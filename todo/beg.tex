@@ -40,125 +40,9 @@
 
 %%-----------------------------------------------------------------
 
-\documentclass[12pt]{book}
-
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{makeidx}
-\usepackage{url}
-\usepackage{fancyhdr}
-\usepackage{verbatim}
-\usepackage{moreverb}
-\usepackage{hevea}
-\usepackage{upquote}
-\usepackage{graphicx}
-
-
-\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
-\newcommand{\theversion}{5.1.2}
-
-\newif\ifplastex
-\plastexfalse
-
-\ifplastex
-% PLASTEX ONLY
-    \usepackage{localdef}
-    \maketitle
-
-\else
-
-% LATEX AND HTML
-
-\newtheoremstyle{exercise}
-  {\topsep}     % space above
-  {\topsep}     % space below
-  {}            % body font
-  {}            % indent amount
-  {\bfseries}   % head font
-  {.}           % punctuation
-  {5pt}         % head space
-  {}            % custom head
-\theoremstyle{exercise}
-\newtheorem{exercise}{Exercise}[chapter]
-
-\title{\thetitle}
-
-\author{Allen B. Downey}
-
-% these styles get translated in CSS for the HTML version
-\newstyle{a:link}{color:black;}
-\newstyle{pre}{color:darkgreen;font-size:110\%;}
-\newstyle{tt}{color:darkgreen;font-size:110\%;}
-\newstyle{p+p}{margin-top:1em;margin-bottom:1em}
-\newstyle{img}{border:0px}
-
-% change the arrows
-\setlinkstext
-  {\imgsrc[ALT="Previous"]{back.png}}
-  {\imgsrc[ALT="Up"]{up.png}}
-  {\imgsrc[ALT="Next"]{next.png}}
-
-\makeindex
-
-% define styles for syntax highlighting in code listings
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{listings}
-\lstset{
-    language=java,
-    basicstyle=\ttfamily,
-    commentstyle=\color{Green},
-    keywordstyle=\color{blue},
-    stringstyle=\color{Orange},
-    columns=fullflexible,
-    keepspaces=true,
-    showstringspaces=false,
-    aboveskip=4pt,
-    belowskip=-4pt
-}
-
-% enable pdf hyperlinks, table of contents, and document properties
-\usepackage[pdftex]{hyperref}
-\makeatletter
-\hypersetup{%
-  pdftitle={\@title},
-  pdfauthor={\@author},
-  pdfsubject={Version \theversion},
-  pdfkeywords={},
-  bookmarksopen=false,
-  colorlinks=true,
-  citecolor=black,
-  filecolor=black,
-  linkcolor=black,
-  urlcolor=blue
-}
-\makeatother
-
 \begin{document}
 
 \frontmatter
-
-% title page for the HTML version
-
-\begin{htmlonly}
-
-% TITLE PAGE FOR HTML VERSION
-
-{\Large Think Java}
-
-{\large Allen B. Downey}
-
-Version \theversion
-
-\setcounter{chapter}{-1}
-
-\end{htmlonly}
-
-% BEGINNING OF LATEXONLY
-
-\input{latexonly}
-
-\begin{latexonly}
 
 %-half title--------------------------------------------------
 
@@ -198,7 +82,7 @@ Version \theversion
 \vspace{1in}
 
 {\Large
-Allen B. Downey
+\theauthors
 }
 
 
@@ -242,9 +126,3 @@ drawn in xfig.  All of these are free, open-source programs.
 
 
 %-----------------------------------------------------------------
-
-\end{latexonly}
-
-\fi
-% END OF THE PART WE SKIP FOR PLASTEX
-

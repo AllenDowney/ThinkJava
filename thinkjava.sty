@@ -1,0 +1,142 @@
+\ProvidesPackage{thinkjava}
+
+\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\title{\thetitle}
+
+\newcommand{\theauthors}{Allen B. Downey and Chris Mayfield}
+\author{\theauthors}
+
+\newcommand{\theversion}{Version 6.0.0 -- August 2015}
+\date{\theversion}
+
+\usepackage{geometry}
+\geometry{
+    width=5.5in,
+    height=8.5in,
+    hmarginratio=3:2,
+    vmarginratio=1:1,
+    includehead=true,
+    headheight=15pt
+}
+
+% paragraph spacing
+\setlength{\parindent}{0pt}                      % 17.62482pt
+\setlength{\parskip}{12pt plus 4pt minus 4pt}    % 0.0pt plus 1.0pt
+\linespread{1.05}
+
+% list spacing
+\setlength{\topsep}{5pt plus 2pt minus 3pt}      % 10.0pt plus 4.0pt minus 6.0pt
+\setlength{\partopsep}{-6pt plus 2pt minus 2pt}  %  3.0pt plus 2.0pt minus 2.0pt
+\setlength{\itemsep}{0pt}                        %  5.0pt plus 2.5pt minus 1.0pt
+
+% these are copied from tex/latex/base/book.cls
+% all I changed is afterskip
+\makeatletter
+\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {0.7ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% table of contents vertical spacing
+\usepackage{tocloft}
+\setlength\cftparskip{8pt plus 4pt minus 4pt}
+
+% The following line adds a little extra space to the column
+% in which the Section numbers appear in the table of contents
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.5em}{3.0em}}
+\makeatother
+
+% customize page headers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+%\rfoot{\textcolor{gray}{\tiny ThinkJava Draft \today}}
+
+% balanced index with TOC entry
+\usepackage{makeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+
+% automatically index glossary terms
+\newcommand{\term}[1]{%
+\index{#1}
+\item[#1:]}
+
+% figures and spacing
+\usepackage{graphicx}
+\usepackage{floatrow}
+\usepackage{moreverb}
+
+% caption formatting
+\usepackage{caption}
+\captionsetup{
+    font=small,
+    labelformat=empty,
+    justification=centering,
+    skip=4pt
+}
+
+% format end of chapter excercises
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheoremstyle{exercise}
+  {12pt}        % space above
+  {12pt}        % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {}            % punctuation
+  {12pt}        % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+% syntax highlighting in code listings
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily,
+    backgroundcolor=\color{gray!5},
+    commentstyle=\color{Green},
+    keywordstyle=\color{blue},
+    stringstyle=\color{Orange},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    aboveskip=\parskip,
+    belowskip=\parskip
+}
+
+% pdf hyperlinks, table of contents, and document properties
+\usepackage[pdftex]{hyperref}
+\hypersetup{%
+  pdftitle={\thetitle},
+  pdfauthor={\theauthors},
+  pdfsubject={\theversion},
+  pdfkeywords={},
+  bookmarksopen=false,
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+\newcommand{\java}[1]{\lstinline{#1}}
