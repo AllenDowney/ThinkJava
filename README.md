@@ -19,5 +19,6 @@ To compile the PDF version from source:
 pdflatex thinkjava
 makeindex thinkjava
 pdflatex thinkjava
+pdflatex thinkjava
 
 You might have to install texlive-latex-extra (in Ubuntu).

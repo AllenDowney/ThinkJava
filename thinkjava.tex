@@ -1,8 +1,21 @@
 \documentclass[12pt]{book}
 \usepackage{thinkjava}
 
-\input{todo/beg.tex}
-\input{todo/chapter00.tex}
+\begin{document}
+
+\frontmatter
+
+\input{00-pre/titlepage.tex}
+\input{00-pre/copyright.tex}
+\input{00-pre/preface.tex}
+
+% table of contents
+\cleardoublepage
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\mainmatter
+
 \input{todo/chapter01.tex}
 \input{todo/chapter02.tex}
 \input{todo/chapter03.tex}
@@ -19,8 +32,17 @@
 \input{todo/chapter14.tex}
 \input{todo/chapter15.tex}
 \input{todo/chapter16.tex}
+
+\backmatter
+\appendix
+
 \input{todo/chapter17.tex}
 \input{todo/chapter18.tex}
 \input{todo/chapter19.tex}
 \input{todo/chapter20.tex}
-\input{todo/end.tex}
+
+\printindex
+\cleardoublepage
+
+\end{document}
+
