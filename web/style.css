@@ -1,0 +1,19 @@
+A:link    {text-decoration: none}
+A:visited {text-decoration: none}
+A:active  {text-decoration: none}
+A:hover   {text-decoration: underline}
+
+h1 {
+    font-size: 15pt;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding-top: 5px;
+}
+
+code {
+    color: darkorange;
+}
+
+em {
+    color: deeppink;
+}

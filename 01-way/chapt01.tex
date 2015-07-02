@@ -258,13 +258,13 @@ All it does is display the words ``Hello, World!''
 In Java, it looks like this:
 
 \begin{lstlisting}
-public class Hello
-{
-    public static void main(String[] args)
-    {
+public class Hello {
+
+    public static void main(String[] args) {
         // generate some simple output
         System.out.println("Hello, World!");
     }
+    
 }
 \end{lstlisting}
 
@@ -284,17 +284,16 @@ For now, let's focus on the overall structure.
 Java programs are made up of {\bf class} and {\bf method} definitions, which generally have the form:
 
 \begin{lstlisting}
-public class CLASSNAME
-{
-    METHOD
-    {
+public class CLASSNAME {
+
+    METHOD {
         STATEMENTS
     }
 
-    METHOD
-    {
+    METHOD {
         STATEMENTS
     }
+
 }
 \end{lstlisting}
 
@@ -316,7 +315,7 @@ When the program runs, it starts at the first statement in \java{main} and ends 
 \index{squiggly braces}
 
 Java uses squiggly braces (\{ and \}) to group things together.
-In Hello.java, the outermost squiggly braces (lines 2 and 8) contain the class definition, and the inner braces (lines 4 and 7) contain the definition of \java{main} method.
+In Hello.java, the outermost squiggly braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
 
 \index{print}
 \index{statement!print}
@@ -336,56 +335,32 @@ The print statement ends with a semi-colon ({\tt ;}).
 \index{comment}
 \index{statement!comment}
 
-Line 5 contains a {\bf comment}, or a bit of English text that explains the code that follows.
+Line 4 contains a {\bf comment}, or a bit of English text that explains the code that follows.
 When the compiler sees \java{//}, it ignores everything from there until the end of the line.
 You should {\em always write comments} before every major block of code so that other programmers (including your future self) can understand what you meant to do.
 
-\section{Getting started with DrJava}
+\subsection{Getting started with DrJava}
 
 \index{JDK}
 
-In order to compile Java programs on your own computer, you need to install the Java Development Kit (JDK).
+In order to compile Java programs on your own computer, you will need to install the Java Development Kit (JDK).
 This free software by Oracle includes tools for developing, debugging, and monitoring Java applications.
 All the examples in this book were developed and tested using Java SE Version 7.
 Later versions of Java are generally backward compatible, so feel free to install the latest and greatest release.
 
-Search the web for ``Java SE Downloads'' on Oracle's website.
-Scroll down to the section ``Java Platform, Standard Edition'' and click the download button under JDK.
-Then accept the license agreement and select the installer for your operating system.
-Don't forget to run the installer after you download it!
-If you run into trouble, there are many detailed tutorials on the web about how to install the JDK for your operating system.
-
-\begin{figure}[h!]
-\includegraphics[height=2.4in]{oracle1.png}
-\hspace{2em}
-\includegraphics[height=2.4in]{oracle2.png}
-\caption{Screenshots of Oracle's website (at the time of writing).}
-\end{figure}
-
 \index{DrJava}
 
-We will use DrJava (\url{http://drjava.org/}) as the development environment throughout the book.
-Mac users should download the jar file instead of the outdated OS X App.
-There is no need to install the jar file; simply double click it to run DrJava.
-Windows users may either download the jar file, or install the Windows App if you prefer to have a Start Menu shortcut.
-
-\begin{figure}[h!]
-\includegraphics[width=0.9\textwidth]{drjava1.png}
-\caption{Download section of DrJava's website (at the time of writing).}
-\end{figure}
-
-Once you get the JDK and DrJava up and running, you should change the following settings from the ``Edit $>$ Preferences'' menu.
-In particular, we will use an indent level of 4 spaces in all examples.
-The other settings are for convenience when editing programs over longs periods of time.
-
-\begin{figure}[h!]
-\includegraphics[width=0.9\textwidth]{drjava2.png}
-\caption{Recommended settings in DrJava preferences.}
-\end{figure}
-
+We will use DrJava as the primary development environment throughout the book.
 One of the most distinctive features of DrJava is the Interactions Pane at the bottom of the window.
 It offers both beginning students and more experienced programmers the ability to try out code quickly, without having to write a class definition and save/compile/run the program.
 Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for more details.
+
+\begin{figure}[h!]
+\includegraphics[width=\textwidth]{drjava-hello.png}
+\caption{Screenshot of DrJava editing the hello world program.}
+\end{figure}
+
+Step-by-step instructions for installing the JDK and configuring DrJava are available on this book's website: \url{http://thinkjava.org/}
 
 \section{Reading error messages}
 
@@ -417,7 +392,7 @@ If there is a single syntax error anywhere in your program, the compiler will di
 
 To make matters worse, the error messages you get from the compiler are often not very helpful.
 For example, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
-The compiler also reports that the problem was found on line 7, which in this case is not at fault.
+The compiler also reports that the problem was found on line 6, which in this case is not at fault.
 Since line 8 was deleted, the compiler had no other choice.
 
 During the first few weeks of your programming career, you will probably spend a lot of time tracking down syntax errors.
@@ -444,13 +419,13 @@ For example, if you accidentally divide by zero you will get an \java{Arithmetic
 \begin{small}
 \begin{lstlisting}[stringstyle=]
 Exception in thread "main" java.lang.ArithmeticException: / by zero
-    at Hello.main(Hello.java:6)
+    at Hello.main(Hello.java:5)
 \end{lstlisting}
 \end{small}
 
 This information is useful for debugging.
 The first line gives a brief description of the error (/ by zero).
-The subsequent lines report the class and method names (Hello.main), along with the file names and line numbers of where the error occurred (Hello.java:6).
+The subsequent lines report the class and method names (Hello.main), along with the file names and line numbers of where the error occurred (Hello.java:5).
 Keep in mind that the exact line where the program crashed may not be the line that needs to be fixed.
 
 \subsection{Semantic errors}
@@ -466,12 +441,12 @@ Specifically, it will do what you told it to do.
 Here is an example of a semantic error in the hello world program:
 
 \begin{lstlisting}
-public class Hello
-{
-    public static void main(String[] args)
-    {
+public class Hello {
+
+    public static void main(String[] args) {
         System.out.println("Goodbye, world.");
     }
+
 }
 \end{lstlisting}
 
