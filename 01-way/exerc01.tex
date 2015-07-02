@@ -1,0 +1,67 @@
+\section{Exercises}
+
+
+\begin{exercise}
+
+Computer scientists have the annoying habit of using common English words to mean something other than their common English meaning.
+For example, in English, statements and comments are the same thing, but in programs they are different.
+
+The glossary at the end of each chapter is intended to highlight words and phrases that have special meanings in computer science.
+When you see familiar words, don't assume that you know what they mean!
+
+\begin{enumerate}
+\item In computer jargon, what's the difference between a statement and a comment?
+\item What does it mean to say that a program is portable?
+\item What is an executable?
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}
+
+Before you do anything else, find out how to compile and run a Java program in your environment.
+Some environments provide sample programs similar to the example in Section~\ref{hello}.
+
+\begin{enumerate}
+\item Type in the ``Hello, world'' program, then compile and run it.
+
+\item Add a print statement that prints a second message after the ``Hello, world!''.
+Say something witty like, ``How are you?''
+Compile and run the program again.
+
+\item Add a comment to the program (anywhere), recompile, and run it again.
+The new comment should not affect the result.
+\end{enumerate}
+
+This exercise may seem trivial, but it is the starting place for many of the programs we will work with.
+To debug with confidence, you have to have confidence in your programming environment.
+In some environments, it is easy to lose track of which program is executing.
+You might find yourself trying to debug one program while you are accidentally running another.
+Adding (and changing) print statements is a simple way to be sure that the program you are looking at is the program you are running.
+
+\end{exercise}
+
+
+\begin{exercise}
+
+It is a good idea to commit as many errors as you can think of, so that you see what error messages the compiler produces.
+Sometimes the compiler tells you exactly what is wrong, and all you have to do is fix it.
+But sometimes the error messages are misleading.
+You will develop a sense for when you can trust the compiler and when you have to figure things out yourself.
+
+\begin {enumerate}
+\item Remove one of the open squiggly-braces.
+\item Remove one of the close squiggly-braces.
+\item Instead of {\tt main}, write {\tt mian}.
+\item Remove the word {\tt static}.
+\item Remove the word {\tt public}.
+\item Remove the word {\tt System}.
+\item Replace {\tt println} with {\tt Println}.
+\item Replace {\tt println} with {\tt print}.
+This one is tricky because it is a logic error, not a syntax error.
+The statement {\tt System.out.print} is legal, but it may or may not do what you expect.
+\item Delete one of the parentheses.  Add an extra one.
+\end {enumerate}
+
+\end{exercise}

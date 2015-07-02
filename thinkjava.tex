@@ -1,5 +1,6 @@
 \documentclass[12pt]{book}
 \usepackage{thinkjava}
+\usepackage{import}
 
 \begin{document}
 
@@ -16,7 +17,10 @@
 
 \mainmatter
 
-\input{todo/chapter01.tex}
+\import{01-way/}{chapt01.tex}
+\import{01-way/}{vocab01.tex}
+\import{01-way/}{exerc01.tex}
+
 \input{todo/chapter02.tex}
 \input{todo/chapter03.tex}
 \input{todo/chapter04.tex}
@@ -45,4 +49,3 @@
 \cleardoublepage
 
 \end{document}
-
