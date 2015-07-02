@@ -1,0 +1,534 @@
+\chapter{Objects of Arrays}
+\label{chap12}
+\index{deck}
+\index{array!of Cards}
+
+WARNING: In this chapter, we take another step toward object-oriented
+programming, but we are not there yet.  So many of the examples are
+non-idiomatic; that is, they are not good Java.  This transitional
+form will help you learn (I hope), but don't write code like this.
+
+You can download the code in this chapter from
+\url{http://thinkapjava.com/code/Card2.java}.
+
+
+\section{The {\tt Deck} class}
+\label{deck}
+
+In the previous chapter, we worked with an array of objects,
+but I also mentioned that it is possible to have an object
+that contains an array as an instance variable.  In this
+chapter we create a {\tt Deck} object
+that contains an array of {\tt Card}s.
+
+\index{instance variable}
+\index{variable!instance}
+
+The class definition looks like this:
+
+\begin{lstlisting}
+class Deck {
+    Card[] cards;
+
+    public Deck(int n) {
+        this.cards = new Card[n];
+    }
+}
+\end{lstlisting}
+%
+The constructor initializes the instance variable with
+an array of cards, but it doesn't create any cards.
+Here is a state diagram showing what a
+{\tt Deck} looks like with no cards:
+
+\index{state diagram}
+\index{constructor}
+
+\includegraphics{figs/deckobject.pdf}
+
+Here is a no-argument constructor that makes a
+52-card deck and populates it with {\tt Card}s:
+
+\begin{lstlisting}
+    public Deck() {
+        this.cards = new Card[52];
+        int index = 0;
+        for (int suit = 0; suit <= 3; suit++) {
+            for (int rank = 1; rank <= 13; rank++) {
+                cards[index] = new Card(suit, rank);
+                index++;
+            }
+        }
+    }
+\end{lstlisting}
+
+This method is similar to {\tt makeDeck};
+we just changed the syntax to make it a constructor.
+To invoke it, we use {\tt new}:
+
+\index{new}
+\index{statement!new}
+
+\begin{lstlisting}
+    Deck deck = new Deck();
+\end{lstlisting}
+%
+Now it makes sense to put
+the methods that pertain to {\tt Deck}s in the {\tt Deck}
+class definition.  Looking at the methods we have written so
+far, one obvious candidate is {\tt printDeck} (Section~\ref{printdeck}).
+Here's how it looks, rewritten to work with a {\tt Deck}:
+\index{printDeck}
+
+\begin{lstlisting}
+    public static void printDeck(Deck deck) {
+        for (int i = 0; i < deck.cards.length; i++) {
+            Card.printCard(deck.cards[i]);
+        }
+    }
+\end{lstlisting}
+%
+One change is the type of the parameter,
+from {\tt Card[]} to {\tt Deck}.
+
+The second change is that we can no
+longer use {\tt deck.length} to get the length of the array, because
+{\tt deck} is a {\tt Deck} object now, not an array.  It contains an
+array, but it is not an array.  So we have to write
+{\tt deck.cards.length} to extract the array from the {\tt Deck}
+object and get the length of the array.
+
+For the same reason, we have to use {\tt deck.cards[i]} to access an
+element of the array, rather than just {\tt deck[i]}.
+
+The last change
+is that the invocation of {\tt printCard} has to say explicitly that
+{\tt printCard} is defined in the {\tt Card} class.
+
+
+\section{Shuffling}
+\label{shuffle}
+\index{shuffling}
+
+For most card games you need to be able to shuffle the deck;
+that is, put the cards in a random order.  In Section~\ref{random}
+we saw how to generate random numbers, but it is not obvious how
+to use them to shuffle a deck.
+
+One possibility is to model the way humans shuffle, which is usually
+by dividing the deck in two and then choosing
+alternately from each deck.  Since humans usually don't shuffle
+perfectly, after about 7 iterations the order of the deck is pretty
+well randomized.  But a computer program would have the annoying
+property of doing a perfect shuffle every time, which is not really
+very random.  In fact, after 8 perfect shuffles, you would find the
+deck back in the order you started in.  For more information, see
+\url{http://en.wikipedia.org/wiki/Faro_shuffle}.
+
+A better shuffling algorithm is to traverse the deck one card at a
+time, and at each iteration choose two cards and swap them.
+
+Here is an outline of how this algorithm works.  To sketch the
+program, I am using a combination of Java statements and English
+words that is sometimes called {\bf pseudocode}:  \index{pseudocode}
+
+\begin{lstlisting}
+    for (int i = 0; i < deck.cards.length; i++) {
+        // choose a number between i and deck.cards.length-1
+        // swap the ith card and the randomly-chosen card
+    }
+\end{lstlisting}
+%
+The nice thing about pseudocode is that it often makes it
+clear what methods you are going to need.  In this case, we
+need something like {\tt randomInt}, which chooses a random
+integer between {\tt low} and {\tt high},
+and {\tt swapCards} which takes two indices and switches the
+cards at the indicated positions.
+\index{random number}
+\index{swapCards}
+\index{reference}
+
+This process---writing pseudocode first and then writing
+methods to make it work---is called {\bf top-down development}
+(see \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
+\index{program development}
+
+
+\section{Sorting}
+\label{sorting}
+\index{sorting}
+
+Now that we have messed up the deck, we need a way to put it back in
+order.  There is an algorithm for sorting that is ironically similar
+to the algorithm for shuffling.  It's called {\bf selection sort}
+because it works by traversing the array repeatedly and selecting the
+lowest remaining card each time.
+\index{selection sort}
+
+During the first iteration we find the lowest card and swap
+it with the card in the 0th position.  During the {\tt i}th, we find the
+lowest card to the right of {\tt i} and swap it with the {\tt i}th
+card.
+
+Here is pseudocode for selection sort:
+
+\begin{lstlisting}
+    for (int i = 0; i < deck.cards.length; i++) {
+        // find the lowest card at or to the right of i
+        // swap the ith card and the lowest card
+    }
+\end{lstlisting}
+%
+Again, the pseudocode helps with the design of the {\bf helper
+methods}.  In this case we can use {\tt swapCards} again,
+so we only need one new one, called {\tt indexLowestCard},
+that takes an array of cards and an index where it should
+start looking.
+\index{helper method}
+\index{method!helper}
+
+
+
+\section {Subdecks}
+\index{subdeck}
+
+How should we represent a hand or some other subset of a full deck?
+One possibility is to create a new class called {\tt Hand}, which
+might extend {\tt Deck}.  Another possibility, the one I will
+demonstrate, is to represent a hand with a {\tt Deck} object with
+fewer than 52 cards.
+
+We might want a method, {\tt subdeck}, that takes a Deck
+and a range of indices, and that returns a new Deck that
+contains the specified subset of the cards:
+
+\begin{lstlisting}
+public static Deck subdeck(Deck deck, int low, int high) {
+    Deck sub = new Deck(high-low+1);
+
+    for (int i = 0; i<sub.cards.length; i++) {
+        sub.cards[i] = deck.cards[low+i];
+    }
+    return sub;
+}
+\end{lstlisting}
+
+The length of the subdeck is {\tt high-low+1} because both the low
+card and high card are included.  This sort of computation can be
+confusing, and lead to ``off-by-one'' errors.  Drawing a picture is
+usually the best way to avoid them.
+
+Because we provide an argument with {\tt new}, the
+contructor that gets invoked will be the first one, which only
+allocates the array and doesn't allocate any cards.  Inside the
+{\tt for} loop, the subdeck gets populated with copies of the
+references from the deck.
+\index{constructor}
+\index{overloading}
+
+The following is a state diagram of a subdeck being created with the
+parameters {\tt low=3} and {\tt high=7}.  The result is a hand with 5
+cards that are shared with the original deck; i.e. they are aliased.
+
+\includegraphics{figs/subdeck.pdf}
+
+\index{aliasing}
+\index{reference}
+
+Aliasing is usually not generally a good idea, because
+changes in one subdeck are reflected in others, which is not the
+behavior you would expect from real cards and decks.  But if the
+cards are immutable, aliasing is less dangerous.
+In this case, there is probably no reason ever to change the
+rank or suit of a card.  Instead we can create each card
+once and then treat it as an immutable object.  So for {\tt Card}s
+aliasing is a reasonable choice.
+
+
+\section{Shuffling and dealing}
+\index{shuffling}
+\index{dealing}
+
+In Section~\ref{shuffle} I wrote pseudocode for a shuffling algorithm.
+Assuming that we have a method called {\tt shuffleDeck} that takes
+a deck as an argument and shuffles it, we can use it to deal hands:
+
+\begin{lstlisting}
+    Deck deck = new Deck();
+    shuffleDeck(deck);
+
+    Deck hand1 = subdeck(deck, 0, 4);
+    Deck hand2 = subdeck(deck, 5, 9);
+    Deck pack = subdeck(deck, 10, 51);
+\end{lstlisting}
+%
+This code puts the first 5 cards in one hand, the next 5 cards
+in the other, and the rest into the pack.
+
+When you thought about dealing, did you think we should give one
+card to each player in the round-robin style that is common
+in real card games?  I thought about it, but then realized that it is
+unnecessary for a computer program.  The round-robin convention is
+intended to mitigate imperfect shuffling and make it more difficult
+for the dealer to cheat.  Neither of these is an issue for a computer.
+
+This example is a useful reminder of one of the dangers of engineering
+metaphors: sometimes we impose restrictions on computers that are
+unnecessary, or expect capabilities that are lacking, because we
+unthinkingly extend a metaphor past its breaking point.
+
+
+\section {Mergesort}
+\label{mergesort}
+\index{efficiency}
+\index{sorting}
+\index{mergesort}
+
+In Section~\ref{sorting}, we saw a simple sorting algorithm that turns
+out not to be very efficient.  To sort $n$ items, it has to
+traverse the array $n$ times, and each traversal takes an amount of
+time that is proportional to $n$.  The total time, therefore, is
+proportional to $n^2$.
+
+In this section I sketch a more efficient algorithm called {\bf
+mergesort}.  To sort $n$ items, mergesort takes time proportional to
+$n \log n$.  That may not seem impressive, but as $n$ gets big, the
+difference between $n^2$ and $n \log n$ can be enormous.  Try out a
+few values of $n$ and see.
+
+The basic idea behind mergesort is this: if you have two subdecks,
+each of which has been sorted, it is easy (and fast) to merge them
+into a single, sorted deck.  Try this out with a deck of cards:
+
+\begin{enumerate}
+
+\item Form two subdecks with about 10 cards each and sort
+them so that when they are face up the lowest cards are on
+top.  Place both decks face up in front of you.
+
+\item Compare the top card from each deck and choose the
+lower one.  Flip it over and add it to the merged deck.
+
+\item Repeat step two until one of the decks is empty.
+Then take the remaining cards and add them to the merged
+deck.
+
+\end{enumerate}
+
+The result should be a single sorted deck.  Here's what this
+looks like in pseudocode:
+
+\begin{lstlisting}
+public static Deck merge(Deck d1, Deck d2) {
+    // create a new deck big enough for all the cards
+    Deck result = new Deck(d1.cards.length + d2.cards.length);
+
+    // use the index i to keep track of where we are in
+    // the first deck, and the index j for the second deck
+    int i = 0;
+    int j = 0;
+
+    // the index k traverses the result deck
+    for (int k = 0; k < result.cards.length; k++) {
+
+        // if d1 is empty, d2 wins; if d2 is empty, d1 wins;
+        // otherwise, compare the two cards
+
+        // add the winner to the new deck
+    }
+    return result;
+}
+\end{lstlisting}
+
+The best way to test {\tt merge} is to build and shuffle a deck,
+use subdeck to form two (small) hands, and then use the sort
+routine from the previous chapter to sort the two halves.  Then
+you can pass the two halves to {\tt merge} to see if it works.
+
+\index{testing}
+
+If you can get that working, try a simple implementation of
+{\tt mergeSort}:
+
+\begin{lstlisting}
+public static Deck mergeSort(Deck deck) {
+    // find the midpoint of the deck
+    // divide the deck into two subdecks
+    // sort the subdecks using sortDeck
+    // merge the two halves and return the result
+}
+\end{lstlisting}
+
+Then, if you get that working, the real fun begins!  The magical thing
+about mergesort is that it is recursive.  At the point where you sort
+the subdecks, why should you invoke the old, slow version of {\tt
+sort}?  Why not invoke the spiffy new {\tt mergeSort} you are in the
+process of writing?
+\index{recursion}
+
+Not only is that a good idea, it is {\em necessary} to
+achieve the performance advantage I promised.  But to make it
+work you have to have a base case; otherwise it recurses
+forever.  A simple base case is a subdeck with 0 or 1 cards.  If {\tt
+mergesort} receives such a small subdeck, it can return it
+unmodified, since it is already sorted.
+
+The recursive version of {\tt mergesort} should look something
+like this:
+
+\begin{lstlisting}
+public static Deck mergeSort(Deck deck) {
+    // if the deck is 0 or 1 cards, return it
+
+    // find the midpoint of the deck
+    // divide the deck into two subdecks
+    // sort the subdecks using mergesort
+    // merge the two halves and return the result
+}
+\end{lstlisting}
+%
+As usual, there are two ways to think about recursive programs:
+you can think through the entire flow of execution, or you
+can make the ``leap of faith'' (see Section~\ref{leap of faith}).
+I have constructed this example to encourage you to make the leap of faith.
+\index{leap of faith}
+
+When you use {\tt sortDeck} to sort the subdecks, you don't
+feel compelled to follow the flow of execution, right?  You just
+assume it works because you already
+debugged it.  Well, all you did to make {\tt mergeSort} recursive was
+replace one sorting algorithm with another.  There is no reason to read
+the program differently.
+
+Actually, you have to give some thought to getting the
+base case right and making sure that you reach it eventually,
+but other than that, writing the recursive version should be
+no problem.  Good luck!
+
+
+\section{Class variables}
+\index{class variables}
+
+So far we have seen local variables, which are declared inside
+a method, and instance variables, which are declared in a class
+definition, usually before the method definitions.
+
+Local variables are created when a method is invoked and destroyed
+when the method ends.  Instance variables are created when you
+create an object and destroyed when the object is garbage collected.
+
+Now it's time to learn about {\bf class variables}.  Like instance
+variables, class variables are defined in a class definition before
+the method definitions, but they are identified by the keyword {\tt
+  static}.  They are created when the program starts and survive until
+the program ends.
+
+You can refer to a class variable from anywhere inside the class
+definition.  Class variables are often used to store constant
+values that are needed in several places.
+
+As an example, here is a version of {\tt Card} where {\tt suits}
+and {\tt ranks} are class variables:
+
+\begin{lstlisting}
+class Card {
+    int suit, rank;
+
+    static String[] suits = { "Clubs", "Diamonds", "Hearts", "Spades" };
+    static String[] ranks = { "narf", "Ace", "2", "3", "4", "5", "6",
+                      "7", "8", "9", "10", "Jack", "Queen", "King" };
+
+    public static void printCard(Card c) {
+        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
+    }
+}
+\end{lstlisting}
+
+Inside {\tt printCard} we can refer to {\tt suits} and {\tt ranks} as
+if they were local variables.
+
+
+\section{Glossary}
+
+\begin{description}
+
+\item[pseudocode:]  A way of designing programs by writing
+rough drafts in a combination of English and Java.
+
+\item[helper method:]  Often a small method that does not
+do anything enormously useful by itself, but which helps
+another, more useful method.
+
+\item[class variable:]  A variable declared within a class as {\tt static};
+there is always exactly one copy of this variable in existence.
+
+\index{pseudocode}
+\index{helper method}
+\index{method!helper}
+\index{class variables}
+
+
+\end{description}
+
+\section{Exercises}
+
+\begin{exercise}
+The goal of this exercise is to implement the shuffling and
+sorting algorithms from this chapter.
+
+\begin{enumerate}
+
+\item Download the code from this chapter from
+\url{http://thinkapjava.com/code/Card2.java}
+and import it into your development environment.  I have
+provided outlines for the methods you will write, so the
+program should compile.  But when it runs it prints messages
+indicating that the empty methods are not working.  When you
+fill them in correctly, the messages should go away.
+
+\item If you did Exercise~\ref{ex.randint}, you already wrote
+{\tt randomInt}.  Otherwise, write it now and add code to test it.
+
+\item Write a method called {\tt swapCards} that takes a
+deck (array of cards) and two indices, and that switches
+the cards at those two locations.
+
+HINT: it should switch references, not
+the contents of the objects.  This is faster; also, it
+correctly handles the case where cards are aliased.
+
+\item Write a method called {\tt shuffleDeck} that uses the algorithm
+in Section~\ref{shuffle}.  You might want to use the {\tt randomInt}
+method from Exercise~\ref{ex.randint}.
+
+\item Write a method called {\tt indexLowestCard} that uses
+the {\tt compareCard} method to find the lowest card
+in a given range of the deck (from {\tt lowIndex} to {\tt highIndex},
+including both).
+
+\item Write a method called {\tt sortDeck} that arranges
+a deck of cards from lowest to highest.
+
+\item Using the pseudocode in Section~\ref{mergesort}, write the
+method called {\tt merge}.  Be sure to test it before trying to use it
+as part of a {\tt mergeSort}.
+
+\item Write the simple version of {\tt mergeSort}, the one that
+divides the deck in half, uses {\tt sortDeck} to sort the two
+halves, and uses {\tt merge} to create a new, fully-sorted deck.
+
+\item Write the fully recursive version of {\tt mergeSort}.
+Remember that {\tt sortDeck} is a modifier and {\tt mergeSort} is
+a function, which means that they get invoked differently:
+
+\begin{lstlisting}
+sortDeck(deck);              // modifies existing deck
+deck = mergeSort(deck);      // replaces old deck with new
+\end{lstlisting}
+
+\end{enumerate}
+\end{exercise}
+
+
+

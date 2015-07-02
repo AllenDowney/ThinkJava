@@ -1,0 +1,108 @@
+\chapter{Program development}
+\label{development}
+
+\section{Strategies}
+
+I present different program development strategies throughout
+the book, so I wanted to pull them together here.
+%
+The foundation of all strategies is {\bf incremental development},
+which goes like this:
+
+\begin{enumerate}
+
+\item Start with a working program that does something visible,
+   like printing something.
+
+\item Add a small number of lines of code at a time,
+   and test the program after every change.
+
+\item Repeat until the program does what it is supposed to do.
+
+\end{enumerate}
+
+After every change, the program should produce some visible effect
+that tests the new code.  This approach to programming can save
+a lot of time.
+
+Because you only add a few lines of code at a time, it
+is easy to find syntax errors.
+%
+And because each version of the
+program produces a visible result, you are constantly testing your
+mental model of how the program works.  If your mental model is
+wrong, you are confronted with the conflict (and have a chance
+to correct it) before you write a lot of bad code.
+
+The challenge of incremental development is that is it not
+easy to figure out a path from the starting place
+to a complete and correct program.
+%
+To help with that, there are several strategies to choose from:
+
+\begin{description}
+
+\item[Encapsulation and generalization:] If you don't know yet how
+to divide the computation into methods, start writing code in
+{\tt main}, then look for coherent chunks to encapsulate in
+a method, and generalize them appropriately.
+
+\item[Rapid prototyping:] If you know what method to write, but not
+how to write it, start with a rough draft that handles the simplest
+case, then test it with other cases, extending and correcting as you go.
+
+\item[Bottom-up:] Start by writing simple methods, then assemble them
+into a solution.
+
+\item[Top-down:] Use pseudocode to design the structure of the
+computation and identify the methods you'll need.  Then write the
+methods and replace the pseudocode with real code.
+
+\end{description}
+
+Along the way, you might need some scaffolding. For example, each
+class should have a {\tt toString} method that lets you print the
+state of an object in human-readable form.  This method is useful
+for debugging, but usually not part of a finished program.
+
+\section{Failure modes}
+
+If you are spending a lot of time debugging, it is probably
+because you are using an ineffective development strategy.  Here
+are the failure modes I see most often (and occasionally fall into):
+
+\begin{description}
+
+\item[Non-incremental developement:] If you write more than a few
+  lines of code without compiling and testing, you are asking for
+  trouble.  One time when I asked a student how the homework was
+  coming along, he said, ``Great!  I have it all written.  Now I just
+  have to debug it.''
+
+\item[Attachment to bad code:] If you write more than a few lines of
+  code without compiling and testing, you may not be able to debug it.
+  Ever.  Sometimes the only strategy is (gasp!)~to delete the bad
+  code and start over (using an incremental strategy).  But beginners
+  are often emotionally attached to their code, even if it doesn't
+  work.  The only way out of this trap is to be ruthless.
+
+\item[Random-walk programming:] I sometimes work with students who
+  seem to be programming at random.  They make a change, run the
+  program, get an error, make a change, run the program, etc.  The
+  problem is that there is no apparent connection between the outcome
+  of the program and the change.
+%
+  If you get an error message, take the time to read it.
+  More generally, take time to think.
+
+\item[Compiler submission:] Error messages are useful, but they
+  are not always right.  For example, if the message says, ``Semi-colon
+  expected on line 13,'' that means there is a syntax error near
+  line 13. But putting a semi-colon on line 13 is not always the
+  solution.  Don't submit to the will of the compiler.
+
+\end{description}
+
+The next chapter makes more suggestions for effective debugging.
+
+

@@ -1,0 +1,212 @@
+\chapter{GridWorld: Part 1}
+\label{gridworld}
+
+\section{Getting started}
+
+Now is a good time to start working with the AP Computer Science Case
+Study, which is a program called GridWorld.  To get started, install
+GridWorld, which you can download from the College Board:
+\url{http://www.collegeboard.com/student/testing/ap/compsci_a/case.html}.
+
+When you unpack this code, you should have a folder named {\tt
+  GridWorldCode} that contains {\tt projects/firstProject}, which
+contains {\tt BugRunner.java}.
+
+Make a copy of {\tt BugRunner.java} in another folder and then import it
+into your development environment.  There are instructions here that
+might help: \url{http://www.collegeboard.com/prod_downloads/student/testing/ap/compsci_a/ap07_gridworld_installation_guide.pdf}.
+
+Once you run {\tt BugRunner.java}, download the GridWorld Student
+Manual from \url{http://www.collegeboard.com/prod_downloads/student/testing/ap/compsci_a/ap07_gridworld_studmanual_appends_v3.pdf}.
+
+The Student Manual uses vocabulary I have not presented yet, so to
+get you started, here is a quick preview:
+
+\begin{itemize}
+
+\item The components of GridWorld, including Bugs, Rocks and the Grid
+itself, are {\bf objects}.
+
+\item A {\bf constructor} is a special method that creates new objects.
+
+\item A {\bf class} is a set of objects; every object belongs to a
+class.
+
+\item An object is also called an {\bf instance} because it is a member,
+or instance, of a class.
+
+\item An {\bf attribute} is a piece of information about an object, like
+its color or location.
+
+\item An {\bf accessor method} is a method that returns an attribute of
+an object.
+
+\item A {\bf modifier method} changes an attribute of an object.
+
+\end{itemize}
+
+Now you should be able to read Part 1 of the Student Manual and do
+the exercises.
+
+\section{{\tt BugRunner}}
+
+{\tt BugRunner.java} contains this code:
+
+\begin{lstlisting}
+import info.gridworld.actor.ActorWorld;
+import info.gridworld.actor.Bug;
+import info.gridworld.actor.Rock;
+
+public class BugRunner
+{
+    public static void main(String[] args)
+    {
+        ActorWorld world = new ActorWorld();
+        world.add(new Bug());
+        world.add(new Rock());
+        world.show();
+    }
+}
+\end{lstlisting}
+
+The first three lines are {\tt import} statements; they list the
+classes from GridWorld used in this program.  You can find the
+documentation for these classes at
+\url{http://www.greenteapress.com/thinkapjava/javadoc/gridworld/}.
+
+Like the other programs we have seen, BugRunner defines a class
+that provides a {\tt main} method.  The first line of {\tt main}
+creates an {\tt ActorWorld} object.  {\tt new} is a Java keyword
+that creates new objects.
+
+The next two lines create a Bug and a Rock, and add them to {\tt world}.
+The last line shows the world on the screen.
+
+Open {\tt BugRunner.java} for editing and replace this line:
+
+\begin{lstlisting}
+    world.add(new Bug());
+\end{lstlisting}
+
+with these lines:
+
+\begin{lstlisting}
+    Bug redBug = new Bug();
+    world.add(redBug);
+\end{lstlisting}
+
+The first line assigns the Bug to a variable named {\tt redBug};
+we can use {\tt redBug} to invoke the Bug's methods.  Try this:
+
+\begin{lstlisting}
+    System.out.println(redBug.getLocation());
+\end{lstlisting}
+
+Note: If you run this before adding the Bug to the {\tt world}, the result is
+{\tt null}, which means that the Bug doesn't have a location yet.
+
+Invoke the other accessor methods and print the bug's attributes.
+Invoke the methods {\tt canMove}, {\tt move} and {\tt turn} and
+be sure you understand what they do.  % Now try these exercises:
+
+
+\section{Exercises}
+
+\begin{exercise}
+
+\begin{enumerate}
+
+\item Write a method named {\tt moveBug} that takes a bug as a parameter
+and invokes {\tt move}.  Test your method by calling it from {\tt main}.
+
+\item Modify {\tt moveBug} so that it invokes {\tt canMove} and moves
+the bug only if it can.
+
+\item Modify {\tt moveBug} so that it takes an integer, {\tt n}, as a
+parameter, and moves the bug {\tt n} times (if it can).
+
+\item Modify {\tt moveBug} so that if the bug can't move, it invokes
+{\tt turn} instead.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+
+\begin{enumerate}
+
+\item The {\tt Math} class provides a method named {\tt random}
+that returns a double between 0.0 and 1.0 (not including 1.0).
+
+\item Write a method named {\tt randomBug} that takes a Bug as a
+  parameter and sets the Bug's direction to one of 0, 90, 180 or 270
+  with equal probability, and then moves the bug if it can.
+
+\item Modify {\tt randomBug} to take an integer {\tt n} and repeat
+{\tt n} times.
+
+The result is a random walk, which you can read about
+at \url{http://en.wikipedia.org/wiki/Random_walk}.
+
+\item To see a longer random walk, you can give ActorWorld a bigger stage.
+At the top of {\tt BugRunner.java}, add this {\tt import} statement:
+
+\begin{lstlisting}
+import info.gridworld.grid.UnboundedGrid;
+\end{lstlisting}
+
+Now replace the line that creates the ActorWorld with this:
+
+\begin{lstlisting}
+    ActorWorld world = new ActorWorld(new UnboundedGrid());
+\end{lstlisting}
+
+You should be able to run your random walk for a few thousand
+steps (you might have to use the scrollbars to find the Bug).
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+
+GridWorld uses Color objects, which are defined in a Java library.
+You can read the documentation at
+\url{http://download.oracle.com/javase/6/docs/api/java/awt/Color.html}.
+
+To create Bugs with different colors, we have to import
+{\tt Color}:
+
+\begin{lstlisting}
+import java.awt.Color;
+\end{lstlisting}
+
+Then you can access the predefined colors, like {\tt Color.blue}, or
+create a new color like this:
+
+\begin{lstlisting}
+    Color purple = new Color(148, 0, 211);
+\end{lstlisting}
+
+Make a few bugs with different colors.  Then write a method named
+{\tt colorBug} that takes a Bug as a parameter, reads its location,
+and sets the color.
+
+The Location object you get from
+{\tt getLocation} has methods named {\tt getRow} and {\tt getCol} that
+return integers.  So you can get the x-coordinate of a Bug like this:
+
+\begin{lstlisting}
+    int x = bug.getLocation().getCol();
+\end{lstlisting}
+
+Write a method named {\tt makeBugs} that takes an ActorWorld and an
+integer {\tt n} and creates {\tt n} bugs colored according to their
+location.  Use the row number to control the red level and the column
+to control the blue.
+
+\end{exercise}
+
+
+

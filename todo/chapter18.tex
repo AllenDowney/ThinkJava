@@ -1,0 +1,175 @@
+\chapter{Input and Output in Java}
+\label{javaio}
+
+\section{System objects}
+\label{system}
+\index{System object}
+\index{object!System}
+
+The {\tt System} class provides
+methods and objects that get input from the keyboard,
+print text on the screen, and do file input and output (I/O).
+%
+{\tt System.out} is the object that displays
+on the screen.  When you invoke {\tt print} and {\tt println}, you
+invoke them on {\tt System.out}.
+
+You can even use {\tt System.out} to print {\tt System.out}:
+
+\begin{lstlisting}
+System.out.println(System.out);
+\end{lstlisting}
+%
+The result is:
+
+\begin{verbatimtab}
+java.io.PrintStream@80cc0e5
+\end{verbatimtab}
+%
+When Java prints an object, it prints the type
+of the object ({\tt PrintStream}), the package
+where the type is defined ({\tt java.io}), and a
+unique identifier for the object.  On my machine the identifier
+is {\tt 80cc0e5}, but if you run the same code you will
+probably get something different.
+
+There is also an object named {\tt System.in} that makes it
+possible to get input from the keyboard.  Unfortunately,
+it does not make it easy to get input from the keyboard.
+
+
+\section{Keyboard input}
+\label{keyboard}
+\index{keyboard}
+\index{input!keyboard}
+
+First, you have to use {\tt System.in} to create a new
+{\tt InputStreamReader}.
+
+\begin{lstlisting}
+    InputStreamReader in = new InputStreamReader(System.in);
+\end{lstlisting}
+%
+Then you use {\tt in} to create a new {\tt BufferedReader}:
+
+\begin{lstlisting}
+    BufferedReader keyboard = new BufferedReader(in);
+\end{lstlisting}
+%
+Finally you can invoke {\tt readLine} on {\tt keyboard},
+to take input from the keyboard and convert it to a
+String.
+
+\begin{lstlisting}
+    String s = keyboard.readLine();
+    System.out.println(s);
+\end{lstlisting}
+%
+There is only one problem.  There are things that can go wrong when
+you invoke {\tt readLine}, and they might throw an {\tt IOException}.  A
+method that throws an exception has to include it in the
+prototype, like this:
+
+\begin {lstlisting}
+public static void main(String[] args) throws IOException {
+    // body of main
+}
+\end{lstlisting}
+
+
+\section{File input}
+\label{fileIO}
+\index{file input}
+\index{input!file}
+
+Here's a program that reads lines from a file and prints them:
+
+\begin{lstlisting}
+import java.io.*;
+
+public class Words {
+
+    public static void main(String[] args)
+        throws FileNotFoundException, IOException {
+
+        processFile("words.txt");
+    }
+
+    public static void processFile(String filename)
+        throws FileNotFoundException, IOException {
+
+        FileReader fileReader = new FileReader(filename);
+        BufferedReader in = new BufferedReader(fileReader);
+
+        while (true) {
+            String s = in.readLine();
+            if (s == null) break;
+            System.out.println(s);
+        }
+    }
+}
+\end{lstlisting}
+
+This first line imports {\tt java.io}, the package that contains
+{\tt FileReader}, {\tt BufferedReader}, and the rest of
+the elaborate class hierarchy Java uses to do
+common, simple things.  The {\tt *} means it imports all classes
+in the package.
+\index{import statement}
+\index{statement!import}
+
+Here's what the same program looks like in Python:
+
+\begin{verbatim}
+for word in open('words.txt'):
+    print word
+\end{verbatim}
+
+I'm not kidding.  That's the whole program, and it does the same thing.
+
+
+\section{Catching exceptions}
+
+In the previous example, {\tt processFile} can throw
+{\tt FileNotFoundException} and {\tt IOException}.  And since
+{\tt main} calls {\tt processFile}, it has to declare the
+same exceptions.  In a larger program, {\tt main} might
+declare every exception there is.
+
+The alternative is to {\bf catch} the exception with a
+{\tt try} statement.  Here's an example:
+\index{try statement}
+\index{statement!try}
+
+\begin{lstlisting}
+    public static void main(String[] args) {
+        try {
+            processFile("words.txt");
+        } catch (Exception ex) {
+            System.out.println("That didn't work.  Here's why:");
+            ex.printStackTrace();
+        }
+    }
+\end{lstlisting}
+
+The structure is similar to an {\tt if} statement.  If the first
+``branch'' runs without causing an Exception, the second branch
+is skipped.
+
+If the first branch causes an Exception, the flow of execution jumps
+to the second branch, which tries to deal with the exceptional
+condition (by saying ``error'' in a polite way).  In this case it prints
+an error message and the stack trace.
+
+You can download this code from
+\url{http://thinkapjava.com/code/Words.java}
+and the word list from
+\url{http://thinkapjava.com/code/words.txt}.
+Make sure both files are in the same folder.
+(If you are using an IDE like NetBeans or Eclipse, make
+sure the words.txt file is in your project directory.)
+
+Now go do Exercises~\ref{palindrome}, \ref{abecedarian}, and \ref{dupledrome}.
+
+
+

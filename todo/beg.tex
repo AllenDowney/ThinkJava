@@ -1,0 +1,250 @@
+% LaTeX source for ``Think Java: How to think like a computer scientist''
+% Copyright (C) 2012  Allen B. Downey
+
+% Permission is granted to copy, distribute, transmit and adapt
+% this work under a Creative Commons
+% Attribution-NonCommercial-ShareAlike 3.0 Unported License:
+% http://creativecommons.org/licenses/by-nc-sa/3.0/
+
+% If you are interested in distributing a commercial version of this
+% work, please contact Allen B. Downey.
+
+% The original form of this book is LaTeX source code.  Compiling this
+% LaTeX source has the effect of generating a device-independent
+% representation of the book, which can be converted to other formats
+% and printed.
+
+% The LaTeX source for this book is available from http://thinkapjava.com
+% and http://code.google.com/p/thinkapjava/source/checkout
+
+% This book was typeset using LaTeX .  The illustrations were
+% drawn in xfig.  All of these are free, open-source programs.
+
+%%----------------------------------------------------------------
+
+% How to compile this document:
+% If your environment provides latex, makeindex, and dvips,
+% the following commands should produce a Postscript version
+% of the book.
+
+%        latex book
+%        makeindex book
+%        latex book
+%        dvips -o book.ps book
+
+% You will also need the following (fairly standard) latex
+% packages: url, epsfig, makeidx, fancyhdr
+
+% This distribution also includes a Makefile that should
+% compile both the Postscript and PDF versions of the book.
+
+%%-----------------------------------------------------------------
+
+\documentclass[12pt]{book}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{url}
+\usepackage{fancyhdr}
+\usepackage{verbatim}
+\usepackage{moreverb}
+\usepackage{hevea}
+\usepackage{upquote}
+\usepackage{graphicx}
+
+
+\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\newcommand{\theversion}{5.1.2}
+
+\newif\ifplastex
+\plastexfalse
+
+\ifplastex
+% PLASTEX ONLY
+    \usepackage{localdef}
+    \maketitle
+
+\else
+
+% LATEX AND HTML
+
+\newtheoremstyle{exercise}
+  {\topsep}     % space above
+  {\topsep}     % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {.}           % punctuation
+  {5pt}         % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+\title{\thetitle}
+
+\author{Allen B. Downey}
+
+% these styles get translated in CSS for the HTML version
+\newstyle{a:link}{color:black;}
+\newstyle{pre}{color:darkgreen;font-size:110\%;}
+\newstyle{tt}{color:darkgreen;font-size:110\%;}
+\newstyle{p+p}{margin-top:1em;margin-bottom:1em}
+\newstyle{img}{border:0px}
+
+% change the arrows
+\setlinkstext
+  {\imgsrc[ALT="Previous"]{back.png}}
+  {\imgsrc[ALT="Up"]{up.png}}
+  {\imgsrc[ALT="Next"]{next.png}}
+
+\makeindex
+
+% define styles for syntax highlighting in code listings
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{listings}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily,
+    commentstyle=\color{Green},
+    keywordstyle=\color{blue},
+    stringstyle=\color{Orange},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    aboveskip=4pt,
+    belowskip=-4pt
+}
+
+% enable pdf hyperlinks, table of contents, and document properties
+\usepackage[pdftex]{hyperref}
+\makeatletter
+\hypersetup{%
+  pdftitle={\@title},
+  pdfauthor={\@author},
+  pdfsubject={Version \theversion},
+  pdfkeywords={},
+  bookmarksopen=false,
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=blue
+}
+\makeatother
+
+\begin{document}
+
+\frontmatter
+
+% title page for the HTML version
+
+\begin{htmlonly}
+
+% TITLE PAGE FOR HTML VERSION
+
+{\Large Think Java}
+
+{\large Allen B. Downey}
+
+Version \theversion
+
+\setcounter{chapter}{-1}
+
+\end{htmlonly}
+
+% BEGINNING OF LATEXONLY
+
+\input{latexonly}
+
+\begin{latexonly}
+
+%-half title--------------------------------------------------
+
+%\thispagestyle{empty}
+%
+%\begin{flushright}
+%\vspace*{2.5in}
+%
+%{\huge Think Java}
+%
+%\vspace{1in}
+%
+%{\LARGE How to Think Like a Computer Scientist}
+%
+%\vfill
+%
+%\end{flushright}
+
+%--verso------------------------------------------------------
+
+%%\clearemptydoublepage
+%\cleardoublepage
+
+%--title page--------------------------------------------------
+\pagebreak
+\thispagestyle{empty}
+
+\begin{flushright}
+\vspace*{2.5in}
+
+{\huge Think Java}
+
+\vspace{0.25in}
+
+{\LARGE How to Think Like a Computer Scientist}
+
+\vspace{1in}
+
+{\Large
+Allen B. Downey
+}
+
+
+\vspace{1in}
+
+{\Large \theversion}
+
+\vfill
+
+\end{flushright}
+
+
+%--copyright--------------------------------------------------
+\pagebreak
+\thispagestyle{empty}
+
+Copyright \copyright ~2012 Allen Downey.
+
+\vspace{0.25in}
+
+Permission is granted to copy, distribute, transmit and adapt
+this work under a Creative Commons
+Attribution-NonCommercial-ShareAlike 3.0 Unported License:
+\url{http://creativecommons.org/licenses/by-nc-sa/3.0/}
+
+If you are interested in distributing a commercial version of this
+work, please contact Allen B. Downey.
+
+The original form of this book is \LaTeX\ source code.  Compiling this
+\LaTeX\ source has the effect of generating a device-independent
+representation of the book, which can be converted to other formats
+and printed.
+
+The \LaTeX\ source for this book is available from:
+\url{http://thinkapjava.com}
+
+This book was typeset using \LaTeX .  The illustrations were
+drawn in xfig.  All of these are free, open-source programs.
+
+\vspace{0.25in}
+
+
+%-----------------------------------------------------------------
+
+\end{latexonly}
+
+\fi
+% END OF THE PART WE SKIP FOR PLASTEX
+

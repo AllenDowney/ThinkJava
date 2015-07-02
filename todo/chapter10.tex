@@ -1,0 +1,357 @@
+\chapter{GridWorld: Part 2}
+\label{gridworld2}
+
+Part 2 of the GridWorld case study uses some features we haven't
+seen yet, so you will get a preview now and more details later.
+As a reminder, you can find the
+documentation for the GridWorld classes at
+\url{http://www.greenteapress.com/thinkapjava/javadoc/gridworld/}.
+
+When you install GridWorld, you should have a folder named {\tt
+  projects/boxBug}, which contains {\tt BoxBug.java}, {\tt
+  BoxBugRunner.java} and {\tt BoxBug.gif}.
+
+Copy these files into your working folder and import them into
+your development environment.
+There are instructions here that
+might help: \url{http://www.collegeboard.com/prod_downloads/student/testing/ap/compsci_a/ap07_gridworld_installation_guide.pdf}.
+
+Here is the code from {\tt BoxBugRunner.java}:
+
+\begin{lstlisting}
+import info.gridworld.actor.ActorWorld;
+import info.gridworld.grid.Location;
+
+import java.awt.Color;
+
+public class BoxBugRunner {
+    public static void main(String[] args) {
+        ActorWorld world = new ActorWorld();
+        BoxBug alice = new BoxBug(6);
+        alice.setColor(Color.ORANGE);
+        BoxBug bob = new BoxBug(3);
+        world.add(new Location(7, 8), alice);
+        world.add(new Location(5, 5), bob);
+        world.show();
+    }
+}
+\end{lstlisting}
+
+Everything here should be familiar, with the possible exception of
+{\tt Location}, which is part of GridWorld, and similar to {\tt
+  java.awt.Point}.
+
+{\tt BoxBug.java} contains the class definition for BoxBug.
+
+\begin{lstlisting}
+public class BoxBug extends Bug {
+    private int steps;
+    private int sideLength;
+
+    public BoxBug(int length) {
+        steps = 0;
+        sideLength = length;
+    }
+}
+\end{lstlisting}
+
+The first line says that this class extends {\tt Bug}, which means
+that a {\tt BoxBug} is a kind of {\tt Bug}.
+
+The next two lines are instance variables.  Every {\tt Bug}
+has variables named {\tt sideLength}, which determines the size of the
+box it draws, and {\tt steps}, which keeps track of how many steps
+the {\tt Bug} has taken.
+
+The next line defines a {\bf constructor}, which is a special
+method that initializes the instance variables.  When you create
+a {\tt Bug} by invoking {\tt new}, Java invokes this constructor.
+
+The parameter of the constructor is the side length.
+
+{\tt Bug} behavior is controlled by the {\tt act} method.  Here
+is the {\tt act} method for {\tt BoxBug}:
+
+\begin{lstlisting}
+    public void act() {
+        if (steps < sideLength && canMove()) {
+            move();
+            steps++;
+        }
+        else {
+            turn();
+            turn();
+            steps = 0;
+        }
+    }
+\end{lstlisting}
+
+If the {\tt BoxBug} can move, and has not taken the required number
+of steps, it moves and increments {\tt steps}.
+
+If it hits a wall or completes one side of the box, it turns 90 degrees
+to the right and resets {\tt steps} to 0.
+
+Run the program and see what it does.  Did you get the behavior you
+expected?
+
+
+\section{Termites}
+
+I wrote a class called {\tt Termite} that extends {\tt Bug} and adds
+the ability to interact with flowers. To run it, download these files
+and import them into your development environment:
+
+\url{http://thinkapjava.com/code/Termite.java} \\
+\url{http://thinkapjava.com/code/Termite.gif} \\
+\url{http://thinkapjava.com/code/TermiteRunner.java} \\
+\url{http://thinkapjava.com/code/EternalFlower.java}
+
+Because {\tt Termite} extends {\tt Bug}, all {\tt Bug} methods
+also work on {\tt Termite}s.  But {\tt Termite}s have additional
+methods that {\tt Bug}s don't have.
+
+\begin{lstlisting}
+    /**
+     * Returns true if the termite has a flower.
+     */
+    public boolean hasFlower();
+
+    /**
+     * Returns true if the termite is facing a flower.
+     */
+    public boolean seeFlower();
+
+    /**
+     * Creates a flower unless the termite already has one.
+     */
+    public void createFlower();
+
+    /**
+     * Drops the flower in the termites current location.
+     *
+     * Note: only one Actor can occupy a grid cell, so the effect
+     * of dropping a flower is delayed until the termite moves.
+     */
+    public void dropFlower();
+
+    /**
+     * Throws the flower into the location the termite is facing.
+     */
+    public void throwFlower();
+
+    /**
+     * Picks up the flower the termite is facing, if there is
+     * one, and if the termite doesn't already have a flower.
+     */
+    public void pickUpFlower();
+\end{lstlisting}
+
+For some methods {\tt Bug} provides one definition and {\tt Termite}
+provides another.  In that case, the {\tt Termite} method
+{\bf overrides} the {\tt Bug} method.
+
+For example, {\tt Bug.canMove}
+returns {\tt true} if there is a flower in the next location, so
+{\tt Bug}s can trample {\tt Flower}s.  {\tt Termite.canMove} returns
+{\tt false} if there is any object in the next location, so
+{\tt Termite} behavior is different.
+
+As another example, Termites have a version of {\tt turn} that takes
+an integer number of degrees as a parameter.  Finally, Termites
+have {\tt randomTurn}, which turns left or right 45 degrees at random.
+
+% TODO: move for loops into the string chapter.
+
+Here is the code from {\tt TermiteRunner.java}:
+
+\begin{lstlisting}
+public class TermiteRunner
+{
+    public static void main(String[] args)
+    {
+        ActorWorld world = new ActorWorld();
+        makeFlowers(world, 20);
+
+        Termite alice = new Termite();
+        world.add(alice);
+
+        Termite bob = new Termite();
+        bob.setColor(Color.blue);
+        world.add(bob);
+
+        world.show();
+    }
+
+    public static void makeFlowers(ActorWorld world, int n) {
+        for (int i = 0; i<n; i++) {
+            world.add(new EternalFlower());
+        }
+    }
+}
+\end{lstlisting}
+
+Everything here should be familiar.  {\tt TermiteRunner} creates
+an {\tt ActorWorld} with 20 {\tt EternalFlowers} and two {\tt Termites}.
+
+An {\tt EternalFlower} is a {\tt Flower} that overrides {\tt act}
+so the flowers don't get darker.
+
+\begin{lstlisting}
+public class EternalFlower extends Flower {
+    public void act() {}
+}
+\end{lstlisting}
+
+If you run {\tt TermiteRunner.java} you should see two termites
+moving at random among the flowers.
+
+{\tt MyTermite.java} demonstrates the methods that interact with
+flowers.  Here is the class definition:
+
+\begin{lstlisting}
+public class MyTermite extends Termite {
+
+    public void act() {
+        if (getGrid() == null)
+            return;
+
+        if (seeFlower()) {
+            pickUpFlower();
+        }
+        if (hasFlower()) {
+            dropFlower();
+        }
+
+        if (canMove()) {
+            move();
+        }
+        randomTurn();
+    }
+}
+\end{lstlisting}
+
+{\tt MyTermite} extends {\tt Termite} and overrides {\tt act}.
+If {\tt MyTermite} sees a flower, it picks it up.  If it has
+a flower, it drops it.
+
+
+\section{Langton's Termite}
+
+Langton's Ant is a simple model of ant behavior that
+displays surprisingly complex behavior.  The Ant lives on a grid
+like GridWorld where each cell is either white or black.  The
+Ant moves according to these rules:
+
+\begin{itemize}
+
+\item If the Ant is on a white cell, it turns to the right,
+makes the cell black, and moves forward.
+
+\item If the Ant is on a black cell, it turns to the left,
+makes the cell white, and moves forward.
+
+\end{itemize}
+
+Because the rules are simple, you might expect the Ant to do
+something simple like make a square or repeat a simple
+pattern.  But starting on a grid with all white cells, the
+Ant makes more than 10,000 steps in a seemingly random pattern
+before it settles into a repeating loop of 104 steps.
+
+You can read more about Langton's
+Ant at \url{http://en.wikipedia.org/wiki/Langton_ant}.
+
+It is not easy to implement
+Langton's Ant in GridWorld because we can't set the color of
+the cells.  As an alternative, we can use Flowers to mark
+cells, but we can't have an Ant and a Flower in the same cell,
+so we can't implement the Ant rules exactly.
+
+Instead we'll create what I'll call a {\tt LangtonTermite}, which uses
+{\tt seeFlower} to check whether there is a flower in the next cell,
+{\tt pickUpFlower} to pick it up,
+and {\tt throwFlower} to put a flower in the next cell.  You
+might want to read the code for these methods to be sure you
+know what they do.
+
+\section{Exercises}
+
+\begin{exercise}
+Now you know enough to do the exercises in the Student Manual, Part 2.
+Go do them, and then come back for more fun.
+\end{exercise}
+
+\begin{exercise}
+The purpose of this exercise is to explore the behavior of Termites
+that interact with flowers.
+
+Modify {\tt TermiteRunner.java} to create {\tt MyTermites} instead
+of {\tt Termites}.  Then run it again.  {\tt MyTermites} should move
+around at random, moving the flowers around.  The total number of
+flowers should stay the same (including the ones {\tt MyTermites}
+are holding).
+
+In {\em Termites, Turtles and Traffic Jams}, Mitchell Resnick describes
+a simple model of termite behavior:
+
+\begin{itemize}
+
+\item If you see a flower, pick it up.  Unless you already have
+a flower; in that case, drop the one you have.
+
+\item Move forward, if you can.
+
+\item Turn left or right at random.
+
+\end{itemize}
+
+Modify {\tt MyTermite.java} to implement this model.  What effect do
+you think this change will have on the behavior of {\tt MyTermites}?
+
+Try it out.  Again, the total number of flowers does not change,
+but over time the flowers accumulate in a small number of piles, often
+just one.
+
+This behavior is an {\bf an emergent property}, which you can read
+about at \url{http://en.wikipedia.org/wiki/Emergence}.  {\tt MyTermites}
+follow simple rules using only small-scale information, but the result
+is large-scale organization.
+
+Experiment with different rules and see what effect they have on the
+system.  Small changes can have unpredicable results!
+
+\end{exercise}
+
+\begin{exercise}
+
+\begin{enumerate}
+
+\item Make a copy of {\tt Termite.java} called {\tt LangtonTermite}
+and a copy of {\tt TermiteRunner.java} called {\tt LangtonRunner.java}.
+Modify them so the class definitions have the same name as the files,
+and so {\tt LangtonRunner} creates a {\tt LangtonTermite}.
+
+\item If you create a file named {\tt LangtonTermite.gif}, GridWorld
+  uses it to represent your Termite.  You can download excellent
+  pictures of insects from
+  \url{http://www.cksinfo.com/animals/insects/realisticdrawings/index.html}.
+  To convert them to GIF format, you can use an application like
+  ImageMagick.
+
+\item Modify {\tt act} to implement rules similar to Langton's Ant.
+Experiment with different rules, and with both 45 and 90 degree turns.
+Find rules that run the maximum number of steps before the Termite
+starts to loop.
+
+\item To give your Termite enough room, you can make the grid
+bigger or switch to an {\tt UnboundedGrid}.
+
+\item Create more than one {\tt LangtonTermite} and see how they
+interact.
+
+\end{enumerate}
+
+\end{exercise}
+
+

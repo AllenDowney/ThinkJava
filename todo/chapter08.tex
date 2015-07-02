@@ -1,0 +1,977 @@
+\chapter{Strings and things}
+\label{chap07}
+\label{strings}
+
+\section{Characters}
+\index{method!string}
+\index{String method}
+\index{method!object}
+\index{object method}
+\index{class!String}
+
+In Java and other object-oriented languages, {\bf objects} are collections
+of related data that come with a set of methods.  These methods
+operate on the objects, performing computations and sometimes
+modifying the object's data.
+
+{\tt Strings} are objects,
+so you might ask ``What is the data
+contained in a {\tt String} object?''~and~``What are the methods we
+can invoke on {\tt String} objects?''
+\index{documentation}
+%
+The components of a {\tt String} object are letters or, more generally,
+characters.  Not all characters are letters; some are numbers,
+symbols, and other things.  For simplicity I
+call them all letters.
+%
+There are many methods, but I use only a few in this
+book.  The rest are documented at
+\url{http://download.oracle.com/javase/6/docs/api/java/lang/String.html}.
+
+The first method we will look at is {\tt charAt}, which allows you to
+extract letters from a {\tt String}.
+% To store the result, we need a new type:
+{\tt char} is the variable type that can store
+individual characters (as opposed to strings of them).
+
+\index{char}
+\index{type!char}
+\index{charAt}
+
+{\tt char}s work just like the other types we have seen:
+
+\begin{lstlisting}
+    char ltr = 'c';
+    if (ltr == 'c') {
+      System.out.println(ltr);
+    }
+\end{lstlisting}
+%
+Character values appear in single quotes, like {\tt 'c'}.  Unlike
+string values (which appear in double quotes), character values
+can contain only a single letter or symbol.
+
+\index{quote}
+\index{double-quote}
+\index{value!char}
+
+Here's how the {\tt charAt} method is used:
+
+\begin{lstlisting}
+    String fruit = "banana";
+    char letter = fruit.charAt(1);
+    System.out.println(letter);
+\end{lstlisting}
+%
+{\tt fruit.charAt()} means that I am
+invoking the {\tt charAt} method on the object named
+{\tt fruit}.
+I am passing the argument {\tt 1} to this method,
+which means that I want to know the first letter of
+the string.  The result is a character, which is stored in a
+{\tt char} named {\tt letter}.  When I print the value of
+{\tt letter}, I get a surprise:
+
+\begin{verbatimtab}
+a
+\end{verbatimtab}
+%
+{\tt a} is not the first letter of {\tt "banana"}.  Unless you are a
+computer scientist.  For technical reasons, computer scientists
+start counting from zero.  The 0th letter (``zeroeth'') of {\tt
+"banana"} is {\tt b}.  The 1th letter (``oneth'') is {\tt a} and the
+2th (``twooth'') letter is {\tt n}.
+
+If you want the zereoth letter of a string, you have to pass
+0 as an argument:
+
+\begin{lstlisting}
+    char letter = fruit.charAt(0);
+\end{lstlisting}
+
+
+\section{Length}
+\index{String!length}
+\index{length!String}
+
+The next {\tt String} method we'll look at is {\tt length}, which
+returns the number of characters in the string.  For example:
+
+\begin{lstlisting}
+    int length = fruit.length();
+\end{lstlisting}
+%
+{\tt length} takes no arguments
+and returns an integer, in this case 6.  Notice that it is
+legal to have a variable with the same name as a method (although
+it can be confusing for human readers).
+
+To find the last letter of a string, you might be tempted to
+try something like
+
+\begin{lstlisting}
+    int length = fruit.length();
+    char last = fruit.charAt(length);       // WRONG!!
+\end{lstlisting}
+%
+That won't work.  The reason is that there is no 6th letter
+in {\tt "banana"}.  Since we started counting at 0, the 6
+letters are numbered from 0 to 5.  To get the last character,
+you have to subtract 1 from {\tt length}.
+
+\begin{lstlisting}
+    int length = fruit.length();
+    char last = fruit.charAt(length-1);
+\end{lstlisting}
+
+
+\section{Traversal}
+\label{traverse}
+\index{traverse}
+
+A common thing to do with a string is
+start at the beginning, select each character in turn, do
+some computation with it, and continue until the end.  This pattern
+of processing is called a {\bf traversal}.  A natural
+way to encode a traversal is with a {\tt while} statement:
+
+\begin{lstlisting}
+    int index = 0;
+    while (index < fruit.length()) {
+        char letter = fruit.charAt(index);
+        System.out.println(letter);
+        index = index + 1;
+    }
+\end{lstlisting}
+%
+This loop traverses the string and prints each letter on
+a line by itself.  Notice that the condition is
+{\tt index < fruit.length()}, which means that when
+{\tt index} is equal to the length of the string, the
+condition is false and the body of the loop is not executed.
+The last character we access is the one with the
+index {\tt fruit.length()-1}.
+
+\index{loop variable}
+\index{variable!loop}
+\index{index}
+
+The name of the loop variable is {\tt index}.  An {\bf
+index} is a variable or value used to specify a member of an ordered
+set, in this case the string of characters.  The index
+indicates (hence the name) which one you want.
+
+\section{Run-time errors}
+\label{StringIndexOutOfBounds}
+\index{error!run-time}
+\index{run-time error}
+\index{exception!StringIndexOutOfBounds}
+
+Way back in Section~\ref{run-time} I talked about run-time errors,
+which are errors that don't appear until a program has started
+running.  In Java run-time errors are called {\bf exceptions}.
+
+You probably haven't seen many run-time errors, because we
+haven't been doing many things that can cause one.  Well, now we are.
+If you use the {\tt charAt} method and provide an index that is
+negative or greater than {\tt length-1}, it {\bf throws} an exception.
+You can think of ``throwing'' an exception like throwing
+a tantrum.
+
+When that happens, Java prints an error message with
+the type of exception and a {\bf stack trace}, which shows the methods
+that were running when the exception occurred.  Here is an example:
+
+\begin{lstlisting}
+public class BadString {
+
+    public static void main(String[] args) {
+        processWord("banana");
+    }
+
+    public static void processWord(String s) {
+        char c = getLastLetter(s);
+        System.out.println(c);
+    }
+
+    public static char getLastLetter(String s) {
+        int index = s.length();         // WRONG!
+        char c = s.charAt(index);
+        return c;
+    }
+}
+\end{lstlisting}
+
+Notice the error in {\tt getLastLetter}: the index of the last
+character should be {\tt s.length()-1}.  Here's what you get:
+
+\begin{verbatimtab}
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException:
+String index out of range: 6
+        at java.lang.String.charAt(String.java:694)
+        at BadString.getLastLetter(BadString.java:24)
+        at BadString.processWord(BadString.java:18)
+        at BadString.main(BadString.java:14)
+\end{verbatimtab}
+
+Then the program ends.
+The stack trace can be hard to read, but it contains a lot of information.
+
+
+\section{Reading documentation}
+\label{documentation}
+\index{documentation}
+
+If you go to
+\url{http://download.oracle.com/javase/6/docs/api/java/lang/String.html}.
+and click on {\tt charAt}, you get the following documentation
+(or something like it):
+
+\begin{verbatimtab}
+public char charAt(int index)
+
+Returns the char value at the specified index. An index ranges
+from 0 to length() - 1. The first char value of the sequence is
+at index 0, the next at index 1, and so on, as for array indexing.
+
+Parameters: index - the index of the char value.
+
+Returns: the char value at the specified index of this string.
+  The first char value is at index 0.
+
+Throws: IndexOutOfBoundsException - if the index argument is
+  negative or not less than the length of this string.
+\end{verbatimtab}
+
+The first line is the method's {\bf prototype}, which specifies the
+name of the method, the type of the parameters, and the return type.
+
+The next line describes what the method does.  The following
+lines explain the parameters and return values.  In this case
+the explanations are redundant, but the documentation is
+supposed to fit a standard format.  The last line describes
+the exceptions this method might throw.
+
+It might take some time to get
+comfortable with this kind of documentation, but it is worth the effort.
+
+
+\section{The {\tt indexOf} method}
+\index{indexOf}
+
+{\tt indexOf} is the inverse of {\tt charAt}:
+{\tt charAt} takes an index and returns the character at that
+index;  {\tt indexOf} takes a character and finds the index
+where that character appears.
+
+{\tt charAt} fails if the index is out of range, and throws an
+exception.  {\tt indexOf} fails if the character does not appear in
+the string, and returns the value {\tt -1}.
+
+\begin{lstlisting}
+    String fruit = "banana";
+    int index = fruit.indexOf('a');
+\end{lstlisting}
+%
+This finds the index of the letter {\tt 'a'} in the string.
+In this case, the letter appears three times, so it is not
+obvious what {\tt indexOf} should do.  According to the
+documentation, it returns the index of the {\em first} appearance.
+
+To find subsequent appearances, there is another
+version of {\tt indexOf}.  It takes a
+second argument that indicates where in the string to start
+looking.  For an explanation of this kind
+of overloading, see Section~\ref{overloading}.
+
+If we invoke:
+
+\begin{lstlisting}
+    int index = fruit.indexOf('a', 2);
+\end{lstlisting}
+%
+it starts at the twoeth letter (the first {\tt n}) and finds
+the second {\tt a}, which is at index 3.  If the letter happens
+to appear at the starting index, the starting index is the
+answer.  So
+
+\begin{lstlisting}
+    int index = fruit.indexOf('a', 5);
+\end{lstlisting}
+%
+returns 5.
+
+
+\section{Looping and counting}
+\label{loopcount}
+\index{traverse!counting}
+\index{loop!counting}
+
+The following program counts the
+number of times the letter {\tt 'a'} appears in a string:
+
+\begin{lstlisting}
+    String fruit = "banana";
+    int length = fruit.length();
+    int count = 0;
+
+    int index = 0;
+    while (index < length) {
+        if (fruit.charAt(index) == 'a') {
+            count = count + 1;
+        }
+        index = index + 1;
+    }
+    System.out.println(count);
+\end{lstlisting}
+%
+This program demonstrates a common idiom, called a {\bf counter}.  The
+variable {\tt count} is initialized to zero and then incremented each
+time we find an {\tt 'a'}. To {\bf increment} is to increase by one;
+it is the opposite of {\bf decrement}.
+%, and unrelated to {\bf excrement}, which is a noun
+When we exit the loop, {\tt count}
+contains the result: the total number of a's.
+\index{counter}
+\index{increment}
+\index{decrement}
+
+
+\section{Increment and decrement operators}
+\index{operator!increment}
+\index{operator!decrement}
+
+Incrementing and decrementing are such common operations that
+Java provides special operators for them.  The {\tt ++}
+operator adds one to the current value of an {\tt int} or
+{\tt char}.  {\tt --} subtracts one.  Neither operator works
+on {\tt double}s, {\tt boolean}s or {\tt String}s.
+
+Technically, it is legal to increment a variable and use it
+in an expression at the same time.  For example, you might see
+something like:
+
+\begin{lstlisting}
+    System.out.println(i++);
+\end{lstlisting}
+%
+Looking at this, it is not clear whether the increment will
+take effect before or after the value is printed.  Because
+expressions like this tend to be confusing, I discourage
+you from using them.  In fact, to discourage you even more,
+I'm not going to tell you what the result is.  If you really
+want to know, you can try it.
+
+Using the increment operators, we can rewrite the letter-counter:
+
+\begin{lstlisting}
+    int index = 0;
+    while (index < length) {
+      if (fruit.charAt(index) == 'a') {
+        count++;
+      }
+      index++;
+    }
+\end{lstlisting}
+%
+It is a common error to write something like
+
+\begin{lstlisting}
+    index = index++;             // WRONG!!
+\end{lstlisting}
+%
+Unfortunately, this is syntactically legal, so the compiler
+will not warn you.  The effect of this statement is to leave
+the value of {\tt index} unchanged.  This is often a difficult
+bug to track down.
+
+Remember, you can write {\tt index = index+1}, or you
+can write {\tt index++}, but you shouldn't mix them.
+
+% \section{Character arithmetic}
+% \index{char}
+% \index{type!char}
+% \index{operator!char}
+% \index{arithmetic!char}
+
+% It may seem odd, but you can do arithmetic with characters.
+% If you have a variable named {\tt letter} that contains a character,
+% then {\tt letter - 'a'} will tell you where in the alphabet it appears
+%(keeping in mind that 'a' is the zeroeth letter of the alphabet and
+% 'z' is the 25th).
+
+% This sort of thing is useful for converting between the characters
+% that contain numbers, like '0', '1' and '2', and the corresponding
+% integers.  They are not the same thing.  For example, if you try this
+
+% \begin{lstlisting}
+%     char letter = '3';
+%     int x =(int) letter;
+%     System.out.println(x);
+% \end{lstlisting}
+% %
+% you might expect the value 3, but depending on your environment,
+% you might get 51, which is the ASCII code that is used to
+% represent the character '3', or you might get something else
+% altogether.  To convert '3' to the corresponding integer value
+% you can subtract '0':
+
+% \begin{lstlisting}
+%     int x =(int)(letter - '0');
+% \end{lstlisting}
+% %
+% Technically, in both of these examples the typecast({\tt(int)}) is
+% unnecessary, since Java will convert type {\tt char} to type {\tt int}
+% automatically.  I included the typecasts to emphasize the difference
+% between the types, and because I'm a stickler about that sort of
+% thing.
+
+% Since this conversion can be a little ugly, it is preferable to use
+% the {\tt digit} method in the {\tt Character} class.  For example:
+
+% \begin{lstlisting}
+%     int x = Character.digit(letter, 10);
+% \end{lstlisting}
+% %
+% converts {\tt letter} to the corresponding digit, interpreting
+% it as a base 10 number.
+
+% Another use for character arithmetic is to loop through the letters of
+% the alphabet in order.  For example, in Robert McCloskey's book {\em
+% Make Way for Ducklings}, the names of the ducklings form an
+% abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and
+% Quack.  Here is a loop that prints these names in order:
+
+% \begin{lstlisting}
+%     char letter = 'J';
+%     while (letter <= 'Q') {
+ %      System.out.println(letter + "ack");
+ %      letter++;
+%     }
+% \end{lstlisting}
+%
+% Notice that in addition to the arithmetic operators, we can also
+% use the conditional operators on characters.  The output of this
+% program is:
+
+% \begin{verbatimtab}
+% Jack
+% Kack
+% Lack
+% Mack
+% Nack
+% Oack
+% Pack
+% Qack
+% \end{verbatimtab}
+% %
+% Of course, that's not quite right because I've misspelled ``Ouack''
+% and ``Quack.''  As an exercise, modify the program to correct
+% this error.
+
+
+\section{{\tt String}s are immutable}
+\label{immutable}
+\index{class!String}
+\index{immutable}
+\index{String}
+\index{toUpperCase}
+\index{toLowerCase}
+
+As you read the documentation of the {\tt String} methods, you
+might notice {\tt toUpperCase} and {\tt toLowerCase}.  These
+methods are often a source of confusion, because it sounds
+like they have the effect of changing (or mutating) an
+existing string.  Actually, neither these methods nor any
+others can change a string, because strings are {\bf immutable}.
+
+When you invoke {\tt toUpperCase} on a {\tt String}, you get a
+{\em new} {\tt String} as a return value.  For example:
+
+\begin{lstlisting}
+    String name = "Alan Turing";
+    String upperName = name.toUpperCase();
+\end{lstlisting}
+%
+After the second line is executed, {\tt upperName} contains
+the value {\tt "ALAN TURING"}, but {\tt name} still contains
+{\tt "Alan Turing"}.
+\index{Turing, Alan}
+
+
+\section{{\tt String}s are incomparable}
+\label{incomparable}
+\index{class!String}
+\index{comparison!String}
+\index{String}
+\index{equals}
+\index{compareTo}
+
+It is often necessary to compare strings to see if they are the same,
+or to see which comes first in alphabetical order.  It would be
+nice if we could use the comparison operators, like {\tt ==} and
+{\tt >}, but we can't.
+
+To compare {\tt String}s, we have to use the {\tt equals}
+and {\tt compareTo} methods.  For example:
+
+\begin{lstlisting}
+    String name1 = "Alan Turing";
+    String name2 = "Ada Lovelace";
+
+    if (name1.equals (name2)) {
+      System.out.println("The names are the same.");
+    }
+
+    int flag = name1.compareTo (name2);
+    if (flag == 0) {
+      System.out.println("The names are the same.");
+    } else if (flag < 0) {
+      System.out.println("name1 comes before name2.");
+    } else if (flag > 0) {
+      System.out.println("name2 comes before name1.");
+    }
+\end{lstlisting}
+%
+The syntax here is a little weird.  To compare two {\tt String}s,
+you have to invoke a method on one of them and pass the other as an
+argument.
+
+The return value from {\tt equals} is straightforward enough;
+{\tt true} if the strings contain the same characters, and
+{\tt false} otherwise.
+
+The return value from {\tt compareTo} is a weird, too.  It is
+the difference between the first characters in the strings
+that differ.  If the strings are equal, it is 0.  If the
+first string (the one on which the method is invoked) comes
+first in the alphabet, the difference is negative.  Otherwise,
+the difference is positive.  In this case the return value
+is positive 8, because the second letter of ``Ada'' comes
+before the second letter of ``Alan'' by 8 letters.
+
+Just for completeness, I should admit that it is {\em legal}, but very
+seldom {\em correct}, to use the {\tt ==} operator with {\tt String}s.
+I explain why in Section~\ref{equivalence}; for now, don't do it.
+
+
+\section{Glossary}
+
+\begin{description}
+
+\item[object:] A collection of related data that comes with a set of
+methods that operate on it.  The objects we have used so far are
+{\tt String}s, Bugs, Rocks, and the other GridWorld objects.
+
+\item[index:]  A variable or value used to select one of the
+members of an ordered set, like a character from a string.
+
+\item[exception:] A run-time error.
+\index{exception}
+\index{run-time error}
+
+\item[throw:] Cause an exception.
+
+\item[stack trace:] A report that shows the state of a program
+when an exception occurs.
+
+\item[prototype:]  The first line of a method, which specifies
+the name, parameters and return type.
+
+\item[traverse:]  To iterate through all the elements of a set
+performing a similar operation on each.
+
+\item[counter:]  A variable used to count something, usually
+initialized to zero and then incremented.
+
+\item[increment:]  Increase the value of a variable by one.
+The increment operator in Java is {\tt ++}.
+
+\item[decrement:]  Decrease the value of a variable by one.
+The decrement operator in Java is {\tt --}.
+
+
+\index{object}
+\index{index}
+\index{traverse}
+\index{counter}
+\index{increment}
+\index{decrement}
+
+\end{description}
+
+
+\section{Exercises}
+
+\begin{exercise}
+Write a method that takes a {\tt String}
+as an argument and that prints the letters backwards all on
+one line.
+\end{exercise}
+
+\begin{exercise}
+Read the stack trace in Section~\ref{StringIndexOutOfBounds}
+and answer these questions:
+
+\begin{itemize}
+
+\item What kind of Exception occurred, and what package is it defined
+in?
+
+\item What is the value of the index that caused the exception?
+
+\item What method threw the exception, and where is
+that method defined?
+
+\item What method invoked {\tt charAt}?
+
+\item In {\tt BadString.java}, what is the line number where {\tt charAt}
+was invoked?
+
+\end{itemize}
+
+\end{exercise}
+
+\begin{exercise}
+
+Encapsulate the code in Section~\ref{loopcount} in a method named
+{\tt countLetters}, and generalize it so that it accepts the
+string and the letter as arguments.
+\index{encapsulation}
+\index{generalization}
+
+Then rewrite the method so that it uses
+{\tt indexOf} to locate the a's, rather than checking
+the characters one by one.
+
+\end{exercise}
+
+\begin{exercise}
+The purpose of this exercise is to review encapsulation
+and generalization.
+
+\begin{enumerate}
+
+\item Encapsulate the following code fragment, transforming it
+into a method that takes a String as an argument and that
+returns the final value of {\tt count}.
+
+\item In a sentence or two, describe what the resulting method does
+(without getting into the details of how).
+
+\item Now that you have generalized the code
+so that it works on any String, what could you do to
+generalize it more?
+
+\end{enumerate}
+
+\begin{lstlisting}
+    String s = "((3 + 7) * 2)";
+    int len = s.length();
+
+    int i = 0;
+    int count = 0;
+
+    while (i < len) {
+        char c = s.charAt(i);
+
+        if (c == '(') {
+           count = count + 1;
+        } else if (c == ')') {
+           count = count - 1;
+        }
+        i = i + 1;
+    }
+
+    System.out.println(count);
+\end{lstlisting}
+\end{exercise}
+
+
+\begin{exercise}
+
+The point of this exercise is to explore Java types
+and fill in some of the details that aren't covered
+in the chapter.
+
+\begin{enumerate}
+
+\item Create a new program named {\tt Test.java} and write
+a {\tt main} method that contains
+expressions that combine
+various types using the {\tt +} operator.  For example, what
+happens when you ``add'' a {\tt String} and a {\tt char}?
+Does it perform addition or concatenation?   What is the type
+of the result? (How can you determine the type of the result?)
+
+\item Make a bigger copy of the following table and fill it in.  At the
+intersection of each pair of types, you should indicate whether it is
+legal to use the {\tt +} operator with these types, what operation is
+performed (addition or concatenation), and what the type of the result
+is.
+
+\begin{tabular}{|l|l|l|l|l|} \hline
+        &  boolean  &  char  &  int  &  String \\ \hline
+boolean &           &        &       &         \\ \hline
+char    &           &        &       &         \\ \hline
+int     &           &        &       &         \\ \hline
+String  &           &        &       &         \\ \hline
+\end{tabular}
+
+\item Think about some of the choices the designers of Java
+made when they filled in this table.  How many of the entries
+seem unavoidable, as if there were no other choice?
+How many seem like arbitrary choices from several equally
+reasonable possibilities?  How many seem problematic?
+
+\item Here's a puzzler: normally, the statement {\tt x++} is exactly
+  equivalent to {\tt x = x + 1}.  But if {\tt x} is a {\tt char}, it's
+  not!  In that case, {\tt x++} is legal, but {\tt x = x + 1} causes
+  an error.  Try it out and see what the error message is, then see if
+  you can figure out what is going on.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+
+What is the output of this program?  Describe in a sentence
+what {\tt mystery} does (not how it works).
+
+\begin{lstlisting}
+public class Mystery {
+
+    public static String mystery(String s) {
+        int i = s.length() - 1;
+        String total = "";
+
+        while (i >= 0 ) {
+            char ch = s.charAt(i);
+            System.out.println(i + "     " + ch);
+
+            total = total + ch;
+            i--;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(mystery("Allen"));
+    }
+}
+\end{lstlisting}
+
+\end{exercise}
+
+
+\begin{exercise}
+A friend of yours shows you the following method and
+explains that if {\tt number} is any two-digit number, the program
+will output the number backwards.  He claims that if {\tt number} is
+17, the method will output {\tt 71}.
+
+Is he right?  If not, explain what the program actually does and
+modify it so that it does the right thing.
+
+\begin{lstlisting}
+     int number = 17;
+     int lastDigit = number%10;
+     int firstDigit = number/10;
+     System.out.println(lastDigit + firstDigit);
+\end{lstlisting}
+
+\end{exercise}
+
+\begin{exercise}
+What is the output of the following program?
+
+\begin{lstlisting}
+public class Enigma {
+
+    public static void enigma(int x) {
+        if (x == 0) {
+            return;
+        } else {
+            enigma(x/2);
+        }
+
+        System.out.print(x%2);
+    }
+
+    public static void main(String[] args) {
+        enigma(5);
+        System.out.println("");
+    }
+}
+\end{lstlisting}
+
+Explain in 4-5 words what the method {\tt enigma} really does.
+\end{exercise}
+
+
+\begin{exercise}
+\label{palindrome}
+
+\begin{enumerate}
+
+\item Create a new program named {\tt Palindrome.java}.
+
+\item Write a method named {\tt first}
+that takes a String and returns the first letter, and one named
+{\tt last} that returns the last letter.
+
+\item Write a method named {\tt middle} that takes a String and
+returns a substring that contains everything {\em except} the
+first and last characters.
+
+Hint: read the documentation of the {\tt substring} method in
+the {\tt String} class.
+Run a few tests to make sure you understand how {\tt substring} works
+before you try to write {\tt middle}.
+
+What happens if you invoke {\tt middle} on a string that has only
+two letters?  One letter?  No letters?
+
+\item The usual definition of a palindrome is a word that reads the
+same both forward and backward, like ``otto'' and
+``palindromeemordnilap.''  An alternative way to define a property
+like this is to specify a way of testing for the property.  For
+example, we might say, ``a single letter is a palindrome, and a
+two-letter word is a palindrome if the letters are the same, and
+any other word is a palindrome if
+the first letter is the same as the
+last and the middle is a palindrome.''
+
+Write a recursive method named {\tt isPalindrome} that takes
+a {\tt String} and that returns a boolean indicating whether the
+word is a palindrome or not.
+
+\item Once you have a working palindrome checker, look for ways
+to simplify it by reducing the number of conditions you check.
+Hint: it might be useful to adopt the definition that the empty
+string is a palindrome.
+
+\item On a piece of paper, figure out a strategy for checking
+palindromes iteratively.  There are several possible approaches,
+so make sure you have a solid plan before you start writing code.
+
+\item Implement your strategy in a method called {\tt isPalindromeIter}.
+
+\item Optional: Appendix~\ref{javaio} provides code for reading a list
+of words from a file.  Read a list of words and print the palindromes.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+\label{abecedarian}
+
+A word is said to be ``abecedarian'' if the letters in the
+word appear in alphabetical order.  For example, the following
+are all 6-letter English abecedarian words.
+
+\begin {quote}
+abdest, acknow, acorsy, adempt, adipsy, agnosy, befist, behint,
+beknow, bijoux, biopsy, cestuy, chintz, deflux, dehors, dehort,
+deinos, diluvy, dimpsy
+\end{quote}
+
+\begin{enumerate}
+
+\item Describe a process for checking whether a given word (String)
+is abecedarian, assuming that the word contains only lower-case
+letters.  Your process can be iterative or recursive.
+
+\item Implement your process in a method called {\tt isAbecedarian}.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+\label{dupledrome}
+A dupledrome is a word that contains only double letters,
+like ``llaammaa'' or ``ssaabb''.  I conjecture that there
+are no dupledromes in common English use.  To test that
+conjecture, I would like a program that reads
+words from the dictionary one at a time and checks them for
+dupledromity.
+
+Write a method called {\tt isDupledrome} that takes a String
+and returns a boolean indicating whether the word is a dupledrome.
+\end{exercise}
+
+
+
+\begin{exercise}
+\begin{enumerate}
+
+\item The Captain Crunch decoder ring works by taking each letter in a
+string and adding 13 to it.  For example, 'a' becomes 'n' and 'b'
+becomes 'o'.  The letters ``wrap around'' at the end, so 'z' becomes
+'m'.
+
+Write a method that takes a String and that returns a new String
+containing the encoded version.  You should assume that the String
+contains upper and lower case letters, and spaces, but no other
+punctuation.  Lower case letters should be tranformed into other lower
+case letters; upper into upper.  You should not encode the spaces.
+
+\item Generalize the Captain Crunch method so that instead of adding
+13 to the letters, it adds any given amount.  Now you should be able
+to encode things by adding 13 and decode them by adding -13.  Try it.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+
+If you did the GridWorld exercises in Chapter~\ref{gridworld}, you
+might enjoy this exercise.  The goal is to use trigonometry to get the
+Bugs to chase each other.
+
+Make a copy of {\tt BugRunner.java} named {\tt ChaseRunner.java} and
+import it into your development environment.  Before you change
+anything, check that you can compile and run it.
+
+\begin{itemize}
+
+\item Create two Bugs, one red and one blue.
+
+\item Write a method called {\tt distance} that takes two Bugs
+and computes the distance between them.  Remember that you can
+get the x-coordinate of a Bug like this:
+
+\begin{lstlisting}
+    int x = bug.getLocation().getCol();
+\end{lstlisting}
+
+\item Write a method called {\tt turnToward} that takes two
+Bugs and turns one to face the other.  HINT: use {\tt Math.atan2},
+but remember that the result is in radians, so you have to
+convert to degrees.  Also, for Bugs, 0 degress is North, not East.
+
+\item Write a method called {\tt moveToward} that takes two
+Bugs, turns the first to face the second, and then moves the
+first one, if it can.
+
+\item Write a method called {\tt moveBugs} that takes two Bugs
+and an integer {\tt n}, and moves each Bug toward the other {\tt n}
+times.  You can write this method recursively, or use a while loop.
+
+\item Test each of your methods as you develop them.  When they are
+  all working, look for opportunities to improve them.  For example,
+  if you have redundant code in {\tt distance} and {\tt turnToward},
+  you could encapsulate the repeated code in a method.
+
+\end{itemize}
+
+\end{exercise}
+
+
+
+
