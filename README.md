@@ -16,9 +16,9 @@ The illustrations were drawn using xfig (http://www.xfig.org/) and dia
 
 To compile the PDF version from source:
 
-pdflatex thinkjava
-makeindex thinkjava
-pdflatex thinkjava
-pdflatex thinkjava
+    pdflatex thinkjava
+    makeindex thinkjava
+    pdflatex thinkjava
+    pdflatex thinkjava
 
 You might have to install texlive-latex-extra (in Ubuntu).
