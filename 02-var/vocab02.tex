@@ -1,102 +1,55 @@
-\section{Exercises}
+\section{Glossary}
 
-\begin{exercise}
+\begin{description}
 
-If you are using this book in a class, you might enjoy this exercise:
-find a partner and play "Stump the Chump'':
+\item[variable:] A named storage location for values.  All
+variables have a type, which is declared when the variable
+is created.
 
-Start with a program that compiles and runs correctly.  One player
-turns away while the other player adds an error to the program.  Then
-the first player tries to find and fix the error.  You get two points
-if you find the error without compiling the program, one point if you
-find it using the compiler, and your opponent gets a point if you
-don't find it.
+\item[value:] A number or string (or other thing to be named later)
+that can be stored in a variable.  Every value belongs to a type.
 
-% Note: please don't remove the ``l'' from ``public.''  It's not as
-% funny as you think.
-\end{exercise}
+\item[type:] A set of values.  The type of a variable
+determines which values can be stored there.  The types
+we have seen are integers ({\tt int} in Java) and strings
+({\tt String} in Java).
 
+\item[keyword:]  A reserved word used by the compiler
+to parse programs.  You cannot use keywords, like {\tt public},
+{\tt class} and {\tt void} as variable names.
 
-\begin{exercise}
-\label{ex.date}
+\item[declaration:] A statement that creates a new variable and
+determines its type.
 
-\begin{enumerate}
+\item[assignment:] A statement that assigns a value to a variable.
 
-\item Create a new program named {\tt Date.java}.  Copy or
-type in something like the ``Hello, World'' program and make
-sure you can compile and run it.
+\item[expression:] A combination of variables, operators and
+values that represents a single value.  Expressions also
+have types, as determined by their operators and operands.
 
-\item Following the example in Section~\ref{printing}, write a program
-that creates variables named {\tt day}, {\tt date}, {\tt month}
-and {\tt year}.  {\tt day} will contain the day of the week and {\tt
-date} will contain the day of the month.  What type is each variable?
-Assign values to those variables that represent today's date.
+\item[operator:] A symbol that represents a
+computation like addition, multiplication or string
+concatenation.
 
-\item Print the value of each variable on a line by itself.  This is
-an intermediate step that is useful for checking that everything is
-working so far.
+\item[operand:] One of the values on which an operator operates.
 
-\item Modify the program so that it prints the date in standard
-American form: {\tt Saturday, July 16, 2011}.
+\item[precedence:] The order in which operations are evaluated.
 
-\item Modify the program again so that the total output is:
+\item[concatenate:] To join two operands end-to-end.
 
-\begin{stdout}
-American format:
-Saturday, July 16, 2011
-European format:
-Saturday 16 July, 2011
-\end{stdout}
+\item[composition:] The ability to combine simple
+expressions and statements into compound statements and expressions
+to represent complex computations concisely.
 
-\end{enumerate}
+\index{variable}
+\index{value}
+\index{type}
+\index{keyword}
+\index{assignment}
+\index{expression}
+\index{operator}
+\index{concatenate}
+\index{operand}
+\index{composition}
 
-The point of this exercise is to use string concatenation to display
-values with different types ({\tt int} and {\tt String}), and to
-practice developing programs gradually by adding a few statements
-at a time.
-
-\end{exercise}
-
-
-\begin{exercise}
-
-\begin{enumerate}
-
-\item Create a new program called {\tt Time.java}.  From now
-on, I won't remind you to start with a small, working program,
-but you should.
-
-\item Following the example in Section 2.6, create variables
-named {\tt hour}, {\tt minute} and {\tt second}, and assign
-them values that are roughly the current time.  Use a 24-hour
-clock, so that at 2pm the value of {\tt hour} is 14.
-
-\item Make the program calculate and print the number of
-seconds since midnight.
-
-\item Make the program calculate and print the number of
-seconds remaining in the day.
-
-\item Make the program calculate and print the percentage of
-the day that has passed.
-
-\item Change the values of {\tt hour}, {\tt minute} and {\tt second}
-to reflect the current time (I assume that some time has elapsed), and
-check to make sure that the program works correctly with different
-values.
-
-\end{enumerate}
-
-The point of this exercise is to use some of the arithmetic
-operations, and to start thinking about compound entities like the
-time of day that that are represented with multiple values.  Also,
-you might run into problems computing percentages with {\tt ints},
-which is the motivation for floating point numbers in the next
-chapter.
-
-HINT: you may want to use additional variables to hold values
-temporarily during the computation.  Variables like this, that
-are used in a computation but never printed, are sometimes called
-intermediate or temporary variables.
-
-\end{exercise}
+\end{description}
