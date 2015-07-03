@@ -73,9 +73,9 @@ the string.  The result is a character, which is stored in a
 {\tt char} named {\tt letter}.  When I print the value of
 {\tt letter}, I get a surprise:
 
-\begin{verbatimtab}
+\begin{stdout}
 a
-\end{verbatimtab}
+\end{stdout}
 %
 {\tt a} is not the first letter of {\tt "banana"}.  Unless you are a
 computer scientist.  For technical reasons, computer scientists
@@ -206,14 +206,14 @@ public class BadString {
 Notice the error in {\tt getLastLetter}: the index of the last
 character should be {\tt s.length()-1}.  Here's what you get:
 
-\begin{verbatimtab}
+\begin{stdout}
 Exception in thread "main" java.lang.StringIndexOutOfBoundsException:
 String index out of range: 6
         at java.lang.String.charAt(String.java:694)
         at BadString.getLastLetter(BadString.java:24)
         at BadString.processWord(BadString.java:18)
         at BadString.main(BadString.java:14)
-\end{verbatimtab}
+\end{stdout}
 
 Then the program ends.
 The stack trace can be hard to read, but it contains a lot of information.
@@ -228,7 +228,7 @@ If you go to
 and click on {\tt charAt}, you get the following documentation
 (or something like it):
 
-\begin{verbatimtab}
+\begin{stdout}
 public char charAt(int index)
 
 Returns the char value at the specified index. An index ranges
@@ -242,7 +242,7 @@ Returns: the char value at the specified index of this string.
 
 Throws: IndexOutOfBoundsException - if the index argument is
   negative or not less than the length of this string.
-\end{verbatimtab}
+\end{stdout}
 
 The first line is the method's {\bf prototype}, which specifies the
 name of the method, the type of the parameters, and the return type.
@@ -455,7 +455,7 @@ can write {\tt index++}, but you shouldn't mix them.
 % use the conditional operators on characters.  The output of this
 % program is:
 
-% \begin{verbatimtab}
+% \begin{stdout}
 % Jack
 % Kack
 % Lack
@@ -464,7 +464,7 @@ can write {\tt index++}, but you shouldn't mix them.
 % Oack
 % Pack
 % Qack
-% \end{verbatimtab}
+% \end{stdout}
 % %
 % Of course, that's not quite right because I've misspelled ``Ouack''
 % and ``Quack.''  As an exercise, modify the program to correct

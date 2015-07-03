@@ -81,7 +81,6 @@
 % figures and spacing
 \usepackage{graphicx}
 \usepackage{floatrow}
-\usepackage{moreverb}
 
 % caption formatting
 \usepackage{caption}
@@ -107,22 +106,33 @@
 \theoremstyle{exercise}
 \newtheorem{exercise}{Exercise}[chapter]
 
+% colors for code listings and output
+\usepackage{xcolor}
+\definecolor{bgcolor}{HTML}{FAFAFA}
+\definecolor{comment}{HTML}{007C00}
+\definecolor{keyword}{HTML}{0000FF}
+\definecolor{strings}{HTML}{B20000}
+
 % syntax highlighting in code listings
-\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{textcomp}
 \usepackage{listings}
 \lstset{
     language=java,
     basicstyle=\ttfamily,
-    backgroundcolor=\color{gray!5},
-    commentstyle=\color{Green},
-    keywordstyle=\color{blue},
-    stringstyle=\color{Orange},
+    backgroundcolor=\color{bgcolor},
+    commentstyle=\color{comment},
+    keywordstyle=\color{keyword},
+    stringstyle=\color{strings},
     columns=fullflexible,
     keepspaces=true,
     showstringspaces=false,
+    upquote=true,
     aboveskip=\parskip,
     belowskip=\parskip
 }
+\lstnewenvironment{stdout}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=}}
+{}
 
 % pdf hyperlinks, table of contents, and document properties
 \usepackage[pdftex]{hyperref}

@@ -222,7 +222,7 @@ right column:
 %
 The output of this program is
 
-\begin{verbatimtab}
+\begin{stdout}
 1.0   0.0
 2.0   0.6931471805599453
 3.0   1.0986122886681098
@@ -232,7 +232,7 @@ The output of this program is
 7.0   1.9459101490553132
 8.0   2.0794415416798357
 9.0   2.1972245773362196
-\end{verbatimtab}
+\end{stdout}
 %
 Looking at these values, can you tell what base the {\tt log}
 method uses?
@@ -253,7 +253,7 @@ Changing the {\tt print} statement to
 %
 yields
 
-\begin{verbatimtab}
+\begin{stdout}
 1.0   0.0
 2.0   1.0
 3.0   1.5849625007211563
@@ -263,7 +263,7 @@ yields
 7.0   2.807354922057604
 8.0   3.0
 9.0   3.1699250014423126
-\end{verbatimtab}
+\end{stdout}
 %
 We can see that 1, 2, 4 and 8 are powers of two, because
 their logarithms base 2 are round numbers.  If we wanted to find
@@ -283,7 +283,7 @@ the loop, which yields an arithmetic sequence, we multiply
 {\tt x} by something, yielding a {\bf geometric} sequence.
 The result is:
 
-\begin{verbatimtab}
+\begin{stdout}
 1.0   0.0
 2.0   1.0
 4.0   2.0
@@ -291,7 +291,7 @@ The result is:
 16.0   4.0
 32.0   5.0
 64.0   6.0
-\end{verbatimtab}
+\end{stdout}
 %
 Log tables may not be useful any more, but for computer scientists,
 knowing the powers of two is!  When you have an idle
@@ -336,9 +336,9 @@ invoke {\tt println}, you may never see the stored output.
 
 The output of this program is:
 
-\begin{verbatimtab}
+\begin{stdout}
 2   4   6   8   10   12
-\end{verbatimtab}
+\end{stdout}
 %
 So far, so good.  The next step is to {\bf encapsulate} and {\bf
 generalize}.
@@ -381,15 +381,15 @@ the value 2 with the parameter {\tt n}.
 If I invoke this method with the argument 2, I get the same
 output as before.  With argument 3, the output is:
 
-\begin{verbatimtab}
+\begin{stdout}
 3   6   9   12   15   18
-\end{verbatimtab}
+\end{stdout}
 %
 and with argument 4, the output is
 
-\begin{verbatimtab}
+\begin{stdout}
 4   8   12   16   20   24
-\end{verbatimtab}
+\end{stdout}
 %
 By now you can probably guess how we are going to print a
 multiplication table: we'll invoke {\tt printMultiples} repeatedly with
@@ -410,14 +410,14 @@ method invocation.
 
 The output of this program is
 
-\begin{verbatimtab}
+\begin{stdout}
 1   2   3   4   5   6
 2   4   6   8   10   12
 3   6   9   12   15   18
 4   8   12   16   20   24
 5   10   15   20   25   30
 6   12   18   24   30   36
-\end{verbatimtab}
+\end{stdout}
 %
 which is a (slightly sloppy) multiplication table.  If the
 sloppiness bothers you, Java provides methods that give you
@@ -531,7 +531,7 @@ size, not just the 6x6 table.  You could add a parameter to
 I replaced the value 6 with the parameter {\tt high}.  If I
 invoke {\tt printMultTable} with the argument 7, I get
 
-\begin{verbatimtab}
+\begin{stdout}
 1   2   3   4   5   6
 2   4   6   8   10   12
 3   6   9   12   15   18
@@ -539,7 +539,7 @@ invoke {\tt printMultTable} with the argument 7, I get
 5   10   15   20   25   30
 6   12   18   24   30   36
 7   14   21   28   35   42
-\end{verbatimtab}
+\end{stdout}
 %
 which is fine, except that I probably want the table to
 be square (same number of rows and columns), which means
@@ -574,7 +574,7 @@ line, and I also had to
 change the place where the method is invoked in {\tt printMultTable}.
 As expected, this program generates a square 7x7 table:
 
-\begin{verbatimtab}
+\begin{stdout}
 1   2   3   4   5   6   7
 2   4   6   8   10   12   14
 3   6   9   12   15   18   21
@@ -582,7 +582,7 @@ As expected, this program generates a square 7x7 table:
 5   10   15   20   25   30   35
 6   12   18   24   30   36   42
 7   14   21   28   35   42   49
-\end{verbatimtab}
+\end{stdout}
 %
 When you generalize a method appropriately, you often find
 that it has capabilities you did not plan.
@@ -604,7 +604,7 @@ to
 %
 and you get
 
-\begin{verbatimtab}
+\begin{stdout}
 1
 2   4
 3   6   9
@@ -612,7 +612,7 @@ and you get
 5   10   15   20   25
 6   12   18   24   30   36
 7   14   21   28   35   42   49
-\end{verbatimtab}
+\end{stdout}
 %
 I'll leave it up to you to figure out how it works.
 
@@ -775,9 +775,9 @@ that you still get the same result.
 {\tt myexp(x)} for various values of {\tt x}.  The output should look
 something like:
 
-\begin{verbatimtab}
+\begin{stdout}
 1.0     2.708333333333333       2.718281828459045
-\end{verbatimtab}
+\end{stdout}
 
 %the next line used to use \\ in an attempt to escape the backslash character
 %but this doesn't work: \\ produces a newline

@@ -324,10 +324,10 @@ this program:
 %
 generates this output:
 
-\begin{verbatimtab}
+\begin{stdout}
 Number of minutes since midnight: 719
 Fraction of the hour that has passed: 0
-\end{verbatimtab}
+\end{stdout}
 %
 The first line is expected, but the second line is
 odd.  The value of {\tt minute} is 59, and
@@ -355,9 +355,9 @@ rather than a fraction:
 %
 The result is:
 
-\begin{verbatimtab}
+\begin{stdout}
 Percentage of the hour that has passed: 98
-\end{verbatimtab}
+\end{stdout}
 %
 Again the result is rounded down, but at least now the answer
 is approximately correct.  To get a more accurate
@@ -407,9 +407,9 @@ In general you cannot perform mathematical operations on {\tt String}s,
 even if the strings look like numbers.  The following are
 illegal (if we know that bob has type {\tt String})
 
-\begin{verbatimtab}
+\begin{stdout}
 bob - 1         "Hello"/123      bob * "Hello"
-\end{verbatimtab}
+\end{stdout}
 %
 By the way, can you tell by looking at those expressions
 whether {\tt bob} is an integer or a string?  Nope.
@@ -573,12 +573,12 @@ American form: {\tt Saturday, July 16, 2011}.
 
 \item Modify the program again so that the total output is:
 
-\begin{verbatimtab}
+\begin{stdout}
 American format:
 Saturday, July 16, 2011
 European format:
 Saturday 16 July, 2011
-\end{verbatimtab}
+\end{stdout}
 
 \end{enumerate}
 
