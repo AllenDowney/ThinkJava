@@ -47,10 +47,10 @@ To use a class defined in another package, you have to {\bf
   import} it.  {\tt Point} and {\tt Rectangle} are in the
 {\tt java.awt} package, so to import them like this:
 
-\begin{lstlisting}
+\begin{code}
     import java.awt.Point;
     import java.awt.Rectangle;
-\end{lstlisting}
+\end{code}
 
 All {\tt import} statements appear at the beginning of the program,
 outside the class definition.
@@ -77,10 +77,10 @@ right and $y$ units up from the origin.
 In Java, a point is represented by a {\tt Point} object.  To
 create a new point, you have to use {\tt new}:
 
-\begin{lstlisting}
+\begin{code}
     Point blank;
     blank = new Point(3, 4);
-\end{lstlisting}
+\end{code}
 %
 The first line is a conventional variable declaration: {\tt blank}
 has type {\tt Point}.  The second line invokes {\tt new}, specifies
@@ -138,9 +138,9 @@ Similarly, if you want to read a value from an instance variable, you
 have to specify the object you want to get it from.  In Java this is
 done using ``dot notation.''
 
-\begin{lstlisting}
+\begin{code}
     int x = blank.x;
-\end{lstlisting}
+\end{code}
 %
 The expression {\tt blank.x} means ``go to the object {\tt blank}
 refers to, and get the value of {\tt x}.''  In this case we assign
@@ -152,10 +152,10 @@ variable named {\tt x}.  The purpose of dot notation is to identify
 You can use dot notation as part of any Java expression, so the
 following are legal.
 
-\begin{lstlisting}
+\begin{code}
     System.out.println(blank.x + ", " + blank.y);
     int distance = blank.x * blank.x + blank.y * blank.y;
-\end{lstlisting}
+\end{code}
 %
 The first line prints {\tt 3, 4}; the second line calculates
 the value 25.
@@ -167,11 +167,11 @@ the value 25.
 You can pass objects as parameters in the usual way.  For
 example:
 
-\begin{lstlisting}
+\begin{code}
   public static void printPoint(Point p) {
     System.out.println("(" + p.x + ", " + p.y + ")");
   }
-\end{lstlisting}
+\end{code}
 %
 This method takes a point as an argument and prints it in
 the standard format.  If you invoke {\tt printPoint(blank)},
@@ -179,9 +179,9 @@ it prints {\tt(3, 4)}.  Actually, Java already has a
 method for printing {\tt Points}.  If you invoke
 {\tt System.out.println(blank)}, you get
 
-\begin{lstlisting}
+\begin{code}
 java.awt.Point[x=3,y=4]
-\end{lstlisting}
+\end{code}
 %
 This is a standard format Java uses for printing objects.  It prints
 the name of the type, followed by the names and values of the instance
@@ -191,13 +191,13 @@ As a second example, we can rewrite the {\tt distance} method from
 Section~\ref{distance} so that it takes two {\tt Point}s as parameters
 instead of four {\tt double}s.
 
-\begin{lstlisting}
+\begin{code}
   public static double distance(Point p1, Point p2) {
     double dx = (double)(p2.x - p1.x);
     double dy = (double)(p2.y - p1.y);
     return Math.sqrt(dx*dx + dy*dy);
   }
-\end{lstlisting}
+\end{code}
 %
 The typecasts are not really necessary; I added them as a
 reminder that the instance variables in a {\tt Point} are integers.
@@ -214,9 +214,9 @@ height}.  Other than that, everything is pretty much the same.
 This example
 creates a {\tt Rectangle} object and makes {\tt box} refer to it.
 
-\begin{lstlisting}
+\begin{code}
     Rectangle box = new Rectangle(0, 0, 100, 200);
-\end{lstlisting}
+\end{code}
 %
 This figure shows the effect of this assignment.
 
@@ -225,9 +225,9 @@ This figure shows the effect of this assignment.
 
 If you print {\tt box}, you get
 
-\begin{lstlisting}
+\begin{code}
 java.awt.Rectangle[x=0,y=0,width=100,height=200]
-\end{lstlisting}
+\end{code}
 %
 Again, this is the result of a Java method that knows how
 to print {\tt Rectangle} objects.
@@ -243,13 +243,13 @@ You can write methods that return objects.  For example,
 returns a {\tt Point} that contains the coordinates of the
 center of the {\tt Rectangle}:
 
-\begin{lstlisting}
+\begin{code}
   public static Point findCenter(Rectangle box) {
     int x = box.x + box.width/2;
     int y = box.y + box.height/2;
     return new Point(x, y);
   }
-\end{lstlisting}
+\end{code}
 %
 Notice that you can use {\tt new} to create a new object,
 and then immediately use the result as the return value.
@@ -264,10 +264,10 @@ to one of its instance variables.  For example, to ``move''
 a rectangle without changing its size, you can modify the
 {\tt x} and {\tt y} values:
 
-\begin{lstlisting}
+\begin{code}
     box.x = box.x + 50;
     box.y = box.y + 100;
-\end{lstlisting}
+\end{code}
 %
 The result is shown in the figure:
 
@@ -281,22 +281,22 @@ The result is shown in the figure:
 We can encapsulate this code in a method and
 generalize it to move the rectangle by any amount:
 
-\begin{lstlisting}
+\begin{code}
   public static void moveRect(Rectangle box, int dx, int dy) {
     box.x = box.x + dx;
     box.y = box.y + dy;
   }
-\end{lstlisting}
+\end{code}
 %
 The variables {\tt dx} and {\tt dy} indicate how far to move the
 rectangle in each direction.  Invoking this method has the effect of
 modifying the {\tt Rectangle} that is passed as an argument.
 
-\begin{lstlisting}
+\begin{code}
     Rectangle box = new Rectangle(0, 0, 100, 200);
     moveRect(box, 50, 100);
     System.out.println(box);
-\end{lstlisting}
+\end{code}
 %
 prints {\tt java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
 
@@ -316,9 +316,9 @@ For example, {\tt translate} has the same effect as {\tt moveRect},
 but instead of passing the Rectangle as an argument, you use dot
 notation:
 
-\begin{lstlisting}
+\begin{code}
     box.translate(50, 100);
-\end{lstlisting}
+\end{code}
 %
 %The effect is the same.
 
@@ -333,10 +333,10 @@ are assigning a {\em reference} to an object.  It is possible to have
 multiple variables that refer to the same object.  For example,
 this code:
 
-\begin{lstlisting}
+\begin{code}
     Rectangle box1 = new Rectangle(0, 0, 100, 200);
     Rectangle box2 = box1;
-\end{lstlisting}
+\end{code}
 %
 generates a state diagram that looks like this:
 
@@ -352,11 +352,11 @@ with objects.
 When two variables are aliased, any changes that affect one
 variable also affect the other.  For example:
 
-\begin{lstlisting}
+\begin{code}
     System.out.println(box2.width);
     box1.grow(50, 50);
     System.out.println(box2.width);
-\end{lstlisting}
+\end{code}
 %
 The first line prints {\tt 100}, which is the width of the
 {\tt Rectangle} referred to by {\tt box2}.  The second
@@ -393,9 +393,9 @@ a Java keyword) that means ``no object.''
 The declaration {\tt Point blank;} is equivalent to this
 initialization
 
-\begin{lstlisting}
+\begin{code}
     Point blank = null;
-\end{lstlisting}
+\end{code}
 %
 and is shown in the following state diagram:
 
@@ -413,11 +413,11 @@ variable or invoking a method, Java throws a {\tt
 NullPointerException}, prints an error message
 and terminates the program.
 
-\begin{lstlisting}
+\begin{code}
     Point blank = null;
     int x = blank.x;              // NullPointerException
     blank.translate(50, 50);      // NullPointerException
-\end{lstlisting}
+\end{code}
 %
 On the other hand, it is legal to pass a null object as an argument or
 receive one as a return value.  In fact, it is common to do so, for
@@ -431,10 +431,10 @@ In Section~\ref{aliasing} we talked about what happens when
 more than one variable refers to the same object.  What happens
 when {\em no} variable refers to an object?  For example:
 
-\begin{lstlisting}
+\begin{code}
     Point blank = new Point(3, 4);
     blank = null;
-\end{lstlisting}
+\end{code}
 %
 The first line creates a new {\tt Point} object and makes
 {\tt blank} refer to it.  The second line changes {\tt blank}
@@ -559,7 +559,7 @@ any objects those variables refer to.
 
 \end{enumerate}
 
-\begin{lstlisting}
+\begin{code}
 public static void main(String[] args)
 {
     int x = 5;
@@ -576,7 +576,7 @@ public static int riddle(int x, Point p)
     x = x + 7;
     return x + p.x + p.y;
 }
-\end{lstlisting}
+\end{code}
 
 The point of this exercise is to make sure you understand the
 mechanism for passing Objects as parameters.
@@ -594,7 +594,7 @@ variables and parameters and the objects those variables refer to.
 
 \end{enumerate}
 
-\begin{lstlisting}
+\begin{code}
 public static double distance(Point p1, Point p2) {
     int dx = p1.x - p2.x;
     int dy = p1.y - p2.y;
@@ -617,7 +617,7 @@ public static void main(String[] args) {
 
     System.out.println(dist);
 }
-\end{lstlisting}
+\end{code}
 %
 \end{exercise}
 
@@ -642,7 +642,7 @@ they refer to.
 
 \end{enumerate}
 
-\begin{lstlisting}
+\begin{code}
 public static void printPoint(Point p) {
     System.out.println("(" + p.x + ", " + p.y + ")");
 }
@@ -663,7 +663,7 @@ public static void main(String[] args) {
     Point p2 = findCenter(box1);
     printPoint(p2);
 }
-\end{lstlisting}
+\end{code}
 
 \end{exercise}
 
@@ -694,10 +694,10 @@ java.math.BigInteger} to the beginning of your program.
 BigInteger, but the one I recommend uses {\tt valueOf}.
 The following code converts an integer to a {\tt BigInteger}:
 
-\begin{lstlisting}
+\begin{code}
     int x = 17;
     BigInteger big = BigInteger.valueOf(x);
-\end{lstlisting}
+\end{code}
 
 Type in this code and try it out.  Try printing a BigInteger.
 
@@ -707,11 +707,11 @@ have to use methods like {\tt add}.  To
 add two BigIntegers, invoke {\tt add} on one
 and pass the other as an argument.  For example:
 
-\begin{lstlisting}
+\begin{code}
     BigInteger small = BigInteger.valueOf(17);
     BigInteger big = BigInteger.valueOf(1700000000);
     BigInteger total = small.add(big);
-\end{lstlisting}
+\end{code}
 
 Try out some of the other methods, like {\tt multiply} and
 {\tt pow}.
@@ -735,7 +735,7 @@ ability to raise large integers to an integer power.  Here is a
 method that implements a (reasonably) fast technique for integer
 exponentiation:
 
-\begin{lstlisting}
+\begin{code}
 public static int pow(int x, int n) {
     if (n == 0) return 1;
 
@@ -751,7 +751,7 @@ public static int pow(int x, int n) {
       return t*t*x;
     }
 }
-\end{lstlisting}
+\end{code}
 
 The problem with this method is that it only works if the result
 is smaller than 2 billion.  Rewrite it so that the result is

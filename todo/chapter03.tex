@@ -16,19 +16,19 @@ called {\tt double}, which is short for ``double-precision.''
 You can create floating-point variables and assign values to them
 using the same syntax we used for the other types.  For example:
 
-\begin{lstlisting}
+\begin{code}
     double pi;
     pi = 3.14159;
-\end{lstlisting}
+\end{code}
 %
 It is also legal to declare a variable and assign a value to it at the
 same time:
 
-\begin{lstlisting}
+\begin{code}
     int x = 1;
     String empty = "";
     double pi = 3.14159;
-\end{lstlisting}
+\end{code}
 %
 This syntax is common; a combined declaration
 and assignment is sometimes called an {\bf initialization}.
@@ -47,9 +47,9 @@ different types, and strictly speaking, you are not allowed
 to make assignments between types.  For example, the following
 is illegal:
 
-\begin{lstlisting}
+\begin{code}
     int x = 1.1;
-\end{lstlisting}
+\end{code}
 %
 because the variable on the left is an {\tt int}
 and the value on the right is a {\tt double}.  But it is easy
@@ -57,17 +57,17 @@ to forget this rule, especially because there are places where Java
 will automatically convert from one type to another.
 For example:
 
-\begin{lstlisting}
+\begin{code}
     double y = 1;
-\end{lstlisting}
+\end{code}
 %
 should technically not be legal, but Java allows it by converting the
 {\tt int} to a {\tt double} automatically.  This leniency is
 convenient, but it can cause problems; for example:
 
-\begin{lstlisting}
+\begin{code}
     double y = 1 / 3;
-\end{lstlisting}
+\end{code}
 %
 You might expect the variable {\tt y} to get the value
 {\tt 0.333333}, which is a legal floating-point value, but in
@@ -81,9 +81,9 @@ One way to solve this problem (once you figure out what
 it is) is to make the right-hand side a floating-point
 expression:
 
-\begin{lstlisting}
+\begin{code}
     double y = 1.0 / 3.0;
-\end{lstlisting}
+\end{code}
 %
 This sets {\tt y} to {\tt 0.333333}, as expected.
 
@@ -118,10 +118,10 @@ The syntax for typecasting is to put
 the name of the type in parentheses and use it as an operator.
 For example,
 
-\begin{lstlisting}
+\begin{code}
     double pi = 3.14159;
     int x = (int) pi;
-\end{lstlisting}
+\end{code}
 %
 The {\tt(int)} operator has the effect of converting what
 follows into an integer, so {\tt x} gets the value 3.
@@ -131,10 +131,10 @@ so in the following example, the value of {\tt pi} gets
 converted to an integer first, and the result
 is 60.0, not 62.
 
-\begin{lstlisting}
+\begin{code}
     double pi = 3.14159;
     double x = (int) pi * 20.0;
-\end{lstlisting}
+\end{code}
 %
 Converting to an integer always rounds down, even if the fraction
 part is 0.99999999.  These behaviors (precedence and rounding)
@@ -166,11 +166,11 @@ are called {\bf methods}.
 The math methods are invoked using a syntax that is similar to
 the {\tt print} statements we have already seen:
 
-\begin{lstlisting}
+\begin{code}
      double root = Math.sqrt(17.0);
      double angle = 1.5;
      double height = Math.sin(angle);
-\end{lstlisting}
+\end{code}
 %
 The first example sets {\tt root} to the square root of 17.
 The second example finds the sine of the value of {\tt angle},
@@ -180,10 +180,10 @@ values you use with {\tt sin} and the other trigonometric functions
 convert from degrees to radians, you can divide by 360
 and multiply by $2 \pi$.  Conveniently, Java provides {\tt Math.PI}:
 
-\begin{lstlisting}
+\begin{code}
      double degrees = 90;
      double angle = degrees * 2 * Math.PI / 360.0;
-\end{lstlisting}
+\end{code}
 %
 Notice that {\tt PI} is in all capital letters.  Java does
 not recognize {\tt Pi}, {\tt pi}, or {\tt pie}.
@@ -192,9 +192,9 @@ Another useful method in the {\tt Math} class is {\tt round},
 which rounds a floating-point value off to the nearest integer
 and returns an {\tt int}.
 
-\begin{lstlisting}
+\begin{code}
     int x = Math.round(Math.PI * 20.0);
-\end{lstlisting}
+\end{code}
 %
 In this case the multiplication happens first, before the
 method is invoked.  The result is 63 (rounded up from 62.8319).
@@ -209,9 +209,9 @@ Just as with mathematical functions, Java methods can be {\bf
 composed}, meaning that you use one expression as part of another.
 For example, you can use any expression as an argument to a method:
 
-\begin{lstlisting}
+\begin{code}
     double x = Math.cos(angle + Math.PI/2);
-\end{lstlisting}
+\end{code}
 %
 This statement takes the value {\tt Math.PI}, divides it by two and
 adds the result to the value of the variable {\tt angle}.  The sum is
@@ -222,9 +222,9 @@ arguments, not even the empty argument {\tt()}).
 You can also take the result of one method and pass it as
 an argument to another:
 
-\begin{lstlisting}
+\begin{code}
     double x = Math.exp(Math.log(10.0));
-\end{lstlisting}
+\end{code}
 %
 In Java, the {\tt log} method always uses base $e$, so this
 statement finds the log base $e$ of 10 and then raises $e$ to that
@@ -242,11 +242,11 @@ but it is also possible to add new methods.  We have already
 seen one method definition: {\tt main}.  The method named {\tt main}
 is special, but the syntax is the same for other methods:
 
-\begin{lstlisting}
+\begin{code}
   public static void NAME( LIST OF PARAMETERS ) {
     STATEMENTS
   }
-\end{lstlisting}
+\end{code}
 %
 You can make up any name you want for your method, except
 that you can't call it {\tt main} or any
@@ -263,11 +263,11 @@ Strings (we'll get to arrays in Chapter~\ref{arrays}).  The first
 couple of methods we are going to write have no parameters, so the
 syntax looks like this:
 
-\begin{lstlisting}
+\begin{code}
   public static void newLine() {
     System.out.println("");
   }
-\end{lstlisting}
+\end{code}
 %
 This method is named {\tt newLine}, and the empty parentheses
 mean that it takes no parameters.  It contains one
@@ -279,13 +279,13 @@ line after it prints, so this statement skips to the next line.
 In {\tt main} we invoke this new method the same way we invoke
 Java methods:
 
-\begin{lstlisting}
+\begin{code}
   public static void main(String[] args) {
     System.out.println("First line.");
     newLine();
     System.out.println("Second line.");
   }
-\end{lstlisting}
+\end{code}
 %
 The output of this program is
 
@@ -301,7 +301,7 @@ Notice the extra space between the lines.  What if we wanted
 more space between the lines?  We could invoke the same
 method repeatedly:
 
-\begin{lstlisting}
+\begin{code}
   public static void main(String[] args) {
     System.out.println("First line.");
     newLine();
@@ -309,12 +309,12 @@ method repeatedly:
     newLine();
     System.out.println("Second line.");
   }
-\end{lstlisting}
+\end{code}
 %
 Or we could write a new method, named {\tt threeLine}, that
 prints three new lines:
 
-\begin{lstlisting}
+\begin{code}
   public static void threeLine() {
     newLine();  newLine();  newLine();
   }
@@ -324,7 +324,7 @@ prints three new lines:
     threeLine();
     System.out.println("Second line.");
   }
-\end{lstlisting}
+\end{code}
 %
 You should notice a few things about this program:
 
@@ -373,7 +373,7 @@ some additional benefits of dividing programs into methods.
 Pulling together the code fragments from the previous
 section, the class definition looks like this:
 
-\begin{lstlisting}
+\begin{code}
 class NewLine {
 
   public static void newLine() {
@@ -390,7 +390,7 @@ class NewLine {
     System.out.println("Second line.");
   }
 }
-\end{lstlisting}
+\end{code}
 %
 The first line indicates that this is the class definition for a new
 class called {\tt NewLine}.  A {\bf class} is a collection of related
@@ -404,10 +404,10 @@ the name of the class ({\tt Math}) and the name of the method.
 That's why the syntax is slightly different for Java
 methods and the methods we write:
 
-\begin{lstlisting}
+\begin{code}
     Math.pow(2.0, 10.0);
     newLine();
-\end{lstlisting}
+\end{code}
 %
 The first statement invokes the {\tt pow} method in
 the {\tt Math class} (which raises the first argument to the
@@ -419,9 +419,9 @@ If you try to invoke a method from the wrong class, the
 compiler will generate an error.  For example, if you
 type:
 
-\begin{lstlisting}
+\begin{code}
     pow(2.0, 10.0);
-\end{lstlisting}
+\end{code}
 %
 The compiler will say something like, ``Can't find a method
 named {\tt pow} in class {\tt NewLine}.''  If you have
@@ -495,19 +495,19 @@ For example, {\tt printTwice} specifies a single parameter,
 suggest that it is a {\tt String}, but I could have given it
 any legal variable name.
 
-\begin{lstlisting}
+\begin{code}
     public static void printTwice(String s) {
         System.out.println(s);
         System.out.println(s);
     }
-\end{lstlisting}
+\end{code}
 %
 When we invoke {\tt printTwice}, we have to provide
 a single argument with type {\tt String}.
 
-\begin{lstlisting}
+\begin{code}
     printTwice("Don't make me say this twice!");
-\end{lstlisting}
+\end{code}
 
 When you invoke a method, the argument you provide are assigned to the
 parameters.  In this example, the argument {\tt "Don't make me say this
@@ -518,17 +518,17 @@ from outside the method to the inside.
 An argument can be any kind of expression, so if you
 have a {\tt String} variable, you can use it as an argument:
 
-\begin{lstlisting}
+\begin{code}
     String argument = "Never say never.";
     printTwice(argument);
-\end{lstlisting}
+\end{code}
 %
 The value you provide as an argument must have the same type as
 the parameter.  For example, if you try this:
 
-\begin{lstlisting}
+\begin{code}
     printTwice(17);
-\end{lstlisting}
+\end{code}
 %
 You get an error message like ``cannot find symbol,'' which isn't very
 helpful.  The reason is that Java is looking for a method named
@@ -575,13 +575,13 @@ parameters is a common source of errors.  First, remember
 that you have to declare the type of every parameter.  For
 example
 
-\begin{lstlisting}
+\begin{code}
     public static void printTime(int hour, int minute) {
         System.out.print(hour);
         System.out.print(":");
         System.out.println(minute);
     }
-\end{lstlisting}
+\end{code}
 %
 It might be tempting to write {\tt int hour, minute}, but
 that format is only legal for variable declarations, not
@@ -590,11 +590,11 @@ parameter lists.
 Another common source of confusion is that you do not have
 to declare the types of arguments.  The following is wrong!
 
-\begin{lstlisting}
+\begin{code}
     int hour = 11;
     int minute = 59;
     printTime(int hour, int minute);   // WRONG!
-\end{lstlisting}
+\end{code}
 %
 In this case, Java can tell the type of {\tt hour}
 and {\tt minute} by looking at their declarations.  It is
@@ -702,7 +702,7 @@ the first time {\tt ping} is invoked.
 
 \end{enumerate}
 
-\begin{lstlisting}
+\begin{code}
   public static void zoop() {
     baffle();
     System.out.print("You wugga ");
@@ -724,7 +724,7 @@ the first time {\tt ping} is invoked.
   public static void ping() {
     System.out.println(".");
   }
-\end{lstlisting}
+\end{code}
 
 \end{exercise}
 

@@ -41,12 +41,12 @@ individual characters (as opposed to strings of them).
 
 {\tt char}s work just like the other types we have seen:
 
-\begin{lstlisting}
+\begin{code}
     char ltr = 'c';
     if (ltr == 'c') {
       System.out.println(ltr);
     }
-\end{lstlisting}
+\end{code}
 %
 Character values appear in single quotes, like {\tt 'c'}.  Unlike
 string values (which appear in double quotes), character values
@@ -58,11 +58,11 @@ can contain only a single letter or symbol.
 
 Here's how the {\tt charAt} method is used:
 
-\begin{lstlisting}
+\begin{code}
     String fruit = "banana";
     char letter = fruit.charAt(1);
     System.out.println(letter);
-\end{lstlisting}
+\end{code}
 %
 {\tt fruit.charAt()} means that I am
 invoking the {\tt charAt} method on the object named
@@ -86,9 +86,9 @@ start counting from zero.  The 0th letter (``zeroeth'') of {\tt
 If you want the zereoth letter of a string, you have to pass
 0 as an argument:
 
-\begin{lstlisting}
+\begin{code}
     char letter = fruit.charAt(0);
-\end{lstlisting}
+\end{code}
 
 
 \section{Length}
@@ -98,9 +98,9 @@ If you want the zereoth letter of a string, you have to pass
 The next {\tt String} method we'll look at is {\tt length}, which
 returns the number of characters in the string.  For example:
 
-\begin{lstlisting}
+\begin{code}
     int length = fruit.length();
-\end{lstlisting}
+\end{code}
 %
 {\tt length} takes no arguments
 and returns an integer, in this case 6.  Notice that it is
@@ -110,20 +110,20 @@ it can be confusing for human readers).
 To find the last letter of a string, you might be tempted to
 try something like
 
-\begin{lstlisting}
+\begin{code}
     int length = fruit.length();
     char last = fruit.charAt(length);       // WRONG!!
-\end{lstlisting}
+\end{code}
 %
 That won't work.  The reason is that there is no 6th letter
 in {\tt "banana"}.  Since we started counting at 0, the 6
 letters are numbered from 0 to 5.  To get the last character,
 you have to subtract 1 from {\tt length}.
 
-\begin{lstlisting}
+\begin{code}
     int length = fruit.length();
     char last = fruit.charAt(length-1);
-\end{lstlisting}
+\end{code}
 
 
 \section{Traversal}
@@ -136,14 +136,14 @@ some computation with it, and continue until the end.  This pattern
 of processing is called a {\bf traversal}.  A natural
 way to encode a traversal is with a {\tt while} statement:
 
-\begin{lstlisting}
+\begin{code}
     int index = 0;
     while (index < fruit.length()) {
         char letter = fruit.charAt(index);
         System.out.println(letter);
         index = index + 1;
     }
-\end{lstlisting}
+\end{code}
 %
 This loop traverses the string and prints each letter on
 a line by itself.  Notice that the condition is
@@ -183,7 +183,7 @@ When that happens, Java prints an error message with
 the type of exception and a {\bf stack trace}, which shows the methods
 that were running when the exception occurred.  Here is an example:
 
-\begin{lstlisting}
+\begin{code}
 public class BadString {
 
     public static void main(String[] args) {
@@ -201,7 +201,7 @@ public class BadString {
         return c;
     }
 }
-\end{lstlisting}
+\end{code}
 
 Notice the error in {\tt getLastLetter}: the index of the last
 character should be {\tt s.length()-1}.  Here's what you get:
@@ -269,10 +269,10 @@ where that character appears.
 exception.  {\tt indexOf} fails if the character does not appear in
 the string, and returns the value {\tt -1}.
 
-\begin{lstlisting}
+\begin{code}
     String fruit = "banana";
     int index = fruit.indexOf('a');
-\end{lstlisting}
+\end{code}
 %
 This finds the index of the letter {\tt 'a'} in the string.
 In this case, the letter appears three times, so it is not
@@ -287,18 +287,18 @@ of overloading, see Section~\ref{overloading}.
 
 If we invoke:
 
-\begin{lstlisting}
+\begin{code}
     int index = fruit.indexOf('a', 2);
-\end{lstlisting}
+\end{code}
 %
 it starts at the twoeth letter (the first {\tt n}) and finds
 the second {\tt a}, which is at index 3.  If the letter happens
 to appear at the starting index, the starting index is the
 answer.  So
 
-\begin{lstlisting}
+\begin{code}
     int index = fruit.indexOf('a', 5);
-\end{lstlisting}
+\end{code}
 %
 returns 5.
 
@@ -311,7 +311,7 @@ returns 5.
 The following program counts the
 number of times the letter {\tt 'a'} appears in a string:
 
-\begin{lstlisting}
+\begin{code}
     String fruit = "banana";
     int length = fruit.length();
     int count = 0;
@@ -324,7 +324,7 @@ number of times the letter {\tt 'a'} appears in a string:
         index = index + 1;
     }
     System.out.println(count);
-\end{lstlisting}
+\end{code}
 %
 This program demonstrates a common idiom, called a {\bf counter}.  The
 variable {\tt count} is initialized to zero and then incremented each
@@ -352,9 +352,9 @@ Technically, it is legal to increment a variable and use it
 in an expression at the same time.  For example, you might see
 something like:
 
-\begin{lstlisting}
+\begin{code}
     System.out.println(i++);
-\end{lstlisting}
+\end{code}
 %
 Looking at this, it is not clear whether the increment will
 take effect before or after the value is printed.  Because
@@ -365,7 +365,7 @@ want to know, you can try it.
 
 Using the increment operators, we can rewrite the letter-counter:
 
-\begin{lstlisting}
+\begin{code}
     int index = 0;
     while (index < length) {
       if (fruit.charAt(index) == 'a') {
@@ -373,13 +373,13 @@ Using the increment operators, we can rewrite the letter-counter:
       }
       index++;
     }
-\end{lstlisting}
+\end{code}
 %
 It is a common error to write something like
 
-\begin{lstlisting}
+\begin{code}
     index = index++;             // WRONG!!
-\end{lstlisting}
+\end{code}
 %
 Unfortunately, this is syntactically legal, so the compiler
 will not warn you.  The effect of this statement is to leave
@@ -405,11 +405,11 @@ can write {\tt index++}, but you shouldn't mix them.
 % that contain numbers, like '0', '1' and '2', and the corresponding
 % integers.  They are not the same thing.  For example, if you try this
 
-% \begin{lstlisting}
+% \begin{code}
 %     char letter = '3';
 %     int x =(int) letter;
 %     System.out.println(x);
-% \end{lstlisting}
+% \end{code}
 % %
 % you might expect the value 3, but depending on your environment,
 % you might get 51, which is the ASCII code that is used to
@@ -417,9 +417,9 @@ can write {\tt index++}, but you shouldn't mix them.
 % altogether.  To convert '3' to the corresponding integer value
 % you can subtract '0':
 
-% \begin{lstlisting}
+% \begin{code}
 %     int x =(int)(letter - '0');
-% \end{lstlisting}
+% \end{code}
 % %
 % Technically, in both of these examples the typecast({\tt(int)}) is
 % unnecessary, since Java will convert type {\tt char} to type {\tt int}
@@ -430,9 +430,9 @@ can write {\tt index++}, but you shouldn't mix them.
 % Since this conversion can be a little ugly, it is preferable to use
 % the {\tt digit} method in the {\tt Character} class.  For example:
 
-% \begin{lstlisting}
+% \begin{code}
 %     int x = Character.digit(letter, 10);
-% \end{lstlisting}
+% \end{code}
 % %
 % converts {\tt letter} to the corresponding digit, interpreting
 % it as a base 10 number.
@@ -443,13 +443,13 @@ can write {\tt index++}, but you shouldn't mix them.
 % abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and
 % Quack.  Here is a loop that prints these names in order:
 
-% \begin{lstlisting}
+% \begin{code}
 %     char letter = 'J';
 %     while (letter <= 'Q') {
  %      System.out.println(letter + "ack");
  %      letter++;
 %     }
-% \end{lstlisting}
+% \end{code}
 %
 % Notice that in addition to the arithmetic operators, we can also
 % use the conditional operators on characters.  The output of this
@@ -489,10 +489,10 @@ others can change a string, because strings are {\bf immutable}.
 When you invoke {\tt toUpperCase} on a {\tt String}, you get a
 {\em new} {\tt String} as a return value.  For example:
 
-\begin{lstlisting}
+\begin{code}
     String name = "Alan Turing";
     String upperName = name.toUpperCase();
-\end{lstlisting}
+\end{code}
 %
 After the second line is executed, {\tt upperName} contains
 the value {\tt "ALAN TURING"}, but {\tt name} still contains
@@ -516,7 +516,7 @@ nice if we could use the comparison operators, like {\tt ==} and
 To compare {\tt String}s, we have to use the {\tt equals}
 and {\tt compareTo} methods.  For example:
 
-\begin{lstlisting}
+\begin{code}
     String name1 = "Alan Turing";
     String name2 = "Ada Lovelace";
 
@@ -532,7 +532,7 @@ and {\tt compareTo} methods.  For example:
     } else if (flag > 0) {
       System.out.println("name2 comes before name1.");
     }
-\end{lstlisting}
+\end{code}
 %
 The syntax here is a little weird.  To compare two {\tt String}s,
 you have to invoke a method on one of them and pass the other as an
@@ -666,7 +666,7 @@ generalize it more?
 
 \end{enumerate}
 
-\begin{lstlisting}
+\begin{code}
     String s = "((3 + 7) * 2)";
     int len = s.length();
 
@@ -685,7 +685,7 @@ generalize it more?
     }
 
     System.out.println(count);
-\end{lstlisting}
+\end{code}
 \end{exercise}
 
 
@@ -740,7 +740,7 @@ reasonable possibilities?  How many seem problematic?
 What is the output of this program?  Describe in a sentence
 what {\tt mystery} does (not how it works).
 
-\begin{lstlisting}
+\begin{code}
 public class Mystery {
 
     public static String mystery(String s) {
@@ -761,7 +761,7 @@ public class Mystery {
         System.out.println(mystery("Allen"));
     }
 }
-\end{lstlisting}
+\end{code}
 
 \end{exercise}
 
@@ -775,19 +775,19 @@ will output the number backwards.  He claims that if {\tt number} is
 Is he right?  If not, explain what the program actually does and
 modify it so that it does the right thing.
 
-\begin{lstlisting}
+\begin{code}
      int number = 17;
      int lastDigit = number%10;
      int firstDigit = number/10;
      System.out.println(lastDigit + firstDigit);
-\end{lstlisting}
+\end{code}
 
 \end{exercise}
 
 \begin{exercise}
 What is the output of the following program?
 
-\begin{lstlisting}
+\begin{code}
 public class Enigma {
 
     public static void enigma(int x) {
@@ -805,7 +805,7 @@ public class Enigma {
         System.out.println("");
     }
 }
-\end{lstlisting}
+\end{code}
 
 Explain in 4-5 words what the method {\tt enigma} really does.
 \end{exercise}
@@ -946,9 +946,9 @@ anything, check that you can compile and run it.
 and computes the distance between them.  Remember that you can
 get the x-coordinate of a Bug like this:
 
-\begin{lstlisting}
+\begin{code}
     int x = bug.getLocation().getCol();
-\end{lstlisting}
+\end{code}
 
 \item Write a method called {\tt turnToward} that takes two
 Bugs and turns one to face the other.  HINT: use {\tt Math.atan2},

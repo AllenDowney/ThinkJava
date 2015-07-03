@@ -249,7 +249,7 @@ the condition, and the value of the condition.
 
 For example,
 
-\begin{lstlisting}
+\begin{code}
     while (x > 0 && y < 0) {
         // do something to x
         // do something to y
@@ -258,7 +258,7 @@ For example,
         System.out.println("y: " + y);
         System.out.println("condition: " + (x > 0 && y < 0));
     }
-\end{lstlisting}
+\end{code}
 %
 Now when you run the program you see three lines of output
 for each time through the loop.  The last time through the
@@ -330,10 +330,10 @@ Remember that when you declare a variable with an object type,
 it is initially {\tt null} until you assign a value to it.
 For example, this code causes a NullPointerException:
 
-\begin{lstlisting}
+\begin{code}
 Point blank;
 System.out.println(blank.x);
-\end{lstlisting}
+\end{code}
 
 \item[ArrayIndexOutOfBoundsException:] The index you are using
 to access an array is either negative or greater than
@@ -492,20 +492,20 @@ temporary variables.
 
 For example:
 
-\begin{lstlisting}
+\begin{code}
 rect.setLocation(rect.getLocation().translate(
                 -rect.getWidth(), -rect.getHeight()));
-\end{lstlisting}
+\end{code}
 %
 Can be rewritten as
 
-\begin{lstlisting}
+\begin{code}
 int dx = -rect.getWidth();
 int dy = -rect.getHeight();
 Point location = rect.getLocation();
 Point newLocation = location.translate(dx, dy);
 rect.setLocation(newLocation);
-\end{lstlisting}
+\end{code}
 %
 The explicit version is easier to read, because the variable
 names provide additional documentation, and easier to debug,
@@ -522,9 +522,9 @@ that the order of evaluation may not be what you expect.
 For example, to evaluate
 $\frac{x}{2 \pi}$, you might write
 
-\begin{lstlisting}
+\begin{code}
 double y = x / 2 * Math.PI;
-\end{lstlisting}
+\end{code}
 %
 That is not correct, because multiplication and division have
 the same precedence, and they are evaluated from left to right.
@@ -533,9 +533,9 @@ This expression computes $x \pi / 2$.
 If you are not sure of the order of operations, use parentheses to
 make it explicit.
 
-\begin{lstlisting}
+\begin{code}
 double y = x / (2 * Math.PI);
-\end{lstlisting}
+\end{code}
 %
 This version is correct,
 and more readable for
@@ -552,7 +552,7 @@ you don't have a chance to print the value before
 returning.  Again, you can use a temporary variable.  For
 example, instead of
 
-\begin{lstlisting}
+\begin{code}
 public Rectangle intersection(Rectangle a, Rectangle b) {
     return new Rectangle(
         Math.min(a.x, b.x),
@@ -560,11 +560,11 @@ public Rectangle intersection(Rectangle a, Rectangle b) {
         Math.max(a.x+a.width, b.x+b.width)-Math.min(a.x, b.x)
         Math.max(a.y+a.height, b.y+b.height)-Math.min(a.y, b.y) );
 }
-\end{lstlisting}
+\end{code}
 %
 You could write
 
-\begin{lstlisting}
+\begin{code}
 public Rectangle intersection(Rectangle a, Rectangle b) {
     int x1 = Math.min(a.x, b.x);
     int y2 = Math.min(a.y, b.y);
@@ -573,7 +573,7 @@ public Rectangle intersection(Rectangle a, Rectangle b) {
     Rectangle rect = new Rectangle(x1, y1, x2-x1, y2-y1);
     return rect;
 }
-\end{lstlisting}
+\end{code}
 %
 Now you have the opportunity to display any of
 the intermediate variables before returning.  And by

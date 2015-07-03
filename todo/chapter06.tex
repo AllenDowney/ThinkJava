@@ -16,31 +16,31 @@ invoking the method is to generate a new value, which we
 usually assign to a variable or use as part of an expression.
 For example:
 
-\begin{lstlisting}
+\begin{code}
     double e = Math.exp(1.0);
     double height = radius * Math.sin(angle);
-\end{lstlisting}
+\end{code}
 %
 But so far all our methods have been {\bf void}; that is, methods
 that return no value.  When you invoke a void method, it is typically
 on a line by itself, with no assignment:
 
-\begin{lstlisting}
+\begin{code}
     countdown(3);
     nLines(3);
-\end{lstlisting}
+\end{code}
 %
 In this chapter we write methods that return things, which I call
 {\bf value} methods.  The first example is {\tt area}, which takes a
 {\tt double} as a parameter, and returns the area of a circle with the
 given radius:
 
-\begin{lstlisting}
+\begin{code}
   public static double area(double radius) {
     double area = Math.PI * radius * radius;
     return area;
   }
-\end{lstlisting}
+\end{code}
 %
 The first thing you should notice is that the beginning of the
 method definition is different.  Instead of {\tt public static
@@ -57,11 +57,11 @@ use the following expression as the return value.''  The
 expression you provide can be arbitrarily complicated,
 so we could have written this method more concisely:
 
-\begin{lstlisting}
+\begin{code}
   public static double area(double radius) {
     return Math.PI * radius * radius;
   }
-\end{lstlisting}
+\end{code}
 %
 On the other hand, {\bf temporary} variables like {\tt area} often
 make debugging easier.  In either case, the type of the expression in
@@ -78,7 +78,7 @@ take you to task.
 Sometimes it is useful to have multiple return
 statements, one in each branch of a conditional:
 
-\begin{lstlisting}
+\begin{code}
   public static double absoluteValue(double x) {
     if (x < 0) {
       return -x;
@@ -86,7 +86,7 @@ statements, one in each branch of a conditional:
       return x;
     }
   }
-\end{lstlisting}
+\end{code}
 %
 Since these return statements are in an alternative conditional,
 only one will be executed.  Although it is legal to have more than one
@@ -104,7 +104,7 @@ If you put return statements inside a conditional, then
 you have to guarantee that {\em every possible path} through
 the program hits a return statement.  For example:
 
-\begin{lstlisting}
+\begin{code}
   public static double absoluteValue(double x) {
     if (x < 0) {
       return -x;
@@ -112,7 +112,7 @@ the program hits a return statement.  For example:
       return x;
     }                          // WRONG!!
   }
-\end{lstlisting}
+\end{code}
 %
 This program is not legal because if {\tt x} is 0,
 neither condition is true and the method ends without hitting
@@ -151,12 +151,12 @@ will have type {\tt double}.
 
 Already we can write an outline of the method:
 
-\begin{lstlisting}
+\begin{code}
   public static double distance
               (double x1, double y1, double x2, double y2) {
     return 0.0;
   }
-\end{lstlisting}
+\end{code}
 %
 The statement {\tt return 0.0;} is a place-keeper that is necessary
 to compile the program.  Obviously, at this stage the
@@ -167,9 +167,9 @@ we add more code.
 To test the new method, we have to invoke it with
 sample values.  Somewhere in {\tt main} I would add:
 
-\begin{lstlisting}
+\begin{code}
     double dist = distance(1.0, 2.0, 4.0, 6.0);
-\end{lstlisting}
+\end{code}
 %
 I chose these values so that the horizontal
 distance is 3 and the vertical distance is 4; that way,
@@ -187,7 +187,7 @@ The next step is to find the differences
 $x_2 - x_1$ and $y_2 - y_1$.  I store those values in
 temporary variables named {\tt dx} and {\tt dy}.
 
-\begin{lstlisting}
+\begin{code}
   public static double distance
               (double x1, double y1, double x2, double y2) {
     double dx = x2 - x1;
@@ -196,7 +196,7 @@ temporary variables named {\tt dx} and {\tt dy}.
     System.out.println("dy is " + dy);
     return 0.0;
   }
-\end{lstlisting}
+\end{code}
 %
 I added print statements so we can check the intermediate values
 before proceeding.  They should be 3.0 and 4.0.
@@ -211,7 +211,7 @@ The next step is to square {\tt dx} and {\tt dy}.  We could use the
 {\tt Math.pow} method, but it is simpler to multiply each term by
 itself.
 
-\begin{lstlisting}
+\begin{code}
   public static double distance
               (double x1, double y1, double x2, double y2) {
     double dx = x2 - x1;
@@ -220,7 +220,7 @@ itself.
     System.out.println("dsquared is " + dsquared);
     return 0.0;
   }
-\end{lstlisting}
+\end{code}
 %
 Again, I would compile and run the program at this stage
 and check the intermediate value (which should be 25.0).
@@ -228,7 +228,7 @@ and check the intermediate value (which should be 25.0).
 Finally, we can use {\tt Math.sqrt} to compute and
 return the result.
 
-\begin{lstlisting}
+\begin{code}
   public static double distance
               (double x1, double y1, double x2, double y2) {
     double dx = x2 - x1;
@@ -237,7 +237,7 @@ return the result.
     double result = Math.sqrt(dsquared);
     return result;
   }
-\end{lstlisting}
+\end{code}
 %
 In {\tt main}, we can print and check the value of the result.
 
@@ -279,40 +279,40 @@ and {\tt yc}, and the perimeter point is in {\tt xp} and
 is the distance between the two points.  Fortunately, we have
 a method, {\tt distance} that does that.
 
-\begin{lstlisting}
+\begin{code}
     double radius = distance(xc, yc, xp, yp);
-\end{lstlisting}
+\end{code}
 %
 The second step is to find the area of a circle with that
 radius, and return it.
 
-\begin{lstlisting}
+\begin{code}
     double area = area(radius);
     return area;
-\end{lstlisting}
+\end{code}
 %
 Wrapping that all up in a method, we get:
 
-\begin{lstlisting}
+\begin{code}
   public static double circleArea
               (double xc, double yc, double xp, double yp) {
     double radius = distance(xc, yc, xp, yp);
     double area = area(radius);
     return area;
   }
-\end{lstlisting}
+\end{code}
 %
 The temporary variables {\tt radius} and {\tt area} are
 useful for development and debugging, but once the program is
 working we can make it more concise by composing
 the method invocations:
 
-\begin{lstlisting}
+\begin{code}
   public static double circleArea
               (double xc, double yc, double xp, double yp) {
     return area(distance(xc, yc, xp, yp));
   }
-\end{lstlisting}
+\end{code}
 
 
 \section{Overloading}
@@ -331,28 +331,28 @@ Having more than one method with the same name, which is called {\bf
 overloading}, is legal in Java {\em as long as each version takes
 different parameters}.  So we could rename {\tt circleArea}:
 
-\begin{lstlisting}
+\begin{code}
   public static double area
               (double x1, double y1, double x2, double y2) {
     return area(distance(xc, yc, xp, yp));
   }
-\end{lstlisting}
+\end{code}
 %
 When you invoke an overloaded method, Java knows which version you
 want by looking at the arguments that you provide.  If you write:
 
-\begin{lstlisting}
+\begin{code}
     double x = area(3.0);
-\end{lstlisting}
+\end{code}
 %
 Java goes looking for a method named {\tt area} that
 takes one {\tt double} as an argument, and so it uses the
 first version, which interprets the argument as a radius.
 If you write:
 
-\begin{lstlisting}
+\begin{code}
     double x = area(1.0, 2.0, 4.0, 6.0);
-\end{lstlisting}
+\end{code}
 %
 Java uses the second version of {\tt area}.  And notice that the
 second version of {\tt area} actually invokes the first.
@@ -405,11 +405,11 @@ are pretty big.  For {\tt boolean}s, there are only two values.
 Boolean expressions and variables work just like other types of
 expressions and variables:
 
-\begin{lstlisting}
+\begin{code}
     boolean flag;
     flag = true;
     boolean testResult = false;
-\end{lstlisting}
+\end{code}
 %
 The first example is a simple variable declaration;
 the second example is an assignment, and the third example is an
@@ -425,18 +425,18 @@ depending on your development environment.
 The result of a conditional operator is a boolean,
 so you can store the result of a comparison in a variable:
 
-\begin{lstlisting}
+\begin{code}
     boolean evenFlag = (n%2 == 0);     // true if n is even
     boolean positiveFlag = (x > 0);    // true if x is positive
-\end{lstlisting}
+\end{code}
 %
 and then use it as part of a conditional statement later:
 
-\begin{lstlisting}
+\begin{code}
     if (evenFlag) {
       System.out.println("n was even when I checked it");
     }
-\end{lstlisting}
+\end{code}
 %
 A variable used in this way is called a {\bf flag}
 because it flags the presence or absence of some condition.
@@ -467,13 +467,13 @@ Logical operators can simplify nested
 conditional statements.  For example, can you re-write
 this code using a single conditional?
 
-\begin{lstlisting}
+\begin{code}
     if (x > 0) {
       if (x < 10) {
         System.out.println("x is a positive single digit.");
       }
     }
-\end{lstlisting}
+\end{code}
 
 
 \section{Boolean methods}
@@ -485,7 +485,7 @@ Methods can return boolean values just like any other type,
 which is often convenient for hiding tests inside
 methods.  For example:
 
-\begin{lstlisting}
+\begin{code}
   public static boolean isSingleDigit(int x) {
     if (x >= 0 && x < 10) {
       return true;
@@ -493,7 +493,7 @@ methods.  For example:
       return false;
     }
   }
-\end{lstlisting}
+\end{code}
 %
 The name of this method is {\tt isSingleDigit}.  It is common
 to give boolean methods names that sound like yes/no questions.
@@ -505,18 +505,18 @@ it needs to be.  Remember that the expression {\tt x >= 0 \&\& x < 10}
 has type boolean, so there is nothing wrong with returning it
 directly and avoiding the {\tt if} statement altogether:
 
-\begin{lstlisting}
+\begin{code}
   public static boolean isSingleDigit(int x) {
     return (x >= 0 && x < 10);
   }
-\end{lstlisting}
+\end{code}
 %
 In {\tt main} you can invoke this method in the usual ways:
 
-\begin{lstlisting}
+\begin{code}
   boolean bigFlag = !isSingleDigit(17);
   System.out.println(isSingleDigit(2));
-\end{lstlisting}
+\end{code}
 %
 The first line sets {\tt bigFlag} to {\tt true}
 only if 17 is {\em not} a single-digit number.  The second
@@ -525,13 +525,13 @@ line prints {\tt true} because 2 is a single-digit number.
 The most common use of boolean methods is inside conditional
 statements
 
-\begin{lstlisting}
+\begin{code}
     if (isSingleDigit(x)) {
       System.out.println("x is little");
     } else {
       System.out.println("x is big");
     }
-\end{lstlisting}
+\end{code}
 
 
 \section {More recursion}
@@ -587,20 +587,20 @@ the parameters are and what the return type is.  Since factorial is
 defined for integers, the method takes an
 integer as a parameter and returns an integer:
 
-\begin{lstlisting}
+\begin{code}
   public static int factorial(int n) {
   }
-\end{lstlisting}
+\end{code}
 
 \noindent If the argument happens to be zero, return 1:
 
-\begin{lstlisting}
+\begin{code}
   public static int factorial(int n) {
     if (n == 0) {
       return 1;
     }
   }
-\end{lstlisting}
+\end{code}
 %
 That's the base case.
 
@@ -608,7 +608,7 @@ Otherwise, and this is the interesting part, we have to make
 a recursive call to find the factorial of $n-1$, and then
 multiply it by $n$.
 
-\begin{lstlisting}
+\begin{code}
   public static int factorial(int n) {
     if (n == 0) {
       return 1;
@@ -618,7 +618,7 @@ multiply it by $n$.
       return result;
     }
   }
-\end{lstlisting}
+\end{code}
 %
 The flow of execution for this program is similar to {\tt countdown}
 from Section~\ref{recursion}.
@@ -722,7 +722,7 @@ following definition:
 %
 Translated into Java, this is
 
-\begin{lstlisting}
+\begin{code}
   public static int fibonacci(int n) {
     if (n == 0 || n == 1) {
       return 1;
@@ -730,7 +730,7 @@ Translated into Java, this is
       return fibonacci(n-1) + fibonacci(n-2);
     }
   }
-\end{lstlisting}
+\end{code}
 %
 If you try to follow the flow of execution here, even for small
 values of {\tt n}, your head explodes.  But according to the leap of
@@ -880,7 +880,7 @@ What is the output of the following program?  The purpose of
 this exercise is to make sure you understand logical operators
 and the flow of execution through value methods.
 
-\begin{lstlisting}
+\begin{code}
   public static void main(String[] args) {
       boolean flag1 = isHoopy(202);
       boolean flag2 = isFrabjuous(202);
@@ -913,7 +913,7 @@ and the flow of execution through value methods.
       }
       return frabjuousFlag;
   }
-\end{lstlisting}
+\end{code}
 \end{exercise}
 
 
@@ -931,9 +931,9 @@ You should assume that there is a method named {\tt sumSquares}
 that calculates and returns the sum of the squares of its arguments.
 For example:
 
-\begin{lstlisting}
+\begin{code}
     double x = sumSquares(3.0, 4.0);
-\end{lstlisting}
+\end{code}
 %
 would assign the value {\tt 25.0} to {\tt x}.
 
@@ -948,7 +948,7 @@ invoke {\tt distance}.
 The point of this exercise is to use a stack diagram to understand
 the execution of a recursive program.
 
-\begin{lstlisting}
+\begin{code}
 public class Prod {
 
     public static void main(String[] args) {
@@ -965,7 +965,7 @@ public class Prod {
         }
     }
 }
-\end{lstlisting}
+\end{code}
 %
 \begin{enumerate}
 
@@ -1014,7 +1014,7 @@ only for small values of $m$ and $n$ (not bigger than 2).
 \item Create a program called {\tt Recurse.java} and
 type in the following methods:
 
-\begin{lstlisting}
+\begin{code}
     // first: returns the first character of the given String
     public static char first(String s) {
         return s.charAt(0);
@@ -1030,7 +1030,7 @@ type in the following methods:
     public static int length(String s) {
         return s.length();
     }
-\end{lstlisting}
+\end{code}
 
 \item Write some code in {\tt main} that tests each of these
 methods.  Make sure they work, and make sure you understand
@@ -1050,10 +1050,10 @@ return value.  The new String should contain the same letters
 as the parameter, but in reverse order.  For example, the
 output of the following code
 
-\begin{lstlisting}
+\begin{code}
     String backwards = reverseString("Allen Downey");
     System.out.println(backwards);
-\end{lstlisting}
+\end{code}
 %
 should be
 

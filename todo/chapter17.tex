@@ -12,7 +12,7 @@ graphics.  There are several ways to create graphics in Java; the
 simplest is to use {\tt java.awt.Graphics}.
 Here is a complete example:
 
-\begin{lstlisting}
+\begin{code}
 import java.awt.Canvas;
 import java.awt.Graphics;
 import javax.swing.JFrame;
@@ -39,7 +39,7 @@ public class MyCanvas extends Canvas {
         g.fillOval(100, 100, 200, 200);
     }
 }
-\end{lstlisting}
+\end{code}
 %
 You can download this code from
 \url{http://thinkapjava.com/code/MyCanvas.java}.
@@ -84,9 +84,9 @@ You can read the documentation of these methods at
 
 Here is the prototype for {\tt fillOval}:
 
-\begin{lstlisting}
+\begin{code}
 public void fillOval(int x, int y, int width, int height)
-\end{lstlisting}
+\end{code}
 
 The parameters specify
 a {\bf bounding box}, which is the rectangle
@@ -138,9 +138,9 @@ use a floating-point value as a coordinate, you have to round it off
 To choose the color of a shape, invoke {\tt setColor} on the Graphics
 object:
 
-\begin{lstlisting}
+\begin{code}
     g.setColor(Color.red);
-\end{lstlisting}
+\end{code}
 %
 {\tt setColor} changes the current color; everything that gets drawn
 is the current color.
@@ -171,15 +171,15 @@ more readable, let's use {\tt Rectangles} to represent bounding boxes.
 
 Here's a method that takes a Rectangle and invokes {\tt fillOval}.
 
-\begin{lstlisting}
+\begin{code}
     public void boxOval(Graphics g, Rectangle bb) {
         g.fillOval(bb.x, bb.y, bb.width, bb.height);
     }
-\end{lstlisting}
+\end{code}
 
 And here's a method that draws Mickey:
 
-\begin{lstlisting}
+\begin{code}
     public void mickey(Graphics g, Rectangle bb) {
         boxOval(g, bb);
 
@@ -193,7 +193,7 @@ And here's a method that draws Mickey:
         half.translate(dx*2, 0);
         boxOval(g, half);
     }
-\end{lstlisting}
+\end{code}
 
 The first line draws the face.  The next three lines create
 a smaller rectangle for the ears.  We translate the rectangle

@@ -9,7 +9,7 @@ You can put as many
 statements as you want in {\tt main}; for example, to
 print more than one line:
 
-\begin{lstlisting}
+\begin{code}
 class Hello {
 
   // Generates some simple output.
@@ -19,7 +19,7 @@ class Hello {
     System.out.println("How are you?");      // print another
   }
 }
-\end{lstlisting}
+\end{code}
 %
 As this example demonstrates, you can put comments at the
 end of a line, as well as on a line by themselves.
@@ -43,7 +43,7 @@ on the next line.
 To display the output from multiple print
 statements all on one line, use {\tt print}:
 
-\begin{lstlisting}
+\begin{code}
 class Hello {
 
   // Generates some simple output.
@@ -53,7 +53,7 @@ class Hello {
     System.out.println("cruel world!");
   }
 }
-\end{lstlisting}
+\end{code}
 %
 The output appears on a single line as
 {\tt Goodbye, cruel world!}.  There is a space
@@ -65,24 +65,24 @@ Spaces that appear outside of quotation marks generally do
 not affect the behavior of the program.  For example, I
 could have written:
 
-\begin{lstlisting}
+\begin{code}
 class Hello {
 public static void main(String[] args) {
 System.out.print("Goodbye, ");
 System.out.println("cruel world!");
 }
 }
-\end{lstlisting}
+\end{code}
 %
 This program would compile and run just as well as the original.
 The breaks at the ends of lines (newlines) do not affect
 the program's behavior either, so I could have written:
 
-\begin{lstlisting}
+\begin{code}
 class Hello { public static void main(String[] args) {
 System.out.print("Goodbye, "); System.out.println
 ("cruel world!");}}
-\end{lstlisting}
+\end{code}
 %
 That would work, too, but
 the program is getting harder and harder to read.  Newlines and
@@ -104,9 +104,9 @@ To store a value, you have to create a variable.  Since
 the values we want to store are strings, we declare that
 the new variable is a string:
 
-\begin{lstlisting}
+\begin{code}
     String bob;
-\end{lstlisting}
+\end{code}
 %
 This statement is a {\bf declaration}, because it declares that the
 variable named {\tt bob} has the type {\tt String}.  Each variable
@@ -129,11 +129,11 @@ variable.  In general, you will want to make up variable names
 that indicate what you plan to do with the variable.  For
 example, if you saw these variable declarations:
 
-\begin{lstlisting}
+\begin{code}
     String firstName;
     String lastName;
     int hour, minute;
-\end{lstlisting}
+\end{code}
 %
 you could guess what values
 would be stored in them.  This example
@@ -149,11 +149,11 @@ Now that we have created variables, we want to
 store values.  We do that with an {\bf assignment
 statement}.
 
-\begin{lstlisting}
+\begin{code}
     bob = "Hello.";      // give bob the value "Hello."
     hour = 11;           // assign the value 11 to hour
     minute = 59;         // set minute to 59
-\end{lstlisting}
+\end{code}
 %
 This example shows three assignments, and the comments show
 three different ways people sometimes talk about assignment
@@ -193,10 +193,10 @@ can contain the string {\tt "123"}, which is made up of the
 characters {\tt 1}, {\tt 2} and {\tt 3}, but that is not
 the same thing as the {\em number} {\tt 123}.
 
-\begin{lstlisting}
+\begin{code}
     bob = "123";     // legal
     bob = 123;       // not legal
-\end{lstlisting}
+\end{code}
 
 
 \section{Printing variables}
@@ -205,7 +205,7 @@ the same thing as the {\em number} {\tt 123}.
 You can print the value of a variable using {\tt println} or
 {\tt print}:
 
-\begin{lstlisting}
+\begin{code}
 class Hello {
   public static void main(String[] args) {
     String firstLine;
@@ -213,7 +213,7 @@ class Hello {
     System.out.println(firstLine);
   }
 }
-\end{lstlisting}
+\end{code}
 %
 This program creates a variable named {\tt firstLine}, assigns
 it the value {\tt "Hello, again!"} and then prints that value.
@@ -224,23 +224,23 @@ For example: {\tt System.out.println("firstLine");}
 
 For example, you can write
 
-\begin{lstlisting}
+\begin{code}
     String firstLine;
     firstLine = "Hello, again!";
     System.out.print("The value of firstLine is ");
     System.out.println(firstLine);
-\end{lstlisting}
+\end{code}
 %
 The output of this program is
 
-\begin{lstlisting}
+\begin{code}
 The value of firstLine is Hello, again!
-\end{lstlisting}
+\end{code}
 %
 I am happy to report that the syntax for printing a variable
 is the same regardless of the variable's type.
 
-\begin{lstlisting}
+\begin{code}
     int hour, minute;
     hour = 11;
     minute = 59;
@@ -249,7 +249,7 @@ is the same regardless of the variable's type.
     System.out.print(":");
     System.out.print(minute);
     System.out.println(".");
-\end{lstlisting}
+\end{code}
 %
 The output of this program is {\tt The current time is 11:59.}
 
@@ -298,9 +298,9 @@ to do because they are common mathematical symbols.  For
 example, the operator for addition is {\tt +}.  Subtraction
 is {\tt -}, multiplication is {\tt *}, and division is {\tt /}.
 
-\begin{lstlisting}
+\begin{code}
 1+1        hour-1       hour*60 + minute     minute/60
-\end{lstlisting}
+\end{code}
 %
 Expressions can contain both variable
 names and numbers.  Variables are
@@ -312,7 +312,7 @@ Addition, subtraction and multiplication all do what you
 expect, but you might be surprised by division.  For example,
 this program:
 
-\begin{lstlisting}
+\begin{code}
     int hour, minute;
     hour = 11;
     minute = 59;
@@ -320,7 +320,7 @@ this program:
     System.out.println(hour*60 + minute);
     System.out.print("Fraction of the hour that has passed: ");
     System.out.println(minute/60);
-\end{lstlisting}
+\end{code}
 %
 generates this output:
 
@@ -348,10 +348,10 @@ even in cases like this where the next integer is so close.
 An alternative is to calculate a percentage
 rather than a fraction:
 
-\begin{lstlisting}
+\begin{code}
     System.out.print("Percentage of the hour that has passed: ");
     System.out.println(minute*100/60);
-\end{lstlisting}
+\end{code}
 %
 The result is:
 
@@ -442,25 +442,25 @@ is their ability to take small building blocks and
 numbers and we know how to print; it turns out we can
 combine them in a single statement:
 
-\begin{lstlisting}
+\begin{code}
     System.out.println(17 * 3);
-\end{lstlisting}
+\end{code}
 %
 Any expression involving numbers, strings
 and variables, can be used inside a print statement.  We've
 already seen one example:
 
-\begin{lstlisting}
+\begin{code}
     System.out.println(hour*60 + minute);
-\end{lstlisting}
+\end{code}
 %
 But you can also put arbitrary expressions on the right-hand
 side of an assignment statement:
 
-\begin{lstlisting}
+\begin{code}
     int percentage;
     percentage = (minute * 100) / 60;
-\end{lstlisting}
+\end{code}
 %
 This ability may not seem impressive now, but we will see
 examples where composition

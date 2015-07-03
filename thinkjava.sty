@@ -130,9 +130,14 @@
     aboveskip=\parskip,
     belowskip=\parskip
 }
+
+% code listing environments
+\lstnewenvironment{code}
+{\minipage{\textwidth}}
+{\endminipage}
 \lstnewenvironment{stdout}
-{\lstset{commentstyle=,keywordstyle=,stringstyle=}}
-{}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\textwidth}}
+{\endminipage}
 
 % pdf hyperlinks, table of contents, and document properties
 \usepackage[pdftex]{hyperref}
@@ -149,4 +154,5 @@
   urlcolor=blue
 }
 
+% inline syntax formatting
 \newcommand{\java}[1]{\lstinline{#1}}

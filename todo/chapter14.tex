@@ -26,7 +26,7 @@ that contains an array of {\tt Card}s.
 
 The class definition looks like this:
 
-\begin{lstlisting}
+\begin{code}
 class Deck {
     Card[] cards;
 
@@ -34,7 +34,7 @@ class Deck {
         this.cards = new Card[n];
     }
 }
-\end{lstlisting}
+\end{code}
 %
 The constructor initializes the instance variable with
 an array of cards, but it doesn't create any cards.
@@ -49,7 +49,7 @@ Here is a state diagram showing what a
 Here is a no-argument constructor that makes a
 52-card deck and populates it with {\tt Card}s:
 
-\begin{lstlisting}
+\begin{code}
     public Deck() {
         this.cards = new Card[52];
         int index = 0;
@@ -60,7 +60,7 @@ Here is a no-argument constructor that makes a
             }
         }
     }
-\end{lstlisting}
+\end{code}
 
 This method is similar to {\tt makeDeck};
 we just changed the syntax to make it a constructor.
@@ -69,9 +69,9 @@ To invoke it, we use {\tt new}:
 \index{new}
 \index{statement!new}
 
-\begin{lstlisting}
+\begin{code}
     Deck deck = new Deck();
-\end{lstlisting}
+\end{code}
 %
 Now it makes sense to put
 the methods that pertain to {\tt Deck}s in the {\tt Deck}
@@ -80,13 +80,13 @@ far, one obvious candidate is {\tt printDeck} (Section~\ref{printdeck}).
 Here's how it looks, rewritten to work with a {\tt Deck}:
 \index{printDeck}
 
-\begin{lstlisting}
+\begin{code}
     public static void printDeck(Deck deck) {
         for (int i = 0; i < deck.cards.length; i++) {
             Card.printCard(deck.cards[i]);
         }
     }
-\end{lstlisting}
+\end{code}
 %
 One change is the type of the parameter,
 from {\tt Card[]} to {\tt Deck}.
@@ -132,12 +132,12 @@ Here is an outline of how this algorithm works.  To sketch the
 program, I am using a combination of Java statements and English
 words that is sometimes called {\bf pseudocode}:  \index{pseudocode}
 
-\begin{lstlisting}
+\begin{code}
     for (int i = 0; i < deck.cards.length; i++) {
         // choose a number between i and deck.cards.length-1
         // swap the ith card and the randomly-chosen card
     }
-\end{lstlisting}
+\end{code}
 %
 The nice thing about pseudocode is that it often makes it
 clear what methods you are going to need.  In this case, we
@@ -173,12 +173,12 @@ card.
 
 Here is pseudocode for selection sort:
 
-\begin{lstlisting}
+\begin{code}
     for (int i = 0; i < deck.cards.length; i++) {
         // find the lowest card at or to the right of i
         // swap the ith card and the lowest card
     }
-\end{lstlisting}
+\end{code}
 %
 Again, the pseudocode helps with the design of the {\bf helper
 methods}.  In this case we can use {\tt swapCards} again,
@@ -203,7 +203,7 @@ We might want a method, {\tt subdeck}, that takes a Deck
 and a range of indices, and that returns a new Deck that
 contains the specified subset of the cards:
 
-\begin{lstlisting}
+\begin{code}
 public static Deck subdeck(Deck deck, int low, int high) {
     Deck sub = new Deck(high-low+1);
 
@@ -212,7 +212,7 @@ public static Deck subdeck(Deck deck, int low, int high) {
     }
     return sub;
 }
-\end{lstlisting}
+\end{code}
 
 The length of the subdeck is {\tt high-low+1} because both the low
 card and high card are included.  This sort of computation can be
@@ -254,14 +254,14 @@ In Section~\ref{shuffle} I wrote pseudocode for a shuffling algorithm.
 Assuming that we have a method called {\tt shuffleDeck} that takes
 a deck as an argument and shuffles it, we can use it to deal hands:
 
-\begin{lstlisting}
+\begin{code}
     Deck deck = new Deck();
     shuffleDeck(deck);
 
     Deck hand1 = subdeck(deck, 0, 4);
     Deck hand2 = subdeck(deck, 5, 9);
     Deck pack = subdeck(deck, 10, 51);
-\end{lstlisting}
+\end{code}
 %
 This code puts the first 5 cards in one hand, the next 5 cards
 in the other, and the rest into the pack.
@@ -319,7 +319,7 @@ deck.
 The result should be a single sorted deck.  Here's what this
 looks like in pseudocode:
 
-\begin{lstlisting}
+\begin{code}
 public static Deck merge(Deck d1, Deck d2) {
     // create a new deck big enough for all the cards
     Deck result = new Deck(d1.cards.length + d2.cards.length);
@@ -339,7 +339,7 @@ public static Deck merge(Deck d1, Deck d2) {
     }
     return result;
 }
-\end{lstlisting}
+\end{code}
 
 The best way to test {\tt merge} is to build and shuffle a deck,
 use subdeck to form two (small) hands, and then use the sort
@@ -351,14 +351,14 @@ you can pass the two halves to {\tt merge} to see if it works.
 If you can get that working, try a simple implementation of
 {\tt mergeSort}:
 
-\begin{lstlisting}
+\begin{code}
 public static Deck mergeSort(Deck deck) {
     // find the midpoint of the deck
     // divide the deck into two subdecks
     // sort the subdecks using sortDeck
     // merge the two halves and return the result
 }
-\end{lstlisting}
+\end{code}
 
 Then, if you get that working, the real fun begins!  The magical thing
 about mergesort is that it is recursive.  At the point where you sort
@@ -377,7 +377,7 @@ unmodified, since it is already sorted.
 The recursive version of {\tt mergesort} should look something
 like this:
 
-\begin{lstlisting}
+\begin{code}
 public static Deck mergeSort(Deck deck) {
     // if the deck is 0 or 1 cards, return it
 
@@ -386,7 +386,7 @@ public static Deck mergeSort(Deck deck) {
     // sort the subdecks using mergesort
     // merge the two halves and return the result
 }
-\end{lstlisting}
+\end{code}
 %
 As usual, there are two ways to think about recursive programs:
 you can think through the entire flow of execution, or you
@@ -431,7 +431,7 @@ values that are needed in several places.
 As an example, here is a version of {\tt Card} where {\tt suits}
 and {\tt ranks} are class variables:
 
-\begin{lstlisting}
+\begin{code}
 class Card {
     int suit, rank;
 
@@ -443,7 +443,7 @@ class Card {
         System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
     }
 }
-\end{lstlisting}
+\end{code}
 
 Inside {\tt printCard} we can refer to {\tt suits} and {\tt ranks} as
 if they were local variables.
@@ -522,10 +522,10 @@ halves, and uses {\tt merge} to create a new, fully-sorted deck.
 Remember that {\tt sortDeck} is a modifier and {\tt mergeSort} is
 a function, which means that they get invoked differently:
 
-\begin{lstlisting}
+\begin{code}
 sortDeck(deck);              // modifies existing deck
 deck = mergeSort(deck);      // replaces old deck with new
-\end{lstlisting}
+\end{code}
 
 \end{enumerate}
 \end{exercise}

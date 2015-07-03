@@ -14,18 +14,18 @@ integers'' and {\tt double[]} is the type ``array of doubles.''
 
 You can declare variables with these types in the usual ways:
 
-\begin{lstlisting}
+\begin{code}
     int[] count;
     double[] values;
-\end{lstlisting}
+\end{code}
 %
 Until you initialize these variables, they are set to {\tt null}.
 To create the array itself, use {\tt new}.
 
-\begin{lstlisting}
+\begin{code}
     count = new int[4];
     values = new double[size];
-\end{lstlisting}
+\end{code}
 %
 The first assignment makes {\tt count} refer to an array of 4
 integers; the second makes {\tt values} refer to an array of {\tt
@@ -59,12 +59,12 @@ To store values in the array, use the
 ``oneth'' element.  You can use the {\tt []} operator anywhere in an
 expression:
 
-\begin{lstlisting}
+\begin{code}
     count[0] = 7;
     count[1] = count[0] * 2;
     count[2]++;
     count[3] -= 60;
-\end{lstlisting}
+\end{code}
 %
 These are all legal assignment statements.  Here is the
 result of this code fragment:
@@ -88,13 +88,13 @@ int}.  One of the most common ways to index an array is with a loop
 variable.  For example:
 \index{expression}
 
-\begin{lstlisting}
+\begin{code}
     int i = 0;
     while (i < 4) {
         System.out.println(count[i]);
         i++;
     }
-\end{lstlisting}
+\end{code}
 %
 This is a standard {\tt while} loop that counts from 0
 up to 4, and when the loop variable {\tt i} is 4, the
@@ -116,10 +116,10 @@ array traversal is very common.
 When you copy an array variable, remember that you are
 copying a reference to the array.  For example:
 
-\begin{lstlisting}
+\begin{code}
     double[] a = new double [3];
     double[] b = a;
-\end{lstlisting}
+\end{code}
 %
 This code creates one array of three {\tt double}s, and
 sets two different variables to refer to it.
@@ -135,7 +135,7 @@ behavior you want; more often you want to
 allocate a new array and copy elements from
 one to the other.
 
-\begin{lstlisting}
+\begin{code}
     double[] b = new double [3];
 
     int i = 0;
@@ -143,7 +143,7 @@ one to the other.
       b[i] = a[i];
       i++;
     }
-\end{lstlisting}
+\end{code}
 
 
 \section{Arrays and objects}
@@ -198,41 +198,41 @@ This type of loop is so common that there is another
 loop statement, called {\tt for}, that expresses it more
 concisely.  The general syntax looks like this:
 
-\begin{lstlisting}
+\begin{code}
     for (INITIALIZER; CONDITION; INCREMENTOR) {
         BODY
     }
-\end{lstlisting}
+\end{code}
 %
 This statement is equivalent to
 
-\begin{lstlisting}
+\begin{code}
     INITIALIZER;
     while (CONDITION) {
         BODY
         INCREMENTOR
     }
-\end{lstlisting}
+\end{code}
 %
 except that it is more concise and, since it puts all the
 loop-related statements in one place, it is easier to read.
 For example:
 
-\begin{lstlisting}
+\begin{code}
     for (int i = 0; i < 4; i++) {
         System.out.println(count[i]);
     }
-\end{lstlisting}
+\end{code}
 %
 is equivalent to
 
-\begin{lstlisting}
+\begin{code}
     int i = 0;
     while (i < 4) {
         System.out.println(count[i]);
         i++;
     }
-\end{lstlisting}
+\end{code}
 
 
 \section{Array length}
@@ -247,11 +247,11 @@ the size of the array changes, you won't have to go through the
 program changing all the loops; they will work correctly for any
 size array.
 
-\begin{lstlisting}
+\begin{code}
     for (int i = 0; i < a.length; i++) {
         b[i] = a[i];
     }
-\end{lstlisting}
+\end{code}
 %
 The last time the body of the loop gets executed, {\tt i}
 is {\tt a.length - 1}, which is the index of the last element.  When
@@ -289,12 +289,12 @@ than 1.0.  Each time you invoke {\tt random} you get the next
 number in a pseudorandom sequence.
 To see a sample, run this loop:
 
-\begin{lstlisting}
+\begin{code}
     for (int i = 0; i < 10; i++) {
         double x = Math.random();
         System.out.println(x);
     }
-\end{lstlisting}
+\end{code}
 %
 To generate a random {\tt double} between 0.0 and an upper bound like
 {\tt high}, you can multiply {\tt x} by {\tt high}.
@@ -320,7 +320,7 @@ the array.  It allocates a new array of integers, fills
 it with random values, and returns a reference to the new
 array.
 
-\begin{lstlisting}
+\begin{code}
   public static int[] randomArray(int n) {
       int[] a = new int[n];
       for (int i = 0; i<a.length; i++) {
@@ -328,28 +328,28 @@ array.
       }
       return a;
   }
-\end{lstlisting}
+\end{code}
 %
 The return type is {\tt int[]}, which means that
 this method returns an array of integers.
 To test this method, it is convenient to have a method that
 prints the contents of an array.
 
-\begin{lstlisting}
+\begin{code}
   public static void printArray(int[] a) {
       for (int i = 0; i<a.length; i++) {
           System.out.println(a[i]);
       }
   }
-\end{lstlisting}
+\end{code}
 %
 The following code generates an array and prints it:
 
-\begin{lstlisting}
+\begin{code}
     int numValues = 8;
     int[] array = randomArray(numValues);
     printArray(array);
-\end{lstlisting}
+\end{code}
 %
 On my machine the output is
 
@@ -420,7 +420,7 @@ elements in an array that fall in a given range.  The parameters are
 the array and two integers that specify the lower and upper bounds of
 the range.
 
-\begin{lstlisting}
+\begin{code}
 public static int inRange(int[] a, int low, int high) {
     int count = 0;
     for (int i = 0; i < a.length; i++) {
@@ -428,7 +428,7 @@ public static int inRange(int[] a, int low, int high) {
     }
     return count;
 }
-\end{lstlisting}
+\end{code}
 %
 I wasn't specific about whether something equal
 to {\tt low} or {\tt high} falls in the range, but you can
@@ -438,14 +438,14 @@ That keeps us from counting any elements twice.
 Now we can count the number of scores in the ranges we are
 interested in:
 
-\begin{lstlisting}
+\begin{code}
 int[] scores = randomArray(30);
 int a = inRange(scores, 90, 100);
 int b = inRange(scores, 80, 90);
 int c = inRange(scores, 70, 80);
 int d = inRange(scores, 60, 70);
 int f = inRange(scores, 0, 60);
-\end{lstlisting}
+\end{code}
 
 
 \section{The histogram}
@@ -457,13 +457,13 @@ long as the number of ranges is small.  But imagine that
 we want to keep track of the number of times each score appears,
 all 100 possible values.  Would you want to write this?
 
-\begin{lstlisting}
+\begin{code}
 int count0 = inRange(scores, 0, 1);
 int count1 = inRange(scores, 1, 2);
 int count2 = inRange(scores, 2, 3);
 ...
 int count3 = inRange(scores, 99, 100);
-\end{lstlisting}
+\end{code}
 
 I don't think so.  What we really want is a way to store 100 integers,
 preferably so we can use an index to access each one.  Hint: array.
@@ -473,13 +473,13 @@ array of counters.  In this case, we initialize the array outside the
 loop; then, inside the loop, we invoke {\tt inRange} and store the
 result:
 
-\begin{lstlisting}
+\begin{code}
     int[] counts = new int[100];
 
     for (int i = 0; i < counts.length; i++) {
         counts[i] = inRange(scores, i, i+1);
     }
-\end{lstlisting}
+\end{code}
 %
 The only tricky thing here is that we are using the loop variable
 in two roles: as in index into the array, and as the parameter to
@@ -503,14 +503,14 @@ can use the value itself as an index into the array of counters.
 Here is code that traverses an array of scores once and generates
 a histogram.
 
-\begin{lstlisting}
+\begin{code}
     int[] counts = new int[100];
 
     for (int i = 0; i < scores.length; i++) {
         int index = scores[i];
         counts[index]++;
     }
-\end{lstlisting}
+\end{code}
 
 
 \section{Glossary}
@@ -603,7 +603,7 @@ For each of the following methods, write one sentence that
 describes abstractly what the method does.  For each variable,
 identify the role it plays.
 
-\begin{lstlisting}
+\begin{code}
 public static int banana(int[] a) {
     int grape = 0;
     int i = 0;
@@ -630,7 +630,7 @@ public static int grapefruit(int[] a, int p) {
     }
     return -1;
 }
-\end{lstlisting}
+\end{code}
 
 The purpose of this exercise is to practice reading code and
 recognizing the computation patterns we have seen.
@@ -648,7 +648,7 @@ program just before {\tt mus} returns.
 \item Describe in a few words what {\tt mus} does.
 \end{enumerate}
 
-\begin{lstlisting}
+\begin{code}
 public static int[] make(int n) {
     int[] a = new int[n];
 
@@ -678,7 +678,7 @@ public static void main(String[] args) {
 
     System.out.println(mus(bob));
 }
-\end{lstlisting}
+\end{code}
 \end{exercise}
 
 
@@ -708,9 +708,9 @@ the maximum of the maxima.
 find the largest element in an array, we have to provide a range
 that includes the entire array.
 
-\begin{lstlisting}
+\begin{code}
     double max = maxInRange(array, 0, a.length-1);
-\end{lstlisting}
+\end{code}
 
 Write a method called {\tt max} that takes an array as a parameter
 and that uses {\tt maxInRange} to find and return the largest value.

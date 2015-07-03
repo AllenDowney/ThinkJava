@@ -257,16 +257,16 @@ Traditionally, the first program you write when learning a new programming langu
 All it does is display the words ``Hello, World!''
 In Java, it looks like this:
 
-\begin{lstlisting}
+\begin{code}
 public class Hello {
 
     public static void main(String[] args) {
         // generate some simple output
         System.out.println("Hello, World!");
     }
-    
+
 }
-\end{lstlisting}
+\end{code}
 
 \index{public}
 \index{static}
@@ -283,7 +283,7 @@ For now, let's focus on the overall structure.
 
 Java programs are made up of {\bf class} and {\bf method} definitions, which generally have the form:
 
-\begin{lstlisting}
+\begin{code}
 public class CLASSNAME {
 
     METHOD {
@@ -295,7 +295,7 @@ public class CLASSNAME {
     }
 
 }
-\end{lstlisting}
+\end{code}
 
 \index{class!name}
 
@@ -317,7 +317,7 @@ When the program runs, it starts at the first statement in \java{main} and ends 
 Java uses squiggly braces (\{ and \}) to group things together.
 In Hello.java, the outermost squiggly braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
 
-\index{print}
+\index{println}
 \index{statement!print}
 
 The main method can have any number of statements, but the \java{Hello} example has only one.
@@ -440,7 +440,7 @@ It will do something else.
 Specifically, it will do what you told it to do.
 Here is an example of a semantic error in the hello world program:
 
-\begin{lstlisting}
+\begin{code}
 public class Hello {
 
     public static void main(String[] args) {
@@ -448,7 +448,7 @@ public class Hello {
     }
 
 }
-\end{lstlisting}
+\end{code}
 
 Note that this program compiles and runs just fine.
 The problem is that the main method is not the program we intended.

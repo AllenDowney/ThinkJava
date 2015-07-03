@@ -71,19 +71,19 @@ use one or the other.
 
 For example, here is {\tt printCard} as a class method:
 
-\begin{lstlisting}
+\begin{code}
     public static void printCard(Card c) {
         System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
     }
-\end{lstlisting}
+\end{code}
 
 Here it is re-written as an object method:
 
-\begin{lstlisting}
+\begin{code}
     public void print() {
         System.out.println(ranks[rank] + " of " + suits[suit]);
     }
-\end{lstlisting}
+\end{code}
 
 Here are the changes:
 
@@ -103,10 +103,10 @@ and likewise for {\tt suit}.
 
 Here's how this method is invoked:
 
-\begin{lstlisting}
+\begin{code}
     Card card = new Card(1, 1);
     card.print();
-\end{lstlisting}
+\end{code}
 
 When you invoke a method on an object, that object becomes the {\bf
 current object}, also known as {\tt this}.  Inside {\tt print},
@@ -134,26 +134,26 @@ new method with the behavior you want.
 
 For example, here is a {\tt toString} method for {\tt Card}:
 
-\begin{lstlisting}
+\begin{code}
 public String toString() {
     return ranks[rank] + " of " + suits[suit];
 }
-\end{lstlisting}
+\end{code}
 %
 The return type is {\tt String}, naturally,
 and it takes no parameters.  You can invoke {\tt toString} in
 the usual way:
 
-\begin{lstlisting}
+\begin{code}
     Card card = new Card(1, 1);
     String s = card.toString();
-\end{lstlisting}
+\end{code}
 %
 or you can invoke it indirectly through {\tt println}:
 
-\begin{lstlisting}
+\begin{code}
     System.out.println(card);
-\end{lstlisting}
+\end{code}
 
 
 \section{The {\tt equals} method}
@@ -176,39 +176,39 @@ same as identity, which is usually not what you want.
 
 For {\tt Card}s we already have a method that checks equivalence:
 
-\begin{lstlisting}
+\begin{code}
     public static boolean sameCard(Card c1, Card c2) {
         return (c1.suit == c2.suit && c1.rank == c2.rank);
     }
-\end{lstlisting}
+\end{code}
 %
 So all we have to do is rewrite is as an object method:
 
-\begin{lstlisting}
+\begin{code}
     public boolean equals(Card c2) {
         return (suit == c2.suit && rank == c2.rank);
     }
-\end{lstlisting}
+\end{code}
 %
 Again, I removed {\tt static} and the first parameter, {\tt c1}.
 Here's how it's invoked:
 
-\begin{lstlisting}
+\begin{code}
     Card card = new Card(1, 1);
     Card card2 = new Card(1, 1);
     System.out.println(card.equals(card2));
-\end{lstlisting}
+\end{code}
 %
 Inside {\tt equals}, {\tt card} is the current object and {\tt card2}
 is the parameter, {\tt c2}.  For methods that operate on two objects
 of the same type, I sometimes use {\tt this} explicitly and call
 the parameter {\tt that}:
 
-\begin{lstlisting}
+\begin{code}
     public boolean equals(Card that) {
         return (this.suit == that.suit && this.rank == that.rank);
     }
-\end{lstlisting}
+\end{code}
 %
 I think it improves readability.
 
@@ -267,7 +267,7 @@ since you can't modify them even if you want to.
 If you did the GridWorld exercises (Chapters~\ref{gridworld} and
 \ref{gridworld2}) you have seen examples of inheritance:
 
-\begin{lstlisting}
+\begin{code}
 public class BoxBug extends Bug {
     private int steps;
     private int sideLength;
@@ -277,7 +277,7 @@ public class BoxBug extends Bug {
         sideLength = length;
     }
 }
-\end{lstlisting}
+\end{code}
 
 {\tt BoxBug extends Bug} means that {\tt BoxBug} is a new
 kind of {\tt Bug} that inherits the methods and instance
@@ -301,14 +301,14 @@ which overrides the {\tt act} method from the parent.
 If you did the Graphics exercises in Appendix~\ref{graphics}, you
 saw another example:
 
-\begin{lstlisting}
+\begin{code}
 public class MyCanvas extends Canvas {
 
     public void paint(Graphics g) {
         g.fillOval(100, 100, 200, 200);
     }
 }
-\end{lstlisting}
+\end{code}
 
 {\tt MyCanvas} is a new kind of {\tt Canvas} with no new methods
 or instance variables, but it overrides {\tt paint}.
@@ -432,22 +432,22 @@ and change {\tt mergeSort} accordingly.  Which version of
 
 Transform the following class method into an object method.
 
-\begin{lstlisting}
+\begin{code}
 public static double abs(Complex c) {
     return Math.sqrt(c.real * c.real + c.imag * c.imag);
 }
-\end{lstlisting}
+\end{code}
 \end{exercise}
 
 
 \begin{exercise}
 Transform the following object method into a class method.
 
-\begin{lstlisting}
+\begin{code}
 public boolean equals(Complex b) {
     return(real == b.real && imag == b.imag);
 }
-\end{lstlisting}
+\end{code}
 \end{exercise}
 
 

@@ -11,10 +11,10 @@ and yields the {\em remainder} when the first operand is divided
 by the second.  In Java, the modulus operator is a percent sign,
 {\tt \%}.  The syntax is the same as for other operators:
 
-\begin{lstlisting}
+\begin{code}
     int quotient = 7 / 3;
     int remainder = 7 % 3;
-\end{lstlisting}
+\end{code}
 %
 The first operator, integer division, yields 2.  The second
 operator yields 1.  Thus, 7 divided by 3 is 2 with 1 left over.
@@ -39,11 +39,11 @@ to check conditions and change the behavior of the program
 accordingly.  {\bf Conditional statements} give us this ability.  The
 simplest form is the {\tt if} statement:
 
-\begin{lstlisting}
+\begin{code}
     if (x > 0) {
       System.out.println("x is positive");
     }
-\end{lstlisting}
+\end{code}
 %
 The expression in parentheses is called the condition.
 If it is true, then the statements in brackets get executed.
@@ -57,14 +57,14 @@ If the condition is not true, nothing happens.
 The condition can contain any of the comparison operators,
 sometimes called {\bf relational operators}:
 
-\begin{lstlisting}
+\begin{code}
     x == y               // x equals y
     x != y               // x is not equal to y
     x > y                // x is greater than y
     x < y                // x is less than y
     x >= y               // x is greater than or equal to y
     x <= y               // x is less than or equal to y
-\end{lstlisting}
+\end{code}
 %
 Although these operations are probably familiar to you, the
 syntax Java uses is a little different from mathematical
@@ -92,13 +92,13 @@ A second form of conditional execution is alternative execution,
 in which there are two possibilities, and the condition determines
 which one gets executed.  The syntax looks like:
 
-\begin{lstlisting}
+\begin{code}
     if (x%2 == 0) {
       System.out.println("x is even");
     } else {
       System.out.println("x is odd");
     }
-\end{lstlisting}
+\end{code}
 %
 If the remainder when {\tt x} is divided by 2 is zero, then
 we know that {\tt x} is even, and this code prints a message
@@ -111,7 +111,7 @@ As an aside, if you think you might want to check the parity
 (evenness or oddness) of numbers often, you might want to
 ``wrap'' this code up in a method, as follows:
 
-\begin{lstlisting}
+\begin{code}
   public static void printParity(int x) {
     if (x%2 == 0) {
       System.out.println("x is even");
@@ -119,25 +119,25 @@ As an aside, if you think you might want to check the parity
       System.out.println("x is odd");
     }
   }
-\end{lstlisting}
+\end{code}
 %
 Now you have a method named {\tt printParity} that will print
 an appropriate message for any integer you care to provide.
 In {\tt main} you would invoke this method like this:
 
-\begin{lstlisting}
+\begin{code}
     printParity(17);
-\end{lstlisting}
+\end{code}
 %
 Always remember that when you {\em invoke} a method, you do
 not have to declare the types of the arguments you provide.
 Java can figure out what type they are.  You should resist the
 temptation to write things like:
 
-\begin{lstlisting}
+\begin{code}
     int number = 17;
     printParity(int number);         // WRONG!!!
-\end{lstlisting}
+\end{code}
 
 
 \section {Chained conditionals}
@@ -147,7 +147,7 @@ Sometimes you want to check for a number of related conditions
 and choose one of several actions.  One way to do this is by
 {\bf chaining} a series of {\tt if}s and {\tt else}s:
 
-\begin{lstlisting}
+\begin{code}
     if (x > 0) {
       System.out.println("x is positive");
     } else if (x < 0) {
@@ -155,7 +155,7 @@ and choose one of several actions.  One way to do this is by
     } else {
       System.out.println("x is zero");
     }
-\end{lstlisting}
+\end{code}
 %
 These chains can be as long as you want, although they can
 be difficult to read if they get out of hand.  One way to
@@ -173,7 +173,7 @@ In addition to chaining, you can also nest one conditional
 within another.  We could have written the previous example
 as:
 
-\begin{lstlisting}
+\begin{code}
     if (x == 0) {
       System.out.println("x is zero");
     } else {
@@ -183,7 +183,7 @@ as:
         System.out.println("x is negative");
       }
     }
-\end{lstlisting}
+\end{code}
 %
 There is now an outer conditional that contains two branches.  The
 first branch contains a simple {\tt print} statement, but the second
@@ -209,7 +209,7 @@ The {\tt return} statement allows you to terminate the execution
 of a method before you reach the end.  One reason to use it
 is if you detect an error condition:
 
-\begin{lstlisting}
+\begin{code}
   public static void printLogarithm(double x) {
     if (x <= 0.0) {
       System.out.println("Positive numbers only, please.");
@@ -219,7 +219,7 @@ is if you detect an error condition:
     double result = Math.log(x);
     System.out.println("The log of x is " + result);
   }
-\end{lstlisting}
+\end{code}
 %
 This defines a method named {\tt printLogarithm} that takes a
 {\tt  double} named {\tt x} as a parameter.  It checks whether
@@ -274,7 +274,7 @@ the most magical and interesting things a program can do.
 
 For example, look at the following method:
 
-\begin{lstlisting}
+\begin{code}
   public static void countdown(int n) {
     if (n == 0) {
       System.out.println("Blastoff!");
@@ -283,7 +283,7 @@ For example, look at the following method:
       countdown(n-1);
     }
   }
-\end{lstlisting}
+\end{code}
 %
 The name of the method is {\tt countdown} and it takes a single
 integer as a parameter.  If the parameter is zero, it prints
@@ -294,9 +294,9 @@ then invokes a method named {\tt countdown}---itself---passing
 What happens if we invoke this method, in {\tt main}, like
 this:
 
-\begin{lstlisting}
+\begin{code}
     countdown(3);
-\end{lstlisting}
+\end{code}
 %
 The execution of {\tt countdown} begins with {\tt n=3}, and
 since {\tt n} is not zero, it prints the value 3, and then
@@ -341,7 +341,7 @@ Blastoff!
 As a second example, let's look again at the methods
 {\tt newLine} and {\tt threeLine}.
 
-\begin{lstlisting}
+\begin{code}
   public static void newLine() {
     System.out.println("");
   }
@@ -349,19 +349,19 @@ As a second example, let's look again at the methods
   public static void threeLine() {
     newLine();  newLine();  newLine();
   }
-\end{lstlisting}
+\end{code}
 %
 Although these work, they would not be much help if we wanted
 to print 2 newlines, or 106.  A better alternative would be
 
-\begin{lstlisting}
+\begin{code}
   public static void nLines(int n) {
     if (n > 0) {
       System.out.println("");
       nLines(n-1);
     }
   }
-\end{lstlisting}
+\end{code}
 %
 This program similar to {\tt countdown}; as long as {\tt n} is greater
 than zero, it prints a newline and then invokes itself to
@@ -455,7 +455,7 @@ This exercise reviews the flow of execution through a program
 with multiple methods.  Read the following code and answer the
 questions below.
 
-\begin{lstlisting}
+\begin{code}
 public class Buzz {
 
     public static void baffle(String blimp) {
@@ -477,7 +477,7 @@ public class Buzz {
         zippo("rattle", 13);
     }
 }
-\end{lstlisting}
+\end{code}
 
 \begin{enumerate}
 
@@ -540,7 +540,7 @@ simple methods.
 
 What is the output of the following program?
 
-\begin{lstlisting}
+\begin{code}
 public class Narf {
 
     public static void zoop(String fred, int bob) {
@@ -568,7 +568,7 @@ public class Narf {
         System.out.println("any " + strangStrung + "more ");
     }
 }
-\end{lstlisting}
+\end{code}
 \end{exercise}
 
 \begin{exercise}
@@ -591,9 +591,9 @@ You should assume that there is a method named {\tt raiseToPow}
 that takes two integers as arguments and that raises the
 first argument to the power of the second.  For example:
 
-\begin{lstlisting}
+\begin{code}
     int x = raiseToPow(2, 3);
-\end{lstlisting}
+\end{code}
 %
 would assign the value {\tt 8} to {\tt x}, because $2^3 = 8$.
 

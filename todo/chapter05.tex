@@ -52,7 +52,7 @@ the exercises.
 
 {\tt BugRunner.java} contains this code:
 
-\begin{lstlisting}
+\begin{code}
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Bug;
 import info.gridworld.actor.Rock;
@@ -67,7 +67,7 @@ public class BugRunner
         world.show();
     }
 }
-\end{lstlisting}
+\end{code}
 
 The first three lines are {\tt import} statements; they list the
 classes from GridWorld used in this program.  You can find the
@@ -84,23 +84,23 @@ The last line shows the world on the screen.
 
 Open {\tt BugRunner.java} for editing and replace this line:
 
-\begin{lstlisting}
+\begin{code}
     world.add(new Bug());
-\end{lstlisting}
+\end{code}
 
 with these lines:
 
-\begin{lstlisting}
+\begin{code}
     Bug redBug = new Bug();
     world.add(redBug);
-\end{lstlisting}
+\end{code}
 
 The first line assigns the Bug to a variable named {\tt redBug};
 we can use {\tt redBug} to invoke the Bug's methods.  Try this:
 
-\begin{lstlisting}
+\begin{code}
     System.out.println(redBug.getLocation());
-\end{lstlisting}
+\end{code}
 
 Note: If you run this before adding the Bug to the {\tt world}, the result is
 {\tt null}, which means that the Bug doesn't have a location yet.
@@ -152,15 +152,15 @@ at \url{http://en.wikipedia.org/wiki/Random_walk}.
 \item To see a longer random walk, you can give ActorWorld a bigger stage.
 At the top of {\tt BugRunner.java}, add this {\tt import} statement:
 
-\begin{lstlisting}
+\begin{code}
 import info.gridworld.grid.UnboundedGrid;
-\end{lstlisting}
+\end{code}
 
 Now replace the line that creates the ActorWorld with this:
 
-\begin{lstlisting}
+\begin{code}
     ActorWorld world = new ActorWorld(new UnboundedGrid());
-\end{lstlisting}
+\end{code}
 
 You should be able to run your random walk for a few thousand
 steps (you might have to use the scrollbars to find the Bug).
@@ -178,16 +178,16 @@ You can read the documentation at
 To create Bugs with different colors, we have to import
 {\tt Color}:
 
-\begin{lstlisting}
+\begin{code}
 import java.awt.Color;
-\end{lstlisting}
+\end{code}
 
 Then you can access the predefined colors, like {\tt Color.blue}, or
 create a new color like this:
 
-\begin{lstlisting}
+\begin{code}
     Color purple = new Color(148, 0, 211);
-\end{lstlisting}
+\end{code}
 
 Make a few bugs with different colors.  Then write a method named
 {\tt colorBug} that takes a Bug as a parameter, reads its location,
@@ -197,9 +197,9 @@ The Location object you get from
 {\tt getLocation} has methods named {\tt getRow} and {\tt getCol} that
 return integers.  So you can get the x-coordinate of a Bug like this:
 
-\begin{lstlisting}
+\begin{code}
     int x = bug.getLocation().getCol();
-\end{lstlisting}
+\end{code}
 
 Write a method named {\tt makeBugs} that takes an ActorWorld and an
 integer {\tt n} and creates {\tt n} bugs colored according to their

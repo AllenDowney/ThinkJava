@@ -91,7 +91,7 @@ that they are not part of the program.  They are part of the
 program design, but they never appear explicitly in the code.
 The class definition for the {\tt Card} type looks like this:
 
-\begin{lstlisting}
+\begin{code}
 class Card
 {
     int suit, rank;
@@ -104,7 +104,7 @@ class Card
         this.suit = suit;  this.rank = rank;
     }
 }
-\end{lstlisting}
+\end{code}
 
 As usual, I provide two constructors: one takes
 a parameter for each instance variable; the other
@@ -114,9 +114,9 @@ takes no parameters.
 
 To create an object that represents the 3 of Clubs, we invoke {\tt new}:
 
-\begin{lstlisting}
+\begin{code}
     Card threeOfClubs = new Card(0, 3);
-\end{lstlisting}
+\end{code}
 %
 The first argument, {\tt 0} represents the suit Clubs.
 
@@ -140,25 +140,25 @@ A natural way to do that is with an array of {\tt String}s.  You
 can create an array of {\tt String}s the same way you create an
 array of primitive types:
 
-\begin{lstlisting}
+\begin{code}
     String[] suits = new String[4];
-\end{lstlisting}
+\end{code}
 %
 Then we can set the values of the elements of the array.
 
-\begin{lstlisting}
+\begin{code}
     suits[0] = "Clubs";
     suits[1] = "Diamonds";
     suits[2] = "Hearts";
     suits[3] = "Spades";
-\end{lstlisting}
+\end{code}
 %
 Creating an array and initializing the elements is such a common
 operation that Java provides a special syntax for it:
 
-\begin{lstlisting}
+\begin{code}
     String[] suits = { "Clubs", "Diamonds", "Hearts", "Spades" };
-\end{lstlisting}
+\end{code}
 %
 This statement is equivalent to the
 separate declaration, allocation, and assignment.  The state
@@ -175,10 +175,10 @@ rather than {\tt String}s themselves.
 
 Now we need another array of {\tt String}s to decode the ranks:
 
-\begin{lstlisting}
+\begin{code}
     String[] ranks = { "narf", "Ace", "2", "3", "4", "5", "6",
                "7", "8", "9", "10", "Jack", "Queen", "King" };
-\end{lstlisting}
+\end{code}
 %
 The reason for the {\tt "narf"} is to act as a place-keeper for the
 zeroeth element of the array, which is never used (or shouldn't be).
@@ -190,7 +190,7 @@ Using these arrays, we can select the appropriate {\tt String}s by
 using the {\tt suit} and {\tt rank} as indices.  In the method
 {\tt printCard},
 
-\begin{lstlisting}
+\begin{code}
 public static void printCard(Card c) {
     String[] suits = { "Clubs", "Diamonds", "Hearts", "Spades" };
     String[] ranks = { "narf", "Ace", "2", "3", "4", "5", "6",
@@ -198,17 +198,17 @@ public static void printCard(Card c) {
 
     System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
 }
-\end{lstlisting}
+\end{code}
 
 the expression {\tt suits[c.suit]} means ``use the instance variable
 {\tt suit} from the object {\tt c} as an index into the array named
 {\tt suits}, and select the appropriate string.''  The output of this
 code
 
-\begin{lstlisting}
+\begin{code}
     Card card = new Card(1, 11);
     printCard(card);
-\end{lstlisting}
+\end{code}
 %
 is {\tt Jack of Diamonds}.
 
@@ -238,14 +238,14 @@ the same {\tt Card} object?
 To see if two references refer to the same object, we use
 the {\tt ==} operator.  For example:
 
-\begin{lstlisting}
+\begin{code}
     Card card1 = new Card(1, 11);
     Card card2 = card1;
 
     if (card1 == card2) {
         System.out.println("card1 and card2 are identical.");
     }
-\end{lstlisting}
+\end{code}
 %
 References to
 the same object are {\bf identical}.  References
@@ -256,23 +256,23 @@ to objects with same data are {\bf equivalent}.
 To check equivalence, it
 is common to write a method with a name like {\tt sameCard}.
 
-\begin{lstlisting}
+\begin{code}
     public static boolean sameCard(Card c1, Card c2) {
         return(c1.suit == c2.suit && c1.rank == c2.rank);
     }
-\end{lstlisting}
+\end{code}
 %
 Here is an example that creates two objects with the same data,
 and uses {\tt sameCard} to see if they are equivalent:
 
-\begin{lstlisting}
+\begin{code}
     Card card1 = new Card(1, 11);
     Card card2 = new Card(1, 11);
 
     if (sameCard(card1, card2)) {
         System.out.println("card1 and card2 are equivalent.");
     }
-\end{lstlisting}
+\end{code}
 %
 If references are identical, they are also equivalent,
 but if they are equivalent, they are not necessarily identical.
@@ -341,18 +341,18 @@ they are equivalent.
 
 First we compare suits:
 
-\begin{lstlisting}
+\begin{code}
     if (c1.suit > c2.suit) return 1;
     if (c1.suit < c2.suit) return -1;
-\end{lstlisting}
+\end{code}
 %
 If neither statement is true, the suits must be equal,
 and we have to compare ranks:
 
-\begin{lstlisting}
+\begin{code}
     if (c1.rank > c2.rank) return 1;
     if (c1.rank < c2.rank) return -1;
-\end{lstlisting}
+\end{code}
 %
 If neither of these is true, the ranks must be equal,
 so we return {\tt 0}.
@@ -382,9 +382,9 @@ combinations using {\tt Card} objects.
 
 This example creates an array of 52 cards:
 
-\begin{lstlisting}
+\begin{code}
     Card[] cards = new Card[52];
-\end{lstlisting}
+\end{code}
 
 Here is the state diagram for this object:
 
@@ -398,11 +398,11 @@ The array contains
 initialized to {\tt null}.  You can access the elements of
 the array in the usual way:
 
-\begin{lstlisting}
+\begin{code}
     if (cards[0] == null) {
         System.out.println("No cards yet!");
     }
-\end{lstlisting}
+\end{code}
 %
 But if you try to access the instance variables of the
 non-existent {\tt Card}s, you get a {\tt NullPointerException}.
@@ -410,9 +410,9 @@ non-existent {\tt Card}s, you get a {\tt NullPointerException}.
 \index{run-time error}
 \index{null}
 
-\begin{lstlisting}
+\begin{code}
     cards[0].rank;             // NullPointerException
-\end{lstlisting}
+\end{code}
 %
 But that is the correct syntax for accessing the {\tt
 rank} of the ``zeroeth'' card in the deck.  This is another example of
@@ -425,7 +425,7 @@ rank} of the ``zeroeth'' card in the deck.  This is another example of
 The easiest way to populate the deck with {\tt Card} objects
 is to write nested for loops (i.e., one loop inside the body of another):
 
-\begin{lstlisting}
+\begin{code}
     int index = 0;
     for (int suit = 0; suit <= 3; suit++) {
         for (int rank = 1; rank <= 13; rank++) {
@@ -433,7 +433,7 @@ is to write nested for loops (i.e., one loop inside the body of another):
             index++;
         }
     }
-\end{lstlisting}
+\end{code}
 %
 The outer loop enumerates the suits from 0 to 3.  For
 each suit, the inner loop enumerates the ranks from 1
@@ -461,13 +461,13 @@ a method that prints the contents.  We have
 seen the pattern for traversing an array several times, so the
 following method should be familiar:
 
-\begin{lstlisting}
+\begin{code}
     public static void printDeck(Card[] cards) {
         for (int i = 0; i < cards.length; i++) {
             printCard(cards[i]);
         }
     }
-\end{lstlisting}
+\end{code}
 
 Since {\tt cards} has type {\tt Card[]}, an element of {\tt cards}
 has type {\tt Card}.  So {\tt cards[i]} is a legal argument
@@ -494,7 +494,7 @@ the deck and compare each card to the one we are looking for.  If we
 find it we return the index where the card appears.  If it is not in
 the deck, we return -1.
 
-\begin{lstlisting}
+\begin{code}
 public static int findCard(Card[] cards, Card card) {
     for (int i = 0; i< cards.length; i++) {
         if (sameCard(cards[i], card)) {
@@ -503,7 +503,7 @@ public static int findCard(Card[] cards, Card card) {
     }
     return -1;
 }
-\end{lstlisting}
+\end{code}
 %
 The arguments of {\tt findCard} are {\tt card} and {\tt cards}.
 It might seem odd to have a variable with the same name as a type (the
@@ -582,7 +582,7 @@ the range from {\tt mid+1} to {\tt high}.
 Steps 3 and 4 look suspiciously like recursive invocations.  Here's
 what this looks like translated into Java code:
 
-\begin{lstlisting}
+\begin{code}
 public static int findBisect(Card[] cards, Card card, int low, int high) {
     // TODO: need a base case
     int mid = (high + low) / 2;
@@ -596,7 +596,7 @@ public static int findBisect(Card[] cards, Card card, int low, int high) {
         return findBisect(cards, card, mid+1, high);
     }
 }
-\end{lstlisting}
+\end{code}
 %
 This code contains the kernel of a bisection search, but it
 is still missing an important piece, which is why I added a TODO comment.
@@ -611,7 +611,7 @@ there are no cards between them,
 see we conclude that the card is not in the deck.
 If we handle that case, the method works correctly:
 
-\begin{lstlisting}
+\begin{code}
 public static int findBisect(Card[] cards, Card card, int low, int high) {
     System.out.println(low + ", " + high);
 
@@ -628,16 +628,16 @@ public static int findBisect(Card[] cards, Card card, int low, int high) {
         return findBisect(cards, card, mid+1, high);
     }
 }
-\end{lstlisting}
+\end{code}
 
 I added a print statement so I can follow
 the sequence of recursive invocations.  I tried out the
 following code:
 
-\begin{lstlisting}
+\begin{code}
     Card card1 = new Card(1, 11);
     System.out.println(findBisect(cards, card1, 0, 51));
-\end{lstlisting}
+\end{code}
 %
 And got the following output:
 
@@ -693,9 +693,9 @@ which throws a {\tt StackOverflowException}.
 \index{prototype}
 Here is the prototype (see Section~\ref{documentation}) of {\tt findBisect}:
 
-\begin{lstlisting}
+\begin{code}
 public static int findBisect(Card[] deck, Card card, int low, int high)
-\end{lstlisting}
+\end{code}
 
 \index{parameter!abstract}
 \index{abstract parameter}

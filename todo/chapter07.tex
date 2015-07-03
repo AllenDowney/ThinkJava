@@ -9,12 +9,12 @@
 You can make more than one assignment to the same variable;
 the effect is to replace the old value with the new.
 
-\begin{lstlisting}
+\begin{code}
     int liz = 5;
     System.out.print(liz);
     liz = 7;
     System.out.println(liz);
-\end{lstlisting}
+\end{code}
 %
 The output of this program is {\tt 57}, because the first
 time we print {\tt liz} her value is 5, and the second time
@@ -45,11 +45,11 @@ for all time.  If $a = b$ now, then $a$ will always equal $b$.
 In Java, an assignment statement can make two variables equal,
 but they don't have to stay that way!
 
-\begin{lstlisting}
+\begin{code}
     int a = 5;
     int b = a;     // a and b are now equal
     a = 3;         // a and b are no longer equal
-\end{lstlisting}
+\end{code}
 %
 The third line changes the value of {\tt a} but it does not
 change the value of {\tt b}, so they are no longer equal.
@@ -80,7 +80,7 @@ Later on (in Section~\ref{for}) will check out the {\tt for} statement.
 
 Using a {\tt while} statement, we can rewrite {\tt countdown}:
 
-\begin{lstlisting}
+\begin{code}
   public static void countdown(int n) {
     while (n > 0) {
       System.out.println(n);
@@ -88,7 +88,7 @@ Using a {\tt while} statement, we can rewrite {\tt countdown}:
     }
     System.out.println("Blastoff!");
   }
-\end{lstlisting}
+\end{code}
 %
 You can almost read a {\tt while} statement like
 English.  What this means is, ``While {\tt n} is greater than
@@ -139,7 +139,7 @@ terminates if {\tt n} is positive.
 %
 In other cases it is not so easy to tell:
 
-\begin{lstlisting}
+\begin{code}
   public static void sequence(int n) {
     while (n != 1) {
       System.out.println(n);
@@ -150,7 +150,7 @@ In other cases it is not so easy to tell:
       }
     }
   }
-\end{lstlisting}
+\end{code}
 %
 The condition for this loop is {\tt n != 1}, so the loop
 will continue until {\tt n} is 1, which will make the condition
@@ -212,13 +212,13 @@ makes a good example of iteration.  The following program prints a
 sequence of values in the left column and their logarithms in the
 right column:
 
-\begin{lstlisting}
+\begin{code}
     double x = 1.0;
     while (x < 10.0) {
       System.out.println(x + "   " + Math.log(x));
       x = x + 1.0;
     }
-\end{lstlisting}
+\end{code}
 %
 The output of this program is
 
@@ -247,9 +247,9 @@ respect to base 2.  To compute them, we can use the formula:
 %
 Changing the {\tt print} statement to
 
-\begin{lstlisting}
+\begin{code}
       System.out.println(x + "   " + Math.log(x) / Math.log(2.0));
-\end{lstlisting}
+\end{code}
 %
 yields
 
@@ -270,13 +270,13 @@ their logarithms base 2 are round numbers.  If we wanted to find
 the logarithms of other powers of two, we could modify the
 program like this:
 
-\begin{lstlisting}
+\begin{code}
     double x = 1.0;
     while (x < 100.0) {
       System.out.println(x + "   " + Math.log(x) / Math.log(2.0));
       x = x * 2.0;
     }
-\end{lstlisting}
+\end{code}
 %
 Now instead of adding something to {\tt x} each time through
 the loop, which yields an arithmetic sequence, we multiply
@@ -310,14 +310,14 @@ multiplication table for the values from 1 to 6.
 A good way to start is to write a simple loop that prints
 the multiples of 2, all on one line.
 
-\begin{lstlisting}
+\begin{code}
     int i = 1;
     while (i <= 6) {
       System.out.print(2*i + "   ");
       i = i + 1;
     }
     System.out.println("");
-\end{lstlisting}
+\end{code}
 %
 The first line initializes a variable named {\tt i}, which is going
 to act as a counter, or {\bf loop variable}.  As the loop executes,
@@ -362,7 +362,7 @@ multiples of any integer.
 Here's a method that encapsulates the loop from the previous
 section and generalizes it to print multiples of {\tt n}.
 
-\begin{lstlisting}
+\begin{code}
   public static void printMultiples(int n) {
     int i = 1;
     while (i <= 6) {
@@ -371,7 +371,7 @@ section and generalizes it to print multiples of {\tt n}.
     }
     System.out.println("");
   }
-\end{lstlisting}
+\end{code}
 %
 To encapsulate, all I had to do was add the first line,
 which declares the name, parameter,
@@ -396,13 +396,13 @@ multiplication table: we'll invoke {\tt printMultiples} repeatedly with
 different arguments.  In fact, we are going to use another loop to
 iterate through the rows.
 
-\begin{lstlisting}
+\begin{code}
     int i = 1;
     while (i <= 6) {
       printMultiples(i);
       i = i + 1;
     }
-\end{lstlisting}
+\end{code}
 %
 First of all, notice how similar this loop is to the one inside {\tt
 printMultiples}.  All I did was replace the print statement with a
@@ -452,7 +452,7 @@ Once you write and debug one, you can reuse it.
 To demonstrate encapsulation again, I'll take the code
 from the previous section and wrap it up in a method:
 
-\begin{lstlisting}
+\begin{code}
   public static void printMultTable() {
     int i = 1;
     while (i <= 6) {
@@ -460,7 +460,7 @@ from the previous section and wrap it up in a method:
       i = i + 1;
     }
   }
-\end{lstlisting}
+\end{code}
 %
 The development process I am demonstrating is called
 {\bf encapsulation and generalization}.
@@ -518,7 +518,7 @@ a program that would print a multiplication table of any
 size, not just the 6x6 table.  You could add a parameter to
 {\tt printMultTable}:
 
-\begin{lstlisting}
+\begin{code}
   public static void printMultTable(int high) {
     int i = 1;
     while (i <= high) {
@@ -526,7 +526,7 @@ size, not just the 6x6 table.  You could add a parameter to
       i = i + 1;
     }
   }
-\end{lstlisting}
+\end{code}
 %
 I replaced the value 6 with the parameter {\tt high}.  If I
 invoke {\tt printMultTable} with the argument 7, I get
@@ -550,7 +550,7 @@ I also call this parameter {\tt high},
 demonstrating that different methods can have parameters
 with the same name (just like local variables):
 
-\begin{lstlisting}
+\begin{code}
   public static void printMultiples(int n, int high) {
     int i = 1;
     while (i <= high) {
@@ -567,7 +567,7 @@ with the same name (just like local variables):
       i = i + 1;
     }
   }
-\end{lstlisting}
+\end{code}
 %
 Notice that when I added a new parameter, I had to change the first
 line, and I also had to
@@ -592,15 +592,15 @@ table appear twice.  You could save ink by printing only
 half the table.  To do that, you only have to change one
 line of {\tt printMultTable}.  Change
 
-\begin{lstlisting}
+\begin{code}
       printMultiples(i, high);
-\end{lstlisting}
+\end{code}
 %
 to
 
-\begin{lstlisting}
+\begin{code}
       printMultiples(i, i);
-\end{lstlisting}
+\end{code}
 %
 and you get
 
@@ -670,7 +670,7 @@ to write.
 
 Consider the following code:
 
-\begin{lstlisting}
+\begin{code}
 public static void main(String[] args) {
     loop(10);
 }
@@ -686,7 +686,7 @@ public static void loop(int n) {
         }
     }
 }
-\end{lstlisting}
+\end{code}
 %
 \begin{enumerate}
 

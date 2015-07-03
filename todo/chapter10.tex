@@ -18,7 +18,7 @@ might help: \url{http://www.collegeboard.com/prod_downloads/student/testing/ap/c
 
 Here is the code from {\tt BoxBugRunner.java}:
 
-\begin{lstlisting}
+\begin{code}
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.grid.Location;
 
@@ -35,7 +35,7 @@ public class BoxBugRunner {
         world.show();
     }
 }
-\end{lstlisting}
+\end{code}
 
 Everything here should be familiar, with the possible exception of
 {\tt Location}, which is part of GridWorld, and similar to {\tt
@@ -43,7 +43,7 @@ Everything here should be familiar, with the possible exception of
 
 {\tt BoxBug.java} contains the class definition for BoxBug.
 
-\begin{lstlisting}
+\begin{code}
 public class BoxBug extends Bug {
     private int steps;
     private int sideLength;
@@ -53,7 +53,7 @@ public class BoxBug extends Bug {
         sideLength = length;
     }
 }
-\end{lstlisting}
+\end{code}
 
 The first line says that this class extends {\tt Bug}, which means
 that a {\tt BoxBug} is a kind of {\tt Bug}.
@@ -72,7 +72,7 @@ The parameter of the constructor is the side length.
 {\tt Bug} behavior is controlled by the {\tt act} method.  Here
 is the {\tt act} method for {\tt BoxBug}:
 
-\begin{lstlisting}
+\begin{code}
     public void act() {
         if (steps < sideLength && canMove()) {
             move();
@@ -84,7 +84,7 @@ is the {\tt act} method for {\tt BoxBug}:
             steps = 0;
         }
     }
-\end{lstlisting}
+\end{code}
 
 If the {\tt BoxBug} can move, and has not taken the required number
 of steps, it moves and increments {\tt steps}.
@@ -111,7 +111,7 @@ Because {\tt Termite} extends {\tt Bug}, all {\tt Bug} methods
 also work on {\tt Termite}s.  But {\tt Termite}s have additional
 methods that {\tt Bug}s don't have.
 
-\begin{lstlisting}
+\begin{code}
     /**
      * Returns true if the termite has a flower.
      */
@@ -145,7 +145,7 @@ methods that {\tt Bug}s don't have.
      * one, and if the termite doesn't already have a flower.
      */
     public void pickUpFlower();
-\end{lstlisting}
+\end{code}
 
 For some methods {\tt Bug} provides one definition and {\tt Termite}
 provides another.  In that case, the {\tt Termite} method
@@ -165,7 +165,7 @@ have {\tt randomTurn}, which turns left or right 45 degrees at random.
 
 Here is the code from {\tt TermiteRunner.java}:
 
-\begin{lstlisting}
+\begin{code}
 public class TermiteRunner
 {
     public static void main(String[] args)
@@ -189,7 +189,7 @@ public class TermiteRunner
         }
     }
 }
-\end{lstlisting}
+\end{code}
 
 Everything here should be familiar.  {\tt TermiteRunner} creates
 an {\tt ActorWorld} with 20 {\tt EternalFlowers} and two {\tt Termites}.
@@ -197,11 +197,11 @@ an {\tt ActorWorld} with 20 {\tt EternalFlowers} and two {\tt Termites}.
 An {\tt EternalFlower} is a {\tt Flower} that overrides {\tt act}
 so the flowers don't get darker.
 
-\begin{lstlisting}
+\begin{code}
 public class EternalFlower extends Flower {
     public void act() {}
 }
-\end{lstlisting}
+\end{code}
 
 If you run {\tt TermiteRunner.java} you should see two termites
 moving at random among the flowers.
@@ -209,7 +209,7 @@ moving at random among the flowers.
 {\tt MyTermite.java} demonstrates the methods that interact with
 flowers.  Here is the class definition:
 
-\begin{lstlisting}
+\begin{code}
 public class MyTermite extends Termite {
 
     public void act() {
@@ -229,7 +229,7 @@ public class MyTermite extends Termite {
         randomTurn();
     }
 }
-\end{lstlisting}
+\end{code}
 
 {\tt MyTermite} extends {\tt Termite} and overrides {\tt act}.
 If {\tt MyTermite} sees a flower, it picks it up.  If it has

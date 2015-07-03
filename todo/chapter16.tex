@@ -33,10 +33,10 @@ If it finds a rock, it makes it blue.
 Here's how it works.  When {\tt act} is invoked, {\tt BlueBug} gets
 its location and a reference to the grid:
 
-\begin{lstlisting}
+\begin{code}
     Location loc = getLocation();
     Grid<Actor> grid = getGrid();
-\end{lstlisting}
+\end{code}
 
 The type in angle-brackets (\verb"<>") is a {\bf type parameter}
 that specifies the contents of {\tt grid}.  In other words, {\tt grid}
@@ -45,47 +45,47 @@ is not just a {\tt Grid}, it's a {\tt Grid} that contains {\tt Actor}s.
 The next step is to get the neighbors of the current location.
 {\tt Grid} provides a method that does just that:
 
-\begin{lstlisting}
+\begin{code}
     ArrayList<Actor> neighbors = grid.getNeighbors(loc);
-\end{lstlisting}
+\end{code}
 
 The return value from {\tt getNeighbors} is an {\tt ArrayList}
 of {\tt Actors}.  The {\tt size} method returns the length of
 the {\tt ArrayList}, and {\tt get} selects an element.  So
 we can print the neighbors like this.
 
-\begin{lstlisting}
+\begin{code}
         for (int i = 0; i < neighbors.size(); i++) {
             Actor actor = neighbors.get(i);
             System.out.println(actor);
         }
-\end{lstlisting}
+\end{code}
 
 Traversing an {\tt ArrayList} is such a common operation there's a
 special syntax for it: the {\bf for-each loop}.  So we could write:
 
-\begin{lstlisting}
+\begin{code}
         for (Actor actor : neighbors) {
             System.out.println(actor);
         }
-\end{lstlisting}
+\end{code}
 
 We know that the neighbors are {\tt Actors}, but we don't know
 what kind: they could be {\tt Bug}s, {\tt Rock}s, etc.
 To find the Rocks, we use the {\tt instanceof} operator, which
 checks whether an object is an instance of a class.
 
-\begin{lstlisting}
+\begin{code}
         for (Actor actor : neighbors) {
             if (actor instanceof Rock) {
                 actor.setColor(Color.blue);
             }
         }
-\end{lstlisting}
+\end{code}
 
 To make all this work, we need to import the classes we use:
 
-\begin{lstlisting}
+\begin{code}
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Bug;
 import info.gridworld.actor.Rock;
@@ -94,7 +94,7 @@ import info.gridworld.grid.Location;
 
 import java.awt.Color;
 import java.util.ArrayList;
-\end{lstlisting}
+\end{code}
 
 
 \section{Interfaces}
@@ -120,9 +120,9 @@ For example, {\tt java.awt.Shape} is an interface with prototypes for
 we say that ``Rectangle implements Shape.''  In fact, the first line
 of the {\tt Rectangle} class definition is:
 
-\begin{lstlisting}
+\begin{code}
 public class Rectangle extends Rectangle2D implements Shape, Serializable
-\end{lstlisting}
+\end{code}
 
 Rectangle inherits methods from {\tt Rectangle2D} and provides
 implementations for the methods in {\tt Shape} and {\tt Serializable}.
@@ -228,7 +228,7 @@ in GridWorld.  You can download my solution at
 Make a copy of {\tt BugRunner.java} named {\tt LifeRunner.java}
 and add methods with the following prototypes:
 
-\begin{lstlisting}
+\begin{code}
     /**
      * Makes a Game of Life grid with an r-pentomino.
      */
@@ -238,7 +238,7 @@ and add methods with the following prototypes:
      * Fills the grid with LifeRocks.
      */
     public static void makeRocks(ActorWorld world)
-\end{lstlisting}
+\end{code}
 
 {\tt makeLifeWorld} should create a Grid of Actors and an ActorWorld,
 then invoke {\tt makeRocks}, which should put a {\tt LifeRock} at
@@ -256,7 +256,7 @@ To keep track of the status of the Rocks, you can add a new instance
 variable, or you can use the Color of the Rock to indicate status.
 Either way, write methods with these prototypes:
 
-\begin{lstlisting}
+\begin{code}
     /**
      * Returns true if the Rock is alive.
      */
@@ -271,7 +271,7 @@ Either way, write methods with these prototypes:
      * Makes the Rock dead.
      */
     public void setDead()
-\end{lstlisting}
+\end{code}
 
 Write a constructor that invokes {\tt setDead} and confirm that
 all Rocks are dead.
@@ -291,7 +291,7 @@ second phase, all Rocks update their status.
 
 Here's what my {\tt act} method looks like:
 
-\begin{lstlisting}
+\begin{code}
     /**
      * Check what phase we're in and calls the appropriate method.
      * Moves to the next phase.
@@ -305,13 +305,13 @@ Here's what my {\tt act} method looks like:
             phase = 1;
         }
     }
-\end{lstlisting}
+\end{code}
 
 {\tt phase} and {\tt numNeighbors} are instance variables.
 And here are the prototypes for {\tt countLiveNeighbors} and
 {\tt updateStatus}:
 
-\begin{lstlisting}
+\begin{code}
     /**
      * Counts the number of live neighbors.
      */
@@ -322,7 +322,7 @@ And here are the prototypes for {\tt countLiveNeighbors} and
      * the number of neighbors.
      */
     public void updateStatus()
-\end{lstlisting}
+\end{code}
 
 Start with a simple version of {\tt updateStatus} that changes live
 rocks to dead and vice versa.  Now run the program and confirm that

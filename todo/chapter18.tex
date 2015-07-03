@@ -16,9 +16,9 @@ invoke them on {\tt System.out}.
 
 You can even use {\tt System.out} to print {\tt System.out}:
 
-\begin{lstlisting}
+\begin{code}
 System.out.println(System.out);
-\end{lstlisting}
+\end{code}
 %
 The result is:
 
@@ -46,35 +46,35 @@ it does not make it easy to get input from the keyboard.
 First, you have to use {\tt System.in} to create a new
 {\tt InputStreamReader}.
 
-\begin{lstlisting}
+\begin{code}
     InputStreamReader in = new InputStreamReader(System.in);
-\end{lstlisting}
+\end{code}
 %
 Then you use {\tt in} to create a new {\tt BufferedReader}:
 
-\begin{lstlisting}
+\begin{code}
     BufferedReader keyboard = new BufferedReader(in);
-\end{lstlisting}
+\end{code}
 %
 Finally you can invoke {\tt readLine} on {\tt keyboard},
 to take input from the keyboard and convert it to a
 String.
 
-\begin{lstlisting}
+\begin{code}
     String s = keyboard.readLine();
     System.out.println(s);
-\end{lstlisting}
+\end{code}
 %
 There is only one problem.  There are things that can go wrong when
 you invoke {\tt readLine}, and they might throw an {\tt IOException}.  A
 method that throws an exception has to include it in the
 prototype, like this:
 
-\begin {lstlisting}
+\begin{code}
 public static void main(String[] args) throws IOException {
     // body of main
 }
-\end{lstlisting}
+\end{code}
 
 
 \section{File input}
@@ -84,7 +84,7 @@ public static void main(String[] args) throws IOException {
 
 Here's a program that reads lines from a file and prints them:
 
-\begin{lstlisting}
+\begin{code}
 import java.io.*;
 
 public class Words {
@@ -108,7 +108,7 @@ public class Words {
         }
     }
 }
-\end{lstlisting}
+\end{code}
 
 This first line imports {\tt java.io}, the package that contains
 {\tt FileReader}, {\tt BufferedReader}, and the rest of
@@ -141,7 +141,7 @@ The alternative is to {\bf catch} the exception with a
 \index{try statement}
 \index{statement!try}
 
-\begin{lstlisting}
+\begin{code}
     public static void main(String[] args) {
         try {
             processFile("words.txt");
@@ -150,7 +150,7 @@ The alternative is to {\bf catch} the exception with a
             ex.printStackTrace();
         }
     }
-\end{lstlisting}
+\end{code}
 
 The structure is similar to an {\tt if} statement.  If the first
 ``branch'' runs without causing an Exception, the second branch

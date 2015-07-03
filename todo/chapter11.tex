@@ -97,12 +97,12 @@ to keep things interesting, let's make {\tt second} a {\tt double}.
 Instance variables are declared at the beginning of the class
 definition, outside of any method definition, like this:
 
-\begin{lstlisting}
+\begin{code}
 class Time {
     int hour, minute;
     double second;
 }
-\end{lstlisting}
+\end{code}
 %
 By itself, this code fragment is a legal class definition.  The
 state diagram for a {\tt Time} object looks like this:
@@ -136,13 +136,13 @@ the class.
 
 Here is an example for the {\tt Time} class:
 
-\begin{lstlisting}
+\begin{code}
     public Time() {
         this.hour = 0;
         this.minute = 0;
         this.second = 0.0;
     }
-\end{lstlisting}
+\end{code}
 %
 Where you would expect to see a return type,
 between {\tt public} and {\tt Time}, there is nothing.  That's
@@ -180,13 +180,13 @@ arguments (shown above), and one constructor that takes
 a parameter list identical to the list of instance
 variables.  For example:
 
-\begin{lstlisting}
+\begin{code}
     public Time(int hour, int minute, double second) {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
     }
-\end{lstlisting}
+\end{code}
 %
 The names and types of the parameters are the same as
 the names and types of the instance variables.  All the
@@ -219,7 +219,7 @@ invokes your constructor.
 The following program demonstrates two ways to create and
 initialize {\tt Time} objects:
 
-\begin{lstlisting}
+\begin{code}
 class Time {
     int hour, minute;
     double second;
@@ -250,7 +250,7 @@ class Time {
         System.out.println(t2);
     }
 }
-\end{lstlisting}
+\end{code}
 %
 In {\tt main}, the first time we invoke {\tt new},
 we provide no arguments, so Java invokes the first constructor.
@@ -289,11 +289,11 @@ To print objects in a way that is more meaningful to users
 (as opposed to programmers), you can write a method
 called something like {\tt printTime}:
 
-\begin{lstlisting}
+\begin{code}
     public static void printTime(Time t) {
         System.out.println(t.hour + ":" + t.minute + ":" + t.second);
     }
-\end{lstlisting}
+\end{code}
 %
 Compare this method to the version of {\tt printTime} in
 Section~\ref{time}.
@@ -361,7 +361,7 @@ One example is {\tt isAfter}, which compares two {\tt Time}s and
 returns a {\tt boolean} that indicates whether the first operand
 comes after the second:
 
-\begin{lstlisting}
+\begin{code}
     public static boolean isAfter(Time time1, Time time2) {
         if (time1.hour > time2.hour) return true;
         if (time1.hour < time2.hour) return false;
@@ -372,7 +372,7 @@ comes after the second:
         if (time1.second > time2.second) return true;
         return false;
     }
-\end{lstlisting}
+\end{code}
 %
 What is the result of this method if the two times are equal?  Does
 that seem like the appropriate result for this method?  If you were
@@ -386,7 +386,7 @@ the bread will be done.
 
 Here is a rough draft of this method that is not quite right:
 
-\begin{lstlisting}
+\begin{code}
     public static Time addTime(Time t1, Time t2) {
         Time sum = new Time();
         sum.hour = t1.hour + t2.hour;
@@ -394,7 +394,7 @@ Here is a rough draft of this method that is not quite right:
         sum.second = t1.second + t2.second;
         return sum;
     }
-\end{lstlisting}
+\end{code}
 %
 Although this method returns a {\tt Time} object, it is not
 a constructor.  You should go back and compare the syntax of
@@ -407,12 +407,12 @@ of time it takes for your breadmaker to make bread, then you
 could use {\tt addTime} to figure out when the bread will be
 done.
 
-\begin{lstlisting}
+\begin{code}
     Time currentTime = new Time(9, 14, 30.0);
     Time breadTime = new Time(3, 35, 0.0);
     Time doneTime = addTime(currentTime, breadTime);
     printTime(doneTime);
-\end{lstlisting}
+\end{code}
 %
 The output of this program is {\tt 12:49:30.0}, which is
 correct.  On the other hand, there are cases where the result
@@ -426,7 +426,7 @@ column.
 
 Here's a corrected version of the method.
 
-\begin{lstlisting}
+\begin{code}
     public static Time addTime(Time t1, Time t2) {
         Time sum = new Time();
         sum.hour = t1.hour + t2.hour;
@@ -443,7 +443,7 @@ Here's a corrected version of the method.
         }
         return sum;
     }
-\end{lstlisting}
+\end{code}
 %
 Although it's correct, it's starting to get big.  Later
 I suggest much shorter alternative.
@@ -470,7 +470,7 @@ As an example of a modifier, consider {\tt increment},
 which adds a given number of seconds to a {\tt Time} object.
 Again, a rough draft of this method looks like:
 
-\begin{lstlisting}
+\begin{code}
     public static void increment(Time time, double secs) {
         time.second += secs;
 
@@ -483,7 +483,7 @@ Again, a rough draft of this method looks like:
             time.hour += 1;
         }
     }
-\end{lstlisting}
+\end{code}
 %
 The first line performs the basic operation; the remainder
 deals with the same cases we saw before.
@@ -494,7 +494,7 @@ subtract 60 once; we have to keep doing it until {\tt second}
 is below 60.  We can do that by replacing the {\tt if}
 statements with {\tt while} statements:
 
-\begin{lstlisting}
+\begin{code}
     public static void increment(Time time, double secs) {
         time.second += secs;
 
@@ -507,7 +507,7 @@ statements with {\tt while} statements:
             time.hour += 1;
         }
     }
-\end{lstlisting}
+\end{code}
 %
 This solution is correct, but not very efficient.
 Can you think of a solution that does not require iteration?
@@ -522,7 +522,7 @@ invoked, we could require the caller to provide an
 object where {\tt addTime} stores the result.  Compare
 this to the previous version:
 
-\begin{lstlisting}
+\begin{code}
     public static void addTimeFill(Time t1, Time t2, Time sum) {
         sum.hour = t1.hour + t2.hour;
         sum.minute = t1.minute + t2.minute;
@@ -537,7 +537,7 @@ this to the previous version:
             sum.hour += 1;
         }
     }
-\end{lstlisting}
+\end{code}
 %
 The result is stored in {\tt sum}, so the return type is {\tt void}.
 
@@ -597,20 +597,20 @@ Another approach to the whole problem is to convert
 the computer already knows how to do arithmetic with {\tt double}s.
 Here is a method that converts a {\tt Time} into a {\tt double}:
 
-\begin{lstlisting}
+\begin{code}
         public static double convertToSeconds(Time t) {
         int minutes = t.hour * 60 + t.minute;
         double seconds = minutes * 60 + t.second;
         return seconds;
     }
-\end{lstlisting}
+\end{code}
 %
 Now all we need is a way to convert from a {\tt double}
 to a {\tt Time} object.  We could write a method to
 do it, but it might make more sense to write it as a third
 constructor:
 
-\begin{lstlisting}
+\begin{code}
     public Time(double secs) {
         this.hour =(int)(secs / 3600.0);
         secs -= this.hour * 3600.0;
@@ -618,7 +618,7 @@ constructor:
         secs -= this.minute * 60;
         this.second = secs;
     }
-\end{lstlisting}
+\end{code}
 %
 This constructor is a little different from the others;
 it involves some calculation along with assignments to the
@@ -628,12 +628,12 @@ You might have to think to convince yourself that the technique
 I am using to convert from one base to another is correct.  But once
 you're convinced, we can use these methods to rewrite {\tt addTime}:
 
-\begin{lstlisting}
+\begin{code}
     public static Time addTime(Time t1, Time t2) {
         double seconds = convertToSeconds(t1) + convertToSeconds(t2);
         return new Time(seconds);
     }
-\end{lstlisting}
+\end{code}
 %
 This is shorter than the original version, and it is much easier
 to demonstrate that it is correct (assuming, as usual, that the
