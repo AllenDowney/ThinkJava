@@ -30,36 +30,6 @@ and {\tt double}s.  Like other values, they are used internally
 to perform computations.
 
 
-\section{Packages}
-\index{package}
-\index{AWT}
-\index{Abstract Window Toolkit|see {AWT}}
-\index{import}
-\index{statement!import}
-
-The Java libraries are divided into {\bf
-packages}, including {\tt java.lang}, which contains most of the
-classes we have used so far, and {\tt java.awt},
-the {\bf Abstract Window Toolkit} (AWT),
-which contains classes for windows, buttons, graphics, etc.
-
-To use a class defined in another package, you have to {\bf
-  import} it.  {\tt Point} and {\tt Rectangle} are in the
-{\tt java.awt} package, so to import them like this:
-
-\begin{code}
-    import java.awt.Point;
-    import java.awt.Rectangle;
-\end{code}
-
-All {\tt import} statements appear at the beginning of the program,
-outside the class definition.
-
-The classes in {\tt java.lang}, like {\tt Math} and {\tt String}, are
-imported automatically, which is why we haven't needed the
-{\tt import} statement yet.
-
-
 \section{{\tt Point} objects}
 \index{Point}
 \index{class!Point}
@@ -503,9 +473,6 @@ chapter.
 
 \begin{description}
 
-\item[package:]  A collection of classes.  Java
-classes are organized in packages.
-
 \item[AWT:]  The Abstract Window Toolkit, one of the biggest
 and commonly-used Java packages.
 
@@ -533,8 +500,6 @@ of a program.
 \item[state diagram:] A snapshot of the state of a program, shown
 graphically.
 
-\index{package}
-\index{AWT}
 \index{instance}
 \index{instance variable}
 \index{reference}

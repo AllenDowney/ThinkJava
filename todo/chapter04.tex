@@ -2,34 +2,6 @@
 \label{chap04}
 \label{condrecursion}
 
-\section{The modulus operator}
-\index{modulus}
-\index{operator!modulus}
-
-The modulus operator works on integers (and integer expressions)
-and yields the {\em remainder} when the first operand is divided
-by the second.  In Java, the modulus operator is a percent sign,
-{\tt \%}.  The syntax is the same as for other operators:
-
-\begin{code}
-    int quotient = 7 / 3;
-    int remainder = 7 % 3;
-\end{code}
-%
-The first operator, integer division, yields 2.  The second
-operator yields 1.  Thus, 7 divided by 3 is 2 with 1 left over.
-
-The modulus operator turns out to be surprisingly useful.  For
-example, you can check whether one number is divisible by
-another: if {\tt x \% y} is zero, then {\tt x} is divisible
-by {\tt y}.
-
-Also, you can use the modulus operator to extract the rightmost
-digit or digits from a number.  For example, {\tt x \% 10} yields
-the rightmost digit of {\tt x} (in base 10).  Similarly
-{\tt x \% 100} yields the last two digits.
-
-
 \section{Conditional execution}
 \index{conditional}
 \index{statement!conditional}
@@ -407,10 +379,6 @@ have any parameters or variables.
 \section{Glossary}
 
 \begin{description}
-
-\item[modulus:]  An operator that works on integers and yields
-the remainder when one number is divided by another.  In Java
-it is denoted with a percent sign({\tt \%}).
 
 \item[conditional:]  A block of statements that may or may not
 be executed depending on some condition.

@@ -219,44 +219,6 @@ Then the program ends.
 The stack trace can be hard to read, but it contains a lot of information.
 
 
-\section{Reading documentation}
-\label{documentation}
-\index{documentation}
-
-If you go to
-\url{http://download.oracle.com/javase/6/docs/api/java/lang/String.html}.
-and click on {\tt charAt}, you get the following documentation
-(or something like it):
-
-\begin{stdout}
-public char charAt(int index)
-
-Returns the char value at the specified index. An index ranges
-from 0 to length() - 1. The first char value of the sequence is
-at index 0, the next at index 1, and so on, as for array indexing.
-
-Parameters: index - the index of the char value.
-
-Returns: the char value at the specified index of this string.
-  The first char value is at index 0.
-
-Throws: IndexOutOfBoundsException - if the index argument is
-  negative or not less than the length of this string.
-\end{stdout}
-
-The first line is the method's {\bf prototype}, which specifies the
-name of the method, the type of the parameters, and the return type.
-
-The next line describes what the method does.  The following
-lines explain the parameters and return values.  In this case
-the explanations are redundant, but the documentation is
-supposed to fit a standard format.  The last line describes
-the exceptions this method might throw.
-
-It might take some time to get
-comfortable with this kind of documentation, but it is worth the effort.
-
-
 \section{The {\tt indexOf} method}
 \index{indexOf}
 

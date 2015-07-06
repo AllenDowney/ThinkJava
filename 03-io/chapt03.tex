@@ -13,3 +13,306 @@ So far the only programs we've looked at just display messages, which doesn't in
 But that will change quickly as we begin to work with different types data.
 This chapter is about storing values in computer memory and doing simple arithmetic.
 More importantly, it's about how to compose algorithms using basic building blocks like variables, keywords, operators, and expressions.
+
+
+\section{System objects}
+\label{system}
+\index{System object}
+\index{object!System}
+
+The {\tt System} class provides
+methods and objects that get input from the keyboard,
+print text on the screen, and do file input and output (I/O).
+
+{\tt System.out} is the object that displays
+on the screen.  When you invoke {\tt print} and {\tt println}, you
+invoke them on {\tt System.out}.
+
+You can even use {\tt System.out} to print {\tt System.out}:
+
+\begin{code}
+System.out.println(System.out);
+\end{code}
+
+The result is:
+
+\begin{stdout}
+java.io.PrintStream@80cc0e5
+\end{stdout}
+
+When Java prints an object, it prints the type
+of the object ({\tt PrintStream}), the package
+where the type is defined ({\tt java.io}), and a
+unique identifier for the object.  On my machine the identifier
+is {\tt 80cc0e5}, but if you run the same code you will
+probably get something different.
+
+There is also an object named {\tt System.in} that makes it
+possible to get input from the keyboard.  Unfortunately,
+it does not make it easy to get input from the keyboard.
+
+
+\section{Packages}
+\index{package}
+\index{AWT}
+\index{Abstract Window Toolkit|see {AWT}}
+\index{import}
+\index{statement!import}
+
+The Java libraries are divided into {\bf
+packages}, including {\tt java.lang}, which contains most of the
+classes we have used so far, and {\tt java.awt},
+the {\bf Abstract Window Toolkit} (AWT),
+which contains classes for windows, buttons, graphics, etc.
+
+To use a class defined in another package, you have to {\bf
+  import} it.  {\tt Point} and {\tt Rectangle} are in the
+{\tt java.awt} package, so to import them like this:
+
+\begin{code}
+    import java.awt.Point;
+    import java.awt.Rectangle;
+\end{code}
+
+All {\tt import} statements appear at the beginning of the program,
+outside the class definition.
+
+The classes in {\tt java.lang}, like {\tt Math} and {\tt String}, are
+imported automatically, which is why we haven't needed the
+{\tt import} statement yet.
+
+
+\section{The Scanner class}
+
+TODO
+
+
+\section{Reading documentation}
+\label{documentation}
+\index{documentation}
+
+If you go to
+\url{http://download.oracle.com/javase/6/docs/api/java/lang/String.html}.
+and click on {\tt charAt}, you get the following documentation
+(or something like it):
+
+\begin{stdout}
+public char charAt(int index)
+
+Returns the char value at the specified index. An index ranges
+from 0 to length() - 1. The first char value of the sequence is
+at index 0, the next at index 1, and so on, as for array indexing.
+
+Parameters: index - the index of the char value.
+
+Returns: the char value at the specified index of this string.
+  The first char value is at index 0.
+
+Throws: IndexOutOfBoundsException - if the index argument is
+  negative or not less than the length of this string.
+\end{stdout}
+
+The first line is the method's {\bf prototype}, which specifies the
+name of the method, the type of the parameters, and the return type.
+
+The next line describes what the method does.  The following
+lines explain the parameters and return values.  In this case
+the explanations are redundant, but the documentation is
+supposed to fit a standard format.  The last line describes
+the exceptions this method might throw.
+
+It might take some time to get
+comfortable with this kind of documentation, but it is worth the effort.
+
+
+\section{File input/output}
+
+TODO
+
+
+\section{The modulus operator}
+\index{modulus}
+\index{operator!modulus}
+
+The modulus operator works on integers (and integer expressions)
+and yields the {\em remainder} when the first operand is divided
+by the second.  In Java, the modulus operator is a percent sign,
+{\tt \%}.  The syntax is the same as for other operators:
+
+\begin{code}
+    int quotient = 7 / 3;
+    int remainder = 7 % 3;
+\end{code}
+%
+The first operator, integer division, yields 2.  The second
+operator yields 1.  Thus, 7 divided by 3 is 2 with 1 left over.
+
+The modulus operator turns out to be surprisingly useful.  For
+example, you can check whether one number is divisible by
+another: if {\tt x \% y} is zero, then {\tt x} is divisible
+by {\tt y}.
+
+Also, you can use the modulus operator to extract the rightmost
+digit or digits from a number.  For example, {\tt x \% 10} yields
+the rightmost digit of {\tt x} (in base 10).  Similarly
+{\tt x \% 100} yields the last two digits.
+
+
+\section{Floating-point}
+\index{floating-point}
+\index{type!double}
+\index{double(floating-point)}
+
+In the last chapter we had some problems dealing with numbers
+that were not integers.  We worked around the problem by measuring
+percentages instead of fractions, but a more general solution is
+to use floating-point numbers, which can represent fractions
+as well as integers.  In Java, the floating-point type is
+called {\tt double}, which is short for ``double-precision.''
+
+You can create floating-point variables and assign values to them
+using the same syntax we used for the other types.  For example:
+
+\begin{code}
+    double pi;
+    pi = 3.14159;
+\end{code}
+%
+It is also legal to declare a variable and assign a value to it at the
+same time:
+
+\begin{code}
+    int x = 1;
+    String empty = "";
+    double pi = 3.14159;
+\end{code}
+%
+This syntax is common; a combined declaration
+and assignment is sometimes called an {\bf initialization}.
+\index{initialization}
+
+Although floating-point numbers are useful, they are
+a source of confusion because there seems to be an
+overlap between integers and floating-point numbers.  For
+example, if you have the value {\tt 1}, is that an integer,
+a floating-point number, or both?
+
+Java distinguishes the integer value {\tt 1}
+from the floating-point value {\tt 1.0}, even though they
+seem to be the same number.  They belong to
+different types, and strictly speaking, you are not allowed
+to make assignments between types.  For example, the following
+is illegal:
+
+\begin{code}
+    int x = 1.1;
+\end{code}
+%
+because the variable on the left is an {\tt int}
+and the value on the right is a {\tt double}.  But it is easy
+to forget this rule, especially because there are places where Java
+will automatically convert from one type to another.
+For example:
+
+\begin{code}
+    double y = 1;
+\end{code}
+%
+should technically not be legal, but Java allows it by converting the
+{\tt int} to a {\tt double} automatically.  This leniency is
+convenient, but it can cause problems; for example:
+
+\begin{code}
+    double y = 1 / 3;
+\end{code}
+%
+You might expect the variable {\tt y} to get the value
+{\tt 0.333333}, which is a legal floating-point value, but in
+fact it gets {\tt 0.0}.  The reason is that the
+expression on the right is the ratio of two integers,
+so Java does {\em integer} division, which yields the integer
+value {\tt 0}.  Converted to floating-point, the result is
+{\tt 0.0}.
+
+One way to solve this problem (once you figure out what
+it is) is to make the right-hand side a floating-point
+expression:
+
+\begin{code}
+    double y = 1.0 / 3.0;
+\end{code}
+%
+This sets {\tt y} to {\tt 0.333333}, as expected.
+
+\index{arithmetic!floating-point}
+
+The operations we have seen so far---addition, subtraction,
+multiplication, and division---also work on floating-point values,
+although you might be interested to know that the underlying mechanism
+is completely different.  In fact, most processors have special
+hardware just for performing floating-point operations.
+
+
+\section{Converting from {\tt double} to {\tt int}}
+\label{rounding}
+\index{rounding}
+\index{typecasting}
+
+As I mentioned, Java converts {\tt int}s
+to {\tt double}s automatically if necessary, because no
+information is lost in the translation.  On the other hand,
+going from a {\tt double} to an {\tt int} requires rounding
+off.  Java doesn't perform this operation automatically, in
+order to make sure that you, as the programmer, are aware
+of the loss of the fractional part of the number.
+
+The simplest way to convert a floating-point value to an integer is to
+use a {\bf typecast}.  Typecasting is so called because it allows you
+to take a value that belongs to one type and ``cast'' it into another
+type (in the sense of molding or reforming).
+
+The syntax for typecasting is to put
+the name of the type in parentheses and use it as an operator.
+For example,
+
+\begin{code}
+    double pi = 3.14159;
+    int x = (int) pi;
+\end{code}
+%
+The {\tt(int)} operator has the effect of converting what
+follows into an integer, so {\tt x} gets the value 3.
+
+Typecasting takes precedence over arithmetic operations,
+so in the following example, the value of {\tt pi} gets
+converted to an integer first, and the result
+is 60.0, not 62.
+
+\begin{code}
+    double pi = 3.14159;
+    double x = (int) pi * 20.0;
+\end{code}
+%
+Converting to an integer always rounds down, even if the fraction
+part is 0.99999999.  These behaviors (precedence and rounding)
+can make typecasting error-prone.
+
+
+\section{Escape characters}
+
+TODO
+
+
+\section{Formatting output with printf}
+
+TODO
+
+
+\section{Putting it all together}
+
+TODO
+
+
+\section{Testing via the command line}
+
+TODO

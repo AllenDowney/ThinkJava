@@ -1,43 +1,6 @@
 \chapter{Input and Output in Java}
 \label{javaio}
 
-\section{System objects}
-\label{system}
-\index{System object}
-\index{object!System}
-
-The {\tt System} class provides
-methods and objects that get input from the keyboard,
-print text on the screen, and do file input and output (I/O).
-%
-{\tt System.out} is the object that displays
-on the screen.  When you invoke {\tt print} and {\tt println}, you
-invoke them on {\tt System.out}.
-
-You can even use {\tt System.out} to print {\tt System.out}:
-
-\begin{code}
-System.out.println(System.out);
-\end{code}
-%
-The result is:
-
-\begin{stdout}
-java.io.PrintStream@80cc0e5
-\end{stdout}
-%
-When Java prints an object, it prints the type
-of the object ({\tt PrintStream}), the package
-where the type is defined ({\tt java.io}), and a
-unique identifier for the object.  On my machine the identifier
-is {\tt 80cc0e5}, but if you run the same code you will
-probably get something different.
-
-There is also an object named {\tt System.in} that makes it
-possible to get input from the keyboard.  Unfortunately,
-it does not make it easy to get input from the keyboard.
-
-
 \section{Keyboard input}
 \label{keyboard}
 \index{keyboard}
