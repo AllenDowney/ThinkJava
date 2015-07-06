@@ -4,7 +4,7 @@
 \begin{exercise}
 
 If you are using this book in a class, you might enjoy this exercise.
-Find a partner and play ``Stump the Chump'':
+Find a partner and play {\it Stump the Chump}:
 
 Start with a program that compiles and runs correctly.
 One player turns away while the other player adds an error to the program.
@@ -17,10 +17,12 @@ You get two points if you find the error without compiling the program, one poin
 \begin{exercise}
 \label{ex.date}
 
+The point of this exercise is (1) to use string concatenation to display values with different types (\java{int} and \java{String}), and (2) to practice developing programs gradually by adding a few statements at a time.
+
 \begin{enumerate}
 
 \item Create a new program named {\tt Date.java}.
-Copy or type in something like the ``Hello, World'' program and make sure you can compile and run it.
+Copy or type in something like the hello world program and make sure you can compile and run it.
 
 \item Following the example in Section~\ref{printing}, write a program that creates variables named {\tt day}, {\tt date}, {\tt month}, and {\tt year}.
 {\tt day} will contain the day of the week and {\tt date} will contain the day of the month.
@@ -30,7 +32,7 @@ Assign values to those variables that represent today's date.
 \item Print the value of each variable on a line by itself.
 This is an intermediate step that is useful for checking that everything is working so far.
 
-\item Modify the program so that it prints the date in standard American form: {\tt Saturday, July 16, 2011}.
+\item Modify the program so that it prints the date in standard American format: {\tt Saturday, July 16, 2011}.
 
 \item Modify the program again so that the total output is:
 
@@ -43,36 +45,37 @@ Saturday 16 July, 2011
 
 \end{enumerate}
 
-The point of this exercise is (1) to use string concatenation to display values with different types ({\tt int} and {\tt String}), and (2) to practice developing programs gradually by adding a few statements at a time.
+HINT: You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
 
 \end{exercise}
 
 
 \begin{exercise}
 
+The point of this exercise is (1) to use some of the arithmetic operators, and (2) to start thinking about compound entities (like time of day) that that are represented with multiple values.
+
 \begin{enumerate}
 
 \item Create a new program called {\tt Time.java}.
-From now on, I won't remind you to start with a small, working program, but you should.
+From now on, we won't remind you to start with a small, working program, but you should.
 
-\item Following the example in Section 2.6, create variables named {\tt hour}, {\tt minute}, and {\tt second}, and assign them values that are roughly the current time.
-Use a 24-hour clock, so that at 2pm the value of {\tt hour} is 14.
+\item Following the example program in Section~\ref{printing}, create variables named {\tt hour}, {\tt minute}, and {\tt second}. Assign values that are roughly the current time.
+Use a 24-hour clock, i.e., so that at 2pm the value of {\tt hour} is 14.
 
-\item Make the program calculate and print the number of seconds since midnight.
+\item Make the program calculate and print the number of seconds since the last midnight.
 
 \item Make the program calculate and print the number of seconds remaining in the day.
 
 \item Make the program calculate and print the percentage of the day that has passed.
+Note you might run into problems when computing percentages with integers.
+%, which is the motivation for floating point numbers in the next chapter.
 
 \item Change the values of {\tt hour}, {\tt minute}, and {\tt second} to reflect the current time.
-Wait a few seconds and check that the program works correctly each time you run it.
+Wait for a short while, and check that the program works correctly each time you run it.
 
 \end{enumerate}
 
-The point of this exercise is to use some of the arithmetic operations, and to start thinking about compound entities like the time of day that that are represented with multiple values.
-Also, you might run into problems computing percentages with {\tt ints}, which is the motivation for floating point numbers in the next chapter.
-
-HINT: you may want to use additional variables to hold values temporarily during the computation.
-Variables like this, that are used in a computation but never printed, are sometimes called intermediate or temporary variables.
+HINT: You may want to use additional variables to hold values during the computation.
+Variables that are used in a computation but never printed are sometimes called intermediate or temporary variables.
 
 \end{exercise}

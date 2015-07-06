@@ -1,18 +1,8 @@
 \chapter{Variables and data types}
 
-A number of years ago, Jeannette Wing published a terrific editorial with the title {\it Computational Thinking}, or in her own words, ``Ways to Think Like a Computer Scientist'' (see Communications of the ACM, March 2006).
-This 3-page article summarizes many of the problem-solving techniques you will discover while learning to program.
-Everyone interested in learning computer science beyond programming should read it.
-She defines the field this way:
-
-\begin{quote}
-{\bf ``Computer science is the study of computation---what can be computed and how to compute it.''}
-\end{quote}
-
-So far the only programs we've looked at just display messages, which doesn't involve a lot of computation.
-But that will change quickly as we begin to work with different types data.
 This chapter is about storing values in computer memory and doing simple arithmetic.
-More importantly, it's about how to compose algorithms using basic building blocks like variables, keywords, operators, and expressions.
+More importantly, it's about how to compose statements using basic building blocks such as variables, keywords, operators, and expressions.
+
 
 \section{More printing}
 
@@ -31,22 +21,20 @@ public class Hello {
 }
 \end{code}
 
-As this program demonstrates, you can put comments at the end of a line as well as on lines by themselves.
+As this program demonstrates, you can place comments at the end of a line as well as on lines all by themselves.
 
 \index{String}
 \index{type!String}
 
-Phrases that appear in quotation marks are called {\bf strings}; they are made up of a sequence of characters.
-Strings can contain any combination of letters, numbers, punctuation marks, symbols, and non-printable characters including tabs and carriage returns.
+Phrases that appear in quotation marks are called {\bf strings} because they are made up of a sequence of characters.
+Strings can contain any combination of letters, numbers, punctuation marks, symbols, and non-printable characters (including tabs and carriage returns).
 
 \index{newline}
-
-The name \java{println} is short for ``print line'' because it adds a special character, called a {\bf newline}, that moves the cursor to the next line of the display.
-The next time \java{println} is invoked, the new text appears on the next line.
-
 \index{print}
 \index{statement!print}
 
+The name \java{println} is short for ``print line.'' It adds a special character at the end, called a {\bf newline}, that moves the cursor to the next line of the display.
+The next time \java{println} is invoked, the new text appears on the next line.
 To display the output from multiple print statements all on one line, use \java{print}:
 
 \begin{code}
@@ -60,10 +48,9 @@ public class Goodbye {
 }
 \end{code}
 
-The output appears on a single line as {\tt Goodbye, cruel world}.
+The output for this example appears on a single line as {\tt Goodbye, cruel world}.
 Note there is a space between the word ``Goodbye'' and the second quotation mark.
 This space appears in the output, so it affects the {\em behavior} of the program.
-
 Spaces that appear outside of quotation marks generally do not affect the behavior of the program.
 For example, we could have written:
 
@@ -91,16 +78,17 @@ Newlines and spaces are important for organizing your program visually, making i
 Formatting your code well does not take much effort, and it pays huge dividends.
 We will discuss readability and style guidelines at the end of the chapter.
 
-\section {Variables}
+
+\section{Variables}
 
 \index{variable}
 \index{value}
 
-One of the most powerful features of a programming language is the ability to manipulate {\bf variables}.
+One of the most powerful features of a programming language is the ability to define and manipulate {\bf variables}.
 A variable is a named location of computer memory that stores a single {\bf value}.
 Values may be numbers, text, images, sounds, and other types of data.
 %They can be printed, and as we'll see later, operated on.
-To store a value, you have to create a variable.
+To store a value in memory, you first have to create a variable.
 %Since the values we want to store are text, we declare that the new variable is a string:
 
 \begin{code}
@@ -109,14 +97,17 @@ To store a value, you have to create a variable.
 
 \index{declaration}
 \index{statement!declaration}
+\index{type!int}
+\index{type!char}
+\index{type!String}
 
 This statement is a {\bf declaration}, because it declares that the variable named \java{message} has the type \java{String}.
-Each variable has a type that determines what kind of values it can store.
+Each variable has a {\bf type} that determines what kind of values it can store.
 For example, the \java{int} type can store integers, and the \java{char} type can store characters.
 
 Some types begin with a capital letter and some with lower-case.
 We will learn the significance of this distinction later, but for now you should take care to get it right.
-There is no such type as \java{Int} or \java{string}, and the compiler will balk if you try to make one up.
+There is no such type as \java{Int} or \java{string}, and the compiler will complain if you try to make one up.
 
 To declare an integer variable, the syntax is:
 
@@ -134,11 +125,25 @@ For example, if you saw these variable declarations, you could probably guess wh
     int hour, minute;
 \end{code}
 
-This example also demonstrates the syntax for declaring multiple variables with the same type: \java{hour} and \java{second} are both integers. Note that each declaration ends with a semicolon.
+This example also demonstrates the syntax for declaring multiple variables with the same type: \java{hour} and \java{second} are both integers.
+Note that each declaration statement ends with a semicolon.
 
-\index{literal}
 
-The messages we have been printing (\java{"Hello, World!"}, \java{"Goodbye, "}, etc.) are {\em literal} string values. {\bf Literals} are data embedded directly into programs. In contrast, variables are the names of values stored in memory. The English word {\em variable} implies that this data is subject to change.
+\section{Keywords}
+\index{keyword}
+
+You can make up just about any name you want for a variable.
+But there are certain words that are reserved in Java, because they are used by the compiler to parse the structure of the program.
+These words, called {\bf keywords}, include \java{public}, \java{class}, \java{static}, \java{void}, \java{int}, and many more.
+Search the Internet for ``Java keywords'' to see the complete list.
+
+%The complete list is available at \url{https://docs.oracle.com/javase/tutorial/}.
+%This site, provided by Oracle, includes Java documentation I refer to throughout the book.
+
+Rather than memorize the keywords, you should take advantage of the syntax highlighting provided in many development environments (including DrJava).
+As you type, the tokens in your program will appear in different colors.
+For example, keywords might be blue, strings red, comments green, and other code black.
+If you type a variable name and it turns blue, watch out!
 
 
 \section{Assignment}
@@ -147,10 +152,10 @@ The messages we have been printing (\java{"Hello, World!"}, \java{"Goodbye, "}, 
 \index{statement!assignment}
 
 Now that we have created variables, we want to store values.
-We do that with an {\bf assignment statement}.
+We do that with an {\bf assignment} statement.
 
 \begin{code}
-    message = "Hello.";  // give message the value "Hello."
+    message = "Hello!";  // give message the value "Hello!"
     hour = 11;           // assign the value 11 to hour
     minute = 59;         // set minute to 59
 \end{code}
@@ -164,13 +169,17 @@ The vocabulary can be confusing here, but the idea is straightforward:
 \end{itemize}
 
 A common way to represent variables on paper is to draw a box with the name of the variable on the outside and the value of the variable on the inside.
-This figure shows the effect of the three assignment statements:
+The diagram below shows the effect of the three assignment statements:
 
 \begin{center}
-\includegraphics{assign.pdf}  %TODO replace Bob with message; draw arrow?
+\begin{tabular}{rl}
+message & \framebox[2cm]{Hello!} \\
+   hour & \framebox[1cm]{11} \\
+ minute & \framebox[1cm]{59} \\
+\end{tabular}
 \end{center}
 
-As a general rule, a variable has to have the same type as the value you assign it.
+As a general rule, a variable has to have the same type as the value you assign to it.
 You cannot store a \java{String} in \java{minute} or an integer in \java{message}.
 
 On the other hand, that rule can be confusing.
@@ -179,38 +188,69 @@ For now you should remember the general rule, and we'll talk about exceptions la
 
 Another source of confusion is that some strings {\em look} like integers, but they are not.
 For example, \java{message} can contain the string \java{"123"}, which is made up of the characters \java{'1'}, \java{'2'}, and \java{'3'}.
-But that is not the same thing as the number \java{123}.
+But that is not the same thing as the decimal number \java{123}.
 
 \begin{code}
-    bob = "123";  // legal
-    bob = 123;    // not legal
+    message = "123";  // legal
+    message = 123;    // not legal
 \end{code}
 
 
-%TODO
-%\section{Constants}
+\section{Literals and constants}
+
+\index{literal}
+
+The messages we have been printing (\java{"Hello, World!"}, \java{"Goodbye, "}, etc.) are {\em literal} string values.
+{\bf Literals} are data embedded directly into programs.
+In contrast, variables are the names of values stored in memory.
+The English word {\em variable} implies that this data is subject to change.
+
+It's often useful to give names to literals that will be used throughout the program.
+But when doing so, we don't want those variables to be changed accidentally because of an unexpected bug in the code.
+For example, consider the famous card game that comes with most versions of Microsoft Windows.
+
+\begin{code}
+    final String title = "Solitaire";
+    final int deckSize = 52;
+\end{code}
+
+\index{final}
+\index{constant}
+\index{initialize}
+
+The keyword \java{final} indicates these variables are {\bf constants} and may be assigned only one time.
+Constants are generally declared and {\bf initialized} on the same line of code.
+%The term initialize means to assign for the first time.
+If you attempt to assign \java{title} or \java{deckSize} later in the program, the compiler will report an error.
+This feature helps prevent you from making mistakes.
+
+It's good practice to create final variables for constant values, rather than repeat literal values again and again.
+For one, it makes the program easier to understand.
+When looking at the code, it may not be obvious what the number \java{52} means.
+The name \java{deckSize} explains the programmer's intent.
+Second, named constants make the program easier to maintain.
+If we want to change the title from \java{"Solitaire"} to \java{"Klondike"}, we would only need to change one line of code (as opposed to every line where that title is used).
 
 
 \section{Printing variables}
 \label{printing}
 
-You can print the value of a variable using {\tt println} or {\tt print}:
+You can print the value of variables and constants using \java{print} or \java{println}.
+The following program declares a variable named \java{firstLine}, assigns it the value \java{"Hello, again!"}, and then prints that value.
 
 \begin{code}
-class Hello {
-  public static void main(String[] args) {
-    String firstLine;
-    firstLine = "Hello, again!";
-    System.out.println(firstLine);
-  }
+public class Hello {
+    public static void main(String[] args) {
+        String firstLine;
+        firstLine = "Hello, again!";
+        System.out.println(firstLine);
+    }
 }
 \end{code}
 
-This program creates a variable named {\tt firstLine}, assigns it the value {\tt "Hello, again!"} and then prints that value.
-When we talk about ``printing a variable,'' we mean printing the {\em value} of the variable.
+When we talk about printing a variable, we mean printing the {\em value} of the variable.
 To print the {\em name} of a variable, you have to put it in quotes.
-For example: {\tt System.out.println("firstLine");}
-
+%For example: {\tt System.out.println("firstLine");}
 For example, you can write:
 
 \begin{code}
@@ -226,7 +266,11 @@ The output of this program is:
 The value of firstLine is Hello, again!
 \end{stdout}
 
-I am happy to report that the syntax for printing a variable is the same regardless of the variable's type.
+Note that the output does not contain quote marks around the words hello and again.
+Those quote marks were part of the source code, not the value.
+
+The syntax for printing a variable is the same regardless of the variable's type.
+For example:
 
 \begin{code}
     int hour, minute;
@@ -239,185 +283,266 @@ I am happy to report that the syntax for printing a variable is the same regardl
     System.out.println(".");
 \end{code}
 
-%TODO
-The output of this program is {\tt The current time is 11:59.}
+The output of this program is:
 
-WARNING: To put multiple values on the same line, is common to use several {\tt print} statements followed by a {\tt println}.
-But you have to remember the {\tt println} at the end.
-In many environments, the output from {\tt print} is stored without being displayed until {\tt println} is invoked, at which point the entire line is displayed at once.
-If you omit {\tt println}, the program may terminate without displaying the stored output!
+\begin{stdout}
+The current time is 11:59.
+\end{stdout}
 
-
-\section{Keywords}
-\index{keyword}
-
-A few sections ago, I said that you can make up any name you want for your variables, but that's not quite true.
-There are certain words that are reserved in Java because they are used by the compiler to parse the structure of your program, and if you use them as variable names, it will get confused.
-These words, called {\bf keywords}, include {\tt public}, {\tt class}, {\tt void}, {\tt int}, and many more.
-
-The complete list is available at \url{http://download.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html}.
-This site, provided by Oracle, includes Java documentation I refer to throughout the book.
-
-Rather than memorize the list, I suggest you take advantage of a feature provided in many Java development environments: code highlighting.
-As you type, parts of your program should appear in different colors.
-For example, keywords might be blue, strings red, and other code black.
-If you type a variable name and it turns blue, watch out!
-You might get some strange behavior from the compiler.
+To output multiple values on the same line, it is common to use several \java{print} statements followed by a \java{println}.
+{\bf Don't forget the {\tt println} at the end!}
+On many operating systems, the output from \java{print} is stored without being displayed until \java{println} is invoked, at which point the entire line is displayed at once.
+If you omit the {\tt println}, the program may display the stored output at unexpected times or even terminate without displaying anything.
 
 
 \section{Arithmetic operators}
-\index{operator}
-
-{\bf Operators} are symbols used to represent computations like addition and multiplication.
-Most operators in Java do what you expect them to do because they are common mathematical symbols.
-For example, the operator for addition is {\tt +}.
-Subtraction is {\tt -}, multiplication is {\tt *}, and division is {\tt /}.
-
-\begin{code}
-1+1        hour-1       hour*60 + minute     minute/60
-\end{code}
-
-Expressions can contain both variable names and numbers.
-Variables are replaced with their values before the computation is performed.
 
 \index{expression}
 
-Addition, subtraction and multiplication all do what you expect, but you might be surprised by division.
-For example, this program:
+Recall that Java programs are organized into {\em classes}, each of which has one or more {\em methods}, each of which has one or more {\em statements}.
+Most statements consist of one or more {\bf expressions}.
+For example, the expressions below are variable names, numbers, or both.
+Each expression represents a single value to be computed.
+
+\begin{code}
+    1 + 1     hour - 1     hour * 60 + minute     minute / 60
+    2         11 - 1       11 * 60 + 59           59 / 60
+              10           660 + 59               0
+                           719
+\end{code}
+
+\index{operator}
+
+{\bf Operators} are symbols used to represent computations like addition and multiplication.
+Most operators in Java do what you expect them to do, since they are common mathematical symbols.
+For example, the operator for addition is \java{+}, subtraction is \java{-}, multiplication is \java{*}, and division is \java{/}.
+Variables are replaced with their values before the computation is performed.
+
+Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
+For example:
 
 \begin{code}
     int hour, minute;
     hour = 11;
     minute = 59;
     System.out.print("Number of minutes since midnight: ");
-    System.out.println(hour*60 + minute);
+    System.out.println(hour * 60 + minute);
     System.out.print("Fraction of the hour that has passed: ");
-    System.out.println(minute/60);
+    System.out.println(minute / 60);
 \end{code}
 
-generates this output:
+This program outputs:
 
 \begin{stdout}
 Number of minutes since midnight: 719
 Fraction of the hour that has passed: 0
 \end{stdout}
 
-The first line is expected, but the second line is odd.
-The value of {\tt minute} is 59, and 59 divided by 60 is 0.98333, not 0.
-The problem is that Java is performing {\bf integer division}.
-
-\index{type!int}
-\index{integer division}
 \index{arithmetic!integer}
 \index{division!integer}
+\index{integer division}
 \index{operand}
 
-When both {\bf operands} are integers (operands are the things operators operate on), the result is also an integer, and by convention integer division always rounds {\em down}, even in cases like this where the next integer is so close.
+The second line often confuses people.
+After all, the value of {\tt minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
+The problem here is that Java is performing {\em integer division}.
+When both {\bf operands} are integers, the result is also an integer.
+Computer hardware is designed so that integer division always rounds {\em down}, even in cases like this one where the next integer is close.
 
-An alternative is to calculate a percentage rather than a fraction:
+Alternatively we can calculate a percentage rather than a fraction:
 
 \begin{code}
-    System.out.print("Percentage of the hour that has passed: ");
-    System.out.println(minute*100/60);
+    System.out.print("Percent of the hour that has passed: ");
+    System.out.println(minute * 100 / 60);
 \end{code}
 
-The result is:
+The new output is:
 
 \begin{stdout}
-Percentage of the hour that has passed: 98
+Percent of the hour that has passed: 98
 \end{stdout}
 
 Again the result is rounded down, but at least now the answer is approximately correct.
-To get a more accurate answer, we can use a different type of variable, called floating-point, that can store fractional values.
+To get a more accurate answer, we can use a different type of variable that can store fractional values.
 We'll get to that in the next chapter.
 
 
 \section{Order of operations}
-\index{precedence}
+
 \index{order of operations}
+\index{precedence}
+\index{PEMDAS}
 
 When more than one operator appears in an expression, the order of evaluation depends on the rules of {\bf precedence}.
-A complete explanation of precedence can get complicated, but just to get you started:
+For arithmetic operators, Java follows mathematical conventions:
 
 \begin{itemize}
 
 \item Multiplication and division happen before addition and subtraction.
-So {\tt 2*3-1} yields 5, not 4, and {\tt 2/3-1} yields -1, not 1 (remember that in integer division {\tt 2/3} is 0).
+So \java{2 * 3 - 1} yields 5, not 4, and \java{2 / 3 - 1} yields -1, not 1.
+Remember that because of integer division, \java{2 / 3} is 0.
 
-\item If the operators have the same precedence they are evaluated from left to right.
-So in the expression {\tt minute*100/60}, the multiplication happens first, yielding {\tt 5900/60}, which in turn yields {\tt 98}.
-If the operations had gone from right to left, the result would be {\tt 59*1} which is {\tt 59}, which is wrong.
+\item If the operators have the same precedence, they are evaluated from left to right.
+So in the expression \java{minute * 100 / 60}, the multiplication happens first, yielding \java{5900 / 60}, which in turn yields \java{98}.
+If these same operations had gone from right to left, the result would have been \java{59 * 1}, which is incorrect.
 
 \item Any time you want to override the rules of precedence (or you are not sure what they are) you can use parentheses.
-Expressions in parentheses are evaluated first, so {\tt 2 *(3-1)} is 4.
-You can also use parentheses to make an expression easier to read, as in {\tt(minute * 100) / 60}, even though it doesn't change the result.
+Expressions in parentheses are evaluated first, so \java{2 * (3 - 1)} is 4.
+You can also use parentheses to make an expression easier to read, as in \java{(minute * 100) / 60}, even though it doesn't change the actual result.
 
 \end{itemize}
 
+Don't work too hard to remember all the rules of precedence, especially for other operators.
+If it's not obvious by looking at the expression, use parentheses to make it more clear.
 
-\section{Operators for {\tt Strings}}
+
+\section{Operators for strings}
 
 \index{string operator}
 \index{operator!string}
 
-In general you cannot perform mathematical operations on {\tt String}s, even if the strings look like numbers.
-The following are illegal (if we know that bob has type {\tt String}):
+In general, you cannot perform mathematical operations on strings, even if the strings look like numbers.
+The following expressions are illegal:
 
-\begin{stdout}
-bob - 1         "Hello"/123      bob * "Hello"
-\end{stdout}
+\begin{code}
+    message - 1     "Hello" / 123     message * "Hello"
+\end{code}
 
-By the way, can you tell by looking at those expressions whether {\tt bob} is an integer or a string?
-Nope.
+Note that it's unclear looking at these expressions whether \java{message} is an integer or a string.
 The only way to tell the type of a variable is to look at the place where it is declared.
 
 \index{concatenate}
 
-Interestingly, the {\tt +} operator {\em does} work with {\tt String}s, but it might not do what you expect.
-For {\tt String}s, the {\tt +} operator represents {\bf concatenation}, which means joining up the two operands by linking them end-to-end.
-So {\tt "Hello, " + "world."} yields the string {\tt "Hello, world."} and {\tt bob + "ism"} adds the suffix {\em ism} to the end of whatever {\tt bob} is, which is handy for naming new forms of bigotry.
+Interestingly, the \java{+} operator does work with strings, but it might not do what you expect.
+For strings, the \java{+} operator represents {\bf concatenation}, which means joining up the two operands by linking them end-to-end.
+
+So \java{"Hello, " + "world!"} yields the string \java{"Hello, world!"}.
+Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} to the hello string, which is handy for creating a personalized greeting.
+When you append two strings, make sure one of them contains a space character.
+Otherwise you will end up with something like \java{"Hello,world!"}.
 
 
 \section{Composition}
 
 \index{composition}
-\index{expression}
 
-So far we have looked at the elements of a programming language---variables, expressions, and statements---in isolation, without talking about how to combine them.
+So far we have looked at the elements of a programming language---variables, expressions, and statements---in isolation, without talking about how to put them all together.
 
 One of the most useful features of programming languages is their ability to take small building blocks and {\bf compose} them.
-For example, we know how to multiply numbers and we know how to print; it turns out we can combine them in a single statement:
+For example, we know how to multiply numbers and we know how to print.
+It turns out we can combine these operations into a single statement:
 
 \begin{code}
     System.out.println(17 * 3);
 \end{code}
 
-Any expression involving numbers, strings and variables, can be used inside a print statement.
+Any expression involving numbers, strings, and variables can be used inside a print statement.
 We've already seen one example:
 
 \begin{code}
-    System.out.println(hour*60 + minute);
+    System.out.println(hour * 60 + minute);
 \end{code}
 
-But you can also put arbitrary expressions on the right-hand side of an assignment statement:
+You can also put arbitrary expressions on the right-hand side of an assignment statement:
 
 \begin{code}
     int percentage;
     percentage = (minute * 100) / 60;
 \end{code}
 
-This ability may not seem impressive now, but we will see examples where composition expresses complex computations neatly and concisely.
+This ability may not seem very impressive now, but we will see examples later on where composition allows us to write complex computations both neatly and concisely.
 
-WARNING: The left side of an assignment has to be a {\em variable} name, not an expression.
-That's because the left side indicates the storage location where the result will go.
+Note the left side of an assignment must be a {\em variable name}, not an expression.
+That's because the left side indicates the location where the result will be stored.
 Expressions do not represent storage locations, only values.
-So the following is illegal: {\tt minute+1 = hour;}.
+
+\begin{code}
+    hour = minute + 1;  // correct
+    minute + 1 = hour;  // syntax error
+\end{code}
 
 
-\section{Readability and style}
+\section{Formatting and style}
 
-As a rule of thumb, each line should be one statement / action.
+\index{readability}
 
-TODO
+Before you get too carried away with the power of composition, keep in mind that other people will be reading your source code.
+In practice, software developers spend the vast majority of their time {\em understanding} and {\em modifying} existing code.
+As a result, it's far more important to write code that is readable than to write code that is (or appears to be) functional.
 
-Static analysis with Checkstyle
+\index{whitespace}
+
+Recall from the beginning of this chapter that the compiler generally ignores {\bf whitespace}, i.e., newlines, tab characters, and other spaces.
+Programmers have a lot of freedom in how they {\em format} their code in terms of indenting, blank lines, spaces around operators, etc.
+However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying your code.
+
+Virtually every organization that does a lot of software development has strict guidelines on how to format source code.
+For example, Google published its Java coding standards for use in open-source projects:
+\url{http://google.github.io/styleguide/javaguide.html}
+It is much easier to understand a large codebase when all the source code is formatted consistently.
+
+Style guidelines can be difficult to learn, especially for beginners who haven't yet seen many of the language features discussed in them.
+Fortunately there are many tools that help programmers find and correct formatting errors.
+One prominent example is Checkstyle, which has the built-in ability to enforce most of Google's coding standards:
+\url{http://checkstyle.sourceforge.net/}
+
+Instructions for downloading and running Checkstyle are available on our website: \url{http://thinkjava.org/}
+If you apply Checkstyle to your source code regularly, you will likely internalize good style habits over time.
+
+
+\section{Documentation}
+
+There are limitations to what automatic style checkers can do.
+In particular, they do NOT evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, and the {\em structure} of your algorithms.
+
+Good comments make it easier for experienced developers to identify errors in your code.
+Good variable names communicate the intent of your program and how the data is organized.
+And good programs tend to avoid doing too much in one statement or method.
+In general, each line of code should be a single step of the algorithm.
+
+\index{comments!documentation}
+\index{documentation comments}
+
+Another important practice for making source code readable is writing good {\bf documentation}.
+In contrast to inline comments that begin with {\tt //}, documentation comments begin with {\tt /**} (two stars) and end with {\tt */} (one star).
+Anything in between these two tokens is part of the documentation.
+As a rule of thumb, you should document every class and every method.
+
+\begin{code}
+/**
+ * Example program that demonstrates print vs println.
+ */
+public class Goodbye {
+
+    /**
+     * Application entry point; simply prints a greeting.
+     */
+    public static void main(String[] args) {
+        System.out.print("Goodbye, ");  // note the space
+        System.out.println("cruel world");
+    }
+
+}
+\end{code}
+
+The above example has perhaps too many comments, since all the program does is print a message.
+But it illustrates the differences between inline and documentation comments:
+
+\begin{itemize}
+\item Inline comments tend to be short phrases that help explain complex parts of a method.
+Documentation comments are typically complete sentences that begin with a capital letter and end with a period.
+
+\item Documentation comments often span multiple lines.
+By convention, each line begins with a {\tt *} that is aligned vertically with the start and end of the comment.
+
+%\item Some development environments (e.g., Eclipse and NetBeans) automatically display documentation comments when you hover your mouse over the name of a class or method.
+
+\index{Javadoc}
+
+\item Documentation comments are used by automated tools to summarize the source code.
+For example, the {\bf Javadoc} tool that comes with the JDK generates web pages to describe your classes and methods.
+
+\end{itemize}
+
+You can run the Javadoc tool directly from DrJava by pressing the corresponding button the toolbar.
+Given the prevalence of this tool, people sometimes refer to documentation as ``Javadoc comments.''

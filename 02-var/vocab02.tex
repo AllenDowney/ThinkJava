@@ -2,35 +2,53 @@
 
 \begin{description}
 
+\term{string}
+A sequence of characters; the primary data type for text.
+
+\term{newline}
+A special character signifying the end of a line of text.
+Also known as line ending, end of line (EOL), or line break.
+
 \term{variable}
 A named storage location for values.
 All variables have a type, which is declared when the variable is created.
 
 \term{value}
-A number or string (or other thing to be named later) that can be stored in a variable.
-Every value belongs to a type.
-
-\term{type}
-A set of values.
-The type of a variable determines which values can be stored there.
-The types we have seen are integers ({\tt int} in Java) and strings ({\tt String} in Java).
-
-\term{keyword}
-A reserved word used by the compiler to parse programs.
-You cannot use keywords, like {\tt public}, {\tt class}, and {\tt void} as variable names.
+A number or text that can be stored in a variable.
+Every value belongs to a type (e.g., \java{int}, \java{String}).
 
 \term{declaration}
 A statement that creates a new variable and determines its type.
 
+\term{type}
+Mathematically speaking, a set of values.
+The type of a variable determines which values can be stored or manipulated.
+%The types we have seen are integers ({\tt int} in Java) and strings ({\tt String} in Java).
+
+\term{keyword}
+A reserved word used by the compiler to parse programs.
+You cannot use keywords (like \java{public}, \java{class}, and \java{void}) as variable names.
+
 \term{assignment}
-A statement that assigns a value to a variable.
+A statement that stores a value in a memory location.
+
+\term{literal}
+A constant value written directly in the source code.
+For example, \java{"Hello"} is a string literal and \java{74} is an integer literal.
+
+\term{constant}
+A variable that can only be assigned one time.
+Once initialized, its value cannot be changed.
+
+\term{initialize}
+To assign an initial value to a variable (i.e., its first value).
 
 \term{expression}
-A combination of variables, operators and values that represents a single value.
+A combination of variables, operators, and values that represents a single value.
 Expressions also have types, as determined by their operators and operands.
 
 \term{operator}
-A symbol that represents a computation like addition, multiplication or string concatenation.
+A symbol that represents a computation like addition, multiplication, or string concatenation.
 
 \term{operand}
 One of the values on which an operator operates.
@@ -40,8 +58,19 @@ The order in which operations are evaluated.
 
 \term{concatenate}
 To join two operands end-to-end.
+For strings, concatenation means to append.
 
 \term{composition}
-The ability to combine simple expressions and statements into compound statements and expressions to represent complex computations concisely.
+The ability to combine simple expressions and statements into compound expressions and statements, making it possible to represent complex computations in a concise manner.
+
+\term{whitespace}
+Newlines, tab characters, and other spaces in a source program.
+Its purpose in the Java language is to separate tokens.
+
+\term{documentation}
+Comments that describe the technical operation of a class or method.
+
+\term{Javadoc}
+A tool that reads Java source code and generates documentation in HTML format.
 
 \end{description}
