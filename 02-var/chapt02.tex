@@ -367,6 +367,37 @@ To get a more accurate answer, we can use a different type of variable that can 
 We'll get to that in the next chapter.
 
 
+\section{The modulus operator}
+
+\index{modulus}
+\index{operator!modulus}
+
+The reason why integer division ``rounds down'' is that the hardware returns both the {\em quotient} and the {\em remainder}.
+In Java, you can get the remainder using the \textbf{modulus} operator:
+
+\begin{code}
+    int quotient = 7 / 3;   // division
+    int remainder = 7 % 3;  // modulus
+\end{code}
+
+The syntax is the same as with other operators.
+The first line (integer division) yields 2.
+The second line (spoken as ``7 mod 3'') yields 1.
+Thus, ``7 divided by 3'' is 2 with 1 left over.
+
+\index{divisible}
+\index{extract digits}
+
+Although the modulus operator is a percent sign ({\tt \%}), you can think of it as a division sign ($\div$) slightly rotated to the left.
+%The modulus operator works on both integers and integer expressions.
+%It always yields the remainder when the first operand is divided by the second.
+The remainder turns out to be surprisingly useful.
+For example, you can check whether one number is divisible by another: if {\tt x \% y} is zero, then {\tt x} is divisible by {\tt y}.
+You can also use modulus to extract digits from a number.
+For example, {\tt x \% 10} yields the rightmost digit of {\tt x}.
+Similarly, {\tt x \% 100} yields the last two digits.
+
+
 \section{Order of operations}
 
 \index{order of operations}
@@ -500,14 +531,6 @@ Good variable names communicate the intent of your program and how the data is o
 And good programs tend to avoid doing too much in one statement or method.
 In general, each line of code should be a single step of the algorithm.
 
-\index{comments!documentation}
-\index{documentation comments}
-
-Another important practice for making source code readable is writing good {\bf documentation}.
-In contrast to inline comments that begin with {\tt //}, documentation comments begin with {\tt /**} (two stars) and end with {\tt */} (one star).
-Anything in between these two tokens is part of the documentation.
-As a rule of thumb, you should document every class and every method.
-
 \begin{code}
 /**
  * Example program that demonstrates print vs println.
@@ -524,6 +547,14 @@ public class Goodbye {
 
 }
 \end{code}
+
+\index{comments!documentation}
+\index{documentation comments}
+
+Another important practice for making source code readable is writing good {\bf documentation}.
+In contrast to inline comments that begin with {\tt //}, documentation comments begin with {\tt /**} (two stars) and end with {\tt */} (one star).
+Anything in between these two tokens is part of the documentation.
+As a rule of thumb, you should document every class and every method.
 
 The above example has perhaps too many comments, since all the program does is print a message.
 But it illustrates the differences between inline and documentation comments:
