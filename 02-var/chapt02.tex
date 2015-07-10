@@ -526,7 +526,7 @@ In English, readers can tolerate most syntax errors, which is why we can read th
 Java is not so forgiving, and there are more syntax rules in Java than there are in English.
 If there is a single syntax error anywhere in your program, the compiler will display an error message and quit, and you will not be able to run your program.
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics[width=\textwidth]{syntax-error.png}
 \caption{A syntax error caused by a missing brace.}
 \end{figure}
@@ -593,6 +593,7 @@ public class Hello {
 
 Note that this program compiles and runs just fine.
 The problem is that the main method is not the program we intended.
-The meaning of the program (its semantics) is wrong, because it says goodbye instead of hello. In addition, world is not capitalized, and it ends with a period instead of an exclamation point.
+The meaning of the program (its semantics) is wrong, because it says goodbye instead of hello.
+In addition, world is not capitalized, and it ends with a period instead of an exclamation point.
 Identifying semantic errors can be tricky because it requires you to challenge your assumptions about the code.
 You will need to work backward by looking at the output of the program, and try to figure out what it is doing.

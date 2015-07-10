@@ -31,12 +31,13 @@ The standard edition of Java comes with {\em several thousand} classes, which ca
 To help keep things organized, classes are grouped into {\bf packages}.
 Just as each class is a separate file, each package is a separate folder.
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics[width=4in]{package.pdf}
 \caption{Elements of the Java language, from largest to smallest.}
 \end{figure}
 
-Two library classes we have seen thus far, \java{System} and \java{String}, belong to the \java{java.lang} package. According to the documentation, \java{java.lang} ``provides classes that are fundamental to the design of the Java programming language.''
+Two library classes we have seen thus far, \java{System} and \java{String}, belong to the \java{java.lang} package.
+According to the documentation, \java{java.lang} ``provides classes that are fundamental to the design of the Java programming language.''
 Note there is a major difference between the Java {\em language}, which deals with syntax and grammar, and the Java {\em library}, which provides the built-in classes.
 In fact, most of the Java library itself is written in Java!
 
@@ -71,7 +72,7 @@ Both \java{System} and \java{PrintStream} are written in Java, and later in the 
 For now, you should understand that \java{System.out} is an {\bf object} of type \java{PrintStream}.
 Because Java is an {\em object-oriented} language, much of the library is organized around objects that perform specific actions.
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics{system.pdf}
 \caption{\java{System.out.println} references the \java{out} variable of the \java{System} class,
 \\ which has the type \java{PrintStream}, which has a method called \java{println}.}
@@ -83,7 +84,8 @@ As with most software, Java programs run on top of an {\bf operating system} tha
 Common examples of operating systems include Android, iOS, Linux, Mac OS~X, and Windows.
 When starting Java programs, the operating system directs \java{System.out} to the screen.
 
-\java{System.out} can display the value of any type of variable. Indeed, you can even use \java{System.out} to print the value of \java{System.out}:
+\java{System.out} can display the value of any type of variable.
+Indeed, you can even use \java{System.out} to print the value of \java{System.out}:
 
 \begin{code}
 System.out.println(System.out);
@@ -189,7 +191,7 @@ You can find it in the Java library (see the link earlier in this chapter) or si
 The latter method is more useful in the long run, especially as versions of Java change.
 Either way, you should get something like this:
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics[width=\textwidth]{scanner.png}
 \caption{Screenshot of the documentation for \java{Scanner} on Oracle's website.}
 \end{figure}
@@ -238,7 +240,8 @@ You can create \java{double} variables and assign values to them using the same 
     double pi = 3.14159;
 \end{code}
 
-Although floating-point numbers are useful, they are a source of confusion because (1) there is an overlap between integers and doubles, and (2) computer hardware can only approximate real numbers. Let's discuss these issues in more detail.
+Although floating-point numbers are useful, they are a source of confusion because (1) there is an overlap between integers and doubles, and (2) computer hardware can only approximate real numbers.
+Let's discuss these issues in more detail.
 
 \subsection{Auto conversion}
 

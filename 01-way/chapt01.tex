@@ -70,7 +70,7 @@ For historical reasons, programming errors are called {\bf bugs}, and the proces
 In the old days, computer scientists had to deal with real bugs flying into their systems.
 You probably won't have that problem, but you will need to think creatively when unexpected errors happen.
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics[height=2.2in]{firstbug.jpg}
 \caption{The first computer bug, taped to Grace Hopper's log book in 1947.
 \\ She discovered the moth in an electromagnetic relay of the Mark II.}
@@ -117,7 +117,7 @@ An {\bf interpreter} reads a high-level program and executes it, meaning that it
 It processes the program a little at a time, alternately reading lines and performing computations on the fly.
 % Figure 1.1 shows the structure of an interpreter.
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics{interpreter.pdf}
 \caption{How interpreted languages like Python and Ruby are executed.}
 \end{figure}
@@ -142,7 +142,7 @@ But it is also portable, like a high-level language.
 Thus it is possible to compile a Java program on one machine, transfer the byte code to another machine, and then execute (interpret) the byte code on the other machine.
 This ability is an advantage of Java over many other high-level languages.
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics{compiler.pdf}
 \caption{The process of editing, compiling, and running a Java program.}
 \end{figure}
@@ -259,7 +259,7 @@ One of the most distinctive features of DrJava is the Interactions Pane at the b
 It offers both beginning students and more experienced programmers the ability to try out code quickly, without having to write a class definition and save/compile/run the program.
 Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for more details.
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics[width=\textwidth]{drjava-hello.png}
 \caption{Screenshot of DrJava editing the hello world program.}
 \end{figure}
@@ -272,15 +272,15 @@ Step-by-step instructions for installing the JDK and configuring DrJava are avai
 
 One of the most powerful and useful skills you can learn as a computer scientist is how to use the {\bf command-line} or ``Terminal'' for short.
 This interface gives you direct access to the operating system, allowing you to run programs, manage files and directories, and monitor system resources.
-
 Many advanced tools, both for software development and general purpose computing, are available only at the command-line.
 Taking time to learn this efficient and elegant way of interacting with your computer will make you a more productive user.
 
 There are many good tutorials online for learning the command-line for your specific operating system; just search the web or YouTube for ``command line tutorial.''
 To get started, you only need to know four commands: how to change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 \includegraphics[width=4.5in]{terminal.png}
+\caption{Compiling and running {\tt Hello.java} from the command-line.}
 \end{figure}
 
 In this example, the {\tt Hello.java} source file is stored in the {\tt Desktop} directory.
@@ -293,78 +293,13 @@ By the way, DrJava runs these same two commands in the background.
 The only difference is that DrJava intercepts the output and displays it in the Interactions Pane.
 
 
-\section{Working through examples}
-
-It is a good idea to read this book in front of a computer so you can try out the examples as you go.
-You can run many of the examples directly in DrJava's Interactions Pane, but if you put the code in a source file, it will be easier to try out variations.
-
-Whenever you are experimenting with a new feature, you should also try to make mistakes.
-For example, in the hello world program, what happens if you leave out one of the quotation marks?
-What if you leave out both?
-What if you spell \java{println} wrong?
-This kind of experiment helps you remember what you read.
-It also helps with debugging, because you get to know what the error messages mean.
-It is better to make mistakes now and on purpose than later on and accidentally.
-
-\index{experimental debugging}
-\index{debugging!experimental}
-
-\index{Holmes, Sherlock}
-\index{Doyle, Arthur Conan}
-
-Debugging is like an experimental science.
-Once you have an idea about what is going wrong, you modify your program and try again.
-If your hypothesis was correct, then you can predict the result of the modification, and you take a step closer to a working program.
-If your hypothesis was wrong, you have to come up with a new one.
-As Sherlock Holmes pointed out, ``When you have eliminated the impossible, whatever remains, however improbable, must be the truth.''
-(A.~Conan Doyle, {\em The Sign of Four}.)
-
-Programming and debugging should go hand in hand.
-Don't just write a bunch of code and then perform trial and error debugging until it all works.
-Instead, start with a program that does {\em something} and make small modifications, debugging them as you go, until the program does what you want.
-That way you will always have a working program, and it will be easier to isolate errors.
-
-\index{Linux}
-\index{Torvalds, Linux}
-\index{Greenfield, Larry}
-
-A great example of this principle is the Linux operating system, which contains millions of lines of code.
-It started out as a simple program Linus Torvalds used to explore the Intel 80386 chip.
-According to Larry Greenfield, ``One of Linus's earlier projects was a program that would switch between printing AAAA and BBBB.
-This later evolved to Linux.'' ({\em The Linux Users' Guide})
-
-%Later chapters will make more suggestions about debugging and other programming practices.
-
-Finally, programming sometimes brings out strong emotions.
-If you are struggling with a difficult bug, you might feel angry, despondent, or embarrassed.
-Remember that you are not alone, and most if not all programmers have had similar experiences.
-Don't hesitate to reach out to a friend and ask questions!
-
-%\index{emotional debugging}
-%\index{debugging!emotional response}
-
-%There is evidence that people naturally respond to computers as if they were people.
-%When they work well, we think of them as teammates, and when they are obstinate or rude, we respond to them the same way we respond to rude, obstinate people.
-%(Reeves and Nass, {\it The Media Equation: How People Treat Computers, Television, and New Media Like Real People and Places})
-
-%Preparing for these reactions might help you deal with them.
-%One approach is to think of the computer as an employee with certain strengths, like speed and precision, and particular weaknesses, like lack of empathy and inability to grasp the big picture.
-
-%Your job is to be a good manager: find ways to take advantage of the strengths and mitigate the weaknesses.
-%And find ways to use your emotions to engage with the problem, without letting your reactions interfere with your ability to work effectively.
-
-%Learning to debug can be frustrating, but it is a valuable skill that is useful for many activities beyond programming.
-%At the end of each chapter there is a debugging section, like this one, with my thoughts about debugging.
-%I hope they help!
-
-
 \section{More printing}
 
 You can put as many statements as you want in \java{main}.
 For example, to print more than one line:
 
 \begin{code}
-public class Hello2 {
+public class Hello {
 
     public static void main(String[] args) {
         // generate some simple output
@@ -442,7 +377,7 @@ It is also possible to print multiple lines of output in just one line of code.
 You simply need to tell java where to place the newline characters.
 
 \begin{code}
-public class Hello3 {
+public class Hello {
 
     public static void main(String[] args) {
         System.out.print("Hello!\nHow are you doing?\n");
@@ -465,7 +400,7 @@ In a sense, the backslash character allows you to ``escape'' the string's litera
 Notice there is no space between \java{\\n} and \java{How} in the previous example.
 If you add a space there, there will be a space at the beginning of the second line.
 
-\begin{table}[h!]
+\begin{table}[!h]
 \begin{tabular}{|c|c|}
 \hline
 \java{\\n} & newline \\
@@ -492,3 +427,68 @@ The resulting output is:
 \begin{stdout}
     She said "Hello!" to me.
 \end{stdout}
+
+
+\section{Working through examples}
+
+It is a good idea to read this book in front of a computer so you can try out the examples as you go.
+You can run many of the examples directly in DrJava's Interactions Pane, but if you put the code in a source file, it will be easier to try out variations.
+
+Whenever you are experimenting with a new feature, you should also try to make mistakes.
+For example, in the hello world program, what happens if you leave out one of the quotation marks?
+What if you leave out both?
+What if you spell \java{println} wrong?
+This kind of experiment helps you remember what you read.
+It also helps with debugging, because you get to know what the error messages mean.
+It is better to make mistakes now and on purpose than later on and accidentally.
+
+\index{experimental debugging}
+\index{debugging!experimental}
+
+\index{Holmes, Sherlock}
+\index{Doyle, Arthur Conan}
+
+Debugging is like an experimental science.
+Once you have an idea about what is going wrong, you modify your program and try again.
+If your hypothesis was correct, then you can predict the result of the modification, and you take a step closer to a working program.
+If your hypothesis was wrong, you have to come up with a new one.
+As Sherlock Holmes pointed out, ``When you have eliminated the impossible, whatever remains, however improbable, must be the truth.''
+(A.~Conan Doyle, {\em The Sign of Four}.)
+
+Programming and debugging should go hand in hand.
+Don't just write a bunch of code and then perform trial and error debugging until it all works.
+Instead, start with a program that does {\em something} and make small modifications, debugging them as you go, until the program does what you want.
+That way you will always have a working program, and it will be easier to isolate errors.
+
+\index{Linux}
+\index{Torvalds, Linux}
+\index{Greenfield, Larry}
+
+A great example of this principle is the Linux operating system, which contains millions of lines of code.
+It started out as a simple program Linus Torvalds used to explore the Intel 80386 chip.
+According to Larry Greenfield, ``One of Linus's earlier projects was a program that would switch between printing AAAA and BBBB.
+This later evolved to Linux.'' ({\em The Linux Users' Guide})
+
+%Later chapters will make more suggestions about debugging and other programming practices.
+
+Finally, programming sometimes brings out strong emotions.
+If you are struggling with a difficult bug, you might feel angry, despondent, or embarrassed.
+Remember that you are not alone, and most if not all programmers have had similar experiences.
+Don't hesitate to reach out to a friend and ask questions!
+
+%\index{emotional debugging}
+%\index{debugging!emotional response}
+
+%There is evidence that people naturally respond to computers as if they were people.
+%When they work well, we think of them as teammates, and when they are obstinate or rude, we respond to them the same way we respond to rude, obstinate people.
+%(Reeves and Nass, {\it The Media Equation: How People Treat Computers, Television, and New Media Like Real People and Places})
+
+%Preparing for these reactions might help you deal with them.
+%One approach is to think of the computer as an employee with certain strengths, like speed and precision, and particular weaknesses, like lack of empathy and inability to grasp the big picture.
+
+%Your job is to be a good manager: find ways to take advantage of the strengths and mitigate the weaknesses.
+%And find ways to use your emotions to engage with the problem, without letting your reactions interfere with your ability to work effectively.
+
+%Learning to debug can be frustrating, but it is a valuable skill that is useful for many activities beyond programming.
+%At the end of each chapter there is a debugging section, like this one, with my thoughts about debugging.
+%I hope they help!
