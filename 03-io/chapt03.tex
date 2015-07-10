@@ -5,6 +5,8 @@ This 3-page article summarizes many of the problem-solving techniques you will d
 Everyone interested in learning computer science beyond programming should read it.
 She defines the field this way:
 
+\index{computer science}
+
 \begin{quote}
 {\bf ``Computer science is the study of computation---what can be computed and how to compute it.''}
 \end{quote}
@@ -238,7 +240,6 @@ You can create \java{double} variables and assign values to them using the same 
 
 Although floating-point numbers are useful, they are a source of confusion because (1) there is an overlap between integers and doubles, and (2) computer hardware can only approximate real numbers. Let's discuss these issues in more detail.
 
-
 \subsection{Auto conversion}
 
 %If you have the value {\tt 1}, is that an integer, a floating-point number, or both?
@@ -378,3 +379,107 @@ TODO
 \section{Testing via the command line}
 
 TODO
+
+
+\section{Formal languages}
+
+\index{natural language}
+\index{language!natural}
+
+Learning a programming language is very different from learning a {\bf natural language} such as English, Spanish, French, or German.
+The languages that people speak evolved naturally over time.
+They were not designed by people, although we try to impose order on them for practical reasons.
+
+\index{formal language}
+\index{language!formal}
+
+In contrast, {\bf formal languages} are designed by people for specific applications.
+For example, the notation that mathematicians use is a formal language that is particularly good at denoting relationships among numbers and symbols.
+Chemists use a formal language to represent the chemical structure of molecules.
+And most importantly:
+
+\index{programming language}
+\index{language!programming}
+
+\begin{quote}
+{\bf Programming languages are formal languages that have been designed to express computations.}
+\end{quote}
+
+\index{syntax}
+\index{semantics}
+
+Formal languages have strict rules about both the {\bf syntax} (structure) and the {\bf semantics} (meaning) of statements.
+For example, $3 + 3 = 6$ is a syntactically correct mathematical statement, but $3\ + = 3\ \$\ 6$ is not.
+$1 + 2 = 4$ uses correct syntax, but is semantically incorrect.
+$H_2O$ is a syntactically correct chemical formula, but $_2Zz$ is not.
+
+\subsection{Tokens and grammar}
+
+\index{token}
+
+Syntax rules come in two flavors, pertaining to tokens and grammar.
+{\bf Tokens} are the basic elements of the language, like words, numbers, and chemical elements.
+One of the problems with $3\ + = 3\ \$\ 6$ is that $\$$ is not a legal token in mathematics.
+Similarly, $_2Zz$ is not legal because there is no element with the abbreviation $Zz$.
+
+\index{grammar}
+
+The second type of syntax rule pertains to the {\bf grammar} of the language, or the way that individual tokens can be arranged.
+The statement $3\ + = 3$ is structurally illegal, even though $+$ and $=$ are legal tokens, because you can't have one right after the other.
+Similarly, in a chemical formula the subscript comes after the element name, not before.
+
+\index{parse}
+
+When you read a sentence in English or a statement in a formal language, you have to figure out the structure of the sentence (although in a natural language you do this unconsciously).
+This process is called {\bf parsing}.
+For example, when you hear the statement ``the penny dropped,'' you understand that the penny is the subject and dropped is the predicate.
+After you have parsed the statement, you can begin to figure out what it means.
+%Assuming that you know what a penny is and what it means to drop, you will understand the general implication of this statement.
+
+Although formal and natural languages have features in common---tokens, grammar, and meaning---there are some differences.
+
+\begin{description}
+
+\term{ambiguity}
+Natural languages are full of ambiguity, which people deal with by using contextual clues and other information.
+Formal languages are designed to be nearly or completely unambiguous, which means that any statement has exactly one meaning, regardless of context.
+
+\term{redundancy}
+In order to make up for ambiguity and reduce misunderstandings, natural languages employ lots of redundancy.
+As a result, they are often verbose.
+Formal languages are less redundant and more concise.
+
+\term{literalness}
+Natural languages are full of idiom and metaphor.
+When someone says ``the penny dropped'' there is no penny and nothing dropping.
+This idiom means that someone finally realized something after a period of confusion.
+In contrast, formal languages mean exactly what they say.
+
+\end{description}
+
+\subsection{Reading source code}
+
+People who grow up speaking a natural language---that is, everyone---often have a hard time adjusting to formal languages.
+In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
+
+\begin{description}
+
+\term{poetry}
+Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
+Ambiguity is not only common but often deliberate.
+
+\term{prose}
+The literal meaning of words is more important, and the structure contributes more meaning.
+Prose is more amenable to analysis than poetry but still often ambiguous.
+
+\term{program}
+The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
+
+\end{description}
+
+Here are some suggestions for reading programs (and other formal languages).
+First, remember that formal languages are much more dense than natural languages, so it takes longer to read them.
+Second, the structure is very important, so it is not always a good idea to read from top to bottom, left to right.
+Over time you will learn to parse the program in your head, identifying the tokens and interpreting the structure.
+Finally, the details matter.
+Small errors in spelling and punctuation, which you can get away with in natural languages, can make a big difference in a formal language.

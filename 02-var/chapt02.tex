@@ -4,143 +4,6 @@ This chapter is about storing values in computer memory and doing simple arithme
 More importantly, it's about how to compose statements using basic building blocks such as variables, keywords, operators, and expressions.
 
 
-\section{More printing}
-
-You can put as many statements as you want in \java{main}.
-For example, to print more than one line:
-
-\begin{code}
-public class Hello {
-
-    public static void main(String[] args) {
-        // generate some simple output
-        System.out.println("Hello, World!");  // print one line
-        System.out.println("How are you?");   // print another
-    }
-
-}
-\end{code}
-
-As this program demonstrates, you can place comments at the end of a line as well as on lines all by themselves.
-
-\index{String}
-\index{type!String}
-
-Phrases that appear in quotation marks are called {\bf strings} because they are a sequence of characters.
-Strings can contain any combination of letters, numbers, punctuation marks, symbols, and non-printable characters (including tabs and carriage returns).
-
-\index{newline}
-\index{print}
-\index{statement!print}
-
-The name \java{println} is short for ``print line.''
-It adds a special character at the end, called a {\bf newline}, that moves the cursor to the next line of the display.
-The next time \java{println} is invoked, the new text appears on the next line.
-To display the output from multiple print statements all on one line, use \java{print}:
-
-\begin{code}
-public class Goodbye {
-
-    public static void main(String[] args) {
-        System.out.print("Goodbye, ");
-        System.out.println("cruel world");
-    }
-
-}
-\end{code}
-
-The output appears on a single line as {\tt Goodbye, cruel world}.
-Note there is a space between the word ``Goodbye'' and the second quotation mark.
-This space appears in the output, so it affects the {\em behavior} of the program.
-
-\subsection{Code formatting}
-
-Spaces that appear outside of quotation marks generally do not affect the behavior of the program.
-For example, we could have written:
-
-\begin{code}
-public class Goodbye {
-public static void main(String[] args) {
-System.out.print("Goodbye, ");
-System.out.println("cruel world");
-}
-}
-\end{code}
-
-This program would compile and run just as well as the original.
-The carriage returns at the end of each line (i.e., the newlines) do not affect the program's behavior either.
-So we could have also written:
-
-\begin{code}
-public class Goodbye { public static void main(String[] args) {
-System.out.print("Goodbye, "); System.out.println
-("cruel world");}}
-\end{code}
-
-It still works, but the program is getting harder and harder to read.
-Newlines and spaces are important for organizing your program visually, making it easier to understand the program and locate errors when they occur.
-Formatting your code well does not take much effort, and it pays huge dividends.
-We will discuss readability and style guidelines in the next chapter.
-
-\subsection{Escape sequences}
-
-It is also possible to print multiple lines of output in just one line of code.
-You simply need to tell java where to place the newline characters.
-
-\begin{code}
-public class Hello2 {
-
-    public static void main(String[] args) {
-        System.out.print("Hello!\nHow are you doing?\n");
-    }
-
-}
-
-\end{code}
-
-The output is two lines, each ending with the (invisible) newline character:
-
-\begin{stdout}
-Hello!
-How are you doing?
-\end{stdout}
-
-\index{escape sequence}
-
-The code \java{\\n} is an example of an {\bf escape sequence}, or a sequence of code that represents a special character when used inside a string.
-In a sense, the backslash character allows you to ``escape'' the string's literal interpretation.
-Notice there is no space between \java{\\n} and \java{How} in the previous example.
-If you add a space there, there will be a space at the beginning of the second line.
-
-\begin{table}[h!]
-\begin{tabular}{|c|c|}
-\hline
-\java{\\n} & newline \\
-\hline
-\java{\\t} & tab \\
-\hline
-\java{\\"} & double quote \\
-\hline
-\java{\\\\} & backslash \\
-\hline
-\end{tabular}
-\caption{Common escape sequences}
-\end{table}
-
-Another common use of escape sequences is to have quote marks inside of strings.
-Since double quotes indicate the beginning and end of strings, you need to escape them.
-
-\begin{code}
-    System.out.println("She said \"Hello!\" to me.");
-\end{code}
-
-The resulting output is:
-
-\begin{stdout}
-    She said "Hello!" to me.
-\end{stdout}
-
-
 \section{Variables}
 
 \index{variable}
@@ -638,3 +501,98 @@ For example, the {\bf Javadoc} tool that comes with the JDK generates web pages 
 
 You can run the Javadoc tool directly from DrJava by pressing the corresponding button the toolbar.
 Given the prevalence of this tool, people sometimes refer to documentation as ``Javadoc comments.''
+
+
+\section{Reading error messages}
+
+\index{error!message}
+
+As you begin writing your own programs, you will encounter various error messages.
+Three kinds of errors can occur in a program: syntax errors, runtime errors, and semantic errors.
+It is useful to distinguish between them in order to track them down more quickly.
+Regardless of what type of error occurs, always remember to {\em read and think about the error messages carefully}.
+They will usually point you in the right direction to fix your program.
+
+\subsection{Syntax errors}
+
+\index{syntax error}
+\index{error!syntax}
+
+The compiler can only translate a program if the syntax is correct; otherwise, the compilation fails and displays an error message.
+For example, parentheses have to come in matching pairs.
+So (1 + 2) is legal, but 8) is a {\bf syntax error}.
+
+In English, readers can tolerate most syntax errors, which is why we can read the poetry of e.\ e.\ cummings without spewing error messages.
+Java is not so forgiving, and there are more syntax rules in Java than there are in English.
+If there is a single syntax error anywhere in your program, the compiler will display an error message and quit, and you will not be able to run your program.
+
+\begin{figure}[h!]
+\includegraphics[width=\textwidth]{syntax-error.png}
+\caption{A syntax error caused by a missing brace.}
+\end{figure}
+
+To make matters worse, the error messages you get from the compiler are often not very helpful.
+For example, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
+The compiler also reports that the problem was found on line 6, which in this case is not at fault.
+Since line 8 was deleted, the compiler had no other choice.
+
+During the first few weeks of your programming career, you will probably spend a lot of time tracking down syntax errors.
+But as you gain experience, you will make fewer errors and find them more quickly.
+
+\subsection{Runtime errors}
+
+\index{runtime error}
+\index{error!runtime}
+\index{type-safe}
+\index{language!type-safe}
+
+The second type of error is a runtime error, so called because it does not appear until after the program has started running.
+In Java, these errors occur when the interpreter is executing the byte code and something goes wrong.
+Java is designed to be a {\bf type-safe} language, which means that the compiler can detect many potential errors cased by common programming mistakes.
+Runtime errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter them.
+
+\index{exception}
+
+These errors are also called {\bf exceptions} because they usually indicate that something exceptional (and bad) has happened.
+In most environments they appear as windows or dialog boxes that contain information about what happened and what the program was doing when it happened.
+For example, if you accidentally divide by zero you will get an \java{ArithmeticException}:
+
+\begin{small}
+\begin{stdout}
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+    at Hello.main(Hello.java:5)
+\end{stdout}
+\end{small}
+
+This information is useful for debugging.
+The first line gives a brief description of the error (/ by zero).
+The subsequent lines report the class and method names (Hello.main), along with the file names and line numbers of where the error occurred (Hello.java:5).
+Keep in mind that the exact line where the program crashed may not be the line that needs to be fixed.
+
+\subsection{Semantic errors}
+
+\index{logic error}
+\index{error!logic}
+
+The third type of error is the semantic or {\bf logic error}.
+If there is an error in your program's logic, it will compile and run successfully in the sense that the computer will not generate any error messages.
+But it will not do the right thing.
+It will do something else.
+Specifically, it will do what you told it to do.
+Here is an example of a semantic error in the hello world program:
+
+\begin{code}
+public class Hello {
+
+    public static void main(String[] args) {
+        System.out.println("Goodbye, world.");
+    }
+
+}
+\end{code}
+
+Note that this program compiles and runs just fine.
+The problem is that the main method is not the program we intended.
+The meaning of the program (its semantics) is wrong, because it says goodbye instead of hello. In addition, world is not capitalized, and it ends with a period instead of an exclamation point.
+Identifying semantic errors can be tricky because it requires you to challenge your assumptions about the code.
+You will need to work backward by looking at the output of the program, and try to figure out what it is doing.
