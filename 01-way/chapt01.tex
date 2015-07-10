@@ -106,8 +106,9 @@ First, it is {\em much} easier to program in a high-level language.
 Programs take less time to write, are shorter and easier to read, and are more likely to be correct.
 Second, high-level languages are {\bf portable}, meaning that they can run on different kinds of computers with few or no modifications.
 Low-level programs can only run on one kind of computer, and have to be rewritten to run on another.
+
 Due to the advantages, almost all programs are written in high-level languages.
-Low-level languages are only used for a few special applications (e.g., device drivers).
+Low-level languages are only used for a few special applications, such as device drivers, that need to interact with hardware directly.
 
 \index{interpreter}
 
@@ -116,16 +117,17 @@ An {\bf interpreter} reads a high-level program and executes it, meaning that it
 It processes the program a little at a time, alternately reading lines and performing computations on the fly.
 % Figure 1.1 shows the structure of an interpreter.
 
-\begin{center}
+\begin{figure}[h!]
 \includegraphics{interpreter.pdf}
-\end{center}
+\caption{How interpreted languages like Python and Ruby are executed.}
+\end{figure}
 
 \index{compiler}
 \index{source code}
 \index{object code}
 \index{executable}
 
-A {\bf compiler} reads the entire program and translates it completely before the program starts running.
+In contrast, a {\bf compiler} reads the entire program and translates it completely before the program starts running.
 In this context, the high-level program is called the {\bf source code}, and the translated program is called the {\bf object code} or the {\bf executable}.
 Once a program is compiled, you can execute it repeatedly without further translation.
 As a result, compiled programs often run faster than interpreted programs.
@@ -140,9 +142,10 @@ But it is also portable, like a high-level language.
 Thus it is possible to compile a Java program on one machine, transfer the byte code to another machine, and then execute (interpret) the byte code on the other machine.
 This ability is an advantage of Java over many other high-level languages.
 
-\begin{center}
+\begin{figure}[h!]
 \includegraphics{compiler.pdf}
-\end{center}
+\caption{The process of editing, compiling, and running a Java program.}
+\end{figure}
 
 Although this process may seem complicated, in most program development environments these steps are automated for you.
 Usually you will only have to write a program and press a button or type a single command to compile and run it.
@@ -254,7 +257,7 @@ Small errors in spelling and punctuation, which you can get away with in natural
 
 
 \section{The hello world program}
-\label{hello}
+\label{sec:hello}
 
 \index{hello world}
 
@@ -276,11 +279,11 @@ public class Hello {
 \index{public}
 \index{static}
 
-Unfortunately for Java, even this simple example requires language features that are difficult to explain to beginners.
+Unfortunately in Java, even this simple example requires language features that are difficult to explain to beginners.
 But it provides a preview of topics that we will see in detail later on.
 The word \java{public} means the code can be accessed from other source files.
 The word \java{static} means that memory is allocated for the program in advance.
-We will discuss \java{void}, \java{String}, and \java{args} in the next chapter.
+We will discuss \java{void}, \java{String}, and \java{args} in a few more chapters.
 For now, let's focus on the overall structure.
 
 \index{class!definition}
@@ -306,21 +309,26 @@ public class CLASSNAME {
 
 Here {\tt CLASSNAME} indicates the name chosen by the programmer.
 Java requires the class name to match the source file name.
-In the hello world example, the file name must be Hello.java because the class name is \java{Hello}.
+In the hello world example, the file name must be {\tt Hello.java} because the class name is \java{Hello}.
 
 \index{statement}
 \index{main}
 
 Classes define a program's methods, or named sequences of {\bf statements}.
-The \java{Hello} class has only one method.
-The name \java{main} is special; it marks the place in the class where execution begins.
+The \java{Hello} class has only one method:
+
+\begin{code}
+    public static void main(String[] args)
+\end{code}
+
+The name and format of \java{main} is special; it marks the place in the class where execution begins.
 When the program runs, it starts at the first statement in \java{main} and ends when it finishes the last statement.
 
 \index{braces}
 \index{squiggly braces}
 
 Java uses squiggly braces (\{ and \}) to group things together.
-In Hello.java, the outermost squiggly braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
+In {\tt Hello.java}, the outermost squiggly braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
 
 \index{println}
 \index{statement!print}
@@ -361,6 +369,32 @@ Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for
 \end{figure}
 
 Step-by-step instructions for installing the JDK and configuring DrJava are available on this book's website: \url{http://thinkjava.org/}
+
+\subsection{The command-line interface}
+
+\index{command-line}
+
+One of the most powerful and useful skills you can learn as a computer scientist is how to use the {\bf command-line} or ``Terminal'' for short.
+This interface gives you direct access to the operating system, allowing you to run programs, manage files and directories, and monitor system resources.
+
+Many advanced tools, both for software development and general purpose computing, are available only at the command-line.
+Taking time to learn this efficient and elegant way of interacting with your computer will make you a more productive user.
+
+There are many good tutorials online for learning the command-line for your specific operating system; just search the web or YouTube for ``command line tutorial.''
+To get started, you only need to know four commands: how to change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
+
+\begin{figure}[h!]
+\includegraphics[width=4.5in]{terminal.png}
+\end{figure}
+
+In this example, the {\tt Hello.java} source file is stored in the {\tt Desktop} directory.
+After changing to that location and listing the files, we use the {\tt javac} command to compile {\tt Hello.java}.
+Running {\tt ls} again, we see that the compiler generated a new file {\tt Hello.class} (the byte code).
+We then run the program using the {\tt java} command, and it displays the output on the following line.
+
+Note that the {\tt javac} command requires a source file name, whereas the {\tt java} command requires only the class name.
+By the way, DrJava runs these same two commands in the background.
+The only difference is that DrJava intercepts the output and displays it in the Interactions Pane.
 
 
 \section{Reading error messages}

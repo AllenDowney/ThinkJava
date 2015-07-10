@@ -26,14 +26,15 @@ As this program demonstrates, you can place comments at the end of a line as wel
 \index{String}
 \index{type!String}
 
-Phrases that appear in quotation marks are called {\bf strings} because they are made up of a sequence of characters.
+Phrases that appear in quotation marks are called {\bf strings} because they are a sequence of characters.
 Strings can contain any combination of letters, numbers, punctuation marks, symbols, and non-printable characters (including tabs and carriage returns).
 
 \index{newline}
 \index{print}
 \index{statement!print}
 
-The name \java{println} is short for ``print line.'' It adds a special character at the end, called a {\bf newline}, that moves the cursor to the next line of the display.
+The name \java{println} is short for ``print line.''
+It adds a special character at the end, called a {\bf newline}, that moves the cursor to the next line of the display.
 The next time \java{println} is invoked, the new text appears on the next line.
 To display the output from multiple print statements all on one line, use \java{print}:
 
@@ -48,9 +49,12 @@ public class Goodbye {
 }
 \end{code}
 
-The output for this example appears on a single line as {\tt Goodbye, cruel world}.
+The output appears on a single line as {\tt Goodbye, cruel world}.
 Note there is a space between the word ``Goodbye'' and the second quotation mark.
 This space appears in the output, so it affects the {\em behavior} of the program.
+
+\subsection{Code formatting}
+
 Spaces that appear outside of quotation marks generally do not affect the behavior of the program.
 For example, we could have written:
 
@@ -74,9 +78,67 @@ System.out.print("Goodbye, "); System.out.println
 \end{code}
 
 It still works, but the program is getting harder and harder to read.
-Newlines and spaces are important for organizing your program visually, making it easier to understand the program and locate errors.
+Newlines and spaces are important for organizing your program visually, making it easier to understand the program and locate errors when they occur.
 Formatting your code well does not take much effort, and it pays huge dividends.
-We will discuss readability and style guidelines at the end of the chapter.
+We will discuss readability and style guidelines in the next chapter.
+
+\subsection{Escape sequences}
+
+It is also possible to print multiple lines of output in just one line of code.
+You simply need to tell java where to place the newline characters.
+
+\begin{code}
+public class Hello2 {
+
+    public static void main(String[] args) {
+        System.out.print("Hello!\nHow are you doing?\n");
+    }
+
+}
+
+\end{code}
+
+The output is two lines, each ending with the (invisible) newline character:
+
+\begin{stdout}
+Hello!
+How are you doing?
+\end{stdout}
+
+\index{escape sequence}
+
+The code \java{\\n} is an example of an {\bf escape sequence}, or a sequence of code that represents a special character when used inside a string.
+In a sense, the backslash character allows you to ``escape'' the string's literal interpretation.
+Notice there is no space between \java{\\n} and \java{How} in the previous example.
+If you add a space there, there will be a space at the beginning of the second line.
+
+\begin{table}[h!]
+\begin{tabular}{|c|c|}
+\hline
+\java{\\n} & newline \\
+\hline
+\java{\\t} & tab \\
+\hline
+\java{\\"} & double quote \\
+\hline
+\java{\\\\} & backslash \\
+\hline
+\end{tabular}
+\caption{Common escape sequences}
+\end{table}
+
+Another common use of escape sequences is to have quote marks inside of strings.
+Since double quotes indicate the beginning and end of strings, you need to escape them.
+
+\begin{code}
+    System.out.println("She said \"Hello!\" to me.");
+\end{code}
+
+The resulting output is:
+
+\begin{stdout}
+    She said "Hello!" to me.
+\end{stdout}
 
 
 \section{Variables}
@@ -373,7 +435,7 @@ We'll get to that in the next chapter.
 \index{operator!modulus}
 
 The reason why integer division ``rounds down'' is that the hardware returns both the {\em quotient} and the {\em remainder}.
-In Java, you can get the remainder using the \textbf{modulus} operator:
+In Java, you can get the remainder using the {\bf modulus} operator:
 
 \begin{code}
     int quotient = 7 / 3;   // division
@@ -402,7 +464,6 @@ Similarly, {\tt x \% 100} yields the last two digits.
 
 \index{order of operations}
 \index{precedence}
-\index{PEMDAS}
 
 When more than one operator appears in an expression, the order of evaluation depends on the rules of {\bf precedence}.
 For arithmetic operators, Java follows mathematical conventions:

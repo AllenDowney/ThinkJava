@@ -118,7 +118,7 @@ Instead, it provides other classes that make use of \java{System.in} for you.
 \index{byte}
 
 From the operating system's point of view, data from the keyboard arrives in a series of hardware control signals.
-The operating system translates these signals into a stream of \textbf{bytes} (small integers), which in turn need to be translated into characters.
+The operating system translates these signals into a stream of {\bf bytes} (small integers), which in turn need to be translated into characters.
 \java{System.in} provides the means for reading one byte of input at a time, which is hardly useful for programs that would rather read in an entire word or line of input.
 
 \index{class!utility}
@@ -368,32 +368,6 @@ System.out.printf("The value is %.3f, okay?\n", value);
 \end{code}
 
 TODO
-
-
-\section{Escape sequences}
-
-\begin{table}[h!]
-\begin{tabular}{|c|c|}
-\hline
-\java{\\n} & newline \\
-\hline
-\java{\\t} & tab \\
-\hline
-\java{\\"} & double quote \\
-\hline
-\java{\\\\} & backslash \\
-\hline
-\end{tabular}
-\caption{Common escape sequences}
-\end{table}
-
-\begin{code}
-    System.out.println("She said "Hello!" to me.");
-\end{code}
-
-\begin{code}
-    System.out.println("She said \"Hello!\" to me.");
-\end{code}
 
 
 \section{Putting it all together}
