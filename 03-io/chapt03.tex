@@ -17,7 +17,7 @@ This chapter will show you how to read input from the keyboard, use that input t
 We will also look at some technical details about how operating systems work.
 
 
-\section{Java class library}
+\section{The Java class library}
 
 \index{library}
 
@@ -29,14 +29,16 @@ You can browse this library on Oracle's website:
 
 The standard edition of Java comes with {\em several thousand} classes, which can be both exciting and intimidating.
 To help keep things organized, classes are grouped into {\bf packages}.
-Just as each class is a separate file, each package is a separate folder.
+Just as each \java{class} is a separate file, each \java{package} is a separate folder.
+We have now seen all major organizational units of Java code.
+As a review from the previous two chapters:
 
 \begin{figure}[!h]
 \includegraphics[width=4in]{package.pdf}
 \caption{Elements of the Java language, from largest to smallest.}
 \end{figure}
 
-Two library classes we have seen thus far, \java{System} and \java{String}, belong to the \java{java.lang} package.
+Two library classes we have used thus far, \java{System} and \java{String}, belong to the \java{java.lang} package.
 According to the documentation, \java{java.lang} ``provides classes that are fundamental to the design of the Java programming language.''
 Note there is a major difference between the Java {\em language}, which deals with syntax and grammar, and the Java {\em library}, which provides the built-in classes.
 In fact, most of the Java library itself is written in Java!
@@ -44,7 +46,7 @@ In fact, most of the Java library itself is written in Java!
 \index{import}
 \index{statement!import}
 
-In order to use a class defined in another package (and in another folder), you have to {\bf import} it first:
+In order to use a class defined in another package (and in another folder), you have to {\bf import} it first.
 
 \begin{code}
 import java.io.File;
@@ -53,14 +55,13 @@ import java.util.Date;
 import java.util.Scanner;
 \end{code}
 
-All \java{import} statements appear at the beginning of the source file, above the class definition.
-It's not uncommon for Java programs to have dozens of import statements.
+All \java{import} statements appear at the top of the source file, above the class definition.
+It's not uncommon for Java programs to have many import statements.
 Because they are so fundamental, all classes in \java{java.lang} are imported automatically.
 That is why we haven't needed the \java{import} statement until now.
 
-
-\section{The System class}
-\label{system}
+\subsection{The System class}
+\label{sec:system}
 
 \index{System class}
 \index{class!System}
@@ -69,7 +70,7 @@ That is why we haven't needed the \java{import} statement until now.
 When you call \java{System.out.println}, you are referring to the \java{out} variable declared in the \java{System} class.
 The \java{out} variable's type is \java{PrintStream}, which provides methods for ``printing'' data.
 Both \java{System} and \java{PrintStream} are written in Java, and later in the book we'll examine their source code.
-For now, you should understand that \java{System.out} is an {\bf object} of type \java{PrintStream}.
+For now, you should understand that \java{System.out} is a \java{PrintStream} {\bf object}.
 Because Java is an {\em object-oriented} language, much of the library is organized around objects that perform specific actions.
 
 \begin{figure}[!h]
@@ -112,13 +113,14 @@ The \java{System} class is a platform-independent abstraction of the operating s
 The operating system itself is a layer of abstraction on top of computer hardware.
 
 There is also an object named \java{System.in} that makes it possible to get input from the keyboard.
-As with \java{System.out}, the exact type of keyboard (or touch screen) does not matter to the programmer.
+As with \java{System.out}, the exact type of keyboard (or even touch screen) does not matter to the programmer.
 Unfortunately, Java does not make it easy to use \java{System.in} directly.
 Instead, it provides other classes that make use of \java{System.in} for you.
 
+\subsection{The Scanner class}
 
-\section{The Scanner class}
-
+\index{Scanner class}
+\index{class!Scanner}
 \index{byte}
 
 From the operating system's point of view, data from the keyboard arrives in a series of hardware control signals.
@@ -182,13 +184,13 @@ public class Echo {
 
 
 \section{Reading documentation}
-\label{documentation}
+\label{sec:apidocs}
 
 \index{documentation}
 
 Now would be a good time to take a look at the documentation for \java{Scanner}.
 You can find it in the Java library (see the link earlier in this chapter) or simply do a web search for ``java scanner.''
-The latter method is more useful in the long run, especially as versions of Java change.
+The latter method is more useful in the long run, especially as Oracle releases new versions of Java.
 Either way, you should get something like this:
 
 \begin{figure}[!h]
@@ -212,112 +214,201 @@ Scans the next token of the input as an int.
 The first line is the method's {\bf prototype}, which specifies the name of the method and its return type.
 In this example, \java{nextInt} returns an \java{int}.
 The next line describes what the method does.
-The subsequent lines explain the parameters (if any) and return values.
-The explanations are often redundant, but the documentation is supposed to fit this standard format.
+The subsequent lines (not shown) explain the parameters and return values.
+Explanations are often redundant, but the documentation is supposed to fit this standard format.
 %The last line describes the exceptions this method might throw.
 
 It might take some time to get comfortable reading this kind of information, but it's well worth the effort.
 Knowing what methods a class provides helps you avoid reinventing the wheel.
 Whenever you learn about a new class, you should take a quick look at its documentation.
-On that note, please take a few minutes and review the documentation for \java{System} and \java{String}.
+On that note, take a few minutes to review the documentation for \java{System} and \java{String}.
 
 
-\section{Floating-point numbers}
+\section{Writing documentation}
 
-\index{floating-point}
-\index{double (floating-point)}
-\index{type!double}
+\index{Javadoc}
 
-In the last chapter we had some problems dealing with numbers that were not integers.
-We worked around the problem by calculating percentages.
-A more general solution is to use {\bf floating-point} numbers, which can represent fractions as well as integers.
-As the name implies, the decimal point floats around (i.e., you can have as many decimal places as you want).
+A nice feature of the Java language is the ability to write documentation at the same time you are writing the source code.
+That way, the documentation stays in sync with the classes and methods themselves.
+In fact, the HTML pages you browsed in the previous section were automatically generated using a tool called {\bf Javadoc}.
+This tool is part of the standard JDK, and you can run it directly from DrJava by pressing the {\tt Javadoc} button on the toolbar.
 
-In Java, the default floating-point type is called \java{double}, which is short for double-precision.
-You can create \java{double} variables and assign values to them using the same syntax we used for the other types:
+\index{comments!documentation}
+\index{documentation comments}
 
-\begin{code}
-    double pi = 3.14159;
-\end{code}
-
-Although floating-point numbers are useful, they are a source of confusion because (1) there is an overlap between integers and doubles, and (2) computer hardware can only approximate real numbers.
-Let's discuss these issues in more detail.
-
-\subsection{Auto conversion}
-
-%If you have the value {\tt 1}, is that an integer, a floating-point number, or both?
-
-Java distinguishes the integer value {\tt 1} from the floating-point value {\tt 1.0}, even though they seem to be the same number.
-They belong to different data types, and strictly speaking, you are not allowed to make assignments between types.
-
-For example, the following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
+Javadoc parses your source files for {\bf documentation comments} and extracts other relevant information about your class and method definitions.
+Given the prevalence of this tool, people sometimes refer to documentation as ``Javadoc comments.''
+In contrast to inline comments that begin with {\tt //}, documentation comments begin with {\tt /**} (two stars) and end with {\tt */} (one star).
+Anything in between these two tokens becomes part of the documentation.
+As a rule of thumb, you should document every class and every method.
 
 \begin{code}
-    int x = 1.1;  // syntax error
+/**
+ * Example program that demonstrates print vs println.
+ */
+public class Goodbye {
+
+    /**
+     * Application entry point; simply prints a greeting.
+     */
+    public static void main(String[] args) {
+        System.out.print("Goodbye, ");  // note the space
+        System.out.println("cruel world");
+    }
+
+}
 \end{code}
 
-It is easy to forget this rule, especially because there are situations where Java will {\em automatically} convert from one type to another.
+This example has perhaps too many comments, since all the program does is print a message.
+But it illustrates the differences between inline and documentation comments:
+
+\begin{itemize}
+\item Inline comments tend to be short phrases that help explain complex parts of a method.
+Documentation comments are typically complete sentences that begin with a capital letter and end with a period.
+
+\item Documentation comments often span multiple lines.
+By convention, each line begins with a {\tt *} that is aligned vertically with the start and end of the comment.
+
+\item Some development environments (e.g., Eclipse and NetBeans) automatically display documentation comments when you hover your mouse over the name of a class or method.
+
+\end{itemize}
+
+Writing documentation and inline comments is essential for making source code readable.
+As we discussed in the last chapter, people spend the majority of their development time understanding and modifying existing code.
+You should not only write good comments for others, but for yourself as well.
+When you haven't looked at your own code for a while, it takes a long time to remember how it works (or what you were trying to do) if there's no comments.
+
+
+\section{Inches to centimeters}
+
+An everyday problem that computers are great at solving is converting numbers from one unit into another.
+Although most of the world has adopted the metric system for weights and measures, some countries are stuck with English units.
+For example, when talking with friends in Europe about the weather, people in the United States may have to convert from Celsius to Fahrenheit and back.
+And when making an international purchase online, you may have to convert your nation's currency into another based on the exchange rate.
+
+%For the rest of the chapter, we will look at how to write programs that solve these types of problems.
+%Specifically, each program will 1) prompt the user for input, 2) read input from the keyboard, 3) calculate a result, and 4) format the result for output.
+%The focus will not only be on Java syntax and language features, but also on the {\em process} of solving the problem, documenting the code, and testing the solution.
+
+Let's think about how to write this type of program.
+This time, we'll even ask the user to input a specific value.
+We'll need some variables and a scanner.
 
 \begin{code}
-    double y = 1;  // bad style
+    int inch;  // the input
+    double cent;  // the output
+    Scanner in = new Scanner(System.in);
 \end{code}
 
-The above example should be illegal, but Java allows it by converting the \java{int} to a \java{double} automatically.
-This leniency is convenient, but it often causes problems for beginners. For example:
+The first step is to prompt the user for the input.
+We'll use \java{print} instead of \java{println} so they can enter the input on the same line.
 
 \begin{code}
-    double y = 1 / 3;  // logic error
+    // prompt the user and get the value
+    System.out.print("How many inches? ");
+    inch = in.nextInt();
 \end{code}
 
-You might expect the variable {\tt y} to get the value {\tt 0.333333}, which is a legal floating-point value.
-But instead it gets the value {\tt 0.0}.
-The reason is that the expression on the right divides two integers.
-So Java does {\em integer} division, which yields the value {\tt 0}.
-Converted to \java{double}, the final result is {\tt 0.0}.
-
-One way to solve this problem (after you finally discover that bug) is to make the right-hand side a floating-point expression. The following initializes {\tt y} to {\tt 0.333333}, as expected:
+Next we multiply the number of inches by 2.54, since that's how many centimeters there are per inch.
+Finally we display the results on one line, but use two print statements since it's easier to read.
 
 \begin{code}
-    double y = 1.0 / 3.0;  // correct
+    // convert and output the result
+    cent = inch * 2.54;
+    System.out.print(inch + " in = ");
+    System.out.println(cent + " cm");
 \end{code}
 
-\subsection{Rounding errors}
+\index{magic number}
 
-\index{arithmetic!floating-point}
-
-The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
-In fact, most processors have special circuitry just for performing floating-point operations.
-
-However there is a fundamental flaw with floating-point arithmetic.
-In math, there are an infinite number of real numbers.
-But computer processors are finite; they cannot represent {\em every} possible floating-point number.
-Even with double-precision, you will frequently run into problems.
+This code works, but for readability we should get rid of the {\bf magic number}.
+Let's put that 2.54 into a constant with a name that documents its purpose.
 
 \begin{code}
-    System.out.println(0.1 * 10);
-    System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
-                     + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
+    // convert and output the result
+    final double centPerInch = 2.54;
+    cent = inch * centPerInch;
+    System.out.print(inch + " in = ");
+    System.out.println(cent + " cm");
 \end{code}
 
-On some machines, the output for the above example will be:
+\subsection{Formatting output}
 
-\begin{stdout}
-    1.0
-    0.9999999999999999
-\end{stdout}
+When printing floating-point numbers, Java automatically decides how many decimal places to display.
 
-The problem here is that intermediate values may be rounded by the hardware.
-Just remember that \java{double} values are always an approximation.
+\begin{code}
+    System.out.print(7.0 / 3.0);
+    // prints 2.3333333333333335   note: 5 is a rounding error
+\end{code}
+
+\index{printf}
+
+You can use \java{System.out.printf} to limit (or format) the number of decimal places.
+Instead of just printing what is between the parentheses, \java{printf} allows for substitutions and formatting of output.
+For example:
+
+\begin{code}
+    System.out.printf("%.3f", 7.0 / 3.0);
+    // prints 2.333
+\end{code}
+
+The \java{printf} method takes two or more parameters, separated by commas.
+The first parameter is a {\em format string}.
+It contains a template for the text you want to output, as well as positions where it will substitute other values.
+
+\begin{code}
+    // what we had before
+    System.out.print(inch + " in = ");
+    System.out.println(cent + " cm");
+
+    // same thing using printf
+    System.out.printf("%d in = %f cm\n", inch, cent);
+\end{code}
+
+Parts of the string that begin with a percent sign are called {\bf format specifiers}.
+They not only indicate where to substitute values, but also describe how to format them.
+Note the format string ends with \java{\\n} because \java{printf} does not append a newline like \java{println} does.
+
+To some extent, learning \java{printf} is like learning a sub-language within Java.
+There are many options, and the syntax can get out of hand quickly.
+But here are some common uses, to give you an idea of how it works:
+
+\begin{table}[!h]
+\begin{tabular}{|l|l|l|}
+\hline
+{\tt \%d} & decimal integer & 12345 \\
+\hline
+{\tt \%,d} & decimal integer with comma separators & 12,345 \\
+\hline
+{\tt \%08d} & padded with zeros, at least 8 digits wide & 00012345 \\
+\hline
+{\tt \%f} & floating-point & 6.789000 \\
+\hline
+{\tt \%.2f} & floating-point {\em rounded} to 2 decimal places & 6.79 \\
+\hline
+\end{tabular}
+\caption{Example format specifiers}
+\end{table}
+
+For more details, refer to the documentation of \java{java.util.Formatter}.
+See also the official Java tutorials on Oracle's website by searching the web for ``java formatting.''
 
 
-\section{Type casting}
-\label{rounding}
+\section{Centimeters to inches}
+\label{sec:rounding}
+
+How do we convert values in the other direction?
+Unfortunately, we can't just say \java{inch = cent / centPerInch;} because Java won't assign a \java{double} value to an \java{int} variable.
+We could change the declaration of \java{inch} to be a \java{double}, but there's another way.
+
+\subsection{Type casting}
 
 Java converts an \java{int} to a \java{double} automatically, since no information is lost in the process.
 On the other hand, going from \java{double} to \java{int} gets rid of the decimal places.
 Java doesn't perform this operation automatically in order to ensure that you are aware of the loss of the fractional part of the number.
 
 \index{type cast}
+\index{operator!cast}
 
 The simplest way to convert a floating-point value to an integer is to use a {\bf type cast}.
 This operation is so called because it takes a value that belongs to one type and ``casts'' it into another type, in the sense of molding or reshaping the data.
@@ -332,157 +423,116 @@ The syntax for type casting is to put the name of the type in parentheses and us
 
 The \java{(int)} operator has the effect of converting what follows into an integer.
 In this example, \java{x} gets the value 3.
-Converting to an integer always {\bf truncates} or rounds down, even if the fraction part is 0.99999999.
-
+Converting to an integer always {\bf truncates} or rounds down, even if the fraction part is 0.999999.
 Type casting takes precedence over arithmetic operations.
-In the following example, the value of \java{pi} gets converted to an integer first, and the result is 60.0, not 62.
 
 \begin{code}
     double pi = 3.14159;
     double x = (int) pi * 20.0;
 \end{code}
 
-Operator precedence and integer truncation make type casting error-prone.
+In this example, the value of \java{pi} gets converted to an integer first.
+The result is 60.0, not 62.
+Operator precedence and integer truncation make type casting somewhat error-prone.
 We will learn in the next chapter how to round floating-point numbers in the traditional way (i.e., to the closest integer).
 
-
-\section{Formatting output}
-
-When printing floating-point numbers, Java automatically decides how many decimal places to display.
+So our latest application would have the following:
 
 \begin{code}
-    System.out.print(7.0 / 3.0);
-    // prints 2.3333333333333335   note: 5 is a rounding error
+    // convert and output the result
+    inch = (int) (cent / centPerInch);
+    System.out.printf("%f cm = %d in\n", cent, inch);
 \end{code}
 
-You can use \java{System.out.printf} to limit (or format) the number of decimal places. For example:
+Notice the second set of parentheses, after the cast operator.
+
+\subsection{Modulus operator}
+
+Another common type of conversion requires integer division, as opposed to floating-point division.
+For example, how do you convert ``76 inches'' into feet and inches?
+The answer is divide 76 by 12 (the number of inches in a foot) and keep the remainder.
+
+\index{modulus}
+\index{operator!modulus}
+
+The reason why integer division ``rounds down'' is that the hardware computes both the {\em quotient} and the {\em remainder}.
+In Java, you can get the remainder using the {\bf modulus} operator:
 
 \begin{code}
-    System.out.printf("%.3f", 7.0 / 3.0);
-    // prints 2.333
+    int quotient = 76 / 12;   // division
+    int remainder = 76 % 12;  // modulus
 \end{code}
 
-The \java{printf} method takes two or more parameters, separated by commas.
-Instead of just printing what is between the parentheses, \java{printf} allows for substitutions and formatting of output.
-The first parameter is a {\em formatting string}.
-It contains the text that you want to use, as well as positions where it will substitute other values.
+Although the modulus operator is a percent sign ({\tt \%}), you can think of it as a division sign ($\div$) slightly rotated to the left.
+The syntax is the same as with other operators.
+The first line (integer division) yields 6.
+The second line (spoken as ``76 mod 12'') yields 4.
+Thus 76 inches is 6 feet, 4 inches.
 
-\begin{code}
-System.out.printf("The value is %.3f, okay?\n", value);
-\end{code}
+\index{divisible}
+\index{extract digits}
 
-TODO
+%The modulus operator works on both integers and integer expressions.
+%It always yields the remainder when the first operand is divided by the second.
+The remainder turns out to be surprisingly useful.
+For example, you can check whether one number is divisible by another: if {\tt x \% y} is zero, then {\tt x} is divisible by {\tt y}.
+You can also use modulus to extract digits from a number.
+For example, {\tt x \% 10} yields the rightmost digit of {\tt x}.
+Similarly, {\tt x \% 100} yields the last two digits.
+Many encryption algorithms are based on modular arithmetic.
 
 
 \section{Putting it all together}
 
-TODO
+TODO: complete code listing?
 
 
-\section{Testing via the command line}
+\section{Formatting and style}
 
-TODO
+\index{whitespace}
+
+Recall from the previous chapter that the compiler generally ignores {\bf whitespace}, i.e., newlines, tab characters, and other spaces.
+Programmers have a lot of freedom in how they {\em format} their code in terms of indenting, blank lines, spaces around operators, etc.
+However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying your code.
+
+Virtually every organization that does a lot of software development has strict guidelines on how to format source code.
+For example, Google published its Java coding standards for use in open-source projects:
+\url{http://google.github.io/styleguide/javaguide.html}
+It is much easier to understand a large codebase when all the source code is formatted consistently.
+Plus following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
+
+Style rules can be difficult to learn, especially for beginners who haven't yet seen many of the language features discussed in them.
+Fortunately there are many tools that help programmers find and correct formatting errors.
+One prominent example is Checkstyle, which has the built-in ability to enforce most of Google's coding standards:
+\url{http://checkstyle.sourceforge.net/}
+
+Checkstyle is primarily a command-line tool.
+Instructions for downloading and running Checkstyle are available on our website: \url{http://thinkjava.org/}
+In short, you first copy Checkstyle and a configuration file into the directory of your source code.
+Then from the command-line:
+
+\begin{stdout}
+    java -jar checkstyle-*-all.jar -c config.xml *.java
+\end{stdout}
+
+Note the {\tt *} characters are {\bf wildcards} that match whatever version of Checkstyle you have and whatever java source files are present.
+The output indicates the file and line number of each problem.
+
+\begin{stdout}
+    Hello.java:93:5: Missing a Javadoc comment
+\end{stdout}
+
+This output refers to a method beginning on line 93, column 5 of {\tt Hello.java}.
+If you apply Checkstyle to your source code regularly, you will likely internalize good style habits over time.
+
+There are limitations to what automatic style checkers can do.
+In particular, they do NOT evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, and the {\em structure} of your algorithms.
+
+Good comments make it easier for experienced developers to identify errors in your code.
+Good variable names communicate the intent of your program and how the data is organized.
+And good programs tend to avoid doing too much in one statement or method.
 
 
-\section{Formal languages}
+\section{Command-line testing}
 
-\index{natural language}
-\index{language!natural}
-
-Learning a programming language is very different from learning a {\bf natural language} such as English, Spanish, French, or German.
-The languages that people speak evolved naturally over time.
-They were not designed by people, although we try to impose order on them for practical reasons.
-
-\index{formal language}
-\index{language!formal}
-
-In contrast, {\bf formal languages} are designed by people for specific applications.
-For example, the notation that mathematicians use is a formal language that is particularly good at denoting relationships among numbers and symbols.
-Chemists use a formal language to represent the chemical structure of molecules.
-And most importantly:
-
-\index{programming language}
-\index{language!programming}
-
-\begin{quote}
-{\bf Programming languages are formal languages that have been designed to express computations.}
-\end{quote}
-
-\index{syntax}
-\index{semantics}
-
-Formal languages have strict rules about both the {\bf syntax} (structure) and the {\bf semantics} (meaning) of statements.
-For example, $3 + 3 = 6$ is a syntactically correct mathematical statement, but $3\ + = 3\ \$\ 6$ is not.
-$1 + 2 = 4$ uses correct syntax, but is semantically incorrect.
-$H_2O$ is a syntactically correct chemical formula, but $_2Zz$ is not.
-
-\subsection{Tokens and grammar}
-
-\index{token}
-
-Syntax rules come in two flavors, pertaining to tokens and grammar.
-{\bf Tokens} are the basic elements of the language, like words, numbers, and chemical elements.
-One of the problems with $3\ + = 3\ \$\ 6$ is that $\$$ is not a legal token in mathematics.
-Similarly, $_2Zz$ is not legal because there is no element with the abbreviation $Zz$.
-
-\index{grammar}
-
-The second type of syntax rule pertains to the {\bf grammar} of the language, or the way that individual tokens can be arranged.
-The statement $3\ + = 3$ is structurally illegal, even though $+$ and $=$ are legal tokens, because you can't have one right after the other.
-Similarly, in a chemical formula the subscript comes after the element name, not before.
-
-\index{parse}
-
-When you read a sentence in English or a statement in a formal language, you have to figure out the structure of the sentence (although in a natural language you do this unconsciously).
-This process is called {\bf parsing}.
-For example, when you hear the statement ``the penny dropped,'' you understand that the penny is the subject and dropped is the predicate.
-After you have parsed the statement, you can begin to figure out what it means.
-%Assuming that you know what a penny is and what it means to drop, you will understand the general implication of this statement.
-
-Although formal and natural languages have features in common---tokens, grammar, and meaning---there are some differences.
-
-\begin{description}
-
-\term{ambiguity}
-Natural languages are full of ambiguity, which people deal with by using contextual clues and other information.
-Formal languages are designed to be nearly or completely unambiguous, which means that any statement has exactly one meaning, regardless of context.
-
-\term{redundancy}
-In order to make up for ambiguity and reduce misunderstandings, natural languages employ lots of redundancy.
-As a result, they are often verbose.
-Formal languages are less redundant and more concise.
-
-\term{literalness}
-Natural languages are full of idiom and metaphor.
-When someone says ``the penny dropped'' there is no penny and nothing dropping.
-This idiom means that someone finally realized something after a period of confusion.
-In contrast, formal languages mean exactly what they say.
-
-\end{description}
-
-\subsection{Reading source code}
-
-People who grow up speaking a natural language---that is, everyone---often have a hard time adjusting to formal languages.
-In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
-
-\begin{description}
-
-\term{poetry}
-Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
-Ambiguity is not only common but often deliberate.
-
-\term{prose}
-The literal meaning of words is more important, and the structure contributes more meaning.
-Prose is more amenable to analysis than poetry but still often ambiguous.
-
-\term{program}
-The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
-
-\end{description}
-
-Here are some suggestions for reading programs (and other formal languages).
-First, remember that formal languages are much more dense than natural languages, so it takes longer to read them.
-Second, the structure is very important, so it is not always a good idea to read from top to bottom, left to right.
-Over time you will learn to parse the program in your head, identifying the tokens and interpreting the structure.
-Finally, the details matter.
-Small errors in spelling and punctuation, which you can get away with in natural languages, can make a big difference in a formal language.
+TODO: Redirecting standard I/O

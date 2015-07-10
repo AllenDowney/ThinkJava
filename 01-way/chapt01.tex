@@ -152,6 +152,110 @@ Usually you will only have to write a program and press a button or type a singl
 On the other hand, it is important to know what steps are happening in the background, so if something goes wrong you can figure out what it is.
 
 
+\section{Formal languages}
+
+\index{natural language}
+\index{language!natural}
+
+Learning a programming language is very different from learning a {\bf natural language} such as English, Spanish, French, or German.
+The languages that people speak evolved naturally over time.
+They were not designed by people, although we try to impose order on them for practical reasons.
+
+\index{formal language}
+\index{language!formal}
+
+In contrast, {\bf formal languages} are designed by people for specific applications.
+For example, the notation that mathematicians use is a formal language that is particularly good at denoting relationships among numbers and symbols.
+Chemists use a formal language to represent the chemical structure of molecules.
+And most importantly:
+
+\index{programming language}
+\index{language!programming}
+
+\begin{quote}
+{\bf Programming languages are formal languages that have been designed to express computations.}
+\end{quote}
+
+\index{syntax}
+\index{semantics}
+
+Formal languages have strict rules about both the {\bf syntax} (structure) and the {\bf semantics} (meaning) of statements.
+For example, $3 + 3 = 6$ is a syntactically correct mathematical statement, but $3\ + = 3\ \$\ 6$ is not.
+$1 + 2 = 4$ uses correct syntax, but is semantically incorrect.
+$H_2O$ is a syntactically correct chemical formula, but $_2Zz$ is not.
+
+\subsection{Tokens and grammar}
+
+\index{token}
+
+Syntax rules come in two flavors, pertaining to tokens and grammar.
+{\bf Tokens} are the basic elements of the language, like words, numbers, and chemical elements.
+One of the problems with $3\ + = 3\ \$\ 6$ is that $\$$ is not a legal token in mathematics.
+Similarly, $_2Zz$ is not legal because there is no element with the abbreviation $Zz$.
+
+\index{grammar}
+
+The second type of syntax rule pertains to the {\bf grammar} of the language, or the way that individual tokens can be arranged.
+The statement $3\ + = 3$ is structurally illegal, even though $+$ and $=$ are legal tokens, because you can't have one right after the other.
+Similarly, in a chemical formula the subscript comes after the element name, not before.
+
+\index{parse}
+
+When you read a sentence in English or a statement in a formal language, you have to figure out the structure of the sentence (although in a natural language you do this unconsciously).
+This process is called {\bf parsing}.
+For example, when you hear the statement ``the penny dropped,'' you understand that the penny is the subject and dropped is the predicate.
+After you have parsed the statement, you can begin to figure out what it means.
+%Assuming that you know what a penny is and what it means to drop, you will understand the general implication of this statement.
+
+\subsection{Reading source code}
+
+Although formal and natural languages have features in common---tokens, grammar, and meaning---there are some differences.
+
+\begin{description}
+
+\term{ambiguity}
+Natural languages are full of ambiguity, which people deal with by using contextual clues and other information.
+Formal languages are designed to be nearly or completely unambiguous, which means that any statement has exactly one meaning, regardless of context.
+
+\term{redundancy}
+In order to make up for ambiguity and reduce misunderstandings, natural languages employ lots of redundancy.
+As a result, they are often verbose.
+Formal languages are less redundant and more concise.
+
+\term{literalness}
+Natural languages are full of idiom and metaphor.
+When someone says ``the penny dropped'' there is no penny and nothing dropping.
+This idiom means that someone finally realized something after a period of confusion.
+In contrast, formal languages mean exactly what they say.
+
+\end{description}
+
+People who grow up speaking a natural language---that is, everyone---often have a hard time adjusting to formal languages.
+In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
+
+\begin{description}
+
+\term{poetry}
+Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
+Ambiguity is not only common but often deliberate.
+
+\term{prose}
+The literal meaning of words is more important, and the structure contributes more meaning.
+Prose is more amenable to analysis than poetry but still often ambiguous.
+
+\term{program}
+The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
+
+\end{description}
+
+%Here are some suggestions for reading programs (and other formal languages).
+Remember that formal languages are much more dense than natural languages, so it takes longer to read them.
+The structure is very important, so it is not always a good idea to read from top to bottom, left to right.
+Over time you will learn to parse the program in your head, identifying the tokens and interpreting the structure.
+Finally, the details matter.
+Small errors in spelling and punctuation, which you can get away with in natural languages, can make a big difference in a formal language.
+
+
 \section{The hello world program}
 \label{sec:hello}
 
@@ -224,7 +328,7 @@ When the program runs, it starts at the first statement in \java{main} and ends 
 \index{squiggly braces}
 
 Java uses squiggly braces (\{ and \}) to group things together.
-In {\tt Hello.java}, the outermost squiggly braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
+In {\tt Hello.java}, the outermost braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
 
 \index{println}
 \index{statement!print}
@@ -243,7 +347,8 @@ Line 4 contains a {\bf comment}, or a bit of English text that explains the code
 When the compiler sees \java{//}, it ignores everything from there until the end of the line.
 You should {\em always write comments} before every major block of code so that other programmers (including your future self) can understand what you meant to do.
 
-\subsection{Getting started with DrJava}
+
+\section{Getting started with DrJava}
 
 \index{JDK}
 
@@ -252,17 +357,17 @@ This free software by Oracle includes tools for developing, debugging, and monit
 All the examples in this book were developed and tested using Java SE Version 7.
 Later versions of Java are generally backward compatible, so feel free to install the latest and greatest release.
 
+\begin{figure}[!h]
+\includegraphics[width=\textwidth]{drjava-hello.png}
+\caption{Screenshot of DrJava editing the hello world program.}
+\end{figure}
+
 \index{DrJava}
 
 We will use DrJava as the primary development environment throughout the book.
 One of the most distinctive features of DrJava is the Interactions Pane at the bottom of the window.
 It offers both beginning students and more experienced programmers the ability to try out code quickly, without having to write a class definition and save/compile/run the program.
 Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for more details.
-
-\begin{figure}[!h]
-\includegraphics[width=\textwidth]{drjava-hello.png}
-\caption{Screenshot of DrJava editing the hello world program.}
-\end{figure}
 
 Step-by-step instructions for installing the JDK and configuring DrJava are available on this book's website: \url{http://thinkjava.org/}
 
@@ -273,7 +378,6 @@ Step-by-step instructions for installing the JDK and configuring DrJava are avai
 One of the most powerful and useful skills you can learn as a computer scientist is how to use the {\bf command-line} or ``Terminal'' for short.
 This interface gives you direct access to the operating system, allowing you to run programs, manage files and directories, and monitor system resources.
 Many advanced tools, both for software development and general purpose computing, are available only at the command-line.
-Taking time to learn this efficient and elegant way of interacting with your computer will make you a more productive user.
 
 There are many good tutorials online for learning the command-line for your specific operating system; just search the web or YouTube for ``command line tutorial.''
 To get started, you only need to know four commands: how to change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
@@ -289,8 +393,11 @@ Running {\tt ls} again, we see that the compiler generated a new file {\tt Hello
 We then run the program using the {\tt java} command, and it displays the output on the following line.
 
 Note that the {\tt javac} command requires a source file name, whereas the {\tt java} command requires only the class name.
-By the way, DrJava runs these same two commands in the background.
+DrJava runs these same two commands in the background.
 The only difference is that DrJava intercepts the output and displays it in the Interactions Pane.
+
+Taking time to learn this efficient and elegant way of interacting with your operating system will make you more productive as a computer user.
+People who haven't learned the command-line don't know what they're missing.
 
 
 \section{More printing}
