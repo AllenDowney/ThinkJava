@@ -1,4 +1,4 @@
-\chapter{Variables and operators}
+\chapter{Variables and arithmetic}
 
 This chapter is about storing values in computer memory and doing basic arithmetic.
 More importantly, it discusses how to {\em compose} statements using smaller building blocks such as variables, literals, and operators.
@@ -216,7 +216,7 @@ But you can change the value as many times as you like.
 
 
 \section{Printing variables}
-\label{sec:printing}
+\label{sec:printvar}
 
 You can display the value of a variable using \java{print} or \java{println}.
 The following program declares a variable named \java{firstLine}, assigns it the value \java{"Hello, again!"}, and then prints that value.
@@ -633,3 +633,48 @@ In practice, software developers spend the vast majority of their time {\em unde
 As a result, it's far more important to write code that is readable than to write code that is (or appears to be) optimal.
 There is much beauty in simplicity.
 In general, each line of code should be a single step of the algorithm.
+
+
+\section{Formatting and style}
+
+\index{whitespace}
+
+Recall from the previous chapter that the compiler generally ignores {\bf whitespace}, i.e., newlines, tab characters, and other spaces.
+Programmers have a lot of freedom in how they {\em format} their code in terms of indenting, blank lines, spaces around operators, etc.
+However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying your code.
+
+\index{Google style}
+
+Virtually every organization that does a lot of software development has strict guidelines on how to format source code.
+For example, Google published its Java coding standards for use in open-source projects:
+\url{http://google.github.io/styleguide/javaguide.html}
+It is much easier to understand a large codebase when all the source code is formatted consistently.
+Plus following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
+
+\index{Checkstyle}
+
+Style rules can be difficult to learn, especially for beginners who haven't yet seen many of the language features discussed in them.
+Fortunately there are many tools that help programmers find and correct formatting errors.
+One prominent example is Checkstyle, which has the built-in ability to enforce most of Google's coding standards:
+\url{http://checkstyle.sourceforge.net/}
+
+Checkstyle is primarily a command-line tool.
+Instructions for downloading and running Checkstyle are available on our website: \url{http://thinkjava.org/}
+In short, you first copy Checkstyle and a configuration file into the directory of your source code.
+Then from the command-line:
+
+\begin{stdout}
+    java -jar checkstyle-*-all.jar -c config.xml *.java
+\end{stdout}
+
+\index{wildcard}
+
+Note the {\tt *} characters are {\bf wildcards} that match whatever version of Checkstyle you have and whatever java source files are present.
+The output indicates the file and line number of each problem.
+
+\begin{stdout}
+    Hello.java:93:5: Missing a Javadoc comment
+\end{stdout}
+
+This output refers to a method beginning on line 93, column 5 of {\tt Hello.java}.
+If you apply Checkstyle to your source code regularly, you will likely internalize good style habits over time.

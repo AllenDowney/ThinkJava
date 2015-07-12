@@ -484,47 +484,84 @@ Many encryption algorithms are based on modular arithmetic.
 
 \section{Putting it all together}
 
-TODO: complete code listing?
+Congratulations!
+You now know enough Java to write useful programs that solve everyday problems.
+Let's take a step back and review some of what we've discussed in this chapter:
 
+\begin{multicols}{2}
+\begin{itemize}
 
-\section{Formatting and style}
+%% Chapter 1
+%\item Write a class and main
+%\item Display simple output
+%\item Compile and run programs
+%\item Correct syntax errors
 
-\index{whitespace}
+%% Chapter 2
+%\item Declare/assign variables
+%\item Create named constants
+%\item Perform basic arithmetic
+%\item Compose multiple operations
 
-Recall from the previous chapter that the compiler generally ignores {\bf whitespace}, i.e., newlines, tab characters, and other spaces.
-Programmers have a lot of freedom in how they {\em format} their code in terms of indenting, blank lines, spaces around operators, etc.
-However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying your code.
+%% Chapter 3
+%\item Browse the Java library
+\item Import Java library classes
+\item Initialize a Scanner object
+\item Get input from the keyboard
+\item Read/write documentation
+\item Format output with printf
+\item Divide and mod integers
 
-Virtually every organization that does a lot of software development has strict guidelines on how to format source code.
-For example, Google published its Java coding standards for use in open-source projects:
-\url{http://google.github.io/styleguide/javaguide.html}
-It is much easier to understand a large codebase when all the source code is formatted consistently.
-Plus following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
+\end{itemize}
+\end{multicols}
 
-Style rules can be difficult to learn, especially for beginners who haven't yet seen many of the language features discussed in them.
-Fortunately there are many tools that help programmers find and correct formatting errors.
-One prominent example is Checkstyle, which has the built-in ability to enforce most of Google's coding standards:
-\url{http://checkstyle.sourceforge.net/}
+Since we've looked at each of these topics in isolation, it's important to see how they fit together in a complete program.
+If you've been working through the examples on your computer as you've been reading (like we recommended in Section~\ref{sec:examples}), then good job!
+Either way, here is a complete example.
 
-Checkstyle is primarily a command-line tool.
-Instructions for downloading and running Checkstyle are available on our website: \url{http://thinkjava.org/}
-In short, you first copy Checkstyle and a configuration file into the directory of your source code.
-Then from the command-line:
+\begin{code}
+import java.util.Scanner;
 
-\begin{stdout}
-    java -jar checkstyle-*-all.jar -c config.xml *.java
-\end{stdout}
+/**
+ * Converts centimeters to feet and inches.
+ */
+public class Convert {
+    public static void main(String[] args) {
+        double centimeters;
+        int feet, inches;
+        final double centPerInch = 2.54;
+        Scanner in = new Scanner(System.in);
 
-Note the {\tt *} characters are {\bf wildcards} that match whatever version of Checkstyle you have and whatever java source files are present.
-The output indicates the file and line number of each problem.
+        // prompt the user and get the value
+        System.out.print("Exactly how many cm? ");
+        centimeters = in.nextDouble();
 
-\begin{stdout}
-    Hello.java:93:5: Missing a Javadoc comment
-\end{stdout}
+        // convert and output the result
+        inches = (int) (centimeters / centPerInch);
+        feet = inches / 12;
+        inches = inches % 12;
+        System.out.printf("%.2f cm = %d ft, %d in\n",
+                          centimeters, feet, inches);
+    }
+}
+\end{code}
 
-This output refers to a method beginning on line 93, column 5 of {\tt Hello.java}.
-If you apply Checkstyle to your source code regularly, you will likely internalize good style habits over time.
+Please note the following as you study the above example:
 
+\begin{itemize}
+
+\item Although not required, all variables and constants are declared at the top of \java{main}.
+This practice not only makes it easier to find their types later on, it also helps the reader know what data is involved in the algorithm.
+
+\item Integer division and modulus often go together.
+Notice how \java{inches} gets reassigned (which replaces its value) just before the \java{printf}.
+
+\item When statements get long (generally wider than 80 characters), a common style convention is to break them across multiple lines.
+The reader should never have to scroll horizontally.
+
+\end{itemize}
+
+As an exercise, try running this code through Checkstyle.
 There are limitations to what automatic style checkers can do.
 In particular, they do NOT evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, and the {\em structure} of your algorithms.
 
@@ -535,4 +572,66 @@ And good programs tend to avoid doing too much in one statement or method.
 
 \section{Command-line testing}
 
-TODO: Redirecting standard I/O
+You might want to review the advice in Section~\ref{sec:examples}, now that you've written some more substantial programs.
+Remember, it's more effective to program and debug your code little by little than to attempt writing everything at once.
+Once you've completed programming an algorithm, it's important to test that it works for a variety of inputs.
+
+Throughout the book, we will illustrate various techniques for testing your programs.
+Most if not all testing is based on a simple idea: does the program do what we expect it to do?
+For simple programs, it's not difficult to run them several times and see what happens.
+But at some point, you will get tired of typing the same test cases over and over again.
+
+We can automate the process of entering test input and comparing {\em expected output} with {\em actual output} using the command-line.
+The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
+Here are step by step instructions.
+
+\begin{enumerate}
+
+\item Make sure you can compile and run the {\tt Convert.java} example in the previous section.
+%You can also download a copy from \url{http://thinkjava.org/}.
+
+\item In the same directory as {\tt Convert.java}, create a plain text file named {\tt test.in} (``in'' is for input).
+Enter the following line and save the file:
+
+\begin{stdout}
+193.04
+\end{stdout}
+
+\item Create a second plain text file named {\tt test.exp} (``exp'' is for expected).
+Enter the following line and save the file:
+
+\begin{stdout}
+193.04 cm = 6 ft, 4 in
+\end{stdout}
+
+\item Open a command-line, and change to the directory with these files.
+Enter the following command and see what happens.
+
+\begin{stdout}
+java Convert < test.in > test.out
+\end{stdout}
+
+\end{enumerate}
+
+On the command-line, \java{<} and \java{>} are {\bf redirection operators}.
+The first one redirects the contents of the file to \java{System.in}, as if it were the keyboard.
+The second one redirects the contest of \java{System.out} to the file, as if it were the screen.
+You should now have a new file named {\tt test.out} containing the output of your program.
+
+At this point, we simply need to compare the contents {\tt test.out} with {\tt test.exp}.
+If the files are the same, then the program outputted what we expected it to output.
+If not, then we found a bug, and we can use the output to begin debugging our program.
+Fortunately, there's a simple way to compare files on the command-line:
+
+\begin{stdout}
+diff test.exp test.out
+\end{stdout}
+
+The {\tt diff} utility summarizes the differences between two files.
+If there are no differences, then it prints nothing, which in our case is what we want.
+If the expected output differs from the actual output, then we need to debug our program.
+Or in some cases, we need to debug our test cases.
+There's always a chance we may have a correct program and a typo in the expected output.
+
+By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command-line.
+Knowing both techniques allows you to use the right tool for the job, depending on your mood or situation.
