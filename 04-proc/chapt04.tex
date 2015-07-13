@@ -1,5 +1,80 @@
 \chapter{Void methods}
-\label{chap03}
+
+TODO
+
+
+\section{A few more details}
+
+TODO
+
+\subsection{Rounding errors}
+
+\index{arithmetic!floating-point}
+
+The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
+In fact, most processors have special circuitry just for performing floating-point operations.
+
+Notwithstanding, there is a fundamental flaw with floating-point arithmetic.
+In mathematics, there is an infinite number of real numbers.
+But computer processors are finite; they cannot represent {\em every} possible floating-point number.
+Even with double-precision, you will frequently run into problems.
+
+\begin{code}
+    System.out.println(0.1 * 10);
+    System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
+                     + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
+\end{code}
+
+On some machines, the output for the above example will be:
+
+\begin{stdout}
+    1.0
+    0.9999999999999999
+\end{stdout}
+
+The problem here is that intermediate values may be {\em rounded} by the hardware.
+Just remember that \java{double} values are always an approximation.
+If you need absolute precision, use integers instead.
+For example, consider a bank account with a balance of \$123.45:
+
+\begin{code}
+    double balance = 123.45;  // potential rounding error
+\end{code}
+
+In this example, balances will become inaccurate over time the variable is used in arithmetic operations (like deposits and withdrawals).
+As a result, you may have to deal with angry customers and potential law suits.
+You can avoid this situation by representing the balance as an integer:
+
+\begin{code}
+    int balance = 12345;      // total number of cents
+\end{code}
+
+\subsection{Strings and numbers}
+
+As was the case with floating-point numbers, Java performs automatic conversions when adding strings and integers.
+However, the result is not what you may think:
+
+\begin{code}
+    System.out.println(1 + 2 + "Hello");
+    System.out.println("Hello" + 1 + 2);
+\end{code}
+
+Java executes these ``additions'' from left to right.
+In the first line, \java{1 + 2} is the value \java{3}, and \java{3 + "Hello"} is the value \java{"3Hello"}.
+But in the second line, \java{"Hello" + 1} is \java{"Hello1"}, and \java{"Hello1" + 2} is \java{"Hello12"}.
+The difference is when the conversion from integer to string actually takes place.
+
+%Fortunately, this situation only happens when using the plus operator.
+%You cannot for example store an integer directly in a string variable.
+%
+%\begin{code}
+%     String number = 5;  // syntax error
+%\end{code}
+
+\subsection{The Scanner bug}
+
+TODO
+
 
 \section{Math methods}
 \index{Math class}
@@ -31,7 +106,7 @@ the {\tt print} statements we have already seen:
      double angle = 1.5;
      double height = Math.sin(angle);
 \end{code}
-%
+
 The first example sets {\tt root} to the square root of 17.
 The second example finds the sine of the value of {\tt angle},
 which is {\tt 1.5}.  Java assumes that the
@@ -44,7 +119,7 @@ and multiply by $2 \pi$.  Conveniently, Java provides {\tt Math.PI}:
      double degrees = 90;
      double angle = degrees * 2 * Math.PI / 360.0;
 \end{code}
-%
+
 Notice that {\tt PI} is in all capital letters.  Java does
 not recognize {\tt Pi}, {\tt pi}, or {\tt pie}.
 
@@ -55,7 +130,7 @@ and returns an {\tt int}.
 \begin{code}
     int x = Math.round(Math.PI * 20.0);
 \end{code}
-%
+
 In this case the multiplication happens first, before the
 method is invoked.  The result is 63 (rounded up from 62.8319).
 
@@ -72,7 +147,7 @@ For example, you can use any expression as an argument to a method:
 \begin{code}
     double x = Math.cos(angle + Math.PI/2);
 \end{code}
-%
+
 This statement takes the value {\tt Math.PI}, divides it by two and
 adds the result to the value of the variable {\tt angle}.  The sum is
 then passed as an argument to {\tt cos}. ({\tt
@@ -85,7 +160,7 @@ an argument to another:
 \begin{code}
     double x = Math.exp(Math.log(10.0));
 \end{code}
-%
+
 In Java, the {\tt log} method always uses base $e$, so this
 statement finds the log base $e$ of 10 and then raises $e$ to that
 power.  The result gets assigned to {\tt x}; I hope you know what it
@@ -107,7 +182,7 @@ is special, but the syntax is the same for other methods:
     STATEMENTS
   }
 \end{code}
-%
+
 You can make up any name you want for your method, except
 that you can't call it {\tt main} or any
 Java keyword.  By convention, Java methods start with a lower
@@ -119,7 +194,7 @@ provide to use (or {\bf invoke}) the new method.
 
 The parameter for {\tt main} is {\tt String[] args}, which
 means that whoever invokes {\tt main} has to provide an array of
-Strings (we'll get to arrays in Chapter~\ref{arrays}).  The first
+Strings (we'll get to arrays in a later chapter).  The first
 couple of methods we are going to write have no parameters, so the
 syntax looks like this:
 
@@ -128,7 +203,7 @@ syntax looks like this:
     System.out.println("");
   }
 \end{code}
-%
+
 This method is named {\tt newLine}, and the empty parentheses
 mean that it takes no parameters.  It contains one
 statement, which prints an empty {\tt String}, indicated by {\tt ""}.
@@ -146,7 +221,7 @@ Java methods:
     System.out.println("Second line.");
   }
 \end{code}
-%
+
 The output of this program is
 
 \begin{minipage}{\linewidth}
@@ -170,7 +245,7 @@ method repeatedly:
     System.out.println("Second line.");
   }
 \end{code}
-%
+
 Or we could write a new method, named {\tt threeLine}, that
 prints three new lines:
 
@@ -185,7 +260,7 @@ prints three new lines:
     System.out.println("Second line.");
   }
 \end{code}
-%
+
 You should notice a few things about this program:
 
 \begin{itemize}
@@ -213,7 +288,9 @@ reasons; this example demonstrates two:
 \item Creating a new method gives you an opportunity to
 give a name to a group of statements.  Methods can simplify a program
 by hiding a complex computation behind a single statement, and by using
-English words in place of arcane code.  Which is clearer, {\tt
+English words in place of arcane code.
+
+Which is clearer, {\tt
 newLine} or {\tt System.out.println("")}?
 
 \item Creating a new method can make a program smaller by eliminating
@@ -251,7 +328,7 @@ class NewLine {
   }
 }
 \end{code}
-%
+
 The first line indicates that this is the class definition for a new
 class called {\tt NewLine}.  A {\bf class} is a collection of related
 methods.  In this case, the class named {\tt NewLine} contains three
@@ -268,7 +345,7 @@ methods and the methods we write:
     Math.pow(2.0, 10.0);
     newLine();
 \end{code}
-%
+
 The first statement invokes the {\tt pow} method in
 the {\tt Math class} (which raises the first argument to the
 power of the second argument).  The second statement invokes
@@ -282,7 +359,7 @@ type:
 \begin{code}
     pow(2.0, 10.0);
 \end{code}
-%
+
 The compiler will say something like, ``Can't find a method
 named {\tt pow} in class {\tt NewLine}.''  If you have
 seen this message, you might have wondered why it was looking
@@ -361,7 +438,7 @@ any legal variable name.
         System.out.println(s);
     }
 \end{code}
-%
+
 When we invoke {\tt printTwice}, we have to provide
 a single argument with type {\tt String}.
 
@@ -382,14 +459,14 @@ have a {\tt String} variable, you can use it as an argument:
     String argument = "Never say never.";
     printTwice(argument);
 \end{code}
-%
+
 The value you provide as an argument must have the same type as
 the parameter.  For example, if you try this:
 
 \begin{code}
     printTwice(17);
 \end{code}
-%
+
 You get an error message like ``cannot find symbol,'' which isn't very
 helpful.  The reason is that Java is looking for a method named
 {\tt printTwice} that can take an integer argument.  Since there
@@ -398,30 +475,6 @@ isn't one, it can't find such a ``symbol.''
 {\tt System.out.println} can accept any
 type as an argument.  But that is an exception; most methods
 are not so accommodating.
-
-
-\section{Stack diagrams}
-\label{stack}
-\index{stack diagram}
-\index{diagram!stack}
-
-Parameters and other
-variables only exist inside their own methods.  Within the
-confines of {\tt main}, there is no such thing as {\tt s}.
-If you try to use it, the compiler will complain.  Similarly,
-inside {\tt printTwice} there is no such thing as {\tt argument}.
-
-One way to keep track of where each variable is defined is
-with a {\bf stack diagram}.  The stack diagram for the previous
-example looks like this:
-
-\includegraphics{figs/stack.pdf}
-
-For each method there is a gray box called a {\bf frame} that contains
-the method's parameters and variables.  The name of the method
-appears outside the frame.  As usual, the value of each variable
-is drawn inside a box with the name of the variable beside it.
-
 
 
 \section{Methods with multiple parameters}
@@ -442,7 +495,7 @@ example
         System.out.println(minute);
     }
 \end{code}
-%
+
 It might be tempting to write {\tt int hour, minute}, but
 that format is only legal for variable declarations, not
 parameter lists.
@@ -455,7 +508,7 @@ to declare the types of arguments.  The following is wrong!
     int minute = 59;
     printTime(int hour, int minute);   // WRONG!
 \end{code}
-%
+
 In this case, Java can tell the type of {\tt hour}
 and {\tt minute} by looking at their declarations.  It is
 not necessary to include the type when you pass them
@@ -493,138 +546,29 @@ out.  In fact, any time you have a question about what is legal or
 illegal in Java, a good way to find out is to ask the compiler.
 
 
-\section{Glossary}
+\section{Stack diagrams}
+\label{stack}
+\index{stack diagram}
+\index{diagram!stack}
 
-\begin{description}
+Parameters and other
+variables only exist inside their own methods.  Within the
+confines of {\tt main}, there is no such thing as {\tt s}.
+If you try to use it, the compiler will complain.  Similarly,
+inside {\tt printTwice} there is no such thing as {\tt argument}.
 
-\item[class:]  A named collection of methods.  So far, we have used
-the {\tt Math} class and the {\tt System} class, and we have
-written classes named {\tt Hello} and {\tt NewLine}.
+One way to keep track of where each variable is defined is
+with a {\bf stack diagram}.  The stack diagram for the previous
+example looks like this:
 
-\item[method:]  A named sequence of statements that performs a
-useful function.  Methods may or may not take parameters, and may
-or may not return a value.
+\includegraphics{figs/stack.pdf}
 
-\item[parameter:]  A piece of information a method requires before
-it can run.  Parameters are variables: they contain values and have types.
-
-\item[argument:]  A value that you provide when you invoke a
-method.  This value must have the same type as the corresponding
-parameter.
-
-\item[frame:] A structure (represented by a gray box in stack diagrams)
-that contains a method's parameters and variables.
-
-\item[invoke:]  Cause a method to execute.
-
-\index{floating-point}
-\index{class}
-\index{method}
-\index{parameter}
-\index{argument}
-
-\end{description}
-
-\section{Exercises}
-
-\begin{exercise}
-
-Draw a stack frame that shows the state of the program in Section~\ref{time}
-when {\tt main} invokes {\tt printTime}
-with the arguments {\tt 11} and {\tt 59}.
-
-\end{exercise}
-
-\begin{exercise}
-
-The point of this exercise is to practice reading code and to
-make sure that you understand the flow of execution through
-a program with multiple methods.
-
-\begin{enumerate}
-
-\item What is the output of the following program?  Be precise
-about where there are spaces and where there are newlines.
-
-HINT: Start by describing in words what {\tt ping} and
-{\tt baffle} do when they are invoked.
-
-\item Draw a stack diagram that shows the state of the program
-the first time {\tt ping} is invoked.
-
-\end{enumerate}
-
-\begin{code}
-  public static void zoop() {
-    baffle();
-    System.out.print("You wugga ");
-    baffle();
-  }
-
-  public static void main(String[] args) {
-    System.out.print("No, I ");
-    zoop();
-    System.out.print("I ");
-    baffle();
-  }
-
-  public static void baffle() {
-    System.out.print("wug");
-    ping();
-  }
-
-  public static void ping() {
-    System.out.println(".");
-  }
-\end{code}
-
-\end{exercise}
+For each method there is a gray box called a {\bf frame} that contains
+the method's parameters and variables.  The name of the method
+appears outside the frame.  As usual, the value of each variable
+is drawn inside a box with the name of the variable beside it.
 
 
-\begin{exercise}
+\section{Tracing code using a debugger}
 
-The point of this exercise is to make sure you understand how
-to write and invoke methods that take parameters.
-
-\begin{enumerate}
-
-\item Write the first line of a method named {\tt zool} that
-takes three parameters: an {\tt int} and two {\tt Strings}.
-
-\item Write a line of code that invokes {\tt zool}, passing
-as arguments the value {\tt 11}, the name of your first pet,
-and the name of the street you grew up on.
-\end{enumerate}
-
-\end{exercise}
-
-
-\begin{exercise}
-
-The purpose of this exercise is to take code from a previous exercise
-and encapsulate it in a method that takes parameters.  You should
-start with a working solution to Exercise~\ref{ex.date}.
-
-\begin{enumerate}
-
-\item Write a method called {\tt printAmerican}
-that takes the day, date, month and year as parameters and that
-prints them in American format.
-
-\item Test your method by invoking it from {\tt main} and passing
-appropriate arguments.  The output should look something like this
-(except that the date might be different):
-%
-\begin{stdout}
-Saturday, July 16, 2011
-\end{stdout}
-%
-\item Once you have debugged {\tt printAmerican}, write another
-method called {\tt printEuropean} that prints the date in
-European format.
-
-\end{enumerate}
-\end{exercise}
-
-
-
+TODO

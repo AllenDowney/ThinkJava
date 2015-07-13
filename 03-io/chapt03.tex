@@ -561,13 +561,7 @@ The reader should never have to scroll horizontally.
 
 \end{itemize}
 
-As an exercise, try running this code through Checkstyle.
-There are limitations to what automatic style checkers can do.
-In particular, they do NOT evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, and the {\em structure} of your algorithms.
-
-Good comments make it easier for experienced developers to identify errors in your code.
-Good variable names communicate the intent of your program and how the data is organized.
-And good programs tend to avoid doing too much in one statement or method.
+%As an exercise, try running this code through Checkstyle.
 
 
 \section{Command-line testing}
@@ -581,7 +575,7 @@ Most if not all testing is based on a simple idea: does the program do what we e
 For simple programs, it's not difficult to run them several times and see what happens.
 But at some point, you will get tired of typing the same test cases over and over again.
 
-We can automate the process of entering test input and comparing {\em expected output} with {\em actual output} using the command-line.
+We can automate the process of testing input and comparing {\em expected output} with {\em actual output} using the command-line.
 The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
 Here are step by step instructions.
 
@@ -605,7 +599,7 @@ Enter the following line and save the file:
 \end{stdout}
 
 \item Open a command-line, and change to the directory with these files.
-Enter the following command and see what happens.
+Enter the following command to test the program.
 
 \begin{stdout}
 java Convert < test.in > test.out
@@ -614,11 +608,11 @@ java Convert < test.in > test.out
 \end{enumerate}
 
 On the command-line, \java{<} and \java{>} are {\bf redirection operators}.
-The first one redirects the contents of the file to \java{System.in}, as if it were the keyboard.
-The second one redirects the contest of \java{System.out} to the file, as if it were the screen.
-You should now have a new file named {\tt test.out} containing the output of your program.
+The first one redirects the contents of {\tt test.in} to \java{System.in}, as if it were entered from the keyboard.
+The second one redirects the contents of \java{System.out} to a new file {\tt test.out}, much like a screen capture.
+In other words, the {\tt test.out} file contains the output of your program.
 
-At this point, we simply need to compare the contents {\tt test.out} with {\tt test.exp}.
+At this point, we just need to compare the contents {\tt test.out} with {\tt test.exp}.
 If the files are the same, then the program outputted what we expected it to output.
 If not, then we found a bug, and we can use the output to begin debugging our program.
 Fortunately, there's a simple way to compare files on the command-line:
@@ -635,3 +629,5 @@ There's always a chance we may have a correct program and a typo in the expected
 
 By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command-line.
 Knowing both techniques allows you to use the right tool for the job, depending on your mood or situation.
+
+%TODO standard I/O is an abstraction that makes redirection possible

@@ -423,7 +423,7 @@ You can create \java{double} variables and assign values to them using the same 
 Although floating-point numbers are useful, they are a source of confusion because (1) there is an overlap between integers and doubles, and (2) computer hardware can only approximate real numbers.
 Let's discuss each of these issues in more detail.
 
-\subsection{Auto conversion}
+\subsection{Automatic conversion}
 
 %If you have the value {\tt 1}, is that an integer, a floating-point number, or both?
 
@@ -468,48 +468,6 @@ The following initializes {\tt y} to {\tt 0.333333}, as expected:
 As a matter of style, you should always assign floating-point literals to floating-point variables.
 The compiler won't make you do it, but you never know when a bug like this one will come back and haunt you.
 
-\subsection{Rounding errors}
-
-\index{arithmetic!floating-point}
-
-The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
-In fact, most processors have special circuitry just for performing floating-point operations.
-
-Notwithstanding, there is a fundamental flaw with floating-point arithmetic.
-In mathematics, there is an infinite number of real numbers.
-But computer processors are finite; they cannot represent {\em every} possible floating-point number.
-Even with double-precision, you will frequently run into problems.
-
-\begin{code}
-    System.out.println(0.1 * 10);
-    System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
-                     + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
-\end{code}
-
-On some machines, the output for the above example will be:
-
-\begin{stdout}
-    1.0
-    0.9999999999999999
-\end{stdout}
-
-The problem here is that intermediate values may be {\em rounded} by the hardware.
-Just remember that \java{double} values are always an approximation.
-If you need absolute precision, use integers instead.
-For example, consider a bank account with a balance of \$123.45:
-
-\begin{code}
-    double balance = 123.45;  // potential rounding error
-\end{code}
-
-In this example, balances will become inaccurate over time the variable is used in arithmetic operations (like deposits and withdrawals).
-As a result, you may have to deal with angry customers and potential law suits.
-You can avoid this situation by representing the balance as an integer:
-
-\begin{code}
-    int balance = 12345;      // total number of cents
-\end{code}
-
 
 \section{Operators for strings}
 
@@ -535,28 +493,6 @@ So \java{"Hello, " + "world!"} yields the string \java{"Hello, world!"}.
 Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} to the hello string, which is handy for creating a personalized greeting.
 When you append two strings, make sure one of them contains a space character.
 Otherwise you will end up with something like \java{"Hello,world!"}.
-
-\subsection{Strings and numbers}
-
-As was the case with floating-point numbers, Java performs automatic conversions when adding strings and integers.
-However, the result is not what you may think:
-
-\begin{code}
-    System.out.println(1 + 2 + "Hello");
-    System.out.println("Hello" + 1 + 2);
-\end{code}
-
-Java executes these ``additions'' from left to right.
-In the first line, \java{1 + 2} is the value \java{3}, and \java{3 + "Hello"} is the value \java{"3Hello"}.
-But in the second line, \java{"Hello" + 1} is \java{"Hello1"}, and \java{"Hello1" + 2} is \java{"Hello12"}.
-The difference is when the conversion from integer to string actually takes place.
-
-%Fortunately, this situation only happens when using the plus operator.
-%You cannot for example store an integer directly in a string variable.
-%
-%\begin{code}
-%     String number = 5;  // syntax error
-%\end{code}
 
 \subsection{Order of operations}
 
@@ -639,7 +575,7 @@ In general, each line of code should be a single step of the algorithm.
 
 \index{whitespace}
 
-Recall from the previous chapter that the compiler generally ignores {\bf whitespace}, i.e., newlines, tab characters, and other spaces.
+Recall from Section~\ref{sec:formatting} that the compiler generally ignores {\bf whitespace}, i.e., newlines, tab characters, and other spaces.
 Programmers have a lot of freedom in how they {\em format} their code in terms of indenting, blank lines, spaces around operators, etc.
 However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying your code.
 
@@ -678,3 +614,9 @@ The output indicates the file and line number of each problem.
 
 This output refers to a method beginning on line 93, column 5 of {\tt Hello.java}.
 If you apply Checkstyle to your source code regularly, you will likely internalize good style habits over time.
+
+There are limits to what automatic style checkers can do.
+In particular, they do NOT evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, and the {\em structure} of your algorithms.
+Good comments make it easier for experienced developers to identify errors in your code.
+Good variable names communicate the intent of your program and how the data is organized.
+And good programs tend to avoid doing too much in one statement or method.
