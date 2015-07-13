@@ -3,54 +3,48 @@
 
 \begin{exercise}
 
-Draw a stack frame that shows the state of the program in Section~\ref{time}
-when {\tt main} invokes {\tt printTime}
-with the arguments {\tt 11} and {\tt 59}.
+Draw a stack frame that shows the state of the program in Section~\ref{time} when {\tt main} invokes {\tt printTime} with the arguments {\tt 11} and {\tt 59}.
 
 \end{exercise}
 
 
 \begin{exercise}
 
-The point of this exercise is to practice reading code and to
-make sure that you understand the flow of execution through
-a program with multiple methods.
+The point of this exercise is to practice reading code and to make sure that you understand the flow of execution through a program with multiple methods.
 
 \begin{enumerate}
 
-\item What is the output of the following program?  Be precise
-about where there are spaces and where there are newlines.
+\item What is the output of the following program?
+Be precise about where there are spaces and where there are newlines.
 
-HINT: Start by describing in words what {\tt ping} and
-{\tt baffle} do when they are invoked.
+HINT: Start by describing in words what {\tt ping} and {\tt baffle} do when they are invoked.
 
-\item Draw a stack diagram that shows the state of the program
-the first time {\tt ping} is invoked.
+\item Draw a stack diagram that shows the state of the program the first time {\tt ping} is invoked.
 
 \end{enumerate}
 
 \begin{code}
-  public static void zoop() {
-    baffle();
-    System.out.print("You wugga ");
-    baffle();
-  }
+    public static void zoop() {
+        baffle();
+        System.out.print("You wugga ");
+        baffle();
+    }
 
-  public static void main(String[] args) {
-    System.out.print("No, I ");
-    zoop();
-    System.out.print("I ");
-    baffle();
-  }
+    public static void main(String[] args) {
+        System.out.print("No, I ");
+        zoop();
+        System.out.print("I ");
+        baffle();
+    }
 
-  public static void baffle() {
-    System.out.print("wug");
-    ping();
-  }
+    public static void baffle() {
+        System.out.print("wug");
+        ping();
+    }
 
-  public static void ping() {
-    System.out.println(".");
-  }
+    public static void ping() {
+        System.out.println(".");
+    }
 \end{code}
 
 \end{exercise}
@@ -58,17 +52,12 @@ the first time {\tt ping} is invoked.
 
 \begin{exercise}
 
-The point of this exercise is to make sure you understand how
-to write and invoke methods that take parameters.
+The point of this exercise is to make sure you understand how to write and invoke methods that take parameters.
 
 \begin{enumerate}
+\item Write the first line of a method named {\tt zool} that takes three parameters: an {\tt int} and two {\tt Strings}.
 
-\item Write the first line of a method named {\tt zool} that
-takes three parameters: an {\tt int} and two {\tt Strings}.
-
-\item Write a line of code that invokes {\tt zool}, passing
-as arguments the value {\tt 11}, the name of your first pet,
-and the name of the street you grew up on.
+\item Write a line of code that invokes {\tt zool}, passing as arguments the value {\tt 11}, the name of your first pet, and the name of the street you grew up on.
 \end{enumerate}
 
 \end{exercise}
@@ -76,27 +65,21 @@ and the name of the street you grew up on.
 
 \begin{exercise}
 
-The purpose of this exercise is to take code from a previous exercise
-and encapsulate it in a method that takes parameters.  You should
-start with a working solution to Exercise~\ref{ex:date}.
+The purpose of this exercise is to take code from a previous exercise and encapsulate it in a method that takes parameters.
+You should start with a working solution to Exercise~\ref{ex:date}.
 
 \begin{enumerate}
 
-\item Write a method called {\tt printAmerican}
-that takes the day, date, month and year as parameters and that
-prints them in American format.
+\item Write a method called {\tt printAmerican} that takes the day, date, month and year as parameters and that prints them in American format.
 
-\item Test your method by invoking it from {\tt main} and passing
-appropriate arguments.  The output should look something like this
-(except that the date might be different):
+\item Test your method by invoking it from {\tt main} and passing appropriate arguments.
+The output should look something like this (except that the date might be different):
 
 \begin{stdout}
 Saturday, July 16, 2011
 \end{stdout}
 
-\item Once you have debugged {\tt printAmerican}, write another
-method called {\tt printEuropean} that prints the date in
-European format.
+\item Once you have debugged {\tt printAmerican}, write another method called {\tt printEuropean} that prints the date in European format.
 
 \end{enumerate}
 \end{exercise}

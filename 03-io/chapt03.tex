@@ -566,16 +566,16 @@ The reader should never have to scroll horizontally.
 
 \section{Command-line testing}
 
-You might want to review the advice in Section~\ref{sec:examples}, now that you've written some more substantial programs.
+You really should review the advice in Section~\ref{sec:examples}, now that you've written some more substantial programs.
 Remember, it's more effective to program and debug your code little by little than to attempt writing everything at once.
-Once you've completed programming an algorithm, it's important to test that it works for a variety of inputs.
+And once you've completed programming an algorithm, it's important to test that it works correctly on     a variety of inputs.
 
 Throughout the book, we will illustrate various techniques for testing your programs.
 Most if not all testing is based on a simple idea: does the program do what we expect it to do?
 For simple programs, it's not difficult to run them several times and see what happens.
 But at some point, you will get tired of typing the same test cases over and over again.
 
-We can automate the process of testing input and comparing {\em expected output} with {\em actual output} using the command-line.
+We can automate the process of entering input and comparing {\em expected output} with {\em actual output} using the command-line.
 The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
 Here are step by step instructions.
 
@@ -585,21 +585,21 @@ Here are step by step instructions.
 %You can also download a copy from \url{http://thinkjava.org/}.
 
 \item In the same directory as {\tt Convert.java}, create a plain text file named {\tt test.in} (``in'' is for input).
-Enter the following line and save the file:
+Enter the following line and save the file.
 
 \begin{stdout}
 193.04
 \end{stdout}
 
 \item Create a second plain text file named {\tt test.exp} (``exp'' is for expected).
-Enter the following line and save the file:
+Enter the following line and save the file.
 
 \begin{stdout}
 193.04 cm = 6 ft, 4 in
 \end{stdout}
 
 \item Open a command-line, and change to the directory with these files.
-Enter the following command to test the program.
+Run the following command to test the program.
 
 \begin{stdout}
 java Convert < test.in > test.out
@@ -611,6 +611,9 @@ On the command-line, \java{<} and \java{>} are {\bf redirection operators}.
 The first one redirects the contents of {\tt test.in} to \java{System.in}, as if it were entered from the keyboard.
 The second one redirects the contents of \java{System.out} to a new file {\tt test.out}, much like a screen capture.
 In other words, the {\tt test.out} file contains the output of your program.
+
+By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command-line.
+Knowing both techniques allows you to use the right tool for the job, depending on your mood or situation.
 
 At this point, we just need to compare the contents {\tt test.out} with {\tt test.exp}.
 If the files are the same, then the program outputted what we expected it to output.
@@ -627,7 +630,7 @@ If the expected output differs from the actual output, then we need to debug our
 Or in some cases, we need to debug our test cases.
 There's always a chance we may have a correct program and a typo in the expected output.
 
-By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command-line.
-Knowing both techniques allows you to use the right tool for the job, depending on your mood or situation.
-
-%TODO standard I/O is an abstraction that makes redirection possible
+Redirecting a program's input and output is a neat example of how computer scientists use abstraction.
+Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
+In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
+What's great is that doesn't change anything about how you write the code.
