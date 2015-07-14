@@ -23,7 +23,7 @@ Learning how to think in terms of computation is much more valuable than simply 
 
 \index{program}
 
-A {\bf program} is essentially a sequence of instructions that specifies how to perform a computation.
+A {\bf program} is a sequence of instructions that specifies how to perform a computation.
 %\footnote{This definition does not apply to all programming languages; for alternatives, see \url{http://en.wikipedia.org/wiki/Declarative_programming}.}
 The computation might be something mathematical, like solving a system of equations or finding the roots of a polynomial.
 It can also be a symbolic computation, like searching and replacing text in a document or (strangely enough) compiling a program.
@@ -59,7 +59,6 @@ Put simply, {\bf computer science} is the science of algorithms, including their
 An {\bf algorithm} is a sequence of steps that specify exactly how to solve a problem.
 Some algorithms are better than others in terms of low long they take or how much memory they use.
 As you learn to develop algorithms for problems you haven't solved before, you also learn to think like a computer scientist.
-It's much more fun to discover new algorithms than to write the code for solutions that other people came up with!
 
 \index{bug}
 \index{debugging}
@@ -67,14 +66,19 @@ It's much more fun to discover new algorithms than to write the code for solutio
 Designing algorithms and writing code is difficult and error-prone.
 One of the most important problem-solving skills you will learn is how to debug your programs.
 For historical reasons, programming errors are called {\bf bugs}, and the process of tracking them down and correcting them is called {\bf debugging}.
-In the old days, computer scientists had to deal with real bugs flying into their systems.
-You probably won't have that problem, but you will need to think creatively when unexpected errors happen.
 
-\begin{figure}[!h]
-\includegraphics[height=2.2in]{firstbug.jpg}
-\caption{The first computer bug, taped to Grace Hopper's log book in 1947.
-\\ She discovered the moth in an electromagnetic relay of the Mark II.}
-\end{figure}
+%In the old days, computer scientists had to deal with real bugs flying into their systems.
+%You probably won't have that problem, but you will need to think creatively when unexpected errors happen.
+
+%\begin{figure}[!h]
+%\includegraphics[height=2.2in]{firstbug.jpg}
+%\caption{The first computer bug, taped to Grace Hopper's log book in 1947.
+%\\ She discovered the moth in an electromagnetic relay of the Mark II.}
+%\end{figure}
+
+% ABD: I don't love this particular piece of mythology, partly because
+% it's not accurate, and partly because stories about the old days bore
+% students.
 
 Although it can be frustrating, debugging is one of the most intellectually rich, challenging, and interesting parts of computer programming.
 In some ways, debugging is like detective work.
@@ -87,9 +91,9 @@ Thinking about how to correct programs and improve their performance sometimes e
 \index{high-level language}
 \index{language!high-level}
 
-The programming language you will be learning is Java, which is relatively new (Sun released the first version in May 1995).
+The programming language you will learn is Java, which is relatively new (Sun released the first version in May 1995).
 Java is an example of a {\bf high-level language}.
-Other high-level languages you may have heard of include C, C++, C\#, Objective-C, Perl, PHP, Python, Ruby, and Visual Basic.
+Other high-level languages you may have heard of include C and C++, JavaScript, Python, Ruby, and Visual Basic.
 
 \index{low-level language}
 \index{language!low-level}
@@ -108,13 +112,13 @@ Second, high-level languages are {\bf portable}, meaning that they can run on di
 Low-level programs can only run on one kind of computer, and have to be rewritten to run on another.
 
 Due to the advantages, almost all programs are written in high-level languages.
-Low-level languages are only used for a few special applications, such as device drivers, that need to interact with hardware directly.
+Low-level languages are only used for programs that need to interact directly with hardware.
 
 \index{interpreter}
 
 Two kinds of programs translate high-level languages into low-level languages: interpreters and compilers.
 An {\bf interpreter} reads a high-level program and executes it, meaning that it does what the program says.
-It processes the program a little at a time, alternately reading lines and performing computations on the fly.
+It processes the program a little at a time, alternately reading lines and performing computations.
 % Figure 1.1 shows the structure of an interpreter.
 
 \begin{figure}[!h]
@@ -140,7 +144,7 @@ Instead of translating programs directly into machine language, the Java compile
 Similar to machine language, byte code is easy (and fast) to interpret.
 But it is also portable, like a high-level language.
 Thus it is possible to compile a Java program on one machine, transfer the byte code to another machine, and then execute (interpret) the byte code on the other machine.
-This ability is an advantage of Java over many other high-level languages.
+This ability is an advantage of Java over some other high-level languages.
 
 \begin{figure}[!h]
 \includegraphics{compiler.pdf}
@@ -157,7 +161,7 @@ On the other hand, it is important to know what steps are happening in the backg
 \index{natural language}
 \index{language!natural}
 
-Learning a programming language is very different from learning a {\bf natural language} such as English, Spanish, French, or German.
+Learning a programming language is very different from learning a {\bf natural language} such as English, Spanish, or German.
 The languages that people speak evolved naturally over time.
 They were not designed by people, although we try to impose order on them for practical reasons.
 
@@ -195,7 +199,7 @@ Similarly, $_2Zz$ is not legal because there is no element with the abbreviation
 
 \index{grammar}
 
-The second type of syntax rule pertains to the {\bf grammar} of the language, or the way that individual tokens can be arranged.
+The second type of syntax rule pertains to the {\bf grammar} of the language, or the way tokens can be arranged.
 The statement $3\ + = 3$ is structurally illegal, even though $+$ and $=$ are legal tokens, because you can't have one right after the other.
 Similarly, in a chemical formula the subscript comes after the element name, not before.
 
@@ -262,7 +266,7 @@ Small errors in spelling and punctuation, which you can get away with in natural
 \index{hello world}
 
 Traditionally, the first program you write when learning a new programming language is called the hello world program.
-All it does is display the words ``Hello, World!''
+All it does is display the words ``Hello, World!'' on the screen.
 In Java, it looks like this:
 
 \begin{code}
@@ -330,6 +334,9 @@ When the program runs, it starts at the first statement in \java{main} and ends 
 Java uses squiggly braces (\{ and \}) to group things together.
 In {\tt Hello.java}, the outermost braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
 
+% ABD: It looks like we don't have line numbers in the listings.
+% Is that a problem for the text here?
+
 \index{println}
 \index{statement!print}
 
@@ -345,7 +352,7 @@ The print statement ends with a semicolon ({\tt ;}).
 
 Line 4 contains a {\bf comment}, or a bit of English text that explains the code that follows.
 When the compiler sees \java{//}, it ignores everything from there until the end of the line.
-You should {\em always write comments} before every major block of code so that other programmers (including your future self) can understand what you meant to do.
+It is a good idea to write a comment before every major block of code so that other programmers (including your future self) can understand what you meant to do.
 
 
 \section{Getting started with DrJava}
@@ -353,9 +360,10 @@ You should {\em always write comments} before every major block of code so that 
 \index{JDK}
 
 In order to compile Java programs on your own computer, you will need to install the Java Development Kit (JDK).
-This free software by Oracle includes tools for developing, debugging, and monitoring Java applications.
+This free software by Oracle includes tools for developing and debugging Java programs.
 All the examples in this book were developed and tested using Java SE Version 7.
-Later versions of Java are generally backward compatible, so feel free to install the latest and greatest release.
+Later versions of Java are generally backward compatible, so if you are
+using a more recent version, the examples in this book should still work.
 
 \begin{figure}[!h]
 \includegraphics[width=\textwidth]{drjava-hello.png}
@@ -365,22 +373,29 @@ Later versions of Java are generally backward compatible, so feel free to instal
 \index{DrJava}
 
 We will use DrJava as the primary development environment throughout the book.
-One of the most distinctive features of DrJava is the Interactions Pane at the bottom of the window.
-It offers both beginning students and more experienced programmers the ability to try out code quickly, without having to write a class definition and save/compile/run the program.
+A useful feature of DrJava is the Interactions Pane at the bottom of the window.
+It provides the ability to try out code quickly, without having to write a class definition and save/compile/run the program.
 Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for more details.
 
 Step-by-step instructions for installing the JDK and configuring DrJava are available on this book's website: \url{http://thinkjava.org/}
+
+% TODO: when we have the specific URL for the install page, let's
+% put it here.
 
 \subsection{The command-line interface}
 
 \index{command-line}
 
-One of the most powerful and useful skills you can learn as a computer scientist is how to use the {\bf command-line} or ``Terminal'' for short.
-This interface gives you direct access to the operating system, allowing you to run programs, manage files and directories, and monitor system resources.
+One of the most powerful and useful skills you can learn as a computer scientist is how to use the {\bf command-line}, also called
+the {\bf terminal}.
+The command-line is an interface to the operating system, which allows you to run programs, manage files and directories, and monitor system resources.
 Many advanced tools, both for software development and general purpose computing, are available only at the command-line.
 
-There are many good tutorials online for learning the command-line for your specific operating system; just search the web or YouTube for ``command line tutorial.''
+There are many good tutorials online for learning the command-line for your operating system; just search the web for ``command line tutorial.''
 To get started, you only need to know four commands: how to change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
+
+% ABD: There's a conflict here between ``Find the details for your system''
+% and ``Here are the UNIX commands''.
 
 \begin{figure}[!h]
 \includegraphics[width=4.5in]{terminal.png}
@@ -389,15 +404,16 @@ To get started, you only need to know four commands: how to change the working d
 
 In this example, the {\tt Hello.java} source file is stored in the {\tt Desktop} directory.
 After changing to that location and listing the files, we use the {\tt javac} command to compile {\tt Hello.java}.
-Running {\tt ls} again, we see that the compiler generated a new file {\tt Hello.class} (the byte code).
-We then run the program using the {\tt java} command, and it displays the output on the following line.
+Running {\tt ls} again, we see that the compiler generated a new file, {\tt Hello.class}, which contains the byte code.
+Then we run the program using the {\tt java} command, which displays the output on the following line.
 
 Note that the {\tt javac} command requires a source file name, whereas the {\tt java} command requires only the class name.
-DrJava runs these same two commands in the background.
-The only difference is that DrJava intercepts the output and displays it in the Interactions Pane.
+If you use DrJava, it runs these commands for you; then it collects the output and displays it in the Interactions Pane.
 
 Taking time to learn this efficient and elegant way of interacting with your operating system will make you more productive as a computer user.
-People who haven't learned the command-line don't know what they're missing.
+People who don't use the command-line interface don't know what they're missing.
+
+% ABD: Maybe add a reference to Neal Stephenson's book?
 
 
 \section{More printing}
@@ -417,20 +433,20 @@ public class Hello {
 }
 \end{code}
 
-As this program demonstrates, you can place comments at the end of a line as well as on lines all by themselves.
+As this program demonstrates, you can put comments at the end of a line as well as on lines all by themselves.
 
 \index{String}
 \index{type!String}
 
-Phrases that appear in quotation marks are called {\bf strings} because they are a sequence of characters.
-Strings can contain any combination of letters, numbers, punctuation marks, symbols, and non-printable characters (including tabs and carriage returns).
+Phrases that appear in quotation marks are called {\bf strings} because they contain a sequence of characters strung together.
+Strings can contain any combination of letters, numbers, punctuation marks, symbols, and even non-printable characters like tab and backspace.
 
 \index{newline}
 \index{print}
 \index{statement!print}
 
 The name \java{println} is short for ``print line.''
-It adds a special character at the end, called a {\bf newline}, that moves the cursor to the next line of the display.
+It adds a special character at the end, called a {\bf newline}, that advances to the beginning of the next line on the screen.
 The next time \java{println} is invoked, the new text appears on the next line.
 To display the output from multiple print statements all on one line, use \java{print}:
 
@@ -446,7 +462,7 @@ public class Goodbye {
 \end{code}
 
 The output appears on a single line as {\tt Goodbye, cruel world}.
-Note there is a space between the word ``Goodbye'' and the second quotation mark.
+Notice that there is a space between the word ``Goodbye'' and the second quotation mark.
 This space appears in the output, so it affects the {\em behavior} of the program.
 
 \subsection{Code formatting}
@@ -465,7 +481,7 @@ System.out.println("cruel world");
 \end{code}
 
 This program would compile and run just as well as the original.
-The carriage returns at the end of each line (i.e., the newlines) do not affect the program's behavior either.
+The newlines at the end of each line do not affect the program's behavior either.
 So we could have also written:
 
 \begin{code}
@@ -475,14 +491,13 @@ System.out.print("Goodbye, "); System.out.println
 \end{code}
 
 It still works, but the program is getting harder and harder to read.
-Newlines and spaces are important for organizing your program visually, making it easier to understand the program and locate errors when they occur.
-Formatting your code well does not take much effort, and it pays huge dividends.
-We will discuss readability and style guidelines in the next chapter.
+Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
+
 
 \subsection{Escape sequences}
 
-It is also possible to print multiple lines of output in just one line of code.
-You simply need to tell java where to place the newline characters.
+It is possible to print multiple lines of output in just one line of code.
+You just have to tell Java where to put the newlines.
 
 \begin{code}
 public class Hello {
@@ -494,7 +509,7 @@ public class Hello {
 }
 \end{code}
 
-The output is two lines, each ending with the (invisible) newline character:
+The output is two lines, each ending with a newline:
 
 \begin{stdout}
 Hello!
@@ -503,9 +518,10 @@ How are you doing?
 
 \index{escape sequence}
 
-The code \java{\\n} is an example of an {\bf escape sequence}, or a sequence of code that represents a special character when used inside a string.
-In a sense, the backslash character allows you to ``escape'' the string's literal interpretation.
-Notice there is no space between \java{\\n} and \java{How} in the previous example.
+The code \java{\\n} is an example of an {\bf escape sequence}, a sequence
+of characters in a string that represents a special character.
+The backslash allows you to ``escape'' the string's literal interpretation.
+Notice there is no space between \java{\\n} and \java{How}.
 If you add a space there, there will be a space at the beginning of the second line.
 
 \begin{table}[!h]
@@ -530,7 +546,7 @@ Since double quotes indicate the beginning and end of strings, you need to escap
     System.out.println("She said \"Hello!\" to me.");
 \end{code}
 
-The resulting output is:
+The result is:
 
 \begin{stdout}
     She said "Hello!" to me.
