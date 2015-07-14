@@ -103,7 +103,7 @@ class Time {
     double second;
 }
 \end{code}
-%
+
 By itself, this code fragment is a legal class definition.  The
 state diagram for a {\tt Time} object looks like this:
 
@@ -143,7 +143,7 @@ Here is an example for the {\tt Time} class:
         this.second = 0.0;
     }
 \end{code}
-%
+
 Where you would expect to see a return type,
 between {\tt public} and {\tt Time}, there is nothing.  That's
 how we (and the compiler) can tell that this is a constructor.
@@ -187,7 +187,7 @@ variables.  For example:
         this.second = second;
     }
 \end{code}
-%
+
 The names and types of the parameters are the same as
 the names and types of the instance variables.  All the
 constructor does is copy the information from the parameters
@@ -251,7 +251,7 @@ class Time {
     }
 }
 \end{code}
-%
+
 In {\tt main}, the first time we invoke {\tt new},
 we provide no arguments, so Java invokes the first constructor.
 The next few lines assign values to the instance
@@ -277,7 +277,7 @@ The output of this program is:
 Time@80cc7c0
 Time@80cc807
 \end{stdout}
-%
+
 When Java prints the value of a user-defined object type, it prints
 the name of the type and a special hexadecimal (base 16) code that is
 unique for each object.  This code is not meaningful in itself; in
@@ -294,7 +294,7 @@ called something like {\tt printTime}:
         System.out.println(t.hour + ":" + t.minute + ":" + t.second);
     }
 \end{code}
-%
+
 Compare this method to the version of {\tt printTime} in
 Section~\ref{time}.
 
@@ -373,7 +373,7 @@ comes after the second:
         return false;
     }
 \end{code}
-%
+
 What is the result of this method if the two times are equal?  Does
 that seem like the appropriate result for this method?  If you were
 writing the documentation for this method, would you mention that case
@@ -395,7 +395,7 @@ Here is a rough draft of this method that is not quite right:
         return sum;
     }
 \end{code}
-%
+
 Although this method returns a {\tt Time} object, it is not
 a constructor.  You should go back and compare the syntax of
 a method like this with the syntax of a constructor, because
@@ -413,7 +413,7 @@ done.
     Time doneTime = addTime(currentTime, breadTime);
     printTime(doneTime);
 \end{code}
-%
+
 The output of this program is {\tt 12:49:30.0}, which is
 correct.  On the other hand, there are cases where the result
 is not correct.  Can you think of one?
@@ -444,7 +444,7 @@ Here's a corrected version of the method.
         return sum;
     }
 \end{code}
-%
+
 Although it's correct, it's starting to get big.  Later
 I suggest much shorter alternative.
 
@@ -484,7 +484,7 @@ Again, a rough draft of this method looks like:
         }
     }
 \end{code}
-%
+
 The first line performs the basic operation; the remainder
 deals with the same cases we saw before.
 
@@ -508,7 +508,7 @@ statements with {\tt while} statements:
         }
     }
 \end{code}
-%
+
 This solution is correct, but not very efficient.
 Can you think of a solution that does not require iteration?
 
@@ -538,7 +538,7 @@ this to the previous version:
         }
     }
 \end{code}
-%
+
 The result is stored in {\tt sum}, so the return type is {\tt void}.
 
 Modifiers and fill-in methods are efficient because they
@@ -604,7 +604,7 @@ Here is a method that converts a {\tt Time} into a {\tt double}:
         return seconds;
     }
 \end{code}
-%
+
 Now all we need is a way to convert from a {\tt double}
 to a {\tt Time} object.  We could write a method to
 do it, but it might make more sense to write it as a third
@@ -619,7 +619,7 @@ constructor:
         this.second = secs;
     }
 \end{code}
-%
+
 This constructor is a little different from the others;
 it involves some calculation along with assignments to the
 instance variables.
@@ -634,7 +634,7 @@ you're convinced, we can use these methods to rewrite {\tt addTime}:
         return new Time(seconds);
     }
 \end{code}
-%
+
 This is shorter than the original version, and it is much easier
 to demonstrate that it is correct (assuming, as usual, that the
 methods it invokes are correct).  As an exercise, rewrite {\tt

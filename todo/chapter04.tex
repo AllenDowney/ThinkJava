@@ -16,7 +16,7 @@ simplest form is the {\tt if} statement:
       System.out.println("x is positive");
     }
 \end{code}
-%
+
 The expression in parentheses is called the condition.
 If it is true, then the statements in brackets get executed.
 If the condition is not true, nothing happens.
@@ -37,7 +37,7 @@ sometimes called {\bf relational operators}:
     x >= y               // x is greater than or equal to y
     x <= y               // x is less than or equal to y
 \end{code}
-%
+
 Although these operations are probably familiar to you, the
 syntax Java uses is a little different from mathematical
 symbols like $=$, $\neq$ and $\le$.  A common error is
@@ -71,7 +71,7 @@ which one gets executed.  The syntax looks like:
       System.out.println("x is odd");
     }
 \end{code}
-%
+
 If the remainder when {\tt x} is divided by 2 is zero, then
 we know that {\tt x} is even, and this code prints a message
 to that effect.  If the condition is false, the second
@@ -92,7 +92,7 @@ As an aside, if you think you might want to check the parity
     }
   }
 \end{code}
-%
+
 Now you have a method named {\tt printParity} that will print
 an appropriate message for any integer you care to provide.
 In {\tt main} you would invoke this method like this:
@@ -100,7 +100,7 @@ In {\tt main} you would invoke this method like this:
 \begin{code}
     printParity(17);
 \end{code}
-%
+
 Always remember that when you {\em invoke} a method, you do
 not have to declare the types of the arguments you provide.
 Java can figure out what type they are.  You should resist the
@@ -128,7 +128,7 @@ and choose one of several actions.  One way to do this is by
       System.out.println("x is zero");
     }
 \end{code}
-%
+
 These chains can be as long as you want, although they can
 be difficult to read if they get out of hand.  One way to
 make them easier to read is to use standard indentation,
@@ -156,7 +156,7 @@ as:
       }
     }
 \end{code}
-%
+
 There is now an outer conditional that contains two branches.  The
 first branch contains a simple {\tt print} statement, but the second
 branch contains another conditional statement, which has two branches
@@ -192,7 +192,7 @@ is if you detect an error condition:
     System.out.println("The log of x is " + result);
   }
 \end{code}
-%
+
 This defines a method named {\tt printLogarithm} that takes a
 {\tt  double} named {\tt x} as a parameter.  It checks whether
 {\tt  x} is less than or equal to zero, in which case it prints an error
@@ -256,7 +256,7 @@ For example, look at the following method:
     }
   }
 \end{code}
-%
+
 The name of the method is {\tt countdown} and it takes a single
 integer as a parameter.  If the parameter is zero, it prints
 the word ``Blastoff.''  Otherwise, it prints the number and
@@ -269,7 +269,7 @@ this:
 \begin{code}
     countdown(3);
 \end{code}
-%
+
 The execution of {\tt countdown} begins with {\tt n=3}, and
 since {\tt n} is not zero, it prints the value 3, and then
 invokes itself...
@@ -309,7 +309,7 @@ total output looks like:
 1
 Blastoff!
 \end{stdout}
-%
+
 As a second example, let's look again at the methods
 {\tt newLine} and {\tt threeLine}.
 
@@ -322,7 +322,7 @@ As a second example, let's look again at the methods
     newLine();  newLine();  newLine();
   }
 \end{code}
-%
+
 Although these work, they would not be much help if we wanted
 to print 2 newlines, or 106.  A better alternative would be
 
@@ -334,7 +334,7 @@ to print 2 newlines, or 106.  A better alternative would be
     }
   }
 \end{code}
-%
+
 This program similar to {\tt countdown}; as long as {\tt n} is greater
 than zero, it prints a newline and then invokes itself to
 print {\tt n-1} additional newlines.  The total number
@@ -487,7 +487,7 @@ no bottles of beer,
 ya' can't take one down, ya' can't pass it around,
 'cause there are no more bottles of beer on the wall!
 \end{quote}
-%
+
 And then the song(finally) ends.
 
 Write a program that prints the entire lyrics of
@@ -542,9 +542,9 @@ public class Narf {
 \begin{exercise}
 Fermat's Last Theorem says that there are no integers
 $a$, $b$, and $c$ such that
-%
+
 \[ a^n + b^n = c^n \]
-%
+
 except in the case when $n=2$.
 
 Write a method named {\tt checkFermat} that takes four
@@ -562,7 +562,7 @@ first argument to the power of the second.  For example:
 \begin{code}
     int x = raiseToPow(2, 3);
 \end{code}
-%
+
 would assign the value {\tt 8} to {\tt x}, because $2^3 = 8$.
 
 \end{exercise}

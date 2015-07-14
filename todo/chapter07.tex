@@ -15,7 +15,7 @@ the effect is to replace the old value with the new.
     liz = 7;
     System.out.println(liz);
 \end{code}
-%
+
 The output of this program is {\tt 57}, because the first
 time we print {\tt liz} her value is 5, and the second time
 her value is 7.
@@ -50,7 +50,7 @@ but they don't have to stay that way!
     int b = a;     // a and b are now equal
     a = 3;         // a and b are no longer equal
 \end{code}
-%
+
 The third line changes the value of {\tt a} but it does not
 change the value of {\tt b}, so they are no longer equal.
 In some programming languages a different symbol is used
@@ -89,7 +89,7 @@ Using a {\tt while} statement, we can rewrite {\tt countdown}:
     System.out.println("Blastoff!");
   }
 \end{code}
-%
+
 You can almost read a {\tt while} statement like
 English.  What this means is, ``While {\tt n} is greater than
 zero, print the value of {\tt n} and then reduce
@@ -115,7 +115,6 @@ between the squiggly-brackets, and then go back to step 1.
 This type of flow is called a {\bf loop} because the third step loops
 back around to the top.  The statements inside the loop are called
 the {\bf body} of the loop.
-%
 If the condition is false the
 first time through the loop, the statements inside the loop are
 never executed.
@@ -151,7 +150,7 @@ In other cases it is not so easy to tell:
     }
   }
 \end{code}
-%
+
 The condition for this loop is {\tt n != 1}, so the loop
 will continue until {\tt n} is 1, which will make the condition
 false.
@@ -219,7 +218,7 @@ right column:
       x = x + 1.0;
     }
 \end{code}
-%
+
 The output of this program is
 
 \begin{stdout}
@@ -233,24 +232,24 @@ The output of this program is
 8.0   2.0794415416798357
 9.0   2.1972245773362196
 \end{stdout}
-%
+
 Looking at these values, can you tell what base the {\tt log}
 method uses?
 
 Since powers of two are important
 in computer science, we often want logarithms with
 respect to base 2.  To compute them, we can use the formula:
-%
+
 \begin{equation*}
 \log_2 x = log_e x / log_e 2
 \end{equation*}
-%
+
 Changing the {\tt print} statement to
 
 \begin{code}
       System.out.println(x + "   " + Math.log(x) / Math.log(2.0));
 \end{code}
-%
+
 yields
 
 \begin{stdout}
@@ -264,7 +263,7 @@ yields
 8.0   3.0
 9.0   3.1699250014423126
 \end{stdout}
-%
+
 We can see that 1, 2, 4 and 8 are powers of two, because
 their logarithms base 2 are round numbers.  If we wanted to find
 the logarithms of other powers of two, we could modify the
@@ -277,7 +276,7 @@ program like this:
       x = x * 2.0;
     }
 \end{code}
-%
+
 Now instead of adding something to {\tt x} each time through
 the loop, which yields an arithmetic sequence, we multiply
 {\tt x} by something, yielding a {\bf geometric} sequence.
@@ -292,7 +291,7 @@ The result is:
 32.0   5.0
 64.0   6.0
 \end{stdout}
-%
+
 Log tables may not be useful any more, but for computer scientists,
 knowing the powers of two is!  When you have an idle
 moment, you should memorize the powers of two up to 65536
@@ -318,7 +317,7 @@ the multiples of 2, all on one line.
     }
     System.out.println("");
 \end{code}
-%
+
 The first line initializes a variable named {\tt i}, which is going
 to act as a counter, or {\bf loop variable}.  As the loop executes,
 the value of {\tt i} increases from 1 to 6; when {\tt i} is 7, the
@@ -339,7 +338,7 @@ The output of this program is:
 \begin{stdout}
 2   4   6   8   10   12
 \end{stdout}
-%
+
 So far, so good.  The next step is to {\bf encapsulate} and {\bf
 generalize}.
 
@@ -372,7 +371,7 @@ section and generalizes it to print multiples of {\tt n}.
     System.out.println("");
   }
 \end{code}
-%
+
 To encapsulate, all I had to do was add the first line,
 which declares the name, parameter,
 and return type.  To generalize, all I had to do was replace
@@ -384,13 +383,13 @@ output as before.  With argument 3, the output is:
 \begin{stdout}
 3   6   9   12   15   18
 \end{stdout}
-%
+
 and with argument 4, the output is
 
 \begin{stdout}
 4   8   12   16   20   24
 \end{stdout}
-%
+
 By now you can probably guess how we are going to print a
 multiplication table: we'll invoke {\tt printMultiples} repeatedly with
 different arguments.  In fact, we are going to use another loop to
@@ -403,7 +402,7 @@ iterate through the rows.
       i = i + 1;
     }
 \end{code}
-%
+
 First of all, notice how similar this loop is to the one inside {\tt
 printMultiples}.  All I did was replace the print statement with a
 method invocation.
@@ -418,7 +417,7 @@ The output of this program is
 5   10   15   20   25   30
 6   12   18   24   30   36
 \end{stdout}
-%
+
 which is a (slightly sloppy) multiplication table.  If the
 sloppiness bothers you, Java provides methods that give you
 more control over the format of the output, but I'm not
@@ -461,7 +460,7 @@ from the previous section and wrap it up in a method:
     }
   }
 \end{code}
-%
+
 The development process I am demonstrating is called
 {\bf encapsulation and generalization}.
 You start by adding
@@ -527,7 +526,7 @@ size, not just the 6x6 table.  You could add a parameter to
     }
   }
 \end{code}
-%
+
 I replaced the value 6 with the parameter {\tt high}.  If I
 invoke {\tt printMultTable} with the argument 7, I get
 
@@ -540,7 +539,7 @@ invoke {\tt printMultTable} with the argument 7, I get
 6   12   18   24   30   36
 7   14   21   28   35   42
 \end{stdout}
-%
+
 which is fine, except that I probably want the table to
 be square (same number of rows and columns), which means
 I have to add another parameter to {\tt printMultiples},
@@ -568,7 +567,7 @@ with the same name (just like local variables):
     }
   }
 \end{code}
-%
+
 Notice that when I added a new parameter, I had to change the first
 line, and I also had to
 change the place where the method is invoked in {\tt printMultTable}.
@@ -583,7 +582,7 @@ As expected, this program generates a square 7x7 table:
 6   12   18   24   30   36   42
 7   14   21   28   35   42   49
 \end{stdout}
-%
+
 When you generalize a method appropriately, you often find
 that it has capabilities you did not plan.
 For example, you might notice that the multiplication table
@@ -595,13 +594,13 @@ line of {\tt printMultTable}.  Change
 \begin{code}
       printMultiples(i, high);
 \end{code}
-%
+
 to
 
 \begin{code}
       printMultiples(i, i);
 \end{code}
-%
+
 and you get
 
 \begin{stdout}
@@ -613,7 +612,7 @@ and you get
 6   12   18   24   30   36
 7   14   21   28   35   42   49
 \end{stdout}
-%
+
 I'll leave it up to you to figure out how it works.
 
 
@@ -687,7 +686,7 @@ public static void loop(int n) {
     }
 }
 \end{code}
-%
+
 \begin{enumerate}
 
 \item Draw a table that shows the value of the variables {\tt i}
@@ -706,11 +705,11 @@ Let's say you are given a number, $a$, and you want to find
 its square root.  One way to do that is to start with a very
 rough guess about the answer, $x_0$, and then improve
 the guess using the following formula:
-%
+
 \begin{equation*}
 x_1 =(x_0 + a/x_0) / 2
 \end{equation*}
-%
+
 For example, if we want to find the square root of 9, and
 we start with $x_0 = 6$, then $x_1 =(6 + 9/6) /2 = 15/4 = 3.75$,
 which is closer.
@@ -748,11 +747,11 @@ Write an iterative version of {\tt factorial}.
 
 \begin{exercise}
 One way to calculate $e^x$ is to use the infinite series expansion
-%
+
 \begin{equation*}
 e^x = 1 + x + x^2 / 2! + x^3 / 3! + x^4 / 4! + ...
 \end{equation*}
-%
+
 If the loop variable is named {\tt i}, then the $i$th term is
 $x^i / i!$.
 
@@ -808,11 +807,11 @@ estimated values.
 
 \begin{exercise}
 One way to evaluate $\exp(-x^2)$ is to use the infinite series expansion
-%
+
 \begin{equation*}
 \exp(-x^2) = 1 - x^2 + x^4/2 - x^6/6 + \ldots
 \end{equation*}
-%
+
 In other words, we need to add up a series of terms where the $i$th
 term is equal to $(-1)^i x^{2i} / i!$.  Write a method named {\tt gauss}
 that takes {\tt x} and {\tt n} as arguments and that returns the sum

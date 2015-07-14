@@ -18,7 +18,7 @@ You can declare variables with these types in the usual ways:
     int[] count;
     double[] values;
 \end{code}
-%
+
 Until you initialize these variables, they are set to {\tt null}.
 To create the array itself, use {\tt new}.
 
@@ -26,7 +26,7 @@ To create the array itself, use {\tt new}.
     count = new int[4];
     values = new double[size];
 \end{code}
-%
+
 The first assignment makes {\tt count} refer to an array of 4
 integers; the second makes {\tt values} refer to an array of {\tt
 double}s.  The number of elements in {\tt values} depends on {\tt
@@ -65,7 +65,7 @@ expression:
     count[2]++;
     count[3] -= 60;
 \end{code}
-%
+
 These are all legal assignment statements.  Here is the
 result of this code fragment:
 
@@ -95,7 +95,7 @@ variable.  For example:
         i++;
     }
 \end{code}
-%
+
 This is a standard {\tt while} loop that counts from 0
 up to 4, and when the loop variable {\tt i} is 4, the
 condition fails and the loop terminates.  Thus, the body
@@ -120,7 +120,7 @@ copying a reference to the array.  For example:
     double[] a = new double [3];
     double[] b = a;
 \end{code}
-%
+
 This code creates one array of three {\tt double}s, and
 sets two different variables to refer to it.
 This situation is a form of aliasing.
@@ -203,7 +203,7 @@ concisely.  The general syntax looks like this:
         BODY
     }
 \end{code}
-%
+
 This statement is equivalent to
 
 \begin{code}
@@ -213,7 +213,7 @@ This statement is equivalent to
         INCREMENTOR
     }
 \end{code}
-%
+
 except that it is more concise and, since it puts all the
 loop-related statements in one place, it is easier to read.
 For example:
@@ -223,7 +223,7 @@ For example:
         System.out.println(count[i]);
     }
 \end{code}
-%
+
 is equivalent to
 
 \begin{code}
@@ -252,7 +252,7 @@ size array.
         b[i] = a[i];
     }
 \end{code}
-%
+
 The last time the body of the loop gets executed, {\tt i}
 is {\tt a.length - 1}, which is the index of the last element.  When
 {\tt i} is equal to {\tt a.length}, the condition fails and the body
@@ -295,7 +295,7 @@ To see a sample, run this loop:
         System.out.println(x);
     }
 \end{code}
-%
+
 To generate a random {\tt double} between 0.0 and an upper bound like
 {\tt high}, you can multiply {\tt x} by {\tt high}.
 
@@ -329,7 +329,7 @@ array.
       return a;
   }
 \end{code}
-%
+
 The return type is {\tt int[]}, which means that
 this method returns an array of integers.
 To test this method, it is convenient to have a method that
@@ -342,7 +342,7 @@ prints the contents of an array.
       }
   }
 \end{code}
-%
+
 The following code generates an array and prints it:
 
 \begin{code}
@@ -350,7 +350,7 @@ The following code generates an array and prints it:
     int[] array = randomArray(numValues);
     printArray(array);
 \end{code}
-%
+
 On my machine the output is
 
 \begin{stdout}
@@ -363,7 +363,7 @@ On my machine the output is
 44
 81
 \end{stdout}
-%
+
 which is pretty random-looking.  Your results may differ.
 
 If these were exam scores (and they would be pretty bad exam
@@ -429,7 +429,7 @@ public static int inRange(int[] a, int low, int high) {
     return count;
 }
 \end{code}
-%
+
 I wasn't specific about whether something equal
 to {\tt low} or {\tt high} falls in the range, but you can
 see from the code that {\tt low} is in and {\tt high} is out.
@@ -480,7 +480,7 @@ result:
         counts[i] = inRange(scores, i, i+1);
     }
 \end{code}
-%
+
 The only tricky thing here is that we are using the loop variable
 in two roles: as in index into the array, and as the parameter to
 {\tt inRange}.

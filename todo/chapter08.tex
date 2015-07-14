@@ -47,7 +47,7 @@ individual characters (as opposed to strings of them).
       System.out.println(ltr);
     }
 \end{code}
-%
+
 Character values appear in single quotes, like {\tt 'c'}.  Unlike
 string values (which appear in double quotes), character values
 can contain only a single letter or symbol.
@@ -63,7 +63,7 @@ Here's how the {\tt charAt} method is used:
     char letter = fruit.charAt(1);
     System.out.println(letter);
 \end{code}
-%
+
 {\tt fruit.charAt()} means that I am
 invoking the {\tt charAt} method on the object named
 {\tt fruit}.
@@ -76,7 +76,7 @@ the string.  The result is a character, which is stored in a
 \begin{stdout}
 a
 \end{stdout}
-%
+
 {\tt a} is not the first letter of {\tt "banana"}.  Unless you are a
 computer scientist.  For technical reasons, computer scientists
 start counting from zero.  The 0th letter (``zeroeth'') of {\tt
@@ -101,7 +101,7 @@ returns the number of characters in the string.  For example:
 \begin{code}
     int length = fruit.length();
 \end{code}
-%
+
 {\tt length} takes no arguments
 and returns an integer, in this case 6.  Notice that it is
 legal to have a variable with the same name as a method (although
@@ -114,7 +114,7 @@ try something like
     int length = fruit.length();
     char last = fruit.charAt(length);       // WRONG!!
 \end{code}
-%
+
 That won't work.  The reason is that there is no 6th letter
 in {\tt "banana"}.  Since we started counting at 0, the 6
 letters are numbered from 0 to 5.  To get the last character,
@@ -144,7 +144,7 @@ way to encode a traversal is with a {\tt while} statement:
         index = index + 1;
     }
 \end{code}
-%
+
 This loop traverses the string and prints each letter on
 a line by itself.  Notice that the condition is
 {\tt index < fruit.length()}, which means that when
@@ -235,7 +235,7 @@ the string, and returns the value {\tt -1}.
     String fruit = "banana";
     int index = fruit.indexOf('a');
 \end{code}
-%
+
 This finds the index of the letter {\tt 'a'} in the string.
 In this case, the letter appears three times, so it is not
 obvious what {\tt indexOf} should do.  According to the
@@ -252,7 +252,7 @@ If we invoke:
 \begin{code}
     int index = fruit.indexOf('a', 2);
 \end{code}
-%
+
 it starts at the twoeth letter (the first {\tt n}) and finds
 the second {\tt a}, which is at index 3.  If the letter happens
 to appear at the starting index, the starting index is the
@@ -261,7 +261,7 @@ answer.  So
 \begin{code}
     int index = fruit.indexOf('a', 5);
 \end{code}
-%
+
 returns 5.
 
 
@@ -287,7 +287,7 @@ number of times the letter {\tt 'a'} appears in a string:
     }
     System.out.println(count);
 \end{code}
-%
+
 This program demonstrates a common idiom, called a {\bf counter}.  The
 variable {\tt count} is initialized to zero and then incremented each
 time we find an {\tt 'a'}. To {\bf increment} is to increase by one;
@@ -317,7 +317,7 @@ something like:
 \begin{code}
     System.out.println(i++);
 \end{code}
-%
+
 Looking at this, it is not clear whether the increment will
 take effect before or after the value is printed.  Because
 expressions like this tend to be confusing, I discourage
@@ -336,13 +336,13 @@ Using the increment operators, we can rewrite the letter-counter:
       index++;
     }
 \end{code}
-%
+
 It is a common error to write something like
 
 \begin{code}
     index = index++;             // WRONG!!
 \end{code}
-%
+
 Unfortunately, this is syntactically legal, so the compiler
 will not warn you.  The effect of this statement is to leave
 the value of {\tt index} unchanged.  This is often a difficult
@@ -455,7 +455,7 @@ When you invoke {\tt toUpperCase} on a {\tt String}, you get a
     String name = "Alan Turing";
     String upperName = name.toUpperCase();
 \end{code}
-%
+
 After the second line is executed, {\tt upperName} contains
 the value {\tt "ALAN TURING"}, but {\tt name} still contains
 {\tt "Alan Turing"}.
@@ -495,7 +495,7 @@ and {\tt compareTo} methods.  For example:
       System.out.println("name2 comes before name1.");
     }
 \end{code}
-%
+
 The syntax here is a little weird.  To compare two {\tt String}s,
 you have to invoke a method on one of them and pass the other as an
 argument.

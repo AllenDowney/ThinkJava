@@ -139,7 +139,7 @@ public String toString() {
     return ranks[rank] + " of " + suits[suit];
 }
 \end{code}
-%
+
 The return type is {\tt String}, naturally,
 and it takes no parameters.  You can invoke {\tt toString} in
 the usual way:
@@ -148,7 +148,7 @@ the usual way:
     Card card = new Card(1, 1);
     String s = card.toString();
 \end{code}
-%
+
 or you can invoke it indirectly through {\tt println}:
 
 \begin{code}
@@ -181,7 +181,7 @@ For {\tt Card}s we already have a method that checks equivalence:
         return (c1.suit == c2.suit && c1.rank == c2.rank);
     }
 \end{code}
-%
+
 So all we have to do is rewrite is as an object method:
 
 \begin{code}
@@ -189,7 +189,7 @@ So all we have to do is rewrite is as an object method:
         return (suit == c2.suit && rank == c2.rank);
     }
 \end{code}
-%
+
 Again, I removed {\tt static} and the first parameter, {\tt c1}.
 Here's how it's invoked:
 
@@ -198,7 +198,7 @@ Here's how it's invoked:
     Card card2 = new Card(1, 1);
     System.out.println(card.equals(card2));
 \end{code}
-%
+
 Inside {\tt equals}, {\tt card} is the current object and {\tt card2}
 is the parameter, {\tt c2}.  For methods that operate on two objects
 of the same type, I sometimes use {\tt this} explicitly and call
@@ -209,7 +209,7 @@ the parameter {\tt that}:
         return (this.suit == that.suit && this.rank == that.rank);
     }
 \end{code}
-%
+
 I think it improves readability.
 
 

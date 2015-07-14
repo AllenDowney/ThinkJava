@@ -12,13 +12,13 @@ First, you have to use {\tt System.in} to create a new
 \begin{code}
     InputStreamReader in = new InputStreamReader(System.in);
 \end{code}
-%
+
 Then you use {\tt in} to create a new {\tt BufferedReader}:
 
 \begin{code}
     BufferedReader keyboard = new BufferedReader(in);
 \end{code}
-%
+
 Finally you can invoke {\tt readLine} on {\tt keyboard},
 to take input from the keyboard and convert it to a
 String.
@@ -27,7 +27,7 @@ String.
     String s = keyboard.readLine();
     System.out.println(s);
 \end{code}
-%
+
 There is only one problem.  There are things that can go wrong when
 you invoke {\tt readLine}, and they might throw an {\tt IOException}.  A
 method that throws an exception has to include it in the

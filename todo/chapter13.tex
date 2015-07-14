@@ -117,7 +117,7 @@ To create an object that represents the 3 of Clubs, we invoke {\tt new}:
 \begin{code}
     Card threeOfClubs = new Card(0, 3);
 \end{code}
-%
+
 The first argument, {\tt 0} represents the suit Clubs.
 
 
@@ -143,7 +143,7 @@ array of primitive types:
 \begin{code}
     String[] suits = new String[4];
 \end{code}
-%
+
 Then we can set the values of the elements of the array.
 
 \begin{code}
@@ -152,14 +152,14 @@ Then we can set the values of the elements of the array.
     suits[2] = "Hearts";
     suits[3] = "Spades";
 \end{code}
-%
+
 Creating an array and initializing the elements is such a common
 operation that Java provides a special syntax for it:
 
 \begin{code}
     String[] suits = { "Clubs", "Diamonds", "Hearts", "Spades" };
 \end{code}
-%
+
 This statement is equivalent to the
 separate declaration, allocation, and assignment.  The state
 diagram of this array looks like:
@@ -179,7 +179,7 @@ Now we need another array of {\tt String}s to decode the ranks:
     String[] ranks = { "narf", "Ace", "2", "3", "4", "5", "6",
                "7", "8", "9", "10", "Jack", "Queen", "King" };
 \end{code}
-%
+
 The reason for the {\tt "narf"} is to act as a place-keeper for the
 zeroeth element of the array, which is never used (or shouldn't be).
 The only valid ranks are 1--13.  To avoid this wasted element,
@@ -209,7 +209,7 @@ code
     Card card = new Card(1, 11);
     printCard(card);
 \end{code}
-%
+
 is {\tt Jack of Diamonds}.
 
 
@@ -246,7 +246,7 @@ the {\tt ==} operator.  For example:
         System.out.println("card1 and card2 are identical.");
     }
 \end{code}
-%
+
 References to
 the same object are {\bf identical}.  References
 to objects with same data are {\bf equivalent}.
@@ -261,7 +261,7 @@ is common to write a method with a name like {\tt sameCard}.
         return(c1.suit == c2.suit && c1.rank == c2.rank);
     }
 \end{code}
-%
+
 Here is an example that creates two objects with the same data,
 and uses {\tt sameCard} to see if they are equivalent:
 
@@ -273,7 +273,7 @@ and uses {\tt sameCard} to see if they are equivalent:
         System.out.println("card1 and card2 are equivalent.");
     }
 \end{code}
-%
+
 If references are identical, they are also equivalent,
 but if they are equivalent, they are not necessarily identical.
 
@@ -345,7 +345,7 @@ First we compare suits:
     if (c1.suit > c2.suit) return 1;
     if (c1.suit < c2.suit) return -1;
 \end{code}
-%
+
 If neither statement is true, the suits must be equal,
 and we have to compare ranks:
 
@@ -353,7 +353,7 @@ and we have to compare ranks:
     if (c1.rank > c2.rank) return 1;
     if (c1.rank < c2.rank) return -1;
 \end{code}
-%
+
 If neither of these is true, the ranks must be equal,
 so we return {\tt 0}.
 
@@ -403,7 +403,7 @@ the array in the usual way:
         System.out.println("No cards yet!");
     }
 \end{code}
-%
+
 But if you try to access the instance variables of the
 non-existent {\tt Card}s, you get a {\tt NullPointerException}.
 \index{exception!NullPointer}
@@ -413,7 +413,7 @@ non-existent {\tt Card}s, you get a {\tt NullPointerException}.
 \begin{code}
     cards[0].rank;             // NullPointerException
 \end{code}
-%
+
 But that is the correct syntax for accessing the {\tt
 rank} of the ``zeroeth'' card in the deck.  This is another example of
   composition, combining the syntax for accessing an element
@@ -434,7 +434,7 @@ is to write nested for loops (i.e., one loop inside the body of another):
         }
     }
 \end{code}
-%
+
 The outer loop enumerates the suits from 0 to 3.  For
 each suit, the inner loop enumerates the ranks from 1
 to 13.  Since the outer loop runs 4 times, and
@@ -504,7 +504,7 @@ public static int findCard(Card[] cards, Card card) {
     return -1;
 }
 \end{code}
-%
+
 The arguments of {\tt findCard} are {\tt card} and {\tt cards}.
 It might seem odd to have a variable with the same name as a type (the
 {\tt card} variable has type {\tt Card}).  We can tell the difference
@@ -597,7 +597,7 @@ public static int findBisect(Card[] cards, Card card, int low, int high) {
     }
 }
 \end{code}
-%
+
 This code contains the kernel of a bisection search, but it
 is still missing an important piece, which is why I added a TODO comment.
 %
@@ -638,7 +638,7 @@ following code:
     Card card1 = new Card(1, 11);
     System.out.println(findBisect(cards, card1, 0, 51));
 \end{code}
-%
+
 And got the following output:
 
 \begin{stdout}
@@ -649,7 +649,7 @@ And got the following output:
 22, 24
 23
 \end{stdout}
-%
+
 Then I made up a card that is not in the deck (the 15 of Diamonds),
 and tried to find it.  I got the following:
 
@@ -662,7 +662,7 @@ and tried to find it.  I got the following:
 13, 12
 -1
 \end{stdout}
-%
+
 These tests don't prove that this program is correct.  In fact, no
 amount of testing can prove that a program is correct.  On the other
 hand, by looking at a few cases and examining the code, you might be

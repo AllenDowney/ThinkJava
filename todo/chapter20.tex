@@ -259,7 +259,7 @@ For example,
         System.out.println("condition: " + (x > 0 && y < 0));
     }
 \end{code}
-%
+
 Now when you run the program you see three lines of output
 for each time through the loop.  The last time through the
 loop, the condition should be {\tt false}.  If the loop keeps
@@ -496,7 +496,7 @@ For example:
 rect.setLocation(rect.getLocation().translate(
                 -rect.getWidth(), -rect.getHeight()));
 \end{code}
-%
+
 Can be rewritten as
 
 \begin{code}
@@ -506,7 +506,7 @@ Point location = rect.getLocation();
 Point newLocation = location.translate(dx, dy);
 rect.setLocation(newLocation);
 \end{code}
-%
+
 The explicit version is easier to read, because the variable
 names provide additional documentation, and easier to debug,
 because you can check the types of the temporary variables
@@ -525,7 +525,7 @@ $\frac{x}{2 \pi}$, you might write
 \begin{code}
 double y = x / 2 * Math.PI;
 \end{code}
-%
+
 That is not correct, because multiplication and division have
 the same precedence, and they are evaluated from left to right.
 This expression computes $x \pi / 2$.
@@ -536,7 +536,7 @@ make it explicit.
 \begin{code}
 double y = x / (2 * Math.PI);
 \end{code}
-%
+
 This version is correct,
 and more readable for
 other people who haven't memorized the order of operations.
@@ -561,7 +561,7 @@ public Rectangle intersection(Rectangle a, Rectangle b) {
         Math.max(a.y+a.height, b.y+b.height)-Math.min(a.y, b.y) );
 }
 \end{code}
-%
+
 You could write
 
 \begin{code}
@@ -574,7 +574,7 @@ public Rectangle intersection(Rectangle a, Rectangle b) {
     return rect;
 }
 \end{code}
-%
+
 Now you have the opportunity to display any of
 the intermediate variables before returning.  And by
 reusing {\tt x1} and {\tt y1}, you made the code smaller, too.

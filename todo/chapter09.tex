@@ -59,7 +59,7 @@ create a new point, you have to use {\tt new}:
     Point blank;
     blank = new Point(3, 4);
 \end{code}
-%
+
 The first line is a conventional variable declaration: {\tt blank}
 has type {\tt Point}.  The second line invokes {\tt new}, specifies
 the type of the new object, and provides arguments.  The arguments are
@@ -119,7 +119,7 @@ done using ``dot notation.''
 \begin{code}
     int x = blank.x;
 \end{code}
-%
+
 The expression {\tt blank.x} means ``go to the object {\tt blank}
 refers to, and get the value of {\tt x}.''  In this case we assign
 that value to a local variable named {\tt x}.  There is no
@@ -134,7 +134,7 @@ following are legal.
     System.out.println(blank.x + ", " + blank.y);
     int distance = blank.x * blank.x + blank.y * blank.y;
 \end{code}
-%
+
 The first line prints {\tt 3, 4}; the second line calculates
 the value 25.
 
@@ -150,7 +150,7 @@ example:
     System.out.println("(" + p.x + ", " + p.y + ")");
   }
 \end{code}
-%
+
 This method takes a point as an argument and prints it in
 the standard format.  If you invoke {\tt printPoint(blank)},
 it prints {\tt(3, 4)}.  Actually, Java already has a
@@ -160,7 +160,7 @@ method for printing {\tt Points}.  If you invoke
 \begin{code}
 java.awt.Point[x=3,y=4]
 \end{code}
-%
+
 This is a standard format Java uses for printing objects.  It prints
 the name of the type, followed by the names and values of the instance
 variables.
@@ -176,7 +176,7 @@ instead of four {\tt double}s.
     return Math.sqrt(dx*dx + dy*dy);
   }
 \end{code}
-%
+
 The typecasts are not really necessary; I added them as a
 reminder that the instance variables in a {\tt Point} are integers.
 
@@ -195,7 +195,7 @@ creates a {\tt Rectangle} object and makes {\tt box} refer to it.
 \begin{code}
     Rectangle box = new Rectangle(0, 0, 100, 200);
 \end{code}
-%
+
 This figure shows the effect of this assignment.
 
 
@@ -206,7 +206,7 @@ If you print {\tt box}, you get
 \begin{code}
 java.awt.Rectangle[x=0,y=0,width=100,height=200]
 \end{code}
-%
+
 Again, this is the result of a Java method that knows how
 to print {\tt Rectangle} objects.
 
@@ -228,7 +228,7 @@ center of the {\tt Rectangle}:
     return new Point(x, y);
   }
 \end{code}
-%
+
 Notice that you can use {\tt new} to create a new object,
 and then immediately use the result as the return value.
 
@@ -246,7 +246,7 @@ a rectangle without changing its size, you can modify the
     box.x = box.x + 50;
     box.y = box.y + 100;
 \end{code}
-%
+
 The result is shown in the figure:
 
 
@@ -265,7 +265,7 @@ generalize it to move the rectangle by any amount:
     box.y = box.y + dy;
   }
 \end{code}
-%
+
 The variables {\tt dx} and {\tt dy} indicate how far to move the
 rectangle in each direction.  Invoking this method has the effect of
 modifying the {\tt Rectangle} that is passed as an argument.
@@ -275,7 +275,7 @@ modifying the {\tt Rectangle} that is passed as an argument.
     moveRect(box, 50, 100);
     System.out.println(box);
 \end{code}
-%
+
 prints {\tt java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
 
 Modifying objects by passing them as arguments to methods can be
@@ -297,7 +297,7 @@ notation:
 \begin{code}
     box.translate(50, 100);
 \end{code}
-%
+
 %The effect is the same.
 
 
@@ -315,7 +315,7 @@ this code:
     Rectangle box1 = new Rectangle(0, 0, 100, 200);
     Rectangle box2 = box1;
 \end{code}
-%
+
 generates a state diagram that looks like this:
 
 
@@ -335,7 +335,7 @@ variable also affect the other.  For example:
     box1.grow(50, 50);
     System.out.println(box2.width);
 \end{code}
-%
+
 The first line prints {\tt 100}, which is the width of the
 {\tt Rectangle} referred to by {\tt box2}.  The second
 line invokes the {\tt grow} method on {\tt box1}, which
@@ -374,7 +374,7 @@ initialization
 \begin{code}
     Point blank = null;
 \end{code}
-%
+
 and is shown in the following state diagram:
 
 
@@ -396,7 +396,7 @@ and terminates the program.
     int x = blank.x;              // NullPointerException
     blank.translate(50, 50);      // NullPointerException
 \end{code}
-%
+
 On the other hand, it is legal to pass a null object as an argument or
 receive one as a return value.  In fact, it is common to do so, for
 example to represent an empty set or indicate an error condition.
@@ -413,7 +413,7 @@ when {\em no} variable refers to an object?  For example:
     Point blank = new Point(3, 4);
     blank = null;
 \end{code}
-%
+
 The first line creates a new {\tt Point} object and makes
 {\tt blank} refer to it.  The second line changes {\tt blank}
 so that instead of referring to the object, it refers to
@@ -591,7 +591,7 @@ public static void main(String[] args) {
     System.out.println(dist);
 }
 \end{code}
-%
+
 \end{exercise}
 
 
