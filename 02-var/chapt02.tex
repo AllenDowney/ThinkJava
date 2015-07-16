@@ -5,11 +5,14 @@ More importantly, it discusses how to {\em compose} statements using smaller bui
 We also discuss code quality, which is almost as important as correctness.
 High quality code is easier to read, which makes it easier to debug.
 
+%For better or worse, Java performs some conversions automatically when you have different types of data in the same statement.
+%Following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
 
 \section{Types of errors}
 
 \index{error!message}
 
+%As you begin writing your own programs, you will encounter various error messages.
 Three kinds of errors can occur in a program: syntax errors, runtime errors, and logic errors.
 It is useful to distinguish between them in order to track them down more quickly.
 Regardless of what type of error occurs, remember to {\em read and think about the error messages carefully}.
@@ -32,12 +35,12 @@ Java is not so forgiving; if there is a single syntax error anywhere in your pro
 \caption{A syntax error caused by a missing brace.}
 \end{figure}
 
-% ABD: This figure should have a number, and we should refer to it in the
-% text.
+% ABD: This figure should have a number, and we should refer to it in the text.
 
 To make matters worse, the error messages you get from the compiler are often not very helpful.
 For example, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
 The compiler also reports that the problem was found on line 6, which in this case is not at fault.
+%Since line 8 was deleted, the compiler had no other choice.
 
 During the first few weeks of your programming career, you will probably spend a lot of time tracking down syntax errors.
 But as you gain experience, you will make fewer mistakes and find them more quickly.
@@ -165,7 +168,6 @@ As you type, the tokens in your program will appear in different colors.
 For example, keywords might be blue, strings red, comments green, and other code black.
 If you type a variable name and it turns blue, watch out!
 
-
 \subsection{Assignment}
 
 \index{assignment}
@@ -193,8 +195,7 @@ The vocabulary can be confusing here, but the idea is straightforward:
 
 As a general rule, a variable has to have the same type as the value you assign to it.
 For example, you cannot store a \java{String} in \java{minute} or an integer in \java{message}.
-We will see some examples that seem to break this rule, but we'll
-get to that later.
+We will see some examples that seem to break this rule, but we'll get to that later.
 
 %On the other hand, that rule can be confusing.
 %There are many ways that you can convert values from one type to another, and Java sometimes converts things automatically.
@@ -208,7 +209,6 @@ But that is not the same thing as the integer \java{123}.
     message = "123";  // legal
     message = 123;    // not legal
 \end{code}
-
 
 \subsection{Memory diagrams}
 
@@ -229,9 +229,9 @@ message & \framebox[2cm]{Hello!} \\
 
 Each box represents the storage location that holds the variable's value.
 %Since these locations can be anywhere in memory, we refer to them by the variable name.
-Once declared, you cannot change the name of a variable, but you can change the value as many times as you like.  For example, \java{hour} was
-initially 10, then reassigned to 11.  The diagram shows only the final
-value.
+Once declared, you cannot change the name of a variable, but you can change the value as many times as you like.
+For example, \java{hour} was initially 10, then reassigned to 11.
+The diagram shows only the final value.
 
 
 \section{Printing variables}
@@ -297,17 +297,30 @@ On many operating systems, the output from \java{print} is stored without being 
 If you omit the {\tt println}, the program may display the stored output at unexpected times or even terminate without displaying anything.
 
 
-% ABD: I'd like to postpone the discussion of final variables.  At
-% this point I think they solve a problem the students don't understand
-% yet.
-
+% ABD: I'd like to postpone the discussion of final variables.
+% At this point I think they solve a problem the students don't understand yet.
 
 
 \section{Arithmetic operators}
 
+%Recall that Java programs are organized into {\em classes}, each of which has one or more {\em methods}, each of which has one or more {\em statements}.
+%Most statements consist of one or more {\bf expressions}.
+%For example, the expressions below are variable names, numbers, or both.
+%Each expression represents a single value to be computed.
+
+%\begin{code}
+%    1 + 1     hour - 1     hour * 60 + minute     minute / 60
+%    2         11 - 1       11 * 60 + 59           59 / 60
+%              10           660 + 59               0
+%                           719
+%\end{code}
+
 \index{operator}
+
 {\bf Operators} are symbols that represent computations like addition and multiplication.
+%Most operators in Java do what you expect them to do, since they are common mathematical symbols.
 For example, the operator for addition is \java{+}, subtraction is \java{-}, multiplication is \java{*}, and division is \java{/}.
+%Variables are replaced with their values before the computation is performed.
 
 The following program converts the time of day to minutes:
 
@@ -319,11 +332,10 @@ The following program converts the time of day to minutes:
     System.out.println(hour * 60 + minute);
 \end{code}
 
-In this program, \java{hour * 60 + minute} is an {\bf expression},
-which is a combination of numbers, variables, and operators.
-The the program runs, each variable is replaced by its value, and
-then the operators are applied to the values.
+\index{expression}
 
+In this program, \java{hour * 60 + minute} is an {\bf expression}, which is a combination of numbers, variables, and operators.
+The the program runs, each variable is replaced by its value, and then the operators are applied to the values.
 The result is:
 
 \begin{stdout}
@@ -331,8 +343,7 @@ Number of minutes since midnight: 719
 \end{stdout}
 
 Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
-For example, the following lines try to compute the fraction of
-an hour that has elapsed:
+For example, the following lines try to compute the fraction of an hour that has elapsed:
 
 \begin{code}
     System.out.print("Fraction of the hour that has passed: ");
@@ -347,7 +358,6 @@ Fraction of the hour that has passed: 0
 
 \index{division!integer}
 \index{integer division}
-\index{operand}
 
 This result often confuses people.
 After all, the value of {\tt minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
@@ -369,6 +379,7 @@ Percent of the hour that has passed: 98
 \end{stdout}
 
 Again the result is rounded down, but at least now it's approximately correct.
+%To get a more precise answer, we can use a different type of variable that can store fractional values.
 
 
 \section{Floating-point numbers}
@@ -378,6 +389,7 @@ Again the result is rounded down, but at least now it's approximately correct.
 \index{type!double}
 
 A more general solution is to use {\bf floating-point} numbers, which can represent fractions as well as integers.
+%As the name implies, the decimal point floats around (i.e., you can have as many decimal places as you want).
 
 In Java, the default floating-point type is called \java{double}, which is short for double-precision.
 You can create \java{double} variables and assign values to them using the same syntax we used for the other types:
@@ -386,12 +398,9 @@ You can create \java{double} variables and assign values to them using the same 
     double pi = 3.14159;
 \end{code}
 
-Although floating-point numbers are useful, they 
-can be a source of confusion.
-For example, Java distinguishes the integer value {\tt 1} from the
-floating-point value {\tt 1.0}, even though they seem to be the same
-number.  They belong to different data types, and strictly speaking,
-you are not allowed to make assignments between types.
+Although floating-point numbers are useful, they can be a source of confusion.
+For example, Java distinguishes the integer value {\tt 1} from the floating-point value {\tt 1.0}, even though they seem to be the same number.
+They belong to different data types, and strictly speaking, you are not allowed to make assignments between types.
 
 The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
 
@@ -444,15 +453,19 @@ The following expressions are illegal:
     "Hello" - 1     "World" / 123     "Hello" * "World"
 \end{code}
 
+%Note that it's unclear looking at these expressions whether \java{message} is an integer or a string.
+%The only way to tell the type of a variable is to look at the place where it is declared.
+
 \index{concatenate}
 
 The \java{+} operator does work with strings, but it might not do what you expect.
-For strings, the \java{+} operator performs {\bf concatenation}, which means joining up the two operands by linking them end-to-end.
+For strings, the \java{+} operator performs {\bf concatenation}, which means joining up each part by linking them end-to-end.
 
 So \java{"Hello, " + "world!"} yields the string \java{"Hello, world!"}.
 Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} to the hello string, which is handy for creating a personalized greeting.
 %When you append two strings, make sure one of them contains a space character.
 %Otherwise you will end up with something like \java{"Hello,world!"}.
+
 
 \section{Order of operations}
 
@@ -486,6 +499,7 @@ If it's not obvious by looking at the expression, use parentheses to make it mor
 \section{Composition}
 
 \index{composition}
+
 So far we have looked at the elements of a programming language---variables, expressions, and statements---in isolation, without talking about how to put them all together.
 
 One of the most useful features of programming languages is their ability to take small building blocks and {\bf compose} them.
@@ -556,11 +570,10 @@ One prominent example is Checkstyle, which has the built-in ability to enforce m
 Checkstyle is primarily a command-line tool.
 Instructions for downloading and running Checkstyle are available on our website: \url{http://thinkjava.org/}
 
-% TODO: When we have the website up, let's update this with a more
-% specific URL
+% TODO: When we have the website up, let's update this with a more specific URL
 
-% ABD: I suggest we remove the following details and put them on
-% the web page ----------
+% ABD: I suggest we remove the following details and put them on the web page
+% ----------
 
 In short, you first copy Checkstyle and a configuration file into the directory of your source code.
 Then from the command-line:

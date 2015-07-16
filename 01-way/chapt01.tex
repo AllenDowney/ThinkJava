@@ -59,6 +59,7 @@ Put simply, {\bf computer science} is the science of algorithms, including their
 An {\bf algorithm} is a sequence of steps that specify exactly how to solve a problem.
 Some algorithms are better than others in terms of low long they take or how much memory they use.
 As you learn to develop algorithms for problems you haven't solved before, you also learn to think like a computer scientist.
+%It's much more fun to discover new algorithms than to write the code for solutions that other people came up with!
 
 \index{bug}
 \index{debugging}
@@ -76,9 +77,7 @@ For historical reasons, programming errors are called {\bf bugs}, and the proces
 %\\ She discovered the moth in an electromagnetic relay of the Mark II.}
 %\end{figure}
 
-% ABD: I don't love this particular piece of mythology, partly because
-% it's not accurate, and partly because stories about the old days bore
-% students.
+% ABD: I don't love this particular piece of mythology, partly because it's not accurate, and partly because stories about the old days bore students.
 
 Although it can be frustrating, debugging is one of the most intellectually rich, challenging, and interesting parts of computer programming.
 In some ways, debugging is like detective work.
@@ -362,8 +361,7 @@ It is a good idea to write a comment before every major block of code so that ot
 In order to compile Java programs on your own computer, you will need to install the Java Development Kit (JDK).
 This free software by Oracle includes tools for developing and debugging Java programs.
 All the examples in this book were developed and tested using Java SE Version 7.
-Later versions of Java are generally backward compatible, so if you are
-using a more recent version, the examples in this book should still work.
+Later versions of Java are generally backward compatible, so if you are using a more recent version, the examples in this book should still work.
 
 \begin{figure}[!h]
 \includegraphics[width=\textwidth]{drjava-hello.png}
@@ -379,23 +377,22 @@ Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for
 
 Step-by-step instructions for installing the JDK and configuring DrJava are available on this book's website: \url{http://thinkjava.org/}
 
-% TODO: when we have the specific URL for the install page, let's
-% put it here.
+% TODO: when we have the specific URL for the install page, let's put it here.
 
 \subsection{The command-line interface}
 
 \index{command-line}
+\index{terminal}
 
 One of the most powerful and useful skills you can learn as a computer scientist is how to use the {\bf command-line}, also called
-the {\bf terminal}.
+the {\em terminal}.
 The command-line is an interface to the operating system, which allows you to run programs, manage files and directories, and monitor system resources.
 Many advanced tools, both for software development and general purpose computing, are available only at the command-line.
 
 There are many good tutorials online for learning the command-line for your operating system; just search the web for ``command line tutorial.''
 To get started, you only need to know four commands: how to change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
 
-% ABD: There's a conflict here between ``Find the details for your system''
-% and ``Here are the UNIX commands''.
+% ABD: There's a conflict here between ``Find the details for your system'' and ``Here are the UNIX commands''.
 
 \begin{figure}[!h]
 \includegraphics[width=4.5in]{terminal.png}
@@ -492,7 +489,8 @@ System.out.print("Goodbye, "); System.out.println
 
 It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
-
+%Formatting your code well does not take much effort, and it pays huge dividends.
+%We will discuss readability and style guidelines in the next chapter.
 
 \subsection{Escape sequences}
 
@@ -518,8 +516,7 @@ How are you doing?
 
 \index{escape sequence}
 
-The code \java{\\n} is an example of an {\bf escape sequence}, a sequence
-of characters in a string that represents a special character.
+The code \java{\\n} is an example of an {\bf escape sequence}, a sequence of characters in a string that represents a special character.
 The backslash allows you to ``escape'' the string's literal interpretation.
 Notice there is no space between \java{\\n} and \java{How}.
 If you add a space there, there will be a space at the beginning of the second line.
