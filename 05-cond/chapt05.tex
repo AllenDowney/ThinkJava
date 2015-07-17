@@ -1,6 +1,100 @@
 \chapter{Conditionals and recursion}
 
 
+\section{Boolean expressions}
+\index{boolean}
+\index{expression!boolean}
+
+Most of the operations we have seen produce results that are
+the same type as their operands.  For example, the {\tt +} operator
+takes two {\tt int}s and produces an {\tt int}, or two {\tt double}s
+and produces a {\tt double}, etc.
+
+\index{operator!relational}
+\index{relational operator}
+
+The exceptions we have seen are the {\bf relational operators}, which
+compare {\tt int}s and {\tt float}s and return either {\tt true} or
+{\tt false}.  {\tt true} and {\tt false} are special values in Java,
+and together they make up a type called {\bf boolean}.  You might
+recall that when I defined a type, I said it was a set of values.  In
+the case of {\tt int}s, {\tt double}s and {\tt String}s, those sets
+are pretty big.  For {\tt boolean}s, there are only two values.
+
+Boolean expressions and variables work just like other types of
+expressions and variables:
+
+\begin{code}
+    boolean flag;
+    flag = true;
+    boolean testResult = false;
+\end{code}
+
+The first example is a simple variable declaration;
+the second example is an assignment, and the third example is an
+initialization.
+
+The values {\tt true} and {\tt false}
+are keywords in Java, so they may appear in a different color,
+depending on your development environment.
+
+\index{initialization}
+\index{statement!initialization}
+
+The result of a conditional operator is a boolean,
+so you can store the result of a comparison in a variable:
+
+\begin{code}
+    boolean evenFlag = (n%2 == 0);     // true if n is even
+    boolean positiveFlag = (x > 0);    // true if x is positive
+\end{code}
+
+and then use it as part of a conditional statement later:
+
+\begin{code}
+    if (evenFlag) {
+      System.out.println("n was even when I checked it");
+    }
+\end{code}
+
+A variable used in this way is called a {\bf flag}
+because it flags the presence or absence of some condition.
+
+
+\section{Logical operators}
+\index{logical operator}
+\index{operator!logical}
+
+There are three {\bf logical operators} in Java: AND, OR and NOT,
+which are denoted by the symbols {\tt \&\&}, {\tt ||} and
+{\tt !}.  The semantics of these operators is similar
+to their meaning in English.  For example {\tt x > 0 \&\& x < 10}
+is true only if {\tt x} is greater than zero AND less than 10.
+\index{semantics}
+
+{\tt evenFlag || n\%3 == 0} is true if {\em either} of
+the conditions is true, that is, if {\tt evenFlag} is true OR the
+number is divisible by 3.
+
+Finally, the NOT operator inverts a boolean expression, so {\tt
+  !evenFlag} is true if {\tt evenFlag} is false---if the number is
+odd.
+
+\index{nested structure}
+
+Logical operators can simplify nested
+conditional statements.  For example, can you re-write
+this code using a single conditional?
+
+\begin{code}
+    if (x > 0) {
+      if (x < 10) {
+        System.out.println("x is a positive single digit.");
+      }
+    }
+\end{code}
+
+
 \section{Conditional execution}
 \index{conditional}
 \index{statement!conditional}
