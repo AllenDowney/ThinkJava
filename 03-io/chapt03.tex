@@ -1,92 +1,28 @@
 \chapter{Input and output}
 
-A number of years ago, Jeannette Wing published a terrific editorial with the title {\it Computational Thinking}, or in her own words, ``Ways to Think Like a Computer Scientist'' (see Communications of the ACM, March 2006).
-This 3-page article summarizes many of the problem-solving techniques you will discover while learning to program.
-Everyone interested in learning computer science beyond programming should read it.
-She defines the field this way:
+%A number of years ago, Jeannette Wing published a terrific editorial with the title {\it Computational Thinking}, or in her own words, ``Ways to Think Like a Computer Scientist'' (see Communications of the ACM, March 2006).
+%This 3-page article summarizes many of the problem-solving techniques you will discover while learning to program.
+%Everyone interested in learning computer science beyond programming should read it.
+%She defines the field this way:
 
-\index{computer science}
+%\index{computer science}
 
-\begin{quote}
-{\bf ``Computer science is the study of computation---what can be computed and how to compute it.''}
-\end{quote}
+%\begin{quote}
+%{\bf ``Computer science is the study of computation---what can be computed and how to compute it.''}
+%\end{quote}
 
-So far the only programs we've looked at simply display messages, which doesn't involve a lot of real computation.
-But that will change quickly as we begin to work with more types of data.
+The programs we've looked at so far just display messages, which doesn't involve a lot of real computation.
 This chapter will show you how to read input from the keyboard, use that input to calculate a result, and then format that result for output.
-We will also look at some technical details about how operating systems work.
 
-
-\section{The Java class library}
-
-\index{library}
-
-Like most programming languages, Java has an extensive {\bf library} of class and method definitions that you can use in your programs.
-You can browse this library on Oracle's website:
-\url{http://docs.oracle.com/javase/7/docs/api/}
-
-\index{package}
-
-The standard edition of Java comes with {\em several thousand} classes, which can be both exciting and intimidating.
-To help keep things organized, classes are grouped into {\bf packages}.
-Just as each \java{class} is a separate file, each \java{package} is a separate folder.
-We have now seen all major organizational units of Java code.
-As a review from the previous two chapters:
-
-\begin{figure}[!h]
-\includegraphics[width=4in]{package.pdf}
-\caption{Elements of the Java language, from largest to smallest.}
-\end{figure}
-
-Two library classes we have used thus far, \java{System} and \java{String}, belong to the \java{java.lang} package.
-According to the documentation, \java{java.lang} ``provides classes that are fundamental to the design of the Java programming language.''
-Note there is a major difference between the Java {\em language}, which deals with syntax and grammar, and the Java {\em library}, which provides the built-in classes.
-In fact, most of the Java library itself is written in Java!
-
-\index{import}
-\index{statement!import}
-
-In order to use a class defined in another package (and in another folder), you have to {\bf import} it first.
-
-\begin{code}
-import java.io.File;
-import java.io.PrintStream;
-import java.util.Date;
-import java.util.Scanner;
-\end{code}
-
-All \java{import} statements appear at the top of the source file, above the class definition.
-It's not uncommon for Java programs to have many import statements.
-Because they are so fundamental, all classes in \java{java.lang} are imported automatically.
-That is why we haven't needed the \java{import} statement until now.
 
 \subsection{The System class}
 \label{sec:system}
-
 \index{System class}
 \index{class!System}
 \index{object}
 
-When you call \java{System.out.println}, you are referring to the \java{out} variable declared in the \java{System} class.
-The \java{out} variable's type is \java{PrintStream}, which provides methods for ``printing'' data.
-Both \java{System} and \java{PrintStream} are written in Java, and later in the book we'll examine their source code.
-For now, you should understand that \java{System.out} is a \java{PrintStream} {\bf object}.
-Because Java is an {\em object-oriented} language, much of the library is organized around objects that perform specific actions.
-
-\begin{figure}[!h]
-\includegraphics{system.pdf}
-\caption{\java{System.out.println} references the \java{out} variable of the \java{System} class,
-\\ which has the type \java{PrintStream}, which has a method called \java{println}.}
-\end{figure}
-
-\index{operating system}
-
-As with most software, Java programs run on top of an {\bf operating system} that manages the keyboard, the display, main memory, disk drives, printers, the network, and other hardware resources.
-Common examples of operating systems include Android, iOS, Linux, Mac OS~X, and Windows.
-When starting Java programs, the operating system directs \java{System.out} to the screen.
-
-\java{System.out} can display the value of any type of variable.
-Indeed, you can even use \java{System.out} to print the value of \java{System.out}:
+\java{System.out.println} can display the value of any type of variable.
+You can even use \java{println} to print the value of \java{System.out}:
 
 \begin{code}
 System.out.println(System.out);
@@ -100,22 +36,57 @@ java.io.PrintStream@685d72cd
 
 \index{address}
 
-When Java prints an object, it prints the type of the object (\java{PrintStream}), the package where the type is defined (\java{java.io}), and the {\bf address} or location of the object in memory (after the \java{@} sign).
+From this output we can see that
+\java{System.out} is a \java{PrintStream}, which is defined in a
+package called \java{java.io}.  A {\bf package} is a collection of
+related classes; \java{java.io} contains classes related to ``I/O'',
+which stands for input and output.
+
+After the \java{@} sign is the
+location of the object in memory, which is called its {\bf address}.
 In this example the address is \java{685d72cd}, but if you run the same code you will likely get something different.
-You can think of the address as a unique identifier for the object.
+%You can think of the address as a unique identifier for the object.
 
-\index{abstraction}
+\java{System.out} is an {\bf object}, which means that it is a value
+that provides methods.  Specifically, \java{System.out} provides methods
+for displaying data, including \java{print} and \java{println}.
+Numbers with type \java{int} and \java{double} are not objects because
+they provide no methods.  Strings are objects; we will see some of their
+methods soon.
 
-Note the exact type of display doesn't matter, whether it's a 5-inch touch screen or 30-inch monitor.
-From the programmer's point of view, \java{System.out} simply provides the means for printing messages.
-Computer scientists often use {\bf abstraction} to deal with the complexity of software.
-The \java{System} class is a platform-independent abstraction of the operating system.
-The operating system itself is a layer of abstraction on top of computer hardware.
+%When you call \java{System.out.println}, you are referring to the \java{out} variable declared in the \java{System} class.
+%The \java{out} variable's type is \java{PrintStream}, which provides methods for ``printing'' data.
+%Both \java{System} and \java{PrintStream} are written in Java, and later in the book we'll examine their source code.
+%For now, you should understand that \java{System.out} is a \java{PrintStream} {\bf object}.
+%Because Java is an {\em object-oriented} language, much of the library is organized around objects that perform specific actions.
 
-There is also an object named \java{System.in} that makes it possible to get input from the keyboard.
-As with \java{System.out}, the exact type of keyboard (or even touch screen) does not matter to the programmer.
-Unfortunately, Java does not make it easy to use \java{System.in} directly.
-Instead, it provides other classes that make use of \java{System.in} for you.
+The \java{System} class is defined in a file called {\tt System.java},
+and {\tt PrintStream} is defined in {\tt PrintStream.java}.  These
+files are part of the Java {\bf library}, which is an extensive collection
+of classes you can use in your programs.
+
+\begin{figure}[!h]
+\includegraphics{system.pdf}
+\caption{\java{System.out.println} refers to the \java{out} variable of the \java{System} class,
+\\ which is a \java{PrintStream} that provides a method called \java{println}.}
+\end{figure}
+
+% ABD: there is no much new vocab in these sections, I want to reduce
+% the number of new ideas
+
+%\index{operating system}
+
+%As with most software, Java programs run on top of an {\bf operating system} that manages the keyboard, the display, main memory, disk drives, printers, the network, and other hardware resources.
+%Common examples of operating systems include Android, iOS, Linux, Mac OS~X, and Windows.
+%When starting Java programs, the operating system directs \java{System.out} to the screen.
+
+%\index{abstraction}
+
+%Note the exact type of display doesn't matter, whether it's a 5-inch touch screen or 30-inch monitor.
+%From the programmer's point of view, \java{System.out} simply provides the means for printing messages.
+%Computer scientists often use {\bf abstraction} to deal with the complexity of software.
+%The \java{System} class is a platform-independent abstraction of the operating system.
+%The operating system itself is a layer of abstraction on top of computer hardware.
 
 \subsection{The Scanner class}
 
@@ -123,43 +94,59 @@ Instead, it provides other classes that make use of \java{System.in} for you.
 \index{class!Scanner}
 \index{byte}
 
-From the operating system's point of view, data from the keyboard arrives in a series of hardware control signals.
-The operating system translates these signals into a stream of {\bf bytes} (small integers), which in turn need to be translated into characters.
-\java{System.in} provides the means for reading one byte of input at a time, which is hardly useful for programs that would rather read in an entire word or line of input.
+
+%From the operating system's point of view, data from the keyboard arrives in a series of hardware control signals.
+%The operating system translates these signals into a stream of {\bf bytes} (small integers), which in turn need to be translated into characters.
+
+The \java{System} class also provides an object named \java{in}, which is an \java{InputStream} that provides methods for reading input from the keyboard.
+
+\java{System.in} provides methods that perform simple operations, but they
+are not easy to use.
+Fortunately, Java provides other classes that make it easier to handle common tasks.
 
 \index{class!utility}
 \index{utility class}
 
-That's where \java{java.util.Scanner} comes in handy.
-\java{Scanner} is a {\bf utility class} that parses an input stream into words, lines, numbers, and other types of data.
-Because \java{Scanner} belongs to the \java{java.util} package, you need to import it at the top of your program.
-Otherwise you will get a compiler error like ``cannot find symbol'' (i.e., the compiler doesn't know what you mean by \java{Scanner}).
+For example, \java{Scanner} is a class that provides methods for
+inputting words, numbers, and other types of data.  \java{Scanner}
+is provided by \java{java.util}, which is a package that contains
+classes so useful they are called {\bf utility classes}.
+
+Before you can use \java{Scanner}, you have to import it like this:
 
 \begin{code}
 import java.util.Scanner;
 \end{code}
 
-In most programs, you will need only one \java{Scanner}, since there is only one source of input.
-The following code declares a \java{Scanner} variable and then creates a \java{Scanner} object that will parse \java{System.in}.
+This {\bf import statement} tells the compiler that when you say \java{Scanner}, you mean the one defined in {\tt java.util}.  This
+is useful because there might be another class named \java{Scanner}
+in another package.  Using an import statement makes your
+code unambiguous.
+
+Next you have
+to create a \java{Scanner} object using the keyword \java{new}.
+The following code declares a \java{Scanner} variable and then creates a \java{Scanner}:
 
 \begin{code}
     Scanner in;
     in = new Scanner(System.in);
 \end{code}
 
+Although \java{Scanner} is not a function, the syntax is the same
+as a function call.  We pass \java{System.in} as an
+argument, which specifies that we are planning to input values from
+the keyboard.
+
 \index{initialize}
 
-As we saw previously with constants, it is also legal to declare a variable and initialize it at the same time:
+You can also declare the variable and initialize it at the same time:
 
 \begin{code}
     Scanner in = new Scanner(System.in);
 \end{code}
 
-This latter syntax is more convenient, since it's a one-time setup for many programs.
-Just make sure you understand that it's two statements in one.
-
-At this point, you can use the variable \java{in} instead of \java{System.in}.
-The following example reads two lines of input from the keyboard and repeats them back again to the user.
+The new \java{Scanner} object provides a method called \java{nextLine} that reads a line of input from the keyboard and returns a String.
+The following example reads two lines and repeats them back to the user.
 
 \begin{code}
 import java.util.Scanner;
@@ -178,9 +165,354 @@ public class Echo {
         line = in.nextLine();
         System.out.println("You also said: " + line);
     }
-
 }
 \end{code}
+
+If you omit the import statement and refer to \java{Scanner}, you will get a compiler error like ``cannot find symbol'', which means the compiler doesn't know what you mean by \java{Scanner}.
+
+You might wonder why we can use the \java{System} class without importing
+it.  \java{System} belongs to the \java{java.lang} package, which is
+imported automatically.
+According to the documentation, \java{java.lang} ``provides classes that are fundamental to the design of the Java programming language.''
+
+
+\section{The structure of computer programs}
+
+At this point, we have seen all of the elements that make up Java programs.
+The following figure shows these organizational units.
+
+\begin{figure}[!h]
+\includegraphics[width=4in]{package.pdf}
+\caption{Elements of the Java language, from largest to smallest.}
+\end{figure}
+
+To review, a package is a collection of classes, which define methods.
+Methods contains statements, some of which contain expressions.  Expression
+are made up of tokens, which include variable names, numbers, operators,
+keywords, and punctuation like braces and semi-colons.
+
+
+
+
+\section{Inches to centimeters}
+
+%An everyday problem that computers are great at solving is converting numbers from one unit into another.
+Now let's see an example that's a little more useful.
+Although most of the world has adopted the metric system for weights and measures, some countries are stuck with English units.
+For example, when talking with friends in Europe about the weather, people in the United States may have to convert from Celsius to Fahrenheit and back.
+Or you might want to convert your height in inches to centimeters.
+
+%For the rest of the chapter, we will look at how to write programs that solve these types of problems.
+%Specifically, each program will 1) prompt the user for input, 2) read input from the keyboard, 3) calculate a result, and 4) format the result for output.
+%The focus will not only be on Java syntax and language features, but also on the {\em process} of solving the problem, documenting the code, and testing the solution.
+
+We can write a program to help.  We can use a \java{Scanner} to 
+input a measurement in inches, convert to centimeters, and then print
+the results.
+
+These lines declare the variables and create the \java{Scanner}:
+
+% ABD: I am inclined not to include comments in most of the code
+% examples because (1) I think it makes the code less cluttered and
+% easier to read, and (2) they are often redundant with the text.
+
+% I understand that it would be good to demonstrate good commenting
+% style.  Despite this benefit, I think it's better to leave
+% them out.  But I don't feel strongly about it.
+
+\begin{code}
+    int inch;  // the input
+    double cm;  // the output
+    Scanner in = new Scanner(System.in);
+\end{code}
+
+The first step is to prompt the user for the input.
+We'll use \java{print} instead of \java{println} so they can enter the input on the same line.
+
+\begin{code}
+    // prompt the user and get the value
+    System.out.print("How many inches? ");
+    inch = in.nextInt();
+\end{code}
+
+Next we multiply the number of inches by 2.54, since that's how many centimeters there are per inch.
+Finally we display the results on one line, but use two print statements since it's easier to read.
+
+\begin{code}
+    // convert and output the result
+    cm = inch * 2.54;
+    System.out.print(inch + " in = ");
+    System.out.println(cm + " cm");
+\end{code}
+
+\index{magic number}
+
+This code works, but it has a problem.  If another programmer reads
+this code, they might wonder where 2.54 comes from.
+Numbers like this that appear in an expression with no explanation are called {\bf magic numbers}.  For the benefit of other programmer (and yourself in the future), it is helpful to assign magic numbers to variables with informative names:
+
+\begin{code}
+    // convert and output the result
+    final double cmPerInch = 2.54;
+    cm = inch * cmPerInch;
+    System.out.print(inch + " in = ");
+    System.out.println(cm + " cm");
+\end{code}
+
+% ABD: if we postpone ``final'', we should remove it from this example.
+% Or maybe this would be a good place to introduce it!
+
+
+
+\subsection{Formatting output}
+
+When printing floating-point numbers, Java automatically decides how many decimal places to display.
+
+% ABD: What do you think of using the DrJava interpreter format to
+% show the result of simple examples, as in the following?
+
+\begin{code}
+> System.out.print(7.0 / 3.0);
+2.3333333333333335   note: 5 is a rounding error
+\end{code}
+
+\index{printf}
+
+\java{System.out} provides a method called \java{printf}, where the ``f'' stands for ``formatted''.  The first argument of \java{printf} is a {\bf format string} that specifies how values should be displayed.
+The following arguments are the values.
+For example:
+
+\begin{code}
+    System.out.printf("Seven thirds = %.3f", 7.0 / 3.0);
+    // prints 2.333
+\end{code}
+
+The format string contains ordinary text followed by a {\bf format specifier}, which is a special sequence that starts with a percent sign (\java{\%}).
+The format specifier \java{} indicates that the value should be displayed as floating-point with three decimal places.
+
+Here's an example that contains two format specifiers:
+
+\begin{code}
+> inch = 100;
+> cm = inch * cmPerInch;
+> System.out.printf("%d in = %f cm\n", inch, cm);
+100 in = 254.000000 cm  
+\end{code}
+
+The values are matched up with the format specifiers in order, so \java{inch}
+is displayed as an integer (``d'' stands for ``decimal'') and
+\java{cm} is displayed as a floating-point number.
+
+The format string ends with a newline character (\java{\\n}) because \java{printf} does not append a newline like \java{println} does.
+
+Learning \java{printf} is like learning a sub-language within Java.
+There are many options, and the details can be overwhelming.
+But here are some common uses, to give you an idea of how it works:
+
+\begin{table}[!h]
+\begin{tabular}{|l|l|l|}
+\hline
+{\tt \%d} & decimal integer & 12345 \\
+\hline
+{\tt \%,d} & decimal integer with comma separators & 12,345 \\
+\hline
+{\tt \%08d} & padded with zeros, at least 8 digits wide & 00012345 \\
+\hline
+{\tt \%f} & floating-point & 6.789000 \\
+\hline
+{\tt \%.2f} & floating-point {\em rounded} to 2 decimal places & 6.79 \\
+\hline
+\end{tabular}
+\caption{Example format specifiers}
+\end{table}
+
+For more details, refer to the documentation of \java{java.util.Formatter}
+of search the web for ``java formatting.''
+
+As an exercise, see what happens if you try to display value with
+type \java{int} using \java{\%f}.  And what happens if you display
+a \java{float} using \java{\%d}?
+
+
+\section{Centimeters to inches}
+\label{sec:rounding}
+
+Now suppose we have a measurement in centimeters and we want to
+round it off to the nearest inch.  It is tempting to write:
+
+\begin{code}
+> inch = cm / centPerInch;
+\end{code}
+
+But the result is an error, something like, ``Bad types in
+assignment: from double to int.''  The problem is that the value
+on the right hand side is floating-point and the variable on the
+left is an integer.
+
+
+%How do we convert values in the other direction?
+%Unfortunately, we can't just say \java{inch = cent / centPerInch;} because Java won't assign a \java{double} value to an \java{int} variable.
+%We could change the declaration of \java{inch} to be a \java{double}, but there's another way.
+
+%Java converts an \java{int} to a \java{double} automatically, since no information is lost in the process.
+%On the other hand, going from \java{double} to \java{int} gets rid of the decimal places.
+%Java doesn't perform this operation automatically in order to ensure that you are aware of the loss of the fractional part of the number.
+
+\index{type cast}
+\index{operator!cast}
+
+The simplest way to convert a floating-point value to an integer is to use a {\bf type cast}, so called because it molds or ``casts'' a value from one shape to another.
+The syntax for type casting is to put the name of the type in parentheses and use it as an operator.
+
+\begin{code}
+    double pi = 3.14159;
+    int x = (int) pi;
+\end{code}
+
+\index{truncate}
+
+The \java{(int)} operator has the effect of converting what follows into an integer.
+In this example, \java{x} gets the value 3.
+Converting to an integer always rounds down (toward zero), even if the fraction part is 0.999999.
+
+Type casting takes precedence over arithmetic operations.
+
+\begin{code}
+    double pi = 3.14159;
+    double x = (int) pi * 20.0;
+\end{code}
+
+In this example, the value of \java{pi} gets converted to an integer first, so the result is 60.0, not 62.
+
+Keeping that in mind, here's how we can round a measurement in
+centimeters to the nearest inch:
+
+\begin{code}
+    // convert and output the result
+    inch = (int) (cm / centPerInch);
+    System.out.printf("%f cm = %d in\n", cent, inch);
+\end{code}
+
+The parentheses after the cast operator require the division to
+come before the type cast.
+
+
+\subsection{Modulus operator}
+
+Let's take the example one step further: suppose you have a measurement
+in inches and you want to convert to feet and inches.
+The goal is divide by 12 (the number of inches in a foot) and keep the remainder.
+
+\index{modulus}
+\index{operator!modulus}
+
+We have already seen the division operator, \java{/}, which computes
+the quotient of two numbers.  If the numbers are integers, it performs
+floor division.
+Java also provides the {\bf modulus} operator, \java{\%}, which
+divides two numbers and computes the remainder.  Assuming that
+\java{inch} is an integer, we can convert 76 inches to feet and inches like this:
+
+\begin{code}
+    int quotient = 76 / 12;   // division
+    int remainder = 76 % 12;  // modulus
+\end{code}
+
+The first line yields 6.
+The second line, which is pronounced ``76 mod 12'', yields 4.
+So 76 inches is 6 feet, 4 inches.
+
+The modulus operator is a percent sign ({\tt \%}), but you might find it helpful to think of it as a division sign ($\div$) rotated to the left.
+
+\index{divisible}
+\index{extract digits}
+
+The modulus operator turns out to be surprisingly useful.  For
+example, you can check whether one number is divisible by another: if
+{\tt x \% y} is zero, then {\tt x} is divisible by {\tt y}.  You can
+also use modulus to extract digits from a number: {\tt x \% 10} yields
+the rightmost digit of {\tt x}.  Similarly, {\tt x \% 100} yields the
+last two digits.  Also, many encryption algorithms are based on
+modular arithmetic.
+
+
+\section{Putting it all together}
+
+At this point you know enough Java to write useful programs that solve everyday problems.
+Here are the operations we've seen in this chapter:
+
+\begin{multicols}{2}
+\begin{itemize}
+
+%% Chapter 1
+%\item Write a class and main
+%\item Display simple output
+%\item Compile and run programs
+%\item Correct syntax errors
+
+%% Chapter 2
+%\item Declare/assign variables
+%\item Create named constants
+%\item Perform basic arithmetic
+%\item Compose multiple operations
+
+%% Chapter 3
+%\item Browse the Java library
+\item Import Java library classes
+\item Initialize a Scanner object
+\item Get input from the keyboard
+\item Read/write documentation
+\item Format output with printf
+\item Divide and mod integers
+
+\end{itemize}
+\end{multicols}
+
+Now we can put them together in a complete program:
+
+\begin{code}
+import java.util.Scanner;
+
+/**
+ * Converts centimeters to feet and inches.
+ */
+public class Convert {
+    public static void main(String[] args) {
+        double cm;
+        int feet, inches;
+        final double centPerInch = 2.54;
+        Scanner in = new Scanner(System.in);
+
+        // prompt the user and get the value
+        System.out.print("Exactly how many cm? ");
+        cm = in.nextDouble();
+
+        // convert and output the result
+        inches = (int) (cm / centPerInch);
+        feet = inches / 12;
+        inches = inches % 12;
+        System.out.printf("%.2f cm = %d ft, %d in\n",
+                          cm, feet, inches);
+    }
+}
+\end{code}
+
+Notice:
+
+\begin{itemize}
+
+\item Although not required, all variables and constants are declared at the top of \java{main}.
+This practice makes it easier to find their types later on and helps the reader know what data is involved in the algorithm.
+
+\item Integer division and modulus often go together.
+Notice how \java{inches} gets reassigned (which replaces its value) just before the \java{printf}.
+
+\item When statements get long (generally wider than 80 characters), a common style convention is to break them across multiple lines.
+The reader should never have to scroll horizontally.
+
+\end{itemize}
+
+%As an exercise, try running this code through Checkstyle.
 
 
 \section{Reading documentation}
@@ -279,301 +611,16 @@ You should not only write good comments for others, but for yourself as well.
 When you haven't looked at your own code for a while, it takes a long time to remember how it works (or what you were trying to do) if there's no comments.
 
 
-\section{Inches to centimeters}
-
-An everyday problem that computers are great at solving is converting numbers from one unit into another.
-Although most of the world has adopted the metric system for weights and measures, some countries are stuck with English units.
-For example, when talking with friends in Europe about the weather, people in the United States may have to convert from Celsius to Fahrenheit and back.
-And when making an international purchase online, you may have to convert your nation's currency into another based on the exchange rate.
-
-%For the rest of the chapter, we will look at how to write programs that solve these types of problems.
-%Specifically, each program will 1) prompt the user for input, 2) read input from the keyboard, 3) calculate a result, and 4) format the result for output.
-%The focus will not only be on Java syntax and language features, but also on the {\em process} of solving the problem, documenting the code, and testing the solution.
-
-Let's think about how to write this type of program.
-This time, we'll even ask the user to input a specific value.
-We'll need some variables and a scanner.
-
-\begin{code}
-    int inch;  // the input
-    double cent;  // the output
-    Scanner in = new Scanner(System.in);
-\end{code}
-
-The first step is to prompt the user for the input.
-We'll use \java{print} instead of \java{println} so they can enter the input on the same line.
-
-\begin{code}
-    // prompt the user and get the value
-    System.out.print("How many inches? ");
-    inch = in.nextInt();
-\end{code}
-
-Next we multiply the number of inches by 2.54, since that's how many centimeters there are per inch.
-Finally we display the results on one line, but use two print statements since it's easier to read.
-
-\begin{code}
-    // convert and output the result
-    cent = inch * 2.54;
-    System.out.print(inch + " in = ");
-    System.out.println(cent + " cm");
-\end{code}
-
-\index{magic number}
-
-This code works, but for readability we should get rid of the {\bf magic number}.
-Let's put that 2.54 into a constant with a name that documents its purpose.
-
-\begin{code}
-    // convert and output the result
-    final double centPerInch = 2.54;
-    cent = inch * centPerInch;
-    System.out.print(inch + " in = ");
-    System.out.println(cent + " cm");
-\end{code}
-
-\subsection{Formatting output}
-
-When printing floating-point numbers, Java automatically decides how many decimal places to display.
-
-\begin{code}
-    System.out.print(7.0 / 3.0);
-    // prints 2.3333333333333335   note: 5 is a rounding error
-\end{code}
-
-\index{printf}
-
-You can use \java{System.out.printf} to limit (or format) the number of decimal places.
-Instead of just printing what is between the parentheses, \java{printf} allows for substitutions and formatting of output.
-For example:
-
-\begin{code}
-    System.out.printf("%.3f", 7.0 / 3.0);
-    // prints 2.333
-\end{code}
-
-The \java{printf} method takes two or more parameters, separated by commas.
-The first parameter is a {\em format string}.
-It contains a template for the text you want to output, as well as positions where it will substitute other values.
-
-\begin{code}
-    // what we had before
-    System.out.print(inch + " in = ");
-    System.out.println(cent + " cm");
-
-    // same thing using printf
-    System.out.printf("%d in = %f cm\n", inch, cent);
-\end{code}
-
-Parts of the string that begin with a percent sign are called {\bf format specifiers}.
-They not only indicate where to substitute values, but also describe how to format them.
-Note the format string ends with \java{\\n} because \java{printf} does not append a newline like \java{println} does.
-
-To some extent, learning \java{printf} is like learning a sub-language within Java.
-There are many options, and the syntax can get out of hand quickly.
-But here are some common uses, to give you an idea of how it works:
-
-\begin{table}[!h]
-\begin{tabular}{|l|l|l|}
-\hline
-{\tt \%d} & decimal integer & 12345 \\
-\hline
-{\tt \%,d} & decimal integer with comma separators & 12,345 \\
-\hline
-{\tt \%08d} & padded with zeros, at least 8 digits wide & 00012345 \\
-\hline
-{\tt \%f} & floating-point & 6.789000 \\
-\hline
-{\tt \%.2f} & floating-point {\em rounded} to 2 decimal places & 6.79 \\
-\hline
-\end{tabular}
-\caption{Example format specifiers}
-\end{table}
-
-For more details, refer to the documentation of \java{java.util.Formatter}.
-See also the official Java tutorials on Oracle's website by searching the web for ``java formatting.''
-
-
-\section{Centimeters to inches}
-\label{sec:rounding}
-
-How do we convert values in the other direction?
-Unfortunately, we can't just say \java{inch = cent / centPerInch;} because Java won't assign a \java{double} value to an \java{int} variable.
-We could change the declaration of \java{inch} to be a \java{double}, but there's another way.
-
-\subsection{Type casting}
-
-Java converts an \java{int} to a \java{double} automatically, since no information is lost in the process.
-On the other hand, going from \java{double} to \java{int} gets rid of the decimal places.
-Java doesn't perform this operation automatically in order to ensure that you are aware of the loss of the fractional part of the number.
-
-\index{type cast}
-\index{operator!cast}
-
-The simplest way to convert a floating-point value to an integer is to use a {\bf type cast}.
-This operation is so called because it takes a value that belongs to one type and ``casts'' it into another type, in the sense of molding or reshaping the data.
-The syntax for type casting is to put the name of the type in parentheses and use it as an operator.
-
-\begin{code}
-    double pi = 3.14159;
-    int x = (int) pi;
-\end{code}
-
-\index{truncate}
-
-The \java{(int)} operator has the effect of converting what follows into an integer.
-In this example, \java{x} gets the value 3.
-Converting to an integer always {\bf truncates} or rounds down, even if the fraction part is 0.999999.
-Type casting takes precedence over arithmetic operations.
-
-\begin{code}
-    double pi = 3.14159;
-    double x = (int) pi * 20.0;
-\end{code}
-
-In this example, the value of \java{pi} gets converted to an integer first.
-The result is 60.0, not 62.
-Operator precedence and integer truncation make type casting somewhat error-prone.
-We will learn in the next chapter how to round floating-point numbers in the traditional way (i.e., to the closest integer).
-
-So our latest application would have the following:
-
-\begin{code}
-    // convert and output the result
-    inch = (int) (cent / centPerInch);
-    System.out.printf("%f cm = %d in\n", cent, inch);
-\end{code}
-
-Notice the second set of parentheses, after the cast operator.
-
-\subsection{Modulus operator}
-
-Another common type of conversion requires integer division, as opposed to floating-point division.
-For example, how do you convert ``76 inches'' into feet and inches?
-The answer is divide 76 by 12 (the number of inches in a foot) and keep the remainder.
-
-\index{modulus}
-\index{operator!modulus}
-
-The reason why integer division ``rounds down'' is that the hardware computes both the {\em quotient} and the {\em remainder}.
-In Java, you can get the remainder using the {\bf modulus} operator:
-
-\begin{code}
-    int quotient = 76 / 12;   // division
-    int remainder = 76 % 12;  // modulus
-\end{code}
-
-Although the modulus operator is a percent sign ({\tt \%}), you can think of it as a division sign ($\div$) slightly rotated to the left.
-The syntax is the same as with other operators.
-The first line (integer division) yields 6.
-The second line (spoken as ``76 mod 12'') yields 4.
-Thus 76 inches is 6 feet, 4 inches.
-
-\index{divisible}
-\index{extract digits}
-
-%The modulus operator works on both integers and integer expressions.
-%It always yields the remainder when the first operand is divided by the second.
-The remainder turns out to be surprisingly useful.
-For example, you can check whether one number is divisible by another: if {\tt x \% y} is zero, then {\tt x} is divisible by {\tt y}.
-You can also use modulus to extract digits from a number.
-For example, {\tt x \% 10} yields the rightmost digit of {\tt x}.
-Similarly, {\tt x \% 100} yields the last two digits.
-Many encryption algorithms are based on modular arithmetic.
-
-
-\section{Putting it all together}
-
-Congratulations!
-You now know enough Java to write useful programs that solve everyday problems.
-Let's take a step back and review some of what we've discussed in this chapter:
-
-\begin{multicols}{2}
-\begin{itemize}
-
-%% Chapter 1
-%\item Write a class and main
-%\item Display simple output
-%\item Compile and run programs
-%\item Correct syntax errors
-
-%% Chapter 2
-%\item Declare/assign variables
-%\item Create named constants
-%\item Perform basic arithmetic
-%\item Compose multiple operations
-
-%% Chapter 3
-%\item Browse the Java library
-\item Import Java library classes
-\item Initialize a Scanner object
-\item Get input from the keyboard
-\item Read/write documentation
-\item Format output with printf
-\item Divide and mod integers
-
-\end{itemize}
-\end{multicols}
-
-Since we've looked at each of these topics in isolation, it's important to see how they fit together in a complete program.
-If you've been working through the examples on your computer as you've been reading (like we recommended in Section~\ref{sec:examples}), then good job!
-Either way, here is a complete example.
-
-\begin{code}
-import java.util.Scanner;
-
-/**
- * Converts centimeters to feet and inches.
- */
-public class Convert {
-    public static void main(String[] args) {
-        double centimeters;
-        int feet, inches;
-        final double centPerInch = 2.54;
-        Scanner in = new Scanner(System.in);
-
-        // prompt the user and get the value
-        System.out.print("Exactly how many cm? ");
-        centimeters = in.nextDouble();
-
-        // convert and output the result
-        inches = (int) (centimeters / centPerInch);
-        feet = inches / 12;
-        inches = inches % 12;
-        System.out.printf("%.2f cm = %d ft, %d in\n",
-                          centimeters, feet, inches);
-    }
-}
-\end{code}
-
-Please note the following as you study the above example:
-
-\begin{itemize}
-
-\item Although not required, all variables and constants are declared at the top of \java{main}.
-This practice not only makes it easier to find their types later on, it also helps the reader know what data is involved in the algorithm.
-
-\item Integer division and modulus often go together.
-Notice how \java{inches} gets reassigned (which replaces its value) just before the \java{printf}.
-
-\item When statements get long (generally wider than 80 characters), a common style convention is to break them across multiple lines.
-The reader should never have to scroll horizontally.
-
-\end{itemize}
-
-%As an exercise, try running this code through Checkstyle.
-
-
 \section{Command-line testing}
 
-You really should review the advice in Section~\ref{sec:examples}, now that you've written some more substantial programs.
-Remember, it's more effective to program and debug your code little by little than to attempt writing everything at once.
-And once you've completed programming an algorithm, it's important to test that it works correctly on     a variety of inputs.
+%You really should review the advice in Section~\ref{sec:examples}, now that you've written some more substantial programs.
+It's more effective to program and debug your code little by little than to attempt writing everything at once.
+And once you've completed programming an algorithm, it's important to test that it works correctly on a variety of inputs.
 
-Throughout the book, we will illustrate various techniques for testing your programs.
+Throughout the book, we will illustrate techniques for testing your programs.
 Most if not all testing is based on a simple idea: does the program do what we expect it to do?
 For simple programs, it's not difficult to run them several times and see what happens.
-But at some point, you will get tired of typing the same test cases over and over again.
+But at some point, you will get tired of typing the same test cases over and over.
 
 We can automate the process of entering input and comparing {\em expected output} with {\em actual output} using the command-line.
 The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
@@ -613,7 +660,7 @@ The second one redirects the contents of \java{System.out} to a new file {\tt te
 In other words, the {\tt test.out} file contains the output of your program.
 
 By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command-line.
-Knowing both techniques allows you to use the right tool for the job, depending on your mood or situation.
+Knowing both techniques allows you to use the right tool for the job.
 
 At this point, we just need to compare the contents {\tt test.out} with {\tt test.exp}.
 If the files are the same, then the program outputted what we expected it to output.
@@ -628,9 +675,13 @@ The {\tt diff} utility summarizes the differences between two files.
 If there are no differences, then it prints nothing, which in our case is what we want.
 If the expected output differs from the actual output, then we need to debug our program.
 Or in some cases, we need to debug our test cases.
-There's always a chance we may have a correct program and a typo in the expected output.
+There's always a chance we have a correct program and a typo in the expected output.
 
-Redirecting a program's input and output is a neat example of how computer scientists use abstraction.
-Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
-In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
-What's great is that doesn't change anything about how you write the code.
+% ABD: Since I killed the previous reference to abstraction, I am inclined
+% to kill this one too.  The problem in both places is that it pulls the
+% focus off topic.
+
+%Redirecting a program's input and output is an example of how computer scientists use abstraction.
+%Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
+%In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
+%What's great is that doesn't change anything about how you write the code.
