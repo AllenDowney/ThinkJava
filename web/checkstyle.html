@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Getting started with Checkstyle</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<font size="+2"><strong>
+    Getting started with Checkstyle
+</strong></font>
+<br>
+<font size="+1">
+    <a href="http://thinkjava.org/">Think Java, 6/E, Downey and Mayfield</a>
+</font>
+
+<h1>Step 1: Download</h1>
+
+TODO
+
+<h1>Step 2: Running</h1>
+
+<p>
+In short, you first copy Checkstyle and a configuration file into the directory of your source code.
+Then from the command-line:
+</p>
+
+<blockquote><kbd style="background-color: #ffffbe">
+java -jar checkstyle-*-all.jar -c config.xml *.java
+</kbd></blockquote>
+
+<p>
+Note the <kbd>*</kbd> characters are <i>wildcards</i> that match whatever version of Checkstyle you have and whatever java source files are present.
+The output indicates the file and line number of each problem.
+</p>
+
+<blockquote><kbd style="background-color: #fafafa">
+    Hello.java:93:5: Missing a Javadoc comment
+</kbd></blockquote>
+
+<p>
+This output refers to a method beginning on line 93, column 5 of <kbd>Hello.java</kbd>.
+If you apply Checkstyle to your source code regularly, you will likely internalize good style habits over time.
+</p>
+
+</body>
+</html>

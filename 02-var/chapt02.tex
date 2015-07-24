@@ -1,9 +1,9 @@
 \chapter{Variables and arithmetic}
 
 This chapter is about storing values in computer memory and doing basic arithmetic.
-More importantly, it discusses how to {\em compose} statements using smaller building blocks such as variables, literals, and operators.
+More importantly, it discusses how to {\em compose} statements using smaller building blocks such as variables and operators.
 We also discuss code quality, which is almost as important as correctness.
-High quality code is easier to read, which makes it easier to debug.
+High quality code is easier to read, which makes it easier to maintain and debug.
 
 %For better or worse, Java performs some conversions automatically when you have different types of data in the same statement.
 %Following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
@@ -31,16 +31,16 @@ In English, readers can tolerate most syntax errors, which is why we can read th
 Java is not so forgiving; if there is a single syntax error anywhere in your program, the compiler will display an error message and quit, and you will not be able to run the program.
 
 \begin{figure}[!h]
+\centering
 \includegraphics[width=\textwidth]{syntax-error.png}
 \caption{A syntax error caused by a missing brace.}
+\label{fig:syntax}
 \end{figure}
 
-% ABD: This figure should have a number, and we should refer to it in the text.
-
 To make matters worse, the error messages you get from the compiler are often not very helpful.
-For example, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
+As shown in Figure~\ref{fig:syntax}, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
 The compiler also reports that the problem was found on line 6, which in this case is not at fault.
-%Since line 8 was deleted, the compiler had no other choice.
+Since line 8 was deleted, the compiler simply reported the last line of the file.
 
 During the first few weeks of your programming career, you will probably spend a lot of time tracking down syntax errors.
 But as you gain experience, you will make fewer mistakes and find them more quickly.
@@ -155,9 +155,9 @@ For example, if you saw these variable declarations, you could probably guess wh
 This example also demonstrates the syntax for declaring multiple variables with the same type: \java{hour} and \java{second} are both integers.
 Note that each declaration statement ends with a semicolon.
 
-You can use any name you want for a variable or constant.
+You can use any name you want for a variable.
 But there are certain words that are reserved in Java, because they are used by the compiler to parse the structure of the program.
-The {\bf keywords} include \java{public}, \java{class}, \java{static}, \java{void}, \java{int}, and others (there are currently 50 in Java).
+These {\bf keywords} include \java{public}, \java{class}, \java{static}, \java{void}, \java{int}, and others (there are currently 50 in Java).
 Search the Internet for ``Java keywords'' to see the complete list.
 
 %The complete list is available at \url{https://docs.oracle.com/javase/tutorial/}.
@@ -190,7 +190,6 @@ The vocabulary can be confusing here, but the idea is straightforward:
 \item When you declare a variable, you create a named storage location.
 \item When you make an assignment to a variable, you give it a value.
 \item If you reassign the variable, its value changes.
-%The storage location does not change; those memory cells are simply reused.
 \end{itemize}
 
 As a general rule, a variable has to have the same type as the value you assign to it.
@@ -228,11 +227,12 @@ message & \framebox[2cm]{Hello!} \\
 % ABD: In the hour box, consider showing 10 crossed out, followed by 11?
 
 Each box represents the storage location that holds the variable's value.
-%Since these locations can be anywhere in memory, we refer to them by the variable name.
 Once declared, you cannot change the name of a variable, but you can change the value as many times as you like.
 For example, \java{hour} was initially 10, then reassigned to 11.
 The diagram shows only the final value.
 
+%Since these locations can be anywhere in memory, we refer to them by the variable name.
+%The storage location does not change; those memory cells are simply reused.
 
 \section{Printing variables}
 \label{sec:printvar}
@@ -268,8 +268,8 @@ The output of this program is:
 The value of firstLine is Hello, again!
 \end{stdout}
 
-The output does not contain quote marks around \java{Hello, again!}.
-Those quote marks were part of the source code, not the value.
+%The output does not contain quote marks around \java{Hello, again!}.
+%Those quote marks were part of the source code, not the value.
 
 The syntax for printing a variable is the same regardless of the variable's type.
 For example:
@@ -305,15 +305,6 @@ If you omit the {\tt println}, the program may display the stored output at unex
 
 %Recall that Java programs are organized into {\em classes}, each of which has one or more {\em methods}, each of which has one or more {\em statements}.
 %Most statements consist of one or more {\bf expressions}.
-%For example, the expressions below are variable names, numbers, or both.
-%Each expression represents a single value to be computed.
-
-%\begin{code}
-%    1 + 1     hour - 1     hour * 60 + minute     minute / 60
-%    2         11 - 1       11 * 60 + 59           59 / 60
-%              10           660 + 59               0
-%                           719
-%\end{code}
 
 \index{operator}
 
@@ -334,13 +325,23 @@ The following program converts the time of day to minutes:
 
 \index{expression}
 
-In this program, \java{hour * 60 + minute} is an {\bf expression}, which is a combination of numbers, variables, and operators.
-The the program runs, each variable is replaced by its value, and then the operators are applied to the values.
+In this program, \java{hour * 60 + minute} is an {\bf expression}, which represents a single value to be computed.
+When the program runs, each variable is replaced by its current value, and then the operators are applied.
 The result is:
 
 \begin{stdout}
 Number of minutes since midnight: 719
 \end{stdout}
+
+Expressions are generally a combination of numbers, variables, and operators.
+When complied and executed, they become a single value:
+
+\begin{code}
+    1 + 1     hour - 1     hour * 60 + minute     minute / 60
+    2         11 - 1       11 * 60 + 59           59 / 60
+              10           660 + 59               0
+                           719
+\end{code}
 
 Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
 For example, the following lines try to compute the fraction of an hour that has elapsed:
@@ -361,7 +362,7 @@ Fraction of the hour that has passed: 0
 
 This result often confuses people.
 After all, the value of {\tt minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
-The problem here is that Java is performing {\em integer division}.
+The problem here is that Java performs {\em integer division}.
 When the values being divided are integers, the result is also an integer.
 Computer hardware is designed so that integer division always rounds {\em down}, even in cases like this one where the next integer is close.
 
@@ -395,7 +396,8 @@ In Java, the default floating-point type is called \java{double}, which is short
 You can create \java{double} variables and assign values to them using the same syntax we used for the other types:
 
 \begin{code}
-    double pi = 3.14159;
+    double pi;
+    pi = 3.14159;
 \end{code}
 
 Although floating-point numbers are useful, they can be a source of confusion.
@@ -405,20 +407,23 @@ They belong to different data types, and strictly speaking, you are not allowed 
 The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
 
 \begin{code}
-    int x = 1.1;  // syntax error
+    int x;
+    x = 1.1;  // syntax error
 \end{code}
 
 But it is easy to forget this rule because in many cases Java {\em automatically} converts from one type to another:
 
 \begin{code}
-    double y = 1;  // bad style
+    double y;
+    y = 1;  // bad style
 \end{code}
 
-The above example should be illegal, but Java allows it by converting the \java{int} to a \java{double} automatically.
+The above example should be illegal, but Java allows it by converting the \java{int} value \java{1} to the \java{double} value \java{1.0} automatically.
 This leniency is convenient, but it often causes problems for beginners. For example:
 
 \begin{code}
-    double y = 1 / 3;  // logic error
+    double y;
+    y = 1 / 3;  // logic error
 \end{code}
 
 \index{division!integer}
@@ -427,17 +432,18 @@ This leniency is convenient, but it often causes problems for beginners. For exa
 You might expect the variable {\tt y} to get the value {\tt 0.333333}, which is a legal floating-point value.
 But instead it gets the value {\tt 0.0}.
 The reason is that the expression on the right divides two integers.
-So Java does {\em integer division}, which yields the value {\tt 0}.
-Converted to \java{double}, the final result is {\tt 0.0}.
+So Java does {\em integer division}, which yields the \java{int} value \java{0}.
+Converted to \java{double}, the final result is \java{0.0}.
 
 One way to solve this problem (after you finally discover that bug) is to make the right-hand side a floating-point expression.
 The following initializes {\tt y} to {\tt 0.333333}, as expected:
 
 \begin{code}
-    double y = 1.0 / 3.0;  // correct
+    double y;
+    y = 1.0 / 3.0;  // correct
 \end{code}
 
-As a matter of style, you should always assign floating-point literals to floating-point variables.
+As a matter of style, you should always assign floating-point values to floating-point variables.
 The compiler won't make you do it, but you never know when a bug like this one will come back and haunt you.
 
 
@@ -459,12 +465,48 @@ The following expressions are illegal:
 \index{concatenate}
 
 The \java{+} operator does work with strings, but it might not do what you expect.
-For strings, the \java{+} operator performs {\bf concatenation}, which means joining up each part by linking them end-to-end.
-
+For strings, the \java{+} operator performs {\bf concatenation}, which means joining each part end-to-end.
 So \java{"Hello, " + "world!"} yields the string \java{"Hello, world!"}.
 Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} to the hello string, which is handy for creating a personalized greeting.
+
 %When you append two strings, make sure one of them contains a space character.
 %Otherwise you will end up with something like \java{"Hello,world!"}.
+
+%\subsection{Adding Strings and numbers}
+
+%If you add an \java{int} and a \java{double}, Java automatically converts the \java{int} into a \java{double} before performing the addition:
+
+%\begin{code}
+%> System.out.println(1 + 2.0);
+%3.0
+%\end{code}
+
+Since addition is defined for both numbers and strings, Java performs automatic conversions you may not expect:
+
+% TODO: use DrJava interactive format for these examples?
+
+\begin{code}
+    System.out.println(1 + 2 + "Hello");
+    // the output is 3Hello
+    
+    System.out.println("Hello" + 1 + 2);
+    // the output is Hello12
+\end{code}
+
+Java executes these operations from left to right.
+In the first line, \java{1 + 2} is the value \java{3}, and \java{3 + "Hello"} is the value \java{"3Hello"}.
+But in the second line, \java{"Hello" + 1} is \java{"Hello1"}, and \java{"Hello1" + 2} is \java{"Hello12"}.
+The difference is when the conversion from integer to string actually takes place.
+
+%Fortunately, this situation only happens when using the plus operator.
+%You cannot, for example, store an integer directly in a string variable.
+%
+%\begin{code}
+%     String number = 5;  // syntax error
+%\end{code}
+
+%In general, it's better not to compose multiple additions of varying data types.
+%Instead you can break those statements into multiple lines, or use another method like \java{printf} to achieve the same results.
 
 
 \section{Order of operations}
@@ -517,7 +559,7 @@ We've already seen one example:
     System.out.println(hour * 60 + minute);
 \end{code}
 
-You can also put arbitrary expressions on the right-hand side of an assignment statement:
+You can also put arbitrary expressions on the right side of an assignment:
 
 \begin{code}
     int percentage;
@@ -535,12 +577,12 @@ and expressions do not represent storage locations.
 
 \index{readability}
 
-The ability to compose operations may not seem impressive now, but we will see examples later that allow us to write complex computations neatly and concisely.
+The ability to compose operations may not seem that impressive now, but we will see examples later on that allow us to write complex computations neatly and concisely.
 
 Before you get too carried away with composition, keep in mind that other people will be reading your source code.
 In practice, software developers spend the vast majority of their time {\em understanding} and {\em modifying} existing code.
-As a result, it's far more important to write code that is readable than to write code that is (or appears to be) optimal.
-There is much beauty in simplicity.
+Thus it's far more important to write code that is readable than to write code that is (or appears to be) optimal.
+%There is much beauty in simplicity.
 In general, each line of code should be a single step of the algorithm.
 
 
@@ -571,30 +613,6 @@ Checkstyle is primarily a command-line tool.
 Instructions for downloading and running Checkstyle are available on our website: \url{http://thinkjava.org/}
 
 % TODO: When we have the website up, let's update this with a more specific URL
-
-% ABD: I suggest we remove the following details and put them on the web page
-% ----------
-
-In short, you first copy Checkstyle and a configuration file into the directory of your source code.
-Then from the command-line:
-
-\begin{stdout}
-    java -jar checkstyle-*-all.jar -c config.xml *.java
-\end{stdout}
-
-\index{wildcard}
-
-Note the {\tt *} characters are {\bf wildcards} that match whatever version of Checkstyle you have and whatever java source files are present.
-The output indicates the file and line number of each problem.
-
-\begin{stdout}
-    Hello.java:93:5: Missing a Javadoc comment
-\end{stdout}
-
-This output refers to a method beginning on line 93, column 5 of {\tt Hello.java}.
-If you apply Checkstyle to your source code regularly, you will likely internalize good style habits over time.
-
-% ---------
 
 There are limits to what automatic style checkers can do.
 In particular, they can't evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, or the {\em structure} of your algorithms.

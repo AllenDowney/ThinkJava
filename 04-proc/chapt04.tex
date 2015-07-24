@@ -611,47 +611,6 @@ This works as long as the number of cents doesn't exceed the largest integer, wh
 % TODO: have we introduced long yet?  should we do it here?
 
 
-\subsection{Adding Strings and numbers}
-
-% ABD: I suggest killing this section.  It is not really a problem with
-% adding strings and ints; really it's a problem with the order of operations.
-% And it's not something I've seen many students run into.
-
-If you add an \java{int} and a \java{double}, Java automatically converts the \java{int} into a \java{double} before performing the addition:
-
-% TODO: use DrJava interactive format for these examples?
-
-\begin{code}
-> System.out.println(1 + 2.0);
-3.0
-\end{code}
-
-Java performs automatic conversions when adding strings and integers, but the result might not be what you expect:
-
-\begin{code}
-    System.out.println(1 + 2 + "Hello");
-    // the output is 3Hello
-    
-    System.out.println("Hello" + 1 + 2);
-    // the output is Hello12
-\end{code}
-
-Java executes these operations from left to right.
-In the first line, \java{1 + 2} is the value \java{3}, and \java{3 + "Hello"} is the value \java{"3Hello"}.
-But in the second line, \java{"Hello" + 1} is \java{"Hello1"}, and \java{"Hello1" + 2} is \java{"Hello12"}.
-The difference is when the conversion from integer to string actually takes place.
-
-Fortunately, this situation only happens when using the plus operator.
-You cannot, for example, store an integer directly in a string variable.
-
-\begin{code}
-     String number = 5;  // syntax error
-\end{code}
-
-In general, it's better not to compose multiple additions of varying data types.
-Instead you can break those statements into multiple lines, or use another method like \java{printf} to achieve the same results.
-
-
 \subsection{The Scanner bug}
 
 Consider a simple program that asks users for their name and age.
