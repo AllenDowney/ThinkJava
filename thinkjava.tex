@@ -1,14 +1,13 @@
 \documentclass[12pt]{book}
 \usepackage{thinkjava}
-\usepackage{import}
 
 \begin{document}
 
 %\frontmatter
 %
-%\import{00-pre/}{titlepage.tex}
-%\import{00-pre/}{copyright.tex}
-%\import{00-pre/}{preface.tex}
+%\input{todo/titlepage.tex}
+%\input{todo/copyright.tex}
+%\input{todo/preface.tex}
 %
 %% table of contents
 %\cleardoublepage
@@ -17,28 +16,27 @@
 %
 %\mainmatter
 
-\import{01-way/}{chapt01.tex}
-\import{01-way/}{vocab01.tex}
-\import{01-way/}{exerc01.tex}
+\graphicspath{{01-way/}}
+\input{01-way/chapt01.tex}
+\input{01-way/vocab01.tex}
+\input{01-way/exerc01.tex}
 
-\import{02-var/}{chapt02.tex}
-\import{02-var/}{vocab02.tex}
-\import{02-var/}{exerc02.tex}
+\graphicspath{{02-var/}}
+\input{02-var/chapt02.tex}
+\input{02-var/vocab02.tex}
+\input{02-var/exerc02.tex}
 
-%\import{03-io/}{chapt03.tex}
-%\import{03-io/}{vocab03.tex}
-%\import{03-io/}{exerc03.tex}
+\graphicspath{{03-io/}}
+\input{03-io/chapt03.tex}
+\input{03-io/vocab03.tex}
+\input{03-io/exerc03.tex}
 
-%\import{04-proc/}{chapt04.tex}
-%\import{04-proc/}{vocab04.tex}
-%\import{04-proc/}{exerc04.tex}
+\graphicspath{{04-proc/}}
+\input{04-proc/chapt04.tex}
+\input{04-proc/vocab04.tex}
+\input{04-proc/exerc04.tex}
 
-%\setcounter{chapter}{4}
-
-%\import{05-cond/}{chapt05.tex}
-%\import{05-cond/}{vocab05.tex}
-%\import{05-cond/}{exerc05.tex}
-
+%\input{todo/chapter04.tex}
 %\input{todo/chapter05.tex}
 %\input{todo/chapter06.tex}
 %\input{todo/chapter07.tex}
