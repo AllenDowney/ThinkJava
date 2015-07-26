@@ -31,7 +31,6 @@ In English, readers can tolerate most syntax errors, which is why we can read th
 Java is not so forgiving; if there is a single syntax error anywhere in your program, the compiler will display an error message and quit, and you will not be able to run the program.
 
 \begin{figure}[!h]
-\centering
 \includegraphics[width=\textwidth]{syntax-error.png}
 \caption{A syntax error caused by a missing brace.}
 \label{fig:syntax}
@@ -52,14 +51,14 @@ But as you gain experience, you will make fewer mistakes and find them more quic
 %\index{type-safe}
 %\index{language!type-safe}
 
-The second type of error is a runtime error, so called because it does not appear until after the program has started running.
+The second type of error is a {\bf runtime error}, so called because it does not appear until after the program has started running.
 In Java, these errors occur when the interpreter is executing the byte code and something goes wrong.
 %Java is designed to be a {\bf type-safe} language, which means that the compiler can detect many potential errors cased by common programming mistakes.
 Runtime errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter one.
 
 \index{exception}
 
-These errors are also called {\bf exceptions} because they usually indicate that something exceptional (and bad) has happened.
+These errors are also called {\em exceptions} because they usually indicate that something exceptional (and bad) has happened.
 In most environments they appear as windows or dialog boxes that contain information about what happened and what the program was doing when it happened.
 For example, if you accidentally divide by zero you will get an \java{ArithmeticException}:
 
@@ -297,10 +296,6 @@ On many operating systems, the output from \java{print} is stored without being 
 If you omit the {\tt println}, the program may display the stored output at unexpected times or even terminate without displaying anything.
 
 
-% ABD: I'd like to postpone the discussion of final variables.
-% At this point I think they solve a problem the students don't understand yet.
-
-
 \section{Arithmetic operators}
 
 %Recall that Java programs are organized into {\em classes}, each of which has one or more {\em methods}, each of which has one or more {\em statements}.
@@ -477,8 +472,8 @@ Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} t
 %If you add an \java{int} and a \java{double}, Java automatically converts the \java{int} into a \java{double} before performing the addition:
 
 %\begin{code}
-%> System.out.println(1 + 2.0);
-%3.0
+%    System.out.println(1 + 2.0);
+%    // prints 3.0
 %\end{code}
 
 Since addition is defined for both numbers and strings, Java performs automatic conversions you may not expect:
