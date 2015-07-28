@@ -645,6 +645,8 @@ Don't hesitate to reach out to a friend and ask questions!
 %Learning to debug can be frustrating, but it is a valuable skill that is useful for many activities beyond programming.
 %At the end of each chapter there is a debugging section, like this one, with my thoughts about debugging.
 %I hope they help!
+
+
 \section{Vocabulary}
 
 \begin{description}
@@ -752,8 +754,9 @@ Also known as line ending, end of line (EOL), or line break.
 A sequence of code that represents a special character when used inside a string.
 
 \end{description}
-\section{Exercises}
 
+
+\section{Exercises}
 
 \begin{exercise}
 
@@ -770,7 +773,6 @@ When you see familiar words, don't assume that you know what they mean!
 \end{enumerate}
 
 \end{exercise}
-
 
 \begin{exercise}
 
@@ -796,7 +798,6 @@ Adding (and changing) print statements is a simple way to be sure that the progr
 
 \end{exercise}
 
-
 \begin{exercise}
 
 It is a good idea to commit as many errors as you can think of, so that you see what error messages the compiler produces.
@@ -819,6 +820,8 @@ The statement {\tt System.out.print} is legal, but it may or may not do what you
 \end {enumerate}
 
 \end{exercise}
+
+
 \chapter{Variables and arithmetic}
 
 This chapter is about storing values in computer memory and doing basic arithmetic.
@@ -828,6 +831,7 @@ High quality code is easier to read, which makes it easier to maintain and debug
 
 %For better or worse, Java performs some conversions automatically when you have different types of data in the same statement.
 %Following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
+
 
 \section{Types of errors}
 
@@ -1053,6 +1057,7 @@ The diagram shows only the final value.
 
 %Since these locations can be anywhere in memory, we refer to them by the variable name.
 %The storage location does not change; those memory cells are simply reused.
+
 
 \section{Printing variables}
 \label{sec:printvar}
@@ -1435,6 +1440,8 @@ In particular, they can't evaluate the {\em quality} of your comments, the {\em 
 Good comments make it easier for experienced developers to identify errors in your code.
 Good variable names communicate the intent of your program and how the data is organized.
 And good programs are designed to be efficient and demonstrably correct.
+
+
 \section{Vocabulary}
 
 \begin{description}
@@ -1490,7 +1497,7 @@ In Java, the default floating-point type is \java{double}.
 
 \term{concatenate}
 To join two values end-to-end.
-For strings, concatenation means to append.
+For string values, concatenation means to append.
 
 \term{precedence}
 The order in which operations are evaluated.
@@ -1506,8 +1513,9 @@ Its purpose in the Java language is to separate tokens.
 %A command-line feature that allows you to specify a pattern of file names.
 
 \end{description}
-\section{Exercises}
 
+
+\section{Exercises}
 
 \begin{exercise}
 
@@ -1520,7 +1528,6 @@ Then the first player tries to find and fix the error.
 You get two points if you find the error without compiling the program, one point if you find it using the compiler, and your opponent gets a point if you don't find it.
 
 \end{exercise}
-
 
 \begin{exercise}
 \label{ex:date}
@@ -1557,7 +1564,6 @@ HINT: You should be able to copy, paste, and modify the code from Step 4 when co
 
 \end{exercise}
 
-
 \begin{exercise}
 
 The point of this exercise is (1) to use some of the arithmetic operators, and (2) to start thinking about compound entities (like time of day) that that are represented with multiple values.
@@ -1567,7 +1573,8 @@ The point of this exercise is (1) to use some of the arithmetic operators, and (
 \item Create a new program called {\tt Time.java}.
 From now on, we won't remind you to start with a small, working program, but you should.
 
-\item Following the example program in Section~\ref{sec:printvar}, create variables named {\tt hour}, {\tt minute}, and {\tt second}. Assign values that are roughly the current time.
+\item Following the example program in Section~\ref{sec:printvar}, create variables named {\tt hour}, {\tt minute}, and {\tt second}.
+Assign values that are roughly the current time.
 Use a 24-hour clock, i.e., so that at 2pm the value of {\tt hour} is 14.
 
 \item Make the program calculate and print the number of seconds since the most recent midnight.
@@ -1586,6 +1593,8 @@ HINT: You may want to use additional variables to hold values during the computa
 Variables that are used in a computation but never printed are sometimes called intermediate or temporary variables.
 
 \end{exercise}
+
+
 \chapter{Input and output}
 
 %A number of years ago, Jeannette Wing published a terrific editorial with the title {\it Computational Thinking}, or in her own words, ``Ways to Think Like a Computer Scientist'' (see Communications of the ACM, March 2006).
@@ -2299,6 +2308,8 @@ There's always a chance we have a correct program and a typo in the expected out
 %Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
 %In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
 %What's great is that doesn't change anything about how you write the code.
+
+
 \section{Vocabulary}
 
 \begin{description}
@@ -2377,8 +2388,9 @@ Comments that describe the technical operation of a class or method.
 A command-line feature that substitutes \java{System.in} and/or \java{System.out} with a plain text file.
 
 \end{description}
-\section{Exercises}
 
+
+\section{Exercises}
 
 \begin{exercise}
 When you use \java{printf}, the Java compiler does not check your formatting string.
@@ -2388,6 +2400,12 @@ What if you use two format specifiers, but then only provide one value?
 \end{exercise}
 
 
+\begin{exercise}
+
+TODO
+
+\end{exercise}
+
 
 \begin{exercise}
 
@@ -2396,12 +2414,6 @@ TODO
 \end{exercise}
 
 
-
-\begin{exercise}
-
-TODO
-
-\end{exercise}
 \chapter{Void methods}
 
 So far we've only written short programs that have a single class with a \java{main} method.
@@ -2420,6 +2432,7 @@ For example, \java{Math.sqrt(25)} returns the value \java{5.0}.
 Other methods (including \java{main}) carry out a sequence of actions without returning a result.
 Java uses the keyword \java{void} to declare such methods.
 Regardless whether they return a value or not, methods enable you to break down a complex program into smaller blocks of code.
+
 
 \section{Math methods}
 
@@ -2828,7 +2841,8 @@ The stack diagram for this example looks like this:
 
 For each method there is a box called a {\bf frame} that contains the method's parameters and variables.
 The name of the method appears outside the frame.
-The value of each variable is drawn inside a box with the name of the variable beside it. (Note for people who know too much: this diagram leaves out a detail we will explain later.)
+The value of each variable is drawn inside a box with the name of the variable beside it.
+(Note for people who know too much: this diagram leaves out a detail we will explain later.)
 
 Stack diagrams help you to visualize the {\bf scope} of a variable, which is the area of a program where a variable exists.
 It's possible to have two variables with the same name in two different methods.
@@ -3011,7 +3025,6 @@ This solution works as long as the number of cents doesn't exceed the largest in
 If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
 Hopefully nobody will ever need that much money!
 
-
 \subsection{The Scanner bug}
 
 Consider a simple program that asks users for their name and age.
@@ -3056,8 +3069,8 @@ Instead, the operating system simply forwards a stream of characters to your pro
 \includegraphics{vader1.pdf}
 \end{center}
 
-The up-arrow represents the next character to be read.
-When you call \java{nextInt}, the \java{Scanner} class will read characters until a non-digit is found.
+The up-arrow represents the next character to be read by \java{Scanner}.
+When you call \java{nextInt}, it will read characters until a non-digit is found.
 
 \begin{center}
 \includegraphics{vader2.pdf}
@@ -3082,6 +3095,8 @@ To solve this problem, you need to add an extra call to \java{nextLine} after yo
 This technique is common when reading \java{int} or \java{double} values that appear on their own line.
 First you read the number, then you read the rest of the line (which is just a newline character).
 Note that you do not have to assign the return value of \java{nextLine} to a variable in that case; you can simply ignore it.
+
+
 \section{Vocabulary}
 
 \begin{description}
@@ -3114,8 +3129,8 @@ It may not necessarily be from top to bottom, left to right.
 The process of assigning an argument value to a parameter variable.
 
 \term{stack diagram}
-A memory diagram that shows which variables belong to each method at a certain point in the program.
-The methods are ``stacked'' from top to bottom in the order of execution.
+A memory diagram that shows which variables belong to which methods at a certain point in the program.
+The methods calls are ``stacked'' from top to bottom, in the order of execution.
 
 \term{frame}
 A structure (represented by a box in stack diagrams) that contains a method's parameters and variables.
@@ -3136,8 +3151,9 @@ The history of method calls and where to resume execution after each method retu
 The small difference between a floating-point number and its actual representation on computer hardware.
 
 \end{description}
-\section{Exercises}
 
+
+\section{Exercises}
 
 \begin{exercise}
 
@@ -3148,7 +3164,6 @@ In terms of their syntax, how does the Java compiler tell the difference between
 %In Java, methods always have parentheses, even if they have no arguments like \java{System.out.println()}.
 
 \end{exercise}
-
 
 \begin{exercise}
 
@@ -3191,13 +3206,11 @@ HINT: Start by describing in words what {\tt ping} and {\tt baffle} do when they
 
 \end{exercise}
 
-
 \begin{exercise}
 
 Draw a stack diagram that shows the state of the program in Section~\ref{time} when {\tt main} invokes {\tt printTime} with the arguments {\tt 11} and {\tt 59}.
 
 \end{exercise}
-
 
 \begin{exercise}
 
@@ -3210,7 +3223,6 @@ The point of this exercise is to make sure you understand how to write and invok
 \end{enumerate}
 
 \end{exercise}
-
 
 \begin{exercise}
 
