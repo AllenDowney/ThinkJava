@@ -10,12 +10,12 @@ In this chapter, we'll show you how to organize longer programs into multiple me
 % in practice I find them impossible to write without breaking the rules
 % (like using terms before defining them, etc)
 
-%At a conceptual level, a {\bf method} represents a {\em function} or {\em procedure}.
-%Functions perform a computation and return a result.
-%For example, \java{Math.sqrt(25)} returns the value \java{5.0}.
-%Procedures simply carry out a sequence of actions without returning a result.
-%We refer to them as \java{void} methods.
-
+At a conceptual level, a {\bf method} represents a mathematical {\em function} or a general {\em procedure}.
+Some methods perform a computation and return a result.
+For example, \java{Math.sqrt(25)} returns the value \java{5.0}.
+Other methods (including \java{main}) carry out a sequence of actions without returning a result.
+Java uses the keyword \java{void} to declare such methods.
+Regardless whether they return a value or not, methods enable you to break down a complex program into smaller blocks of code.
 
 \section{Math methods}
 
@@ -33,7 +33,8 @@ First we evaluate the argument of the innermost function, then evaluate the func
 
 The Java library includes a \java{Math} class that provides most common mathematical operations.
 %These functions are called {\bf methods}.
-\java{Math} is in the \java{java.lang} package, so you don't have to import it.  You can invoke Math methods like this:
+\java{Math} is in the \java{java.lang} package, so you don't have to import it.
+You can invoke Math methods like this:
 
 \begin{code}
     double root = Math.sqrt(17.0);
@@ -48,34 +49,39 @@ The third line finds the sine of the value of \java{angle}.
 \index{radians}
 
 Arguments of the trigonometric functions---\java{sin}, \java{cos}, and \java{tan}---should be in {\em radians}.
-To convert from degrees to radians, you can divide by 360 and multiply by $2 \pi$.
-Conveniently, the \java{Math} class provides a \java{double} named \java{PI} that contains an approximation of $\pi$:
+To convert from degrees to radians, you can divide by 180 and multiply by $\pi$.
+Conveniently, the \java{Math} class provides a \java{final double} named \java{PI} that contains an approximation of $\pi$:
 
 \begin{code}
     double degrees = 90;
-    double angle = degrees * 2 * Math.PI / 360.0;
+    double angle = degrees / 180.0 * Math.PI;
 \end{code}
 
 Notice that \java{PI} is in capital letters.
 Java does not recognize \java{Pi}, \java{pi}, or \java{pie}.
 Also, \java{PI} is the name of a variable, not a method, so it doesn't have parentheses.
-%A variable is a {\em location of data}, whereas a method is a {\em location of code}.
-%In Java, methods always have parentheses, even if they have no arguments like \java{System.out.println()}.
+The same is true for the constant \java{Math.E}, which approximates Euler's number.
 
+It turns out that converting to/from radians is a common operation, so the \java{Math} class provides methods for that.
+
+\begin{code}
+    double radians = Math.toRadians(180.0);
+    double degrees = Math.toDegrees(Math.PI);
+\end{code}
 
 \index{type!long}
 
-Another useful method in the \java{Math} class is \java{round}, which rounds a floating-point value to the nearest integer and returns a \java{long}.
-In Java, \java{int} values are 32 bits and \java{long} values are 64 bits.
-As a result, \java{long} variables can represent much larger (and smaller) integers.
+If you haven't already, take a look at the documentation for \java{Math} so you know what methods are provided.
+For example, another useful method is \java{round}, which rounds a floating-point value to the nearest integer and returns a \java{long}.
 
 \begin{code}
     long x = Math.round(Math.PI * 20.0);
 \end{code}
 
-In this example the multiplication happens first, before the method is invoked.
+In Java, \java{int} values are stored using 32 bits (4 bytes) of memory, whereas \java{long} values are stored in 64 bits (8 bytes).
+As a result, \java{long} variables can represent much larger integers.
+In the above example, the multiplication happens first, before the method is invoked.
 The result is 63 (rounded up from 62.8319).
-
 
 \subsection{Composition revisited}
 
@@ -92,7 +98,6 @@ For example, you can use any expression as an argument to a method:
 
 This statement takes the value \java{Math.PI}, divides it by two, and then adds the result to the value of the variable \java{angle}.
 The sum is then passed as an argument to \java{cos}.
-
 You can also take the result of one method and pass it as an argument to another:
 
 \begin{code}
@@ -104,15 +109,14 @@ So this statement finds the log base $e$ of 10, and then raises $e$ to that powe
 The result gets assigned to \java{x}.
 %Do you know what it is without reaching for a calculator?
 
-When using \java{Math} methods, it is a common error to leave out \java{Math}.
+When using \java{Math} methods, it is a common error to forget to specify the class name \java{Math}.
 For example, \java{Math.pow} takes two arguments and raises the first argument to the power of the second.
-But if you try to invoke it like this:
 
 \begin{code}
-    pow(2.0, 10.0);
+    pow(2.0, 10.0);  // syntax error
 \end{code}
 
-The compiler will say it ``cannot find symbol'' \java{pow}.
+If you try to invoke \java{Math.pow} this way, the compiler will say it ``cannot find symbol'' (i.e., there is no method named \java{pow} in the current class).
 
 
 \section{Adding new methods}
@@ -122,8 +126,9 @@ The compiler will say it ``cannot find symbol'' \java{pow}.
 \index{main}
 \index{method!main}
 
-One of the most powerful features of a programming language is the ability to add new methods.
-We have already seen one new method definition, \java{main}:
+Like the \java{Math} class, you can write your own set of methods for use in other programs.
+%One of the most powerful features of a programming language is the ability to add new methods.
+Let's revisit the method definition for \java{main}:
 
 \begin{code}
     public static void main(String[] args) {
@@ -131,10 +136,16 @@ We have already seen one new method definition, \java{main}:
     }
 \end{code}
 
+\index{public}
+\index{void}
+\index{type!void}
+
 The first line contains information about the method:
-\java{main} is a {\bf public} method, which means it can be invoked from other classes;
-it is a static method, but we're not going to explain what that means yet;
-and it is a {\bf void} method, which means that it doesn't yield a result, unlike the \java{Math} methods, for example.
+\java{main} is a \java{public} method, which means it can be invoked from other classes;
+it is a \java{static} method, but we're not going to explain what that means yet;
+and it is a \java{void} method, which means that it doesn't yield a result (unlike the \java{Math} methods).
+
+\index{parameter}
 
 The statement in parentheses declares a parameter named
 \java{args}.  A {\bf parameter} is a variable that stores an argument.
@@ -148,13 +159,13 @@ You can define other methods using syntax is similar to \java{main}:
     }
 \end{code}
 
-You can use any name you want for your method, except \java{main} or any of the Java keywords.
 By convention, methods start with a lower case letter and use ``camel case,'' which is a cute name for {\tt jammingWordsTogetherLikeThis}.
-
-The list of parameters specifies what values, if any, you have to provide in order to invoke the new method.
+You can use any name you want for your method, except \java{main} or any of the Java keywords.
 
 % TODO: check where there first use of ``invoke'' was
+% TODO: move the definition of ``argument'' to Ch3?
 
+The list of parameters specifies what values, if any, you have to provide in order to invoke the new method.
 The first methods we are going to write have no parameters, so the parameter list is empty.  Here's an example:
 
 \begin{code}
@@ -163,9 +174,8 @@ The first methods we are going to write have no parameters, so the parameter lis
     }
 \end{code}
 
-The name of this method is \java{newLine}.  It 
-contains only one statement, which prints a blank line.
-%Printing a {\tt String} with no letters in it may not seem all that useful, but {\tt println} skips to the next line after it prints, so this statement skips to the next line.
+The name of this method is \java{newLine}.
+It contains only one statement, which prints a blank line.
 In {\tt main}, we can invoke the new method like this:
 
 \begin{code}
@@ -177,7 +187,6 @@ In {\tt main}, we can invoke the new method like this:
 \end{code}
 
 Because \java{newLine} is in the same class as \java{main}, we don't have to specify the class name.
-
 The output of this program is:
 
 \begin{stdout}
@@ -248,7 +257,7 @@ Methods allow you to focus on each sub-problem in isolation, and then compose th
 \index{class}
 \index{method}
 
-Pulling together the code from the previous section, the program looks like this:
+Pulling together the code from the previous section, the complete program looks like this:
 
 \begin{code}
 public class NewLine {
@@ -271,29 +280,14 @@ public class NewLine {
 }
 \end{code}
 
+\index{case-sensitive}
+
 The first line is the class definition.
 Class names should be capitalized; this convention helps readers tell the difference between classes and methods in your source code.
-%A {\bf class} is a collection of related methods.
-The \java{NewLine} class contains three methods: \java{newLine}, \java{threeLine}, and \java{main}.
+The \java{NewLine} class contains three \java{void} methods: \java{newLine}, \java{threeLine}, and \java{main}.
 Java is a case-sensitive language, so \java{NewLine} and \java{newLine} are considered different.
 
-%The other class we've seen is the \java{Math} class.
-%It contains methods named \java{sqrt}, \java{sin}, and many others.
-%(If you haven't yet already, take a look at the documentation for \java{Math}.)
-%When we invoke a method in another class, we have to specify both the name of the class and the name of the method.
-%That's why the syntax is slightly different for Java methods and the methods we write:
-
-%\begin{code}
-%    Math.pow(2.0, 10.0);
-%    newLine();
-%\end{code}
-
-%The first statement invokes the \java{pow} method in the \java{Math} class, which raises the first argument to the power of the second argument.
-%The second statement invokes the \java{newLine} method, which Java assumes is in the current class we are writing (i.e., {\tt NewLine}).
-
-
-
-\section{Programs with multiple methods}
+\subsection{Programs with multiple methods}
 
 \index{order of execution}
 
@@ -313,13 +307,12 @@ Then \java{newLine} invokes \java{println}, which causes yet another detour.
 
 Fortunately, Java is adept at keeping track of where it is.
 So when \java{println} completes, it picks up where it left off in \java{newLine}, and then gets back to \java{threeLine}, and then finally gets back to \java{main} so the program can terminate.
+In summary, when you read a program, don't read from top to bottom.
+Instead, follow the flow of execution.
 
 %Technically, the program does not terminate at the end of \java{main}.
 %Instead, execution picks up where it left off in the program that invoked \java{main}, which is the Java interpreter.
 %The interpreter takes care of things like deleting windows and general cleanup, and {\em then} the program terminates.
-
-In summary, when you read a program, don't read from top to bottom.
-Instead, follow the flow of execution.
 
 
 \section{Parameters and arguments}
@@ -337,9 +330,8 @@ For example, \java{Math.pow} takes two \java{double}s: the base and the exponent
 
 When you use a method, you provide the arguments.
 When you write a method, you list the parameters.
-
 The parameter list indicates what arguments are required.
-For example, here's a method that takes a String and prints it twice:
+Here's a method that takes a string and prints it twice:
 
 \begin{code}
     public static void printTwice(String s) {
@@ -349,9 +341,9 @@ For example, here's a method that takes a String and prints it twice:
 \end{code}
 
 \java{printTwice} has a parameter named \java{s} with type \java{String}.
-The parameter name a hint that it is a {\tt String}, but you could use any legal variable name.
-
-When we invoke \java{printTwice}, we have to provide an argument with type \java{String}.  Before the method executes, the argument gets assigned to the parameter.
+The parameter name hints that it is a {\tt String}, but you could use any legal variable name.
+When we invoke \java{printTwice}, we have to provide an argument with type \java{String}.
+Before the method executes, the argument gets assigned to the parameter.
 
 In this example, the argument \java{"Don't make me say this twice!"} gets assigned to the parameter \java{s}.
 
@@ -362,7 +354,6 @@ In this example, the argument \java{"Don't make me say this twice!"} gets assign
 \index{parameter passing}
 
 This process is called {\bf parameter passing} because the value gets passed from outside the method to the inside.
-
 An argument can be any kind of expression, so if you have a {\tt String} variable, you can use it as an argument:
 
 \begin{code}
@@ -374,7 +365,7 @@ The value you provide as an argument must have the same type as the parameter.
 For example, if you try:
 
 \begin{code}
-    printTwice(17);
+    printTwice(17);  // syntax error
 \end{code}
 
 You will get the compiler error ``cannot find symbol,'' which might be confusing.
@@ -385,8 +376,8 @@ There are some apparent exceptions to this rule, because sometimes Java converts
 For example, \java{Math.sqrt} requires a \java{double} value.
 If you run \java{Math.sqrt(25)}, the interger value \java{25} is automatically converted to the floating-point value \java{25.0}.
 
-%\java{System.out.println} can accept any type as an argument.
-%But generally speaking, that is an exception; most methods are not so accommodating.
+\java{System.out.println} can accept any type as an argument.
+But generally speaking, that is an exception; most methods are not so accommodating.
 
 
 \section{Stack diagrams and scope}
@@ -395,7 +386,7 @@ If you run \java{Math.sqrt(25)}, the interger value \java{25} is automatically c
 \index{stack diagram}
 \index{diagram!stack}
 
-Pulling together the code from the previous sections, here is a complete
+Pulling together the code examples from the previous section, here is a complete
 class definition:
 
 \begin{code}
@@ -410,6 +401,7 @@ public class PrintTwice {
         String argument = "Never say never.";
         printTwice(argument);
     }
+
 }
 \end{code}
 
@@ -422,15 +414,17 @@ That variable belongs to the \java{main} method.
 One way to keep track of where each variable is defined is to draw a {\bf stack diagram}.
 The stack diagram for this example looks like this:
 
-\begin{center}
+\begin{figure}[!h]
+\centering
 \includegraphics{stack.pdf}
-\end{center}
+\caption{Stack diagram for the \java{PrintTwice} program.}
+\end{figure}
 
 \index{frame}
 
-For each method there is a gray box called a {\bf frame} that contains the method's parameters and variables.
+For each method there is a box called a {\bf frame} that contains the method's parameters and variables.
 The name of the method appears outside the frame.
-The value of each variable is drawn inside a box with the name of the variable beside it.\footnote{Note for people who know too much: this diagram leaves out a detail we will explain later.}
+The value of each variable is drawn inside a box with the name of the variable beside it. (Note for people who know too much: this diagram leaves out a detail we will explain later.)
 
 Stack diagrams help you to visualize the {\bf scope} of a variable, which is the area of a program where a variable exists.
 It's possible to have two variables with the same name in two different methods.
@@ -475,13 +469,13 @@ There is a breakpoint on the first line of \java{main}.}
 
 When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
 This feature allows you to verify your assumptions about how data is passed from one method to another.
+You can edit your code while debugging it, but the changes won't take effect until after you compile.
+The result can be confusing, so we don't recommend it.
+%The debugger may get out of sync if you add or delete multiple lines of code while the program is paused.
 
 Using a debugger is like having the computer proofread your code out loud.
 You might expect the code do one thing, and then the debugger shows it doing something else.
 At that moment, you gain insight about what may be wrong with the code.
-
-You can edit your code while debugging it, but the changes won't take effect until after you compile.  The result can be confusing, so we don't recommend it.
-%The debugger may get out of sync if you add or delete multiple lines of code while the program is paused.
 
 
 \section{Methods with multiple parameters}
@@ -502,8 +496,7 @@ For one, you have to declare the type of every parameter separately.
     }
 \end{code}
 
-It might be tempting to write \java{int hour, minute} but that format is only legal for variable declarations, not parameter lists.
-
+It might be tempting to write ``\java{int hour, minute}'' but that format is only legal for variable declarations, not parameter lists.
 Another common source of confusion is that you do not have to declare the types of arguments.
 The following is incorrect:
 
@@ -520,6 +513,7 @@ The correct syntax is:
 \begin{code}
     printTime(hour, minute);
 \end{code}
+
 
 % TODO: consider moving the following section later, after students
 % start writign methods that return values
@@ -552,19 +546,19 @@ The correct syntax is:
 
 \section{A few more details}
 
-Now that you've had some experience with \java{double}, \java{String}, and \java{Scanner}, there are a few unexpected behaviors we want to warn you about.
+Now that you've had some experience with \java{double} and \java{Scanner}, there are a few unexpected behaviors we want to warn you about.
 
 \subsection{Rounding errors}
-
-\index{arithmetic!floating-point}
 
 %The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
 %In fact, most processors have special circuitry just for performing floating-point operations.
 
-In general, floating point numbers are only approximately right.
-Some numbers, like reasonable-sized integers, can be represented exactly.  
+\index{rounding error}
+
+On hardware, floating-point numbers are only approximately correct.
+Some numbers, like reasonably-sized integers, can be represented exactly.  
 But repeating fractions, like $1/3$, and irrational numbers, like $\pi$, cannot.
-To represent these numbers, we have to round off to the nearest floating-point number.
+To represent these numbers, computers have to round off to the nearest floating-point number.
 The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
 
 %Notwithstanding, there is a fundamental flaw with floating-point arithmetic.
@@ -572,7 +566,9 @@ The difference between the number we want and the floating-point number we get i
 %But computer processors are finite; they cannot represent {\em every} possible floating-point number.
 %Even with double-precision, you will frequently run into problems.
 
-For example, mathematically the following two statements should be equivalent:
+\index{arithmetic!floating-point}
+
+For example, the following two statements should be equivalent:
 
 \begin{code}
     System.out.println(0.1 * 10);
@@ -587,7 +583,8 @@ But on many machines, the output is:
     0.9999999999999999
 \end{stdout}
 
-The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2, so its floating-point representation is only approximate.
+The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
+So its floating-point representation is only approximate.
 When we add up the approximations, the rounding errors accumulate.
 
 For many applications, like computer graphics, encryption, statistical analysis, and multimedia rendering, floating-point arithmetic has benefits that outweigh the costs.
@@ -606,9 +603,9 @@ You can avoid the problem by representing the balance as an integer:
     int balance = 12345;      // total number of cents
 \end{code}
 
-This works as long as the number of cents doesn't exceed the largest integer, which is about 2 billion.
-
-% TODO: have we introduced long yet?  should we do it here?
+This solution works as long as the number of cents doesn't exceed the largest integer, which is about 2 billion.
+If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
+Hopefully nobody will ever need that much money!
 
 
 \subsection{The Scanner bug}
@@ -624,7 +621,7 @@ Somewhere in the middle of the code, we have the following lines:
     System.out.printf("Hello %s, age %d\n", name, age);
 \end{code}
 
-The output of the \java{printf} statement looks like this:
+The output of the \java{printf} statement looks something like this:
 
 \begin{stdout}
     Hello Darth Vader, age 45
@@ -655,15 +652,15 @@ Instead, the operating system simply forwards a stream of characters to your pro
 \includegraphics{vader1.pdf}
 \end{center}
 
-The up arrow represents the next character to be read.
+The up-arrow represents the next character to be read.
 When you call \java{nextInt}, the \java{Scanner} class will read characters until a non-digit is found.
 
 \begin{center}
 \includegraphics{vader2.pdf}
 \end{center}
 
-At this point, \java{nextInt} returns the value \java{45}.
-The above example then asks \java{"What is your name? "} and calls \java{nextLine}.
+At this point, \java{nextInt} returns the \java{int} value \java{45}.
+The program then asks \java{"What is your name? "} and calls \java{nextLine}.
 \java{Scanner} will read characters until a newline is found.
 Since the next character to be read already is a newline, \java{nextLine} returns the empty string \java{""}.
 
@@ -675,6 +672,7 @@ To solve this problem, you need to add an extra call to \java{nextLine} after yo
     in.nextLine();  // read the newline
     System.out.print("What is your name? ");
     name = in.nextLine();
+    System.out.printf("Hello %s, age %d\n", name, age);
 \end{code}
 
 This technique is common when reading \java{int} or \java{double} values that appear on their own line.
