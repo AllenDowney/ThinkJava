@@ -46,7 +46,7 @@ diagrams:
 The large numbers inside the boxes are the {\bf elements} of
 the array.  The small numbers outside the boxes are the
 indices used to identify each box.  When you allocate an
-array if {\tt int}s, the elements are initialized to zero.
+array of {\tt int}s, the elements are initialized to zero.
 
 
 \section{Accessing elements}
@@ -117,7 +117,7 @@ When you copy an array variable, remember that you are
 copying a reference to the array.  For example:
 
 \begin{code}
-    double[] a = new double [3];
+    double[] a = new double[4];
     double[] b = a;
 \end{code}
 
@@ -136,7 +136,7 @@ allocate a new array and copy elements from
 one to the other.
 
 \begin{code}
-    double[] b = new double [3];
+    double[] b = new double[4];
 
     int i = 0;
     while (i < 4) {
@@ -719,7 +719,7 @@ because they provide a layer of abstraction around an awkward method
 and make it easier to use.  The method that actually
 performs the computation is called the {\bf helper method}.
 
-\item Write a recursive version of {\tt find} using the
+\item Write a recursive method named {\tt find} using the
 wrapper-helper pattern.  {\tt find} should take an array of
 integers and a target integer.  It should return the index
 of the first location where the target integer appears in the

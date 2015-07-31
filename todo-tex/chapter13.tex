@@ -821,5 +821,12 @@ You can use this class as a starting place to implement your own
 card games.
 \end{exercise}
 
-
-
+% TODO from Leslie Klein:
+% Need more descriptive text on how to modify CardTable.java so that it can find the gif files that are extracted from cardset.zip.
+% If CardTable.java and all the .gif files are in the same package, and I run CardTable, I just get a green table, without the cards.
+% Need text on how to set the variable cardset: the String name of the folder that contains the card images.
+%-----
+% Create a folder under your project called “images”. Put all the .gif files from cardset.zip into this folder.
+% Make the following change in main(String[] args): change value of cardset to the name of the folder containing the images. For example,
+% cardset = "images";
+% Now when main() calls CardTable(cardset), CardTable can find all the gif files.

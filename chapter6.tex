@@ -737,7 +737,7 @@ What is the output of this program?
 
 \begin{exercise}
 The purpose of this exercise is to translate a recursive definition into a Java method.
-The Ackerman function is defined for non-negative integers as follows:
+The Ackermann function is defined for non-negative integers as follows:
 
 \begin{eqnarray}
 A(m, n) = \begin{cases}
@@ -747,9 +747,9 @@ A(m-1, A(m, n-1)) & \mbox{if } m > 0 \mbox{ and } n > 0.
 \end{cases}
 \end{eqnarray}
 
-Write a method called {\tt ack} that takes two {\tt int}s as parameters and that computes and returns the value of the Ackerman function.
+Write a method called {\tt ack} that takes two {\tt int}s as parameters and that computes and returns the value of the Ackermann function.
 
-Test your implementation of Ackerman by invoking it from {\tt main} and printing the return value.
+Test your implementation of Ackermann by invoking it from {\tt main} and printing the return value.
 
 WARNING: the return value gets very big very quickly.
 You should try it only for small values of $m$ and $n$ (not bigger than 2).
