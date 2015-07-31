@@ -1,20 +1,15 @@
-% this file is for the chapter currently under development
-
 \documentclass[12pt]{book}
 \usepackage{thinkjava}
-
-\graphicspath{{todo-fig/}}
 \setcounter{chapter}{4}
 
 \begin{document}
 
-\chapter{Decisions and logic}
 
+\chapter{Decisions and logic}
 TODO
 
 
 \section{Boolean expressions}
-
 TODO
 
 \subsection{Relational operators}
@@ -99,7 +94,6 @@ For example, can you re-write this code using a single conditional?
 
 
 \section{The if-else statement}
-
 TODO
 
 \subsection{Conditional execution}
@@ -147,7 +141,8 @@ You can only compare {\tt ints} to {\tt ints} and {\tt doubles} to {\tt doubles}
 
 The operators {\tt ==} and {\tt !=} work with Strings, but they don't do what you expect.
 And the other relational operators don't do anything at all.
-We will see how to compare strings Section~\ref{incomparable}.
+To compare two strings, you should use the \java{String.equals} method.
+%We will see how to compare strings Section~\ref{incomparable}.
 
 \subsection{Alternative execution}
 \label{alternative}
@@ -276,7 +271,7 @@ One reason to use it is if you detect an error condition:
 \begin{code}
     public static void printLogarithm(double x) {
         if (x <= 0.0) {
-            System.out.println("Positive numbers only, please.");
+            System.err.println("Positive numbers only, please.");
             return;
         }
         double result = Math.log(x);
@@ -289,36 +284,6 @@ It checks whether {\tt  x} is less than or equal to zero, in which case it print
 The flow of execution immediately returns to the caller and the remaining lines of the method are not executed.
 
 I used a floating-point value on the right side of the condition because there is a floating-point variable on the left.
-
-
-%\section{Type conversion}
-%\index{type!conversion}
-%\index{typecasting}
-
-%You might wonder how you can get away with an expression like {\tt
-%"The log of x is " + result}, since one of the operands is a {\tt String}
-%and the other is a {\tt double}.  In this case Java is being
-%smart on our behalf, automatically converting the {\tt double} to a
-%{\tt String} before it does the string concatenation.
-
-%This kind of feature is an example of a common problem in designing a
-%programming language, which is that there is a conflict between {\em
-%formalism}, which is the requirement that formal languages should have
-%simple rules with few exceptions, and {\em convenience}, which is the
-%requirement that programming languages be easy to use in practice.
-
-%More often than not, convenience wins, which is usually good for
-%expert programmers (who are spared from rigorous but unwieldy
-%formalism), but bad for beginning programmers, who are often baffled
-%by the complexity of the rules and the number of exceptions.  In this
-%book I have tried to simplify things by emphasizing the rules and
-%omitting many of the exceptions.
-
-%Whenever you try to ``add'' two
-%expressions, if one of them is a {\tt String}, Java converts the
-%other to a {\tt String} and then perform string concatenation.
-%What do you think happens if you perform an operation between
-%an integer and a floating-point value?
 
 
 \section{Recursive methods}
@@ -414,7 +379,6 @@ When a method invokes itself, that's called {\bf recursion}, and such methods ar
 \subsection{Recursive stack diagrams}
 
 \index{stack}
-\index{diagram!state}
 \index{diagram!stack}
 
 In the previous chapter we used a stack diagram to represent the state of a program during a method invocation.
@@ -477,19 +441,13 @@ A condition that causes a recursive method {\em not} to make a recursive call.
 
 \section{Exercises}
 
-
 \begin{exercise}
-Draw a stack diagram that shows the state of the program in Section~\ref{recursion}
-after {\tt main} invokes {\tt nLines} with the parameter {\tt n=4},
-just before the last invocation of {\tt nLines} returns.
+Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after {\tt main} invokes {\tt nLines} with the parameter {\tt n=4}, just before the last invocation of {\tt nLines} returns.
 \end{exercise}
 
-
 \begin{exercise}
-
-This exercise reviews the flow of execution through a program
-with multiple methods.  Read the following code and answer the
-questions below.
+This exercise reviews the flow of execution through a program with multiple methods.
+Read the following code and answer the questions below.
 
 \begin{code}
 public class Buzz {
@@ -517,64 +475,49 @@ public class Buzz {
 
 \begin{enumerate}
 
-\item Write the number {\tt 1} next to the first {\em statement}
-of this program that will be executed.  Be careful to distinguish
-things that are statements from things that are not.
+\item Write the number {\tt 1} next to the first {\em statement} of this program that will be executed.
+Be careful to distinguish things that are statements from things that are not.
 
-\item Write the number {\tt 2} next to the second statement, and so on
-until the end of the program.  If a statement is executed more than
-once, it might end up with more than one number next to it.
+\item Write the number {\tt 2} next to the second statement, and so on until the end of the program.
+If a statement is executed more than once, it might end up with more than one number next to it.
 
-\item What is the value of the parameter {\tt blimp} when {\tt baffle}
-gets invoked?
+\item What is the value of the parameter {\tt blimp} when {\tt baffle} gets invoked?
 
 \item What is the output of this program?
 
 \end{enumerate}
 \end{exercise}
 
-
 \begin{exercise}
-
-The first verse of the song ``99 Bottles of Beer'' is:
+The first verse of the song ``99 Bottles of Pop'' is:
 
 \begin{quote}
-99 bottles of beer on the wall,
-99 bottles of beer,
-ya' take one down, ya' pass it around,
-98 bottles of beer on the wall.
+99 bottles of pop on the wall,
+99 bottles of pop,
+If one of those bottles should happen to fall,
+98 bottles of pop on the wall.
 \end{quote}
 
-Subsequent verses are identical except that the number
-of bottles gets smaller by one in each verse, until the
-last verse:
+Subsequent verses are identical except that the number of bottles gets smaller by one in each verse, until the last verse:
 
 \begin{quote}
-No bottles of beer on the wall,
-no bottles of beer,
-ya' can't take one down, ya' can't pass it around,
-'cause there are no more bottles of beer on the wall!
+1 bottle of pop on the wall,
+1 bottle of pop,
+If that last bottle should happen to fall,
+No more bottles of pop on the wall.
 \end{quote}
 
 And then the song(finally) ends.
 
-Write a program that prints the entire lyrics of
-``99 Bottles of Beer.''  Your program should include a
-recursive method that does the hard part, but you
-might want to write additional methods to separate the major
-functions of the program.
+Write a program that prints the entire lyrics of ``99 Bottles of Pop.''
+Your program should include a {\em recursive} method that does the hard part, but you might want to write additional methods to separate the major functions of the program.
 
-As you develop your code, test it with a small number of
-verses, like ``3 Bottles of Beer.''
+As you develop your code, test it with a small number of verses, like ``3 Bottles of Pop.''
 
-The purpose of this exercise is to take a problem and break it
-into smaller problems, and to solve the smaller problems by writing
-simple methods.
+The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods.
 \end{exercise}
 
-
 \begin{exercise}
-
 What is the output of the following program?
 
 \begin{code}
@@ -593,7 +536,7 @@ public class Narf {
         int bizz = 5;
         int buzz = 2;
         zoop("just for", bizz);
-        clink(2*buzz);
+        clink(2 * buzz);
     }
 
     public static void clink(int fork) {
@@ -608,33 +551,19 @@ public class Narf {
 \end{code}
 \end{exercise}
 
-
 \begin{exercise}
-Fermat's Last Theorem says that there are no integers
-$a$, $b$, and $c$ such that
+Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that
 
 \[ a^n + b^n = c^n \]
 
-except in the case when $n=2$.
+except in the case when $n \leq 2$ (e.g., the Pythagorean Theorem).
 
-Write a method named {\tt checkFermat} that takes four
-integers as parameters---{\tt a}, {\tt b}, {\tt c} and {\tt n}---and
-that checks to see if Fermat's theorem holds.  If
-$n$ is greater than 2 and it turns out to be true that
-$a^n + b^n = c^n$,
-the program should print ``Holy smokes, Fermat was wrong!''
+Write a method named {\tt checkFermat} that takes four integers as parameters---{\tt a}, {\tt b}, {\tt c} and {\tt n}---and that checks to see if Fermat's theorem holds.
+If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
 Otherwise the program should print ``No, that doesn't work.''
 
-You should assume that there is a method named {\tt raiseToPow}
-that takes two integers as arguments and that raises the
-first argument to the power of the second.  For example:
-
-\begin{code}
-    int x = raiseToPow(2, 3);
-\end{code}
-
-would assign the value {\tt 8} to {\tt x}, because $2^3 = 8$.
-
+HINT: You may want to use \java{Math.pow} in your method.
 \end{exercise}
+
 
 \end{document}

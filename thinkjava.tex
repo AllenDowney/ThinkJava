@@ -1330,6 +1330,37 @@ The difference is when the conversion from integer to string actually takes plac
 %Instead you can break those statements into multiple lines, or use another method like \java{printf} to achieve the same results.
 
 
+% TODO: add the following subsection before/after this section?
+%\section{Type conversion}
+%\index{type!conversion}
+%\index{typecasting}
+
+%You might wonder how you can get away with an expression like {\tt
+%"The log of x is " + result}, since one of the operands is a {\tt String}
+%and the other is a {\tt double}.  In this case Java is being
+%smart on our behalf, automatically converting the {\tt double} to a
+%{\tt String} before it does the string concatenation.
+
+%This kind of feature is an example of a common problem in designing a
+%programming language, which is that there is a conflict between {\em
+%formalism}, which is the requirement that formal languages should have
+%simple rules with few exceptions, and {\em convenience}, which is the
+%requirement that programming languages be easy to use in practice.
+
+%More often than not, convenience wins, which is usually good for
+%expert programmers (who are spared from rigorous but unwieldy
+%formalism), but bad for beginning programmers, who are often baffled
+%by the complexity of the rules and the number of exceptions.  In this
+%book I have tried to simplify things by emphasizing the rules and
+%omitting many of the exceptions.
+
+%Whenever you try to ``add'' two
+%expressions, if one of them is a {\tt String}, Java converts the
+%other to a {\tt String} and then perform string concatenation.
+%What do you think happens if you perform an operation between
+%an integer and a floating-point value?
+
+
 \section{Order of operations}
 
 \index{order of operations}
@@ -2931,35 +2962,6 @@ The correct syntax is:
 \begin{code}
     printTime(hour, minute);
 \end{code}
-
-
-% TODO: consider moving the following section later, after students
-% start writign methods that return values
-
-%\section{Methods that return values}
-%
-%\index{value method}
-%\index{method!value}
-%
-%Some of the methods we are using, like the {\tt Math} methods, return values.
-%Other methods, like {\tt println} and {\tt newLine}, perform an action but they don't return a value.
-%That raises some questions:
-%
-%\begin{itemize}
-%
-%\item What happens if you invoke a method and you don't do anything with the result?
-%(In other words, if you don't assign it to a variable or use it as part of a larger expression?)
-%
-%\item What happens if you use a \java{print} method as part of an expression? For example: \java{System.out.println("boo!") + 7;}
-%
-%\item Can we write methods that return values, or are we stuck with things like \java{newLine} and \java{printTwice}?
-%
-%\end{itemize}
-%
-%The answer to the third question is ``yes, you can write methods that return values,'' and we'll see how in a couple of chapters.
-%It's up to you to answer the other two questions by trying them out.
-%In fact, any time you have a question about what is legal or illegal in Java, a good way to find out is to ask the compiler.
-%If you're using DrJava, you can quickly try out these examples in the Interactions Pane.
 
 
 \section{A few more details}
