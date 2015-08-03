@@ -3,18 +3,18 @@
 
 \begin{document}
 
-%\frontmatter
-%
-%\input{todo/titlepage.tex}
-%\input{todo/copyright.tex}
-%\input{todo/preface.tex}
-%
-%% table of contents
-%\cleardoublepage
-%\setcounter{tocdepth}{1}
-%\tableofcontents
-%
-%\mainmatter
+\frontmatter
+
+\input{todo-tex/titlepage.tex}
+\input{todo-tex/copyright.tex}
+%\input{todo-tex/preface.tex}
+
+% table of contents
+\cleardoublepage
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\mainmatter
 
 
 \chapter{The way of the program}
@@ -407,7 +407,7 @@ Step-by-step instructions for installing the JDK and configuring DrJava are avai
 
 % TODO: when we have the specific URL for the install page, let's put it here.
 
-\subsection{The command-line interface}
+\subsection{Command-line interface}
 
 \index{command-line}
 \index{terminal}
@@ -2881,7 +2881,7 @@ It's possible to have two variables with the same name in two different methods.
 Each only exists within its own method, so they don't interfere with each other.
 
 
-\section{Tracing code using a debugger}
+\section{Tracing with a debugger}
 
 \index{debugger}
 
@@ -2928,7 +2928,7 @@ You might expect the code do one thing, and then the debugger shows it doing som
 At that moment, you gain insight about what may be wrong with the code.
 
 
-\section{Methods with multiple parameters}
+\section{Multiple parameters}
 \label{time}
 
 \index{parameter!multiple}
@@ -3249,29 +3249,25 @@ Saturday, July 16, 2011
 \end{exercise}
 
 
-%\input{todo/chapter04.tex}
-%\input{todo/chapter05.tex}
-%\input{todo/chapter06.tex}
 %\input{todo/chapter07.tex}
 %\input{todo/chapter08.tex}
 %\input{todo/chapter09.tex}
-%\input{todo/chapter10.tex}
 %\input{todo/chapter11.tex}
 %\input{todo/chapter12.tex}
 %\input{todo/chapter13.tex}
 %\input{todo/chapter14.tex}
 %\input{todo/chapter15.tex}
 %\input{todo/chapter16.tex}
-%
-%\backmatter
-%\appendix
-%
+
+\backmatter
+\appendix
+
 %\input{todo/chapter17.tex}
 %\input{todo/chapter18.tex}
 %\input{todo/chapter19.tex}
 %\input{todo/chapter20.tex}
-%
-%\printindex
-%\cleardoublepage
+
+\printindex
+\cleardoublepage
 
 \end{document}
