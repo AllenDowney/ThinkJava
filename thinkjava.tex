@@ -1,5 +1,170 @@
 \documentclass[12pt]{book}
-\usepackage{thinkjava}
+\usepackage{url}
+
+\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\title{\thetitle}
+
+\newcommand{\theauthors}{Allen B. Downey and Chris Mayfield}
+\author{\theauthors}
+
+\newcommand{\theversion}{Version 6.0.0 -- August 2015}
+\date{\theversion}
+
+\usepackage{geometry}
+\geometry{
+    width=5.5in,
+    height=8.5in,
+    hmarginratio=3:2,
+    vmarginratio=1:1,
+    includehead=true,
+    headheight=15pt
+}
+
+% paragraph spacing
+\setlength{\parindent}{0pt}                      % 17.62482pt
+\setlength{\parskip}{12pt plus 4pt minus 4pt}    % 0.0pt plus 1.0pt
+\linespread{1.05}
+\def\arraystretch{1.5}
+
+% list spacing
+\setlength{\topsep}{5pt plus 2pt minus 3pt}      % 10.0pt plus 4.0pt minus 6.0pt
+\setlength{\partopsep}{-6pt plus 2pt minus 2pt}  %  3.0pt plus 2.0pt minus 2.0pt
+\setlength{\itemsep}{0pt}                        %  5.0pt plus 2.5pt minus 1.0pt
+
+% these are copied from tex/latex/base/book.cls
+% all I changed is afterskip
+\makeatletter
+\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {0.7ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% table of contents vertical spacing
+\usepackage{tocloft}
+\setlength\cftparskip{8pt plus 4pt minus 4pt}
+
+% The following line adds a little extra space to the column
+% in which the Section numbers appear in the table of contents
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.5em}{3.0em}}
+\makeatother
+
+% customize page headers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+%\rfoot{\textcolor{gray}{\tiny ThinkJava Draft \today}}
+
+% balanced index with TOC entry
+\usepackage{makeidx}
+\makeindex
+%\usepackage[totoc]{idxlayout}
+
+% automatically index glossary terms
+% TODO: I had to dismantle this; we either need to fix it or
+% index these terms by hand
+\newcommand{\term}[1]{\item[#1:]}
+
+% where to find graphics
+\usepackage{graphicx}
+
+% graphicspath doesn't work with plastex
+%\graphicspath{{figs/}}
+
+%% tweak spacing of figures and captions
+%\usepackage{floatrow}
+%\usepackage{caption}
+%\captionsetup{
+%    font=small,
+%    labelformat=empty,
+%    justification=centering,
+%    skip=4pt
+%}
+
+% format end of chapter excercises
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheoremstyle{exercise}
+  {12pt}        % space above
+  {12pt}        % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {}            % punctuation
+  {12pt}        % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+% colors for code listings and output
+%\usepackage{xcolor}
+%\definecolor{bgcolor}{HTML}{FAFAFA}
+%\definecolor{comment}{HTML}{007C00}
+%\definecolor{keyword}{HTML}{0000FF}
+%\definecolor{strings}{HTML}{B20000}
+
+% syntax highlighting in code listings
+\usepackage{textcomp}
+\usepackage{listings}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily,
+    %backgroundcolor=\color{bgcolor},
+    %commentstyle=\color{comment},
+    %keywordstyle=\color{keyword},
+    %stringstyle=\color{strings},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    upquote=true,
+    aboveskip=\parskip,
+    belowskip=\parskip
+}
+
+% code listing environments
+% ABD: These don't work in plastex.  replacing with verbatim.
+%\lstnewenvironment{code}
+%{\minipage{\linewidth}}
+%{\endminipage}
+%\lstnewenvironment{stdout}
+%{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
+%{\endminipage}
+
+
+% pdf hyperlinks, table of contents, and document properties
+\usepackage[pdftex]{hyperref}
+\hypersetup{%
+  pdftitle={\thetitle},
+  pdfauthor={\theauthors},
+  pdfsubject={\theversion},
+  pdfkeywords={},
+  bookmarksopen=false,
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+% inline syntax formatting
+%\newcommand{\java}[1]{\lstinline{#1}}
+%\newcommand{\java}[1]{\verb"#1"}
+\newcommand{\java}[1]{{\tt #1}}
 
 \begin{document}
 
@@ -67,7 +232,7 @@ The process continues until the subtasks are simple enough to be performed with 
 \section{What is computer science?}
 
 One of the most interesting aspects of writing programs is deciding how to solve a particular problem, especially when there are multiple solutions.
-For example, there are numerous ways to sort a list of numbers, and each way has its advantages (see e.g., \url{http://www.sorting-algorithms.com/}).
+For example, there are numerous ways to sort a list of numbers, and each way has its advantages (see \url{http://www.sorting-algorithms.com/}).
 In order to determine which way is best for a given situation, we need techniques for describing and analyzing solutions formally.
 That is where computer science comes in.
 
@@ -141,8 +306,7 @@ It processes the program a little at a time, alternately reading lines and perfo
 % Figure 1.1 shows the structure of an interpreter.
 
 \begin{figure}[!h]
-\centering
-\includegraphics{interpreter.pdf}
+\includegraphics{figs/interpreter.pdf}
 \caption{How interpreted languages like Python and Ruby are executed.}
 \end{figure}
 
@@ -167,8 +331,7 @@ Thus it is possible to compile a Java program on one machine, transfer the byte 
 %This ability is an advantage of Java over some other high-level languages.
 
 \begin{figure}[!h]
-\centering
-\includegraphics{compiler.pdf}
+\includegraphics{figs/compiler.pdf}
 \caption{The process of editing, compiling, and running a Java program.}
 \end{figure}
 
@@ -290,7 +453,7 @@ Traditionally, the first program you write when learning a new programming langu
 All it does is display the words ``Hello, World!''\ on the screen.
 In Java, it looks like this:
 
-\begin{code}
+\begin{verbatim}
 public class Hello {
 
     public static void main(String[] args) {
@@ -299,13 +462,13 @@ public class Hello {
     }
 
 }
-\end{code}
+\end{verbatim}
 
 Note the output of this program does not include the quote marks:
 
-\begin{stdout}
+\begin{verbatim}
 Hello, World!
-\end{stdout}
+\end{verbatim}
 
 \index{public}
 \index{static}
@@ -322,7 +485,7 @@ For now, let's focus on the overall structure.
 
 Java programs are made up of {\bf class} and {\bf method} definitions, which generally have the form:
 
-\begin{code}
+\begin{verbatim}
 public class CLASSNAME {
 
     METHOD {
@@ -334,7 +497,7 @@ public class CLASSNAME {
     }
 
 }
-\end{code}
+\end{verbatim}
 
 \index{class!name}
 
@@ -348,9 +511,9 @@ In the hello world example, the file name must be {\tt Hello.java} because the c
 Classes define a program's methods, or named sequences of {\bf statements}.
 The \java{Hello} class has only one method:
 
-\begin{code}
+\begin{verbatim}
     public static void main(String[] args)
-\end{code}
+\end{verbatim}
 
 The name and format of \java{main} is special; it marks the place in the class where execution begins.
 When the program runs, it starts at the first statement in \java{main} and ends when it finishes the last statement.
@@ -359,7 +522,7 @@ When the program runs, it starts at the first statement in \java{main} and ends 
 \index{squiggly braces}
 
 Java uses squiggly braces (\{ and \}) to group things together.
-In {\tt Hello.java}, the outermost braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
+In \java{Hello.java}, the outermost braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
 
 % ABD: It looks like we don't have line numbers in the listings.
 % Is that a problem for the text here?
@@ -392,7 +555,7 @@ All the examples in this book were developed and tested using Java SE Version 7.
 Later versions of Java are generally backward compatible, so if you are using a more recent version, the examples in this book should still work.
 
 \begin{figure}[!h]
-\includegraphics[width=\textwidth]{drjava-hello.png}
+\includegraphics[width=\textwidth]{figs/drjava-hello.png}
 \caption{Screenshot of DrJava editing the hello world program.}
 \end{figure}
 
@@ -424,8 +587,7 @@ To get started, you only need to know four commands: how to change the working d
 % ABD: There's a conflict here between ``Find the details for your system'' and ``Here are the UNIX commands''.
 
 \begin{figure}[!h]
-\centering
-\includegraphics[width=4.5in]{terminal.png}
+\includegraphics[width=4.5in]{figs/terminal.png}
 \caption{Compiling and running {\tt Hello.java} from the command-line.}
 \end{figure}
 
@@ -448,7 +610,7 @@ People who don't use the command-line don't know what they're missing.
 You can put as many statements as you want in \java{main}.
 For example, to print more than one line:
 
-\begin{code}
+\begin{verbatim}
 public class Hello {
 
     public static void main(String[] args) {
@@ -458,7 +620,7 @@ public class Hello {
     }
 
 }
-\end{code}
+\end{verbatim}
 
 As this program demonstrates, you can put comments at the end of a line as well as on lines all by themselves.
 
@@ -477,7 +639,7 @@ It appends a special character, called a {\bf newline}, that advances the cursor
 %The next time \java{println} is invoked, the new text appears on the next line.
 To display the output from multiple print statements on one line, use \java{print}:
 
-\begin{code}
+\begin{verbatim}
 public class Goodbye {
 
     public static void main(String[] args) {
@@ -486,7 +648,7 @@ public class Goodbye {
     }
 
 }
-\end{code}
+\end{verbatim}
 
 The output appears on a single line as {\tt Goodbye, cruel world}.
 Notice that there is a space between the word ``Goodbye'' and the second quotation mark.
@@ -498,24 +660,24 @@ This space appears in the output, so it affects the {\em behavior} of the progra
 Spaces that appear outside of quotation marks generally do not affect the behavior of the program.
 For example, we could have written:
 
-\begin{code}
+\begin{verbatim}
 public class Goodbye {
 public static void main(String[] args) {
 System.out.print("Goodbye, ");
 System.out.println("cruel world");
 }
 }
-\end{code}
+\end{verbatim}
 
 This program would compile and run just as well as the original.
 The newlines at the end of each line do not affect the program's behavior either.
 So we could have also written:
 
-\begin{code}
+\begin{verbatim}
 public class Goodbye { public static void main(String[] args) {
 System.out.print("Goodbye, "); System.out.println
 ("cruel world");}}
-\end{code}
+\end{verbatim}
 
 It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
@@ -527,7 +689,7 @@ Newlines and spaces are important for organizing your program visually, making i
 It is possible to print multiple lines of output in just one line of code.
 You simply have to tell Java where to put the newlines.
 
-\begin{code}
+\begin{verbatim}
 public class Hello {
 
     public static void main(String[] args) {
@@ -535,33 +697,32 @@ public class Hello {
     }
 
 }
-\end{code}
+\end{verbatim}
 
 The output is two lines, each ending with a newline character:
 
-\begin{stdout}
+\begin{verbatim}
 Hello!
 How are you doing?
-\end{stdout}
+\end{verbatim}
 
 \index{escape sequence}
 
-The code \java{\\n} is an example of an {\bf escape sequence}, which is a sequence of characters in a string that represents a special character.
+The code \verb"\n" is an example of an {\bf escape sequence}, which is a sequence of characters in a string that represents a special character.
 The backslash allows you to ``escape'' the string's literal interpretation.
-Notice there is no space between \java{\\n} and \java{How}.
+Notice there is no space between \verb"\n" and \java{How}.
 If you add a space there, there will be a space at the beginning of the second line.
 
 \begin{table}[!h]
-\centering
 \begin{tabular}{|c|c|}
 \hline
-\java{\\n} & newline \\
+\verb"\n" & newline \\
 \hline
-\java{\\t} & tab \\
+\verb"\t" & tab \\
 \hline
-\java{\\"} & double quote \\
+\verb'\"' & double quote \\
 \hline
-\java{\\\\} & backslash \\
+\verb"\\" & backslash \\
 \hline
 \end{tabular}
 \caption{Common escape sequences}
@@ -570,15 +731,15 @@ If you add a space there, there will be a space at the beginning of the second l
 Another common use of escape sequences is to have quote marks inside of strings.
 Since double quotes indicate the beginning and end of strings, you need to escape them with a backslash.
 
-\begin{code}
+\begin{verbatim}
     System.out.println("She said \"Hello!\" to me.");
-\end{code}
+\end{verbatim}
 
 The result is:
 
-\begin{stdout}
+\begin{verbatim}
     She said "Hello!" to me.
-\end{stdout}
+\end{verbatim}
 
 
 \section{Working through examples}
@@ -856,7 +1017,7 @@ In English, readers can tolerate most syntax errors, which is why we can read th
 Java is not so forgiving; if there is a single syntax error anywhere in your program, the compiler will display an error message and quit, and you will not be able to run the program.
 
 \begin{figure}[!h]
-\includegraphics[width=\textwidth]{syntax-error.png}
+\includegraphics[width=\textwidth]{figs/syntax-error.png}
 \caption{A syntax error caused by a missing brace.}
 \label{fig:syntax}
 \end{figure}
@@ -888,10 +1049,10 @@ In most environments they appear as windows or dialog boxes that contain informa
 For example, if you accidentally divide by zero you will get an \java{ArithmeticException}:
 
 \begin{small}
-\begin{stdout}
+\begin{verbatim}
 Exception in thread "main" java.lang.ArithmeticException: / by zero
     at Hello.main(Hello.java:5)
-\end{stdout}
+\end{verbatim}
 \end{small}
 
 This information is useful for debugging.
@@ -911,7 +1072,7 @@ It will do something else.
 Specifically, it will do what you told it to do.
 Here is an example of a logic error in the hello world program:
 
-\begin{code}
+\begin{verbatim}
 public class Hello {
 
     public static void main(String[] args) {
@@ -919,7 +1080,7 @@ public class Hello {
     }
 
 }
-\end{code}
+\end{verbatim}
 
 This program compiles and runs just fine.
 The problem is that the main method is not the program we intended.
@@ -942,9 +1103,9 @@ Values may be numbers, text, images, sounds, and other types of data.
 To store a value in memory, you first have to create a variable.
 %Since the values we want to store are text, we declare that the new variable is a string:
 
-\begin{code}
+\begin{verbatim}
     String message;
-\end{code}
+\end{verbatim}
 
 \index{declaration}
 \index{statement!declaration}
@@ -962,19 +1123,19 @@ There is no such type as \java{Int} or \java{string}, and the compiler will comp
 
 To declare an integer variable, the syntax is:
 
-\begin{code}
+\begin{verbatim}
     int x;
-\end{code}
+\end{verbatim}
 
 Note that \java{x} is an arbitrary name for the variable.
 In general, you should use names that indicate what the variables mean.
 For example, if you saw these variable declarations, you could probably guess what values would be stored in them:
 
-\begin{code}
+\begin{verbatim}
     String firstName;
     String lastName;
     int hour, minute;
-\end{code}
+\end{verbatim}
 
 This example also demonstrates the syntax for declaring multiple variables with the same type: \java{hour} and \java{minute} are both integers.
 Note that each declaration statement ends with a semicolon.
@@ -1000,12 +1161,12 @@ If you type a variable name and it turns blue, watch out!
 Now that we have created variables, we want to store values.
 We do that with an {\bf assignment} statement.
 
-\begin{code}
+\begin{verbatim}
     message = "Hello!";  // give message the value "Hello!"
     hour = 10;           // assign the value 10 to hour
     minute = 59;         // set minute to 59
     hour = 11;           // change the hour to 11
-\end{code}
+\end{verbatim}
 
 This example shows four assignments, and the comments illustrate different ways people sometimes talk about assignment statements.
 The vocabulary can be confusing here, but the idea is straightforward:
@@ -1028,10 +1189,10 @@ A common source of confusion is that some strings {\em look} like integers, but 
 For example, \java{message} can contain the string \java{"123"}, which is made up of the characters \java{'1'}, \java{'2'}, and \java{'3'}.
 But that is not the same thing as the integer \java{123}.
 
-\begin{code}
+\begin{verbatim}
     message = "123";  // legal
     message = 123;    // not legal
-\end{code}
+\end{verbatim}
 
 \subsection{Memory diagrams}
 
@@ -1065,7 +1226,7 @@ The diagram shows only the final value.
 You can display the value of a variable using \java{print} or \java{println}.
 The following program declares a variable named \java{firstLine}, assigns it the value \java{"Hello, again!"}, and then prints that value.
 
-\begin{code}
+\begin{verbatim}
 public class Hello {
     public static void main(String[] args) {
         String firstLine;
@@ -1073,25 +1234,25 @@ public class Hello {
         System.out.println(firstLine);
     }
 }
-\end{code}
+\end{verbatim}
 
 When we talk about printing a variable, we generally mean printing the {\em value} of the variable.
 To print the {\em name} of a variable, you have to put it in quotes.
 %For example: {\tt System.out.println("firstLine");}
 For example, you can write:
 
-\begin{code}
+\begin{verbatim}
     String firstLine;
     firstLine = "Hello, again!";
     System.out.print("The value of firstLine is ");
     System.out.println(firstLine);
-\end{code}
+\end{verbatim}
 
 The output of this program is:
 
-\begin{stdout}
+\begin{verbatim}
 The value of firstLine is Hello, again!
-\end{stdout}
+\end{verbatim}
 
 %The output does not contain quote marks around \java{Hello, again!}.
 %Those quote marks were part of the source code, not the value.
@@ -1099,7 +1260,7 @@ The value of firstLine is Hello, again!
 The syntax for printing a variable is the same regardless of the variable's type.
 For example:
 
-\begin{code}
+\begin{verbatim}
     int hour, minute;
     hour = 11;
     minute = 59;
@@ -1108,13 +1269,13 @@ For example:
     System.out.print(":");
     System.out.print(minute);
     System.out.println(".");
-\end{code}
+\end{verbatim}
 
 The output of this program is:
 
-\begin{stdout}
+\begin{verbatim}
 The current time is 11:59.
-\end{stdout}
+\end{verbatim}
 
 To output multiple values on the same line, it's common to use several \java{print} statements followed by a \java{println} at the end.
 {\bf Don't forget the {\tt println}!}
@@ -1136,13 +1297,13 @@ For example, the operator for addition is \java{+}, subtraction is \java{-}, mul
 
 The following program converts the time of day to minutes:
 
-\begin{code}
+\begin{verbatim}
     int hour, minute;
     hour = 11;
     minute = 59;
     System.out.print("Number of minutes since midnight: ");
     System.out.println(hour * 60 + minute);
-\end{code}
+\end{verbatim}
 
 \index{expression}
 
@@ -1150,33 +1311,33 @@ In this program, \java{hour * 60 + minute} is an {\bf expression}, which represe
 When the program runs, each variable is replaced by its current value, and then the operators are applied.
 The result is:
 
-\begin{stdout}
+\begin{verbatim}
 Number of minutes since midnight: 719
-\end{stdout}
+\end{verbatim}
 
 Expressions are generally a combination of numbers, variables, and operators.
 When complied and executed, they become a single value:
 
-\begin{code}
+\begin{verbatim}
     1 + 1     hour - 1     hour * 60 + minute     minute / 60
     2         11 - 1       11 * 60 + 59           59 / 60
               10           660 + 59               0
                            719
-\end{code}
+\end{verbatim}
 
 Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
 For example, the following lines try to compute the fraction of an hour that has elapsed:
 
-\begin{code}
+\begin{verbatim}
     System.out.print("Fraction of the hour that has passed: ");
     System.out.println(minute / 60);
-\end{code}
+\end{verbatim}
 
 Bu the program outputs:
 
-\begin{stdout}
+\begin{verbatim}
 Fraction of the hour that has passed: 0
-\end{stdout}
+\end{verbatim}
 
 \index{division!integer}
 \index{integer division}
@@ -1189,16 +1350,16 @@ Computer hardware is designed so that integer division always rounds {\em down},
 
 One solution is to calculate a percentage rather than a fraction:
 
-\begin{code}
+\begin{verbatim}
     System.out.print("Percent of the hour that has passed: ");
     System.out.println(minute * 100 / 60);
-\end{code}
+\end{verbatim}
 
 The new output is:
 
-\begin{stdout}
+\begin{verbatim}
 Percent of the hour that has passed: 98
-\end{stdout}
+\end{verbatim}
 
 Again the result is rounded down, but at least now it's approximately correct.
 %To get a more precise answer, we can use a different type of variable that can store fractional values.
@@ -1216,10 +1377,10 @@ A more general solution is to use {\bf floating-point} numbers, which can repres
 In Java, the default floating-point type is called \java{double}, which is short for double-precision.
 You can create \java{double} variables and assign values to them using the same syntax we used for the other types:
 
-\begin{code}
+\begin{verbatim}
     double pi;
     pi = 3.14159;
-\end{code}
+\end{verbatim}
 
 Although floating-point numbers are useful, they can be a source of confusion.
 For example, Java distinguishes the integer value {\tt 1} from the floating-point value {\tt 1.0}, even though they seem to be the same number.
@@ -1227,25 +1388,25 @@ They belong to different data types, and strictly speaking, you are not allowed 
 
 The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
 
-\begin{code}
+\begin{verbatim}
     int x;
     x = 1.1;  // syntax error
-\end{code}
+\end{verbatim}
 
 But it is easy to forget this rule because in many cases Java {\em automatically} converts from one type to another:
 
-\begin{code}
+\begin{verbatim}
     double y;
     y = 1;  // bad style
-\end{code}
+\end{verbatim}
 
 The above example should be illegal, but Java allows it by converting the \java{int} value \java{1} to the \java{double} value \java{1.0} automatically.
 This leniency is convenient, but it often causes problems for beginners. For example:
 
-\begin{code}
+\begin{verbatim}
     double y;
     y = 1 / 3;  // logic error
-\end{code}
+\end{verbatim}
 
 \index{division!integer}
 \index{integer division}
@@ -1259,10 +1420,10 @@ Converted to \java{double}, the final result is \java{0.0}.
 One way to solve this problem (after you finally discover that bug) is to make the right-hand side a floating-point expression.
 The following initializes {\tt y} to {\tt 0.333333}, as expected:
 
-\begin{code}
+\begin{verbatim}
     double y;
     y = 1.0 / 3.0;  // correct
-\end{code}
+\end{verbatim}
 
 As a matter of style, you should always assign floating-point values to floating-point variables.
 The compiler won't make you do it, but you never know when a bug like this one will come back and haunt you.
@@ -1276,9 +1437,9 @@ The compiler won't make you do it, but you never know when a bug like this one w
 In general, you cannot perform mathematical operations on strings, even if the strings look like numbers.
 The following expressions are illegal:
 
-\begin{code}
+\begin{verbatim}
     "Hello" - 1     "World" / 123     "Hello" * "World"
-\end{code}
+\end{verbatim}
 
 %Note that it's unclear looking at these expressions whether \java{message} is an integer or a string.
 %The only way to tell the type of a variable is to look at the place where it is declared.
@@ -1297,22 +1458,22 @@ Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} t
 
 %If you add an \java{int} and a \java{double}, Java automatically converts the \java{int} into a \java{double} before performing the addition:
 
-%\begin{code}
+%\begin{verbatim}
 %    System.out.println(1 + 2.0);
 %    // prints 3.0
-%\end{code}
+%\end{verbatim}
 
 Since addition is defined for both numbers and strings, Java performs automatic conversions you may not expect:
 
 % TODO: use DrJava interactive format for these examples?
 
-\begin{code}
+\begin{verbatim}
     System.out.println(1 + 2 + "Hello");
     // the output is 3Hello
 
     System.out.println("Hello" + 1 + 2);
     // the output is Hello12
-\end{code}
+\end{verbatim}
 
 Java executes these operations from left to right.
 In the first line, \java{1 + 2} is the value \java{3}, and \java{3 + "Hello"} is the value \java{"3Hello"}.
@@ -1322,9 +1483,9 @@ The difference is when the conversion from integer to string actually takes plac
 %Fortunately, this situation only happens when using the plus operator.
 %You cannot, for example, store an integer directly in a string variable.
 %
-%\begin{code}
+%\begin{verbatim}
 %     String number = 5;  // syntax error
-%\end{code}
+%\end{verbatim}
 
 %In general, it's better not to compose multiple additions of varying data types.
 %Instead you can break those statements into multiple lines, or use another method like \java{printf} to achieve the same results.
@@ -1400,32 +1561,32 @@ One of the most useful features of programming languages is their ability to tak
 For example, we know how to multiply numbers and we know how to print.
 It turns out we can combine these operations into a single statement:
 
-\begin{code}
+\begin{verbatim}
     System.out.println(17 * 3);
-\end{code}
+\end{verbatim}
 
 Any expression involving numbers, strings, and variables can be used inside a print statement.
 We've already seen one example:
 
-\begin{code}
+\begin{verbatim}
     System.out.println(hour * 60 + minute);
-\end{code}
+\end{verbatim}
 
 You can also put arbitrary expressions on the right side of an assignment:
 
-\begin{code}
+\begin{verbatim}
     int percentage;
     percentage = (minute * 100) / 60;
-\end{code}
+\end{verbatim}
 
 The left side of an assignment must be a {\em variable name}, not an expression.
 That's because the left side indicates where the result will be stored,
 and expressions do not represent storage locations.
 
-\begin{code}
+\begin{verbatim}
     hour = minute + 1;  // correct
     minute + 1 = hour;  // syntax error
-\end{code}
+\end{verbatim}
 
 \index{readability}
 
@@ -1582,12 +1743,12 @@ This is an intermediate step that is useful for checking that everything is work
 
 \item Modify the program again so that the total output is:
 
-\begin{stdout}
+\begin{verbatim}
 American format:
 Thursday, July 16, 2015
 European format:
 Thursday 16 July, 2015
-\end{stdout}
+\end{verbatim}
 
 \end{enumerate}
 
@@ -1653,15 +1814,15 @@ This chapter will show you how to read input from the keyboard, use that input t
 \java{System.out.println} can display the value of any type of variable.
 You can even use \java{println} to print the value of \java{System.out}:
 
-\begin{code}
+\begin{verbatim}
 System.out.println(System.out);
-\end{code}
+\end{verbatim}
 
 The result is:
 
-\begin{stdout}
+\begin{verbatim}
 java.io.PrintStream@685d72cd
-\end{stdout}
+\end{verbatim}
 
 \index{package}
 
@@ -1687,8 +1848,7 @@ The \java{System} class is defined in a file called {\tt System.java}, and {\tt 
 These files are part of the Java {\bf library}, which is an extensive collection of classes you can use in your programs.
 
 \begin{figure}[!h]
-\centering
-\includegraphics{system.pdf}
+\includegraphics{figs/system.pdf}
 \caption{\java{System.out.println} refers to the \java{out} variable of the \java{System} class, which is a \java{PrintStream} that provides a method called \java{println}.}
 \end{figure}
 
@@ -1736,9 +1896,9 @@ For example, \java{Scanner} is a class that provides methods for inputting words
 \java{Scanner} is provided by \java{java.util}, which is a package that contains classes so useful they are called {\bf utility classes}.
 Before you can use \java{Scanner}, you have to import it at the top of your source file:
 
-\begin{code}
+\begin{verbatim}
 import java.util.Scanner;
-\end{code}
+\end{verbatim}
 
 \index{import}
 \index{statement!import}
@@ -1751,10 +1911,10 @@ Next you have to create a \java{Scanner} object using the keyword \java{new}.
 %In most programs, you will need only one \java{Scanner}, since there is only one source of input.
 The following code declares a \java{Scanner} variable and then creates a \java{Scanner} object:
 
-\begin{code}
+\begin{verbatim}
     Scanner in;
     in = new Scanner(System.in);
-\end{code}
+\end{verbatim}
 
 Although \java{Scanner} is not a method, the syntax is the same as a method call.
 We pass \java{System.in} as an argument, which specifies that we are planning to input values from the keyboard.
@@ -1762,14 +1922,14 @@ Alternatively, you can declare the variable and assign it using one line of code
 %This latter syntax is more convenient, since it's a one-time setup for many programs.
 %Just make sure you understand that it's two statements in one.
 
-\begin{code}
+\begin{verbatim}
     Scanner in = new Scanner(System.in);
-\end{code}
+\end{verbatim}
 
 The new \java{Scanner} object (stored in the variable \java{in}) provides a method called \java{nextLine} that reads a line of input from the keyboard and returns a String.
 The following example reads two lines and repeats them back to the user.
 
-\begin{code}
+\begin{verbatim}
 import java.util.Scanner;
 
 public class Echo {
@@ -1786,7 +1946,7 @@ public class Echo {
         System.out.println("You also said: " + line);
     }
 }
-\end{code}
+\end{verbatim}
 
 If you omit the import statement and later refer to \java{Scanner}, you will get a compiler error like ``cannot find symbol.''
 That means the compiler doesn't know what you mean by \java{Scanner}.
@@ -1803,8 +1963,7 @@ At this point, we have seen all of the elements that make up Java programs.
 The following figure shows these organizational units.
 
 \begin{figure}[!h]
-\centering
-\includegraphics[width=4in]{package.pdf}
+\includegraphics[width=4in]{figs/package.pdf}
 \caption{Elements of the Java language, from largest to smallest.}
 \end{figure}
 
@@ -1822,12 +1981,12 @@ In face, most of the Java library itself is written in Java.
 
 %In order to use a class defined in another package (and in another folder), you have to {\bf import} it first.
 
-%\begin{code}
+%\begin{verbatim}
 %import java.io.File;
 %import java.io.PrintStream;
 %import java.util.Date;
 %import java.util.Scanner;
-%\end{code}
+%\end{verbatim}
 
 %All \java{import} statements appear at the top of the source file, above the class definition.
 %It's not uncommon for Java programs to have many import statements.
@@ -1858,28 +2017,28 @@ These lines declare the variables and create the \java{Scanner}:
 % style.  Despite this benefit, I think it's better to leave
 % them out.  But I don't feel strongly about it.
 
-\begin{code}
+\begin{verbatim}
     int inch;  // the input
     double cm;  // the output
     Scanner in = new Scanner(System.in);
-\end{code}
+\end{verbatim}
 
 The first step is to prompt the user for the input.
 We'll use \java{print} instead of \java{println} so they can enter the input on the same line.
 
-\begin{code}
+\begin{verbatim}
     System.out.print("How many inches? ");
     inch = in.nextInt();
-\end{code}
+\end{verbatim}
 
 Next we multiply the number of inches by 2.54, since that's how many centimeters there are per inch.
 Finally we display the results on one line, but use two print statements since it's easier to read.
 
-\begin{code}
+\begin{verbatim}
     cm = inch * 2.54;
     System.out.print(inch + " in = ");
     System.out.println(cm + " cm");
-\end{code}
+\end{verbatim}
 
 \index{magic number}
 
@@ -1888,12 +2047,12 @@ If another programmer reads this code, they might wonder where 2.54 comes from.
 Numbers that appear in an expression with no explanation are called {\bf magic numbers}.
 For the benefit of other programmers (and yourself in the future), it is helpful to assign magic numbers to variables with informative names:
 
-\begin{code}
+\begin{verbatim}
     final double cmPerInch = 2.54;
     cm = inch * cmPerInch;
     System.out.print(inch + " in = ");
     System.out.println(cm + " cm");
-\end{code}
+\end{verbatim}
 
 \subsection{Literals and constants}
 
@@ -1908,10 +2067,10 @@ As we saw with \java{cmPerInch}, it's often useful to give names to literals tha
 But when doing so, we don't want those variables to be changed accidentally because of an unexpected bug in the code.
 As another example, consider the famous card game that comes with most versions of Microsoft Windows.
 
-\begin{code}
+\begin{verbatim}
     final String title = "Solitaire";
     final int deckSize = 52;
-\end{code}
+\end{verbatim}
 
 \index{final}
 \index{constant}
@@ -1937,10 +2096,10 @@ When printing floating-point numbers, Java automatically decides how many decima
 
 % ABD: What do you think of using the DrJava interpreter format to show the result of simple examples, as in the following?
 
-\begin{code}
+\begin{verbatim}
     System.out.print(7.0 / 3.0);
     // prints 2.3333333333333335   note: 5 is a rounding error
-\end{code}
+\end{verbatim}
 
 \index{printf}
 
@@ -1949,10 +2108,10 @@ The first argument of \java{printf} is a {\em format string} that specifies how 
 %It contains a template for the text you want to output, as well as positions where it will substitute other values.
 The other arguments are the values themselves.
 
-\begin{code}
+\begin{verbatim}
     System.out.printf("Seven thirds = %.3f", 7.0 / 3.0);
     // prints Seven thirds = 2.333
-\end{code}
+\end{verbatim}
 
 \index{format specifier}
 
@@ -1960,12 +2119,12 @@ This format string contains ordinary text followed by a {\bf format specifier}, 
 The format specifier \java{\%.3f} indicates that the value should be displayed as floating-point with three decimal places.
 Here's an example that contains two format specifiers:
 
-\begin{code}
+\begin{verbatim}
    inch = 100;
    cm = inch * cmPerInch;
    System.out.printf("%d in = %f cm\n", inch, cm);
    // prints 100 in = 254.000000 cm
-\end{code}
+\end{verbatim}
 
 The values are matched up with the format specifiers in order, so \java{inch} is displayed as an integer (``d'' stands for ``decimal'') and \java{cm} is displayed as a floating-point number.
 Format strings often end with a newline character (\java{\\n}), since \java{printf} does not append a newline like \java{println} does.
@@ -1975,7 +2134,6 @@ There are many options, and the details can be overwhelming.
 But here are some common uses, to give you an idea of how it works:
 
 \begin{table}[!h]
-\centering
 \begin{tabular}{|l|l|l|}
 \hline
 {\tt \%d} & decimal integer & 12345 \\
@@ -2002,9 +2160,9 @@ or search the web for ``java formatting.''
 Now suppose we have a measurement in centimeters and we want to round it off to the nearest inch.
 It is tempting to write:
 
-\begin{code}
+\begin{verbatim}
     inch = cm / centPerInch;  // syntax error
-\end{code}
+\end{verbatim}
 
 But the result is an error---you get something like, ``Bad types in assignment: from double to int.''
 The problem is that the value on the right is floating-point and the variable on the left is an integer.
@@ -2019,10 +2177,10 @@ The problem is that the value on the right is floating-point and the variable on
 The simplest way to convert a floating-point value to an integer is to use a {\bf type cast}, so called because it molds or ``casts'' a value from one shape to another.
 The syntax for type casting is to put the name of the type in parentheses and use it as an operator.
 
-\begin{code}
+\begin{verbatim}
     double pi = 3.14159;
     int x = (int) pi;
-\end{code}
+\end{verbatim}
 
 %\index{truncate}
 
@@ -2034,19 +2192,19 @@ Type casting takes precedence over arithmetic operations.
 In this example, the value of \java{pi} gets converted to an integer first.
 So the result is 60.0, not 62.
 
-\begin{code}
+\begin{verbatim}
     double pi = 3.14159;
     double x = (int) pi * 20.0;
-\end{code}
+\end{verbatim}
 
 %Operator precedence and integer truncation make type casting somewhat error-prone.
 
 Keeping that in mind, here's how we can convert a measurement in centimeters to inches.
 
-\begin{code}
+\begin{verbatim}
     inch = (int) (cm / centPerInch);
     System.out.printf("%f cm = %d in\n", cent, inch);
-\end{code}
+\end{verbatim}
 
 The parentheses after the cast operator require the division to come before the type cast.
 This result will be rounded down, but we will learn in the next chapter how to round floating-point numbers to the closest integer.
@@ -2067,10 +2225,10 @@ Java also provides the {\bf modulus} operator (\java{\%}), which divides two num
 
 Assuming the following variables are integers, we can convert 76 inches to feet and inches like this:
 
-\begin{code}
+\begin{verbatim}
     quotient = 76 / 12;   // division
     remainder = 76 % 12;  // modulus
-\end{code}
+\end{verbatim}
 
 The first line yields 6.
 The second line, which is pronounced ``76 mod 12,'' yields 4.
@@ -2122,7 +2280,7 @@ Now we can put them together in a complete program:
 %Since we've looked at each of these topics in isolation, it's important to see how they fit together in a complete program.
 %If you've been working through the examples on your computer as you've been reading (like we recommended in Section~\ref{sec:examples}), then good job!
 
-\begin{code}
+\begin{verbatim}
 import java.util.Scanner;
 
 /**
@@ -2147,7 +2305,7 @@ public class Convert {
                           cm, feet, inches);
     }
 }
-\end{code}
+\end{verbatim}
 
 \begin{itemize}
 
@@ -2178,8 +2336,7 @@ The latter method is more useful in the long run, especially as Oracle releases 
 Either way, you should get something like this:
 
 \begin{figure}[!h]
-\centering
-\includegraphics[width=0.9\textwidth]{scanner.png}
+\includegraphics[width=0.9\textwidth]{figs/scanner.png}
 \caption{Screenshot of the documentation for \java{Scanner} on Oracle's website.}
 \end{figure}
 
@@ -2188,10 +2345,10 @@ As you can see, the \java{Scanner} class provides quite a few methods.
 In this chapter we focused on the ``next'' methods.
 Click on the link for \java{nextInt}.
 
-\begin{stdout}
+\begin{verbatim}
 public int nextInt()
 Scans the next token of the input as an int.
-\end{stdout}
+\end{verbatim}
 
 \index{prototype}
 
@@ -2226,7 +2383,7 @@ In contrast to inline comments that begin with {\tt //}, documentation comments 
 Anything in between these two tokens becomes part of the documentation.
 %As a rule of thumb, you should document every class and every method.
 
-\begin{code}
+\begin{verbatim}
 /**
  * Example program that demonstrates print vs println.
  */
@@ -2241,7 +2398,7 @@ public class Goodbye {
     }
 
 }
-\end{code}
+\end{verbatim}
 
 This example has perhaps too many comments, since all the program does is print a message.
 But it illustrates the differences between inline and documentation comments:
@@ -2286,23 +2443,23 @@ Here are step by step instructions.
 \item In the same directory as {\tt Convert.java}, create a plain text file named {\tt test.in} (``in'' is for input).
 Enter the following line and save the file.
 
-\begin{stdout}
+\begin{verbatim}
 193.04
-\end{stdout}
+\end{verbatim}
 
 \item Create a second plain text file named {\tt test.exp} (``exp'' is for expected).
 Enter the following line and save the file.
 
-\begin{stdout}
+\begin{verbatim}
 193.04 cm = 6 ft, 4 in
-\end{stdout}
+\end{verbatim}
 
 \item Open a command-line, and change to the directory with these files.
 Run the following command to test the program.
 
-\begin{stdout}
+\begin{verbatim}
 java Convert < test.in > test.out
-\end{stdout}
+\end{verbatim}
 
 \end{enumerate}
 
@@ -2321,9 +2478,9 @@ If the files are the same, then the program outputted what we expected it to out
 If not, then we found a bug, and we can use the output to begin debugging our program.
 Fortunately, there's a simple way to compare files on the command-line:
 
-\begin{stdout}
+\begin{verbatim}
 diff test.exp test.out
-\end{stdout}
+\end{verbatim}
 
 The {\tt diff} utility summarizes the differences between two files.
 If there are no differences, then it prints nothing, which in our case is what we want.
@@ -2485,11 +2642,11 @@ The Java library includes a \java{Math} class that provides most common mathemat
 \java{Math} is in the \java{java.lang} package, so you don't have to import it.
 You can invoke Math methods like this:
 
-\begin{code}
+\begin{verbatim}
     double root = Math.sqrt(17.0);
     double angle = 1.5;
     double height = Math.sin(angle);
-\end{code}
+\end{verbatim}
 
 The first line sets \java{root} to the square root of 17.
 The third line finds the sine of the value of \java{angle}.
@@ -2501,10 +2658,10 @@ Arguments of the trigonometric functions---\java{sin}, \java{cos}, and \java{tan
 To convert from degrees to radians, you can divide by 180 and multiply by $\pi$.
 Conveniently, the \java{Math} class provides a \java{final double} named \java{PI} that contains an approximation of $\pi$:
 
-\begin{code}
+\begin{verbatim}
     double degrees = 90;
     double angle = degrees / 180.0 * Math.PI;
-\end{code}
+\end{verbatim}
 
 Notice that \java{PI} is in capital letters.
 Java does not recognize \java{Pi}, \java{pi}, or \java{pie}.
@@ -2513,19 +2670,19 @@ The same is true for the constant \java{Math.E}, which approximates Euler's numb
 
 It turns out that converting to/from radians is a common operation, so the \java{Math} class provides methods for that.
 
-\begin{code}
+\begin{verbatim}
     double radians = Math.toRadians(180.0);
     double degrees = Math.toDegrees(Math.PI);
-\end{code}
+\end{verbatim}
 
 \index{type!long}
 
 If you haven't already, take a look at the documentation for \java{Math} so you know what methods are provided.
 For example, another useful method is \java{round}, which rounds a floating-point value to the nearest integer and returns a \java{long}.
 
-\begin{code}
+\begin{verbatim}
     long x = Math.round(Math.PI * 20.0);
-\end{code}
+\end{verbatim}
 
 In Java, \java{int} values are stored using 32 bits (4 bytes) of memory, whereas \java{long} values are stored in 64 bits (8 bytes).
 As a result, \java{long} variables can represent much larger integers.
@@ -2541,17 +2698,17 @@ Just as with mathematical functions, Java methods can be {\bf composed}.
 That means you can use one expression as part of another.
 For example, you can use any expression as an argument to a method:
 
-\begin{code}
+\begin{verbatim}
     double x = Math.cos(angle + Math.PI / 2);
-\end{code}
+\end{verbatim}
 
 This statement takes the value \java{Math.PI}, divides it by two, and then adds the result to the value of the variable \java{angle}.
 The sum is then passed as an argument to \java{cos}.
 You can also take the result of one method and pass it as an argument to another:
 
-\begin{code}
+\begin{verbatim}
     double x = Math.exp(Math.log(10.0));
-\end{code}
+\end{verbatim}
 
 In Java, the \java{log} method always uses base $e$.
 So this statement finds the log base $e$ of 10, and then raises $e$ to that power.
@@ -2561,9 +2718,9 @@ The result gets assigned to \java{x}.
 When using \java{Math} methods, it is a common error to forget to specify the class name \java{Math}.
 For example, \java{Math.pow} takes two arguments and raises the first argument to the power of the second.
 
-\begin{code}
+\begin{verbatim}
     pow(2.0, 10.0);  // syntax error
-\end{code}
+\end{verbatim}
 
 If you try to invoke \java{Math.pow} this way, the compiler will say it ``cannot find symbol'' (i.e., there is no method named \java{pow} in the current class).
 
@@ -2579,11 +2736,11 @@ Like the \java{Math} class, you can write your own set of methods for use in oth
 %One of the most powerful features of a programming language is the ability to add new methods.
 Let's revisit the method definition for \java{main}:
 
-\begin{code}
+\begin{verbatim}
     public static void main(String[] args) {
         System.out.println("Hello, World!");
     }
-\end{code}
+\end{verbatim}
 
 \index{public}
 \index{void}
@@ -2602,11 +2759,11 @@ This parameter has type \java{String[]}, which means that whoever invokes \java{
 
 You can define other methods using syntax is similar to \java{main}:
 
-\begin{code}
+\begin{verbatim}
     public static void NAME(PARAMETERS) {
         STATEMENTS
     }
-\end{code}
+\end{verbatim}
 
 By convention, methods start with a lower case letter and use ``camel case,'' which is a cute name for {\tt jammingWordsTogetherLikeThis}.
 You can use any name you want for your method, except \java{main} or any of the Java keywords.
@@ -2617,37 +2774,37 @@ You can use any name you want for your method, except \java{main} or any of the 
 The list of parameters specifies what values, if any, you have to provide in order to invoke the new method.
 The first methods we are going to write have no parameters, so the parameter list is empty.  Here's an example:
 
-\begin{code}
+\begin{verbatim}
     public static void newLine() {
         System.out.println();
     }
-\end{code}
+\end{verbatim}
 
 The name of this method is \java{newLine}.
 It contains only one statement, which prints a blank line.
 In {\tt main}, we can invoke the new method like this:
 
-\begin{code}
+\begin{verbatim}
     public static void main(String[] args) {
         System.out.println("First line.");
         newLine();
         System.out.println("Second line.");
     }
-\end{code}
+\end{verbatim}
 
 Because \java{newLine} is in the same class as \java{main}, we don't have to specify the class name.
 The output of this program is:
 
-\begin{stdout}
+\begin{verbatim}
 First line.
 
 Second line.
-\end{stdout}
+\end{verbatim}
 
 Notice the extra space between the lines.
 If we wanted more space between them, we could invoke the same method repeatedly:
 
-\begin{code}
+\begin{verbatim}
     public static void main(String[] args) {
         System.out.println("First line.");
         newLine();
@@ -2655,11 +2812,11 @@ If we wanted more space between them, we could invoke the same method repeatedly
         newLine();
         System.out.println("Second line.");
     }
-\end{code}
+\end{verbatim}
 
 Or we could write a new method that prints three blank lines:
 
-\begin{code}
+\begin{verbatim}
     public static void threeLine() {
         newLine();
         newLine();
@@ -2671,7 +2828,7 @@ Or we could write a new method that prints three blank lines:
         threeLine();
         System.out.println("Second line.");
     }
-\end{code}
+\end{verbatim}
 
 You can invoke the same method more than once, and you can have one method invoke another.
 In this example, \java{main} invokes \java{threeLine}, and \java{threeLine} invokes \java{newLine}.
@@ -2708,7 +2865,7 @@ Methods allow you to focus on each sub-problem in isolation, and then compose th
 
 Pulling together the code from the previous section, the complete program looks like this:
 
-\begin{code}
+\begin{verbatim}
 public class NewLine {
 
     public static void newLine() {
@@ -2727,7 +2884,7 @@ public class NewLine {
         System.out.println("Second line.");
     }
 }
-\end{code}
+\end{verbatim}
 
 \index{case-sensitive}
 
@@ -2782,12 +2939,12 @@ When you write a method, you list the parameters.
 The parameter list indicates what arguments are required.
 Here's a method that takes a string and prints it twice:
 
-\begin{code}
+\begin{verbatim}
     public static void printTwice(String s) {
         System.out.println(s);
         System.out.println(s);
     }
-\end{code}
+\end{verbatim}
 
 \java{printTwice} has a parameter named \java{s} with type \java{String}.
 The parameter name hints that it is a {\tt String}, but you could use any legal variable name.
@@ -2796,26 +2953,26 @@ Before the method executes, the argument gets assigned to the parameter.
 
 In this example, the argument \java{"Don't make me say this twice!"} gets assigned to the parameter \java{s}.
 
-\begin{code}
+\begin{verbatim}
     printTwice("Don't make me say this twice!");
-\end{code}
+\end{verbatim}
 
 \index{parameter passing}
 
 This process is called {\bf parameter passing} because the value gets passed from outside the method to the inside.
 An argument can be any kind of expression, so if you have a {\tt String} variable, you can use it as an argument:
 
-\begin{code}
+\begin{verbatim}
     String argument = "Never say never.";
     printTwice(argument);
-\end{code}
+\end{verbatim}
 
 The value you provide as an argument must have the same type as the parameter.
 For example, if you try:
 
-\begin{code}
+\begin{verbatim}
     printTwice(17);  // syntax error
-\end{code}
+\end{verbatim}
 
 You will get the compiler error ``cannot find symbol,'' which might be confusing.
 Java is looking for a method named \java{printTwice} that can take an integer.
@@ -2838,7 +2995,7 @@ But generally speaking, that is an exception; most methods are not so accommodat
 Pulling together the code examples from the previous section, here is a complete
 class definition:
 
-\begin{code}
+\begin{verbatim}
 public class PrintTwice {
 
     public static void printTwice(String s) {
@@ -2852,7 +3009,7 @@ public class PrintTwice {
     }
 
 }
-\end{code}
+\end{verbatim}
 
 Parameters and other variables only exist inside their own methods.
 Within the confines of \java{main}, there is no such thing as \java{s}.
@@ -2864,8 +3021,7 @@ One way to keep track of where each variable is defined is to draw a {\bf stack 
 The stack diagram for this example looks like this:
 
 \begin{figure}[!h]
-\centering
-\includegraphics{stack.pdf}
+\includegraphics{figs/stack.pdf}
 \caption{Stack diagram for the \java{PrintTwice} program.}
 \end{figure}
 
@@ -2911,7 +3067,7 @@ To the right are several buttons that allow you to step through the code at your
 You can also press ``Automatic Trace'' to watch DrJava run your code one line at a time.
 
 \begin{figure}[!h]
-\includegraphics[width=\textwidth]{debugger.png}
+\includegraphics[width=\textwidth]{figs/debugger.png}
 \caption{Screenshot of the DrJava debugger.
 Execution is currently paused on the first line of \java{printTwice}.
 There is a breakpoint on the first line of \java{main}.}
@@ -2938,31 +3094,31 @@ At that moment, you gain insight about what may be wrong with the code.
 The syntax for declaring and invoking methods with multiple parameters is a common source of confusion.
 For one, you have to declare the type of every parameter separately.
 
-\begin{code}
+\begin{verbatim}
     public static void printTime(int hour, int minute) {
         System.out.print(hour);
         System.out.print(":");
         System.out.println(minute);
     }
-\end{code}
+\end{verbatim}
 
 It might be tempting to write ``\java{int hour, minute}'' but that format is only legal for variable declarations, not parameter lists.
 Another common source of confusion is that you do not have to declare the types of arguments.
 The following is incorrect:
 
-\begin{code}
+\begin{verbatim}
     int hour = 11;
     int minute = 59;
     printTime(int hour, int minute);  // syntax error
-\end{code}
+\end{verbatim}
 
 In this case, Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
 It is unnecessary (and therefore not allowed) to include the type when you pass them as arguments.
 The correct syntax is:
 
-\begin{code}
+\begin{verbatim}
     printTime(hour, minute);
-\end{code}
+\end{verbatim}
 
 
 \section{A few more details}
@@ -2991,18 +3147,18 @@ The difference between the number we want and the floating-point number we get i
 
 For example, the following two statements should be equivalent:
 
-\begin{code}
+\begin{verbatim}
     System.out.println(0.1 * 10);
     System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
                      + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
-\end{code}
+\end{verbatim}
 
 But on many machines, the output is:
 
-\begin{stdout}
+\begin{verbatim}
     1.0
     0.9999999999999999
-\end{stdout}
+\end{verbatim}
 
 The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
 So its floating-point representation is only approximate.
@@ -3012,17 +3168,17 @@ For many applications, like computer graphics, encryption, statistical analysis,
 But if you need {\em absolute} precision, use integers instead.
 For example, consider a bank account with a balance of \$123.45:
 
-\begin{code}
+\begin{verbatim}
     double balance = 123.45;  // potential rounding error
-\end{code}
+\end{verbatim}
 
 In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
 The result would be angry customers and potential law suits.
 You can avoid the problem by representing the balance as an integer:
 
-\begin{code}
+\begin{verbatim}
     int balance = 12345;      // total number of cents
-\end{code}
+\end{verbatim}
 
 This solution works as long as the number of cents doesn't exceed the largest integer, which is about 2 billion.
 If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
@@ -3033,50 +3189,50 @@ Hopefully nobody will ever need that much money!
 Consider a simple program that asks users for their name and age.
 Somewhere in the middle of the code, we have the following lines:
 
-\begin{code}
+\begin{verbatim}
     System.out.print("What is your name? ");
     name = in.nextLine();
     System.out.print("What is your age? ");
     age = in.nextInt();
     System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
+\end{verbatim}
 
 The output of the \java{printf} statement looks something like this:
 
-\begin{stdout}
+\begin{verbatim}
     Hello Darth Vader, age 45
-\end{stdout}
+\end{verbatim}
 
 When you read a \java{String} followed by an \java{int}, everything works just fine.
 But when you read an \java{int} followed by a \java{String}, something strange happens.
 
-\begin{code}
+\begin{verbatim}
     System.out.print("What is your age? ");
     age = in.nextInt();
     System.out.print("What is your name? ");
     name = in.nextLine();
     System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
+\end{verbatim}
 
 Try running the above example.
 It doesn't let you input your name and immediately displays the output:
 
-\begin{stdout}
+\begin{verbatim}
     What is your name? Hello , age 45
-\end{stdout}
+\end{verbatim}
 
 To understand what is happening, recall that computers do not {\em see} input as multiple lines as we do.
 Instead, the operating system simply forwards a stream of characters to your program via \java{System.in}:
 
 \begin{center}
-\includegraphics{vader1.pdf}
+\includegraphics{figs/vader1.pdf}
 \end{center}
 
 The up-arrow represents the next character to be read by \java{Scanner}.
 When you call \java{nextInt}, it will read characters until a non-digit is found.
 
 \begin{center}
-\includegraphics{vader2.pdf}
+\includegraphics{figs/vader2.pdf}
 \end{center}
 
 At this point, \java{nextInt} returns the \java{int} value \java{45}.
@@ -3086,14 +3242,14 @@ Since the next character to be read already is a newline, \java{nextLine} return
 
 To solve this problem, you need to add an extra call to \java{nextLine} after you call \java{nextInt}.
 
-\begin{code}
+\begin{verbatim}
     System.out.print("What is your age? ");
     age = in.nextInt();
     in.nextLine();  // read the newline
     System.out.print("What is your name? ");
     name = in.nextLine();
     System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
+\end{verbatim}
 
 This technique is common when reading \java{int} or \java{double} values that appear on their own line.
 First you read the number, then you read the rest of the line (which is just a newline character).
@@ -3183,7 +3339,7 @@ HINT: Start by describing in words what {\tt ping} and {\tt baffle} do when they
 
 \end{enumerate}
 
-\begin{code}
+\begin{verbatim}
     public static void zoop() {
         baffle();
         System.out.print("You wugga ");
@@ -3205,7 +3361,7 @@ HINT: Start by describing in words what {\tt ping} and {\tt baffle} do when they
     public static void ping() {
         System.out.println(".");
     }
-\end{code}
+\end{verbatim}
 
 \end{exercise}
 
@@ -3239,9 +3395,9 @@ You should start with a working solution to Exercise~\ref{ex:date}.
 \item Test your method by invoking it from {\tt main} and passing appropriate arguments.
 The output should look something like this (except that the date might be different):
 
-\begin{stdout}
+\begin{verbatim}
 Saturday, July 16, 2011
-\end{stdout}
+\end{verbatim}
 
 \item Once you have debugged {\tt printAmerican}, write another method called {\tt printEuropean} that prints the date in European format.
 

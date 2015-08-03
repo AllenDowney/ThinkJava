@@ -19,3 +19,10 @@ xxe:
 
 lint:
 	xmllint -noout $(F)/$(F).xml
+
+oreilly:
+	rsync -a thinkjava/thinkjava.xml atlas	
+	rsync -a figs/*.pdf atlas/figs/
+	rsync -a figs/*.png atlas/figs/
+	cd atlas; git add thinkjava.xml figs/*	
+
