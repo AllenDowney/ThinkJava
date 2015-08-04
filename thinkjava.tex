@@ -254,9 +254,11 @@ You will need to think creatively when unexpected errors happen.
 %You probably won't have that problem, but you will need to think creatively when unexpected errors happen.
 
 %\begin{figure}[!h]
-%\includegraphics[height=2.2in]{todo-fig/firstbug.jpg}
+%\begin{center}
+%\includegraphics[height=2.2in]{figs/firstbug.jpg}
 %\caption{The first computer bug, taped to Grace Hopper's log book in 1947.
 %\\ She discovered the moth in an electromagnetic relay of the Mark II.}
+%\end{center}
 %\end{figure}
 
 % ABD: I don't love this particular piece of mythology, partly because it's not accurate, and partly because stories about the old days bore students.
@@ -302,8 +304,10 @@ It processes the program a little at a time, alternately reading lines and perfo
 % Figure 1.1 shows the structure of an interpreter.
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics{figs/interpreter.pdf}
 \caption{How interpreted languages like Python and Ruby are executed.}
+\end{center}
 \end{figure}
 
 \index{compiler}
@@ -327,8 +331,10 @@ Thus it is possible to compile a Java program on one machine, transfer the byte 
 %This ability is an advantage of Java over some other high-level languages.
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics{figs/compiler.pdf}
 \caption{The process of editing, compiling, and running a Java program.}
+\end{center}
 \end{figure}
 
 Although this process may seem complicated, in most program development environments these steps are automated for you.
@@ -551,8 +557,10 @@ All the examples in this book were developed and tested using Java SE Version 7.
 Later versions of Java are generally backward compatible, so if you are using a more recent version, the examples in this book should still work.
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics[width=\textwidth]{figs/drjava-hello.png}
 \caption{Screenshot of DrJava editing the hello world program.}
+\end{center}
 \end{figure}
 
 \index{DrJava}
@@ -583,8 +591,10 @@ To get started, you only need to know four commands: how to change the working d
 % ABD: There's a conflict here between ``Find the details for your system'' and ``Here are the UNIX commands''.
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics[width=4.5in]{figs/terminal.png}
 \caption{Compiling and running {\tt Hello.java} from the command-line.}
+\end{center}
 \end{figure}
 
 In this example, the {\tt Hello.java} source file is stored in the {\tt Desktop} directory.
@@ -710,6 +720,7 @@ Notice there is no space between \verb"\n" and \verb"How".
 If you add a space there, there will be a space at the beginning of the second line.
 
 \begin{table}[!h]
+\begin{center}
 \begin{tabular}{|c|c|}
 \hline
 \verb"\n" & newline \\
@@ -722,6 +733,7 @@ If you add a space there, there will be a space at the beginning of the second l
 \hline
 \end{tabular}
 \caption{Common escape sequences}
+\end{center}
 \end{table}
 
 Another common use of escape sequences is to have quote marks inside of strings.
@@ -1013,9 +1025,11 @@ In English, readers can tolerate most syntax errors, which is why we can read th
 Java is not so forgiving; if there is a single syntax error anywhere in your program, the compiler will display an error message and quit, and you will not be able to run the program.
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics[width=\textwidth]{figs/syntax-error.png}
 \caption{A syntax error caused by a missing brace.}
 \label{fig:syntax}
+\end{center}
 \end{figure}
 
 To make matters worse, the error messages you get from the compiler are often not very helpful.
@@ -1844,8 +1858,10 @@ The \java{System} class is defined in a file called {\tt System.java}, and {\tt 
 These files are part of the Java {\bf library}, which is an extensive collection of classes you can use in your programs.
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics{figs/system.pdf}
 \caption{\java{System.out.println} refers to the \java{out} variable of the \java{System} class, which is a \java{PrintStream} that provides a method called \java{println}.}
+\end{center}
 \end{figure}
 
 %Both \java{System} and \java{PrintStream} are written in Java, and later in the book we'll examine their source code.
@@ -1959,8 +1975,10 @@ At this point, we have seen all of the elements that make up Java programs.
 The following figure shows these organizational units.
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics[width=4in]{figs/package.pdf}
 \caption{Elements of the Java language, from largest to smallest.}
+\end{center}
 \end{figure}
 
 To review, a package is a collection of classes, which define methods.
@@ -2130,6 +2148,7 @@ There are many options, and the details can be overwhelming.
 But here are some common uses, to give you an idea of how it works:
 
 \begin{table}[!h]
+\begin{center}
 \begin{tabular}{|l|l|l|}
 \hline
 \verb"%d" & decimal integer & 12345 \\
@@ -2144,6 +2163,7 @@ But here are some common uses, to give you an idea of how it works:
 \hline
 \end{tabular}
 \caption{Example format specifiers}
+\end{center}
 \end{table}
 
 For more details, refer to the documentation of \java{java.util.Formatter}
@@ -2332,8 +2352,10 @@ The latter method is more useful in the long run, especially as Oracle releases 
 Either way, you should get something like this:
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics[width=0.9\textwidth]{figs/scanner.png}
 \caption{Screenshot of the documentation for \java{Scanner} on Oracle's website.}
+\end{center}
 \end{figure}
 
 Scroll down to the ``Method Summary'' section.
@@ -3017,8 +3039,10 @@ One way to keep track of where each variable is defined is to draw a {\bf stack 
 The stack diagram for this example looks like this:
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics{figs/stack.pdf}
 \caption{Stack diagram for the \java{PrintTwice} program.}
+\end{center}
 \end{figure}
 
 \index{frame}
@@ -3063,10 +3087,12 @@ To the right are several buttons that allow you to step through the code at your
 You can also press ``Automatic Trace'' to watch DrJava run your code one line at a time.
 
 \begin{figure}[!h]
+\begin{center}
 \includegraphics[width=\textwidth]{figs/debugger.png}
 \caption{Screenshot of the DrJava debugger.
 Execution is currently paused on the first line of \java{printTwice}.
 There is a breakpoint on the first line of \java{main}.}
+\end{center}
 \end{figure}
 
 When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
@@ -3401,23 +3427,23 @@ Saturday, July 16, 2011
 \end{exercise}
 
 
-%\input{todo/chapter07.tex}
-%\input{todo/chapter08.tex}
-%\input{todo/chapter09.tex}
-%\input{todo/chapter11.tex}
-%\input{todo/chapter12.tex}
-%\input{todo/chapter13.tex}
-%\input{todo/chapter14.tex}
-%\input{todo/chapter15.tex}
-%\input{todo/chapter16.tex}
+%\input{todo-tex/chapter07.tex}
+%\input{todo-tex/chapter08.tex}
+%\input{todo-tex/chapter09.tex}
+%\input{todo-tex/chapter11.tex}
+%\input{todo-tex/chapter12.tex}
+%\input{todo-tex/chapter13.tex}
+%\input{todo-tex/chapter14.tex}
+%\input{todo-tex/chapter15.tex}
+%\input{todo-tex/chapter16.tex}
 
 \backmatter
 \appendix
 
-%\input{todo/chapter17.tex}
-%\input{todo/chapter18.tex}
-%\input{todo/chapter19.tex}
-%\input{todo/chapter20.tex}
+%\input{todo-tex/chapter17.tex}
+%\input{todo-tex/chapter18.tex}
+%\input{todo-tex/chapter19.tex}
+%\input{todo-tex/chapter20.tex}
 
 \printindex
 \cleardoublepage
