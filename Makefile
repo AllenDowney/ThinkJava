@@ -25,4 +25,3 @@ oreilly:
 	rsync -a figs/*.pdf atlas/figs/
 	rsync -a figs/*.png atlas/figs/
 	cd atlas; git add thinkjava.xml figs/*	
-
