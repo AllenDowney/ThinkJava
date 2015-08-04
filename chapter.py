@@ -3,12 +3,16 @@
 import sys
 
 def main(n):
-    print "\\documentclass[12pt]{book}"
-    print "\\usepackage{thinkjava}"
-    print "\\setcounter{chapter}{" + str(n-1) + "}\n"
-    print "\\begin{document}\n\n"
+    src = open("thinkjava.tex")
+    # copy the preamble
+    for line in src:
+        print line,
+        if line.startswith("\\begin{document}"):
+            print "\\setcounter{chapter}{" + str(n-1) + "}\n"
+            break
+    # copy the chapter
     i = 0
-    for line in open("thinkjava.tex"):
+    for line in src:
         if line.startswith("\\chapter{"):
             i += 1
         if i == n:
