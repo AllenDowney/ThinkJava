@@ -159,7 +159,7 @@
 }
 
 % inline syntax formatting
-\newcommand{\java}[1]{\lstinline{#1}}
+\newcommand{\java}[1]{\lstinline{#1}} %\end{
 %\newcommand{\java}[1]{\verb"#1"}
 %\newcommand{\java}[1]{{\tt #1}}
 
@@ -497,7 +497,7 @@ public class CLASSNAME {
 
 \index{class!name}
 
-Here {\tt CLASSNAME} indicates the name chosen by the programmer.
+Here \java{CLASSNAME} indicates the name chosen by the programmer.
 Java requires the class name to match the source file name.
 In the hello world example, the file name must be {\tt Hello.java} because the class name is \java{Hello}.
 
@@ -518,7 +518,7 @@ When the program runs, it starts at the first statement in \java{main} and ends 
 \index{squiggly braces}
 
 Java uses squiggly braces (\{ and \}) to group things together.
-In \java{Hello.java}, the outermost braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
+In {\tt Hello.java}, the outermost braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
 
 % ABD: It looks like we don't have line numbers in the listings.
 % Is that a problem for the text here?
@@ -537,7 +537,7 @@ The print statement ends with a semicolon ({\tt ;}).
 \index{statement!comment}
 
 Line 4 contains a {\bf comment}, or a bit of English text that explains the code that follows.
-When the compiler sees \java{//}, it ignores everything from there until the end of the line.
+When the compiler sees {\tt //}, it ignores everything from there until the end of the line.
 It is a good idea to write a comment before every major block of code so that other programmers (including your future self) can understand what you meant to do.
 
 
@@ -706,7 +706,7 @@ How are you doing?
 
 The code \verb"\n" is an example of an {\bf escape sequence}, which is a sequence of characters in a string that represents a special character.
 The backslash allows you to ``escape'' the string's literal interpretation.
-Notice there is no space between \verb"\n" and \java{How}.
+Notice there is no space between \verb"\n" and \verb"How".
 If you add a space there, there will be a space at the beginning of the second line.
 
 \begin{table}[!h]
@@ -734,7 +734,7 @@ Since double quotes indicate the beginning and end of strings, you need to escap
 The result is:
 
 \begin{stdout}
-    She said "Hello!" to me.
+She said "Hello!" to me.
 \end{stdout}
 
 
@@ -965,14 +965,14 @@ You will develop a sense for when you can trust the compiler and when you have t
 \begin {enumerate}
 \item Remove one of the open squiggly-braces.
 \item Remove one of the close squiggly-braces.
-\item Instead of {\tt main}, write {\tt mian}.
-\item Remove the word {\tt static}.
-\item Remove the word {\tt public}.
-\item Remove the word {\tt System}.
-\item Replace {\tt println} with {\tt Println}.
-\item Replace {\tt println} with {\tt print}.
+\item Instead of \java{main}, write \java{mian}.
+\item Remove the word \java{static}.
+\item Remove the word \java{public}.
+\item Remove the word \java{System}.
+\item Replace \java{println} with {Println}.
+\item Replace \java{println} with {print}.
 This one is tricky because it is a logic error, not a syntax error.
-The statement {\tt System.out.print} is legal, but it may or may not do what you expect.
+The statement \java{System.out.print} is legal, but it may or may not do what you expect.
 \item Delete one of the parentheses.  Add an extra one.
 \end {enumerate}
 
@@ -1209,7 +1209,7 @@ message & \framebox[2cm]{Hello!} \\
 
 Each box represents the storage location that holds the variable's value.
 Once declared, you cannot change the name of a variable, but you can change the value as many times as you like.
-For example, \java{hour} was initially 10, then reassigned to 11.
+For example, \java{hour} was initially \java{10}, then reassigned to \java{11}.
 The diagram shows only the final value.
 
 %Since these locations can be anywhere in memory, we refer to them by the variable name.
@@ -1234,7 +1234,7 @@ public class Hello {
 
 When we talk about printing a variable, we generally mean printing the {\em value} of the variable.
 To print the {\em name} of a variable, you have to put it in quotes.
-%For example: {\tt System.out.println("firstLine");}
+%For example: \java{System.out.println("firstLine");}
 For example, you can write:
 
 \begin{code}
@@ -1274,9 +1274,9 @@ The current time is 11:59.
 \end{stdout}
 
 To output multiple values on the same line, it's common to use several \java{print} statements followed by a \java{println} at the end.
-{\bf Don't forget the {\tt println}!}
+{\bf Don't forget the \java{println}!}
 On many operating systems, the output from \java{print} is stored without being displayed until \java{println} is invoked, at which point the entire line is displayed at once.
-If you omit the {\tt println}, the program may display the stored output at unexpected times or even terminate without displaying anything.
+If you omit the \java{println}, the program may display the stored output at unexpected times or even terminate without displaying anything.
 
 
 \section{Arithmetic operators}
@@ -1288,7 +1288,7 @@ If you omit the {\tt println}, the program may display the stored output at unex
 
 {\bf Operators} are symbols that represent computations like addition and multiplication.
 %Most operators in Java do what you expect them to do, since they are common mathematical symbols.
-For example, the operator for addition is \java{+}, subtraction is \java{-}, multiplication is \java{*}, and division is \java{/}.
+For example, the operator for addition is {\tt +}, subtraction is {\tt -}, multiplication is {\tt *}, and division is {\tt /}.
 %Variables are replaced with their values before the computation is performed.
 
 The following program converts the time of day to minutes:
@@ -1339,10 +1339,10 @@ Fraction of the hour that has passed: 0
 \index{integer division}
 
 This result often confuses people.
-After all, the value of {\tt minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
+After all, the value of \java{minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
 The problem here is that Java performs {\em integer division}.
 When the values being divided are integers, the result is also an integer.
-Computer hardware is designed so that integer division always rounds {\em down}, even in cases like this one where the next integer is close.
+Computer hardware is designed so that integer division always {\em rounds down}, even in cases like this one where the next integer is close.
 
 One solution is to calculate a percentage rather than a fraction:
 
@@ -1379,7 +1379,7 @@ You can create \java{double} variables and assign values to them using the same 
 \end{code}
 
 Although floating-point numbers are useful, they can be a source of confusion.
-For example, Java distinguishes the integer value {\tt 1} from the floating-point value {\tt 1.0}, even though they seem to be the same number.
+For example, Java distinguishes the integer value \java{1} from the floating-point value \java{1.0}, even though they seem to be the same number.
 They belong to different data types, and strictly speaking, you are not allowed to make assignments between types.
 
 The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
@@ -1407,14 +1407,14 @@ This leniency is convenient, but it often causes problems for beginners. For exa
 \index{division!integer}
 \index{integer division}
 
-You might expect the variable {\tt y} to get the value {\tt 0.333333}, which is a legal floating-point value.
-But instead it gets the value {\tt 0.0}.
+You might expect the variable \java{y} to get the value \java{0.333333}, which is a legal floating-point value.
+But instead it gets the value \java{0.0}.
 The reason is that the expression on the right divides two integers.
 So Java does {\em integer division}, which yields the \java{int} value \java{0}.
 Converted to \java{double}, the final result is \java{0.0}.
 
 One way to solve this problem (after you finally discover that bug) is to make the right-hand side a floating-point expression.
-The following initializes {\tt y} to {\tt 0.333333}, as expected:
+The following initializes \java{y} to \java{0.333333}, as expected:
 
 \begin{code}
     double y;
@@ -1442,8 +1442,8 @@ The following expressions are illegal:
 
 \index{concatenate}
 
-The \java{+} operator does work with strings, but it might not do what you expect.
-For strings, the \java{+} operator performs {\bf concatenation}, which means joining each part end-to-end.
+The {\tt +} operator does work with strings, but it might not do what you expect.
+For strings, the {\tt +} operator performs {\bf concatenation}, which means joining each part end-to-end.
 So \java{"Hello, " + "world!"} yields the string \java{"Hello, world!"}.
 Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} to the hello string, which is handy for creating a personalized greeting.
 
@@ -1492,11 +1492,11 @@ The difference is when the conversion from integer to string actually takes plac
 %\index{type!conversion}
 %\index{typecasting}
 
-%You might wonder how you can get away with an expression like {\tt
-%"The log of x is " + result}, since one of the operands is a {\tt String}
-%and the other is a {\tt double}.  In this case Java is being
-%smart on our behalf, automatically converting the {\tt double} to a
-%{\tt String} before it does the string concatenation.
+%You might wonder how you can get away with an expression like \java{
+%"The log of x is " + result}, since one of the operands is a \java{String}
+%and the other is a \java{double}.  In this case Java is being
+%smart on our behalf, automatically converting the \java{double} to a
+%\java{String} before it does the string concatenation.
 
 %This kind of feature is an example of a common problem in designing a
 %programming language, which is that there is a conflict between {\em
@@ -1512,8 +1512,8 @@ The difference is when the conversion from integer to string actually takes plac
 %omitting many of the exceptions.
 
 %Whenever you try to ``add'' two
-%expressions, if one of them is a {\tt String}, Java converts the
-%other to a {\tt String} and then perform string concatenation.
+%expressions, if one of them is a \java{String}, Java converts the
+%other to a \java{String} and then perform string concatenation.
 %What do you think happens if you perform an operation between
 %an integer and a floating-point value?
 
@@ -1727,8 +1727,8 @@ The point of this exercise is (1) to use string concatenation to display values 
 \item Create a new program named {\tt Date.java}.
 Copy or type in something like the ``Hello, World!'' program and make sure you can compile and run it.
 
-\item Following the example in Section~\ref{sec:printvar}, write a program that creates variables named {\tt day}, {\tt date}, {\tt month}, and {\tt year}.
-{\tt day} will contain the day of the week and {\tt date} will contain the day of the month.
+\item Following the example in Section~\ref{sec:printvar}, write a program that creates variables named \java{day}, \java{date}, \java{month}, and \java{year}.
+\java{day} will contain the day of the week and \java{date} will contain the day of the month.
 What type is each variable?
 Assign values to those variables that represent today's date.
 
@@ -1761,9 +1761,9 @@ The point of this exercise is (1) to use some of the arithmetic operators, and (
 \item Create a new program called {\tt Time.java}.
 From now on, we won't remind you to start with a small, working program, but you should.
 
-\item Following the example program in Section~\ref{sec:printvar}, create variables named {\tt hour}, {\tt minute}, and {\tt second}.
+\item Following the example program in Section~\ref{sec:printvar}, create variables named \java{hour}, \java{minute}, and \java{second}.
 Assign values that are roughly the current time.
-Use a 24-hour clock, i.e., so that at 2pm the value of {\tt hour} is 14.
+Use a 24-hour clock, i.e., so that at 2pm the value of \java{hour} is 14.
 
 \item Make the program calculate and print the number of seconds since the most recent midnight.
 
@@ -1772,7 +1772,7 @@ Use a 24-hour clock, i.e., so that at 2pm the value of {\tt hour} is 14.
 \item Make the program calculate and print the percentage of the day that has passed.
 You might run into problems when computing percentages with integers, so consider using floating-point.
 
-\item Change the values of {\tt hour}, {\tt minute}, and {\tt second} to reflect the current time.
+\item Change the values of \java{hour}, \java{minute}, and \java{second} to reflect the current time.
 Check that the program works correctly each time you run it.
 
 \end{enumerate}
@@ -1811,7 +1811,7 @@ This chapter will show you how to read input from the keyboard, use that input t
 You can even use \java{println} to print the value of \java{System.out}:
 
 \begin{code}
-System.out.println(System.out);
+    System.out.println(System.out);
 \end{code}
 
 The result is:
@@ -1827,7 +1827,7 @@ A {\bf package} is a collection of related classes; \java{java.io} contains clas
 
 \index{address}
 
-After the \java{@} sign is the location of the object in memory, which is called its {\bf address}.
+After the {\tt @} sign is the location of the object in memory, which is called its {\bf address}.
 In this example the address is \java{685d72cd}, but if you run the same code you will likely get something different.
 %You can think of the address as a unique identifier for the object.
 
@@ -1899,7 +1899,7 @@ import java.util.Scanner;
 \index{import}
 \index{statement!import}
 
-This {\bf import statement} tells the compiler that when you say \java{Scanner}, you mean the one defined in {\tt java.util}.
+This {\bf import statement} tells the compiler that when you say \java{Scanner}, you mean the one defined in \java{java.util}.
 It's necessary because there might be another class named \java{Scanner} in another package.
 Using an import statement makes your code unambiguous.
 
@@ -1965,12 +1965,12 @@ The following figure shows these organizational units.
 
 To review, a package is a collection of classes, which define methods.
 Methods contain statements, some of which contain expressions.
-Expressions are made up of tokens, which include variable names, numbers, operators, keywords, and punctuation like braces and semi-colons.
+Expressions are made up of tokens, which include variable names, numbers, operators, keywords, and punctuation like braces and semicolons.
 
 The standard edition of Java comes with {\em several thousand} classes you can \java{import}, which can be both exciting and intimidating.
 You can browse this library on Oracle's website: \url{http://docs.oracle.com/javase/7/docs/api/}
 Note there is a major difference between the Java {\em language}, which deals with syntax and grammar, and the Java {\em library}, which provides the built-in classes.
-In face, most of the Java library itself is written in Java.
+In fact, most of the Java library itself is written in Java.
 
 %To help keep things organized, classes are grouped into {\bf packages}.
 %Just as each \java{class} is a separate file, each \java{package} is a separate folder.
@@ -2112,7 +2112,7 @@ The other arguments are the values themselves.
 \index{format specifier}
 
 This format string contains ordinary text followed by a {\bf format specifier}, which is a special sequence that starts with a percent sign.
-The format specifier \java{\%.3f} indicates that the value should be displayed as floating-point with three decimal places.
+The format specifier \verb"%.3f" indicates that the value should be displayed as floating-point with three decimal places.
 Here's an example that contains two format specifiers:
 
 \begin{code}
@@ -2123,7 +2123,7 @@ Here's an example that contains two format specifiers:
 \end{code}
 
 The values are matched up with the format specifiers in order, so \java{inch} is displayed as an integer (``d'' stands for ``decimal'') and \java{cm} is displayed as a floating-point number.
-Format strings often end with a newline character (\java{\\n}), since \java{printf} does not append a newline like \java{println} does.
+Format strings often end with a newline character (\verb"\n"), since \java{printf} does not append a newline like \java{println} does.
 
 Learning \java{printf} is like learning a sub-language within Java.
 There are many options, and the details can be overwhelming.
@@ -2132,15 +2132,15 @@ But here are some common uses, to give you an idea of how it works:
 \begin{table}[!h]
 \begin{tabular}{|l|l|l|}
 \hline
-{\tt \%d} & decimal integer & 12345 \\
+\verb"%d" & decimal integer & 12345 \\
 \hline
-{\tt \%,d} & decimal integer with comma separators & 12,345 \\
+\verb"%,d" & decimal integer with comma separators & 12,345 \\
 \hline
-{\tt \%08d} & padded with zeros, at least 8 digits wide & 00012345 \\
+\verb"%08d" & padded with zeros, at least 8 digits wide & 00012345 \\
 \hline
-{\tt \%f} & floating-point & 6.789000 \\
+\verb"%f" & floating-point & 6.789000 \\
 \hline
-{\tt \%.2f} & floating-point {\em rounded} to 2 decimal places & 6.79 \\
+\verb"%.2f" & floating-point {\em rounded} to 2 decimal places & 6.79 \\
 \hline
 \end{tabular}
 \caption{Example format specifiers}
@@ -2181,8 +2181,8 @@ The syntax for type casting is to put the name of the type in parentheses and us
 %\index{truncate}
 
 The \java{(int)} operator has the effect of converting what follows into an integer.
-In this example, \java{x} gets the value 3.
-Converting to an integer always rounds down (toward zero), even if the fraction part is 0.999999.
+In this example, \java{x} gets the value \java{3}.
+Converting to an integer always rounds {\em toward zero}, even if the fraction part is \java{0.999999} (or \java{-0.999999}).
 
 Type casting takes precedence over arithmetic operations.
 In this example, the value of \java{pi} gets converted to an integer first.
@@ -2203,7 +2203,7 @@ Keeping that in mind, here's how we can convert a measurement in centimeters to 
 \end{code}
 
 The parentheses after the cast operator require the division to come before the type cast.
-This result will be rounded down, but we will learn in the next chapter how to round floating-point numbers to the closest integer.
+This result will be rounded toward zero, but we will learn in the next chapter how to round floating-point numbers to the closest integer.
 
 \subsection{Modulus operator}
 
@@ -2213,11 +2213,9 @@ The goal is divide by 12 (the number of inches in a foot) and keep the remainder
 \index{modulus}
 \index{operator!modulus}
 
-We have already seen the division operator (\java{/}), which computes the quotient of two numbers.
+We have already seen the division operator ({\tt /}), which computes the quotient of two numbers.
 If the numbers are integers, it performs integer division.
-Java also provides the {\bf modulus} operator (\java{\%}), which divides two numbers and computes the remainder.
-
-%The reason why integer division ``rounds down'' is that the hardware computes both the {\em quotient} and the {\em remainder}.
+Java also provides the {\bf modulus} operator ({\tt \%}), which divides two numbers and computes the remainder.
 
 Assuming the following variables are integers, we can convert 76 inches to feet and inches like this:
 
@@ -2231,14 +2229,16 @@ The second line, which is pronounced ``76 mod 12,'' yields 4.
 So 76 inches is 6 feet, 4 inches.
 
 Although the modulus operator is a percent sign, you might find it helpful to think of it as a division sign ($\div$) rotated to the left.
+Note that both {\tt /} and {\tt \%} perform {\em integer division}.
+The reason why integer division ``rounds down'' is that the hardware computes the quotient and remainder separately.
 %Many algorithms, including the example above, perform division and modulus together.
 
 \index{divisible}
 \index{extract digits}
 
 Integer division turns out to be surprisingly useful.
-For example, you can check whether one number is divisible by another: if {\tt x \% y} is zero, then {\tt x} is divisible by {\tt y}.
-You can also use modulus to ``extract'' digits from a number: {\tt x \% 10} yields the rightmost digit of {\tt x}, and {\tt x \% 100} yields the last two digits.
+For example, you can check whether one number is divisible by another: if \java{x \% y} is zero, then \java{x} is divisible by \java{y}.
+You can also use modulus to ``extract'' digits from a number: \java{x \% 10} yields the rightmost digit of \java{x}, and \java{x \% 100} yields the last two digits.
 Also, many encryption algorithms are based on modular arithmetic.
 
 
@@ -2461,7 +2461,7 @@ java Convert < test.in > test.out
 
 \index{redirection operator}
 
-On the command-line, \java{<} and \java{>} are {\bf redirection operators}.
+On the command-line, {\tt <} and {\tt >} are {\bf redirection operators}.
 The first one redirects the contents of {\tt test.in} to \java{System.in}, as if it were entered from the keyboard.
 The second one redirects the contents of \java{System.out} to a new file {\tt test.out}, much like a screen capture.
 In other words, the {\tt test.out} file contains the output of your program.
@@ -2512,7 +2512,7 @@ In Java, objects are stored in memory and referenced by variables.
 
 \term{library}
 A collection of packages and classes that are available for use in other programs.
-Libraries are often distributed in \java{.jar} (Java Archive) files.
+Libraries are often distributed in {\tt .jar} (Java Archive) files.
 
 %\term{operating system}
 %Software that is always running behind the scenes on your computer.
@@ -2579,8 +2579,8 @@ A command-line feature that substitutes \java{System.in} and/or \java{System.out
 
 \begin{exercise}
 When you use \java{printf}, the Java compiler does not check your formatting string.
-See what happens if you try to display value with type \java{int} using \java{\%f}.
-And what happens if you display a \java{float} using \java{\%d}?
+See what happens if you try to display value with type \java{int} using \verb"%f".
+And what happens if you display a \java{float} using \verb"%d"?
 What if you use two format specifiers, but then only provide one value?
 \end{exercise}
 
@@ -2761,7 +2761,7 @@ You can define other methods using syntax is similar to \java{main}:
     }
 \end{code}
 
-By convention, methods start with a lower case letter and use ``camel case,'' which is a cute name for {\tt jammingWordsTogetherLikeThis}.
+By convention, methods start with a lower case letter and use ``camel case,'' which is a cute name for \java{jammingWordsTogetherLikeThis}.
 You can use any name you want for your method, except \java{main} or any of the Java keywords.
 
 % TODO: check where there first use of ``invoke'' was
@@ -2778,7 +2778,7 @@ The first methods we are going to write have no parameters, so the parameter lis
 
 The name of this method is \java{newLine}.
 It contains only one statement, which prints a blank line.
-In {\tt main}, we can invoke the new method like this:
+In \java{main}, we can invoke the new method like this:
 
 \begin{code}
     public static void main(String[] args) {
@@ -2829,7 +2829,7 @@ Or we could write a new method that prints three blank lines:
 You can invoke the same method more than once, and you can have one method invoke another.
 In this example, \java{main} invokes \java{threeLine}, and \java{threeLine} invokes \java{newLine}.
 
-%In {\tt threeLine} I wrote three statements all on the same line, which is syntactically legal (remember that spaces and new lines usually don't change the meaning of a program).
+%In \java{threeLine} I wrote three statements all on the same line, which is syntactically legal (remember that spaces and new lines usually don't change the meaning of a program).
 %It is usually a good idea to put each statement on its own line, but I sometimes break that rule.
 
 You might wonder why it is worth the trouble to create new methods.
@@ -2839,7 +2839,7 @@ There are many reasons, but this example demonstrates a few of them:
 
 \item Creating a new method gives you an opportunity to give a name to a group of statements, which makes code easier to read and understand.
 %Methods simplify a program by hiding complex computations behind a single statement, and by using English words in place of arcane code.
-%Which is clearer, {\tt newLine} or {\tt System.out.println()}?
+%Which is clearer, \java{newLine} or \java{System.out.println()}?
 
 \item Creating a new method can make a program smaller by eliminating repetitive code.
 For example, to print nine consecutive new lines, you could invoke \java{threeLine} three times.
@@ -2943,7 +2943,7 @@ Here's a method that takes a string and prints it twice:
 \end{code}
 
 \java{printTwice} has a parameter named \java{s} with type \java{String}.
-The parameter name hints that it is a {\tt String}, but you could use any legal variable name.
+The parameter name hints that it is a \java{String}, but you could use any legal variable name.
 When we invoke \java{printTwice}, we have to provide an argument with type \java{String}.
 Before the method executes, the argument gets assigned to the parameter.
 
@@ -2956,7 +2956,7 @@ In this example, the argument \java{"Don't make me say this twice!"} gets assign
 \index{parameter passing}
 
 This process is called {\bf parameter passing} because the value gets passed from outside the method to the inside.
-An argument can be any kind of expression, so if you have a {\tt String} variable, you can use it as an argument:
+An argument can be any kind of expression, so if you have a \java{String} variable, you can use it as an argument:
 
 \begin{code}
     String argument = "Never say never.";
@@ -3152,8 +3152,8 @@ For example, the following two statements should be equivalent:
 But on many machines, the output is:
 
 \begin{stdout}
-    1.0
-    0.9999999999999999
+1.0
+0.9999999999999999
 \end{stdout}
 
 The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
@@ -3196,7 +3196,7 @@ Somewhere in the middle of the code, we have the following lines:
 The output of the \java{printf} statement looks something like this:
 
 \begin{stdout}
-    Hello Darth Vader, age 45
+Hello Darth Vader, age 45
 \end{stdout}
 
 When you read a \java{String} followed by an \java{int}, everything works just fine.
@@ -3214,7 +3214,7 @@ Try running the above example.
 It doesn't let you input your name and immediately displays the output:
 
 \begin{stdout}
-    What is your name? Hello , age 45
+What is your name? Hello , age 45
 \end{stdout}
 
 To understand what is happening, recall that computers do not {\em see} input as multiple lines as we do.
@@ -3329,9 +3329,9 @@ The point of this exercise is to practice reading code and to make sure that you
 \item What is the output of the following program?
 Be precise about where there are spaces and where there are newlines.
 
-HINT: Start by describing in words what {\tt ping} and {\tt baffle} do when they are invoked.
+HINT: Start by describing in words what \java{ping} and \java{baffle} do when they are invoked.
 
-\item Draw a stack diagram that shows the state of the program the first time {\tt ping} is invoked.
+\item Draw a stack diagram that shows the state of the program the first time \java{ping} is invoked.
 
 \end{enumerate}
 
@@ -3363,7 +3363,7 @@ HINT: Start by describing in words what {\tt ping} and {\tt baffle} do when they
 
 \begin{exercise}
 
-Draw a stack diagram that shows the state of the program in Section~\ref{time} when {\tt main} invokes {\tt printTime} with the arguments {\tt 11} and {\tt 59}.
+Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
 
 \end{exercise}
 
@@ -3372,9 +3372,9 @@ Draw a stack diagram that shows the state of the program in Section~\ref{time} w
 The point of this exercise is to make sure you understand how to write and invoke methods that take parameters.
 
 \begin{enumerate}
-\item Write the first line of a method named {\tt zool} that takes three parameters: an {\tt int} and two {\tt Strings}.
+\item Write the first line of a method named \java{zool} that takes three parameters: an \java{int} and two \java{Strings}.
 
-\item Write a line of code that invokes {\tt zool}, passing as arguments the value {\tt 11}, the name of your first pet, and the name of the street you grew up on.
+\item Write a line of code that invokes \java{zool}, passing as arguments the value \java{11}, the name of your first pet, and the name of the street you grew up on.
 \end{enumerate}
 
 \end{exercise}
@@ -3386,16 +3386,16 @@ You should start with a working solution to Exercise~\ref{ex:date}.
 
 \begin{enumerate}
 
-\item Write a method called {\tt printAmerican} that takes the day, date, month and year as parameters and that prints them in American format.
+\item Write a method called \java{printAmerican} that takes the day, date, month and year as parameters and that prints them in American format.
 
-\item Test your method by invoking it from {\tt main} and passing appropriate arguments.
+\item Test your method by invoking it from \java{main} and passing appropriate arguments.
 The output should look something like this (except that the date might be different):
 
 \begin{stdout}
 Saturday, July 16, 2011
 \end{stdout}
 
-\item Once you have debugged {\tt printAmerican}, write another method called {\tt printEuropean} that prints the date in European format.
+\item Once you have debugged \java{printAmerican}, write another method called \java{printEuropean} that prints the date in European format.
 
 \end{enumerate}
 \end{exercise}
