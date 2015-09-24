@@ -2399,101 +2399,141 @@ The reader should never have to scroll horizontally.
 %As an exercise, try running this code through Checkstyle.
 
 
-\section{Reading documentation}
-\label{sec:apidocs}
+\section{A few more details}
 
-\index{documentation}
+Now that you've had some experience with \java{double} and \java{Scanner}, there are a few unexpected behaviors we want to warn you about.
 
-Now would be a good time to take a look at the documentation for \java{Scanner}.
-You can find it in the Java library (see the link in Section~\ref{sec:library}) or simply do a web search for ``java scanner.''
-The latter method is more useful in the long run, especially as Oracle releases new versions of Java.
-Either way, you should get something like this:
+\subsection{Rounding errors}
 
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{figs/scanner.png}
-\caption{Screenshot of the documentation for \java{Scanner} on Oracle's website.}
-\end{center}
-\end{figure}
+%The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
+%In fact, most processors have special circuitry just for performing floating-point operations.
 
-Scroll down to the ``Method Summary'' section.
-As you can see, the \java{Scanner} class provides quite a few methods.
-In this chapter we focused on the ``next'' methods.
-Click on the link for \java{nextInt}.
+\index{rounding error}
 
-\begin{stdout}
-public int nextInt()
-Scans the next token of the input as an int.
-\end{stdout}
+On hardware, floating-point numbers are only approximately correct.
+Some numbers, like reasonably-sized integers, can be represented exactly.
+But repeating fractions, like $1/3$, and irrational numbers, like $\pi$, cannot.
+To represent these numbers, computers have to round off to the nearest floating-point number.
+The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
 
-\index{prototype}
+%Notwithstanding, there is a fundamental flaw with floating-point arithmetic.
+%In mathematics, there is an infinite number of real numbers.
+%But computer processors are finite; they cannot represent {\em every} possible floating-point number.
+%Even with double-precision, you will frequently run into problems.
 
-The first line is the method's {\bf prototype}, which specifies the name of the method and its return type.
-In this example, \java{nextInt} returns an \java{int}.
-The next line describes what the method does.
-The subsequent lines (not shown) explain the parameters and return values.
-Explanations are often redundant, but the documentation is supposed to fit this standard format.
-%The last line describes the exceptions this method might throw.
+\index{arithmetic!floating-point}
 
-It might take some time to get comfortable reading this kind of information, but it's well worth the effort.
-Knowing what methods a class provides helps you avoid reinventing the wheel.
-Whenever you learn about a new class, you should take a quick look at its documentation.
-On that note, take a few minutes to review the documentation for \java{System} and \java{String}.
-
-
-\section{Writing documentation}
-
-\index{Javadoc}
-
-A nice feature of the Java language is the ability to write documentation at the same time you are writing the source code.
-That way, the documentation stays in sync with the classes and methods themselves.
-In fact, the HTML pages you browsed in the previous section were automatically generated using a tool called {\bf Javadoc}.
-This tool is part of the standard JDK, and you can run it directly from DrJava by pressing the {\tt Javadoc} button on the toolbar.
-
-\index{comments!documentation}
-\index{documentation comments}
-
-Javadoc parses your source files for {\bf documentation comments} and extracts other relevant information about your class and method definitions.
-Given the prevalence of this tool, people sometimes refer to documentation as ``Javadoc comments.''
-In contrast to inline comments that begin with {\tt //}, documentation comments begin with {\tt /**} (two stars) and end with {\tt */} (one star).
-Anything in between these two tokens becomes part of the documentation.
-%As a rule of thumb, you should document every class and every method.
+For example, the following two statements should be equivalent:
 
 \begin{code}
-/**
- * Example program that demonstrates print vs println.
- */
-public class Goodbye {
-
-    /**
-     * Application entry point; simply prints a greeting.
-     */
-    public static void main(String[] args) {
-        System.out.print("Goodbye, ");  // note the space
-        System.out.println("cruel world");
-    }
-
-}
+    System.out.println(0.1 * 10);
+    System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
+                     + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
 \end{code}
 
-This example has perhaps too many comments, since all the program does is print a message.
-But it illustrates the differences between inline and documentation comments:
+But on many machines, the output is:
 
-\begin{itemize}
-\item Inline comments tend to be short phrases that help explain complex parts of a method.
-Documentation comments are typically complete sentences that begin with a capital letter and end with a period.
+\begin{stdout}
+1.0
+0.9999999999999999
+\end{stdout}
 
-\item Documentation comments often span multiple lines.
-By convention, each line begins with a {\tt *} that is aligned vertically with the start and end of the comment.
+The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
+So its floating-point representation is only approximate.
+When we add up the approximations, the rounding errors accumulate.
 
-\item Some development environments (e.g., Eclipse and NetBeans) automatically display documentation comments when you hover your mouse over the name of a class or method.
+For many applications, like computer graphics, encryption, statistical analysis, and multimedia rendering, floating-point arithmetic has benefits that outweigh the costs.
+But if you need {\em absolute} precision, use integers instead.
+For example, consider a bank account with a balance of \$123.45:
 
-\end{itemize}
+\begin{code}
+    double balance = 123.45;  // potential rounding error
+\end{code}
 
-Writing documentation and inline comments is essential for making source code readable.
-As we discussed in the last chapter, people spend the majority of their development time understanding and modifying existing code.
-You should not only write good comments for others, but for yourself as well.
-When you haven't looked at your own code for a while, it takes a long time to remember how it works (or what you were trying to do) if there's no comments.
+In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
+The result would be angry customers and potential law suits.
+You can avoid the problem by representing the balance as an integer:
+
+\begin{code}
+    int balance = 12345;      // total number of cents
+\end{code}
+
+\index{type!long}
+
+This solution works as long as the number of cents doesn't exceed the largest integer, which is about 2 billion.
+If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
+Hopefully nobody will ever need that much money!
+
+\subsection{The Scanner bug}
+
+Consider a simple program that asks users for their name and age.
+Somewhere in the middle of the code, we have the following lines:
+
+\begin{code}
+    System.out.print("What is your name? ");
+    name = in.nextLine();
+    System.out.print("What is your age? ");
+    age = in.nextInt();
+    System.out.printf("Hello %s, age %d\n", name, age);
+\end{code}
+
+The output of the \java{printf} statement looks something like this:
+
+\begin{stdout}
+Hello Darth Vader, age 45
+\end{stdout}
+
+When you read a \java{String} followed by an \java{int}, everything works just fine.
+But when you read an \java{int} followed by a \java{String}, something strange happens.
+
+\begin{code}
+    System.out.print("What is your age? ");
+    age = in.nextInt();
+    System.out.print("What is your name? ");
+    name = in.nextLine();
+    System.out.printf("Hello %s, age %d\n", name, age);
+\end{code}
+
+Try running the above example.
+It doesn't let you input your name and immediately displays the output:
+
+\begin{stdout}
+What is your name? Hello , age 45
+\end{stdout}
+
+To understand what is happening, recall that computers do not {\em see} input as multiple lines like we do.
+Instead, the operating system simply forwards a stream of characters to your program via \java{System.in}:
+
+\begin{center}
+\includegraphics{figs/vader1.pdf}
+\end{center}
+
+The up-arrow represents the next character to be read by \java{Scanner}.
+When you call \java{nextInt}, it will read characters until a non-digit is found.
+
+\begin{center}
+\includegraphics{figs/vader2.pdf}
+\end{center}
+
+At this point, \java{nextInt} returns the \java{int} value \java{45}.
+The program then asks \java{"What is your name? "} and calls \java{nextLine}.
+\java{Scanner} will read characters until a newline is found.
+Since the next character to be read already is a newline, \java{nextLine} returns the empty string \java{""}.
+
+To solve this problem, you need to add an extra call to \java{nextLine} after you call \java{nextInt}.
+
+\begin{code}
+    System.out.print("What is your age? ");
+    age = in.nextInt();
+    in.nextLine();  // read the newline
+    System.out.print("What is your name? ");
+    name = in.nextLine();
+    System.out.printf("Hello %s, age %d\n", name, age);
+\end{code}
+
+This technique is common when reading \java{int} or \java{double} values that appear on their own line.
+First you read the number, then you read the rest of the line (which is just a newline character).
+Note that you do not have to assign the return value of \java{nextLine} to a variable in that case; you can simply ignore it.
 
 
 \section{Command-line testing}
@@ -2640,14 +2680,8 @@ In Java it appears as a type name in parentheses, like \java{(int)}.
 An operator that yields the remainder when one integer is divided by another.
 In Java, it is denoted with a percent sign (e.g., \java{5 \% 2} is \java{1}).
 
-\term{prototype}
-The signature of a method that defines its name and what type it returns.
-
-\term{Javadoc}
-A tool that reads Java source code and generates documentation in HTML format.
-
-\term{documentation}
-Comments that describe the technical operation of a class or method.
+\term{rounding error}
+The small difference between a floating-point number and its actual representation on computer hardware.
 
 \term{redirection operator}
 A command-line feature that substitutes \java{System.in} and/or \java{System.out} with a plain text file.
@@ -2921,7 +2955,7 @@ There are many reasons, but this example demonstrates a few of them:
 %Methods simplify a program by hiding complex computations behind a single statement, and by using English words in place of arcane code.
 %Which is clearer, \java{newLine} or \java{System.out.println()}?
 
-\item Creating a new method can make a program smaller by eliminating repetitive code.
+\item Introducing new methods can make a program smaller by eliminating repetitive code.
 For example, to print nine consecutive new lines, you could invoke \java{threeLine} three times.
 
 \item A common problem-solving technique is to break things down into sub-problems.
@@ -2929,9 +2963,10 @@ Methods allow you to focus on each sub-problem in isolation, and then compose th
 
 \end{enumerate}
 
-%In Section~\ref{methods} we will come back to this question and list some additional benefits of dividing programs into methods.
-
 %Perhaps most importantly, organizing your code into multiple methods allows you to test individual parts of your program separately.
+%It's easier to get a complex program working if you know that each sub-part works correctly.
+
+%In Section~\ref{methods} we will come back to this question and list some additional benefits of dividing programs into methods.
 
 
 \section{Classes and methods}
@@ -3061,6 +3096,146 @@ If you run \java{Math.sqrt(25)}, the interger value \java{25} is automatically c
 \java{System.out.println} can accept any type as an argument.
 But generally speaking, that is an exception; most methods are not so accommodating.
 
+\subsection{Methods with multiple parameters}
+\label{time}
+
+\index{parameter!multiple}
+\index{method!multiple parameter}
+\index{class!Time}
+
+The syntax for declaring and invoking methods with multiple parameters is a common source of confusion.
+For one, you have to declare the type of every parameter separately.
+
+\begin{code}
+    public static void printTime(int hour, int minute) {
+        System.out.print(hour);
+        System.out.print(":");
+        System.out.println(minute);
+    }
+\end{code}
+
+It might be tempting to write ``\java{int hour, minute}'' but that format is only legal for variable declarations, not parameter lists.
+Another common source of confusion is that you do not have to declare the types of arguments in a method call.
+The following is incorrect:
+
+\begin{code}
+    int hour = 11;
+    int minute = 59;
+    printTime(int hour, int minute);  // syntax error
+\end{code}
+
+In this case, Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
+It is unnecessary (and therefore not allowed) to include the type when you pass them as arguments.
+The correct syntax is:
+
+\begin{code}
+    printTime(hour, minute);
+\end{code}
+
+When you call a method, Java {\it copies the value} of any arguments you provide into the method's parameters.
+It's common for two methods (e.g., \java{main} and \java{printTime}) to have variables with the same name, to show how data passes from one method to the next.
+But remember that these variables are stored in different memory locations.
+Changing the value of \java{hour} or \java{minute} in \java{printTime} has no effect on the original variables in \java{main}.
+
+
+\section{Reading documentation}
+\label{sec:apidocs}
+
+\index{documentation}
+
+For a comprehensive example of what methods are like, take a look at the documentation for \java{Scanner}.
+You can find it in the Java library (see the link in Section~\ref{sec:library}) or simply do a web search for ``java scanner.''
+The latter technique is more useful in the long run, especially as Oracle releases new versions of Java.
+Either way, you should get something like Figure~\ref{fig:javadoc}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figs/scanner.png}
+\caption{Screenshot of the documentation for \java{Scanner} on Oracle's website.}
+\label{fig:javadoc}
+\end{center}
+\end{figure}
+
+Scroll down to the ``Method Summary'' section.
+In the previous chapter, we introduced methods for reading the ``next'' input.
+As you can see, the \java{Scanner} class provides quite a few of them.
+Click on the link for \java{nextInt}, and it will scroll down to more details:
+
+\begin{stdout}
+public int nextInt()
+Scans the next token of the input as an int.
+\end{stdout}
+
+\index{signature}
+
+The first line is the method's {\bf signature}, which specifies the name of the method, its return type, and parameters.
+In this example, \java{nextInt} returns an \java{int}.
+The empty parentheses mean that \java{nextInt} has no parameters.
+The next line explains what the method does.
+The subsequent lines (not shown) describe each parameter (if any) and the return value.
+Explanations are often redundant, but the documentation is supposed to fit this standard format.
+%The last line describes the exceptions this method might throw.
+
+It might take some time to get comfortable reading this kind of information, but it's well worth the effort.
+Knowing what methods a class provides helps you avoid reinventing the wheel.
+Whenever you learn about a new class, you should take a quick look at its documentation.
+On that note, take a few minutes to review the documentation for \java{System} and \java{String}.
+
+
+\section{Writing documentation}
+
+\index{Javadoc}
+
+A nice feature of the Java language is the ability to write documentation at the same time you are writing the source code.
+That way, the documentation stays in sync with the classes and methods themselves.
+In fact, the HTML pages you browsed in the previous section were automatically generated using a tool called {\bf Javadoc}.
+This tool is part of the standard JDK, and you can run it directly from DrJava by pressing the {\tt Javadoc} button on the toolbar.
+
+\index{comments!documentation}
+\index{documentation comments}
+
+Javadoc parses your source files for {\bf documentation comments} and extracts other relevant information about your class and method definitions.
+Given the prevalence of this tool, people sometimes refer to documentation as ``Javadoc comments.''
+In contrast to inline comments that begin with {\tt //}, documentation comments begin with {\tt /**} (two stars) and end with {\tt */} (one star).
+Anything in between these two tokens becomes part of the documentation.
+%As a rule of thumb, you should document every class and every method.
+
+\begin{code}
+/**
+ * Example program that demonstrates print vs println.
+ */
+public class Goodbye {
+
+    /**
+     * Application entry point; simply prints a greeting.
+     */
+    public static void main(String[] args) {
+        System.out.print("Goodbye, ");  // note the space
+        System.out.println("cruel world");
+    }
+
+}
+\end{code}
+
+This example has perhaps too many comments, since all the program does is print a single message.
+But it illustrates the differences between inline and documentation comments:
+
+\begin{itemize}
+\item Inline comments tend to be short phrases that help explain complex parts of a method.
+Documentation comments are typically complete sentences that begin with a capital letter and end with a period.
+
+\item Documentation comments often span multiple lines.
+By convention, each line begins with a {\tt *} that is aligned vertically with the start and end of the comment.
+
+\item Some development environments (e.g., Eclipse and NetBeans) automatically display documentation comments when you hover your mouse over the name of a class or method.
+
+\end{itemize}
+
+Writing documentation and inline comments is essential for making source code readable.
+As we discussed in an earlier chapter, people spend the majority of their development time understanding and modifying existing code.
+You should not only write good comments for others, but for yourself as well.
+When you haven't looked at your own code for a while, it takes a long time to remember how it works (or what you were trying to do) if there's no comments.
+
 
 \section{Stack diagrams and scope}
 \label{stack}
@@ -3164,178 +3339,6 @@ You might expect the code do one thing, and then the debugger shows it doing som
 At that moment, you gain insight about what may be wrong with the code.
 
 
-\section{Multiple parameters}
-\label{time}
-
-\index{parameter!multiple}
-\index{method!multiple parameter}
-\index{class!Time}
-
-The syntax for declaring and invoking methods with multiple parameters is a common source of confusion.
-For one, you have to declare the type of every parameter separately.
-
-\begin{code}
-    public static void printTime(int hour, int minute) {
-        System.out.print(hour);
-        System.out.print(":");
-        System.out.println(minute);
-    }
-\end{code}
-
-It might be tempting to write ``\java{int hour, minute}'' but that format is only legal for variable declarations, not parameter lists.
-Another common source of confusion is that you do not have to declare the types of arguments in a method call.
-The following is incorrect:
-
-\begin{code}
-    int hour = 11;
-    int minute = 59;
-    printTime(int hour, int minute);  // syntax error
-\end{code}
-
-In this case, Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
-It is unnecessary (and therefore not allowed) to include the type when you pass them as arguments.
-The correct syntax is:
-
-\begin{code}
-    printTime(hour, minute);
-\end{code}
-
-
-\section{A few more details}
-
-Now that you've had some experience with \java{double} and \java{Scanner}, there are a few unexpected behaviors we want to warn you about.
-
-\subsection{Rounding errors}
-
-%The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
-%In fact, most processors have special circuitry just for performing floating-point operations.
-
-\index{rounding error}
-
-On hardware, floating-point numbers are only approximately correct.
-Some numbers, like reasonably-sized integers, can be represented exactly.
-But repeating fractions, like $1/3$, and irrational numbers, like $\pi$, cannot.
-To represent these numbers, computers have to round off to the nearest floating-point number.
-The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
-
-%Notwithstanding, there is a fundamental flaw with floating-point arithmetic.
-%In mathematics, there is an infinite number of real numbers.
-%But computer processors are finite; they cannot represent {\em every} possible floating-point number.
-%Even with double-precision, you will frequently run into problems.
-
-\index{arithmetic!floating-point}
-
-For example, the following two statements should be equivalent:
-
-\begin{code}
-    System.out.println(0.1 * 10);
-    System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
-                     + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
-\end{code}
-
-But on many machines, the output is:
-
-\begin{stdout}
-1.0
-0.9999999999999999
-\end{stdout}
-
-The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
-So its floating-point representation is only approximate.
-When we add up the approximations, the rounding errors accumulate.
-
-For many applications, like computer graphics, encryption, statistical analysis, and multimedia rendering, floating-point arithmetic has benefits that outweigh the costs.
-But if you need {\em absolute} precision, use integers instead.
-For example, consider a bank account with a balance of \$123.45:
-
-\begin{code}
-    double balance = 123.45;  // potential rounding error
-\end{code}
-
-In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
-The result would be angry customers and potential law suits.
-You can avoid the problem by representing the balance as an integer:
-
-\begin{code}
-    int balance = 12345;      // total number of cents
-\end{code}
-
-This solution works as long as the number of cents doesn't exceed the largest integer, which is about 2 billion.
-If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
-Hopefully nobody will ever need that much money!
-
-\subsection{The Scanner bug}
-
-Consider a simple program that asks users for their name and age.
-Somewhere in the middle of the code, we have the following lines:
-
-\begin{code}
-    System.out.print("What is your name? ");
-    name = in.nextLine();
-    System.out.print("What is your age? ");
-    age = in.nextInt();
-    System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
-
-The output of the \java{printf} statement looks something like this:
-
-\begin{stdout}
-Hello Darth Vader, age 45
-\end{stdout}
-
-When you read a \java{String} followed by an \java{int}, everything works just fine.
-But when you read an \java{int} followed by a \java{String}, something strange happens.
-
-\begin{code}
-    System.out.print("What is your age? ");
-    age = in.nextInt();
-    System.out.print("What is your name? ");
-    name = in.nextLine();
-    System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
-
-Try running the above example.
-It doesn't let you input your name and immediately displays the output:
-
-\begin{stdout}
-What is your name? Hello , age 45
-\end{stdout}
-
-To understand what is happening, recall that computers do not {\em see} input as multiple lines as we do.
-Instead, the operating system simply forwards a stream of characters to your program via \java{System.in}:
-
-\begin{center}
-\includegraphics{figs/vader1.pdf}
-\end{center}
-
-The up-arrow represents the next character to be read by \java{Scanner}.
-When you call \java{nextInt}, it will read characters until a non-digit is found.
-
-\begin{center}
-\includegraphics{figs/vader2.pdf}
-\end{center}
-
-At this point, \java{nextInt} returns the \java{int} value \java{45}.
-The program then asks \java{"What is your name? "} and calls \java{nextLine}.
-\java{Scanner} will read characters until a newline is found.
-Since the next character to be read already is a newline, \java{nextLine} returns the empty string \java{""}.
-
-To solve this problem, you need to add an extra call to \java{nextLine} after you call \java{nextInt}.
-
-\begin{code}
-    System.out.print("What is your age? ");
-    age = in.nextInt();
-    in.nextLine();  // read the newline
-    System.out.print("What is your name? ");
-    name = in.nextLine();
-    System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
-
-This technique is common when reading \java{int} or \java{double} values that appear on their own line.
-First you read the number, then you read the rest of the line (which is just a newline character).
-Note that you do not have to assign the return value of \java{nextLine} to a variable in that case; you can simply ignore it.
-
-
 \section{Vocabulary}
 
 \begin{description}
@@ -3367,6 +3370,15 @@ It may not necessarily be from top to bottom, left to right.
 \term{parameter passing}
 The process of assigning an argument value to a parameter variable.
 
+\term{signature}
+The first line of a method that defines its name, return type, and parameters.
+
+\term{Javadoc}
+A tool that reads Java source code and generates documentation in HTML format.
+
+\term{documentation}
+Comments that describe the technical operation of a class or method.
+
 \term{stack diagram}
 A memory diagram that shows which variables belong to which methods at a certain point in the program.
 The methods calls are ``stacked'' from top to bottom, in the order of execution.
@@ -3386,9 +3398,6 @@ A line of code where the debugger will pause a running program.
 \term{call stack}
 The history of method calls and where to resume execution after each method returns.
 
-\term{rounding error}
-The small difference between a floating-point number and its actual representation on computer hardware.
-
 \end{description}
 
 
@@ -3401,6 +3410,12 @@ In terms of their syntax, how does the Java compiler tell the difference between
 
 %A variable is a {\em location of data}, whereas a method is a {\em location of code}.
 %In Java, methods always have parentheses, even if they have no arguments like \java{System.out.println()}.
+
+\begin{exercise}
+
+Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
+
+\end{exercise}
 
 \end{exercise}
 
@@ -3416,6 +3431,8 @@ Be precise about where there are spaces and where there are newlines.
 HINT: Start by describing in words what \java{ping} and \java{baffle} do when they are invoked.
 
 \item Draw a stack diagram that shows the state of the program the first time \java{ping} is invoked.
+
+\item What happens if you add a method call to \java{baffle();} at the end of the \java{ping} method? (We will see why in the next chapter.)
 
 \end{enumerate}
 
@@ -3447,18 +3464,12 @@ HINT: Start by describing in words what \java{ping} and \java{baffle} do when th
 
 \begin{exercise}
 
-Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
-
-\end{exercise}
-
-\begin{exercise}
-
 The point of this exercise is to make sure you understand how to write and invoke methods that take parameters.
 
 \begin{enumerate}
 \item Write the first line of a method named \java{zool} that takes three parameters: an \java{int} and two \java{Strings}.
 
-\item Write a line of code that invokes \java{zool}, passing as arguments the value \java{11}, the name of your first pet, and the name of the street you grew up on.
+\item Write a line of code that calls \java{zool}, passing as arguments the value \java{11}, the name of your first pet, and the name of the street you grew up on.
 \end{enumerate}
 
 \end{exercise}
