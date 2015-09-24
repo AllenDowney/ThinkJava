@@ -1497,6 +1497,68 @@ As a matter of style, you should always assign floating-point values to floating
 The compiler won't make you do it, but you never know when a bug like this one will come back and haunt you.
 
 
+\section{Rounding errors}
+
+%The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
+%In fact, most processors have special circuitry just for performing floating-point operations.
+
+\index{rounding error}
+
+On hardware, floating-point numbers are only {\it approximately} correct.
+Some numbers, like reasonably-sized integers, can be represented exactly.
+But repeating fractions, like $1/3$, and irrational numbers, like $\pi$, cannot.
+To represent these numbers, computers have to round off to the nearest floating-point number.
+The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
+
+%Notwithstanding, there is a fundamental flaw with floating-point arithmetic.
+%In mathematics, there is an infinite number of real numbers.
+%But computer processors are finite; they cannot represent {\em every} possible floating-point number.
+%Even with double-precision, you will frequently run into problems.
+
+\index{arithmetic!floating-point}
+
+For example, the following two statements should be equivalent:
+
+\begin{code}
+    System.out.println(0.1 * 10);
+    System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
+                     + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
+\end{code}
+
+But on many machines, the output is:
+
+\begin{stdout}
+1.0
+0.9999999999999999
+\end{stdout}
+
+The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
+So its floating-point representation is only approximate.
+When we add up the approximations, the rounding errors accumulate.
+
+For many applications, like computer graphics, encryption, statistical analysis, and multimedia rendering, floating-point arithmetic has benefits that outweigh the costs.
+But if you need {\em absolute} precision, use integers instead.
+For example, consider a bank account with a balance of \$123.45:
+
+\begin{code}
+    double balance = 123.45;  // potential rounding error
+\end{code}
+
+In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
+The result would be angry customers and potential law suits.
+You can avoid the problem by representing the balance as an integer:
+
+\begin{code}
+    int balance = 12345;      // total number of cents
+\end{code}
+
+\index{type!long}
+
+This solution works as long as the number of cents doesn't exceed the largest integer, which is about 2 billion.
+If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
+Hopefully nobody will ever need that much money!
+
+
 \section{Operators for strings}
 
 \index{string operator}
@@ -1755,6 +1817,9 @@ Expressions also have types, as determined by their operators and operands.
 A data type that represents decimal numbers (numbers that have an integer part and a fractional part).
 In Java, the default floating-point type is \java{double}.
 
+\term{rounding error}
+The small difference between a floating-point number and its actual representation on computer hardware.
+
 \term{concatenate}
 To join two values end-to-end.
 For string values, concatenation means to append.
@@ -1986,6 +2051,8 @@ The following code declares a \java{Scanner} variable and then creates a \java{S
     in = new Scanner(System.in);
 \end{code}
 
+\index{argument}
+
 Although \java{Scanner} is not a method, the syntax is the same as a method call.
 We pass \java{System.in} as an argument, which specifies that we are planning to input values from the keyboard.
 Alternatively, you can declare the variable and assign it using one line of code.
@@ -2174,6 +2241,7 @@ When printing floating-point numbers, Java automatically decides how many decima
 \end{code}
 
 \index{printf}
+\index{argument}
 
 \java{System.out} provides another method called \java{printf}, where the ``f'' stands for ``formatted''.
 The first argument of \java{printf} is a {\em format string} that specifies how values should be displayed.
@@ -2399,73 +2467,9 @@ The reader should never have to scroll horizontally.
 %As an exercise, try running this code through Checkstyle.
 
 
-\section{A few more details}
+\section{The Scanner bug}
 
-Now that you've had some experience with \java{double} and \java{Scanner}, there are a few unexpected behaviors we want to warn you about.
-
-\subsection{Rounding errors}
-
-%The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
-%In fact, most processors have special circuitry just for performing floating-point operations.
-
-\index{rounding error}
-
-On hardware, floating-point numbers are only approximately correct.
-Some numbers, like reasonably-sized integers, can be represented exactly.
-But repeating fractions, like $1/3$, and irrational numbers, like $\pi$, cannot.
-To represent these numbers, computers have to round off to the nearest floating-point number.
-The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
-
-%Notwithstanding, there is a fundamental flaw with floating-point arithmetic.
-%In mathematics, there is an infinite number of real numbers.
-%But computer processors are finite; they cannot represent {\em every} possible floating-point number.
-%Even with double-precision, you will frequently run into problems.
-
-\index{arithmetic!floating-point}
-
-For example, the following two statements should be equivalent:
-
-\begin{code}
-    System.out.println(0.1 * 10);
-    System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
-                     + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
-\end{code}
-
-But on many machines, the output is:
-
-\begin{stdout}
-1.0
-0.9999999999999999
-\end{stdout}
-
-The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
-So its floating-point representation is only approximate.
-When we add up the approximations, the rounding errors accumulate.
-
-For many applications, like computer graphics, encryption, statistical analysis, and multimedia rendering, floating-point arithmetic has benefits that outweigh the costs.
-But if you need {\em absolute} precision, use integers instead.
-For example, consider a bank account with a balance of \$123.45:
-
-\begin{code}
-    double balance = 123.45;  // potential rounding error
-\end{code}
-
-In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
-The result would be angry customers and potential law suits.
-You can avoid the problem by representing the balance as an integer:
-
-\begin{code}
-    int balance = 12345;      // total number of cents
-\end{code}
-
-\index{type!long}
-
-This solution works as long as the number of cents doesn't exceed the largest integer, which is about 2 billion.
-If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
-Hopefully nobody will ever need that much money!
-
-\subsection{The Scanner bug}
-
+Now that you've had some experience with \java{Scanner}, there is an unexpected behavior we want to warn you about.
 Consider a simple program that asks users for their name and age.
 Somewhere in the middle of the code, we have the following lines:
 
@@ -2680,9 +2684,6 @@ In Java it appears as a type name in parentheses, like \java{(int)}.
 An operator that yields the remainder when one integer is divided by another.
 In Java, it is denoted with a percent sign (e.g., \java{5 \% 2} is \java{1}).
 
-\term{rounding error}
-The small difference between a floating-point number and its actual representation on computer hardware.
-
 \term{redirection operator}
 A command-line feature that substitutes \java{System.in} and/or \java{System.out} with a plain text file.
 
@@ -2747,10 +2748,12 @@ Then you can evaluate the function itself, maybe by punching it into a calculato
 This process can be applied repeatedly to evaluate more complex expressions like $\log(1/\sin(\pi/2))$.
 First we evaluate the argument of the innermost function, then evaluate the function itself, and so on.
 
+\index{invoke}
+
 The Java library includes a \java{Math} class that provides most common mathematical operations.
 %These functions are called {\bf methods}.
 \java{Math} is in the \java{java.lang} package, so you don't have to import it.
-You can invoke Math methods like this:
+You can {\bf invoke} Math methods like this:
 
 \begin{code}
     double root = Math.sqrt(17.0);
@@ -2878,7 +2881,6 @@ You can define other methods using syntax that is similar to \java{main}:
 By convention, methods start with a lower case letter and use ``camel case,'' which is a cute name for \java{jammingWordsTogetherLikeThis}.
 You can use any name you want for your method, except \java{main} or any of the Java keywords.
 
-% TODO: check where there first use of ``invoke'' was
 % TODO: move the definition of ``argument'' to Ch3?
 
 The list of parameters specifies what values, if any, you have to provide in order to invoke the new method.
@@ -3273,7 +3275,7 @@ The stack diagram for this example looks like this:
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics{figs/stack.pdf}
+\includegraphics[scale=0.9]{figs/stack.pdf}
 \caption{Stack diagram for the \java{PrintTwice} program.}
 \end{center}
 \end{figure}
@@ -3283,7 +3285,7 @@ The stack diagram for this example looks like this:
 For each method there is a box called a {\bf frame} that contains the method's parameters and variables.
 The name of the method appears outside the frame.
 The value of each variable is drawn inside a box with the name of the variable beside it.
-(Note for people who know too much: this diagram leaves out a detail we will explain later.)
+(Note for people who know too much: this diagram leaves out an important detail about strings that we will explain later.)
 
 Stack diagrams help you to visualize the {\bf scope} of a variable, which is the area of a program where a variable exists.
 It's possible to have two variables with the same name in two different methods.
@@ -3296,14 +3298,14 @@ Each only exists within its own method, so they don't interfere with each other.
 
 Keeping track of variables and methods on paper is a useful skill, and you should practice drawing stack diagrams.
 Another way to visualize the scope of variables and the flow of execution is to use a {\bf debugger}.
-The overall process is the same, regardless which development environment you use:
+Regardless which development environment you use, the overall process is the same:
 
 \index{breakpoint}
 
 \begin{enumerate}
 \item Set {\bf breakpoints} on lines where you want the program to pause.
 \item Step through the code one line at a time and watch what it does.
-\item Check the values of variables and see when they change.
+\item Check the values of variables and see when and how they change.
 \end{enumerate}
 
 For example, open any program in DrJava and move the cursor to the first line of \java{main}.
@@ -3349,10 +3351,10 @@ A named sequence of statements that performs a procedure or function.
 Methods may or may not take parameters, and may or may not return a value.
 
 \term{invoke}
-To call a method, i.e., cause it to execute.
+To call or run a method, i.e., cause it to execute.
 
 \term{parameter}
-A piece of information a method requires before it can run.
+A piece of information that a method requires before it can run.
 Parameters are variables: they contain values and have types.
 
 \term{argument}
