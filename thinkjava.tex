@@ -1401,7 +1401,7 @@ For example, the following lines try to compute the fraction of an hour that has
     System.out.println(minute / 60);
 \end{code}
 
-Bu the program outputs:
+But the program outputs:
 
 \begin{stdout}
 Fraction of the hour that has passed: 0
@@ -2833,7 +2833,7 @@ The statement in parentheses declares a parameter named
 \java{args}.  A {\bf parameter} is a variable that stores an argument.
 This parameter has type \java{String[]}, which means that whoever invokes \java{main} must provide an array of Strings (we'll get to arrays in a later chapter).
 
-You can define other methods using syntax is similar to \java{main}:
+You can define other methods using syntax that is similar to \java{main}:
 
 \begin{code}
     public static void NAME(PARAMETERS) {
@@ -3138,7 +3138,7 @@ Press Ctrl+Shift+D to turn on Debug Mode; a new pane should appear at the bottom
 
 \index{call stack}
 
-When you the your program, execution pauses at the first breakpoint.
+When you run the program, execution pauses at the first breakpoint.
 The debug pane shows the {\bf call stack}, with the current method on top of the stack.
 You might be surprised to see how many methods were called before the \java{main} method!
 To the right are several buttons that allow you to step through the code at your own pace.
@@ -3183,7 +3183,7 @@ For one, you have to declare the type of every parameter separately.
 \end{code}
 
 It might be tempting to write ``\java{int hour, minute}'' but that format is only legal for variable declarations, not parameter lists.
-Another common source of confusion is that you do not have to declare the types of arguments.
+Another common source of confusion is that you do not have to declare the types of arguments in a method call.
 The following is incorrect:
 
 \begin{code}
