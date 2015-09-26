@@ -167,29 +167,69 @@
 \setcounter{chapter}{4}
 
 \chapter{Decisions and logic}
-TODO
-
-
-\section{Boolean expressions}
-TODO
-
-\subsection{Relational operators}
 
 \index{boolean}
-\index{expression!boolean}
+\index{type!boolean}
 
-Most of the operations we have seen produce results that are the same type as their operands.
-For example, the \java{+} operator takes two \java{int}s and produces an \java{int}, or two \java{double}s and produces a \java{double}, etc.
+During the mid 19th century, the mathematician George Boole developed a formal system for representing logic which today is known as Boolean algebra.
+In contrast to traditional algebra that deals with real numbers and arithmetic operations like addition and multiplication, Boolean algebra is based on the values {\it true} and {\it false} and logic operations like {\it and}, {\it or}, and {\it not}.
+In Java, the values \java{true} and \java{false} belong to the data type \java{boolean}.
+
+%{\tt true} and {\tt false} are special values in Java, and together they make up a type called {\bf boolean}.
+%You might recall that when I defined a type, I said it was a set of values.
+%In the case of {\tt int}s, {\tt double}s and {\tt String}s, those sets are pretty big.
+%For {\tt boolean}s, there are only two values.
+%The values {\tt true} and {\tt false} are keywords in Java, so they may appear in a different color, depending on your development environment.
+
+
+\section{Relational operators}
 
 \index{operator!relational}
 \index{relational operator}
+\index{operator!comparison}
+\index{comparison operator}
 
-The exceptions we have seen are the {\bf relational operators}, which compare {\tt int}s and {\tt float}s and return either {\tt true} or {\tt false}.
-{\tt true} and {\tt false} are special values in Java, and together they make up a type called {\bf boolean}.
-You might recall that when I defined a type, I said it was a set of values.
-In the case of {\tt int}s, {\tt double}s and {\tt String}s, those sets are pretty big.
-For {\tt boolean}s, there are only two values.
+Most operations we have seen produce results that are the same type as their operands.
+For example, the \java{+} operator takes two \java{int}s and produces an \java{int}, or two \java{double}s and produces a \java{double}, etc.
+In contrast, {\bf relational operators} compare numeric types like \java{int}s and \java{double}s and return either \java{true} or \java{false}.
 
+\begin{code}
+    x == y          // x is equal to y
+    x != y          // x is not equal to y
+    x > y           // x is greater than y
+    x < y           // x is less than y
+    x >= y          // x is greater than or equal to y
+    x <= y          // x is less than or equal to y
+\end{code}
+
+Although these operations are probably familiar to you, the syntax Java uses is a little different from mathematical symbols like $=$, $\neq$ and $\le$.
+A common error is to use a single {\tt =} instead of a double {\tt ==}.
+Remember that {\tt =} is the assignment operator and {\tt ==} is a comparison operator.
+Also, there is no such thing as {\tt =<} or {\tt =>} operators.
+
+The two sides of a relational operator have to be compatible.
+For example, the expression \java{5 < "6"} is invalid because \java{5} is an \java{int} and \java{"6"} is a \java{String}.
+When comparing values of different numeric types, Java applies the same conversion rules we saw previously with the assignment operator.
+For example, when evaluating the expression \java{5 < 6.0}, Java automatically converts the \java{5} to \java{5.0}.
+
+The operators {\tt ==} and {\tt !=} work with Strings too, but they don't do what you expect.
+And the other relational operators don't do anything at all with Strings.
+To compare two strings, you should use methods like \java{String.equals} or \java{String.compareTo}:
+
+\begin{code}
+    String fruit1 = "Apple";
+    String fruit2 = "Orange";
+    System.out.println(fruit1.equals(fruit2));
+    System.out.println(fruit1.compareTo(fruit2));
+\end{code}
+
+\subsection{Flag variables}
+
+\index{expression!boolean}
+
+Recall from Section~\ref{sec:arithops} that expressions are typically a combination of variables and operators.
+More generally, an expression is a language construct that evaluates to a single value.
+Expressions can be as simple as the literal \java{0} or more complex like \java{Math.cos(angle + Math.PI / 2)}.
 Boolean expressions and variables work just like other types of expressions and variables:
 
 \begin{code}
@@ -198,14 +238,11 @@ Boolean expressions and variables work just like other types of expressions and 
     boolean testResult = false;
 \end{code}
 
-The first example is a simple variable declaration, the second example is an assignment, and the third example is an initialization.
-
-The values {\tt true} and {\tt false} are keywords in Java, so they may appear in a different color, depending on your development environment.
-
 \index{initialization}
 \index{statement!initialization}
 
-The result of a conditional operator is a boolean, so you can store the result of a comparison in a variable:
+The first line is a variable declaration, the second is an assignment, and the third is an initialization.
+Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
 
 \begin{code}
     boolean evenFlag = (n % 2 == 0);    // true if n is even
@@ -213,7 +250,8 @@ The result of a conditional operator is a boolean, so you can store the result o
 \end{code}
 
 The parentheses are unnecessary, but they make the code easier to read.
-You can then use these variables as part of a conditional statement later:
+A variable used in this way is called a {\bf flag}, because it signals the presence or absence of some condition.
+You can use flag variables as part of a conditional statement later:
 
 \begin{code}
     if (evenFlag) {
@@ -221,37 +259,82 @@ You can then use these variables as part of a conditional statement later:
     }
 \end{code}
 
-A variable used in this way is called a {\bf flag} because it flags the presence or absence of some condition.
-Notice you don't need to say \java{if (evenFlag == true)}.
+Notice that you don't need to say \java{if (evenFlag == true)}.
 Since \java{evenFlag} is a \java{boolean}, it's already a condition.
 
-\subsection{Conditional operators}
+\section{Conditional operators}
 
+\index{conditional operator}
+\index{operator!conditional}
 \index{logical operator}
 \index{operator!logical}
 
-There are three {\bf logical operators} in Java: AND, OR and NOT, which are denoted by the symbols {\tt \&\&}, {\tt ||} and {\tt !}.
-The semantics of these operators is similar to their meaning in English.
-For example {\tt x > 0 \&\& x < 10} is true only if {\tt x} is greater than zero AND less than 10.
+Java has three {\bf conditional operators}: AND, OR, and NOT, which are denoted by the symbols \java{&&}, \java{||}, and \java{!}.
+The semantics of these operators are similar to their meaning in English.
 
-\index{semantics}
+For example \java{x > 0 && x < 10} is true when \java{x} is greater than zero AND less than 10.
+The expression \java{evenFlag || n \% 3 == 0} is true if {\it either} condition is true, that is, if \java{evenFlag} is true OR the number \java{n} is divisible by 3.
+Finally, the NOT operator inverts a boolean expression.
+So \java{!evenFlag} is \java{true} if \java{evenFlag} is \java{false}---regardless whether the original number is odd.
 
-{\tt evenFlag || n\%3 == 0} is true if {\em either} of the conditions is true, that is, if {\tt evenFlag} is true OR the number is divisible by 3.
+\index{short circuit}
 
-Finally, the NOT operator inverts a boolean expression, so {\tt !evenFlag} is true if {\tt evenFlag} is false---if the number is odd.
+It's important to remember that conditional operators have a {\bf short circuit} property, meaning they only evaluate the second operand when necessary.
+For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
+Likewise, \java{false && anything} is always false.
+The short circuit feature is particularly efficient when \java{anything} is a method call, because Java eliminates the need to call that method.
 
-\index{nested structure}
+\index{De Morgan's laws}
 
-Logical operators can simplify nested conditional statements.
-For example, can you re-write this code using a single conditional?
+When solving logic problems using conditional operators, you will often need to negate AND and OR operations.
+{\bf De Morgan's laws} show how to simplify such expressions:
 
-\begin{code}
-    if (x > 0) {
-        if (x < 10) {
-            System.out.println("x is a positive single digit.");
-        }
-    }
-\end{code}
+\begin{itemize}
+\item \java{!(A && B)} ~is the same as~ \java{!A || !B}
+\item \java{!(A || B)} ~is the same as~ \java{!A && !B}
+\end{itemize}
+
+In other words, negating a conditional expression is the same as negating each term and changing the operator.
+Note that since the \java{!} operator has higher precedence than \java{&&} and \java{||}, you don't need to put parentheses around the individual terms \java{!A} and \java{!B}.
+
+De Morgan's laws also apply to the relational operators.
+In this case, negating each term means using the ``opposite'' relational operator.
+
+\begin{itemize}
+\item \java{!(x < 5 && y == 3)} ~is the same as~ \java{x >= 5 || y != 3}
+\item \java{!(x >= 1 || y != 7)} ~is the same as~ \java{x < 1 && y == 7}
+\end{itemize}
+
+It may help to read these examples out loud in English.
+For instance, ``If I don't want x to be less than 5 AND I don't want y to be 3, then I need x to be greater than or equal to 5 OR I need y to be anything but 3.''
+
+\subsection{DrJava interactions}
+
+A good way to gain experience with relational and conditional operators is to practice using them via the Interactions Pane of DrJava.
+As shown in Figure~\ref{fig:drjava}, you can declare several variables and {\it interactively} test your logic skills.
+Come up with several interesting examples, and try to determine their result before running the code.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/drjava-logic.png}
+\caption{Screenshot of the Interactions Pane in DrJava.}
+\label{fig:drjava}
+\end{center}
+\end{figure}
+
+There is one subtle aspect to using the Interactions feature.
+Notice how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
+When you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
+
+What's nice about this feature is you don't have to create a new class, declare a main method, write arbitrary expressions inside System.out.println statements, save the source file, and get all of your code to compile in advance.
+In addition, you can press the up arrow to edit the previous command and experiment with incremental differences.
+
+\index{order of operations}
+\index{precedence}
+
+Note also in Figure~\ref{fig:drjava} that the logic expressions do not use any parentheses.
+As a general rule, Java first evaluates arithmetic operators, then the relational operators, followed by any conditional operators, and finally the assignment operator.
+For more details, do a web search for ``java operator precedence.''
 
 
 \section{The if-else statement}
@@ -276,34 +359,8 @@ The expression in parentheses is called the condition.
 If it is true, then the statements in brackets get executed.
 If the condition is not true, nothing happens.
 
-\index{operator!comparison}
-\index{operator!relational}
-\index{comparison!operator}
-\index{relational operator}
-
 The condition can contain any of the comparison operators, sometimes called {\bf relational operators}:
 
-\begin{code}
-    x == y               // x equals y
-    x != y               // x is not equal to y
-    x > y                // x is greater than y
-    x < y                // x is less than y
-    x >= y               // x is greater than or equal to y
-    x <= y               // x is less than or equal to y
-\end{code}
-
-Although these operations are probably familiar to you, the syntax Java uses is a little different from mathematical symbols like $=$, $\neq$ and $\le$.
-A common error is to use a single {\tt =} instead of a double {\tt ==}.
-Remember that {\tt =} is the assignment operator, and {\tt ==} is a comparison operator.
-Also, there is no such thing as {\tt =<} or {\tt =>}.
-
-The two sides of a condition operator have to be the same type.
-You can only compare {\tt ints} to {\tt ints} and {\tt doubles} to {\tt doubles}.
-
-The operators {\tt ==} and {\tt !=} work with Strings, but they don't do what you expect.
-And the other relational operators don't do anything at all.
-To compare two strings, you should use the \java{String.equals} method.
-%We will see how to compare strings Section~\ref{incomparable}.
 
 \subsection{Alternative execution}
 \label{alternative}
@@ -352,19 +409,6 @@ You should resist the temptation to write things like:
     int number = 17;
     printParity(int number);        // WRONG!!!
 \end{code}
-
-
-\section{Programming logic}
-TODO
-
-\subsection{De Morgan's law}
-TODO
-
-\subsection{Short circuit evaluation}
-TODO
-
-\subsection{DrJava interactions}
-TODO
 
 
 \section{Decision structures}
@@ -550,7 +594,7 @@ Remember that every time a method gets called it creates a new frame that contai
 The following figure is a stack diagram for countdown, called with {\tt n = 3}:
 
 \begin{center}
-\includegraphics{stack2.pdf}
+\includegraphics{figs/stack2.pdf}
 \end{center}
 
 There is one frame for {\tt main} and four frames for {\tt countdown}, each with a different value for the parameter {\tt n}.
@@ -722,5 +766,21 @@ Otherwise the program should print ``No, that doesn't work.''
 HINT: You may want to use \java{Math.pow} in your method.
 \end{exercise}
 
+
+\begin{exercise}
+\index{nested structure}
+
+Logical operators can simplify nested conditional statements.
+For example, can you re-write this code using a single conditional?
+
+\begin{code}
+    if (x > 0) {
+        if (x < 10) {
+            System.out.println("x is a positive single digit.");
+        }
+    }
+\end{code}
+
+\end{exercise}
 
 \end{document}
