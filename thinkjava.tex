@@ -2590,6 +2590,15 @@ The first one redirects the contents of {\tt test.in} to \java{System.in}, as if
 The second one redirects the contents of \java{System.out} to a new file {\tt test.out}, much like a screen capture.
 In other words, the {\tt test.out} file contains the output of your program.
 
+% ABD: Since I killed the previous reference to abstraction, I am inclined
+% to kill this one too.  The problem in both places is that it pulls the
+% focus off topic.
+
+%Redirecting a program's input and output is an example of how computer scientists use abstraction.
+%Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
+%In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
+%What's great is that doesn't change anything about how you write the code.
+
 By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command-line.
 Knowing both techniques allows you to use the right tool for the job.
 
@@ -2604,18 +2613,18 @@ diff test.exp test.out
 
 The {\tt diff} utility summarizes the differences between two files.
 If there are no differences, then it prints nothing, which in our case is what we want.
-If the expected output differs from the actual output, then we need to debug our program.
-Or in some cases, we need to debug our test cases.
-There's always a chance we have a correct program and a typo in the expected output.
+If the expected output differs from the actual output, then we need to continue debugging.
+Usually the program is at fault, and {\tt diff} provides some insight about what is broken.
+But there's also a chance that we have a correct program and the expected output is wrong.
 
-% ABD: Since I killed the previous reference to abstraction, I am inclined
-% to kill this one too.  The problem in both places is that it pulls the
-% focus off topic.
+Interpreting the results from {\tt diff} can be confusing, but fortunately there are many graphical tools that show the differences between two files. For example, on Windows you can install WinMerge, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}. Regardless what tool you use, the goal is the same. Debug your program until the actual output is {\it identical} to the expected output.
 
-%Redirecting a program's input and output is an example of how computer scientists use abstraction.
-%Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
-%In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
-%What's great is that doesn't change anything about how you write the code.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figs/meld.png}
+\caption{Using {\tt meld} to compare the expected output with the actual output.}
+\end{center}
+\end{figure}
 
 
 \section{Vocabulary}
@@ -3330,14 +3339,13 @@ There is a breakpoint on the first line of \java{main}.}
 \end{center}
 \end{figure}
 
-When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
-This feature allows you to verify your assumptions about how data is passed from one method to another.
-You can edit your code while debugging it, but the changes won't take effect until after you compile.
-The result can be confusing, so we don't recommend it.
-%The debugger may get out of sync if you add or delete multiple lines of code while the program is paused.
-
 Using a debugger is like having the computer proofread your code out loud.
-You might expect the code do one thing, and then the debugger shows it doing something else.
+When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
+Tracing allows you to verify how control and data passes from one method to another.
+%You can edit your code while debugging it, but the changes won't take effect until after you compile.
+%The result can be confusing, so we don't recommend it.
+%The debugger may get out of sync if you add or delete multiple lines of code while the program is paused.
+You might expect the code do one thing, but then the debugger shows it doing something else.
 At that moment, you gain insight about what may be wrong with the code.
 
 
@@ -3407,34 +3415,17 @@ The history of method calls and where to resume execution after each method retu
 
 \begin{exercise}
 
-What is the difference between a variable and a method?
-In terms of their syntax, how does the Java compiler tell the difference between the two?
-
-%A variable is a {\em location of data}, whereas a method is a {\em location of code}.
-%In Java, methods always have parentheses, even if they have no arguments like \java{System.out.println()}.
-
-\begin{exercise}
-
-Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
-
-\end{exercise}
-
-\end{exercise}
-
-\begin{exercise}
-
 The point of this exercise is to practice reading code and to make sure that you understand the flow of execution through a program with multiple methods.
 
 \begin{enumerate}
 
 \item What is the output of the following program?
 Be precise about where there are spaces and where there are newlines.
-
-HINT: Start by describing in words what \java{ping} and \java{baffle} do when they are invoked.
+(Hint: Start by describing in words what \java{ping} and \java{baffle} do when they are invoked.)
 
 \item Draw a stack diagram that shows the state of the program the first time \java{ping} is invoked.
 
-\item What happens if you add a method call to \java{baffle();} at the end of the \java{ping} method? (We will see why in the next chapter.)
+%\item What happens if you add a method call to \java{baffle();} at the end of the \java{ping} method? (We will see why in the next chapter.)
 
 \end{enumerate}
 
@@ -3444,23 +3435,36 @@ HINT: Start by describing in words what \java{ping} and \java{baffle} do when th
         System.out.print("You wugga ");
         baffle();
     }
-
     public static void main(String[] args) {
         System.out.print("No, I ");
         zoop();
         System.out.print("I ");
         baffle();
     }
-
     public static void baffle() {
         System.out.print("wug");
         ping();
     }
-
     public static void ping() {
         System.out.println(".");
     }
 \end{code}
+
+\end{exercise}
+
+\begin{exercise}
+
+What is the difference between a variable and a method?
+In terms of their syntax, how does the Java compiler tell the difference between the two?
+
+%A variable is a {\em location of data}, whereas a method is a {\em location of code}.
+%In Java, methods always have parentheses, even if they have no arguments like \java{System.out.println()}.
+
+\end{exercise}
+
+\begin{exercise}
+
+Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
 
 \end{exercise}
 
