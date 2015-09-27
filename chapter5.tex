@@ -338,16 +338,13 @@ For more details, do a web search for ``java operator precedence.''
 
 
 \section{The if-else statement}
-TODO
 
-\subsection{Conditional execution}
+\index{decision statement}
+\index{statement!if}
 
-\index{conditional}
-\index{statement!conditional}
-
-To write useful programs, we almost always need to check conditions and change the behavior of the program accordingly.
-{\bf Conditional statements} give us this ability.
-The simplest form is the {\tt if} statement:
+To write useful programs, we almost always need to check conditions and react accordingly.
+{\bf Decision statements} give us this ability.
+We have already seen the simplest form of the \java{if} statement:
 
 \begin{code}
     if (x > 0) {
@@ -356,19 +353,15 @@ The simplest form is the {\tt if} statement:
 \end{code}
 
 The expression in parentheses is called the condition.
-If it is true, then the statements in brackets get executed.
-If the condition is not true, nothing happens.
+If it is true, then the following statements in braces get executed.
+If the condition is false, then execution skips over that block of code.
+The condition in parentheses can be {\it any} boolean expression.
 
-The condition can contain any of the comparison operators, sometimes called {\bf relational operators}:
+\index{statement!else}
+\index{decision!alternative}
 
-
-\subsection{Alternative execution}
-\label{alternative}
-
-\index{conditional!alternative}
-
-A second form of conditional execution is alternative execution, in which there are two possibilities, and the condition determines which one gets executed.
-The syntax looks like:
+A second form of decision statement is alternative execution, in which there are two possibilities: \java{if} and \java{else}.
+The condition determines which one gets executed:
 
 \begin{code}
     if (x % 2 == 0) {
@@ -382,44 +375,41 @@ If the remainder when {\tt x} is divided by 2 is zero, then we know that {\tt x}
 If the condition is false, the second print statement is executed.
 Since the condition must be true or false, exactly one of the alternatives will be executed.
 
-As an aside, if you need to check the {\em parity} (evenness or oddness) of numbers often, you might want to ``wrap'' this code up in a method, as follows:
+%\label{alternative}
+%\index{parity}
+%
+%To follow up the previous chapter, if you need to check the {\bf parity} (evenness or oddness) of numbers often, you might want to ``wrap'' this code up in a method:
+%
+%\begin{code}
+%    public static void printParity(int x) {
+%        if (x % 2 == 0) {
+%            System.out.println("x is even");
+%        } else {
+%            System.out.println("x is odd");
+%        }
+%    }
+%\end{code}
+%
+%Now you have a method named \java{printParity} that will print an appropriate message for any integer you care to provide.
+%In \java{main} you would invoke this method as follows:
+%
+%\begin{code}
+%    printParity(17);
+%\end{code}
+%
+%Always remember that when you invoke a method, you do not have to declare the types of the arguments you provide.
+%Java can figure out what type they are.
+%You should resist the temptation to write things like:
+%
+%\begin{code}
+%    int number = 17;
+%    printParity(int number);        // WRONG!!!
+%\end{code}
 
-\begin{code}
-    public static void printParity(int x) {
-        if (x % 2 == 0) {
-            System.out.println("x is even");
-        } else {
-            System.out.println("x is odd");
-        }
-    }
-\end{code}
-
-Now you have a method named {\tt printParity} that will print an appropriate message for any integer you care to provide.
-In {\tt main} you would invoke this method like this:
-
-\begin{code}
-    printParity(17);
-\end{code}
-
-Always remember that when you {\em invoke} a method, you do not have to declare the types of the arguments you provide.
-Java can figure out what type they are.
-You should resist the temptation to write things like:
-
-\begin{code}
-    int number = 17;
-    printParity(int number);        // WRONG!!!
-\end{code}
-
-
-\section{Decision structures}
-TODO
-
-\subsection{Chained conditionals}
-
-\index{conditional!chained}
+\index{decision!chained}
 
 Sometimes you want to check for a number of related conditions and choose one of several actions.
-One way to do this is by {\bf chaining} a series of {\tt if}s and {\tt else}s:
+One way to do this is by {\bf chaining} a series of \java{if} and \java{else} statements:
 
 \begin{code}
     if (x > 0) {
@@ -433,13 +423,12 @@ One way to do this is by {\bf chaining} a series of {\tt if}s and {\tt else}s:
 
 These chains can be as long as you want, although they can be difficult to read if they get out of hand.
 One way to make them easier to read is to use standard indentation, as demonstrated in these examples.
-If you keep all the statements and squiggly-brackets lined up, you are less likely to make syntax errors and more likely to find them if you do.
+If you keep all the statements and braces lined up, you are less likely to make syntax errors.
 
-\subsection{Nested conditionals}
+\index{decision!nested}
+\index{nested structure}
 
-\index{conditional!nested}
-
-In addition to chaining, you can also nest one conditional within another.
+In addition to chaining, you can also make complex decisions by {\bf nesting} one decision inside another.
 We could have written the previous example as:
 
 \begin{code}
@@ -455,28 +444,26 @@ We could have written the previous example as:
 \end{code}
 
 There is now an outer conditional that contains two branches.
-The first branch contains a simple {\tt print} statement, but the second branch contains another conditional statement, which has two branches of its own.
-Those two branches are both {\tt print} statements, but they could have been conditional statements as well.
+The first branch contains a \java{print} statement, but the second branch contains another decision statement.
+It has two branches of its own that each contain a \java{print} statement, but they could have been further decision statements as well.
 
-Indentation helps make the structure apparent, but nevertheless, nested conditionals get difficult to read very quickly.
-Avoid them when you can.
+These kinds of nested structures are common, and they can get difficult to read very quickly.
+Good indentation is essential to make the structure (or intended structure) apparent to the reader.
+Although Java does not require braces for one-line if statements, you should always use them as shown.
 
-\index{nested structure}
 
-On the other hand, this kind of {\bf nested structure} is common, and we will see it again, so you better get used to it.
-
-\subsection{The return statement}
+\section{The return statement}
 
 \index{return}
 \index{statement!return}
 
-The {\tt return} statement allows you to terminate the execution of a method before you reach the end.
+The \java{return} statement allows you to terminate a method before you reach the end.
 One reason to use it is if you detect an error condition:
 
 \begin{code}
     public static void printLogarithm(double x) {
         if (x <= 0.0) {
-            System.err.println("Positive numbers only, please.");
+            System.err.println("Oops, x must be positive.");
             return;
         }
         double result = Math.log(x);
@@ -484,11 +471,20 @@ One reason to use it is if you detect an error condition:
     }
 \end{code}
 
-This defines a method named {\tt printLogarithm} that takes a {\tt  double} named {\tt x} as a parameter.
-It checks whether {\tt  x} is less than or equal to zero, in which case it prints an error message and then uses {\tt return} to exit the method.
-The flow of execution immediately returns to the caller and the remaining lines of the method are not executed.
+This example defines a method named \java{printLogarithm} that takes a \java{double} value (named \java{x}) as a parameter.
+It checks whether \java{x} is less than or equal to zero, in which case it prints an error message and then uses \java{return} to exit the method.
+The flow of execution immediately returns to the caller, and the remaining lines of the method are not executed.
 
-I used a floating-point value on the right side of the condition because there is a floating-point variable on the left.
+\index{System.err}
+
+Notice the floating-point value \java{0.0} on the right side of the condition.
+Since \java{x} is a floating-point variable, you should compare it to a floating-point literal.
+This example also makes use of \java{System.err}, which is the {\it standard error} output stream.
+Operating systems typically distinguish normal output and error output by using a different color.
+
+As a matter of practice, methods should have {\it at most two} return statements: one for the error condition, and another for the final result.
+Many methods don't have error conditions, and \java{void} methods don't need an explicit \java{return} at the end.
+We will look at the more general use of \java{return} in the next chapter.
 
 
 \section{Recursive methods}
@@ -496,10 +492,14 @@ I used a floating-point value on the right side of the condition because there i
 
 \index{recursion}
 
-I mentioned in the last chapter that it is legal for one method to invoke another, and we have seen several examples.
-I neglected to mention that it is also legal for a method to invoke itself.
-It may not be obvious why that is a good thing, but it turns out to be one of the most magical and interesting things a program can do.
+We saw in the previous chapter how it is common for one method to invoke another.
+But what happens if a method invokes itself?
+This idea turns out to be one of the most magical and interesting things a program can do.
+It may not be obvious why at this point, but we need to learn the basics first.
 
+\index{recursion}
+
+When a method invokes itself, the process is called {\bf recursion}.
 For example, look at the following method:
 
 \begin{code}
@@ -508,36 +508,36 @@ For example, look at the following method:
             System.out.println("Blastoff!");
         } else {
             System.out.println(n);
-            countdown(n-1);
+            countdown(n - 1);
         }
     }
 \end{code}
 
-The name of the method is {\tt countdown} and it takes a single integer as a parameter.
+The name of the method is \java{countdown}, and it takes a single integer as a parameter.
 If the parameter is zero, it prints the word ``Blastoff.''
-Otherwise, it prints the number and then invokes a method named {\tt countdown}---itself---passing {\tt n-1} as an argument.
+Otherwise, it prints the number and then invokes the \java{countdown} method (i.e., itself) passing \java{n - 1} as the argument.
 
-What happens if we invoke this method, in {\tt main}, like this:
+What happens if we invoke \java{countdown(3)} from \java{main}?
 
-\begin{code}
-    countdown(3);
-\end{code}
-
-The execution of {\tt countdown} begins with {\tt n=3}, and since {\tt n} is not zero, it prints the value 3, and then invokes itself...
+\vspace{-1ex}
 \begin{quote}
-The execution of {\tt countdown} begins with {\tt n=2}, and since {\tt n} is not zero, it prints the value 2, and then invokes itself...
+The execution of \java{countdown} begins with \java{n == 3}, and since \java{n} is not zero, it prints the value 3, and then invokes itself...
 \begin{quote}
-The execution of {\tt countdown} begins with {\tt n=1}, and since {\tt n} is not zero, it prints the value 1, and then invokes itself...
+The execution of \java{countdown} begins with \java{n == 2}, and since \java{n} is not zero, it prints the value 2, and then invokes itself...
 \begin{quote}
-The execution of {\tt countdown} begins with {\tt n=0}, and since {\tt n} is zero, it prints the word ``Blastoff!'' and then returns.
+The execution of \java{countdown} begins with \java{n == 1}, and since \java{n} is not zero, it prints the value 1, and then invokes itself...
+\begin{quote}
+The execution of \java{countdown} begins with \java{n == 0}, and since \java{n} is zero, it prints the word ``Blastoff!'' and then returns.
 \end{quote}
-The {\tt countdown} that got {\tt n=1} returns.
+The \java{countdown} that got \java{n == 1} returns.
 \end{quote}
-The {\tt countdown} that got {\tt n=2} returns.
+The \java{countdown} that got \java{n == 2} returns.
 \end{quote}
-The {\tt countdown} that got {\tt n=3} returns.
+The \java{countdown} that got \java{n == 3} returns.
+\end{quote}
+\vspace{-1ex}
 
-\noindent And then you're back in {\tt main}.
+And then you're back in \java{main}.
 So the total output looks like:
 
 \begin{stdout}
@@ -547,7 +547,7 @@ So the total output looks like:
 Blastoff!
 \end{stdout}
 
-As a second example, let's look again at the methods {\tt newLine} and {\tt threeLine}.
+As a second example, let's look again at the methods \java{newLine} and \java{threeLine}.
 
 \begin{code}
     public static void newLine() {
@@ -561,6 +561,8 @@ As a second example, let's look again at the methods {\tt newLine} and {\tt thre
     }
 \end{code}
 
+\index{newline}
+
 Although these work, they would not be much help if we wanted to print 2 newlines, or 106.
 A better alternative would be:
 
@@ -568,40 +570,113 @@ A better alternative would be:
     public static void nLines(int n) {
         if (n > 0) {
             System.out.println();
-            nLines(n-1);
+            nLines(n - 1);
         }
     }
 \end{code}
 
-This program similar to {\tt countdown}; as long as {\tt n} is greater than zero, it prints a newline and then invokes itself to print {\tt n-1} additional newlines.
-The total number of newlines that get printed is {\tt 1 +(n-1)}, which usually comes out to roughly {\tt n}.
+This method is similar to \java{countdown}.
+As long as \java{n} is greater than zero, it prints a newline and then invokes itself to print \java{n - 1} additional newlines.
+The total number of newlines that get printed is \java{1 + (n - 1)}, which by no accident comes out to be exactly \java{n}.
 
-\index{recursive}
-\index{newline}
 
-When a method invokes itself, that's called {\bf recursion}, and such methods are {\bf recursive}.
+\section{Recursive stack diagrams}
 
-\subsection{Recursive stack diagrams}
-
-\index{stack}
+\index{stack diagram}
 \index{diagram!stack}
 
 In the previous chapter we used a stack diagram to represent the state of a program during a method invocation.
 The same kind of diagram can make it easier to interpret a recursive method.
 
-Remember that every time a method gets called it creates a new frame that contains a new version of the method's parameters and variables.
-
-The following figure is a stack diagram for countdown, called with {\tt n = 3}:
+Remember that every time a method gets called, it creates a new frame that contains a new version of the method's parameters and variables.
+The following figure is a stack diagram for countdown, called with \java{n == 3}:
 
 \begin{center}
 \includegraphics{figs/stack2.pdf}
 \end{center}
 
-There is one frame for {\tt main} and four frames for {\tt countdown}, each with a different value for the parameter {\tt n}.
-The bottom of the stack, {\tt countdown} with {\tt n=0} is called the {\bf base case}.
-It does not make a recursive call, so there are no more frames for {\tt countdown}.
+Note that this ``stack'' of method calls is upside down.
+It's easier to draw stack diagrams from top to bottom, because it's not always clear how much vertical space you will need.
 
-The frame for {\tt main} is empty because {\tt main} does not have any parameters or variables.
+The stack frame for \java{main} is empty because \java{main} does not have any variables.
+Technically speaking, \java{main} does have the parameter \java{args} for its command-line arguments.
+But since we're not using that parameter, we'll omit it from the diagram for simplicity.
+
+There is one frame for \java{main} and four frames for \java{countdown}, each with a different value for the parameter \java{n}.
+The top of the stack, \java{countdown} with \java{n == 0}, is called the {\bf base case}.
+It does not make a recursive call, so there are no more frames for \java{countdown}.
+
+This type of recursion is essentially a simple loop.
+We'll see in a couple chapters how to accomplish that with a \java{while} statement.
+But for now, it's important to understand how a recursive call causes the method to repeat itself.
+
+
+\section{Binary Numbers}
+
+The \java{countdown} example illustrated three basic steps: (1) check the base case, (2) print something out, and (3) make the recursive call.
+You should always check the base case first, or else the recursion may keep going until the program runs out of memory (i.e., \java{java.lang.StackOverflowError}).
+However, it's okay to make the recursive call {\it before} completing the rest of the method:
+
+\begin{code}
+    public static void countup(int n) {
+        if (n == 0) {
+            System.out.println("Blastoff!");
+        } else {
+            countdown(n - 1);
+            System.out.println(n);
+        }
+    }
+\end{code}
+
+Doing so causes the original behavior to be reversed.
+The stack diagram is the same as before, and the method is still called \java{n} times.
+But now the \java{System.out.println} happens just before each recursive call returns.
+As a result, it counts up instead of down---even though the code is subtracting!
+
+\begin{stdout}
+Blastoff!
+1
+2
+3
+\end{stdout}
+
+There are many situations when you want to compute results in reverse order.
+For example, to convert a decimal integer into its {\bf binary} representation, you repeatedly divide the number by two:
+
+\begin{stdout}
+23 / 2 is 11 remainder 1
+11 / 2 is  5 remainder 1
+ 5 / 2 is  2 remainder 1
+ 2 / 2 is  1 remainder 0
+ 1 / 2 is  0 remainder 1
+\end{stdout}
+
+23 in binary is 10111, which is the remainders in the above example from bottom to top.
+Here is a recursive method that prints the binary representation of any positive integer:
+
+\begin{code}
+    public static void showBinary(int value) {
+        if (value > 0) {
+            showBinary(value / 2);
+            System.out.print(value % 2);  // line 4
+        }
+    }
+\end{code}
+
+The \java{showBinary} method begins with the base case: it stops recursion when the value to divide becomes 0.
+If the argument is still positive, \java{showBinary} divides it by two and makes the recursive call again.
+At some point, \java{showBinary} returns from the base case to line 4.
+It then prints the remainder at that step of the algorithm and returns again to line 4.
+Because each method call has its own copy of the parameter \java{value}, the arithmetic works out correctly.
+
+\begin{code}
+    print(23);    
+    // output is 10111
+\end{code}
+
+Learning to think recursively is an important aspect of learning to think like a computer scientist.
+The main idea is that the method parameter decreases or increases until a base case is reached.
+With respect to recursive calls, the interesting computation happens on the way in, on the way out, or both.
 
 
 \section{Vocabulary}
@@ -609,20 +684,26 @@ The frame for {\tt main} is empty because {\tt main} does not have any parameter
 \begin{description}
 
 \term{boolean}
-A type of variable that can contain only the two values \java{true} and \java{false}.
-
-\term{flag}
-A variable (usually \java{boolean}) that records a condition or status information.
+A type of variable that contains either the value \java{true} or \java{false}.
 
 \index{operator!relational}
 \term{relational operator}
 An operator that compares two values and produces a boolean that indicates the relationship between the operands.
 
-\index{operator!logical}
-\term{logical operator}
+\term{flag}
+A variable (usually \java{boolean}) that records a condition or status.
+
+\index{operator!conditional}
+\term{conditional operator}
 An operator that combines boolean values and produces boolean values.
 
-\term{conditional}
+\term{short circuit}
+A property of conditional operators that cases them not to evaluate the second operand if the answer is already known.
+
+\term{De Morgan's laws}
+Mathematical rules that show how to negate a conditional expression.
+
+\term{decision statement}
 A block of statements that may or may not be executed depending on some condition.
 
 \term{chaining}
@@ -635,7 +716,11 @@ Putting a conditional statement inside one or both branches of another condition
 The process of invoking the same method you are currently executing.
 
 \term{base case}
-A condition that causes a recursive method {\em not} to make a recursive call.
+A condition that causes a recursive method {\it not} to make another recursive call.
+
+\term{binary}
+A system that uses only zeros and ones to represent numbers.
+Also known as base-2 in mathematics.
 
 \end{description}
 
@@ -643,79 +728,28 @@ A condition that causes a recursive method {\em not} to make a recursive call.
 \section{Exercises}
 
 \begin{exercise}
-Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after {\tt main} invokes {\tt nLines} with the parameter {\tt n=4}, just before the last invocation of {\tt nLines} returns.
+Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that
+\[ a^n + b^n = c^n \]
+except in the case when $n \leq 2$ (e.g., the Pythagorean Theorem).
+
+Write a method named {\tt checkFermat} that takes four integers as parameters---{\tt a}, {\tt b}, {\tt c} and {\tt n}---and that checks to see if Fermat's theorem holds.
+If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
+Otherwise the program should print ``No, that doesn't work.''
+
+HINT: You may want to use \java{Math.pow} in your method.
 \end{exercise}
 
 \begin{exercise}
-This exercise reviews the flow of execution through a program with multiple methods.
-Read the following code and answer the questions below.
+Conditional operators can simplify nested decision structures.
+For example, how can you rewrite this code using a single \java{if} statement?
 
 \begin{code}
-public class Buzz {
-
-    public static void baffle(String blimp) {
-        System.out.println(blimp);
-        zippo("ping", -5);
-    }
-
-    public static void zippo(String quince, int flag) {
-        if (flag < 0) {
-            System.out.println(quince + " zoop");
-        } else {
-            System.out.println("ik");
-            baffle(quince);
-            System.out.println("boo-wa-ha-ha");
+    if (x > 0) {
+        if (x < 10) {
+            System.out.println("x is a positive single digit.");
         }
     }
-
-    public static void main(String[] args) {
-        zippo("rattle", 13);
-    }
-}
 \end{code}
-
-\begin{enumerate}
-
-\item Write the number {\tt 1} next to the first {\em statement} of this program that will be executed.
-Be careful to distinguish things that are statements from things that are not.
-
-\item Write the number {\tt 2} next to the second statement, and so on until the end of the program.
-If a statement is executed more than once, it might end up with more than one number next to it.
-
-\item What is the value of the parameter {\tt blimp} when {\tt baffle} gets invoked?
-
-\item What is the output of this program?
-
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}
-The first verse of the song ``99 Bottles of Pop'' is:
-
-\begin{quote}
-99 bottles of pop on the wall,
-99 bottles of pop,
-If one of those bottles should happen to fall,
-98 bottles of pop on the wall.
-\end{quote}
-
-Subsequent verses are identical except that the number of bottles gets smaller by one in each verse, until the last verse:
-
-\begin{quote}
-1 bottle of pop on the wall,
-1 bottle of pop,
-If that last bottle should happen to fall,
-No more bottles of pop on the wall.
-\end{quote}
-
-And then the song(finally) ends.
-
-Write a program that prints the entire lyrics of ``99 Bottles of Pop.''
-Your program should include a {\em recursive} method that does the hard part, but you might want to write additional methods to separate the major functions of the program.
-
-As you develop your code, test it with a small number of verses, like ``3 Bottles of Pop.''
-
-The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods.
 \end{exercise}
 
 \begin{exercise}
@@ -748,39 +782,85 @@ public class Narf {
     public static void ping(String strangStrung) {
         System.out.println("any " + strangStrung + "more ");
     }
+
 }
 \end{code}
 \end{exercise}
 
 \begin{exercise}
-Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that
-
-\[ a^n + b^n = c^n \]
-
-except in the case when $n \leq 2$ (e.g., the Pythagorean Theorem).
-
-Write a method named {\tt checkFermat} that takes four integers as parameters---{\tt a}, {\tt b}, {\tt c} and {\tt n}---and that checks to see if Fermat's theorem holds.
-If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
-Otherwise the program should print ``No, that doesn't work.''
-
-HINT: You may want to use \java{Math.pow} in your method.
+Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after \java{main} invokes \java{nLines} with the parameter \java{n == 4}, just before the last invocation of \java{nLines} returns.
 \end{exercise}
 
+\begin{exercise}
+The first verse of the song ``99 Bottles of Pop'' is:
+
+\begin{quote}
+99 bottles of pop on the wall,
+99 bottles of pop,
+If one of those bottles should happen to fall,
+98 bottles of pop on the wall.
+\end{quote}
+
+Subsequent verses are identical except that the number of bottles gets smaller by one in each verse, until the last verse:
+
+\begin{quote}
+1 bottle of pop on the wall,
+1 bottle of pop,
+If that last bottle should happen to fall,
+No more bottles of pop on the wall.
+\end{quote}
+
+And then the song (finally) ends.
+
+Write a program that prints the entire lyrics of ``99 Bottles of Pop.''
+Your program should include a {\it recursive} method that does the hard part, but you might want to write additional methods to separate the major functions of the program.
+As you develop your code, test it with a small number of verses like ``3 Bottles of Pop.''
+
+%The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods.
+\end{exercise}
 
 \begin{exercise}
-\index{nested structure}
-
-Logical operators can simplify nested conditional statements.
-For example, can you re-write this code using a single conditional?
+This exercise reviews the flow of execution through a program with multiple methods.
+Read the following code and answer the questions.
 
 \begin{code}
-    if (x > 0) {
-        if (x < 10) {
-            System.out.println("x is a positive single digit.");
+public class Buzz {
+
+    public static void baffle(String blimp) {
+        System.out.println(blimp);
+        zippo("ping", -5);
+    }
+
+    public static void zippo(String quince, int flag) {
+        if (flag < 0) {
+            System.out.println(quince + " zoop");
+        } else {
+            System.out.println("ik");
+            baffle(quince);
+            System.out.println("boo-wa-ha-ha");
         }
     }
+
+    public static void main(String[] args) {
+        zippo("rattle", 13);
+    }
+
+}
 \end{code}
 
+\begin{enumerate}
+
+\item Write the number {\tt 1} next to the first {\em statement} of this program that will be executed.
+Be careful to distinguish things that are statements from things that are not.
+
+\item Write the number {\tt 2} next to the second statement, and so on until the end of the program.
+If a statement is executed more than once, it might end up with more than one number next to it.
+
+\item What is the value of the parameter {\tt blimp} when {\tt baffle} gets invoked?
+
+\item What is the output of this program?
+
+\end{enumerate}
 \end{exercise}
 
 \end{document}
