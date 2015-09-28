@@ -171,9 +171,17 @@
 \index{boolean}
 \index{type!boolean}
 
-During the mid 19th century, the mathematician George Boole developed a formal system for representing logic which today is known as Boolean algebra.
-In contrast to traditional algebra that deals with real numbers and arithmetic operations like addition and multiplication, Boolean algebra is based on the values {\it true} and {\it false} and logic operations like {\it and}, {\it or}, and {\it not}.
-In Java, the values \java{true} and \java{false} belong to the data type \java{boolean}.
+% TODO(ABD): I'd like an intro that presents the contents of the chapter in
+% terms of new capabilities: what can we do at the end of this chapter
+% that we can't do now?
+
+The programs we've seen so far do pretty much the same thing every time, regardless of the input.  
+For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
+This chapter presents the features you need for programs like this: {\tt if} statements and a new data type called {\tt boolean}.
+
+%{\tt boolean} is named after George Boole, who developed a formal system that represents logic using the values {\it true} and {\it false} and operations like {\it and}, {\it or}, and {\it not}.
+%In Java, the values \java{true} and \java{false} belong to the data type \java{boolean}.
+
 
 %{\tt true} and {\tt false} are special values in Java, and together they make up a type called {\bf boolean}.
 %You might recall that when I defined a type, I said it was a set of values.
@@ -184,14 +192,13 @@ In Java, the values \java{true} and \java{false} belong to the data type \java{b
 
 \section{Relational operators}
 
+{\bf Relational operators} are used to check conditions like
+whether two values are equal, or whether one is greater than the other.
+The following expressions show how they are used:
 \index{operator!relational}
 \index{relational operator}
 \index{operator!comparison}
 \index{comparison operator}
-
-Most operations we have seen produce results that are the same type as their operands.
-For example, the \java{+} operator takes two \java{int}s and produces an \java{int}, or two \java{double}s and produces a \java{double}, etc.
-In contrast, {\bf relational operators} compare numeric types like \java{int}s and \java{double}s and return either \java{true} or \java{false}.
 
 \begin{code}
     x == y          // x is equal to y
@@ -202,9 +209,14 @@ In contrast, {\bf relational operators} compare numeric types like \java{int}s a
     x <= y          // x is less than or equal to y
 \end{code}
 
-Although these operations are probably familiar to you, the syntax Java uses is a little different from mathematical symbols like $=$, $\neq$ and $\le$.
-A common error is to use a single {\tt =} instead of a double {\tt ==}.
-Remember that {\tt =} is the assignment operator and {\tt ==} is a comparison operator.
+The result of a relational operator is one of two special values,
+{\tt true} or {\tt false}.  These values have type {\tt boolean};
+in fact, they are the only values with type {\tt boolean}.
+
+You are probably familiar with these operations, but notice that the
+Java syntax is different from mathematical symbols like $=$, $\neq$
+and $\le$.
+A common error is to use a single {\tt =} instead of a double {\tt ==}.  Remember that {\tt =} is the assignment operator and {\tt ==} is a comparison operator.
 Also, there is no such thing as {\tt =<} or {\tt =>} operators.
 
 The two sides of a relational operator have to be compatible.
@@ -212,9 +224,10 @@ For example, the expression \java{5 < "6"} is invalid because \java{5} is an \ja
 When comparing values of different numeric types, Java applies the same conversion rules we saw previously with the assignment operator.
 For example, when evaluating the expression \java{5 < 6.0}, Java automatically converts the \java{5} to \java{5.0}.
 
-The operators {\tt ==} and {\tt !=} work with Strings too, but they don't do what you expect.
-And the other relational operators don't do anything at all with Strings.
-To compare two strings, you should use methods like \java{String.equals} or \java{String.compareTo}:
+Most relational operators don't work with Strings.  But confusingly,
+{\tt ==} and {\tt !=} work with Strings, but they don't do what you expect.
+We'll explain what they do later; in the meantime, don't use them with
+Strings.  Instead, you should use the String methods \java{equals} and \java{compareTo}:
 
 \begin{code}
     String fruit1 = "Apple";
@@ -223,44 +236,6 @@ To compare two strings, you should use methods like \java{String.equals} or \jav
     System.out.println(fruit1.compareTo(fruit2));
 \end{code}
 
-\subsection{Flag variables}
-
-\index{expression!boolean}
-
-Recall from Section~\ref{sec:arithops} that expressions are typically a combination of variables and operators.
-More generally, an expression is a language construct that evaluates to a single value.
-Expressions can be as simple as the literal \java{0} or more complex like \java{Math.cos(angle + Math.PI / 2)}.
-Boolean expressions and variables work just like other types of expressions and variables:
-
-\begin{code}
-    boolean flag;
-    flag = true;
-    boolean testResult = false;
-\end{code}
-
-\index{initialization}
-\index{statement!initialization}
-
-The first line is a variable declaration, the second is an assignment, and the third is an initialization.
-Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
-
-\begin{code}
-    boolean evenFlag = (n % 2 == 0);    // true if n is even
-    boolean positiveFlag = (x > 0);     // true if x is positive
-\end{code}
-
-The parentheses are unnecessary, but they make the code easier to read.
-A variable used in this way is called a {\bf flag}, because it signals the presence or absence of some condition.
-You can use flag variables as part of a conditional statement later:
-
-\begin{code}
-    if (evenFlag) {
-        System.out.println("n was even when I checked it");
-    }
-\end{code}
-
-Notice that you don't need to say \java{if (evenFlag == true)}.
-Since \java{evenFlag} is a \java{boolean}, it's already a condition.
 
 \section{Conditional operators}
 
@@ -275,14 +250,20 @@ The semantics of these operators are similar to their meaning in English.
 For example \java{x > 0 && x < 10} is true when \java{x} is greater than zero AND less than 10.
 The expression \java{evenFlag || n \% 3 == 0} is true if {\it either} condition is true, that is, if \java{evenFlag} is true OR the number \java{n} is divisible by 3.
 Finally, the NOT operator inverts a boolean expression.
-So \java{!evenFlag} is \java{true} if \java{evenFlag} is \java{false}---regardless whether the original number is odd.
+So \java{!evenFlag} is \java{true} if \java{evenFlag} is \java{false}.
 
 \index{short circuit}
 
-It's important to remember that conditional operators have a {\bf short circuit} property, meaning they only evaluate the second operand when necessary.
-For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
-Likewise, \java{false && anything} is always false.
-The short circuit feature is particularly efficient when \java{anything} is a method call, because Java eliminates the need to call that method.
+
+Conditional operators only evaluate the second operand if they have
+to.  For example, \java{true || anything} is always true, so Java does
+not need to evaluate the expression \java{anything}.  Likewise,
+\java{false && anything} is always false.  Ignoring the second
+argument, when possible, is called {\bf short circuit} evaluation, by
+analogy with an electrical circuit.  Short circuit evaluation can save
+time, especially if \java{anything} is a method call; it can also
+avoid unnecessary errors, if \java{anything} might fail.
+
 
 \index{De Morgan's laws}
 
@@ -310,9 +291,13 @@ For instance, ``If I don't want x to be less than 5 AND I don't want y to be 3, 
 
 \subsection{DrJava interactions}
 
-A good way to gain experience with relational and conditional operators is to practice using them via the Interactions Pane of DrJava.
+A good way to gain experience with relational and conditional operators is to use the Interactions Pane of DrJava.
 As shown in Figure~\ref{fig:drjava}, you can declare several variables and {\it interactively} test your logic skills.
 Come up with several interesting examples, and try to determine their result before running the code.
+
+% ABD: I worry about instructions like this, because students seldom follow
+% them.  Can we create some exercises (and move this section to the
+% end of the chapter)?
 
 \begin{figure}[!h]
 \begin{center}
@@ -326,15 +311,15 @@ There is one subtle aspect to using the Interactions feature.
 Notice how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
 When you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
 
-What's nice about this feature is you don't have to create a new class, declare a main method, write arbitrary expressions inside System.out.println statements, save the source file, and get all of your code to compile in advance.
+What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside System.out.println statements, save the source file, and get all of your code to compile in advance.
 In addition, you can press the up arrow to edit the previous command and experiment with incremental differences.
 
 \index{order of operations}
 \index{precedence}
 
-Note also in Figure~\ref{fig:drjava} that the logic expressions do not use any parentheses.
-As a general rule, Java first evaluates arithmetic operators, then the relational operators, followed by any conditional operators, and finally the assignment operator.
-For more details, do a web search for ``java operator precedence.''
+Notice that the expressions in this example don't use parentheses.
+According to the rules of precedence, Java evaluates arithmetic operators first, then the relational operators, then conditional operators, and finally the assignment operator.
+
 
 
 \section{The if-else statement}
@@ -344,7 +329,7 @@ For more details, do a web search for ``java operator precedence.''
 
 To write useful programs, we almost always need to check conditions and react accordingly.
 {\bf Decision statements} give us this ability.
-We have already seen the simplest form of the \java{if} statement:
+The simplest decision statement in Java is the \java{if} statement:
 
 \begin{code}
     if (x > 0) {
@@ -353,15 +338,15 @@ We have already seen the simplest form of the \java{if} statement:
 \end{code}
 
 The expression in parentheses is called the condition.
-If it is true, then the following statements in braces get executed.
-If the condition is false, then execution skips over that block of code.
+If it is true, the statements in braces get executed.
+If the condition is false, execution skips over that block of code.
 The condition in parentheses can be {\it any} boolean expression.
 
 \index{statement!else}
 \index{decision!alternative}
 
-A second form of decision statement is alternative execution, in which there are two possibilities: \java{if} and \java{else}.
-The condition determines which one gets executed:
+A second form of decision statement is alternative execution, in which there are two possibilities indicated by \java{if} and \java{else}.  The possibilities are called {\bf branches};
+the condition determines which one gets executed:
 
 \begin{code}
     if (x % 2 == 0) {
@@ -371,7 +356,7 @@ The condition determines which one gets executed:
     }
 \end{code}
 
-If the remainder when {\tt x} is divided by 2 is zero, then we know that {\tt x} is even, and this code prints a message to that effect.
+If the remainder when {\tt x} is divided by 2 is zero, we know that {\tt x} is even, and this code prints a message to that effect.
 If the condition is false, the second print statement is executed.
 Since the condition must be true or false, exactly one of the alternatives will be executed.
 
@@ -408,7 +393,7 @@ Since the condition must be true or false, exactly one of the alternatives will 
 
 \index{decision!chained}
 
-Sometimes you want to check for a number of related conditions and choose one of several actions.
+Sometimes you want to check related conditions and choose one of several actions.
 One way to do this is by {\bf chaining} a series of \java{if} and \java{else} statements:
 
 \begin{code}
@@ -443,13 +428,57 @@ We could have written the previous example as:
     }
 \end{code}
 
-There is now an outer conditional that contains two branches.
-The first branch contains a \java{print} statement, but the second branch contains another decision statement.
-It has two branches of its own that each contain a \java{print} statement, but they could have been further decision statements as well.
+The outer conditional has two branches:
+the first branch contains a \java{print} statement; the second branch contains another decision statement, which has
+two branches of its own.  Each of them is a \java{print} statement, but they could have been decision statements as well.
 
-These kinds of nested structures are common, and they can get difficult to read very quickly.
+These kinds of nested structures are common, but they get difficult to read very quickly.
 Good indentation is essential to make the structure (or intended structure) apparent to the reader.
-Although Java does not require braces for one-line if statements, you should always use them as shown.
+
+%Although Java does not require braces for one-line if statements,  we %recommend them...
+
+% ABD: I don't like to give style advice unless I explain why.  Otherwise
+% it's just religion.
+
+
+\subsection{Flag variables}
+
+\index{expression!boolean}
+
+Recall from Section~\ref{sec:arithops} that an expression is a combination of variables and operators that evaluates to a single value.
+Expressions can be as simple as the literal \java{0} or more complex like \java{Math.cos(angle + Math.PI / 2)}.
+Boolean expressions and variables work just like other types of expressions and variables:
+
+\begin{code}
+    boolean flag;
+    flag = true;
+    boolean testResult = false;
+\end{code}
+
+\index{initialization}
+\index{statement!initialization}
+
+The first line is a variable declaration, the second is an assignment, and the third is an initialization.
+Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
+
+\begin{code}
+    boolean evenFlag = (n % 2 == 0);    // true if n is even
+    boolean positiveFlag = (x > 0);     // true if x is positive
+\end{code}
+
+The parentheses are unnecessary, but they make the code easier to read.
+A variable used in this way is called a {\bf flag}, because it signals the presence or absence of some condition.
+
+You can use flag variables as part of a conditional statement later:
+
+\begin{code}
+    if (evenFlag) {
+        System.out.println("n was even when I checked it");
+    }
+\end{code}
+
+Notice that you don't need to say \java{if (evenFlag == true)}.
+Since \java{evenFlag} is a \java{boolean}, it's already a condition.
 
 
 \section{The return statement}
@@ -463,7 +492,7 @@ One reason to use it is if you detect an error condition:
 \begin{code}
     public static void printLogarithm(double x) {
         if (x <= 0.0) {
-            System.err.println("Oops, x must be positive.");
+            System.err.println("Error: x must be positive.");
             return;
         }
         double result = Math.log(x);
@@ -479,12 +508,17 @@ The flow of execution immediately returns to the caller, and the remaining lines
 
 Notice the floating-point value \java{0.0} on the right side of the condition.
 Since \java{x} is a floating-point variable, you should compare it to a floating-point literal.
-This example also makes use of \java{System.err}, which is the {\it standard error} output stream.
-Operating systems typically distinguish normal output and error output by using a different color.
 
-As a matter of practice, methods should have {\it at most two} return statements: one for the error condition, and another for the final result.
-Many methods don't have error conditions, and \java{void} methods don't need an explicit \java{return} at the end.
-We will look at the more general use of \java{return} in the next chapter.
+This example uses \java{System.err}, which is the {\it standard error} output stream.
+Your development environment might distinguish normal output and error output by using a different color.
+
+%As a matter of practice, methods should have {\it at most two} return statements: one for the error condition, and another for the final result.
+%Many methods don't have error conditions, and \java{void} methods don't need an explicit \java{return} at the end.
+%We will look at the more general use of \java{return} in the next chapter.
+
+% ABD: I don't agree with this advice.  I think there's nothing wrong
+% with methods that peel off special cases one at a time, with one
+% return statement per special case.
 
 
 \section{Recursive methods}
@@ -492,15 +526,14 @@ We will look at the more general use of \java{return} in the next chapter.
 
 \index{recursion}
 
-We saw in the previous chapter how it is common for one method to invoke another.
-But what happens if a method invokes itself?
+It is common for one method to invoke another, but what happens if a method invokes itself?
 This idea turns out to be one of the most magical and interesting things a program can do.
-It may not be obvious why at this point, but we need to learn the basics first.
+%It may not be obvious why at this point, but we need to learn the basics first.
 
 \index{recursion}
 
 When a method invokes itself, the process is called {\bf recursion}.
-For example, look at the following method:
+Consider the following example:
 
 \begin{code}
     public static void countdown(int n) {
@@ -513,9 +546,9 @@ For example, look at the following method:
     }
 \end{code}
 
-The name of the method is \java{countdown}, and it takes a single integer as a parameter.
+The name of the method is \java{countdown}; it takes a single integer as a parameter.
 If the parameter is zero, it prints the word ``Blastoff.''
-Otherwise, it prints the number and then invokes the \java{countdown} method (i.e., itself) passing \java{n - 1} as the argument.
+Otherwise, it prints the number and then invokes itself, passing \java{n - 1} as the argument.
 
 What happens if we invoke \java{countdown(3)} from \java{main}?
 
@@ -547,7 +580,7 @@ So the total output looks like:
 Blastoff!
 \end{stdout}
 
-As a second example, let's look again at the methods \java{newLine} and \java{threeLine}.
+As a second example, we'll rewrite the methods \java{newLine} and \java{threeLine} from Section~\ref{adding_methods}.
 
 \begin{code}
     public static void newLine() {
@@ -577,7 +610,7 @@ A better alternative would be:
 
 This method is similar to \java{countdown}.
 As long as \java{n} is greater than zero, it prints a newline and then invokes itself to print \java{n - 1} additional newlines.
-The total number of newlines that get printed is \java{1 + (n - 1)}, which by no accident comes out to be exactly \java{n}.
+The total number of newlines is \java{1 + (n - 1)}, which is just what we wanted: \java{n}.
 
 
 \section{Recursive stack diagrams}
@@ -588,34 +621,40 @@ The total number of newlines that get printed is \java{1 + (n - 1)}, which by no
 In the previous chapter we used a stack diagram to represent the state of a program during a method invocation.
 The same kind of diagram can make it easier to interpret a recursive method.
 
-Remember that every time a method gets called, it creates a new frame that contains a new version of the method's parameters and variables.
+Remember that every time a method gets called, Java creates a new frame that contains the method's parameters and variables.
 The following figure is a stack diagram for countdown, called with \java{n == 3}:
 
 \begin{center}
 \includegraphics{figs/stack2.pdf}
 \end{center}
 
-Note that this ``stack'' of method calls is upside down.
-It's easier to draw stack diagrams from top to bottom, because it's not always clear how much vertical space you will need.
+Note that the ``stack'' of method calls is upside down.
+It's easier to draw stack diagrams from top to bottom, because you don't know how much vertical space you will need.
 
-The stack frame for \java{main} is empty because \java{main} does not have any variables.
-Technically speaking, \java{main} does have the parameter \java{args} for its command-line arguments.
-But since we're not using that parameter, we'll omit it from the diagram for simplicity.
+The stack frame for \java{main} is empty because \java{main} does not have any local variables.
+It has one parameter, \java{args}, but since we're not using it, we left it out of the diagram.
 
-There is one frame for \java{main} and four frames for \java{countdown}, each with a different value for the parameter \java{n}.
-The top of the stack, \java{countdown} with \java{n == 0}, is called the {\bf base case}.
-It does not make a recursive call, so there are no more frames for \java{countdown}.
+There are four frames for \java{countdown}, each with a different value for the parameter \java{n}.
+The last frame, with \java{n == 0}, is called the {\bf base case}.
+It does not make a recursive call, so there are no more frames below it.
 
-This type of recursion is essentially a simple loop.
-We'll see in a couple chapters how to accomplish that with a \java{while} statement.
-But for now, it's important to understand how a recursive call causes the method to repeat itself.
+% ABD: we have not defined loop yet
+%This type of recursion is essentially a simple loop.
+
+% ABD: I prefer to leave out this kind of forward reference
+%We'll see in a couple chapters how to accomplish that with a \java{while} statement.
+%But for now, it's important to understand how a recursive call causes the method to repeat itself.
 
 
 \section{Binary Numbers}
 
-The \java{countdown} example illustrated three basic steps: (1) check the base case, (2) print something out, and (3) make the recursive call.
-You should always check the base case first, or else the recursion may keep going until the program runs out of memory (i.e., \java{java.lang.StackOverflowError}).
-However, it's okay to make the recursive call {\it before} completing the rest of the method:
+% ABD: I love this example.  Nice addition!
+
+The \java{countdown} example has three parts: (1) it checks the base case, (2) prints something, and (3) makes a recursive call.
+What do you think happens if you reverse steps 2 and 3, making the recursive call {\it before} printing?
+
+% TODO: we should have an example that demonstrates infinite recursion
+%You should always check the base case first, or else the recursion may keep going until the program runs out of memory (i.e., \java{java.lang.StackOverflowError}).
 
 \begin{code}
     public static void countup(int n) {
@@ -628,10 +667,9 @@ However, it's okay to make the recursive call {\it before} completing the rest o
     }
 \end{code}
 
-Doing so causes the original behavior to be reversed.
 The stack diagram is the same as before, and the method is still called \java{n} times.
 But now the \java{System.out.println} happens just before each recursive call returns.
-As a result, it counts up instead of down---even though the code is subtracting!
+As a result, it counts up instead of down:
 
 \begin{stdout}
 Blastoff!
@@ -640,7 +678,7 @@ Blastoff!
 3
 \end{stdout}
 
-There are many situations when you want to compute results in reverse order.
+This behavior comes in handy when it is easier to compute results in reverse order.
 For example, to convert a decimal integer into its {\bf binary} representation, you repeatedly divide the number by two:
 
 \begin{stdout}
@@ -658,25 +696,24 @@ Here is a recursive method that prints the binary representation of any positive
     public static void showBinary(int value) {
         if (value > 0) {
             showBinary(value / 2);
-            System.out.print(value % 2);  // line 4
+            System.out.print(value % 2);
         }
     }
 \end{code}
 
-The \java{showBinary} method begins with the base case: it stops recursion when the value to divide becomes 0.
-If the argument is still positive, \java{showBinary} divides it by two and makes the recursive call again.
-At some point, \java{showBinary} returns from the base case to line 4.
-It then prints the remainder at that step of the algorithm and returns again to line 4.
-Because each method call has its own copy of the parameter \java{value}, the arithmetic works out correctly.
+If \java{value} is zero, \java{showBinary} does nothing; that's the base case.
+If the argument is positive, the method divides it by two and calls \java{showBinary} recursively.
+When the recursive call returns, the method prints one digit of the result and returns.
+
+The leftmost digit is at the bottom of the stack, so it gets printed first.  The rightmost digit, at the top of the stack, gets printed last.
 
 \begin{code}
-    print(23);    
+    showBinary(23);    
     // output is 10111
 \end{code}
 
 Learning to think recursively is an important aspect of learning to think like a computer scientist.
-The main idea is that the method parameter decreases or increases until a base case is reached.
-With respect to recursive calls, the interesting computation happens on the way in, on the way out, or both.
+Many algorithms can be written concisely with recursive methods that perform computations on the way down, on the way up, or both.
 
 
 \section{Vocabulary}
@@ -684,27 +721,31 @@ With respect to recursive calls, the interesting computation happens on the way 
 \begin{description}
 
 \term{boolean}
-A type of variable that contains either the value \java{true} or \java{false}.
+A data type with only two values, \java{true} and \java{false}.
 
 \index{operator!relational}
 \term{relational operator}
-An operator that compares two values and produces a boolean that indicates the relationship between the operands.
-
-\term{flag}
-A variable (usually \java{boolean}) that records a condition or status.
+An operator that compares two values and produces a boolean indicating the relationship between them.
 
 \index{operator!conditional}
 \term{conditional operator}
 An operator that combines boolean values and produces boolean values.
 
-\term{short circuit}
-A property of conditional operators that cases them not to evaluate the second operand if the answer is already known.
+\term{short circuit evaluation}
+A way of evaluating conditional operators that only evaluates the second operand if necessary.
 
 \term{De Morgan's laws}
 Mathematical rules that show how to negate a conditional expression.
 
 \term{decision statement}
-A block of statements that may or may not be executed depending on some condition.
+A statement that uses a condition to determine which statements to
+execute.
+
+\term{branch}
+One of the alternative sets of statements inside a decision statement.
+
+\term{flag}
+A variable (usually \java{boolean}) that represents a condition or status.
 
 \term{chaining}
 A way of joining several conditional statements in sequence.
@@ -720,7 +761,7 @@ A condition that causes a recursive method {\it not} to make another recursive c
 
 \term{binary}
 A system that uses only zeros and ones to represent numbers.
-Also known as base-2 in mathematics.
+Also known as ``base 2''.
 
 \end{description}
 
