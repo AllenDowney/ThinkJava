@@ -244,23 +244,23 @@ Instead, you should use the \java{String} methods \java{equals} and \java{compar
 Java has three {\bf conditional operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
 The semantics of these operators are similar to their meanings in English.
 
-For example, \java{x > 0 && x < 10} is true when \java{x} is greater than zero AND less than 10.
-The expression \java{evenFlag || n \% 3 == 0} is true if {\it either} condition is true, that is, if \java{evenFlag} is true OR the number \java{n} is divisible by 3.
-Finally, the NOT operator inverts a boolean expression.
+For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero and less than 10.
+The expression \java{evenFlag || n \% 3 == 0} is true if {\it either} condition is true, that is, if \java{evenFlag} is true or the number \java{n} is divisible by 3.
+Finally, the \java{!} operator inverts a boolean expression.
 So \java{!evenFlag} is \java{true} if \java{evenFlag} is \java{false}.
 
 \index{short circuit}
 
-Conditional operators evaluate the second operand only if necessary.
+Conditional operators evaluate the second expression only when necessary.
 For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
 Likewise, \java{false && anything} is always false.
 Ignoring the second operand, when possible, is called {\bf short circuit} evaluation, by analogy with an electrical circuit.
 Short circuit evaluation can save time, especially if \java{anything} is a method call.
-It can also avoid unnecessary errors, if \java{anything} might fail.
+It can also avoid unnecessary errors, if \java{anything} might fail based on the first operand.
 
 \index{De Morgan's laws}
 
-When solving logic problems using conditional operators, you will often need to negate AND and OR operations.
+When solving logic problems using conditional operators, you will often need to negate \java{&&} and \java{||} operations.
 {\bf De Morgan's laws} show how to simplify such expressions:
 
 \begin{itemize}
@@ -287,7 +287,7 @@ For instance, ``If I don't want x to be less than 5, and I don't want y to be 3,
 
 A good way to gain experience with relational and conditional operators is to use the Interactions Pane of DrJava.
 As shown in Figure~\ref{fig:drjava}, you can declare several variables and {\it interactively} test your logic skills.
-Don't forget that you can try out many of the examples in this book directly in Interactions.
+Don't forget that you can try out many of the examples in this book this same way.
 
 % try to determine their result before running the code.
 %
@@ -302,12 +302,12 @@ Don't forget that you can try out many of the examples in this book directly in 
 \end{center}
 \end{figure}
 
-There is one subtle aspect to using the Interactions feature.
-When you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
+There is one subtle detail to note when using the Interactions feature.
+If you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
 Notice in Figure~\ref{fig:drjava} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
 
-What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside System.out.println statements, save the source file, and get all of your code to compile in advance.
-In addition, you can press the up arrow to edit the previous command and experiment with incremental differences.
+What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
+In addition, you can press the up/down arrows on the keyboard to repeat previous commands and experiment with incremental differences.
 
 \index{order of operations}
 \index{precedence}
@@ -459,7 +459,7 @@ Since relational operators evaluate to a \java{boolean} value, you can store the
 \end{code}
 
 The parentheses are unnecessary, but they make the code easier to read.
-A variable used in this way is called a {\bf flag}, because it signals the presence or absence of some condition.
+A variable defined in this way is called a {\bf flag}, because it signals the presence or absence of some condition.
 
 You can use flag variables as part of a conditional statement later:
 
@@ -485,8 +485,8 @@ Likewise, to check if a flag is \java{false}:
 \index{return}
 \index{statement!return}
 
-The \java{return} statement allows you to terminate a method before you reach the end.
-One reason to use it is if you detect an error condition:
+The \java{return} statement allows you to terminate a method before you reach the end of it.
+One reason to use \java{return} is if you detect an error condition:
 
 \begin{code}
     public static void printLogarithm(double x) {
@@ -539,7 +539,7 @@ Exception in thread "main" java.util.InputMismatchException
 
 In this example, the program calls the \java{nextDouble} method, so the \java{Scanner} attempts to parse a \java{double}.
 However the user input is \java{Hello}, which causes an \java{InputMismatchException}.
-We can prevent this error from happening by checking the input before parsing:
+We can prevent this error from happening by checking the input before parsing it:
 
 \begin{code}
     public static void main(String args[]) {
@@ -560,7 +560,7 @@ They return \java{true} or \java{false}, depending on the format of the next tok
 In this example, we call \java{hasNextDouble} to check if the user entered a \java{double}.
 If not, then we display an error message (using \java{System.err}) and abort the program.
 
-Note that if you \java{return} from \java{main}, the program ends without running the remaining statements.
+If you \java{return} from \java{main}, the program ends immediately.
 Notice also the use of the \java{!} operator, instead of the test \java{hasNextDouble() == false}.
 Since the \java{hasNextDouble} method returns a boolean result, it is already a condition.
 
@@ -570,13 +570,9 @@ Since the \java{hasNextDouble} method returns a boolean result, it is already a 
 
 \index{recursion}
 
+Now that we have methods and if statements, we can explore one of the most magical and interesting things a program can do.
 It is common for one method to invoke another, but what happens if a method invokes itself?
-This idea turns out to be one of the most magical and interesting things a program can do.
-%It may not be obvious why at this point, but we need to learn the basics first.
-
-\index{recursion}
-
-When a method invokes itself, the process is called {\bf recursion}.
+This process is called {\bf recursion}.
 Consider the following example:
 
 \begin{code}
@@ -662,18 +658,21 @@ The total number of newlines is $1 + (n - 1)$, which is just what we wanted: $n$
 \index{stack diagram}
 \index{diagram!stack}
 
-In the previous chapter we used a stack diagram to represent the state of a program during a method invocation.
+In the previous chapter, we used a stack diagram to represent the state of a program during a method invocation.
 The same kind of diagram can make it easier to interpret a recursive method.
 
-Remember that every time a method gets called, Java creates a new frame that contains the method's parameters and variables.
+Remember that every time a method gets called, Java creates a new frame in memory that contains the current method's parameters and variables.
 The following figure is a stack diagram for countdown, called with \java{n == 3}:
 
+\begin{figure}[!h]
 \begin{center}
 \includegraphics{figs/stack2.pdf}
+\caption{Stack diagram for the \java{countdown} program.}
 \end{center}
+\end{figure}
 
 Note that the ``stack'' of method calls is upside down.
-It's easier to draw stack diagrams from top to bottom, because you don't know how much vertical space you will need.
+It's easier to draw stack diagrams from top to bottom, because you don't always know how much vertical space you will need in advance.
 
 The stack frame for \java{main} is empty because \java{main} does not have any local variables.
 It has one parameter, \java{args}, but since we're not using it, we left it out of the diagram.
@@ -682,7 +681,7 @@ There are four frames for \java{countdown}, each with a different value for the 
 The last frame, with \java{n == 0}, is called the {\bf base case}.
 It does not make a recursive call, so there are no more frames below it.
 
-You should always check the base case first, or else the recursion may keep going until the program runs out of memory.
+You should always check for a base case in your code, or else the recursion may keep going until the program runs out of memory.
 For example, here is a recursive method without a base case:
 
 \begin{code}
@@ -693,10 +692,16 @@ For example, here is a recursive method without a base case:
 \end{code}
 
 \index{call stack}
+\index{stack overflow}
 
-The \java{forever} method prints the string only about 10,000 times before it suddenly terminates with a \java{StackOverflowError}.
-As we saw in Section~\ref{debugger}, Java automatically tracks the call and return of each method in memory, much like the stack diagrams we draw on paper.
-Each method call takes a little memory, and that memory is freed when the method returns.
+This \java{forever} method prints the string over 10,000 times, but then the program suddenly terminates with a \java{StackOverflowError}.
+In other words, there's no more room on the stack for additional method calls.
+
+Java sets aside a reasonable amount of memory for the call stack, so that it can remember where to return at the end of each method.
+But if that memory fills up, it's usually because you have infinite recursion.
+
+%Recall from Section~\ref{debugger} that Java automatically tracks the call and return of each method in memory, much like the stack diagrams we draw on paper.
+%Each method call takes a little memory, but that memory can be reused when the method returns.
 
 
 \section{Binary Numbers}
@@ -715,7 +720,7 @@ What do you think happens if you reverse steps 2 and 3, making the recursive cal
     }
 \end{code}
 
-The stack diagram is the same as before, and the method is still called \java{n} times.
+The stack diagram is the same as before, and the method is still called $n$ times.
 But now the \java{System.out.println} happens just before each recursive call returns.
 As a result, it counts up instead of down:
 
@@ -737,7 +742,7 @@ For example, to convert a decimal integer into its {\bf binary} representation, 
  1 / 2 is  0 remainder 1
 \end{stdout}
 
-23 in binary is 10111, which is the remainders in the above example from bottom to top.
+So 23 in binary is 10111, which is the remainders in the above example from bottom to top.
 Here is a recursive method that prints the binary representation of any positive integer:
 
 \begin{code}
@@ -751,7 +756,7 @@ Here is a recursive method that prints the binary representation of any positive
 
 If \java{value} is zero, \java{showBinary} does nothing (that's the base case).
 If the argument is positive, the method divides it by two and calls \java{showBinary} recursively.
-When the recursive call returns, the method prints one digit of the result and returns.
+When the recursive call returns, the method prints one digit of the result and returns (again).
 The leftmost digit is at the bottom of the stack, so it gets printed first.  The rightmost digit, at the top of the stack, gets printed last.
 
 \begin{code}
@@ -840,21 +845,21 @@ HINT: You may want to use \java{Math.pow} in your method.
 \end{exercise}
 
 \begin{exercise}
-The first verse of the song ``99 Bottles of Pop'' is:
+The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods. Consider the first verse of the song ``99 Bottles of Pop'':
 
 \begin{quote}
-99 bottles of pop on the wall,
-99 bottles of pop,
-If one of those bottles should happen to fall,
+99 bottles of pop on the wall,\\
+99 bottles of pop,\\
+If one of those bottles should happen to fall,\\
 98 bottles of pop on the wall.
 \end{quote}
 
 Subsequent verses are identical except that the number of bottles gets smaller by one in each verse, until the last verse:
 
 \begin{quote}
-1 bottle of pop on the wall,
-1 bottle of pop,
-If that last bottle should happen to fall,
+1 bottle of pop on the wall,\\
+1 bottle of pop,\\
+If that last bottle should happen to fall,\\
 No more bottles of pop on the wall.
 \end{quote}
 
@@ -863,8 +868,6 @@ And then the song (finally) ends.
 Write a program that prints the entire lyrics of ``99 Bottles of Pop.''
 Your program should include a {\it recursive} method that does the hard part, but you might want to write additional methods to separate the major functions of the program.
 As you develop your code, test it with a small number of verses like ``3 Bottles of Pop.''
-
-%The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods.
 \end{exercise}
 
 \begin{exercise}
