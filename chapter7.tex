@@ -1,10 +1,181 @@
-\chapter{Iteration and loops}
-\label{chap06}
+\documentclass[12pt]{book}
+
+\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\title{\thetitle}
+
+\newcommand{\theauthors}{Allen Downey and Chris Mayfield}
+\author{\theauthors}
+
+\newcommand{\theversion}{Version 6.0 Draft -- \today}
+\date{\theversion}
+
+\usepackage{geometry}
+\geometry{
+    width=5.5in,
+    height=8.5in,
+    hmarginratio=3:2,
+    vmarginratio=1:1,
+    includehead=true,
+    headheight=15pt
+}
+
+% paragraph spacing
+\setlength{\parindent}{0pt}                      % 17.62482pt
+\setlength{\parskip}{12pt plus 4pt minus 4pt}    % 0.0pt plus 1.0pt
+\linespread{1.05}
+\def\arraystretch{1.5}
+
+% list spacing
+\setlength{\topsep}{5pt plus 2pt minus 3pt}      % 10.0pt plus 4.0pt minus 6.0pt
+\setlength{\partopsep}{-6pt plus 2pt minus 2pt}  %  3.0pt plus 2.0pt minus 2.0pt
+\setlength{\itemsep}{0pt}                        %  5.0pt plus 2.5pt minus 1.0pt
+
+% these are copied from tex/latex/base/book.cls
+% all I changed is afterskip
+\makeatletter
+\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {0.7ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% table of contents vertical spacing
+\usepackage{tocloft}
+\setlength\cftparskip{8pt plus 4pt minus 4pt}
+
+% The following line adds a little extra space to the column
+% in which the Section numbers appear in the table of contents
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.5em}{3.0em}}
+\makeatother
+
+% customize page headers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+%\rfoot{\textcolor{gray}{\tiny ThinkJava Draft \today}}
+
+% balanced index with TOC entry
+\usepackage{makeidx}
+\makeindex
+%\usepackage[totoc]{idxlayout}
+
+% automatically index glossary terms
+\newcommand{\term}[1]{%
+\index{#1}
+\item[#1:]}
+% TODO: doesn't work with plastex
+%\newcommand{\term}[1]{\item[#1:]}
+
+% where to find graphics
+\usepackage{graphicx}
+%\graphicspath{{figs/}}
+
+%% tweak spacing of figures and captions
+%\usepackage{floatrow}
+%\usepackage{caption}
+%\captionsetup{
+%    font=small,
+%    labelformat=empty,
+%    justification=centering,
+%    skip=4pt
+%}
+
+% format end of chapter excercises
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheoremstyle{exercise}
+  {12pt}        % space above
+  {12pt}        % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {}            % punctuation
+  {12pt}        % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+% colors for code listings and output
+\usepackage{xcolor}
+\definecolor{bgcolor}{HTML}{FAFAFA}
+\definecolor{comment}{HTML}{007C00}
+\definecolor{keyword}{HTML}{0000FF}
+\definecolor{strings}{HTML}{B20000}
+
+% syntax highlighting in code listings
+\usepackage{textcomp}
+\usepackage{listings}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily,
+    backgroundcolor=\color{bgcolor},
+    commentstyle=\color{comment},
+    keywordstyle=\color{keyword},
+    stringstyle=\color{strings},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    upquote=true,
+    aboveskip=\parskip,
+    belowskip=\parskip
+}
+
+% code listing environments
+\lstnewenvironment{code}
+{\minipage{\linewidth}}
+{\endminipage}
+\lstnewenvironment{stdout}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
+{\endminipage}
+
+% pdf hyperlinks, table of contents, and document properties
+\usepackage[pdftex]{hyperref}
+\hypersetup{%
+  pdftitle={\thetitle},
+  pdfauthor={\theauthors},
+  pdfsubject={\theversion},
+  pdfkeywords={},
+  bookmarksopen=false,
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+% inline syntax formatting
+\newcommand{\java}[1]{\lstinline{#1}} %\end{
+%\newcommand{\java}[1]{\verb"#1"}
+%\newcommand{\java}[1]{{\tt #1}}
+
+\begin{document}
+\setcounter{chapter}{6}
+
+\chapter{Loops and iteration}
+
+TODO
 
 \section{Multiple assignment}
 \index{assignment}
 \index{statement!assignment}
 \index{multiple assignment}
+
+%TODO move to chapter 5
 
 You can make more than one assignment to the same variable;
 the effect is to replace the old value with the new.
@@ -176,7 +347,7 @@ So far, no one has been able to prove it {\em or} disprove it!
 For more information, see \url{http://en.wikipedia.org/wiki/Collatz_conjecture}.
 
 
-\section{Tables}
+\section{Generating tables}
 \index{table}
 \index{logarithm}
 
@@ -298,51 +469,6 @@ moment, you should memorize the powers of two up to 65536
 (that's $2^{16}$).
 
 
-\section{Two-dimensional tables}
-\index{table!two-dimensional}
-
-A two-dimensional table consists of rows and columns that make
-it easy to find values at the intersections.  A multiplication
-table is a good example.  Let's say you want to print a
-multiplication table for the values from 1 to 6.
-
-A good way to start is to write a simple loop that prints
-the multiples of 2, all on one line.
-
-\begin{code}
-    int i = 1;
-    while (i <= 6) {
-      System.out.print(2*i + "   ");
-      i = i + 1;
-    }
-    System.out.println("");
-\end{code}
-
-The first line initializes a variable named {\tt i}, which is going
-to act as a counter, or {\bf loop variable}.  As the loop executes,
-the value of {\tt i} increases from 1 to 6; when {\tt i} is 7, the
-loop terminates.  Each time through the loop, we print the value {\tt
-  2*i} and three spaces.  Since we use {\tt System.out.print},
-the output appears on a single line.
-
-\index{loop variable}
-\index{variable!loop}
-
-In some environments the
-output from {\tt print} gets stored without being displayed until {\tt
-println} is invoked.  If the program terminates, and you forget to
-invoke {\tt println}, you may never see the stored output.
-
-The output of this program is:
-
-\begin{stdout}
-2   4   6   8   10   12
-\end{stdout}
-
-So far, so good.  The next step is to {\bf encapsulate} and {\bf
-generalize}.
-
-
 \section{Encapsulation and generalization}
 \label{encapsulation}
 
@@ -422,6 +548,51 @@ which is a (slightly sloppy) multiplication table.  If the
 sloppiness bothers you, Java provides methods that give you
 more control over the format of the output, but I'm not
 going to get into that here.
+
+
+\section{Two-dimensional tables}
+\index{table!two-dimensional}
+
+A two-dimensional table consists of rows and columns that make
+it easy to find values at the intersections.  A multiplication
+table is a good example.  Let's say you want to print a
+multiplication table for the values from 1 to 6.
+
+A good way to start is to write a simple loop that prints
+the multiples of 2, all on one line.
+
+\begin{code}
+    int i = 1;
+    while (i <= 6) {
+      System.out.print(2*i + "   ");
+      i = i + 1;
+    }
+    System.out.println("");
+\end{code}
+
+The first line initializes a variable named {\tt i}, which is going
+to act as a counter, or {\bf loop variable}.  As the loop executes,
+the value of {\tt i} increases from 1 to 6; when {\tt i} is 7, the
+loop terminates.  Each time through the loop, we print the value {\tt
+  2*i} and three spaces.  Since we use {\tt System.out.print},
+the output appears on a single line.
+
+\index{loop variable}
+\index{variable!loop}
+
+In some environments the
+output from {\tt print} gets stored without being displayed until {\tt
+println} is invoked.  If the program terminates, and you forget to
+invoke {\tt println}, you may never see the stored output.
+
+The output of this program is:
+
+\begin{stdout}
+2   4   6   8   10   12
+\end{stdout}
+
+So far, so good.  The next step is to {\bf encapsulate} and {\bf
+generalize}.
 
 
 \section{Methods and encapsulation}
@@ -615,8 +786,71 @@ and you get
 
 I'll leave it up to you to figure out how it works.
 
+\section{Do-while loops}
 
-\section{Glossary}
+TODO
+
+
+\section{{\tt for} loops}
+\label{for}
+
+The loops we have written have a number of elements
+in common.  All of them start by initializing a variable;
+they have a test, or condition, that depends on that variable;
+and inside the loop they do something to that variable,
+like increment it.
+
+\index{loop!for}
+\index{for}
+\index{statement!for}
+
+This type of loop is so common that there is another
+loop statement, called {\tt for}, that expresses it more
+concisely.  The general syntax looks like this:
+
+\begin{code}
+    for (INITIALIZER; CONDITION; INCREMENTOR) {
+        BODY
+    }
+\end{code}
+
+This statement is equivalent to
+
+\begin{code}
+    INITIALIZER;
+    while (CONDITION) {
+        BODY
+        INCREMENTOR
+    }
+\end{code}
+
+except that it is more concise and, since it puts all the
+loop-related statements in one place, it is easier to read.
+For example:
+
+\begin{code}
+    for (int i = 0; i < 4; i++) {
+        System.out.println(count[i]);
+    }
+\end{code}
+
+is equivalent to
+
+\begin{code}
+    int i = 0;
+    while (i < 4) {
+        System.out.println(count[i]);
+        i++;
+    }
+\end{code}
+
+
+\section{Nested loops}
+
+TODO
+
+
+\section{Vocabulary}
 
 \begin{description}
 
@@ -820,3 +1054,4 @@ factorial} or {\tt pow}.
 \end{exercise}
 
 
+\end{document}

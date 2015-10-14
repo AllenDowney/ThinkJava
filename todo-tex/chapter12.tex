@@ -181,60 +181,6 @@ elements of an array have to be the same type.  Objects can
 have instance variables with different types.
 
 
-\section{{\tt for} loops}
-\label{for}
-
-The loops we have written have a number of elements
-in common.  All of them start by initializing a variable;
-they have a test, or condition, that depends on that variable;
-and inside the loop they do something to that variable,
-like increment it.
-
-\index{loop!for}
-\index{for}
-\index{statement!for}
-
-This type of loop is so common that there is another
-loop statement, called {\tt for}, that expresses it more
-concisely.  The general syntax looks like this:
-
-\begin{code}
-    for (INITIALIZER; CONDITION; INCREMENTOR) {
-        BODY
-    }
-\end{code}
-
-This statement is equivalent to
-
-\begin{code}
-    INITIALIZER;
-    while (CONDITION) {
-        BODY
-        INCREMENTOR
-    }
-\end{code}
-
-except that it is more concise and, since it puts all the
-loop-related statements in one place, it is easier to read.
-For example:
-
-\begin{code}
-    for (int i = 0; i < 4; i++) {
-        System.out.println(count[i]);
-    }
-\end{code}
-
-is equivalent to
-
-\begin{code}
-    int i = 0;
-    while (i < 4) {
-        System.out.println(count[i]);
-        i++;
-    }
-\end{code}
-
-
 \section{Array length}
 \index{length!array}
 \index{array!length}
