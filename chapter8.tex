@@ -1,6 +1,175 @@
+\documentclass[12pt]{book}
+
+\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\title{\thetitle}
+
+\newcommand{\theauthors}{Allen Downey and Chris Mayfield}
+\author{\theauthors}
+
+\newcommand{\theversion}{Version 6.0 Draft -- \today}
+\date{\theversion}
+
+\usepackage{geometry}
+\geometry{
+    width=5.5in,
+    height=8.5in,
+    hmarginratio=3:2,
+    vmarginratio=1:1,
+    includehead=true,
+    headheight=15pt
+}
+
+% paragraph spacing
+\setlength{\parindent}{0pt}                      % 17.62482pt
+\setlength{\parskip}{12pt plus 4pt minus 4pt}    % 0.0pt plus 1.0pt
+\linespread{1.05}
+\def\arraystretch{1.5}
+
+% list spacing
+\setlength{\topsep}{5pt plus 2pt minus 3pt}      % 10.0pt plus 4.0pt minus 6.0pt
+\setlength{\partopsep}{-6pt plus 2pt minus 2pt}  %  3.0pt plus 2.0pt minus 2.0pt
+\setlength{\itemsep}{0pt}                        %  5.0pt plus 2.5pt minus 1.0pt
+
+% these are copied from tex/latex/base/book.cls
+% all I changed is afterskip
+\makeatletter
+\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {0.7ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% table of contents vertical spacing
+\usepackage{tocloft}
+\setlength\cftparskip{8pt plus 4pt minus 4pt}
+
+% The following line adds a little extra space to the column
+% in which the Section numbers appear in the table of contents
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.5em}{3.0em}}
+\makeatother
+
+% customize page headers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+%\rfoot{\textcolor{gray}{\tiny ThinkJava Draft \today}}
+
+% balanced index with TOC entry
+\usepackage{makeidx}
+\makeindex
+%\usepackage[totoc]{idxlayout}
+
+% automatically index glossary terms
+\newcommand{\term}[1]{%
+\index{#1}
+\item[#1:]}
+% TODO: doesn't work with plastex
+%\newcommand{\term}[1]{\item[#1:]}
+
+% where to find graphics
+\usepackage{graphicx}
+%\graphicspath{{figs/}}
+
+%% tweak spacing of figures and captions
+%\usepackage{floatrow}
+%\usepackage{caption}
+%\captionsetup{
+%    font=small,
+%    labelformat=empty,
+%    justification=centering,
+%    skip=4pt
+%}
+
+% format end of chapter excercises
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheoremstyle{exercise}
+  {12pt}        % space above
+  {12pt}        % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {}            % punctuation
+  {12pt}        % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+% colors for code listings and output
+\usepackage{xcolor}
+\definecolor{bgcolor}{HTML}{FAFAFA}
+\definecolor{comment}{HTML}{007C00}
+\definecolor{keyword}{HTML}{0000FF}
+\definecolor{strings}{HTML}{B20000}
+
+% syntax highlighting in code listings
+\usepackage{textcomp}
+\usepackage{listings}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily,
+    backgroundcolor=\color{bgcolor},
+    commentstyle=\color{comment},
+    keywordstyle=\color{keyword},
+    stringstyle=\color{strings},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    upquote=true,
+    aboveskip=\parskip,
+    belowskip=\parskip
+}
+
+% code listing environments
+\lstnewenvironment{code}
+{\minipage{\linewidth}}
+{\endminipage}
+\lstnewenvironment{stdout}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
+{\endminipage}
+
+% pdf hyperlinks, table of contents, and document properties
+\usepackage[pdftex]{hyperref}
+\hypersetup{%
+  pdftitle={\thetitle},
+  pdfauthor={\theauthors},
+  pdfsubject={\theversion},
+  pdfkeywords={},
+  bookmarksopen=false,
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+% inline syntax formatting
+\newcommand{\java}[1]{\lstinline{#1}} %\end{
+%\newcommand{\java}[1]{\verb"#1"}
+%\newcommand{\java}[1]{{\tt #1}}
+
+\begin{document}
+\setcounter{chapter}{7}
+
 \chapter{Strings and things}
-\label{chap07}
 \label{strings}
+
+TODO
 
 \section{Characters}
 \index{method!string}
@@ -91,42 +260,7 @@ If you want the zereoth letter of a string, you have to pass
 \end{code}
 
 
-\section{Length}
-\index{String!length}
-\index{length!String}
-
-The next {\tt String} method we'll look at is {\tt length}, which
-returns the number of characters in the string.  For example:
-
-\begin{code}
-    int length = fruit.length();
-\end{code}
-
-{\tt length} takes no arguments
-and returns an integer, in this case 6.  Notice that it is
-legal to have a variable with the same name as a method (although
-it can be confusing for human readers).
-
-To find the last letter of a string, you might be tempted to
-try something like
-
-\begin{code}
-    int length = fruit.length();
-    char last = fruit.charAt(length);       // WRONG!!
-\end{code}
-
-That won't work.  The reason is that there is no 6th letter
-in {\tt "banana"}.  Since we started counting at 0, the 6
-letters are numbered from 0 to 5.  To get the last character,
-you have to subtract 1 from {\tt length}.
-
-\begin{code}
-    int length = fruit.length();
-    char last = fruit.charAt(length-1);
-\end{code}
-
-
-\section{Traversal}
+\section{String traversal}
 \label{traverse}
 \index{traverse}
 
@@ -161,6 +295,42 @@ The name of the loop variable is {\tt index}.  An {\bf
 index} is a variable or value used to specify a member of an ordered
 set, in this case the string of characters.  The index
 indicates (hence the name) which one you want.
+
+
+\section{Length}
+\index{String!length}
+\index{length!String}
+
+The next {\tt String} method we'll look at is {\tt length}, which
+returns the number of characters in the string.  For example:
+
+\begin{code}
+    int length = fruit.length();
+\end{code}
+
+{\tt length} takes no arguments
+and returns an integer, in this case 6.  Notice that it is
+legal to have a variable with the same name as a method (although
+it can be confusing for human readers).
+
+To find the last letter of a string, you might be tempted to
+try something like
+
+\begin{code}
+    int length = fruit.length();
+    char last = fruit.charAt(length);       // WRONG!!
+\end{code}
+
+That won't work.  The reason is that there is no 6th letter
+in {\tt "banana"}.  Since we started counting at 0, the 6
+letters are numbered from 0 to 5.  To get the last character,
+you have to subtract 1 from {\tt length}.
+
+\begin{code}
+    int length = fruit.length();
+    char last = fruit.charAt(length-1);
+\end{code}
+
 
 \section{Run-time errors}
 \label{StringIndexOutOfBounds}
@@ -518,7 +688,69 @@ seldom {\em correct}, to use the {\tt ==} operator with {\tt String}s.
 I explain why in Section~\ref{equivalence}; for now, don't do it.
 
 
-\section{Glossary}
+\section{Objects and primitives}
+\index{type!object}
+\index{type!primitive}
+\index{object type}
+\index{primitive type}
+
+There are two kinds of types in Java, primitive types and
+object types.  Primitives, like {\tt int} and {\tt boolean}
+begin with lower-case letters; object types begin with
+upper-case letters.  This distinction is useful because it
+reminds us of some of the differences between them:
+
+\begin{itemize}
+
+\item When you declare a primitive variable, you get storage
+space for a primitive value.  When you declare an object variable, you
+get a space for a reference to an object.  To get space for
+the object itself, you have to use {\tt new}.
+
+\item If you don't initialize a primitive type, it is given
+a default value that depends on the type.  For example,
+{\tt 0} for {\tt int}s and {\tt false} for {\tt boolean}s.
+The default value for object types is {\tt null}, which indicates
+no object.
+
+\item Primitive variables are well isolated in the sense that there is
+nothing you can do in one method that will affect a variable in
+another method.  Object variables can be tricky to work with because
+they are not as well isolated.  If you pass a reference to an object
+as an argument, the method you invoke might modify the object, in which
+case you will see the effect.  Of course, that can be a good thing, but you
+have to be aware of it.
+
+\end{itemize}
+
+There is one other difference between primitives and object
+types.  You cannot add new primitives to Java
+(unless you get yourself on the standards committee), but
+you can create new object types!  We'll see how in the next
+chapter.
+
+
+\section{Wrapper classes}
+
+MIN/MAX\_VALUE
+
+
+\section{Memory diagrams}
+
+draw arrows for references
+
+
+\section{String manipulation}
+
+TODO other string methods
+
+
+\section{Java library source}
+
+TODO String.java
+
+
+\section{Vocabulary}
 
 \begin{description}
 
@@ -935,5 +1167,4 @@ times.  You can write this method recursively, or use a while loop.
 \end{exercise}
 
 
-
-
+\end{document}

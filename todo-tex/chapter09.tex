@@ -436,47 +436,6 @@ and in general you will not be aware of it.  But you
 should know that it periodically runs in the background.
 
 
-\section{Objects and primitives}
-\index{type!object}
-\index{type!primitive}
-\index{object type}
-\index{primitive type}
-
-There are two kinds of types in Java, primitive types and
-object types.  Primitives, like {\tt int} and {\tt boolean}
-begin with lower-case letters; object types begin with
-upper-case letters.  This distinction is useful because it
-reminds us of some of the differences between them:
-
-\begin{itemize}
-
-\item When you declare a primitive variable, you get storage
-space for a primitive value.  When you declare an object variable, you
-get a space for a reference to an object.  To get space for
-the object itself, you have to use {\tt new}.
-
-\item If you don't initialize a primitive type, it is given
-a default value that depends on the type.  For example,
-{\tt 0} for {\tt int}s and {\tt false} for {\tt boolean}s.
-The default value for object types is {\tt null}, which indicates
-no object.
-
-\item Primitive variables are well isolated in the sense that there is
-nothing you can do in one method that will affect a variable in
-another method.  Object variables can be tricky to work with because
-they are not as well isolated.  If you pass a reference to an object
-as an argument, the method you invoke might modify the object, in which
-case you will see the effect.  Of course, that can be a good thing, but you
-have to be aware of it.
-
-\end{itemize}
-
-There is one other difference between primitives and object
-types.  You cannot add new primitives to Java
-(unless you get yourself on the standards committee), but
-you can create new object types!  We'll see how in the next
-chapter.
-
 \section{Glossary}
 
 \begin{description}
