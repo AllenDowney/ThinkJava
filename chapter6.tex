@@ -638,7 +638,7 @@ Otherwise, and this is the interesting part, we have to make a recursive call to
     }
 \end{code}
 
-The flow of execution for this program is similar to \java{countdown} from Section~\ref{recursion}.
+The flow of execution for this program is similar to \java{countdown} from Section~5.8.
 If we invoke \java{factorial} with the value 3:
 
 \vspace{-1ex}
@@ -862,37 +862,50 @@ For example: \java{System.out.println("boo!") + 7;}
 \begin{exercise}
 \label{ex.isdiv}
 
-Write a method named {\tt isDivisible} that takes two integers, {\tt n} and {\tt m} and that returns {\tt true} if {\tt n} is divisible by {\tt m} and {\tt false} otherwise.
+Write a method named \java{isDivisible} that takes two integers, \java{n} and \java{m}, and that returns \java{true} if \java{n} is divisible by \java{m}, and \java{false} otherwise.
+\end{exercise}
+
+\begin{exercise}
+If you are given three sticks, you may or may not be able to arrange them in a triangle.
+For example, if one of the sticks is 12 inches long and the other two are one inch long, you will not be able to get the short sticks to meet in the middle.
+For any three lengths, there is a simple test to see if it is possible to form a triangle:
+
+\begin{quote}
+``If any of the three lengths is greater than the sum of the other two, then you cannot form a triangle.''
+\end{quote}
+
+Write a method named \java{isTriangle} that takes three integers as arguments and returns either \java{true} or \java{false}, depending on whether you can or cannot form a triangle from sticks with the given lengths.
+The point of this exercise is to use conditional statements to write a value method.
 \end{exercise}
 
 \begin{exercise}
 \label{ex.multadd}
 
-Many computations can be expressed concisely using the ``multadd'' operation, which takes three operands and computes {\tt a * b + c}.
+Many computations can be expressed more concisely using the ``multadd'' operation, which takes three operands and computes \java{a * b + c}.
 Some processors even provide a hardware implementation of this operation for floating-point numbers.
 
 \begin{enumerate}
 
 \item Create a new program called {\tt Multadd.java}.
 
-\item Write a method called {\tt multadd} that takes three {\tt doubles} as parameters and that returns their multaddization.
+\item Write a method called {\tt multadd} that takes three {\tt doubles} as parameters and that returns \java{a * b + c}.
 
-\item Write a {\tt main} method that tests {\tt multadd} by invoking it with a few simple parameters, like {\tt 1.0, 2.0, 3.0}.
+\item Write a \java{main} method that tests \java{multadd} by invoking it with a few simple parameters, like \java{1.0, 2.0, 3.0}.
 
-\item Also in {\tt main}, use {\tt multadd} to compute the following values:
+\item Also in \java{main}, use \java{multadd} to compute the following values:
 
 \begin{eqnarray*}
 & \sin \frac{\pi}{4} + \frac{\cos \frac{\pi}{4}}{2} & \\
 & \log 10 + \log 20 &
 \end{eqnarray*}
 
-\item Write a method called {\tt yikes} that takes a double as a parameter and that uses {\tt multadd} to calculate:
+\item Write a method called \java{yikes} that takes a double as a parameter and that uses \java{multadd} to calculate:
 
 \begin{eqnarray*}
 x e^{-x} + \sqrt{1 - e^{-x}}
 \end{eqnarray*}
 
-HINT: The Math method for raising $e$ to a power is {\tt Math.exp}.
+HINT: The Math method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
 
@@ -904,22 +917,7 @@ One of the purposes of this exercise is to practice pattern-matching: the abilit
 \end{exercise}
 
 \begin{exercise}
-If you are given three sticks, you may or may not be able to arrange them in a triangle.
-For example, if one of the sticks is 12 inches long and the other two are one inch long, you will not be able to get the short sticks to meet in the middle.
-For any three lengths, there is a simple test to see if it is possible to form a triangle:
-
-\begin{quotation}
-``If any of the three lengths is greater than the sum of the other two, then you cannot form a triangle.''
-\end{quotation}
-
-Write a method named {\tt isTriangle} that it takes three integers as arguments, and that returns either {\tt true} or {\tt false}, depending on whether you can or cannot form a triangle from sticks with the given lengths.
-
-The point of this exercise is to use conditional statements to write a value method.
-\end{exercise}
-
-\begin{exercise}
 What is the output of the following program?
-The purpose of this exercise is to make sure you understand logical operators and the flow of execution through value methods.
 
 \begin{code}
     public static void main(String[] args) {
@@ -937,7 +935,7 @@ The purpose of this exercise is to make sure you understand logical operators an
 
     public static boolean isHoopy(int x) {
         boolean hoopyFlag;
-        if (x%2 == 0) {
+        if (x % 2 == 0) {
             hoopyFlag = true;
         } else {
             hoopyFlag = false;
@@ -955,31 +953,12 @@ The purpose of this exercise is to make sure you understand logical operators an
         return frabjuousFlag;
     }
 \end{code}
+
+The purpose of this exercise is to make sure you understand logical operators and the flow of execution through value methods.
 \end{exercise}
 
 \begin{exercise}
-The distance between two points $(x_1, y_1)$ and $(x_2, y_2)$ is
-
-\[ distance = \sqrt{(x_2 - x_1)^2 +(y_2 - y_1)^2} \]
-
-Write a method named {\tt distance} that takes four doubles as parameters---{\tt x1}, {\tt y1}, {\tt x2} and {\tt y2}---and that prints the distance between the points.
-
-You should assume that there is a method named {\tt sumSquares} that calculates and returns the sum of the squares of its arguments.
-For example:
-
-\begin{code}
-    double x = sumSquares(3.0, 4.0);
-\end{code}
-
-would assign the value {\tt 25.0} to {\tt x}.
-
-The point of this exercise is to write a new method that uses an existing one.
-You should write only one method: {\tt distance}.
-You should not write {\tt sumSquares} or {\tt main} and you should not invoke {\tt distance}.
-\end{exercise}
-
-\begin{exercise}
-The point of this exercise is to use a stack diagram to understand the execution of a recursive program.
+In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
 
 \begin{code}
 public class Prod {
@@ -1002,12 +981,12 @@ public class Prod {
 
 \begin{enumerate}
 
-\item Draw a stack diagram showing the state of the program just before the last instance of {\tt prod} completes.
+\item Draw a stack diagram showing the state of the program just before the last instance of \java{prod} completes.
 What is the output of this program?
 
-\item Explain in a few words what {\tt prod} does.
+\item Explain in a few words what \java{prod} does.
 
-\item Rewrite {\tt prod} without using the temporary variables {\tt recurse} and {\tt result}.
+\item Rewrite \java{prod} without using temporary variables \java{recurse} and \java{result}.
 
 \end{enumerate}
 \end{exercise}
@@ -1015,27 +994,25 @@ What is the output of this program?
 \begin{exercise}
 The purpose of this exercise is to translate a recursive definition into a Java method.
 The Ackermann function is defined for non-negative integers as follows:
-
-\begin{eqnarray}
+\begin{eqnarray*}
 A(m, n) = \begin{cases}
               n+1 & \mbox{if } m = 0 \\
         A(m-1, 1) & \mbox{if } m > 0 \mbox{ and } n = 0 \\
 A(m-1, A(m, n-1)) & \mbox{if } m > 0 \mbox{ and } n > 0.
 \end{cases}
-\end{eqnarray}
+\end{eqnarray*}
 
-Write a method called {\tt ack} that takes two {\tt int}s as parameters and returns the value of the Ackermann function.
+Write a method called \java{ack} that takes two \java{int}s as parameters and that computes and returns the value of the Ackermann function.
 
-Test your implementation of Ackermann by invoking it from {\tt main} and printing the return value.
-
-WARNING: the return value gets very big very quickly.
-You should try it only for small values of $m$ and $n$ (not bigger than 2).
+Test your implementation of Ackermann by invoking it from \java{main} and printing the return value.
+Note the return value gets very big very quickly.
+You should try it only for small values of $m$ and $n$ (not bigger than 3).
 \end{exercise}
 
-\begin{exercise}
-\begin{enumerate}
+% TODO(CSM): move to strings and things chapter?
 
-\item Create a program called {\tt Recurse.java} and type in the following methods:
+\begin{exercise}
+Create a program called {\tt Recurse.java} and type in the following methods:
 
 \begin{code}
     // first: returns the first character of the given String
@@ -1055,14 +1032,16 @@ You should try it only for small values of $m$ and $n$ (not bigger than 2).
     }
 \end{code}
 
-\item Write some code in {\tt main} that tests each of these methods.
-Make sure they work and you understand what they do.
+\begin{enumerate}
 
-\item Write a method called {\tt printString} that takes a String as a parameter and prints the letters of the String, one on each line.  It should be a {\tt void} method.
+\item Write some code in \java{main} that tests each of these methods.
+Make sure they work, and you understand what they do.
 
-\item Write a method called {\tt printBackward} that does the same thing as {\tt printString} but that prints the String backward (one character per line).
+\item Write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.  It should be a \java{void} method.
 
-\item Write a method called {\tt reverseString} that takes a String as a parameter and that returns a new String as a return value.
+\item Write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
+
+\item Write a method called \java{reverseString} that takes a String as a parameter and that returns a new String as a return value.
 The new String should contain the same letters as the parameter, but in reverse order.
 
 \begin{code}
@@ -1081,20 +1060,20 @@ eeffoc
 
 \begin{exercise}
 \label{ex.power}
-Write a recursive method called {\tt power} that takes a double {\tt x} and an integer {\tt n} and that returns $x^n$.
+Write a recursive method called \java{power} that takes a double \java{x} and an integer \java{n} and that returns $x^n$.
 
 Hint: a recursive definition of this operation is $x^n = x \cdot x^{n-1}$.
 Also, remember that anything raised to the zeroeth power is 1.
 
-Optional challenge: you can make this method more efficient, when {\tt n} is even, using $x^n = \left( x^{n/2} \right)^2$.
+Optional challenge: you can make this method more efficient, when \java{n} is even, using $x^n = \left( x^{n/2} \right)^2$.
 \end{exercise}
 
 \begin{exercise}
 \label{gcd}
 (This exercise is based on page 44 of Ableson and Sussman's {\em Structure and Interpretation of Computer Programs}.)
 
-The following technique is known as Euclid's Algorithm because it appears in Euclid's {\em Elements} (Book 7, ca.~300 BC).
-It may be the oldest nontrivial algorithm.
+The following technique is known as Euclid's Algorithm, because it appears in Euclid's {\em Elements} (Book 7, ca.~300 BC).
+It may be the oldest recorded nontrivial algorithm.
 %\footnote{For a definition of ``algorithm'', jump ahead to Section~\ref{algorithm}.}  NOW IN CHAPTER 1
 
 The process is based on the observation that, if $r$ is the remainder when $a$ is divided by $b$, then the common divisors of $a$ and $b$ are the same as the common divisors of $b$ and $r$.
@@ -1111,7 +1090,7 @@ implies that the GCD of 36 and 20 is 4.
 It can be shown that for any two starting numbers, this repeated reduction eventually produces a pair where the second number is 0.
 Then the GCD is the other number in the pair.
 
-Write a method called {\tt gcd} that takes two integer parameters and that uses Euclid's algorithm to compute and return the greatest common divisor of the two numbers.
+Write a method called \java{gcd} that takes two integer parameters and that uses Euclid's algorithm to compute and return the greatest common divisor of the two numbers.
 \end{exercise}
 
 
