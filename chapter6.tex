@@ -168,35 +168,27 @@
 
 \chapter{Value methods}
 
-Some of the methods we have been using, like the \java{Math} methods, return values.
-Other methods, like \java{println} and \java{newLine}, perform an action but they don't return a value.
-That raises some questions:
+Some of the methods we have used, like the \java{Math} methods, return values.
+Others, like \java{println} and \java{newLine}, perform an action but don't return a value.
 
-\begin{itemize}
-
-\item What happens if you invoke a method and you don't do anything with the result?
-(In other words, if you don't assign it to a variable or use it as part of a larger expression?)
-
-\item What happens if you use a \java{print} method as part of an expression?
-For example: \java{System.out.println("boo!") + 7;}
-
-\item Can we write methods that return values, or are we stuck with things like \java{newLine} and \java{printTwice}?
-
-\end{itemize}
-
-The answer to the third question is yes, and that is the focus of this chapter.
-It's up to you to answer the other two questions by trying them out.
-In fact, any time you have a question about what is legal or illegal in Java, a good way to find out is to ask the compiler.
-%If you're using DrJava, you can quickly try out these examples in the Interactions Pane.
-
-
-\section{Return values}
-
+Methods that return values are called {\bf value methods}; methods that don't are called {\bf void methods}.  The methods we have written so far, like {\tt countdown} and {\tt countup}, are all void, which is why the first line has the keyword \java{void}.
 \index{void}
 \index{method!void}
+\index{method!value}
+\index{value method}
+\index{void method}
 
-The simple methods we have written in previous chapters are \java{void}.
-In other words, they are a sequence of statements that return no value.
+\begin{code}
+    public static void countup(int n) {
+        if (n == 0) {
+            System.out.println("Blastoff!");
+        } else {
+            countdown(n - 1);
+            System.out.println(n);
+        }
+    }
+\end{code}
+
 When you invoke a \java{void} method, it is typically on a line all by itself:
 
 \begin{code}
@@ -204,8 +196,7 @@ When you invoke a \java{void} method, it is typically on a line all by itself:
     System.out.println("Have a nice day.");
 \end{code}
 
-In contrast, some of the methods we have used produce results.
-That is, the effect of invoking the method is to generate a new value, which we usually assign to a variable or use as part of an expression:
+When you invoke a value method, it returns a value which we usually assign to a variable or use as part of an expression:
 
 \begin{code}
     double error = Math.abs(expected - actual);
@@ -215,8 +206,8 @@ That is, the effect of invoking the method is to generate a new value, which we 
 \index{value method}
 \index{method!value}
 
-In this chapter, you will learn to write methods that \java{return} values.
-The first example is \java{area}, which takes a \java{double} as a parameter and returns the area of a circle with that radius:
+In this chapter, you will learn to write methods that return values.
+Here's an example:  \java{area} takes a \java{double} as a parameter and returns the area of a circle with that radius:
 
 \begin{code}
     public static double area(double radius) {
@@ -246,10 +237,11 @@ The expression you provide can be arbitrarily complex, so we could have written 
 \index{temporary variable}
 \index{variable!temporary}
 
-On the other hand, {\bf temporary} variables like \java{area} often make debugging easier, especially when you are stepping through code using an integrated debugger.
-In either case, the type of the expression in the \java{return} statement must match the return type of the method.
+On the other hand, {\bf temporary} variables like \java{area} often make debugging easier, especially when you are stepping through code using a debugger.
+
+The type of the expression in the \java{return} statement must match the return type of the method.
 When you declare that the return type is \java{double}, you are making a promise that this method will eventually produce a \java{double} value.
-If you try to \java{return} with no expression, or an expression with the wrong type, the compiler will give an error.
+If you try to \java{return} with no expression, or an expression with the wrong type, the compiler will generate an error.
 
 Sometimes it is useful to have multiple return statements, for example, one in each branch of a decision:
 
@@ -282,7 +274,7 @@ The compiler will give you an ``unreachable statement'' error if part of your co
     }
 \end{code}
 
-If you put \java{return} statements inside of a decision, then you have to guarantee that {\em every possible path} through the program reaches a \java{return} statement.
+If you put \java{return} statements inside of a decision, you have to guarantee that {\em every possible path} through the program reaches a \java{return} statement.
 
 \begin{code}
     public static double absoluteValue(double x) {
@@ -297,7 +289,7 @@ If you put \java{return} statements inside of a decision, then you have to guara
 
 This program is not legal because when \java{x} is 0, neither condition is true.
 As a result, the method ends without hitting a return statement.
-The typical compiler error message is ``missing return statement,'' which is confusing since there are already two of them.
+The typical compiler error message is ``missing return statement'', which is confusing since there are already two of them.
 
 
 \section{Writing methods}
@@ -333,10 +325,10 @@ This code includes the method signature and a \java{return} statement:
     }
 \end{code}
 
-The statement \java{return 0.0;} is a placeholder that is necessary for the program to compile.
-Obviously, at this stage the program doesn't do anything useful, but it is worthwhile to try compiling it so we can identify any syntax errors before we add more code.
+The return statement is a placeholder that is necessary for the program to compile.
+At this stage the program doesn't do anything useful, but it is worthwhile to compile it so we can identify any syntax errors before we add more code.
 
-It's always a good idea to think about testing {\it before} you develop new methods, because doing so can help you figure out how to implement them.
+It's always a good idea to think about testing {\it before} you develop new methods; it can help you figure out how to implement them.
 To test this new method, we can invoke it (in \java{main}) using sample values:
 
 \begin{code}
@@ -344,8 +336,8 @@ To test this new method, we can invoke it (in \java{main}) using sample values:
 \end{code}
 
 These values make the horizontal distance 3.0 and the vertical distance 4.0.
-That way, the result should be 5.0 (i.e., the hypotenuse of a 3-4-5 triangle).
-When you are testing a method, it is important to know the right answer.
+That way, the result should be 5.0, the hypotenuse of a 3-4-5 triangle.
+When you are testing a method, it is useful to know the right answer.
 
 Once we have checked the syntax of the method definition, we can start adding lines of code one at a time.
 After each incremental change, we recompile and run the program.
@@ -386,7 +378,8 @@ We could use the \java{Math.pow} method, but it is simpler to multiply each term
     }
 \end{code}
 
-Again, you should compile and run the program at this stage and check the intermediate value (which should be 25.0). Finally, we can use \java{Math.sqrt} to compute and return the result.
+Again, you should compile and run the program at this stage and check the intermediate value, which should be 25.0.
+Finally, we can use \java{Math.sqrt} to compute and return the result.
 
 \begin{code}
     public static double distance
@@ -408,9 +401,9 @@ The key aspects of the process are:
 \begin{itemize}
 
 \item Start with a working program and make small, incremental changes.
-At any point, if there is an error, you will know exactly where to look.
+At any point, if there is an error, you will know where to look.
 
-\item Use temporary variables to hold intermediate values so you can check them (i.e., with print statements or by using a debugger).
+\item Use temporary variables to hold intermediate values so you can check them, either with print statements or by using a debugger.
 
 \item Once the program is working, you can remove scaffolding and consolidate multiple statements into compound expressions (but only if it does not make the program more difficult to read).
 
@@ -421,24 +414,27 @@ At any point, if there is an error, you will know exactly where to look.
 
 \index{composition}
 
-Once you define a new method, you can use it as part of an expression and build new methods using existing methods.
-For example, what if someone gave you two points, the center of the circle and a point on the perimeter, and asked for the area of the circle?
-
+Once you define a new method, you can use it as part of an expression, or build new methods using existing methods.
+For example, suppose someone gave you two points, the center of the circle and a point on the perimeter, and asked for the area of the circle.
 Let's say the center point is stored in the variables \java{xc} and \java{yc}, and the perimeter point is in \java{xp} and \java{yp}.
+
 The first step is to find the radius of the circle, which is the distance between the two points.
 Fortunately, we have a method that does just that (\java{distance}).
-%
-%\begin{code}
-%    double radius = distance(xc, yc, xp, yp);
-%\end{code}
-%
+
+% ABD: I am inclined to uncomment these code snippets before showing
+% the complete function
+
+\begin{code}
+    double radius = distance(xc, yc, xp, yp);
+\end{code}
+
 The second step is to find the area of a circle with that radius.
 We have a method for that computation too (\java{area}).
-%
-%\begin{code}
-%    double area = area(radius);
-%    return area;
-%\end{code}
+
+\begin{code}
+    double area = area(radius);
+    return area;
+\end{code}
 
 Putting everything together in a new method, we get:
 
@@ -500,8 +496,8 @@ If you write:
     double x = area(1.0, 2.0, 4.0, 6.0);
 \end{code}
 
-Java uses the second version of \java{area}.
-And notice that the second version of \java{area} actually invokes the first.
+Java uses the second version of \java{area}, which
+actually invokes the first version.
 
 Many Java methods are overloaded, meaning that there are different versions that accept different numbers or types of parameters.
 For example, there are versions of \java{print} and \java{println} that accept a single parameter of any data type.
@@ -546,12 +542,12 @@ Remember that the expression \java{x >= 0 \&\& x < 10} has type boolean, so ther
 In \java{main}, you can invoke the method in the usual ways:
 
 \begin{code}
-    boolean bigFlag = !isSingleDigit(17);
     System.out.println(isSingleDigit(2));
+    boolean bigFlag = !isSingleDigit(17);
 \end{code}
 
-The first line sets \java{bigFlag} to \java{true}, because 17 is {\em not} a single-digit number.
-The second line prints \java{true} because 2 is a single-digit number.
+The first line prints \java{true} because 2 is a single-digit number.
+The second line sets \java{bigFlag} to \java{true}, because 17 is {\em not} a single-digit number.
 
 Decision statements often invoke \java{boolean} methods for the condition:
 
@@ -574,7 +570,7 @@ Decision statements often invoke \java{boolean} methods for the condition:
 \index{Church, Alonzo}
 
 Now that we have methods that return values, we have a {\bf Turing complete} programming language.
-That means Java can compute anything computable, for any reasonable definition of ``computable.''
+That means Java can compute anything computable, for any reasonable definition of ``computable''.
 This idea was developed by Alonzo Church and Alan Turing, so it is known as the Church-Turing thesis.
 %You can read more about it at \url{http://en.wikipedia.org/wiki/Turing_thesis}.
 
@@ -589,7 +585,7 @@ A truly circular definition is not very useful:
 \index{factorial}
 
 If you saw that definition in the dictionary, you might be annoyed.
-However if you search for recursion on Google, it displays ``Did you mean: recursion'' as an inside joke.
+In fact, if you search for recursion on Google, it displays ``Did you mean: recursion'' as an inside joke.
 
 Many mathematical functions are defined recursively.
 For example, if you look up the definition of {\bf factorial}, you get something like:
@@ -601,7 +597,7 @@ For example, if you look up the definition of {\bf factorial}, you get something
 \end{eqnarray*}
 \vspace{-1ex}
 
-(Factorial is usually denoted with the symbol $!$, which is not to be confused with the Java operator {\tt !} that means NOT.)
+Factorial is usually denoted with the symbol $!$, which is not to be confused with the Java operator {\tt !} that means NOT.
 
 This definition says that the factorial of 0 is 1, and the factorial of any other value $n$ is $n$ multiplied by the factorial of $n-1$.
 So $3!$ is 3 times $2!$, which is 2 times $1!$, which is 1 times $0!$, which is 1.
@@ -609,10 +605,11 @@ Putting it all together, we get $3!$ equal to 3 times 2 times 1 times 1, which i
 
 If you can formulate a recursive definition of something, you can easily write a Java method to evaluate it.
 The first step is to decide what the parameters and return type are.
-Since factorial is defined for integers, the method takes an integer as a parameter and returns an integer:
+Since factorial is defined for integers, the method takes an integer as a parameter and returns an integer.  So here's a good starting place:
 
 \begin{code}
     public static int factorial(int n) {
+        return 0;
     }
 \end{code}
 
@@ -624,6 +621,7 @@ If the argument happens to be zero, we simply return 1.
         if (n == 0) {
             return 1;
         }
+        return 0;
     }
 \end{code}
 
@@ -633,11 +631,10 @@ Otherwise, and this is the interesting part, we have to make a recursive call to
     public static int factorial(int n) {
         if (n == 0) {
             return 1;
-        } else {
-            int recurse = factorial(n - 1);
-            int result = n * recurse;
-            return result;
         }
+        int recurse = factorial(n - 1);
+        int result = n * recurse;
+        return result;
     }
 \end{code}
 
@@ -668,7 +665,7 @@ The return value (2) gets multiplied by {\tt n}, which is 3, and the result, 6, 
 
 Figure~\ref{fig:stack3} shows what the stack diagram looks like for this sequence of method invocations.
 The return values are shown being passed back up the stack.
-Notice that \java{recurse} and \java{result} do not exist in the last frame, because when \java{n == 0} the branch that creates them does not execute.
+Notice that \java{recurse} and \java{result} do not exist in the last frame, because when \java{n == 0} the code that creates them does not execute.
 
 \begin{figure}[!h]
 \begin{center}
@@ -684,9 +681,9 @@ Notice that \java{recurse} and \java{result} do not exist in the last frame, bec
 
 \index{leap of faith}
 
-Following the flow of execution is one way to read programs, but it can quickly become disorienting.
-An alternative to drawing lengthy stack diagrams is simply a ``leap of faith.''
-When you come to a method invocation, instead of following the flow of execution, you {\em assume} that the method works correctly and returns the appropriate value.
+Following the flow of execution is one way to read programs, but it can quickly become overwhelming.
+An alternative is a ``leap of faith'':
+when you come to a method invocation, instead of following the flow of execution, you {\em assume} that the method works correctly and returns the appropriate value.
 
 In fact, you are already practicing this leap of faith when you use methods in the Java library.
 When you invoke {\tt Math.cos} or {\tt System.out.println}, you don't examine the implementations of those methods.
@@ -694,14 +691,14 @@ You just assume that they work properly.
 
 You should apply the same reasoning to your own methods.
 For example, in Section~\ref{boolean} we wrote a method called {\tt isSingleDigit} that determines whether a number is between 0 and 9.
-Once we convince ourselves that this method is correct---by testing and examination of the code---we can use the method without ever looking at the code again.
+Once we convince ourselves that this method is correct---by testing and examination of the code---we can use the method without ever looking at the implementation again.
 
 The same is true of recursive programs.
 When you get to the recursive call, instead of following the flow of execution you should {\em assume} that the recursive invocation works.
 For example, ``Assuming that I can find the factorial of $n-1$, can I compute the factorial of $n$?''
 Yes you can, by multiplying by $n$.
 
-Of course, it is strange to assume that the method works correctly when you have not even finished writing it; that's why it's called a leap of faith!
+Of course, it is strange to assume that the method works correctly when you have not finished writing it, but that's why it's called a leap of faith!
 
 
 \section{One more example}
@@ -709,7 +706,7 @@ Of course, it is strange to assume that the method works correctly when you have
 
 \index{fibonacci}
 
-Another common example of recursively-defined mathematical functions is the Fibonacci sequence, which has the following definition:
+Another common recursively-defined mathematical function is the Fibonacci sequence, which has the following definition:
 
 \vspace{-1ex}
 \begin{eqnarray*}
@@ -725,9 +722,8 @@ Translated into Java, this function is simply:
     public static int fibonacci(int n) {
         if (n == 1 || n == 2) {
             return 1;
-        } else {
-            return fibonacci(n - 1) + fibonacci(n - 2);
         }
+        return fibonacci(n - 1) + fibonacci(n - 2);
     }
 \end{code}
 
@@ -737,25 +733,25 @@ But according to the leap of faith, if we assume that the two recursive invocati
 
 \section{Testing with JUnit}
 
-To convince yourself that anything works, you should always test it.
+To convince yourself that anything works, you should test it.
+Since we can compute Fibonacci numbers by hand, we can write a simple \java{main} method to test the \java{fibonacci} method.
 The first ten Fibonacci numbers are 1, 1, 2, 3, 5, 8, 13, 21, 34, and 55.
-We can write a simple \java{main} method to test the \java{fibonacci} method.
 
 \begin{code}
     public static void main(String[] args) {
         if (fibonacci(1) != 1) {
-            System.err.println("1 is incorrect");
+            System.err.println("fibonacci(1) is incorrect");
         }
         // copy that if statement nine more times
     }
 \end{code}
 
-JUnit is a framework that helps automate and standardize this process (see \url{http://junit.org/}).
-The basic pattern is very simple:
+JUnit is a framework that helps automate and standardize this kind of testing (see \url{http://junit.org/}).
+The basic pattern is simple:
 
 \begin{itemize}
-\item For every class \java{X} there is a companion class named \java{XTest} that is responsible for testing the class.
-\item For every method \java{m} there is a companion method \java{testM} that is responsible for testing the method.
+\item For every class \java{X} there is a corresponding class named \java{XTest} that is responsible for testing the class.
+\item For every method \java{m} there is a corresponding method \java{testM} that is responsible for testing the method.
 \end{itemize}
 
 For example, the \java{fibonacci} method in the previous section belongs to a class named \java{Series}.
@@ -772,22 +768,21 @@ public class SeriesTest extends TestCase {
         assertEquals(2, Series.fibonacci(3));
         assertEquals(3, Series.fibonacci(4));
         // six more assertEquals statements
-    }
-    
+    }    
 }
 \end{code}
 
-Since JUnit is industry strength, it uses some Java language features we have not yet studied in this book (e.g., \java{extends}).
-However, it's easy to get started by writing simple test methods.
-In DrJava, you can select ``File $>$ New JUnit Test Case'' from the menu to generate the required \java{import} and \java{extends} code.
+JUnit uses some Java language features we have not see yet, like the keyword \java{extends}.
+But it's easy to get started by writing simple test methods.
+In DrJava, you can select ``File $>$ New JUnit Test Case'' from the menu to generate a test class and methods.
 
 JUnit provides a family of overloaded \java{assert} methods.
-In the example above, \java{assertEquals} compares expected values (e.g., 1) with actual values (e.g., what \java{fibonacci} returns).
-If an assertion fails, it displays an error showing the values that did not match.
+In the example above, \java{assertEquals} compares the expected value with the actual value, that is, what \java{fibonacci} returns.
+If \java{assertEquals} fails, it displays an error showing the values that did not match.
 This code is more concise than writing your own \java{if} statements and \java{System.err} messages.
 
 To run JUnit directly from DrJava, click the {\tt Test} button on the toolbar.
-If all your test methods pass, you will see a green rectangle on the lower right.
+If all your test methods pass, you will see a green rectangle in the lower right.
 Otherwise, it will take you directly to the first assertion that failed.
 
 
@@ -795,8 +790,14 @@ Otherwise, it will take you directly to the first assertion that failed.
 
 \begin{description}
 
+\term{value method}
+A method that returns a value.
+
+\term{void method}
+A method that does not return a value.
+
 \term{return type}
-The part of a method declaration that indicates what type of value the method returns.
+The type of value a method returns.
 
 \term{return value}
 The value provided as the result of a method invocation.
@@ -805,10 +806,14 @@ The value provided as the result of a method invocation.
 A special return type indicating the method does not return a value.
 
 \term{temporary variable}
-A variable that is short-lived, often declared for debugging purposes.
+A variable that is short-lived, often used for debugging purposes.
 
 \term{dead code}
 Part of a program that can never be executed, often because it appears after a {\tt return} statement.
+
+\term{incremental development}
+A process for creating programs by writing a few lines at a time,
+compiling, and testing.
 
 \term{stub}
 A placeholder for an incomplete method so that the class will compile.
@@ -831,6 +836,29 @@ The product of all the integers up to and including a given integer.
 
 \section{Exercises}
 
+
+\begin{exercize}
+
+Answer the following questions by trying them out.
+In fact, any time you have a question about what is legal or illegal in Java, a good way to find out is to ask the compiler.
+
+\begin{enumerate}
+
+\item What happens if you invoke a value method and don't do anything with the result?
+(In other words, if you don't assign it to a variable or use it as part of a larger expression?)
+
+\item What happens if you use a \java{print} method as part of an expression?
+For example: \java{System.out.println("boo!") + 7;}
+
+%TODO: any more?
+
+\end{enumerate}
+
+\end{exercize}
+
+
+
+
 \begin{exercise}
 \label{ex.isdiv}
 
@@ -847,7 +875,7 @@ Some processors even provide a hardware implementation of this operation for flo
 
 \item Create a new program called {\tt Multadd.java}.
 
-\item Write a method called {\tt multadd} that takes three {\tt doubles} as parameters and that returns their multadditionization.
+\item Write a method called {\tt multadd} that takes three {\tt doubles} as parameters and that returns their multaddization.
 
 \item Write a {\tt main} method that tests {\tt multadd} by invoking it with a few simple parameters, like {\tt 1.0, 2.0, 3.0}.
 
@@ -932,7 +960,7 @@ The purpose of this exercise is to make sure you understand logical operators an
 \begin{exercise}
 The distance between two points $(x_1, y_1)$ and $(x_2, y_2)$ is
 
-\[ Distance = \sqrt{(x_2 - x_1)^2 +(y_2 - y_1)^2} \]
+\[ distance = \sqrt{(x_2 - x_1)^2 +(y_2 - y_1)^2} \]
 
 Write a method named {\tt distance} that takes four doubles as parameters---{\tt x1}, {\tt y1}, {\tt x2} and {\tt y2}---and that prints the distance between the points.
 
@@ -996,7 +1024,7 @@ A(m-1, A(m, n-1)) & \mbox{if } m > 0 \mbox{ and } n > 0.
 \end{cases}
 \end{eqnarray}
 
-Write a method called {\tt ack} that takes two {\tt int}s as parameters and that computes and returns the value of the Ackermann function.
+Write a method called {\tt ack} that takes two {\tt int}s as parameters and returns the value of the Ackermann function.
 
 Test your implementation of Ackermann by invoking it from {\tt main} and printing the return value.
 
@@ -1028,9 +1056,9 @@ You should try it only for small values of $m$ and $n$ (not bigger than 2).
 \end{code}
 
 \item Write some code in {\tt main} that tests each of these methods.
-Make sure they work, and make sure you understand what they do.
+Make sure they work and you understand what they do.
 
-\item Write a method called {\tt printString} that takes a String as a parameter and that prints the letters of the String, one on each line.  It should be a {\tt void} method.
+\item Write a method called {\tt printString} that takes a String as a parameter and prints the letters of the String, one on each line.  It should be a {\tt void} method.
 
 \item Write a method called {\tt printBackward} that does the same thing as {\tt printString} but that prints the String backward (one character per line).
 
@@ -1038,14 +1066,14 @@ Make sure they work, and make sure you understand what they do.
 The new String should contain the same letters as the parameter, but in reverse order.
 
 \begin{code}
-    String backwards = reverseString("Allen Downey");
+    String backwards = reverseString("coffee");
     System.out.println(backwards);
 \end{code}
 
 For example, the output of the above code should be:
 
 \begin{stdout}
-yenwoD nellA
+eeffoc
 \end{stdout}
 
 \end{enumerate}
