@@ -170,69 +170,6 @@
 
 TODO
 
-\section{Multiple assignment}
-\index{assignment}
-\index{statement!assignment}
-\index{multiple assignment}
-
-%TODO move to chapter 5
-
-You can make more than one assignment to the same variable;
-the effect is to replace the old value with the new.
-
-\begin{code}
-    int liz = 5;
-    System.out.print(liz);
-    liz = 7;
-    System.out.println(liz);
-\end{code}
-
-The output of this program is {\tt 57}, because the first
-time we print {\tt liz} her value is 5, and the second time
-her value is 7.
-
-This kind of {\bf multiple assignment} is the reason I
-described variables as a {\em container} for values.  When
-you assign a value to a variable, you change the contents of
-the container, as shown in the figure:
-
-
-\includegraphics{figs/assign2.pdf}
-
-
-When there are multiple assignments to a variable, it is especially
-important to distinguish between an assignment statement and a
-statement of equality.  Because Java uses the {\tt =} symbol for
-assignment, it is tempting to interpret a statement like {\tt a = b}
-as a statement of equality.  It is not!
-
-First of all, equality is commutative, and assignment is not.
-For example, in mathematics if $a = 7$ then $7 = a$.  But in
-Java {\tt a = 7;} is a legal assignment statement, and {\tt 7 = a;}
-is not.
-
-Furthermore, in mathematics, a statement of equality is true
-for all time.  If $a = b$ now, then $a$ will always equal $b$.
-In Java, an assignment statement can make two variables equal,
-but they don't have to stay that way!
-
-\begin{code}
-    int a = 5;
-    int b = a;     // a and b are now equal
-    a = 3;         // a and b are no longer equal
-\end{code}
-
-The third line changes the value of {\tt a} but it does not
-change the value of {\tt b}, so they are no longer equal.
-In some programming languages a different symbol is used
-for assignment, such as {\tt <-} or {\tt :=}, to
-avoid this confusion.
-
-Although multiple assignment is frequently useful, you should use it
-with caution.  If the values of variables change often, it can make
-the code difficult to read and debug.
-
-
 \section{The {\tt while} statement}
 \index{statement!while}
 \index{while statement}
