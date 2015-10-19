@@ -170,12 +170,11 @@
 
 Computers are often used to automate repetitive tasks.
 Repeating tasks without making errors is something that computers do well and people do poorly.
-
 \index{iteration}
 
 We have already seen methods like {\tt countdown} and {\tt factorial} that use recursion to run the same code multiple times.
 Although recursion is elegant and powerful, Java provides language features that make it much easier to repeat statements.
-In this chapter, we will study {\bf iteration} using the \java{while} and \java{for} loop structures.
+In this chapter, we present {\bf iteration} using the \java{while} and \java{for} statements.
 
 
 \section{The while statement}
@@ -196,7 +195,7 @@ Using a \java{while} statement, we can rewrite {\tt countdown} this way:
 \end{code}
 
 You can almost read a \java{while} statement like English.
-What this code example means is: ``While {\tt n} is greater than zero, print the value of {\tt n} and then reduce the value of {\tt n} by 1.
+What this code means is: ``While {\tt n} is greater than zero, print the value of {\tt n} and then reduce the value of {\tt n} by 1.
 When you get to zero, print the word Blastoff!''
 
 More formally, the flow of execution for a \java{while} statement is as follows:
@@ -217,14 +216,14 @@ More formally, the flow of execution for a \java{while} statement is as follows:
 
 This type of flow is called a {\bf loop} because the last step loops back around to the first.
 The statements inside the loop are called the {\bf body} of the loop.
-If the condition is \java{false} the first time through the loop, the statements inside the loop are never executed.
+If the condition is \java{false} the first time, the statements inside the loop are never executed.
 
 \index{loop!infinite}
 \index{infinite loop}
 
 The body of the loop should change the value of one or more variables so that, eventually, the condition becomes \java{false} and the loop terminates.
 Otherwise the loop will repeat forever, which is called an {\bf infinite loop}.
-An endless source of amusement for computer scientists is the observation that the directions on shampoo, ``Lather, rinse, repeat'' are an infinite loop.
+An endless source of amusement for computer scientists is the observation that the directions on shampoo, ``Lather, rinse, repeat'', are an infinite loop.
 
 In the case of {\tt countdown}, we can prove that the loop terminates when {\tt n} is positive.
 But in general, it is not so easy to tell whether a loop terminates.
@@ -257,7 +256,7 @@ The previous example ends with such a sequence, starting with 16.
 Particular values aside, the interesting question is whether we can prove that this program terminates for {\em all} values of n.
 So far, no one has been able to prove it {\em or} disprove it!
 For more information, see \url{http://en.wikipedia.org/wiki/Collatz_conjecture}.
-The field of computer science is interested in these types of questions, because their answers give insight to the limits of what computers can and cannot do.
+%The field of computer science is interested in these types of questions, because their answers give insight to the limits of what computers can and cannot do.
 
 
 \section{Generating tables}
@@ -274,13 +273,11 @@ Creating these tables was slow and boring, and the results were often full of er
 When computers appeared on the scene, one of the initial reactions was, ``This is great!
 We can use the computers to generate the tables, so there will be no errors.''
 That turned out to be true (mostly), but shortsighted.
-Soon thereafter computers were so pervasive that the tables became obsolete.
+Not much later, computers were so pervasive that printed tables became obsolete.
 
 \index{division!floating-point}
 
-Well, almost.
-For some operations, computers use tables of values to get an approximate answer, and then perform computations to improve
-the approximation.
+Even so, for some operations, computers use tables of values to get an approximate answer, and then perform computations to improve the approximation.
 In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division (see \url{http://en.wikipedia.org/wiki/Pentium_FDIV_bug}).
 
 Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
@@ -360,7 +357,7 @@ The result is:
 \end{stdout}
 
 Log tables may not be useful any more, but for computer scientists, knowing the powers of two helps a lot!
-When you have an idle moment, you should memorize the powers of two up to 65536 (that's $2^{16}$).
+%When you have an idle moment, you should memorize the powers of two up to 65536 (that's $2^{16}$).
 
 
 \section{Program development}
@@ -372,7 +369,7 @@ A two-dimensional table consists of rows and columns that make it easy to find v
 A multiplication table is a good example.
 Let's say you want to print a multiplication table for the values from 1 to 6.
 
-A good way to start is to write a simple loop that prints the multiples of 2, all on one line.
+A good way to start is a simple loop that prints the multiples of 2, all on one line.
 
 \begin{code}
     int i = 1;
@@ -388,10 +385,10 @@ A good way to start is to write a simple loop that prints the multiples of 2, al
 
 The first line initializes a variable named {\tt i}, which is going to act as a counter, or {\bf loop variable}.
 As the loop executes, the value of {\tt i} increases from 1 to 6; when {\tt i} is 7, the loop terminates.
-Each time through the loop, we print the value {\tt 2 * i} padded with spaces so it's four characters wide.
+Each time through the loop, we print the value {\tt 2 * i}, padded with spaces so it's four characters wide.
 Since we use {\tt System.out.printf}, the output appears on a single line.
 
-We need to call {\tt println} after the loop to complete that line of output.
+We need to call {\tt println} after the loop to complete the line of output.
 In some environments, the output from {\tt printf} gets stored without being displayed until {\tt println} is invoked.
 If the program terminates, and you forget to invoke {\tt println}, you may never see the stored output.
 
@@ -421,8 +418,8 @@ Now that we've solved part of the problem, we can encapsulate and generalize the
     }
 \end{code}
 
-To encapsulate, all we had to do was add the first line that declares the method name, parameter, and return type.
-To generalize, all we had to do was replace the value 2 with the parameter {\tt n}.
+To encapsulate, we added the first line, which declares the method name, parameter, and return type.
+To generalize, we replaced the value 2 with the parameter {\tt n}.
 The whole point of parameters is to allow you to write general purpose methods.
 
 Note that invoking this method with the argument 2 yields the same output as before.
@@ -449,9 +446,9 @@ In fact, we are going to use another loop to iterate through the rows.
     }
 \end{code}
 
-First of all, notice how similar this loop is to the one inside {\tt printMultiples}.
+First, notice how similar this loop is to the one inside {\tt printMultiples}.
 All we did was replace the \java{printf} statement with a method invocation.
-Notice how the format specifier \java{"\%4d"} in {\tt printMultiples} causes the output to align vertically, regardless whether the numbers are one or two digits.
+Also, notice how the format specifier \java{"\%4d"} in {\tt printMultiples} causes the output to align vertically, regardless of whether the numbers are one or two digits.
 
 \begin{stdout}
     1    2    3    4    5    6
@@ -479,11 +476,14 @@ Notice how the format specifier \java{"\%4d"} in {\tt printMultiples} causes the
 
 \index{program development}
 
-With limited experience, it's hard to know how to divide up a program into methods.
+One of the challenges of programming, especially for beginners, is figuring out how to divide up a program into methods.
 The process of encapsulation and generalization allows you design as you go along.
-You start {\bf program development} by adding code to {\tt main} or some another method.
+You start by adding code to {\tt main} or some another method.
 When you get the code working, you wrap it up in a new method and generalize it by adding parameters.
-To demonstrate again, let's take the code from the last example and wrap it up in a method:
+Then you repeat, alternately developing new code and creating new methods.
+
+As a final example, we can take the code from the last example and
+wrap it up in a method:
 
 \begin{code}
     public static void printMultTable() {
@@ -494,6 +494,9 @@ To demonstrate again, let's take the code from the last example and wrap it up i
         }
     }
 \end{code}
+
+Encapsulation and generalization, as demonstrated in this section, is a useful and common process for {\bf program development}.
+In later chapters we will present some alternatives.
 
 
 \section{Local variables}
@@ -534,6 +537,7 @@ If you avoid using them in one method just because you used them somewhere else,
 Another reason is when two or more methods are based on the same parameter.
 It's awkward to come up with many different names for the same data.
 
+
 \section{More generalization}
 \index{generalization}
 
@@ -550,7 +554,7 @@ All we need is to add a parameter to {\tt printMultTable}:
     }
 \end{code}
 
-Rather than use the literal value 6 in the while statement, we generalize the code by using the parameter {\tt size}.
+Rather than use the literal value 6 in the while statement, we generalize by using the parameter {\tt size}.
 Here is the output when you invoke {\tt printMultTable} with the argument 7:
 
 \begin{stdout}
@@ -563,7 +567,7 @@ Here is the output when you invoke {\tt printMultTable} with the argument 7:
    7  14  21  28  35  42
 \end{stdout}
 
-This result is fine, however it would be even better if it were square (i.e., the same number of rows and columns).
+This result is fine, but it would be even better if it were square (i.e., the same number of rows and columns).
 We can pass the {\tt size} parameter to {\tt printMultiples} to specify how many columns the table should have.
 
 \begin{code}
@@ -585,7 +589,8 @@ We can pass the {\tt size} parameter to {\tt printMultiples} to specify how many
     }
 \end{code}
 
-Notice when adding this new parameter we not only had to change the method declaration but also the line where the method is invoked in {\tt printMultTable}.
+Since we added a new parameter to \java{printMultTable}, we had to change both the method declaration and the line where it is invoked.
+
 As expected, this program generates a square 7x7 table:
 
 \begin{stdout}
@@ -630,7 +635,7 @@ Even though the second parameter in {\tt printMultiples} is named {\tt size} and
 
 The loops we have written so far have a number of elements in common.
 All of them start by initializing a variable; they have a test, or condition, that depends on that variable; and inside the loop they do something to update that variable.
-This type of loop is so common that there is another loop statement, called \java{for}, that expresses it more concisely.
+This type of loop is so common that there is another statement, called \java{for}, that expresses it more concisely.
 
 \begin{code}
     for (INITIALIZER; CONDITION; INCREMENTOR) {
@@ -641,14 +646,14 @@ This type of loop is so common that there is another loop statement, called \jav
 This structure is equivalent to the following \java{while} loop:
 
 \begin{code}
-    INITIALIZER;
+    INITIALIZER
     while (CONDITION) {
         BODY
         INCREMENTOR
     }
 \end{code}
 
-The \java{for} loop is more concise and easier to read, since it puts all the loop-related statements in one place.
+The \java{for} loop is more concise and easier to read, since it puts all the loop-related statements in one place.  This for loop:
 
 \begin{code}
     for (int i = 0; i < 4; i++) {
@@ -656,7 +661,7 @@ The \java{for} loop is more concise and easier to read, since it puts all the lo
     }
 \end{code}
 
-Again, this code is more or less equivalent to:
+Has the same output as this while loop:
 
 \begin{code}
     int i = 0;
@@ -669,9 +674,9 @@ Again, this code is more or less equivalent to:
 The statement {\tt i++;} is shorthand for {\tt i = i + 1;} and is commonly used in loop structures.
 The {\tt ++} operator increments a variable by one, and the {\tt --} operator decrements a variable by one.
 
-There is one minor difference between the \java{for} and \java{while} loops above: where the variable {\tt i} is declared.
+There is one difference between the \java{for} and \java{while} loops above: where the variable {\tt i} is declared.
 After the \java{for} loop, the variable {\tt i} ceases to exist because it was declared in the loop header.
-In contrast, the variable {\tt i} continues to exist after the \java{while} loop since they are at the same level.
+In contrast, the variable {\tt i} continues to exist after the \java{while} statment, because it was declared outside the loop.
 
 Because \java{for} loops are so concise, they are particularly useful when iterating over two or more dimensions.
 We can rewrite the final example in the previous section with just a few lines of code:
@@ -686,18 +691,18 @@ We can rewrite the final example in the previous section with just a few lines o
 \end{code}
 
 In contrast to {\tt printMultTable} and {\tt printMultiples}, this version of the code cannot use the variable {\tt i} for both loops.
-Instead, it uses the variables {\tt row} and {\tt col} to represent the exact positions in the table by name.
+Instead, it uses the variables {\tt row} and {\tt col} to represent positions in the table.
 
 
 \section{Vocabulary}
 
 \begin{description}
 
-\term{iteration}
-One pass through (execution of) the body of the loop, including the evaluation of the condition.
-
 \term{loop}
 A statement that executes repeatedly while some condition is satisfied.
+
+\term{iteration}
+One pass through (execution of) the body of the loop, including the evaluation of the condition.
 
 \term{loop body}
 The statements inside the loop.
@@ -717,7 +722,7 @@ Generalization makes code more versatile, more likely to be reused, and sometime
 
 \term{local variable}
 A variable that is declared inside a method and that exists only within that method.
-Local variables cannot be accessed from outside their home method and do not interfere with any other methods.
+Local variables cannot be accessed from outside their method and do not interfere with any other methods.
 
 \term{program development}
 A process for writing programs.
@@ -759,24 +764,26 @@ The table should contain one column for each variable and one line for each iter
 
 \item What is the output of this program?
 
+\item Can you prove that this loop terminates for any positive value of {\tt n}?
+
 \end{enumerate}
 \end{exercise}
 
 
 \begin{exercise}
 Let's say you are given a number, $a$, and you want to find its square root.
-One way to do that is to start with a very rough guess about the answer, $x_0$, and then improve the guess using the following average:
+One way to do that is to start with a rough guess about the answer, $x_0$, and then improve the guess using the following average:
 %
 \begin{equation*}
 x_1 =(x_0 + a/x_0) / 2
 \end{equation*}
 %
-For example, if we want to find the square root of 9, and we start with $x_0 = 6$, then $x_1 =(6 + 9/6) /2 = 15/4 = 3.75$, which is closer.
+For example, if we want to find the square root of 9, and we start with $x_0 = 6$, then $x_1 = (6 + 9/6) / 2 = 3.75$, which is closer.
 We can repeat the procedure, using $x_1$ to calculate $x_2$, and so on.
 In this case, $x_2 = 3.075$ and $x_3 = 3.00091$.
-So that is converging very quickly on the correct answer.
+So it converges quickly on the correct answer.
 
-Write a method called {\tt squareRoot} that takes a \java{double} as a parameter and that returns an approximation of the square root of the parameter, using this technique.
+Write a method called {\tt squareRoot} that takes a \java{double} and returns an approximation of the square root of the parameter, using this technique.
 You may not use {\tt Math.sqrt}.
 
 As your initial guess, you should use $a/2$.
@@ -803,17 +810,17 @@ One way to calculate $e^x$ is to use the infinite series expansion:
 e^x = 1 + x + x^2 / 2! + x^3 / 3! + x^4 / 4! + ...
 \end{equation*}
 %
-If the loop variable is named {\tt i}, then the $i$th term is $x^i / i!$ and so forth.
+If the loop variable is named {\tt i}, then the $i$th term is $x^i / i!$.
 
 \begin{enumerate}
 
 \item Write a method called {\tt myexp} that adds up the first {\tt n} terms of this series.
 You can use the {\tt factorial} method from Section~\ref{factorial} or your iterative version from the previous exercise.
 
-\item You can make this method much more efficient if you realize that, in each iteration, the numerator of the term is the same as its predecessor multiplied by {\tt x}, and the denominator is the same as its predecessor multiplied by {\tt i}.
+\item You can make this method more efficient if you realize that, in each iteration, the numerator of the term is the same as its predecessor multiplied by {\tt x}, and the denominator is the same as its predecessor multiplied by {\tt i}.
 Use this observation to eliminate the use of {\tt Math.pow} and {\tt factorial}, and check that you still get the same result.
 
-\item Write a method called {\tt check} that takes a single parameter, {\tt x}, and that prints the values of {\tt x}, {\tt Math.exp(x)} and {\tt myexp(x)} for various values of {\tt x}.
+\item Write a method called {\tt check} that takes a parameter, {\tt x}, and prints the values of {\tt x}, {\tt Math.exp(x)} and {\tt myexp(x)} for various values of {\tt x}.
 The output should look something like:
 
 \begin{stdout}
@@ -844,8 +851,8 @@ One way to evaluate $\exp(-x^2)$ is to use the infinite series expansion:
 \exp(-x^2) = 1 - x^2 + x^4/2 - x^6/6 + \ldots
 \end{equation*}
 %
-In other words, we need to add up a series of terms where the $i$th term is equal to $(-1)^i x^{2i} / i!$ and so forth.
-Write a method named {\tt gauss} that takes {\tt x} and {\tt n} as arguments and that returns the sum of the first {\tt n} terms of the series.
+In other words, we need to add up a series of terms where the $i$th term is equal to $(-1)^i x^{2i} / i!$.
+Write a method named {\tt gauss} that takes {\tt x} and {\tt n} as arguments and returns the sum of the first {\tt n} terms of the series.
 You should not use {\tt factorial} or {\tt pow}.
 \end{exercise}
 
