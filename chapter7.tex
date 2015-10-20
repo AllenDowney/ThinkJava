@@ -170,11 +170,12 @@
 
 Computers are often used to automate repetitive tasks.
 Repeating tasks without making errors is something that computers do well and people do poorly.
+
 \index{iteration}
 
 We have already seen methods like {\tt countdown} and {\tt factorial} that use recursion to run the same code multiple times.
-Although recursion is elegant and powerful, Java provides language features that make it much easier to repeat statements.
-In this chapter, we present {\bf iteration} using the \java{while} and \java{for} statements.
+Although recursion is elegant and powerful, Java provides language features that make it much easier to repeat code.
+In this chapter, we present {\bf iteration} using \java{while} and \java{for} statements.
 
 
 \section{The while statement}
@@ -202,7 +203,7 @@ More formally, the flow of execution for a \java{while} statement is as follows:
 
 \begin{enumerate}
 
-\item Evaluate the condition in parentheses, yielding \java{true} or {\tt false}.
+\item Evaluate the condition in parentheses, yielding \java{true} or \java{false}.
 
 \item If the condition is \java{false}, exit the \java{while} block and continue execution at the next statement.
 
@@ -215,15 +216,15 @@ More formally, the flow of execution for a \java{while} statement is as follows:
 \index{body}
 
 This type of flow is called a {\bf loop} because the last step loops back around to the first.
-The statements inside the loop are called the {\bf body} of the loop.
-If the condition is \java{false} the first time, the statements inside the loop are never executed.
+The statements inside the \java{while} block are called the {\bf body} of the loop.
+If the condition is \java{false} the first time, the statements inside the \java{while} block are never executed.
 
 \index{loop!infinite}
 \index{infinite loop}
 
 The body of the loop should change the value of one or more variables so that, eventually, the condition becomes \java{false} and the loop terminates.
 Otherwise the loop will repeat forever, which is called an {\bf infinite loop}.
-An endless source of amusement for computer scientists is the observation that the directions on shampoo, ``Lather, rinse, repeat'', are an infinite loop.
+An endless source of amusement for computer scientists is the observation that the directions on shampoo, ``Lather, rinse, repeat,'' are an infinite loop.
 
 In the case of {\tt countdown}, we can prove that the loop terminates when {\tt n} is positive.
 But in general, it is not so easy to tell whether a loop terminates.
@@ -249,8 +250,7 @@ For example, if the starting value (the argument passed to {\tt sequence}) is 3,
 
 Since {\tt n} sometimes increases and sometimes decreases, there is no obvious proof that {\tt n} will ever reach 1, or that the program will ever terminate.
 For some particular values of {\tt n}, we can prove termination.
-For example, if the starting value is a power of two, then the value of {\tt n} will be even every time through the loop, until
-we get to 1.
+For example, if the starting value is a power of two, then the value of {\tt n} will be even every time through the loop, until we get to 1.
 The previous example ends with such a sequence, starting with 16.
 
 Particular values aside, the interesting question is whether we can prove that this program terminates for {\em all} values of n.
@@ -266,7 +266,6 @@ For more information, see \url{http://en.wikipedia.org/wiki/Collatz_conjecture}.
 
 One of the things loops are good for is generating and printing tabular data.
 Before computers were readily available, people had to calculate logarithms, sines and cosines, and other common mathematical functions by hand.
-
 To make that easier, there were books containing long tables where you could find the values of various functions.
 Creating these tables was slow and boring, and the results were often full of errors.
 
@@ -312,7 +311,7 @@ To compute them, we can apply the properties of logarithms.
 \begin{equation*}
 \log_2 x = \frac{log_e x}{log_e 2}
 \end{equation*}
-
+%
 Using this formula, we can modify the {\tt println} statement.
 
 \begin{code}
@@ -365,16 +364,15 @@ Log tables may not be useful any more, but for computer scientists, knowing the 
 
 \index{table!two-dimensional}
 
-A two-dimensional table consists of rows and columns that make it easy to find values at the intersections.
+Two-dimensional tables consist of rows and columns that list values at the intersections.
 A multiplication table is a good example.
 Let's say you want to print a multiplication table for the values from 1 to 6.
-
 A good way to start is a simple loop that prints the multiples of 2, all on one line.
 
 \begin{code}
     int i = 1;
     while (i <= 6) {
-        System.out.printf("%4d", n * i);
+        System.out.printf("%4d", 2 * i);
         i = i + 1;
     }
     System.out.println();
@@ -474,16 +472,13 @@ Also, notice how the format specifier \java{"\%4d"} in {\tt printMultiples} caus
 %\item Well-designed methods are often useful for many programs. Once you write and debug one, you can reuse it.
 %\end{itemize}
 
-\index{program development}
-
 One of the challenges of programming, especially for beginners, is figuring out how to divide up a program into methods.
 The process of encapsulation and generalization allows you design as you go along.
 You start by adding code to {\tt main} or some another method.
 When you get the code working, you wrap it up in a new method and generalize it by adding parameters.
 Then you repeat, alternately developing new code and creating new methods.
 
-As a final example, we can take the code from the last example and
-wrap it up in a method:
+As a final example, we can take the code above and wrap it up in a method:
 
 \begin{code}
     public static void printMultTable() {
@@ -495,6 +490,8 @@ wrap it up in a method:
     }
 \end{code}
 
+\index{program development}
+
 Encapsulation and generalization, as demonstrated in this section, is a useful and common process for {\bf program development}.
 In later chapters we will present some alternatives.
 
@@ -502,7 +499,7 @@ In later chapters we will present some alternatives.
 \section{Local variables}
 
 You might wonder how we can use the same variable {\tt i} in both {\tt printMultiples} and {\tt printMultTable}.
-Isn't in true that you can only declare a variable once?
+Isn't it true that you can only declare a variable once?
 And doesn't it cause problems when one of the methods changes the value of the variable?
 
 The answer to both questions is ``no,'' because the {\tt i} in {\tt printMultiples} and the {\tt i} in {\tt printMultTable} are {\em not the same variable}.
@@ -511,9 +508,9 @@ Changing the value of one variable has no effect on the other.
 Consider the stack diagram at the moment the program begins printing the second row of the table:
 
 \begin{center}
-\vspace{1ex}
+\vspace{1em}
 \includegraphics{figs/stack4.pdf}
-\vspace{1ex}
+\vspace{1em}
 \end{center}
 
 %\begin{tabular}{rl}
@@ -579,18 +576,19 @@ We can pass the {\tt size} parameter to {\tt printMultiples} to specify how many
         }
         System.out.println();
     }
-    
-    public static void printMultTable(int size) {
-        int i = 1;
-        while (i <= size) {
-            printMultiples(i, size);
-            i = i + 1;
-        }
-    }
 \end{code}
 
-Since we added a new parameter to \java{printMultTable}, we had to change both the method declaration and the line where it is invoked.
+%\begin{code}
+%    public static void printMultTable(int size) {
+%        int i = 1;
+%        while (i <= size) {
+%            printMultiples(i, size);
+%            i = i + 1;
+%        }
+%    }
+%\end{code}
 
+Since we added a new parameter to \java{printMultiples}, we also have to change the line \java{printMultiples(i, size);} where it is invoked in {\tt printMultTable}.
 As expected, this program generates a square 7x7 table:
 
 \begin{stdout}
@@ -611,7 +609,7 @@ You could save ink by printing half the table, and you would only have to change
       printMultiples(i, i);
 \end{code}
 
-In other words, the {\tt size} of each row is the same as the row number.
+In other words, the {\tt size} of each row is the same as the row number itself.
 
 \begin{stdout}
    1
@@ -624,6 +622,7 @@ In other words, the {\tt size} of each row is the same as the row number.
 \end{stdout}
 
 Even though the second parameter in {\tt printMultiples} is named {\tt size} and we have a variable with the same name, we can still use any value or expression we want for the argument.
+Remember you do not pass variables to methods; you pass their current values.
 
 
 \section{{\tt for} loops}
@@ -653,7 +652,7 @@ This structure is equivalent to the following \java{while} loop:
     }
 \end{code}
 
-The \java{for} loop is more concise and easier to read, since it puts all the loop-related statements in one place.  This for loop:
+The \java{for} loop is more concise and easier to read, since it puts all the loop-related statements in one place.
 
 \begin{code}
     for (int i = 0; i < 4; i++) {
@@ -661,7 +660,7 @@ The \java{for} loop is more concise and easier to read, since it puts all the lo
     }
 \end{code}
 
-Has the same output as this while loop:
+We easily rewrite any \java{for} statement as a \java{while} statement by separating the loop components:
 
 \begin{code}
     int i = 0;
@@ -691,7 +690,7 @@ We can rewrite the final example in the previous section with just a few lines o
 \end{code}
 
 In contrast to {\tt printMultTable} and {\tt printMultiples}, this version of the code cannot use the variable {\tt i} for both loops.
-Instead, it uses the variables {\tt row} and {\tt col} to represent positions in the table.
+Instead, it uses the variables {\tt row} and {\tt col} to represent the positions in the table.
 
 
 \section{Vocabulary}
