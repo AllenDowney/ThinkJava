@@ -1,0 +1,77 @@
+\section{Increment and decrement}
+
+\index{operator!increment}
+\index{operator!decrement}
+
+Incrementing and decrementing are such common operations that Java provides special operators for them.
+The {\tt ++} operator adds one to the current value of an {\tt int} or {\tt char}.
+{\tt --} subtracts one.
+Neither operator works on {\tt double}s, {\tt boolean}s or {\tt String}s.
+
+Technically, it is legal to increment a variable and use it in an expression at the same time.
+For example, you might see something like:
+
+\begin{code}
+    System.out.println(i++);
+\end{code}
+
+Looking at this, it is not clear whether the increment will take effect before or after the value is printed.
+Because expressions like this tend to be confusing, I discourage you from using them.
+In fact, to discourage you even more, I'm not going to tell you what the result is.
+If you really want to know, you can try it.
+
+Using the increment operators, we can rewrite the letter-counter:
+
+\begin{code}
+    int index = 0;
+    while (index < length) {
+        if (fruit.charAt(index) == 'a') {
+            count++;
+        }
+        index++;
+    }
+\end{code}
+
+It is a common error to write something like
+
+\begin{code}
+    index = index++;             // WRONG!!
+\end{code}
+
+Unfortunately, this is syntactically legal, so the compiler will not warn you.
+The effect of this statement is to leave the value of {\tt index} unchanged.
+This is often a difficult bug to track down.
+
+Remember, you can write {\tt index = index+1}, or you can write {\tt index++}, but you shouldn't mix them.
+
+
+\section{Objects and primitives}
+
+\index{type!object}
+\index{type!primitive}
+\index{object type}
+\index{primitive type}
+
+There are two kinds of types in Java, primitive types and reference types.
+Primitives, like \java{int} and \java{char} begin with lowercase letters; reference types like \java{String} begin with uppercase letters.
+This distinction is useful because it reminds us of some of the differences between them:
+
+\begin{itemize}
+
+\item When you declare a primitive variable, you get storage space for a primitive value.
+When you declare a reference variable, you only get space for a reference to an object.
+To get space for the object itself, you have to use \java{new}.
+
+\item If you don't initialize a primitive type, it is given a default value that depends on the type.
+For example, {\tt 0} for {\tt int}s and {\tt false} for {\tt boolean}s.
+The default value for object types is {\tt null}, which indicates no object.
+
+\item Primitive variables are well isolated in the sense that there is nothing you can do in one method that will affect a variable in another method.
+Object variables can be tricky to work with because they are not as well isolated.
+If you pass a reference to an object as an argument, the method you invoke might modify the object, in which case you will see the effect.
+Of course, that can be a good thing, but you have to be aware of it.
+
+\end{itemize}
+
+There is one other difference between primitives and object types.
+You cannot add new primitives to Java (unless you get yourself on the standards committee), but you can create new object types!  We'll see how in the next chapter.

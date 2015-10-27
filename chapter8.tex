@@ -169,63 +169,24 @@
 \chapter{Strings and things}
 \label{strings}
 
-TODO
+\index{object}
+\index{class!String}
+\index{method!string}
+
+In Java and other object-oriented languages, {\bf objects} are data that come with a set of methods.
+These methods operate on a specific object, performing computations and sometimes modifying the object's data.
+Strings are objects, and their data is a sequence of characters (i.e., letters, numbers, spaces, and symbols).
+The {\tt String} class has many methods for manipulating character data, and we will explore some of them in this chapter.
+
 
 \section{Characters}
-\index{method!string}
-\index{String method}
-\index{method!object}
-\index{object method}
-\index{class!String}
 
-In Java and other object-oriented languages, {\bf objects} are collections
-of related data that come with a set of methods.  These methods
-operate on the objects, performing computations and sometimes
-modifying the object's data.
-
-{\tt Strings} are objects,
-so you might ask ``What is the data
-contained in a {\tt String} object?''~and~``What are the methods we
-can invoke on {\tt String} objects?''
-\index{documentation}
-%
-The components of a {\tt String} object are letters or, more generally,
-characters.  Not all characters are letters; some are numbers,
-symbols, and other things.  For simplicity I
-call them all letters.
-%
-There are many methods, but I use only a few in this
-book.  The rest are documented at
-\url{http://download.oracle.com/javase/6/docs/api/java/lang/String.html}.
-
-The first method we will look at is {\tt charAt}, which allows you to
-extract letters from a {\tt String}.
-% To store the result, we need a new type:
-{\tt char} is the variable type that can store
-individual characters (as opposed to strings of them).
-
+\index{charAt}
 \index{char}
 \index{type!char}
-\index{charAt}
 
-{\tt char}s work just like the other types we have seen:
-
-\begin{code}
-    char ltr = 'c';
-    if (ltr == 'c') {
-      System.out.println(ltr);
-    }
-\end{code}
-
-Character values appear in single quotes, like {\tt 'c'}.  Unlike
-string values (which appear in double quotes), character values
-can contain only a single letter or symbol.
-
-\index{quote}
-\index{double-quote}
-\index{value!char}
-
-Here's how the {\tt charAt} method is used:
+The first method we will look at is {\tt charAt}, which allows you to extract characters from a {\tt String}.
+It returns a \java{char}, a primitive type that can store individual characters (as opposed to strings of them).
 
 \begin{code}
     String fruit = "banana";
@@ -233,565 +194,510 @@ Here's how the {\tt charAt} method is used:
     System.out.println(letter);
 \end{code}
 
-{\tt fruit.charAt()} means that I am
-invoking the {\tt charAt} method on the object named
-{\tt fruit}.
-I am passing the argument {\tt 1} to this method,
-which means that I want to know the first letter of
-the string.  The result is a character, which is stored in a
-{\tt char} named {\tt letter}.  When I print the value of
-{\tt letter}, I get a surprise:
+The code {\tt fruit.charAt(1)} means we invoke the {\tt charAt} method on the object referenced by {\tt fruit}.
+The argument {\tt 1} means that we want to know the letter at position 1.
+The result is a character, which is stored in a \java{char} variable named {\tt letter}.
+When you print the value of {\tt letter}, you may be surprised:
 
 \begin{stdout}
 a
 \end{stdout}
 
-{\tt a} is not the first letter of {\tt "banana"}.  Unless you are a
-computer scientist.  For technical reasons, computer scientists
-start counting from zero.  The 0th letter (``zeroeth'') of {\tt
-"banana"} is {\tt b}.  The 1th letter (``oneth'') is {\tt a} and the
-2th (``twooth'') letter is {\tt n}.
-
-If you want the zereoth letter of a string, you have to pass
-0 as an argument:
+Unless you already think like a computer scientist, the letter {\tt a} is not the {\em first} letter of {\tt "banana"}.
+For technical reasons, computer scientists start counting from zero.
+The 0th (``zeroeth'') letter of {\tt "banana"} is the letter {\tt b}.
+%The 1th letter (``oneth'') is {\tt a} and the 2th (``twooth'') letter is {\tt n}.
+So if you want the first letter of a string, you have to pass 0 as the argument:
 
 \begin{code}
     char letter = fruit.charAt(0);
 \end{code}
 
+\index{quote}
+\index{double-quote}
+\index{value!char}
 
-\section{String traversal}
-\label{traverse}
-\index{traverse}
-
-A common thing to do with a string is
-start at the beginning, select each character in turn, do
-some computation with it, and continue until the end.  This pattern
-of processing is called a {\bf traversal}.  A natural
-way to encode a traversal is with a {\tt while} statement:
+In source code, character literals appear in single quotes like \java{'c'}.
+Unlike string literals which appear in double quotes, characters may only contain a single letter or symbol.
 
 \begin{code}
-    int index = 0;
-    while (index < fruit.length()) {
-        char letter = fruit.charAt(index);
-        System.out.println(letter);
-        index = index + 1;
+    char letter = 'c';
+    if (letter == 'd') {
+        System.out.println('?');
     }
 \end{code}
 
-This loop traverses the string and prints each letter on
-a line by itself.  Notice that the condition is
-{\tt index < fruit.length()}, which means that when
-{\tt index} is equal to the length of the string, the
-condition is false and the body of the loop is not executed.
-The last character we access is the one with the
-index {\tt fruit.length()-1}.
+Characters work much like the other primitive types we have seen.
+In fact, they are really just 16-bit integers in disguise.
+You can use them in arithmetic, decisions, loops, and so forth.
+
+\begin{code}
+    System.out.print("Roman alphabet: ");
+    for (char c = 'A'; c <= 'Z'; c++) {
+        System.out.print(c);
+    }
+    System.out.println();
+\end{code}
+
+\index{Unicode}
+
+Java uses {\bf Unicode} for its character set (see \url{http://unicode.org/}) so that strings may store text in any language.
+Possible characters not only include the letters A to Z and the digits 0 to 9; they also support alphabets like Cyrillic and Greek, and left-to-right scripts like Arabic and Hebrew.
+%Regardless, both the data type \java{char} and the method {\tt charAt} work the same.
+
+\begin{code}
+    System.out.print("Greek alphabet: ");
+    for (int i = 913; i <= 937; i++) {
+        System.out.print((char) i);
+    }
+    System.out.println();
+\end{code}
+
+This example also demonstrates how you can convert \java{char} and \java{int} values using a cast operator.
+
+
+\section{String traversal}
+\label{traverse}
+
+\index{traverse}
+
+A common task with strings is to start at the beginning, select each character in turn, do some computation with it, and continue until the end.
+This pattern is called a {\bf traversal}.
+A natural way to traverse a string is with a \java{for} statement:
+
+\begin{code}
+    for (int i = 0; i < fruit.length(); i++) {
+        char letter = fruit.charAt(i);
+        System.out.println(letter);
+    }
+\end{code}
 
 \index{loop variable}
 \index{variable!loop}
 \index{index}
 
-The name of the loop variable is {\tt index}.  An {\bf
-index} is a variable or value used to specify a member of an ordered
-set, in this case the string of characters.  The index
-indicates (hence the name) which one you want.
+This loop prints each character of the string {\tt fruit} on a line by itself.
+The name of the loop variable is {\tt i}, which stands for {\bf index} (i.e., the position of each character).
+Notice that the condition is {\tt i < fruit.length()}, which means that when {\tt i} is equal to the length of the string, the
+condition is \java{false} and the loop terminates.
+%The last character we access is the one with the index {\tt fruit.length() - 1}.
 
-
-\section{Length}
 \index{String!length}
 \index{length!String}
 
-The next {\tt String} method we'll look at is {\tt length}, which
-returns the number of characters in the string.  For example:
+In the above example, {\tt length()} returns the number of characters in the string.
+It takes no arguments and returns an integer; the length of \java{"banana"} is 6.
+%Notice that it is legal to have a variable with the same name as a method (although it can be confusing for human readers).
+To find the last letter of a string, you might be tempted to try something like:
 
 \begin{code}
     int length = fruit.length();
+    char last = fruit.charAt(length);      // WRONG!
 \end{code}
 
-{\tt length} takes no arguments
-and returns an integer, in this case 6.  Notice that it is
-legal to have a variable with the same name as a method (although
-it can be confusing for human readers).
-
-To find the last letter of a string, you might be tempted to
-try something like
+This code compiles just fine, but it results in a runtime error.
+The reason is that there is no sixth letter in {\tt "banana"}.
+Since we started counting at 0, the 6 letters are indexed from 0 to 5.
+To get the last character, you have to subtract 1 from {\tt length}.
 
 \begin{code}
-    int length = fruit.length();
-    char last = fruit.charAt(length);       // WRONG!!
+    char last = fruit.charAt(length - 1);  // CORRECT
 \end{code}
 
-That won't work.  The reason is that there is no 6th letter
-in {\tt "banana"}.  Since we started counting at 0, the 6
-letters are numbered from 0 to 5.  To get the last character,
-you have to subtract 1 from {\tt length}.
+Many string traversal problems involve reading one string and creating another string.
+For example, to reverse the characters of a string we simply add one character at a time:
 
 \begin{code}
-    int length = fruit.length();
-    char last = fruit.charAt(length-1);
+    public static String reverse(String s) {
+        String r = "";
+        for (int i = s.length() - 1; i >= 0; i--) {
+            r = r + s.charAt(i);
+        }
+        return r;
+    }
 \end{code}
 
+\index{empty string}
 
-\section{Run-time errors}
+The value returned by \java{reverse("banana")} is \java{"ananab"}.
+Notice that the {\tt reverse} method begins with \java{""}, the {\bf empty string}.
+It then iterates from the last character and down to the zeroth.
+
+%\section{Looping and counting}
+%\label{loopcount}
+
+\index{loop!counting}
+\index{traverse!counting}
+
+Other string traversal problems involve looping and counting.
+The following method counts the number of times a character appears in a string.
+For example, \java{numberOf("banana", 'a')} returns 3.
+
+\begin{code}
+    public static int numberOf(String s, char c) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                count++;
+            }
+        }
+        return count;
+    }
+\end{code}
+
+\index{counter}
+
+This method demonstrates a common idiom, called a {\bf counter}.
+The variable {\tt count} is initialized to zero and then incremented each time we find an {\tt 'a'}.
+%To {\bf increment} is to increase by one; it is the opposite of {\bf decrement}.
+When we exit the loop, {\tt count} contains the result: the total number of a's.
+
+
+\section{Substrings}
+
+The {\tt substring} method returns a copy of the given string, beginning at the specified index.
+\begin{itemize}
+\item \java{fruit.substring(0)} returns \java{"banana"}
+\item \java{fruit.substring(2)} returns \java{"nana"}
+\item \java{fruit.substring(6)} returns \java{""}
+\end{itemize}
+
+By design, {\tt substring} returns the empty string if the argument is the length of the string.
+To visualize how this method works, it helps to draw a picture:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+b & a & n & a & n & a \\
+\hline
+0 & 1 & 2 & 3 & 4 & 5 \\
+\hline
+\end{tabular}
+\end{center}
+
+Like many string methods, {\tt substring} is overloaded for convenience.
+Another version of {\tt substring} takes two arguments: the start and ``end'' index.
+
+\begin{itemize}
+\item \java{fruit.substring(0, 3)} returns \java{"ban"}
+\item \java{fruit.substring(2, 5)} returns \java{"nan"}
+\item \java{fruit.substring(6, 6)} returns \java{""}
+\end{itemize}
+
+Notice that the end index is not included in the string.
+In other words, substrings are for the interval $[beg, end)$.
+One way to remember this detail is to think about how loops work.
+Here is a simplified version of \java{substring(2, 5)}:
+
+\begin{code}
+    String str = "banana";
+    int beg = 2;
+    int end = 5;
+    String sub = "";
+    for (int i = beg; i < end; i++) {
+        sub = sub + str.charAt(i);
+    }
+    System.out.println(sub);  // prints "nan"
+\end{code}
+
+Because of \java{<}, the loop terminates when \java{i == end}.
+Designing substring this way allows programmers to specify a length without having to subtract one.
+For example, the code could be rewritten as \java{fruit.substring(2, 2 + 3)}.
+
+
+\section{Bounds checking}
 \label{StringIndexOutOfBounds}
-\index{error!run-time}
-\index{run-time error}
-\index{exception!StringIndexOutOfBounds}
 
-Way back in Section~\ref{run-time} I talked about run-time errors,
-which are errors that don't appear until a program has started
-running.  In Java run-time errors are called {\bf exceptions}.
+\index{runtime error}
+\index{error!runtime}
 
-You probably haven't seen many run-time errors, because we
-haven't been doing many things that can cause one.  Well, now we are.
-If you use the {\tt charAt} method and provide an index that is
-negative or greater than {\tt length-1}, it {\bf throws} an exception.
-You can think of ``throwing'' an exception like throwing
-a tantrum.
+\index{exception}
+\index{stack trace}
 
-When that happens, Java prints an error message with
-the type of exception and a {\bf stack trace}, which shows the methods
-that were running when the exception occurred.  Here is an example:
+If you call the {\tt charAt} method with an index that is negative or greater than {\tt length - 1}, you will get an {\bf exception}.
+The same is true when calling {\tt substring} with invalid start or end indexes.
+When that happens, Java prints an error message and terminates the program.
+
+For example, notice the error in the {\tt getLastLetter} method below.
+It should be looking at \java{index - 1} instead of \java{index}.
 
 \begin{code}
 public class BadString {
-
     public static void main(String[] args) {
         processWord("banana");
     }
-
     public static void processWord(String s) {
         char c = getLastLetter(s);
         System.out.println(c);
     }
-
     public static char getLastLetter(String s) {
-        int index = s.length();         // WRONG!
-        char c = s.charAt(index);
+        int index = s.length();
+        char c = s.charAt(index);  // WRONG!
         return c;
     }
 }
 \end{code}
 
-Notice the error in {\tt getLastLetter}: the index of the last
-character should be {\tt s.length()-1}.  Here's what you get:
+When you run the {\tt BadString} program, Java prints the following message.
 
+\begin{small}
 \begin{stdout}
 Exception in thread "main" java.lang.StringIndexOutOfBoundsException:
 String index out of range: 6
-        at java.lang.String.charAt(String.java:694)
-        at BadString.getLastLetter(BadString.java:24)
-        at BadString.processWord(BadString.java:18)
-        at BadString.main(BadString.java:14)
+	at java.lang.String.charAt(String.java:658)
+	at BadString.getLastLetter(BadString.java:14)
+	at BadString.processWord(BadString.java:8)
+	at BadString.main(BadString.java:4)
 \end{stdout}
+\end{small}
 
-Then the program ends.
-The stack trace can be hard to read, but it contains a lot of information.
+\index{stack trace}
+
+This information is called a {\bf stack trace}, which shows the methods that were running when the error occurred.
+The stack trace can be difficult to read, but it contains a lot of useful information.
+For one, it tells you that the index 6 was out of range.
+
+More importantly, it shows the exact line of code where the error occurred.
+It may be helpful to read the stack trace bottom-up.
+On line~4, {\tt main} called {\tt processWord}, which on line~8 called {\tt getLastLetter}, which on line~14 called {\tt charAt}.
+The actual error occurred on line 658 of String.java, which is in the source code for the {\tt String} class itself.
+
+Although possible, it's unlikely that the Java library code has mistakes that cause programs to crash.
+When reading stack diagrams, look for the top line that refers to a file you wrote.
+In this example, {\tt BadString.java:14} is the most useful debugging information.
 
 
-\section{The {\tt indexOf} method}
+\section{The indexOf method}
 \index{indexOf}
 
-{\tt indexOf} is the inverse of {\tt charAt}:
-{\tt charAt} takes an index and returns the character at that
-index;  {\tt indexOf} takes a character and finds the index
-where that character appears.
-
-{\tt charAt} fails if the index is out of range, and throws an
-exception.  {\tt indexOf} fails if the character does not appear in
-the string, and returns the value {\tt -1}.
+At first glance, {\tt indexOf} is the inverse of {\tt charAt}.
+The {\tt charAt} method takes an index and returns the character at that index.
+The {\tt indexOf} method takes a character and finds an index where that character appears.
 
 \begin{code}
     String fruit = "banana";
     int index = fruit.indexOf('a');
 \end{code}
 
-This finds the index of the letter {\tt 'a'} in the string.
-In this case, the letter appears three times, so it is not
-obvious what {\tt indexOf} should do.  According to the
-documentation, it returns the index of the {\em first} appearance.
+This code finds the index of the letter \java{'a'} in the string.
+In this case, the letter appears three times, so it is not obvious what {\tt indexOf} should do.
+According to the documentation, it returns the index of the {\em first} appearance.
 
-To find subsequent appearances, there is another
-version of {\tt indexOf}.  It takes a
-second argument that indicates where in the string to start
-looking.  For an explanation of this kind
-of overloading, see Section~\ref{overloading}.
-
-If we invoke:
+To find subsequent appearances, there is another version of {\tt indexOf}.
+It takes a second argument that indicates where in the string to start looking.
+For an explanation of this kind of overloading, see Section~\ref{overloading}.
 
 \begin{code}
     int index = fruit.indexOf('a', 2);
 \end{code}
 
-it starts at the twoeth letter (the first {\tt n}) and finds
-the second {\tt a}, which is at index 3.  If the letter happens
-to appear at the starting index, the starting index is the
-answer.  So
+This code starts at the third letter (the first \java{'n'}) and finds the next \java{'a'}, which is at index 3.
+If the letter happens to appear at the starting index, the starting index is the answer.
+So \java{fruit.indexOf('a', 5)} returns 5.
 
-\begin{code}
-    int index = fruit.indexOf('a', 5);
-\end{code}
+There are subtle differences between {\tt charAt} and {\tt indexOf}.
+The former throws an exception when the index is out of range.
+In contrast, {\tt indexOf} returns the value {\tt -1} if the character does not appear in the string.
 
-returns 5.
-
-
-\section{Looping and counting}
-\label{loopcount}
-\index{traverse!counting}
-\index{loop!counting}
-
-The following program counts the
-number of times the letter {\tt 'a'} appears in a string:
-
-\begin{code}
-    String fruit = "banana";
-    int length = fruit.length();
-    int count = 0;
-
-    int index = 0;
-    while (index < length) {
-        if (fruit.charAt(index) == 'a') {
-            count = count + 1;
-        }
-        index = index + 1;
-    }
-    System.out.println(count);
-\end{code}
-
-This program demonstrates a common idiom, called a {\bf counter}.  The
-variable {\tt count} is initialized to zero and then incremented each
-time we find an {\tt 'a'}. To {\bf increment} is to increase by one;
-it is the opposite of {\bf decrement}.
-%, and unrelated to {\bf excrement}, which is a noun
-When we exit the loop, {\tt count}
-contains the result: the total number of a's.
-\index{counter}
-\index{increment}
-\index{decrement}
+You can also use {\tt indexOf} to search for an entire string.
+For example, the code \java{fruit.indexOf("nan")} returns 2 and \java{fruit.indexOf("zzz")} returns -1.
 
 
-\section{Increment and decrement operators}
-\index{operator!increment}
-\index{operator!decrement}
-
-Incrementing and decrementing are such common operations that
-Java provides special operators for them.  The {\tt ++}
-operator adds one to the current value of an {\tt int} or
-{\tt char}.  {\tt --} subtracts one.  Neither operator works
-on {\tt double}s, {\tt boolean}s or {\tt String}s.
-
-Technically, it is legal to increment a variable and use it
-in an expression at the same time.  For example, you might see
-something like:
-
-\begin{code}
-    System.out.println(i++);
-\end{code}
-
-Looking at this, it is not clear whether the increment will
-take effect before or after the value is printed.  Because
-expressions like this tend to be confusing, I discourage
-you from using them.  In fact, to discourage you even more,
-I'm not going to tell you what the result is.  If you really
-want to know, you can try it.
-
-Using the increment operators, we can rewrite the letter-counter:
-
-\begin{code}
-    int index = 0;
-    while (index < length) {
-      if (fruit.charAt(index) == 'a') {
-        count++;
-      }
-      index++;
-    }
-\end{code}
-
-It is a common error to write something like
-
-\begin{code}
-    index = index++;             // WRONG!!
-\end{code}
-
-Unfortunately, this is syntactically legal, so the compiler
-will not warn you.  The effect of this statement is to leave
-the value of {\tt index} unchanged.  This is often a difficult
-bug to track down.
-
-Remember, you can write {\tt index = index+1}, or you
-can write {\tt index++}, but you shouldn't mix them.
-
-% \section{Character arithmetic}
-% \index{char}
-% \index{type!char}
-% \index{operator!char}
-% \index{arithmetic!char}
-
-% It may seem odd, but you can do arithmetic with characters.
-% If you have a variable named {\tt letter} that contains a character,
-% then {\tt letter - 'a'} will tell you where in the alphabet it appears
-%(keeping in mind that 'a' is the zeroeth letter of the alphabet and
-% 'z' is the 25th).
-
-% This sort of thing is useful for converting between the characters
-% that contain numbers, like '0', '1' and '2', and the corresponding
-% integers.  They are not the same thing.  For example, if you try this
-
-% \begin{code}
-%     char letter = '3';
-%     int x =(int) letter;
-%     System.out.println(x);
-% \end{code}
-% %
-% you might expect the value 3, but depending on your environment,
-% you might get 51, which is the ASCII code that is used to
-% represent the character '3', or you might get something else
-% altogether.  To convert '3' to the corresponding integer value
-% you can subtract '0':
-
-% \begin{code}
-%     int x =(int)(letter - '0');
-% \end{code}
-% %
-% Technically, in both of these examples the typecast({\tt(int)}) is
-% unnecessary, since Java will convert type {\tt char} to type {\tt int}
-% automatically.  I included the typecasts to emphasize the difference
-% between the types, and because I'm a stickler about that sort of
-% thing.
-
-% Since this conversion can be a little ugly, it is preferable to use
-% the {\tt digit} method in the {\tt Character} class.  For example:
-
-% \begin{code}
-%     int x = Character.digit(letter, 10);
-% \end{code}
-% %
-% converts {\tt letter} to the corresponding digit, interpreting
-% it as a base 10 number.
-
-% Another use for character arithmetic is to loop through the letters of
-% the alphabet in order.  For example, in Robert McCloskey's book {\em
-% Make Way for Ducklings}, the names of the ducklings form an
-% abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and
-% Quack.  Here is a loop that prints these names in order:
-
-% \begin{code}
-%     char letter = 'J';
-%     while (letter <= 'Q') {
- %      System.out.println(letter + "ack");
- %      letter++;
-%     }
-% \end{code}
-%
-% Notice that in addition to the arithmetic operators, we can also
-% use the conditional operators on characters.  The output of this
-% program is:
-
-% \begin{stdout}
-% Jack
-% Kack
-% Lack
-% Mack
-% Nack
-% Oack
-% Pack
-% Qack
-% \end{stdout}
-% %
-% Of course, that's not quite right because I've misspelled ``Ouack''
-% and ``Quack.''  As an exercise, modify the program to correct
-% this error.
-
-
-\section{{\tt String}s are immutable}
+\section{String comparison}
 \label{immutable}
-\index{class!String}
-\index{immutable}
-\index{String}
+\label{incomparable}
+
 \index{toUpperCase}
 \index{toLowerCase}
+\index{immutable}
 
-As you read the documentation of the {\tt String} methods, you
-might notice {\tt toUpperCase} and {\tt toLowerCase}.  These
-methods are often a source of confusion, because it sounds
-like they have the effect of changing (or mutating) an
-existing string.  Actually, neither these methods nor any
-others can change a string, because strings are {\bf immutable}.
+As you read the documentation of the {\tt String} methods, you might notice {\tt toUpperCase} and {\tt toLowerCase}.
+These methods are often a source of confusion, because it sounds like they have the effect of changing (or mutating) an
+existing string.
+Actually, neither these methods nor any others can change a string, because strings are {\bf immutable}.
 
-When you invoke {\tt toUpperCase} on a {\tt String}, you get a
-{\em new} {\tt String} as a return value.  For example:
+When you invoke {\tt toUpperCase} on a {\tt String}, you get a {\em new} {\tt String} as a return value.
+For example:
 
 \begin{code}
     String name = "Alan Turing";
     String upperName = name.toUpperCase();
 \end{code}
 
-After the second line is executed, {\tt upperName} contains
-the value {\tt "ALAN TURING"}, but {\tt name} still contains
-{\tt "Alan Turing"}.
 \index{Turing, Alan}
 
+After the second line is executed, {\tt upperName} contains the value \java{"ALAN TURING"}.
+But {\tt name} still contains \java{"Alan Turing"} as before.
 
-\section{{\tt String}s are incomparable}
-\label{incomparable}
-\index{class!String}
-\index{comparison!String}
-\index{String}
 \index{equals}
 \index{compareTo}
 
-It is often necessary to compare strings to see if they are the same,
-or to see which comes first in alphabetical order.  It would be
-nice if we could use the comparison operators, like {\tt ==} and
-{\tt >}, but we can't.
-
-To compare {\tt String}s, we have to use the {\tt equals}
-and {\tt compareTo} methods.  For example:
+It is often necessary to compare strings to see if they are the same, or to see which comes first in alphabetical order.
+It would be nice if we could use the comparison operators, like {\tt ==} and {\tt >}, but we can't.
+To compare {\tt String}s, we have to use the {\tt equals} and {\tt compareTo} methods.
 
 \begin{code}
     String name1 = "Alan Turing";
     String name2 = "Ada Lovelace";
-
-    if (name1.equals (name2)) {
-      System.out.println("The names are the same.");
+    if (name1.equals(name2)) {
+        System.out.println("The names are the same.");
     }
-
-    int flag = name1.compareTo (name2);
-    if (flag == 0) {
-      System.out.println("The names are the same.");
-    } else if (flag < 0) {
-      System.out.println("name1 comes before name2.");
-    } else if (flag > 0) {
-      System.out.println("name2 comes before name1.");
+    int diff = name1.compareTo(name2);
+    if (diff == 0) {
+        System.out.println("The names are the same.");
+    } else if (diff < 0) {
+        System.out.println("name1 comes before name2.");
+    } else if (diff > 0) {
+        System.out.println("name2 comes before name1.");
     }
 \end{code}
 
-The syntax here is a little weird.  To compare two {\tt String}s,
-you have to invoke a method on one of them and pass the other as an
-argument.
+The syntax here may seem a little awkward.
+To compare two strings, you have to invoke a method on one of them and pass the other as an argument.
+The return value from {\tt equals} is straightforward: \java{true} if the strings contain the same characters, and \java{false} otherwise.
 
-The return value from {\tt equals} is straightforward enough;
-{\tt true} if the strings contain the same characters, and
-{\tt false} otherwise.
+The return value from {\tt compareTo} is the {\em difference} between the first characters in the strings that differ.
+If the strings are equal, their difference is 0.
+If the first string (the one on which the method is invoked) comes first in the alphabet, the difference is negative.
+Otherwise, the difference is positive.
 
-The return value from {\tt compareTo} is a weird, too.  It is
-the difference between the first characters in the strings
-that differ.  If the strings are equal, it is 0.  If the
-first string (the one on which the method is invoked) comes
-first in the alphabet, the difference is negative.  Otherwise,
-the difference is positive.  In this case the return value
-is positive 8, because the second letter of ``Ada'' comes
-before the second letter of ``Alan'' by 8 letters.
-
-Just for completeness, I should admit that it is {\em legal}, but very
-seldom {\em correct}, to use the {\tt ==} operator with {\tt String}s.
-I explain why in Section~\ref{equivalence}; for now, don't do it.
+In the example above, the return value is positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
 
 
-\section{Objects and primitives}
-\index{type!object}
-\index{type!primitive}
-\index{object type}
-\index{primitive type}
+\section{Character arithmetic}
 
-There are two kinds of types in Java, primitive types and
-object types.  Primitives, like {\tt int} and {\tt boolean}
-begin with lower-case letters; object types begin with
-upper-case letters.  This distinction is useful because it
-reminds us of some of the differences between them:
+\index{arithmetic!char}
 
-\begin{itemize}
+Like the \java{compareTo} method, you too can do useful arithmetic with characters.
+For example, \java{letter - 'a'} will tell you what position in the alphabet a lowercase letter appears (keeping in mind that 'a' is the zeroeth letter of the alphabet and 'z' is the 25th).
 
-\item When you declare a primitive variable, you get storage
-space for a primitive value.  When you declare an object variable, you
-get a space for a reference to an object.  To get space for
-the object itself, you have to use {\tt new}.
+This technique is useful for converting between characters that contain numbers (e.g., \java{'0'}, \java{'1'}, \java{'2'}) and the corresponding integers.
+They are not the same!
+For example, try this code:
 
-\item If you don't initialize a primitive type, it is given
-a default value that depends on the type.  For example,
-{\tt 0} for {\tt int}s and {\tt false} for {\tt boolean}s.
-The default value for object types is {\tt null}, which indicates
-no object.
+\begin{code}
+    char letter = '3';
+    int x = (int) letter;
+    System.out.println(x);
+\end{code}
 
-\item Primitive variables are well isolated in the sense that there is
-nothing you can do in one method that will affect a variable in
-another method.  Object variables can be tricky to work with because
-they are not as well isolated.  If you pass a reference to an object
-as an argument, the method you invoke might modify the object, in which
-case you will see the effect.  Of course, that can be a good thing, but you
-have to be aware of it.
+You might expect the value 3, but instead you get 51, which is the Unicode value for the character \java{'3'}.
+%Remember, not all languages in the world use Arabic numerals like English does.
+To convert '3' to the corresponding integer value, you can subtract \java{'0'}:
 
-\end{itemize}
+\begin{code}
+    int x = (int) (letter - '0');
+\end{code}
 
-There is one other difference between primitives and object
-types.  You cannot add new primitives to Java
-(unless you get yourself on the standards committee), but
-you can create new object types!  We'll see how in the next
-chapter.
+Technically, in both of these examples the typecast \java{(int)} is unnecessary, since Java will convert type \java{char} to type \java{int} automatically.
+Since this conversion can be a bit ugly, it is preferable to use the {\tt digit} method in the {\tt Character} class.
+For example, this code converts {\tt letter} to the corresponding digit, interpreting it as a base 10 number.
+
+\begin{code}
+    int x = Character.digit(letter, 10);
+\end{code}
+
+Another use for character arithmetic is to loop through the letters of the alphabet in order.
+For example, in Robert McCloskey's book {\em Make Way for Ducklings}, the names of the ducklings form an Abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack.
+Here is a loop that prints these names in order:
+
+\begin{code}
+    char letter = 'J';
+    while (letter <= 'Q') {
+        System.out.println(letter + "ack");
+        letter++;
+    }
+\end{code}
+
+Notice that in addition to the arithmetic operators, we can also use the conditional operators on characters.
+The output of this program is:
+
+\begin{stdout}
+Jack
+Kack
+Lack
+Mack
+Nack
+Oack
+Pack
+Qack
+\end{stdout}
+
+Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack.''
+As an exercise, you can modify the program to correct this error.
 
 
 \section{Wrapper classes}
 
-MIN/MAX\_VALUE
+In the previous section, we introduced the {\tt Character} class.
+There are similar classes for the other primitive data types: {\tt Boolean}, {\tt Byte}, {\tt Short}, {\tt Integer}, {\tt Long}, {\tt Float}, and {\tt Double}.
+Each of these classes is in the {\tt java.lang} package, so you don't need to \java{import} them.
 
+One nice feature of these classes is they each define the constants \java{MIN_VALUE} and \java{MAX_VALUE}.
+For example, \java{Integer.MIN_VALUE} is the \java{int} $-2147483648$, and \java{Integer.MAX_VALUE} is the \java{int} $2147483647$.
+Rather than remember these unusual numbers, you can simply refer to the built-in constants.
 
-\section{Memory diagrams}
+Another purpose of wrapper classes is converting values to and from Strings.
+For example, we can convert a string to an integer using the \java{parseInt} method:
 
-draw arrows for references
+\begin{code}
+String str = "12345";
+int num = Integer.parseInt(str);
+\end{code}
 
+You will find similar methods in the other wrapper classes, for example, \java{Double.parseDouble}.
+We can convert integers (and other primitives) to strings using the same technique:
 
-\section{String manipulation}
+\begin{code}
+int num = 12345;
+String str = Integer.toString(num);
+\end{code}
 
-TODO other string methods
+As a convenience, Java will automatically convert primitive values to/from their wrapper types.
+We will see later why this code is inefficient.
 
+\begin{code}
+Integer i = 12345;
+Double d = 123.45;
+\end{code}
 
-\section{Java library source}
-
-TODO String.java
+For now, it's important to note that {\tt i} and {\tt d} are references to objects.
+In other words, the values {\tt 12345} and {\tt 123.45} have been wrapped inside objects.
+Like strings, these objects have a variety of methods that can be applied.
+Refer to the documentation for {\tt Integer} and {\tt Double} for more details.
 
 
 \section{Vocabulary}
 
 \begin{description}
 
-\item[object:] A collection of related data that comes with a set of
-methods that operate on it.  The objects we have used so far are
-{\tt String}s, Bugs, Rocks, and the other GridWorld objects.
+\term{object}
+A collection of related data that comes with a set of methods that operate on it.
 
-\item[index:]  A variable or value used to select one of the
-members of an ordered set, like a character from a string.
+\term{Unicode}
+The computing industry standard for representing text in most of the world's languages.
 
-\item[exception:] A run-time error.
-\index{exception}
-\index{run-time error}
+\term{traverse}
+To iterate through all the elements of a set performing a similar operation on each.
 
-\item[throw:] Cause an exception.
+\term{index}
+A variable or value used to select one of the members of an ordered set, like a character from a string.
 
-\item[stack trace:] A report that shows the state of a program
-when an exception occurs.
+\term{empty string}
+The string \java{""} which exists but has a length of zero.
 
-\item[prototype:]  The first line of a method, which specifies
-the name, parameters and return type.
+\term{counter}
+A variable used to count something, usually initialized to zero and then incremented.
 
-\item[traverse:]  To iterate through all the elements of a set
-performing a similar operation on each.
+\term{exception}
+A runtime error like ArithmeticException or IndexOutOfBoundsException.
 
-\item[counter:]  A variable used to count something, usually
-initialized to zero and then incremented.
+\term{stack trace}
+A report that shows the state of a program when an exception occurs.
 
-\item[increment:]  Increase the value of a variable by one.
-The increment operator in Java is {\tt ++}.
-
-\item[decrement:]  Decrease the value of a variable by one.
-The decrement operator in Java is {\tt --}.
-
-
-\index{object}
-\index{index}
-\index{traverse}
-\index{counter}
-\index{increment}
-\index{decrement}
+\term{immutable}
+An object that, once created, cannot be modified.
+All strings are immutable.
 
 \end{description}
 
@@ -799,42 +705,13 @@ The decrement operator in Java is {\tt --}.
 \section{Exercises}
 
 \begin{exercise}
-Write a method that takes a {\tt String}
-as an argument and that prints the letters backwards all on
-one line.
-\end{exercise}
 
-\begin{exercise}
-Read the stack trace in Section~\ref{StringIndexOutOfBounds}
-and answer these questions:
-
-\begin{itemize}
-
-\item What kind of Exception occurred, and what package is it defined
-in?
-
-\item What is the value of the index that caused the exception?
-
-\item What method threw the exception, and where is
-that method defined?
-
-\item What method invoked {\tt charAt}?
-
-\item In {\tt BadString.java}, what is the line number where {\tt charAt}
-was invoked?
-
-\end{itemize}
-
-\end{exercise}
-
-\begin{exercise}
-
-Encapsulate the code in Section~\ref{loopcount} in a method named
-{\tt countLetters}, and generalize it so that it accepts the
-string and the letter as arguments.
 \index{encapsulation}
 \index{generalization}
 
+Encapsulate the code in Section~\ref{loopcount} into a method named
+{\tt countLetters}, and generalize it so that it accepts the
+string and the letter as arguments.
 Then rewrite the method so that it uses
 {\tt indexOf} to locate the a's, rather than checking
 the characters one by one.
