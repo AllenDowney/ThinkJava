@@ -75,3 +75,49 @@ Of course, that can be a good thing, but you have to be aware of it.
 
 There is one other difference between primitives and object types.
 You cannot add new primitives to Java (unless you get yourself on the standards committee), but you can create new object types!  We'll see how in the next chapter.
+
+
+% was in Chapter 8 Strings and Things
+\begin{exercise}
+
+If you did the GridWorld exercises in Chapter~\ref{gridworld}, you
+might enjoy this exercise.  The goal is to use trigonometry to get the
+Bugs to chase each other.
+
+Make a copy of {\tt BugRunner.java} named {\tt ChaseRunner.java} and
+import it into your development environment.  Before you change
+anything, check that you can compile and run it.
+
+\begin{itemize}
+
+\item Create two Bugs, one red and one blue.
+
+\item Write a method called {\tt distance} that takes two Bugs
+and computes the distance between them.  Remember that you can
+get the x-coordinate of a Bug like this:
+
+\begin{code}
+    int x = bug.getLocation().getCol();
+\end{code}
+
+\item Write a method called {\tt turnToward} that takes two
+Bugs and turns one to face the other.  HINT: use {\tt Math.atan2},
+but remember that the result is in radians, so you have to
+convert to degrees.  Also, for Bugs, 0 degress is North, not East.
+
+\item Write a method called {\tt moveToward} that takes two
+Bugs, turns the first to face the second, and then moves the
+first one, if it can.
+
+\item Write a method called {\tt moveBugs} that takes two Bugs
+and an integer {\tt n}, and moves each Bug toward the other {\tt n}
+times.  You can write this method recursively, or use a while loop.
+
+\item Test each of your methods as you develop them.  When they are
+  all working, look for opportunities to improve them.  For example,
+  if you have redundant code in {\tt distance} and {\tt turnToward},
+  you could encapsulate the repeated code in a method.
+
+\end{itemize}
+
+\end{exercise}

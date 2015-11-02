@@ -168,22 +168,29 @@
 
 \chapter{Value methods}
 
-Some of the methods we have used, like the \java{Math} methods, return values.
-Others, like \java{println} and \java{newLine}, perform an action but don't return a value.
-
-Methods that return values are called {\bf value methods}; methods that don't are called {\bf void methods}.  The methods we have written so far, like {\tt countdown} and {\tt countup}, are all void, which is why the first line has the keyword \java{void}.
-\index{void}
-\index{method!void}
 \index{method!value}
+\index{method!void}
 \index{value method}
 \index{void method}
+
+Some of the methods we have used, like the \java{Math} methods, return values.
+Others, like \java{println} and \java{newLine}, perform an action but don't return a value.
+In Chapter~\ref{voidmeth}, we called methods that don't return a value {\bf void methods}.
+The focus of this chapter is {\bf value methods}, or methods that compute and return a result.
+
+
+\section{Return values}
+
+\index{void}
+
+The methods we have written so far, like {\tt countdown} and {\tt countup}, don't return values, which is why the first line has the keyword \java{void}.
 
 \begin{code}
     public static void countup(int n) {
         if (n == 0) {
             System.out.println("Blastoff!");
         } else {
-            countdown(n - 1);
+            countup(n - 1);
             System.out.println(n);
         }
     }
@@ -192,7 +199,7 @@ Methods that return values are called {\bf value methods}; methods that don't ar
 When you invoke a \java{void} method, it is typically on a line all by itself:
 
 \begin{code}
-    countdown(3);
+    countup(3);
     System.out.println("Have a nice day.");
 \end{code}
 
@@ -579,13 +586,13 @@ A recursive definition is similar to a circular definition, in the sense that th
 A truly circular definition is not very useful:
 
 \begin{description}
-\item[recursive:] an adjective used to describe a method that is recursive.
+\term{recursive} an adjective used to describe a method that is recursive.
 \end{description}
-
-\index{factorial}
 
 If you saw that definition in the dictionary, you might be annoyed.
 In fact, if you search for recursion on Google, it displays ``Did you mean: recursion'' as an inside joke.
+
+\index{factorial}
 
 Many mathematical functions are defined recursively.
 For example, if you look up the definition of {\bf factorial}, you get something like:
@@ -605,7 +612,8 @@ Putting it all together, we get $3!$ equal to 3 times 2 times 1 times 1, which i
 
 If you can formulate a recursive definition of something, you can easily write a Java method to evaluate it.
 The first step is to decide what the parameters and return type are.
-Since factorial is defined for integers, the method takes an integer as a parameter and returns an integer.  So here's a good starting place:
+Since factorial is defined for integers, the method takes an \java{int} as a parameter and returns an \java{int}.
+So here's a good starting place:
 
 \begin{code}
     public static int factorial(int n) {
@@ -774,7 +782,7 @@ public class SeriesTest extends TestCase {
 
 JUnit uses some Java language features we have not see yet, like the keyword \java{extends}.
 But it's easy to get started by writing simple test methods.
-In DrJava, you can select ``File $>$ New JUnit Test Case'' from the menu to generate a test class and methods.
+In \mbox{DrJava}, you can select ``File $>$ New JUnit Test Case'' from the menu to generate a test class and methods.
 
 JUnit provides a family of overloaded \java{assert} methods.
 In the example above, \java{assertEquals} compares the expected value with the actual value, that is, what \java{fibonacci} returns.
@@ -782,8 +790,8 @@ If \java{assertEquals} fails, it displays an error showing the values that did n
 This code is more concise than writing your own \java{if} statements and \java{System.err} messages.
 
 To run JUnit directly from DrJava, click the {\tt Test} button on the toolbar.
-If all your test methods pass, you will see a green rectangle in the lower right.
-Otherwise, it will take you directly to the first assertion that failed.
+If all your test methods pass, you will see a green bar in the lower right.
+Otherwise, DrJava will take you directly to the first assertion that failed.
 
 
 \section{Vocabulary}
@@ -837,7 +845,7 @@ The product of all the integers up to and including a given integer.
 \section{Exercises}
 
 
-\begin{exercize}
+\begin{exercise}
 
 Answer the following questions by trying them out.
 In fact, any time you have a question about what is legal or illegal in Java, a good way to find out is to ask the compiler.
@@ -854,9 +862,7 @@ For example: \java{System.out.println("boo!") + 7;}
 
 \end{enumerate}
 
-\end{exercize}
-
-
+\end{exercise}
 
 
 \begin{exercise}
@@ -893,18 +899,18 @@ Some processors even provide a hardware implementation of this operation for flo
 \item Write a \java{main} method that tests \java{multadd} by invoking it with a few simple parameters, like \java{1.0, 2.0, 3.0}.
 
 \item Also in \java{main}, use \java{multadd} to compute the following values:
-
+%
 \begin{eqnarray*}
 & \sin \frac{\pi}{4} + \frac{\cos \frac{\pi}{4}}{2} & \\
 & \log 10 + \log 20 &
 \end{eqnarray*}
 
 \item Write a method called \java{yikes} that takes a double as a parameter and that uses \java{multadd} to calculate:
-
+%
 \begin{eqnarray*}
 x e^{-x} + \sqrt{1 - e^{-x}}
 \end{eqnarray*}
-
+%
 HINT: The Math method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
@@ -914,6 +920,40 @@ Whenever you do that, it is a good idea to test the first method carefully befor
 Otherwise, you might find yourself debugging two methods at the same time, which can be difficult.
 
 One of the purposes of this exercise is to practice pattern-matching: the ability to recognize a specific problem as an instance of a general category of problems.
+\end{exercise}
+
+\begin{exercise}
+In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
+
+\begin{code}
+public class Prod {
+
+    public static void main(String[] args) {
+        System.out.println(prod(1, 4));
+    }
+
+    public static int prod(int m, int n) {
+        if (m == n) {
+            return n;
+        } else {
+            int recurse = prod(m, n-1);
+            int result = n * recurse;
+            return result;
+        }
+    }
+}
+\end{code}
+
+\begin{enumerate}
+
+\item Draw a stack diagram showing the state of the program just before the last instance of \java{prod} completes.
+What is the output of this program?
+
+\item Explain in a few words what \java{prod} does.
+
+\item Rewrite \java{prod} without using temporary variables \java{recurse} and \java{result}.
+
+\end{enumerate}
 \end{exercise}
 
 \begin{exercise}
@@ -955,40 +995,6 @@ What is the output of the following program?
 \end{code}
 
 The purpose of this exercise is to make sure you understand logical operators and the flow of execution through value methods.
-\end{exercise}
-
-\begin{exercise}
-In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
-
-\begin{code}
-public class Prod {
-
-    public static void main(String[] args) {
-        System.out.println(prod(1, 4));
-    }
-
-    public static int prod(int m, int n) {
-        if (m == n) {
-            return n;
-        } else {
-            int recurse = prod(m, n-1);
-            int result = n * recurse;
-            return result;
-        }
-    }
-}
-\end{code}
-
-\begin{enumerate}
-
-\item Draw a stack diagram showing the state of the program just before the last instance of \java{prod} completes.
-What is the output of this program?
-
-\item Explain in a few words what \java{prod} does.
-
-\item Rewrite \java{prod} without using temporary variables \java{recurse} and \java{result}.
-
-\end{enumerate}
 \end{exercise}
 
 \begin{exercise}
@@ -1070,27 +1076,22 @@ Optional challenge: you can make this method more efficient, when \java{n} is ev
 
 \begin{exercise}
 \label{gcd}
-(This exercise is based on page 44 of Ableson and Sussman's {\em Structure and Interpretation of Computer Programs}.)
+Write a method called \java{gcd} that takes two integer parameters and that uses Euclid's algorithm to compute and return the greatest common divisor of the two numbers.
 
 The following technique is known as Euclid's Algorithm, because it appears in Euclid's {\em Elements} (Book 7, ca.~300 BC).
 It may be the oldest recorded nontrivial algorithm.
-%\footnote{For a definition of ``algorithm'', jump ahead to Section~\ref{algorithm}.}  NOW IN CHAPTER 1
-
 The process is based on the observation that, if $r$ is the remainder when $a$ is divided by $b$, then the common divisors of $a$ and $b$ are the same as the common divisors of $b$ and $r$.
-Thus we can use the equation:
-
 \[ gcd(a, b) = gcd(b, r) \]
-
-to successively reduce the problem of computing a GCD to the problem of computing the GCD of smaller and smaller pairs of integers.
-For example,
-
+%
+We can use this fact to reduce the problem of computing a GCD to the problem of computing the GCD of smaller and smaller pairs of integers.
+For example:
 \[ gcd(36, 20) = gcd(20, 16) = gcd(16, 4) = gcd(4, 0) = 4 \]
+%implies that the GCD of 36 and 20 is 4.
 
-implies that the GCD of 36 and 20 is 4.
-It can be shown that for any two starting numbers, this repeated reduction eventually produces a pair where the second number is 0.
-Then the GCD is the other number in the pair.
+%It can be shown that for any two starting numbers, this repeated reduction eventually produces a pair where the second number is 0.
+%Then the GCD is the other number in the pair.
 
-Write a method called \java{gcd} that takes two integer parameters and that uses Euclid's algorithm to compute and return the greatest common divisor of the two numbers.
+(This exercise is based on page 44 of Ableson and Sussman's {\em Structure and Interpretation of Computer Programs}.)
 \end{exercise}
 
 

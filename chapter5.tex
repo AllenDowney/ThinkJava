@@ -273,7 +273,7 @@ When comparing values of different numeric types, Java applies the same conversi
 For example, when evaluating the expression \java{5 < 6.0}, Java automatically converts the \java{5} to \java{5.0}.
 
 Most relational operators don't work with strings.
-But confusingly, \java{==} and \java{!=} work with Strings---they just don't do what you expect.
+Confusingly, \java{==} and \java{!=} do work with strings---they just don't do what you expect.
 We'll explain what they do later; in the meantime, don't use them with strings.
 Instead, you should use the \java{String} methods \java{equals} and \java{compareTo}:
 
@@ -363,9 +363,9 @@ In addition, you can press the up/down arrows on the keyboard to repeat previous
 \index{order of operations}
 \index{precedence}
 
-Notice that the expressions in this example don't use parentheses.
-According to the rules of precedence, Java evaluates arithmetic operators first, then the relational operators, then conditional operators, and finally the assignment operator.
-%Do a web search for ``java operator precedence'' to see the complete list of rules.
+Notice how none of the expressions in this example require parentheses.
+Java evaluates arithmetic operators first, then the relational operators, then conditional operators, and finally the assignment operator.
+Do a web search for ``java operator precedence'' to see the complete list of rules.
 If two operators have the same precedence, Java evaluates them from left to right.
 
 
@@ -589,7 +589,7 @@ Exception in thread "main" java.util.InputMismatchException
 \end{stdout}
 
 In this example, the program calls the \java{nextDouble} method, so the \java{Scanner} attempts to parse a \java{double}.
-However the user input is \java{Hello}, which causes an \java{InputMismatchException}.
+However the user input is \java{"Hello"}, which causes an \java{InputMismatchException}.
 We can prevent this error from happening by checking the input before parsing it:
 
 \begin{code}
@@ -622,7 +622,7 @@ Since the \java{hasNextDouble} method returns a boolean result, it is already a 
 \index{recursion}
 
 Now that we have methods and if statements, we can explore one of the most magical and interesting things a program can do.
-It is common for one method to invoke another, but what happens if a method invokes itself?
+It is common for one method to invoke another, but what happens if a method invokes {\em itself}?
 This process is called {\bf recursion}.
 Consider the following example:
 
@@ -765,7 +765,7 @@ What do you think happens if you reverse steps 2 and 3, making the recursive cal
         if (n == 0) {
             System.out.println("Blastoff!");
         } else {
-            countdown(n - 1);
+            countup(n - 1);
             System.out.println(n);
         }
     }

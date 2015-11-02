@@ -196,10 +196,10 @@ Using a \java{while} statement, we can rewrite {\tt countdown} this way:
 \end{code}
 
 You can almost read a \java{while} statement like English.
-What this code means is: ``While {\tt n} is greater than zero, print the value of {\tt n} and then reduce the value of {\tt n} by 1.
+The above code means: ``While {\tt n} is greater than zero, print the value of {\tt n} and then reduce the value of {\tt n} by 1.
 When you get to zero, print the word Blastoff!''
 
-More formally, the flow of execution for a \java{while} statement is as follows:
+More formally, the flow of execution for a \java{while} statement is three steps:
 
 \begin{enumerate}
 
@@ -215,7 +215,7 @@ More formally, the flow of execution for a \java{while} statement is as follows:
 \index{loop!body}
 \index{body}
 
-This type of flow is called a {\bf loop} because the last step loops back around to the first.
+This type of flow is called a {\bf loop}, because the last step loops back around to the first.
 The statements inside the \java{while} block are called the {\bf body} of the loop.
 If the condition is \java{false} the first time, the statements inside the \java{while} block are never executed.
 
@@ -248,9 +248,9 @@ If it is even, the value of {\tt n} is divided by two.
 If it is odd, the value is replaced by $3n+1$.
 For example, if the starting value (the argument passed to {\tt sequence}) is 3, the resulting sequence is 3, 10, 5, 16, 8, 4, 2, 1.
 
-Since {\tt n} sometimes increases and sometimes decreases, there is no obvious proof that {\tt n} will ever reach 1, or that the program will ever terminate.
+Since {\tt n} sometimes increases and sometimes decreases, there is no obvious proof that {\tt n} will ever reach 1 and that the program will ever terminate.
 For some particular values of {\tt n}, we can prove termination.
-For example, if the starting value is a power of two, then the value of {\tt n} will be even every time through the loop, until we get to 1.
+For example, if the starting value is a power of two, then the value of {\tt n} will be even every time through the loop until we get to 1.
 The previous example ends with such a sequence, starting with 16.
 
 Particular values aside, the interesting question is whether we can prove that this program terminates for {\em all} values of n.
@@ -306,13 +306,13 @@ The output of this program is:
 
 Looking at these values, can you tell what base {\tt Math.log} uses?
 Since powers of two are important in computer science, we often want logarithms with respect to base 2.
-To compute them, we can apply the properties of logarithms.
+To compute them, we can apply this property of logarithms:
 %
 \begin{equation*}
 \log_2 x = \frac{log_e x}{log_e 2}
 \end{equation*}
 %
-Using this formula, we can modify the {\tt println} statement.
+Using the right side of the formula, we modify the {\tt println} statement.
 
 \begin{code}
     System.out.println(x + "   " + Math.log(x) / Math.log(2));
@@ -335,14 +335,16 @@ We can see that 1, 2, 4 and 8 are powers of two, because their logarithms base 2
 If we wanted to find the logarithms of other powers of two, we could modify the program like this:
 
 \begin{code}
+    final double log2 = Math.log(2);
     double x = 1.0;
     while (x < 100.0) {
-        System.out.println(x + "   " + Math.log(x) / Math.log(2));
+        System.out.println(x + "   " + Math.log(x) / log2);
         x = x * 2.0;
     }
 \end{code}
 
-Now instead of adding something to {\tt x} each time through the loop, which yields an {\em arithmetic sequence}, we multiply {\tt x} by something, yielding a {\em geometric sequence}.
+First, we store \java{Math.log(2)} in a \java{final} variable to avoid computing that value over and over again.
+Second, instead of adding something to {\tt x} each time through the loop, which yields an {\em arithmetic sequence}, we multiply {\tt x} by something, yielding a {\em geometric sequence}.
 The result is:
 
 \begin{stdout}
@@ -622,10 +624,10 @@ In other words, the {\tt size} of each row is the same as the row number itself.
 \end{stdout}
 
 Even though the second parameter in {\tt printMultiples} is named {\tt size} and we have a variable with the same name, we can still use any value or expression we want for the argument.
-Remember you do not pass variables to methods; you pass their current values.
+Remember you do not pass {\em variables} to methods; you pass their current {\em values}.
 
 
-\section{{\tt for} loops}
+\section{The for statement}
 \label{for}
 
 \index{for}
@@ -678,7 +680,7 @@ After the \java{for} loop, the variable {\tt i} ceases to exist because it was d
 In contrast, the variable {\tt i} continues to exist after the \java{while} statment, because it was declared outside the loop.
 
 Because \java{for} loops are so concise, they are particularly useful when iterating over two or more dimensions.
-We can rewrite the final example in the previous section with just a few lines of code:
+We can rewrite the final example of {\tt printMultTable} in the previous section with just a few lines of code:
 
 \begin{code}
     for (int row = 1; row <= size; row++) {
@@ -691,6 +693,9 @@ We can rewrite the final example in the previous section with just a few lines o
 
 In contrast to {\tt printMultTable} and {\tt printMultiples}, this version of the code cannot use the variable {\tt i} for both loops.
 Instead, it uses the variables {\tt row} and {\tt col} to represent the positions in the table.
+
+
+%TODO(csm) tracing code by hand?
 
 
 \section{Vocabulary}
