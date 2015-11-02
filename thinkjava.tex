@@ -2725,6 +2725,7 @@ TODO
 
 
 \chapter{Void methods}
+\label{voidmeth}
 
 So far we've only written short programs that have a single class with a \java{main} method.
 In this chapter, we'll show you how to organize longer programs into multiple methods and classes.
@@ -3541,6 +3542,3282 @@ Saturday, July 16, 2011
 \end{stdout}
 
 \item Once you have debugged \java{printAmerican}, write another method called \java{printEuropean} that prints the date in European format.
+
+\end{enumerate}
+\end{exercise}
+
+
+\chapter{Decisions and logic}
+
+\index{boolean}
+\index{type!boolean}
+
+% TODO(ABD): I'd like an intro that presents the contents of the chapter in
+% terms of new capabilities: what can we do at the end of this chapter
+% that we can't do now?
+
+The programs we've seen so far do pretty much the same thing every time, regardless of the input.
+For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
+This chapter presents the features you need for programs to make complex decisions: a new data type called \java{boolean}, additional operators for expressing logic, and \java{if} statements.
+
+%{\tt boolean} is named after George Boole, who developed a formal system that represents logic using the values {\it true} and {\it false} and operations like {\it and}, {\it or}, and {\it not}.
+%In Java, the values \java{true} and \java{false} belong to the data type \java{boolean}.
+
+%{\tt true} and {\tt false} are special values in Java, and together they make up a type called {\bf boolean}.
+%You might recall that when I defined a type, I said it was a set of values.
+%In the case of {\tt int}s, {\tt double}s and {\tt String}s, those sets are pretty big.
+%For {\tt boolean}s, there are only two values.
+%The values {\tt true} and {\tt false} are keywords in Java, so they may appear in a different color, depending on your development environment.
+
+
+\section{Assignment revisited}
+
+\index{assignment}
+\index{statement!assignment}
+
+You can make more than one assignment to the same variable; the effect is to replace the old value with the new.
+One way to remember this behavior is to think of variables as {\em containers}.
+When you assign a value to a variable, you change the contents of the container.
+
+\begin{center}
+\includegraphics{figs/assign2.pdf}
+\end{center}
+
+%TODO(CSM): multiple assignment means "int x=0, y=0;" using the comma operator
+%\index{multiple assignment}
+%
+%\begin{code}
+%    int liz = 5;
+%    System.out.print(liz);
+%    liz = 7;
+%    System.out.println(liz);
+%\end{code}
+%
+%The output of this program is {\tt 57}, because the first time we print {\tt liz} her value is 5, and the second time her value is 7.
+
+When there are multiple assignments to a variable, it is especially important to distinguish between an assignment statement and a statement of equality.
+Because Java uses the {\tt =} symbol for assignment, it is tempting to interpret a statement like {\tt a = b} as a statement of equality.
+It is not!
+
+First of all, equality is commutative, and assignment is not.
+For example, in mathematics if $a = 7$ then $7 = a$.
+In Java {\tt a = 7;} is a legal assignment statement, but {\tt 7 = a;} is not.
+Assignment {\em always} executes from right to left.
+
+Furthermore, in mathematics, a statement of equality is true for all time.
+If $a = b$ now, then $a$ will always equal $b$.
+In Java, an assignment statement can make two variables equal, but they don't have to stay that way.
+
+\begin{code}
+    int a = 5;
+    int b = a;     // a and b are now equal
+    a = 3;         // a and b are no longer equal
+\end{code}
+
+The third line changes the value of {\tt a}, but it does not change the value of {\tt b}, so they are no longer equal.
+In some programming languages a different symbol is used for assignment, such as {\tt <-} or {\tt :=}, to avoid this confusion.
+
+%Although multiple assignment is frequently useful, you should use it with caution.
+%If the values of variables change often, it can make the code difficult to read and debug.
+
+
+\section{Relational operators}
+
+\index{operator!relational}
+\index{relational operator}
+\index{operator!comparison}
+\index{comparison operator}
+
+{\bf Relational operators} are used to check conditions like whether two values are equal, or whether one is greater than the other.
+The following expressions show how they are used:
+
+\begin{code}
+    x == y          // x is equal to y
+    x != y          // x is not equal to y
+    x > y           // x is greater than y
+    x < y           // x is less than y
+    x >= y          // x is greater than or equal to y
+    x <= y          // x is less than or equal to y
+\end{code}
+
+The result of a relational operator is one of two special values, \java{true} or \java{false}.
+These values belong to the type \java{boolean}; in fact, they are the only values for the type \java{boolean}.
+
+You are probably familiar with these operations, but notice that the Java syntax is different from mathematical symbols like $=$, $\neq$, and $\le$.
+A common error is to use a single \java{=} instead of a double \java{==}.
+Remember that \java{=} is the assignment operator, and \java{==} is a comparison operator.
+Also, there is no such thing as \java{=<} or \java{=>} operators.
+
+The two sides of a relational operator have to be compatible.
+For example, the expression \java{5 < "6"} is invalid because \java{5} is an \java{int} and \java{"6"} is a \java{String}.
+When comparing values of different numeric types, Java applies the same conversion rules we saw previously with the assignment operator.
+For example, when evaluating the expression \java{5 < 6.0}, Java automatically converts the \java{5} to \java{5.0}.
+
+Most relational operators don't work with strings.
+Confusingly, \java{==} and \java{!=} do work with strings---they just don't do what you expect.
+We'll explain what they do later; in the meantime, don't use them with strings.
+Instead, you should use the \java{String} methods \java{equals} and \java{compareTo}:
+
+\begin{code}
+    String fruit1 = "Apple";
+    String fruit2 = "Orange";
+    System.out.println(fruit1.equals(fruit2));
+    System.out.println(fruit1.compareTo(fruit2));
+\end{code}
+
+
+\section{Conditional operators}
+
+\index{conditional operator}
+\index{operator!conditional}
+\index{logical operator}
+\index{operator!logical}
+
+Java has three {\bf conditional operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
+The semantics of these operators are similar to their meanings in English.
+
+For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero and less than 10.
+The expression \java{evenFlag || n \% 3 == 0} is true if {\it either} condition is true, that is, if \java{evenFlag} is true or the number \java{n} is divisible by 3.
+Finally, the \java{!} operator inverts a boolean expression.
+So \java{!evenFlag} is \java{true} if \java{evenFlag} is \java{false}.
+
+\index{short circuit}
+
+Conditional operators evaluate the second expression only when necessary.
+For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
+Likewise, \java{false && anything} is always false.
+Ignoring the second operand, when possible, is called {\bf short circuit} evaluation, by analogy with an electrical circuit.
+Short circuit evaluation can save time, especially if \java{anything} is a method call.
+It can also avoid unnecessary errors, if \java{anything} might fail based on the first operand.
+
+\index{De Morgan's laws}
+
+When solving logic problems using conditional operators, you will often need to negate \java{&&} and \java{||} operations.
+{\bf De Morgan's laws} show how to simplify such expressions:
+
+\begin{itemize}
+\item \java{!(A && B)} ~is the same as~ \java{!A || !B}
+\item \java{!(A || B)} ~is the same as~ \java{!A && !B}
+\end{itemize}
+
+In other words, negating a conditional expression is the same as negating each term and changing the operator.
+Note that since the \java{!} operator has higher precedence than \java{&&} and \java{||}, you don't need to put parentheses around the individual terms \java{!A} and \java{!B}.
+
+De Morgan's laws also apply to the relational operators.
+In this case, negating each term means using the ``opposite'' relational operator.
+
+\begin{itemize}
+\item \java{!(x < 5 && y == 3)} ~is the same as~ \java{x >= 5 || y != 3}
+\item \java{!(x >= 1 || y != 7)} ~is the same as~ \java{x < 1 && y == 7}
+\end{itemize}
+
+It may help to read these examples out loud in English.
+For instance, ``If I don't want x to be less than 5, and I don't want y to be 3, then I need x to be greater than or equal to 5, or I need y to be anything but 3.''
+
+
+\section{DrJava interactions}
+
+A good way to gain experience with relational and conditional operators is to use the Interactions Pane of DrJava.
+As shown in Figure~\ref{fig:drjava}, you can declare several variables and {\it interactively} test your logic skills.
+Don't forget that you can try out many of the examples in this book this same way.
+
+% try to determine their result before running the code.
+%
+% ABD: I worry about instructions like this, because students seldom follow them.
+% Can we create some exercises (and move this section to the end of the chapter)?
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/drjava-logic.png}
+\caption{Screenshot of the Interactions Pane in DrJava.}
+\label{fig:drjava}
+\end{center}
+\end{figure}
+
+There is one subtle detail to note when using the Interactions feature.
+If you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
+Notice in Figure~\ref{fig:drjava} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
+
+What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
+In addition, you can press the up/down arrows on the keyboard to repeat previous commands and experiment with incremental differences.
+
+\index{order of operations}
+\index{precedence}
+
+Notice how none of the expressions in this example require parentheses.
+Java evaluates arithmetic operators first, then the relational operators, then conditional operators, and finally the assignment operator.
+Do a web search for ``java operator precedence'' to see the complete list of rules.
+If two operators have the same precedence, Java evaluates them from left to right.
+
+
+\section{The if-else statement}
+
+\index{decision statement}
+\index{statement!if}
+
+To write useful programs, we almost always need to check conditions and react accordingly.
+{\bf Decision statements} give us this ability.
+The simplest decision statement in Java is the \java{if} statement:
+
+\begin{code}
+    if (x > 0) {
+        System.out.println("x is positive");
+    }
+\end{code}
+
+The expression in parentheses is called the condition.
+If it is true, the statements in braces get executed.
+If the condition is false, execution skips over that block of code.
+The condition in parentheses can be {\it any} boolean expression.
+
+\index{branch}
+\index{statement!else}
+\index{decision!alternative}
+
+A second form of decision statement is alternative execution, in which there are two possibilities indicated by \java{if} and \java{else}.
+The possibilities are called {\bf branches}, and the condition determines which one gets executed:
+
+\begin{code}
+    if (x % 2 == 0) {
+        System.out.println("x is even");
+    } else {
+        System.out.println("x is odd");
+    }
+\end{code}
+
+If the remainder when \java{x} is divided by 2 is zero, we know that \java{x} is even, and this code prints a message to that effect.
+If the condition is false, the second print statement is executed instead.
+Since the condition must be true or false, exactly one of the alternatives will be executed.
+
+%\label{alternative}
+%\index{parity}
+%
+%To follow up the previous chapter, if you need to check the {\bf parity} (evenness or oddness) of numbers often, you might want to ``wrap'' this code up in a method:
+%
+%\begin{code}
+%    public static void printParity(int x) {
+%        if (x % 2 == 0) {
+%            System.out.println("x is even");
+%        } else {
+%            System.out.println("x is odd");
+%        }
+%    }
+%\end{code}
+%
+%Now you have a method named \java{printParity} that will print an appropriate message for any integer you care to provide.
+%In \java{main} you would invoke this method as follows:
+%
+%\begin{code}
+%    printParity(17);
+%\end{code}
+%
+%Always remember that when you invoke a method, you do not have to declare the types of the arguments you provide.
+%Java can figure out what type they are.
+%You should resist the temptation to write things like:
+%
+%\begin{code}
+%    int number = 17;
+%    printParity(int number);        // WRONG!!!
+%\end{code}
+
+\index{decision!chained}
+
+Sometimes you want to check related conditions and choose one of several actions.
+One way to do this is by {\bf chaining} a series of \java{if} and \java{else} statements:
+
+\begin{code}
+    if (x > 0) {
+        System.out.println("x is positive");
+    } else if (x < 0) {
+        System.out.println("x is negative");
+    } else {
+        System.out.println("x is zero");
+    }
+\end{code}
+
+These chains can be as long as you want, although they can be difficult to read if they get out of hand.
+One way to make them easier to read is to use standard indentation, as demonstrated in these examples.
+If you keep all the statements and braces lined up, you are less likely to make syntax errors.
+
+\index{decision!nested}
+\index{nested structure}
+
+In addition to chaining, you can also make complex decisions by {\bf nesting} one decision inside another.
+We could have written the previous example as:
+
+\begin{code}
+    if (x == 0) {
+        System.out.println("x is zero");
+    } else {
+        if (x > 0) {
+            System.out.println("x is positive");
+        } else {
+            System.out.println("x is negative");
+        }
+    }
+\end{code}
+
+The outer conditional has two branches:
+the first branch contains a \java{print} statement; the second branch contains another decision statement, which has two branches of its own.
+Each of them is a \java{print} statement, but they could have been decision statements as well.
+
+These kinds of nested structures are common, but they get difficult to read very quickly.
+Good indentation is essential to make the structure (or intended structure) apparent to the reader.
+
+
+\section{Flag variables}
+
+\index{expression!boolean}
+
+Recall from Section~\ref{sec:arithops} that an expression is a combination of variables and operators that evaluates to a single value.
+Expressions can be as simple as the literal \java{0} or more complex like \java{Math.cos(angle + Math.PI / 2)}.
+Boolean expressions and variables work just like other types of expressions and variables:
+
+\begin{code}
+    boolean flag;
+    flag = true;
+    boolean testResult = false;
+\end{code}
+
+\index{initialization}
+\index{statement!initialization}
+
+The first line is a variable declaration, the second is an assignment, and the third is an initialization.
+Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
+
+\begin{code}
+    boolean evenFlag = (n % 2 == 0);    // true if n is even
+    boolean positiveFlag = (x > 0);     // true if x is positive
+\end{code}
+
+The parentheses are unnecessary, but they make the code easier to read.
+A variable defined in this way is called a {\bf flag}, because it signals the presence or absence of some condition.
+
+You can use flag variables as part of a conditional statement later:
+
+\begin{code}
+    if (evenFlag) {
+        System.out.println("n was even when I checked it");
+    }
+\end{code}
+
+Notice that you don't need to say \java{if (evenFlag == true)}.
+Since \java{evenFlag} is a \java{boolean}, it's already a condition.
+Likewise, to check if a flag is \java{false}:
+
+\begin{code}
+    if (!evenFlag) {
+        System.out.println("n was odd when I checked it");
+    }
+\end{code}
+
+
+\section{The return statement}
+
+\index{return}
+\index{statement!return}
+
+The \java{return} statement allows you to terminate a method before you reach the end of it.
+One reason to use \java{return} is if you detect an error condition:
+
+\begin{code}
+    public static void printLogarithm(double x) {
+        if (x <= 0.0) {
+            System.err.println("Error: x must be positive.");
+            return;
+        }
+        double result = Math.log(x);
+        System.out.println("The log of x is " + result);
+    }
+\end{code}
+
+This example defines a method named \java{printLogarithm} that takes a \java{double} value (named \java{x}) as a parameter.
+It checks whether \java{x} is less than or equal to zero, in which case it prints an error message and then uses \java{return} to exit the method.
+The flow of execution immediately returns to the caller, and the remaining lines of the method are not executed.
+
+\index{System.err}
+
+Notice the floating-point value \java{0.0} on the right side of the condition.
+Since \java{x} is a floating-point variable, you should compare it to a floating-point literal.
+This example also uses \java{System.err}, which is the {\it standard error} output stream.
+Your development environment might distinguish normal output and error output by using a different color.
+
+
+\section{Validating input}
+
+Here is a simple program that makes use of the \java{printLogarithm} method defined in the previous section:
+
+\begin{code}
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        double x = in.nextDouble();
+        printLogarithm(x);
+    }
+\end{code}
+
+Up to this point, we have assumed that users always do what they're told.
+But what happens if they make an innocent mistake?
+Or even worse, what happens if they deliberately try to crash your program?
+
+\begin{stdout}
+Enter a number: Hello
+Exception in thread "main" java.util.InputMismatchException
+    at java.util.Scanner.throwFor(Scanner.java:909)
+    at java.util.Scanner.next(Scanner.java:1530)
+    at java.util.Scanner.nextDouble(Scanner.java:2456)
+    at Example.main(Example.java:17)
+\end{stdout}
+
+In this example, the program calls the \java{nextDouble} method, so the \java{Scanner} attempts to parse a \java{double}.
+However the user input is \java{"Hello"}, which causes an \java{InputMismatchException}.
+We can prevent this error from happening by checking the input before parsing it:
+
+\begin{code}
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        if (!in.hasNextDouble()) {
+            String word = in.next();
+            System.err.println(word + " is not a number");
+            return;
+        }
+        double x = in.nextDouble();
+        printLogarithm(x);
+    }
+\end{code}
+
+The \java{Scanner} class provides \java{hasNext} methods for each of the \java{next} methods.
+They return \java{true} or \java{false}, depending on the format of the next token of input.
+In this example, we call \java{hasNextDouble} to check if the user entered a \java{double}.
+If not, then we display an error message (using \java{System.err}) and abort the program.
+
+If you \java{return} from \java{main}, the program ends immediately.
+Notice also the use of the \java{!} operator, instead of the test \java{hasNextDouble() == false}.
+Since the \java{hasNextDouble} method returns a boolean result, it is already a condition.
+
+
+\section{Recursive methods}
+\label{recursion}
+
+\index{recursion}
+
+Now that we have methods and if statements, we can explore one of the most magical and interesting things a program can do.
+It is common for one method to invoke another, but what happens if a method invokes {\em itself}?
+This process is called {\bf recursion}.
+Consider the following example:
+
+\begin{code}
+    public static void countdown(int n) {
+        if (n == 0) {
+            System.out.println("Blastoff!");
+        } else {
+            System.out.println(n);
+            countdown(n - 1);
+        }
+    }
+\end{code}
+
+The name of the method is \java{countdown}; it takes a single integer as a parameter.
+If the parameter is zero, it prints the word ``Blastoff.''
+Otherwise, it prints the number and then invokes itself, passing \java{n - 1} as the argument.
+
+What happens if we invoke \java{countdown(3)} from \java{main}?
+
+\vspace{-1ex}
+\begin{quote}
+The execution of \java{countdown} begins with \java{n == 3}, and since \java{n} is not zero, it prints the value 3, and then invokes itself...
+\begin{quote}
+The execution of \java{countdown} begins with \java{n == 2}, and since \java{n} is not zero, it prints the value 2, and then invokes itself...
+\begin{quote}
+The execution of \java{countdown} begins with \java{n == 1}, and since \java{n} is not zero, it prints the value 1, and then invokes itself...
+\begin{quote}
+The execution of \java{countdown} begins with \java{n == 0}, and since \java{n} is zero, it prints the word ``Blastoff!'' and then returns.
+\end{quote}
+The \java{countdown} that got \java{n == 1} returns.
+\end{quote}
+The \java{countdown} that got \java{n == 2} returns.
+\end{quote}
+The \java{countdown} that got \java{n == 3} returns.
+\end{quote}
+\vspace{-1ex}
+
+And then you're back in \java{main}.
+So the total output looks like:
+
+\begin{stdout}
+3
+2
+1
+Blastoff!
+\end{stdout}
+
+As a second example, we'll rewrite the methods \java{newLine} and \java{threeLine} from Section~\ref{adding_methods}.
+
+\begin{code}
+    public static void newLine() {
+        System.out.println();
+    }
+
+    public static void threeLine() {
+        newLine();
+        newLine();
+        newLine();
+    }
+\end{code}
+
+\index{newline}
+
+Although these methods work, they would not be much help if we wanted to print 2 newlines, or 106.
+A better alternative would be:
+
+\begin{code}
+    public static void nLines(int n) {
+        if (n > 0) {
+            System.out.println();
+            nLines(n - 1);
+        }
+    }
+\end{code}
+
+This method is similar to \java{countdown}.
+As long as $n$ is greater than zero, it prints a newline and then invokes itself to print $(n-1)$ additional newlines.
+The total number of newlines is $1 + (n - 1)$, which is just what we wanted: $n$.
+
+
+\section{Recursive stack diagrams}
+
+\index{stack diagram}
+\index{diagram!stack}
+
+In the previous chapter, we used a stack diagram to represent the state of a program during a method invocation.
+The same kind of diagram can make it easier to interpret a recursive method.
+
+Remember that every time a method gets called, Java creates a new frame in memory that contains the current method's parameters and variables.
+The following figure is a stack diagram for countdown, called with \java{n == 3}:
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics{figs/stack2.pdf}
+\caption{Stack diagram for the \java{countdown} program.}
+\end{center}
+\end{figure}
+
+Note that the ``stack'' of method calls is upside down.
+It's easier to draw stack diagrams from top to bottom, because you don't always know how much vertical space you will need in advance.
+
+The stack frame for \java{main} is empty because \java{main} does not have any local variables.
+It has one parameter, \java{args}, but since we're not using it, we left it out of the diagram.
+
+There are four frames for \java{countdown}, each with a different value for the parameter \java{n}.
+The last frame, with \java{n == 0}, is called the {\bf base case}.
+It does not make a recursive call, so there are no more frames below it.
+
+You should always check for a base case in your code, or else the recursion may keep going until the program runs out of memory.
+For example, here is a recursive method without a base case:
+
+\begin{code}
+    public static void forever(String s) {
+        System.out.println(s);
+        forever(s);
+    }
+\end{code}
+
+\index{call stack}
+\index{stack overflow}
+
+This \java{forever} method prints the string over 10,000 times, but then the program suddenly terminates with a \java{StackOverflowError}.
+In other words, there's no more room on the stack for additional method calls.
+
+Java sets aside a reasonable amount of memory for the call stack, so that it can remember where to return at the end of each method.
+But if that memory fills up, it's usually because you have infinite recursion.
+
+%Recall from Section~\ref{debugger} that Java automatically tracks the call and return of each method in memory, much like the stack diagrams we draw on paper.
+%Each method call takes a little memory, but that memory can be reused when the method returns.
+
+
+\section{Binary Numbers}
+
+The \java{countdown} example has three parts: (1) it checks the base case, (2) prints something, and (3) makes a recursive call.
+What do you think happens if you reverse steps 2 and 3, making the recursive call {\it before} printing?
+
+\begin{code}
+    public static void countup(int n) {
+        if (n == 0) {
+            System.out.println("Blastoff!");
+        } else {
+            countup(n - 1);
+            System.out.println(n);
+        }
+    }
+\end{code}
+
+The stack diagram is the same as before, and the method is still called $n$ times.
+But now the \java{System.out.println} happens just before each recursive call returns.
+As a result, it counts up instead of down:
+
+\begin{stdout}
+Blastoff!
+1
+2
+3
+\end{stdout}
+
+This behavior comes in handy when it is easier to compute results in reverse order.
+For example, to convert a decimal integer into its {\bf binary} representation, you repeatedly divide the number by two:
+
+\begin{stdout}
+23 / 2 is 11 remainder 1
+11 / 2 is  5 remainder 1
+ 5 / 2 is  2 remainder 1
+ 2 / 2 is  1 remainder 0
+ 1 / 2 is  0 remainder 1
+\end{stdout}
+
+So 23 in binary is 10111, which is the remainders in the above example from bottom to top.
+Here is a recursive method that prints the binary representation of any positive integer:
+
+\begin{code}
+    public static void showBinary(int value) {
+        if (value > 0) {
+            showBinary(value / 2);
+            System.out.print(value % 2);
+        }
+    }
+\end{code}
+
+If \java{value} is zero, \java{showBinary} does nothing (that's the base case).
+If the argument is positive, the method divides it by two and calls \java{showBinary} recursively.
+When the recursive call returns, the method prints one digit of the result and returns (again).
+The leftmost digit is at the bottom of the stack, so it gets printed first.  The rightmost digit, at the top of the stack, gets printed last.
+
+\begin{code}
+    showBinary(23);
+    // output is 10111
+\end{code}
+
+Learning to think recursively is an important aspect of learning to think like a computer scientist.
+Many algorithms can be written concisely with recursive methods that perform computations on the way down, on the way up, or both.
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{boolean}
+A data type with only two values, \java{true} and \java{false}.
+
+\index{operator!relational}
+\term{relational operator}
+An operator that compares two values and produces a boolean indicating the relationship between them.
+
+\index{operator!conditional}
+\term{conditional operator}
+An operator that combines boolean values and produces boolean values.
+
+\term{short circuit}
+A way of evaluating conditional operators that only evaluates the second operand if necessary.
+
+\term{De Morgan's laws}
+Mathematical rules that show how to negate a conditional expression.
+
+\term{decision statement}
+A statement that uses a condition to determine which statements to execute.
+
+\term{branch}
+One of the alternative sets of statements inside a decision statement.
+
+\term{chaining}
+A way of joining several conditional statements in sequence.
+
+\term{nesting}
+Putting a conditional statement inside one or both branches of another conditional statement.
+
+\term{flag}
+A variable (usually \java{boolean}) that represents a condition or status.
+
+\term{recursion}
+The process of invoking the same method that you are currently executing.
+
+\term{base case}
+A condition that causes a recursive method {\it not} to make another recursive call.
+
+\term{binary}
+A system that uses only zeros and ones to represent numbers.
+Also known as ``base 2.''
+
+\end{description}
+
+
+\section{Exercises}
+
+\begin{exercise}
+Conditional operators can simplify nested decision structures.
+For example, how can you rewrite this code using a single \java{if} statement?
+
+\begin{code}
+    if (x > 0) {
+        if (x < 10) {
+            System.out.println("x is a positive single digit.");
+        }
+    }
+\end{code}
+\end{exercise}
+
+\begin{exercise}
+Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that
+\[ a^n + b^n = c^n \]
+except in the case when $n \leq 2$ (e.g., the Pythagorean Theorem).
+
+Write a method named {\tt checkFermat} that takes four integers as parameters---{\tt a}, {\tt b}, {\tt c} and {\tt n}---and that checks to see if Fermat's theorem holds.
+If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
+Otherwise the program should print ``No, that doesn't work.''
+
+HINT: You may want to use \java{Math.pow} in your method.
+\end{exercise}
+
+\begin{exercise}
+The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods. Consider the first verse of the song ``99 Bottles of Pop'':
+
+\begin{quote}
+99 bottles of pop on the wall,\\
+99 bottles of pop,\\
+If one of those bottles should happen to fall,\\
+98 bottles of pop on the wall.
+\end{quote}
+
+Subsequent verses are identical except that the number of bottles gets smaller by one in each verse, until the last verse:
+
+\begin{quote}
+1 bottle of pop on the wall,\\
+1 bottle of pop,\\
+If that last bottle should happen to fall,\\
+No more bottles of pop on the wall.
+\end{quote}
+
+%And then the song (finally) ends.
+
+Write a program that prints the entire lyrics of ``99 Bottles of Pop.''
+Your program should include a {\it recursive} method that does the hard part, but you might want to write additional methods to separate the major functions of the program.
+As you develop your code, test it with a small number of verses like ``3 Bottles of Pop.''
+\end{exercise}
+
+\begin{exercise}
+Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after \java{main} invokes \java{nLines} with the parameter \java{n == 4}, just before the last invocation of \java{nLines} returns.
+\end{exercise}
+
+\begin{exercise}
+This exercise reviews the flow of execution through a program with multiple methods.
+Read the following code and answer the questions.
+
+\begin{code}
+public class Buzz {
+
+    public static void baffle(String blimp) {
+        System.out.println(blimp);
+        zippo("ping", -5);
+    }
+
+    public static void zippo(String quince, int flag) {
+        if (flag < 0) {
+            System.out.println(quince + " zoop");
+        } else {
+            System.out.println("ik");
+            baffle(quince);
+            System.out.println("boo-wa-ha-ha");
+        }
+    }
+
+    public static void main(String[] args) {
+        zippo("rattle", 13);
+    }
+
+}
+\end{code}
+
+\begin{enumerate}
+
+\item Write the number {\tt 1} next to the first {\em statement} of this program that will be executed.
+Be careful to distinguish things that are statements from things that are not.
+
+\item Write the number {\tt 2} next to the second statement, and so on until the end of the program.
+If a statement is executed more than once, it might end up with more than one number next to it.
+
+\item What is the value of the parameter {\tt blimp} when {\tt baffle} gets invoked?
+
+\item What is the output of this program?
+
+\end{enumerate}
+\end{exercise}
+
+
+\chapter{Value methods}
+
+\index{method!value}
+\index{method!void}
+\index{value method}
+\index{void method}
+
+Some of the methods we have used, like the \java{Math} methods, return values.
+Others, like \java{println} and \java{newLine}, perform an action but don't return a value.
+In Chapter~\ref{voidmeth}, we called methods that don't return a value {\bf void methods}.
+The focus of this chapter is {\bf value methods}, or methods that compute and return a result.
+
+
+\section{Return values}
+
+\index{void}
+
+The methods we have written so far, like {\tt countdown} and {\tt countup}, don't return values, which is why the first line has the keyword \java{void}.
+
+\begin{code}
+    public static void countup(int n) {
+        if (n == 0) {
+            System.out.println("Blastoff!");
+        } else {
+            countup(n - 1);
+            System.out.println(n);
+        }
+    }
+\end{code}
+
+When you invoke a \java{void} method, it is typically on a line all by itself:
+
+\begin{code}
+    countup(3);
+    System.out.println("Have a nice day.");
+\end{code}
+
+When you invoke a value method, it returns a value which we usually assign to a variable or use as part of an expression:
+
+\begin{code}
+    double error = Math.abs(expected - actual);
+    double height = radius * Math.sin(angle);
+\end{code}
+
+\index{value method}
+\index{method!value}
+
+In this chapter, you will learn to write methods that return values.
+Here's an example:  \java{area} takes a \java{double} as a parameter and returns the area of a circle with that radius:
+
+\begin{code}
+    public static double area(double radius) {
+        double area;
+        area = Math.PI * radius * radius;
+        return area;
+    }
+\end{code}
+
+The first thing you should notice is that the beginning of the method definition is different.
+Instead of \java{public static void}, which indicates a \java{void} method, we see \java{public static double}, which means that the return value from this method is a \java{double}.
+%I still haven't explained what {\tt public static} means, but be patient.
+
+\index{return}
+\index{statement!return}
+
+The last line is a new form of the \java{return} statement that includes a return value.
+This statement means, ``return immediately from this method and use the following expression as the return value.''
+The expression you provide can be arbitrarily complex, so we could have written this method more concisely:
+
+\begin{code}
+    public static double area(double radius) {
+        return Math.PI * radius * radius;
+    }
+\end{code}
+
+\index{temporary variable}
+\index{variable!temporary}
+
+On the other hand, {\bf temporary} variables like \java{area} often make debugging easier, especially when you are stepping through code using a debugger.
+
+The type of the expression in the \java{return} statement must match the return type of the method.
+When you declare that the return type is \java{double}, you are making a promise that this method will eventually produce a \java{double} value.
+If you try to \java{return} with no expression, or an expression with the wrong type, the compiler will generate an error.
+
+Sometimes it is useful to have multiple return statements, for example, one in each branch of a decision:
+
+\begin{code}
+    public static double absoluteValue(double x) {
+        if (x < 0) {
+            return -x;
+        } else {
+            return x;
+        }
+    }
+\end{code}
+
+Since these \java{return} statements are in an alternative structure, only one will be executed.
+Although it is legal to have more than one \java{return} statement in a method, you should keep in mind that as soon as one is executed, the method terminates without executing any subsequent statements.
+
+\index{dead code}
+
+Code that appears after a \java{return} statement, or any place else where it can never be executed, is called {\bf dead code}.
+The compiler will give you an ``unreachable statement'' error if part of your code is dead.
+
+\begin{code}
+    public static double absoluteValue(double x) {
+        if (x < 0) {
+            return -x;
+        } else {
+            return x;
+        }
+        System.out.println("This line is dead.");
+    }
+\end{code}
+
+If you put \java{return} statements inside of a decision, you have to guarantee that {\em every possible path} through the program reaches a \java{return} statement.
+
+\begin{code}
+    public static double absoluteValue(double x) {
+        if (x < 0) {
+            return -x;
+        } else if (x > 0) {
+            return x;
+        }
+        // syntax error
+    }
+\end{code}
+
+This program is not legal because when \java{x} is 0, neither condition is true.
+As a result, the method ends without hitting a return statement.
+The typical compiler error message is ``missing return statement'', which is confusing since there are already two of them.
+
+
+\section{Writing methods}
+\label{distance}
+
+\index{incremental development}
+
+At this point you should be able to look at Java methods and tell what they do.
+But it may not be clear yet how to go about writing them.
+In this section, we are going to model a technique called {\bf incremental development}.
+As an example, imagine you want to find the distance between two points, given by the coordinates $(x_1, y_1)$ and $(x_2, y_2)$.
+By the usual definition:
+
+\begin{equation*}
+distance = \sqrt{(x_2 - x_1)^2 +(y_2 - y_1)^2}
+\end{equation*}
+
+The first step is to consider what a \java{distance} method should look like in Java.
+In other words, what are the inputs (parameters) and what is the output (return value)?
+In this case, the two points are the parameters, and it is natural to represent them using four \java{double} values.
+%, although we will see later that there is a \java{Point} object in Java that we could use.
+The return value is the distance, which should also have type \java{double}.
+
+\index{stub}
+
+Already we can write an outline for the method, which is sometimes called a {\bf stub}.
+This code includes the method signature and a \java{return} statement:
+
+\begin{code}
+    public static double distance
+            (double x1, double y1, double x2, double y2) {
+        return 0.0;
+    }
+\end{code}
+
+The return statement is a placeholder that is necessary for the program to compile.
+At this stage the program doesn't do anything useful, but it is worthwhile to compile it so we can identify any syntax errors before we add more code.
+
+It's always a good idea to think about testing {\it before} you develop new methods; it can help you figure out how to implement them.
+To test this new method, we can invoke it (in \java{main}) using sample values:
+
+\begin{code}
+    double dist = distance(1.0, 2.0, 4.0, 6.0);
+\end{code}
+
+These values make the horizontal distance 3.0 and the vertical distance 4.0.
+That way, the result should be 5.0, the hypotenuse of a 3-4-5 triangle.
+When you are testing a method, it is useful to know the right answer.
+
+Once we have checked the syntax of the method definition, we can start adding lines of code one at a time.
+After each incremental change, we recompile and run the program.
+If there is an error at any point, we have a good idea where to look: the last line we added.
+
+The next step is to find the differences $x_2 - x_1$ and $y_2 - y_1$.
+We store those values in temporary variables named \java{dx} and \java{dy}.
+
+\begin{code}
+    public static double distance
+            (double x1, double y1, double x2, double y2) {
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        System.out.println("dx is " + dx);
+        System.out.println("dy is " + dy);
+        return 0.0;
+    }
+\end{code}
+
+\index{scaffolding}
+
+The print statements allows us to check the intermediate values before proceeding.
+They should be 3.0 and 4.0.
+We will remove the print statements when the method is finished.
+Code like that is called {\bf scaffolding}, because it is helpful for building the program, but it is not part of the final product.
+
+The next step is to square \java{dx} and \java{dy}.
+We could use the \java{Math.pow} method, but it is simpler to multiply each term by itself.
+
+\begin{code}
+    public static double distance
+            (double x1, double y1, double x2, double y2) {
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        double dsquared = dx * dx + dy * dy;
+        System.out.println("dsquared is " + dsquared);
+        return 0.0;
+    }
+\end{code}
+
+Again, you should compile and run the program at this stage and check the intermediate value, which should be 25.0.
+Finally, we can use \java{Math.sqrt} to compute and return the result.
+
+\begin{code}
+    public static double distance
+            (double x1, double y1, double x2, double y2) {
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        double dsquared = dx*dx + dy*dy;
+        double result = Math.sqrt(dsquared);
+        return result;
+    }
+\end{code}
+
+%In \java{main}, we can print and check the value of the result.
+
+As you gain more experience programming, you might write and debug more than one line at a time.
+Nevertheless, incremental development can save you a lot of time.
+The key aspects of the process are:
+
+\begin{itemize}
+
+\item Start with a working program and make small, incremental changes.
+At any point, if there is an error, you will know where to look.
+
+\item Use temporary variables to hold intermediate values so you can check them, either with print statements or by using a debugger.
+
+\item Once the program is working, you can remove scaffolding and consolidate multiple statements into compound expressions (but only if it does not make the program more difficult to read).
+
+\end{itemize}
+
+
+\section{Method composition}
+
+\index{composition}
+
+Once you define a new method, you can use it as part of an expression, or build new methods using existing methods.
+For example, suppose someone gave you two points, the center of the circle and a point on the perimeter, and asked for the area of the circle.
+Let's say the center point is stored in the variables \java{xc} and \java{yc}, and the perimeter point is in \java{xp} and \java{yp}.
+
+The first step is to find the radius of the circle, which is the distance between the two points.
+Fortunately, we have a method that does just that (\java{distance}).
+
+% ABD: I am inclined to uncomment these code snippets before showing
+% the complete function
+
+\begin{code}
+    double radius = distance(xc, yc, xp, yp);
+\end{code}
+
+The second step is to find the area of a circle with that radius.
+We have a method for that computation too (\java{area}).
+
+\begin{code}
+    double area = area(radius);
+    return area;
+\end{code}
+
+Putting everything together in a new method, we get:
+
+\begin{code}
+    public static double circleArea
+            (double xc, double yc, double xp, double yp) {
+        double radius = distance(xc, yc, xp, yp);
+        double area = area(radius);
+        return area;
+    }
+\end{code}
+
+The temporary variables \java{radius} and \java{area} are useful for development and debugging, but once the program is working we can make it more concise by {\it composing} the method calls:
+
+\begin{code}
+    public static double circleArea
+            (double xc, double yc, double xp, double yp) {
+        return area(distance(xc, yc, xp, yp));
+    }
+\end{code}
+
+Computer scientists deal with the complexity of large programs by breaking down computations into individual methods (which in turn may call other methods).
+Data is passed around the program via method parameters and return statements.
+By using incremental development, scaffolding, and testing, you can be confident that your code is correct.
+
+
+\section{Overloading}
+\label{overloading}
+
+You might have noticed that \java{circleArea} and \java{area} perform similar functions.
+They both find the area of a circle, but they take different parameters.
+For \java{area}, we have to provide the radius; for \java{circleArea} we provide two points.
+
+\index{overloading}
+
+If two methods do the same thing, it is natural to give them the same name.
+Having more than one method with the same name is called {\bf overloading}, and it is legal in Java as long as each version takes different parameters.
+So we could rename \java{circleArea} to \java{area}:
+
+\begin{code}
+    public static double area
+            (double x1, double y1, double x2, double y2) {
+        return area(distance(xc, yc, xp, yp));
+    }
+\end{code}
+
+Note that this new \java{area} method is {\em not} recursive.
+When you invoke an overloaded method, Java knows which version you want by looking at the arguments that you provide.
+If you write:
+
+\begin{code}
+    double x = area(3.0);
+\end{code}
+
+Java goes looking for a method named \java{area} that takes one \java{double} as an argument, and so it uses the first version, which interprets the argument as a radius.
+If you write:
+
+\begin{code}
+    double x = area(1.0, 2.0, 4.0, 6.0);
+\end{code}
+
+Java uses the second version of \java{area}, which
+actually invokes the first version.
+
+Many Java methods are overloaded, meaning that there are different versions that accept different numbers or types of parameters.
+For example, there are versions of \java{print} and \java{println} that accept a single parameter of any data type.
+In the Math class, there is a version of \java{abs} that works on \java{double}s, and there is also a version for \java{int}s.
+
+Although overloading is a useful feature, it should be used with caution.
+You might get yourself nicely confused if you are trying to debug one version of a method while accidentally invoking a different one.
+
+
+\section{Boolean methods}
+\label{boolean}
+
+\index{boolean}
+\index{method!boolean}
+
+Methods can return \java{boolean} values just like any other type, which is often convenient for hiding tests inside methods.
+For example:
+
+\begin{code}
+    public static boolean isSingleDigit(int x) {
+        if (x >= 0 && x < 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+\end{code}
+
+The name of this method is \java{isSingleDigit}.
+It is common to give \java{boolean} methods names that sound like yes/no questions.
+Since the return type is \java{boolean}, the return statement has to provide a boolean expression.
+
+The code itself is straightforward, although it is longer than it needs to be.
+Remember that the expression \java{x >= 0 \&\& x < 10} has type boolean, so there is nothing wrong with returning it directly (without the \java{if} statement):
+
+\begin{code}
+    public static boolean isSingleDigit(int x) {
+        return x >= 0 && x < 10;
+    }
+\end{code}
+
+In \java{main}, you can invoke the method in the usual ways:
+
+\begin{code}
+    System.out.println(isSingleDigit(2));
+    boolean bigFlag = !isSingleDigit(17);
+\end{code}
+
+The first line prints \java{true} because 2 is a single-digit number.
+The second line sets \java{bigFlag} to \java{true}, because 17 is {\em not} a single-digit number.
+
+Decision statements often invoke \java{boolean} methods for the condition:
+
+\begin{code}
+    if (isSingleDigit(x)) {
+        System.out.println("x is small");
+    } else {
+        System.out.println("x is big");
+    }
+\end{code}
+
+
+\section{More recursion}
+\label{factorial}
+
+\index{recursion}
+\index{language!complete}
+
+\index{Turing, Alan}
+\index{Church, Alonzo}
+
+Now that we have methods that return values, we have a {\bf Turing complete} programming language.
+That means Java can compute anything computable, for any reasonable definition of ``computable''.
+This idea was developed by Alonzo Church and Alan Turing, so it is known as the Church-Turing thesis.
+%You can read more about it at \url{http://en.wikipedia.org/wiki/Turing_thesis}.
+
+To give you an idea of what you can do with the tools we have learned, let's look at some methods for evaluating recursively-defined mathematical functions.
+A recursive definition is similar to a circular definition, in the sense that the definition contains a reference to the thing being defined.
+A truly circular definition is not very useful:
+
+\begin{description}
+\term{recursive} an adjective used to describe a method that is recursive.
+\end{description}
+
+If you saw that definition in the dictionary, you might be annoyed.
+In fact, if you search for recursion on Google, it displays ``Did you mean: recursion'' as an inside joke.
+
+\index{factorial}
+
+Many mathematical functions are defined recursively.
+For example, if you look up the definition of {\bf factorial}, you get something like:
+
+\vspace{-1ex}
+\begin{eqnarray*}
+&&  0! = 1 \\
+&&  n! = n \cdot(n-1)!
+\end{eqnarray*}
+\vspace{-1ex}
+
+Factorial is usually denoted with the symbol $!$, which is not to be confused with the Java operator {\tt !} that means NOT.
+
+This definition says that the factorial of 0 is 1, and the factorial of any other value $n$ is $n$ multiplied by the factorial of $n-1$.
+So $3!$ is 3 times $2!$, which is 2 times $1!$, which is 1 times $0!$, which is 1.
+Putting it all together, we get $3!$ equal to 3 times 2 times 1 times 1, which is 6.
+
+If you can formulate a recursive definition of something, you can easily write a Java method to evaluate it.
+The first step is to decide what the parameters and return type are.
+Since factorial is defined for integers, the method takes an \java{int} as a parameter and returns an \java{int}.
+So here's a good starting place:
+
+\begin{code}
+    public static int factorial(int n) {
+        return 0;
+    }
+\end{code}
+
+Next, we think about the base case.
+If the argument happens to be zero, we simply return 1.
+
+\begin{code}
+    public static int factorial(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        return 0;
+    }
+\end{code}
+
+Otherwise, and this is the interesting part, we have to make a recursive call to find the factorial of $n-1$, and then multiply it by $n$.
+
+\begin{code}
+    public static int factorial(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        int recurse = factorial(n - 1);
+        int result = n * recurse;
+        return result;
+    }
+\end{code}
+
+The flow of execution for this program is similar to \java{countdown} from Section~5.8.
+If we invoke \java{factorial} with the value 3:
+
+\vspace{-1ex}
+\begin{quote}
+Since 3 is not zero, we take the second branch and calculate the factorial of $n-1$...
+\begin{quote}
+Since 2 is not zero, we take the second branch and calculate the factorial of $n-1$...
+\begin{quote}
+Since 1 is not zero, we take the second branch and calculate the factorial of $n-1$...
+\begin{quote}
+Since 0 {\em is} zero, we take the first branch and return the value 1 immediately.
+% without making any more recursive invocations.
+\end{quote}
+The return value (1) gets multiplied by {\tt n}, which is 1, and the result is returned.
+\end{quote}
+The return value (1) gets multiplied by {\tt n}, which is 2, and the result is returned.
+\end{quote}
+The return value (2) gets multiplied by {\tt n}, which is 3, and the result, 6, is returned to whatever invoked \java{factorial(3)}.
+\end{quote}
+\vspace{-1ex}
+
+\index{stack}
+\index{diagram!stack}
+
+Figure~\ref{fig:stack3} shows what the stack diagram looks like for this sequence of method invocations.
+The return values are shown being passed back up the stack.
+Notice that \java{recurse} and \java{result} do not exist in the last frame, because when \java{n == 0} the code that creates them does not execute.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics{figs/stack3.pdf}
+\caption{Stack diagram for the \java{factorial} method.}
+\label{fig:stack3}
+\end{center}
+\end{figure}
+
+
+\section{Leap of faith}
+\label{leap of faith}
+
+\index{leap of faith}
+
+Following the flow of execution is one way to read programs, but it can quickly become overwhelming.
+An alternative is a ``leap of faith'':
+when you come to a method invocation, instead of following the flow of execution, you {\em assume} that the method works correctly and returns the appropriate value.
+
+In fact, you are already practicing this leap of faith when you use methods in the Java library.
+When you invoke {\tt Math.cos} or {\tt System.out.println}, you don't examine the implementations of those methods.
+You just assume that they work properly.
+
+You should apply the same reasoning to your own methods.
+For example, in Section~\ref{boolean} we wrote a method called {\tt isSingleDigit} that determines whether a number is between 0 and 9.
+Once we convince ourselves that this method is correct---by testing and examination of the code---we can use the method without ever looking at the implementation again.
+
+The same is true of recursive programs.
+When you get to the recursive call, instead of following the flow of execution you should {\em assume} that the recursive invocation works.
+For example, ``Assuming that I can find the factorial of $n-1$, can I compute the factorial of $n$?''
+Yes you can, by multiplying by $n$.
+
+Of course, it is strange to assume that the method works correctly when you have not finished writing it, but that's why it's called a leap of faith!
+
+
+\section{One more example}
+\label{fibonacci}
+
+\index{fibonacci}
+
+Another common recursively-defined mathematical function is the Fibonacci sequence, which has the following definition:
+
+\vspace{-1ex}
+\begin{eqnarray*}
+&& fibonacci(1) = 1 \\
+&& fibonacci(2) = 1 \\
+&& fibonacci(n) = fibonacci(n-1) + fibonacci(n-2);
+\end{eqnarray*}
+\vspace{-1ex}
+
+Translated into Java, this function is simply:
+
+\begin{code}
+    public static int fibonacci(int n) {
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+\end{code}
+
+If you try to follow the flow of execution here, even for small values of \java{n}, your head will explode.
+But according to the leap of faith, if we assume that the two recursive invocations work correctly, then it is clear that we get the right result by adding them together.
+
+
+\section{Testing with JUnit}
+
+To convince yourself that anything works, you should test it.
+Since we can compute Fibonacci numbers by hand, we can write a simple \java{main} method to test the \java{fibonacci} method.
+The first ten Fibonacci numbers are 1, 1, 2, 3, 5, 8, 13, 21, 34, and 55.
+
+\begin{code}
+    public static void main(String[] args) {
+        if (fibonacci(1) != 1) {
+            System.err.println("fibonacci(1) is incorrect");
+        }
+        // copy that if statement nine more times
+    }
+\end{code}
+
+JUnit is a framework that helps automate and standardize this kind of testing (see \url{http://junit.org/}).
+The basic pattern is simple:
+
+\begin{itemize}
+\item For every class \java{X} there is a corresponding class named \java{XTest} that is responsible for testing the class.
+\item For every method \java{m} there is a corresponding method \java{testM} that is responsible for testing the method.
+\end{itemize}
+
+For example, the \java{fibonacci} method in the previous section belongs to a class named \java{Series}.
+Here are the corresponding test class and test method:
+
+\begin{code}
+import junit.framework.TestCase;
+
+public class SeriesTest extends TestCase {
+
+    public void testFibonacci() {
+        assertEquals(1, Series.fibonacci(1));
+        assertEquals(1, Series.fibonacci(2));
+        assertEquals(2, Series.fibonacci(3));
+        assertEquals(3, Series.fibonacci(4));
+        // six more assertEquals statements
+    }
+}
+\end{code}
+
+JUnit uses some Java language features we have not see yet, like the keyword \java{extends}.
+But it's easy to get started by writing simple test methods.
+In \mbox{DrJava}, you can select ``File $>$ New JUnit Test Case'' from the menu to generate a test class and methods.
+
+JUnit provides a family of overloaded \java{assert} methods.
+In the example above, \java{assertEquals} compares the expected value with the actual value, that is, what \java{fibonacci} returns.
+If \java{assertEquals} fails, it displays an error showing the values that did not match.
+This code is more concise than writing your own \java{if} statements and \java{System.err} messages.
+
+To run JUnit directly from DrJava, click the {\tt Test} button on the toolbar.
+If all your test methods pass, you will see a green bar in the lower right.
+Otherwise, DrJava will take you directly to the first assertion that failed.
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{value method}
+A method that returns a value.
+
+\term{void method}
+A method that does not return a value.
+
+\term{return type}
+The type of value a method returns.
+
+\term{return value}
+The value provided as the result of a method invocation.
+
+\term{void}
+A special return type indicating the method does not return a value.
+
+\term{temporary variable}
+A variable that is short-lived, often used for debugging purposes.
+
+\term{dead code}
+Part of a program that can never be executed, often because it appears after a {\tt return} statement.
+
+\term{incremental development}
+A process for creating programs by writing a few lines at a time,
+compiling, and testing.
+
+\term{stub}
+A placeholder for an incomplete method so that the class will compile.
+
+\term{scaffolding}
+Code that is used during program development but is not part of the final version.
+
+\term{overloading}
+Defining more than one method with the same name but different parameters.
+%When you invoke an overloaded method, Java knows which version to use by looking at the arguments you provide.
+
+\term{Turing complete}
+A programming language that can implement any theoretically possible algorithm.
+
+\term{factorial}
+The product of all the integers up to and including a given integer.
+
+\end{description}
+
+
+\section{Exercises}
+
+
+\begin{exercise}
+
+Answer the following questions by trying them out.
+In fact, any time you have a question about what is legal or illegal in Java, a good way to find out is to ask the compiler.
+
+\begin{enumerate}
+
+\item What happens if you invoke a value method and don't do anything with the result?
+(In other words, if you don't assign it to a variable or use it as part of a larger expression?)
+
+\item What happens if you use a \java{print} method as part of an expression?
+For example: \java{System.out.println("boo!") + 7;}
+
+%TODO: any more?
+
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}
+\label{ex.isdiv}
+
+Write a method named \java{isDivisible} that takes two integers, \java{n} and \java{m}, and that returns \java{true} if \java{n} is divisible by \java{m}, and \java{false} otherwise.
+\end{exercise}
+
+\begin{exercise}
+If you are given three sticks, you may or may not be able to arrange them in a triangle.
+For example, if one of the sticks is 12 inches long and the other two are one inch long, you will not be able to get the short sticks to meet in the middle.
+For any three lengths, there is a simple test to see if it is possible to form a triangle:
+
+\begin{quote}
+``If any of the three lengths is greater than the sum of the other two, then you cannot form a triangle.''
+\end{quote}
+
+Write a method named \java{isTriangle} that takes three integers as arguments and returns either \java{true} or \java{false}, depending on whether you can or cannot form a triangle from sticks with the given lengths.
+The point of this exercise is to use conditional statements to write a value method.
+\end{exercise}
+
+\begin{exercise}
+\label{ex.multadd}
+
+Many computations can be expressed more concisely using the ``multadd'' operation, which takes three operands and computes \java{a * b + c}.
+Some processors even provide a hardware implementation of this operation for floating-point numbers.
+
+\begin{enumerate}
+
+\item Create a new program called {\tt Multadd.java}.
+
+\item Write a method called {\tt multadd} that takes three {\tt doubles} as parameters and that returns \java{a * b + c}.
+
+\item Write a \java{main} method that tests \java{multadd} by invoking it with a few simple parameters, like \java{1.0, 2.0, 3.0}.
+
+\item Also in \java{main}, use \java{multadd} to compute the following values:
+%
+\begin{eqnarray*}
+& \sin \frac{\pi}{4} + \frac{\cos \frac{\pi}{4}}{2} & \\
+& \log 10 + \log 20 &
+\end{eqnarray*}
+
+\item Write a method called \java{yikes} that takes a double as a parameter and that uses \java{multadd} to calculate:
+%
+\begin{eqnarray*}
+x e^{-x} + \sqrt{1 - e^{-x}}
+\end{eqnarray*}
+%
+HINT: The Math method for raising $e$ to a power is \java{Math.exp}.
+
+\end{enumerate}
+
+In the last part, you get a chance to write a method that invokes a method you wrote.
+Whenever you do that, it is a good idea to test the first method carefully before you start working on the second.
+Otherwise, you might find yourself debugging two methods at the same time, which can be difficult.
+
+One of the purposes of this exercise is to practice pattern-matching: the ability to recognize a specific problem as an instance of a general category of problems.
+\end{exercise}
+
+\begin{exercise}
+In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
+
+\begin{code}
+public class Prod {
+
+    public static void main(String[] args) {
+        System.out.println(prod(1, 4));
+    }
+
+    public static int prod(int m, int n) {
+        if (m == n) {
+            return n;
+        } else {
+            int recurse = prod(m, n-1);
+            int result = n * recurse;
+            return result;
+        }
+    }
+}
+\end{code}
+
+\begin{enumerate}
+
+\item Draw a stack diagram showing the state of the program just before the last instance of \java{prod} completes.
+What is the output of this program?
+
+\item Explain in a few words what \java{prod} does.
+
+\item Rewrite \java{prod} without using temporary variables \java{recurse} and \java{result}.
+
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+What is the output of the following program?
+
+\begin{code}
+    public static void main(String[] args) {
+        boolean flag1 = isHoopy(202);
+        boolean flag2 = isFrabjuous(202);
+        System.out.println(flag1);
+        System.out.println(flag2);
+        if (flag1 && flag2) {
+            System.out.println("ping!");
+        }
+        if (flag1 || flag2) {
+            System.out.println("pong!");
+        }
+    }
+
+    public static boolean isHoopy(int x) {
+        boolean hoopyFlag;
+        if (x % 2 == 0) {
+            hoopyFlag = true;
+        } else {
+            hoopyFlag = false;
+        }
+        return hoopyFlag;
+    }
+
+    public static boolean isFrabjuous(int x) {
+        boolean frabjuousFlag;
+        if (x > 0) {
+            frabjuousFlag = true;
+        } else {
+            frabjuousFlag = false;
+        }
+        return frabjuousFlag;
+    }
+\end{code}
+
+The purpose of this exercise is to make sure you understand logical operators and the flow of execution through value methods.
+\end{exercise}
+
+\begin{exercise}
+The purpose of this exercise is to translate a recursive definition into a Java method.
+The Ackermann function is defined for non-negative integers as follows:
+\begin{eqnarray*}
+A(m, n) = \begin{cases}
+              n+1 & \mbox{if } m = 0 \\
+        A(m-1, 1) & \mbox{if } m > 0 \mbox{ and } n = 0 \\
+A(m-1, A(m, n-1)) & \mbox{if } m > 0 \mbox{ and } n > 0.
+\end{cases}
+\end{eqnarray*}
+
+Write a method called \java{ack} that takes two \java{int}s as parameters and that computes and returns the value of the Ackermann function.
+
+Test your implementation of Ackermann by invoking it from \java{main} and printing the return value.
+Note the return value gets very big very quickly.
+You should try it only for small values of $m$ and $n$ (not bigger than 3).
+\end{exercise}
+
+% TODO(CSM): move to strings and things chapter?
+
+\begin{exercise}
+Create a program called {\tt Recurse.java} and type in the following methods:
+
+\begin{code}
+    // first: returns the first character of the given String
+    public static char first(String s) {
+        return s.charAt(0);
+    }
+
+    // last: returns a new String that contains all but the
+    // first letter of the given String
+    public static String rest(String s) {
+        return s.substring(1, s.length());
+    }
+
+    // length: returns the length of the given String
+    public static int length(String s) {
+        return s.length();
+    }
+\end{code}
+
+\begin{enumerate}
+
+\item Write some code in \java{main} that tests each of these methods.
+Make sure they work, and you understand what they do.
+
+\item Write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.  It should be a \java{void} method.
+
+\item Write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
+
+\item Write a method called \java{reverseString} that takes a String as a parameter and that returns a new String as a return value.
+The new String should contain the same letters as the parameter, but in reverse order.
+
+\begin{code}
+    String backwards = reverseString("coffee");
+    System.out.println(backwards);
+\end{code}
+
+For example, the output of the above code should be:
+
+\begin{stdout}
+eeffoc
+\end{stdout}
+
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\label{ex.power}
+Write a recursive method called \java{power} that takes a double \java{x} and an integer \java{n} and that returns $x^n$.
+
+Hint: a recursive definition of this operation is $x^n = x \cdot x^{n-1}$.
+Also, remember that anything raised to the zeroeth power is 1.
+
+Optional challenge: you can make this method more efficient, when \java{n} is even, using $x^n = \left( x^{n/2} \right)^2$.
+\end{exercise}
+
+\begin{exercise}
+\label{gcd}
+Write a method called \java{gcd} that takes two integer parameters and that uses Euclid's algorithm to compute and return the greatest common divisor of the two numbers.
+
+The following technique is known as Euclid's Algorithm, because it appears in Euclid's {\em Elements} (Book 7, ca.~300 BC).
+It may be the oldest recorded nontrivial algorithm.
+The process is based on the observation that, if $r$ is the remainder when $a$ is divided by $b$, then the common divisors of $a$ and $b$ are the same as the common divisors of $b$ and $r$.
+\[ gcd(a, b) = gcd(b, r) \]
+%
+We can use this fact to reduce the problem of computing a GCD to the problem of computing the GCD of smaller and smaller pairs of integers.
+For example:
+\[ gcd(36, 20) = gcd(20, 16) = gcd(16, 4) = gcd(4, 0) = 4 \]
+%implies that the GCD of 36 and 20 is 4.
+
+%It can be shown that for any two starting numbers, this repeated reduction eventually produces a pair where the second number is 0.
+%Then the GCD is the other number in the pair.
+
+(This exercise is based on page 44 of Ableson and Sussman's {\em Structure and Interpretation of Computer Programs}.)
+\end{exercise}
+
+
+\chapter{Loops and iteration}
+
+Computers are often used to automate repetitive tasks.
+Repeating tasks without making errors is something that computers do well and people do poorly.
+
+\index{iteration}
+
+We have already seen methods like {\tt countdown} and {\tt factorial} that use recursion to run the same code multiple times.
+Although recursion is elegant and powerful, Java provides language features that make it much easier to repeat code.
+In this chapter, we present {\bf iteration} using \java{while} and \java{for} statements.
+
+
+\section{The while statement}
+
+\index{statement!while}
+\index{while statement}
+
+Using a \java{while} statement, we can rewrite {\tt countdown} this way:
+
+\begin{code}
+    public static void countdown(int n) {
+        while (n > 0) {
+            System.out.println(n);
+            n = n - 1;
+        }
+        System.out.println("Blastoff!");
+    }
+\end{code}
+
+You can almost read a \java{while} statement like English.
+The above code means: ``While {\tt n} is greater than zero, print the value of {\tt n} and then reduce the value of {\tt n} by 1.
+When you get to zero, print the word Blastoff!''
+
+More formally, the flow of execution for a \java{while} statement is three steps:
+
+\begin{enumerate}
+
+\item Evaluate the condition in parentheses, yielding \java{true} or \java{false}.
+
+\item If the condition is \java{false}, exit the \java{while} block and continue execution at the next statement.
+
+\item If the condition is \java{true}, execute the statements between the braces, and then go back to step 1.
+
+\end{enumerate}
+
+\index{loop}
+\index{loop!body}
+\index{body}
+
+This type of flow is called a {\bf loop}, because the last step loops back around to the first.
+The statements inside the \java{while} block are called the {\bf body} of the loop.
+If the condition is \java{false} the first time, the statements inside the \java{while} block are never executed.
+
+\index{loop!infinite}
+\index{infinite loop}
+
+The body of the loop should change the value of one or more variables so that, eventually, the condition becomes \java{false} and the loop terminates.
+Otherwise the loop will repeat forever, which is called an {\bf infinite loop}.
+An endless source of amusement for computer scientists is the observation that the directions on shampoo, ``Lather, rinse, repeat,'' are an infinite loop.
+
+In the case of {\tt countdown}, we can prove that the loop terminates when {\tt n} is positive.
+But in general, it is not so easy to tell whether a loop terminates.
+For example, this loop continues until {\tt n} is 1 (which makes the condition \java{false}).
+
+\begin{code}
+    public static void sequence(int n) {
+        while (n != 1) {
+            System.out.println(n);
+            if (n % 2 == 0) {         // n is even
+                n = n / 2;
+            } else {                  // n is odd
+                n = n * 3 + 1;
+            }
+        }
+    }
+\end{code}
+
+At each iteration, the program prints the value of {\tt n} and then checks whether it is even or odd.
+If it is even, the value of {\tt n} is divided by two.
+If it is odd, the value is replaced by $3n+1$.
+For example, if the starting value (the argument passed to {\tt sequence}) is 3, the resulting sequence is 3, 10, 5, 16, 8, 4, 2, 1.
+
+Since {\tt n} sometimes increases and sometimes decreases, there is no obvious proof that {\tt n} will ever reach 1 and that the program will ever terminate.
+For some particular values of {\tt n}, we can prove termination.
+For example, if the starting value is a power of two, then the value of {\tt n} will be even every time through the loop until we get to 1.
+The previous example ends with such a sequence, starting with 16.
+
+Particular values aside, the interesting question is whether we can prove that this program terminates for {\em all} values of n.
+So far, no one has been able to prove it {\em or} disprove it!
+For more information, see \url{http://en.wikipedia.org/wiki/Collatz_conjecture}.
+%The field of computer science is interested in these types of questions, because their answers give insight to the limits of what computers can and cannot do.
+
+
+\section{Generating tables}
+
+\index{table}
+\index{logarithm}
+
+One of the things loops are good for is generating and printing tabular data.
+Before computers were readily available, people had to calculate logarithms, sines and cosines, and other common mathematical functions by hand.
+To make that easier, there were books containing long tables where you could find the values of various functions.
+Creating these tables was slow and boring, and the results were often full of errors.
+
+When computers appeared on the scene, one of the initial reactions was, ``This is great!
+We can use the computers to generate the tables, so there will be no errors.''
+That turned out to be true (mostly), but shortsighted.
+Not much later, computers were so pervasive that printed tables became obsolete.
+
+\index{division!floating-point}
+
+Even so, for some operations, computers use tables of values to get an approximate answer, and then perform computations to improve the approximation.
+In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division (see \url{http://en.wikipedia.org/wiki/Pentium_FDIV_bug}).
+
+Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
+The following program prints a sequence of values in the left column and their logarithms in the right column:
+
+\begin{code}
+    double x = 1.0;
+    while (x < 10.0) {
+        System.out.println(x + "   " + Math.log(x));
+        x = x + 1.0;
+    }
+\end{code}
+
+The output of this program is:
+
+\begin{stdout}
+1.0   0.0
+2.0   0.6931471805599453
+3.0   1.0986122886681098
+4.0   1.3862943611198906
+5.0   1.6094379124341003
+6.0   1.791759469228055
+7.0   1.9459101490553132
+8.0   2.0794415416798357
+9.0   2.1972245773362196
+\end{stdout}
+
+Looking at these values, can you tell what base {\tt Math.log} uses?
+Since powers of two are important in computer science, we often want logarithms with respect to base 2.
+To compute them, we can apply this property of logarithms:
+%
+\begin{equation*}
+\log_2 x = \frac{log_e x}{log_e 2}
+\end{equation*}
+%
+Using the right side of the formula, we modify the {\tt println} statement.
+
+\begin{code}
+    System.out.println(x + "   " + Math.log(x) / Math.log(2));
+\end{code}
+
+We can see that 1, 2, 4 and 8 are powers of two, because their logarithms base 2 are round numbers.
+
+\begin{stdout}
+1.0   0.0
+2.0   1.0
+3.0   1.5849625007211563
+4.0   2.0
+5.0   2.321928094887362
+6.0   2.584962500721156
+7.0   2.807354922057604
+8.0   3.0
+9.0   3.1699250014423126
+\end{stdout}
+
+If we wanted to find the logarithms of other powers of two, we could modify the program like this:
+
+\begin{code}
+    final double log2 = Math.log(2);
+    double x = 1.0;
+    while (x < 100.0) {
+        System.out.println(x + "   " + Math.log(x) / log2);
+        x = x * 2.0;
+    }
+\end{code}
+
+First, we store \java{Math.log(2)} in a \java{final} variable to avoid computing that value over and over again.
+Second, instead of adding something to {\tt x} each time through the loop, which yields an {\em arithmetic sequence}, we multiply {\tt x} by something, yielding a {\em geometric sequence}.
+The result is:
+
+\begin{stdout}
+1.0   0.0
+2.0   1.0
+4.0   2.0
+8.0   3.0
+16.0   4.0
+32.0   5.0
+64.0   6.0
+\end{stdout}
+
+Log tables may not be useful any more, but for computer scientists, knowing the powers of two helps a lot!
+%When you have an idle moment, you should memorize the powers of two up to 65536 (that's $2^{16}$).
+
+
+\section{Program development}
+\label{encapsulation}
+
+\index{table!two-dimensional}
+
+Two-dimensional tables consist of rows and columns that list values at the intersections.
+A multiplication table is a good example.
+Let's say you want to print a multiplication table for the values from 1 to 6.
+A good way to start is a simple loop that prints the multiples of 2, all on one line.
+
+\begin{code}
+    int i = 1;
+    while (i <= 6) {
+        System.out.printf("%4d", 2 * i);
+        i = i + 1;
+    }
+    System.out.println();
+\end{code}
+
+\index{loop variable}
+\index{variable!loop}
+
+The first line initializes a variable named {\tt i}, which is going to act as a counter, or {\bf loop variable}.
+As the loop executes, the value of {\tt i} increases from 1 to 6; when {\tt i} is 7, the loop terminates.
+Each time through the loop, we print the value {\tt 2 * i}, padded with spaces so it's four characters wide.
+Since we use {\tt System.out.printf}, the output appears on a single line.
+
+We need to call {\tt println} after the loop to complete the line of output.
+In some environments, the output from {\tt printf} gets stored without being displayed until {\tt println} is invoked.
+If the program terminates, and you forget to invoke {\tt println}, you may never see the stored output.
+
+The output of the code so far is:
+
+\begin{stdout}
+    2    4    6    8   10   12
+\end{stdout}
+
+\index{encapsulation}
+\index{generalization}
+
+Now that we've solved part of the problem, we can encapsulate and generalize the code to do the rest.
+{\bf Encapsulation} means taking a piece of code and wrapping it up in a method, allowing you to take advantage of all the things methods are good for.
+%We have seen two examples of encapsulation, when we wrote {\tt printParity} in Section~\ref{alternative} and {\tt isSingleDigit} in Section~\ref{boolean}.
+{\bf Generalization} means taking something specific, like printing multiples of 2, and making it more general, like printing the multiples of any integer.
+%Here's a method that encapsulates the loop and then generalizes it to print multiples of {\tt n}.
+
+\begin{code}
+    public static void printMultiples(int n) {
+        int i = 1;
+        while (i <= 6) {
+            System.out.printf("%4d", n * i);
+            i = i + 1;
+        }
+        System.out.println();
+    }
+\end{code}
+
+To encapsulate, we added the first line, which declares the method name, parameter, and return type.
+To generalize, we replaced the value 2 with the parameter {\tt n}.
+The whole point of parameters is to allow you to write general purpose methods.
+
+Note that invoking this method with the argument 2 yields the same output as before.
+With the argument 3, the output becomes:
+
+\begin{stdout}
+    3    6    9   12   15   18
+\end{stdout}
+
+And with argument 4, the output is:
+
+\begin{stdout}
+    4    8   12   16   20   24
+\end{stdout}
+
+By now you can probably guess how we are going to print a multiplication table: we'll invoke {\tt printMultiples} repeatedly with different arguments.
+In fact, we are going to use another loop to iterate through the rows.
+
+\begin{code}
+    int i = 1;
+    while (i <= 6) {
+        printMultiples(i);
+        i = i + 1;
+    }
+\end{code}
+
+First, notice how similar this loop is to the one inside {\tt printMultiples}.
+All we did was replace the \java{printf} statement with a method invocation.
+Also, notice how the format specifier \java{"\%4d"} in {\tt printMultiples} causes the output to align vertically, regardless of whether the numbers are one or two digits.
+
+\begin{stdout}
+    1    2    3    4    5    6
+    2    4    6    8   10   12
+    3    6    9   12   15   18
+    4    8   12   16   20   24
+    5   10   15   20   25   30
+    6   12   18   24   30   36
+\end{stdout}
+
+%\section{Generalization}
+%\label{methods}
+%\index{method}
+%\index{encapsulation}
+%
+%In Section~\ref{adding_methods} I listed some of the reasons methods are useful.
+%Here are several more:
+%
+%\begin{itemize}
+%\item By giving a name to a sequence of statements, you make your program easier to read and debug.
+%\item Dividing a long program into methods allows you to separate parts of the program, debug them in isolation, and then compose them into a whole.
+%\item Methods facilitate both recursion and iteration.
+%\item Well-designed methods are often useful for many programs. Once you write and debug one, you can reuse it.
+%\end{itemize}
+
+One of the challenges of programming, especially for beginners, is figuring out how to divide up a program into methods.
+The process of encapsulation and generalization allows you design as you go along.
+You start by adding code to {\tt main} or some another method.
+When you get the code working, you wrap it up in a new method and generalize it by adding parameters.
+Then you repeat, alternately developing new code and creating new methods.
+
+As a final example, we can take the code above and wrap it up in a method:
+
+\begin{code}
+    public static void printMultTable() {
+        int i = 1;
+        while (i <= 6) {
+            printMultiples(i);
+            i = i + 1;
+        }
+    }
+\end{code}
+
+\index{program development}
+
+Encapsulation and generalization, as demonstrated in this section, is a useful and common process for {\bf program development}.
+In later chapters we will present some alternatives.
+
+
+\section{Local variables}
+
+You might wonder how we can use the same variable {\tt i} in both {\tt printMultiples} and {\tt printMultTable}.
+Isn't it true that you can only declare a variable once?
+And doesn't it cause problems when one of the methods changes the value of the variable?
+
+The answer to both questions is ``no,'' because the {\tt i} in {\tt printMultiples} and the {\tt i} in {\tt printMultTable} are {\em not the same variable}.
+They have the same name, but they do not refer to the same storage location.
+Changing the value of one variable has no effect on the other.
+Consider the stack diagram at the moment the program begins printing the second row of the table:
+
+\begin{center}
+\vspace{1em}
+\includegraphics{figs/stack4.pdf}
+\vspace{1em}
+\end{center}
+
+%\begin{tabular}{rl}
+%          main & \framebox[3cm][r]{\strut args ~\framebox[1cm]{\strut  }~} \\[1em]
+%printMultTable & \framebox[3cm][r]{\strut    i ~\framebox[1cm]{\strut 2}~} \\[1em]
+%printMultiples & \framebox[3cm][r]{\strut    i ~\framebox[1cm]{\strut 2}~} \\[1em]
+%\end{tabular}
+
+\index{local variable}
+\index{variable!local}
+
+Variables and parameters declared inside a method definition are called {\bf local variables} because they only exist inside the method.
+You cannot access a local variable from outside its method, and you are free to have multiple variables with the same name as long as they are not in the same method.
+
+\index{loop variable}
+\index{variable!loop}
+
+Although it can be confusing, there are good reasons to reuse names.
+For example, it is common to use the names {\tt i}, {\tt j} and {\tt k} as loop variables.
+If you avoid using them in one method just because you used them somewhere else, you make the program harder to read.
+Another reason is when two or more methods are based on the same parameter.
+It's awkward to come up with many different names for the same data.
+
+
+\section{More generalization}
+\index{generalization}
+
+Imagine a program that prints multiplication tables of any size, not just the 6x6 table.
+All we need is to add a parameter to {\tt printMultTable}:
+
+\begin{code}
+    public static void printMultTable(int size) {
+        int i = 1;
+        while (i <= size) {
+            printMultiples(i);
+            i = i + 1;
+        }
+    }
+\end{code}
+
+Rather than use the literal value 6 in the while statement, we generalize by using the parameter {\tt size}.
+Here is the output when you invoke {\tt printMultTable} with the argument 7:
+
+\begin{stdout}
+   1   2   3   4   5   6
+   2   4   6   8  10  12
+   3   6   9  12  15  18
+   4   8  12  16  20  24
+   5  10  15  20  25  30
+   6  12  18  24  30  36
+   7  14  21  28  35  42
+\end{stdout}
+
+This result is fine, but it would be even better if it were square (i.e., the same number of rows and columns).
+We can pass the {\tt size} parameter to {\tt printMultiples} to specify how many columns the table should have.
+
+\begin{code}
+    public static void printMultiples(int n, int size) {
+        int i = 1;
+        while (i <= size) {
+            System.out.printf("%4d", n * i);
+            i = i + 1;
+        }
+        System.out.println();
+    }
+\end{code}
+
+%\begin{code}
+%    public static void printMultTable(int size) {
+%        int i = 1;
+%        while (i <= size) {
+%            printMultiples(i, size);
+%            i = i + 1;
+%        }
+%    }
+%\end{code}
+
+Since we added a new parameter to \java{printMultiples}, we also have to change the line \java{printMultiples(i, size);} where it is invoked in {\tt printMultTable}.
+As expected, this program generates a square 7x7 table:
+
+\begin{stdout}
+   1   2   3   4   5   6   7
+   2   4   6   8  10  12  14
+   3   6   9  12  15  18  21
+   4   8  12  16  20  24  28
+   5  10  15  20  25  30  35
+   6  12  18  24  30  36  42
+   7  14  21  28  35  42  49
+\end{stdout}
+
+When you generalize a method appropriately, you often find that it has capabilities you did not plan.
+For example, you might notice that the multiplication table is symmetric, because $ab = ba$, so all the entries in the table appear twice.
+You could save ink by printing half the table, and you would only have to change one line of {\tt printMultTable}:
+
+\begin{code}
+      printMultiples(i, i);
+\end{code}
+
+In other words, the {\tt size} of each row is the same as the row number itself.
+
+\begin{stdout}
+   1
+   2   4
+   3   6   9
+   4   8  12  16
+   5  10  15  20  25
+   6  12  18  24  30  36
+   7  14  21  28  35  42  49
+\end{stdout}
+
+Even though the second parameter in {\tt printMultiples} is named {\tt size} and we have a variable with the same name, we can still use any value or expression we want for the argument.
+Remember you do not pass {\em variables} to methods; you pass their current {\em values}.
+
+
+\section{The for statement}
+\label{for}
+
+\index{for}
+\index{loop!for}
+\index{statement!for}
+
+The loops we have written so far have a number of elements in common.
+All of them start by initializing a variable; they have a test, or condition, that depends on that variable; and inside the loop they do something to update that variable.
+This type of loop is so common that there is another statement, called \java{for}, that expresses it more concisely.
+
+\begin{code}
+    for (INITIALIZER; CONDITION; INCREMENTOR) {
+        BODY
+    }
+\end{code}
+
+This structure is equivalent to the following \java{while} loop:
+
+\begin{code}
+    INITIALIZER
+    while (CONDITION) {
+        BODY
+        INCREMENTOR
+    }
+\end{code}
+
+The \java{for} loop is more concise and easier to read, since it puts all the loop-related statements in one place.
+
+\begin{code}
+    for (int i = 0; i < 4; i++) {
+        System.out.println(i);
+    }
+\end{code}
+
+We easily rewrite any \java{for} statement as a \java{while} statement by separating the loop components:
+
+\begin{code}
+    int i = 0;
+    while (i < 4) {
+        System.out.println(i);
+        i++;
+    }
+\end{code}
+
+The statement {\tt i++;} is shorthand for {\tt i = i + 1;} and is commonly used in loop structures.
+The {\tt ++} operator increments a variable by one, and the {\tt --} operator decrements a variable by one.
+
+There is one difference between the \java{for} and \java{while} loops above: where the variable {\tt i} is declared.
+After the \java{for} loop, the variable {\tt i} ceases to exist because it was declared in the loop header.
+In contrast, the variable {\tt i} continues to exist after the \java{while} statment, because it was declared outside the loop.
+
+Because \java{for} loops are so concise, they are particularly useful when iterating over two or more dimensions.
+We can rewrite the final example of {\tt printMultTable} in the previous section with just a few lines of code:
+
+\begin{code}
+    for (int row = 1; row <= size; row++) {
+        for (int col = 1; col <= row; col++) {
+            System.out.printf("%4d", row * col);
+        }
+        System.out.println();
+    }
+\end{code}
+
+In contrast to {\tt printMultTable} and {\tt printMultiples}, this version of the code cannot use the variable {\tt i} for both loops.
+Instead, it uses the variables {\tt row} and {\tt col} to represent the positions in the table.
+
+
+%TODO(csm) tracing code by hand?
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{loop}
+A statement that executes repeatedly while some condition is satisfied.
+
+\term{iteration}
+One pass through (execution of) the body of the loop, including the evaluation of the condition.
+
+\term{loop body}
+The statements inside the loop.
+
+\term{infinite loop}
+A loop whose condition is always true.
+
+\term{loop variable}
+A variable that is initialized, tested, and updated in order to control a loop.
+
+\term{encapsulate}
+To divide a large complex program into components (like methods) and isolate the components from each other (for example, by using local variables).
+
+\term{generalize}
+To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter).
+Generalization makes code more versatile, more likely to be reused, and sometimes even easier to write.
+
+\term{local variable}
+A variable that is declared inside a method and that exists only within that method.
+Local variables cannot be accessed from outside their method and do not interfere with any other methods.
+
+\term{program development}
+A process for writing programs.
+So far we have seen ``incremental development'' and ``encapsulation and generalization.''
+
+\end{description}
+
+
+\section{Exercises}
+
+
+\begin{exercise}
+\label{infloop}
+
+Consider the following code:
+
+\begin{code}
+public static void main(String[] args) {
+    loop(10);
+}
+
+public static void loop(int n) {
+    int i = n;
+    while (i > 0) {
+        System.out.println(i);
+        if (i % 2 == 0) {
+            i = i / 2;
+        } else {
+            i = i + 1;
+        }
+    }
+}
+\end{code}
+
+\begin{enumerate}
+
+\item Draw a table that shows the value of the variables {\tt i} and {\tt n} during the execution of {\tt loop}.
+The table should contain one column for each variable and one line for each iteration.
+
+\item What is the output of this program?
+
+\item Can you prove that this loop terminates for any positive value of {\tt n}?
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+Let's say you are given a number, $a$, and you want to find its square root.
+One way to do that is to start with a rough guess about the answer, $x_0$, and then improve the guess using the following average:
+%
+\begin{equation*}
+x_1 =(x_0 + a/x_0) / 2
+\end{equation*}
+%
+For example, if we want to find the square root of 9, and we start with $x_0 = 6$, then $x_1 = (6 + 9/6) / 2 = 3.75$, which is closer.
+We can repeat the procedure, using $x_1$ to calculate $x_2$, and so on.
+In this case, $x_2 = 3.075$ and $x_3 = 3.00091$.
+So it converges quickly on the correct answer.
+
+Write a method called {\tt squareRoot} that takes a \java{double} and returns an approximation of the square root of the parameter, using this technique.
+You may not use {\tt Math.sqrt}.
+
+As your initial guess, you should use $a/2$.
+Your method should iterate until it gets two consecutive estimates that differ by less than 0.0001.
+In other words, return when the absolute value of $x_n - x_{n-1}$ is less than 0.0001.
+You can use {\tt Math.abs} to calculate the absolute value.
+\end{exercise}
+
+
+\begin{exercise}
+In Exercise~\ref{ex.power} we wrote a recursive version of {\tt power}, which takes a double {\tt x} and an integer {\tt n} and returns $x^n$.
+Now write an iterative method to perform the same calculation.
+\end{exercise}
+
+\begin{exercise}
+Section~\ref{factorial} presents a recursive method that computes the factorial function.
+Write an iterative version of {\tt factorial}.
+\end{exercise}
+
+\begin{exercise}
+One way to calculate $e^x$ is to use the infinite series expansion:
+%
+\begin{equation*}
+e^x = 1 + x + x^2 / 2! + x^3 / 3! + x^4 / 4! + ...
+\end{equation*}
+%
+If the loop variable is named {\tt i}, then the $i$th term is $x^i / i!$.
+
+\begin{enumerate}
+
+\item Write a method called {\tt myexp} that adds up the first {\tt n} terms of this series.
+You can use the {\tt factorial} method from Section~\ref{factorial} or your iterative version from the previous exercise.
+
+\item You can make this method more efficient if you realize that, in each iteration, the numerator of the term is the same as its predecessor multiplied by {\tt x}, and the denominator is the same as its predecessor multiplied by {\tt i}.
+Use this observation to eliminate the use of {\tt Math.pow} and {\tt factorial}, and check that you still get the same result.
+
+\item Write a method called {\tt check} that takes a parameter, {\tt x}, and prints the values of {\tt x}, {\tt Math.exp(x)} and {\tt myexp(x)} for various values of {\tt x}.
+The output should look something like:
+
+\begin{stdout}
+1.0     2.708333333333333     2.718281828459045
+\end{stdout}
+
+Recall that you can use the string \java{"\\t"} to print a tab character between columns of a table.
+
+\item Vary the number of terms in the series (the second argument that {\tt check} sends to {\tt myexp}) and see the effect on
+the accuracy of the result.
+Adjust this value until the estimated value agrees with the ``correct'' answer when {\tt x} is 1.
+
+\item Write a loop in {\tt main} that invokes {\tt check} with the values 0.1, 1.0, 10.0, and 100.0.
+How does the accuracy of the result vary as {\tt x} varies?
+Compare the number of digits of agreement rather than the difference between the actual and estimated values.
+
+\item Add a loop in {\tt main} that checks {\tt myexp} with the values -0.1, -1.0, -10.0, and -100.0.
+Comment on the accuracy.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+One way to evaluate $\exp(-x^2)$ is to use the infinite series expansion:
+%
+\begin{equation*}
+\exp(-x^2) = 1 - x^2 + x^4/2 - x^6/6 + \ldots
+\end{equation*}
+%
+In other words, we need to add up a series of terms where the $i$th term is equal to $(-1)^i x^{2i} / i!$.
+Write a method named {\tt gauss} that takes {\tt x} and {\tt n} as arguments and returns the sum of the first {\tt n} terms of the series.
+You should not use {\tt factorial} or {\tt pow}.
+\end{exercise}
+
+
+\chapter{Strings and things}
+\label{strings}
+
+\index{object}
+\index{class!String}
+\index{method!string}
+
+In Java and other object-oriented languages, an {\bf object} is a collection of data that provides a set of methods.
+These methods operate on the object, performing computations and sometimes modifying the data.
+Strings are objects, and their data is a sequence of characters; that is,
+letters, numbers, spaces, and symbols.
+The {\tt String} class provides many methods for manipulating character data, and we will explore some of them in this chapter.
+
+
+\section{Characters}
+
+\index{charAt}
+\index{char}
+\index{type!char}
+
+The first method we will look at is {\tt charAt}, which extracts a character from a {\tt String}.
+It returns a \java{char}, a primitive type that can store individual characters (as opposed to strings of them).
+
+\begin{code}
+    String fruit = "banana";
+    char letter = fruit.charAt(1);
+    System.out.println(letter);
+\end{code}
+
+The expression {\tt fruit.charAt(1)} means that we invoke the {\tt charAt} method on the object referenced by {\tt fruit}.
+The argument {\tt 1} means that we want to know the letter at position 1.
+The result is a character, which is stored in a \java{char} variable named {\tt letter}.
+When you print the value of {\tt letter}, you might be surprised:
+
+\begin{stdout}
+a
+\end{stdout}
+
+Unless you already think like a computer scientist, the letter {\tt a} is not the first letter of {\tt "banana"}.
+For technical reasons, computer scientists start counting from zero.
+The 0th (``zeroeth'') letter of {\tt "banana"} is the {\tt b}.
+The 1th letter (``oneth'') is {\tt a} and the 2th (``twooth'') letter is {\tt n}.
+So if you want the {\em first} letter of a string, you have to pass 0 as the argument:
+
+\begin{code}
+    char letter = fruit.charAt(0);
+\end{code}
+
+\index{quote}
+\index{double-quote}
+\index{value!char}
+
+Character literals appear in single quotes like \java{'c'}.
+Unlike string literals, which appear in double quotes, characters may only contain a single letter or symbol.
+
+\begin{code}
+    char letter = 'c';
+    if (letter == 'd') {
+        System.out.println('?');
+    }
+\end{code}
+
+Characters work much like the other primitive types we have seen.
+You can use them in arithmetic, decisions, loops, and so forth.
+
+\begin{code}
+    System.out.print("Roman alphabet: ");
+    for (char c = 'A'; c <= 'Z'; c++) {
+        System.out.print(c);
+    }
+    System.out.println();
+\end{code}
+
+\index{Unicode}
+
+Java uses {\bf Unicode} for its character set (see \url{http://unicode.org/}) so that strings may store text in any language.
+Unicode supports alphabets like Cyrillic and Greek, and left-to-right scripts like Arabic and Hebrew.
+%Regardless, both the data type \java{char} and the method {\tt charAt} work the same.
+
+\begin{code}
+    System.out.print("Greek alphabet: ");
+    for (int i = 913; i <= 937; i++) {
+        System.out.print((char) i);
+    }
+    System.out.println();
+\end{code}
+
+This example demonstrates how you can convert a Unicode ``code unit,'' represented as an integer, to a \java{char} using a cast operator.
+
+
+\section{String traversal}
+\label{traverse}
+
+\index{traverse}
+
+A common task with strings is to start at the beginning, select each character in turn, do some computation with it, and continue until the end.
+This pattern is called a {\bf traversal}.
+A natural way to traverse a string is with a \java{for} statement:
+
+\begin{code}
+    for (int i = 0; i < fruit.length(); i++) {
+        char letter = fruit.charAt(i);
+        System.out.println(letter);
+    }
+\end{code}
+
+\index{loop variable}
+\index{variable!loop}
+\index{index}
+
+This loop prints each character of the string {\tt fruit} on a line by itself.
+The name of the loop variable is {\tt i}, which stands for {\bf index}; an
+index is an integer that indicates the position of a character.
+Notice that the condition is {\tt i < fruit.length()}, which means that when {\tt i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
+%The last character we access is the one with the index {\tt fruit.length() - 1}.
+
+\index{String!length}
+\index{length!String}
+
+The {\tt length} method returns the number of characters in the string.
+It takes no arguments and returns an integer; the length of \java{"banana"} is 6.
+%Notice that it is legal to have a variable with the same name as a method (although it can be confusing for human readers).
+To find the last letter of a string, you might be tempted to try something like:
+
+\begin{code}
+    int length = fruit.length();
+    char last = fruit.charAt(length);      // WRONG!
+\end{code}
+
+This code compiles and runs, but it causes a runtime error.
+The reason is that there is no sixth letter in {\tt "banana"}.
+Since we started counting at 0, the 6 letters are indexed from 0 to 5.
+To get the last character, you have to subtract 1 from {\tt length}.
+
+\begin{code}
+    char last = fruit.charAt(length - 1);  // CORRECT
+\end{code}
+
+Many string traversals involve reading one string and creating another.
+For example, to reverse a string we simply add one character at a time:
+
+\begin{code}
+    public static String reverse(String s) {
+        String r = "";
+        for (int i = s.length() - 1; i >= 0; i--) {
+            r = r + s.charAt(i);
+        }
+        return r;
+    }
+\end{code}
+
+\index{empty string}
+
+The initial value of \java{r} is \java{""}, which is the {\bf empty string}.
+The loop traverses the letters of \java{s} in reverse order.
+Each time through the loop, it creates a new string and assigns it to \java{r}.
+When the loop exits, \java{r} contains the letters from {\tt s} in reverse order.
+So the result of \java{reverse("banana")} is \java{"ananab"}.
+
+%\section{Looping and counting}
+\label{loopcount}
+
+\index{loop!counting}
+\index{traverse!counting}
+
+Other string traversals involve looping and counting.
+The following method counts the number of times a given character appears in a string.
+For example, \java{numberOf("banana", 'a')} returns 3.
+
+\begin{code}
+    public static int numberOf(String s, char c) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                count++;
+            }
+        }
+        return count;
+    }
+\end{code}
+
+\index{counter}
+
+This method demonstrates a common idiom, called a {\bf counter}.
+The variable {\tt count} is initialized to zero and then incremented each time we find an \java{'a'}.
+When we exit the loop, {\tt count} contains the result: the total number of a's.
+
+
+\section{Substrings}
+
+The {\tt substring} method returns new string that copies letters from an existing string, beginning at the given index.
+
+\begin{itemize}
+\item \java{fruit.substring(0)} returns \java{"banana"}
+\item \java{fruit.substring(2)} returns \java{"nana"}
+\item \java{fruit.substring(6)} returns \java{""}
+\end{itemize}
+
+The first example returns a copy of the entire string.
+The second example returns all but the first two characters.
+As the last example shows, {\tt substring} returns the empty string if the argument is the length of the string.
+To visualize how this method works, it helps to draw a picture:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+b & a & n & a & n & a \\
+\hline
+0 & 1 & 2 & 3 & 4 & 5 \\
+\hline
+\end{tabular}
+\end{center}
+
+Like many string methods, {\tt substring} is overloaded.
+That is, there are other versions of {\tt substring} that have different parameters.
+If it's invoked with two argments, they are treated as a start and end index:
+
+\begin{itemize}
+\item \java{fruit.substring(0, 3)} returns \java{"ban"}
+\item \java{fruit.substring(2, 5)} returns \java{"nan"}
+\item \java{fruit.substring(6, 6)} returns \java{""}
+\end{itemize}
+
+Notice that the character indicated by the end index is not included.
+%In other words, substrings are for the interval $[beg, end)$.
+One way to remember this detail is to think about how loops work.
+Here is a simplified version of \java{substring(2, 5)}:
+
+\begin{code}
+    String str = "banana";
+    int beg = 2;
+    int end = 5;
+    String sub = "";
+    for (int i = beg; i < end; i++) {
+        sub = sub + str.charAt(i);
+    }
+    System.out.println(sub);  // prints "nan"
+\end{code}
+
+Because of the \java{<} operator, the loop terminates when \java{i == end}.
+Designing substring this way simplifies many common operations.
+For example, to select a substring with length \java{len}, starting at index \java{i}, you could write \java{fruit.substring(i, i + len)}.
+
+
+\section{Bounds checking}
+\label{StringIndexOutOfBounds}
+
+\index{runtime error}
+\index{error!runtime}
+\index{exception}
+
+If you call the {\tt charAt} method with an index that is either negative or greater than {\tt length - 1}, you will get an {\bf exception}.
+%The same is true when calling {\tt substring} with invalid start or end indexes.
+When that happens, Java prints an error message and terminates the program.
+
+For example, notice the error in the {\tt getLastLetter} method below.
+It should be looking at \java{index - 1} instead of \java{index}.
+
+\begin{code}
+public class BadString {
+    public static void main(String[] args) {
+        processWord("banana");
+    }
+    public static void processWord(String s) {
+        char c = getLastLetter(s);
+        System.out.println(c);
+    }
+    public static char getLastLetter(String s) {
+        int index = s.length();
+        char c = s.charAt(index);  // WRONG!
+        return c;
+    }
+}
+\end{code}
+
+When you run the {\tt BadString} program, Java prints the following message.
+
+\begin{small}
+\begin{stdout}
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException:
+String index out of range: 6
+    at java.lang.String.charAt(String.java:658)
+    at BadString.getLastLetter(BadString.java:14)
+    at BadString.processWord(BadString.java:8)
+    at BadString.main(BadString.java:4)
+\end{stdout}
+\end{small}
+
+\index{stack trace}
+
+This information is called a {\bf stack trace}, which shows the methods that were running when the error occurred.
+The stack trace can be difficult to read, but it contains a lot of useful information.
+For one, it tells you that the index 6 was out of range.
+
+More importantly, it shows the line of code where the error occurred.
+It may be helpful to read the stack trace bottom-up.
+On line~4, {\tt main} called {\tt processWord}, which on line~8 called {\tt getLastLetter}, which on line~14 called {\tt charAt}.
+The actual error occurred on line 658 of String.java, which is in the source code for the {\tt String} class itself.
+
+Although possible, it's unlikely that the Java library code has mistakes that cause programs to crash.
+When reading stack diagrams, look for the top line that refers to a file you wrote.
+In this example, {\tt BadString.java:14} is the most useful debugging information.
+
+
+\section{The indexOf method}
+\index{indexOf}
+
+At first glance, {\tt indexOf} is the inverse of {\tt charAt}.
+The {\tt charAt} method takes an index and returns the character at that index.
+In contrast, the {\tt indexOf} method takes a character and finds an index where that character appears.
+
+\begin{code}
+    String fruit = "banana";
+    int index = fruit.indexOf('a');
+\end{code}
+
+This example finds the index of the letter \java{'a'} in the string.
+But the letter appears three times, so it's not obvious what {\tt indexOf} should do.
+According to the documentation, it returns the index of the {\em first} appearance.
+
+To find subsequent appearances, you can use another version of {\tt indexOf}, which takes a second argument that indicates where in the string to start looking.
+%For an explanation of this kind of overloading, see Section~\ref{overloading}.
+
+\begin{code}
+    int index = fruit.indexOf('a', 2);
+\end{code}
+
+This code starts at the third letter (the first \java{'n'}) and finds the next \java{'a'}, which is at index 3.
+If the letter happens to appear at the starting index, the starting index is the answer.
+So \java{fruit.indexOf('a', 5)} returns 5.
+
+There are subtle differences between {\tt charAt} and {\tt indexOf}:
+\java{charAt} throws an exception if the index is out of range;
+{\tt indexOf} returns the value {\tt -1} if the character does not appear in the string.
+
+You can also use {\tt indexOf} to search for an entire string.
+For example, the expression \java{fruit.indexOf("nan")} returns 2, whereas \java{fruit.indexOf("zzz")} returns -1 (not found).
+
+
+\section{String comparison}
+\label{immutable}
+\label{incomparable}
+
+\index{toUpperCase}
+\index{toLowerCase}
+\index{immutable}
+
+As you read the documentation of the {\tt String} methods, you might notice {\tt toUpperCase} and {\tt toLowerCase}.
+These methods are often a source of confusion, because it sounds like they have the effect of changing (or mutating) an existing string.
+It turns out that neither these methods nor any others can change a string, because strings are {\bf immutable}.
+
+When you invoke {\tt toUpperCase} on a string object, you get a new string object as a return value.
+For example:
+
+\begin{code}
+    String name = "Alan Turing";
+    String upperName = name.toUpperCase();
+\end{code}
+
+\index{Turing, Alan}
+
+After the second line runs, {\tt upperName} contains the value \java{"ALAN TURING"}.
+But {\tt name} still contains \java{"Alan Turing"} as before.
+
+\index{equals}
+\index{compareTo}
+
+It is often useful to compare strings to see if they are the same, or to see which comes first in alphabetical order.
+It would be nice if we could use the comparison operators, like {\tt ==} and {\tt >}, but we can't.
+To compare {\tt String}s, we have to use the {\tt equals} and {\tt compareTo} methods.
+
+\begin{code}
+    String name1 = "Alan Turing";
+    String name2 = "Ada Lovelace";
+    if (name1.equals(name2)) {
+        System.out.println("The names are the same.");
+    }
+\end{code}
+
+The syntax here may seem awkward.
+To compare two strings, you have to invoke a method on one of them and pass the other as an argument.
+The return value from {\tt equals} is straightforward: \java{true} if the strings contain the same characters, and \java{false} otherwise.
+
+\begin{code}
+    int diff = name1.compareTo(name2);
+    if (diff == 0) {
+        System.out.println("The names are the same.");
+    } else if (diff < 0) {
+        System.out.println("name1 comes before name2.");
+    } else if (diff > 0) {
+        System.out.println("name2 comes before name1.");
+    }
+\end{code}
+
+The return value from {\tt compareTo} is the {\em difference} between the first characters in the strings that differ.
+If the strings are equal, their difference is 0.
+If the first string (the one on which the method is invoked) comes first in the alphabet, the difference is negative.
+Otherwise, the difference is positive.
+
+In the example above, {\tt compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
+
+
+\section{Character arithmetic}
+
+% ABD: I propose that we kill this section.  The first example is
+% a bad solution, and the second example is string concatentation,
+% not character arithmetic. (CSM: the ++ is the arithmetic part.)
+
+% Instead, let's have a section that introduces the Character class
+% and some of the methods it provides.
+
+\index{arithmetic!char}
+
+Like the \java{compareTo} method, you too can do arithmetic with characters.
+For example, if \java{letter} refers to a lowercase letter, \java{letter - 'a'} yields its position in the alphabet (keeping in mind that 'a' is the zeroeth letter of the alphabet and 'z' is the 25th).
+
+Performing arithmetic on characters is rarely necessary in programs, but it helps demonstrate how text is represented in Java.
+For example, we often need to convert between characters that contain numbers (e.g., \java{'0'}, \java{'1'}, \java{'2'}) and their corresponding integers.
+A common mistake beginning programmers make is simply to cast a \java{char} to an \java{int}:
+
+\begin{code}
+    char letter = '3';
+    int x = (int) letter;
+    System.out.println(x);
+\end{code}
+
+You might expect the value to be 3, but instead you get 51, which is the Unicode value for the character \java{'3'}.
+%Remember, not all languages in the world use Arabic numerals like English does.
+To convert \java{'3'} to the corresponding integer value, you effectively need to subtract \java{'0'}:
+
+\begin{code}
+    int x = (int) (letter - '0');
+\end{code}
+
+In both of these examples, the typecast \java{(int)} is not strictly necessary since Java will do the conversion automatically.
+Since this conversion can be a bit ugly, it is preferable to use the {\tt digit} method in the {\tt Character} class instead.
+For example, this code converts {\tt letter} to the corresponding digit, interpreting it as a base 10 number.
+
+\begin{code}
+    int x = Character.digit(letter, 10);
+\end{code}
+
+Another use for character arithmetic is to loop through the letters of the alphabet in order.
+For example, in Robert McCloskey's book {\em Make Way for Ducklings}, the names of the ducklings form an Abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack.
+Here is a loop that prints these names in order:
+
+\begin{code}
+    char letter = 'J';
+    while (letter <= 'Q') {
+        System.out.println(letter + "ack");
+        letter++;
+    }
+\end{code}
+
+Notice that in addition to the arithmetic operators, we can also use the conditional operators on characters.
+The output of this program is:
+
+\begin{stdout}
+Jack
+Kack
+Lack
+Mack
+Nack
+Oack
+Pack
+Qack
+\end{stdout}
+
+Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack.''
+As an exercise, you can modify the program to correct this error.
+
+
+\section{Wrapper classes}
+
+In the previous section, we introduced the {\tt Character} class.
+There are similar classes for the other primitive data types such as {\tt Boolean}, {\tt Integer}, {\tt Long}, and {\tt Double}.
+These classes are in the {\tt java.lang} package, so can use them without explicitly importing them.
+
+Each of these classes defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
+For example, \java{Integer.MIN_VALUE} is the \java{int} $-2147483648$, and \java{Integer.MAX_VALUE} is the \java{int} $2147483647$.
+Rather than remember these unusual numbers, you can simply refer to the built-in constants.
+
+Another purpose of wrapper classes is converting values to and from strings.
+For example, we can convert a string to an integer using the \java{parseInt} method:
+
+\begin{code}
+String str = "12345";
+int num = Integer.parseInt(str);
+\end{code}
+
+You will find similar methods in the other wrapper classes, for example, \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
+
+These wrapper classes also provide \java{toString}, which returns a string
+representation of a number:
+
+\begin{code}
+int num = 12345;
+String str = Integer.toString(num);
+\end{code}
+
+% ABD: There is a jump here from talking about wrapper classes to talking
+% about instances of those classes.  I think we don't want to do the
+% second part yet.
+
+%As a convenience, Java will automatically convert primitive values to/from their wrapper types.
+%We will see later why this code is inefficient.
+
+%\begin{code}
+%Integer i = 12345;
+%Double d = 123.45;
+%\end{code}
+
+%For now, it's important to note that {\tt i} and {\tt d} are references to %objects.
+%In other words, the values {\tt 12345} and {\tt 123.45} have been wrapped %inside objects.
+%Like strings, these objects have a variety of methods that can be applied.
+%Refer to the documentation for {\tt Integer} and {\tt Double} for more details.
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{object}
+A collection of related data that comes with a set of methods that operate on it.
+
+\term{Unicode}
+A standard for representing characters in most of the world's languages.
+
+\term{traverse}
+To iterate through the elements of a set performing a similar operation on each.
+
+\term{index}
+A variable or value used to indicate one of the members of a collection, like a character from a string.
+
+\term{empty string}
+The string \java{""}, what contains no characters and has a length of zero.
+
+\term{counter}
+A variable used to count something, usually initialized to zero and then incremented.
+
+\term{exception}
+A runtime error like ArithmeticException or IndexOutOfBoundsException.
+
+\term{stack trace}
+An error message that shows the state of a program when an exception occurs.
+
+\term{immutable}
+An object that, once created, cannot be modified.
+Strings are immutable.
+
+\end{description}
+
+
+\section{Exercises}
+
+\begin{exercise}
+
+\index{encapsulation}
+\index{generalization}
+
+Encapsulate the code in Section~\ref{loopcount} into a method named
+{\tt countLetters}, and generalize it so that it accepts the
+string and the letter as arguments.
+Then rewrite the method so that it uses
+{\tt indexOf} to locate the a's, rather than checking
+the characters one by one.
+
+\end{exercise}
+
+\begin{exercise}
+The purpose of this exercise is to review encapsulation
+and generalization.
+
+\begin{enumerate}
+
+\item Encapsulate the following code fragment, transforming it
+into a method that takes a String as an argument and
+returns the final value of {\tt count}.
+
+\item In a sentence or two, describe what the resulting method does
+(without getting into the details of how).
+
+\item Now that you have generalized the code
+so that it works on any String, what could you do to
+generalize it more?
+
+\end{enumerate}
+
+\begin{code}
+    String s = "((3 + 7) * 2)";
+    int len = s.length();
+
+    int i = 0;
+    int count = 0;
+
+    while (i < len) {
+        char c = s.charAt(i);
+
+        if (c == '(') {
+           count = count + 1;
+        } else if (c == ')') {
+           count = count - 1;
+        }
+        i = i + 1;
+    }
+
+    System.out.println(count);
+\end{code}
+\end{exercise}
+
+
+\begin{exercise}
+
+The point of this exercise is to explore Java types and fill in some of the details that aren't covered in the chapter.
+
+\begin{enumerate}
+
+% ABD: have we defined concatenation?
+
+\item Create a new program named {\tt Test.java} and write
+a {\tt main} method that contains expressions that combine
+various types using the {\tt +} operator.  For example, what
+happens when you ``add'' a {\tt String} and a {\tt char}?
+Does it perform addition or concatenation?   What is the type
+of the result? (How can you determine the type of the result?)
+
+\item Make a bigger copy of the following table and fill it in.  At the
+intersection of each pair of types, you should indicate whether it is
+legal to use the {\tt +} operator with these types, what operation is
+performed (addition or concatenation), and what the type of the result
+is.
+
+\begin{tabular}{|l|l|l|l|l|} \hline
+        &  boolean  &  char  &  int  &  String \\ \hline
+boolean &           &        &       &         \\ \hline
+char    &           &        &       &         \\ \hline
+int     &           &        &       &         \\ \hline
+String  &           &        &       &         \\ \hline
+\end{tabular}
+
+\item Think about some of the choices the designers of Java
+made when they filled in this table.  How many of the entries
+seem unavoidable, as if there were no other choice?
+How many seem like arbitrary choices from several equally
+reasonable possibilities?  How many seem problematic?
+
+\item Here's a puzzler: normally, the statement {\tt x++} is exactly
+  equivalent to {\tt x = x + 1}.  But if {\tt x} is a {\tt char}, it's
+  not!  In that case, {\tt x++} is legal, but {\tt x = x + 1} causes
+  an error.  Try it out and see what the error message is, then see if
+  you can figure out what is going on.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+
+What is the output of this program?  Describe in a sentence
+what {\tt mystery} does (not how it works).
+
+\begin{code}
+public class Mystery {
+
+    public static String mystery(String s) {
+        int i = s.length() - 1;
+        String total = "";
+
+        while (i >= 0 ) {
+            char ch = s.charAt(i);
+            System.out.println(i + "     " + ch);
+
+            total = total + ch;
+            i--;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(mystery("Think Java"));
+    }
+}
+\end{code}
+
+\end{exercise}
+
+
+\begin{exercise}
+A friend of yours shows you the following method and
+explains that if {\tt number} is any two-digit number, the program
+will output the number backwards.  He claims that if {\tt number} is
+17, the method will output {\tt 71}.
+
+Is he right?  If not, explain what the program actually does and
+modify it so that it does the right thing.
+
+\begin{code}
+     int number = 17;
+     int lastDigit = number%10;
+     int firstDigit = number/10;
+     System.out.println(lastDigit + firstDigit);
+\end{code}
+
+\end{exercise}
+
+
+\begin{exercise}
+What is the output of the following program?
+
+\begin{code}
+public class Enigma {
+
+    public static void enigma(int x) {
+        if (x == 0) {
+            return;
+        } else {
+            enigma(x/2);
+        }
+        System.out.print(x%2);
+    }
+
+    public static void main(String[] args) {
+        enigma(5);
+        System.out.println("");
+    }
+}
+\end{code}
+
+Explain in 4-5 words what the method {\tt enigma} really does.
+\end{exercise}
+
+
+\begin{exercise}
+\label{palindrome}
+
+\begin{enumerate}
+
+\item Create a new program named {\tt Palindrome.java}.
+
+\item Write a method named {\tt first}
+that takes a String and returns the first letter, and one named
+{\tt last} that returns the last letter.
+
+\item Write a method named {\tt middle} that takes a String and
+returns a substring that contains everything {\em except} the
+first and last characters.
+
+Hint: read the documentation of the {\tt substring} method in
+the {\tt String} class.
+Run a few tests to make sure you understand how {\tt substring} works
+before you try to write {\tt middle}.
+
+What happens if you invoke {\tt middle} on a string that has only
+two letters?  One letter?  No letters?
+
+\item The usual definition of a palindrome is a word that reads the
+same both forward and backward, like ``otto'' and
+``palindromeemordnilap.''  An alternative way to define a property
+like this is to specify a way of testing for the property.  For
+example, we might say, ``a single letter is a palindrome, and a
+two-letter word is a palindrome if the letters are the same, and
+any other word is a palindrome if
+the first letter is the same as the
+last and the middle is a palindrome.''
+
+Write a recursive method named {\tt isPalindrome} that takes
+a {\tt String} and returns a boolean indicating whether the
+word is a palindrome or not.
+
+\item Once you have a working palindrome checker, look for ways
+to simplify it by reducing the number of conditions you check.
+Hint: it might be useful to adopt the definition that the empty
+string is a palindrome.
+
+\item On a piece of paper, figure out a strategy for checking
+palindromes iteratively.  There are several possible approaches,
+so make sure you have a solid plan before you start writing code.
+
+\item Implement your strategy in a method called {\tt isPalindromeIter}.
+
+%\item Optional: Appendix~\ref{javaio} provides code for reading a list
+%of words from a file.  Read a list of words and print the palindromes.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+\label{abecedarian}
+
+A word is said to be ``abecedarian'' if the letters in the
+word appear in alphabetical order.  For example, the following
+are all 6-letter English abecedarian words.
+
+\begin {quote}
+abdest, acknow, acorsy, adempt, adipsy, agnosy, befist, behint,
+beknow, bijoux, biopsy, cestuy, chintz, deflux, dehors, dehort,
+deinos, diluvy, dimpsy
+\end{quote}
+
+\begin{enumerate}
+
+\item Describe a process for checking whether a given word
+is abecedarian, assuming that the word contains only lower-case
+letters.  Your process can be iterative or recursive.
+
+\item Implement your process in a method called {\tt isAbecedarian}.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+\label{dupledrome}
+A dupledrome is a word that contains only double letters,
+like ``llaammaa'' or ``ssaabb''.  I conjecture that there
+are no dupledromes in common English use.  To test that
+conjecture, I would like a program that reads
+words from a file one at a time and checks them for
+dupledromity.
+
+Write a method called {\tt isDupledrome} that takes a String
+and returns a boolean indicating whether the word is a dupledrome.
+\end{exercise}
+
+
+\begin{exercise}
+\begin{enumerate}
+
+\item A Caesar cypher works by taking each letter in a
+string and adding 13 to it.  For example, 'a' becomes 'n' and 'b'
+becomes 'o'.  The letters ``wrap around'' at the end, so 'z' becomes
+'m'.
+
+Write a method that takes a String and that returns a new String
+containing the encoded version.  You should assume that the String
+contains upper and lower case letters, and spaces, but no other
+punctuation.  Lower case letters should be tranformed into other lower
+case letters; upper into upper.  You should not encode the spaces.
+
+\item Generalize the method so that instead of adding
+13 to the letters, it adds any given amount.  Now you should be able
+to encode things by adding 13 and decode them by adding -13.  Try it.
 
 \end{enumerate}
 \end{exercise}
