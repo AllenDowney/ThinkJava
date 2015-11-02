@@ -985,6 +985,7 @@ A sequence of code that represents a special character when used inside a string
 
 \section{Exercises}
 
+
 \begin{exercise}
 
 Computer scientists have the annoying habit of using common English words to mean something other than their common English meaning.
@@ -1000,6 +1001,7 @@ When you see familiar words, don't assume that you know what they mean!
 \end{enumerate}
 
 \end{exercise}
+
 
 \begin{exercise}
 
@@ -1024,6 +1026,7 @@ You might find yourself trying to debug one program while you are accidentally r
 Adding (and changing) print statements is a simple way to be sure that the program you are looking at is the program you are running.
 
 \end{exercise}
+
 
 \begin{exercise}
 
@@ -1843,6 +1846,7 @@ Its purpose in the Java language is to separate tokens.
 
 \section{Exercises}
 
+
 \begin{exercise}
 
 If you are using this book in a class, you might enjoy this exercise.
@@ -1854,6 +1858,7 @@ Then the first player tries to find and fix the error.
 You get two points if you find the error without compiling the program, one point if you find it using the compiler, and your opponent gets a point if you don't find it.
 
 \end{exercise}
+
 
 \begin{exercise}
 \label{ex:date}
@@ -1889,6 +1894,7 @@ Thursday 16 July, 2015
 HINT: You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
 
 \end{exercise}
+
 
 \begin{exercise}
 
@@ -2702,11 +2708,14 @@ A command-line feature that substitutes \java{System.in} and/or \java{System.out
 
 \section{Exercises}
 
+
 \begin{exercise}
+
 When you use \java{printf}, the Java compiler does not check your formatting string.
 See what happens if you try to display value with type \java{int} using \verb"%f".
 And what happens if you display a \java{float} using \verb"%d"?
 What if you use two format specifiers, but then only provide one value?
+
 \end{exercise}
 
 
@@ -3418,6 +3427,7 @@ The history of method calls and where to resume execution after each method retu
 
 \section{Exercises}
 
+
 \begin{exercise}
 
 The point of this exercise is to practice reading code and to make sure that you understand the flow of execution through a program with multiple methods.
@@ -3456,6 +3466,7 @@ Be precise about where there are spaces and where there are newlines.
 \end{code}
 
 \end{exercise}
+
 
 \begin{exercise}
 This exercise builds on the previous one by using parameters.
@@ -3497,6 +3508,7 @@ Make sure you understand both the order of execution and the flow of data.
 \end{code}
 \end{exercise}
 
+
 \begin{exercise}
 
 What is the difference between a variable and a method?
@@ -3507,11 +3519,13 @@ In terms of their syntax, how does the Java compiler tell the difference between
 
 \end{exercise}
 
+
 \begin{exercise}
 
 Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
 
 \end{exercise}
+
 
 \begin{exercise}
 
@@ -3524,6 +3538,7 @@ The point of this exercise is to make sure you understand how to write and invok
 \end{enumerate}
 
 \end{exercise}
+
 
 \begin{exercise}
 
@@ -3544,6 +3559,7 @@ Saturday, July 16, 2011
 \item Once you have debugged \java{printAmerican}, write another method called \java{printEuropean} that prints the date in European format.
 
 \end{enumerate}
+
 \end{exercise}
 
 
@@ -4251,7 +4267,9 @@ Also known as ``base 2.''
 
 \section{Exercises}
 
+
 \begin{exercise}
+
 Conditional operators can simplify nested decision structures.
 For example, how can you rewrite this code using a single \java{if} statement?
 
@@ -4262,9 +4280,12 @@ For example, how can you rewrite this code using a single \java{if} statement?
         }
     }
 \end{code}
+
 \end{exercise}
 
+
 \begin{exercise}
+
 Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that
 \[ a^n + b^n = c^n \]
 except in the case when $n \leq 2$ (e.g., the Pythagorean Theorem).
@@ -4274,9 +4295,12 @@ If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the
 Otherwise the program should print ``No, that doesn't work.''
 
 HINT: You may want to use \java{Math.pow} in your method.
+
 \end{exercise}
 
+
 \begin{exercise}
+
 The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods. Consider the first verse of the song ``99 Bottles of Pop'':
 
 \begin{quote}
@@ -4300,13 +4324,19 @@ No more bottles of pop on the wall.
 Write a program that prints the entire lyrics of ``99 Bottles of Pop.''
 Your program should include a {\it recursive} method that does the hard part, but you might want to write additional methods to separate the major functions of the program.
 As you develop your code, test it with a small number of verses like ``3 Bottles of Pop.''
+
 \end{exercise}
 
+
 \begin{exercise}
+
 Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after \java{main} invokes \java{nLines} with the parameter \java{n == 4}, just before the last invocation of \java{nLines} returns.
+
 \end{exercise}
 
+
 \begin{exercise}
+
 This exercise reviews the flow of execution through a program with multiple methods.
 Read the following code and answer the questions.
 
@@ -4348,6 +4378,7 @@ If a statement is executed more than once, it might end up with more than one nu
 \item What is the output of this program?
 
 \end{enumerate}
+
 \end{exercise}
 
 
@@ -4925,6 +4956,7 @@ But according to the leap of faith, if we assume that the two recursive invocati
 
 
 \section{Testing with JUnit}
+\label{JUnit}
 
 To convince yourself that anything works, you should test it.
 Since we can compute Fibonacci numbers by hand, we can write a simple \java{main} method to test the \java{fibonacci} method.
@@ -5054,9 +5086,12 @@ For example: \java{System.out.println("boo!") + 7;}
 \label{ex.isdiv}
 
 Write a method named \java{isDivisible} that takes two integers, \java{n} and \java{m}, and that returns \java{true} if \java{n} is divisible by \java{m}, and \java{false} otherwise.
+
 \end{exercise}
 
+
 \begin{exercise}
+
 If you are given three sticks, you may or may not be able to arrange them in a triangle.
 For example, if one of the sticks is 12 inches long and the other two are one inch long, you will not be able to get the short sticks to meet in the middle.
 For any three lengths, there is a simple test to see if it is possible to form a triangle:
@@ -5067,7 +5102,9 @@ For any three lengths, there is a simple test to see if it is possible to form a
 
 Write a method named \java{isTriangle} that takes three integers as arguments and returns either \java{true} or \java{false}, depending on whether you can or cannot form a triangle from sticks with the given lengths.
 The point of this exercise is to use conditional statements to write a value method.
+
 \end{exercise}
+
 
 \begin{exercise}
 \label{ex.multadd}
@@ -5105,9 +5142,12 @@ Whenever you do that, it is a good idea to test the first method carefully befor
 Otherwise, you might find yourself debugging two methods at the same time, which can be difficult.
 
 One of the purposes of this exercise is to practice pattern-matching: the ability to recognize a specific problem as an instance of a general category of problems.
+
 \end{exercise}
 
+
 \begin{exercise}
+
 In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
 
 \begin{code}
@@ -5139,9 +5179,12 @@ What is the output of this program?
 \item Rewrite \java{prod} without using temporary variables \java{recurse} and \java{result}.
 
 \end{enumerate}
+
 \end{exercise}
 
+
 \begin{exercise}
+
 What is the output of the following program?
 
 \begin{code}
@@ -5180,9 +5223,12 @@ What is the output of the following program?
 \end{code}
 
 The purpose of this exercise is to make sure you understand logical operators and the flow of execution through value methods.
+
 \end{exercise}
 
+
 \begin{exercise}
+
 The purpose of this exercise is to translate a recursive definition into a Java method.
 The Ackermann function is defined for non-negative integers as follows:
 \begin{eqnarray*}
@@ -5198,69 +5244,26 @@ Write a method called \java{ack} that takes two \java{int}s as parameters and th
 Test your implementation of Ackermann by invoking it from \java{main} and printing the return value.
 Note the return value gets very big very quickly.
 You should try it only for small values of $m$ and $n$ (not bigger than 3).
+
 \end{exercise}
 
-% TODO(CSM): move to strings and things chapter?
-
-\begin{exercise}
-Create a program called {\tt Recurse.java} and type in the following methods:
-
-\begin{code}
-    // first: returns the first character of the given String
-    public static char first(String s) {
-        return s.charAt(0);
-    }
-
-    // last: returns a new String that contains all but the
-    // first letter of the given String
-    public static String rest(String s) {
-        return s.substring(1, s.length());
-    }
-
-    // length: returns the length of the given String
-    public static int length(String s) {
-        return s.length();
-    }
-\end{code}
-
-\begin{enumerate}
-
-\item Write some code in \java{main} that tests each of these methods.
-Make sure they work, and you understand what they do.
-
-\item Write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.  It should be a \java{void} method.
-
-\item Write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
-
-\item Write a method called \java{reverseString} that takes a String as a parameter and that returns a new String as a return value.
-The new String should contain the same letters as the parameter, but in reverse order.
-
-\begin{code}
-    String backwards = reverseString("coffee");
-    System.out.println(backwards);
-\end{code}
-
-For example, the output of the above code should be:
-
-\begin{stdout}
-eeffoc
-\end{stdout}
-
-\end{enumerate}
-\end{exercise}
 
 \begin{exercise}
 \label{ex.power}
+
 Write a recursive method called \java{power} that takes a double \java{x} and an integer \java{n} and that returns $x^n$.
 
 Hint: a recursive definition of this operation is $x^n = x \cdot x^{n-1}$.
 Also, remember that anything raised to the zeroeth power is 1.
 
 Optional challenge: you can make this method more efficient, when \java{n} is even, using $x^n = \left( x^{n/2} \right)^2$.
+
 \end{exercise}
+
 
 \begin{exercise}
 \label{gcd}
+
 Write a method called \java{gcd} that takes two integer parameters and that uses Euclid's algorithm to compute and return the greatest common divisor of the two numbers.
 
 The following technique is known as Euclid's Algorithm, because it appears in Euclid's {\em Elements} (Book 7, ca.~300 BC).
@@ -5277,6 +5280,7 @@ For example:
 %Then the GCD is the other number in the pair.
 
 (This exercise is based on page 44 of Ableson and Sussman's {\em Structure and Interpretation of Computer Programs}.)
+
 \end{exercise}
 
 
@@ -5885,10 +5889,12 @@ The table should contain one column for each variable and one line for each iter
 \item Can you prove that this loop terminates for any positive value of {\tt n}?
 
 \end{enumerate}
+
 \end{exercise}
 
 
 \begin{exercise}
+
 Let's say you are given a number, $a$, and you want to find its square root.
 One way to do that is to start with a rough guess about the answer, $x_0$, and then improve the guess using the following average:
 %
@@ -5908,20 +5914,28 @@ As your initial guess, you should use $a/2$.
 Your method should iterate until it gets two consecutive estimates that differ by less than 0.0001.
 In other words, return when the absolute value of $x_n - x_{n-1}$ is less than 0.0001.
 You can use {\tt Math.abs} to calculate the absolute value.
+
 \end{exercise}
 
 
 \begin{exercise}
+
 In Exercise~\ref{ex.power} we wrote a recursive version of {\tt power}, which takes a double {\tt x} and an integer {\tt n} and returns $x^n$.
 Now write an iterative method to perform the same calculation.
+
 \end{exercise}
 
+
 \begin{exercise}
+
 Section~\ref{factorial} presents a recursive method that computes the factorial function.
 Write an iterative version of {\tt factorial}.
+
 \end{exercise}
 
+
 \begin{exercise}
+
 One way to calculate $e^x$ is to use the infinite series expansion:
 %
 \begin{equation*}
@@ -5959,10 +5973,12 @@ Compare the number of digits of agreement rather than the difference between the
 Comment on the accuracy.
 
 \end{enumerate}
+
 \end{exercise}
 
 
 \begin{exercise}
+
 One way to evaluate $\exp(-x^2)$ is to use the infinite series expansion:
 %
 \begin{equation*}
@@ -5972,6 +5988,7 @@ One way to evaluate $\exp(-x^2)$ is to use the infinite series expansion:
 In other words, we need to add up a series of terms where the $i$th term is equal to $(-1)^i x^{2i} / i!$.
 Write a method named {\tt gauss} that takes {\tt x} and {\tt n} as arguments and returns the sum of the first {\tt n} terms of the series.
 You should not use {\tt factorial} or {\tt pow}.
+
 \end{exercise}
 
 
@@ -6530,59 +6547,55 @@ Strings are immutable.
 
 \section{Exercises}
 
-\begin{exercise}
-
 \index{encapsulation}
 \index{generalization}
 
-Encapsulate the code in Section~\ref{loopcount} into a method named
-{\tt countLetters}, and generalize it so that it accepts the
-string and the letter as arguments.
-Then rewrite the method so that it uses
-{\tt indexOf} to locate the a's, rather than checking
-the characters one by one.
+
+\begin{exercise}
+
+Encapsulate the code in Section~\ref{loopcount} into a method named {\tt countLetters}, and generalize it so that it accepts the string and the letter as arguments.
+Then rewrite the method so that it uses {\tt indexOf} to locate the a's, rather than checking the characters one by one.
 
 \end{exercise}
 
+
 \begin{exercise}
-The purpose of this exercise is to review encapsulation
-and generalization.
+
+The purpose of this exercise is to review encapsulation and generalization (see Section~\ref{encapsulation}).
 
 \begin{enumerate}
 
-\item Encapsulate the following code fragment, transforming it
-into a method that takes a String as an argument and
-returns the final value of {\tt count}.
+\item Encapsulate the following code fragment, transforming it into a method that takes a string argument and returns the final value of {\tt count}.
 
-\item In a sentence or two, describe what the resulting method does
-(without getting into the details of how).
+\item In a sentence or two, describe what the resulting method does (without getting into the details of how).
 
-\item Now that you have generalized the code
-so that it works on any String, what could you do to
-generalize it more?
+\item Now that you have generalized the code so that it works on any string, what could you do to generalize it more?
+
+\item Write several test cases to verify that your generalized code works as expected (see Section~\ref{JUnit}).
 
 \end{enumerate}
 
 \begin{code}
     String s = "((3 + 7) * 2)";
     int len = s.length();
-
+    
     int i = 0;
     int count = 0;
-
+    
     while (i < len) {
         char c = s.charAt(i);
-
+        
         if (c == '(') {
-           count = count + 1;
+            count = count + 1;
         } else if (c == ')') {
-           count = count - 1;
+            count = count - 1;
         }
         i = i + 1;
     }
-
+    
     System.out.println(count);
 \end{code}
+
 \end{exercise}
 
 
@@ -6592,58 +6605,111 @@ The point of this exercise is to explore Java types and fill in some of the deta
 
 \begin{enumerate}
 
-% ABD: have we defined concatenation?
+\index{concatenate}
 
-\item Create a new program named {\tt Test.java} and write
-a {\tt main} method that contains expressions that combine
-various types using the {\tt +} operator.  For example, what
-happens when you ``add'' a {\tt String} and a {\tt char}?
-Does it perform addition or concatenation?   What is the type
-of the result? (How can you determine the type of the result?)
+\item Create a new program named {\tt Test.java} and write a {\tt main} method that contains expressions that combine various types using the {\tt +} operator.
+For example, what happens when you ``add'' a {\tt String} and a {\tt char}?
+Does it perform character addition or string concatenation?
+What is the type of the result?
+(How can you determine the type of the result?)
 
-\item Make a bigger copy of the following table and fill it in.  At the
-intersection of each pair of types, you should indicate whether it is
-legal to use the {\tt +} operator with these types, what operation is
-performed (addition or concatenation), and what the type of the result
-is.
+\item Make a bigger copy of the following table and fill it in.
+At the intersection of each pair of types, you should indicate whether it is legal to use the {\tt +} operator with these types, what operation is performed (addition or concatenation), and what the type of the result is.
 
-\begin{tabular}{|l|l|l|l|l|} \hline
-        &  boolean  &  char  &  int  &  String \\ \hline
-boolean &           &        &       &         \\ \hline
-char    &           &        &       &         \\ \hline
-int     &           &        &       &         \\ \hline
-String  &           &        &       &         \\ \hline
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|} \hline
+        &  boolean  &  ~char~  &  ~~int~~  &  double  &  String \\ \hline
+boolean &           &          &           &          &         \\ \hline
+char    &           &          &           &          &         \\ \hline
+int     &           &          &           &          &         \\ \hline
+double  &           &          &           &          &         \\ \hline
+String  &           &          &           &          &         \\ \hline
 \end{tabular}
+\end{center}
 
-\item Think about some of the choices the designers of Java
-made when they filled in this table.  How many of the entries
-seem unavoidable, as if there were no other choice?
-How many seem like arbitrary choices from several equally
-reasonable possibilities?  How many seem problematic?
+\item Think about some of the choices the designers of Java made when they filled in this table.
+How many of the entries seem unavoidable, as if there was no other choice?
+How many seem like arbitrary choices from several equally reasonable possibilities?
+Which entries seem most problematic?
 
-\item Here's a puzzler: normally, the statement {\tt x++} is exactly
-  equivalent to {\tt x = x + 1}.  But if {\tt x} is a {\tt char}, it's
-  not!  In that case, {\tt x++} is legal, but {\tt x = x + 1} causes
-  an error.  Try it out and see what the error message is, then see if
-  you can figure out what is going on.
+\item Here's a puzzler: normally, the statement {\tt x++} is exactly equivalent to {\tt x = x + 1}.
+But if {\tt x} is a {\tt char}, it's not exactly the same!
+In that case, {\tt x++} is legal, but {\tt x = x + 1} causes an error.
+Try it out and see what the error message is, then see if you can figure out what is going on.
+
+\item What happens when you add \java{""} (the empty string) to the other types (e.g., \java{"" + 5})?
+How does this technique compare with methods provided by the wrapper classes?
+
+\item For each data type, what types of values can you assign to it? For example, you can assign an \java{int} to a \java{double} but not vice versa.
 
 \end{enumerate}
+
 \end{exercise}
 
 
 \begin{exercise}
 
-What is the output of this program?  Describe in a sentence
-what {\tt mystery} does (not how it works).
+Create a program called {\tt Recurse.java} and type in the following methods:
+
+\begin{code}
+    // first: returns the first character of the given String
+    public static char first(String s) {
+        return s.charAt(0);
+    }
+
+    // last: returns a new String that contains all but the
+    // first letter of the given String
+    public static String rest(String s) {
+        return s.substring(1, s.length());
+    }
+
+    // length: returns the length of the given String
+    public static int length(String s) {
+        return s.length();
+    }
+\end{code}
+
+\begin{enumerate}
+
+\item Write some code in \java{main} that tests each of these methods.
+Make sure they work, and you understand what they do.
+
+\item Write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.  It should be a \java{void} method.
+
+\item Write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
+
+\item Write a method called \java{reverseString} that takes a String as a parameter and that returns a new String as a return value.
+The new String should contain the same letters as the parameter, but in reverse order.
+
+\begin{code}
+    String backwards = reverseString("coffee");
+    System.out.println(backwards);
+\end{code}
+
+For example, the output of the above code should be:
+
+\begin{stdout}
+eeffoc
+\end{stdout}
+
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}
+
+What is the output of this program?
+Describe in a sentence what {\tt mystery} does (not how it works).
 
 \begin{code}
 public class Mystery {
 
     public static String mystery(String s) {
-        int i = s.length() - 1;
         String total = "";
+        int i = s.length() - 1;
 
-        while (i >= 0 ) {
+        while (i >= 0) {
             char ch = s.charAt(i);
             System.out.println(i + "     " + ch);
 
@@ -6656,6 +6722,7 @@ public class Mystery {
     public static void main(String[] args) {
         System.out.println(mystery("Think Java"));
     }
+
 }
 \end{code}
 
@@ -6663,113 +6730,76 @@ public class Mystery {
 
 
 \begin{exercise}
-A friend of yours shows you the following method and
-explains that if {\tt number} is any two-digit number, the program
-will output the number backwards.  He claims that if {\tt number} is
-17, the method will output {\tt 71}.
 
-Is he right?  If not, explain what the program actually does and
-modify it so that it does the right thing.
+A friend shows you the following method and claims that if {\tt number} is any two-digit number, the program will output the number backwards.
+For example if {\tt number} is 17, the code should output {\tt 71}.
 
 \begin{code}
-     int number = 17;
-     int lastDigit = number%10;
-     int firstDigit = number/10;
-     System.out.println(lastDigit + firstDigit);
+    Scanner in = new Scanner(System.in);
+    int number = in.nextInt();
+
+    int lastDigit = number % 10;
+    int firstDigit = number / 10;
+
+    System.out.println(lastDigit + firstDigit);
 \end{code}
 
-\end{exercise}
+Explain what the program actually does, and modify it so that it does the right thing.
+You can assume the input will be a two-digit positive integer.
 
-
-\begin{exercise}
-What is the output of the following program?
-
-\begin{code}
-public class Enigma {
-
-    public static void enigma(int x) {
-        if (x == 0) {
-            return;
-        } else {
-            enigma(x/2);
-        }
-        System.out.print(x%2);
-    }
-
-    public static void main(String[] args) {
-        enigma(5);
-        System.out.println("");
-    }
-}
-\end{code}
-
-Explain in 4-5 words what the method {\tt enigma} really does.
 \end{exercise}
 
 
 \begin{exercise}
 \label{palindrome}
 
+A palindrome is a word that reads the same both forward and backward, like ``otto'' and ``palindromeemordnilap.''
+
 \begin{enumerate}
 
 \item Create a new program named {\tt Palindrome.java}.
 
-\item Write a method named {\tt first}
-that takes a String and returns the first letter, and one named
-{\tt last} that returns the last letter.
+\item Write a method named {\tt first} that takes a string and returns the first letter.
+Write another method named {\tt last} that returns the last letter.
 
-\item Write a method named {\tt middle} that takes a String and
-returns a substring that contains everything {\em except} the
+\item Write a method named {\tt middle} that takes a string and returns a substring that contains everything {\em except} the
 first and last characters.
 
-Hint: read the documentation of the {\tt substring} method in
-the {\tt String} class.
-Run a few tests to make sure you understand how {\tt substring} works
-before you try to write {\tt middle}.
+%Hint: read the documentation of the {\tt substring} method in the {\tt String} class.
+% Run a few tests to make sure you understand how {\tt substring} works before you try to write {\tt middle}.
 
-What happens if you invoke {\tt middle} on a string that has only
-two letters?  One letter?  No letters?
+Hint: Think about what happens if you invoke {\tt middle} on strings that have only two letters, one letter, and no letters.
 
-\item The usual definition of a palindrome is a word that reads the
-same both forward and backward, like ``otto'' and
-``palindromeemordnilap.''  An alternative way to define a property
-like this is to specify a way of testing for the property.  For
-example, we might say, ``a single letter is a palindrome, and a
-two-letter word is a palindrome if the letters are the same, and
-any other word is a palindrome if
-the first letter is the same as the
-last and the middle is a palindrome.''
+\item Here's one way to test whether a string is a palindrome:
+``A single letter is a palindrome, and a two-letter word is a palindrome if the letters are the same, and any other word is a palindrome if the first letter is the same as the last and the middle is a palindrome.''
 
-Write a recursive method named {\tt isPalindrome} that takes
-a {\tt String} and returns a boolean indicating whether the
-word is a palindrome or not.
+Write a recursive method named {\tt isPalindrome} that takes a {\tt String} and returns a \java{boolean} indicating whether the word is a palindrome or not.
 
-\item Once you have a working palindrome checker, look for ways
-to simplify it by reducing the number of conditions you check.
-Hint: it might be useful to adopt the definition that the empty
-string is a palindrome.
+\item Once you have a working palindrome checker, look for ways to simplify it by reducing the number of conditions you check.
 
-\item On a piece of paper, figure out a strategy for checking
-palindromes iteratively.  There are several possible approaches,
-so make sure you have a solid plan before you start writing code.
+Hint: It might be useful to adopt the definition that the empty string is a palindrome.
+
+\item On a piece of paper, figure out a strategy for checking palindromes iteratively (i.e., using loops).
+There are several possible approaches, so make sure you have a solid plan before you start writing code.
 
 \item Implement your strategy in a method called {\tt isPalindromeIter}.
+Make sure it returns the same results as your recursive method.
 
 %\item Optional: Appendix~\ref{javaio} provides code for reading a list
 %of words from a file.  Read a list of words and print the palindromes.
 
 \end{enumerate}
+
 \end{exercise}
 
 
 \begin{exercise}
 \label{abecedarian}
 
-A word is said to be ``abecedarian'' if the letters in the
-word appear in alphabetical order.  For example, the following
-are all 6-letter English abecedarian words.
+A word is said to be ``abecedarian'' if the letters in the word appear in alphabetical order.
+For example, the following are all 6-letter English abecedarian words.
 
-\begin {quote}
+\begin{quote}
 abdest, acknow, acorsy, adempt, adipsy, agnosy, befist, behint,
 beknow, bijoux, biopsy, cestuy, chintz, deflux, dehors, dehort,
 deinos, diluvy, dimpsy
@@ -6777,49 +6807,59 @@ deinos, diluvy, dimpsy
 
 \begin{enumerate}
 
-\item Describe a process for checking whether a given word
-is abecedarian, assuming that the word contains only lower-case
-letters.  Your process can be iterative or recursive.
+\item Describe a process for checking whether a given word is abecedarian, assuming that the word contains only lower-case
+letters.
+Your process can be iterative or recursive.
 
 \item Implement your process in a method called {\tt isAbecedarian}.
 
 \end{enumerate}
+
 \end{exercise}
 
 
 \begin{exercise}
 \label{dupledrome}
-A dupledrome is a word that contains only double letters,
-like ``llaammaa'' or ``ssaabb''.  I conjecture that there
-are no dupledromes in common English use.  To test that
-conjecture, I would like a program that reads
-words from a file one at a time and checks them for
-dupledromity.
 
-Write a method called {\tt isDupledrome} that takes a String
-and returns a boolean indicating whether the word is a dupledrome.
+A dupledrome is a word that contains only double letters, like ``llaammaa'' or ``ssaabb''.
+There are most likely no dupledromes in common English use.
+
+\begin{enumerate}
+
+\item Write a method named {\tt isDupledrome} that takes a {\tt String} and returns a \java{boolean} indicating whether the word is a dupledrome.
+
+\item Write a {\tt main} program that reads words from {\tt System.in} and checks them for dupledromity.
+Continue reading input until the user enters the word \java{"Done"} (ignoring case).
+
+\end{enumerate}
+
 \end{exercise}
 
 
 \begin{exercise}
+
+A {\em shift cipher} works by taking each letter in a string and adding 13 to it.
+For example, \java{'a'} becomes \java{'n'} and \java{'b'} becomes \java{'o'}.
+The letters wrap around at the end, so \java{'z'} becomes \java{'m'}.
+
 \begin{enumerate}
 
-\item A Caesar cypher works by taking each letter in a
-string and adding 13 to it.  For example, 'a' becomes 'n' and 'b'
-becomes 'o'.  The letters ``wrap around'' at the end, so 'z' becomes
-'m'.
+\item Write a method that takes a string and returns a new string containing the encoded version.
+You should assume that the string contains upper and lower case letters and spaces, but no other characters.
+Lower case letters should be transformed into other lowercase letters, and uppercase into uppercase.
+You should not encode the spaces.
 
-Write a method that takes a String and that returns a new String
-containing the encoded version.  You should assume that the String
-contains upper and lower case letters, and spaces, but no other
-punctuation.  Lower case letters should be tranformed into other lower
-case letters; upper into upper.  You should not encode the spaces.
+\item Generalize the method so that instead of adding 13 to each letter, it adds any given amount.
+Now you should be able to encode things by adding 13 and decode them by adding -13.
 
-\item Generalize the method so that instead of adding
-13 to the letters, it adds any given amount.  Now you should be able
-to encode things by adding 13 and decode them by adding -13.  Try it.
+\item Use your method to decrypt the string \java{"Jnl gb Tb"}.
+
+\item Figure out how to decrypt \java{"Tjp adbpmzy do jpo"}.
+It wasn't created by adding 13 to each letter.
+Write a loop to try other possible values.
 
 \end{enumerate}
+
 \end{exercise}
 
 

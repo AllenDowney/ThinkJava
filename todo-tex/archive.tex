@@ -79,7 +79,6 @@ You cannot add new primitives to Java (unless you get yourself on the standards 
 
 % was in Chapter 8 Strings and Things
 \begin{exercise}
-
 If you did the GridWorld exercises in Chapter~\ref{gridworld}, you
 might enjoy this exercise.  The goal is to use trigonometry to get the
 Bugs to chase each other.
@@ -119,5 +118,31 @@ times.  You can write this method recursively, or use a while loop.
   you could encapsulate the repeated code in a method.
 
 \end{itemize}
+\end{exercise}
 
+
+% was in Chapter 8 Strings and Things
+\begin{exercise}
+What is the output of the following program?
+
+\begin{code}
+public class Enigma {
+
+    public static void enigma(int x) {
+        if (x == 0) {
+            return;
+        } else {
+            enigma(x / 2);
+        }
+        System.out.print(x % 2);
+    }
+
+    public static void main(String[] args) {
+        enigma(5);
+        System.out.println("");
+    }
+}
+\end{code}
+
+Explain in 4-5 words what the method {\tt enigma} really does.
 \end{exercise}
