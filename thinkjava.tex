@@ -451,7 +451,7 @@ Similarly, in a chemical formula the subscript comes after the element name, not
 
 When you read a sentence in English or a statement in a formal language, you have to figure out its structure.
 This process is called {\bf parsing}, and in a natural language you learn to do it unconsciously.
-As you learn to program, you will learn to parse Python code.
+As you learn to program, you will learn to parse Java code.
 
 %For example, when you hear the statement ``the penny dropped,'' you understand that the penny is the subject and ``dropped'' is the predicate.
 %After you have parsed the statement, you can begin to figure out what it means.
@@ -601,13 +601,13 @@ It is a {\bf print statement}, meaning that it displays a message on the screen.
 Confusingly, print can mean both ``display something on the screen'' and ``send something to the printer.''
 %I won't say much about sending things to the printer;
 In this book, we'll do all our printing on the screen.
-The print statement ends with a semicolon ({\tt ;}).
+The print statement ends with a semicolon (\java{;}).
 
 \index{comments!inline}
 \index{statement!comment}
 
 Line 4 contains a {\bf comment}, or a bit of English text that explains the code that follows.
-When the compiler sees {\tt //}, it ignores everything from there until the end of the line.
+When the compiler sees \java{//}, it ignores everything from there until the end of the line.
 It is a good idea to write a comment before every major block of code so that other programmers (including your future self) can understand what you meant to do.
 
 
@@ -1378,7 +1378,7 @@ If you omit the \java{println}, the program may display the stored output at une
 
 {\bf Operators} are symbols that represent computations like addition and multiplication.
 %Most operators in Java do what you expect them to do, since they are common mathematical symbols.
-For example, the operator for addition is {\tt +}, subtraction is {\tt -}, multiplication is {\tt *}, and division is {\tt /}.
+For example, the operator for addition is \java{+}, subtraction is \java{-}, multiplication is \java{*}, and division is \java{/}.
 %Variables are replaced with their values before the computation is performed.
 
 The following program converts the time of day to minutes:
@@ -1594,8 +1594,8 @@ The following expressions are illegal:
 
 \index{concatenate}
 
-The {\tt +} operator does work with strings, but it might not do what you expect.
-For strings, the {\tt +} operator performs {\bf concatenation}, which means joining each part end-to-end.
+The \java{+} operator does work with strings, but it might not do what you expect.
+For strings, the \java{+} operator performs {\bf concatenation}, which means joining each part end-to-end.
 So \java{"Hello, " + "world!"} yields the string \java{"Hello, world!"}.
 Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} to the hello string, which is handy for creating a personalized greeting.
 
@@ -2380,9 +2380,9 @@ The goal is divide by 12 (the number of inches in a foot) and keep the remainder
 \index{modulus}
 \index{operator!modulus}
 
-We have already seen the division operator ({\tt /}), which computes the quotient of two numbers.
+We have already seen the division operator (\java{/}), which computes the quotient of two numbers.
 If the numbers are integers, it performs integer division.
-Java also provides the {\bf modulus} operator ({\tt \%}), which divides two numbers and computes the remainder.
+Java also provides the {\bf modulus} operator (\java{\%}), which divides two numbers and computes the remainder.
 
 Assuming the following variables are integers, we can convert 76 inches to feet and inches like this:
 
@@ -2396,7 +2396,7 @@ The second line, which is pronounced ``76 mod 12,'' yields 4.
 So 76 inches is 6 feet, 4 inches.
 
 Although the modulus operator is a percent sign, you might find it helpful to think of it as a division sign ($\div$) rotated to the left.
-Note that both {\tt /} and {\tt \%} perform {\em integer division}.
+Note that both \java{/} and \java{\%} perform {\em integer division}.
 The reason why integer division ``rounds down'' is that the hardware computes the quotient and remainder separately.
 %Many algorithms, including the example above, perform division and modulus together.
 
@@ -3232,7 +3232,7 @@ This tool is part of the standard JDK, and you can run it directly from DrJava b
 
 Javadoc parses your source files for {\bf documentation comments} and extracts other relevant information about your class and method definitions.
 Given the prevalence of this tool, people sometimes refer to documentation as ``Javadoc comments.''
-In contrast to inline comments that begin with {\tt //}, documentation comments begin with {\tt /**} (two stars) and end with {\tt */} (one star).
+In contrast to inline comments that begin with \java{//}, documentation comments begin with \java{/**} (two stars) and end with \java{*/} (one star).
 Anything in between these two tokens becomes part of the documentation.
 %As a rule of thumb, you should document every class and every method.
 
@@ -3261,7 +3261,7 @@ But it illustrates the differences between inline and documentation comments:
 Documentation comments are typically complete sentences that begin with a capital letter and end with a period.
 
 \item Documentation comments often span multiple lines.
-By convention, each line begins with a {\tt *} that is aligned vertically with the start and end of the comment.
+By convention, each line begins with a \java{*} that is aligned vertically with the start and end of the comment.
 
 \item Some development environments (e.g., Eclipse and NetBeans) automatically display documentation comments when you hover your mouse over the name of a class or method.
 
@@ -3590,14 +3590,14 @@ The programs we've seen so far do pretty much the same thing every time, regardl
 For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
 This chapter presents the features you need for programs to make complex decisions: a new data type called \java{boolean}, additional operators for expressing logic, and \java{if} statements.
 
-%{\tt boolean} is named after George Boole, who developed a formal system that represents logic using the values {\it true} and {\it false} and operations like {\it and}, {\it or}, and {\it not}.
+%\java{boolean} is named after George Boole, who developed a formal system that represents logic using the values {\it true} and {\it false} and operations like {\it and}, {\it or}, and {\it not}.
 %In Java, the values \java{true} and \java{false} belong to the data type \java{boolean}.
 
-%{\tt true} and {\tt false} are special values in Java, and together they make up a type called {\bf boolean}.
+%\java{true} and \java{false} are special values in Java, and together they make up a type called {\bf boolean}.
 %You might recall that when I defined a type, I said it was a set of values.
-%In the case of {\tt int}s, {\tt double}s and {\tt String}s, those sets are pretty big.
-%For {\tt boolean}s, there are only two values.
-%The values {\tt true} and {\tt false} are keywords in Java, so they may appear in a different color, depending on your development environment.
+%In the case of \java{int}s, \java{double}s and \java{String}s, those sets are pretty big.
+%For \java{boolean}s, there are only two values.
+%The values \java{true} and \java{false} are keywords in Java, so they may appear in a different color, depending on your development environment.
 
 
 \section{Assignment revisited}
@@ -3623,15 +3623,15 @@ When you assign a value to a variable, you change the contents of the container.
 %    System.out.println(liz);
 %\end{code}
 %
-%The output of this program is {\tt 57}, because the first time we print {\tt liz} her value is 5, and the second time her value is 7.
+%The output of this program is {\tt 57}, because the first time we print \java{liz} her value is 5, and the second time her value is 7.
 
 When there are multiple assignments to a variable, it is especially important to distinguish between an assignment statement and a statement of equality.
-Because Java uses the {\tt =} symbol for assignment, it is tempting to interpret a statement like {\tt a = b} as a statement of equality.
+Because Java uses the \java{=} symbol for assignment, it is tempting to interpret a statement like \java{a = b} as a statement of equality.
 It is not!
 
 First of all, equality is commutative, and assignment is not.
 For example, in mathematics if $a = 7$ then $7 = a$.
-In Java {\tt a = 7;} is a legal assignment statement, but {\tt 7 = a;} is not.
+In Java \java{a = 7;} is a legal assignment statement, but \java{7 = a;} is not.
 Assignment {\em always} executes from right to left.
 
 Furthermore, in mathematics, a statement of equality is true for all time.
@@ -3644,7 +3644,7 @@ In Java, an assignment statement can make two variables equal, but they don't ha
     a = 3;         // a and b are no longer equal
 \end{code}
 
-The third line changes the value of {\tt a}, but it does not change the value of {\tt b}, so they are no longer equal.
+The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
 In some programming languages a different symbol is used for assignment, such as {\tt <-} or {\tt :=}, to avoid this confusion.
 
 %Although multiple assignment is frequently useful, you should use it with caution.
@@ -4304,7 +4304,7 @@ Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such tha
 \[ a^n + b^n = c^n \]
 except in the case when $n \leq 2$ (e.g., the Pythagorean Theorem).
 
-Write a method named {\tt checkFermat} that takes four integers as parameters---{\tt a}, {\tt b}, {\tt c} and {\tt n}---and that checks to see if Fermat's theorem holds.
+Write a method named \java{checkFermat} that takes four integers as parameters---\java{a}, \java{b}, \java{c} and \java{n}---and that checks to see if Fermat's theorem holds.
 If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
 Otherwise the program should print ``No, that doesn't work.''
 
@@ -4387,7 +4387,7 @@ Be careful to distinguish things that are statements from things that are not.
 \item Write the number {\tt 2} next to the second statement, and so on until the end of the program.
 If a statement is executed more than once, it might end up with more than one number next to it.
 
-\item What is the value of the parameter {\tt blimp} when {\tt baffle} gets invoked?
+\item What is the value of the parameter \java{blimp} when \java{baffle} gets invoked?
 
 \item What is the output of this program?
 
@@ -4413,7 +4413,7 @@ The focus of this chapter is {\bf value methods}, or methods that compute and re
 
 \index{void}
 
-The methods we have written so far, like {\tt countdown} and {\tt countup}, don't return values, which is why the first line has the keyword \java{void}.
+The methods we have written so far, like \java{countdown} and \java{countup}, don't return values, which is why the first line has the keyword \java{void}.
 
 \begin{code}
     public static void countup(int n) {
@@ -4456,7 +4456,7 @@ Here's an example:  \java{area} takes a \java{double} as a parameter and returns
 
 The first thing you should notice is that the beginning of the method definition is different.
 Instead of \java{public static void}, which indicates a \java{void} method, we see \java{public static double}, which means that the return value from this method is a \java{double}.
-%I still haven't explained what {\tt public static} means, but be patient.
+%I still haven't explained what \java{public static} means, but be patient.
 
 \index{return}
 \index{statement!return}
@@ -4834,7 +4834,7 @@ For example, if you look up the definition of {\bf factorial}, you get something
 \end{eqnarray*}
 \vspace{-1ex}
 
-Factorial is usually denoted with the symbol $!$, which is not to be confused with the Java operator {\tt !} that means NOT.
+Factorial is usually denoted with the symbol $!$, which is not to be confused with the Java operator \java{!} that means NOT.
 
 This definition says that the factorial of 0 is 1, and the factorial of any other value $n$ is $n$ multiplied by the factorial of $n-1$.
 So $3!$ is 3 times $2!$, which is 2 times $1!$, which is 1 times $0!$, which is 1.
@@ -4890,11 +4890,11 @@ Since 1 is not zero, we take the second branch and calculate the factorial of $n
 Since 0 {\em is} zero, we take the first branch and return the value 1 immediately.
 % without making any more recursive invocations.
 \end{quote}
-The return value (1) gets multiplied by {\tt n}, which is 1, and the result is returned.
+The return value (1) gets multiplied by \java{n}, which is 1, and the result is returned.
 \end{quote}
-The return value (1) gets multiplied by {\tt n}, which is 2, and the result is returned.
+The return value (1) gets multiplied by \java{n}, which is 2, and the result is returned.
 \end{quote}
-The return value (2) gets multiplied by {\tt n}, which is 3, and the result, 6, is returned to whatever invoked \java{factorial(3)}.
+The return value (2) gets multiplied by \java{n}, which is 3, and the result, 6, is returned to whatever invoked \java{factorial(3)}.
 \end{quote}
 \vspace{-1ex}
 
@@ -4924,11 +4924,11 @@ An alternative is a ``leap of faith'':
 when you come to a method invocation, instead of following the flow of execution, you {\em assume} that the method works correctly and returns the appropriate value.
 
 In fact, you are already practicing this leap of faith when you use methods in the Java library.
-When you invoke {\tt Math.cos} or {\tt System.out.println}, you don't examine the implementations of those methods.
+When you invoke \java{Math.cos} or \java{System.out.println}, you don't examine the implementations of those methods.
 You just assume that they work properly.
 
 You should apply the same reasoning to your own methods.
-For example, in Section~\ref{boolean} we wrote a method called {\tt isSingleDigit} that determines whether a number is between 0 and 9.
+For example, in Section~\ref{boolean} we wrote a method called \java{isSingleDigit} that determines whether a number is between 0 and 9.
 Once we convince ourselves that this method is correct---by testing and examination of the code---we can use the method without ever looking at the implementation again.
 
 The same is true of recursive programs.
@@ -5048,7 +5048,7 @@ A special return type indicating the method does not return a value.
 A variable that is short-lived, often used for debugging purposes.
 
 \term{dead code}
-Part of a program that can never be executed, often because it appears after a {\tt return} statement.
+Part of a program that can never be executed, often because it appears after a \java{return} statement.
 
 \term{incremental development}
 A process for creating programs by writing a few lines at a time,
@@ -5130,7 +5130,7 @@ Some processors even provide a hardware implementation of this operation for flo
 
 \item Create a new program called {\tt Multadd.java}.
 
-\item Write a method called {\tt multadd} that takes three {\tt doubles} as parameters and that returns \java{a * b + c}.
+\item Write a method called \java{multadd} that takes three \java{doubles} as parameters and that returns \java{a * b + c}.
 
 \item Write a \java{main} method that tests \java{multadd} by invoking it with a few simple parameters, like \java{1.0, 2.0, 3.0}.
 
@@ -5305,7 +5305,7 @@ Repeating tasks without making errors is something that computers do well and pe
 
 \index{iteration}
 
-We have already seen methods like {\tt countdown} and {\tt factorial} that use recursion to run the same code multiple times.
+We have already seen methods like \java{countdown} and \java{factorial} that use recursion to run the same code multiple times.
 Although recursion is elegant and powerful, Java provides language features that make it much easier to repeat code.
 In this chapter, we present {\bf iteration} using \java{while} and \java{for} statements.
 
@@ -5315,7 +5315,7 @@ In this chapter, we present {\bf iteration} using \java{while} and \java{for} st
 \index{statement!while}
 \index{while statement}
 
-Using a \java{while} statement, we can rewrite {\tt countdown} this way:
+Using a \java{while} statement, we can rewrite \java{countdown} this way:
 
 \begin{code}
     public static void countdown(int n) {
@@ -5328,7 +5328,7 @@ Using a \java{while} statement, we can rewrite {\tt countdown} this way:
 \end{code}
 
 You can almost read a \java{while} statement like English.
-The above code means: ``While {\tt n} is greater than zero, print the value of {\tt n} and then reduce the value of {\tt n} by 1.
+The above code means: ``While \java{n} is greater than zero, print the value of \java{n} and then reduce the value of \java{n} by 1.
 When you get to zero, print the word Blastoff!''
 
 More formally, the flow of execution for a \java{while} statement is three steps:
@@ -5358,9 +5358,9 @@ The body of the loop should change the value of one or more variables so that, e
 Otherwise the loop will repeat forever, which is called an {\bf infinite loop}.
 An endless source of amusement for computer scientists is the observation that the directions on shampoo, ``Lather, rinse, repeat,'' are an infinite loop.
 
-In the case of {\tt countdown}, we can prove that the loop terminates when {\tt n} is positive.
+In the case of \java{countdown}, we can prove that the loop terminates when \java{n} is positive.
 But in general, it is not so easy to tell whether a loop terminates.
-For example, this loop continues until {\tt n} is 1 (which makes the condition \java{false}).
+For example, this loop continues until \java{n} is 1 (which makes the condition \java{false}).
 
 \begin{code}
     public static void sequence(int n) {
@@ -5375,14 +5375,14 @@ For example, this loop continues until {\tt n} is 1 (which makes the condition \
     }
 \end{code}
 
-At each iteration, the program prints the value of {\tt n} and then checks whether it is even or odd.
-If it is even, the value of {\tt n} is divided by two.
+At each iteration, the program prints the value of \java{n} and then checks whether it is even or odd.
+If it is even, the value of \java{n} is divided by two.
 If it is odd, the value is replaced by $3n+1$.
-For example, if the starting value (the argument passed to {\tt sequence}) is 3, the resulting sequence is 3, 10, 5, 16, 8, 4, 2, 1.
+For example, if the starting value (the argument passed to \java{sequence}) is 3, the resulting sequence is 3, 10, 5, 16, 8, 4, 2, 1.
 
-Since {\tt n} sometimes increases and sometimes decreases, there is no obvious proof that {\tt n} will ever reach 1 and that the program will ever terminate.
-For some particular values of {\tt n}, we can prove termination.
-For example, if the starting value is a power of two, then the value of {\tt n} will be even every time through the loop until we get to 1.
+Since \java{n} sometimes increases and sometimes decreases, there is no obvious proof that \java{n} will ever reach 1 and that the program will ever terminate.
+For some particular values of \java{n}, we can prove termination.
+For example, if the starting value is a power of two, then the value of \java{n} will be even every time through the loop until we get to 1.
 The previous example ends with such a sequence, starting with 16.
 
 Particular values aside, the interesting question is whether we can prove that this program terminates for {\em all} values of n.
@@ -5436,7 +5436,7 @@ The output of this program is:
 9.0   2.1972245773362196
 \end{stdout}
 
-Looking at these values, can you tell what base {\tt Math.log} uses?
+Looking at these values, can you tell what base \java{Math.log} uses?
 Since powers of two are important in computer science, we often want logarithms with respect to base 2.
 To compute them, we can apply this property of logarithms:
 %
@@ -5444,7 +5444,7 @@ To compute them, we can apply this property of logarithms:
 \log_2 x = \frac{log_e x}{log_e 2}
 \end{equation*}
 %
-Using the right side of the formula, we modify the {\tt println} statement.
+Using the right side of the formula, we modify the \java{println} statement.
 
 \begin{code}
     System.out.println(x + "   " + Math.log(x) / Math.log(2));
@@ -5476,7 +5476,7 @@ If we wanted to find the logarithms of other powers of two, we could modify the 
 \end{code}
 
 First, we store \java{Math.log(2)} in a \java{final} variable to avoid computing that value over and over again.
-Second, instead of adding something to {\tt x} each time through the loop, which yields an {\em arithmetic sequence}, we multiply {\tt x} by something, yielding a {\em geometric sequence}.
+Second, instead of adding something to \java{x} each time through the loop, which yields an {\em arithmetic sequence}, we multiply \java{x} by something, yielding a {\em geometric sequence}.
 The result is:
 
 \begin{stdout}
@@ -5515,14 +5515,14 @@ A good way to start is a simple loop that prints the multiples of 2, all on one 
 \index{loop variable}
 \index{variable!loop}
 
-The first line initializes a variable named {\tt i}, which is going to act as a counter, or {\bf loop variable}.
-As the loop executes, the value of {\tt i} increases from 1 to 6; when {\tt i} is 7, the loop terminates.
-Each time through the loop, we print the value {\tt 2 * i}, padded with spaces so it's four characters wide.
-Since we use {\tt System.out.printf}, the output appears on a single line.
+The first line initializes a variable named \java{i}, which is going to act as a counter, or {\bf loop variable}.
+As the loop executes, the value of \java{i} increases from 1 to 6; when \java{i} is 7, the loop terminates.
+Each time through the loop, we print the value \java{2 * i}, padded with spaces so it's four characters wide.
+Since we use \java{System.out.printf}, the output appears on a single line.
 
-We need to call {\tt println} after the loop to complete the line of output.
-In some environments, the output from {\tt printf} gets stored without being displayed until {\tt println} is invoked.
-If the program terminates, and you forget to invoke {\tt println}, you may never see the stored output.
+We need to call \java{println} after the loop to complete the line of output.
+In some environments, the output from \java{printf} gets stored without being displayed until \java{println} is invoked.
+If the program terminates, and you forget to invoke \java{println}, you may never see the stored output.
 
 The output of the code so far is:
 
@@ -5535,9 +5535,9 @@ The output of the code so far is:
 
 Now that we've solved part of the problem, we can encapsulate and generalize the code to do the rest.
 {\bf Encapsulation} means taking a piece of code and wrapping it up in a method, allowing you to take advantage of all the things methods are good for.
-%We have seen two examples of encapsulation, when we wrote {\tt printParity} in Section~\ref{alternative} and {\tt isSingleDigit} in Section~\ref{boolean}.
+%We have seen two examples of encapsulation, when we wrote \java{printParity} in Section~\ref{alternative} and \java{isSingleDigit} in Section~\ref{boolean}.
 {\bf Generalization} means taking something specific, like printing multiples of 2, and making it more general, like printing the multiples of any integer.
-%Here's a method that encapsulates the loop and then generalizes it to print multiples of {\tt n}.
+%Here's a method that encapsulates the loop and then generalizes it to print multiples of \java{n}.
 
 \begin{code}
     public static void printMultiples(int n) {
@@ -5551,7 +5551,7 @@ Now that we've solved part of the problem, we can encapsulate and generalize the
 \end{code}
 
 To encapsulate, we added the first line, which declares the method name, parameter, and return type.
-To generalize, we replaced the value 2 with the parameter {\tt n}.
+To generalize, we replaced the value 2 with the parameter \java{n}.
 The whole point of parameters is to allow you to write general purpose methods.
 
 Note that invoking this method with the argument 2 yields the same output as before.
@@ -5567,7 +5567,7 @@ And with argument 4, the output is:
     4    8   12   16   20   24
 \end{stdout}
 
-By now you can probably guess how we are going to print a multiplication table: we'll invoke {\tt printMultiples} repeatedly with different arguments.
+By now you can probably guess how we are going to print a multiplication table: we'll invoke \java{printMultiples} repeatedly with different arguments.
 In fact, we are going to use another loop to iterate through the rows.
 
 \begin{code}
@@ -5578,9 +5578,9 @@ In fact, we are going to use another loop to iterate through the rows.
     }
 \end{code}
 
-First, notice how similar this loop is to the one inside {\tt printMultiples}.
+First, notice how similar this loop is to the one inside \java{printMultiples}.
 All we did was replace the \java{printf} statement with a method invocation.
-Also, notice how the format specifier \java{"\%4d"} in {\tt printMultiples} causes the output to align vertically, regardless of whether the numbers are one or two digits.
+Also, notice how the format specifier \java{"\%4d"} in \java{printMultiples} causes the output to align vertically, regardless of whether the numbers are one or two digits.
 
 \begin{stdout}
     1    2    3    4    5    6
@@ -5608,7 +5608,7 @@ Also, notice how the format specifier \java{"\%4d"} in {\tt printMultiples} caus
 
 One of the challenges of programming, especially for beginners, is figuring out how to divide up a program into methods.
 The process of encapsulation and generalization allows you design as you go along.
-You start by adding code to {\tt main} or some another method.
+You start by adding code to \java{main} or some another method.
 When you get the code working, you wrap it up in a new method and generalize it by adding parameters.
 Then you repeat, alternately developing new code and creating new methods.
 
@@ -5632,11 +5632,11 @@ In later chapters we will present some alternatives.
 
 \section{Local variables}
 
-You might wonder how we can use the same variable {\tt i} in both {\tt printMultiples} and {\tt printMultTable}.
+You might wonder how we can use the same variable \java{i} in both \java{printMultiples} and \java{printMultTable}.
 Isn't it true that you can only declare a variable once?
 And doesn't it cause problems when one of the methods changes the value of the variable?
 
-The answer to both questions is ``no,'' because the {\tt i} in {\tt printMultiples} and the {\tt i} in {\tt printMultTable} are {\em not the same variable}.
+The answer to both questions is ``no,'' because the \java{i} in \java{printMultiples} and the \java{i} in \java{printMultTable} are {\em not the same variable}.
 They have the same name, but they do not refer to the same storage location.
 Changing the value of one variable has no effect on the other.
 Consider the stack diagram at the moment the program begins printing the second row of the table:
@@ -5663,7 +5663,7 @@ You cannot access a local variable from outside its method, and you are free to 
 \index{variable!loop}
 
 Although it can be confusing, there are good reasons to reuse names.
-For example, it is common to use the names {\tt i}, {\tt j} and {\tt k} as loop variables.
+For example, it is common to use the names \java{i}, \java{j} and \java{k} as loop variables.
 If you avoid using them in one method just because you used them somewhere else, you make the program harder to read.
 Another reason is when two or more methods are based on the same parameter.
 It's awkward to come up with many different names for the same data.
@@ -5673,7 +5673,7 @@ It's awkward to come up with many different names for the same data.
 \index{generalization}
 
 Imagine a program that prints multiplication tables of any size, not just the 6x6 table.
-All we need is to add a parameter to {\tt printMultTable}:
+All we need is to add a parameter to \java{printMultTable}:
 
 \begin{code}
     public static void printMultTable(int size) {
@@ -5685,8 +5685,8 @@ All we need is to add a parameter to {\tt printMultTable}:
     }
 \end{code}
 
-Rather than use the literal value 6 in the while statement, we generalize by using the parameter {\tt size}.
-Here is the output when you invoke {\tt printMultTable} with the argument 7:
+Rather than use the literal value 6 in the while statement, we generalize by using the parameter \java{size}.
+Here is the output when you invoke \java{printMultTable} with the argument 7:
 
 \begin{stdout}
    1   2   3   4   5   6
@@ -5699,7 +5699,7 @@ Here is the output when you invoke {\tt printMultTable} with the argument 7:
 \end{stdout}
 
 This result is fine, but it would be even better if it were square (i.e., the same number of rows and columns).
-We can pass the {\tt size} parameter to {\tt printMultiples} to specify how many columns the table should have.
+We can pass the \java{size} parameter to \java{printMultiples} to specify how many columns the table should have.
 
 \begin{code}
     public static void printMultiples(int n, int size) {
@@ -5722,7 +5722,7 @@ We can pass the {\tt size} parameter to {\tt printMultiples} to specify how many
 %    }
 %\end{code}
 
-Since we added a new parameter to \java{printMultiples}, we also have to change the line \java{printMultiples(i, size);} where it is invoked in {\tt printMultTable}.
+Since we added a new parameter to \java{printMultiples}, we also have to change the line \java{printMultiples(i, size);} where it is invoked in \java{printMultTable}.
 As expected, this program generates a square 7x7 table:
 
 \begin{stdout}
@@ -5737,13 +5737,13 @@ As expected, this program generates a square 7x7 table:
 
 When you generalize a method appropriately, you often find that it has capabilities you did not plan.
 For example, you might notice that the multiplication table is symmetric, because $ab = ba$, so all the entries in the table appear twice.
-You could save ink by printing half the table, and you would only have to change one line of {\tt printMultTable}:
+You could save ink by printing half the table, and you would only have to change one line of \java{printMultTable}:
 
 \begin{code}
       printMultiples(i, i);
 \end{code}
 
-In other words, the {\tt size} of each row is the same as the row number itself.
+In other words, the \java{size} of each row is the same as the row number itself.
 
 \begin{stdout}
    1
@@ -5755,7 +5755,7 @@ In other words, the {\tt size} of each row is the same as the row number itself.
    7  14  21  28  35  42  49
 \end{stdout}
 
-Even though the second parameter in {\tt printMultiples} is named {\tt size} and we have a variable with the same name, we can still use any value or expression we want for the argument.
+Even though the second parameter in \java{printMultiples} is named \java{size} and we have a variable with the same name, we can still use any value or expression we want for the argument.
 Remember you do not pass {\em variables} to methods; you pass their current {\em values}.
 
 
@@ -5804,15 +5804,15 @@ We easily rewrite any \java{for} statement as a \java{while} statement by separa
     }
 \end{code}
 
-The statement {\tt i++;} is shorthand for {\tt i = i + 1;} and is commonly used in loop structures.
-The {\tt ++} operator increments a variable by one, and the {\tt --} operator decrements a variable by one.
+The statement \java{i++;} is shorthand for \java{i = i + 1;} and is commonly used in loop structures.
+The \java{++} operator increments a variable by one, and the \java{--} operator decrements a variable by one.
 
-There is one difference between the \java{for} and \java{while} loops above: where the variable {\tt i} is declared.
-After the \java{for} loop, the variable {\tt i} ceases to exist because it was declared in the loop header.
-In contrast, the variable {\tt i} continues to exist after the \java{while} statment, because it was declared outside the loop.
+There is one difference between the \java{for} and \java{while} loops above: where the variable \java{i} is declared.
+After the \java{for} loop, the variable \java{i} ceases to exist because it was declared in the loop header.
+In contrast, the variable \java{i} continues to exist after the \java{while} statment, because it was declared outside the loop.
 
 Because \java{for} loops are so concise, they are particularly useful when iterating over two or more dimensions.
-We can rewrite the final example of {\tt printMultTable} in the previous section with just a few lines of code:
+We can rewrite the final example of \java{printMultTable} in the previous section with just a few lines of code:
 
 \begin{code}
     for (int row = 1; row <= size; row++) {
@@ -5823,8 +5823,8 @@ We can rewrite the final example of {\tt printMultTable} in the previous section
     }
 \end{code}
 
-In contrast to {\tt printMultTable} and {\tt printMultiples}, this version of the code cannot use the variable {\tt i} for both loops.
-Instead, it uses the variables {\tt row} and {\tt col} to represent the positions in the table.
+In contrast to \java{printMultTable} and \java{printMultiples}, this version of the code cannot use the variable \java{i} for both loops.
+Instead, it uses the variables \java{row} and \java{col} to represent the positions in the table.
 
 
 %TODO(csm) tracing code by hand?
@@ -5895,12 +5895,12 @@ public static void loop(int n) {
 
 \begin{enumerate}
 
-\item Draw a table that shows the value of the variables {\tt i} and {\tt n} during the execution of {\tt loop}.
+\item Draw a table that shows the value of the variables \java{i} and \java{n} during the execution of \java{loop}.
 The table should contain one column for each variable and one line for each iteration.
 
 \item What is the output of this program?
 
-\item Can you prove that this loop terminates for any positive value of {\tt n}?
+\item Can you prove that this loop terminates for any positive value of \java{n}?
 
 \end{enumerate}
 
@@ -5921,20 +5921,20 @@ We can repeat the procedure, using $x_1$ to calculate $x_2$, and so on.
 In this case, $x_2 = 3.075$ and $x_3 = 3.00091$.
 So it converges quickly on the correct answer.
 
-Write a method called {\tt squareRoot} that takes a \java{double} and returns an approximation of the square root of the parameter, using this technique.
-You may not use {\tt Math.sqrt}.
+Write a method called \java{squareRoot} that takes a \java{double} and returns an approximation of the square root of the parameter, using this technique.
+You may not use \java{Math.sqrt}.
 
 As your initial guess, you should use $a/2$.
 Your method should iterate until it gets two consecutive estimates that differ by less than 0.0001.
 In other words, return when the absolute value of $x_n - x_{n-1}$ is less than 0.0001.
-You can use {\tt Math.abs} to calculate the absolute value.
+You can use \java{Math.abs} to calculate the absolute value.
 
 \end{exercise}
 
 
 \begin{exercise}
 
-In Exercise~\ref{ex.power} we wrote a recursive version of {\tt power}, which takes a double {\tt x} and an integer {\tt n} and returns $x^n$.
+In Exercise~\ref{ex.power} we wrote a recursive version of \java{power}, which takes a double \java{x} and an integer \java{n} and returns $x^n$.
 Now write an iterative method to perform the same calculation.
 
 \end{exercise}
@@ -5943,7 +5943,7 @@ Now write an iterative method to perform the same calculation.
 \begin{exercise}
 
 Section~\ref{factorial} presents a recursive method that computes the factorial function.
-Write an iterative version of {\tt factorial}.
+Write an iterative version of \java{factorial}.
 
 \end{exercise}
 
@@ -5956,17 +5956,17 @@ One way to calculate $e^x$ is to use the infinite series expansion:
 e^x = 1 + x + x^2 / 2! + x^3 / 3! + x^4 / 4! + ...
 \end{equation*}
 %
-If the loop variable is named {\tt i}, then the $i$th term is $x^i / i!$.
+If the loop variable is named \java{i}, then the $i$th term is $x^i / i!$.
 
 \begin{enumerate}
 
-\item Write a method called {\tt myexp} that adds up the first {\tt n} terms of this series.
-You can use the {\tt factorial} method from Section~\ref{factorial} or your iterative version from the previous exercise.
+\item Write a method called \java{myexp} that adds up the first \java{n} terms of this series.
+You can use the \java{factorial} method from Section~\ref{factorial} or your iterative version from the previous exercise.
 
-\item You can make this method more efficient if you realize that, in each iteration, the numerator of the term is the same as its predecessor multiplied by {\tt x}, and the denominator is the same as its predecessor multiplied by {\tt i}.
-Use this observation to eliminate the use of {\tt Math.pow} and {\tt factorial}, and check that you still get the same result.
+\item You can make this method more efficient if you realize that, in each iteration, the numerator of the term is the same as its predecessor multiplied by \java{x}, and the denominator is the same as its predecessor multiplied by \java{i}.
+Use this observation to eliminate the use of \java{Math.pow} and \java{factorial}, and check that you still get the same result.
 
-\item Write a method called {\tt check} that takes a parameter, {\tt x}, and prints the values of {\tt x}, {\tt Math.exp(x)} and {\tt myexp(x)} for various values of {\tt x}.
+\item Write a method called \java{check} that takes a parameter, \java{x}, and prints the values of \java{x}, \java{Math.exp(x)} and \java{myexp(x)} for various values of \java{x}.
 The output should look something like:
 
 \begin{stdout}
@@ -5975,15 +5975,15 @@ The output should look something like:
 
 Recall that you can use the string \java{"\\t"} to print a tab character between columns of a table.
 
-\item Vary the number of terms in the series (the second argument that {\tt check} sends to {\tt myexp}) and see the effect on
+\item Vary the number of terms in the series (the second argument that \java{check} sends to \java{myexp}) and see the effect on
 the accuracy of the result.
-Adjust this value until the estimated value agrees with the ``correct'' answer when {\tt x} is 1.
+Adjust this value until the estimated value agrees with the ``correct'' answer when \java{x} is 1.
 
-\item Write a loop in {\tt main} that invokes {\tt check} with the values 0.1, 1.0, 10.0, and 100.0.
-How does the accuracy of the result vary as {\tt x} varies?
+\item Write a loop in \java{main} that invokes \java{check} with the values 0.1, 1.0, 10.0, and 100.0.
+How does the accuracy of the result vary as \java{x} varies?
 Compare the number of digits of agreement rather than the difference between the actual and estimated values.
 
-\item Add a loop in {\tt main} that checks {\tt myexp} with the values -0.1, -1.0, -10.0, and -100.0.
+\item Add a loop in \java{main} that checks \java{myexp} with the values -0.1, -1.0, -10.0, and -100.0.
 Comment on the accuracy.
 
 \end{enumerate}
@@ -6000,8 +6000,8 @@ One way to evaluate $\exp(-x^2)$ is to use the infinite series expansion:
 \end{equation*}
 %
 In other words, we need to add up a series of terms where the $i$th term is equal to $(-1)^i x^{2i} / i!$.
-Write a method named {\tt gauss} that takes {\tt x} and {\tt n} as arguments and returns the sum of the first {\tt n} terms of the series.
-You should not use {\tt factorial} or {\tt pow}.
+Write a method named \java{gauss} that takes \java{x} and \java{n} as arguments and returns the sum of the first \java{n} terms of the series.
+You should not use \java{factorial} or \java{pow}.
 
 \end{exercise}
 
@@ -6017,7 +6017,7 @@ In Java and other object-oriented languages, an {\bf object} is a collection of 
 These methods operate on the object, performing computations and sometimes modifying the data.
 Strings are objects, and their data is a sequence of characters; that is,
 letters, numbers, spaces, and symbols.
-The {\tt String} class provides many methods for manipulating character data, and we will explore some of them in this chapter.
+The \java{String} class provides many methods for manipulating character data, and we will explore some of them in this chapter.
 
 
 \section{Characters}
@@ -6026,7 +6026,7 @@ The {\tt String} class provides many methods for manipulating character data, an
 \index{char}
 \index{type!char}
 
-The first method we will look at is {\tt charAt}, which extracts a character from a {\tt String}.
+The first method we will look at is \java{charAt}, which extracts a character from a \java{String}.
 It returns a \java{char}, a primitive type that can store individual characters (as opposed to strings of them).
 
 \begin{code}
@@ -6035,19 +6035,19 @@ It returns a \java{char}, a primitive type that can store individual characters 
     System.out.println(letter);
 \end{code}
 
-The expression {\tt fruit.charAt(1)} means that we invoke the {\tt charAt} method on the object referenced by {\tt fruit}.
-The argument {\tt 1} means that we want to know the letter at position 1.
-The result is a character, which is stored in a \java{char} variable named {\tt letter}.
-When you print the value of {\tt letter}, you might be surprised:
+The expression \java{fruit.charAt(1)} means that we invoke the \java{charAt} method on the object referenced by \java{fruit}.
+The argument \java{1} means that we want to know the letter at position 1.
+The result is a character, which is stored in a \java{char} variable named \java{letter}.
+When you print the value of \java{letter}, you might be surprised:
 
 \begin{stdout}
 a
 \end{stdout}
 
-Unless you already think like a computer scientist, the letter {\tt a} is not the first letter of {\tt "banana"}.
+Unless you already think like a computer scientist, the letter \java{a} is not the first letter of \java{"banana"}.
 For technical reasons, computer scientists start counting from zero.
-The 0th (``zeroeth'') letter of {\tt "banana"} is the {\tt b}.
-The 1th letter (``oneth'') is {\tt a} and the 2th (``twooth'') letter is {\tt n}.
+The 0th (``zeroeth'') letter of \java{"banana"} is the \java{b}.
+The 1th letter (``oneth'') is \java{a} and the 2th (``twooth'') letter is \java{n}.
 So if you want the {\em first} letter of a string, you have to pass 0 as the argument:
 
 \begin{code}
@@ -6083,7 +6083,7 @@ You can use them in arithmetic, decisions, loops, and so forth.
 
 Java uses {\bf Unicode} for its character set (see \url{http://unicode.org/}) so that strings may store text in any language.
 Unicode supports alphabets like Cyrillic and Greek, and left-to-right scripts like Arabic and Hebrew.
-%Regardless, both the data type \java{char} and the method {\tt charAt} work the same.
+%Regardless, both the data type \java{char} and the method \java{charAt} work the same.
 
 \begin{code}
     System.out.print("Greek alphabet: ");
@@ -6116,16 +6116,16 @@ A natural way to traverse a string is with a \java{for} statement:
 \index{variable!loop}
 \index{index}
 
-This loop prints each character of the string {\tt fruit} on a line by itself.
-The name of the loop variable is {\tt i}, which stands for {\bf index}; an
+This loop prints each character of the string \java{fruit} on a line by itself.
+The name of the loop variable is \java{i}, which stands for {\bf index}; an
 index is an integer that indicates the position of a character.
-Notice that the condition is {\tt i < fruit.length()}, which means that when {\tt i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
-%The last character we access is the one with the index {\tt fruit.length() - 1}.
+Notice that the condition is \java{i < fruit.length()}, which means that when \java{i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
+%The last character we access is the one with the index \java{fruit.length() - 1}.
 
 \index{String!length}
 \index{length!String}
 
-The {\tt length} method returns the number of characters in the string.
+The \java{length} method returns the number of characters in the string.
 It takes no arguments and returns an integer; the length of \java{"banana"} is 6.
 %Notice that it is legal to have a variable with the same name as a method (although it can be confusing for human readers).
 To find the last letter of a string, you might be tempted to try something like:
@@ -6136,9 +6136,9 @@ To find the last letter of a string, you might be tempted to try something like:
 \end{code}
 
 This code compiles and runs, but it causes a runtime error.
-The reason is that there is no sixth letter in {\tt "banana"}.
+The reason is that there is no sixth letter in \java{"banana"}.
 Since we started counting at 0, the 6 letters are indexed from 0 to 5.
-To get the last character, you have to subtract 1 from {\tt length}.
+To get the last character, you have to subtract 1 from \java{length}.
 
 \begin{code}
     char last = fruit.charAt(length - 1);  // CORRECT
@@ -6162,7 +6162,7 @@ For example, to reverse a string we simply add one character at a time:
 The initial value of \java{r} is \java{""}, which is the {\bf empty string}.
 The loop traverses the letters of \java{s} in reverse order.
 Each time through the loop, it creates a new string and assigns it to \java{r}.
-When the loop exits, \java{r} contains the letters from {\tt s} in reverse order.
+When the loop exits, \java{r} contains the letters from \java{s} in reverse order.
 So the result of \java{reverse("banana")} is \java{"ananab"}.
 
 %\section{Looping and counting}
@@ -6190,13 +6190,13 @@ For example, \java{numberOf("banana", 'a')} returns 3.
 \index{counter}
 
 This method demonstrates a common idiom, called a {\bf counter}.
-The variable {\tt count} is initialized to zero and then incremented each time we find an \java{'a'}.
-When we exit the loop, {\tt count} contains the result: the total number of a's.
+The variable \java{count} is initialized to zero and then incremented each time we find an \java{'a'}.
+When we exit the loop, \java{count} contains the result: the total number of a's.
 
 
 \section{Substrings}
 
-The {\tt substring} method returns new string that copies letters from an existing string, beginning at the given index.
+The \java{substring} method returns new string that copies letters from an existing string, beginning at the given index.
 
 \begin{itemize}
 \item \java{fruit.substring(0)} returns \java{"banana"}
@@ -6206,7 +6206,7 @@ The {\tt substring} method returns new string that copies letters from an existi
 
 The first example returns a copy of the entire string.
 The second example returns all but the first two characters.
-As the last example shows, {\tt substring} returns the empty string if the argument is the length of the string.
+As the last example shows, \java{substring} returns the empty string if the argument is the length of the string.
 To visualize how this method works, it helps to draw a picture:
 
 \begin{center}
@@ -6219,8 +6219,8 @@ b & a & n & a & n & a \\
 \end{tabular}
 \end{center}
 
-Like many string methods, {\tt substring} is overloaded.
-That is, there are other versions of {\tt substring} that have different parameters.
+Like many string methods, \java{substring} is overloaded.
+That is, there are other versions of \java{substring} that have different parameters.
 If it's invoked with two argments, they are treated as a start and end index:
 
 \begin{itemize}
@@ -6257,11 +6257,11 @@ For example, to select a substring with length \java{len}, starting at index \ja
 \index{error!runtime}
 \index{exception}
 
-If you call the {\tt charAt} method with an index that is either negative or greater than {\tt length - 1}, you will get an {\bf exception}.
-%The same is true when calling {\tt substring} with invalid start or end indexes.
+If you call the \java{charAt} method with an index that is either negative or greater than \java{length - 1}, you will get an {\bf exception}.
+%The same is true when calling \java{substring} with invalid start or end indexes.
 When that happens, Java prints an error message and terminates the program.
 
-For example, notice the error in the {\tt getLastLetter} method below.
+For example, notice the error in the \java{getLastLetter} method below.
 It should be looking at \java{index - 1} instead of \java{index}.
 
 \begin{code}
@@ -6281,7 +6281,7 @@ public class BadString {
 }
 \end{code}
 
-When you run the {\tt BadString} program, Java prints the following message.
+When you run the \java{BadString} program, Java prints the following message.
 
 \begin{small}
 \begin{stdout}
@@ -6302,20 +6302,20 @@ For one, it tells you that the index 6 was out of range.
 
 More importantly, it shows the line of code where the error occurred.
 It may be helpful to read the stack trace bottom-up.
-On line~4, {\tt main} called {\tt processWord}, which on line~8 called {\tt getLastLetter}, which on line~14 called {\tt charAt}.
-The actual error occurred on line 658 of String.java, which is in the source code for the {\tt String} class itself.
+On line~4, \java{main} called \java{processWord}, which on line~8 called \java{getLastLetter}, which on line~14 called \java{charAt}.
+The actual error occurred on line 658 of String.java, which is in the source code for the \java{String} class itself.
 
 Although possible, it's unlikely that the Java library code has mistakes that cause programs to crash.
 When reading stack diagrams, look for the top line that refers to a file you wrote.
-In this example, {\tt BadString.java:14} is the most useful debugging information.
+In this example, \java{BadString.java:14} is the most useful debugging information.
 
 
 \section{The indexOf method}
 \index{indexOf}
 
-At first glance, {\tt indexOf} is the inverse of {\tt charAt}.
-The {\tt charAt} method takes an index and returns the character at that index.
-In contrast, the {\tt indexOf} method takes a character and finds an index where that character appears.
+At first glance, \java{indexOf} is the inverse of \java{charAt}.
+The \java{charAt} method takes an index and returns the character at that index.
+In contrast, the \java{indexOf} method takes a character and finds an index where that character appears.
 
 \begin{code}
     String fruit = "banana";
@@ -6323,10 +6323,10 @@ In contrast, the {\tt indexOf} method takes a character and finds an index where
 \end{code}
 
 This example finds the index of the letter \java{'a'} in the string.
-But the letter appears three times, so it's not obvious what {\tt indexOf} should do.
+But the letter appears three times, so it's not obvious what \java{indexOf} should do.
 According to the documentation, it returns the index of the {\em first} appearance.
 
-To find subsequent appearances, you can use another version of {\tt indexOf}, which takes a second argument that indicates where in the string to start looking.
+To find subsequent appearances, you can use another version of \java{indexOf}, which takes a second argument that indicates where in the string to start looking.
 %For an explanation of this kind of overloading, see Section~\ref{overloading}.
 
 \begin{code}
@@ -6337,11 +6337,11 @@ This code starts at the third letter (the first \java{'n'}) and finds the next \
 If the letter happens to appear at the starting index, the starting index is the answer.
 So \java{fruit.indexOf('a', 5)} returns 5.
 
-There are subtle differences between {\tt charAt} and {\tt indexOf}:
+There are subtle differences between \java{charAt} and \java{indexOf}:
 \java{charAt} throws an exception if the index is out of range;
-{\tt indexOf} returns the value {\tt -1} if the character does not appear in the string.
+\java{indexOf} returns the value \java{-1} if the character does not appear in the string.
 
-You can also use {\tt indexOf} to search for an entire string.
+You can also use \java{indexOf} to search for an entire string.
 For example, the expression \java{fruit.indexOf("nan")} returns 2, whereas \java{fruit.indexOf("zzz")} returns -1 (not found).
 
 
@@ -6353,11 +6353,11 @@ For example, the expression \java{fruit.indexOf("nan")} returns 2, whereas \java
 \index{toLowerCase}
 \index{immutable}
 
-As you read the documentation of the {\tt String} methods, you might notice {\tt toUpperCase} and {\tt toLowerCase}.
+As you read the documentation of the \java{String} methods, you might notice \java{toUpperCase} and \java{toLowerCase}.
 These methods are often a source of confusion, because it sounds like they have the effect of changing (or mutating) an existing string.
 It turns out that neither these methods nor any others can change a string, because strings are {\bf immutable}.
 
-When you invoke {\tt toUpperCase} on a string object, you get a new string object as a return value.
+When you invoke \java{toUpperCase} on a string object, you get a new string object as a return value.
 For example:
 
 \begin{code}
@@ -6367,15 +6367,15 @@ For example:
 
 \index{Turing, Alan}
 
-After the second line runs, {\tt upperName} contains the value \java{"ALAN TURING"}.
-But {\tt name} still contains \java{"Alan Turing"} as before.
+After the second line runs, \java{upperName} contains the value \java{"ALAN TURING"}.
+But \java{name} still contains \java{"Alan Turing"} as before.
 
 \index{equals}
 \index{compareTo}
 
 It is often useful to compare strings to see if they are the same, or to see which comes first in alphabetical order.
-It would be nice if we could use the comparison operators, like {\tt ==} and {\tt >}, but we can't.
-To compare {\tt String}s, we have to use the {\tt equals} and {\tt compareTo} methods.
+It would be nice if we could use the comparison operators, like \java{==} and \java{>}, but we can't.
+To compare \java{String}s, we have to use the \java{equals} and \java{compareTo} methods.
 
 \begin{code}
     String name1 = "Alan Turing";
@@ -6387,7 +6387,7 @@ To compare {\tt String}s, we have to use the {\tt equals} and {\tt compareTo} me
 
 The syntax here may seem awkward.
 To compare two strings, you have to invoke a method on one of them and pass the other as an argument.
-The return value from {\tt equals} is straightforward: \java{true} if the strings contain the same characters, and \java{false} otherwise.
+The return value from \java{equals} is straightforward: \java{true} if the strings contain the same characters, and \java{false} otherwise.
 
 \begin{code}
     int diff = name1.compareTo(name2);
@@ -6400,12 +6400,12 @@ The return value from {\tt equals} is straightforward: \java{true} if the string
     }
 \end{code}
 
-The return value from {\tt compareTo} is the {\em difference} between the first characters in the strings that differ.
+The return value from \java{compareTo} is the {\em difference} between the first characters in the strings that differ.
 If the strings are equal, their difference is 0.
 If the first string (the one on which the method is invoked) comes first in the alphabet, the difference is negative.
 Otherwise, the difference is positive.
 
-In the example above, {\tt compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
+In the example above, \java{compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
 
 
 \section{Character arithmetic}
@@ -6441,8 +6441,8 @@ To convert \java{'3'} to the corresponding integer value, you effectively need t
 \end{code}
 
 In both of these examples, the typecast \java{(int)} is not strictly necessary since Java will do the conversion automatically.
-Since this conversion can be a bit ugly, it is preferable to use the {\tt digit} method in the {\tt Character} class instead.
-For example, this code converts {\tt letter} to the corresponding digit, interpreting it as a base 10 number.
+Since this conversion can be a bit ugly, it is preferable to use the \java{digit} method in the \java{Character} class instead.
+For example, this code converts \java{letter} to the corresponding digit, interpreting it as a base 10 number.
 
 \begin{code}
     int x = Character.digit(letter, 10);
@@ -6480,9 +6480,9 @@ As an exercise, you can modify the program to correct this error.
 
 \section{Wrapper classes}
 
-In the previous section, we introduced the {\tt Character} class.
-There are similar classes for the other primitive data types such as {\tt Boolean}, {\tt Integer}, {\tt Long}, and {\tt Double}.
-These classes are in the {\tt java.lang} package, so can use them without explicitly importing them.
+In the previous section, we introduced the \java{Character} class.
+There are similar classes for the other primitive data types such as \java{Boolean}, \java{Integer}, \java{Long}, and \java{Double}.
+These classes are in the \java{java.lang} package, so can use them without explicitly importing them.
 
 Each of these classes defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
 For example, \java{Integer.MIN_VALUE} is the \java{int} $-2147483648$, and \java{Integer.MAX_VALUE} is the \java{int} $2147483647$.
@@ -6518,10 +6518,10 @@ String str = Integer.toString(num);
 %Double d = 123.45;
 %\end{code}
 
-%For now, it's important to note that {\tt i} and {\tt d} are references to %objects.
+%For now, it's important to note that \java{i} and \java{d} are references to %objects.
 %In other words, the values {\tt 12345} and {\tt 123.45} have been wrapped %inside objects.
 %Like strings, these objects have a variety of methods that can be applied.
-%Refer to the documentation for {\tt Integer} and {\tt Double} for more details.
+%Refer to the documentation for \java{Integer} and \java{Double} for more details.
 
 
 \section{Vocabulary}
@@ -6567,8 +6567,8 @@ Strings are immutable.
 
 \begin{exercise}
 
-Encapsulate the code in Section~\ref{loopcount} into a method named {\tt countLetters}, and generalize it so that it accepts the string and the letter as arguments.
-Then rewrite the method so that it uses {\tt indexOf} to locate the a's, rather than checking the characters one by one.
+Encapsulate the code in Section~\ref{loopcount} into a method named \java{countLetters}, and generalize it so that it accepts the string and the letter as arguments.
+Then rewrite the method so that it uses \java{indexOf} to locate the a's, rather than checking the characters one by one.
 
 \end{exercise}
 
@@ -6579,7 +6579,7 @@ The purpose of this exercise is to review encapsulation and generalization (see 
 
 \begin{enumerate}
 
-\item Encapsulate the following code fragment, transforming it into a method that takes a string argument and returns the final value of {\tt count}.
+\item Encapsulate the following code fragment, transforming it into a method that takes a string argument and returns the final value of \java{count}.
 
 \item In a sentence or two, describe what the resulting method does (without getting into the details of how).
 
@@ -6621,14 +6621,14 @@ The point of this exercise is to explore Java types and fill in some of the deta
 
 \index{concatenate}
 
-\item Create a new program named {\tt Test.java} and write a {\tt main} method that contains expressions that combine various types using the {\tt +} operator.
-For example, what happens when you ``add'' a {\tt String} and a {\tt char}?
+\item Create a new program named {\tt Test.java} and write a \java{main} method that contains expressions that combine various types using the \java{+} operator.
+For example, what happens when you ``add'' a \java{String} and a \java{char}?
 Does it perform character addition or string concatenation?
 What is the type of the result?
 (How can you determine the type of the result?)
 
 \item Make a bigger copy of the following table and fill it in.
-At the intersection of each pair of types, you should indicate whether it is legal to use the {\tt +} operator with these types, what operation is performed (addition or concatenation), and what the type of the result is.
+At the intersection of each pair of types, you should indicate whether it is legal to use the \java{+} operator with these types, what operation is performed (addition or concatenation), and what the type of the result is.
 
 \begin{center}
 \begin{tabular}{|l|l|l|l|l|l|} \hline
@@ -6646,9 +6646,9 @@ How many of the entries seem unavoidable, as if there was no other choice?
 How many seem like arbitrary choices from several equally reasonable possibilities?
 Which entries seem most problematic?
 
-\item Here's a puzzler: normally, the statement {\tt x++} is exactly equivalent to {\tt x = x + 1}.
-But if {\tt x} is a {\tt char}, it's not exactly the same!
-In that case, {\tt x++} is legal, but {\tt x = x + 1} causes an error.
+\item Here's a puzzler: normally, the statement \java{x++} is exactly equivalent to \java{x = x + 1}.
+But if \java{x} is a \java{char}, it's not exactly the same!
+In that case, \java{x++} is legal, but \java{x = x + 1} causes an error.
 Try it out and see what the error message is, then see if you can figure out what is going on.
 
 \item What happens when you add \java{""} (the empty string) to the other types (e.g., \java{"" + 5})?
@@ -6714,7 +6714,7 @@ eeffoc
 \begin{exercise}
 
 What is the output of this program?
-Describe in a sentence what {\tt mystery} does (not how it works).
+Describe in a sentence what \java{mystery} does (not how it works).
 
 \begin{code}
 public class Mystery {
@@ -6745,8 +6745,8 @@ public class Mystery {
 
 \begin{exercise}
 
-A friend shows you the following method and claims that if {\tt number} is any two-digit number, the program will output the number backwards.
-For example if {\tt number} is 17, the code should output {\tt 71}.
+A friend shows you the following method and claims that if \java{number} is any two-digit number, the program will output the number backwards.
+For example if \java{number} is 17, the code should output {\tt 71}.
 
 \begin{code}
     Scanner in = new Scanner(System.in);
@@ -6773,21 +6773,21 @@ A palindrome is a word that reads the same both forward and backward, like ``ott
 
 \item Create a new program named {\tt Palindrome.java}.
 
-\item Write a method named {\tt first} that takes a string and returns the first letter.
-Write another method named {\tt last} that returns the last letter.
+\item Write a method named \java{first} that takes a string and returns the first letter.
+Write another method named \java{last} that returns the last letter.
 
-\item Write a method named {\tt middle} that takes a string and returns a substring that contains everything {\em except} the
+\item Write a method named \java{middle} that takes a string and returns a substring that contains everything {\em except} the
 first and last characters.
 
-%Hint: read the documentation of the {\tt substring} method in the {\tt String} class.
-% Run a few tests to make sure you understand how {\tt substring} works before you try to write {\tt middle}.
+%Hint: read the documentation of the \java{substring} method in the \java{String} class.
+% Run a few tests to make sure you understand how \java{substring} works before you try to write \java{middle}.
 
-Hint: Think about what happens if you invoke {\tt middle} on strings that have only two letters, one letter, and no letters.
+Hint: Think about what happens if you invoke \java{middle} on strings that have only two letters, one letter, and no letters.
 
 \item Here's one way to test whether a string is a palindrome:
 ``A single letter is a palindrome, and a two-letter word is a palindrome if the letters are the same, and any other word is a palindrome if the first letter is the same as the last and the middle is a palindrome.''
 
-Write a recursive method named {\tt isPalindrome} that takes a {\tt String} and returns a \java{boolean} indicating whether the word is a palindrome or not.
+Write a recursive method named \java{isPalindrome} that takes a \java{String} and returns a \java{boolean} indicating whether the word is a palindrome or not.
 
 \item Once you have a working palindrome checker, look for ways to simplify it by reducing the number of conditions you check.
 
@@ -6796,7 +6796,7 @@ Hint: It might be useful to adopt the definition that the empty string is a pali
 \item On a piece of paper, figure out a strategy for checking palindromes iteratively (i.e., using loops).
 There are several possible approaches, so make sure you have a solid plan before you start writing code.
 
-\item Implement your strategy in a method called {\tt isPalindromeIter}.
+\item Implement your strategy in a method called \java{isPalindromeIter}.
 Make sure it returns the same results as your recursive method.
 
 %\item Optional: Appendix~\ref{javaio} provides code for reading a list
@@ -6825,7 +6825,7 @@ deinos, diluvy, dimpsy
 letters.
 Your process can be iterative or recursive.
 
-\item Implement your process in a method called {\tt isAbecedarian}.
+\item Implement your process in a method called \java{isAbecedarian}.
 
 \end{enumerate}
 
@@ -6840,9 +6840,9 @@ There are most likely no dupledromes in common English use.
 
 \begin{enumerate}
 
-\item Write a method named {\tt isDupledrome} that takes a {\tt String} and returns a \java{boolean} indicating whether the word is a dupledrome.
+\item Write a method named \java{isDupledrome} that takes a \java{String} and returns a \java{boolean} indicating whether the word is a dupledrome.
 
-\item Write a {\tt main} program that reads words from {\tt System.in} and checks them for dupledromity.
+\item Write a \java{main} program that reads words from \java{System.in} and checks them for dupledromity.
 Continue reading input until the user enters the word \java{"Done"} (ignoring case).
 
 \end{enumerate}
