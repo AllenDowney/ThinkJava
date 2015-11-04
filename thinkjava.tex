@@ -407,7 +407,7 @@ On the other hand, it is important to know what steps are happening in the backg
 
 Learning a programming language is very different from learning a {\bf natural language} such as English, Spanish, or German.
 The languages that people speak evolved naturally over time.
-They were not designed by people, although we try to impose order on them for practical reasons.
+%They were not designed by people, although we try to impose order on them for practical reasons.
 
 \index{formal language}
 \index{language!formal}
@@ -432,7 +432,7 @@ For example, $3 + 3 = 6$ is a syntactically correct mathematical statement, but 
 $1 + 2 = 4$ uses correct syntax, but is semantically incorrect.
 $H_2O$ is a syntactically correct chemical formula, but $_2Zz$ is not.
 
-\subsection{Tokens and grammar}
+%\subsection{Tokens and grammar}
 
 \index{token}
 
@@ -451,13 +451,17 @@ Similarly, in a chemical formula the subscript comes after the element name, not
 
 When you read a sentence in English or a statement in a formal language, you have to figure out its structure.
 This process is called {\bf parsing}, and in a natural language you learn to do it unconsciously.
-For example, when you hear the statement ``the penny dropped,'' you understand that the penny is the subject and dropped is the predicate.
-After you have parsed the statement, you can begin to figure out what it means.
+As you learn to program, you will learn to parse Python code.
+
+%For example, when you hear the statement ``the penny dropped,'' you understand that the penny is the subject and ``dropped'' is the predicate.
+%After you have parsed the statement, you can begin to figure out what it means.
 %Assuming that you know what a penny is and what it means to drop, you will understand the general implication of this statement.
 
-\subsection{Reading source code}
+%\subsection{Reading source code}
 
-Although formal and natural languages have features in common---tokens, grammar, and meaning---there are some differences.
+
+Beginning programmers, who are used to natural languages, often have a hard time adjusting to formal languages.
+Although formal and natural languages have features in common---tokens, grammar, and meaning---there are some differences:
 
 \begin{description}
 
@@ -478,30 +482,32 @@ In contrast, formal languages mean exactly what they say.
 
 \end{description}
 
-People who grow up speaking a natural language---that is, everyone---often have a hard time adjusting to formal languages.
-In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
+%In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
 
-\begin{description}
+%\begin{description}
 
-\term{poetry}
-Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
-Ambiguity is not only common but often deliberate.
+%\term{poetry}
+%Words are used for their sounds as well as for their meaning, and the whole poe%m together creates an effect or emotional response.
+%Ambiguity is not only common but often deliberate.
 
-\term{prose}
-The literal meaning of words is more important, and the structure contributes more meaning.
-Prose is more amenable to analysis than poetry but still often ambiguous.
+%\term{prose}
+%The literal meaning of words is more important, and the structure contributes more meaning.
+%Prose is more amenable to analysis than poetry but still often ambiguous.
 
-\term{program}
-The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
+%\term{program}
+%The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
 
-\end{description}
+%\end{description}
 
 %Here are some suggestions for reading programs (and other formal languages).
-Remember that formal languages are much more dense than natural languages, so it takes longer to read them.
-The structure is very important, so it is not always a good idea to read from top to bottom, left to right.
-Over time you will learn to parse the program in your head, identifying the tokens and interpreting the structure.
-Finally, the details matter.
+
 Small errors in spelling and punctuation, which you can get away with in natural languages, can make a big difference in a formal language.
+
+Also, formal languages are more dense than natural languages, so it takes longer to read them.
+The structure is very important, so it is not always a good idea to read from top to bottom, left to right.
+Over time you will learn to parse programs in your head, identifying the tokens and interpreting the structure.
+And you will learn to read and write programs more quickly.
+
 
 
 \section{The hello world program}
@@ -605,14 +611,15 @@ When the compiler sees {\tt //}, it ignores everything from there until the end 
 It is a good idea to write a comment before every major block of code so that other programmers (including your future self) can understand what you meant to do.
 
 
-\section{Getting started with DrJava}
+\section{Setting up a programming environment}
 
 \index{JDK}
 
 In order to compile Java programs on your own computer, you will need to install the Java Development Kit (JDK).
 This free software by Oracle includes tools for developing and debugging Java programs.
 All the examples in this book were developed and tested using Java SE Version 7.
-Later versions of Java are generally backward compatible, so if you are using a more recent version, the examples in this book should still work.
+If you are using a more recent version, the examples in this book should still work.
+If you are using an older version, a few of them might not.
 
 \begin{figure}[!h]
 \begin{center}
@@ -637,11 +644,10 @@ Step-by-step instructions for installing the JDK and configuring DrJava are avai
 \index{command-line}
 \index{terminal}
 
-One of the most powerful and useful skills you can learn as a computer scientist is how to use the {\bf command-line}, also called
-the {\em terminal}.
-The command-line is a direct interface to the operating system.
+One of the most powerful and useful skills you can learn is how to use the {\bf command-line interface}, also called the {\em terminal}.
+The command line is a direct interface to the operating system.
 It allows you to run programs, manage files and directories, and monitor system resources.
-Many advanced tools, both for software development and general purpose computing, are available only at the command-line.
+Many advanced tools, both for software development and general purpose computing, are available only at the command line.
 
 There are many good tutorials online for learning the command-line for your operating system; just search the web for ``command line tutorial.''
 To get started, you only need to know four commands: how to change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
@@ -651,7 +657,7 @@ To get started, you only need to know four commands: how to change the working d
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=4.5in]{figs/terminal.png}
-\caption{Compiling and running {\tt Hello.java} from the command-line.}
+\caption{Compiling and running {\tt Hello.java} from the command line.}
 \end{center}
 \end{figure}
 
@@ -663,13 +669,13 @@ We run the program using the {\tt java} command, which displays the output on th
 Note that the {\tt javac} command requires a {\em file name} (or multiple source files separated by spaces), whereas the {\tt java} command requires a single {\em class name}.
 If you use DrJava, it runs these commands for you and displays the output in the Interactions Pane.
 
-Taking time to learn this efficient and elegant way of interacting with your operating system will make you more productive as a computer user.
-People who don't use the command-line don't know what they're missing.
+Taking time to learn this efficient and elegant way of interacting with your operating system will make you more productive.
+People who don't use the command line don't know what they're missing.
 
 % ABD: Maybe add a reference to Neal Stephenson's book?
 
 
-\section{More printing}
+\section{Printing strings}
 
 You can put as many statements as you want in \java{main}.
 For example, to print more than one line:
@@ -751,7 +757,7 @@ Newlines and spaces are important for organizing your program visually, making i
 \subsection{Escape sequences}
 
 It is possible to print multiple lines of output in just one line of code.
-You simply have to tell Java where to put the newlines.
+You just have to tell Java where to put the line breaks.
 
 \begin{code}
 public class Hello {
@@ -772,7 +778,7 @@ How are you doing?
 
 \index{escape sequence}
 
-The code \verb"\n" is an example of an {\bf escape sequence}, which is a sequence of characters in a string that represents a special character.
+The code \verb"\n" is an {\bf escape sequence}, which is a sequence of characters in a string that represents a special character.
 The backslash allows you to ``escape'' the string's literal interpretation.
 Notice there is no space between \verb"\n" and \verb"How".
 If you add a space there, there will be a space at the beginning of the second line.
@@ -808,7 +814,7 @@ She said "Hello!" to me.
 \end{stdout}
 
 
-\section{Working through examples}
+\section{Debugging}
 \label{sec:examples}
 
 It is a good idea to read this book in front of a computer so you can try out the examples as you go.
@@ -825,15 +831,15 @@ It is better to make mistakes now and on purpose than later on and accidentally.
 \index{experimental debugging}
 \index{debugging!experimental}
 
-\index{Holmes, Sherlock}
-\index{Doyle, Arthur Conan}
+%\index{Holmes, Sherlock}
+%\index{Doyle, Arthur Conan}
 
 Debugging is like an experimental science.
 Once you have an idea about what is going wrong, you modify your program and try again.
 If your hypothesis was correct, then you can predict the result of the modification, and you take a step closer to a working program.
 If your hypothesis was wrong, you have to come up with a new one.
-As Sherlock Holmes pointed out, ``When you have eliminated the impossible, whatever remains, however improbable, must be the truth.''
-(A.~Conan Doyle, {\em The Sign of Four}.)
+%As Sherlock Holmes pointed out, ``When you have eliminated the impossible, whatever remains, however improbable, must be the truth.''
+%(A.~Conan Doyle, {\em The Sign of Four}.)
 
 Programming and debugging should go hand in hand.
 Don't just write a bunch of code and then perform trial and error debugging until it all works.
@@ -875,6 +881,11 @@ Don't hesitate to reach out to a friend and ask questions!
 
 
 \section{Vocabulary}
+
+Throughout the book, we try to define each term the first time we use
+it.
+And the end of each chapter, we include the new terms and their definitions.
+If you spend some time learning this vocablary, you will have an easier time reading the following chapters.
 
 \begin{description}
 
@@ -985,6 +996,9 @@ A sequence of code that represents a special character when used inside a string
 
 \section{Exercises}
 
+At the end of each chapter we include exercises you can do with the things you've learned.
+We encourage you to at least attempt every problem.
+You can't learn to program by reading along; you have to practice.
 
 \begin{exercise}
 
