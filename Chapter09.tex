@@ -175,40 +175,37 @@
 
 As we learned in the previous chapter, \java{String}s are objects.
 But they are atypical in Java because:
+
 \begin{itemize}
 
-\item They are immutable.
-You can't change an existing \java{String} object, but you can create new ones.
+\item You don't have to use the \java{new} operator to create a \java{String} object.
+For convenience, Java allows you to define \java{String} literals.
 
-\item You don't have to use \java{new} to create a \java{String} object.
-For convenience, Java allows you to assign \java{String} literals.
+\item They are immutable.
+You cannot edit an existing \java{String} object directly; you can only create new ones.
 
 \end{itemize}
 
-In this chapter, we use two objects from the Java library: \java{Point} and \java{Rectangle}.
+In this chapter, we will learn about more classes from the Java library such as \java{Point} and \java{Rectangle}.
+These classes are defined in the \java{java.awt} package, so you will need to \java{import} them before running the examples.
 To be clear, these points and rectangles are not graphical objects that appear on the screen.
-Like strings, they simply contain data and provide methods for manipulating that data.
-
-
-\section{Class diagrams}
-
-TODO
+Like strings, they contain data and provide methods for manipulating that data.
+But unlike strings, you can make changes to that data directly.
 
 
 \section{Point objects}
 
+A point is two numbers (coordinates) that we treat collectively as a single object.
+In mathematical notation, points are often written in parentheses with a comma separating the coordinates.
+For example, $(0,0)$ indicates the origin, and $(x,y)$ indicates the point $x$ units to the right and $y$ units up from the origin.
+
 \index{Point}
 \index{class!Point}
-
-A point is two numbers (coordinates) that we treat collectively as a single object.
-In mathematical notation, points are often written in parentheses, with a comma separating the coordinates.
-For example, $(0, 0)$ indicates the origin, and $(x, y)$ indicates the point $x$ units to the right and $y$ units up from the origin.
-
 \index{new}
 \index{statement!new}
 
-In Java, a point is represented by a \java{Point} object.
-To create a new point, you have to use \java{new}:
+In Java, a point is represented by a \java{java.awt.Point} object.
+To create a new point, you have to use the \java{new} operator:
 
 \begin{code}
     Point blank;
@@ -220,63 +217,128 @@ To create a new point, you have to use \java{new}:
 
 The first line is a conventional variable declaration: \java{blank} has type \java{Point}.
 The second line invokes \java{new}, specifies the type of the new object, and provides arguments.
-The arguments are the coordinates of the new point, $(3, 4)$.
+The arguments are the coordinates of the new point: $(3, 4)$.
 
 \index{reference}
 
-The result of \java{new} is a {\bf reference} to the new point.
+The result of the \java{new} operator is a {\bf reference} to the new \java{Point}.
 So \java{blank} contains a reference to the newly-created object.
 Here is a standard way to diagram this assignment:
 
+\begin{center}
 \includegraphics{figs/reference.pdf}
+\end{center}
+
+\index{attribute}
 
 As usual, the name of the variable \java{blank} appears outside the box and its value appears inside the box.
 In this case, that value is a reference, which is shown graphically with an arrow.
-The arrow points to the object we're referring to.
+The arrow points to the object we're referring to, which shows the newly-created object and the two values in it.
+The variables \java{x} and \java{y} are the object's {\bf attributes}.
 
-\index{instance variable}
-\index{variable!instance}
-
-The big box shows the newly-created object with the two values in it.
-The names \java{x} and \java{y} are the names of the {\bf instance variables}.
+% CSM: We already introduced memory diagrams (Ch1) and stack diagrams (Ch4).
+% State diagrams are the next aspect of this general diagraming convention.
 
 \index{state}
 \index{state diagram}
 
 Taken together, all the variables, values, and objects in a program are called the {\bf state}.
-Diagrams like this that show the state of the program are called {\bf state diagrams}.
+Diagrams like this that show the state of the program's objects are called {\bf state diagrams}.
 As the program runs, the state changes, so you should think of a state diagram as a snapshot of a particular point in the execution.
+
+
+\section{The Point class}
+
+When you define a class in Java, you are also defining a new data type.
+It is helpful to think of classes as the blueprints (or a template) for objects.
+To illustrate this point (pun intended), here is a simplified version of the source code for the \java{java.awt.Point} class:
+
+\begin{code}
+public class Point {
+
+    public int x;
+    public int y;
+    
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    public String toString() {
+        return "Point[x=" + x + ",y=" + y + "]";
+    }
+    
+}
+\end{code}
+
+There are several details to note in this example.
+
+\begin{itemize}
+
+\item The class defines two variables (attributes) named \java{x} and \java{y} that are shared across all methods.
+Because they are declared at the class level, their scope is the entire class.
+
+\item The method \java{public Point(int x, int y)} is called a {\bf constructor}.
+Its purpose is to initialize new objects, and it is called by the \java{new} operator.
+Notice that it has no return type (not even \java{void}).
+
+\item The parameters \java{x} and \java{y} in the constructor happen to have the same name as the attributes.
+In order to distinguish one variable from the other, the keyword \java{this} refers to the current object.
+
+%\item None of the variables or methods are \java{static}.
+%In other words, they apply to each object of the class as opposed to the class itself.
+%We will discuss this issue more deeply in the next chapter.
+
+\end{itemize}
+
+In practice, it's more convenient to look at high-level pictures than source code.
+{\bf Unified Modeling Language} (UML) defines a standard way to visualize class designs.
+Here is a {\bf class diagram} for the simplified \java{Point} class above:
+
+\begin{center}
+\vspace{1ex}
+\includegraphics{figs/point.pdf}
+\vspace{1ex}
+\end{center}
+
+The diagram is divided into two sections: the attributes (or variables) of the class, and the methods of the class.
 
 
 \section{Instance variables}
 
-The pieces of data that make up an object are called instance variables because each object, which is an {\bf instance} of its type, has its own copy of the instance variables.
+\index{instance variable}
+\index{variable!instance}
 
-It's like the glove compartment of a car.  Each car is an instance of the type ``car,'' and each car has its own glove compartment.
+The attributes that make up an object are also called instance variables, because each object has its own copy of the variables.
+Classes define new data types, and each object is an {\bf instance} of that type.
+
+It's like the glove compartment of a car.
+Each car is an instance of the type ``Car,'' and each car has its own glove compartment.
 If you ask me to get something from the glove compartment of your car, you have to tell me which car is yours.
 
 \index{dot notation}
 
-Similarly, if you want to read a value from an instance variable, you have to specify the object you want to get it from.
-In Java this is done using dot notation.
+Similarly if you want to read a value from an object, you have to specify the object you want to get it from.
+Java uses dot notation for this purpose.
 
 \begin{code}
     int x = blank.x;
 \end{code}
 
 The expression \java{blank.x} means ``go to the object \java{blank} refers to, and get the value of \java{x}.''
-In this case we assign that value to a local variable named \java{x}.
+In this case, we assign that value to a local variable named \java{x}.
 There is no conflict between the local variable named \java{x} and the instance variable named \java{x}.
 The purpose of dot notation is to identify {\em which} variable you are referring to unambiguously.
 
-You can use dot notation as part of any Java expression, so the following are legal.
+You can use dot notation to build other Java expressions.
+Here are several common examples:
 
 \begin{code}
     System.out.println(blank.x + ", " + blank.y);
     int sum = blank.x * blank.x + blank.y * blank.y;
 \end{code}
 
-The first line prints \java{3, 4}; the second line calculates the value 25.
+The first line prints {\tt 3, 4}; the second line calculates the value 25.
 
 
 \section{Objects as parameters}
@@ -293,39 +355,40 @@ For example:
     }
 \end{code}
 
-This method takes a point as an argument and prints it in the standard format.
+This method takes a point as an argument and prints it in parentheses.
 If you invoke \java{printPoint(blank)}, it prints \java{(3, 4)}.
-Actually, Java already has a method for printing \java{Points}.
-If you invoke \java{System.out.println(blank)}, you get:
+
+It turns out that Java already has a way of printing \java{Point}s and other objects.
+All you have to do is define a \java{toString} method, and \java{println} will call it.
+For example, if you invoke \java{System.out.println(blank)} you get:
 
 \begin{stdout}
 java.awt.Point[x=3,y=4]
 \end{stdout}
 
-This is a standard format Java uses for printing objects.
+This format is what \java{java.awt} uses for printing objects.
 It prints the name of the type, followed by the names and values of the instance variables.
 
 As a second example, we can rewrite the \java{distance} method from Section~\ref{distance} so that it takes two \java{Point}s as parameters instead of four \java{double}s.
 
 \begin{code}
     public static double distance(Point p1, Point p2) {
-        double dx = (double)(p2.x - p1.x);
-        double dy = (double)(p2.y - p1.y);
-        return Math.sqrt(dx*dx + dy*dy);
+        double dx = (double) (p2.x - p1.x);
+        double dy = (double) (p2.y - p1.y);
+        return Math.sqrt(dx * dx + dy * dy);
     }
 \end{code}
 
-The typecasts are not really necessary; I added them as a reminder that the instance variables in a \java{Point} are integers.
+The typecasts are not really necessary; they are simply a reminder that the instance variables for \java{Point} are integers.
 
 
-\section{Rectangles}
+\section{Objects as return types}
 
 \index{Rectangle}
 \index{class!Rectangle}
 
-\java{Rectangle}s are similar to points, except that they have four instance variables: \java{x}, \java{y}, \java{width} and \java{height}.
-Other than that, everything is pretty much the same.
-This example creates a \java{Rectangle} object and makes \java{box} refer to it.
+\java{Rectangle}s are similar to points, except that they have four instance variables: \java{x}, \java{y}, \java{width}, and \java{height}.
+This example creates a \java{Rectangle} object and makes the variable \java{box} refer to it.
 
 \begin{code}
     Rectangle box = new Rectangle(0, 0, 100, 200);
@@ -333,7 +396,9 @@ This example creates a \java{Rectangle} object and makes \java{box} refer to it.
 
 This figure shows the effect of this assignment.
 
+\begin{center}
 \includegraphics{figs/rectangle.pdf}
+\end{center}
 
 If you print \java{box}, you get:
 
@@ -341,10 +406,7 @@ If you print \java{box}, you get:
 java.awt.Rectangle[x=0,y=0,width=100,height=200]
 \end{stdout}
 
-Again, this is the result of a Java method that knows how to print \java{Rectangle} objects.
-
-
-\section{Objects as return types}
+Again, this output is the result of a \java{toString} method that knows how to display \java{Rectangle} objects.
 
 \index{return}
 \index{statement!return}
@@ -354,8 +416,8 @@ For example, \java{findCenter} takes a \java{Rectangle} as an argument and retur
 
 \begin{code}
     public static Point findCenter(Rectangle box) {
-        int x = box.x + box.width/2;
-        int y = box.y + box.height/2;
+        int x = box.x + box.width / 2;
+        int y = box.y + box.height / 2;
         return new Point(x, y);
     }
 \end{code}
@@ -378,7 +440,9 @@ For example, to ``move'' a rectangle without changing its size, you can modify t
 
 The result is shown in the figure:
 
+\begin{center}
 \includegraphics{figs/rectangle2.pdf}
+\end{center}
 
 \index{encapsulation}
 \index{generalization}
@@ -404,19 +468,22 @@ Invoking this method has the effect of modifying the \java{Rectangle} that is pa
 This code prints \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
 
 Modifying objects by passing them as arguments to methods can be useful, but it can also make debugging more difficult because it is not always clear which method invocations do or do not modify their arguments.
-Later, I discuss some pros and cons of this programming style.
+%Later, I discuss some pros and cons of this programming style.
 
-Java provides methods that operate on Points and Rectangles.
-You can read the documentation at
-\url{http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html}
-and
-\url{http://docs.oracle.com/javase/7/docs/api/java/awt/Rectangle.html}.
-
+Java provides a number of methods that operate on \java{Point}s and \java{Rectangle}s.
+Now would be a good time to examine the documentation for these classes.
+%You can read the documentation at
+%\url{http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html}
+%and
+%\url{http://docs.oracle.com/javase/7/docs/api/java/awt/Rectangle.html}.
 For example, \java{translate} has the same effect as \java{moveRect}, but instead of passing the Rectangle as an argument, you use dot notation:
 
 \begin{code}
     box.translate(50, 100);
 \end{code}
+
+To foreshadow what's to come in future chapters, this example illustrates {\bf object-oriented programming}.
+Rather than write \java{static} methods that manipulate external data (like \java{moveRect}), we make the methods non-static and bundle them with the objects themselves using dot notation.
 
 
 \section{Aliasing}
@@ -434,13 +501,15 @@ It is possible to have multiple variables that refer to the same object.
 
 This code generates a state diagram that looks like:
 
+\begin{center}
 \includegraphics{figs/aliasing.pdf}
+\end{center}
 
 \index{aliasing}
 
 The \java{box1} and \java{box2} variables refer to the same object.
 In other words, this object has two names, \java{box1} and \java{box2}.
-When a person uses two names, it's called {\bf aliasing}.
+When a person in real life uses two names, it's called {\bf aliasing}.
 Same thing with objects.
 
 When two variables are aliased, any changes that affect one variable also affect the other.
@@ -452,49 +521,45 @@ For example:
     System.out.println(box2.width);
 \end{code}
 
-The first line prints \java{100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
+The first line prints {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
 The second line invokes the \java{grow} method on \java{box1}, which expands the \java{Rectangle} by 50 pixels in every direction (see the documentation for more details).
 The effect is shown in the figure:
 
+\begin{center}
 \includegraphics{figs/aliasing2.pdf}
+\end{center}
 
 Whatever changes are made to \java{box1} also apply to \java{box2}.
-Thus, the value printed by the third line is \java{200}, the width of the expanded rectangle.
+Thus, the value printed by the third line is {\tt 200}, the width of the expanded rectangle.
 (As an aside, it is perfectly legal for the coordinates of a \java{Rectangle} to be negative.)
 
-As you can tell even from this simple example, code that involves aliasing can get confusing fast, and can be difficult to debug.
+As you can tell even from this simple example, code that involves aliasing can get confusing fast and can be difficult to debug.
 In general, aliasing should be avoided or used with care.
-
-
-\section{Immutable objects}
-
-TODO
 
 
 \section{The null keyword}
 
 \index{null}
 
-When you create an object variable, remember that you are creating a {\em reference} to an object.
-Until you make the variable point to an object, the value of the variable is \java{null}.
-\java{null} is a special value (and a Java keyword) that means ``no object.''
-
-The declaration \java{Point blank;} is equivalent to this initialization:
+When you create an object variable, remember that you are storing a {\em reference} to an object.
+%Until you make the variable point to an object, the value of the variable will be \java{null}.
+In Java, the keyword \java{null} is a special value that means ``no object.''
+You can declare and initialize object variables this way:
 
 \begin{code}
     Point blank = null;
 \end{code}
 
-and is shown in the following state diagram:
+The value \java{null} is represented in state diagrams by a small box with no arrow.
 
+\begin{center}
 \includegraphics{figs/reference2.pdf}
-
-The value \java{null} is represented by a small square with no arrow.
+\end{center}
 
 \index{exception!NullPointer}
 \index{run-time error}
 
-If you try to use a null object, either by accessing an instance variable or invoking a method, Java throws a \java{NullPointerException}, prints an error message, and terminates the program.
+If you try to use a \java{null} object, either by accessing an instance variable or invoking a method, Java throws a \java{NullPointerException}, prints an error message, and terminates the program.
 
 \begin{code}
     Point blank = null;
@@ -510,7 +575,6 @@ In fact, it is common to do so, for example to represent an empty set or indicat
 
 In Section~\ref{aliasing} we talked about what happens when more than one variable refers to the same object.
 What happens when {\em no} variable refers to an object?
-For example:
 
 \begin{code}
     Point blank = new Point(3, 4);
@@ -519,14 +583,18 @@ For example:
 
 The first line creates a new \java{Point} object and makes \java{blank} refer to it.
 The second line changes \java{blank} so that instead of referring to the object, it refers to nothing (the null object).
+In terms of the state diagram, we have removed the arrow between them.
 
+\begin{center}
 \includegraphics{figs/reference3.pdf}
+\end{center}
 
 \index{garbage collection}
 
 If no one refers to an object, then no one can read or write any of its values, or invoke a method on it.
 In effect, it ceases to exist.
-We could keep the object in memory, but it would only waste space, so periodically as your program runs, the system looks for stranded objects and reclaims them, in a process called {\bf garbage collection}.
+We could keep the object in memory, but it would only waste space.
+So periodically as your program runs, the system looks for stranded objects and reclaims them in a process called {\bf garbage collection}.
 Later, the memory space occupied by the object will be available to be used as part of a new object.
 
 You don't have to do anything to make garbage collection happen, and in general you will not be aware of it.
@@ -544,20 +612,32 @@ But you should know that it periodically runs in the background.
 A value that indicates an object.
 In a state diagram, a reference appears as an arrow.
 
-\term{instance}
-An example from a category.
-My cat is an instance of the category ``feline things.''
-Every object is an instance of some class.
-
-\term{instance variable}
-One of the named data items that make up an object.
-Each object (instance) has its own copy of the instance variables for its class.
+\term{attribute}
+One of the named data items (instance variables) that make up an object.
+Each object (instance) has its own copy of the attributes for its class.
 
 \term{state}
 A complete description of all the variables and objects and their values, at a given point during the execution of a program.
 
 \term{state diagram}
 A snapshot of the state of a program, shown graphically.
+
+\term{constructor}
+A special method called by \java{new} to initialize an object.
+
+\term{UML}
+Unified Modeling Language, a standard way to draw diagrams for software engineering.
+
+\term{class diagram}
+An illustration of attributes and methods for a class.
+
+\term{instance}
+An example from a category.
+My cat is an instance of the category ``feline things.''
+Every object is an instance of some class.
+
+\term{object-oriented programming}
+A programming technique that focuses on objects rather than independent methods.
 
 \term{aliasing}
 The condition when two or more variables refer to the same object.
@@ -602,6 +682,7 @@ For the following program:
 The point of this exercise is to make sure you understand the mechanism for passing objects as parameters.
 \end{exercise}
 
+\newpage
 
 \begin{exercise}
 For the following program:
