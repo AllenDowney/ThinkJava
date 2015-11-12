@@ -1,13 +1,71 @@
 \documentclass[12pt]{book}
 
+\title{Think Java}
+\author{Allen Downey and Chris Mayfield}
+
 \newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
-\title{\thetitle}
-
 \newcommand{\theauthors}{Allen Downey and Chris Mayfield}
-\author{\theauthors}
-
 \newcommand{\theversion}{Version 6.0 Draft -- \today}
-\date{\theversion}
+
+%%%% Both LATEX and PLASTEX
+
+% balanced index with TOC entry
+\usepackage{makeidx}
+\makeindex
+
+% automatically index glossary terms
+\newcommand{\term}[1]{%
+\index{#1}
+\item[#1:]}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+% format end of chapter excercises
+\newtheoremstyle{exercise}
+  {12pt}        % space above
+  {12pt}        % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {}            % punctuation
+  {12pt}        % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+\usepackage{graphicx}
+%\graphicspath{{figs/}}
+
+\usepackage{url}
+
+\newif\ifplastex
+\plastexfalse
+
+\ifplastex
+%%%% PLASTEX ONLY
+
+\usepackage{localdef}
+
+\newcount\anchorcnt
+\newcommand*{\Anchor}[1]{%
+  \@bsphack%
+    \Hy@GlobalStepCount\anchorcnt%
+    \edef\@currentHref{anchor.\the\anchorcnt}% 
+    \Hy@raisedlink{\hyper@anchorstart{\@currentHref}\hyper@anchorend}% 
+    \M@gettitle{}\label{#1}% 
+    \@esphack%
+}
+
+\newcommand{\java}[1]{\verb"#1"}
+\newcommand{\stdout}[1]{\verb"#1"}
+
+\else
+%%%% LATEX ONLY
+
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+\usepackage[totoc]{idxlayout}
 
 \usepackage{geometry}
 \geometry{
@@ -48,7 +106,6 @@
 \makeatother
 
 % table of contents vertical spacing
-\usepackage{tocloft}
 \setlength\cftparskip{8pt plus 4pt minus 4pt}
 
 % The following line adds a little extra space to the column
@@ -58,7 +115,6 @@
 \makeatother
 
 % customize page headers
-\usepackage{fancyhdr}
 \pagestyle{fancyplain}
 \renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
@@ -69,22 +125,6 @@
 \cfoot{}
 %\rfoot{\textcolor{gray}{\tiny ThinkJava Draft \today}}
 
-% balanced index with TOC entry
-\usepackage{makeidx}
-\makeindex
-%\usepackage[totoc]{idxlayout}
-
-% automatically index glossary terms
-\newcommand{\term}[1]{%
-\index{#1}
-\item[#1:]}
-% TODO: doesn't work with plastex
-%\newcommand{\term}[1]{\item[#1:]}
-
-% where to find graphics
-\usepackage{graphicx}
-%\graphicspath{{figs/}}
-
 %% tweak spacing of figures and captions
 %\usepackage{floatrow}
 %\usepackage{caption}
@@ -94,21 +134,6 @@
 %    justification=centering,
 %    skip=4pt
 %}
-
-% format end of chapter excercises
-\usepackage{amsmath}
-\usepackage{amsthm}
-\newtheoremstyle{exercise}
-  {12pt}        % space above
-  {12pt}        % space below
-  {}            % body font
-  {}            % indent amount
-  {\bfseries}   % head font
-  {}            % punctuation
-  {12pt}        % head space
-  {}            % custom head
-\theoremstyle{exercise}
-\newtheorem{exercise}{Exercise}[chapter]
 
 % colors for code listings and output
 \usepackage{xcolor}
@@ -160,32 +185,24 @@
 
 % inline syntax formatting
 \newcommand{\java}[1]{\lstinline{#1}} %\end{
-%\newcommand{\java}[1]{\verb"#1"}
-%\newcommand{\java}[1]{{\tt #1}}
+
+% END OF LATEX ONLY
+\fi
+
+
+%% END OF PREAMBLE
 
 \begin{document}
 
 \frontmatter
 
-%-half title--------------------------------------------------
-%\thispagestyle{empty}
-%
-%\begin{flushright}
-%\vspace*{2.0in}
-%
-%{\huge Think Java}
-%
-%\vspace{0.25in}
-%{\LARGE How to Think Like a Computer Scientist}
-%
-%\vfill
-%
-%\end{flushright}
 
-%--verso------------------------------------------------------
+\ifplastex
+%PLASTEX ONLY
+    \maketitle
 
-%\cleardoublepage
-%\cleardoublepage
+\else
+%LATEX ONLY
 
 %--title page--------------------------------------------------
 \pagebreak
@@ -234,6 +251,10 @@ The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 \setcounter{tocdepth}{1}
 \tableofcontents
 
+%%%% END OF LATEX ONLY
+\fi
+
+
 \mainmatter
 
 
@@ -244,7 +265,6 @@ This way of thinking combines some of the best features of mathematics, engineer
 Like mathematicians, computer scientists use formal languages to denote ideas (specifically computations).
 Like engineers, they design things, assembling components into systems and evaluating trade-offs among alternatives.
 And like scientists, they observe the behavior of complex systems, form hypotheses, and test predictions.
-
 \index{problem-solving}
 
 The single most important skill for a computer scientist is {\bf problem-solving}.
@@ -261,7 +281,6 @@ Learning how to think in terms of computation is much more valuable than simply 
 \section{What is programming?}
 
 \index{program}
-
 A {\bf program} is a sequence of instructions that specifies how to perform a computation.
 %\footnote{This definition does not apply to all programming languages; for alternatives, see \url{http://en.wikipedia.org/wiki/Declarative_programming}.}
 The computation might be something mathematical, like solving a system of equations or finding the roots of a polynomial.
@@ -4540,9 +4559,7 @@ In this section, we are going to model a technique called {\bf incremental devel
 As an example, imagine you want to find the distance between two points, given by the coordinates $(x_1, y_1)$ and $(x_2, y_2)$.
 By the usual definition:
 
-\begin{equation*}
-distance = \sqrt{(x_2 - x_1)^2 +(y_2 - y_1)^2}
-\end{equation*}
+\[ distance = \sqrt{(x_2 - x_1)^2 +(y_2 - y_1)^2} \]
 
 The first step is to consider what a \java{distance} method should look like in Java.
 In other words, what are the inputs (parameters) and what is the output (return value)?
@@ -5440,9 +5457,7 @@ Looking at these values, can you tell what base \java{Math.log} uses?
 Since powers of two are important in computer science, we often want logarithms with respect to base 2.
 To compute them, we can apply this property of logarithms:
 %
-\begin{equation*}
-\log_2 x = \frac{log_e x}{log_e 2}
-\end{equation*}
+\[ \log_2 x = \frac{log_e x}{log_e 2} \]
 %
 Using the right side of the formula, we modify the \java{println} statement.
 
@@ -5912,9 +5927,7 @@ The table should contain one column for each variable and one line for each iter
 Let's say you are given a number, $a$, and you want to find its square root.
 One way to do that is to start with a rough guess about the answer, $x_0$, and then improve the guess using the following average:
 %
-\begin{equation*}
-x_1 =(x_0 + a/x_0) / 2
-\end{equation*}
+\[ x_1 =(x_0 + a/x_0) / 2 \]
 %
 For example, if we want to find the square root of 9, and we start with $x_0 = 6$, then $x_1 = (6 + 9/6) / 2 = 3.75$, which is closer.
 We can repeat the procedure, using $x_1$ to calculate $x_2$, and so on.
@@ -5952,9 +5965,7 @@ Write an iterative version of \java{factorial}.
 
 One way to calculate $e^x$ is to use the infinite series expansion:
 %
-\begin{equation*}
-e^x = 1 + x + x^2 / 2! + x^3 / 3! + x^4 / 4! + ...
-\end{equation*}
+\[ e^x = 1 + x + x^2 / 2! + x^3 / 3! + x^4 / 4! + ... \]
 %
 If the loop variable is named \java{i}, then the $i$th term is $x^i / i!$.
 
@@ -5995,9 +6006,7 @@ Comment on the accuracy.
 
 One way to evaluate $\exp(-x^2)$ is to use the infinite series expansion:
 %
-\begin{equation*}
-\exp(-x^2) = 1 - x^2 + x^4/2 - x^6/6 + \ldots
-\end{equation*}
+\[ \exp(-x^2) = 1 - x^2 + x^4/2 - x^6/6 + \ldots \]
 %
 In other words, we need to add up a series of terms where the $i$th term is equal to $(-1)^i x^{2i} / i!$.
 Write a method named \java{gauss} that takes \java{x} and \java{n} as arguments and returns the sum of the first \java{n} terms of the series.
