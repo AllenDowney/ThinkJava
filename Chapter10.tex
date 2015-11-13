@@ -1,8 +1,179 @@
-\chapter{Create your own objects}
-\label{chap09}
+\documentclass[12pt]{book}
+
+\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\title{\thetitle}
+
+\newcommand{\theauthors}{Allen Downey and Chris Mayfield}
+\author{\theauthors}
+
+\newcommand{\theversion}{Version 6.0 Draft -- \today}
+\date{\theversion}
+
+\usepackage{geometry}
+\geometry{
+    width=5.5in,
+    height=8.5in,
+    hmarginratio=3:2,
+    vmarginratio=1:1,
+    includehead=true,
+    headheight=15pt
+}
+
+% paragraph spacing
+\setlength{\parindent}{0pt}                      % 17.62482pt
+\setlength{\parskip}{12pt plus 4pt minus 4pt}    % 0.0pt plus 1.0pt
+\linespread{1.05}
+\def\arraystretch{1.5}
+
+% list spacing
+\setlength{\topsep}{5pt plus 2pt minus 3pt}      % 10.0pt plus 4.0pt minus 6.0pt
+\setlength{\partopsep}{-6pt plus 2pt minus 2pt}  %  3.0pt plus 2.0pt minus 2.0pt
+\setlength{\itemsep}{0pt}                        %  5.0pt plus 2.5pt minus 1.0pt
+
+% these are copied from tex/latex/base/book.cls
+% all I changed is afterskip
+\makeatletter
+\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {0.7ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% table of contents vertical spacing
+\usepackage{tocloft}
+\setlength\cftparskip{8pt plus 4pt minus 4pt}
+
+% The following line adds a little extra space to the column
+% in which the Section numbers appear in the table of contents
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.5em}{3.0em}}
+\makeatother
+
+% customize page headers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+%\rfoot{\textcolor{gray}{\tiny ThinkJava Draft \today}}
+
+% balanced index with TOC entry
+\usepackage{makeidx}
+\makeindex
+%\usepackage[totoc]{idxlayout}
+
+% automatically index glossary terms
+\newcommand{\term}[1]{%
+\index{#1}
+\item[#1:]}
+% TODO: doesn't work with plastex
+%\newcommand{\term}[1]{\item[#1:]}
+
+% where to find graphics
+\usepackage{graphicx}
+%\graphicspath{{figs/}}
+
+%% tweak spacing of figures and captions
+%\usepackage{floatrow}
+%\usepackage{caption}
+%\captionsetup{
+%    font=small,
+%    labelformat=empty,
+%    justification=centering,
+%    skip=4pt
+%}
+
+% format end of chapter excercises
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheoremstyle{exercise}
+  {12pt}        % space above
+  {12pt}        % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {}            % punctuation
+  {12pt}        % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+% colors for code listings and output
+\usepackage{xcolor}
+\definecolor{bgcolor}{HTML}{FAFAFA}
+\definecolor{comment}{HTML}{007C00}
+\definecolor{keyword}{HTML}{0000FF}
+\definecolor{strings}{HTML}{B20000}
+
+% syntax highlighting in code listings
+\usepackage{textcomp}
+\usepackage{listings}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily,
+    backgroundcolor=\color{bgcolor},
+    commentstyle=\color{comment},
+    keywordstyle=\color{keyword},
+    stringstyle=\color{strings},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    upquote=true,
+    aboveskip=\parskip,
+    belowskip=\parskip
+}
+
+% code listing environments
+\lstnewenvironment{code}
+{\minipage{\linewidth}}
+{\endminipage}
+\lstnewenvironment{stdout}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
+{\endminipage}
+
+% pdf hyperlinks, table of contents, and document properties
+\usepackage[pdftex]{hyperref}
+\hypersetup{%
+  pdftitle={\thetitle},
+  pdfauthor={\theauthors},
+  pdfsubject={\theversion},
+  pdfkeywords={},
+  bookmarksopen=false,
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+% inline syntax formatting
+\newcommand{\java}[1]{\lstinline{#1}} %\end{
+%\newcommand{\java}[1]{\verb"#1"}
+%\newcommand{\java}[1]{{\tt #1}}
+
+\begin{document}
+\setcounter{chapter}{9}
+
+
+\chapter{Design your own classes}
+
+TODO
 
 \section{Class definitions and object types}
 \label{classes}
+
 \index{type!object}
 \index{type!user-defined}
 \index{object type}
@@ -107,14 +278,50 @@ class Time {
 By itself, this code fragment is a legal class definition.  The
 state diagram for a {\tt Time} object looks like this:
 
-
+\begin{center}
 \includegraphics{figs/time.pdf}
-
+\end{center}
 
 After declaring the instance variables, the next step is
 to define a constructor for the new class.
 
-\section{Constructors}
+
+\section{{\tt public} and {\tt private}}
+
+Remember in Chapter~\ref{chap01} I said I would explain why the {\tt
+  main} method has the keyword {\tt public}?  Finally, the time has
+come.
+
+{\tt public} means that the method can be invoked from other classes.
+The alternative is {\tt private}, which means the method can only
+be invoked inside the class where it is defined.
+
+Instance variables can also be {\tt public} or {\tt private}, with
+the same result: a private instance variable can be accessed only
+inside the class where it is defined.
+
+The primary reason to make methods and instance variables private
+is to limit interactions between classes in order to manage
+complexity.
+
+For example, the Location class keeps its instance variables private.
+It has accessor methods {\tt getRow} and {\tt getCol}, but it provides
+no methods that modify the instance variables.  In effect, Location
+objects are immutable, which means that they can be shared without
+worrying about unexpected behavior due to aliasing.
+
+Making methods private helps keep the API simple.  Classes often
+include helper methods that are used to implement other methods, but
+making those methods part of the public API might be unnecessary
+and error-prone.
+
+Private methods and instance variables are language features
+that help programmers ensure {\bf data encapsulation}, which means
+that objects in one class are isolated from other classes.
+
+
+\section{Constructors (and this)}
+
 \index{constructor}
 \index{method!constructor}
 \index{static}
@@ -166,7 +373,8 @@ A common error when writing constructors is to put a {\tt return}
 statement at the end.  Resist the temptation.
 
 
-\section{More constructors}
+\subsection{More constructors}
+
 \index{overloading}
 
 Constructors can be overloaded, just like other methods,
@@ -208,6 +416,7 @@ variables.
 
 
 \section{Creating a new object}
+
 \index{new}
 \index{statement!new}
 
@@ -267,6 +476,7 @@ variables.
 
 \section{Printing objects}
 \label{printobject}
+
 \index{print}
 \index{statement!print}
 \index{object!printing}
@@ -306,48 +516,252 @@ the number of minutes or seconds is less than 10, we expect a leading
 part of the seconds.  In other words, we want something like
 {\tt 11:08:03}.
 
-In most languages, there are simple ways to control the output format
-for numbers.  In Java there are no simple ways.
-
-Java provides powerful tools for printing formatted things
-like times and dates, and also for interpreting formatted input.
-Unfortunately, these tools are not very easy to use, so I am going to
-leave them out of this book.  If you want, you can take a look
-at the documentation for the {\tt Date} class in the {\tt
-java.util} package.
-\index{Date}
-\index{class!Date}
-
-
-\section{Operations on objects}
-\label{objectops}
-\index{object}
-\index{operator!object}
-
-In the next few
-sections, I demonstrate three kinds of methods that
-operate on objects:
-
-\begin{description}
-
-\item[pure function:]  Takes objects as
-arguments but does not modify them.  The return value is
-either a primitive or a new object created inside the method.
-
-\item[modifier:]  Takes objects as arguments and modifies some
-or all of them.  Often returns void. \index{void}
-
-\item[fill-in method:]  One of the arguments is an ``empty''
-object that gets filled in by the method.  Technically, this is
-a type of modifier.
-
-\end{description}
-
-Often it is possible to write a given method as a pure function, a modifier,
-or a fill-in method.  I will discuss the pros and cons of each.
+%~ In most languages, there are simple ways to control the output format
+%~ for numbers.  In Java there are no simple ways.
+%~
+%~ Java provides powerful tools for printing formatted things
+%~ like times and dates, and also for interpreting formatted input.
+%~ Unfortunately, these tools are not very easy to use, so I am going to
+%~ leave them out of this book.  If you want, you can take a look
+%~ at the documentation for the {\tt Date} class in the {\tt
+%~ java.util} package.
+%~ \index{Date}
+%~ \index{class!Date}
 
 
-\section{Pure functions}
+\section{The {\tt toString} method}
+
+\index{toString}
+\index{method!toString}
+
+Every object type has a method called {\tt toString} that returns a
+string representation of the object.  When you print an object using
+{\tt print} or {\tt println}, Java invokes the object's {\tt toString}
+method.
+
+The default
+version of {\tt toString} returns a string that contains the type
+of the object and a unique identifier (see Section~\ref{printobject}).
+When you define a new object
+type, you can {\bf override} the default behavior by providing a
+new method with the behavior you want.
+
+For example, here is a {\tt toString} method for {\tt Card}:
+
+\begin{code}
+public String toString() {
+    return ranks[rank] + " of " + suits[suit];
+}
+\end{code}
+
+The return type is {\tt String}, naturally,
+and it takes no parameters.  You can invoke {\tt toString} in
+the usual way:
+
+\begin{code}
+    Card card = new Card(1, 1);
+    String s = card.toString();
+\end{code}
+
+or you can invoke it indirectly through {\tt println}:
+
+\begin{code}
+    System.out.println(card);
+\end{code}
+
+
+\section{The {\tt equals} method}
+
+\index{equals}
+\index{method!equals}
+
+In Section~\ref{equivalence} we talked about two notions of equality:
+identity, which means that two variables refer to the same
+object, and equivalence, which means that they have the same
+value.
+
+The {\tt ==} operator tests identity, but there is no operator
+that tests equivalence, because what ``equivalence'' means
+depends on the type of the objects.  Instead, objects provide
+a method named {\tt equals} that defines equivalence.
+
+Java classes provide {\tt equals} methods that do the right
+thing.  But for user defined types the default behavior is the
+same as identity, which is usually not what you want.
+
+For {\tt Card}s we already have a method that checks equivalence:
+
+\begin{code}
+    public static boolean sameCard(Card c1, Card c2) {
+        return (c1.suit == c2.suit && c1.rank == c2.rank);
+    }
+\end{code}
+
+So all we have to do is rewrite is as an object method:
+
+\begin{code}
+    public boolean equals(Card c2) {
+        return (suit == c2.suit && rank == c2.rank);
+    }
+\end{code}
+
+Again, I removed {\tt static} and the first parameter, {\tt c1}.
+Here's how it's invoked:
+
+\begin{code}
+    Card card = new Card(1, 1);
+    Card card2 = new Card(1, 1);
+    System.out.println(card.equals(card2));
+\end{code}
+
+Inside {\tt equals}, {\tt card} is the current object and {\tt card2}
+is the parameter, {\tt c2}.  For methods that operate on two objects
+of the same type, I sometimes use {\tt this} explicitly and call
+the parameter {\tt that}:
+
+\begin{code}
+    public boolean equals(Card that) {
+        return (this.suit == that.suit && this.rank == that.rank);
+    }
+\end{code}
+
+I think it improves readability.
+
+
+\section{Object methods and class methods}
+
+\index{object method}
+\index{method!object}
+\index{class method}
+\index{method!class}
+\index{static}
+
+There are two types of methods in Java, called {\bf class methods} and
+{\bf object methods}.  Class methods are identified by the keyword {\tt
+  static} in the first line.  Any method that does {\em not} have the
+keyword {\tt static} is an object method.
+
+Although we have not written object methods, we have invoked some.
+Whenever you invoke a method ``on'' an object, it's an object method.
+For example, {\tt charAt} and the other methods we invoked on {\tt String}
+objects are all object methods.
+
+For example, here is {\tt printCard} as a class method:
+
+\begin{code}
+    public static void printCard(Card c) {
+        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
+    }
+\end{code}
+
+Anything that can be written as a class method can also be written as an
+object method, and vice versa.  But sometimes it is more natural to
+use one or the other.
+Here it is re-written as an object method:
+
+\begin{code}
+    public void print() {
+        System.out.println(ranks[rank] + " of " + suits[suit]);
+    }
+\end{code}
+
+Here are the changes:
+
+\begin{enumerate}
+
+\item I removed {\tt static}.
+
+\item I changed the name of the method to be more idiomatic.
+
+\item I removed the parameter.
+
+\item Inside an object method you can refer to instance variables
+as if they were local variables, so I changed {\tt c.rank} to {\tt rank},
+and likewise for {\tt suit}.
+
+\end{enumerate}
+
+Here's how this method is invoked:
+
+\begin{code}
+    Card card = new Card(1, 1);
+    card.print();
+\end{code}
+
+When you invoke a method on an object, that object becomes the {\bf
+current object}, also known as {\tt this}.  Inside {\tt print},
+the keyword {\tt this} refers to the card the method was invoked on.
+\index{current object}
+\index{object!current}
+\index{this}
+
+
+\subsection{Oddities and errors}
+
+\index{method!object}
+\index{method!class}
+\index{overloading}
+
+If you have object methods and class methods in the same class, it is
+easy to get confused.  A common way to organize a class definition is
+to put all the constructors at the beginning, followed by all the
+object methods and then all the class methods.
+
+You can have an object method and a class method with the same
+name, as long as they do not have the same number and types of
+parameters.  As with other kinds of overloading, Java decides
+which version to invoke by looking at the arguments you provide.
+\index{static}
+
+Now that we know what the keyword {\tt static} means, you
+have probably figured out that {\tt main} is a class method,
+which means that there is no ``current object'' when it is invoked.
+\index{current object}
+\index{this}
+\index{instance variable}
+\index{variable!instance}
+%
+Since there is no current object in a class method, it is an
+error to use the keyword {\tt this}.  If you try, you get
+an error message like: ``Undefined variable: this.''
+
+Also, you cannot refer to instance variables without using dot
+notation and providing an object name.  If you try, you get a message
+like ``non-static variable... cannot be referenced from a static
+context.''  By ``non-static variable'' it means ``instance variable.''
+
+
+
+%~ \section{Operations on objects}
+%~ \label{objectops}
+%~ \index{object}
+%~ \index{operator!object}
+%~
+%~ In the next few
+%~ sections, I demonstrate three kinds of methods that
+%~ operate on objects:
+%~
+%~ \begin{description}
+%~
+%~ \item[pure function:]  Takes objects as
+%~ arguments but does not modify them.  The return value is
+%~ either a primitive or a new object created inside the method.
+%~
+%~ \item[modifier:]  Takes objects as arguments and modifies some
+%~ or all of them.  Often returns void. \index{void}
+%~
+%~ \item[fill-in method:]  One of the arguments is an ``empty''
+%~ object that gets filled in by the method.  Technically, this is
+%~ a type of modifier.
+%~
+%~ \end{description}
+%~
+%~ Often it is possible to write a given method as a pure function, a modifier,
+%~ or a fill-in method.  I will discuss the pros and cons of each.
+
+
+\section{Pure functions (static methods)}
+
 \index{pure function}
 \index{function}
 \index{method!pure function}
@@ -462,7 +876,8 @@ does not have to be 1.  The statement {\tt sum.second -= 60.0;}
 is equivalent to {\tt sum.second = sum.second - 60;}
 
 
-\section{Modifiers}
+\section{Modifiers (accessors and mutators)}
+
 \index{modifier}
 \index{method!modifier}
 
@@ -513,53 +928,54 @@ This solution is correct, but not very efficient.
 Can you think of a solution that does not require iteration?
 
 
-\section{Fill-in methods}
-\index{fill-in method}
-\index{method!fill-in}
+%~ \section{Fill-in methods}
+%~ \index{fill-in method}
+%~ \index{method!fill-in}
+%~
+%~ Instead of creating a new object every time {\tt addTime} is
+%~ invoked, we could require the caller to provide an
+%~ object where {\tt addTime} stores the result.  Compare
+%~ this to the previous version:
+%~
+%~ \begin{code}
+%~     public static void addTimeFill(Time t1, Time t2, Time sum) {
+%~         sum.hour = t1.hour + t2.hour;
+%~         sum.minute = t1.minute + t2.minute;
+%~         sum.second = t1.second + t2.second;
+%~
+%~         if (sum.second >= 60.0) {
+%~             sum.second -= 60.0;
+%~             sum.minute += 1;
+%~         }
+%~         if (sum.minute >= 60) {
+%~             sum.minute -= 60;
+%~             sum.hour += 1;
+%~         }
+%~     }
+%~ \end{code}
+%~
+%~ The result is stored in {\tt sum}, so the return type is {\tt void}.
+%~
+%~ Modifiers and fill-in methods are efficient because they
+%~ don't have to create new objects.  But they make it more
+%~ difficult to isolate parts of a program; in large projects they can
+%~ cause errors that are hard to find.
+%~
+%~ Pure functions help manage the complexity of large projects,
+%~ in part by making certain kinds of errors impossible.  Also, they
+%~ lend themselves to certain kinds of composition and nesting.
+%~ And because the result of a pure function depends only on the parameters,
+%~ it is possible to speed them up by storing previously-computed
+%~ results.
+%~ \index{pure function}
+%~
+%~ I recommend that you write pure functions whenever
+%~ it is reasonable, and resort to modifiers only if there
+%~ is a compelling advantage.
 
-Instead of creating a new object every time {\tt addTime} is
-invoked, we could require the caller to provide an
-object where {\tt addTime} stores the result.  Compare
-this to the previous version:
 
-\begin{code}
-    public static void addTimeFill(Time t1, Time t2, Time sum) {
-        sum.hour = t1.hour + t2.hour;
-        sum.minute = t1.minute + t2.minute;
-        sum.second = t1.second + t2.second;
+\section{Incremental development}
 
-        if (sum.second >= 60.0) {
-            sum.second -= 60.0;
-            sum.minute += 1;
-        }
-        if (sum.minute >= 60) {
-            sum.minute -= 60;
-            sum.hour += 1;
-        }
-    }
-\end{code}
-
-The result is stored in {\tt sum}, so the return type is {\tt void}.
-
-Modifiers and fill-in methods are efficient because they
-don't have to create new objects.  But they make it more
-difficult to isolate parts of a program; in large projects they can
-cause errors that are hard to find.
-
-Pure functions help manage the complexity of large projects,
-in part by making certain kinds of errors impossible.  Also, they
-lend themselves to certain kinds of composition and nesting.
-And because the result of a pure function depends only on the parameters,
-it is possible to speed them up by storing previously-computed
-results.
-\index{pure function}
-
-I recommend that you write pure functions whenever
-it is reasonable, and resort to modifiers only if there
-is a compelling advantage.
-
-
-\section{Incremental development and planning}
 \index{incremental development}
 \index{prototyping}
 \index{program development!incremental}
@@ -598,7 +1014,7 @@ the computer already knows how to do arithmetic with {\tt double}s.
 Here is a method that converts a {\tt Time} into a {\tt double}:
 
 \begin{code}
-        public static double convertToSeconds(Time t) {
+    public static double convertToSeconds(Time t) {
         int minutes = t.hour * 60 + t.minute;
         double seconds = minutes * 60 + t.second;
         return seconds;
@@ -641,7 +1057,8 @@ methods it invokes are correct).  As an exercise, rewrite {\tt
 increment} the same way.
 
 
-\section{Generalization}
+\section{Generalization and algorithms}
+
 \index{generalization}
 
 In some ways converting from base 60 to base 10 and back is
@@ -662,9 +1079,11 @@ naive approach would be to implement subtraction complete with
 Ironically, sometimes making a problem harder (more general)
 makes it easier (fewer special cases, fewer opportunities for error).
 
+%TODO show solution?
 
-\section{Algorithms}
-\label{algorithm}
+%\section{Algorithms}
+%\label{algorithm}
+
 \index{algorithm}
 
 When you write a general solution for a class of problems, as
@@ -704,8 +1123,8 @@ example.  We all do it, but so far no one has been able to
 explain {\em how} we do it, at least not in the form of an
 algorithm.
 
-Soon you will have the opportunity to design
-simple algorithms for a variety of problems.
+%~ Soon you will have the opportunity to design
+%~ simple algorithms for a variety of problems.
 
 
 \section{Glossary}
@@ -751,6 +1170,7 @@ problems by a mechanical process.
 
 
 \section{Exercises}
+
 
 \begin{exercise}
 In the board game Scrabble\footnote{Scrabble is a registered trademark
@@ -866,5 +1286,4 @@ pure functions.
 \end{exercise}
 
 
-
-
+\end{document}

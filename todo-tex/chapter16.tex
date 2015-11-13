@@ -141,40 +141,6 @@ that are available for you, the application programmer, to use.  See
 \url{http://en.wikipedia.org/wiki/Application_programming_interface}.
 
 
-\section{{\tt public} and {\tt private}}
-
-Remember in Chapter~\ref{chap01} I said I would explain why the {\tt
-  main} method has the keyword {\tt public}?  Finally, the time has
-come.
-
-{\tt public} means that the method can be invoked from other classes.
-The alternative is {\tt private}, which means the method can only
-be invoked inside the class where it is defined.
-
-Instance variables can also be {\tt public} or {\tt private}, with
-the same result: a private instance variable can be accessed only
-inside the class where it is defined.
-
-The primary reason to make methods and instance variables private
-is to limit interactions between classes in order to manage
-complexity.
-
-For example, the Location class keeps its instance variables private.
-It has accessor methods {\tt getRow} and {\tt getCol}, but it provides
-no methods that modify the instance variables.  In effect, Location
-objects are immutable, which means that they can be shared without
-worrying about unexpected behavior due to aliasing.
-
-Making methods private helps keep the API simple.  Classes often
-include helper methods that are used to implement other methods, but
-making those methods part of the public API might be unnecessary
-and error-prone.
-
-Private methods and instance variables are language features
-that help programmers ensure {\bf data encapsulation}, which means
-that objects in one class are isolated from other classes.
-
-
 \section{Game of Life}
 
 The mathematician John Conway invented
