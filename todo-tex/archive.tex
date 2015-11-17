@@ -474,3 +474,26 @@ algorithm.
 
 %\item[algorithm:]  A set of instructions for solving a class of
 %problems by a mechanical process.
+
+
+\section{Class definitions and object types}
+
+Here are some syntax issues about class definitions:
+
+\begin{itemize}
+
+\item Class names (and hence object types) should begin with a capital letter, which helps distinguish them from primitive types and variable names.
+
+\item You usually put one class definition in each file, and the name of the file must be the same as the name of the class, with the suffix {\tt .java}.
+For example, the \java {class Time} is defined in the file named {\tt Time.java}.
+
+\item In any program, one class is designated as the {\bf startup class} that contains a method named \java{main} where the execution of the program begins.
+Other classes {\em may} have a method named \java{main}, but it will not be executed (unless another method calls it directly for some reason).
+
+\end{itemize}
+
+\term{startup class}
+The class that contains the \java{main} method where execution of the program begins.
+
+\term{pure function}
+A method whose result depends only on its parameters, and that has no side-effects other than returning a value.

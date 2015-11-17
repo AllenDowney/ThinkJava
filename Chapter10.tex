@@ -167,74 +167,63 @@
 \setcounter{chapter}{9}
 
 
-\chapter{Design your own classes}
+\chapter{User-defined types}
 
-\index{class definition}
 \index{object type}
 \index{type!object}
-\index{user-defined type}
 
-Way back in Section~\ref{hello} when we defined the class \java{Hello}, we also created a data type named \java{Hello}.
-We didn't create any variables with type \java{Hello}, and we didn't use \java{new} to create any \java{Hello} objects---but we could have!
-This example doesn't make much sense, since there is no reason to create a \java{Hello} object, and it wouldn't do much if we did.
+Way back in Section~\ref{hello} when we defined the class \java{Hello}, we created a data type named \java{Hello}.
+We didn't declare any variables with type \java{Hello}, and we didn't use \java{new} to create any \java{Hello} objects---but we could have!
+There was no reason to create a \java{Hello} object, and it wouldn't have done much if we did.
 
-In this chapter, we will look at class definitions for creating {\em useful} object types.
+\index{class definition}
+
+In this chapter, we will look at defining class that create {\em useful} object types.
 Here are the most important ideas:
 
 \begin{itemize}
 
 \item Defining a new class also creates a new object type with the same name.
 
+\index{instance}
+
 \item Every object belongs to some object type; that is, it is an {\bf instance} of some class.
 
-\item A class definition is like a template for objects: it determines what instance variables the objects have and what methods can operate on them.
+\item A class definition is like a template for objects: it determines what attributes the objects have and what methods can operate on them.
 
 \item The methods that operate on a type are defined in the class definition for that type.
 
-\item When you invoke \java{new} to create an object, Java invokes a special method called a {\bf constructor} to initialize the instance variables.
+\index{constructor}
+
+\item When you use \java{new} to create an object, Java invokes a special method called a {\bf constructor} to initialize the instance variables.
 You may provide one or more constructors as part of the class definition.
 
 \item If you don't provide a constructor for a class, then Java will generate one for you.
-The default constructor takes no arguments and initializes all instance variables to zero (or the equivalent value for its data type).
+The default constructor takes no arguments and initializes all attributes to zero (or an equivalent value like \java{false} or \java{null}).
 
 \end{itemize}
 
-Here are some syntax issues about class definitions:
 
-\begin{itemize}
-
-\item Class names (and hence object types) should begin with a capital letter, which helps distinguish them from primitive types and variable names.
-
-\item You usually put one class definition in each file, and the name of the file must be the same as the name of the class, with the suffix {\tt .java}.
-For example, the \java {class Time} is defined in the file named {\tt Time.java}.
-
-\item In any program, one class is designated as the {\bf startup class} that contains a method named \java{main} where the execution of the program begins.
-Other classes {\em may} have a method named \java{main}, but it will not be executed (unless another method calls it directly for some reason).
-
-\end{itemize}
-
-%With those issues out of the way, let's look at an example of a user-defined class.
-
-
-\section{Time}
+\section{Time class}
 
 \index{class!Time}
 \index{Time}
 
-A common motivation for creating an object type is to encapsulate related data in an object that can be treated as a single unit.
+Let's take a look at an example of a user-defined class.
+A common motivation for designing a new class is to encapsulate related data in an object that can be treated as a single unit.
+That way, we can use objects as parameters and return values, rather than passing and returning multiple things.
 We have already seen two such types, \java{Point} and \java{Rectangle}.
-
-Another example, which we will implement ourselves, is \java{Time}, which represents the time of day.
-The data encapsulated in a \java{Time} object are an hour, a minute, and a number of seconds.
-Because every \java{Time} object contains these data, we need instance variables to hold them.
-
-The first step is to decide what type each variable should be.
-It seems clear that \java{hour} and \java{minute} should be integers.
-Just to keep things interesting, let's make \java{second} a \java{double}.
 
 \index{instance variable}
 \index{variable!instance}
 
+Another example, which we will implement ourselves, is \java{Time}, which represents the time of day.
+The data encapsulated in a \java{Time} object are an hour, a minute, and a number of seconds.
+Because every \java{Time} object contains these data, we need {\bf instance variables} to hold them.
+
+The first step is to decide what type each variable should be.
+It seems clear that \java{hour} and \java{minute} should be integers.
+Just to keep things interesting, let's make \java{second} a \java{double}.
 Instance variables are declared at the beginning of the class definition, outside of any method definition:
 
 \begin{code}
@@ -254,13 +243,15 @@ The state diagram for a \java{Time} object looks like this:
 
 %\subsection{Public vs private}
 
-The keyword \java{public} means that a class, method, or variable can be accessed from other classes.
-The alternative is \java{private}, which means the item can only be accessed inside the class where it is defined.
+The keyword \java{public} means that a variable (or method or class) can be accessed from other classes.
+The alternative is \java{private}, which means it can only be accessed inside the class where it is defined.
 To prevent yourself and others from making mistakes, it's good practice to make instance variables \java{private}.
+
+\index{data encapsulation}
 
 If you attempt to read or write a \java{private} variable from another class, you will get a compiler error.
 Private methods and instance variables are language features that help programmers ensure {\bf data encapsulation}, which means that objects in one class are isolated from other classes.
-Limiting interactions between classes is one technique for managing complexity of software development.
+%Limiting interactions between classes is a standard technique for managing complexity.
 
 %We can create {\bf accessor methods} like \java{getHour}, \java{getMinute}, and \java{getSecond}.
 %, but it provides no methods that modify the instance variables.
@@ -269,8 +260,6 @@ Limiting interactions between classes is one technique for managing complexity o
 %Making methods private helps keep the API simple.
 %Classes often include helper methods that are used to implement other methods, but making those methods part of the public API might be unnecessary and error-prone.
 
-After declaring the instance variables, the next step is to define a constructor for the new class.
-
 
 \section{Constructors}
 
@@ -278,12 +267,13 @@ After declaring the instance variables, the next step is to define a constructor
 \index{method!constructor}
 \index{static}
 
+After declaring the instance variables, the next step is to define a constructor for the new class.
 Constructors initialize the instance variables.
-The syntax for constructors is similar to that of other methods, with three exceptions:
+The syntax for constructors is similar to that of other methods, with a few exceptions:
 
 \begin{itemize}
 \item The name of the constructor is the same as the name of the class.
-\item Constructors have no return type and no return value.
+\item Constructors have no return type (and no return value).
 \item The keyword \java{static} is omitted.
 \end{itemize}
 
@@ -298,18 +288,16 @@ Here is an example for the \java{Time} class:
 \end{code}
 
 Where you would expect to see a return type, between \java{public} and \java{Time}, there is nothing.
-That's how we (and the compiler) can tell that this is a constructor as opposed to a \java{void} method.
-
+That's how we (and the compiler) can tell it's a constructor as opposed to a \java{void} method.
 This constructor does not take any arguments.
-Each line of the constructor initializes an instance variable to zero (which in this case means midnight).
+Each line of the constructor initializes an instance variable to zero (which in this example means midnight).
 
 \index{this}
 
-The name \java{this} is a special keyword that refers to the object that we are creating.
+The variable \java{this} is a special keyword that refers to the object that we are creating.
 You can use \java{this} the same way you use the name of any other object.
 For example, you can read and write the instance variables of \java{this}, and you can pass \java{this} as an argument to other methods.
 But you do not declare \java{this}, and you can't make an assignment to it.
-%The variable \java{this} is created by the system; all you have to do is initialize its instance variables.
 
 A common error when writing constructors is to put a \java{return} statement at the end.
 Like \java{void} methods, constructors do not return values.
@@ -323,7 +311,7 @@ For example, writing the code \java{new Time(0, 0, 0.0)} in the constructor resu
 Constructors can be overloaded, just like other methods, which means that you can provide multiple constructors with different parameters.
 Java knows which constructor to invoke by matching the arguments after \java{new} with the parameters of the constructors.
 
-It is common to have one constructor that takes no arguments (the default constructor), and one constructor that takes a parameter list identical to the list of instance variables (the explicit value constructor).
+For example, it is common to have one constructor that takes no arguments (the ``default constructor'') and another one that takes a parameter list identical to the list of instance variables (the ``explicit value constructor'').
 
 \begin{code}
     public Time(int hour, int minute, double second) {
@@ -339,9 +327,9 @@ All the constructor does is copy the information from the parameters into the in
 If you look at the documentation for \java{Point} and \java{Rectangle}, you will see that both classes provide similar constructors.
 Overloading constructors provides the flexibility to create an object first and then fill in the blanks, or to collect all the information before creating the object.
 
-This might not seem very interesting, and in fact it is not.
+This detail might not seem very interesting, and in fact it is not.
 Writing constructors is a boring, mechanical process, and some IDEs will automatically generate them for you.
-Once you have written two, you will find that you can write them quickly just by looking at the list of instance variables.
+You will find that you can write them quickly just by looking at the list of instance variables.
 
 
 \section{Creating a new object}
@@ -350,9 +338,9 @@ Once you have written two, you will find that you can write them quickly just by
 \index{statement!new}
 
 Although constructors look like methods, you never invoke them directly.
-Instead, when you apply the \java{new} operator, the system allocates space for the object and then invokes your constructor.
+When you apply the \java{new} operator, the system allocates space for the object and then invokes the constructor for you.
 
-The following program demonstrates two common ways to create and initialize \java{Time} objects:
+The following program (in the \java{main} method) demonstrates two common ways to create and initialize \java{Time} objects:
 
 \begin{code}
 public class Time {
@@ -373,7 +361,7 @@ public class Time {
     }
 
     public static void main(String[] args) {
-        // one way to create and initialize a Time object
+        // one way to create a time object
         Time t1 = new Time();
         t1.hour = 11;
         t1.minute = 8;
@@ -387,46 +375,48 @@ public class Time {
 }
 \end{code}
 
-In \java{main}, the first time we apply \java{new} we provide no arguments, so Java invokes the default constructor.
+The first time we apply \java{new} we provide no arguments, so Java invokes the default constructor.
 The next few lines assign values to the instance variables.
-
 The second time we invoke \java{new}, we provide arguments that match the parameters of the second constructor.
 This way of initializing the instance variables is more concise and slightly more efficient.
-But it can be harder to read, since it is not as clear which values are assigned to which instance variables.
 
-
-\section{Printing objects}
+%\section{Printing objects}
 \label{printobject}
 
 \index{print}
 \index{statement!print}
 \index{object!printing}
 
-The output of this program is:
+The output of this program is something like:
 
 \begin{stdout}
 Time@80cc7c0
 Time@80cc807
 \end{stdout}
 
-When Java prints the value of a user-defined object type, it prints the name of the type and a special hexadecimal (base 16) code that is unique for each object.  This code is not meaningful in itself; in fact, it can vary from machine to machine and even from run to run.
-But it can be useful for debugging, in case you want to keep track of individual objects.
+When Java prints the value of a user-defined object type, it prints the name of the type and a hexadecimal (base 16) code that is unique for each object.
+As we saw in Section~\ref{sec:system}, this code is the address of the object in memory, and it usually varies from machine to machine.
+It is useful for debugging, in case you want to keep track of individual objects.
 
-To print objects in a way that is more meaningful to users (as opposed to programmers), you could write a method called something like \java{printTime}:
+To print \java{Time} objects in a way that is more meaningful to users (as opposed to programmers), you could write a method to print the hour, minute, and second.
+Using \java{printTime} in Section~\ref{time} as a starting point, we could write:
 
 \begin{code}
     public static void printTime(Time t) {
-        System.out.println(t.hour + ":" + t.minute + ":" + t.second);
+        System.out.print(t.hour);
+        System.out.print(":");
+        System.out.println(t.minute);
+        System.out.print(":");
+        System.out.println(t.second);
     }
 \end{code}
 
-Compare this method to the version of \java{printTime} in Section~\ref{time}.
-
 The output of this method, if we pass either \java{t1} or \java{t2} as an argument, is {\tt 11:8:3.14159}.
-Although this is recognizable as a time, it is not quite in the standard format.
-For example, if the number of minutes or seconds is less than 10, we expect a leading {\tt 0} as a place-keeper.
+Although it's recognizable as a time, it's not quite in the standard format.
+For example, if the number of minutes or seconds is less than 10, we expect a leading {\tt 0}.
 Also, we might want to drop the decimal part of the seconds.
 In other words, we want something like {\tt 11:08:03}.
+
 Fortunately, we can use \java{printf} to format the output:
 
 \begin{code}
@@ -437,7 +427,8 @@ Fortunately, we can use \java{printf} to format the output:
 \end{code}
 
 As a reminder, you need to use \java{\%d} with integers and \java{\%f} with floating-point numbers.
-The \java{\%f} specifier automatically rounds the value.
+The \java{02} option means ``two digits with leading zeros,'' and the \java{.0} option means ``zero decimal places.''
+Note that \java{\%f} automatically rounds the floating-point value.
 
 
 \section{The toString method}
@@ -448,7 +439,9 @@ The \java{\%f} specifier automatically rounds the value.
 Every object type has a method called \java{toString} that returns a string representation of the object.
 When you print an object using \java{print} or \java{println}, Java invokes the object's \java{toString} method.
 
-The default version of \java{toString} returns a string that contains the type of the object and a unique identifier (see Section~\ref{printobject}).
+\index{override}
+
+The default version of \java{toString} returns a string that contains the type of the object and its current address (see Section~\ref{printobject}).
 When you define a new object type, you can {\bf override} the default behavior by providing a new method with the behavior you want.
 
 For example, here is a \java{toString} method for \java{Time}:
@@ -460,10 +453,10 @@ public String toString() {
 }
 \end{code}
 
-This code is essentially the same as printTime in the previous section, except that we are returning a string instead of printing one to the screen.
+This code is essentially the same as printTime in the previous section, except that we are returning a string instead of printing it to the screen.
 The \java{String.format} method works the same way as \java{printf}; in fact, the \java{printf} method invokes \java{String.format}.
 
-You can invoke \java{toString} in the usual way:
+You can call \java{toString} in the usual way:
 
 \begin{code}
     Time time = new Time(11, 8, 3.14159);
@@ -485,7 +478,7 @@ Or you can invoke it indirectly through \java{println}:
 When comparing objects, there are two notions of equality: objects that are {\em identical}, and objects that are {\em equivalent}.
 Identical means that two variables refer to the same object.
 Equivalent means that two objects have the same values.
-Consider for example the following \java{Time} variables:
+Consider for example the following three \java{Time} variables:
 
 \begin{code}
     Time time1 = new Time(9, 30, 0.0);
@@ -500,17 +493,17 @@ Here is a memory diagram:
 \includegraphics{figs/time2.pdf}
 \end{center}
 
-Recall that the assignment operator simply copies a reference; \java{time1} and \java{time2} refer to the same object.
+Recall that the assignment operator simply copies a reference, so \java{time1} and \java{time2} refer to the same object.
 In contrast, \java{time3} points to a different object.
 Whenever you apply the \java{new} operator, you create a new object in memory.
 
 In this example, \java{time1} and \java{time2} are identical: they refer to the same object.
 The \java{==} operator compares references, so \java{time1 == time2} is \java{true}.
-All three variables are equivalent: the objects they reference have the same values.
+All three variables are equivalent, since the objects they reference have the same values.
 However \java{time1 == time3} is \java{false}, because their references are not the same.
 
 There is no operator that tests equivalence, since the notion of equality is different for each type of object.
-In the case of \java{Time}, we could write a \java{static} method that compares hours, minutes, and seconds:
+In the case of \java{Time}, we could write a method that compares hours, minutes, and seconds:
 
 \begin{code}
     public static boolean sameTime(Time t1, Time t2) {
@@ -520,9 +513,11 @@ In the case of \java{Time}, we could write a \java{static} method that compares 
     }
 \end{code}
 
+\index{instance method}
+
 This method works just fine, but it's not the way most Java classes are designed.
-Instead, objects should provide a non-\java{static} method named \java{equals} that defines equivalence.
-So all we have to do is rewrite \java{sameTime} as an instance method:
+Instead, objects may provide a non-\java{static} named \java{equals} that defines equality.
+All we have to do is rewrite \java{sameTime} as an {\bf instance method}:
 
 \begin{code}
     public boolean equals(Time t2) {
@@ -532,7 +527,7 @@ So all we have to do is rewrite \java{sameTime} as an instance method:
     }
 \end{code}
 
-By way of comparison, here is how each of these methods are invoked:
+By way of comparison, here is how each of the methods are invoked:
 
 \begin{code}
     System.out.println(Time.sameTime(time1, time3));
@@ -542,28 +537,53 @@ By way of comparison, here is how each of these methods are invoked:
 The latter method is certainly easier to read and understand.
 Inside the \java{equals} method, the reference to \java{time1} is the current object \java{this}, and \java{time3} is the parameter \java{t2}.
 
+Like the \java{toString} method, Java provides a default implementation of the \java{equals} method.
+If you don't define your own, then \java{equals} behaves the same way as the \java{==} operator, which is often incorrect.
+Unlike the \java{toString} method, \java{equals} requires a parameter: the other object you need to compare.
+So in order to override the default \java{equals} method, you need to write it this way:
 
-\section{Static methods}
+\begin{code}
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Time)) {
+            return false;
+        }
+        Time t2 = (Time) obj;
+        return this.hour == t2.hour
+            && this.minute == t2.minute
+            && this.second == t2.second;
+    }
+\end{code}
 
-\index{pure function}
-\index{function}
-\index{method!pure function}
+Because the parameter is declared as an \java{Object}, one could in theory pass any type of data (like a \java{String} or \java{Scanner}) to this method.
+The \java{instanceof} operator tests whether \java{obj} references an actual \java{Time} object.
+If it passes the test, we can safely cast \java{obj} to a \java{Time} reference and perform the equality test as before.
 
-A method is considered a pure function if the result depends only on the arguments, and it has no side effects like modifying an argument or printing something.
-The only result of invoking a pure function is the return value.
+Of course, the \java{equals} method may be arbitrarily complex.
+You could design it, for example, to allow \java{Time} and \java{String} objects to be equal if they represent the same time.
+However that design would likely confuse other programmers, since normally objects are only considered equal if they are of the same type.
 
-One example is \java{isAfter}, which compares two \java{Time}s and returns a \java{boolean} that indicates whether the first operand comes after the second:
+
+\section{The compareTo method}
+
+%\index{pure function}
+%\index{method!pure function}
+%, and it has no side effects like modifying an argument or printing something.
+%The only result of invoking a pure function is the return value.
+
+In contrast to instance methods, \java{static} methods do not refer to a specific object.
+The result of a \java{static} method depends only on the arguments.
+For example, \java{isAfter} compares two \java{Time}s and returns a \java{boolean} that indicates whether the first operand comes after the second:
 
 \begin{code}
     public static boolean isAfter(Time time1, Time time2) {
-        if (time1.hour > time2.hour) return true;
         if (time1.hour < time2.hour) return false;
+        if (time1.hour > time2.hour) return true;
 
-        if (time1.minute > time2.minute) return true;
         if (time1.minute < time2.minute) return false;
+        if (time1.minute > time2.minute) return true;
 
-        if (time1.second > time2.second) return true;
-        return false;
+        if (time1.second < time2.second) return false;
+        return true;
     }
 \end{code}
 
@@ -571,10 +591,34 @@ What is the result of this method if the two times are equal?
 Does that seem like the appropriate result for this method?
 If you were writing the documentation for this method, would you mention that case specifically?
 
-A second example is \java{addTime}, which calculates the sum of two times.
-For example, if it is {\tt 9:14:30}, and your bread maker takes 3 hours and 35 minutes, you could use \java{addTime} to figure out when the bread will be done.
+A better solution would be to define a \java{compareTo} method.
+We have already seen how to compare two strings in this way: \java{time1.compareTo(time2)}.
 
-Here is a rough draft of this method that is not quite right:
+\begin{code}
+    public int compareTo(Time t2) {
+        if (this.hour < t2.hour) return -1;
+        if (this.hour > t2.hour) return +1;
+        
+        if (this.minute < t2.minute) return -1;
+        if (this.minute > t2.minute) return +1;
+        
+        if (this.second < t2.second) return -1;
+        if (this.second > t2.second) return +1;
+        
+        return 0;
+    }
+\end{code}
+
+If \java{this} time comes before the other time, then compareTo returns \java{-1}.
+It returns \java{+1} when \java{this} time comes after the other time.
+If both times are the same (in the \java{equals} sense), \java{compareTo} returns \java{0}.
+
+
+\section{Adding times}
+
+Throughout the chapter, we have demonstrated how \java{static} methods can and should be implemented as instance methods.
+As a further example, \java{addTime} calculates the sum of two times.
+Here is a rough draft of a method that is not quite right.
 
 \begin{code}
     public static Time addTime(Time t1, Time t2) {
@@ -586,34 +630,49 @@ Here is a rough draft of this method that is not quite right:
     }
 \end{code}
 
-Although this method returns a \java{Time} object, it is not a constructor.
-You should go back and compare the syntax of a method like this with the syntax of a constructor, because it is easy to get confused.
+%Note that although this method returns a \java{Time} object, it is not a constructor.
+%You should go back and compare the syntax of a method like this with the syntax of a constructor, because it is easy to get confused.
 
-Here is an example of how to use this method.
-If \java{currentTime} contains the current time and \java{breadTime} contains the amount of time it takes for your bread maker to make bread, then you could use \java{addTime} to figure out when the bread will be done.
+%Here is an example of how to use this method.
+If it is {\tt 9:14:30}, and your bread maker takes 3 hours and 35 minutes, you could use \java{addTime} to figure out when the bread will be done.
+%Since \java{currentTime} contains the current time and \java{breadTime} contains the amount of time it takes for your bread maker to make bread, we can use \java{addTime} to figure out when the bread will be done.
 
 \begin{code}
     Time currentTime = new Time(9, 14, 30.0);
     Time breadTime = new Time(3, 35, 0.0);
     Time doneTime = addTime(currentTime, breadTime);
-    printTime(doneTime);
 \end{code}
 
-The output of this program is {\tt 12:49:30.0}, which is correct.
-On the other hand, there are cases where the result is not correct.
-Can you think of one?
+We can rewrite \java{addTime} as an instance method by deleting the word \java{static} and removing the first parameter.
 
+\begin{code}
+    public Time addTime(Time t2) {
+        Time sum = new Time();
+        sum.hour = this.hour + t2.hour;
+        sum.minute = this.minute + t2.minute;
+        sum.second = this.second + t2.second;
+        return sum;
+    }
+\end{code}
+
+When calling this version of \java{addTime}, we still need to specify the \java{currentTime} object.
+Because of the dot operator, it becomes \java{this} in the method.
+
+\begin{code}
+    Time doneTime = currentTime.addTime(breadTime);
+\end{code}
+
+The result of this method is {\tt 12:49:30.0}, which is correct.
+On the other hand, there are cases where the result is not correct.
 The problem is that this method does not deal with cases where the number of seconds or minutes adds up to more than 60.
 In that case, we have to ``carry'' the extra seconds into the minutes column, or extra minutes into the hours column.
 
-Here's a corrected version of the method.
-
 \begin{code}
-    public static Time addTime(Time t1, Time t2) {
+    public Time addTime(Time t2) {
         Time sum = new Time();
-        sum.hour = t1.hour + t2.hour;
-        sum.minute = t1.minute + t2.minute;
-        sum.second = t1.second + t2.second;
+        sum.hour = this.hour + t2.hour;
+        sum.minute = this.minute + t2.minute;
+        sum.second = this.second + t2.second;
 
         if (sum.second >= 60.0) {
             sum.second -= 60.0;
@@ -626,9 +685,6 @@ Here's a corrected version of the method.
         return sum;
     }
 \end{code}
-
-Although it's correct, it's starting to get big.
-Later I suggest a much shorter alternative.
 
 \index{increment}
 \index{decrement}
@@ -643,58 +699,107 @@ The statement \java{sum.second -= 60.0;} is equivalent to \java{sum.second = sum
 
 \section{Accessors and mutators}
 
-\index{modifier}
-\index{method!modifier}
+\index{immutable}
 
-As an example of a modifier, consider \java{increment}, which adds a given number of seconds to a \java{Time} object.
+Notice how the \java{addTime} method does not change \java{this} object.
+Instead, it creates a \java{new} object to store the results.
+All of the \java{String} methods work the same way.
+Up to this point, we have designed \java{Time} to be immutable.
+
+\index{accessor}
+\index{method!accessor}
+
+Because \java{hour}, \java{minute}, and \java{second} are \java{private}, there is no way for outside classes to access them directly.
+The only method we have provided for other to look at the time is \java{toString}.
+As a convenience, we can also write \java{public} {\bf accessor} methods that return a copy of the \java{private} values.
+
+\begin{code}
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+\end{code}
+
+\index{mutator}
+\index{method!mutator}
+
+If we want the class to be immutable, we would stop here and have a complete implementation.
+But if we want other programmers (including ourselves) to be able to change the time from other classes, we should also provide the corresponding {\bf mutator} methods.
+
+\begin{code}
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public void setSecond(int second) {
+        return this.second = second;
+    }
+\end{code}
+
+Accessors and mutators are the formal terms for referring to these types of methods, but many programmers simply call them getters and setters.
+These methods are intentionally simple, and many IDEs will generate them for you automatically with a press of a button.
+The absence or presence of these methods allows the class designer to control how the object's data is used from the outside.
+
+Mutator methods are often one line of code, but they don't have to be.
+As another example of a mutator, consider \java{increment}, which adds a given number of seconds to a \java{Time} object.
 Again, a rough draft of this method looks like:
 
 \begin{code}
-    public static void increment(Time time, double secs) {
-        time.second += secs;
-        if (time.second >= 60.0) {
-            time.second -= 60.0;
-            time.minute += 1;
+    public void increment(double secs) {
+        this.second += secs;
+        if (this.second >= 60.0) {
+            this.second -= 60.0;
+            this.minute += 1;
         }
-        if (time.minute >= 60) {
-            time.minute -= 60;
-            time.hour += 1;
+        if (this.minute >= 60) {
+            this.minute -= 60;
+            this.hour += 1;
         }
     }
 \end{code}
 
 The first line performs the basic operation; the remainder deals with the same cases we saw before.
 
-Is this method correct?
 What happens if the argument \java{secs} is much greater than 60?
-In that case, it is not enough to subtract 60 once; we have to keep doing it until \java{second} is below 60.
+In that case, it may not be enough to subtract 60 once; we have to keep doing it until \java{second} is below 60.
 We can do that by replacing the \java{if} statements with \java{while} statements:
 
 \begin{code}
-    public static void increment(Time time, double secs) {
-        time.second += secs;
-        while (time.second >= 60.0) {
-            time.second -= 60.0;
-            time.minute += 1;
+    public void increment(double secs) {
+        this.second += secs;
+        while (this.second >= 60.0) {
+            this.second -= 60.0;
+            this.minute += 1;
         }
-        while (time.minute >= 60) {
-            time.minute -= 60;
-            time.hour += 1;
+        while (this.minute >= 60) {
+            this.minute -= 60;
+            this.hour += 1;
         }
     }
 \end{code}
 
-This solution is correct, but not very efficient.
+This solution is correct, but it's not very efficient.
 Can you think of a solution that does not require iteration?
 
 
-\section{Glossary}
+\section{Vocabulary}
 
 \begin{description}
 
 \term{class}
 Previously, we defined a class as a collection of related methods.
-In this chapter we learned that a class definition is also a template for a new type of object.
+Now you know that a class is also a template for a new type of object.
 
 \term{instance}
 A member of a class.
@@ -703,14 +808,24 @@ Every object is an instance of some class.
 \term{constructor}
 A special method that initializes the instance variables of a newly-constructed object.
 
-\term{startup class}
-The class that contains the \java{main} method where execution of the program begins.
+\term{instance variables}
+The attributes of an object; non-\java{static} variables defined at the class level.
 
-\term{pure function}
-A method whose result depends only on its parameters, and that has no side-effects other than returning a value.
+\term{data encapsulation}
+A technique for bundling multiple named variables into a single object.
 
-\term{modifier}
-A method that changes one or more of the objects it receives as parameters and is usually \java{void}.
+\term{override}
+Replacing a default implementation of a method, such as \java{equals} or \java{toString}.
+
+\term{instance methods}
+Non-\java{static} methods that have access to \java{this} and the instance variables.
+
+\term{accessor}
+A method that returns a copy of a \java{private} variable.
+
+\term{mutator}
+A method that changes one or more of the objects it receives as parameters.
+It is usually \java{void} and modifies \java{this}.
 
 \end{description}
 
@@ -719,7 +834,7 @@ A method that changes one or more of the objects it receives as parameters and i
 
 
 \begin{exercise}
-In the board game Scrabble\footnote{Scrabble is a registered trademark owned in the U.S.A and Canada by Hasbro Inc., and in the rest of the world by J.W. Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.}, each tile contains a letter, which is used to spell words, and a score, which is used to determine the value of words.
+In the board game Scrabble\footnote{Scrabble is a registered trademark owned in the U.S.A and Canada by Hasbro Inc., and in the rest of the world by J.W. Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.}, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
 
 \begin{enumerate}
 
@@ -728,10 +843,13 @@ The instance variables should be a character named \java{letter} and an integer 
 
 \item Write a constructor that takes parameters named \java{letter} and \java{value} and initializes the instance variables.
 
-\item Write a method named \java{printTile} that takes a \java{Tile} object as a parameter and prints the instance variables in
-a reader-friendly format.
+\item Write a method named \java{printTile} that takes a \java{Tile} object as a parameter and prints the instance variables in a reader-friendly format.
 
 \item Write a method named \java{testTile} that creates a Tile object with the letter \java{Z} and the value 10, and then uses \java{printTile} to print the state of the object.
+
+\item Implement the \java{toString} and \java{equals} methods for a \java{Tile}.
+
+\item Create accessors and mutators for each of the attributes.
 
 \end{enumerate}
 
@@ -740,14 +858,15 @@ The point of this exercise is to practice the mechanical part of creating a new 
 
 
 \begin{exercise}
-Write a class definition for \java{Date}, an object type that contains three integers, \java{year}, \java{month} and \java{day}.
+Write a class definition for \java{Date}, an object type that contains three integers: \java{year}, \java{month}, and \java{day}.
 This class should provide two constructors.
-The first should take no parameters.
-The second should take parameters named \java{year}, \java{month} and \java{day}, and use them to initialize the instance variables.
+The first should take no parameters and initialize a default date.
+The second should take parameters named \java{year}, \java{month} and \java{day} and use them to initialize the instance variables.
 
 Write a \java{main} method that creates a new \java{Date} object named \java{birthday}.
 The new object should contain your birth date.
 You can use either constructor.
+Compare your implementation to \java{java.util.Date}.
 \end{exercise}
 
 
@@ -792,11 +911,11 @@ To find the GCD, see Exercise~\ref{gcd}).
 \item Write a method called \java{add} that takes two Rational numbers as arguments and returns a new Rational object.
 The return object should contain the sum of the arguments.
 
-There are several ways to add fractions.
+\item There are several ways to add fractions.
 You can use any one you want, but you should make sure that the result of the operation is reduced so that the numerator and denominator have no common divisor (other than 1).
 \end{enumerate}
 
-The purpose of this exercise is to write a class definition that includes a variety of methods, including constructors, modifiers and pure functions.
+The purpose of this exercise is to write a class definition that includes a variety of methods, including constructors, accessors, mutators, \java{static} methods, and instance methods.
 \end{exercise}
 
 
