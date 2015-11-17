@@ -169,53 +169,33 @@
 
 \chapter{Design your own classes}
 
-TODO
-
-\section{Class definitions and object types}
-\label{classes}
-
-\index{type!object}
-\index{type!user-defined}
-\index{object type}
 \index{class definition}
+\index{object type}
+\index{type!object}
 \index{user-defined type}
 
-% Every time you write a class definition, you create a new
-% object type with the same name as the class.
-Way back in
-Section~\ref{hello} when we defined the class {\tt Hello},
-we also created an object type named {\tt Hello}.  We
-didn't create any variables with type {\tt Hello}, and we
-didn't use {\tt new} to create any {\tt Hello}
-objects, but we could have!
+Way back in Section~\ref{hello} when we defined the class \java{Hello}, we also created a data type named \java{Hello}.
+We didn't create any variables with type \java{Hello}, and we didn't use \java{new} to create any \java{Hello} objects---but we could have!
+This example doesn't make much sense, since there is no reason to create a \java{Hello} object, and it wouldn't do much if we did.
 
-That example doesn't make much sense, since there is no
-reason to create a {\tt Hello} object, and it wouldn't do
-much if we did.  In this chapter, we
-will look at class definitions that create
-{\em useful} object types.
-
-Here are the most important ideas in this chapter:
+In this chapter, we will look at class definitions for creating {\em useful} object types.
+Here are the most important ideas:
 
 \begin{itemize}
 
-\item Defining a new class also creates a new object type
-with the same name.
+\item Defining a new class also creates a new object type with the same name.
 
-\item A class definition is like a template for objects:
-it determines what instance variables the objects have and
-what methods can operate on them.
+\item Every object belongs to some object type; that is, it is an {\bf instance} of some class.
 
-\item Every object belongs to some object type; that is, it
-is an instance of some class.
+\item A class definition is like a template for objects: it determines what instance variables the objects have and what methods can operate on them.
 
-\item When you invoke {\tt new} to create an object, Java
-invokes a special method called a {\bf constructor} to initialize the
-instance variables.  You provide one or more constructors as part of
-the class definition.
+\item The methods that operate on a type are defined in the class definition for that type.
 
-\item The methods that operate on a type are defined in the
-class definition for that type.
+\item When you invoke \java{new} to create an object, Java invokes a special method called a {\bf constructor} to initialize the instance variables.
+You may provide one or more constructors as part of the class definition.
+
+\item If you don't provide a constructor for a class, then Java will generate one for you.
+The default constructor takes no arguments and initializes all instance variables to zero (or the equivalent value for its data type).
 
 \end{itemize}
 
@@ -223,125 +203,91 @@ Here are some syntax issues about class definitions:
 
 \begin{itemize}
 
-\item Class names (and hence object types) should begin with a capital
-letter, which helps distinguish them from primitive types and variable
-names.
+\item Class names (and hence object types) should begin with a capital letter, which helps distinguish them from primitive types and variable names.
 
-\item You usually put one class definition in each file, and the name
-of the file must be the same as the name of the class, with the suffix
-{\tt .java}.  For example, the {\tt Time} class is defined in the file
-named {\tt Time.java}.
+\item You usually put one class definition in each file, and the name of the file must be the same as the name of the class, with the suffix {\tt .java}.
+For example, the \java {class Time} is defined in the file named {\tt Time.java}.
 
-\item In any program, one class is designated as the {\bf startup
-class}.  The startup class must contain a method named {\tt main}, which
-is where the execution of the program begins.  Other classes {\em may}
-have a method named {\tt main}, but it will not be executed.
+\item In any program, one class is designated as the {\bf startup class} that contains a method named \java{main} where the execution of the program begins.
+Other classes {\em may} have a method named \java{main}, but it will not be executed (unless another method calls it directly for some reason).
 
 \end{itemize}
 
-With those issues out of the way, let's look at an example of
-a user-defined class, {\tt Time}.
+%With those issues out of the way, let's look at an example of a user-defined class.
 
 
 \section{Time}
+
 \index{class!Time}
 \index{Time}
 
-A common motivation for creating an object type is to encapsulate
-related data in an object that can be treated as a single unit.  We
-have already seen two types like this, {\tt Point} and {\tt
-Rectangle}.
+A common motivation for creating an object type is to encapsulate related data in an object that can be treated as a single unit.
+We have already seen two such types, \java{Point} and \java{Rectangle}.
 
-Another example, which we will implement ourselves, is {\tt Time},
-which represents the time of day.  The data encapsulated in a Time
-object are an hour, a minute, and a number of seconds.  Because every
-{\tt Time} object contains these data, we need instance
-variables to hold them.
+Another example, which we will implement ourselves, is \java{Time}, which represents the time of day.
+The data encapsulated in a \java{Time} object are an hour, a minute, and a number of seconds.
+Because every \java{Time} object contains these data, we need instance variables to hold them.
 
-The first step is to decide what type each variable should be.  It
-seems clear that {\tt hour} and {\tt minute} should be integers.  Just
-to keep things interesting, let's make {\tt second} a {\tt double}.
+The first step is to decide what type each variable should be.
+It seems clear that \java{hour} and \java{minute} should be integers.
+Just to keep things interesting, let's make \java{second} a \java{double}.
 
 \index{instance variable}
 \index{variable!instance}
 
-Instance variables are declared at the beginning of the class
-definition, outside of any method definition, like this:
+Instance variables are declared at the beginning of the class definition, outside of any method definition:
 
 \begin{code}
-class Time {
-    int hour, minute;
-    double second;
+public class Time {
+    private int hour;
+    private int minute;
+    private double second;
 }
 \end{code}
 
-By itself, this code fragment is a legal class definition.  The
-state diagram for a {\tt Time} object looks like this:
+By itself, this code fragment is a legal class definition.
+The state diagram for a \java{Time} object looks like this:
 
 \begin{center}
 \includegraphics{figs/time.pdf}
 \end{center}
 
-After declaring the instance variables, the next step is
-to define a constructor for the new class.
+%\subsection{Public vs private}
+
+The keyword \java{public} means that a class, method, or variable can be accessed from other classes.
+The alternative is \java{private}, which means the item can only be accessed inside the class where it is defined.
+To prevent yourself and others from making mistakes, it's good practice to make instance variables \java{private}.
+
+If you attempt to read or write a \java{private} variable from another class, you will get a compiler error.
+Private methods and instance variables are language features that help programmers ensure {\bf data encapsulation}, which means that objects in one class are isolated from other classes.
+Limiting interactions between classes is one technique for managing complexity of software development.
+
+%We can create {\bf accessor methods} like \java{getHour}, \java{getMinute}, and \java{getSecond}.
+%, but it provides no methods that modify the instance variables.
+%In effect, \java{Location} objects are immutable, which means that they can be shared without worrying about unexpected behavior due to aliasing.
+
+%Making methods private helps keep the API simple.
+%Classes often include helper methods that are used to implement other methods, but making those methods part of the public API might be unnecessary and error-prone.
+
+After declaring the instance variables, the next step is to define a constructor for the new class.
 
 
-\section{{\tt public} and {\tt private}}
-
-Remember in Chapter~\ref{chap01} I said I would explain why the {\tt
-  main} method has the keyword {\tt public}?  Finally, the time has
-come.
-
-{\tt public} means that the method can be invoked from other classes.
-The alternative is {\tt private}, which means the method can only
-be invoked inside the class where it is defined.
-
-Instance variables can also be {\tt public} or {\tt private}, with
-the same result: a private instance variable can be accessed only
-inside the class where it is defined.
-
-The primary reason to make methods and instance variables private
-is to limit interactions between classes in order to manage
-complexity.
-
-For example, the Location class keeps its instance variables private.
-It has accessor methods {\tt getRow} and {\tt getCol}, but it provides
-no methods that modify the instance variables.  In effect, Location
-objects are immutable, which means that they can be shared without
-worrying about unexpected behavior due to aliasing.
-
-Making methods private helps keep the API simple.  Classes often
-include helper methods that are used to implement other methods, but
-making those methods part of the public API might be unnecessary
-and error-prone.
-
-Private methods and instance variables are language features
-that help programmers ensure {\bf data encapsulation}, which means
-that objects in one class are isolated from other classes.
-
-
-\section{Constructors (and this)}
+\section{Constructors}
 
 \index{constructor}
 \index{method!constructor}
 \index{static}
 
-Constructors initialize instance
-variables.  The syntax for constructors is similar to that
-of other methods, with three exceptions:
+Constructors initialize the instance variables.
+The syntax for constructors is similar to that of other methods, with three exceptions:
 
 \begin{itemize}
-
-\item The name of the constructor is the same as the name of
-the class.
-
+\item The name of the constructor is the same as the name of the class.
 \item Constructors have no return type and no return value.
-
-\item The keyword {\tt static} is omitted.
-
+\item The keyword \java{static} is omitted.
 \end{itemize}
 
-Here is an example for the {\tt Time} class:
+Here is an example for the \java{Time} class:
 
 \begin{code}
     public Time() {
@@ -351,42 +297,33 @@ Here is an example for the {\tt Time} class:
     }
 \end{code}
 
-Where you would expect to see a return type,
-between {\tt public} and {\tt Time}, there is nothing.  That's
-how we (and the compiler) can tell that this is a constructor.
+Where you would expect to see a return type, between \java{public} and \java{Time}, there is nothing.
+That's how we (and the compiler) can tell that this is a constructor as opposed to a \java{void} method.
 
-This constructor does not take any arguments.  Each line of the
-constructor initializes an instance variable to a default
-value (in this case, midnight).  The name {\tt this} is a special
-keyword that refers to the object we are creating.  You can use
-{\tt this} the same way you use the name of any other object.  For
-example, you can read and write the instance variables of {\tt this},
-and you can pass {\tt this} as an argument to other methods.
+This constructor does not take any arguments.
+Each line of the constructor initializes an instance variable to zero (which in this case means midnight).
 
 \index{this}
 
-But you do not declare {\tt this} and you can't make an
-assignment to it.  {\tt this} is created by the system; all you
-have to do is initialize its instance variables.
+The name \java{this} is a special keyword that refers to the object that we are creating.
+You can use \java{this} the same way you use the name of any other object.
+For example, you can read and write the instance variables of \java{this}, and you can pass \java{this} as an argument to other methods.
+But you do not declare \java{this}, and you can't make an assignment to it.
+%The variable \java{this} is created by the system; all you have to do is initialize its instance variables.
 
-A common error when writing constructors is to put a {\tt return}
-statement at the end.  Resist the temptation.
+A common error when writing constructors is to put a \java{return} statement at the end.
+Like \java{void} methods, constructors do not return values.
+Another mistake that beginning programmers make is to invoke the \java{new} operation inside the constructor.
+For example, writing the code \java{new Time(0, 0, 0.0)} in the constructor results in infinite recursion.
 
-
-\subsection{More constructors}
+%\subsection{More constructors}
 
 \index{overloading}
 
-Constructors can be overloaded, just like other methods,
-which means that you can provide multiple constructors
-with different parameters.  Java knows which constructor
-to invoke by matching the arguments of {\tt new}
-with the parameters of the constructors.
+Constructors can be overloaded, just like other methods, which means that you can provide multiple constructors with different parameters.
+Java knows which constructor to invoke by matching the arguments after \java{new} with the parameters of the constructors.
 
-It is common to have one constructor that takes no
-arguments (shown above), and one constructor that takes
-a parameter list identical to the list of instance
-variables.  For example:
+It is common to have one constructor that takes no arguments (the default constructor), and one constructor that takes a parameter list identical to the list of instance variables (the explicit value constructor).
 
 \begin{code}
     public Time(int hour, int minute, double second) {
@@ -396,23 +333,15 @@ variables.  For example:
     }
 \end{code}
 
-The names and types of the parameters are the same as
-the names and types of the instance variables.  All the
-constructor does is copy the information from the parameters
-to the instance variables.
+Notice how the names and types of the parameters are the same as the names and types of the instance variables.
+All the constructor does is copy the information from the parameters into the instance variables.
 
-If you look at the documentation for {\tt Point}s
-and {\tt Rectangle}s, you will see that both classes provide
-constructors like this.  Overloading constructors provides the
-flexibility to create an object first and then fill in the
-blanks, or to collect all the information before creating
-the object.
+If you look at the documentation for \java{Point} and \java{Rectangle}, you will see that both classes provide similar constructors.
+Overloading constructors provides the flexibility to create an object first and then fill in the blanks, or to collect all the information before creating the object.
 
-This might not seem very interesting, and in fact it
-is not.  Writing constructors is a boring, mechanical process.
-Once you have written two, you will find that you can write them
-quickly just by looking at the list of instance
-variables.
+This might not seem very interesting, and in fact it is not.
+Writing constructors is a boring, mechanical process, and some IDEs will automatically generate them for you.
+Once you have written two, you will find that you can write them quickly just by looking at the list of instance variables.
 
 
 \section{Creating a new object}
@@ -420,18 +349,16 @@ variables.
 \index{new}
 \index{statement!new}
 
-Although constructors look like methods, you never invoke them
-directly.  Instead, when you invoke {\tt new}, the system
-allocates space for the new object and then
-invokes your constructor.
+Although constructors look like methods, you never invoke them directly.
+Instead, when you apply the \java{new} operator, the system allocates space for the object and then invokes your constructor.
 
-The following program demonstrates two ways to create and
-initialize {\tt Time} objects:
+The following program demonstrates two common ways to create and initialize \java{Time} objects:
 
 \begin{code}
-class Time {
-    int hour, minute;
-    double second;
+public class Time {
+    private int hour;
+    private int minute;
+    private double second;
 
     public Time() {
         this.hour = 0;
@@ -446,7 +373,6 @@ class Time {
     }
 
     public static void main(String[] args) {
-
         // one way to create and initialize a Time object
         Time t1 = new Time();
         t1.hour = 11;
@@ -461,17 +387,12 @@ class Time {
 }
 \end{code}
 
-In {\tt main}, the first time we invoke {\tt new},
-we provide no arguments, so Java invokes the first constructor.
-The next few lines assign values to the instance
-variables.
+In \java{main}, the first time we apply \java{new} we provide no arguments, so Java invokes the default constructor.
+The next few lines assign values to the instance variables.
 
-The second time we invoke {\tt new}, we provide
-arguments that match the parameters of the second constructor.
-This way of initializing the instance variables is more concise
-and slightly more efficient, but it can be harder to read, since
-it is not as clear which values are assigned to which instance
-variables.
+The second time we invoke \java{new}, we provide arguments that match the parameters of the second constructor.
+This way of initializing the instance variables is more concise and slightly more efficient.
+But it can be harder to read, since it is not as clear which values are assigned to which instance variables.
 
 
 \section{Printing objects}
@@ -488,16 +409,10 @@ Time@80cc7c0
 Time@80cc807
 \end{stdout}
 
-When Java prints the value of a user-defined object type, it prints
-the name of the type and a special hexadecimal (base 16) code that is
-unique for each object.  This code is not meaningful in itself; in
-fact, it can vary from machine to machine and even from run to run.
-But it can be useful for debugging, in case you want to keep track of
-individual objects.
+When Java prints the value of a user-defined object type, it prints the name of the type and a special hexadecimal (base 16) code that is unique for each object.  This code is not meaningful in itself; in fact, it can vary from machine to machine and even from run to run.
+But it can be useful for debugging, in case you want to keep track of individual objects.
 
-To print objects in a way that is more meaningful to users
-(as opposed to programmers), you can write a method
-called something like {\tt printTime}:
+To print objects in a way that is more meaningful to users (as opposed to programmers), you could write a method called something like \java{printTime}:
 
 \begin{code}
     public static void printTime(Time t) {
@@ -505,275 +420,139 @@ called something like {\tt printTime}:
     }
 \end{code}
 
-Compare this method to the version of {\tt printTime} in
-Section~\ref{time}.
+Compare this method to the version of \java{printTime} in Section~\ref{time}.
 
-The output of this method, if we pass either {\tt t1} or {\tt t2} as
-an argument, is {\tt 11:8:3.14159}.  Although this is recognizable
-as a time, it is not quite in the standard format.  For example, if
-the number of minutes or seconds is less than 10, we expect a leading
-{\tt 0} as a place-keeper.  Also, we might want to drop the decimal
-part of the seconds.  In other words, we want something like
-{\tt 11:08:03}.
+The output of this method, if we pass either \java{t1} or \java{t2} as an argument, is {\tt 11:8:3.14159}.
+Although this is recognizable as a time, it is not quite in the standard format.
+For example, if the number of minutes or seconds is less than 10, we expect a leading {\tt 0} as a place-keeper.
+Also, we might want to drop the decimal part of the seconds.
+In other words, we want something like {\tt 11:08:03}.
+Fortunately, we can use \java{printf} to format the output:
 
-%~ In most languages, there are simple ways to control the output format
-%~ for numbers.  In Java there are no simple ways.
-%~
-%~ Java provides powerful tools for printing formatted things
-%~ like times and dates, and also for interpreting formatted input.
-%~ Unfortunately, these tools are not very easy to use, so I am going to
-%~ leave them out of this book.  If you want, you can take a look
-%~ at the documentation for the {\tt Date} class in the {\tt
-%~ java.util} package.
-%~ \index{Date}
-%~ \index{class!Date}
+\begin{code}
+    public static void printTime(Time t) {
+        System.out.printf("%02d:%02d:%02.0f\n",
+            t.hour, t.minute, t.second);
+    }
+\end{code}
+
+As a reminder, you need to use \java{\%d} with integers and \java{\%f} with floating-point numbers.
+The \java{\%f} specifier automatically rounds the value.
 
 
-\section{The {\tt toString} method}
+\section{The toString method}
 
 \index{toString}
 \index{method!toString}
 
-Every object type has a method called {\tt toString} that returns a
-string representation of the object.  When you print an object using
-{\tt print} or {\tt println}, Java invokes the object's {\tt toString}
-method.
+Every object type has a method called \java{toString} that returns a string representation of the object.
+When you print an object using \java{print} or \java{println}, Java invokes the object's \java{toString} method.
 
-The default
-version of {\tt toString} returns a string that contains the type
-of the object and a unique identifier (see Section~\ref{printobject}).
-When you define a new object
-type, you can {\bf override} the default behavior by providing a
-new method with the behavior you want.
+The default version of \java{toString} returns a string that contains the type of the object and a unique identifier (see Section~\ref{printobject}).
+When you define a new object type, you can {\bf override} the default behavior by providing a new method with the behavior you want.
 
-For example, here is a {\tt toString} method for {\tt Card}:
+For example, here is a \java{toString} method for \java{Time}:
 
 \begin{code}
 public String toString() {
-    return ranks[rank] + " of " + suits[suit];
+    return String.format("%02d:%02d:%02.0f\n",
+            t.hour, t.minute, t.second);
 }
 \end{code}
 
-The return type is {\tt String}, naturally,
-and it takes no parameters.  You can invoke {\tt toString} in
-the usual way:
+This code is essentially the same as printTime in the previous section, except that we are returning a string instead of printing one to the screen.
+The \java{String.format} method works the same way as \java{printf}; in fact, the \java{printf} method invokes \java{String.format}.
+
+You can invoke \java{toString} in the usual way:
 
 \begin{code}
-    Card card = new Card(1, 1);
-    String s = card.toString();
+    Time time = new Time(11, 8, 3.14159);
+    String s = time.toString();
 \end{code}
 
-or you can invoke it indirectly through {\tt println}:
+Or you can invoke it indirectly through \java{println}:
 
 \begin{code}
-    System.out.println(card);
+    System.out.println(time);
 \end{code}
 
 
-\section{The {\tt equals} method}
+\section{The equals method}
 
 \index{equals}
 \index{method!equals}
 
-In Section~\ref{equivalence} we talked about two notions of equality:
-identity, which means that two variables refer to the same
-object, and equivalence, which means that they have the same
-value.
-
-The {\tt ==} operator tests identity, but there is no operator
-that tests equivalence, because what ``equivalence'' means
-depends on the type of the objects.  Instead, objects provide
-a method named {\tt equals} that defines equivalence.
-
-Java classes provide {\tt equals} methods that do the right
-thing.  But for user defined types the default behavior is the
-same as identity, which is usually not what you want.
-
-For {\tt Card}s we already have a method that checks equivalence:
+When comparing objects, there are two notions of equality: objects that are {\em identical}, and objects that are {\em equivalent}.
+Identical means that two variables refer to the same object.
+Equivalent means that two objects have the same values.
+Consider for example the following \java{Time} variables:
 
 \begin{code}
-    public static boolean sameCard(Card c1, Card c2) {
-        return (c1.suit == c2.suit && c1.rank == c2.rank);
+    Time time1 = new Time(9, 30, 0.0);
+    Time time2 = time1;
+    Time time3 = new Time(9, 30, 0.0);
+\end{code}
+
+Since \java{Time} is a reference type, \java{time1}, \java{time2}, and \java{time3} are references to objects.
+Here is a memory diagram:
+
+\begin{center}
+\includegraphics{figs/time2.pdf}
+\end{center}
+
+Recall that the assignment operator simply copies a reference; \java{time1} and \java{time2} refer to the same object.
+In contrast, \java{time3} points to a different object.
+Whenever you apply the \java{new} operator, you create a new object in memory.
+
+In this example, \java{time1} and \java{time2} are identical: they refer to the same object.
+The \java{==} operator compares references, so \java{time1 == time2} is \java{true}.
+All three variables are equivalent: the objects they reference have the same values.
+However \java{time1 == time3} is \java{false}, because their references are not the same.
+
+There is no operator that tests equivalence, since the notion of equality is different for each type of object.
+In the case of \java{Time}, we could write a \java{static} method that compares hours, minutes, and seconds:
+
+\begin{code}
+    public static boolean sameTime(Time t1, Time t2) {
+        return t1.hour == t2.hour
+            && t1.minute == t2.minute
+            && t1.second == t2.second;
     }
 \end{code}
 
-So all we have to do is rewrite is as an object method:
+This method works just fine, but it's not the way most Java classes are designed.
+Instead, objects should provide a non-\java{static} method named \java{equals} that defines equivalence.
+So all we have to do is rewrite \java{sameTime} as an instance method:
 
 \begin{code}
-    public boolean equals(Card c2) {
-        return (suit == c2.suit && rank == c2.rank);
+    public boolean equals(Time t2) {
+        return this.hour == t2.hour
+            && this.minute == t2.minute
+            && this.second == t2.second;
     }
 \end{code}
 
-Again, I removed {\tt static} and the first parameter, {\tt c1}.
-Here's how it's invoked:
+By way of comparison, here is how each of these methods are invoked:
 
 \begin{code}
-    Card card = new Card(1, 1);
-    Card card2 = new Card(1, 1);
-    System.out.println(card.equals(card2));
+    System.out.println(Time.sameTime(time1, time3));
+    System.out.println(time1.equals(time3));
 \end{code}
 
-Inside {\tt equals}, {\tt card} is the current object and {\tt card2}
-is the parameter, {\tt c2}.  For methods that operate on two objects
-of the same type, I sometimes use {\tt this} explicitly and call
-the parameter {\tt that}:
-
-\begin{code}
-    public boolean equals(Card that) {
-        return (this.suit == that.suit && this.rank == that.rank);
-    }
-\end{code}
-
-I think it improves readability.
+The latter method is certainly easier to read and understand.
+Inside the \java{equals} method, the reference to \java{time1} is the current object \java{this}, and \java{time3} is the parameter \java{t2}.
 
 
-\section{Object methods and class methods}
-
-\index{object method}
-\index{method!object}
-\index{class method}
-\index{method!class}
-\index{static}
-
-There are two types of methods in Java, called {\bf class methods} and
-{\bf object methods}.  Class methods are identified by the keyword {\tt
-  static} in the first line.  Any method that does {\em not} have the
-keyword {\tt static} is an object method.
-
-Although we have not written object methods, we have invoked some.
-Whenever you invoke a method ``on'' an object, it's an object method.
-For example, {\tt charAt} and the other methods we invoked on {\tt String}
-objects are all object methods.
-
-For example, here is {\tt printCard} as a class method:
-
-\begin{code}
-    public static void printCard(Card c) {
-        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
-    }
-\end{code}
-
-Anything that can be written as a class method can also be written as an
-object method, and vice versa.  But sometimes it is more natural to
-use one or the other.
-Here it is re-written as an object method:
-
-\begin{code}
-    public void print() {
-        System.out.println(ranks[rank] + " of " + suits[suit]);
-    }
-\end{code}
-
-Here are the changes:
-
-\begin{enumerate}
-
-\item I removed {\tt static}.
-
-\item I changed the name of the method to be more idiomatic.
-
-\item I removed the parameter.
-
-\item Inside an object method you can refer to instance variables
-as if they were local variables, so I changed {\tt c.rank} to {\tt rank},
-and likewise for {\tt suit}.
-
-\end{enumerate}
-
-Here's how this method is invoked:
-
-\begin{code}
-    Card card = new Card(1, 1);
-    card.print();
-\end{code}
-
-When you invoke a method on an object, that object becomes the {\bf
-current object}, also known as {\tt this}.  Inside {\tt print},
-the keyword {\tt this} refers to the card the method was invoked on.
-\index{current object}
-\index{object!current}
-\index{this}
-
-
-\subsection{Oddities and errors}
-
-\index{method!object}
-\index{method!class}
-\index{overloading}
-
-If you have object methods and class methods in the same class, it is
-easy to get confused.  A common way to organize a class definition is
-to put all the constructors at the beginning, followed by all the
-object methods and then all the class methods.
-
-You can have an object method and a class method with the same
-name, as long as they do not have the same number and types of
-parameters.  As with other kinds of overloading, Java decides
-which version to invoke by looking at the arguments you provide.
-\index{static}
-
-Now that we know what the keyword {\tt static} means, you
-have probably figured out that {\tt main} is a class method,
-which means that there is no ``current object'' when it is invoked.
-\index{current object}
-\index{this}
-\index{instance variable}
-\index{variable!instance}
-%
-Since there is no current object in a class method, it is an
-error to use the keyword {\tt this}.  If you try, you get
-an error message like: ``Undefined variable: this.''
-
-Also, you cannot refer to instance variables without using dot
-notation and providing an object name.  If you try, you get a message
-like ``non-static variable... cannot be referenced from a static
-context.''  By ``non-static variable'' it means ``instance variable.''
-
-
-
-%~ \section{Operations on objects}
-%~ \label{objectops}
-%~ \index{object}
-%~ \index{operator!object}
-%~
-%~ In the next few
-%~ sections, I demonstrate three kinds of methods that
-%~ operate on objects:
-%~
-%~ \begin{description}
-%~
-%~ \item[pure function:]  Takes objects as
-%~ arguments but does not modify them.  The return value is
-%~ either a primitive or a new object created inside the method.
-%~
-%~ \item[modifier:]  Takes objects as arguments and modifies some
-%~ or all of them.  Often returns void. \index{void}
-%~
-%~ \item[fill-in method:]  One of the arguments is an ``empty''
-%~ object that gets filled in by the method.  Technically, this is
-%~ a type of modifier.
-%~
-%~ \end{description}
-%~
-%~ Often it is possible to write a given method as a pure function, a modifier,
-%~ or a fill-in method.  I will discuss the pros and cons of each.
-
-
-\section{Pure functions (static methods)}
+\section{Static methods}
 
 \index{pure function}
 \index{function}
 \index{method!pure function}
 
-A method is considered a pure function if the result depends only on
-the arguments, and it has no side effects like modifying an argument
-or printing something.  The only result of invoking a pure function is
-the return value.
+A method is considered a pure function if the result depends only on the arguments, and it has no side effects like modifying an argument or printing something.
+The only result of invoking a pure function is the return value.
 
-One example is {\tt isAfter}, which compares two {\tt Time}s and
-returns a {\tt boolean} that indicates whether the first operand
-comes after the second:
+One example is \java{isAfter}, which compares two \java{Time}s and returns a \java{boolean} that indicates whether the first operand comes after the second:
 
 \begin{code}
     public static boolean isAfter(Time time1, Time time2) {
@@ -788,15 +567,12 @@ comes after the second:
     }
 \end{code}
 
-What is the result of this method if the two times are equal?  Does
-that seem like the appropriate result for this method?  If you were
-writing the documentation for this method, would you mention that case
-specifically?
+What is the result of this method if the two times are equal?
+Does that seem like the appropriate result for this method?
+If you were writing the documentation for this method, would you mention that case specifically?
 
-A second example is {\tt addTime}, which calculates the sum of two
-times.  For example, if it is {\tt 9:14:30}, and your breadmaker takes
-3 hours and 35 minutes, you could use {\tt addTime} to figure out when
-the bread will be done.
+A second example is \java{addTime}, which calculates the sum of two times.
+For example, if it is {\tt 9:14:30}, and your bread maker takes 3 hours and 35 minutes, you could use \java{addTime} to figure out when the bread will be done.
 
 Here is a rough draft of this method that is not quite right:
 
@@ -810,16 +586,11 @@ Here is a rough draft of this method that is not quite right:
     }
 \end{code}
 
-Although this method returns a {\tt Time} object, it is not
-a constructor.  You should go back and compare the syntax of
-a method like this with the syntax of a constructor, because
-it is easy to get confused.
+Although this method returns a \java{Time} object, it is not a constructor.
+You should go back and compare the syntax of a method like this with the syntax of a constructor, because it is easy to get confused.
 
-Here is an example of how to use this method.  If {\tt currentTime}
-contains the current time and {\tt breadTime} contains the amount
-of time it takes for your breadmaker to make bread, then you
-could use {\tt addTime} to figure out when the bread will be
-done.
+Here is an example of how to use this method.
+If \java{currentTime} contains the current time and \java{breadTime} contains the amount of time it takes for your bread maker to make bread, then you could use \java{addTime} to figure out when the bread will be done.
 
 \begin{code}
     Time currentTime = new Time(9, 14, 30.0);
@@ -828,15 +599,12 @@ done.
     printTime(doneTime);
 \end{code}
 
-The output of this program is {\tt 12:49:30.0}, which is
-correct.  On the other hand, there are cases where the result
-is not correct.  Can you think of one?
+The output of this program is {\tt 12:49:30.0}, which is correct.
+On the other hand, there are cases where the result is not correct.
+Can you think of one?
 
-The problem is that this method does not deal with cases
-where the number of seconds or minutes adds up to more than
-60.  In that case, we have to ``carry'' the extra seconds
-into the minutes column, or extra minutes into the hours
-column.
+The problem is that this method does not deal with cases where the number of seconds or minutes adds up to more than 60.
+In that case, we have to ``carry'' the extra seconds into the minutes column, or extra minutes into the hours column.
 
 Here's a corrected version of the method.
 
@@ -859,36 +627,31 @@ Here's a corrected version of the method.
     }
 \end{code}
 
-Although it's correct, it's starting to get big.  Later
-I suggest a much shorter alternative.
+Although it's correct, it's starting to get big.
+Later I suggest a much shorter alternative.
 
 \index{increment}
 \index{decrement}
 \index{operator!increment}
 \index{operator!decrement}
 
-This code demonstrates two operators we have not seen before,
-{\tt +=} and {\tt -=}.  These operators provide a concise
-way to increment and decrement variables.  They are similar
-to {\tt ++} and {\tt --}, except (1) they work on {\tt double}s
-as well as {\tt int}s, and (2) the amount of the increment
-does not have to be 1.  The statement {\tt sum.second -= 60.0;}
-is equivalent to {\tt sum.second = sum.second - 60;}
+This code demonstrates two operators we have not seen before, \java{+=} and \java{-=}.
+These operators provide a concise way to increment and decrement variables.
+They are similar to \java{++} and \java{--}, except (1) they work on \java{double}s as well as \java{int}s, and (2) the amount of the increment does not have to be 1.
+The statement \java{sum.second -= 60.0;} is equivalent to \java{sum.second = sum.second - 60;}
 
 
-\section{Modifiers (accessors and mutators)}
+\section{Accessors and mutators}
 
 \index{modifier}
 \index{method!modifier}
 
-As an example of a modifier, consider {\tt increment},
-which adds a given number of seconds to a {\tt Time} object.
+As an example of a modifier, consider \java{increment}, which adds a given number of seconds to a \java{Time} object.
 Again, a rough draft of this method looks like:
 
 \begin{code}
     public static void increment(Time time, double secs) {
         time.second += secs;
-
         if (time.second >= 60.0) {
             time.second -= 60.0;
             time.minute += 1;
@@ -900,19 +663,16 @@ Again, a rough draft of this method looks like:
     }
 \end{code}
 
-The first line performs the basic operation; the remainder
-deals with the same cases we saw before.
+The first line performs the basic operation; the remainder deals with the same cases we saw before.
 
-Is this method correct?  What happens if the argument {\tt secs}
-is much greater than 60?  In that case, it is not enough to
-subtract 60 once; we have to keep doing it until {\tt second}
-is below 60.  We can do that by replacing the {\tt if}
-statements with {\tt while} statements:
+Is this method correct?
+What happens if the argument \java{secs} is much greater than 60?
+In that case, it is not enough to subtract 60 once; we have to keep doing it until \java{second} is below 60.
+We can do that by replacing the \java{if} statements with \java{while} statements:
 
 \begin{code}
     public static void increment(Time time, double secs) {
         time.second += secs;
-
         while (time.second >= 60.0) {
             time.second -= 60.0;
             time.minute += 1;
@@ -928,243 +688,29 @@ This solution is correct, but not very efficient.
 Can you think of a solution that does not require iteration?
 
 
-%~ \section{Fill-in methods}
-%~ \index{fill-in method}
-%~ \index{method!fill-in}
-%~
-%~ Instead of creating a new object every time {\tt addTime} is
-%~ invoked, we could require the caller to provide an
-%~ object where {\tt addTime} stores the result.  Compare
-%~ this to the previous version:
-%~
-%~ \begin{code}
-%~     public static void addTimeFill(Time t1, Time t2, Time sum) {
-%~         sum.hour = t1.hour + t2.hour;
-%~         sum.minute = t1.minute + t2.minute;
-%~         sum.second = t1.second + t2.second;
-%~
-%~         if (sum.second >= 60.0) {
-%~             sum.second -= 60.0;
-%~             sum.minute += 1;
-%~         }
-%~         if (sum.minute >= 60) {
-%~             sum.minute -= 60;
-%~             sum.hour += 1;
-%~         }
-%~     }
-%~ \end{code}
-%~
-%~ The result is stored in {\tt sum}, so the return type is {\tt void}.
-%~
-%~ Modifiers and fill-in methods are efficient because they
-%~ don't have to create new objects.  But they make it more
-%~ difficult to isolate parts of a program; in large projects they can
-%~ cause errors that are hard to find.
-%~
-%~ Pure functions help manage the complexity of large projects,
-%~ in part by making certain kinds of errors impossible.  Also, they
-%~ lend themselves to certain kinds of composition and nesting.
-%~ And because the result of a pure function depends only on the parameters,
-%~ it is possible to speed them up by storing previously-computed
-%~ results.
-%~ \index{pure function}
-%~
-%~ I recommend that you write pure functions whenever
-%~ it is reasonable, and resort to modifiers only if there
-%~ is a compelling advantage.
-
-
-\section{Incremental development}
-
-\index{incremental development}
-\index{prototyping}
-\index{program development!incremental}
-\index{program development!planning}
-
-In this chapter I demonstrated a program development process called
-{\bf rapid prototyping}\footnote{What I am calling rapid prototyping
-  is similar to test-driven development (TDD); the difference is that
-  TDD is usually based on automated testing.  See
-  \url{http://en.wikipedia.org/wiki/Test-driven_development}.}.  For
-each method, I wrote a rough draft that performed the
-basic calculation, then tested it on a few cases, correcting flaws
-as I found them.
-
-This approach can be effective, but it can lead to code
-that is unnecessarily complicated---since it deals with many
-special cases---and unreliable---since it is hard to convince
-yourself that you have found {\em all} the errors.
-
-An alternative is to look for insight
-into the problem that can make the programming easier.  In
-this case the insight is that a {\tt Time} is really a three-digit
-number in base 60!  The {\tt second} is the ``ones column,''
-the {\tt minute} is the ``60's column'', and the {\tt hour}
-is the ``3600's column.''
-
-When we wrote {\tt addTime} and {\tt increment}, we were effectively
-doing addition in base 60, which is why we had to ``carry'' from one
-column to the next.
-
-\index{arithmetic!floating-point}
-
-Another approach to the whole problem is to convert
-{\tt Time}s into {\tt double}s and take advantage of the fact that
-the computer already knows how to do arithmetic with {\tt double}s.
-Here is a method that converts a {\tt Time} into a {\tt double}:
-
-\begin{code}
-    public static double convertToSeconds(Time t) {
-        int minutes = t.hour * 60 + t.minute;
-        double seconds = minutes * 60 + t.second;
-        return seconds;
-    }
-\end{code}
-
-Now all we need is a way to convert from a {\tt double}
-to a {\tt Time} object.  We could write a method to
-do it, but it might make more sense to write it as a third
-constructor:
-
-\begin{code}
-    public Time(double secs) {
-        this.hour =(int)(secs / 3600.0);
-        secs -= this.hour * 3600.0;
-        this.minute =(int)(secs / 60.0);
-        secs -= this.minute * 60;
-        this.second = secs;
-    }
-\end{code}
-
-This constructor is a little different from the others;
-it involves some calculation along with assignments to the
-instance variables.
-
-You might have to think to convince yourself that the technique
-I am using to convert from one base to another is correct.  But once
-you're convinced, we can use these methods to rewrite {\tt addTime}:
-
-\begin{code}
-    public static Time addTime(Time t1, Time t2) {
-        double seconds = convertToSeconds(t1) + convertToSeconds(t2);
-        return new Time(seconds);
-    }
-\end{code}
-
-This is shorter than the original version, and it is much easier
-to demonstrate that it is correct (assuming, as usual, that the
-methods it invokes are correct).  As an exercise, rewrite {\tt
-increment} the same way.
-
-
-\section{Generalization and algorithms}
-
-\index{generalization}
-
-In some ways converting from base 60 to base 10 and back is
-harder than just dealing with times.  Base conversion is more
-abstract; our intuition for dealing with times is better.
-
-But if we have the insight to treat times as base 60 numbers,
-and make the investment of writing the conversion methods
-({\tt convertToSeconds} and the third constructor), we get
-a program that is shorter, easier to read and debug, and more
-reliable.
-
-It is also easier to add features later.  Imagine
-subtracting two {\tt Time}s to find the duration between them.  The
-naive approach would be to implement subtraction complete with
-``borrowing.''  Using the conversion methods would be much easier.
-
-Ironically, sometimes making a problem harder (more general)
-makes it easier (fewer special cases, fewer opportunities for error).
-
-%TODO show solution?
-
-%\section{Algorithms}
-%\label{algorithm}
-
-\index{algorithm}
-
-When you write a general solution for a class of problems, as
-opposed to a specific solution to a single problem, you have
-written an {\bf algorithm}.  This word is
-not easy to define, so I will try a couple of approaches.
-
-First, consider some things that are not algorithms.  When you learned
-to multiply single-digit numbers, you probably memorized the
-multiplication table.  In effect, you memorized 100 specific
-solutions, so that knowledge is not really algorithmic.
-
-But if you were ``lazy,'' you probably learned a few
-tricks.  For example, to find the product of $n$ and 9, you can
-write $n-1$ as the first digit and $10-n$ as the second digit.  This
-trick is a general solution for multiplying any single-digit number by 9.
-That's an algorithm!
-
-Similarly, the techniques you learned for addition with carrying,
-subtraction with borrowing, and long division are all algorithms.  One
-of the characteristics of algorithms is that they do not require any
-intelligence to carry out.  They are mechanical processes in which
-each step follows from the last according to a simple set of rules.
-
-In my opinion, it is embarrassing that humans spend so much
-time in school learning to execute algorithms that,
-quite literally, require no intelligence.
-%
-On the other hand, the process of designing algorithms is
-interesting, intellectually challenging, and a central part
-of what we call programming.
-
-Some of the things that people do naturally, without difficulty
-or conscious thought, are the most difficult to express
-algorithmically.  Understanding natural language is a good
-example.  We all do it, but so far no one has been able to
-explain {\em how} we do it, at least not in the form of an
-algorithm.
-
-%~ Soon you will have the opportunity to design
-%~ simple algorithms for a variety of problems.
-
-
 \section{Glossary}
 
 \begin{description}
 
-\item[class:]  Previously, I defined a class as a collection
-of related methods.  In this chapter we learned that a class
-definition is also a template for a new type of object.
+\term{class}
+Previously, we defined a class as a collection of related methods.
+In this chapter we learned that a class definition is also a template for a new type of object.
 
-\item[instance:]  A member of a class.  Every object is an
-instance of some class.
+\term{instance}
+A member of a class.
+Every object is an instance of some class.
 
-\item[constructor:]  A special method that initializes the instance
-variables of a newly-constructed object.
+\term{constructor}
+A special method that initializes the instance variables of a newly-constructed object.
 
-\item[startup class:]  The class that contains the {\tt main}
-method where execution of the program begins.
+\term{startup class}
+The class that contains the \java{main} method where execution of the program begins.
 
-\item[pure function:]  A method whose result depends only on its
-parameters, and that has no side-effects other than returning
-a value.
+\term{pure function}
+A method whose result depends only on its parameters, and that has no side-effects other than returning a value.
 
-\item[modifier:]  A method that changes one or more of the objects
-it receives as parameters, and usually returns {\tt void}.
-
-\item[fill-in method:]  A type of method that takes an ``empty''
-object as a parameter and fills in its instance variables instead
-of generating a return value.
-
-\item[algorithm:]  A set of instructions for solving a class of
-problems by a mechanical process.
-
-\index{class}
-\index{instance}
-\index{constructor}
-\index{startup class}
-\index{pure function}
-\index{modifier}
-\index{algorithm}
+\term{modifier}
+A method that changes one or more of the objects it receives as parameters and is usually \java{void}.
 
 \end{description}
 
@@ -1173,46 +719,34 @@ problems by a mechanical process.
 
 
 \begin{exercise}
-In the board game Scrabble\footnote{Scrabble is a registered trademark
-owned in the U.S.A and Canada by Hasbro Inc., and in the rest of the world
-by J.W. Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary
-of Mattel Inc.}, each tile contains a letter, which is used to spell
-words, and a score, which is used to determine the value of words.
+In the board game Scrabble\footnote{Scrabble is a registered trademark owned in the U.S.A and Canada by Hasbro Inc., and in the rest of the world by J.W. Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.}, each tile contains a letter, which is used to spell words, and a score, which is used to determine the value of words.
 
 \begin{enumerate}
 
-\item Write a definition for a class named {\tt Tile}
-that represents Scrabble tiles.  The instance variables should
-be a character named {\tt letter} and an integer named {\tt value}.
+\item Write a definition for a class named \java{Tile} that represents Scrabble tiles.
+The instance variables should be a character named \java{letter} and an integer named \java{value}.
 
-\item Write a constructor that takes parameters named {\tt letter}
-and {\tt value} and initializes the instance variables.
+\item Write a constructor that takes parameters named \java{letter} and \java{value} and initializes the instance variables.
 
-\item Write a method named {\tt printTile} that takes a {\tt Tile}
-object as a parameter and prints the instance variables in
+\item Write a method named \java{printTile} that takes a \java{Tile} object as a parameter and prints the instance variables in
 a reader-friendly format.
 
-\item Write a method named {\tt testTile} that creates a
-Tile object with the letter {\tt Z} and the value 10, and
-then uses {\tt printTile} to print the state of the object.
+\item Write a method named \java{testTile} that creates a Tile object with the letter \java{Z} and the value 10, and then uses \java{printTile} to print the state of the object.
 
 \end{enumerate}
 
-The point of this exercise is to practice the mechanical part
-of creating a new class definition and code that tests it.
+The point of this exercise is to practice the mechanical part of creating a new class definition and code that tests it.
 \end{exercise}
 
 
 \begin{exercise}
-Write a class definition for {\tt Date}, an object type that
-contains three integers, {\tt year}, {\tt month} and {\tt day}.
-This class should provide two constructors.  The first should
-take no parameters.  The second should take parameters named
-{\tt year}, {\tt month} and {\tt day}, and use them to initialize
-the instance variables.
+Write a class definition for \java{Date}, an object type that contains three integers, \java{year}, \java{month} and \java{day}.
+This class should provide two constructors.
+The first should take no parameters.
+The second should take parameters named \java{year}, \java{month} and \java{day}, and use them to initialize the instance variables.
 
-Write a {\tt main} method that creates a new {\tt Date} object
-named {\tt birthday}.  The new object should contain your birthdate.
+Write a \java{main} method that creates a new \java{Date} object named \java{birthday}.
+The new object should contain your birth date.
 You can use either constructor.
 \end{exercise}
 
@@ -1220,69 +754,49 @@ You can use either constructor.
 \begin{exercise}
 \label{ex.rational}
 
-A rational number is a number that can be represented as the ratio of
-two integers.  For example, $2/3$ is a rational number, and you can
-think of 7 as a rational number with an implicit 1 in the denominator.
-For this assignment, you are going to write a class definition for
-rational numbers.
+A rational number is a number that can be represented as the ratio of two integers.
+For example, $2/3$ is a rational number, and you can think of 7 as a rational number with an implicit 1 in the denominator.
+For this assignment, you are going to write a class definition for rational numbers.
 
 \begin{enumerate}
 
-\item Create a new program called {\tt Rational.java} that defines a
-class named {\tt Rational}.  A {\tt Rational} object should have two
-integer instance variables to store the numerator and denominator.
+\item Create a new program called \java{Rational.java} that defines a class named \java{Rational}.
+A \java{Rational} object should have two integer instance variables to store the numerator and denominator.
 
-\item Write a constructor that takes no arguments and that sets the
-numerator to 0 and denominator to 1.
+\item Write a constructor that takes no arguments and that sets the numerator to 0 and denominator to 1.
 
-\item Write a method called {\tt printRational} that takes
-a Rational object as an argument and prints it in some
-reasonable format.
+\item Write a method called \java{printRational} that takes a Rational object as an argument and prints it in some reasonable format.
 
-\item Write a {\tt main} method that creates a new object with
-type Rational, sets its instance variables to some values, and prints
-the object.
+\item Write a \java{main} method that creates a new object with type Rational, sets its instance variables to some values, and prints the object.
 
-\item At this stage, you have a minimal testable
-program.  Test it and, if necessary, debug it.
+\item At this stage, you have a minimal testable program.
+Test it and, if necessary, debug it.
 
-\item Write a second constructor for your class that takes two
-arguments and that uses them to initalize the instance
-variables.
+\item Write a second constructor for your class that takes two arguments and that uses them to initialize the instance variables.
 
-\item Write a method called {\tt negate} that reverses the sign of
-a rational number.  This method should be a modifier, so it should
-return {\tt void}.  Add lines to {\tt main} to test the new method.
+\item Write a method called \java{negate} that reverses the sign of a rational number.
+This method should be a modifier, so it should be \java{void}.
+Add lines to \java{main} to test the new method.
 
-\item Write a method called {\tt invert} that inverts the number by
-  swapping the numerator and denominator.  Add lines to {\tt main} to
-  test the new method.
+\item Write a method called \java{invert} that inverts the number by swapping the numerator and denominator.
+Add lines to \java{main} to test the new method.
 
-\item Write a method called {\tt toDouble} that converts the rational
-number to a double (floating-point number) and returns the result.
+\item Write a method called \java{toDouble} that converts the rational number to a double (floating-point number) and returns the result.
 This method is a pure function; it does not modify the object.
 As always, test the new method.
 
-\item Write a modifier named {\tt reduce} that reduces a rational
-  number to its lowest terms by finding the greatest common divisor
-  (GCD) of the numerator and denominator and dividing through.
-  This method should be a pure function; it should
-  not modify the instance variables of the object on which it is
-  invoked.  To find the GCD, see Exercise~\ref{gcd}).
+\item Write a modifier named \java{reduce} that reduces a rational number to its lowest terms by finding the greatest common divisor (GCD) of the numerator and denominator and dividing through.
+This method should be a pure function; it should not modify the instance variables of the object on which it is invoked.
+To find the GCD, see Exercise~\ref{gcd}).
 
-\item Write a method called {\tt add} that takes two Rational
-numbers as arguments and returns a new Rational object.  The return
-object should contain the sum of the arguments.
+\item Write a method called \java{add} that takes two Rational numbers as arguments and returns a new Rational object.
+The return object should contain the sum of the arguments.
 
-There are several ways to add fractions.  You can use any one you
-want, but you should make sure that the result of the operation is
-reduced so that the numerator and denominator have no common divisor
-(other than 1).
+There are several ways to add fractions.
+You can use any one you want, but you should make sure that the result of the operation is reduced so that the numerator and denominator have no common divisor (other than 1).
 \end{enumerate}
 
-The purpose of this exercise is to write a class definition that
-includes a variety of methods, including constructors, modifiers and
-pure functions.
+The purpose of this exercise is to write a class definition that includes a variety of methods, including constructors, modifiers and pure functions.
 \end{exercise}
 
 

@@ -146,3 +146,331 @@ public class Enigma {
 
 Explain in 4-5 words what the method {\tt enigma} really does.
 \end{exercise}
+
+
+\section{Object methods and class methods}
+
+\index{object method}
+\index{method!object}
+\index{class method}
+\index{method!class}
+\index{static}
+
+There are two types of methods in Java, called {\bf class methods} and
+{\bf object methods}.  Class methods are identified by the keyword {\tt
+  static} in the first line.  Any method that does {\em not} have the
+keyword {\tt static} is an object method.
+
+Although we have not written object methods, we have invoked some.
+Whenever you invoke a method ``on'' an object, it's an object method.
+For example, {\tt charAt} and the other methods we invoked on {\tt String}
+objects are all object methods.
+
+For example, here is {\tt printCard} as a class method:
+
+\begin{code}
+    public static void printCard(Card c) {
+        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
+    }
+\end{code}
+
+Anything that can be written as a class method can also be written as an
+object method, and vice versa.  But sometimes it is more natural to
+use one or the other.
+Here it is re-written as an object method:
+
+\begin{code}
+    public void print() {
+        System.out.println(ranks[rank] + " of " + suits[suit]);
+    }
+\end{code}
+
+Here are the changes:
+
+\begin{enumerate}
+
+\item I removed {\tt static}.
+
+\item I changed the name of the method to be more idiomatic.
+
+\item I removed the parameter.
+
+\item Inside an object method you can refer to instance variables
+as if they were local variables, so I changed {\tt c.rank} to {\tt rank},
+and likewise for {\tt suit}.
+
+\end{enumerate}
+
+Here's how this method is invoked:
+
+\begin{code}
+    Card card = new Card(1, 1);
+    card.print();
+\end{code}
+
+When you invoke a method on an object, that object becomes the {\bf
+current object}, also known as {\tt this}.  Inside {\tt print},
+the keyword {\tt this} refers to the card the method was invoked on.
+\index{current object}
+\index{object!current}
+\index{this}
+
+
+\section{Oddities and errors}
+
+\index{method!object}
+\index{method!class}
+\index{overloading}
+
+If you have object methods and class methods in the same class, it is
+easy to get confused.  A common way to organize a class definition is
+to put all the constructors at the beginning, followed by all the
+object methods and then all the class methods.
+
+You can have an object method and a class method with the same
+name, as long as they do not have the same number and types of
+parameters.  As with other kinds of overloading, Java decides
+which version to invoke by looking at the arguments you provide.
+\index{static}
+
+Now that we know what the keyword {\tt static} means, you
+have probably figured out that {\tt main} is a class method,
+which means that there is no ``current object'' when it is invoked.
+\index{current object}
+\index{this}
+\index{instance variable}
+\index{variable!instance}
+%
+Since there is no current object in a class method, it is an
+error to use the keyword {\tt this}.  If you try, you get
+an error message like: ``Undefined variable: this.''
+
+Also, you cannot refer to instance variables without using dot
+notation and providing an object name.  If you try, you get a message
+like ``non-static variable... cannot be referenced from a static
+context.''  By ``non-static variable'' it means ``instance variable.''
+
+
+\section{Operations on objects}
+\label{objectops}
+\index{object}
+\index{operator!object}
+
+In the next few
+sections, I demonstrate three kinds of methods that
+operate on objects:
+
+\begin{description}
+
+\item[pure function:]  Takes objects as
+arguments but does not modify them.  The return value is
+either a primitive or a new object created inside the method.
+
+\item[modifier:]  Takes objects as arguments and modifies some
+or all of them.  Often returns void. \index{void}
+
+\item[fill-in method:]  One of the arguments is an ``empty''
+object that gets filled in by the method.  Technically, this is
+a type of modifier.
+
+\end{description}
+
+Often it is possible to write a given method as a pure function, a modifier,
+or a fill-in method.  I will discuss the pros and cons of each.
+
+
+\section{Fill-in methods}
+\index{fill-in method}
+\index{method!fill-in}
+
+Instead of creating a new object every time {\tt addTime} is invoked, we could require the caller to provide an object where {\tt addTime} stores the result.
+Compare this to the previous version:
+
+\begin{code}
+    public static void addTimeFill(Time t1, Time t2, Time sum) {
+        sum.hour = t1.hour + t2.hour;
+        sum.minute = t1.minute + t2.minute;
+        sum.second = t1.second + t2.second;
+
+        if (sum.second >= 60.0) {
+            sum.second -= 60.0;
+            sum.minute += 1;
+        }
+        if (sum.minute >= 60) {
+            sum.minute -= 60;
+            sum.hour += 1;
+        }
+    }
+\end{code}
+
+The result is stored in {\tt sum}, so the return type is {\tt void}.
+
+Modifiers and fill-in methods are efficient because they don't have to create new objects.
+But they make it more difficult to isolate parts of a program; in large projects they can cause errors that are hard to find.
+
+Pure functions help manage the complexity of large projects, in part by making certain kinds of errors impossible.
+Also, they lend themselves to certain kinds of composition and nesting.
+And because the result of a pure function depends only on the parameters, it is possible to speed them up by storing previously-computed results.
+
+\index{pure function}
+
+I recommend that you write pure functions whenever it is reasonable, and resort to modifiers only if there is a compelling advantage.
+
+%\term{fill-in method}
+%A type of method that takes an ``empty'' object as a parameter and fills in its instance variables instead of generating a return value.
+
+
+\section{Incremental development}
+
+\index{incremental development}
+\index{prototyping}
+\index{program development!incremental}
+\index{program development!planning}
+
+In this chapter I demonstrated a program development process called
+{\bf rapid prototyping}\footnote{What I am calling rapid prototyping
+  is similar to test-driven development (TDD); the difference is that
+  TDD is usually based on automated testing.  See
+  \url{http://en.wikipedia.org/wiki/Test-driven_development}.}.  For
+each method, I wrote a rough draft that performed the
+basic calculation, then tested it on a few cases, correcting flaws
+as I found them.
+
+This approach can be effective, but it can lead to code
+that is unnecessarily complicated---since it deals with many
+special cases---and unreliable---since it is hard to convince
+yourself that you have found {\em all} the errors.
+
+An alternative is to look for insight
+into the problem that can make the programming easier.  In
+this case the insight is that a {\tt Time} is really a three-digit
+number in base 60!  The {\tt second} is the ``ones column,''
+the {\tt minute} is the ``60's column'', and the {\tt hour}
+is the ``3600's column.''
+
+When we wrote {\tt addTime} and {\tt increment}, we were effectively
+doing addition in base 60, which is why we had to ``carry'' from one
+column to the next.
+
+\index{arithmetic!floating-point}
+
+Another approach to the whole problem is to convert
+{\tt Time}s into {\tt double}s and take advantage of the fact that
+the computer already knows how to do arithmetic with {\tt double}s.
+Here is a method that converts a {\tt Time} into a {\tt double}:
+
+\begin{code}
+    public static double convertToSeconds(Time t) {
+        int minutes = t.hour * 60 + t.minute;
+        double seconds = minutes * 60 + t.second;
+        return seconds;
+    }
+\end{code}
+
+Now all we need is a way to convert from a {\tt double}
+to a {\tt Time} object.  We could write a method to
+do it, but it might make more sense to write it as a third
+constructor:
+
+\begin{code}
+    public Time(double secs) {
+        this.hour =(int)(secs / 3600.0);
+        secs -= this.hour * 3600.0;
+        this.minute =(int)(secs / 60.0);
+        secs -= this.minute * 60;
+        this.second = secs;
+    }
+\end{code}
+
+This constructor is a little different from the others;
+it involves some calculation along with assignments to the
+instance variables.
+
+You might have to think to convince yourself that the technique
+I am using to convert from one base to another is correct.  But once
+you're convinced, we can use these methods to rewrite {\tt addTime}:
+
+\begin{code}
+    public static Time addTime(Time t1, Time t2) {
+        double seconds = convertToSeconds(t1) + convertToSeconds(t2);
+        return new Time(seconds);
+    }
+\end{code}
+
+This is shorter than the original version, and it is much easier
+to demonstrate that it is correct (assuming, as usual, that the
+methods it invokes are correct).  As an exercise, rewrite {\tt
+increment} the same way.
+
+
+\section{Generalization and algorithms}
+
+\index{generalization}
+
+In some ways converting from base 60 to base 10 and back is
+harder than just dealing with times.  Base conversion is more
+abstract; our intuition for dealing with times is better.
+
+But if we have the insight to treat times as base 60 numbers,
+and make the investment of writing the conversion methods
+({\tt convertToSeconds} and the third constructor), we get
+a program that is shorter, easier to read and debug, and more
+reliable.
+
+It is also easier to add features later.  Imagine
+subtracting two {\tt Time}s to find the duration between them.  The
+naive approach would be to implement subtraction complete with
+``borrowing.''  Using the conversion methods would be much easier.
+
+Ironically, sometimes making a problem harder (more general)
+makes it easier (fewer special cases, fewer opportunities for error).
+
+%TODO show solution?
+
+%\section{Algorithms}
+%\label{algorithm}
+
+\index{algorithm}
+
+When you write a general solution for a class of problems, as
+opposed to a specific solution to a single problem, you have
+written an {\bf algorithm}.  This word is
+not easy to define, so I will try a couple of approaches.
+
+First, consider some things that are not algorithms.  When you learned
+to multiply single-digit numbers, you probably memorized the
+multiplication table.  In effect, you memorized 100 specific
+solutions, so that knowledge is not really algorithmic.
+
+But if you were ``lazy,'' you probably learned a few
+tricks.  For example, to find the product of $n$ and 9, you can
+write $n-1$ as the first digit and $10-n$ as the second digit.  This
+trick is a general solution for multiplying any single-digit number by 9.
+That's an algorithm!
+
+Similarly, the techniques you learned for addition with carrying,
+subtraction with borrowing, and long division are all algorithms.  One
+of the characteristics of algorithms is that they do not require any
+intelligence to carry out.  They are mechanical processes in which
+each step follows from the last according to a simple set of rules.
+
+In my opinion, it is embarrassing that humans spend so much
+time in school learning to execute algorithms that,
+quite literally, require no intelligence.
+%
+On the other hand, the process of designing algorithms is
+interesting, intellectually challenging, and a central part
+of what we call programming.
+
+Some of the things that people do naturally, without difficulty
+or conscious thought, are the most difficult to express
+algorithmically.  Understanding natural language is a good
+example.  We all do it, but so far no one has been able to
+explain {\em how} we do it, at least not in the form of an
+algorithm.
+
+%~ Soon you will have the opportunity to design
+%~ simple algorithms for a variety of problems.
+
+%\item[algorithm:]  A set of instructions for solving a class of
+%problems by a mechanical process.
