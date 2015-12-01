@@ -173,60 +173,53 @@
 \index{array}
 \index{type!array}
 
-An {\bf array} is a set of values where each value is identified by an
-index.  You can make an array of {\tt int}s, {\tt double}s, or any
-other type, but all the values in an array have to have the same type.
+An {\bf array} is a set of values where each value is identified by an index.
+You can make an array of \java{int}s, \java{double}s, or any other type, but all the values in an array must have the same type.
 
-Syntactically, array types look like other Java types except they are
-followed by {\tt []}.  For example, {\tt int[]} is the type ``array of
-integers'' and {\tt double[]} is the type ``array of doubles.''
+Syntactically, array types look like other Java types except they are followed by square brackets \java{[]}.
+For example, \java{int[]} is the type ``integer array'' and \java{double[]} is the type ``double array.''
 
-You can declare variables with these types in the usual ways:
+You can declare variables with these types in the usual way:
 
 \begin{code}
-    int[] count;
+    int[] counts;
     double[] values;
 \end{code}
 
-Until you initialize these variables, they are set to {\tt null}.
-To create the array itself, use {\tt new}.
+Arrays are objects and must be created.
+An array variable simply stores a reference to an array object.
+To create the array itself, use the \java{new} operator.
 
 \begin{code}
-    count = new int[4];
+    counts = new int[4];
     values = new double[size];
 \end{code}
 
-The first assignment makes {\tt count} refer to an array of 4
-integers; the second makes {\tt values} refer to an array of {\tt
-double}s.  The number of elements in {\tt values} depends on {\tt
-size}.  You can use any integer expression as an array
-size.
-
-\index{null}
-\index{state diagram}
-
-The following figure shows how arrays are represented in state
-diagrams:
-
-
-\includegraphics{figs/array.pdf}
-
-
-The large numbers inside the boxes are the {\bf elements} of
-the array.  The small numbers outside the boxes are the
-indices used to identify each box.  When you allocate an
-array of {\tt int}s, the elements are initialized to zero.
-
+The first assignment makes \java{count} refer to an array of 4 integers.
+The second makes \java{values} refer to an array of \java{double}s, but the number of elements in \java{values} depends on the variable \java{size}.
+You can use any integer expression for the size of an array.
 
 \section{Accessing elements}
-\index{element}
-\index{array!element}
 
-To store values in the array, use the
-{\tt []} operator.  For example {\tt count[0]} refers to the
-``zeroeth'' element of the array, and {\tt count[1]} refers to the
-``oneth'' element.  You can use the {\tt []} operator anywhere in an
-expression:
+\index{memory diagram}
+
+When you allocate an array of \java{int}s, the elements are automatically initialized to zero.
+Here is a memory diagram of the \java{counts} array so far:
+
+\begin{center}
+\includegraphics{figs/array.pdf}
+\end{center}
+
+\index{element}
+\index{index}
+\index{array!element}
+\index{array!index}
+
+The large numbers inside the boxes are the {\bf elements} of the array.
+The small numbers outside the boxes are the {\bf indexes} (or indices) used to identify each memory location.
+
+To store values in the array, use the \java{[]} operator.
+For example \java{count[0]} refers to the ``zeroeth'' element of the array, and \java{count[1]} refers to the ``oneth'' element.  You can use the \java{[]} operator anywhere in an expression:
 
 \begin{code}
     count[0] = 7;
@@ -235,27 +228,23 @@ expression:
     count[3] -= 60;
 \end{code}
 
-These are all legal assignment statements.  Here is the
-result of this code fragment:
+These assignment statements are all legal in Java.
+Here is the result of the above code fragment:
 
-
+\begin{center}
 \includegraphics{figs/array2.pdf}
+\end{center}
 
-
-The elements of the array
-are numbered from 0 to 3, which means that there is no element with
-the index 4.  This should sound familiar, since we saw the same thing
-with {\tt String} indices.  Nevertheless, it is a common error to go
-beyond the bounds of an array, which throws an {\tt
-ArrayOutOfBoundsException}.
 \index{exception!ArrayOutOfBounds}
 \index{run-time error}
-\index{index}
 
-You can use any expression as an index, as long as it has type {\tt
-int}.  One of the most common ways to index an array is with a loop
-variable.  For example:
-\index{expression}
+The elements of the array are numbered from 0 to 3, which means that there is no element with the index 4.
+This should sound familiar, since we saw the same thing with \java{String} indexes.
+Nevertheless a common programming mistake is going beyond the bounds of an array, which throws an \java{ArrayIndexOutOfBoundsException}.
+
+You can use any expression as an index, as long as it has type \java{int}.
+One of the most common ways to index an array is with a loop variable.
+For example:
 
 \begin{code}
     int i = 0;
@@ -265,102 +254,93 @@ variable.  For example:
     }
 \end{code}
 
-This is a standard {\tt while} loop that counts from 0
-up to 4, and when the loop variable {\tt i} is 4, the
-condition fails and the loop terminates.  Thus, the body
-of the loop is only executed when {\tt i} is 0, 1, 2 and 3.
-
 \index{loop}
 \index{loop variable}
 \index{variable!loop}
 
-Each time through the loop we use {\tt i} as an index into
-the array, printing the {\tt i}th element.  This type of
-array traversal is very common.
+This is a standard \java{while} loop that counts from 0 up to 4.
+When the loop variable \java{i} is 4, the condition fails and the loop terminates.
+Thus, the body of the loop is only executed when \java{i} is 0, 1, 2 and 3.
+
+Each time through the loop we use \java{i} as an {\it index} into the array, printing the \java{i}th element.
+For convenience, this type of array traversal is commonly written using a \java{for} loop.
+
+\begin{code}
+    for (int i = 0; i < 4; i++) {
+        System.out.println(count[i]);
+    }
+\end{code}
+
+%\section{Arrays vs objects}
+
+\index{object!compared to array}
+\index{array!compared to object}
+
+Some of the objects we looked at, like \java{Rectangle}s, are similar to arrays in the sense that they are a set of values.
+Because arrays are also objects, they have many of the same behaviors:
+
+\begin{itemize}
+
+\item When you declare an array variable, you get a reference to an array.
+
+\item You have to use \java{new} to create the array itself.
+
+\item When you pass an array as an argument, you pass a reference, which means that the invoked method can change the contents of the array.
+
+\end{itemize}
+
+You might ask, ``How is an array of 4 integers different from a Rectangle object of 4 integers?''
+The main difference is that array elements are accessed by index, whereas object elements have names.
+Another difference is that the elements of an array have to be the same type; objects can have instance variables with different types.
 
 
 \section{Copying arrays}
 \index{array!copying}
 
-When you copy an array variable, remember that you are
-copying a reference to the array.  For example:
+When you copy an array variable, remember that you are copying a reference to the array.
+For example:
 
 \begin{code}
-    double[] a = new double[4];
+    double[] a = new double[3];
     double[] b = a;
 \end{code}
 
-This code creates one array of three {\tt double}s, and
-sets two different variables to refer to it.
-This situation is a form of aliasing.
+This code creates one array of three \java{double}s and sets two different variables to reference it.
+As with objects, this situation is a form of aliasing.
 
-
+\begin{center}
 \includegraphics{figs/array3.pdf}
+\end{center}
 
-
-Any changes in either array
-will be reflected in the other.  This is not usually the
-behavior you want; more often you want to
-allocate a new array and copy elements from
-one to the other.
+Any changes made through either array variable will be reflected in the other.
+This behavior is usually not what you want; more often you want to allocate a \java{new} array and copy elements from one to the other.
 
 \begin{code}
-    double[] b = new double[4];
-
-    int i = 0;
-    while (i < 4) {
-      b[i] = a[i];
-      i++;
+    double[] b = new double[3];
+    for (int i = 0; i < 3; i++) {
+        b[i] = a[i];
     }
+
 \end{code}
 
+\index{java.util.Arrays}
 
-\section{Arrays vs objects}
-\index{object!compared to array}
-\index{array!compared to object}
+The Java library provides a utility class named \java{java.util.Arrays} with methods for copying arrays and other common array operations.
+We can rewrite the above \java{for} loop with just one line of code.
 
-In many ways, arrays behave like objects:
+\begin{code}
+    double[] b = Arrays.copyOf(a, 3);
+\end{code}
 
-\begin{itemize}
+%\section{Array length}
 
-\item When you declare an array variable, you get a reference
-to an array.
-
-\item You have to use {\tt new} to create the array itself.
-
-\item When you pass an array as an argument, you pass a reference,
-which means that the invoked method can change the contents
-of the array.
-
-\end{itemize}
-
-Some of the objects we looked at, like {\tt Rectangles}, are
-similar to arrays in the sense that they are collections of
-values.  This raises the question, ``How is an array of 4 integers
-different from a Rectangle object?''
-\index{collection}
-
-If you go back to the definition of ``array'' at the beginning
-of the chapter, you see one difference: the
-elements of an array are identified by indices, and the
-elements of an object have names.
-
-Another difference is that the
-elements of an array have to be the same type.  Objects can
-have instance variables with different types.
-
-
-\section{Array length}
 \index{length!array}
 \index{array!length}
 
-All arrays have one named instance variable: {\tt length}.
-Not surprisingly, it contains the length of the array (number
-of elements).  It is a good idea to use this value as the upper
-bound of a loop, rather than a constant value.  That way, if
-the size of the array changes, you won't have to go through the
-program changing all the loops; they will work correctly for any
-size array.
+All arrays have one named instance variable: \java{length}.
+Not surprisingly, it contains the length of the array (number of elements).
+It is a good idea to use this value as the upper bound of a loop, rather than a constant value.
+That way, if you need to change the size of the array, you won't have to go through the program changing all the loops.
 
 \begin{code}
     for (int i = 0; i < a.length; i++) {
@@ -368,40 +348,41 @@ size array.
     }
 \end{code}
 
-The last time the body of the loop gets executed, {\tt i}
-is {\tt a.length - 1}, which is the index of the last element.  When
-{\tt i} is equal to {\tt a.length}, the condition fails and the body
-is not executed, which is a good thing, since it would throw an
-exception.  This code assumes that the array {\tt b} contains at least
-as many elements as {\tt a}.
+The last time the body of the loop gets executed, \java{i} is \java{a.length - 1}, which is the index of the last element.
+When \java{i} is equal to \java{a.length}, the condition fails and the body is not executed (which is a good thing, since it would throw an exception).
+
+The above \java{for} loop assumes that the array {\tt b} contains at least as many elements as {\tt a}.
+Of course, you could simply use the \java{Arrays} class and \java{a.length}:
+
+\begin{code}
+    b = Arrays.copyOf(a, a.length);
+\end{code}
 
 
 \section{Random numbers}
 \label{random}
 \label{pseudorandom}
-\index{random number}
+
 \index{deterministic}
+
+Most computer programs do the same thing every time they are executed, so they are said to be {\bf deterministic}.
+Usually determinism is a good thing, since we expect the same calculation to yield the same result.
+But for some applications we want the computer to be unpredictable.
+Games are an obvious example, but there are many others.
+
 \index{nondeterministic}
 
-Most computer programs do the same thing every time they are executed,
-so they are said to be {\bf deterministic}.  Usually, determinism is a
-good thing, since we expect the same calculation to yield the same
-result.  But for some applications we want the
-computer to be unpredictable.  Games are an obvious example, but
-there are more.
+Making a program truly {\bf nondeterministic} turns out to be not so easy, but there are ways to make it at least seem nondeterministic.
+One of them is to generate random numbers and use them to determine the outcome of the program.
+Java provides a method that generates {\bf pseudorandom} numbers, which are not truly random since they are determined by an algorithm.
+But for our purposes, they will do.
 
-Making a program truly {\bf nondeterministic} turns out to be not so
-easy, but there are ways to make it at least seem nondeterministic.
-One of them is to generate random numbers and use them to determine
-the outcome of the program.  Java provides a method that generates
-{\bf pseudorandom} numbers, which may not be truly random, but for our
-purposes, they will do.
+\index{random}
 
-Check out the documentation of the {\tt random} method in the {\tt
-Math} class.  The return value is a {\tt double} between 0.0 and 1.0.
-To be precise, it is greater than or equal to 0.0 and strictly less
-than 1.0.  Each time you invoke {\tt random} you get the next
-number in a pseudorandom sequence.
+Check out the documentation of the \java{random} method in the \java{Math} class.
+The return value is a \java{double} between 0.0 and 1.0.
+To be precise, it is greater than or equal to 0.0 and strictly less than 1.0.
+Each time you invoke {\tt Math.random()} you get the next number in a pseudorandom sequence.
 To see a sample, run this loop:
 
 \begin{code}
@@ -411,51 +392,55 @@ To see a sample, run this loop:
     }
 \end{code}
 
-To generate a random {\tt double} between 0.0 and an upper bound like
-{\tt high}, you can multiply {\tt x} by {\tt high}.
+Let's say we need to generate a number between 5 and 15 inclusive.
+Notice how there are 11 possible results: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, and 15.
+We can use \java{Math.random()} to get a number in the range [0, 1).
+If we multiply that number by 11, we now have a number in the range [0, 11).
+Now we just have to add 5 to that number to shift the range to [5, 16).
+Finally, we cast the value to an \java{int}, which throws away any decimal places.
+
+We can encapsulate this technique in a method and generalize for any numbers \java{x} and \java{y}.
+
+\begin{code}
+    public static int randomInt(int x, int y) {
+        int range = y - x + 1;
+        return (int) (Math.random() * range + x);
+    }
+\end{code}
+
+%A similar method is provided by \java{java.util.Random}, but for simplicity we will use our own version in this chapter.
 
 
 \section{Array of random numbers}
 \label{randarray}
 
-How would you generate a random integer between {\tt low} and {\tt high}?
-If your implementation of {\tt randomInt} is correct, then
-every value in the range from {\tt low} to {\tt high-1} should
-have the same probability.  If you generate a long series
-of numbers, every value should appear, at least approximately,
-the same number of times.
+If you generate a long series of random numbers, then every value should appear, at least approximately, the same number of times.
+One way to test the \java{randomInt} method is to generate a large number of values, store them in an array, and count the number of times each value occurs.
 
-One way to test your method is to
-generate a large number of random values,
-store them in an array, and count the number of times each
-value occurs.
-
-The following method takes a single argument, the size of
-the array.  It allocates a new array of integers, fills
-it with random values, and returns a reference to the new
-array.
+The following method takes a single argument: the size of an array.
+It allocates a new array of integers, fills it with random values, and returns a reference to the new array.
 
 \begin{code}
-  public static int[] randomArray(int n) {
-      int[] a = new int[n];
-      for (int i = 0; i<a.length; i++) {
-          a[i] = randomInt(0, 100);
+    public static int[] randomArray(int size) {
+      int[] a = new int[size];
+      for (int i = 0; i < a.length; i++) {
+          a[i] = randomInt(0, 99);
       }
       return a;
   }
 \end{code}
 
-The return type is {\tt int[]}, which means that
-this method returns an array of integers.
-To test this method, it is convenient to have a method that
-prints the contents of an array.
+The return type is \java{int[]}, which means that this method returns (a reference to) an array of integers.
+To test this method, it is convenient to have a method that prints the contents of an array.
 
 \begin{code}
-  public static void printArray(int[] a) {
-      for (int i = 0; i<a.length; i++) {
-          System.out.println(a[i]);
-      }
-  }
+    public static void printArray(int[] a) {
+        System.out.print("{" + a[0]);
+        for (int i = 1; i < a.length; i++) {
+            System.out.print(", " + a[i]);
+        }
+        System.out.println("}");
+    }
 \end{code}
 
 The following code generates an array and prints it:
@@ -466,166 +451,127 @@ The following code generates an array and prints it:
     printArray(array);
 \end{code}
 
-On my machine the output is
+Here is what the output will look like (your results may differ):
 
 \begin{stdout}
-27
-6
-54
-62
-54
-2
-44
-81
+{15, 62, 46, 74, 67, 52, 51, 10}
 \end{stdout}
-
-which is pretty random-looking.  Your results may differ.
-
-If these were exam scores (and they would be pretty bad exam
-scores) the teacher might present the results to the class
-in the form of a {\bf histogram}, which is a set of counters
-that keeps track of the number of times each value appears.
-
-\index{histogram}
-
-For exam scores, we might have ten counters to keep track of
-how many students scored in the 90s, the 80s, etc.  The next
-few sections develop code to generate a histogram.
 
 
 \section{Traverse and count}
+
+\index{histogram}
+\index{counter}
+
+If these values were exam scores (and they would be pretty bad exam scores), the teacher might present them to the class in the form of a {\bf histogram}, which is a set of counters that keeps track of the number of times each value appears.
+For exam scores, we might have ten counters to keep track of how many students scored in the 90s, the 80s, etc.
+
+\index{program development}
+\index{bottom-up}
+
+The next few sections develop the code to generate a histogram.
+A good approach to solving problems like this one is to think of simple methods that are easy to write and then combine them into a solution.
+This process is called {\bf bottom-up} development.
+It is not always obvious where to start, but a good approach is to look for subproblems that fit a pattern you have seen before.
+
 \index{traverse!array}
 \index{array!traverse}
 \index{looping and counting}
-\index{counter}
 
-A good approach to problems like this is to think of simple methods
-that are easy to write, then combine them into a solution.
-This process is called {\bf bottom-up development}.
-See \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}.
-\index{program development}
-
-It is not always obvious where to start,
-but a good approach is to look for subproblems that fit a pattern you
-have seen before.
-
-In Section~\ref{loopcount} we saw a loop that traversed a
-string and counted the number of times a given letter appeared.  You
-can think of this program as an example of a pattern called ``traverse
-and count.''  The elements of this pattern are:
+In Section~\ref{loopcount}, we saw a loop that traversed a string and counted the number of times a given letter appeared.
+You can think of this program as an example of a pattern called ``traverse and count.''
+The elements of this pattern are:
 
 \begin{itemize}
-
-\item A set or container that can be traversed, like an array
-or a string.
-
+\item A container that can be traversed, like an array or a string.
 \item A test that you can apply to each element in the container.
-
-\item A counter that keeps track of how many elements pass
-the test.
-
+\item A counter that keeps track of how many elements pass the test.
 \end{itemize}
 
-In this case, the container is an array of integers.  The
-test is whether or not a given score falls in a given range of
-values.
+In the case of building a histogram, the container is an array of integers.
+The test is whether or not a given score falls in a given range of values.
+And the counter is the histogram itself.
 
-Here is a method called {\tt inRange} that counts the number of
-elements in an array that fall in a given range.  The parameters are
-the array and two integers that specify the lower and upper bounds of
-the range.
+Here is a method called \java{inRange} that counts the number of elements in an array that fall in a given range.
+The parameters are the array and two integers that specify the lower and upper bounds of the range.
 
 \begin{code}
 public static int inRange(int[] a, int low, int high) {
     int count = 0;
     for (int i = 0; i < a.length; i++) {
-        if (a[i] >= low && a[i] < high) count++;
+        if (a[i] >= low && a[i] < high) {
+            count++;
+        }
     }
     return count;
 }
 \end{code}
 
-I wasn't specific about whether something equal
-to {\tt low} or {\tt high} falls in the range, but you can
-see from the code that {\tt low} is in and {\tt high} is out.
-That keeps us from counting any elements twice.
+Note that \java{low} is included in the range (\java{>=}), but \java{high} is excluded (\java{<}).
+This important detail keeps us from counting any elements twice.
 
-Now we can count the number of scores in the ranges we are
-interested in:
+Now we can count the number of scores in the ranges we are interested in:
 
 \begin{code}
-int[] scores = randomArray(30);
-int a = inRange(scores, 90, 100);
-int b = inRange(scores, 80, 90);
-int c = inRange(scores, 70, 80);
-int d = inRange(scores, 60, 70);
-int f = inRange(scores, 0, 60);
+    int[] scores = randomArray(30);
+    int a = inRange(scores, 90, 100);
+    int b = inRange(scores, 80, 90);
+    int c = inRange(scores, 70, 80);
+    int d = inRange(scores, 60, 70);
+    int f = inRange(scores, 0, 60);
 \end{code}
 
 
 \section{Building a histogram}
-\index{range}
-\index{histogram}
 
-This code is repetitious, but it is acceptable as
-long as the number of ranges is small.  But imagine that
-we want to keep track of the number of times each score appears,
-all 100 possible values.  Would you want to write this?
+This code is repetitious, but it is acceptable as long as the number of ranges is small.
+Imagine that we want to keep track of the number of times each score appears, i.e., all 100 possible values.
+Should you just write the following 100 lines of code?
 
 \begin{code}
-int count0 = inRange(scores, 0, 1);
-int count1 = inRange(scores, 1, 2);
-int count2 = inRange(scores, 2, 3);
-...
-int count3 = inRange(scores, 99, 100);
+    int count0 = inRange(scores, 0, 1);
+    int count1 = inRange(scores, 1, 2);
+    int count2 = inRange(scores, 2, 3);
+    ...
+    int count99 = inRange(scores, 99, 100);
 \end{code}
 
-I don't think so.  What we really want is a way to store 100 integers,
-preferably so we can use an index to access each one.  Hint: array.
+What we really want is a way to store 100 integers, preferably so we can use an index to access each one.
+In other words, we need an array!
 
-The counting pattern is the same whether we use a single counter or an
-array of counters.  In this case, we initialize the array outside the
-loop; then, inside the loop, we invoke {\tt inRange} and store the
+The counting pattern is the same whether we use a single counter or an array of counters.
+In this case, we initialize the array outside the loop; then, inside the loop, we invoke \java{inRange} and store the
 result:
 
 \begin{code}
     int[] counts = new int[100];
-
     for (int i = 0; i < counts.length; i++) {
-        counts[i] = inRange(scores, i, i+1);
+        counts[i] = inRange(scores, i, i + 1);
     }
 \end{code}
 
-The only tricky thing here is that we are using the loop variable
-in two roles: as in index into the array, and as the parameter to
-{\tt inRange}.
+The only tricky thing here is that we are using the loop variable in two roles: as in index into the array, and as the parameter to \java{inRange}.
 
+%\section{A single-pass solution}
+%\label{singlepass}
 
-\section{A single-pass solution}
-\label{singlepass}
+The code works, but it is not as efficient as it could be.
+Every time it invokes \java{inRange}, it traverses the entire array.
+As the number of ranges increases, that gets to be a lot of traversals.
 
-This code works, but it is not as efficient as it could
-be.  Every time it invokes {\tt inRange}, it traverses the
-entire array.  As the number of ranges increases, that gets
-to be a lot of traversals.
-
-It would be better to make a single pass through the array,
-and for each value, compute which range it falls in.  Then
-we could increment the appropriate counter.
-In this example, that computation is trivial, because we
-can use the value itself as an index into the array of counters.
-
-Here is code that traverses an array of scores once and generates
-a histogram.
+It would be better to make a single pass through the array, and for each value, compute which range it falls in.
+Then we could increment the appropriate counter.
+Here is code that traverses an array of scores once and generates a histogram.
 
 \begin{code}
     int[] counts = new int[100];
-
     for (int i = 0; i < scores.length; i++) {
         int index = scores[i];
         counts[index]++;
     }
 \end{code}
+
+In this example the computation is trivial, because we can use the value itself as an index into the array of counters.
 
 
 \section{The enhanced for loop}
