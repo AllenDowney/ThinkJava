@@ -351,7 +351,7 @@ That way, if you need to change the size of the array, you won't have to go thro
 The last time the body of the loop gets executed, \java{i} is \java{a.length - 1}, which is the index of the last element.
 When \java{i} is equal to \java{a.length}, the condition fails and the body is not executed (which is a good thing, since it would throw an exception).
 
-The above \java{for} loop assumes that the array {\tt b} contains at least as many elements as {\tt a}.
+The above \java{for} loop assumes that the array \java{b} contains at least as many elements as \java{a}.
 Of course, you could simply use the \java{Arrays} class and \java{a.length}:
 
 \begin{code}
@@ -382,7 +382,7 @@ But for our purposes, they will do.
 Check out the documentation of the \java{random} method in the \java{Math} class.
 The return value is a \java{double} between 0.0 and 1.0.
 To be precise, it is greater than or equal to 0.0 and strictly less than 1.0.
-Each time you invoke {\tt Math.random()} you get the next number in a pseudorandom sequence.
+Each time you invoke \java{Math.random()} you get the next number in a pseudorandom sequence.
 To see a sample, run this loop:
 
 \begin{code}
@@ -431,7 +431,7 @@ It allocates a new array of integers, fills it with random values, and returns a
 \end{code}
 
 The return type is \java{int[]}, which means that this method returns (a reference to) an array of integers.
-To test this method, it is convenient to have a method that prints the contents of an array.
+To test this method, it is convenient to have another method that prints the contents of an array.
 
 \begin{code}
     public static void printArray(int[] a) {
@@ -540,8 +540,7 @@ What we really want is a way to store 100 integers, preferably so we can use an 
 In other words, we need an array!
 
 The counting pattern is the same whether we use a single counter or an array of counters.
-In this case, we initialize the array outside the loop; then, inside the loop, we invoke \java{inRange} and store the
-result:
+In this case, we initialize the array outside the loop; then, inside the loop, we invoke \java{inRange} and store the result:
 
 \begin{code}
     int[] counts = new int[100];
@@ -553,7 +552,7 @@ result:
 The only tricky thing here is that we are using the loop variable in two roles: as in index into the array, and as the parameter to \java{inRange}.
 
 %\section{A single-pass solution}
-%\label{singlepass}
+\label{singlepass}
 
 The code works, but it is not as efficient as it could be.
 Every time it invokes \java{inRange}, it traverses the entire array.
@@ -576,321 +575,381 @@ In this example the computation is trivial, because we can use the value itself 
 
 \section{The enhanced for loop}
 
-TODO
+Since looping through arrays is so common, Java provides an alternative \java{for} loop syntax that makes the code more compact.
+The basic idea is to iterate each element of the array, as opposed to each index.
+
+\begin{code}
+    // standard for loop
+    for (int i = 0; i < values.length; i++) {
+        System.out.println("The value is " + values[i]);
+    }
+
+    // enhanced for loop
+    for (int value : values) {
+        System.out.println("The value is " + value);
+    }
+\end{code}
+
+You can read the enhanced \java{for} loop above as, ``for each \java{value} in \java{values}.''
+It's common to use a plural nouns for array variables and singular nouns for element variables.
+
+Using the enhanced \java{for} loop, we can create the histogram from the previous section using even less code:
+
+\begin{code}
+    int[] counts = new int[100];
+    for (int score : scores) {
+        counts[score]++;
+    }
+\end{code}
+
+Because they make the code more readable, you should use enhanced \java{for} loops whenever possible.
+For example, to find the maximum value in an array of integers, we simply look at each one:
+
+\begin{code}
+    int max = Integer.MIN_VALUE;
+    for (int value : numbers) {
+        if (value > max) {
+            max = value;
+        }
+    }
+\end{code}
+
+Note however that the enhanced \java{for} loop does not give you the index of each value.
+If you need to find the index of the maximum value, then you need to use a standard \java{for} loop.
+
+\begin{code}
+    int index = -1;
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            index = i;
+            max = numbers[i];
+        }
+    }
+\end{code}
 
 
 \section{Command-line arguments}
 
-TODO
+Now that you have learned about arrays, the time has finally come to explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter 1.
+Continuing the example from the previous section, let's write a program to find the maximum number.
+Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
+Here is a starting point:
+
+\begin{code}
+public class Max {
+    public static void main(String[] args) {
+        System.out.println(args);
+    }
+}
+\end{code}
+
+If you compile and run this program as-is, the output looks something like:
+
+\begin{stdout}
+[Ljava.lang.String;@5da1fbed
+\end{stdout}
+
+The variable \java{args} is an array of strings, and since arrays are objects, the \java{println} method calls its \java{toString} method.
+Unfortunately arrays don't come with a useful version of \java{toString}, which is why we wrote our own \java{printArray} method in Section~\ref{randarray}.
+The \java{java.util.Arrays} class provides a number of \java{toString} methods, if you're not in the mood to write your own.
+
+Rather than print the address of the array, let's look at its actual contents:
+
+\begin{code}
+    System.out.println(Arrays.toString(args));
+\end{code}
+
+The output indicates that we have an empty array:
+
+\begin{stdout}
+[]
+\end{stdout}
+
+If you run Java from the command-line, you can pass optional arguments separated by spaces.
+Everything after the class name is considered part of the command-line arguments.
+For example, we can enter the command:
+
+\begin{stdout}
+java Max 10 -3 55 0 14
+\end{stdout}
+
+Now the output of the program is:
+
+\begin{stdout}
+[10, -3, 55, 0, 14]
+\end{stdout}
+
+At this point, we have a program that can read and write strings.
+To find the maximum number, we need to convert the String arguments into integers.
+Here is a complete example that uses an enhanced \java{for} loop to parse each command-line argument and search for the maximum value in a single pass.
+
+\begin{code}
+    int max = Integer.MIN_VALUE;
+    for (String arg : args) {
+        int value = Integer.parseInt(arg);
+        if (value > max) {
+            max = value;
+        }
+    }
+    System.out.println("The max is " + max);
+\end{code}
+
+In general, command-line arguments allow you to customize your programs based on user input before the program begins.
+For example, the \java{javac} and \java{java} programs use command-line arguments for a variety of configuration settings.
+You can run \java{javac -help} and \java{java -help} from the command-line to see what they are.
 
 
-\section{Glossary}
+\section{Vocabulary}
 
 \begin{description}
 
-\item[array:]  A collection of values, where all the
-values have the same type, and each value is identified by
-an index.
+\term{array}
+A collection of values, where all the values have the same type, and each value is identified by an index.
 
-\item[element:]  One of the values in an array.  The {\tt []}
-operator selects elements.
+\term{element}
+One of the values in an array.
+The \java{[]} operator selects elements.
 
-\item[index:]  An integer variable or value used to indicate
-an element of an array.
+\term{index}
+An integer variable or value used to indicate an element of an array.
 
-\item[deterministic:]  A program that does the same thing every
-time it is invoked.
+\term{deterministic}
+A program that does the same thing every time it is invoked.
+Technically speaking, all computer programs are deterministic: they simply execute the source code.
 
-\item[pseudorandom:]  A sequence of numbers that appear to be
-random, but which are actually the product of a deterministic
-computation.
+\term{nondeterministic}
+A program that behaves differently, even when run multiple times with the same input.
+Nondeterminism is a theoretical concept for analyzing the complexity of algorithms.
 
-\item[histogram:]  An array of integers where each integer
-counts the number of values that fall into a certain range.
+\term{pseudorandom}
+A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.
 
-\index{array}
-\index{element}
-\index{index}
-\index{deterministic}
-\index{pseudorandom}
+\term{histogram}
+An array of integers where each integer counts the number of values that fall into a certain range.
+
+\term{bottom-up}
+A program development process that starts with simple methods and then assembles them into a working solution.
 
 \end{description}
 
 
 \section{Exercises}
 
+
 \begin{exercise}
-Write a method called {\tt cloneArray} that takes an
-array of integers as a parameter, creates a new array that is the same
-size, copies the elements from the first array into the new one, and
-then returns a reference to the new array.
+Write a method called \java{cloneArray} that takes an array of integers as a parameter, creates a new array that is the same size, copies the elements from the first array into the new one, and then returns a reference to the new array.
 \end{exercise}
 
 
 \begin{exercise}
-Write a method called {\tt randomDouble} that takes two doubles,
-{\tt low} and {\tt high}, and that returns a random double $x$
-so that $low \le x < high$.
+Write a method called \java{randomDouble} that takes two doubles, \java{low} and {high}, and that returns a random double $x$ such that $low \le x < high$.
 \end{exercise}
 
 
 \begin{exercise}
-\label{ex.randint}
-Write a method called {\tt randomInt} that takes two arguments,
-{\tt low} and {\tt high}, and that returns a random integer between
-{\tt low} and {\tt high}, not including {\tt high}.
+Encapsulate the code in Section~\ref{singlepass} in a method called \java{makeHist} that takes an array of scores and returns a histogram of the values in the array.
 \end{exercise}
 
 
 \begin{exercise}
-Encapsulate the code in Section~\ref{singlepass} in a method called
-{\tt makeHist} that takes an array of scores and returns a histogram
-of the values in the array.
+Write a method named \java{areFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all factors of \java{n} (which is to say that \java{n} is divisible by all of them).
+%HINT: See Exercise~\ref{ex.isdiv}.
 \end{exercise}
 
 
 \begin{exercise}
-Write a method named {\tt areFactors} that takes
-an integer {\tt n} and an array of integers, and that returns
-{\tt true} if the numbers in the array are all factors of {\tt n}
-(which is to say that {\tt n} is divisible by all of them).
-HINT: See Exercise~\ref{ex.isdiv}.
+Write a method that takes an array of integers and an integer named \java{target} as arguments, and that returns the first index where \java{target} appears in the array, if it does, and -1 otherwise.
 \end{exercise}
 
-
 \begin{exercise}
-Write a method that takes an array of integers and an integer named
-{\tt target} as arguments, and that returns the first index where
-{\tt target} appears in the array, if it does, and -1 otherwise.
-\end{exercise}
+Some programmers disagree with the general rule that variables and methods should be given meaningful names.
+Instead, they think variables and methods should be named after fruit.
 
-
-\begin{exercise}
-Some programmers disagree with the general rule that variables
-and methods should be given meaningful names.  Instead, they
-think variables and methods should be named after fruit.
-
-For each of the following methods, write one sentence that
-describes abstractly what the method does.  For each variable,
-identify the role it plays.
+For each of the following methods, write one sentence that describes abstractly what the method does.
+For each variable, identify the role it plays.
+(The purpose of this exercise is to practice reading code and recognizing the computation patterns we have seen.)
 
 \begin{code}
-public static int banana(int[] a) {
-    int grape = 0;
-    int i = 0;
-    while (i < a.length) {
-        grape = grape + a[i];
-        i++;
+    public static int banana(int[] a) {
+        int grape = 0;
+        int i = 0;
+        while (i < a.length) {
+            grape = grape + a[i];
+            i++;
+        }
+        return grape;
     }
-    return grape;
-}
-
-public static int apple(int[] a, int p) {
-    int i = 0;
-    int pear = 0;
-    while (i < a.length) {
-        if (a[i] == p) pear++;
-        i++;
-    }
-    return pear;
-}
-
-public static int grapefruit(int[] a, int p) {
-    for (int i = 0; i<a.length; i++) {
-        if (a[i] == p) return i;
-    }
-    return -1;
-}
 \end{code}
 
-The purpose of this exercise is to practice reading code and
-recognizing the computation patterns we have seen.
-\end{exercise}
-
-
-\begin{exercise}
-\begin{enumerate}
-
-\item What is the output of the following program?
-
-\item Draw a stack diagram that shows the state of the
-program just before {\tt mus} returns.
-
-\item Describe in a few words what {\tt mus} does.
-\end{enumerate}
+\begin{code}
+    public static int apple(int[] a, int p) {
+        int i = 0;
+        int pear = 0;
+        while (i < a.length) {
+            if (a[i] == p) {
+                pear++;
+            }
+            i++;
+        }
+        return pear;
+    }
+\end{code}
 
 \begin{code}
-public static int[] make(int n) {
-    int[] a = new int[n];
-
-    for (int i = 0; i < n; i++) {
-        a[i] = i+1;
+    public static int grapefruit(int[] a, int p) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == p) {
+                return i;
+            }
+        }
+        return -1;
     }
-    return a;
-}
-
-public static void dub(int[] jub) {
-    for (int i = 0; i < jub.length; i++) {
-        jub[i] *= 2;
-    }
-}
-
-public static int mus(int[] zoo) {
-    int fus = 0;
-    for (int i = 0; i < zoo.length; i++) {
-        fus = fus + zoo[i];
-    }
-    return fus;
-}
-
-public static void main(String[] args) {
-    int[] bob = make(5);
-    dub(bob);
-
-    System.out.println(mus(bob));
-}
 \end{code}
 \end{exercise}
 
 
 \begin{exercise}
-Many of the patterns we have seen for traversing arrays can
-also be written recursively.  It is not common to do so, but
-it is a useful exercise.
-
-\begin{enumerate}
-
-\item Write a method called {\tt maxInRange} that takes an array of
-integers and a range of indices ({\tt lowIndex} and {\tt highIndex}),
-and that finds the maximum value in the array, considering only the
-elements between {\tt lowIndex} and {\tt highIndex}, including both
-ends.
-
-This method should be recursive.  If the length of the range is 1,
-that is, if {\tt lowIndex == highIndex}, we know immediately that the
-sole element in the range must be the maximum.  So that's the base
-case.
-
-If there is more than one element in the range, we can break the array
-into two pieces, find the maximum in each of the pieces, and then find
-the maximum of the maxima.
-
-\item Methods like {\tt maxInRange} can be awkward to use.  To
-find the largest element in an array, we have to provide a range
-that includes the entire array.
+What is the output of the following program?
+Draw a stack diagram that shows the state of the program just before \java{mus} returns.
+Describe in a few words what \java{mus} does.
 
 \begin{code}
-    double max = maxInRange(array, 0, a.length-1);
+    public static int[] make(int n) {
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = i + 1;
+        }
+        return a;
+    }
 \end{code}
 
-Write a method called {\tt max} that takes an array as a parameter
-and that uses {\tt maxInRange} to find and return the largest value.
-Methods like {\tt max} are sometimes called {\bf wrapper methods}
-because they provide a layer of abstraction around an awkward method
-and make it easier to use.  The method that actually
-performs the computation is called the {\bf helper method}.
+\begin{code}
+    public static void dub(int[] jub) {
+        for (int i = 0; i < jub.length; i++) {
+            jub[i] *= 2;
+        }
+    }
+\end{code}
 
-\item Write a recursive method named {\tt find} using the
-wrapper-helper pattern.  {\tt find} should take an array of
-integers and a target integer.  It should return the index
-of the first location where the target integer appears in the
-array, or -1 if it does not appear.
+\begin{code}
+    public static int mus(int[] zoo) {
+        int fus = 0;
+        for (int i = 0; i < zoo.length; i++) {
+            fus = fus + zoo[i];
+        }
+        return fus;
+    }
+\end{code}
 
-\end{enumerate}
+\begin{code}
+    public static void main(String[] args) {
+        int[] bob = make(5);
+        dub(bob);
+        System.out.println(mus(bob));
+    }
+\end{code}
 \end{exercise}
 
+
 \begin{exercise}
-One not-very-efficient way to sort the elements of an array
-is to find the largest element and swap it with the first
-element, then find the second-largest element and swap it with
-the second, and so on.  This method is called a {\bf selection
-sort} (see \url{http://en.wikipedia.org/wiki/Selection_sort}).
+Many of the patterns we have seen for traversing arrays can also be written recursively.
+It is uncommon, but it is a useful exercise.
 
 \begin{enumerate}
 
-\item Write a method called {\tt indexOfMaxInRange} that
-takes an array of integers, finds the
-largest element in the given range, and returns its {\em index}.
-You can modify your recursive version of {\tt maxInRange} or
-you can write an iterative version from scratch.
+\item Write a method called \java{maxInRange} that takes an array of integers and a range of indexes (\java{lowIndex} and \java{highIndex}), and that finds the maximum value in the array, considering only the elements between \java{lowIndex} and \java{highIndex}, including both ends.
 
-\item Write a method called {\tt swapElement} that takes an
-array of integers and two indices, and that swaps the elements
-at the given indices.
+This method should be recursive.
+If the length of the range is 1, that is, \java{if lowIndex == highIndex}, we know immediately that the sole element in the range must be the maximum.
+So that's the base case.
 
-\item Write a method called {\tt selectionSort} that takes an array of
-integers and that uses {\tt indexOfMaxInRange} and {\tt swapElement}
-to sort the array from largest to smallest.
+If there is more than one element in the range, we can break the array into two pieces, find the maximum in each of the pieces, and then find the maximum of the maxima.
+
+\item Methods like \java{maxInRange} can be awkward to use.
+To find the largest element in an array, we have to provide a range for the entire array.
+
+\begin{code}
+    double max = maxInRange(array, 0, a.length - 1);
+\end{code}
+
+Write a method called \java{max} that takes an array as a parameter and that uses \java{maxInRange} to find and return the largest value.
+
+Methods like \java{max} are sometimes called ``wrapper methods'' because they provide a layer of abstraction around an awkward method and make it easier to use.
+The method that actually performs the computation is called the ``helper method.''
+
+\item Write a recursive method named \java{find} using the wrapper-helper pattern.
+The \java{find} method should take an array of integers and a target integer.
+It should return the index of the first location where the target integer appears in the array, or -1 if it does not appear.
 
 \end{enumerate}
 \end{exercise}
 
 
 \begin{exercise}
-Write a method called {\tt letterHist} that takes a String as a
-parameter and that returns a histogram of the letters in the String.
-The zeroeth element of the histogram should contain the number of a's
-in the String (upper and lower case); the 25th element should contain
-the number of z's.
+One not-very-efficient way to sort the elements of an array is to find the largest element and swap it with the first element, then find the second-largest element and swap it with the second, and so on.
+This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/Selection_sort}).
+
+\begin{enumerate}
+
+\item Write a method called \java{indexOfMaxInRange} that takes an array of integers, finds the largest element in the given range, and returns its {\em index}.
+You can modify your recursive version of \java{maxInRange} or you can write an iterative version from scratch.
+
+\item Write a method called \java{swapElement} that takes an array of integers and two indices, and that swaps the elements at the given indices.
+
+\item Write a method called \java{selectionSort} that takes an array of integers and that uses \java{indexOfMaxInRange} and \java{swapElement} to sort the array from largest to smallest.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+Write a method called \java{letterHist} that takes a String as a parameter and that returns a histogram of the letters in the String.
+The zeroeth element of the histogram should contain the number of a's in the String (upper and lower case); the 25th element should contain the number of z's.
 Your solution should only traverse the String once.
 \end{exercise}
 
 
 \begin{exercise}
-A word is said to be a ``doubloon'' if every letter that appears in the
-word appears exactly twice.  For example, the following are all the
-doubloons I found in my dictionary.
+A word is said to be a ``doubloon'' if every letter that appears in the word appears exactly twice.
+Here are some example doubloons found in the dictionary.
 
-\begin {quote}
-Abba, Anna, appall, appearer, appeases, arraigning, beriberi,
-bilabial, boob, Caucasus, coco, Dada, deed, Emmett, Hannah,
-horseshoer, intestines, Isis, mama, Mimi, murmur, noon, Otto, papa,
-peep, reappear, redder, sees, Shanghaiings, Toto
+\begin{quote}
+Abba, Anna, appall, appearer, appeases, arraigning, beriberi, bilabial, boob, Caucasus, coco, Dada, deed, Emmett, Hannah, horseshoer, intestines, Isis, mama, Mimi, murmur, noon, Otto, papa, peep, reappear, redder, sees, Shanghaiings, Toto
 \end{quote}
 
-Write a method called {\tt isDoubloon} that returns {\tt true}
-if the given word is a doubloon and {\tt false} otherwise.
+Write a method called \java{isDoubloon} that returns \java{true} if the given word is a doubloon and \java{false} otherwise.
 \end{exercise}
 
 
 \begin{exercise}
-Two words are anagrams if they contain the same letters (and the
-same number of each letter).  For example, ``stop'' is an anagram
-of ``pots'' and ``allen downey'' is an anagram of ``well annoyed.''
+Two words are anagrams if they contain the same letters (and the same number of each letter).
+For example, ``stop'' is an anagram of ``pots'' and ``allen downey'' is an anagram of ``well annoyed.''
 
-Write a method that takes two Strings and returns {\tt true} if
-the Strings are anagrams of each other.
+Write a method that takes two Strings and returns \java{true} if the Strings are anagrams of each other.
 
 Optional challenge: read the letters of the Strings only once.
 \end{exercise}
 
 
 \begin{exercise}
-In Scrabble each player has a set of tiles with letters on them, and
-the object of the game is to use those letters to spell words.  The
-scoring system is complicated, but longer words are usually
-worth more than shorter words.
+In Scrabble each player has a set of tiles with letters on them, and the object of the game is to use those letters to spell words.
+The scoring system is complicated, but longer words are usually worth more than shorter words.
 
-Imagine you are given your set of tiles as a String, like {\tt
-"quijibo"} and you are given another String to test, like {\tt "jib"}.
-Write a method called {\tt canSpell} that takes two Strings and
-returns {\tt true} if the set of tiles can be used to spell the word.  You
-might have more than one tile with the same letter, but you can only
-use each tile once.
+Imagine you are given your set of tiles as a String, like \java{"quijibo"} and you are given another String to test, like \java{"jib"}.
+Write a method called \java{canSpell} that takes two Strings and returns \java{true} if the set of tiles can be used to spell the word.
+You might have more than one tile with the same letter, but you can only use each tile once.
 
 Optional challenge: read the letters of the Strings only once.
 \end{exercise}
 
 
 \begin{exercise}
-In real Scrabble, there are some blank tiles that can be used
-as wild cards; that is, a blank tile can be used to represent
-any letter.
+In real Scrabble, there are some blank tiles that can be used as wild cards; that is, a blank tile can be used to represent any letter.
 
-Think of an algorithm for {\tt canSpell} that deals with wild
-cards.  Don't get bogged down in details of implementation like
-how to represent wild cards.  Just describe the algorithm, using
-English, pseudocode, or Java.
+Think of an algorithm for \java{canSpell} that deals with wild cards.
+Don't get bogged down in details of implementation like how to represent wild cards.
+Just describe the algorithm, using English, pseudocode, or Java.
 \end{exercise}
 
 
