@@ -1,5 +1,174 @@
+\documentclass[12pt]{book}
+
+\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\title{\thetitle}
+
+\newcommand{\theauthors}{Allen Downey and Chris Mayfield}
+\author{\theauthors}
+
+\newcommand{\theversion}{Version 6.0 Draft -- \today}
+\date{\theversion}
+
+\usepackage{geometry}
+\geometry{
+    width=5.5in,
+    height=8.5in,
+    hmarginratio=3:2,
+    vmarginratio=1:1,
+    includehead=true,
+    headheight=15pt
+}
+
+% paragraph spacing
+\setlength{\parindent}{0pt}                      % 17.62482pt
+\setlength{\parskip}{12pt plus 4pt minus 4pt}    % 0.0pt plus 1.0pt
+\linespread{1.05}
+\def\arraystretch{1.5}
+
+% list spacing
+\setlength{\topsep}{5pt plus 2pt minus 3pt}      % 10.0pt plus 4.0pt minus 6.0pt
+\setlength{\partopsep}{-6pt plus 2pt minus 2pt}  %  3.0pt plus 2.0pt minus 2.0pt
+\setlength{\itemsep}{0pt}                        %  5.0pt plus 2.5pt minus 1.0pt
+
+% these are copied from tex/latex/base/book.cls
+% all I changed is afterskip
+\makeatletter
+\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {0.7ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% table of contents vertical spacing
+\usepackage{tocloft}
+\setlength\cftparskip{8pt plus 4pt minus 4pt}
+
+% The following line adds a little extra space to the column
+% in which the Section numbers appear in the table of contents
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.5em}{3.0em}}
+\makeatother
+
+% customize page headers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+%\rfoot{\textcolor{gray}{\tiny ThinkJava Draft \today}}
+
+% balanced index with TOC entry
+\usepackage{makeidx}
+\makeindex
+%\usepackage[totoc]{idxlayout}
+
+% automatically index glossary terms
+\newcommand{\term}[1]{%
+\index{#1}
+\item[#1:]}
+% TODO: doesn't work with plastex
+%\newcommand{\term}[1]{\item[#1:]}
+
+% where to find graphics
+\usepackage{graphicx}
+%\graphicspath{{figs/}}
+
+%% tweak spacing of figures and captions
+%\usepackage{floatrow}
+%\usepackage{caption}
+%\captionsetup{
+%    font=small,
+%    labelformat=empty,
+%    justification=centering,
+%    skip=4pt
+%}
+
+% format end of chapter excercises
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheoremstyle{exercise}
+  {12pt}        % space above
+  {12pt}        % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {}            % punctuation
+  {12pt}        % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+% colors for code listings and output
+\usepackage{xcolor}
+\definecolor{bgcolor}{HTML}{FAFAFA}
+\definecolor{comment}{HTML}{007C00}
+\definecolor{keyword}{HTML}{0000FF}
+\definecolor{strings}{HTML}{B20000}
+
+% syntax highlighting in code listings
+\usepackage{textcomp}
+\usepackage{listings}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily,
+    backgroundcolor=\color{bgcolor},
+    commentstyle=\color{comment},
+    keywordstyle=\color{keyword},
+    stringstyle=\color{strings},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    upquote=true,
+    aboveskip=\parskip,
+    belowskip=\parskip
+}
+
+% code listing environments
+\lstnewenvironment{code}
+{\minipage{\linewidth}}
+{\endminipage}
+\lstnewenvironment{stdout}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
+{\endminipage}
+
+% pdf hyperlinks, table of contents, and document properties
+\usepackage[pdftex]{hyperref}
+\hypersetup{%
+  pdftitle={\thetitle},
+  pdfauthor={\theauthors},
+  pdfsubject={\theversion},
+  pdfkeywords={},
+  bookmarksopen=false,
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+% inline syntax formatting
+\newcommand{\java}[1]{\lstinline{#1}} %\end{
+%\newcommand{\java}[1]{\verb"#1"}
+%\newcommand{\java}[1]{{\tt #1}}
+
+\begin{document}
+\setcounter{chapter}{12}
+
+
 \chapter{Objects of Arrays}
-\label{chap12}
+
 \index{deck}
 \index{array!of Cards}
 
@@ -10,6 +179,46 @@ form will help you learn (I hope), but don't write code like this.
 
 You can download the code in this chapter from
 \url{http://thinkapjava.com/code/Card2.java}.
+
+
+\section{Decks and subdecks}
+\index{deck}
+\index{subdeck}
+
+\index{prototype}
+Here is the prototype (see Section~\ref{documentation}) of {\tt findBisect}:
+
+\begin{code}
+public static int findBisect(Card[] deck, Card card, int low, int high)
+\end{code}
+
+\index{parameter!abstract}
+\index{abstract parameter}
+
+We can think of {\tt cards}, {\tt low}, and {\tt high}
+as a single parameter that specifies a {\bf subdeck}.
+This way of thinking is common, and is sometimes referred
+to as an {\bf abstract parameter}.  What I mean by ``abstract'' is
+something that is not literally part of the program text, but which
+describes the function of the program at a higher level.
+
+For example, when you invoke a method and pass an array and the bounds
+{\tt low} and {\tt high}, there is nothing that prevents the invoked
+method from accessing parts of the array that are out of bounds.  So
+you are not literally sending a subset of the deck; you are really
+sending the whole deck.  But as long as the recipient plays by the
+rules, it makes sense to think of it abstractly as a subdeck.
+
+This kind of thinking, in which a program takes on meaning beyond what
+is literally encoded, is an important part of thinking like a computer
+scientist.  The word ``abstract'' gets used so often and in so many
+contexts that it comes to lose its meaning.  Nevertheless, {\bf abstraction}
+is a central idea in computer science (and many other fields).
+\index{abstraction}
+
+A more general definition of ``abstraction'' is ``The process of
+modeling a complex system with a simplified description to
+suppress unnecessary details while capturing relevant behavior.''
 
 
 \section{The {\tt Deck} class}
@@ -155,7 +364,7 @@ methods to make it work---is called {\bf top-down development}
 \index{program development}
 
 
-\section{Sorting}
+\section{Selection sort algorithm}
 \label{sorting}
 \index{sorting}
 
@@ -187,7 +396,6 @@ that takes an array of cards and an index where it should
 start looking.
 \index{helper method}
 \index{method!helper}
-
 
 
 \section{Subdecks}
@@ -279,7 +487,12 @@ unnecessary, or expect capabilities that are lacking, because we
 unthinkingly extend a metaphor past its breaking point.
 
 
-\section{Mergesort}
+\section{Insertion sort algotihm}
+
+TODO
+
+
+\section{Merge sort algorithm}
 \label{mergesort}
 \index{efficiency}
 \index{sorting}
@@ -407,49 +620,17 @@ but other than that, writing the recursive version should be
 no problem.  Good luck!
 
 
-\section{Class variables}
-\index{class variables}
+\section{java.util.Arrays}
 
-So far we have seen local variables, which are declared inside
-a method, and instance variables, which are declared in a class
-definition, usually before the method definitions.
-
-Local variables are created when a method is invoked and destroyed
-when the method ends.  Instance variables are created when you
-create an object and destroyed when the object is garbage collected.
-
-Now it's time to learn about {\bf class variables}.  Like instance
-variables, class variables are defined in a class definition before
-the method definitions, but they are identified by the keyword {\tt
-  static}.  They are created when the program starts and survive until
-the program ends.
-
-You can refer to a class variable from anywhere inside the class
-definition.  Class variables are often used to store constant
-values that are needed in several places.
-
-As an example, here is a version of {\tt Card} where {\tt suits}
-and {\tt ranks} are class variables:
-
-\begin{code}
-class Card {
-    int suit, rank;
-
-    static String[] suits = { "Clubs", "Diamonds", "Hearts", "Spades" };
-    static String[] ranks = { "narf", "Ace", "2", "3", "4", "5", "6",
-                      "7", "8", "9", "10", "Jack", "Queen", "King" };
-
-    public static void printCard(Card c) {
-        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
-    }
-}
-\end{code}
-
-Inside {\tt printCard} we can refer to {\tt suits} and {\tt ranks} as
-if they were local variables.
+TODO
 
 
-\section{Glossary}
+\section{Two dimensional arrays}
+
+TODO
+
+
+\section{Vocabulary}
 
 \begin{description}
 
@@ -471,7 +652,9 @@ there is always exactly one copy of this variable in existence.
 
 \end{description}
 
+
 \section{Exercises}
+
 
 \begin{exercise}
 The goal of this exercise is to implement the shuffling and
@@ -531,4 +714,4 @@ deck = mergeSort(deck);      // replaces old deck with new
 \end{exercise}
 
 
-
+\end{document}
