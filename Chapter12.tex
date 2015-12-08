@@ -169,16 +169,18 @@
 
 \chapter{Arrays of Objects}
 
-In the remaining chapters, we will develop programs to work with playing cards and decks of cards.
+In the remaining chapters, we will develop programs that work with playing cards and decks of cards.
 Here is an outline of the road ahead:
 
 \begin{enumerate}
 
-\item In this chapter, we will define a \java{Card} class and write methods that work with \java{Card}s and arrays of \java{Card}s.
+\item In this chapter, we will define a \java{Card} class and write methods that work directly with \java{Card}s and arrays of \java{Card}s.
 
-\item In Chapter~\ref{chap12}, we will create a \java{Deck} class that encapsulates an array of Cards and write methods that operate on \java{Deck}s.
+%TODO add \ref for each chapter
 
-\item In Chapter~\ref{chap13}, we will introduce object-oriented programming (OOP) and redesign the \java{Card} and \java{Deck} classes accordingly.
+\item In Chapter 13, we will create a \java{Deck} class that encapsulates an array of Cards and write methods that operate on \java{Deck}s.
+
+\item In Chapter 14, we will introduce object-oriented programming (OOP) and redesign the \java{Card} and \java{Deck} classes accordingly.
 
 \end{enumerate}
 
@@ -195,19 +197,20 @@ It may help you to create a {\tt Card.java} file and paste in the examples as we
 \index{Card}
 \index{class!Card}
 
-If you are unfamiliar with common playing cards, now would be a good time to get a deck; otherwise this chapter might not make much sense.
-Or read \url{https://en.wikipedia.org/wiki/Standard_52-card_deck}.
+If you are unfamiliar with traditional playing cards, now would be a good time to get a deck; otherwise this chapter might not make much sense.
+Or just read \url{https://en.wikipedia.org/wiki/Standard_52-card_deck}.
 
 \index{rank}
 \index{suit}
 
-There are 52 cards in a deck; each belongs to one of four suits and one of 13 ranks.
+There are 52 cards in a standard deck.
+Each card belongs to one of four suits and one of 13 ranks.
 The suits are Spades, Hearts, Diamonds, and Clubs (in descending order in Bridge).
 The ranks are Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, and King.
 Depending on what game you are playing, the Ace may be considered higher than King or lower than 2.
 
-If we want to define a new object to represent a playing card, it is pretty obvious what the instance variables should be:\java{rank} and \java{suit}.
-It is not as obvious what type the instance variables should be.
+If we want to define a new object to represent a playing card, it is pretty obvious what the instance variables should be: \java{rank} and \java{suit}.
+It is not as obvious what types the instance variables should be.
 One possibility is \java{String}s, containing things like \java{"Spade"} for suits and \java{"Queen"} for ranks.
 A problem with this implementation is that it would not be easy to compare cards to see which had higher rank or suit.
 
@@ -217,17 +220,16 @@ A problem with this implementation is that it would not be easy to compare cards
 
 An alternative is to use integers to {\bf encode} the ranks and suits.
 By ``encode'' we do not mean to encrypt or translate into a secret code.
-What a computer scientist means by ``encode'' is something like ``define a mapping between a sequence of numbers and the things we want to represent.''
-For example:
+What a computer scientist means by encode is something like ``define a mapping between a sequence of numbers and the things we want to represent.''
 
 \begin{tabular}{l c l}
-Spades & $\mapsto$ & 3 \\
-Hearts & $\mapsto$ & 2 \\
+Clubs & $\mapsto$ & 0 \\
 Diamonds & $\mapsto$ & 1 \\
-Clubs & $\mapsto$ & 0
+Hearts & $\mapsto$ & 2 \\
+Spades & $\mapsto$ & 3
 \end{tabular}
 
-The nice feature of this mapping is that the suits map to integers in order, so we can compare suits by comparing integers.
+The nice feature of this mapping is that the suits map to integers in order, so we can compare suits simply by comparing integers.
 The mapping for ranks is fairly obvious: each of the numerical ranks maps to the corresponding integer, and for face cards:
 
 \begin{tabular}{l c l}
@@ -261,7 +263,7 @@ public class Card {
 \index{constructor}
 
 As usual, we define two constructors: a default constructor that takes no parameters, and an explicit value constructor that takes a parameter for each instance variable.
-To create a \java{Card} object that represents the 3 of Clubs, we invoke the \java{new} operator:
+To create a \java{Card} object that represents the 3 of Clubs, we can invoke the \java{new} operator:
 
 \begin{code}
     Card threeOfClubs = new Card(0, 3);
@@ -318,6 +320,7 @@ The memory diagram of this array looks like:
 \index{String!reference to}
 
 Notice how the elements of the array are {\em references} to the \java{String}s, rather than \java{String}s themselves.
+
 Now we need another array of \java{String}s to decode the ranks:
 
 \begin{code}
@@ -348,7 +351,7 @@ The expression \java{suits[c.suit]} means ``use the instance variable \java{suit
     printCard(card);
 \end{code}
 
-The output of this code is {\tt Jack of Diamonds}.
+The output for this code is {\tt Jack of Diamonds}.
 
 
 \section{The sameCard method}
@@ -362,7 +365,7 @@ The word ``same'' is one of those things that occur in natural language that see
 For example, if I say ``Jared and I have the same car,'' I mean that his car and mine are the same make and model, but they are
 two different cars.
 If I say ``Jared and I have the same mother,'' I mean that his mother and mine are one person.
-So the idea of ``sameness'' is different depending on the context.
+So the idea of ``sameness'' is different, depending on the context.
 
 \index{ambiguity}
 
@@ -381,10 +384,9 @@ For example:
     Card card2 = card1;
 
     if (card1 == card2) {
-        System.out.println("card1 and card2 are identical.");
+        System.out.println("card1 and card2 are identical");
     }
 \end{code}
-
 
 \index{equivalent}
 
@@ -404,7 +406,7 @@ Here is an example that creates two objects with the same data, and uses \java{s
     Card card2 = new Card(1, 11);
 
     if (sameCard(card1, card2)) {
-        System.out.println("card1 and card2 are equivalent.");
+        System.out.println("card1 and card2 are equivalent");
     }
 \end{code}
 
@@ -432,16 +434,16 @@ Here is a memory diagram:
 \index{conditional operator}
 
 For primitive types, the conditional operators compare values and determine when one is greater or less than another.
-These operators (\java{<} and \java{>} and the others) don't work for object types.
+These operators (\java{<}, \java{>}, and others) don't work for object types.
 For \java{String}s, Java provides a \java{compareTo} method.
-We have to write our own for \java{Card}s, which we will call \java{compareCard}.
+We have to write our own version for \java{Card}s, which we will call \java{compareCard}.
 Later we will use this method to sort a deck of cards.
 
 \index{ordering}
 \index{complete ordering}
 \index{partial ordering}
 
-Some sets are completely ordered, which means that you can compare any two elements and tell which is bigger.
+Some types are completely ordered, which means that you can compare any two values and tell which is bigger.
 Integers and floating-point numbers are totally ordered.
 Some sets are unordered, which means that there is no meaningful way to say that one element is bigger than another.
 Fruits are unordered, which is why we cannot compare apples and oranges.
@@ -483,14 +485,13 @@ If neither statement is true, then the suits must be equal and we have to compar
 \end{code}
 
 If neither of these is true, then the ranks must also be equal.
-So we simply return zero at the end of the method.
+So we simply return 0 at the end of the method.
 
 
 \section{Class variables}
 
 So far we have seen local variables, which are declared inside a method, and instance variables, which are declared in a class
 definition, usually before the method definitions.
-
 Local variables are created when a method is invoked and destroyed when the method ends.
 Instance variables are created when you create an object and destroyed when the object is garbage collected.
 
@@ -499,16 +500,16 @@ Instance variables are created when you create an object and destroyed when the 
 Now it's time to learn about {\bf class variables}.
 Like instance variables, class variables are defined in a class definition before the method definitions.
 But they are identified by the keyword \java{static}.
-They are created when the program starts (when the class is used for the first time) and survive until the program ends.
+They are created when the program starts (or when the class is used for the first time) and survive until the program ends.
 Class variables are {\em shared} across all instances of the class.
 
 You can refer to a class variable from anywhere inside the class definition.
 Class variables are often used to store constant values that are needed in several places.
 In that case, they should also be defined as \java{final}.
-Note that whether a variable is \java{static} and \java{final} are two separate considerations:
+Note that whether a variable is \java{static} or \java{final} involves two separate considerations:
 \java{static} means the variable is shared, and \java{final} means the variable is constant.
 
-As an example, here is a version of \java{Card} where \java{suits} and \java{ranks} are defined as class variables:
+As an example, here is a version of \java{Card} where \java{suits} and \java{ranks} are defined as class constants:
 
 \begin{code}
 public class Card {
@@ -520,7 +521,7 @@ public class Card {
         "narf", "Ace", "2", "3", "4", "5", "6", "7", "8", "9",
         "10", "Jack", "Queen", "King"};
 
-    // add instance variables and constructors here
+    // instance variables and constructors go here
 
     public static void printCard(Card c) {
         String name = RANKS[c.rank] + " of " + SUITS[c.suit];
@@ -530,10 +531,10 @@ public class Card {
 \end{code}
 
 Inside \java{printCard} we can refer to \java{SUITS} and \java{RANKS} as if they were local variables.
-Writing \java{static final} variables in ALL CAPS is a common convention that makes it easier to find their definitions.
+Writing \java{static final} variables in ALL CAPS is a common convention that makes it easier to recognize their purpose in the class.
 
-One advantage of making them class variables is that they don't need to be created (and garbage collected) every time the printCard method is called.
-They may also be useful in other methods and classes, so it's nice to have them defined in one place.
+One advantage of defining \java{SUITS} and \java{RANKS} as class variables is that they don't need to be created (and garbage collected) every time the printCard method is called.
+They may also be useful in other methods and classes, so it's nice to maintain them in one place.
 
 
 \section{Arrays of cards}
@@ -575,23 +576,23 @@ You can access the elements of the array in the usual way:
 
 \begin{code}
     if (cards[0] == null) {
-        System.out.println("No card here!");
+        System.out.println("No card yet!");
     }
 \end{code}
 
 \index{exception!NullPointer}
 \index{run-time error}
 
-But if you try to access the instance variables of the non-existent \java{Card}s, you get a \java{NullPointerException}.
+But if you try to access the instance variables of the non-existent \java{Card}s, you will get a \java{NullPointerException}.
 
 \begin{code}
-    cards[0].rank;  // NullPointerException
+    System.out.println(cards[0].rank);  // NullPointerException
 \end{code}
 
 \index{composition}
 
-Note that {\em is} the correct syntax for accessing the \java{rank} of the ``zeroeth'' card in the deck.
-Here is another example of composition, or combining the syntax for accessing an element of an array and an instance variable of an object.
+That {\em is} the correct syntax for accessing the \java{rank} of the ``zeroeth'' card in the deck.
+It's also another example of composition, or combining the syntax for accessing an element of an array and an instance variable of an object.
 
 \index{loop!nested}
 
@@ -621,8 +622,8 @@ The following memory diagram shows what the deck looks like after the first two 
 \end{center}
 
 
-\section{The printDeck method}
-\label{printdeck}
+%\section{The printDeck method}
+%\label{printdeck}
 
 \index{printDeck}
 \index{print!array of Cards}
@@ -642,15 +643,14 @@ Since \java{cards} has type \java{Card[]}, an element of \java{cards} has type \
 So \java{cards[i]} is a legal argument for \java{printCard}.
 
 
-\section{Sequential search algorithm}
+\section{Sequential search}
 \label{findcard}
 
 \index{findCard}
 \index{sequential search}
 \index{binary search}
 
-The next method we'll write is \java{findCard}, which searches an array of \java{Card}s to see whether it contains a certain
-card.
+The next method we'll write is \java{findCard}, which searches an array of \java{Card}s to see whether it contains a certain card.
 This method gives us a chance to demonstrate two algorithms: {\bf sequential search} and {\bf binary search}.
 
 \index{traverse}
@@ -671,7 +671,7 @@ public static int findCard(Card[] cards, Card card) {
 }
 \end{code}
 
-The arguments of \java{findCard} are \java{cards} and \java{card}.
+The parameters of \java{findCard} are \java{cards} and \java{card}.
 It might seem odd to have a variable with the same name as a type (the \java{card} variable has type \java{Card}).
 We can tell the difference because the variable begins with a lower-case letter.
 
@@ -679,36 +679,58 @@ We can tell the difference because the variable begins with a lower-case letter.
 \index{return!inside loop}
 
 The method returns as soon as it discovers the card, which means that we do not have to traverse the entire deck if we find the card we are looking for.
-If we get to the end of the loop, we know the card is not in the deck.
+If we get to the end of the loop, however, we know the card is not in the deck.
 
-If the cards in the deck are not in order, there is no way to search faster than this.
+If the cards in the deck are not in order, there is no way to search faster than sequential search.
 We have to look at every card, because otherwise we can't be certain the card we want is not there.
 
+However for large arrays, sequential search is rather inefficient.
+If you pay the price to keep them sorted, finding elements becomes much easier.
 
-\section{Binary search algorithm}
 
-When you look for a word in a dictionary, you don't search linearly through every word, because the words are in alphabetical order.
-As a result, you probably use an algorithm similar to a binary search:
+\section{Binary search}
+
+When you look for a word in a dictionary, you don't just search page by page from front to back.
+Since the words are in alphabetical order, you probably use an algorithm similar to binary search:
 
 \begin{enumerate}
-
-\item Start in the middle somewhere.
-\item Choose a word on the page and compare it to the word you are looking for.
-\item If you find the word you are looking for, stop.
-\item If the word you are looking for comes after the word on the page, flip to somewhere later in the dictionary and go to
-step 2.
-\item If the word you are looking for comes before the word on the page, flip to somewhere earlier in the dictionary and go to
-step 2.
-
+\item Start in the middle of the dictionary (or array).
+\item Compare a word on that page to the word you are looking for.
+If you find the word you are looking for, stop.
+\item If the word you are looking for comes after the word on the page, flip to somewhere later in the dictionary and go back to step 2.
+\item If the word you are looking for comes before the word on the page, flip to somewhere earlier in the dictionary and go back to step 2.
 \end {enumerate}
 
 If you ever get to the point where there are two adjacent words on the page and your word comes between them, you can conclude that your word is not in the dictionary.
 
-Getting back to the deck of cards, if we know the cards are in order, we can write a faster version of \java{findCard}.
-One way to write a binary search is with a recursive method, because binary is naturally recursive.
+Getting back to the deck of cards, we can write a faster version of \java{findCard} if we know the cards are in order.
+It takes a little more code, but the idea is the same four steps listed above.
 
-The trick is to write a method that takes two indexes as parameters: \java{low} and \java{high}.
-They indicate the segment of the array that should be searched (including both \java{low} and \java{high}).
+\begin{code}
+public static int findCard(Card[] cards, Card card) {
+    int low = 0;
+    int high = cards.length - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;                   // step 1
+        int comp = compareCard(cards[mid], card);
+
+        if (comp == 0) {                              // step 2
+            return mid;
+        } else if (comp < 0) {                        // step 3
+            low = mid + 1;
+        } else {                                      // step 4
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+\end{code}
+
+First, we declare \java{low} and \java{high} variables to represent the range we are searching.
+Initially we search the entire array, from index \java{0} to \java{length - 1}.
+We will terminate our search if these indexes ever cross, yielding an invalid range.
+
+Inside the \java{while} loop, we repeat the four steps of binary search:
 
 \begin{enumerate}
 
@@ -722,46 +744,65 @@ They indicate the segment of the array that should be searched (including both \
 
 \end{enumerate}
 
-Steps 3 and 4 look suspiciously like recursive invocations.
+%\section{Recursive version}
+
+\index{recursion}
+
+Another way to write a binary search is with a recursive method.
+The trick is to write a method that takes \java{low} and \java{high} as parameters, and turn steps 3 and 4 into recursive invocations.
+%They indicate the segment of the array that should be searched (including both \java{low} and \java{high}).
 Here's what this algorithm looks like translated into Java code:
 
 \begin{code}
-public static int findCard(Card[] cards, Card card, int low, int high) {
-    int mid = (high + low) / 2;
+public static int findCard(Card[] cards, Card card,
+                           int low, int high) {
+    if (high < low) {
+        return -1;
+    }
+    int mid = (low + high) / 2;                       // step 1
     int comp = compareCard(cards[mid], card);
 
-    if (comp == 0) {
+    if (comp == 0) {                                  // step 2
         return mid;
-    } else if (comp > 0) {
-        return findCard(cards, card, low, mid - 1);
-    } else {
+    } else if (comp < 0) {                            // step 3
         return findCard(cards, card, mid + 1, high);
+    } else {                                          // step 4
+        return findCard(cards, card, low, mid - 1);
     }
 }
 \end{code}
 
-\index{recursion}
+%This code contains the main idea of a binary search, but it is still missing an important part.
+%As written, the method recurses forever if the card is not in the deck!
+%We need a base case to handle this condition and end the recursion.
 
-This code contains the main idea of a binary search, but it is still missing an important part.
-As written, the method recurses forever if the card is not in the deck!
-We need a base case to handle this condition and end the recursion.
-
+Instead of a \java{while} loop, we simply have an \java{if} statement to terminate the recursion.
 If \java{high} is less than \java{low}, there are no cards between them, and we conclude that the card is not in the deck.
-We can handle that case by adding a single \java{if} statement to the top:
+%We can handle that case by adding a single \java{if} statement to the top:
+
+\index{recursion!infinite}
+\index{infinite recursion}
+\index{exception!StackOverflow}
+
+Two common errors in recursive programs are (1) forgetting to include a base case, and (2) writing the recursive call so that the base case is never reached.
+Either error causes infinite recursion and a \java{StackOverflowException}.
+%(Think of a stack diagram for a recursive method that never ends.)
+
+\section{Tracing the code}
+
+To see how binary search works, it's useful to add the following print statement at the beginning of each iteration (or recursive call).
 
 \begin{code}
     System.out.println(low + ", " + high);
-    if (high < low) {
-        return -1;
-    }
 \end{code}
 
-The print statement is unnecessary, but it's useful to trace the sequence of recursive invocations.
-For example, you might execute the following code:
+%The print statement is unnecessary, but it's useful to trace the sequence of recursive invocations.
+
+Then in the \java{main} method, execute the following code (after creating the cards array with nested loops):
 
 \begin{code}
     Card card = new Card(1, 11);
-    System.out.println(findCard(cards, card, 0, 51));
+    System.out.println(findCard(cards, card));
 \end{code}
 
 The result is \java{23} as expected, since there are 13 cards in the zeroth suit followed by 11 in the first suit (and indexes start at zero).
@@ -776,8 +817,8 @@ Here is the complete output, thanks to the print statement in \java{findCard}:
 23
 \end{stdout}
 
-Let's make up a card that is not in the deck, say the ``15 of Diamonds'' \java{new Card(1, 15)}.
-If we try to find it using the recursive method, we get the following:
+Let's make up a card that is not in the deck, say \java{new Card(1, 15)} or the ``15 of Diamonds''.
+If we try to find it using binary search, we get the following:
 
 \begin{stdout}
 0, 51
@@ -789,24 +830,16 @@ If we try to find it using the recursive method, we get the following:
 -1
 \end{stdout}
 
-\index{testing}
-\index{correctness}
-
-These tests don't prove that this program is correct.
+%\index{testing}
+%\index{correctness}
+%
+%These tests don't prove that this program is correct.
 %In fact, no amount of testing can {\em prove} that a program is correct.
-But looking at a few cases and examining the code, you might be able to convince yourself.
+%But looking at a few cases and examining the code, you might be able to convince yourself.
 
-The number of recursive invocations is typically 6 or 7.
-So we only have to invoke \java{compareCard} 6 or 7 times, compared to up to 52 times if we did a sequential search.
-In general, binary is much faster than a sequential search, and even more so for large arrays.
-
-\index{recursion!infinite}
-\index{infinite recursion}
-\index{exception!StackOverflow}
-
-Two common errors in recursive programs are (1) forgetting to include a base case, and (2) writing the recursive call so that the base case is never reached.
-Either error causes infinite recursion, which throws a \java{StackOverflowException}.
-(Think of a stack diagram for a recursive method that never ends.)
+Binary search over an array of length $n$ requires $\log_2 n$ comparisons.
+So we only have to look at 5 or 6 cards in the deck, as opposed to all 52 if we did a sequential search.
+In general, binary search is much faster than sequential search (which requires $n$ comparisons), and even more so for large arrays.
 
 
 \section{Vocabulary}
@@ -847,7 +880,7 @@ Then modify it so that aces are ranked higher than Kings.
 
 
 \begin{exercise}
-Encapsulate the deck-building code of Section~\ref{cardarray} in a method called \java{makeDeck} that takes no parameters and returns a fully-populated array of \java{Card}s.
+Encapsulate the deck-building code from Section~\ref{cardarray} in a method called \java{makeDeck} that takes no parameters and returns a fully-populated array of \java{Card}s.
 \end{exercise}
 
 
