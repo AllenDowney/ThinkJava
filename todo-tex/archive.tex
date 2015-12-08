@@ -497,3 +497,34 @@ The class that contains the \java{main} method where execution of the program be
 
 \term{pure function}
 A method whose result depends only on its parameters, and that has no side-effects other than returning a value.
+
+
+\section{Cards graphics exercises}
+
+\begin{exercise}
+Working with cards is more interesting if you can display them on the screen.
+If you haven't played with the graphics examples in Appendix~\ref{graphics}, you might want to do that now.
+
+First download
+\url{http://thinkapjava.com/code/CardTable.java}
+and
+\url{http://thinkapjava.com/code/cardset.zip} into the same folder.
+Then unzip {\tt cardset.zip}, which contains a {\tt cardset-oxymoron}
+subfolder with all the card images. (Note the variable \java{cardset}
+in \java{CardTable.main} is the name of this folder.)
+Run \java{CardTable.java} and you
+should see images of a pack of cards laid out on a green table.
+
+You can use this class as a starting place to implement your own
+card games.
+\end{exercise}
+
+% TODO from Leslie Klein:
+% Need more descriptive text on how to modify CardTable.java so that it can find the gif files that are extracted from cardset.zip.
+% If CardTable.java and all the .gif files are in the same package, and I run CardTable, I just get a green table, without the cards.
+% Need text on how to set the variable cardset: the String name of the folder that contains the card images.
+%-----
+% Create a folder under your project called “images”. Put all the .gif files from cardset.zip into this folder.
+% Make the following change in main(String[] args): change value of cardset to the name of the folder containing the images. For example,
+% cardset = "images";
+% Now when main() calls CardTable(cardset), CardTable can find all the gif files.
