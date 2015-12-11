@@ -219,13 +219,13 @@ The large numbers inside the boxes are the {\bf elements} of the array.
 The small numbers outside the boxes are the {\bf indexes} (or indices) used to identify each memory location.
 
 To store values in the array, use the \java{[]} operator.
-For example \java{count[0]} refers to the ``zeroeth'' element of the array, and \java{count[1]} refers to the ``oneth'' element.  You can use the \java{[]} operator anywhere in an expression:
+For example \java{counts[0]} refers to the ``zeroeth'' element of the array, and \java{counts[1]} refers to the ``oneth'' element.  You can use the \java{[]} operator anywhere in an expression:
 
 \begin{code}
-    count[0] = 7;
-    count[1] = count[0] * 2;
-    count[2]++;
-    count[3] -= 60;
+    counts[0] = 7;
+    counts[1] = counts[0] * 2;
+    counts[2]++;
+    counts[3] -= 60;
 \end{code}
 
 These assignment statements are all legal in Java.
@@ -249,7 +249,7 @@ For example:
 \begin{code}
     int i = 0;
     while (i < 4) {
-        System.out.println(count[i]);
+        System.out.println(counts[i]);
         i++;
     }
 \end{code}
@@ -267,7 +267,7 @@ For convenience, this type of array traversal is commonly written using a \java{
 
 \begin{code}
     for (int i = 0; i < 4; i++) {
-        System.out.println(count[i]);
+        System.out.println(counts[i]);
     }
 \end{code}
 

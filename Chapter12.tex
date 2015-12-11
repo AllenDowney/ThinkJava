@@ -167,7 +167,7 @@
 \setcounter{chapter}{11}
 
 
-\chapter{Arrays of Objects}
+\chapter{Arrays of objects}
 
 In the remaining chapters, we will develop programs that work with playing cards and decks of cards.
 Here is an outline of the road ahead:
@@ -328,7 +328,7 @@ Now we need another array of \java{String}s to decode the ranks:
                "7", "8", "9", "10", "Jack", "Queen", "King"};
 \end{code}
 
-The reason for the \java{"narf"} is to act as a place-keeper for thezeroeth element of the array, which is never used (or shouldn't be).
+The reason for the \java{"narf"} is to act as a placeholder for the zeroeth element of the array, which is never used (or shouldn't be).
 The only valid ranks are 1--13.
 To avoid this wasted element, we could have started at 0, but the mapping is more natural if we encode 2 as 2, 3 as 3, and so forth.
 
@@ -662,7 +662,7 @@ If it is not in the deck, we return -1.
 
 \begin{code}
 public static int findCard(Card[] cards, Card card) {
-    for (int i = 0; i< cards.length; i++) {
+    for (int i = 0; i < cards.length; i++) {
         if (sameCard(cards[i], card)) {
             return i;
         }
