@@ -528,3 +528,40 @@ card games.
 % Make the following change in main(String[] args): change value of cardset to the name of the folder containing the images. For example,
 % cardset = "images";
 % Now when main() calls CardTable(cardset), CardTable can find all the gif files.
+
+
+\section{Decks and subdecks}
+\index{deck}
+\index{subdeck}
+
+\index{prototype}
+Here is the prototype (see Section~\ref{documentation}) of \java{findBisect}:
+
+\begin{code}
+public static int findBisect(Card[] deck, Card card, int low, int high)
+\end{code}
+
+\index{parameter!abstract}
+\index{abstract parameter}
+
+We can think of \java{cards}, \java{low}, and \java{high} as a single parameter that specifies a {\bf subdeck}.
+This way of thinking is common, and is sometimes referred to as an {\bf abstract parameter}.
+What I mean by ``abstract'' is something that is not literally part of the program text, but which describes the function of the program at a higher level.
+
+For example, when you invoke a method and pass an array and the bounds \java{low} and \java{high}, there is nothing that prevents the invoked method from accessing parts of the array that are out of bounds.
+So you are not literally sending a subset of the deck; you are really sending the whole deck.
+But as long as the recipient plays by the rules, it makes sense to think of it abstractly as a subdeck.
+
+This kind of thinking, in which a program takes on meaning beyond what is literally encoded, is an important part of thinking like a computer scientist.
+The word ``abstract'' gets used so often and in so many contexts that it comes to lose its meaning.
+Nevertheless, {\bf abstraction} is a central idea in computer science (and many other fields).
+
+\index{abstraction}
+
+A more general definition of ``abstraction'' is ``The process of modeling a complex system with a simplified description to suppress unnecessary details while capturing relevant behavior.''
+
+%\term{abstract parameter}
+%A set of parameters that act together as a single parameter.
+
+%\term{abstraction}
+%The process of interpreting a program (or anything else) at a higher level than what is literally represented by the code.
