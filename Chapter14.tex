@@ -169,19 +169,13 @@
 
 \chapter{Object-oriented programming}
 
-If you haven't done the exercises in Chapters~\ref{gridworld} and
-\ref{gridworld2}, you should do them before reading this chapter.
-As a reminder, you can find the
-documentation for the GridWorld classes at
-\url{http://www.greenteapress.com/thinkapjava/javadoc/gridworld/}.
+If you haven't done the exercises in Chapters~\ref{gridworld} and \ref{gridworld2}, you should do them before reading this chapter.
+As a reminder, you can find the documentation for the GridWorld classes at \url{http://www.greenteapress.com/thinkapjava/javadoc/gridworld/}.
 
-Part 3 of the GridWorld Student Manual presents the classes that
-make up GridWorld and the interactions among them.  It is an
-example of object-oriented design and an opportunity to discuss OO
-design issues.
+Part 3 of the GridWorld Student Manual presents the classes that make up GridWorld and the interactions among them.
+It is an example of object-oriented design and an opportunity to discuss OO design issues.
 
-But before you read the Student Manual, there are a few more things
-you need to know.
+But before you read the Student Manual, there are a few more things you need to know.
 
 
 \section{Programming paradigms}
@@ -196,61 +190,43 @@ you need to know.
 \index{programming!functional}
 \index{programming!procedural}
 
-There are many programming languages and almost as many
-programming styles (sometimes called paradigms).
-The programs we have written so far are {\bf procedural},
-because the emphasis has been on specifying computational procedures.
+There are many programming languages and almost as many programming styles (sometimes called paradigms).
+The programs we have written so far are {\bf procedural}, because the emphasis has been on specifying computational procedures.
 
-Most Java programs are {\bf object-oriented}, which means that
-the focus is on objects and their interactions.
+Most Java programs are {\bf object-oriented}, which means that the focus is on objects and their interactions.
 Here are some of the characteristics of object-oriented programming:
 
 \begin{itemize}
 
 \item Objects often represent entities in the real world.
-  In the previous chapter, creating the {\tt Deck} class
-  was a step toward object-oriented programming.
+In the previous chapter, creating the \java{Deck} class was a step toward object-oriented programming.
 
-\item The majority of methods are object methods (like the methods you
-  invoke on {\tt Strings}) rather than class methods (like the {\tt Math}
-  methods).  The methods we have written so far have
-  been class methods.  In this chapter we write some object methods.
+\item The majority of methods are object methods (like the methods you invoke on \java{Strings}) rather than class methods (like the \java{Math} methods).
+The methods we have written so far have been class methods.
+In this chapter we write some object methods.
 
-\item Objects are isolated from each other by limiting the ways they
-  interact, especially by preventing them from accessing
-  instance variables without invoking methods.
+\item Objects are isolated from each other by limiting the ways they interact, especially by preventing them from accessing  instance variables without invoking methods.
 
-\item Classes are organized in family trees where
-  new classes extend existing classes, adding new methods and
-  replacing others.
+\item Classes are organized in family trees where new classes extend existing classes, adding new methods and replacing others.
 
 \end{itemize}
 
-In this chapter I translate the {\tt Card} program from the
-previous chapter from procedural to object-oriented style.  You
-can download the code from this chapter from
-\url{http://thinkapjava.com/code/Card3.java}.
+In this chapter I translate the \java{Card} program from the previous chapter from procedural to object-oriented style.
+You can download the code from this chapter from \url{http://thinkapjava.com/code/Card3.java}.
 
 
 \section{Inheritance}
 \index{inheritance}
 
-The language feature most often associated with
-object-oriented programming is {\bf inheritance}.  Inheritance is the
-ability to define a new class that is a modified version of an
-existing class.
+The language feature most often associated with object-oriented programming is {\bf inheritance}.
+Inheritance is the ability to define a new class that is a modified version of an existing class.
 %
-Extending the metaphor, the existing
-class is sometimes called the {\bf parent} class and the new
-class is called the {\bf child}.
+Extending the metaphor, the existing class is sometimes called the {\bf parent} class and the new class is called the {\bf child}.
 
-The primary advantage of this feature is that you can add methods
-and instance variables without modifying the
-parent.  This is particularly useful for Java classes,
-since you can't modify them even if you want to.
+The primary advantage of this feature is that you can add methods and instance variables without modifying the parent.
+This is particularly useful for Java classes, since you can't modify them even if you want to.
 
-If you did the GridWorld exercises (Chapters~\ref{gridworld} and
-\ref{gridworld2}) you have seen examples of inheritance:
+If you did the GridWorld exercises (Chapters~\ref{gridworld} and \ref{gridworld2}) you have seen examples of inheritance:
 
 \begin{code}
 public class BoxBug extends Bug {
@@ -264,27 +240,20 @@ public class BoxBug extends Bug {
 }
 \end{code}
 
-{\tt BoxBug extends Bug} means that {\tt BoxBug} is a new
-kind of {\tt Bug} that inherits the methods and instance
-variables of {\tt Bug}.  In addition:
+\java{BoxBug extends Bug} means that \java{BoxBug} is a new kind of \java{Bug} that inherits the methods and instance variables of \java{Bug}.
+In addition:
 
 \begin{itemize}
 
-\item The child class can have additional instance variables; in
-this example, {\tt BoxBug}s have {\tt steps} and {\tt sideLength}.
+\item The child class can have additional instance variables; in this example, \java{BoxBug}s have \java{steps} and \java{sideLength}.
 
-\item The child can have additional methods; in this example,
-{\tt BoxBugs} have an additional constructor that takes an integer
-parameter.
+\item The child can have additional methods; in this example, \java{BoxBugs} have an additional constructor that takes an integer parameter.
 
-\item The child can {\bf override} a method from the parent; in
-this example, the child provides {\tt act} (not shown here),
-which overrides the {\tt act} method from the parent.
+\item The child can {\bf override} a method from the parent; in this example, the child provides \java{act} (not shown here), which overrides the \java{act} method from the parent.
 
 \end{itemize}
 
-If you did the Graphics exercises in Appendix~\ref{graphics}, you
-saw another example:
+If you did the Graphics exercises in Appendix~\ref{graphics}, you saw another example:
 
 \begin{code}
 public class MyCanvas extends Canvas {
@@ -295,40 +264,31 @@ public class MyCanvas extends Canvas {
 }
 \end{code}
 
-{\tt MyCanvas} is a new kind of {\tt Canvas} with no new methods
-or instance variables, but it overrides {\tt paint}.
+\java{MyCanvas} is a new kind of \java{Canvas} with no new methods or instance variables, but it overrides \java{paint}.
 
 If you didn't do either of those exercises, now is a good time!
-
-
-\section{this vs super}
-
-TODO
 
 
 \section{Object-oriented design}
 \index{object-oriented design}
 
-Inheritance is a powerful feature.  Some programs that would be
-complicated without it can be written concisely and simply
-with it.  Also, inheritance can facilitate code reuse, since you can
-customize the behavior of existing classes without having to modify
-them.
+Inheritance is a powerful feature.
+Some programs that would be complicated without it can be written concisely and simply with it.
+Also, inheritance can facilitate code reuse, since you can customize the behavior of existing classes without having to modify them.
 
-On the other hand, inheritance can make programs hard to read.  When
-you see a method invocation, it can be hard to figure out which method
-gets invoked.
+On the other hand, inheritance can make programs hard to read.
+When you see a method invocation, it can be hard to figure out which method gets invoked.
 
-Also, many of the things that can be done with inheritance can
-be done as well or better without it.
-A common alternative is {\bf composition}, where new objects are
-composed of existing objects, adding new capability without
-inheritance.
+Also, many of the things that can be done with inheritance can be done as well or better without it.
+A common alternative is {\bf composition}, where new objects are composed of existing objects, adding new capability without inheritance.
 
-Designing objects and the relationships among them is the topic
-of {\bf object-oriented design}, which is beyond the scope of this
-book.  But if you are interested, I recommend {\em Head First Design
-Patterns}, published by O'Reilly Media.
+Designing objects and the relationships among them is the topic of {\bf object-oriented design}, which is beyond the scope of this book.
+But if you are interested, I recommend {\em Head First Design Patterns}, published by O'Reilly Media.
+
+
+\section{this vs super}
+
+TODO
 
 
 \section{The class hierarchy}
@@ -337,25 +297,20 @@ Patterns}, published by O'Reilly Media.
 \index{parent class}
 \index{class!parent}
 
-In Java, all classes extend some other class.  The most basic class is
-called {\tt Object}.  It contains no instance variables, but it
-provides the methods {\tt equals} and {\tt toString}, among others.
+In Java, all classes extend some other class.
+The most basic class is called \java{Object}.
+It contains no instance variables, but it provides the methods \java{equals} and \java{toString}, among others.
 
-Many classes extend {\tt Object}, including almost all of the classes
-we have written and many Java classes, like {\tt java.awt.Rectangle}.
-Any class that does not explicitly name a parent inherits from {\tt
-  Object} by default.
+Many classes extend \java{Object}, including almost all of the classes we have written and many Java classes, like \java{java.awt.Rectangle}.
+Any class that does not explicitly name a parent inherits from \java{Object} by default.
 
-Some inheritance chains are much longer, though.  For example, {\tt
-  javax.swing.JFrame} extends {\tt java.awt.Frame}, which extends {\tt
-  Window}, which extends {\tt Container}, which extends {\tt
-  Component}, which extends {\tt Object}.  No matter how long the
-chain, {\tt Object} is the common ancestor of all classes.
+Some inheritance chains are much longer, though.
+For example, \java{javax.swing.JFrame} extends \java{java.awt.Frame}, which extends \java{Window}, which extends \java{Container}, which extends \java{Component}, which extends \java{Object}.
+No matter how long the chain, \java{Object} is the common ancestor of all classes.
 
-The ``family tree'' of classes is called the class hierarchy.  {\tt Object}
-usually appears at the top, with all the ``child'' classes below.  If
-you look at the documentation of {\tt JFrame}, for example, you
-see the part of the hierarchy that makes up {\tt JFrame}'s pedigree.
+The ``family tree'' of classes is called the class hierarchy.
+\java{Object} usually appears at the top, with all the ``child'' classes below.
+If you look at the documentation of \java{JFrame}, for example, you see the part of the hierarchy that makes up \java{JFrame}'s pedigree.
 
 
 \section{Abstract classes}
@@ -366,84 +321,66 @@ TODO
 \section{Interfaces}
 \index{interface}
 
-GridWorld also uses Java {\bf interfaces}, so I want to explain what
-they are.  ``Interface'' means different things in different contexts,
-but in Java it refers to a specific language feature:
-an interface is a class definition where the methods have no bodies.
+GridWorld also uses Java {\bf interfaces}, so I want to explain what they are.
+``Interface'' means different things in different contexts, but in Java it refers to a specific language feature: an interface is a class definition where the methods have no bodies.
 
-In a normal class definition, each method has a prototype and a
-body (see Section~\ref{documentation}).  A prototype is also called a
-{\bf specification} because it specifies the name, parameters, and
-return type of the method. The body is called the {\bf implementation}
-because it implements the specification.
+In a normal class definition, each method has a prototype and a body (see Section~\ref{documentation}).
+A prototype is also called a {\bf specification} because it specifies the name, parameters, and return type of the method.
+The body is called the {\bf implementation} because it implements the specification.
 
-In a Java interface the methods have no bodies, so it specifies
-the methods without implementing them.
+In a Java interface the methods have no bodies, so it specifies the methods without implementing them.
 
-For example, {\tt java.awt.Shape} is an interface with prototypes for
-{\tt contains}, {\tt intersects}, and several other methods.  {\tt
-  java.awt.Rectangle} provides implementations for those methods, so
-we say that ``Rectangle implements Shape.''  In fact, the first line
-of the {\tt Rectangle} class definition is:
+For example, \java{java.awt.Shape} is an interface with prototypes for \java{contains}, \java{intersects}, and several other methods.
+\java{java.awt.Rectangle} provides implementations for those methods, so we say that ``Rectangle implements Shape.''
+In fact, the first line of the \java{Rectangle} class definition is:
 
 \begin{code}
 public class Rectangle extends Rectangle2D implements Shape, Serializable
 \end{code}
 
-Rectangle inherits methods from {\tt Rectangle2D} and provides
-implementations for the methods in {\tt Shape} and {\tt Serializable}.
+Rectangle inherits methods from \java{Rectangle2D} and provides implementations for the methods in \java{Shape} and \java{Serializable}.
 
-In GridWorld the Location class implements the {\tt
-  java.lang.Comparable} interface by providing {\tt compareTo}, which
-is similar to {\tt compareCards} in Section~\ref{compare}.
+In GridWorld the Location class implements the \java{java.lang.Comparable} interface by providing \java{compareTo}, which is similar to \java{compareCards} in Section~\ref{compare}.
 %
-GridWorld also defines a new interface, {\tt Grid}, that specifies
-the methods a {\tt Grid} should provide.  And it includes two
-implementations, {\tt BoundedGrid} and {\tt UnboundedGrid}.
+GridWorld also defines a new interface, \java{Grid}, that specifies the methods a \java{Grid} should provide.
+And it includes two implementations, \java{BoundedGrid} and \java{UnboundedGrid}.
 
-The Student Manual uses the abbreviation {\bf API}, which stands for
-``application programming interface.''  The API is the set of methods
-that are available for you, the application programmer, to use.  See
-\url{http://en.wikipedia.org/wiki/Application_programming_interface}.
+The Student Manual uses the abbreviation {\bf API}, which stands for ``application programming interface.''
+The API is the set of methods that are available for you, the application programmer, to use.
+See \url{http://en.wikipedia.org/wiki/Application_programming_interface}.
 
 
-\section{{\tt ArrayList}}
+\section{ArrayList}
 
-GridWorld uses {\tt java.util.ArrayList}, which is an object similar
-to an array.  It is a {\bf collection}, which means that it's an
-object that contains other objects.  Java provides other collections
-with different capabilities, but to use GridWorld we only need {\tt
-  ArrayList}s.
+GridWorld uses \java{java.util.ArrayList}, which is an object similar to an array.
+It is a {\bf collection}, which means that it's an object that contains other objects.
+Java provides other collections with different capabilities, but to use GridWorld we only need \java{ArrayList}s.
 
-To see an example, download
-\url{http://thinkapjava.com/code/BlueBug.java} and
-\url{http://thinkapjava.com/code/BlueBugRunner.java}.
-A {\tt BlueBug} is a bug that moves at random and looks for rocks.
+To see an example, download \url{http://thinkapjava.com/code/BlueBug.java} and \url{http://thinkapjava.com/code/BlueBugRunner.java}.
+A \java{BlueBug} is a bug that moves at random and looks for rocks.
 If it finds a rock, it makes it blue.
 
-Here's how it works.  When {\tt act} is invoked, {\tt BlueBug} gets
-its location and a reference to the grid:
+Here's how it works.
+When \java{act} is invoked, \java{BlueBug} gets its location and a reference to the grid:
 
 \begin{code}
     Location loc = getLocation();
     Grid<Actor> grid = getGrid();
 \end{code}
 
-The type in angle-brackets (\verb"<>") is a {\bf type parameter}
-that specifies the contents of {\tt grid}.  In other words, {\tt grid}
-is not just a {\tt Grid}, it's a {\tt Grid} that contains {\tt Actor}s.
+The type in angle-brackets (\verb"<>") is a {\bf type parameter} that specifies the contents of \java{grid}.
+In other words, \java{grid} is not just a \java{Grid}, it's a \java{Grid} that contains \java{Actor}s.
 
 The next step is to get the neighbors of the current location.
-{\tt Grid} provides a method that does just that:
+\java{Grid} provides a method that does just that:
 
 \begin{code}
     ArrayList<Actor> neighbors = grid.getNeighbors(loc);
 \end{code}
 
-The return value from {\tt getNeighbors} is an {\tt ArrayList}
-of {\tt Actors}.  The {\tt size} method returns the length of
-the {\tt ArrayList}, and {\tt get} selects an element.  So
-we can print the neighbors like this.
+The return value from \java{getNeighbors} is an \java{ArrayList} of \java{Actors}.
+The \java{size} method returns the length of the \java{ArrayList}, and \java{get} selects an element.
+So we can print the neighbors like this.
 
 \begin{code}
         for (int i = 0; i < neighbors.size(); i++) {
@@ -452,8 +389,8 @@ we can print the neighbors like this.
         }
 \end{code}
 
-Traversing an {\tt ArrayList} is such a common operation there's a
-special syntax for it: the {\bf for-each loop}.  So we could write:
+Traversing an \java{ArrayList} is such a common operation there's a special syntax for it: the {\bf for-each loop}.
+So we could write:
 
 \begin{code}
         for (Actor actor : neighbors) {
@@ -461,10 +398,8 @@ special syntax for it: the {\bf for-each loop}.  So we could write:
         }
 \end{code}
 
-We know that the neighbors are {\tt Actors}, but we don't know
-what kind: they could be {\tt Bug}s, {\tt Rock}s, etc.
-To find the Rocks, we use the {\tt instanceof} operator, which
-checks whether an object is an instance of a class.
+We know that the neighbors are \java{Actors}, but we don't know what kind: they could be \java{Bug}s, \java{Rock}s, etc.
+To find the Rocks, we use the \java{instanceof} operator, which checks whether an object is an instance of a class.
 
 \begin{code}
         for (Actor actor : neighbors) {
@@ -490,56 +425,47 @@ import java.util.ArrayList;
 
 \section{Game of Life}
 
-The mathematician John Conway invented
-the ``Game of Life,'' which he called a ``zero-player game''
-because no players are needed to choose strategies or make decisions.
-After you set up the initial conditions, you watch the game
-play itself.  But that turns out to be more interesting than it sounds;
-you can read about it at
-\url{http://en.wikipedia.org/wiki/Conways_Game_of_Life}.
+The mathematician John Conway invented the ``Game of Life,'' which he called a ``zero-player game'' because no players are needed to choose strategies or make decisions.
+After you set up the initial conditions, you watch the game play itself.
+But that turns out to be more interesting than it sounds; you can read about it at \url{http://en.wikipedia.org/wiki/Conways_Game_of_Life}.
 
-The goal of this exercise is to implement the Game of Life in
-GridWorld.  The game board is the grid, and the pieces are Rocks.
+The goal of this exercise is to implement the Game of Life in GridWorld.
+The game board is the grid, and the pieces are Rocks.
 
-The game proceeds in turns, or {\bf time steps}.  At the beginning
-of the time step, each Rock is either ``alive'' or ``dead''.  On the
-screen, the color of the Rock indicates its status.
+The game proceeds in turns, or {\bf time steps}.
+At the beginning of the time step, each Rock is either ``alive'' or ``dead''.
+On the screen, the color of the Rock indicates its status.
 %
-The status of each Rock depends on the status of its
-{\bf neighbors}.  Each Rock has 8 neighbors, except the Rocks along
-the edge of the Grid.  Here are the rules:
+The status of each Rock depends on the status of its {\bf neighbors}.
+Each Rock has 8 neighbors, except the Rocks along the edge of the Grid.
+Here are the rules:
 
 \begin{itemize}
 
 \item If a dead Rock has exactly three neighbors, it comes to life!
 Otherwise it stays dead.
 
-\item If a live Rock has 2 or 3 neighbors, it survives.  Otherwise it dies.
+\item If a live Rock has 2 or 3 neighbors, it survives.
+Otherwise it dies.
 
 \end{itemize}
 
-Some consequences of these rules:
-If all Rocks are dead, no Rocks come to life.  If you start with a
-single live Rock, it dies.  But if you have 4 Rocks in a square, they
-keep each other alive, so that's a stable configuration.
+There are several consequences of these rules.
+If all Rocks are dead, no Rocks come to life.
+If you start with a single live Rock, it dies.
+But if you have 4 Rocks in a square, they keep each other alive, so that's a stable configuration.
 
-Most simple starting configurations either die out quickly or reach a
-stable configuration.  But there are a few starting conditions that
-display remarkable complexity.  One of those is the r-pentomino: it
-starts with only 5 Rocks, runs for 1103 timesteps and ends in a stable
-configuration with 116 live Rocks (see
-\url{http://www.conwaylife.com/wiki/R-pentomino}).
+Most simple starting configurations either die out quickly or reach a stable configuration.
+But there are a few starting conditions that display remarkable complexity.
+One of those is the r-pentomino: it starts with only 5 Rocks, runs for 1103 timesteps and ends in a stable configuration with 116 live Rocks (see \url{http://www.conwaylife.com/wiki/R-pentomino}).
 
-The following sections are suggestions for implementing Game of Life
-in GridWorld.  You can download my solution at
-\url{http://thinkapjava.com/code/LifeRunner.java} and
-\url{http://thinkapjava.com/code/LifeRock.java}.
+The following sections are suggestions for implementing Game of Life in GridWorld.
+You can download my solution at \url{http://thinkapjava.com/code/LifeRunner.java} and \url{http://thinkapjava.com/code/LifeRock.java}.
 
 
-\section{{\tt LifeRunner}}
+\section{LifeRunner}
 
-Make a copy of {\tt BugRunner.java} named {\tt LifeRunner.java}
-and add methods with the following prototypes:
+Make a copy of \java{BugRunner.java} named \java{LifeRunner.java} and add methods with the following prototypes:
 
 \begin{code}
     /**
@@ -553,20 +479,17 @@ and add methods with the following prototypes:
     public static void makeRocks(ActorWorld world)
 \end{code}
 
-{\tt makeLifeWorld} should create a Grid of Actors and an ActorWorld,
-then invoke {\tt makeRocks}, which should put a {\tt LifeRock} at
-every location in the Grid.
+\java{makeLifeWorld} should create a Grid of Actors and an ActorWorld, then invoke \java{makeRocks}, which should put a \java{LifeRock} at every location in the Grid.
 
 
-\section{{\tt LifeRock}}
+\section{LifeRock}
 
-Make a copy of {\tt BoxBug.java} named {\tt LifeRock.java}.
-{\tt LifeRock} should extend {\tt Rock}.  Add an {\tt act} method
-that does nothing.  At this point you should be able to run the
-code and see a Grid full of Rocks.
+Make a copy of \java{BoxBug.java} named \java{LifeRock.java}.
+\java{LifeRock} should extend \java{Rock}.
+Add an \java{act} method that does nothing.
+At this point you should be able to run the code and see a Grid full of Rocks.
 
-To keep track of the status of the Rocks, you can add a new instance
-variable, or you can use the Color of the Rock to indicate status.
+To keep track of the status of the Rocks, you can add a new instance variable, or you can use the Color of the Rock to indicate status.
 Either way, write methods with these prototypes:
 
 \begin{code}
@@ -586,23 +509,17 @@ Either way, write methods with these prototypes:
     public void setDead()
 \end{code}
 
-Write a constructor that invokes {\tt setDead} and confirm that
-all Rocks are dead.
+Write a constructor that invokes \java{setDead} and confirm that all Rocks are dead.
 
 
 \section{Simultaneous updates}
 
-In the Game of Life, all Rocks are updated simultaneously; that is,
-each rock checks the status of its neighbors before any Rocks
-change their status.  Otherwise the behavior of the system would
-depend on the order of the updates.
+In the Game of Life, all Rocks are updated simultaneously; that is, each rock checks the status of its neighbors before any Rocks change their status.
+Otherwise the behavior of the system would depend on the order of the updates.
 
-In order to implement simultaneous updates, I suggest that you write
-an {\tt act} method that has two phases: during the first phase,
-all Rocks count their neighbors and record the results; during the
-second phase, all Rocks update their status.
+In order to implement simultaneous updates, I suggest that you write an \java{act} method that has two phases: during the first phase, all Rocks count their neighbors and record the results; during the second phase, all Rocks update their status.
 
-Here's what my {\tt act} method looks like:
+Here's what my \java{act} method looks like:
 
 \begin{code}
     /**
@@ -620,9 +537,8 @@ Here's what my {\tt act} method looks like:
     }
 \end{code}
 
-{\tt phase} and {\tt numNeighbors} are instance variables.
-And here are the prototypes for {\tt countLiveNeighbors} and
-{\tt updateStatus}:
+\java{phase} and \java{numNeighbors} are instance variables.
+And here are the prototypes for \java{countLiveNeighbors} and \java{updateStatus}:
 
 \begin{code}
     /**
@@ -637,42 +553,34 @@ And here are the prototypes for {\tt countLiveNeighbors} and
     public void updateStatus()
 \end{code}
 
-Start with a simple version of {\tt updateStatus} that changes live
-rocks to dead and vice versa.  Now run the program and confirm that
-the Rocks change color.  Every two steps in the World correspond to
-one timestep in the Game of Life.
+Start with a simple version of \java{updateStatus} that changes live rocks to dead and vice versa.
+Now run the program and confirm that the Rocks change color.
+Every two steps in the World correspond to one timestep in the Game of Life.
 
-Now fill in the bodies of {\tt countLiveNeighbors} and
-{\tt updateStatus} according to the rules and see if the system behaves
-as expected.
+Now fill in the bodies of \java{countLiveNeighbors} and \java{updateStatus} according to the rules and see if the system behaves as expected.
 
 
 \section{Initial conditions}
 
-To change the initial conditions, you can use the GridWorld pop-up
-menus to set the status of the Rocks by invoking {\tt setAlive}.
+To change the initial conditions, you can use the GridWorld pop-up menus to set the status of the Rocks by invoking \java{setAlive}.
 Or you can write methods to automate the process.
 
-In {\tt LifeRunner}, add a method called {\tt makeRow} that creates
-an initial configuration with {\tt n} live Rocks in a row in the middle
-of the grid.  What happens for different values of {\tt n}?
+In \java{LifeRunner}, add a method called \java{makeRow} that creates an initial configuration with \java{n} live Rocks in a row in the middle of the grid.
+What happens for different values of \java{n}?
 
-Add a method called {\tt makePentomino} that creates
-an r-pentomino in the middle of the Grid.  The initial configuration
-should look like this:
+Add a method called \java{makePentomino} that creates an r-pentomino in the middle of the Grid.
+The initial configuration should look like this:
 
+\begin{center}
 \includegraphics[height=2in]{figs/LifeRunner.pdf}
+\end{center}
 
-If you run this configuration for more than a few steps, it reaches the
-end of the Grid.  The boundaries of the Grid change the behavior of
-the system; in order to see the full evolution of the r-pentomino,
-the Grid has to be big enough.  You might have to experiment to find
-the right size, and depending on the speed of your computer, it
-might take a while.
+If you run this configuration for more than a few steps, it reaches the end of the Grid.
+The boundaries of the Grid change the behavior of the system; in order to see the full evolution of the r-pentomino, the Grid has to be big enough.
+You might have to experiment to find the right size, and depending on the speed of your computer, it might take a while.
 
-The Game of Life web page describes other initial conditions that
-yield interesting results (\url{http://www.conwaylife.com/}).  Choose
-one you like and implement it.
+The Game of Life web page describes other initial conditions that yield interesting results (\url{http://www.conwaylife.com/}).
+Choose one you like and implement it.
 
 There are also variations of the Game of Life based on different rules.
 Try one out and see if you find anything interesting.
@@ -682,36 +590,29 @@ Try one out and see if you find anything interesting.
 
 \begin{description}
 
-\item[object method:]  A method that is invoked on an object,
-and that operates on that object.
-%, which is referred to by the keyword {\tt this} in Java
+\term{object method}
+A method that is invoked on an object, and that operates on that object.
+%, which is referred to by the keyword \java{this} in Java
 % or ``the current object'' in English.
-Object methods do not have the keyword {\tt static}.
+Object methods do not have the keyword \java{static}.
 
-\item[class method:]  A method with the keyword {\tt static}.
-Class methods are not invoked on objects and they do not have
-a current object.
+\term{class method}
+A method with the keyword \java{static}.
+Class methods are not invoked on objects and they do not have a current object.
 
-\item[current object:]  The object on which an object method
-is invoked.  Inside the method,
-the current object is referred to by {\tt this}.
+\term{current object}
+The object on which an object method is invoked.
+Inside the method, the current object is referred to by \java{this}.
 
-%\item[{\tt this}:]  The keyword that refers to the current object.
+%\item[\java{this}:]  The keyword that refers to the current object.
 
-\item[implicit:]  Anything that is left unsaid or implied.  Within
-an object method, you can refer to the instance variables
-implicitly (i.e., without naming the object).
+\term{implicit}
+Anything that is left unsaid or implied.
+Within an object method, you can refer to the instance variables implicitly (i.e., without naming the object).
 
-\item[explicit:]  Anything that is spelled out completely.  Within
-a class method, all references to the instance variables have to
-be explicit.
-
-\index{object method}
-\index{class method}
-\index{current object}
-\index{this}
-\index{implicit}
-\index{explicit}
+\term{explicit}
+Anything that is spelled out completely.
+Within a class method, all references to the instance variables have to be explicit.
 
 \end{description}
 
@@ -720,40 +621,34 @@ be explicit.
 
 
 \begin{exercise}
-Starting with a copy of {\tt BlueBug.java}, write a class definition
-for a new kind of {\tt Bug} that finds and eats flowers.  You can
-``eat'' a flower by invoking {\tt removeSelfFromGrid} on it.
+Starting with a copy of \java{BlueBug.java}, write a class definition for a new kind of \java{Bug} that finds and eats flowers.
+You can ``eat'' a flower by invoking \java{removeSelfFromGrid} on it.
 \end{exercise}
 
 
 \begin{exercise}
-Now you know what you need to know to read Part 3 of the
-GridWorld Student Manual and do the exercises.
+Now you know what you need to know to read Part 3 of the GridWorld Student Manual and do the exercises.
 \end{exercise}
 
 
 \begin{exercise}
-If you implemented the Game of Life, you are well prepared for
-Part 4 of the GridWorld Student Manual.  Read it and do the exercises.
+If you implemented the Game of Life, you are well prepared for Part 4 of the GridWorld Student Manual.
+Read it and do the exercises.
 \end{exercise}
 
 
 \begin{exercise}
 
-Download \url{http://thinkapjava.com/code/CardSoln2.java} and
-\url{http://thinkapjava.com/code/CardSoln3.java}.
+Download \url{http://thinkapjava.com/code/CardSoln2.java} and \url{http://thinkapjava.com/code/CardSoln3.java}.
 
-{\tt CardSoln2.java} contains solutions to the exercises
-in the previous chapter.  It uses only class methods (except the
-constructors).
+\java{CardSoln2.java} contains solutions to the exercises in the previous chapter.
+It uses only class methods (except the constructors).
 
-{\tt CardSoln3.java} contains the same program, but most of the
-methods are object methods.  I left {\tt merge} unchanged because
-I think it is more readable as a class method.
+\java{CardSoln3.java} contains the same program, but most of the methods are object methods.
+I left \java{merge} unchanged because I think it is more readable as a class method.
 
-Transform {\tt merge} into an object method,
-and change {\tt mergeSort} accordingly.  Which version of
-{\tt merge} do you prefer?
+Transform \java{merge} into an object method, and change \java{mergeSort} accordingly.
+Which version of \java{merge} do you prefer?
 
 \end{exercise}
 
@@ -784,75 +679,54 @@ public boolean equals(Complex b) {
 \begin{exercise}
 
 This exercise is a continuation of Exercise~\ref{ex.rational}.
-The purpose is to practice the syntax of object methods and
-get familiar with the relevant error messages.
+The purpose is to practice the syntax of object methods and get familiar with the relevant error messages.
 
 \begin{enumerate}
 
-\item Transform the methods in the {\tt Rational} class
-from class methods to object methods, and make the necessary
-changes in {\tt main}.
+\item Transform the methods in the \java{Rational} class from class methods to object methods, and make the necessary changes in \java{main}.
 
-\item Make a few mistakes.  Try invoking class methods as if
-they were object methods and vice-versa.  Try to get a sense for
-what is legal and what is not, and for the error messages that
-you get when you mess up.
+\item Make a few mistakes.
+Try invoking class methods as if they were object methods and vice-versa.
+Try to get a sense for what is legal and what is not, and for the error messages that you get when you mess up.
 
-\item Think about the pros and cons of
-class and object methods.  Which is more concise (usually)?
-Which is a more natural way to express computation (or, maybe
-more fairly, what kind of computations can be expressed most
-naturally using each style)?
+\item Think about the pros and cons of class and object methods.
+Which is more concise (usually)?
+Which is a more natural way to express computation (or, maybe more fairly, what kind of computations can be expressed most naturally using each style)?
 
 \end{enumerate}
 \end{exercise}
 
 
 \begin{exercise}
-The goal of this exercise is to write a program that generates random
-poker hands and classifies them, so that we can estimate the
-probability of the various poker hands.  If you don't play poker, you
-can read about it here
-\url{http://en.wikipedia.org/wiki/List_of_poker_hands}.
+The goal of this exercise is to write a program that generates random poker hands and classifies them, so that we can estimate the
+probability of the various poker hands.
+If you don't play poker, you can read about it here \url{http://en.wikipedia.org/wiki/List_of_poker_hands}.
 
 \begin{enumerate}
 
-\item Start with \url{http://thinkapjava.com/code/CardSoln3.java}
-and make sure you can compile and run it.
+\item Start with \url{http://thinkapjava.com/code/CardSoln3.java} and make sure you can compile and run it.
 
-\item Write a definition for a class named {\tt PokerHand}
-that extends {\tt Deck}.
+\item Write a definition for a class named \java{PokerHand} that extends \java{Deck}.
 
-\item Write a {\tt Deck} method named {\tt deal} that creates
-a PokerHand, transfers cards from the deck to the hand, and returns
-the hand.
+\item Write a \java{Deck} method named \java{deal} that creates a PokerHand, transfers cards from the deck to the hand, and returns the hand.
 
-\item In {\tt main} use {\tt shuffle} and
-{\tt deal} to generate and print four {\tt PokerHands} with
-five cards each.  Did you get anything good?
+\item In \java{main} use \java{shuffle} and \java{deal} to generate and print four \java{PokerHands} with five cards each.
+Did you get anything good?
 
-\item Write a {\tt PokerHand} method called {\tt hasFlush}
-returns a boolean indicating whether the
-hand contains a flush.
+\item Write a \java{PokerHand} method called \java{hasFlush} returns a boolean indicating whether the hand contains a flush.
 
-\item Write a method called {\tt hasThreeKind} that
-indicates whether the hand contains
-Three of a Kind.
+\item Write a method called \java{hasThreeKind} that indicates whether the hand contains Three of a Kind.
 
-\item Write a loop that generates a few thousand hands and
-checks whether they contain a flush or three of a kind.
+\item Write a loop that generates a few thousand hands and checks whether they contain a flush or three of a kind.
 Estimate the probability of getting one of those hands.
-Compare your results to the probabilities at
-\url{http://en.wikipedia.org/wiki/List_of_poker_hands}.
+Compare your results to the probabilities at \url{http://en.wikipedia.org/wiki/List_of_poker_hands}.
 
-\item Write methods that test for the other poker hands.  Some
-are easier than others.  You might find it useful to write some
-general-purpose helper methods that can be used for more than one
-test.
+\item Write methods that test for the other poker hands.
+Some are easier than others.
+You might find it useful to write some general-purpose helper methods that can be used for more than one test.
 
-\item In some poker games, players get seven cards each, and
-they form a hand with the best five of the seven.  Modify your
-program to generate seven-card hands and recompute the probabilities.
+\item In some poker games, players get seven cards each, and they form a hand with the best five of the seven.
+Modify your program to generate seven-card hands and recompute the probabilities.
 
 \end{enumerate}
 \end{exercise}
