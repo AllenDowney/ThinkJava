@@ -51,9 +51,9 @@
 \newcommand*{\Anchor}[1]{%
   \@bsphack%
     \Hy@GlobalStepCount\anchorcnt%
-    \edef\@currentHref{anchor.\the\anchorcnt}% 
-    \Hy@raisedlink{\hyper@anchorstart{\@currentHref}\hyper@anchorend}% 
-    \M@gettitle{}\label{#1}% 
+    \edef\@currentHref{anchor.\the\anchorcnt}%
+    \Hy@raisedlink{\hyper@anchorstart{\@currentHref}\hyper@anchorend}%
+    \M@gettitle{}\label{#1}%
     \@esphack%
 }
 
@@ -62,10 +62,6 @@
 
 \else
 %%%% LATEX ONLY
-
-\usepackage{tocloft}
-\usepackage{fancyhdr}
-\usepackage[totoc]{idxlayout}
 
 \usepackage{geometry}
 \geometry{
@@ -106,7 +102,9 @@
 \makeatother
 
 % table of contents vertical spacing
+\usepackage{tocloft}
 \setlength\cftparskip{8pt plus 4pt minus 4pt}
+\usepackage[totoc]{idxlayout}
 
 % The following line adds a little extra space to the column
 % in which the Section numbers appear in the table of contents
@@ -115,6 +113,7 @@
 \makeatother
 
 % customize page headers
+\usepackage{fancyhdr}
 \pagestyle{fancyplain}
 \renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
@@ -168,6 +167,9 @@
 {\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
 {\endminipage}
 
+% inline syntax formatting
+\newcommand{\java}[1]{\lstinline{#1}} %\end{
+
 % pdf hyperlinks, table of contents, and document properties
 \usepackage[pdftex]{hyperref}
 \hypersetup{%
@@ -183,26 +185,21 @@
   urlcolor=blue
 }
 
-% inline syntax formatting
-\newcommand{\java}[1]{\lstinline{#1}} %\end{
-
-% END OF LATEX ONLY
+%%%% END OF LATEX ONLY
 \fi
 
-
-%% END OF PREAMBLE
+%%%% END OF PREAMBLE
 
 \begin{document}
 
 \frontmatter
 
-
 \ifplastex
-%PLASTEX ONLY
+%%%% PLASTEX ONLY
     \maketitle
 
 \else
-%LATEX ONLY
+%%%% LATEX ONLY
 
 %--title page--------------------------------------------------
 \pagebreak
@@ -253,7 +250,6 @@ The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 
 %%%% END OF LATEX ONLY
 \fi
-
 
 \mainmatter
 
@@ -6601,13 +6597,13 @@ The purpose of this exercise is to review encapsulation and generalization (see 
 \begin{code}
     String s = "((3 + 7) * 2)";
     int len = s.length();
-    
+
     int i = 0;
     int count = 0;
-    
+
     while (i < len) {
         char c = s.charAt(i);
-        
+
         if (c == '(') {
             count = count + 1;
         } else if (c == ')') {
@@ -6615,7 +6611,7 @@ The purpose of this exercise is to review encapsulation and generalization (see 
         }
         i = i + 1;
     }
-    
+
     System.out.println(count);
 \end{code}
 
