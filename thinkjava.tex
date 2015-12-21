@@ -6011,6 +6011,792 @@ You should not use \java{factorial} or \java{pow}.
 \end{exercise}
 
 
+\chapter{Arrays of integers}
+\label{arrays}
+
+\index{array}
+\index{type!array}
+
+An {\bf array} is a set of values where each value is identified by an index.
+You can make an array of \java{int}s, \java{double}s, or any other type, but all the values in an array must have the same type.
+
+Syntactically, array types look like other Java types except they are followed by square brackets \java{[]}.
+For example, \java{int[]} is the type ``integer array'' and \java{double[]} is the type ``double array.''
+
+You can declare variables with these types in the usual way:
+
+\begin{code}
+    int[] counts;
+    double[] values;
+\end{code}
+
+Arrays are objects and must be created.
+An array variable simply stores a reference to an array object.
+To create the array itself, use the \java{new} operator.
+
+\begin{code}
+    counts = new int[4];
+    values = new double[size];
+\end{code}
+
+The first assignment makes \java{count} refer to an array of 4 integers.
+The second makes \java{values} refer to an array of \java{double}s, but the number of elements in \java{values} depends on the variable \java{size}.
+You can use any integer expression for the size of an array.
+
+\section{Accessing elements}
+
+\index{memory diagram}
+
+When you allocate an array of \java{int}s, the elements are automatically initialized to zero.
+Here is a memory diagram of the \java{counts} array so far:
+
+\begin{center}
+\includegraphics{figs/array.pdf}
+\end{center}
+
+\index{element}
+\index{index}
+\index{array!element}
+\index{array!index}
+
+The large numbers inside the boxes are the {\bf elements} of the array.
+The small numbers outside the boxes are the {\bf indexes} (or indices) used to identify each memory location.
+
+To store values in the array, use the \java{[]} operator.
+For example \java{counts[0]} refers to the ``zeroeth'' element of the array, and \java{counts[1]} refers to the ``oneth'' element.  You can use the \java{[]} operator anywhere in an expression:
+
+\begin{code}
+    counts[0] = 7;
+    counts[1] = counts[0] * 2;
+    counts[2]++;
+    counts[3] -= 60;
+\end{code}
+
+These assignment statements are all legal in Java.
+Here is the result of the above code fragment:
+
+\begin{center}
+\includegraphics{figs/array2.pdf}
+\end{center}
+
+\index{exception!ArrayOutOfBounds}
+\index{run-time error}
+
+The elements of the array are numbered from 0 to 3, which means that there is no element with the index 4.
+This should sound familiar, since we saw the same thing with \java{String} indexes.
+Nevertheless a common programming mistake is going beyond the bounds of an array, which throws an \java{ArrayIndexOutOfBoundsException}.
+
+You can use any expression as an index, as long as it has type \java{int}.
+One of the most common ways to index an array is with a loop variable.
+For example:
+
+\begin{code}
+    int i = 0;
+    while (i < 4) {
+        System.out.println(counts[i]);
+        i++;
+    }
+\end{code}
+
+\index{loop}
+\index{loop variable}
+\index{variable!loop}
+
+This is a standard \java{while} loop that counts from 0 up to 4.
+When the loop variable \java{i} is 4, the condition fails and the loop terminates.
+Thus, the body of the loop is only executed when \java{i} is 0, 1, 2 and 3.
+
+Each time through the loop we use \java{i} as an {\it index} into the array, printing the \java{i}th element.
+For convenience, this type of array traversal is commonly written using a \java{for} loop.
+
+\begin{code}
+    for (int i = 0; i < 4; i++) {
+        System.out.println(counts[i]);
+    }
+\end{code}
+
+%\section{Arrays vs objects}
+
+\index{object!compared to array}
+\index{array!compared to object}
+
+Some of the objects we looked at, like \java{Rectangle}s, are similar to arrays in the sense that they are a set of values.
+Because arrays are also objects, they have many of the same behaviors:
+
+\begin{itemize}
+
+\item When you declare an array variable, you get a reference to an array.
+
+\item You have to use \java{new} to create the array itself.
+
+\item When you pass an array as an argument, you pass a reference, which means that the invoked method can change the contents of the array.
+
+\end{itemize}
+
+You might ask, ``How is an array of 4 integers different from a Rectangle object of 4 integers?''
+The main difference is that array elements are accessed by index, whereas object elements have names.
+Another difference is that the elements of an array have to be the same type; objects can have instance variables with different types.
+
+
+\section{Copying arrays}
+\index{array!copying}
+
+When you copy an array variable, remember that you are copying a reference to the array.
+For example:
+
+\begin{code}
+    double[] a = new double[3];
+    double[] b = a;
+\end{code}
+
+This code creates one array of three \java{double}s and sets two different variables to reference it.
+As with objects, this situation is a form of aliasing.
+
+\begin{center}
+\includegraphics{figs/array3.pdf}
+\end{center}
+
+Any changes made through either array variable will be reflected in the other.
+This behavior is usually not what you want; more often you want to allocate a \java{new} array and copy elements from one to the other.
+
+\begin{code}
+    double[] b = new double[3];
+    for (int i = 0; i < 3; i++) {
+        b[i] = a[i];
+    }
+
+\end{code}
+
+\index{java.util.Arrays}
+
+The Java library provides a utility class named \java{java.util.Arrays} with methods for copying arrays and other common array operations.
+We can rewrite the above \java{for} loop with just one line of code.
+
+\begin{code}
+    double[] b = Arrays.copyOf(a, 3);
+\end{code}
+
+%\section{Array length}
+
+\index{length!array}
+\index{array!length}
+
+All arrays have one named instance variable: \java{length}.
+Not surprisingly, it contains the length of the array (number of elements).
+It is a good idea to use this value as the upper bound of a loop, rather than a constant value.
+That way, if you need to change the size of the array, you won't have to go through the program changing all the loops.
+
+\begin{code}
+    for (int i = 0; i < a.length; i++) {
+        b[i] = a[i];
+    }
+\end{code}
+
+The last time the body of the loop gets executed, \java{i} is \java{a.length - 1}, which is the index of the last element.
+When \java{i} is equal to \java{a.length}, the condition fails and the body is not executed (which is a good thing, since it would throw an exception).
+
+The above \java{for} loop assumes that the array \java{b} contains at least as many elements as \java{a}.
+Of course, you could simply use the \java{Arrays} class and \java{a.length}:
+
+\begin{code}
+    b = Arrays.copyOf(a, a.length);
+\end{code}
+
+
+\section{Random numbers}
+\label{random}
+\label{pseudorandom}
+
+\index{deterministic}
+
+Most computer programs do the same thing every time they are executed, so they are said to be {\bf deterministic}.
+Usually determinism is a good thing, since we expect the same calculation to yield the same result.
+But for some applications we want the computer to be unpredictable.
+Games are an obvious example, but there are many others.
+
+\index{nondeterministic}
+
+Making a program truly {\bf nondeterministic} turns out to be not so easy, but there are ways to make it at least seem nondeterministic.
+One of them is to generate random numbers and use them to determine the outcome of the program.
+Java provides a method that generates {\bf pseudorandom} numbers, which are not truly random since they are determined by an algorithm.
+But for our purposes, they will do.
+
+\index{random}
+
+Check out the documentation of the \java{random} method in the \java{Math} class.
+The return value is a \java{double} between 0.0 and 1.0.
+To be precise, it is greater than or equal to 0.0 and strictly less than 1.0.
+Each time you invoke \java{Math.random()} you get the next number in a pseudorandom sequence.
+To see a sample, run this loop:
+
+\begin{code}
+    for (int i = 0; i < 10; i++) {
+        double x = Math.random();
+        System.out.println(x);
+    }
+\end{code}
+
+Let's say we need to generate a number between 5 and 15 inclusive.
+Notice how there are 11 possible results: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, and 15.
+We can use \java{Math.random()} to get a number in the range [0, 1).
+If we multiply that number by 11, we now have a number in the range [0, 11).
+Now we just have to add 5 to that number to shift the range to [5, 16).
+Finally, we cast the value to an \java{int}, which throws away any decimal places.
+
+We can encapsulate this technique in a method and generalize for any numbers \java{x} and \java{y}.
+
+\begin{code}
+    public static int randomInt(int x, int y) {
+        int range = y - x + 1;
+        return (int) (Math.random() * range + x);
+    }
+\end{code}
+
+%A similar method is provided by \java{java.util.Random}, but for simplicity we will use our own version in this chapter.
+
+
+\section{Array of random numbers}
+\label{randarray}
+
+If you generate a long series of random numbers, then every value should appear, at least approximately, the same number of times.
+One way to test the \java{randomInt} method is to generate a large number of values, store them in an array, and count the number of times each value occurs.
+
+The following method takes a single argument: the size of an array.
+It allocates a new array of integers, fills it with random values, and returns a reference to the new array.
+
+\begin{code}
+    public static int[] randomArray(int size) {
+      int[] a = new int[size];
+      for (int i = 0; i < a.length; i++) {
+          a[i] = randomInt(0, 99);
+      }
+      return a;
+  }
+\end{code}
+
+The return type is \java{int[]}, which means that this method returns (a reference to) an array of integers.
+To test this method, it is convenient to have another method that prints the contents of an array.
+
+\begin{code}
+    public static void printArray(int[] a) {
+        System.out.print("{" + a[0]);
+        for (int i = 1; i < a.length; i++) {
+            System.out.print(", " + a[i]);
+        }
+        System.out.println("}");
+    }
+\end{code}
+
+The following code generates an array and prints it:
+
+\begin{code}
+    int numValues = 8;
+    int[] array = randomArray(numValues);
+    printArray(array);
+\end{code}
+
+Here is what the output will look like (your results may differ):
+
+\begin{stdout}
+{15, 62, 46, 74, 67, 52, 51, 10}
+\end{stdout}
+
+
+\section{Traverse and count}
+
+\index{histogram}
+\index{counter}
+
+If these values were exam scores (and they would be pretty bad exam scores), the teacher might present them to the class in the form of a {\bf histogram}, which is a set of counters that keeps track of the number of times each value appears.
+For exam scores, we might have ten counters to keep track of how many students scored in the 90s, the 80s, etc.
+
+\index{program development}
+\index{bottom-up}
+
+The next few sections develop the code to generate a histogram.
+A good approach to solving problems like this one is to think of simple methods that are easy to write and then combine them into a solution.
+This process is called {\bf bottom-up} development.
+It is not always obvious where to start, but a good approach is to look for subproblems that fit a pattern you have seen before.
+
+\index{traverse!array}
+\index{array!traverse}
+\index{looping and counting}
+
+In Section~\ref{loopcount}, we saw a loop that traversed a string and counted the number of times a given letter appeared.
+You can think of this program as an example of a pattern called ``traverse and count.''
+The elements of this pattern are:
+
+\begin{itemize}
+\item A container that can be traversed, like an array or a string.
+\item A test that you can apply to each element in the container.
+\item A counter that keeps track of how many elements pass the test.
+\end{itemize}
+
+In the case of building a histogram, the container is an array of integers.
+The test is whether or not a given score falls in a given range of values.
+And the counter is the histogram itself.
+
+Here is a method called \java{inRange} that counts the number of elements in an array that fall in a given range.
+The parameters are the array and two integers that specify the lower and upper bounds of the range.
+
+\begin{code}
+public static int inRange(int[] a, int low, int high) {
+    int count = 0;
+    for (int i = 0; i < a.length; i++) {
+        if (a[i] >= low && a[i] < high) {
+            count++;
+        }
+    }
+    return count;
+}
+\end{code}
+
+Note that \java{low} is included in the range (\java{>=}), but \java{high} is excluded (\java{<}).
+This important detail keeps us from counting any elements twice.
+
+Now we can count the number of scores in the ranges we are interested in:
+
+\begin{code}
+    int[] scores = randomArray(30);
+    int a = inRange(scores, 90, 100);
+    int b = inRange(scores, 80, 90);
+    int c = inRange(scores, 70, 80);
+    int d = inRange(scores, 60, 70);
+    int f = inRange(scores, 0, 60);
+\end{code}
+
+
+\section{Building a histogram}
+
+This code is repetitious, but it is acceptable as long as the number of ranges is small.
+Imagine that we want to keep track of the number of times each score appears, i.e., all 100 possible values.
+Should you just write the following 100 lines of code?
+
+\begin{code}
+    int count0 = inRange(scores, 0, 1);
+    int count1 = inRange(scores, 1, 2);
+    int count2 = inRange(scores, 2, 3);
+    ...
+    int count99 = inRange(scores, 99, 100);
+\end{code}
+
+What we really want is a way to store 100 integers, preferably so we can use an index to access each one.
+In other words, we need an array!
+
+The counting pattern is the same whether we use a single counter or an array of counters.
+In this case, we initialize the array outside the loop; then, inside the loop, we invoke \java{inRange} and store the result:
+
+\begin{code}
+    int[] counts = new int[100];
+    for (int i = 0; i < counts.length; i++) {
+        counts[i] = inRange(scores, i, i + 1);
+    }
+\end{code}
+
+The only tricky thing here is that we are using the loop variable in two roles: as in index into the array, and as the parameter to \java{inRange}.
+
+%\section{A single-pass solution}
+\label{singlepass}
+
+The code works, but it is not as efficient as it could be.
+Every time it invokes \java{inRange}, it traverses the entire array.
+As the number of ranges increases, that gets to be a lot of traversals.
+
+It would be better to make a single pass through the array, and for each value, compute which range it falls in.
+Then we could increment the appropriate counter.
+Here is code that traverses an array of scores once and generates a histogram.
+
+\begin{code}
+    int[] counts = new int[100];
+    for (int i = 0; i < scores.length; i++) {
+        int index = scores[i];
+        counts[index]++;
+    }
+\end{code}
+
+In this example the computation is trivial, because we can use the value itself as an index into the array of counters.
+
+
+\section{The enhanced for loop}
+
+Since looping through arrays is so common, Java provides an alternative \java{for} loop syntax that makes the code more compact.
+The basic idea is to iterate each element of the array, as opposed to each index.
+
+\begin{code}
+    // standard for loop
+    for (int i = 0; i < values.length; i++) {
+        System.out.println("The value is " + values[i]);
+    }
+
+    // enhanced for loop
+    for (int value : values) {
+        System.out.println("The value is " + value);
+    }
+\end{code}
+
+You can read the enhanced \java{for} loop above as, ``for each \java{value} in \java{values}.''
+It's common to use a plural nouns for array variables and singular nouns for element variables.
+
+Using the enhanced \java{for} loop, we can create the histogram from the previous section using even less code:
+
+\begin{code}
+    int[] counts = new int[100];
+    for (int score : scores) {
+        counts[score]++;
+    }
+\end{code}
+
+Because they make the code more readable, you should use enhanced \java{for} loops whenever possible.
+For example, to find the maximum value in an array of integers, we simply look at each one:
+
+\begin{code}
+    int max = Integer.MIN_VALUE;
+    for (int value : numbers) {
+        if (value > max) {
+            max = value;
+        }
+    }
+\end{code}
+
+Note however that the enhanced \java{for} loop does not give you the index of each value.
+If you need to find the index of the maximum value, then you need to use a standard \java{for} loop.
+
+\begin{code}
+    int index = -1;
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            index = i;
+            max = numbers[i];
+        }
+    }
+\end{code}
+
+
+\section{Command-line arguments}
+
+Now that you have learned about arrays, the time has finally come to explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter 1.
+Continuing the example from the previous section, let's write a program to find the maximum number.
+Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
+Here is a starting point:
+
+\begin{code}
+public class Max {
+    public static void main(String[] args) {
+        System.out.println(args);
+    }
+}
+\end{code}
+
+If you compile and run this program as-is, the output looks something like:
+
+\begin{stdout}
+[Ljava.lang.String;@5da1fbed
+\end{stdout}
+
+The variable \java{args} is an array of strings, and since arrays are objects, the \java{println} method calls its \java{toString} method.
+Unfortunately arrays don't come with a useful version of \java{toString}, which is why we wrote our own \java{printArray} method in Section~\ref{randarray}.
+The \java{java.util.Arrays} class provides a number of \java{toString} methods, if you're not in the mood to write your own.
+
+Rather than print the address of the array, let's look at its actual contents:
+
+\begin{code}
+    System.out.println(Arrays.toString(args));
+\end{code}
+
+The output indicates that we have an empty array:
+
+\begin{stdout}
+[]
+\end{stdout}
+
+If you run Java from the command-line, you can pass optional arguments separated by spaces.
+Everything after the class name is considered part of the command-line arguments.
+For example, we can enter the command:
+
+\begin{stdout}
+java Max 10 -3 55 0 14
+\end{stdout}
+
+Now the output of the program is:
+
+\begin{stdout}
+[10, -3, 55, 0, 14]
+\end{stdout}
+
+At this point, we have a program that can read and write strings.
+To find the maximum number, we need to convert the String arguments into integers.
+Here is a complete example that uses an enhanced \java{for} loop to parse each command-line argument and search for the maximum value in a single pass.
+
+\begin{code}
+    int max = Integer.MIN_VALUE;
+    for (String arg : args) {
+        int value = Integer.parseInt(arg);
+        if (value > max) {
+            max = value;
+        }
+    }
+    System.out.println("The max is " + max);
+\end{code}
+
+In general, command-line arguments allow you to customize your programs based on user input before the program begins.
+For example, the \java{javac} and \java{java} programs use command-line arguments for a variety of configuration settings.
+You can run \java{javac -help} and \java{java -help} from the command-line to see what they are.
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{array}
+A collection of values, where all the values have the same type, and each value is identified by an index.
+
+\term{element}
+One of the values in an array.
+The \java{[]} operator selects elements.
+
+\term{index}
+An integer variable or value used to indicate an element of an array.
+
+\term{deterministic}
+A program that does the same thing every time it is invoked.
+Technically speaking, all computer programs are deterministic: they simply execute the source code.
+
+\term{nondeterministic}
+A program that behaves differently, even when run multiple times with the same input.
+Nondeterminism is a theoretical concept for analyzing the complexity of algorithms.
+
+\term{pseudorandom}
+A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.
+
+\term{histogram}
+An array of integers where each integer counts the number of values that fall into a certain range.
+
+\term{bottom-up}
+A program development process that starts with simple methods and then assembles them into a working solution.
+
+\end{description}
+
+
+\section{Exercises}
+
+
+\begin{exercise}
+Write a method called \java{cloneArray} that takes an array of integers as a parameter, creates a new array that is the same size, copies the elements from the first array into the new one, and then returns a reference to the new array.
+\end{exercise}
+
+
+\begin{exercise}
+Write a method called \java{randomDouble} that takes two doubles, \java{low} and {high}, and that returns a random double $x$ such that $low \le x < high$.
+\end{exercise}
+
+
+\begin{exercise}
+Encapsulate the code in Section~\ref{singlepass} in a method called \java{makeHist} that takes an array of scores and returns a histogram of the values in the array.
+\end{exercise}
+
+
+\begin{exercise}
+Write a method named \java{areFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all factors of \java{n} (which is to say that \java{n} is divisible by all of them).
+%HINT: See Exercise~\ref{ex.isdiv}.
+\end{exercise}
+
+
+\begin{exercise}
+Write a method that takes an array of integers and an integer named \java{target} as arguments, and that returns the first index where \java{target} appears in the array, if it does, and -1 otherwise.
+\end{exercise}
+
+\begin{exercise}
+Some programmers disagree with the general rule that variables and methods should be given meaningful names.
+Instead, they think variables and methods should be named after fruit.
+
+For each of the following methods, write one sentence that describes abstractly what the method does.
+For each variable, identify the role it plays.
+(The purpose of this exercise is to practice reading code and recognizing the computation patterns we have seen.)
+
+\begin{code}
+    public static int banana(int[] a) {
+        int grape = 0;
+        int i = 0;
+        while (i < a.length) {
+            grape = grape + a[i];
+            i++;
+        }
+        return grape;
+    }
+\end{code}
+
+\begin{code}
+    public static int apple(int[] a, int p) {
+        int i = 0;
+        int pear = 0;
+        while (i < a.length) {
+            if (a[i] == p) {
+                pear++;
+            }
+            i++;
+        }
+        return pear;
+    }
+\end{code}
+
+\begin{code}
+    public static int grapefruit(int[] a, int p) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == p) {
+                return i;
+            }
+        }
+        return -1;
+    }
+\end{code}
+\end{exercise}
+
+
+\begin{exercise}
+What is the output of the following program?
+Draw a stack diagram that shows the state of the program just before \java{mus} returns.
+Describe in a few words what \java{mus} does.
+
+\begin{code}
+    public static int[] make(int n) {
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = i + 1;
+        }
+        return a;
+    }
+\end{code}
+
+\begin{code}
+    public static void dub(int[] jub) {
+        for (int i = 0; i < jub.length; i++) {
+            jub[i] *= 2;
+        }
+    }
+\end{code}
+
+\begin{code}
+    public static int mus(int[] zoo) {
+        int fus = 0;
+        for (int i = 0; i < zoo.length; i++) {
+            fus = fus + zoo[i];
+        }
+        return fus;
+    }
+\end{code}
+
+\begin{code}
+    public static void main(String[] args) {
+        int[] bob = make(5);
+        dub(bob);
+        System.out.println(mus(bob));
+    }
+\end{code}
+\end{exercise}
+
+
+\begin{exercise}
+Many of the patterns we have seen for traversing arrays can also be written recursively.
+It is uncommon, but it is a useful exercise.
+
+\begin{enumerate}
+
+\item Write a method called \java{maxInRange} that takes an array of integers and a range of indexes (\java{lowIndex} and \java{highIndex}), and that finds the maximum value in the array, considering only the elements between \java{lowIndex} and \java{highIndex}, including both ends.
+
+This method should be recursive.
+If the length of the range is 1, that is, \java{if lowIndex == highIndex}, we know immediately that the sole element in the range must be the maximum.
+So that's the base case.
+
+If there is more than one element in the range, we can break the array into two pieces, find the maximum in each of the pieces, and then find the maximum of the maxima.
+
+\item Methods like \java{maxInRange} can be awkward to use.
+To find the largest element in an array, we have to provide a range for the entire array.
+
+\begin{code}
+    double max = maxInRange(array, 0, a.length - 1);
+\end{code}
+
+Write a method called \java{max} that takes an array as a parameter and that uses \java{maxInRange} to find and return the largest value.
+
+Methods like \java{max} are sometimes called ``wrapper methods'' because they provide a layer of abstraction around an awkward method and make it easier to use.
+The method that actually performs the computation is called the ``helper method.''
+
+\item Write a recursive method named \java{find} using the wrapper-helper pattern.
+The \java{find} method should take an array of integers and a target integer.
+It should return the index of the first location where the target integer appears in the array, or -1 if it does not appear.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+One not-very-efficient way to sort the elements of an array is to find the largest element and swap it with the first element, then find the second-largest element and swap it with the second, and so on.
+This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/Selection_sort}).
+
+\begin{enumerate}
+
+\item Write a method called \java{indexOfMaxInRange} that takes an array of integers, finds the largest element in the given range, and returns its {\em index}.
+You can modify your recursive version of \java{maxInRange} or you can write an iterative version from scratch.
+
+\item Write a method called \java{swapElement} that takes an array of integers and two indices, and that swaps the elements at the given indices.
+
+\item Write a method called \java{selectionSort} that takes an array of integers and that uses \java{indexOfMaxInRange} and \java{swapElement} to sort the array from largest to smallest.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+Write a method called \java{letterHist} that takes a String as a parameter and that returns a histogram of the letters in the String.
+The zeroeth element of the histogram should contain the number of a's in the String (upper and lower case); the 25th element should contain the number of z's.
+Your solution should only traverse the String once.
+\end{exercise}
+
+
+\begin{exercise}
+A word is said to be a ``doubloon'' if every letter that appears in the word appears exactly twice.
+Here are some example doubloons found in the dictionary.
+
+\begin{quote}
+Abba, Anna, appall, appearer, appeases, arraigning, beriberi, bilabial, boob, Caucasus, coco, Dada, deed, Emmett, Hannah, horseshoer, intestines, Isis, mama, Mimi, murmur, noon, Otto, papa, peep, reappear, redder, sees, Shanghaiings, Toto
+\end{quote}
+
+Write a method called \java{isDoubloon} that returns \java{true} if the given word is a doubloon and \java{false} otherwise.
+\end{exercise}
+
+
+\begin{exercise}
+Two words are anagrams if they contain the same letters (and the same number of each letter).
+For example, ``stop'' is an anagram of ``pots'' and ``allen downey'' is an anagram of ``well annoyed.''
+
+Write a method that takes two Strings and returns \java{true} if the Strings are anagrams of each other.
+
+Optional challenge: read the letters of the Strings only once.
+\end{exercise}
+
+
+\begin{exercise}
+In Scrabble each player has a set of tiles with letters on them, and the object of the game is to use those letters to spell words.
+The scoring system is complicated, but longer words are usually worth more than shorter words.
+
+Imagine you are given your set of tiles as a String, like \java{"quijibo"} and you are given another String to test, like \java{"jib"}.
+Write a method called \java{canSpell} that takes two Strings and returns \java{true} if the set of tiles can be used to spell the word.
+You might have more than one tile with the same letter, but you can only use each tile once.
+
+Optional challenge: read the letters of the Strings only once.
+\end{exercise}
+
+
+\begin{exercise}
+In real Scrabble, there are some blank tiles that can be used as wild cards; that is, a blank tile can be used to represent any letter.
+
+Think of an algorithm for \java{canSpell} that deals with wild cards.
+Don't get bogged down in details of implementation like how to represent wild cards.
+Just describe the algorithm, using English, pseudocode, or Java.
+\end{exercise}
+
+
 \chapter{Strings and things}
 \label{strings}
 
@@ -6882,13 +7668,2181 @@ Write a loop to try other possible values.
 \end{exercise}
 
 
-%\input{todo-tex/chapter09.tex}
-%\input{todo-tex/chapter11.tex}
-%\input{todo-tex/chapter12.tex}
-%\input{todo-tex/chapter13.tex}
-%\input{todo-tex/chapter14.tex}
-%\input{todo-tex/chapter15.tex}
-%\input{todo-tex/chapter16.tex}
+\chapter{Classes and objects}
+\label{objects}
+
+\index{String}
+\index{type!String}
+
+As we learned in the previous chapter, \java{String}s are objects.
+But they are atypical in Java because:
+
+\begin{itemize}
+
+\item You don't have to use the \java{new} operator to create a \java{String} object.
+For convenience, Java allows you to define \java{String} literals.
+
+\item They are immutable.
+You cannot edit an existing \java{String} object directly; you can only create new ones.
+
+\end{itemize}
+
+In this chapter, we will learn about more classes from the Java library such as \java{Point} and \java{Rectangle}.
+These classes are defined in the \java{java.awt} package, so you will need to \java{import} them before running the examples.
+To be clear, these points and rectangles are not graphical objects that appear on the screen.
+Like strings, they contain data and provide methods for manipulating that data.
+But unlike strings, you can make changes to that data directly.
+
+
+\section{Point objects}
+
+A point is two numbers (coordinates) that we treat collectively as a single object.
+In mathematical notation, points are often written in parentheses with a comma separating the coordinates.
+For example, $(0,0)$ indicates the origin, and $(x,y)$ indicates the point $x$ units to the right and $y$ units up from the origin.
+
+\index{Point}
+\index{class!Point}
+\index{new}
+\index{statement!new}
+
+In Java, a point is represented by a \java{java.awt.Point} object.
+To create a new point, you have to use the \java{new} operator:
+
+\begin{code}
+    Point blank;
+    blank = new Point(3, 4);
+\end{code}
+
+\index{declaration}
+\index{statement!declaration}
+
+The first line is a conventional variable declaration: \java{blank} has type \java{Point}.
+The second line invokes \java{new}, specifies the type of the new object, and provides arguments.
+The arguments are the coordinates of the new point: $(3, 4)$.
+
+\index{reference}
+
+The result of the \java{new} operator is a {\bf reference} to the new \java{Point}.
+So \java{blank} contains a reference to the newly-created object.
+Here is a standard way to diagram this assignment:
+
+\begin{center}
+\includegraphics{figs/reference.pdf}
+\end{center}
+
+\index{attribute}
+
+As usual, the name of the variable \java{blank} appears outside the box and its value appears inside the box.
+In this case, that value is a reference, which is shown graphically with an arrow.
+The arrow points to the object we're referring to, which shows the newly-created object and the two values in it.
+The variables \java{x} and \java{y} are the object's {\bf attributes}.
+
+% CSM: We already introduced memory diagrams (Ch1) and stack diagrams (Ch4).
+% State diagrams are the next aspect of this general diagraming convention.
+
+\index{state}
+\index{state diagram}
+
+Taken together, all the variables, values, and objects in a program are called the {\bf state}.
+Diagrams like this that show the state of the program's objects are called {\bf state diagrams}.
+As the program runs, the state changes, so you should think of a state diagram as a snapshot of a particular point in the execution.
+
+
+\section{The Point class}
+
+When you define a class in Java, you are also defining a new data type.
+It is helpful to think of classes as the blueprints (or a template) for objects.
+To illustrate this point (pun intended), here is a simplified version of the source code for the \java{java.awt.Point} class:
+
+\begin{code}
+public class Point {
+
+    public int x;
+    public int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public String toString() {
+        return "Point[x=" + x + ",y=" + y + "]";
+    }
+
+}
+\end{code}
+
+There are several details to note in this example.
+
+\begin{itemize}
+
+\item The class defines two variables (attributes) named \java{x} and \java{y} that are shared across all methods.
+Because they are declared at the class level, their scope is the entire class.
+
+\item The method \java{public Point(int x, int y)} is called a {\bf constructor}.
+Its purpose is to initialize new objects, and it is called by the \java{new} operator.
+Notice that it has no return type (not even \java{void}).
+
+\item The parameters \java{x} and \java{y} in the constructor happen to have the same name as the attributes.
+In order to distinguish one variable from the other, the keyword \java{this} refers to the current object.
+
+%\item None of the variables or methods are \java{static}.
+%In other words, they apply to each object of the class as opposed to the class itself.
+%We will discuss this issue more deeply in the next chapter.
+
+\end{itemize}
+
+In practice, it's more convenient to look at high-level pictures than source code.
+{\bf Unified Modeling Language} (UML) defines a standard way to visualize class designs.
+Here is a {\bf class diagram} for the simplified \java{Point} class above:
+
+\begin{center}
+\vspace{1ex}
+\includegraphics{figs/point.pdf}
+\vspace{1ex}
+\end{center}
+
+The diagram is divided into two sections: the attributes (or variables) of the class, and the methods of the class.
+
+
+\section{Instance variables}
+
+\index{instance variable}
+\index{variable!instance}
+
+The attributes that make up an object are also called instance variables, because each object has its own copy of the variables.
+Classes define new data types, and each object is an {\bf instance} of that type.
+
+It's like the glove compartment of a car.
+Each car is an instance of the type ``Car,'' and each car has its own glove compartment.
+If you ask me to get something from the glove compartment of your car, you have to tell me which car is yours.
+
+\index{dot notation}
+
+Similarly if you want to read a value from an object, you have to specify the object you want to get it from.
+Java uses dot notation for this purpose.
+
+\begin{code}
+    int x = blank.x;
+\end{code}
+
+The expression \java{blank.x} means ``go to the object \java{blank} refers to, and get the value of \java{x}.''
+In this case, we assign that value to a local variable named \java{x}.
+There is no conflict between the local variable named \java{x} and the instance variable named \java{x}.
+The purpose of dot notation is to identify {\em which} variable you are referring to unambiguously.
+
+You can use dot notation to build other Java expressions.
+Here are several common examples:
+
+\begin{code}
+    System.out.println(blank.x + ", " + blank.y);
+    int sum = blank.x * blank.x + blank.y * blank.y;
+\end{code}
+
+The first line prints {\tt 3, 4}; the second line calculates the value 25.
+
+
+\section{Objects as parameters}
+
+\index{parameter}
+\index{object!as parameter}
+
+You can pass objects as parameters in the usual way.
+For example:
+
+\begin{code}
+    public static void printPoint(Point p) {
+        System.out.println("(" + p.x + ", " + p.y + ")");
+    }
+\end{code}
+
+This method takes a point as an argument and prints it in parentheses.
+If you invoke \java{printPoint(blank)}, it prints \java{(3, 4)}.
+
+It turns out that Java already has a way of printing \java{Point}s and other objects.
+All you have to do is define a \java{toString} method, and \java{println} will call it.
+For example, if you invoke \java{System.out.println(blank)} you get:
+
+\begin{stdout}
+java.awt.Point[x=3,y=4]
+\end{stdout}
+
+This format is what \java{java.awt} uses for printing objects.
+It prints the name of the type, followed by the names and values of the instance variables.
+
+As a second example, we can rewrite the \java{distance} method from Section~\ref{distance} so that it takes two \java{Point}s as parameters instead of four \java{double}s.
+
+\begin{code}
+    public static double distance(Point p1, Point p2) {
+        double dx = (double) (p2.x - p1.x);
+        double dy = (double) (p2.y - p1.y);
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+\end{code}
+
+The typecasts are not really necessary; they are simply a reminder that the instance variables for \java{Point} are integers.
+
+
+\section{Objects as return types}
+
+\index{Rectangle}
+\index{class!Rectangle}
+
+\java{Rectangle}s are similar to points, except that they have four instance variables: \java{x}, \java{y}, \java{width}, and \java{height}.
+This example creates a \java{Rectangle} object and makes the variable \java{box} refer to it.
+
+\begin{code}
+    Rectangle box = new Rectangle(0, 0, 100, 200);
+\end{code}
+
+This figure shows the effect of this assignment.
+
+\begin{center}
+\includegraphics{figs/rectangle.pdf}
+\end{center}
+
+If you print \java{box}, you get:
+
+\begin{stdout}
+java.awt.Rectangle[x=0,y=0,width=100,height=200]
+\end{stdout}
+
+Again, this output is the result of a \java{toString} method that knows how to display \java{Rectangle} objects.
+
+\index{return}
+\index{statement!return}
+
+You can write methods that return objects.
+For example, \java{findCenter} takes a \java{Rectangle} as an argument and returns a \java{Point} that contains the coordinates of the center of the \java{Rectangle}:
+
+\begin{code}
+    public static Point findCenter(Rectangle box) {
+        int x = box.x + box.width / 2;
+        int y = box.y + box.height / 2;
+        return new Point(x, y);
+    }
+\end{code}
+
+Notice that you can use \java{new} to create a new object, and then immediately use the result as the return value.
+
+
+\section{Mutable objects}
+
+\index{mutable}
+\index{object!mutable}
+
+You can change the contents of an object by making an assignment to one of its instance variables.
+For example, to ``move'' a rectangle without changing its size, you can modify the \java{x} and \java{y} values:
+
+\begin{code}
+    box.x = box.x + 50;
+    box.y = box.y + 100;
+\end{code}
+
+The result is shown in the figure:
+
+\begin{center}
+\includegraphics{figs/rectangle2.pdf}
+\end{center}
+
+\index{encapsulation}
+\index{generalization}
+
+We can encapsulate this code in a method and generalize it to move the rectangle by any amount:
+
+\begin{code}
+    public static void moveRect(Rectangle box, int dx, int dy) {
+        box.x = box.x + dx;
+        box.y = box.y + dy;
+    }
+\end{code}
+
+The variables \java{dx} and \java{dy} indicate how far to move the rectangle in each direction.
+Invoking this method has the effect of modifying the \java{Rectangle} that is passed as an argument.
+
+\begin{code}
+    Rectangle box = new Rectangle(0, 0, 100, 200);
+    moveRect(box, 50, 100);
+    System.out.println(box);
+\end{code}
+
+This code prints \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
+
+Modifying objects by passing them as arguments to methods can be useful, but it can also make debugging more difficult because it is not always clear which method invocations do or do not modify their arguments.
+%Later, I discuss some pros and cons of this programming style.
+
+Java provides a number of methods that operate on \java{Point}s and \java{Rectangle}s.
+Now would be a good time to examine the documentation for these classes.
+%You can read the documentation at
+%\url{http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html}
+%and
+%\url{http://docs.oracle.com/javase/7/docs/api/java/awt/Rectangle.html}.
+For example, \java{translate} has the same effect as \java{moveRect}, but instead of passing the Rectangle as an argument, you use dot notation:
+
+\begin{code}
+    box.translate(50, 100);
+\end{code}
+
+To foreshadow what's to come in future chapters, this example illustrates {\bf object-oriented programming}.
+Rather than write \java{static} methods that manipulate external data (like \java{moveRect}), we make the methods non-static and bundle them with the objects themselves using dot notation.
+
+
+\section{Aliasing}
+\label{aliasing}
+
+\index{reference}
+
+Remember that when you assign an object to a variable, you are assigning a {\em reference} to an object.
+It is possible to have multiple variables that refer to the same object.
+
+\begin{code}
+    Rectangle box1 = new Rectangle(0, 0, 100, 200);
+    Rectangle box2 = box1;
+\end{code}
+
+This code generates a state diagram that looks like:
+
+\begin{center}
+\includegraphics{figs/aliasing.pdf}
+\end{center}
+
+\index{aliasing}
+
+The \java{box1} and \java{box2} variables refer to the same object.
+In other words, this object has two names, \java{box1} and \java{box2}.
+When a person in real life uses two names, it's called {\bf aliasing}.
+Same thing with objects.
+
+When two variables are aliased, any changes that affect one variable also affect the other.
+For example:
+
+\begin{code}
+    System.out.println(box2.width);
+    box1.grow(50, 50);
+    System.out.println(box2.width);
+\end{code}
+
+The first line prints {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
+The second line invokes the \java{grow} method on \java{box1}, which expands the \java{Rectangle} by 50 pixels in every direction (see the documentation for more details).
+The effect is shown in the figure:
+
+\begin{center}
+\includegraphics{figs/aliasing2.pdf}
+\end{center}
+
+Whatever changes are made to \java{box1} also apply to \java{box2}.
+Thus, the value printed by the third line is {\tt 200}, the width of the expanded rectangle.
+(As an aside, it is perfectly legal for the coordinates of a \java{Rectangle} to be negative.)
+
+As you can tell even from this simple example, code that involves aliasing can get confusing fast and can be difficult to debug.
+In general, aliasing should be avoided or used with care.
+
+
+\section{The null keyword}
+
+\index{null}
+
+When you create an object variable, remember that you are storing a {\em reference} to an object.
+%Until you make the variable point to an object, the value of the variable will be \java{null}.
+In Java, the keyword \java{null} is a special value that means ``no object.''
+You can declare and initialize object variables this way:
+
+\begin{code}
+    Point blank = null;
+\end{code}
+
+The value \java{null} is represented in state diagrams by a small box with no arrow.
+
+\begin{center}
+\includegraphics{figs/reference2.pdf}
+\end{center}
+
+\index{exception!NullPointer}
+\index{run-time error}
+
+If you try to use a \java{null} object, either by accessing an instance variable or invoking a method, Java throws a \java{NullPointerException}, prints an error message, and terminates the program.
+
+\begin{code}
+    Point blank = null;
+    int x = blank.x;              // NullPointerException
+    blank.translate(50, 50);      // NullPointerException
+\end{code}
+
+On the other hand, it is legal to pass a null object as an argument or receive one as a return value.
+In fact, it is common to do so, for example to represent an empty set or indicate an error condition.
+
+
+\section{Garbage collection}
+
+In Section~\ref{aliasing} we talked about what happens when more than one variable refers to the same object.
+What happens when {\em no} variable refers to an object?
+
+\begin{code}
+    Point blank = new Point(3, 4);
+    blank = null;
+\end{code}
+
+The first line creates a new \java{Point} object and makes \java{blank} refer to it.
+The second line changes \java{blank} so that instead of referring to the object, it refers to nothing (the null object).
+In terms of the state diagram, we have removed the arrow between them.
+
+\begin{center}
+\includegraphics{figs/reference3.pdf}
+\end{center}
+
+\index{garbage collection}
+
+If no one refers to an object, then no one can read or write any of its values, or invoke a method on it.
+In effect, it ceases to exist.
+We could keep the object in memory, but it would only waste space.
+So periodically as your program runs, the system looks for stranded objects and reclaims them in a process called {\bf garbage collection}.
+Later, the memory space occupied by the object will be available to be used as part of a new object.
+
+You don't have to do anything to make garbage collection happen, and in general you will not be aware of it.
+But you should know that it periodically runs in the background.
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+%\term{AWT}
+%The Abstract Window Toolkit, one of the biggest and commonly-used Java packages.
+
+\term{reference}
+A value that indicates an object.
+In a state diagram, a reference appears as an arrow.
+
+\term{attribute}
+One of the named data items (instance variables) that make up an object.
+Each object (instance) has its own copy of the attributes for its class.
+
+\term{state}
+A complete description of all the variables and objects and their values, at a given point during the execution of a program.
+
+\term{state diagram}
+A snapshot of the state of a program, shown graphically.
+
+\term{constructor}
+A special method called by \java{new} to initialize an object.
+
+\term{UML}
+Unified Modeling Language, a standard way to draw diagrams for software engineering.
+
+\term{class diagram}
+An illustration of attributes and methods for a class.
+
+\term{instance}
+An example from a category.
+My cat is an instance of the category ``feline things.''
+Every object is an instance of some class.
+
+\term{object-oriented programming}
+A programming technique that focuses on objects rather than independent methods.
+
+\term{aliasing}
+The condition when two or more variables refer to the same object.
+
+\term{garbage collection}
+The process of finding objects that have no references and reclaiming their storage space.
+
+\end{description}
+
+
+\section{Exercises}
+
+
+\begin{exercise}
+For the following program:
+
+\begin{enumerate}
+
+\item Draw a stack diagram showing the local variables and parameters of \java{main} and \java{riddle}, and show any objects those variables refer to.
+
+\item What is the output of this program?
+
+\end{enumerate}
+
+\begin{code}
+    public static void main(String[] args) {
+        int x = 5;
+        Point blank = new Point(1, 2);
+
+        System.out.println(riddle(x, blank));
+        System.out.println(x);
+        System.out.println(blank.x);
+        System.out.println(blank.y);
+    }
+
+    public static int riddle(int x, Point p) {
+        x = x + 7;
+        return x + p.x + p.y;
+    }
+\end{code}
+
+The point of this exercise is to make sure you understand the mechanism for passing objects as parameters.
+\end{exercise}
+
+\newpage
+
+\begin{exercise}
+For the following program:
+
+\begin{enumerate}
+
+\item Draw a stack diagram showing the state of the program just before \java{distance} returns.
+Include all variables and parameters and the objects those variables refer to.
+
+\item What is the output of this program?
+
+\end{enumerate}
+
+\begin{code}
+    public static double distance(Point p1, Point p2) {
+        int dx = p1.x - p2.x;
+        int dy = p1.y - p2.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    public static Point findCenter(Rectangle box) {
+        int x = box.x + box.width / 2;
+        int y = box.y + box.height / 2;
+        return new Point(x, y);
+    }
+
+    public static void main(String[] args) {
+        Point blank = new Point(5, 8);
+
+        Rectangle rect = new Rectangle(0, 2, 4, 4);
+        Point center = findCenter(rect);
+
+        double dist = distance(center, blank);
+        System.out.println(dist);
+    }
+\end{code}
+
+\end{exercise}
+
+
+\begin{exercise}
+The method \java{grow} is part of the \java{Rectangle} class.
+
+\begin{enumerate}
+
+\item What is the output of the following program?
+
+\item Draw a state diagram that shows the state of the program just before the end of \java{main}.
+Include all local variables and the objects they refer to.
+
+\item At the end of \java{main}, are \java{p1} and \java{p2} aliased?
+Why or why not?
+
+\end{enumerate}
+
+\begin{code}
+    public static void printPoint(Point p) {
+        System.out.println("(" + p.x + ", " + p.y + ")");
+    }
+
+    public static Point findCenter(Rectangle box) {
+        int x = box.x + box.width / 2;
+        int y = box.y + box.height / 2;
+        return new Point(x, y);
+    }
+
+    public static void main(String[] args) {
+        Rectangle box1 = new Rectangle(2, 4, 7, 9);
+        Point p1 = findCenter(box1);
+        printPoint(p1);
+
+        box1.grow(1, 1);
+        Point p2 = findCenter(box1);
+        printPoint(p2);
+    }
+\end{code}
+
+\end{exercise}
+
+
+\begin{exercise}
+\label{ex.biginteger}
+
+You might be sick of the factorial method by now, but we're going to do one more version.
+
+\begin{enumerate}
+
+\item Create a new program called \java{Big.java} and write an iterative version of \java{factorial}.
+
+\item Print a table of the integers from 0 to 30 along with their factorials.
+At some point around 15, you will probably see that the answers are not right any more.
+Why not?
+
+\item \java{BigInteger} is a Java class that can represent arbitrarily big integers.
+There is no upper bound except the limitations of memory size and processing speed.
+Read the documentation at \url{http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html}.
+
+\item To use BigIntegers, you have to add \java{import java.math.BigInteger} to the beginning of your program.
+
+\item There are several ways to create a BigInteger, but the one I recommend uses \java{valueOf}.
+The following code converts an integer to a \java{BigInteger}:
+
+\begin{code}
+    int x = 17;
+    BigInteger big = BigInteger.valueOf(x);
+\end{code}
+
+Type in this code and try it out.
+Try printing a BigInteger.
+
+\item Because BigIntegers are not primitive types, the usual math operators don't work.
+Instead we have to use methods like \java{add}.
+To add two BigIntegers, invoke \java{add} on one and pass the other as an argument.
+For example:
+
+\begin{code}
+    BigInteger small = BigInteger.valueOf(17);
+    BigInteger big = BigInteger.valueOf(1700000000);
+    BigInteger total = small.add(big);
+\end{code}
+
+Try out some of the other methods, like \java{multiply} and \java{pow}.
+
+\item Convert \java{factorial} so that it performs its calculation using BigIntegers and returns a BigInteger as a result.
+You can leave the parameter alone---it will still be an integer.
+
+\item Try printing the table again with your modified factorial method.
+Is it correct up to 30?
+How high can you make it go?
+I calculated the factorial of all the numbers from 0 to 999, but my machine is pretty slow, so it took a while.
+The last number, 999!, has 2565 digits.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+Many encryption techniques depend on the ability to raise large integers to an integer power.
+Here is a method that implements a (reasonably) fast technique for integer exponentiation:
+
+\begin{code}
+    public static int pow(int x, int n) {
+        if (n == 0) return 1;
+
+        // find x to the n/2 recursively
+        int t = pow(x, n / 2);
+
+        // if n is even, the result is t squared
+        // if n is odd, the result is t squared times x
+        if (n % 2 == 0) {
+            return t*t;
+        } else {
+            return t*t*x;
+        }
+    }
+\end{code}
+
+The problem with this method is that it only works if the result is smaller than 2 billion.
+Rewrite it so that the result is a \java{BigInteger}.
+The parameters should still be integers, though.
+
+You can use the BigInteger methods \java{add} and \java{multiply}, but don't use \java{pow}, which would spoil the fun.
+\end{exercise}
+
+
+\chapter{User-defined types}
+
+\index{object type}
+\index{type!object}
+
+Way back in Section~\ref{sec:hello} when we defined the class \java{Hello}, we created a data type named \java{Hello}.
+We didn't declare any variables with type \java{Hello}, and we didn't use \java{new} to create any \java{Hello} objects---but we could have!
+There was no reason to create a \java{Hello} object, and it wouldn't have done much if we did.
+
+\index{class definition}
+
+In this chapter, we will look at defining class that create {\em useful} object types.
+Here are the most important ideas:
+
+\begin{itemize}
+
+\item Defining a new class also creates a new object type with the same name.
+
+\index{instance}
+
+\item Every object belongs to some object type; that is, it is an {\bf instance} of some class.
+
+\item A class definition is like a template for objects: it determines what attributes the objects have and what methods can operate on them.
+
+\item The methods that operate on a type are defined in the class definition for that type.
+
+\index{constructor}
+
+\item When you use \java{new} to create an object, Java invokes a special method called a {\bf constructor} to initialize the instance variables.
+You may provide one or more constructors as part of the class definition.
+
+\item If you don't provide a constructor for a class, then Java will generate one for you.
+The default constructor takes no arguments and initializes all attributes to zero (or an equivalent value like \java{false} or \java{null}).
+
+\end{itemize}
+
+
+\section{Time class}
+
+\index{class!Time}
+\index{Time}
+
+Let's take a look at an example of a user-defined class.
+A common motivation for designing a new class is to encapsulate related data in an object that can be treated as a single unit.
+That way, we can use objects as parameters and return values, rather than passing and returning multiple things.
+We have already seen two such types, \java{Point} and \java{Rectangle}.
+
+\index{instance variable}
+\index{variable!instance}
+
+Another example, which we will implement ourselves, is \java{Time}, which represents the time of day.
+The data encapsulated in a \java{Time} object are an hour, a minute, and a number of seconds.
+Because every \java{Time} object contains these data, we need {\bf instance variables} to hold them.
+
+The first step is to decide what type each variable should be.
+It seems clear that \java{hour} and \java{minute} should be integers.
+Just to keep things interesting, let's make \java{second} a \java{double}.
+Instance variables are declared at the beginning of the class definition, outside of any method definition:
+
+\begin{code}
+public class Time {
+    private int hour;
+    private int minute;
+    private double second;
+}
+\end{code}
+
+By itself, this code fragment is a legal class definition.
+The state diagram for a \java{Time} object looks like this:
+
+\begin{center}
+\includegraphics{figs/time.pdf}
+\end{center}
+
+%\subsection{Public vs private}
+
+The keyword \java{public} means that a variable (or method or class) can be accessed from other classes.
+The alternative is \java{private}, which means it can only be accessed inside the class where it is defined.
+To prevent yourself and others from making mistakes, it's good practice to make instance variables \java{private}.
+
+\index{data encapsulation}
+
+If you attempt to read or write a \java{private} variable from another class, you will get a compiler error.
+Private methods and instance variables are language features that help programmers ensure {\bf data encapsulation}, which means that objects in one class are isolated from other classes.
+%Limiting interactions between classes is a standard technique for managing complexity.
+
+%We can create {\bf accessor methods} like \java{getHour}, \java{getMinute}, and \java{getSecond}.
+%, but it provides no methods that modify the instance variables.
+%In effect, \java{Location} objects are immutable, which means that they can be shared without worrying about unexpected behavior due to aliasing.
+
+%Making methods private helps keep the API simple.
+%Classes often include helper methods that are used to implement other methods, but making those methods part of the public API might be unnecessary and error-prone.
+
+
+\section{Constructors}
+
+\index{constructor}
+\index{method!constructor}
+\index{static}
+
+After declaring the instance variables, the next step is to define a constructor for the new class.
+Constructors initialize the instance variables.
+The syntax for constructors is similar to that of other methods, with a few exceptions:
+
+\begin{itemize}
+\item The name of the constructor is the same as the name of the class.
+\item Constructors have no return type (and no return value).
+\item The keyword \java{static} is omitted.
+\end{itemize}
+
+Here is an example for the \java{Time} class:
+
+\begin{code}
+    public Time() {
+        this.hour = 0;
+        this.minute = 0;
+        this.second = 0.0;
+    }
+\end{code}
+
+Where you would expect to see a return type, between \java{public} and \java{Time}, there is nothing.
+That's how we (and the compiler) can tell it's a constructor as opposed to a \java{void} method.
+This constructor does not take any arguments.
+Each line of the constructor initializes an instance variable to zero (which in this example means midnight).
+
+\index{this}
+
+The variable \java{this} is a special keyword that refers to the object that we are creating.
+You can use \java{this} the same way you use the name of any other object.
+For example, you can read and write the instance variables of \java{this}, and you can pass \java{this} as an argument to other methods.
+But you do not declare \java{this}, and you can't make an assignment to it.
+
+A common error when writing constructors is to put a \java{return} statement at the end.
+Like \java{void} methods, constructors do not return values.
+Another mistake that beginning programmers make is to invoke the \java{new} operation inside the constructor.
+For example, writing the code \java{new Time(0, 0, 0.0)} in the constructor results in infinite recursion.
+
+%\subsection{More constructors}
+
+\index{overloading}
+
+Constructors can be overloaded, just like other methods, which means that you can provide multiple constructors with different parameters.
+Java knows which constructor to invoke by matching the arguments after \java{new} with the parameters of the constructors.
+
+For example, it is common to have one constructor that takes no arguments (the ``default constructor'') and another one that takes a parameter list identical to the list of instance variables (the ``explicit value constructor'').
+
+\begin{code}
+    public Time(int hour, int minute, double second) {
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+    }
+\end{code}
+
+Notice how the names and types of the parameters are the same as the names and types of the instance variables.
+All the constructor does is copy the information from the parameters into the instance variables.
+
+If you look at the documentation for \java{Point} and \java{Rectangle}, you will see that both classes provide similar constructors.
+Overloading constructors provides the flexibility to create an object first and then fill in the blanks, or to collect all the information before creating the object.
+
+This detail might not seem very interesting, and in fact it is not.
+Writing constructors is a boring, mechanical process, and some IDEs will automatically generate them for you.
+You will find that you can write them quickly just by looking at the list of instance variables.
+
+
+\section{Creating a new object}
+
+\index{new}
+\index{statement!new}
+
+Although constructors look like methods, you never invoke them directly.
+When you apply the \java{new} operator, the system allocates space for the object and then invokes the constructor for you.
+
+The following program (in the \java{main} method) demonstrates two common ways to create and initialize \java{Time} objects:
+
+\begin{code}
+public class Time {
+    private int hour;
+    private int minute;
+    private double second;
+
+    public Time() {
+        this.hour = 0;
+        this.minute = 0;
+        this.second = 0.0;
+    }
+
+    public Time(int hour, int minute, double second) {
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+    }
+
+    public static void main(String[] args) {
+        // one way to create a time object
+        Time t1 = new Time();
+        t1.hour = 11;
+        t1.minute = 8;
+        t1.second = 3.14159;
+        System.out.println(t1);
+
+        // another way to do the same thing
+        Time t2 = new Time(11, 8, 3.14159);
+        System.out.println(t2);
+    }
+}
+\end{code}
+
+The first time we apply \java{new} we provide no arguments, so Java invokes the default constructor.
+The next few lines assign values to the instance variables.
+The second time we invoke \java{new}, we provide arguments that match the parameters of the second constructor.
+This way of initializing the instance variables is more concise and slightly more efficient.
+
+%\section{Printing objects}
+\label{printobject}
+
+\index{print}
+\index{statement!print}
+\index{object!printing}
+
+The output of this program is something like:
+
+\begin{stdout}
+Time@80cc7c0
+Time@80cc807
+\end{stdout}
+
+When Java prints the value of a user-defined object type, it prints the name of the type and a hexadecimal (base 16) code that is unique for each object.
+As we saw in Section~\ref{sec:system}, this code is the address of the object in memory, and it usually varies from machine to machine.
+It is useful for debugging, in case you want to keep track of individual objects.
+
+To print \java{Time} objects in a way that is more meaningful to users (as opposed to programmers), you could write a method to print the hour, minute, and second.
+Using \java{printTime} in Section~\ref{time} as a starting point, we could write:
+
+\begin{code}
+    public static void printTime(Time t) {
+        System.out.print(t.hour);
+        System.out.print(":");
+        System.out.println(t.minute);
+        System.out.print(":");
+        System.out.println(t.second);
+    }
+\end{code}
+
+The output of this method, if we pass either \java{t1} or \java{t2} as an argument, is {\tt 11:8:3.14159}.
+Although it's recognizable as a time, it's not quite in the standard format.
+For example, if the number of minutes or seconds is less than 10, we expect a leading {\tt 0}.
+Also, we might want to drop the decimal part of the seconds.
+In other words, we want something like {\tt 11:08:03}.
+
+Fortunately, we can use \java{printf} to format the output:
+
+\begin{code}
+    public static void printTime(Time t) {
+        System.out.printf("%02d:%02d:%02.0f\n",
+            t.hour, t.minute, t.second);
+    }
+\end{code}
+
+As a reminder, you need to use \java{\%d} with integers and \java{\%f} with floating-point numbers.
+The \java{02} option means ``two digits with leading zeros,'' and the \java{.0} option means ``zero decimal places.''
+Note that \java{\%f} automatically rounds the floating-point value.
+
+
+\section{The toString method}
+
+\index{toString}
+\index{method!toString}
+
+Every object type has a method called \java{toString} that returns a string representation of the object.
+When you print an object using \java{print} or \java{println}, Java invokes the object's \java{toString} method.
+
+\index{override}
+
+The default version of \java{toString} returns a string that contains the type of the object and its current address (see Section~\ref{printobject}).
+When you define a new object type, you can {\bf override} the default behavior by providing a new method with the behavior you want.
+
+For example, here is a \java{toString} method for \java{Time}:
+
+\begin{code}
+public String toString() {
+    return String.format("%02d:%02d:%02.0f\n",
+            t.hour, t.minute, t.second);
+}
+\end{code}
+
+This code is essentially the same as printTime in the previous section, except that we are returning a string instead of printing it to the screen.
+The \java{String.format} method works the same way as \java{printf}; in fact, the \java{printf} method invokes \java{String.format}.
+
+You can call \java{toString} in the usual way:
+
+\begin{code}
+    Time time = new Time(11, 8, 3.14159);
+    String s = time.toString();
+\end{code}
+
+Or you can invoke it indirectly through \java{println}:
+
+\begin{code}
+    System.out.println(time);
+\end{code}
+
+
+\section{The equals method}
+
+\index{equals}
+\index{method!equals}
+
+When comparing objects, there are two notions of equality: objects that are {\em identical}, and objects that are {\em equivalent}.
+Identical means that two variables refer to the same object.
+Equivalent means that two objects have the same values.
+Consider for example the following three \java{Time} variables:
+
+\begin{code}
+    Time time1 = new Time(9, 30, 0.0);
+    Time time2 = time1;
+    Time time3 = new Time(9, 30, 0.0);
+\end{code}
+
+Since \java{Time} is a reference type, \java{time1}, \java{time2}, and \java{time3} are references to objects.
+Here is a memory diagram:
+
+\begin{center}
+\includegraphics{figs/time2.pdf}
+\end{center}
+
+Recall that the assignment operator simply copies a reference, so \java{time1} and \java{time2} refer to the same object.
+In contrast, \java{time3} points to a different object.
+Whenever you apply the \java{new} operator, you create a new object in memory.
+
+In this example, \java{time1} and \java{time2} are identical: they refer to the same object.
+The \java{==} operator compares references, so \java{time1 == time2} is \java{true}.
+All three variables are equivalent, since the objects they reference have the same values.
+However \java{time1 == time3} is \java{false}, because their references are not the same.
+
+There is no operator that tests equivalence, since the notion of equality is different for each type of object.
+In the case of \java{Time}, we could write a method that compares hours, minutes, and seconds:
+
+\begin{code}
+    public static boolean sameTime(Time t1, Time t2) {
+        return t1.hour == t2.hour
+            && t1.minute == t2.minute
+            && t1.second == t2.second;
+    }
+\end{code}
+
+\index{instance method}
+
+This method works just fine, but it's not the way most Java classes are designed.
+Instead, objects may provide a non-\java{static} named \java{equals} that defines equality.
+All we have to do is rewrite \java{sameTime} as an {\bf instance method}:
+
+\begin{code}
+    public boolean equals(Time t2) {
+        return this.hour == t2.hour
+            && this.minute == t2.minute
+            && this.second == t2.second;
+    }
+\end{code}
+
+By way of comparison, here is how each of the methods are invoked:
+
+\begin{code}
+    System.out.println(Time.sameTime(time1, time3));
+    System.out.println(time1.equals(time3));
+\end{code}
+
+The latter method is certainly easier to read and understand.
+Inside the \java{equals} method, the reference to \java{time1} is the current object \java{this}, and \java{time3} is the parameter \java{t2}.
+
+Like the \java{toString} method, Java provides a default implementation of the \java{equals} method.
+If you don't define your own, then \java{equals} behaves the same way as the \java{==} operator, which is often incorrect.
+Unlike the \java{toString} method, \java{equals} requires a parameter: the other object you need to compare.
+So in order to override the default \java{equals} method, you need to write it this way:
+
+\begin{code}
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Time)) {
+            return false;
+        }
+        Time t2 = (Time) obj;
+        return this.hour == t2.hour
+            && this.minute == t2.minute
+            && this.second == t2.second;
+    }
+\end{code}
+
+Because the parameter is declared as an \java{Object}, one could in theory pass any type of data (like a \java{String} or \java{Scanner}) to this method.
+The \java{instanceof} operator tests whether \java{obj} references an actual \java{Time} object.
+If it passes the test, we can safely cast \java{obj} to a \java{Time} reference and perform the equality test as before.
+
+Of course, the \java{equals} method may be arbitrarily complex.
+You could design it, for example, to allow \java{Time} and \java{String} objects to be equal if they represent the same time.
+However that design would likely confuse other programmers, since normally objects are only considered equal if they are of the same type.
+
+
+\section{The compareTo method}
+
+%\index{pure function}
+%\index{method!pure function}
+%, and it has no side effects like modifying an argument or printing something.
+%The only result of invoking a pure function is the return value.
+
+In contrast to instance methods, \java{static} methods do not refer to a specific object.
+The result of a \java{static} method depends only on the arguments.
+For example, \java{isAfter} compares two \java{Time}s and returns a \java{boolean} that indicates whether the first operand comes after the second:
+
+\begin{code}
+    public static boolean isAfter(Time time1, Time time2) {
+        if (time1.hour < time2.hour) return false;
+        if (time1.hour > time2.hour) return true;
+
+        if (time1.minute < time2.minute) return false;
+        if (time1.minute > time2.minute) return true;
+
+        if (time1.second < time2.second) return false;
+        return true;
+    }
+\end{code}
+
+What is the result of this method if the two times are equal?
+Does that seem like the appropriate result for this method?
+If you were writing the documentation for this method, would you mention that case specifically?
+
+A better solution would be to define a \java{compareTo} method.
+We have already seen how to compare two strings in this way: \java{time1.compareTo(time2)}.
+
+\begin{code}
+    public int compareTo(Time t2) {
+        if (this.hour < t2.hour) return -1;
+        if (this.hour > t2.hour) return +1;
+
+        if (this.minute < t2.minute) return -1;
+        if (this.minute > t2.minute) return +1;
+
+        if (this.second < t2.second) return -1;
+        if (this.second > t2.second) return +1;
+
+        return 0;
+    }
+\end{code}
+
+If \java{this} time comes before the other time, then compareTo returns \java{-1}.
+It returns \java{+1} when \java{this} time comes after the other time.
+If both times are the same (in the \java{equals} sense), \java{compareTo} returns \java{0}.
+
+
+\section{Adding times}
+
+Throughout the chapter, we have demonstrated how \java{static} methods can and should be implemented as instance methods.
+As a further example, \java{addTime} calculates the sum of two times.
+Here is a rough draft of a method that is not quite right.
+
+\begin{code}
+    public static Time addTime(Time t1, Time t2) {
+        Time sum = new Time();
+        sum.hour = t1.hour + t2.hour;
+        sum.minute = t1.minute + t2.minute;
+        sum.second = t1.second + t2.second;
+        return sum;
+    }
+\end{code}
+
+%Note that although this method returns a \java{Time} object, it is not a constructor.
+%You should go back and compare the syntax of a method like this with the syntax of a constructor, because it is easy to get confused.
+
+%Here is an example of how to use this method.
+If it is {\tt 9:14:30}, and your bread maker takes 3 hours and 35 minutes, you could use \java{addTime} to figure out when the bread will be done.
+%Since \java{currentTime} contains the current time and \java{breadTime} contains the amount of time it takes for your bread maker to make bread, we can use \java{addTime} to figure out when the bread will be done.
+
+\begin{code}
+    Time currentTime = new Time(9, 14, 30.0);
+    Time breadTime = new Time(3, 35, 0.0);
+    Time doneTime = addTime(currentTime, breadTime);
+\end{code}
+
+We can rewrite \java{addTime} as an instance method by deleting the word \java{static} and removing the first parameter.
+
+\begin{code}
+    public Time addTime(Time t2) {
+        Time sum = new Time();
+        sum.hour = this.hour + t2.hour;
+        sum.minute = this.minute + t2.minute;
+        sum.second = this.second + t2.second;
+        return sum;
+    }
+\end{code}
+
+When calling this version of \java{addTime}, we still need to specify the \java{currentTime} object.
+Because of the dot operator, it becomes \java{this} in the method.
+
+\begin{code}
+    Time doneTime = currentTime.addTime(breadTime);
+\end{code}
+
+The result of this method is {\tt 12:49:30.0}, which is correct.
+On the other hand, there are cases where the result is not correct.
+The problem is that this method does not deal with cases where the number of seconds or minutes adds up to more than 60.
+In that case, we have to ``carry'' the extra seconds into the minutes column, or extra minutes into the hours column.
+
+\begin{code}
+    public Time addTime(Time t2) {
+        Time sum = new Time();
+        sum.hour = this.hour + t2.hour;
+        sum.minute = this.minute + t2.minute;
+        sum.second = this.second + t2.second;
+
+        if (sum.second >= 60.0) {
+            sum.second -= 60.0;
+            sum.minute += 1;
+        }
+        if (sum.minute >= 60) {
+            sum.minute -= 60;
+            sum.hour += 1;
+        }
+        return sum;
+    }
+\end{code}
+
+\index{increment}
+\index{decrement}
+\index{operator!increment}
+\index{operator!decrement}
+
+This code demonstrates two operators we have not seen before, \java{+=} and \java{-=}.
+These operators provide a concise way to increment and decrement variables.
+They are similar to \java{++} and \java{--}, except (1) they work on \java{double}s as well as \java{int}s, and (2) the amount of the increment does not have to be 1.
+The statement \java{sum.second -= 60.0;} is equivalent to \java{sum.second = sum.second - 60;}
+
+
+\section{Accessors and mutators}
+
+\index{immutable}
+
+Notice how the \java{addTime} method does not change \java{this} object.
+Instead, it creates a \java{new} object to store the results.
+All of the \java{String} methods work the same way.
+Up to this point, we have designed \java{Time} to be immutable.
+
+\index{accessor}
+\index{method!accessor}
+
+Because \java{hour}, \java{minute}, and \java{second} are \java{private}, there is no way for outside classes to access them directly.
+The only method we have provided for other to look at the time is \java{toString}.
+As a convenience, we can also write \java{public} {\bf accessor} methods that return a copy of the \java{private} values.
+
+\begin{code}
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+\end{code}
+
+\index{mutator}
+\index{method!mutator}
+
+If we want the class to be immutable, we would stop here and have a complete implementation.
+But if we want other programmers (including ourselves) to be able to change the time from other classes, we should also provide the corresponding {\bf mutator} methods.
+
+\begin{code}
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public void setSecond(int second) {
+        this.second = second;
+    }
+\end{code}
+
+Accessors and mutators are the formal terms for referring to these types of methods, but many programmers simply call them getters and setters.
+These methods are intentionally simple, and many IDEs will generate them for you automatically with a press of a button.
+The absence or presence of these methods allows the class designer to control how the object's data is used from the outside.
+
+Mutator methods are often one line of code, but they don't have to be.
+As another example of a mutator, consider \java{increment}, which adds a given number of seconds to a \java{Time} object.
+Again, a rough draft of this method looks like:
+
+\begin{code}
+    public void increment(double secs) {
+        this.second += secs;
+        if (this.second >= 60.0) {
+            this.second -= 60.0;
+            this.minute += 1;
+        }
+        if (this.minute >= 60) {
+            this.minute -= 60;
+            this.hour += 1;
+        }
+    }
+\end{code}
+
+The first line performs the basic operation; the remainder deals with the same cases we saw before.
+
+What happens if the argument \java{secs} is much greater than 60?
+In that case, it may not be enough to subtract 60 once; we have to keep doing it until \java{second} is below 60.
+We can do that by replacing the \java{if} statements with \java{while} statements:
+
+\begin{code}
+    public void increment(double secs) {
+        this.second += secs;
+        while (this.second >= 60.0) {
+            this.second -= 60.0;
+            this.minute += 1;
+        }
+        while (this.minute >= 60) {
+            this.minute -= 60;
+            this.hour += 1;
+        }
+    }
+\end{code}
+
+This solution is correct, but it's not very efficient.
+Can you think of a solution that does not require iteration?
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{class}
+Previously, we defined a class as a collection of related methods.
+Now you know that a class is also a template for a new type of object.
+
+\term{instance}
+A member of a class.
+Every object is an instance of some class.
+
+\term{constructor}
+A special method that initializes the instance variables of a newly-constructed object.
+
+\term{instance variables}
+The attributes of an object; non-\java{static} variables defined at the class level.
+
+\term{data encapsulation}
+A technique for bundling multiple named variables into a single object.
+
+\term{override}
+Replacing a default implementation of a method, such as \java{equals} or \java{toString}.
+
+\term{instance methods}
+Non-\java{static} methods that have access to \java{this} and the instance variables.
+
+\term{accessor}
+A method that returns a copy of a \java{private} variable.
+
+\term{mutator}
+A method that changes one or more of the objects it receives as parameters.
+It is usually \java{void} and modifies \java{this}.
+
+\end{description}
+
+
+\section{Exercises}
+
+
+\begin{exercise}
+In the board game Scrabble\footnote{Scrabble is a registered trademark owned in the U.S.A and Canada by Hasbro Inc., and in the rest of the world by J.W. Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.}, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
+
+\begin{enumerate}
+
+\item Write a definition for a class named \java{Tile} that represents Scrabble tiles.
+The instance variables should be a character named \java{letter} and an integer named \java{value}.
+
+\item Write a constructor that takes parameters named \java{letter} and \java{value} and initializes the instance variables.
+
+\item Write a method named \java{printTile} that takes a \java{Tile} object as a parameter and prints the instance variables in a reader-friendly format.
+
+\item Write a method named \java{testTile} that creates a Tile object with the letter \java{Z} and the value 10, and then uses \java{printTile} to print the state of the object.
+
+\item Implement the \java{toString} and \java{equals} methods for a \java{Tile}.
+
+\item Create accessors and mutators for each of the attributes.
+
+\end{enumerate}
+
+The point of this exercise is to practice the mechanical part of creating a new class definition and code that tests it.
+\end{exercise}
+
+
+\begin{exercise}
+Write a class definition for \java{Date}, an object type that contains three integers: \java{year}, \java{month}, and \java{day}.
+This class should provide two constructors.
+The first should take no parameters and initialize a default date.
+The second should take parameters named \java{year}, \java{month} and \java{day} and use them to initialize the instance variables.
+
+Write a \java{main} method that creates a new \java{Date} object named \java{birthday}.
+The new object should contain your birth date.
+You can use either constructor.
+Compare your implementation to \java{java.util.Date}.
+\end{exercise}
+
+
+\begin{exercise}
+\label{ex.rational}
+
+A rational number is a number that can be represented as the ratio of two integers.
+For example, $2/3$ is a rational number, and you can think of 7 as a rational number with an implicit 1 in the denominator.
+For this assignment, you are going to write a class definition for rational numbers.
+
+\begin{enumerate}
+
+\item Create a new program called \java{Rational.java} that defines a class named \java{Rational}.
+A \java{Rational} object should have two integer instance variables to store the numerator and denominator.
+
+\item Write a constructor that takes no arguments and that sets the numerator to 0 and denominator to 1.
+
+\item Write a method called \java{printRational} that takes a Rational object as an argument and prints it in some reasonable format.
+
+\item Write a \java{main} method that creates a new object with type Rational, sets its instance variables to some values, and prints the object.
+
+\item At this stage, you have a minimal testable program.
+Test it and, if necessary, debug it.
+
+\item Write a second constructor for your class that takes two arguments and that uses them to initialize the instance variables.
+
+\item Write a method called \java{negate} that reverses the sign of a rational number.
+This method should be a modifier, so it should be \java{void}.
+Add lines to \java{main} to test the new method.
+
+\item Write a method called \java{invert} that inverts the number by swapping the numerator and denominator.
+Add lines to \java{main} to test the new method.
+
+\item Write a method called \java{toDouble} that converts the rational number to a double (floating-point number) and returns the result.
+This method is a pure function; it does not modify the object.
+As always, test the new method.
+
+\item Write a modifier named \java{reduce} that reduces a rational number to its lowest terms by finding the greatest common divisor (GCD) of the numerator and denominator and dividing through.
+This method should be a pure function; it should not modify the instance variables of the object on which it is invoked.
+To find the GCD, see Exercise~\ref{gcd}).
+
+\item Write a method called \java{add} that takes two Rational numbers as arguments and returns a new Rational object.
+The return object should contain the sum of the arguments.
+
+\item There are several ways to add fractions.
+You can use any one you want, but you should make sure that the result of the operation is reduced so that the numerator and denominator have no common divisor (other than 1).
+\end{enumerate}
+
+The purpose of this exercise is to write a class definition that includes a variety of methods, including constructors, accessors, mutators, \java{static} methods, and instance methods.
+\end{exercise}
+
+
+\chapter{Arrays of objects}
+
+In the remaining chapters, we will develop programs that work with playing cards and decks of cards.
+Here is an outline of the road ahead:
+
+\begin{enumerate}
+
+\item In this chapter, we will define a \java{Card} class and write methods that work directly with \java{Card}s and arrays of \java{Card}s.
+
+%TODO add \ref for each chapter
+
+\item In Chapter 13, we will create a \java{Deck} class that encapsulates an array of Cards and write methods that operate on \java{Deck}s.
+
+\item In Chapter 14, we will introduce object-oriented programming (OOP) and redesign the \java{Card} and \java{Deck} classes accordingly.
+
+\end{enumerate}
+
+Although we will see several versions of the same code, the main advantage of proceeding this way is that the explanations will be smoother.
+It may help you to create a {\tt Card.java} file and paste in the examples as we go.
+
+%If it helps, you can download the code for each chapter as you go along.
+%The code for this chapter is here: \url{http://thinkapjava.com/code/Card1.java}.
+
+
+\section{Card objects}
+\label{card}
+
+\index{Card}
+\index{class!Card}
+
+If you are unfamiliar with traditional playing cards, now would be a good time to get a deck; otherwise this chapter might not make much sense.
+Or just read \url{https://en.wikipedia.org/wiki/Standard_52-card_deck}.
+
+\index{rank}
+\index{suit}
+
+There are 52 cards in a standard deck.
+Each card belongs to one of four suits and one of 13 ranks.
+The suits are Spades, Hearts, Diamonds, and Clubs (in descending order in Bridge).
+The ranks are Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, and King.
+Depending on what game you are playing, the Ace may be considered higher than King or lower than 2.
+
+If we want to define a new object to represent a playing card, it is pretty obvious what the instance variables should be: \java{rank} and \java{suit}.
+It is not as obvious what types the instance variables should be.
+One possibility is \java{String}s, containing things like \java{"Spade"} for suits and \java{"Queen"} for ranks.
+A problem with this implementation is that it would not be easy to compare cards to see which had higher rank or suit.
+
+\index{encode}
+\index{encrypt}
+\index{map to}
+
+An alternative is to use integers to {\bf encode} the ranks and suits.
+By ``encode'' we do not mean to encrypt or translate into a secret code.
+What a computer scientist means by encode is something like ``define a mapping between a sequence of numbers and the things we want to represent.''
+
+\begin{tabular}{l c l}
+Clubs & $\mapsto$ & 0 \\
+Diamonds & $\mapsto$ & 1 \\
+Hearts & $\mapsto$ & 2 \\
+Spades & $\mapsto$ & 3
+\end{tabular}
+
+The nice feature of this mapping is that the suits map to integers in order, so we can compare suits simply by comparing integers.
+The mapping for ranks is fairly obvious: each of the numerical ranks maps to the corresponding integer, and for face cards:
+
+\begin{tabular}{l c l}
+Ace & $\mapsto$ & 1 \\
+Jack & $\mapsto$ & 11 \\
+Queen & $\mapsto$ & 12 \\
+King & $\mapsto$ & 13 \\
+\end{tabular}
+
+The reason we are using mathematical notation for these mappings is that they are not part of the program.
+They are part of the program design, but they never appear explicitly in the code.
+The class definition for the \java{Card} type simply looks like this:
+
+\begin{code}
+public class Card {
+    private int suit;
+    private int rank;
+
+    public Card() {
+        this.suit = 0;
+        this.rank = 0;
+    }
+
+    public Card(int suit, int rank) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+}
+\end{code}
+
+\index{constructor}
+
+As usual, we define two constructors: a default constructor that takes no parameters, and an explicit value constructor that takes a parameter for each instance variable.
+To create a \java{Card} object that represents the 3 of Clubs, we can invoke the \java{new} operator:
+
+\begin{code}
+    Card threeOfClubs = new Card(0, 3);
+\end{code}
+
+%The first argument, \java{0} represents the suit Clubs.
+
+
+\section{The printCard method}
+\label{printcard}
+
+\index{print!Card}
+
+When you create a new class, the first step is to declare the instance variables and write constructors.
+The second step is to write the standard methods that every object should have, including one that prints the object, and one or two that compare objects.
+Let's start with \java{printCard}.
+
+\index{String!array of}
+\index{array!of String}
+
+To print \java{Card} objects in a way that humans can read easily, we need to map the integer codes onto words.
+A natural way to do that is with an array of \java{String}s.
+You can create an array of \java{String}s the same way you create an array of primitive types:
+
+\begin{code}
+    String[] suits = new String[4];
+\end{code}
+
+Then we can set the values of the elements of the array.
+
+\begin{code}
+    suits[0] = "Clubs";
+    suits[1] = "Diamonds";
+    suits[2] = "Hearts";
+    suits[3] = "Spades";
+\end{code}
+
+Creating an array and initializing the elements is such a common operation that Java provides a special syntax for it:
+
+\begin{code}
+    String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+\end{code}
+
+\index{memory diagram}
+
+This statement is equivalent to the separate declaration, allocation, and assignment.
+The memory diagram of this array looks like:
+
+\begin{center}
+\includegraphics{figs/stringarray.pdf}
+\end{center}
+
+\index{reference}
+\index{String!reference to}
+
+Notice how the elements of the array are {\em references} to the \java{String}s, rather than \java{String}s themselves.
+
+Now we need another array of \java{String}s to decode the ranks:
+
+\begin{code}
+    String[] ranks = {"narf", "Ace", "2", "3", "4", "5", "6",
+               "7", "8", "9", "10", "Jack", "Queen", "King"};
+\end{code}
+
+The reason for the \java{"narf"} is to act as a placeholder for the zeroeth element of the array, which is never used (or shouldn't be).
+The only valid ranks are 1--13.
+To avoid this wasted element, we could have started at 0, but the mapping is more natural if we encode 2 as 2, 3 as 3, and so forth.
+
+Using these arrays, we can select the appropriate \java{String}s by using the \java{suit} and \java{rank} as indexes.
+In the method \java{printCard}:
+
+\begin{code}
+public static void printCard(Card c) {
+    String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+    String[] ranks = {"narf", "Ace", "2", "3", "4", "5", "6",
+               "7", "8", "9", "10", "Jack", "Queen", "King"};
+    System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
+}
+\end{code}
+
+The expression \java{suits[c.suit]} means ``use the instance variable \java{suit} from the object \java{c} as an index into the array named \java{suits}.''
+
+\begin{code}
+    Card card = new Card(1, 11);
+    printCard(card);
+\end{code}
+
+The output for this code is {\tt Jack of Diamonds}.
+
+
+\section{The sameCard method}
+\label{equivalence}
+
+The word ``same'' is one of those things that occur in natural language that seem perfectly clear until you give it some thought, and then you realize there is more to it than you expected.
+
+\index{natural language}
+\index{language!natural}
+
+For example, if I say ``Jared and I have the same car,'' I mean that his car and mine are the same make and model, but they are
+two different cars.
+If I say ``Jared and I have the same mother,'' I mean that his mother and mine are one person.
+So the idea of ``sameness'' is different, depending on the context.
+
+\index{ambiguity}
+
+When you talk about objects, there is a similar ambiguity.
+For example, if two \java{Card}s are the same, does that mean they contain the same data (rank and suit), or they are actually
+the same \java{Card} object?
+
+\index{identical}
+
+To see if two references refer to the same object, we use the \java{==} operator.
+References to the same object are {\bf identical}.
+For example:
+
+\begin{code}
+    Card card1 = new Card(1, 11);
+    Card card2 = card1;
+
+    if (card1 == card2) {
+        System.out.println("card1 and card2 are identical");
+    }
+\end{code}
+
+\index{equivalent}
+
+In contrast, references to objects with same data are {\bf equivalent}.
+To check equivalence, it is common to write a method with a name like \java{sameCard}.
+
+\begin{code}
+    public static boolean sameCard(Card c1, Card c2) {
+        return c1.suit == c2.suit && c1.rank == c2.rank;
+    }
+\end{code}
+
+Here is an example that creates two objects with the same data, and uses \java{sameCard} to see if they are equivalent:
+
+\begin{code}
+    Card card1 = new Card(1, 11);
+    Card card2 = new Card(1, 11);
+
+    if (sameCard(card1, card2)) {
+        System.out.println("card1 and card2 are equivalent");
+    }
+\end{code}
+
+Note that if references are identical, they are also equivalent.
+However if they are equivalent, they are not necessarily identical.
+In the above example, \java{card1} and \java{card2} are equivalent but not identical.
+Here is a memory diagram:
+
+\begin{center}
+\includegraphics{figs/card.pdf}
+\end{center}
+
+%\index{aliasing}
+%What does it look like when \java{card1} and \java{card2} are identical?
+
+%In Section~\ref{incomparable} I said that you should not use the \java{==} operator on \java{String}s because it does not do what you expect.
+%Instead of comparing the contents of the \java{String} (equivalence), it checks whether the two \java{String}s are the same object (identity).
+
+
+\section{The compareCard method}
+\label{compare}
+
+\index{compareCard}
+\index{operator!conditional}
+\index{conditional operator}
+
+For primitive types, the conditional operators compare values and determine when one is greater or less than another.
+These operators (\java{<}, \java{>}, and others) don't work for object types.
+For \java{String}s, Java provides a \java{compareTo} method.
+We have to write our own version for \java{Card}s, which we will call \java{compareCard}.
+Later we will use this method to sort a deck of cards.
+
+\index{ordering}
+\index{complete ordering}
+\index{partial ordering}
+
+Some types are completely ordered, which means that you can compare any two values and tell which is bigger.
+Integers and floating-point numbers are totally ordered.
+Some sets are unordered, which means that there is no meaningful way to say that one element is bigger than another.
+Fruits are unordered, which is why we cannot compare apples and oranges.
+In Java, the \java{boolean} type is unordered; we cannot say that \java{true} is greater than \java{false}.
+
+The set of playing cards is partially ordered, which means that sometimes we can compare cards and sometimes not.
+For example, I know that the 3 of Clubs is higher than the 2 of Clubs, and the 3 of Diamonds is higher than the 3 of Clubs.
+But which is better, the 3 of Clubs or the 2 of Diamonds?
+One has a higher rank, but the other has a higher suit.
+
+\index{comparable}
+
+To make cards comparable, we have to decide which is more important: rank or suit.
+The choice is arbitrary, but when you buy a new deck of cards, it comes sorted with all the Clubs together, followed by all the Diamonds, and so on.
+So for now, let's say that suit is more important.
+
+With that decided, we can write \java{compareCard}.
+It takes two \java{Card}s as parameters and returns 1 if the first card wins, -1 if the second card wins, and 0 if they are equivalent.
+First we compare suits:
+
+\begin{code}
+    if (c1.suit > c2.suit) {
+        return 1;
+    }
+    if (c1.suit < c2.suit) {
+        return -1;
+    }
+\end{code}
+
+If neither statement is true, then the suits must be equal and we have to compare ranks:
+
+\begin{code}
+    if (c1.rank > c2.rank) {
+        return 1;
+    }
+    if (c1.rank < c2.rank) {
+        return -1;
+    }
+\end{code}
+
+If neither of these is true, then the ranks must also be equal.
+So we simply return 0 at the end of the method.
+
+
+\section{Class variables}
+
+So far we have seen local variables, which are declared inside a method, and instance variables, which are declared in a class
+definition, usually before the method definitions.
+Local variables are created when a method is invoked and destroyed when the method ends.
+Instance variables are created when you create an object and destroyed when the object is garbage collected.
+
+\index{class variables}
+
+Now it's time to learn about {\bf class variables}.
+Like instance variables, class variables are defined in a class definition before the method definitions.
+But they are identified by the keyword \java{static}.
+They are created when the program starts (or when the class is used for the first time) and survive until the program ends.
+Class variables are {\em shared} across all instances of the class.
+
+You can refer to a class variable from anywhere inside the class definition.
+Class variables are often used to store constant values that are needed in several places.
+In that case, they should also be defined as \java{final}.
+Note that whether a variable is \java{static} or \java{final} involves two separate considerations:
+\java{static} means the variable is shared, and \java{final} means the variable is constant.
+
+As an example, here is a version of \java{Card} where \java{suits} and \java{ranks} are defined as class constants:
+
+\begin{code}
+public class Card {
+
+    public static final String[] SUITS = {
+        "Clubs", "Diamonds", "Hearts", "Spades"};
+
+    public static final String[] RANKS = {
+        "narf", "Ace", "2", "3", "4", "5", "6", "7", "8", "9",
+        "10", "Jack", "Queen", "King"};
+
+    // instance variables and constructors go here
+
+    public static void printCard(Card c) {
+        String name = RANKS[c.rank] + " of " + SUITS[c.suit];
+        System.out.println(name);
+    }
+}
+\end{code}
+
+Inside \java{printCard} we can refer to \java{SUITS} and \java{RANKS} as if they were local variables.
+Writing \java{static final} variables in ALL CAPS is a common convention that makes it easier to recognize their purpose in the class.
+
+One advantage of defining \java{SUITS} and \java{RANKS} as class variables is that they don't need to be created (and garbage collected) every time the printCard method is called.
+They may also be useful in other methods and classes, so it's nice to maintain them in one place.
+
+
+\section{Arrays of cards}
+\label{cardarray}
+
+\index{array!of object}
+\index{object!array of}
+\index{deck}
+
+\index{composition}
+
+By now we have seen several examples of composition (the ability to combine language features in a variety of arrangements).
+One of the first examples we saw was using a method invocation as part of an expression.
+Another example is the nested structure of statements: you can put an \java{if} statement within a \java{while} loop, or within
+another \java{if} statement, etc.
+
+Having seen this pattern, and having learned about arrays and objects, you should not be surprised to learn that you can make arrays of objects.
+And you can define objects with arrays as instance variables; you can make arrays that contain arrays; you can define objects that contain objects, and so on.
+%In the next two chapters we will see examples of these combinations using \java{Card} objects.
+This example creates an array of 52 cards:
+
+\begin{code}
+    Card[] cards = new Card[52];
+\end{code}
+
+\index{state diagram}
+
+Here is the memory diagram for this object:
+
+\begin{center}
+\includegraphics{figs/cardarray.pdf}
+\end{center}
+
+\index{null}
+
+The array contains {\em references} to objects; it does not contain the \java{Card} objects themselves.
+The elements are initialized to \java{null}.
+You can access the elements of the array in the usual way:
+
+\begin{code}
+    if (cards[0] == null) {
+        System.out.println("No card yet!");
+    }
+\end{code}
+
+\index{exception!NullPointer}
+\index{run-time error}
+
+But if you try to access the instance variables of the non-existent \java{Card}s, you will get a \java{NullPointerException}.
+
+\begin{code}
+    System.out.println(cards[0].rank);  // NullPointerException
+\end{code}
+
+\index{composition}
+
+That {\em is} the correct syntax for accessing the \java{rank} of the ``zeroeth'' card in the deck.
+It's also another example of composition, or combining the syntax for accessing an element of an array and an instance variable of an object.
+
+\index{loop!nested}
+
+The easiest way to populate the deck with \java{Card} objects is to write nested for loops (i.e., one loop inside the body of another):
+
+\begin{code}
+    int index = 0;
+    for (int suit = 0; suit <= 3; suit++) {
+        for (int rank = 1; rank <= 13; rank++) {
+            cards[index] = new Card(suit, rank);
+            index++;
+        }
+    }
+\end{code}
+
+The outer loop enumerates the suits from 0 to 3.
+For each suit, the inner loop enumerates the ranks from 1 to 13.
+Since the outer loop runs 4 times, and the inner loop runs 13 times, the body is executed is 52 times.
+
+\index{index}
+
+We use a separate variable \java{index} to keep track of where in the deck the next card should go.
+The following memory diagram shows what the deck looks like after the first two cards have been allocated:
+
+\begin{center}
+\includegraphics{figs/cardarray2.pdf}
+\end{center}
+
+
+%\section{The printDeck method}
+%\label{printdeck}
+
+\index{printDeck}
+\index{print!array of Cards}
+
+When you work with arrays, it is convenient to have a method that prints the contents.
+We have seen the pattern for traversing an array several times, so the following method should be familiar:
+
+\begin{code}
+    public static void printDeck(Card[] cards) {
+        for (int i = 0; i < cards.length; i++) {
+            printCard(cards[i]);
+        }
+    }
+\end{code}
+
+Since \java{cards} has type \java{Card[]}, an element of \java{cards} has type \java{Card}.
+So \java{cards[i]} is a legal argument for \java{printCard}.
+
+
+\section{Sequential search}
+\label{findcard}
+
+\index{findCard}
+\index{sequential search}
+\index{binary search}
+
+The next method we'll write is \java{findCard}, which searches an array of \java{Card}s to see whether it contains a certain card.
+This method gives us a chance to demonstrate two algorithms: {\bf sequential search} and {\bf binary search}.
+
+\index{traverse}
+\index{loop!search}
+
+Sequential search is pretty obvious: we traverse the deck and compare each card to the one we are looking for.
+If we find it, we return the index where the card appears.
+If it is not in the deck, we return -1.
+
+\begin{code}
+public static int findCard(Card[] cards, Card card) {
+    for (int i = 0; i < cards.length; i++) {
+        if (sameCard(cards[i], card)) {
+            return i;
+        }
+    }
+    return -1;
+}
+\end{code}
+
+The parameters of \java{findCard} are \java{cards} and \java{card}.
+It might seem odd to have a variable with the same name as a type (the \java{card} variable has type \java{Card}).
+We can tell the difference because the variable begins with a lower-case letter.
+
+\index{statement!return}
+\index{return!inside loop}
+
+The method returns as soon as it discovers the card, which means that we do not have to traverse the entire deck if we find the card we are looking for.
+If we get to the end of the loop, however, we know the card is not in the deck.
+
+If the cards in the deck are not in order, there is no way to search faster than sequential search.
+We have to look at every card, because otherwise we can't be certain the card we want is not there.
+
+However for large arrays, sequential search is rather inefficient.
+If you pay the price to keep them sorted, finding elements becomes much easier.
+
+
+\section{Binary search}
+
+When you look for a word in a dictionary, you don't just search page by page from front to back.
+Since the words are in alphabetical order, you probably use an algorithm similar to binary search:
+
+\begin{enumerate}
+\item Start in the middle of the dictionary (or array).
+\item Compare a word on that page to the word you are looking for.
+If you find the word you are looking for, stop.
+\item If the word you are looking for comes after the word on the page, flip to somewhere later in the dictionary and go back to step 2.
+\item If the word you are looking for comes before the word on the page, flip to somewhere earlier in the dictionary and go back to step 2.
+\end {enumerate}
+
+If you ever get to the point where there are two adjacent words on the page and your word comes between them, you can conclude that your word is not in the dictionary.
+
+Getting back to the deck of cards, we can write a faster version of \java{findCard} if we know the cards are in order.
+It takes a little more code, but the idea is the same four steps listed above.
+
+\begin{code}
+public static int findCard(Card[] cards, Card card) {
+    int low = 0;
+    int high = cards.length - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;                   // step 1
+        int comp = compareCard(cards[mid], card);
+
+        if (comp == 0) {                              // step 2
+            return mid;
+        } else if (comp < 0) {                        // step 3
+            low = mid + 1;
+        } else {                                      // step 4
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+\end{code}
+
+First, we declare \java{low} and \java{high} variables to represent the range we are searching.
+Initially we search the entire array, from index \java{0} to \java{length - 1}.
+We will terminate our search if these indexes ever cross, yielding an invalid range.
+
+Inside the \java{while} loop, we repeat the four steps of binary search:
+
+\begin{enumerate}
+
+\item To search the array, choose an index between \java{low} and \java{high} (call it \java{mid}) and compare it to the card you are looking for.
+
+\item If you found it, return the index.
+
+\item If the card at \java{mid} is higher than your card, search the range from \java{low} to \java{mid - 1}.
+
+\item If the card at \java{mid} is lower than your card, search the range from \java{mid + 1} to \java{high}.
+
+\end{enumerate}
+
+%\section{Recursive version}
+
+\index{recursion}
+
+Another way to write a binary search is with a recursive method.
+The trick is to write a method that takes \java{low} and \java{high} as parameters, and turn steps 3 and 4 into recursive invocations.
+%They indicate the segment of the array that should be searched (including both \java{low} and \java{high}).
+Here's what this algorithm looks like translated into Java code:
+
+\begin{code}
+public static int findCard(Card[] cards, Card card,
+                           int low, int high) {
+    if (high < low) {
+        return -1;
+    }
+    int mid = (low + high) / 2;                       // step 1
+    int comp = compareCard(cards[mid], card);
+
+    if (comp == 0) {                                  // step 2
+        return mid;
+    } else if (comp < 0) {                            // step 3
+        return findCard(cards, card, mid + 1, high);
+    } else {                                          // step 4
+        return findCard(cards, card, low, mid - 1);
+    }
+}
+\end{code}
+
+%This code contains the main idea of a binary search, but it is still missing an important part.
+%As written, the method recurses forever if the card is not in the deck!
+%We need a base case to handle this condition and end the recursion.
+
+Instead of a \java{while} loop, we simply have an \java{if} statement to terminate the recursion.
+If \java{high} is less than \java{low}, there are no cards between them, and we conclude that the card is not in the deck.
+%We can handle that case by adding a single \java{if} statement to the top:
+
+\index{recursion!infinite}
+\index{infinite recursion}
+\index{exception!StackOverflow}
+
+Two common errors in recursive programs are (1) forgetting to include a base case, and (2) writing the recursive call so that the base case is never reached.
+Either error causes infinite recursion and a \java{StackOverflowException}.
+%(Think of a stack diagram for a recursive method that never ends.)
+
+\section{Tracing the code}
+
+To see how binary search works, it's useful to add the following print statement at the beginning of each iteration (or recursive call).
+
+\begin{code}
+    System.out.println(low + ", " + high);
+\end{code}
+
+%The print statement is unnecessary, but it's useful to trace the sequence of recursive invocations.
+
+Then in the \java{main} method, execute the following code (after creating the cards array with nested loops):
+
+\begin{code}
+    Card card = new Card(1, 11);
+    System.out.println(findCard(cards, card));
+\end{code}
+
+The result is \java{23} as expected, since there are 13 cards in the zeroth suit followed by 11 in the first suit (and indexes start at zero).
+Here is the complete output, thanks to the print statement in \java{findCard}:
+
+\begin{stdout}
+0, 51
+0, 24
+13, 24
+19, 24
+22, 24
+23
+\end{stdout}
+
+Let's make up a card that is not in the deck, say \java{new Card(1, 15)} or the ``15 of Diamonds''.
+If we try to find it using binary search, we get the following:
+
+\begin{stdout}
+0, 51
+26, 51
+26, 37
+26, 30
+26, 27
+26, 25
+-1
+\end{stdout}
+
+%\index{testing}
+%\index{correctness}
+%
+%These tests don't prove that this program is correct.
+%In fact, no amount of testing can {\em prove} that a program is correct.
+%But looking at a few cases and examining the code, you might be able to convince yourself.
+
+Binary search over an array of length $n$ requires $\log_2 n$ comparisons.
+So we only have to look at 5 or 6 cards in the deck, as opposed to all 52 if we did a sequential search.
+In general, binary search is much faster than sequential search (which requires $n$ comparisons), and even more so for large arrays.
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{encode}
+To represent one set of values using another set of values, by constructing a mapping between them.
+
+\term{identical}
+Equality of references.
+Two references that point to the same object in memory.
+
+\term{equivalent}
+Equality of values.
+Two references that point to objects that contain the same data.
+
+\term{class variable}
+A variable declared within a class as \java{static}.
+There is always exactly one copy of this variable, no matter how many objects exist.
+
+\term{sequential search}
+An algorithm that searches array elements in order, one by one, until an item is found.
+
+\term{binary search}
+An algorithm that searches an ordered array by starting in the middle and discarding half of the remaining elements each time a comparison is made.
+
+\end{description}
+
+
+\section{Exercises}
+
+
+\begin{exercise}
+Encapsulate the code in Section~\ref{compare} in a method.
+Then modify it so that aces are ranked higher than Kings.
+\end{exercise}
+
+
+\begin{exercise}
+Encapsulate the deck-building code from Section~\ref{cardarray} in a method called \java{makeDeck} that takes no parameters and returns a fully-populated array of \java{Card}s.
+\end{exercise}
+
+
+\begin{exercise}
+In Blackjack the object of the game is to get a collection of cards with a score of 21.
+The score for a hand is the sum of scores for all cards.
+The score for an aces is 1, for all face cards is ten, and for all other cards the score is the same as the rank.
+For example, the hand (Ace, 10, Jack, 3) has a total score of 1 + 10 + 10 + 3 = 24.
+
+Write a method called \java{handScore} that takes an array of cards as an argument and that returns the total score.
+\end{exercise}
+
+
+\begin{exercise}
+In Poker a ``flush'' is a hand that contains five or more cards of the same suit.
+A hand can contain any number of cards.
+
+\begin{enumerate}
+
+\item Write a method called \java{suitHist} that takes an array of Cards as a parameter and that returns a histogram of the suits in the hand.
+Your solution should only traverse the array once.
+
+\item Write a method called \java{hasFlush} that takes an array of Cards as a parameter and returns \java{true} if the hand contains a flush (\java{false} otherwise).
+
+\end{enumerate}
+
+\end{exercise}
+
 
 \backmatter
 \appendix

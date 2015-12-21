@@ -15,6 +15,8 @@ def main(n):
     for line in src:
         if line.startswith("\\chapter{"):
             i += 1
+            if i > n:
+                break
         if i == n:
             print line,
     print "\\end{document}"
