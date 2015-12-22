@@ -502,7 +502,7 @@ In contrast, formal languages mean exactly what they say.
 %\begin{description}
 
 %\term{poetry}
-%Words are used for their sounds as well as for their meaning, and the whole poe%m together creates an effect or emotional response.
+%Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
 %Ambiguity is not only common but often deliberate.
 
 %\term{prose}
@@ -626,7 +626,7 @@ When the compiler sees \java{//}, it ignores everything from there until the end
 It is a good idea to write a comment before every major block of code so that other programmers (including your future self) can understand what you meant to do.
 
 
-\section{Setting up a programming environment}
+\section{Programming environment}
 
 \index{JDK}
 
@@ -654,7 +654,7 @@ Step-by-step instructions for installing the JDK and configuring DrJava are avai
 
 % TODO: when we have the specific URL for the install page, let's put it here.
 
-\subsection{Command-line interface}
+\section{Command-line interface}
 
 \index{command-line}
 \index{terminal}
@@ -739,7 +739,7 @@ The output appears on a single line as {\tt Goodbye, cruel world}.
 Notice that there is a space between the word ``Goodbye'' and the second quotation mark.
 This space appears in the output, so it affects the {\em behavior} of the program.
 
-\subsection{Code formatting}
+%\subsection{Code formatting}
 \label{sec:formatting}
 
 Spaces that appear outside of quotation marks generally do not affect the behavior of the program.
@@ -769,7 +769,7 @@ Newlines and spaces are important for organizing your program visually, making i
 %Formatting your code well does not take much effort, and it pays huge dividends.
 %We will discuss readability and style guidelines in the next chapter.
 
-\subsection{Escape sequences}
+\section{Escape sequences}
 
 It is possible to print multiple lines of output in just one line of code.
 You just have to tell Java where to put the line breaks.
@@ -1102,7 +1102,7 @@ It is useful to distinguish between them in order to track them down more quickl
 Regardless of what type of error occurs, remember to {\em read and think about the error messages carefully}.
 They will usually point you in the right direction to fix your program.
 
-\subsection{Syntax errors}
+%\subsection{Syntax errors}
 
 \index{syntax error}
 \index{error!syntax}
@@ -1130,7 +1130,7 @@ Since line 8 was deleted, the compiler simply reported the last line of the file
 During the first few weeks of your programming career, you will probably spend a lot of time tracking down syntax errors.
 But as you gain experience, you will make fewer mistakes and find them more quickly.
 
-\subsection{Runtime errors}
+%\subsection{Runtime errors}
 
 \index{runtime error}
 \index{error!runtime}
@@ -1160,7 +1160,7 @@ The first line gives a brief description of the error (/ by zero).
 The subsequent lines report the class and method names (Hello.main), along with the file name and line number where the error occurred (Hello.java:5).
 Keep in mind that the line where the program crashed may not be the line that needs to be fixed.
 
-\subsection{Logic errors}
+%\subsection{Logic errors}
 
 \index{logic error}
 \index{error!logic}
@@ -1253,7 +1253,7 @@ As you type, the tokens in your program will appear in different colors.
 For example, keywords might be blue, strings red, comments green, and other code black.
 If you type a variable name and it turns blue, watch out!
 
-\subsection{Assignment}
+%\subsection{Assignment}
 
 \index{assignment}
 \index{statement!assignment}
@@ -1294,30 +1294,30 @@ But that is not the same thing as the integer \java{123}.
     message = 123;    // not legal
 \end{code}
 
-\subsection{Memory diagrams}
-
-\index{memory diagram}
-
-A common way to represent variables on paper is to draw a box with the name of the variable on the outside and the value of the variable on the inside.
-This diagram shows the effect of the four assignments in the previous section:
-
-\begin{center}
-\begin{tabular}{rl}
-message & \framebox[2cm]{Hello!} \\
-   hour & \framebox[1cm]{11} \\
- minute & \framebox[1cm]{59} \\
-\end{tabular}
-\end{center}
-
-% ABD: In the hour box, consider showing 10 crossed out, followed by 11?
-
-Each box represents the storage location that holds the variable's value.
-Once declared, you cannot change the name of a variable, but you can change the value as many times as you like.
-For example, \java{hour} was initially \java{10}, then reassigned to \java{11}.
-The diagram shows only the final value.
-
-%Since these locations can be anywhere in memory, we refer to them by the variable name.
-%The storage location does not change; those memory cells are simply reused.
+%\subsection{Memory diagrams}
+%
+%\index{memory diagram}
+%
+%A common way to represent variables on paper is to draw a box with the name of the variable on the outside and the value of the variable on the inside.
+%This diagram shows the effect of the four assignments in the previous section:
+%
+%\begin{center}
+%\begin{tabular}{rl}
+%message & \framebox[2cm]{Hello!} \\
+%   hour & \framebox[1cm]{11} \\
+% minute & \framebox[1cm]{59} \\
+%\end{tabular}
+%\end{center}
+%
+%% ABD: In the hour box, consider showing 10 crossed out, followed by 11?
+%
+%Each box represents the storage location that holds the variable's value.
+%Once declared, you cannot change the name of a variable, but you can change the value as many times as you like.
+%For example, \java{hour} was initially \java{10}, then reassigned to \java{11}.
+%The diagram shows only the final value.
+%
+%%Since these locations can be anywhere in memory, we refer to them by the variable name.
+%%The storage location does not change; those memory cells are simply reused.
 
 
 \section{Printing variables}
@@ -2129,7 +2129,7 @@ You might wonder why we can use the \java{System} class without importing it.
 According to the documentation, \java{java.lang} ``provides classes that are fundamental to the design of the Java programming language.''
 The \java{String} class is also part of the \java{java.lang} package.
 
-\subsection{Structure of Java programs}
+\section{Program structure}
 \label{sec:library}
 
 At this point, we have seen all of the elements that make up Java programs.
@@ -2229,7 +2229,7 @@ For the benefit of other programmers (and yourself in the future), it is helpful
     System.out.println(cm + " cm");
 \end{code}
 
-\subsection{Literals and constants}
+\section{Literals and constants}
 
 \index{literal}
 
@@ -2387,7 +2387,7 @@ Keeping that in mind, here's how we can convert a measurement in centimeters to 
 The parentheses after the cast operator require the division to come before the type cast.
 This result will be rounded toward zero, but we will learn in the next chapter how to round floating-point numbers to the closest integer.
 
-\subsection{Modulus operator}
+\section{Modulus operator}
 
 Let's take the example one step further: suppose you have a measurement in inches and you want to convert to feet and inches.
 The goal is divide by 12 (the number of inches in a foot) and keep the remainder.
@@ -2851,7 +2851,7 @@ As a result, \java{long} variables can represent much larger integers.
 In the above example, the multiplication happens first, before the method is invoked.
 The result is 63 (rounded up from 62.8319).
 
-\subsection{Composition revisited}
+\section{Composition revisited}
 
 \index{composition}
 \index{expression}
@@ -3055,7 +3055,7 @@ Class names should be capitalized; this convention helps readers tell the differ
 The \java{NewLine} class contains three \java{void} methods: \java{newLine}, \java{threeLine}, and \java{main}.
 Java is a case-sensitive language, so \java{NewLine} and \java{newLine} are considered different.
 
-\subsection{Programs with multiple methods}
+%\subsection{Programs with multiple methods}
 
 \index{order of execution}
 
@@ -3147,7 +3147,7 @@ If you run \java{Math.sqrt(25)}, the interger value \java{25} is automatically c
 \java{System.out.println} can accept any type as an argument.
 But generally speaking, that is an exception; most methods are not so accommodating.
 
-\subsection{Methods with multiple parameters}
+%\subsection{Methods with multiple parameters}
 \label{time}
 
 \index{parameter!multiple}
@@ -7180,7 +7180,7 @@ Invoking this method has the effect of modifying the \java{Rectangle} that is pa
     System.out.println(box);
 \end{code}
 
-This code prints \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
+The code prints \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
 
 Modifying objects by passing them as arguments to methods can be useful, but it can also make debugging more difficult because it is not always clear which method invocations do or do not modify their arguments.
 %Later, I discuss some pros and cons of this programming style.
@@ -9567,7 +9567,7 @@ The following memory diagram shows what the deck looks like after the first two 
 
 
 %\section{The printDeck method}
-%\label{printdeck}
+\label{printdeck}
 
 \index{printDeck}
 \index{print!array of Cards}
@@ -10051,8 +10051,8 @@ This code puts the first five cards in one hand, the next five cards in the othe
 When you thought about dealing, did you think we should give one card to each player in the round-robin style that is common in real card games?
 The round-robin convention is intended to mitigate imperfect shuffling and make it more difficult for the dealer to cheat.
 
-This example is a useful reminder of one of the dangers of engineering metaphors.
-Sometimes we impose restrictions on computers that are unnecessary, or expect capabilities that are lacking, because we unthinkingly extend a metaphor past its breaking point.
+%This example is a useful reminder of one of the dangers of engineering metaphors.
+%Sometimes we impose restrictions on computers that are unnecessary, or expect capabilities that are lacking, because we unthinkingly extend a metaphor past its breaking point.
 
 
 \section{Selection sort algorithm}
@@ -10308,7 +10308,7 @@ HINT: it should switch references, not the contents of the objects.
 This is also faster; it correctly handles the case where cards are aliased.
 
 \item Write a method called \java{shuffleDeck} that uses the algorithm in Section~\ref{shuffle}.
-You might want to use the \java{randomInt} method from Exercise~\ref{ex.randint}.
+You might want to use the \java{randomInt} method from Section~\ref{random}.
 
 \item Write a method called \java{indexLowestCard} that uses the \java{compareCard} method to find the lowest card in a given range of the deck (from \java{lowIndex} to \java{highIndex}, including both).
 
