@@ -347,8 +347,7 @@ Thinking about how to correct programs and improve their performance sometimes e
 \index{high-level language}
 \index{language!high-level}
 
-The programming language you will learn is Java, which is relatively new (Sun released the first version in May 1995).
-Java is an example of a {\bf high-level language}.
+The programming language you will learn is Java, which is a {\bf high-level language}.
 Other high-level languages you may have heard of include C and C++, JavaScript, Python, Ruby, and Visual Basic.
 
 \index{low-level language}
@@ -473,7 +472,6 @@ As you learn to program, you will learn to parse Java code.
 %Assuming that you know what a penny is and what it means to drop, you will understand the general implication of this statement.
 
 %\subsection{Reading source code}
-
 
 Beginning programmers, who are used to natural languages, often have a hard time adjusting to formal languages.
 Although formal and natural languages have features in common---tokens, grammar, and meaning---there are some differences:
@@ -1144,7 +1142,7 @@ Runtime errors are rare in the simple programs you will see in the first few cha
 
 \index{exception}
 
-These errors are also called {\em exceptions} because they usually indicate that something exceptional (and bad) has happened.
+These errors are also called {\bf exceptions} because they usually indicate that something exceptional (and bad) has happened.
 In most environments they appear as windows or dialog boxes that contain information about what happened and what the program was doing when it happened.
 For example, if you accidentally divide by zero you will get an \java{ArithmeticException}:
 
@@ -1156,7 +1154,7 @@ Exception in thread "main" java.lang.ArithmeticException: / by zero
 \end{small}
 
 This information is useful for debugging.
-The first line gives a brief description of the error (/ by zero).
+The first line gives a brief description of the error (\java{/ by zero}).
 The subsequent lines report the class and method names (Hello.main), along with the file name and line number where the error occurred (Hello.java:5).
 Keep in mind that the line where the program crashed may not be the line that needs to be fixed.
 
@@ -1253,7 +1251,8 @@ As you type, the tokens in your program will appear in different colors.
 For example, keywords might be blue, strings red, comments green, and other code black.
 If you type a variable name and it turns blue, watch out!
 
-%\subsection{Assignment}
+
+\section{Assignment}
 
 \index{assignment}
 \index{statement!assignment}
@@ -1519,7 +1518,7 @@ So Java does {\em integer division}, which yields the \java{int} value \java{0}.
 Converted to \java{double}, the final result is \java{0.0}.
 
 One way to solve this problem (after you finally discover that bug) is to make the right-hand side a floating-point expression.
-The following initializes \java{y} to \java{0.333333}, as expected:
+The following sets \java{y} to \java{0.333333}, as expected:
 
 \begin{code}
     double y;
@@ -1609,7 +1608,7 @@ The following expressions are illegal:
 
 \index{concatenate}
 
-The \java{+} operator does work with strings, but it might not do what you expect.
+The \java{+} operator works with strings, but it might not do what you expect.
 For strings, the \java{+} operator performs {\bf concatenation}, which means joining each part end-to-end.
 So \java{"Hello, " + "world!"} yields the string \java{"Hello, world!"}.
 Likewise, the expression \java{"Hello, " + name} adds the value of \java{name} to the hello string, which is handy for creating a personalized greeting.
@@ -1766,7 +1765,7 @@ In general, each line of code should be a single step of the algorithm.
 
 \index{whitespace}
 
-Recall from Section~\ref{sec:formatting} that the compiler generally ignores {\bf whitespace}, i.e., newlines, tab characters, and other spaces.
+Recall from Section~\ref{sec:formatting} that the compiler generally ignores {\bf whitespace}; that is, newlines, tab characters, and other spaces.
 Programmers have a lot of freedom in how they {\em format} their code in terms of indenting, blank lines, spaces around operators, etc.
 However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying your code.
 
@@ -1936,7 +1935,7 @@ From now on, we won't remind you to start with a small, working program, but you
 
 \item Following the example program in Section~\ref{sec:printvar}, create variables named \java{hour}, \java{minute}, and \java{second}.
 Assign values that are roughly the current time.
-Use a 24-hour clock, i.e., so that at 2pm the value of \java{hour} is 14.
+Use a 24-hour clock so that at 2pm the value of \java{hour} is 14.
 
 \item Make the program calculate and print the number of seconds since the most recent midnight.
 
@@ -2223,11 +2222,12 @@ Numbers that appear in an expression with no explanation are called {\bf magic n
 For the benefit of other programmers (and yourself in the future), it is helpful to assign magic numbers to variables with informative names:
 
 \begin{code}
-    final double cmPerInch = 2.54;
+    double cmPerInch = 2.54;
     cm = inch * cmPerInch;
     System.out.print(inch + " in = ");
     System.out.println(cm + " cm");
 \end{code}
+
 
 \section{Literals and constants}
 
@@ -2239,30 +2239,26 @@ In contrast, variables (\java{inch}, \java{cm}, etc.) are the names of values st
 The English word {\em variable} implies that this data is subject to change.
 
 As we saw with \java{cmPerInch}, it's often useful to give names to literals that will be used throughout the program.
-But when doing so, we don't want those variables to be changed accidentally because of an unexpected bug in the code.
-As another example, consider the famous card game that comes with most versions of Microsoft Windows.
+But when doing so, we don't want those variables to be changed accidentally because of an unexpected bug in the code.  We can use the keyword \java{final} to make sure that doesn't happen.
 
 \begin{code}
-    final String title = "Solitaire";
-    final int deckSize = 52;
+    final double cmPerInch = 2.54;
 \end{code}
 
-\index{final}
-\index{constant}
-\index{initialize}
-
-The keyword \java{final} indicates these variables are {\bf constants} and therefore may be assigned only one time.
-Constants are generally declared and {\bf initialized} on the same line of code.
-%The term initialize means to assign for the first time.
+The keyword \java{final} indicates that \java{cmPerInch} is a {\bf constant},
+and cannot be reassigned.
 If you attempt to assign \java{title} or \java{deckSize} later in the program, the compiler will report an error.
 This feature helps prevent you from making mistakes.
+\index{final}
+\index{constant}
 
 It's good practice to create final variables for constant values, rather than repeat literal values again and again.
-For one, it makes the program easier to understand.
-When looking at the code, it may not be obvious what the number \java{52} means.
-The name \java{deckSize} explains the programmer's intent.
+First, it makes the program easier to understand.
+When looking at the code, it may not be obvious what the number \java{2.54} means.
+The name \java{cmPerInch} explains the programmer's intent.
 Second, named constants make the program easier to maintain.
-If we want to change the title from \java{"Solitaire"} to \java{"Klondike"}, we would only need to change one line of code (as opposed to every line where that title is used).
+If we have to change the value of a constant in the future,
+we only have to change one line of code (as opposed to every line where the constant is used).
 
 
 \section{Formatting output}
@@ -2452,7 +2448,7 @@ Also, many encryption algorithms are based on modular arithmetic.
 %\end{itemize}
 
 At this point you know enough Java to write useful programs that solve everyday problems.
-You've seen how to 1) import Java library classes, 2) initialize a \java{Scanner} object, 3) get input from the keyboard, 4) format output with \java{printf}, and 5) divide and mod integers.
+You've seen how to 1) import Java library classes, 2) instantiates a \java{Scanner} object, 3) get input from the keyboard, 4) format output with \java{printf}, and 5) divide and mod integers.
 Now we can put them together in a complete program:
 
 %Since we've looked at each of these topics in isolation, it's important to see how they fit together in a complete program.
@@ -2709,10 +2705,7 @@ For example, \java{"Hello"} is a string literal and \java{74} is an integer lite
 
 \term{constant}
 A variable that can only be assigned one time.
-Once initialized, its value cannot be changed.
-
-\term{initialize}
-To assign an initial value to a variable.
+Once assigned, its value cannot be changed.
 
 \term{format specifier}
 A special code beginning with percent sign and ending with a single letter that stands for the data type.
@@ -2727,7 +2720,7 @@ In Java it appears as a type name in parentheses, like \java{(int)}.
 
 \term{modulus}
 An operator that yields the remainder when one integer is divided by another.
-In Java, it is denoted with a percent sign (e.g., \java{5 \% 2} is \java{1}).
+In Java, it is denoted with a percent sign; for example, \java{5 \% 2} is \java{1}.
 
 \term{redirection operator}
 A command-line feature that substitutes \java{System.in} and/or \java{System.out} with a plain text file.
@@ -2884,7 +2877,7 @@ For example, \java{Math.pow} takes two arguments and raises the first argument t
     pow(2.0, 10.0);  // syntax error
 \end{code}
 
-If you try to invoke \java{Math.pow} this way, the compiler will say it ``cannot find symbol'' (i.e., there is no method named \java{pow} in the current class).
+If you try to invoke \java{Math.pow} this way, the compiler will say it ``cannot find symbol''; that is, there is no method named \java{pow} in the current class.
 
 
 \section{Adding new methods}
@@ -3147,7 +3140,8 @@ If you run \java{Math.sqrt(25)}, the interger value \java{25} is automatically c
 \java{System.out.println} can accept any type as an argument.
 But generally speaking, that is an exception; most methods are not so accommodating.
 
-%\subsection{Methods with multiple parameters}
+
+\section{Methods with multiple parameters}
 \label{time}
 
 \index{parameter!multiple}
@@ -3184,7 +3178,7 @@ The correct syntax is:
 \end{code}
 
 When you call a method, Java {\it copies the value} of any arguments you provide into the method's parameters.
-It's common for two methods (e.g., \java{main} and \java{printTime}) to have variables with the same name, to show how data passes from one method to the next.
+It's common for two methods, like \java{main} and \java{printTime}, to have variables with the same name, to show how data passes from one method to the next.
 But remember that these variables are stored in different memory locations.
 Changing the value of \java{hour} or \java{minute} in \java{printTime} has no effect on the original variables in \java{main}.
 
@@ -3278,7 +3272,7 @@ Documentation comments are typically complete sentences that begin with a capita
 \item Documentation comments often span multiple lines.
 By convention, each line begins with a \java{*} that is aligned vertically with the start and end of the comment.
 
-\item Some development environments (e.g., Eclipse and NetBeans) automatically display documentation comments when you hover your mouse over the name of a class or method.
+\item Some development environments, like Eclipse and NetBeans, automatically display documentation comments when you hover your mouse over the name of a class or method.
 
 \end{itemize}
 
@@ -3402,7 +3396,7 @@ A named sequence of statements that performs a procedure or function.
 Methods may or may not take parameters, and may or may not return a value.
 
 \term{invoke}
-To call or run a method, i.e., cause it to execute.
+To cause a method to execute.
 
 \term{parameter}
 A piece of information that a method requires before it can run.
@@ -4002,8 +3996,13 @@ Here is a simple program that makes use of the \java{printLogarithm} method defi
 \end{code}
 
 Up to this point, we have assumed that users always do what they're told.
-But what happens if they make an innocent mistake?
-Or even worse, what happens if they deliberately try to crash your program?
+But what happens if they make a mistake?
+
+% TODO: This is the first exception that has come up since they
+% were mentioned in Chapter 1.  And this is the first stack trace.
+% We define stack trace later, in Strings and Things.  We should either
+% explain stack traces here, or skip this example and wait for the
+% explanation later.
 
 \begin{stdout}
 Enter a number: Hello
@@ -4014,6 +4013,7 @@ Exception in thread "main" java.util.InputMismatchException
     at Example.main(Example.java:17)
 \end{stdout}
 
+\index{exception}
 In this example, the program calls the \java{nextDouble} method, so the \java{Scanner} attempts to parse a \java{double}.
 However the user input is \java{"Hello"}, which causes an \java{InputMismatchException}.
 We can prevent this error from happening by checking the input before parsing it:
@@ -4317,7 +4317,7 @@ For example, how can you rewrite this code using a single \java{if} statement?
 
 Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that
 \[ a^n + b^n = c^n \]
-except in the case when $n \leq 2$ (e.g., the Pythagorean Theorem).
+except in the case when $n \leq 2$.
 
 Write a method named \java{checkFermat} that takes four integers as parameters---\java{a}, \java{b}, \java{c} and \java{n}---and that checks to see if Fermat's theorem holds.
 If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
@@ -5713,7 +5713,7 @@ Here is the output when you invoke \java{printMultTable} with the argument 7:
    7  14  21  28  35  42
 \end{stdout}
 
-This result is fine, but it would be even better if it were square (i.e., the same number of rows and columns).
+This result is fine, but it would be even better if it were square; that is, if it had the same number of rows and columns.
 We can pass the \java{size} parameter to \java{printMultiples} to specify how many columns the table should have.
 
 \begin{code}
@@ -6023,10 +6023,10 @@ You should not use \java{factorial} or \java{pow}.
 \index{method!string}
 
 In Java and other object-oriented languages, an {\bf object} is a collection of data that provides a set of methods.
-These methods operate on the object, performing computations and sometimes modifying the data.
+These methods operate on the object, performing computations and sometimes modifying the object's data.
 Strings are objects, and their data is a sequence of characters; that is,
 letters, numbers, spaces, and symbols.
-The \java{String} class provides many methods for manipulating character data, and we will explore some of them in this chapter.
+The \java{String} class provides many methods for manipulating character data. We will explore some of them in this chapter.
 
 
 \section{Characters}
@@ -6077,7 +6077,7 @@ Unlike string literals, which appear in double quotes, characters may only conta
     }
 \end{code}
 
-Characters work much like the other primitive types we have seen.
+Characters work like the other primitive types we have seen.
 You can use them in arithmetic, decisions, loops, and so forth.
 
 \begin{code}
@@ -6090,7 +6090,7 @@ You can use them in arithmetic, decisions, loops, and so forth.
 
 \index{Unicode}
 
-Java uses {\bf Unicode} for its character set (see \url{http://unicode.org/}) so that strings may store text in any language.
+Java uses {\bf Unicode} for its character set (see \url{http://unicode.org/}), so strings can store text in any language.
 Unicode supports alphabets like Cyrillic and Greek, and left-to-right scripts like Arabic and Hebrew.
 %Regardless, both the data type \java{char} and the method \java{charAt} work the same.
 
@@ -6102,7 +6102,7 @@ Unicode supports alphabets like Cyrillic and Greek, and left-to-right scripts li
     System.out.println();
 \end{code}
 
-This example demonstrates how you can convert a Unicode ``code unit,'' represented as an integer, to a \java{char} using a cast operator.
+This example demonstrates how you can convert a Unicode ``code unit'', represented as an integer, to a \java{char} using a cast operator.
 
 
 \section{String traversal}
@@ -6126,8 +6126,8 @@ A natural way to traverse a string is with a \java{for} statement:
 \index{index}
 
 This loop prints each character of the string \java{fruit} on a line by itself.
-The name of the loop variable is \java{i}, which stands for {\bf index}; an
-index is an integer that indicates the position of a character.
+The name of the loop variable is \java{i}, which stands for ``index''; an
+{\bf index} is an integer that indicates the position of a character.
 Notice that the condition is \java{i < fruit.length()}, which means that when \java{i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
 %The last character we access is the one with the index \java{fruit.length() - 1}.
 
@@ -6174,7 +6174,7 @@ Each time through the loop, it creates a new string and assigns it to \java{r}.
 When the loop exits, \java{r} contains the letters from \java{s} in reverse order.
 So the result of \java{reverse("banana")} is \java{"ananab"}.
 
-%\section{Looping and counting}
+\section{Looping and counting}
 \label{loopcount}
 
 \index{loop!counting}
@@ -6217,6 +6217,10 @@ The first example returns a copy of the entire string.
 The second example returns all but the first two characters.
 As the last example shows, \java{substring} returns the empty string if the argument is the length of the string.
 To visualize how this method works, it helps to draw a picture:
+
+% TODO: There is a version of this picture with the lines between
+% the letters, which helps with understanding substring.  Let's bring
+% it back and add text to explain it.
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -6266,9 +6270,8 @@ For example, to select a substring with length \java{len}, starting at index \ja
 \index{error!runtime}
 \index{exception}
 
-If you call the \java{charAt} method with an index that is either negative or greater than \java{length - 1}, you will get an {\bf exception}.
+If you call the \java{charAt} method with an index that is either negative or greater than \java{length - 1}, you will get an exception, specifically a \java{StringIndexOutOfBounds} exception.
 %The same is true when calling \java{substring} with invalid start or end indexes.
-When that happens, Java prints an error message and terminates the program.
 
 For example, notice the error in the \java{getLastLetter} method below.
 It should be looking at \java{index - 1} instead of \java{index}.
@@ -6278,10 +6281,12 @@ public class BadString {
     public static void main(String[] args) {
         processWord("banana");
     }
+
     public static void processWord(String s) {
         char c = getLastLetter(s);
         System.out.println(c);
     }
+
     public static char getLastLetter(String s) {
         int index = s.length();
         char c = s.charAt(index);  // WRONG!
@@ -6305,6 +6310,8 @@ String index out of range: 6
 
 \index{stack trace}
 
+% TODO: we should define stack trace earlier
+
 This information is called a {\bf stack trace}, which shows the methods that were running when the error occurred.
 The stack trace can be difficult to read, but it contains a lot of useful information.
 For one, it tells you that the index 6 was out of range.
@@ -6322,9 +6329,9 @@ In this example, \java{BadString.java:14} is the most useful debugging informati
 \section{The indexOf method}
 \index{indexOf}
 
-At first glance, \java{indexOf} is the inverse of \java{charAt}.
-The \java{charAt} method takes an index and returns the character at that index.
-In contrast, the \java{indexOf} method takes a character and finds an index where that character appears.
+The \java{indexOf} method takes a character and finds an index where that character appears.
+%At first glance, \java{indexOf} is the inverse of \java{charAt}.
+%The \java{charAt} method takes an index and returns the character at that index.
 
 \begin{code}
     String fruit = "banana";
@@ -6342,15 +6349,15 @@ To find subsequent appearances, you can use another version of \java{indexOf}, w
     int index = fruit.indexOf('a', 2);
 \end{code}
 
-This code starts at the third letter (the first \java{'n'}) and finds the next \java{'a'}, which is at index 3.
+This code starts at index 2 (the first \java{'n'}) and finds the next \java{'a'}, which is at index 3.
 If the letter happens to appear at the starting index, the starting index is the answer.
 So \java{fruit.indexOf('a', 5)} returns 5.
 
-There are subtle differences between \java{charAt} and \java{indexOf}:
-\java{charAt} throws an exception if the index is out of range;
-\java{indexOf} returns the value \java{-1} if the character does not appear in the string.
+If the character does not appear in the string,
+\java{indexOf} returns \java{-1}.
 
-You can also use \java{indexOf} to search for an entire string.
+You can also use \java{indexOf} to search for a substring, not just
+a single character.
 For example, the expression \java{fruit.indexOf("nan")} returns 2, whereas \java{fruit.indexOf("zzz")} returns -1 (not found).
 
 
@@ -6364,7 +6371,7 @@ For example, the expression \java{fruit.indexOf("nan")} returns 2, whereas \java
 
 As you read the documentation of the \java{String} methods, you might notice \java{toUpperCase} and \java{toLowerCase}.
 These methods are often a source of confusion, because it sounds like they have the effect of changing (or mutating) an existing string.
-It turns out that neither these methods nor any others can change a string, because strings are {\bf immutable}.
+But neither these methods nor any others can change a string, because strings are {\bf immutable}.
 
 When you invoke \java{toUpperCase} on a string object, you get a new string object as a return value.
 For example:
@@ -6384,7 +6391,7 @@ But \java{name} still contains \java{"Alan Turing"} as before.
 
 It is often useful to compare strings to see if they are the same, or to see which comes first in alphabetical order.
 It would be nice if we could use the comparison operators, like \java{==} and \java{>}, but we can't.
-To compare \java{String}s, we have to use the \java{equals} and \java{compareTo} methods.
+To compare strings, we have to use the \java{equals} and \java{compareTo} methods.
 
 \begin{code}
     String name1 = "Alan Turing";
@@ -6396,7 +6403,7 @@ To compare \java{String}s, we have to use the \java{equals} and \java{compareTo}
 
 The syntax here may seem awkward.
 To compare two strings, you have to invoke a method on one of them and pass the other as an argument.
-The return value from \java{equals} is straightforward: \java{true} if the strings contain the same characters, and \java{false} otherwise.
+The return value from \java{equals} is \java{true} if the strings contain the same characters and \java{false} otherwise.
 
 \begin{code}
     int diff = name1.compareTo(name2);
@@ -6418,21 +6425,13 @@ In the example above, \java{compareTo} returns positive 8, because the second le
 
 
 \section{Character arithmetic}
-
-% ABD: I propose that we kill this section.  The first example is
-% a bad solution, and the second example is string concatentation,
-% not character arithmetic. (CSM: the ++ is the arithmetic part.)
-
-% Instead, let's have a section that introduces the Character class
-% and some of the methods it provides.
-
-\index{arithmetic!char}
+\index{arithmetic!character}
 
 Like the \java{compareTo} method, you too can do arithmetic with characters.
 For example, if \java{letter} refers to a lowercase letter, \java{letter - 'a'} yields its position in the alphabet (keeping in mind that 'a' is the zeroeth letter of the alphabet and 'z' is the 25th).
 
 Performing arithmetic on characters is rarely necessary in programs, but it helps demonstrate how text is represented in Java.
-For example, we often need to convert between characters that contain numbers (e.g., \java{'0'}, \java{'1'}, \java{'2'}) and their corresponding integers.
+For example, we often need to convert between characters that contain numbers, like \java{'0'} and \java{'1'}, and their corresponding integers.
 A common mistake beginning programmers make is simply to cast a \java{char} to an \java{int}:
 
 \begin{code}
@@ -6443,19 +6442,20 @@ A common mistake beginning programmers make is simply to cast a \java{char} to a
 
 You might expect the value to be 3, but instead you get 51, which is the Unicode value for the character \java{'3'}.
 %Remember, not all languages in the world use Arabic numerals like English does.
-To convert \java{'3'} to the corresponding integer value, you effectively need to subtract \java{'0'}:
+To convert \java{'3'} to the corresponding integer value, you could subtract \java{'0'}:
 
 \begin{code}
     int x = (int) (letter - '0');
 \end{code}
 
-In both of these examples, the typecast \java{(int)} is not strictly necessary since Java will do the conversion automatically.
-Since this conversion can be a bit ugly, it is preferable to use the \java{digit} method in the \java{Character} class instead.
+But it is better to use the \java{digit} method in the \java{Character} class instead.
 For example, this code converts \java{letter} to the corresponding digit, interpreting it as a base 10 number.
 
 \begin{code}
     int x = Character.digit(letter, 10);
 \end{code}
+
+\java{Character} is a built-in class that provides methods for working with characters.
 
 Another use for character arithmetic is to loop through the letters of the alphabet in order.
 For example, in Robert McCloskey's book {\em Make Way for Ducklings}, the names of the ducklings form an Abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack.
@@ -6514,6 +6514,10 @@ representation of a number:
 int num = 12345;
 String str = Integer.toString(num);
 \end{code}
+
+% TODO: do we have a use case for instantiating one of these classes?
+% Maybe not until we use Collections.
+%We'll see more about the wrapper classes in Section~\ref{???}.
 
 % ABD: There is a jump here from talking about wrapper classes to talking
 % about instances of those classes.  I think we don't want to do the
@@ -6594,7 +6598,7 @@ The purpose of this exercise is to review encapsulation and generalization (see 
 
 \item Now that you have generalized the code so that it works on any string, what could you do to generalize it more?
 
-\item Write several test cases to verify that your generalized code works as expected (see Section~\ref{JUnit}).
+\item Write test cases to verify that your generalized code works as expected (see Section~\ref{JUnit}).
 
 \end{enumerate}
 
@@ -6660,7 +6664,7 @@ But if \java{x} is a \java{char}, it's not exactly the same!
 In that case, \java{x++} is legal, but \java{x = x + 1} causes an error.
 Try it out and see what the error message is, then see if you can figure out what is going on.
 
-\item What happens when you add \java{""} (the empty string) to the other types (e.g., \java{"" + 5})?
+\item What happens when you add \java{""} (the empty string) to the other types; for example, \java{"" + 5}?
 How does this technique compare with methods provided by the wrapper classes?
 
 \item For each data type, what types of values can you assign to it? For example, you can assign an \java{int} to a \java{double} but not vice versa.
@@ -6697,11 +6701,11 @@ Create a program called {\tt Recurse.java} and type in the following methods:
 \item Write some code in \java{main} that tests each of these methods.
 Make sure they work, and you understand what they do.
 
-\item Write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.  It should be a \java{void} method.
+\item Using these methods, and without using any other String methods, write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.  It should be a \java{void} method.
 
-\item Write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
+\item Again using only these methods, write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
 
-\item Write a method called \java{reverseString} that takes a String as a parameter and that returns a new String as a return value.
+\item Now write a method called \java{reverseString} that takes a String as a parameter and that returns a new String as a return value.
 The new String should contain the same letters as the parameter, but in reverse order.
 
 \begin{code}
@@ -6722,7 +6726,7 @@ eeffoc
 
 \begin{exercise}
 
-What is the output of this program?
+What is the output of the following program?
 Describe in a sentence what \java{mystery} does (not how it works).
 
 \begin{code}
@@ -6754,7 +6758,7 @@ public class Mystery {
 
 \begin{exercise}
 
-A friend shows you the following method and claims that if \java{number} is any two-digit number, the program will output the number backwards.
+A friend shows you the following method and claims that if the value of \java{number} is any two-digit number, the program will output the number backwards.
 For example if \java{number} is 17, the code should output {\tt 71}.
 
 \begin{code}
@@ -6799,10 +6803,9 @@ Hint: Think about what happens if you invoke \java{middle} on strings that have 
 Write a recursive method named \java{isPalindrome} that takes a \java{String} and returns a \java{boolean} indicating whether the word is a palindrome or not.
 
 \item Once you have a working palindrome checker, look for ways to simplify it by reducing the number of conditions you check.
-
 Hint: It might be useful to adopt the definition that the empty string is a palindrome.
 
-\item On a piece of paper, figure out a strategy for checking palindromes iteratively (i.e., using loops).
+\item On a piece of paper, figure out a strategy for checking palindromes iteratively, using a loop.
 There are several possible approaches, so make sure you have a solid plan before you start writing code.
 
 \item Implement your strategy in a method called \java{isPalindromeIter}.
@@ -6861,16 +6864,16 @@ Continue reading input until the user enters the word \java{"Done"} (ignoring ca
 
 \begin{exercise}
 
-A {\em shift cipher} works by taking each letter in a string and adding 13 to it.
+ROT13 is a {\em shift cipher} that works by taking each letter in a string and adding 13 to it.
 For example, \java{'a'} becomes \java{'n'} and \java{'b'} becomes \java{'o'}.
 The letters wrap around at the end, so \java{'z'} becomes \java{'m'}.
 
 \begin{enumerate}
 
-\item Write a method that takes a string and returns a new string containing the encoded version.
+\item Write a method that takes a string and returns a new string containing the ROT13encoded version.
 You should assume that the string contains upper and lower case letters and spaces, but no other characters.
 Lower case letters should be transformed into other lowercase letters, and uppercase into uppercase.
-You should not encode the spaces.
+You should not transform the spaces.
 
 \item Generalize the method so that instead of adding 13 to each letter, it adds any given amount.
 Now you should be able to encode things by adding 13 and decode them by adding -13.
@@ -7704,7 +7707,7 @@ Like \java{void} methods, constructors do not return values.
 Another mistake that beginning programmers make is to invoke the \java{new} operation inside the constructor.
 For example, writing the code \java{new Time(0, 0, 0.0)} in the constructor results in infinite recursion.
 
-%\subsection{More constructors}
+\section{More constructors}
 
 \index{overloading}
 
@@ -8679,8 +8682,8 @@ Now we can count the number of scores in the ranges we are interested in:
 \section{Building a histogram}
 
 This code is repetitious, but it is acceptable as long as the number of ranges is small.
-Imagine that we want to keep track of the number of times each score appears, i.e., all 100 possible values.
-Should you just write the following 100 lines of code?
+Imagine that we want to keep track of the number of times each score appears.
+Should you write the following 100 lines of code?
 
 \begin{code}
     int count0 = inRange(scores, 0, 1);
@@ -9546,7 +9549,7 @@ It's also another example of composition, or combining the syntax for accessing 
 
 \index{loop!nested}
 
-The easiest way to populate the deck with \java{Card} objects is to write nested for loops (i.e., one loop inside the body of another):
+The easiest way to populate the deck with \java{Card} objects is to write nested for loops:
 
 \begin{code}
     int index = 0;
@@ -9865,7 +9868,7 @@ Your solution should only traverse the array once.
 \index{array!of Cards}
 
 Previously we looked at algorithms for searching for a particular \java{Card} in an array of \java{Card} objects.
-It turns out that an array of \java{Card}s is not only useful for representing an entire deck, but also for representing a subdeck (i.e., part of the deck).
+It turns out that an array of \java{Card}s is not only useful for representing an entire deck, but also for representing a subset of the cards.
 For example, we can use a separate array for each player to remember which \java{Card}s they have been dealt.
 
 In this chapter, we will take another step toward object-oriented programming.
@@ -9985,7 +9988,7 @@ It simply allocates the array without allocating any cards.
 Inside the \java{for} loop, the subdeck gets populated with copies of the references from the deck.
 
 The following is a state diagram of a subdeck being created with the parameters \java{low = 3} and \java{high = 7}.
-The result is a hand with 5 cards that are {\em shared} with the original deck, i.e., they are aliased.
+The result is a hand with 5 cards that are {\em shared} with the original deck; that is, they are aliased.
 
 \begin{center}
 \includegraphics{figs/subdeck.pdf}
@@ -10004,7 +10007,7 @@ So for \java{Card}s, \java{String}s, and other immutable objects, aliasing is an
 
 \index{shuffle}
 
-For most card games you need to be able to shuffle the deck, i.e., put the cards in a random order.
+For most card games you need to be able to shuffle the deck; that is, put the cards in a random order.
 In Section~\ref{random} we saw how to generate random numbers, but it is not obvious how to use them to shuffle a deck.
 
 One possibility is to model the way humans shuffle, which is usually dividing the deck in two and then choosing alternately from each deck.
@@ -10217,7 +10220,7 @@ One last sorting algorithm is called {\bf insertion sort}, because it's based on
 In the card playing example, humans typically apply the following algorithm when they are dealt new cards:
 
 \begin{enumerate}
-\item Use sequential search to find the insertion point (i.e., the index in the array where the new \java{Card} belongs).
+\item Use sequential search to find the insertion point; that is, the index in the array where the new \java{Card} belongs.
 \item Insert the new card at that position.
 \end{enumerate}
 
@@ -10228,7 +10231,7 @@ If the array has five \java{Card}s, you can't just insert a sixth \java{Card} in
 Consequently, the second step above is a bit more complicated:
 
 \begin{enumerate}
-\item Use sequential search to find the insertion point (i.e., the index in the array where the new \java{Card} belongs).
+\item Use sequential search to find the insertion point.
 \item Create a new array with a length of one more element.
 \item Copy existing elements from the old array to their corresponding position in the new array (skipping the insertion point).
 \item Insert the new card at the insertion point.
