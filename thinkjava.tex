@@ -711,7 +711,8 @@ As this program demonstrates, you can put comments at the end of a line as well 
 \index{type!String}
 
 Phrases that appear in quotation marks are called {\bf strings}, because they contain a sequence of characters strung together.
-Strings can contain any combination of letters, numbers, punctuation marks, symbols, and even non-printable characters like tab and backspace.
+{\bf Characters} can be letters, numbers, punctuation marks, symbols, spaces, tabs, and more.
+Strings can contain any combination of characters.
 
 \index{newline}
 \index{print}
@@ -1765,9 +1766,11 @@ In general, each line of code should be a single step of the algorithm.
 
 \index{whitespace}
 
-Recall from Section~\ref{sec:formatting} that the compiler generally ignores {\bf whitespace}; that is, newlines, tab characters, and other spaces.
-Programmers have a lot of freedom in how they {\em format} their code in terms of indenting, blank lines, spaces around operators, etc.
-However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying your code.
+As we saw in Section~\ref{sec:formatting}, the compiler generally ignores spaces, tabs, and newlines.
+These characters, which are called {\bf whitespace}, affect the format of the code, but they don't affect its behavior.
+
+So you have a lot of freedom in how you arrange your code.
+However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying it.
 
 \index{Google style}
 
@@ -1864,7 +1867,7 @@ The ability to combine simple expressions and statements into compound expressio
 
 \term{whitespace}
 Newlines, tab characters, and other spaces in a source program.
-Its purpose in the Java language is to separate tokens.
+Whitespace characters are used to separate tokens, but other than that, they don't affect the behavior of the program.
 
 %\term{wildcard}
 %A command-line feature that allows you to specify a pattern of file names.
@@ -1979,8 +1982,12 @@ This chapter will show you how to read input from the keyboard, use that input t
 \index{System class}
 \index{class!System}
 
-\java{System.out.println} can display the value of any type of variable.
-You can even use \java{println} to print the value of \java{System.out}:
+We have been using {\tt System.out.println} for a while, but you might
+not have thought about what it means.
+\java{System} a class that provides methods related to the ``system'' or environment where programs run.
+It also provides \java{System.out}, which is a special value that provides methods for displaying output, including \java{println}.
+
+In fact, we can use \java{System.out.println} to display the value of \java{System.out}:
 
 \begin{code}
     System.out.println(System.out);
@@ -1994,21 +2001,20 @@ java.io.PrintStream@685d72cd
 
 \index{package}
 
-From this output we can see that \java{System.out} is a \java{PrintStream}, which is defined in a package called \java{java.io}.
+This output indicates that \java{System.out} is a \java{PrintStream}, which is defined in a package called \java{java.io}.
 A {\bf package} is a collection of related classes; \java{java.io} contains classes for ``I/O'' which stands for input and output.
 
 \index{address}
 
-After the {\tt @} sign is the location of the object in memory, which is called its {\bf address}.
+After the {\tt @} sign is the location of \java{System.out} in memory, which is called its {\bf address}.
 In this example the address is \java{685d72cd}, but if you run the same code you will likely get something different.
 %You can think of the address as a unique identifier for the object.
 
-\index{object}
+%\index{object}
 
-\java{System.out} is an {\bf object}, which means that it is a special value that provides methods.
-Specifically, \java{System.out} provides methods for displaying output, including \java{print} and \java{println}.
-Numbers with type \java{int} and \java{double} are not objects because they provide no methods.
-Strings are objects; we will see some of their methods soon.
+%\java{System.out} is a special value that provides methods for displaying output, including \java{print} and \java{println}.
+%Numbers with type \java{int} and \java{double} are not objects because they provide no methods.
+%Strings are objects; we will see some of their methods soon.
 
 \index{library}
 
@@ -2044,7 +2050,7 @@ These files are part of the Java {\bf library}, which is an extensive collection
 
 
 \section{The Scanner class}
-
+\label{scanner}
 \index{Scanner class}
 \index{class!Scanner}
 
@@ -2054,8 +2060,7 @@ These files are part of the Java {\bf library}, which is an extensive collection
 %The operating system translates these signals into a stream of {\bf bytes} (small integers), which in turn need to be translated into characters.
 %\java{System.in} provides the means for reading one byte of input at a time, which is hardly useful for programs that would rather read in an entire word or line of input.
 
-The \java{System} class also provides an object named \java{in}, which is an \java{InputStream} that provides methods for reading input from the keyboard.
-%As with \java{System.out}, the exact type of keyboard (or even touch screen) does not matter to the programmer.
+The \java{System} class also provides the special value \java{in}, which is an \java{InputStream} that provides methods for reading input from the keyboard.
 These methods perform simple operations, but they are not easy to use.
 Fortunately, Java provides other classes that make it easier to handle common input tasks.
 
@@ -2077,9 +2082,9 @@ This {\bf import statement} tells the compiler that when you say \java{Scanner},
 It's necessary because there might be another class named \java{Scanner} in another package.
 Using an import statement makes your code unambiguous.
 
-Next you have to create a \java{Scanner} object using the keyword \java{new}.
+Next you have to create a \java{Scanner} using the keyword \java{new}.
 %In most programs, you will need only one \java{Scanner}, since there is only one source of input.
-The following code declares a \java{Scanner} variable and then creates a \java{Scanner} object:
+The following code declares a \java{Scanner} variable and then creates a \java{Scanner}:
 
 \begin{code}
     Scanner in;
@@ -2098,7 +2103,7 @@ Alternatively, you can declare the variable and assign it using one line of code
     Scanner in = new Scanner(System.in);
 \end{code}
 
-The new \java{Scanner} object (stored in the variable \java{in}) provides a method called \java{nextLine} that reads a line of input from the keyboard and returns a String.
+The new \java{Scanner} provides a method called \java{nextLine} that reads a line of input from the keyboard and returns a String.
 The following example reads two lines and repeats them back to the user.
 
 \begin{code}
@@ -2299,7 +2304,7 @@ Here's an example that contains two format specifiers:
 \end{code}
 
 The values are matched up with the format specifiers in order, so \java{inch} is displayed as an integer (``d'' stands for ``decimal'') and \java{cm} is displayed as a floating-point number.
-Format strings often end with a newline character (\verb"\n"), since \java{printf} does not append a newline like \java{println} does.
+Format strings often end with a newline (\verb"\n"), since \java{printf} does not append a newline like \java{println} does.
 
 Learning \java{printf} is like learning a sub-language within Java.
 There are many options, and the details can be overwhelming.
@@ -2448,7 +2453,7 @@ Also, many encryption algorithms are based on modular arithmetic.
 %\end{itemize}
 
 At this point you know enough Java to write useful programs that solve everyday problems.
-You've seen how to 1) import Java library classes, 2) instantiates a \java{Scanner} object, 3) get input from the keyboard, 4) format output with \java{printf}, and 5) divide and mod integers.
+You've seen how to 1) import Java library classes, 2) create a \java{Scanner}, 3) get input from the keyboard, 4) format output with \java{printf}, and 5) divide and mod integers.
 Now we can put them together in a complete program:
 
 %Since we've looked at each of these topics in isolation, it's important to see how they fit together in a complete program.
@@ -2538,7 +2543,7 @@ What is your name? Hello , age 45
 \end{stdout}
 
 To understand what is happening, recall that computers do not {\em see} input as multiple lines like we do.
-Instead, the operating system simply forwards a stream of characters to your program via \java{System.in}:
+Instead, they simply forward a stream of characters to your program via \java{System.in}:
 
 \begin{center}
 \includegraphics{figs/vader1.pdf}
@@ -2569,7 +2574,8 @@ To solve this problem, you need to add an extra call to \java{nextLine} after yo
 
 This technique is common when reading \java{int} or \java{double} values that appear on their own line.
 First you read the number, then you read the rest of the line (which is just a newline character).
-Note that you do not have to assign the return value of \java{nextLine} to a variable in that case; you can simply ignore it.
+% This is the first use of ``return value''
+%Note that you do not have to assign the return value of \java{nextLine} to a variable in that case; you can simply ignore it.
 
 
 \section{Command-line testing}
@@ -2668,12 +2674,12 @@ A group of classes that are related to each other.
 Java classes are organized into packages.
 
 \term{address}
-The storage location of a variable or object in memory.
+The storage location of a value in memory.
 Addresses are integers encoded in hexadecimal (base 16).
 
-\term{object}
-An abstract entity that represents data and performs actions.
-In Java, objects are stored in memory and referenced by variables.
+%\term{object}
+%An abstract entity that represents data and performs actions.
+%In Java, objects are stored in memory and referenced by variables.
 
 \term{library}
 A collection of packages and classes that are available for use in other programs.
@@ -2768,12 +2774,12 @@ In this chapter, we'll show you how to organize longer programs into multiple me
 % in practice I find them impossible to write without breaking the rules
 % (like using terms before defining them, etc)
 
-At a conceptual level, a {\bf method} represents a mathematical {\em function} or a general {\em procedure}.
-Some methods perform a computation and return a result.
-For example, \java{Math.sqrt(25)} returns the value \java{5.0}.
-Other methods (including \java{main}) carry out a sequence of actions without returning a result.
-Java uses the keyword \java{void} to declare such methods.
-Regardless whether they return a value or not, methods enable you to break down a complex program into smaller blocks of code.
+%At a conceptual level, a {\bf method} represents a mathematical {\em function} or a general {\em procedure}.
+%Some methods perform a computation and return a result.
+%For example, \java{Math.sqrt(25)} returns the value \java{5.0}.
+%Other methods (including \java{main}) carry out a sequence of actions without returning a result.
+%Java uses the keyword \java{void} to declare such methods.
+%Regardless whether they return a value or not, methods enable you to break down a complex program into smaller blocks of code.
 
 
 \section{Math methods}
@@ -6022,11 +6028,11 @@ You should not use \java{factorial} or \java{pow}.
 \index{class!String}
 \index{method!string}
 
-In Java and other object-oriented languages, an {\bf object} is a collection of data that provides a set of methods.
-These methods operate on the object, performing computations and sometimes modifying the object's data.
-Strings are objects, and their data is a sequence of characters; that is,
-letters, numbers, spaces, and symbols.
-The \java{String} class provides many methods for manipulating character data. We will explore some of them in this chapter.
+In Java and other object-oriented languages, an {\bf object} is a collection of data that provides a set of methods.  For example, \java{Scanner}, which we saw in Section~\ref{scanner} is an object that provides methods for parsing strings.  \java{System.out} and \java{System.in} are also objects.
+
+Strings are objects, too.
+They contain characters and provide methods for manipulating character data.
+We explore some of those methods in this chapter.
 
 
 \section{Characters}
@@ -6035,7 +6041,7 @@ The \java{String} class provides many methods for manipulating character data. W
 \index{char}
 \index{type!char}
 
-The first method we will look at is \java{charAt}, which extracts a character from a \java{String}.
+Strings provide a method named \java{charAt}, which extracts a character.
 It returns a \java{char}, a primitive type that can store individual characters (as opposed to strings of them).
 
 \begin{code}
@@ -6895,24 +6901,35 @@ Write a loop to try other possible values.
 \index{String}
 \index{type!String}
 
-As we learned in the previous chapter, \java{String}s are objects.
-But they are atypical in Java because:
+As we learned in the previous chapter, an object is
+is a collection of data that provides a set of methods.  For example,
+a String is a collection of characters that provides methods like
+\java{charAt} and \java{substring}.
 
-\begin{itemize}
+In this chapter we introduce two new classes, \java{Point}
+and \java{Rectangle}, and show how to write functions that take objects
+as parameters and produce objects as return values.
 
-\item You don't have to use the \java{new} operator to create a \java{String} object.
-For convenience, Java allows you to define \java{String} literals.
 
-\item They are immutable.
-You cannot edit an existing \java{String} object directly; you can only create new ones.
 
-\end{itemize}
+%\java{String}s are objects.
+%But they are atypical in Java because:
 
-In this chapter, we will learn about more classes from the Java library such as \java{Point} and \java{Rectangle}.
-These classes are defined in the \java{java.awt} package, so you will need to \java{import} them before running the examples.
-To be clear, these points and rectangles are not graphical objects that appear on the screen.
-Like strings, they contain data and provide methods for manipulating that data.
-But unlike strings, you can make changes to that data directly.
+%\begin{itemize}
+
+%\item You don't have to use the \java{new} operator to create a \java{String} object.
+%For convenience, Java allows you to define \java{String} literals.
+
+%\item They are immutable.
+%You cannot edit an existing \java{String} object directly; you can only create new ones.
+
+%\end{itemize}
+
+%In this chapter, we will learn about more classes from the Java library such as \java{Point} and \java{Rectangle}.
+%These classes are defined in the \java{java.awt} package, so you will need to \java{import} them before running the examples.
+%To be clear, these points and rectangles are not graphical objects that appear on the screen.
+%Like strings, they contain data and provide methods for manipulating that data.
+%But unlike strings, you can make changes to that data directly.
 
 
 \section{Point objects}
