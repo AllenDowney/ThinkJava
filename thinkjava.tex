@@ -255,6 +255,7 @@ The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 
 
 \chapter{The way of the program}
+\label{theway}
 
 The goal of this book is to teach you to think like a computer scientist.
 This way of thinking combines some of the best features of mathematics, engineering, and natural science.
@@ -653,7 +654,7 @@ Step-by-step instructions for installing the JDK and configuring DrJava are avai
 % TODO: when we have the specific URL for the install page, let's put it here.
 
 \section{Command-line interface}
-
+\label{commandline}
 \index{command-line}
 \index{terminal}
 
@@ -2611,6 +2612,8 @@ Enter the following line and save the file.
 \begin{stdout}
 193.04 cm = 6 ft, 4 in
 \end{stdout}
+
+%TODO: check the use of ``terminal''
 
 \item Open a command-line, and change to the directory with these files.
 Run the following command to test the program.
@@ -6938,11 +6941,11 @@ For example, $(0,0)$ indicates the origin, and $(x,y)$ indicates the point $x$ u
 \index{statement!new}
 
 In order to use the \java{Point} class, you have to import it.
-%
+
 \begin{code}
 import java.awt.Point;
-\end{code{
-%
+\end{code}
+
 Then, to create a new point, you have to use the \java{new} operator:
 
 \begin{code}
@@ -7932,6 +7935,8 @@ But other definitions are possible.
 
 \section{Adding times}
 
+%TODO: we need to add index terms to this chapter
+
 Suppose you are going to a movie that starts at 6:50 and the running time is 2 hours 16 minutes.
 What time does the movie end?
 We'll use \java{Time} objects to figure it out.
@@ -8009,7 +8014,8 @@ There's only one problem: this method is not correct.
 For this example, it returns 8:66, which is not a valid time.
 If \java{second} exceeds 59, we have to ``carry'' into the minutes column, and if \java{minute} exceeds 59, we have to carry into \java{hour}.
 
-Here's a 
+Here's a better version of \java{add}:
+
 \begin{code}
     public Time add(Time t2) {
         Time sum = new Time();
@@ -8072,7 +8078,7 @@ Methods like \java{add} are called {\bf pure} because:
 
 \item The return value only depends on the parameters, not on any other state.
 
-\begin{itemize}
+\end{itemize}
 
 Methods like \java{increment}, that break the first rule, are sometimes called {\bf modifiers}.
 Modifiers are usually void methods, but sometimes they return a reference to the object they modify.
@@ -8190,6 +8196,8 @@ If we decide that \java{TimeClient} should be able to read the instance variable
         return this.second;
     }
 \end{code}
+
+%TODO: sometime later we should let them know that ``this.'' is optional
 
 Methods like these are formally called ``accessors'', but more often called {\bf getters}.
 By convention, the method that gets a variable named \java{something} is called \java{getSomething}.
@@ -8364,7 +8372,7 @@ The purpose of this exercise is to write a class definition that includes a vari
 \end{exercise}
 
 
-\chapter{Arrays of integers}
+\chapter{Arrays}
 \label{arrays}
 
 \index{array}
@@ -8383,8 +8391,7 @@ You can declare variables with these types in the usual way:
     double[] values;
 \end{code}
 
-Arrays are objects and must be created.
-An array variable simply stores a reference to an array object.
+Arrays are objects, so an array variable stores a reference to an array object.
 To create the array itself, use the \java{new} operator.
 
 \begin{code}
@@ -8393,8 +8400,9 @@ To create the array itself, use the \java{new} operator.
 \end{code}
 
 The first assignment makes \java{count} refer to an array of 4 integers.
-The second makes \java{values} refer to an array of \java{double}s, but the number of elements in \java{values} depends on the variable \java{size}.
+The second makes \java{values} refer to an array of \java{double}, but the number of elements in \java{values} depends on the variable \java{size}.
 You can use any integer expression for the size of an array.
+
 
 \section{Accessing elements}
 
@@ -8415,8 +8423,9 @@ Here is a memory diagram of the \java{counts} array so far:
 The large numbers inside the boxes are the {\bf elements} of the array.
 The small numbers outside the boxes are the {\bf indexes} (or indices) used to identify each memory location.
 
-To store values in the array, use the \java{[]} operator.
-For example \java{counts[0]} refers to the ``zeroeth'' element of the array, and \java{counts[1]} refers to the ``oneth'' element.  You can use the \java{[]} operator anywhere in an expression:
+To access values in the array, use the \java{[]} operator.
+As with Strings, indexes start from 0.
+So \java{counts[0]} refers to the ``zeroeth'' element of the array, and \java{counts[1]} refers to the ``oneth'' element.  You can use the \java{[]} operator anywhere in an expression:
 
 \begin{code}
     counts[0] = 7;
@@ -8425,8 +8434,7 @@ For example \java{counts[0]} refers to the ``zeroeth'' element of the array, and
     counts[3] -= 60;
 \end{code}
 
-These assignment statements are all legal in Java.
-Here is the result of the above code fragment:
+Here is the result of this code:
 
 \begin{center}
 \includegraphics{figs/array2.pdf}
@@ -8455,12 +8463,12 @@ For example:
 \index{loop variable}
 \index{variable!loop}
 
-This is a standard \java{while} loop that counts from 0 up to 4.
-When the loop variable \java{i} is 4, the condition fails and the loop terminates.
-Thus, the body of the loop is only executed when \java{i} is 0, 1, 2 and 3.
+This \java{while} loop counts from 0 up to 4.
+When \java{i} is 4, the condition fails and the loop terminates.
+So the body of the loop is only executed when \java{i} is 0, 1, 2 or 3.
 
-Each time through the loop we use \java{i} as an {\it index} into the array, printing the \java{i}th element.
-For convenience, this type of array traversal is commonly written using a \java{for} loop.
+Each time through the loop we use \java{i} as an index into the array, printing the \java{i}th element.
+This type of array traversal is often written using a \java{for} loop.
 
 \begin{code}
     for (int i = 0; i < 4; i++) {
@@ -8468,7 +8476,10 @@ For convenience, this type of array traversal is commonly written using a \java{
     }
 \end{code}
 
-%\section{Arrays vs objects}
+These two loops are equivalent.
+
+
+\section{Arrays and objects}
 
 \index{object!compared to array}
 \index{array!compared to object}
@@ -8494,7 +8505,8 @@ Another difference is that the elements of an array have to be the same type; ob
 \section{Copying arrays}
 \index{array!copying}
 
-When you copy an array variable, remember that you are copying a reference to the array.
+Remember that array variables contain references.
+Assigning an array variable copies the reference, but it doesn't copy the array.
 For example:
 
 \begin{code}
@@ -8503,7 +8515,7 @@ For example:
 \end{code}
 
 This code creates one array of three \java{double}s and sets two different variables to reference it.
-As with objects, this situation is a form of aliasing.
+As the following figure shows, this array is aliased.
 
 \begin{center}
 \includegraphics{figs/array3.pdf}
@@ -8511,31 +8523,31 @@ As with objects, this situation is a form of aliasing.
 
 Any changes made through either array variable will be reflected in the other.
 This behavior is usually not what you want; more often you want to allocate a \java{new} array and copy elements from one to the other.
+You can do that with a for loop:
 
 \begin{code}
     double[] b = new double[3];
     for (int i = 0; i < 3; i++) {
         b[i] = a[i];
     }
-
 \end{code}
 
 \index{java.util.Arrays}
 
-The Java library provides a utility class named \java{java.util.Arrays} with methods for copying arrays and other common array operations.
-We can rewrite the above \java{for} loop with just one line of code.
+The Java library provides a utility class named \java{java.util.Arrays} that provides methods for working with arrays, including \java{copyOf}, which copies an array.
+So we can rewrite the for loop with just one line of code.
 
 \begin{code}
     double[] b = Arrays.copyOf(a, 3);
 \end{code}
 
-%\section{Array length}
+
+\section{Array length}
 
 \index{length!array}
 \index{array!length}
 
-All arrays have one named instance variable: \java{length}.
-Not surprisingly, it contains the length of the array (number of elements).
+Array have an attribute, \java{length}, that contains the length of the array; that is, the number of elements.
 It is a good idea to use this value as the upper bound of a loop, rather than a constant value.
 That way, if you need to change the size of the array, you won't have to go through the program changing all the loops.
 
@@ -8547,13 +8559,13 @@ That way, if you need to change the size of the array, you won't have to go thro
 
 The last time the body of the loop gets executed, \java{i} is \java{a.length - 1}, which is the index of the last element.
 When \java{i} is equal to \java{a.length}, the condition fails and the body is not executed (which is a good thing, since it would throw an exception).
+This loop assumes that the array \java{b} contains at least as many elements as \java{a}.
 
-The above \java{for} loop assumes that the array \java{b} contains at least as many elements as \java{a}.
-Of course, you could simply use the \java{Arrays} class and \java{a.length}:
+%Of course, you could simply use the \java{Arrays} class and \java{a.length}:
 
-\begin{code}
-    b = Arrays.copyOf(a, a.length);
-\end{code}
+%\begin{code}
+%    b = Arrays.copyOf(a, a.length);
+%\end{code}
 
 
 \section{Random numbers}
@@ -8569,10 +8581,9 @@ Games are an obvious example, but there are many others.
 
 \index{nondeterministic}
 
-Making a program truly {\bf nondeterministic} turns out to be not so easy, but there are ways to make it at least seem nondeterministic.
-One of them is to generate random numbers and use them to determine the outcome of the program.
-Java provides a method that generates {\bf pseudorandom} numbers, which are not truly random since they are determined by an algorithm.
-But for our purposes, they will do.
+Making a program truly {\bf nondeterministic} turns out to be hard, because it's hard for a computer to generate truly random numbers.
+But there are algorithms that generate unpredictable sequences called {\bf pseudorandom} numbers.
+For most applications, they are as good as random.
 
 \index{random}
 
@@ -8589,45 +8600,43 @@ To see a sample, run this loop:
     }
 \end{code}
 
-Let's say we need to generate a number between 5 and 15 inclusive.
-Notice how there are 11 possible results: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, and 15.
+Let's say we need to generate a number between 5 and 15, including both.
+There are 11 possible results: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, and 15.
 We can use \java{Math.random()} to get a number in the range [0, 1).
-If we multiply that number by 11, we now have a number in the range [0, 11).
-Now we just have to add 5 to that number to shift the range to [5, 16).
-Finally, we cast the value to an \java{int}, which throws away any decimal places.
+If we multiply that number by 11, we get a number in the range [0, 11).
+If we add 5, we get the range to [5, 16).
+Finally, we cast the value to an \java{int}, which always rounds down.
 
-We can encapsulate this technique in a method and generalize for any numbers \java{x} and \java{y}.
+We can encapsulate this algorithm in a method and generalize for any numbers \java{low} and \java{high}.
 
 \begin{code}
-    public static int randomInt(int x, int y) {
-        int range = y - x + 1;
-        return (int) (Math.random() * range + x);
+    public static int randomInt(int low, int high) {
+        int range = high - low + 1;
+        return (int) (Math.random() * range + low);
     }
 \end{code}
-
-%A similar method is provided by \java{java.util.Random}, but for simplicity we will use our own version in this chapter.
 
 
 \section{Array of random numbers}
 \label{randarray}
 
-If you generate a long series of random numbers, then every value should appear, at least approximately, the same number of times.
-One way to test the \java{randomInt} method is to generate a large number of values, store them in an array, and count the number of times each value occurs.
+If you generate a long series of random numbers, every value should appear, at least approximately, the same number of times.
+One way to test \java{randomInt} is to generate a large number of values, store them in an array, and count the number of times each value occurs.
 
 The following method takes a single argument: the size of an array.
 It allocates a new array of integers, fills it with random values, and returns a reference to the new array.
 
 \begin{code}
     public static int[] randomArray(int size) {
-      int[] a = new int[size];
-      for (int i = 0; i < a.length; i++) {
-          a[i] = randomInt(0, 99);
-      }
-      return a;
-  }
+        int[] a = new int[size];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = randomInt(0, 99);
+        }
+        return a;
+    }
 \end{code}
 
-The return type is \java{int[]}, which means that this method returns (a reference to) an array of integers.
+The return type is \java{int[]}, which means that this method returns a reference to an array of integers.
 To test this method, it is convenient to have another method that prints the contents of an array.
 
 \begin{code}
@@ -8648,11 +8657,13 @@ The following code generates an array and prints it:
     printArray(array);
 \end{code}
 
-Here is what the output will look like (your results may differ):
+The output should look something like this.
 
 \begin{stdout}
 {15, 62, 46, 74, 67, 52, 51, 10}
 \end{stdout}
+
+If you run it, you will probably get different values.
 
 
 \section{Traverse and count}
@@ -8660,7 +8671,7 @@ Here is what the output will look like (your results may differ):
 \index{histogram}
 \index{counter}
 
-If these values were exam scores (and they would be pretty bad exam scores), the teacher might present them to the class in the form of a {\bf histogram}, which is a set of counters that keeps track of the number of times each value appears.
+If these values were exam scores -- and they would be pretty bad exam scores -- the teacher might present them to the class in the form of a {\bf histogram}, which is a set of counters that keeps track of the number of times each value appears.
 For exam scores, we might have ten counters to keep track of how many students scored in the 90s, the 80s, etc.
 
 \index{program development}
@@ -8681,13 +8692,13 @@ The elements of this pattern are:
 
 \begin{itemize}
 \item A container that can be traversed, like an array or a string.
-\item A test that you can apply to each element in the container.
+\item A test you can apply to each element in the container.
 \item A counter that keeps track of how many elements pass the test.
 \end{itemize}
 
 In the case of building a histogram, the container is an array of integers.
 The test is whether or not a given score falls in a given range of values.
-And the counter is the histogram itself.
+%And the counter is the histogram itself.
 
 Here is a method called \java{inRange} that counts the number of elements in an array that fall in a given range.
 The parameters are the array and two integers that specify the lower and upper bounds of the range.
@@ -8705,9 +8716,9 @@ public static int inRange(int[] a, int low, int high) {
 \end{code}
 
 Note that \java{low} is included in the range (\java{>=}), but \java{high} is excluded (\java{<}).
-This important detail keeps us from counting any elements twice.
+This important detail keeps us from counting any scores twice.
 
-Now we can count the number of scores in the ranges we are interested in:
+Now we can count the number of scores in each range:
 
 \begin{code}
     int[] scores = randomArray(30);
@@ -8736,8 +8747,9 @@ Should you write the following 100 lines of code?
 What we really want is a way to store 100 integers, preferably so we can use an index to access each one.
 In other words, we need an array!
 
-The counting pattern is the same whether we use a single counter or an array of counters.
-In this case, we initialize the array outside the loop; then, inside the loop, we invoke \java{inRange} and store the result:
+The following code creates an array of 100 integers, one for each possible score.
+It loops through the scores and uses \java{inRange} to count how many times each score appears.
+Then it stores the results in the array, \java{counts}:
 
 \begin{code}
     int[] counts = new int[100];
@@ -8746,18 +8758,17 @@ In this case, we initialize the array outside the loop; then, inside the loop, w
     }
 \end{code}
 
-The only tricky thing here is that we are using the loop variable in two roles: as in index into the array, and as the parameter to \java{inRange}.
+Notice that we are using the loop variable twice: as in index into the array, and as the parameter to \java{inRange}.
 
-%\section{A single-pass solution}
+
+\section{A single-pass solution}
 \label{singlepass}
 
-The code works, but it is not as efficient as it could be.
+The previous code works, but it is not as efficient as it could be.
 Every time it invokes \java{inRange}, it traverses the entire array.
-As the number of ranges increases, that gets to be a lot of traversals.
 
-It would be better to make a single pass through the array, and for each value, compute which range it falls in.
-Then we could increment the appropriate counter.
-Here is code that traverses an array of scores once and generates a histogram.
+It would be better to make a single pass through the array, and for each score, compute which range it falls in, and increment the corresponding counter.
+The following loop traverses an array of scores once and generates a histogram.
 
 \begin{code}
     int[] counts = new int[100];
@@ -8767,13 +8778,12 @@ Here is code that traverses an array of scores once and generates a histogram.
     }
 \end{code}
 
-In this example the computation is trivial, because we can use the value itself as an index into the array of counters.
+Each time through the loop, we select one element from \java{scores} and use it as an index to increment the corresponding element of \java{counts}.
 
 
 \section{The enhanced for loop}
 
-Since looping through arrays is so common, Java provides an alternative \java{for} loop syntax that makes the code more compact.
-The basic idea is to iterate each element of the array, as opposed to each index.
+Since looping through arrays is so common, Java provides an alternative syntax that makes the code more compact.
 
 \begin{code}
     // standard for loop
@@ -8787,7 +8797,7 @@ The basic idea is to iterate each element of the array, as opposed to each index
     }
 \end{code}
 
-You can read the enhanced \java{for} loop above as, ``for each \java{value} in \java{values}.''
+You can read the enhanced \java{for} loop as, ``for each \java{value} in \java{values}.''
 It's common to use a plural nouns for array variables and singular nouns for element variables.
 
 Using the enhanced \java{for} loop, we can create the histogram from the previous section using even less code:
@@ -8800,7 +8810,7 @@ Using the enhanced \java{for} loop, we can create the histogram from the previou
 \end{code}
 
 Because they make the code more readable, you should use enhanced \java{for} loops whenever possible.
-For example, to find the maximum value in an array of integers, we simply look at each one:
+For example, the following loop finds the maximum value in an array of integers:
 
 \begin{code}
     int max = Integer.MIN_VALUE;
@@ -8811,8 +8821,8 @@ For example, to find the maximum value in an array of integers, we simply look a
     }
 \end{code}
 
-Note however that the enhanced \java{for} loop does not give you the index of each value.
-If you need to find the index of the maximum value, then you need to use a standard \java{for} loop.
+But notice that the enhanced \java{for} loop does not give you the index the value.
+If you need to find the index of the maximum value, you have to use a standard \java{for} loop.
 
 \begin{code}
     int index = -1;
@@ -8828,8 +8838,8 @@ If you need to find the index of the maximum value, then you need to use a stand
 
 \section{Command-line arguments}
 
-Now that you have learned about arrays, the time has finally come to explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter 1.
-Continuing the example from the previous section, let's write a program to find the maximum number.
+Now that you know about arrays, we can {\em finally} explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter~\ref{theway}.
+Continuing the example from the previous section, let's write a program to find the largest in a sequence of numbers.
 Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
 Here is a starting point:
 
@@ -8847,11 +8857,10 @@ If you compile and run this program as-is, the output looks something like:
 [Ljava.lang.String;@5da1fbed
 \end{stdout}
 
-The variable \java{args} is an array of strings, and since arrays are objects, the \java{println} method calls its \java{toString} method.
-Unfortunately arrays don't come with a useful version of \java{toString}, which is why we wrote our own \java{printArray} method in Section~\ref{randarray}.
-The \java{java.util.Arrays} class provides a number of \java{toString} methods, if you're not in the mood to write your own.
+% TODO: is this right?  It looks mangled
 
-Rather than print the address of the array, let's look at its actual contents:
+The \java{toString} method for arrays prints the type and address of the array, but not the contents.
+But \java{java.util.Arrays} provides a version of \java{toString} that's more useful:
 
 \begin{code}
     System.out.println(Arrays.toString(args));
@@ -8864,21 +8873,21 @@ The output indicates that we have an empty array:
 \end{stdout}
 
 If you run Java from the command-line, you can pass optional arguments separated by spaces.
-Everything after the class name is considered part of the command-line arguments.
-For example, we can enter the command:
+Everything after the class name is considered an argument.
+For example, if you run:
 
 \begin{stdout}
 java Max 10 -3 55 0 14
 \end{stdout}
 
-Now the output of the program is:
+The output of the program is:
 
 \begin{stdout}
 [10, -3, 55, 0, 14]
 \end{stdout}
 
 At this point, we have a program that can read and write strings.
-To find the maximum number, we need to convert the String arguments into integers.
+To find the maximum number, we need to convert the strings into integers.
 Here is a complete example that uses an enhanced \java{for} loop to parse each command-line argument and search for the maximum value in a single pass.
 
 \begin{code}
@@ -8893,18 +8902,22 @@ Here is a complete example that uses an enhanced \java{for} loop to parse each c
 \end{code}
 
 In general, command-line arguments allow you to customize your programs based on user input before the program begins.
-For example, the \java{javac} and \java{java} programs use command-line arguments for a variety of configuration settings.
-You can run \java{javac -help} and \java{java -help} from the command-line to see what they are.
+%For example, the \java{javac} and \java{java} programs use command-line arguments for a variety of configuration settings.
+%You can run \java{javac -help} and \java{java -help} from the command-line to see what they are.
 
 
-\section{java.util.Arrays}
+%\section{java.util.Arrays}
 
-TODO
+%TODO: write this section
+
+% ABD: we presented copyOf and toString.  What else?
 
 
-\section{Two dimensional arrays}
+%\section{Two dimensional arrays}
 
-TODO
+%TODO: write this section
+
+% ABD: this chapter is already getting long.  maybe we should postpone this?
 
 
 \section{Vocabulary}
@@ -8945,7 +8958,7 @@ A program development process that starts with simple methods and then assembles
 
 
 \begin{exercise}
-Write a method called \java{cloneArray} that takes an array of integers as a parameter, creates a new array that is the same size, copies the elements from the first array into the new one, and then returns a reference to the new array.
+Write a method called \java{cloneArray} that takes an array of integers as a parameter, creates a new array that is the same size, copies the elements from the first array into the new one, and then returns a reference to the new array.  Since this is an exercise, you should not use \java{Arrays.copyOf}.
 \end{exercise}
 
 
@@ -8960,7 +8973,7 @@ Encapsulate the code in Section~\ref{singlepass} in a method called \java{makeHi
 
 
 \begin{exercise}
-Write a method named \java{areFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all factors of \java{n} (which is to say that \java{n} is divisible by all of them).
+Write a method named \java{areFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all factors of \java{n}, which is to say that \java{n} is divisible by all of them.
 %HINT: See Exercise~\ref{ex.isdiv}.
 \end{exercise}
 
@@ -8969,6 +8982,7 @@ Write a method named \java{areFactors} that takes an integer \java{n} and an arr
 Write a method that takes an array of integers and an integer named \java{target} as arguments, and that returns the first index where \java{target} appears in the array, if it does, and -1 otherwise.
 \end{exercise}
 
+
 \begin{exercise}
 Some programmers disagree with the general rule that variables and methods should be given meaningful names.
 Instead, they think variables and methods should be named after fruit.
@@ -8976,6 +8990,9 @@ Instead, they think variables and methods should be named after fruit.
 For each of the following methods, write one sentence that describes abstractly what the method does.
 For each variable, identify the role it plays.
 (The purpose of this exercise is to practice reading code and recognizing the computation patterns we have seen.)
+
+% TODO: we never did the first pattern, which is a reduce.
+% Also, we might want to do map, filter, and reduce.
 
 \begin{code}
     public static int banana(int[] a) {
@@ -9065,7 +9082,7 @@ It is uncommon, but it is a useful exercise.
 
 \begin{enumerate}
 
-\item Write a method called \java{maxInRange} that takes an array of integers and a range of indexes (\java{lowIndex} and \java{highIndex}), and that finds the maximum value in the array, considering only the elements between \java{lowIndex} and \java{highIndex}, including both ends.
+\item Write a method called \java{maxInRange} that takes an array of integers and a range of indexes (\java{lowIndex} and \java{highIndex}), and that finds the maximum value in the array, considering only the elements between \java{lowIndex} and \java{highIndex}, including both.
 
 This method should be recursive.
 If the length of the range is 1, that is, \java{if lowIndex == highIndex}, we know immediately that the sole element in the range must be the maximum.
@@ -9100,21 +9117,25 @@ This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/S
 \begin{enumerate}
 
 \item Write a method called \java{indexOfMaxInRange} that takes an array of integers, finds the largest element in the given range, and returns its {\em index}.
-You can modify your recursive version of \java{maxInRange} or you can write an iterative version from scratch.
+%You can modify your recursive version of \java{maxInRange} or you can write an iterative version from scratch.
 
 \item Write a method called \java{swapElement} that takes an array of integers and two indices, and that swaps the elements at the given indices.
 
 \item Write a method called \java{selectionSort} that takes an array of integers and that uses \java{indexOfMaxInRange} and \java{swapElement} to sort the array from largest to smallest.
 
 \end{enumerate}
+
+% TODO: call back to this exercise when we sort cards
 \end{exercise}
 
 
 \begin{exercise}
-Write a method called \java{letterHist} that takes a String as a parameter and that returns a histogram of the letters in the String.
+Write a method called \java{letterHist} that takes a String as a parameter and returns a histogram of the letters in the String.
 The zeroeth element of the histogram should contain the number of a's in the String (upper and lower case); the 25th element should contain the number of z's.
 Your solution should only traverse the String once.
 \end{exercise}
+
+%TODO: check for consistency on String vs string
 
 
 \begin{exercise}
@@ -9138,12 +9159,13 @@ Write a method that takes two Strings and returns \java{true} if the Strings are
 Optional challenge: read the letters of the Strings only once.
 \end{exercise}
 
+% Note: we provided the copyright notice on Scrabble in a previous exercise
 
 \begin{exercise}
 In Scrabble each player has a set of tiles with letters on them, and the object of the game is to use those letters to spell words.
 The scoring system is complicated, but longer words are usually worth more than shorter words.
 
-Imagine you are given your set of tiles as a String, like \java{"quijibo"} and you are given another String to test, like \java{"jib"}.
+Imagine you are given your set of tiles as a String, like \java{"quijibo"}, and you are given another String to test, like \java{"jib"}.
 Write a method called \java{canSpell} that takes two Strings and returns \java{true} if the set of tiles can be used to spell the word.
 You might have more than one tile with the same letter, but you can only use each tile once.
 
