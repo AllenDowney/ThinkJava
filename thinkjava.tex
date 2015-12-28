@@ -6031,6 +6031,9 @@ Strings are objects, too.
 They contain characters and provide methods for manipulating character data.
 We explore some of those methods in this chapter.
 
+Not everything in Java is an object: \java{int}, \java{float}, and \java{boolean} are so-called {\bf primitive} types.
+We will explain some of the differences between object types and primitive types as we go along.
+
 
 \section{Characters}
 
@@ -8936,11 +8939,11 @@ An integer variable or value used to indicate an element of an array.
 
 \term{deterministic}
 A program that does the same thing every time it is invoked.
-Technically speaking, all computer programs are deterministic: they simply execute the source code.
+%Technically speaking, all computer programs are deterministic: they simply execute the source code.
 
 \term{nondeterministic}
 A program that behaves differently, even when run multiple times with the same input.
-Nondeterminism is a theoretical concept for analyzing the complexity of algorithms.
+%Nondeterminism is a theoretical concept for analyzing the complexity of algorithms.
 
 \term{pseudorandom}
 A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.
@@ -9184,6 +9187,8 @@ Just describe the algorithm, using English, pseudocode, or Java.
 
 \chapter{Arrays of objects}
 
+%TODO: rewrite this after we redo the chapters
+
 In the remaining chapters, we will develop programs that work with playing cards and decks of cards.
 Here is an outline of the road ahead:
 
@@ -9220,7 +9225,7 @@ Or just read \url{https://en.wikipedia.org/wiki/Standard_52-card_deck}.
 
 There are 52 cards in a standard deck.
 Each card belongs to one of four suits and one of 13 ranks.
-The suits are Spades, Hearts, Diamonds, and Clubs (in descending order in Bridge).
+The suits are Spades, Hearts, Diamonds, and Clubs.
 The ranks are Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, and King.
 Depending on what game you are playing, the Ace may be considered higher than King or lower than 2.
 
@@ -9234,8 +9239,8 @@ A problem with this implementation is that it would not be easy to compare cards
 \index{map to}
 
 An alternative is to use integers to {\bf encode} the ranks and suits.
-By ``encode'' we do not mean to encrypt or translate into a secret code.
-What a computer scientist means by encode is something like ``define a mapping between a sequence of numbers and the things we want to represent.''
+By ``encode'' we don't mean to encrypt or translate into a secret code.
+What we mean is something like ``define a mapping between a sequence of numbers and the things we want to represent.''
 
 \begin{tabular}{l c l}
 Clubs & $\mapsto$ & 0 \\
@@ -9256,7 +9261,7 @@ King & $\mapsto$ & 13 \\
 
 The reason we are using mathematical notation for these mappings is that they are not part of the program.
 They are part of the program design, but they never appear explicitly in the code.
-The class definition for the \java{Card} type simply looks like this:
+The class definition for the \java{Card} type looks like this:
 
 \begin{code}
 public class Card {
@@ -9278,30 +9283,30 @@ public class Card {
 \index{constructor}
 
 As usual, we define two constructors: a default constructor that takes no parameters, and an explicit value constructor that takes a parameter for each instance variable.
-To create a \java{Card} object that represents the 3 of Clubs, we can invoke the \java{new} operator:
+To create a \java{Card} object that represents the 3 of Clubs, we use the \java{new} operator:
 
 \begin{code}
     Card threeOfClubs = new Card(0, 3);
 \end{code}
 
 %The first argument, \java{0} represents the suit Clubs.
+As usual, the result is a reference to a new object.
 
 
-\section{The printCard method}
+\section{The toString method}
 \label{printcard}
 
 \index{print!Card}
 
 When you create a new class, the first step is to declare the instance variables and write constructors.
-The second step is to write the standard methods that every object should have, including one that prints the object, and one or two that compare objects.
-Let's start with \java{printCard}.
+A good next step is to write \java{toString}, which is useful for debugging and incremental development.
 
 \index{String!array of}
 \index{array!of String}
 
 To print \java{Card} objects in a way that humans can read easily, we need to map the integer codes onto words.
 A natural way to do that is with an array of \java{String}s.
-You can create an array of \java{String}s the same way you create an array of primitive types:
+You can create an array of \java{String}s the same way you create an array of other types:
 
 \begin{code}
     String[] suits = new String[4];
