@@ -87,7 +87,7 @@
 % these are copied from tex/latex/base/book.cls
 % all I changed is afterskip
 \makeatletter
-\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
     {-3.5ex \@plus -1ex \@minus -.2ex}%
     {0.7ex \@plus.2ex}%
     {\normalfont\Large\bfseries}}
@@ -897,8 +897,7 @@ Don't hesitate to reach out to a friend and ask questions!
 
 \section{Vocabulary}
 
-Throughout the book, we try to define each term the first time we use
-it.
+Throughout the book, we try to define each term the first time we use it.
 And the end of each chapter, we include the new terms and their definitions.
 If you spend some time learning this vocablary, you will have an easier time reading the following chapters.
 
@@ -985,7 +984,8 @@ A part of a program that specifies a computation.
 A named sequence of statements.
 
 \term{class}
-For now, a collection of related methods. (We will see later that there is more to it.)
+For now, a collection of related methods.
+(We will see later that there is more to it.)
 
 \term{print statement}
 A statement that causes output to be displayed on the screen.
@@ -1064,19 +1064,20 @@ Sometimes the compiler tells you exactly what is wrong, and all you have to do i
 But sometimes the error messages are misleading.
 You will develop a sense for when you can trust the compiler and when you have to figure things out yourself.
 
-\begin {enumerate}
+\begin{enumerate}
 \item Remove one of the open squiggly-braces.
 \item Remove one of the close squiggly-braces.
 \item Instead of \java{main}, write \java{mian}.
 \item Remove the word \java{static}.
 \item Remove the word \java{public}.
 \item Remove the word \java{System}.
-\item Replace \java{println} with {Println}.
-\item Replace \java{println} with {print}.
+\item Replace \java{println} with \java{Println}.
+\item Replace \java{println} with \java{print}.
 This one is tricky because it is a logic error, not a syntax error.
 The statement \java{System.out.print} is legal, but it may or may not do what you expect.
-\item Delete one of the parentheses.  Add an extra one.
-\end {enumerate}
+\item Delete one of the parentheses.
+Add an extra one.
+\end{enumerate}
 
 \end{exercise}
 
@@ -1503,7 +1504,8 @@ But it is easy to forget this rule because in many cases Java {\em automatically
 \end{code}
 
 The above example should be illegal, but Java allows it by converting the \java{int} value \java{1} to the \java{double} value \java{1.0} automatically.
-This leniency is convenient, but it often causes problems for beginners. For example:
+This leniency is convenient, but it often causes problems for beginners.
+For example:
 
 \begin{code}
     double y;
@@ -1744,8 +1746,7 @@ You can also put arbitrary expressions on the right side of an assignment:
 \end{code}
 
 The left side of an assignment must be a {\em variable name}, not an expression.
-That's because the left side indicates where the result will be stored,
-and expressions do not represent storage locations.
+That's because the left side indicates where the result will be stored, and expressions do not represent storage locations.
 
 \begin{code}
     hour = minute + 1;  // correct
@@ -1983,8 +1984,7 @@ This chapter will show you how to read input from the keyboard, use that input t
 \index{System class}
 \index{class!System}
 
-We have been using {\tt System.out.println} for a while, but you might
-not have thought about what it means.
+We have been using {\tt System.out.println} for a while, but you might not have thought about what it means.
 \java{System} a class that provides methods related to the ``system'' or environment where programs run.
 It also provides \java{System.out}, which is a special value that provides methods for displaying output, including \java{println}.
 
@@ -2244,18 +2244,20 @@ Parts of the output we have been printing (\java{" in = "}, \java{" cm"}, etc.) 
 In contrast, variables (\java{inch}, \java{cm}, etc.) are the names of values stored in memory.
 The English word {\em variable} implies that this data is subject to change.
 
+\index{final}
+
 As we saw with \java{cmPerInch}, it's often useful to give names to literals that will be used throughout the program.
-But when doing so, we don't want those variables to be changed accidentally because of an unexpected bug in the code.  We can use the keyword \java{final} to make sure that doesn't happen.
+But when doing so, we don't want those variables to be changed accidentally because of an unexpected bug in the code.
+We can use the keyword \java{final} to make sure that doesn't happen.
 
 \begin{code}
     final double cmPerInch = 2.54;
 \end{code}
 
-The keyword \java{final} indicates that \java{cmPerInch} is a {\bf constant},
-and cannot be reassigned.
-If you attempt to assign \java{title} or \java{deckSize} later in the program, the compiler will report an error.
+The keyword \java{final} indicates that \java{cmPerInch} is a {\bf constant}, and cannot be reassigned.
+If you attempt to assign \java{cmPerInch} later in the program, the compiler will report an error.
 This feature helps prevent you from making mistakes.
-\index{final}
+
 \index{constant}
 
 It's good practice to create final variables for constant values, rather than repeat literal values again and again.
@@ -2263,8 +2265,7 @@ First, it makes the program easier to understand.
 When looking at the code, it may not be obvious what the number \java{2.54} means.
 The name \java{cmPerInch} explains the programmer's intent.
 Second, named constants make the program easier to maintain.
-If we have to change the value of a constant in the future,
-we only have to change one line of code (as opposed to every line where the constant is used).
+If we have to change the value of a constant in the future, we only have to change one line of code (as opposed to every line where the constant is used).
 
 
 \section{Formatting output}
@@ -2658,7 +2659,10 @@ If the expected output differs from the actual output, then we need to continue 
 Usually the program is at fault, and {\tt diff} provides some insight about what is broken.
 But there's also a chance that we have a correct program and the expected output is wrong.
 
-Interpreting the results from {\tt diff} can be confusing, but fortunately there are many graphical tools that show the differences between two files. For example, on Windows you can install WinMerge, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}. Regardless what tool you use, the goal is the same. Debug your program until the actual output is {\it identical} to the expected output.
+Interpreting the results from {\tt diff} can be confusing, but fortunately there are many graphical tools that show the differences between two files.
+For example, on Windows you can install WinMerge, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}.
+Regardless what tool you use, the goal is the same.
+Debug your program until the actual output is {\it identical} to the expected output.
 
 \begin{figure}[!h]
 \begin{center}
@@ -2911,8 +2915,8 @@ and it is a \java{void} method, which means that it doesn't yield a result (unli
 
 \index{parameter}
 
-The statement in parentheses declares a parameter named
-\java{args}.  A {\bf parameter} is a variable that stores an argument.
+The statement in parentheses declares a parameter named \java{args}.
+A {\bf parameter} is a variable that stores an argument.
 This parameter has type \java{String[]}, which means that whoever invokes \java{main} must provide an array of Strings (we'll get to arrays in a later chapter).
 
 You can define other methods using syntax that is similar to \java{main}:
@@ -2929,7 +2933,8 @@ You can use any name you want for your method, except \java{main} or any of the 
 % TODO: move the definition of ``argument'' to Ch3?
 
 The list of parameters specifies what values, if any, you have to provide in order to invoke the new method.
-The first methods we are going to write have no parameters, so the parameter list is empty.  Here's an example:
+The first methods we are going to write have no parameters, so the parameter list is empty.
+Here's an example:
 
 \begin{code}
     public static void newLine() {
@@ -3291,8 +3296,7 @@ When you haven't looked at your own code for a while, it takes a long time to re
 \index{stack diagram}
 \index{diagram!stack}
 
-Pulling together the code examples from the previous section, here is a complete
-class definition:
+Pulling together the code examples from the previous section, here is a complete class definition:
 
 \begin{code}
 public class PrintTwice {
@@ -4017,6 +4021,7 @@ Exception in thread "main" java.util.InputMismatchException
 \end{stdout}
 
 \index{exception}
+
 In this example, the program calls the \java{nextDouble} method, so the \java{Scanner} attempts to parse a \java{double}.
 However the user input is \java{"Hello"}, which causes an \java{InputMismatchException}.
 We can prevent this error from happening by checking the input before parsing it:
@@ -4237,7 +4242,8 @@ Here is a recursive method that prints the binary representation of any positive
 If \java{value} is zero, \java{showBinary} does nothing (that's the base case).
 If the argument is positive, the method divides it by two and calls \java{showBinary} recursively.
 When the recursive call returns, the method prints one digit of the result and returns (again).
-The leftmost digit is at the bottom of the stack, so it gets printed first.  The rightmost digit, at the top of the stack, gets printed last.
+The leftmost digit is at the bottom of the stack, so it gets printed first.
+The rightmost digit, at the top of the stack, gets printed last.
 
 \begin{code}
     showBinary(23);
@@ -4318,9 +4324,7 @@ For example, how can you rewrite this code using a single \java{if} statement?
 
 \begin{exercise}
 
-Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that
-\[ a^n + b^n = c^n \]
-except in the case when $n \leq 2$.
+Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that $a^n + b^n = c^n$ except in the case when $n \leq 2$.
 
 Write a method named \java{checkFermat} that takes four integers as parameters---\java{a}, \java{b}, \java{c} and \java{n}---and that checks to see if Fermat's theorem holds.
 If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
@@ -4333,7 +4337,8 @@ HINT: You may want to use \java{Math.pow} in your method.
 
 \begin{exercise}
 
-The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods. Consider the first verse of the song ``99 Bottles of Pop'':
+The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods.
+Consider the first verse of the song ``99 Bottles of Pop'':
 
 \begin{quote}
 99 bottles of pop on the wall,\\
@@ -4749,8 +4754,7 @@ If you write:
     double x = area(1.0, 2.0, 4.0, 6.0);
 \end{code}
 
-Java uses the second version of \java{area}, which
-actually invokes the first version.
+Java uses the second version of \java{area}, which actually invokes the first version.
 
 Many Java methods are overloaded, meaning that there are different versions that accept different numbers or types of parameters.
 For example, there are versions of \java{print} and \java{println} that accept a single parameter of any data type.
@@ -5067,8 +5071,7 @@ A variable that is short-lived, often used for debugging purposes.
 Part of a program that can never be executed, often because it appears after a \java{return} statement.
 
 \term{incremental development}
-A process for creating programs by writing a few lines at a time,
-compiling, and testing.
+A process for creating programs by writing a few lines at a time, compiling, and testing.
 
 \term{stub}
 A placeholder for an incomplete method so that the class will compile.
@@ -5823,7 +5826,8 @@ We easily rewrite any \java{for} statement as a \java{while} statement by separa
 \end{code}
 
 The statement \java{i++;} is shorthand for \java{i = i + 1;} and is commonly used in loop structures.
-The \java{++} operator increases a variable by one, and the \java{--} operator decreases a variable by one.  These operations are called {\bf increment} and {\bf decrement}.
+The \java{++} operator increases a variable by one, and the \java{--} operator decreases a variable by one.
+These operations are called {\bf increment} and {\bf decrement}.
 
 There is one difference between the \java{for} and \java{while} loops above: where the variable \java{i} is declared.
 After the \java{for} loop, the variable \java{i} ceases to exist because it was declared in the loop header.
@@ -5989,8 +5993,7 @@ The output should look something like:
 
 Recall that you can use the string \java{"\\t"} to print a tab character between columns of a table.
 
-\item Vary the number of terms in the series (the second argument that \java{check} sends to \java{myexp}) and see the effect on
-the accuracy of the result.
+\item Vary the number of terms in the series (the second argument that \java{check} sends to \java{myexp}) and see the effect on the accuracy of the result.
 Adjust this value until the estimated value agrees with the ``correct'' answer when \java{x} is 1.
 
 \item Write a loop in \java{main} that invokes \java{check} with the values 0.1, 1.0, 10.0, and 100.0.
@@ -6025,7 +6028,9 @@ You should not use \java{factorial} or \java{pow}.
 \index{class!String}
 \index{method!string}
 
-In Java and other object-oriented languages, an {\bf object} is a collection of data that provides a set of methods.  For example, \java{Scanner}, which we saw in Section~\ref{scanner} is an object that provides methods for parsing strings.  \java{System.out} and \java{System.in} are also objects.
+In Java and other object-oriented languages, an {\bf object} is a collection of data that provides a set of methods.
+For example, \java{Scanner}, which we saw in Section~\ref{scanner} is an object that provides methods for parsing strings.
+\java{System.out} and \java{System.in} are also objects.
 
 Strings are objects, too.
 They contain characters and provide methods for manipulating character data.
@@ -6132,8 +6137,7 @@ A natural way to traverse a string is with a \java{for} statement:
 \index{index}
 
 This loop prints each character of the string \java{fruit} on a line by itself.
-The name of the loop variable is \java{i}, which stands for ``index''; an
-{\bf index} is an integer that indicates the position of a character.
+The name of the loop variable is \java{i}, which stands for ``index''; an {\bf index} is an integer that indicates the position of a character.
 Notice that the condition is \java{i < fruit.length()}, which means that when \java{i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
 %The last character we access is the one with the index \java{fruit.length() - 1}.
 
@@ -6359,11 +6363,9 @@ This code starts at index 2 (the first \java{'n'}) and finds the next \java{'a'}
 If the letter happens to appear at the starting index, the starting index is the answer.
 So \java{fruit.indexOf('a', 5)} returns 5.
 
-If the character does not appear in the string,
-\java{indexOf} returns \java{-1}.
+If the character does not appear in the string, \java{indexOf} returns \java{-1}.
 
-You can also use \java{indexOf} to search for a substring, not just
-a single character.
+You can also use \java{indexOf} to search for a substring, not just a single character.
 For example, the expression \java{fruit.indexOf("nan")} returns 2, whereas \java{fruit.indexOf("zzz")} returns -1 (not found).
 
 
@@ -6434,7 +6436,7 @@ In the example above, \java{compareTo} returns positive 8, because the second le
 \index{arithmetic!character}
 
 Like the \java{compareTo} method, you too can do arithmetic with characters.
-For example, if \java{letter} refers to a lowercase letter, \java{letter - 'a'} yields its position in the alphabet (keeping in mind that 'a' is the zeroeth letter of the alphabet and 'z' is the 25th).
+For example, if \java{letter} refers to a lower-case letter, \java{letter - 'a'} yields its position in the alphabet (keeping in mind that 'a' is the zeroeth letter of the alphabet and 'z' is the 25th).
 
 Performing arithmetic on characters is rarely necessary in programs, but it helps demonstrate how text is represented in Java.
 For example, we often need to convert between characters that contain numbers, like \java{'0'} and \java{'1'}, and their corresponding integers.
@@ -6513,8 +6515,7 @@ int num = Integer.parseInt(str);
 
 You will find similar methods in the other wrapper classes, for example, \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
 
-These wrapper classes also provide \java{toString}, which returns a string
-representation of a number:
+These wrapper classes also provide \java{toString}, which returns a string representation of a number:
 
 \begin{code}
 int num = 12345;
@@ -6673,7 +6674,8 @@ Try it out and see what the error message is, then see if you can figure out wha
 \item What happens when you add \java{""} (the empty string) to the other types; for example, \java{"" + 5}?
 How does this technique compare with methods provided by the wrapper classes?
 
-\item For each data type, what types of values can you assign to it? For example, you can assign an \java{int} to a \java{double} but not vice versa.
+\item For each data type, what types of values can you assign to it?
+For example, you can assign an \java{int} to a \java{double} but not vice versa.
 
 \end{enumerate}
 
@@ -6707,7 +6709,8 @@ Create a program called {\tt Recurse.java} and type in the following methods:
 \item Write some code in \java{main} that tests each of these methods.
 Make sure they work, and you understand what they do.
 
-\item Using these methods, and without using any other String methods, write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.  It should be a \java{void} method.
+\item Using these methods, and without using any other String methods, write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.
+It should be a \java{void} method.
 
 \item Again using only these methods, write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
 
@@ -6795,8 +6798,7 @@ A palindrome is a word that reads the same both forward and backward, like ``ott
 \item Write a method named \java{first} that takes a string and returns the first letter.
 Write another method named \java{last} that returns the last letter.
 
-\item Write a method named \java{middle} that takes a string and returns a substring that contains everything {\em except} the
-first and last characters.
+\item Write a method named \java{middle} that takes a string and returns a substring that contains everything {\em except} the first and last characters.
 
 %Hint: read the documentation of the \java{substring} method in the \java{String} class.
 % Run a few tests to make sure you understand how \java{substring} works before you try to write \java{middle}.
@@ -6832,15 +6834,14 @@ A word is said to be ``abecedarian'' if the letters in the word appear in alphab
 For example, the following are all 6-letter English abecedarian words.
 
 \begin{quote}
-abdest, acknow, acorsy, adempt, adipsy, agnosy, befist, behint,
-beknow, bijoux, biopsy, cestuy, chintz, deflux, dehors, dehort,
-deinos, diluvy, dimpsy
+abdest, acknow, acorsy, adempt, adipsy, agnosy, befist, behint, %\\
+beknow, bijoux, biopsy, cestuy, chintz, deflux, dehors, dehort, %\\
+deinos, diluvy, dimpsy %\\
 \end{quote}
 
 \begin{enumerate}
 
-\item Describe a process for checking whether a given word is abecedarian, assuming that the word contains only lower-case
-letters.
+\item Describe a process for checking whether a given word is abecedarian, assuming that the word contains only lower-case letters.
 Your process can be iterative or recursive.
 
 \item Implement your process in a method called \java{isAbecedarian}.
@@ -6876,9 +6877,9 @@ The letters wrap around at the end, so \java{'z'} becomes \java{'m'}.
 
 \begin{enumerate}
 
-\item Write a method that takes a string and returns a new string containing the ROT13encoded version.
+\item Write a method that takes a string and returns a new string containing the ROT13 encoded version.
 You should assume that the string contains upper and lower case letters and spaces, but no other characters.
-Lower case letters should be transformed into other lowercase letters, and uppercase into uppercase.
+Lower case letters should be transformed into other lower-case letters, and uppercase into uppercase.
 You should not transform the spaces.
 
 \item Generalize the method so that instead of adding 13 to each letter, it adds any given amount.
@@ -6901,15 +6902,10 @@ Write a loop to try other possible values.
 \index{String}
 \index{type!String}
 
-As we learned in the previous chapter, an object is
-is a collection of data that provides a set of methods.  For example,
-a String is a collection of characters that provides methods like
-\java{charAt} and \java{substring}.
+As we learned in the previous chapter, an object is is a collection of data that provides a set of methods.
+For example, a String is a collection of characters that provides methods like \java{charAt} and \java{substring}.
 
-In this chapter we introduce two new classes, \java{Point}
-and \java{Rectangle}, and show how to write methods that take objects
-as parameters and produce objects as return values.
-
+In this chapter we introduce two new classes, \java{Point} and \java{Rectangle}, and show how to write methods that take objects as parameters and produce objects as return values.
 
 
 %\java{String}s are objects.
@@ -7038,7 +7034,8 @@ For example:
 This method takes a point as an argument and prints it's attributes in parentheses.
 If you invoke \java{printPoint(blank)}, it prints \java{(3, 4)}.
 
-But we don't really need \java{printPoint}.  If you invoke \java{System.out.println(blank)} you get:
+But we don't really need \java{printPoint}.
+If you invoke \java{System.out.println(blank)} you get:
 
 \begin{stdout}
 java.awt.Point[x=3,y=4]
@@ -7368,7 +7365,6 @@ The point of this exercise is to make sure you understand the mechanism for pass
 
 \end{exercise}
 
-\newpage
 
 \begin{exercise}
 For the following program:
@@ -7676,7 +7672,8 @@ When you invoke \java{new}, it allocates space in memory for the new object, the
 When your constructor is done, \java{new} returns a reference to the new object; in the example, the reference gets assigned to \java{time}.
 Notice that the type of \java{time} is \java{Time}, the new type we just created.
 
-Beginners sometimes make the mistake of invoking \java{new} inside the constructor.  You don't have to, and you shouldn't; for example, invoking \java{new Time()} in this constructor results in infinite recursion.
+Beginners sometimes make the mistake of invoking \java{new} inside the constructor.
+You don't have to, and you shouldn't; for example, invoking \java{new Time()} in this constructor results in infinite recursion.
 
 
 \section{More constructors}
@@ -7853,7 +7850,7 @@ With objects you can use either one, but they are not the same.
 
 The \java{==} operator checks whether objects are {\bf identical}; that is, whether they are the same object.
 
-The \java{equals} method checks whether they are {\bf equivalent}; that is, they have the same value.  
+The \java{equals} method checks whether they are {\bf equivalent}; that is, they have the same value.
 
 The definition of identity is always the same, so the \java{==} operator always does the same thing.
 But the definition of equivalence is different for different objects.
@@ -7874,9 +7871,7 @@ Here is a memory diagram that shows these references.
 \includegraphics{figs/time2.pdf}
 \end{center}
 
-The assignment operator copies references, so \java{time1} and
-\java{time2} refer to the same object, but \java{time3} points to a
-different object.
+The assignment operator copies references, so \java{time1} and \java{time2} refer to the same object, but \java{time3} points to a different object.
 
 \java{time1} and \java{time2} are identical: they refer to the same object.
 The \java{==} operator compares references, so \java{time1 == time2} is \java{true}.
@@ -8074,13 +8069,9 @@ It doesn't create a new one, and it doesn't return anything.
 Methods like \java{add} are called {\bf pure} because:
 
 \begin{itemize}
-
-\item They don't modify the parameters,
-
+\item They don't modify the parameters.
 \item They don't have any other ``side effects'', like printing.
-
 \item The return value only depends on the parameters, not on any other state.
-
 \end{itemize}
 
 Methods like \java{increment}, that break the first rule, are sometimes called {\bf modifiers}.
@@ -8148,8 +8139,7 @@ As a general rule, if you are using modifiers, you should avoid aliasing.
 \section{Getters and setters}
 
 Recall that the instance variables of \java{Time} are private.
-We can access them from within the \java{Time} class, but if we try to
-access them from another class, the compiler generates an error.
+We can access them from within the \java{Time} class, but if we try to access them from another class, the compiler generates an error.
 
 For example, here's a class called \java{TimeClient}, because a class that uses objects defined in another class is called a {\bf client}:
 
@@ -8288,7 +8278,7 @@ Hint: remember the modulus operator.
 
 
 \begin{exercise}
-In the board game Scrabble\footnote{Scrabble is a registered trademark owned in the U.S.A and Canada by Hasbro Inc., and in the rest of the world by J.W. Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.}, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
+In the board game Scrabble\footnote{Scrabble is a registered trademark owned in the USA and Canada by Hasbro Inc., and in the rest of the world by J.\ W.\ Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.}, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
 
 \begin{enumerate}
 
@@ -8353,7 +8343,8 @@ Test it and, if necessary, debug it.
 This method should be a modifier, so it should be void.
 Add lines to \java{main} to test the new method.
 
-\item Write a method called \java{invert} that inverts the number by swapping the numerator and denominator.  It should be a modifier.
+\item Write a method called \java{invert} that inverts the number by swapping the numerator and denominator.
+It should be a modifier.
 Add lines to \java{main} to test the new method.
 
 \item Write a method called \java{toDouble} that converts the rational number to a double (floating-point number) and returns the result.
@@ -8428,7 +8419,8 @@ The small numbers outside the boxes are the {\bf indexes} (or indices) used to i
 
 To access values in the array, use the \java{[]} operator.
 As with Strings, indexes start from 0.
-So \java{counts[0]} refers to the ``zeroeth'' element of the array, and \java{counts[1]} refers to the ``oneth'' element.  You can use the \java{[]} operator anywhere in an expression:
+So \java{counts[0]} refers to the ``zeroeth'' element of the array, and \java{counts[1]} refers to the ``oneth'' element.
+You can use the \java{[]} operator anywhere in an expression:
 
 \begin{code}
     counts[0] = 7;
@@ -8860,8 +8852,7 @@ If you compile and run this program as-is, the output looks something like:
 [Ljava.lang.String;@5da1fbed
 \end{stdout}
 
-% TODO: is this right?  It looks mangled
-
+At a first glance, the output looks like a mistake.
 The \java{toString} method for arrays prints the type and address of the array, but not the contents.
 But \java{java.util.Arrays} provides a version of \java{toString} that's more useful:
 
@@ -8961,12 +8952,13 @@ A program development process that starts with simple methods and then assembles
 
 
 \begin{exercise}
-Write a method called \java{cloneArray} that takes an array of integers as a parameter, creates a new array that is the same size, copies the elements from the first array into the new one, and then returns a reference to the new array.  Since this is an exercise, you should not use \java{Arrays.copyOf}.
+Write a method called \java{cloneArray} that takes an array of integers as a parameter, creates a new array that is the same size, copies the elements from the first array into the new one, and then returns a reference to the new array.
+Since this is an exercise, you should not use \java{Arrays.copyOf}.
 \end{exercise}
 
 
 \begin{exercise}
-Write a method called \java{randomDouble} that takes two doubles, \java{low} and {high}, and that returns a random double $x$ such that $low \le x < high$.
+Write a method called \java{randomDouble} that takes two doubles, \java{low} and \java{high}, and that returns a random double $x$ such that $low \le x < high$.
 \end{exercise}
 
 
@@ -9146,7 +9138,7 @@ A word is said to be a ``doubloon'' if every letter that appears in the word app
 Here are some example doubloons found in the dictionary.
 
 \begin{quote}
-Abba, Anna, appall, appearer, appeases, arraigning, beriberi, bilabial, boob, Caucasus, coco, Dada, deed, Emmett, Hannah, horseshoer, intestines, Isis, mama, Mimi, murmur, noon, Otto, papa, peep, reappear, redder, sees, Shanghaiings, Toto
+Abba, Anna, appall, appearer, appeases, arraigning, beriberi, bilabial, boob, Caucasus, coco, Dada, deed, Emmett, Hannah, horseshoer, intestines, Isis, mama, Mimi, murmur, noon, Otto, papa, peep, reappear, redder, sees, Shanghaiings, Toto.
 \end{quote}
 
 Write a method called \java{isDoubloon} that returns \java{true} if the given word is a doubloon and \java{false} otherwise.
@@ -9382,16 +9374,14 @@ The word ``same'' is one of those things that occur in natural language that see
 \index{natural language}
 \index{language!natural}
 
-For example, if I say ``Jared and I have the same car,'' I mean that his car and mine are the same make and model, but they are
-two different cars.
+For example, if I say ``Jared and I have the same car,'' I mean that his car and mine are the same make and model, but they are two different cars.
 If I say ``Jared and I have the same mother,'' I mean that his mother and mine are one person.
 So the idea of ``sameness'' is different, depending on the context.
 
 \index{ambiguity}
 
 When you talk about objects, there is a similar ambiguity.
-For example, if two \java{Card}s are the same, does that mean they contain the same data (rank and suit), or they are actually
-the same \java{Card} object?
+For example, if two \java{Card}s are the same, does that mean they contain the same data (rank and suit), or they are actually the same \java{Card} object?
 
 \index{identical}
 
@@ -9511,8 +9501,7 @@ So we simply return 0 at the end of the method.
 \section{Class variables}
 \label{classvar}
 
-So far we have seen local variables, which are declared inside a method, and instance variables, which are declared in a class
-definition, usually before the method definitions.
+So far we have seen local variables, which are declared inside a method, and instance variables, which are declared in a class definition, usually before the method definitions.
 Local variables are created when a method is invoked and destroyed when the method ends.
 Instance variables are created when you create an object and destroyed when the object is garbage collected.
 
@@ -9569,8 +9558,7 @@ They may also be useful in other methods and classes, so it's nice to maintain t
 
 By now we have seen several examples of composition (the ability to combine language features in a variety of arrangements).
 One of the first examples we saw was using a method invocation as part of an expression.
-Another example is the nested structure of statements: you can put an \java{if} statement within a \java{while} loop, or within
-another \java{if} statement, etc.
+Another example is the nested structure of statements: you can put an \java{if} statement within a \java{while} loop, or within another \java{if} statement, etc.
 
 Having seen this pattern, and having learned about arrays and objects, you should not be surprised to learn that you can make arrays of objects.
 And you can define objects with arrays as instance variables; you can make arrays that contain arrays; you can define objects that contain objects, and so on.
@@ -9720,7 +9708,7 @@ Since the words are in alphabetical order, you probably use an algorithm similar
 If you find the word you are looking for, stop.
 \item If the word you are looking for comes after the word on the page, flip to somewhere later in the dictionary and go back to step 2.
 \item If the word you are looking for comes before the word on the page, flip to somewhere earlier in the dictionary and go back to step 2.
-\end {enumerate}
+\end{enumerate}
 
 If you ever get to the point where there are two adjacent words on the page and your word comes between them, you can conclude that your word is not in the dictionary.
 
