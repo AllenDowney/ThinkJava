@@ -39,10 +39,7 @@ public class Deck {
         Random random = new Random();
         for (int i = this.cards.length - 1; i > 0; i--) {
             int j = random.nextInt(i);
-            //TODO: factor out swapCards
-            Card temp = this.cards[i];
-            this.cards[i] = this.cards[j];
-            this.cards[j] = temp;
+            swapCards(i, j);
         }
     }
     
@@ -70,6 +67,15 @@ public class Deck {
             sub.cards[i] = this.cards[low + i];
         }
         return sub;
+    }
+    
+    /**
+     * Swaps the cards at indexes i and j.
+     */
+    public void swapCards(int i, int j) {
+        Card temp = this.cards[i];
+        this.cards[i] = this.cards[j];
+        this.cards[j] = temp;
     }
     
     /**

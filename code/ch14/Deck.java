@@ -88,10 +88,7 @@ public class Deck {
         Random random = new Random();
         for (int i = this.cards.size() - 1; i > 0; i--) {
             int j = random.nextInt(i);
-            //TODO: refactor swapCards
-            Card temp = this.cards.get(i);
-            this.cards.set(i, this.cards.get(j));
-            this.cards.set(j, temp);
+            swapCards(i, j);
         }
     }
     
@@ -116,6 +113,15 @@ public class Deck {
     public Deck subdeck(int low, int high) {
         List<Card> cards = this.cards.subList(low, high + 1);
         return new Deck(cards);
+    }
+    
+    /**
+     * Swaps the cards at indexes i and j.
+     */
+    public void swapCards(int i, int j) {
+        Card temp = this.cards.get(i);
+        this.cards.set(i, this.cards.get(j));
+        this.cards.set(j, temp);
     }
     
     /**
