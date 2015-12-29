@@ -1,5 +1,4 @@
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * A player of the card game.
@@ -12,8 +11,6 @@ public class Player {
     private String name;
     
     private Deck hand;
-    
-    //TODO: get rid of the implicit this
     
     /**
      * Constructs a player with an empty hand.
