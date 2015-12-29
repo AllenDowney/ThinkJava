@@ -1,3 +1,111 @@
+\section{Formal languages}
+
+\index{natural language}
+\index{language!natural}
+
+Learning a programming language is very different from learning a {\bf natural language} such as English, Spanish, or German.
+The languages that people speak evolved naturally over time.
+%They were not designed by people, although we try to impose order on them for practical reasons.
+
+\index{formal language}
+\index{language!formal}
+
+In contrast, {\bf formal languages} are designed by people for specific applications.
+For example, the notation that mathematicians use is a formal language that is particularly good at denoting relationships among numbers and symbols.
+Chemists use a formal language to represent the chemical structure of molecules.
+And most importantly:
+
+\index{programming language}
+\index{language!programming}
+
+\begin{quote}
+{\bf Programming languages are formal languages that have been designed to express computations.}
+\end{quote}
+
+\index{syntax}
+\index{semantics}
+
+Formal languages have strict rules about both the {\bf syntax} (structure) and the {\bf semantics} (meaning) of statements.
+For example, $3 + 3 = 6$ is a syntactically correct mathematical statement, but $3\ + = 3\ \$\ 6$ is not.
+$1 + 2 = 4$ uses correct syntax, but is semantically incorrect.
+$H_2O$ is a syntactically correct chemical formula, but $_2Zz$ is not.
+
+%\subsection{Tokens and grammar}
+
+\index{token}
+
+Syntax rules come in two flavors, pertaining to tokens and grammar.
+{\bf Tokens} are the basic elements of the language, like words, numbers, and chemical elements.
+One of the problems with $3\ + = 3\ \$\ 6$ is that $\$$ is not a legal token in mathematics.
+Similarly, $_2Zz$ is not legal because there is no element with the abbreviation $Zz$.
+
+\index{grammar}
+
+The second type of syntax rule pertains to the {\bf grammar} of the language, or the way tokens can be arranged.
+The statement $3\ + = 3$ is structurally illegal, even though $+$ and $=$ are legal tokens, because you can't have one right after the other.
+Similarly, in a chemical formula the subscript comes after the element name, not before.
+
+\index{parse}
+
+When you read a sentence in English or a statement in a formal language, you have to figure out its structure.
+This process is called {\bf parsing}, and in a natural language you learn to do it unconsciously.
+As you learn to program, you will learn to parse Java code.
+
+%For example, when you hear the statement ``the penny dropped,'' you understand that the penny is the subject and ``dropped'' is the predicate.
+%After you have parsed the statement, you can begin to figure out what it means.
+%Assuming that you know what a penny is and what it means to drop, you will understand the general implication of this statement.
+
+%\subsection{Reading source code}
+
+Beginning programmers, who are used to natural languages, often have a hard time adjusting to formal languages.
+Although formal and natural languages have features in common---tokens, grammar, and meaning---there are some differences:
+
+\begin{description}
+
+\term{ambiguity}
+Natural languages are full of ambiguity, which people deal with by using contextual clues and other information.
+Formal languages are designed to be nearly or completely unambiguous, which means that any statement has exactly one meaning, regardless of context.
+
+\term{redundancy}
+In order to make up for ambiguity and reduce misunderstandings, natural languages employ lots of redundancy.
+As a result, they are often verbose.
+Formal languages are less redundant and more concise.
+
+\term{literalness}
+Natural languages are full of idiom and metaphor.
+When someone says ``the penny dropped'' there is no penny and nothing dropping.
+This idiom means that someone finally realized something after a period of confusion.
+In contrast, formal languages mean exactly what they say.
+
+\end{description}
+
+%In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
+
+%\begin{description}
+
+%\term{poetry}
+%Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
+%Ambiguity is not only common but often deliberate.
+
+%\term{prose}
+%The literal meaning of words is more important, and the structure contributes more meaning.
+%Prose is more amenable to analysis than poetry but still often ambiguous.
+
+%\term{program}
+%The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
+
+%\end{description}
+
+%Here are some suggestions for reading programs (and other formal languages).
+
+Small errors in spelling and punctuation, which you can get away with in natural languages, can make a big difference in a formal language.
+
+Also, formal languages are more dense than natural languages, so it takes longer to read them.
+The structure is very important, so it is not always a good idea to read from top to bottom, left to right.
+Over time you will learn to parse programs in your head, identifying the tokens and interpreting the structure.
+And you will learn to read and write programs more quickly.
+
+
 \section{Increment and decrement}
 
 \index{operator!increment}
@@ -565,3 +673,71 @@ A more general definition of ``abstraction'' is ``The process of modeling a comp
 
 %\term{abstraction}
 %The process of interpreting a program (or anything else) at a higher level than what is literally represented by the code.
+
+
+\section{The Point class}
+
+When you define a class in Java, you are also defining a new data type.
+It is helpful to think of classes as the blueprints (or a template) for objects.
+To illustrate this point (pun intended), here is a simplified version of the source code for the \java{java.awt.Point} class:
+
+\begin{code}
+public class Point {
+
+    public int x;
+    public int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public String toString() {
+        return "Point[x=" + x + ",y=" + y + "]";
+    }
+
+}
+\end{code}
+
+There are several details to note in this example.
+
+\begin{itemize}
+
+\item The class defines two variables (attributes) named \java{x} and \java{y} that are shared across all methods.
+Because they are declared at the class level, their scope is the entire class.
+
+\item The method \java{public Point(int x, int y)} is called a {\bf constructor}.
+Its purpose is to initialize new objects, and it is called by the \java{new} operator.
+Notice that it has no return type (not even \java{void}).
+
+\item The parameters \java{x} and \java{y} in the constructor happen to have the same name as the attributes.
+In order to distinguish one variable from the other, the keyword \java{this} refers to the current object.
+
+%\item None of the variables or methods are \java{static}.
+%In other words, they apply to each object of the class as opposed to the class itself.
+%We will discuss this issue more deeply in the next chapter.
+
+\end{itemize}
+
+In practice, it's more convenient to look at high-level pictures than source code.
+{\bf Unified Modeling Language} (UML) defines a standard way to visualize class designs.
+Here is a {\bf class diagram} for the simplified \java{Point} class above:
+
+\begin{center}
+\vspace{1ex}
+\includegraphics{figs/point.pdf}
+\vspace{1ex}
+\end{center}
+
+The diagram is divided into two sections: the attributes (or variables) of the class, and the methods of the class.
+
+
+\index{instance variable}
+\index{variable!instance}
+
+The attributes that make up an object are also called instance variables, because each object has its own copy of the variables.
+Classes define new data types, and each object is an {\bf instance} of that type.
+
+It's like the glove compartment of a car.
+Each car is an instance of the type ``Car,'' and each car has its own glove compartment.
+If you ask me to get something from the glove compartment of your car, you have to tell me which car is yours.

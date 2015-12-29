@@ -260,7 +260,7 @@ The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 
 The goal of this book is to teach you to think like a computer scientist.
 This way of thinking combines some of the best features of mathematics, engineering, and natural science.
-Like mathematicians, computer scientists use formal languages to denote ideas (specifically computations).
+Like mathematicians, computer scientists use formal languages to denote ideas, specifically computations.
 Like engineers, they design things, assembling components into systems and evaluating trade-offs among alternatives.
 And like scientists, they observe the behavior of complex systems, form hypotheses, and test predictions.
 \index{problem-solving}
@@ -273,7 +273,7 @@ That's why this chapter is called, ``The way of the program.''
 On one level you will be learning to program, a useful skill by itself.
 But on another level you will use programming as a means to an end.
 As we go along, that end will become clearer.
-Learning how to think in terms of computation is much more valuable than just learning how to write code.
+%Learning how to think in terms of computation is much more valuable than just learning how to write code.
 
 
 \section{What is programming?}
@@ -287,7 +287,7 @@ The details look different in different languages, but a few basic instructions 
 
 \begin{description}
 \item[input:] Get data from the keyboard, a file, a sensor, or some other device.
-\item[output:] Display data on the screen or send data to a file or other device.
+\item[output:] Display data on the screen or send data to a file, network, or other device.
 \item[math:] Perform basic mathematical operations like addition and division.
 \item[decisions:] Check for certain conditions and execute the appropriate code.
 \item[repetition:] Perform some action repeatedly, usually with some variation.
@@ -298,13 +298,13 @@ The details look different in different languages, but a few basic instructions 
 Believe it or not, that's pretty much all there is to it.
 Every program you've ever used, no matter how complicated, is made up of instructions that look much like these.
 So you can think of {\bf programming} as the process of breaking down a large, complex task into smaller and smaller subtasks.
-The process continues until the subtasks are simple enough to be performed with the basic instructions provided by computer hardware.
+The process continues until the subtasks are simple enough to be performed with the basic instructions provided by computer.
 
 
 \section{What is computer science?}
 
 One of the most interesting aspects of writing programs is deciding how to solve a particular problem, especially when there are multiple solutions.
-For example, there are numerous ways to sort a list of numbers, and each way has its advantages (see \url{http://www.sorting-algorithms.com/}).
+For example, there are numerous ways to sort a list of numbers, and each way has its advantages.
 In order to determine which way is best for a given situation, we need techniques for describing and analyzing solutions formally.
 That is where computer science comes in.
 
@@ -312,8 +312,8 @@ That is where computer science comes in.
 \index{algorithm}
 
 {\bf Computer science} is the science of algorithms, including their discovery and analysis.
-An {\bf algorithm} is a sequence of steps that specify exactly how to solve a problem.
-Some algorithms are better than others in terms of how long they take or how much memory they use.
+An {\bf algorithm} is a sequence of steps that specify how to solve a problem.
+Some algorithms are faster than others, and some use less space in memory.
 As you learn to develop algorithms for problems you haven't solved before, you also learn to think like a computer scientist.
 %It's much more fun to discover new algorithms than to write the code for solutions that other people came up with!
 
@@ -350,28 +350,27 @@ Thinking about how to correct programs and improve their performance sometimes e
 \index{language!high-level}
 
 The programming language you will learn is Java, which is a {\bf high-level language}.
-Other high-level languages you may have heard of include C and C++, JavaScript, Python, Ruby, and Visual Basic.
+Other high-level languages you may have heard of include Python, C and C++, Ruby, and JavaScript.
 
 \index{low-level language}
 \index{language!low-level}
 
-There are also {\bf low-level languages}, sometimes referred to as ``machine languages'' or ``assembly languages.''
-Loosely speaking, computers can only run programs written in low-level languages.
-So programs written in a high-level language have to be translated before they can run.
+Before they can run, programs in high-level languages have to be translated into a {\bf low-level language}, also called ``machine language''.
 This translation takes some time, which is a small disadvantage of high-level languages.
-But the advantages of high-level languages are enormous.
-As a result, low-level languages are only used for programs that need to interact directly with hardware.
+But high-level languages have two advantages:
 
+\begin{itemize}
+
+\item It is {\em much} easier to program in a high-level language.
+Programs take less time to write, are shorter and easier to read, and are more likely to be correct.
+
+\item High-level languages are {\bf portable}, meaning that they can run on different kinds of computers with few or no modifications.
+Low-level programs can only run on one kind of computer, and have to be rewritten to run on another.
 \index{portable}
 
-Due to the advantages, almost all programs are written in high-level languages.
-First, it is {\em much} easier to program in a high-level language.
-Programs take less time to write, are shorter and easier to read, and are more likely to be correct.
-Second, high-level languages are {\bf portable}, meaning that they can run on different kinds of computers with few or no modifications.
-Low-level programs can only run on one kind of computer, and have to be rewritten to run on another.
+\end{itemize}
 
 \index{interpreter}
-
 Two kinds of programs translate high-level languages into low-level languages: interpreters and compilers.
 An {\bf interpreter} reads a high-level program and executes it, meaning that it does what the program says.
 It processes the program a little at a time, alternately reading lines and performing computations.
@@ -380,7 +379,7 @@ It processes the program a little at a time, alternately reading lines and perfo
 \begin{figure}[!h]
 \begin{center}
 \includegraphics{figs/interpreter.pdf}
-\caption{How interpreted languages like Python and Ruby are executed.}
+\caption{How interpreted languages are executed.}
 \end{center}
 \end{figure}
 
@@ -399,129 +398,20 @@ As a result, compiled programs often run faster than interpreted programs.
 
 Java is {\em both} compiled and interpreted.
 Instead of translating programs directly into machine language, the Java compiler generates {\bf byte code}.
-Similar to machine language, byte code is easy (and fast) to interpret.
-But it is also portable, like a high-level language.
-Thus it is possible to compile a Java program on one machine, transfer the byte code to another machine, and then execute (interpret) the byte code on the other machine.
+Similar to machine language, byte code is easy and fast to interpret.
+But it is also portable, so it is possible to compile a Java program on one machine, transfer the byte code to another machine, and run the byte code on the other machine.
 %This ability is an advantage of Java over some other high-level languages.
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics{figs/compiler.pdf}
-\caption{The process of editing, compiling, and running a Java program.}
+\caption{The process of compiling and running a Java program.}
 \end{center}
 \end{figure}
 
 Although this process may seem complicated, in most program development environments these steps are automated for you.
-Usually you will only have to write a program and press a button or type a single command to compile and run it.
+Usually you only have press a button or type a single command to compile and run your program.
 On the other hand, it is important to know what steps are happening in the background, so if something goes wrong you can figure out what it is.
-
-
-\section{Formal languages}
-
-\index{natural language}
-\index{language!natural}
-
-Learning a programming language is very different from learning a {\bf natural language} such as English, Spanish, or German.
-The languages that people speak evolved naturally over time.
-%They were not designed by people, although we try to impose order on them for practical reasons.
-
-\index{formal language}
-\index{language!formal}
-
-In contrast, {\bf formal languages} are designed by people for specific applications.
-For example, the notation that mathematicians use is a formal language that is particularly good at denoting relationships among numbers and symbols.
-Chemists use a formal language to represent the chemical structure of molecules.
-And most importantly:
-
-\index{programming language}
-\index{language!programming}
-
-\begin{quote}
-{\bf Programming languages are formal languages that have been designed to express computations.}
-\end{quote}
-
-\index{syntax}
-\index{semantics}
-
-Formal languages have strict rules about both the {\bf syntax} (structure) and the {\bf semantics} (meaning) of statements.
-For example, $3 + 3 = 6$ is a syntactically correct mathematical statement, but $3\ + = 3\ \$\ 6$ is not.
-$1 + 2 = 4$ uses correct syntax, but is semantically incorrect.
-$H_2O$ is a syntactically correct chemical formula, but $_2Zz$ is not.
-
-%\subsection{Tokens and grammar}
-
-\index{token}
-
-Syntax rules come in two flavors, pertaining to tokens and grammar.
-{\bf Tokens} are the basic elements of the language, like words, numbers, and chemical elements.
-One of the problems with $3\ + = 3\ \$\ 6$ is that $\$$ is not a legal token in mathematics.
-Similarly, $_2Zz$ is not legal because there is no element with the abbreviation $Zz$.
-
-\index{grammar}
-
-The second type of syntax rule pertains to the {\bf grammar} of the language, or the way tokens can be arranged.
-The statement $3\ + = 3$ is structurally illegal, even though $+$ and $=$ are legal tokens, because you can't have one right after the other.
-Similarly, in a chemical formula the subscript comes after the element name, not before.
-
-\index{parse}
-
-When you read a sentence in English or a statement in a formal language, you have to figure out its structure.
-This process is called {\bf parsing}, and in a natural language you learn to do it unconsciously.
-As you learn to program, you will learn to parse Java code.
-
-%For example, when you hear the statement ``the penny dropped,'' you understand that the penny is the subject and ``dropped'' is the predicate.
-%After you have parsed the statement, you can begin to figure out what it means.
-%Assuming that you know what a penny is and what it means to drop, you will understand the general implication of this statement.
-
-%\subsection{Reading source code}
-
-Beginning programmers, who are used to natural languages, often have a hard time adjusting to formal languages.
-Although formal and natural languages have features in common---tokens, grammar, and meaning---there are some differences:
-
-\begin{description}
-
-\term{ambiguity}
-Natural languages are full of ambiguity, which people deal with by using contextual clues and other information.
-Formal languages are designed to be nearly or completely unambiguous, which means that any statement has exactly one meaning, regardless of context.
-
-\term{redundancy}
-In order to make up for ambiguity and reduce misunderstandings, natural languages employ lots of redundancy.
-As a result, they are often verbose.
-Formal languages are less redundant and more concise.
-
-\term{literalness}
-Natural languages are full of idiom and metaphor.
-When someone says ``the penny dropped'' there is no penny and nothing dropping.
-This idiom means that someone finally realized something after a period of confusion.
-In contrast, formal languages mean exactly what they say.
-
-\end{description}
-
-%In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
-
-%\begin{description}
-
-%\term{poetry}
-%Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
-%Ambiguity is not only common but often deliberate.
-
-%\term{prose}
-%The literal meaning of words is more important, and the structure contributes more meaning.
-%Prose is more amenable to analysis than poetry but still often ambiguous.
-
-%\term{program}
-%The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
-
-%\end{description}
-
-%Here are some suggestions for reading programs (and other formal languages).
-
-Small errors in spelling and punctuation, which you can get away with in natural languages, can make a big difference in a formal language.
-
-Also, formal languages are more dense than natural languages, so it takes longer to read them.
-The structure is very important, so it is not always a good idea to read from top to bottom, left to right.
-Over time you will learn to parse programs in your head, identifying the tokens and interpreting the structure.
-And you will learn to read and write programs more quickly.
 
 
 
@@ -541,89 +431,76 @@ public class Hello {
         // generate some simple output
         System.out.println("Hello, World!");
     }
-
 }
 \end{code}
 
-Note the output of this program does not include the quote marks:
+When this program runs it displays
 
 \begin{stdout}
 Hello, World!
 \end{stdout}
 
+Notice that the output does not include the quotation marks.
+
 \index{public}
 \index{static}
 
-Unfortunately in Java, even this simple example requires language features that are difficult to explain to beginners.
-But it provides a preview of topics that we will see in detail later on.
-The word \java{public} means the code can be accessed from other source files.
-The word \java{static} means that memory is allocated for the program in advance.
-We will discuss \java{void}, \java{String}, and \java{args} in the next few chapters.
-For now, let's focus on the overall structure.
+Unfortunately, this simple example uses several features that are hard to explain; in fact, we won't be able to explain all of them for several more chapters.
+But we can start with the structure.
 
 \index{class!definition}
 \index{method!definition}
 
-Java programs are made up of {\bf class} and {\bf method} definitions, which generally have the form:
-
-\begin{code}
-public class CLASSNAME {
-
-    METHOD {
-        STATEMENTS
-    }
-
-    METHOD {
-        STATEMENTS
-    }
-
-}
-\end{code}
+Java programs are made up of ``class'' and ``method'' definitions, and methods are made up of ``statements''.
 
 \index{class!name}
 
-Here \java{CLASSNAME} indicates the name chosen by the programmer.
-Java requires the class name to match the source file name.
-In the hello world example, the file name must be {\tt Hello.java} because the class name is \java{Hello}.
-
+A {\bf statement} is a line of code that performs a basic operation.
+In the hello world program, this line
 \index{statement}
-\index{main}
 
-Classes define a program's methods, or named sequences of {\bf statements}.
-The \java{Hello} class has only one method:
+\begin{code}
+        System.out.println("Hello, World!");
+\end{code}
+
+is a {\bf print statement}, which displays a message on the screen.
+Confusingly, print can mean both ``display something on the screen'' and ``send something to the printer.''
+In this book, we'll try to say ``display'' when we mean ``display''.
+\index{println}
+\index{statement!print}
+
+Like most statements, the print statement ends with a semicolon (\java{;}).
+\index{semicolon}
+
+A {\bf method} is a named sequence of statements.
+This program defines one method, named \java{main}:
+\index{method}
 
 \begin{code}
     public static void main(String[] args)
 \end{code}
 
-The name and format of \java{main} is special; it marks the place in the class where execution begins.
-When the program runs, it starts at the first statement in \java{main} and ends when it finishes the last statement.
+The name and format of \java{main} is special: when the program runs, it starts at the first statement in \java{main} and ends when it finishes the last statement.
+Later, we will see programs that define more than one method.
+\index{main}
+
+A {\bf class} is a collection of methods.
+This program defines a class named \java{Hello}.
+You can give a class any name you like, but it conventional to start with a capital letter.
+And the name of the class has to match the name of the file it is in, so this class has to be in a file named \java{hello.java}.
 
 \index{braces}
 \index{squiggly braces}
 
 Java uses squiggly braces (\{ and \}) to group things together.
-In {\tt Hello.java}, the outermost braces (lines 1 and 8) contain the class definition, and the inner braces (lines 3 and 6) contain the definition of \java{main} method.
-
-% ABD: It looks like we don't have line numbers in the listings.
-% Is that a problem for the text here?
-
-\index{println}
-\index{statement!print}
-
-The main method can have any number of statements, but the \java{Hello} example has only one.
-It is a {\bf print statement}, meaning that it displays a message on the screen.
-Confusingly, print can mean both ``display something on the screen'' and ``send something to the printer.''
-%I won't say much about sending things to the printer;
-In this book, we'll do all our printing on the screen.
-The print statement ends with a semicolon (\java{;}).
+In {\tt Hello.java}, the outermost braces contain the class definition, and the inner braces contain the method definition.
 
 \index{comments!inline}
 \index{statement!comment}
 
-Line 4 contains a {\bf comment}, or a bit of English text that explains the code that follows.
+The line that begins with two slashes (\java{//}) is a {\bf comment}, which is a bit of English text that explains the code.
 When the compiler sees \java{//}, it ignores everything from there until the end of the line.
-It is a good idea to write a comment before every major block of code so that other programmers (including your future self) can understand what you meant to do.
+Comments have no effect on the execution of the program, but they make it easier for other programmers (and your future self) to understand what you meant to do.
 
 
 \section{Programming environment}
@@ -700,27 +577,25 @@ public class Hello {
         System.out.println("Hello, World!");  // print one line
         System.out.println("How are you?");   // print another
     }
-
 }
 \end{code}
 
-As this program demonstrates, you can put comments at the end of a line as well as on lines all by themselves.
+As this example shows, you can put comments at the end of a line as well as on lines all by themselves.
 
 \index{String}
 \index{type!String}
 
 Phrases that appear in quotation marks are called {\bf strings}, because they contain a sequence of characters strung together.
 {\bf Characters} can be letters, numbers, punctuation marks, symbols, spaces, tabs, and more.
-Strings can contain any combination of characters.
 
 \index{newline}
 \index{print}
 \index{statement!print}
 
 The name \java{println} is short for ``print line.''
-It appends a special character, called a {\bf newline}, that advances the cursor to the beginning of the next line.
-%The next time \java{println} is invoked, the new text appears on the next line.
-To display the output from multiple print statements on one line, use \java{print}:
+It appends a special character, called a {\bf newline}, that moves to the beginning of the next line.
+
+If you don't want a newline at the end, you can use \java{print} instead of \java{println}: 
 
 \begin{code}
 public class Goodbye {
@@ -729,43 +604,14 @@ public class Goodbye {
         System.out.print("Goodbye, ");
         System.out.println("cruel world");
     }
-
 }
 \end{code}
 
-The output appears on a single line as {\tt Goodbye, cruel world}.
-Notice that there is a space between the word ``Goodbye'' and the second quotation mark.
-This space appears in the output, so it affects the {\em behavior} of the program.
+In this example, the first statement does not add a newline, so the
+output appears on a single line as {\tt Goodbye, cruel world}.
 
-%\subsection{Code formatting}
-\label{sec:formatting}
+Notice that there is a space at the end of the first string, which appears in the output.
 
-Spaces that appear outside of quotation marks generally do not affect the behavior of the program.
-For example, we could have written:
-
-\begin{code}
-public class Goodbye {
-public static void main(String[] args) {
-System.out.print("Goodbye, ");
-System.out.println("cruel world");
-}
-}
-\end{code}
-
-This program would compile and run just as well as the original.
-The newlines at the end of each line do not affect the program's behavior either.
-So we could have also written:
-
-\begin{code}
-public class Goodbye { public static void main(String[] args) {
-System.out.print("Goodbye, "); System.out.println
-("cruel world");}}
-\end{code}
-
-It still works, but the program is getting harder and harder to read.
-Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
-%Formatting your code well does not take much effort, and it pays huge dividends.
-%We will discuss readability and style guidelines in the next chapter.
 
 \section{Escape sequences}
 
@@ -813,7 +659,7 @@ If you add a space there, there will be a space at the beginning of the second l
 \end{center}
 \end{table}
 
-Another common use of escape sequences is to have quote marks inside of strings.
+Another common use of escape sequences is to have quotation marks inside of strings.
 Since double quotes indicate the beginning and end of strings, you need to escape them with a backslash.
 
 \begin{code}
@@ -827,6 +673,45 @@ She said "Hello!" to me.
 \end{stdout}
 
 
+\section{Formatting code}
+
+In Java programs, some spaces are required.
+For example, you need at least one space between keywords, so this program is not legal:
+
+\begin{code}
+publicclassGoodbye{
+
+    publicstaticvoidmain(String[] args) {
+        System.out.print("Goodbye, ");
+        System.out.println("cruel world");
+    }
+}
+\end{code}
+
+But most other spaces are optional.
+For example, this program is legal:
+
+\begin{code}
+public class Goodbye {
+public static void main(String[] args) {
+System.out.print("Goodbye, ");
+System.out.println("cruel world");
+}
+}
+\end{code}
+
+The newlines are optional, too, so we could write:
+
+\begin{code}
+public class Goodbye { public static void main(String[] args) {
+System.out.print("Goodbye, "); System.out.println
+("cruel world");}}
+\end{code}
+
+It still works, but the program is getting harder and harder to read.
+Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
+
+
 \section{Debugging}
 \label{sec:examples}
 
@@ -838,7 +723,7 @@ For example, in the hello world program, what happens if you leave out one of th
 What if you leave out both?
 What if you spell \java{println} wrong?
 This kind of experiment helps you remember what you read.
-It also helps with debugging, because you get to know what the error messages mean.
+It also helps with debugging, because you learn what the error messages mean.
 It is better to make mistakes now and on purpose than later on and accidentally.
 
 \index{experimental debugging}
@@ -954,29 +839,32 @@ Byte code is similar to a low-level language, but it is portable like a high-lev
 \term{natural language}
 Any of the languages people speak that have evolved naturally.
 
-\term{formal language}
-A language people have designed for specific purposes, like representing mathematical ideas or computer programs.
+%\term{formal language}
+%A language people have designed for specific purposes, like representing mathematical ideas or computer programs.
 
-\term{programming language}
-A formal language that has been designed to express computations.
+%\term{programming language}
+%A formal language that has been designed to express computations.
 
-\term{syntax}
-The structure of a program.
+%\term{syntax}
+%The structure of a program.
 
-\term{semantics}
-The meaning of a program.
+%\term{semantics}
+%The meaning of a program.
 
-\term{token}
-A basic element of a program, such as a word, space, symbol, or number.
+%\term{token}
+%A basic element of a program, such as a word, space, symbol, or number.
 
-\term{grammar}
-A set of rules that determines whether a statement is legal.
+%\term{grammar}
+%A set of rules that determines whether a statement is legal.
 
-\term{parse}
-To examine a program and analyze the syntactic structure.
+%\term{parse}
+%To examine a program and analyze the syntactic structure.
 
 \term{statement}
 A part of a program that specifies a computation.
+
+\term{print statement}
+A statement that causes output to be displayed on the screen.
 
 \term{method}
 A named sequence of statements.
@@ -984,9 +872,6 @@ A named sequence of statements.
 \term{class}
 For now, a collection of related methods.
 (We will see later that there is more to it.)
-
-\term{print statement}
-A statement that causes output to be displayed on the screen.
 
 \term{comment}
 A part of a program that contains information about the program but has no effect when the program runs.
@@ -1071,13 +956,15 @@ You will develop a sense for when you can trust the compiler and when you have t
 \item Remove the word \java{System}.
 \item Replace \java{println} with \java{Println}.
 \item Replace \java{println} with \java{print}.
-This one is tricky because it is a logic error, not a syntax error.
-The statement \java{System.out.print} is legal, but it may or may not do what you expect.
 \item Delete one of the parentheses.
 Add an extra one.
 \end{enumerate}
 
+%TODO: do this exercise and see if there are any vocabulary words in
+% the error messages we need to interpret
+
 \end{exercise}
+
 
 
 \chapter{Variables and arithmetic}
@@ -1240,7 +1127,7 @@ This example also demonstrates the syntax for declaring multiple variables with 
 Note that each declaration statement ends with a semicolon.
 
 You can use any name you want for a variable.
-But there are certain words that are reserved in Java, because they are used by the compiler to parse the structure of the program.
+But there are certain words that are reserved in Java, because they are used by the compiler to analyze the structure of the program.
 These {\bf keywords} include \java{public}, \java{class}, \java{static}, \java{void}, \java{int}, and others (there are currently 50 in Java).
 Search the Internet for ``Java keywords'' to see the complete list.
 
@@ -1248,7 +1135,7 @@ Search the Internet for ``Java keywords'' to see the complete list.
 %This site, provided by Oracle, includes Java documentation I refer to throughout the book.
 
 Rather than memorize the keywords, you should take advantage of the syntax highlighting provided in many development environments (including DrJava).
-As you type, the tokens in your program will appear in different colors.
+As you type, the words in your program appear in different colors.
 For example, keywords might be blue, strings red, comments green, and other code black.
 If you type a variable name and it turns blue, watch out!
 
@@ -1805,7 +1692,7 @@ And good programs are designed to be efficient and demonstrably correct.
 \begin{description}
 
 \term{syntax error}
-An error in a program that makes it impossible to parse (and therefore impossible to compile).
+An error in a program that makes it impossible to compile.
 
 %\term{type-safe}
 %A property of Java that makes it possible to catch some errors at compile time.
@@ -1833,7 +1720,7 @@ Mathematically speaking, a set of values.
 The type of a variable determines which values it can have.
 
 \term{keyword}
-A reserved word used by the compiler to parse programs.
+A reserved word used by the compiler to analyze programs.
 You cannot use keywords (like \java{public}, \java{class}, and \java{void}) as variable names.
 
 \term{assignment}
@@ -1868,7 +1755,7 @@ The ability to combine simple expressions and statements into compound expressio
 
 \term{whitespace}
 Newlines, tab characters, and other spaces in a source program.
-Whitespace characters are used to separate tokens, but other than that, they don't affect the behavior of the program.
+Whitespace characters are used to separate words, but other than that, they don't affect the behavior of the program.
 
 %\term{wildcard}
 %A command-line feature that allows you to specify a pattern of file names.
@@ -2148,7 +2035,7 @@ The following figure shows these organizational units.
 
 To review, a package is a collection of classes, which define methods.
 Methods contain statements, some of which contain expressions.
-Expressions are made up of tokens, which include variable names, numbers, operators, keywords, and punctuation like braces and semicolons.
+Expressions are made up of variable names, numbers, operators, keywords, and punctuation like braces and semicolons.
 
 The standard edition of Java comes with {\em several thousand} classes you can \java{import}, which can be both exciting and intimidating.
 You can browse this library on Oracle's website: \url{http://docs.oracle.com/javase/7/docs/api/}
@@ -3240,7 +3127,7 @@ This tool is part of the standard JDK, and you can run it directly from DrJava b
 \index{comments!documentation}
 \index{documentation comments}
 
-Javadoc parses your source files for {\bf documentation comments} and extracts other relevant information about your class and method definitions.
+Javadoc reads your source files for {\bf documentation comments} and extracts other relevant information about your class and method definitions.
 Given the prevalence of this tool, people sometimes refer to documentation as ``Javadoc comments.''
 In contrast to inline comments that begin with \java{//}, documentation comments begin with \java{/**} (two stars) and end with \java{*/} (one star).
 Anything in between these two tokens becomes part of the documentation.
@@ -4013,7 +3900,7 @@ Exception in thread "main" java.util.InputMismatchException
 
 \index{exception}
 
-In this example, the program calls the \java{nextDouble} method, so the \java{Scanner} attempts to parse a \java{double}.
+In this example, the program calls the \java{nextDouble} method, so the \java{Scanner} tries to read a \java{double}.
 However the user input is \java{"Hello"}, which causes an \java{InputMismatchException}.
 We can prevent this error from happening by checking the input before parsing it:
 
@@ -6503,6 +6390,7 @@ String str = "12345";
 int num = Integer.parseInt(str);
 \end{code}
 
+In this context, ``parse'' means something like ``read and translate''.
 You will find similar methods in the other wrapper classes, for example, \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
 
 These wrapper classes also provide \java{toString}, which returns a string representation of a number:
@@ -9104,7 +8992,7 @@ This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/S
 \item Write a method called \java{indexOfMaxInRange} that takes an array of integers, finds the largest element in the given range, and returns its {\em index}.
 %You can modify your recursive version of \java{maxInRange} or you can write an iterative version from scratch.
 
-\item Write a method called \java{swapElement} that takes an array of integers and two indices, and that swaps the elements at the given indices.
+\item Write a method called \java{swapElement} that takes an array of integers and two indexes, and that swaps the elements at the given indexes.
 
 \item Write a method called \java{selectionSort} that takes an array of integers and that uses \java{indexOfMaxInRange} and \java{swapElement} to sort the array from largest to smallest.
 
@@ -10070,6 +9958,9 @@ In this case we can use \java{swapCards} again, so we only need a method to find
 
 One of the exercises at the end of this chapter asks you to write \java{indexLowestCard} and \java{selectionSort}.
 
+%TODO: swap the order of rank and suit
+%TODO: make an exercise of validating the input to Card constructor
+
 
 \section{Mergesort}
 \label{mergesort}
@@ -10374,69 +10265,3 @@ Read about it at \url{https://en.wikipedia.org/wiki/Insertion_sort} write a func
 
 
 
-\section{The Point class}
-
-When you define a class in Java, you are also defining a new data type.
-It is helpful to think of classes as the blueprints (or a template) for objects.
-To illustrate this point (pun intended), here is a simplified version of the source code for the \java{java.awt.Point} class:
-
-\begin{code}
-public class Point {
-
-    public int x;
-    public int y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public String toString() {
-        return "Point[x=" + x + ",y=" + y + "]";
-    }
-
-}
-\end{code}
-
-There are several details to note in this example.
-
-\begin{itemize}
-
-\item The class defines two variables (attributes) named \java{x} and \java{y} that are shared across all methods.
-Because they are declared at the class level, their scope is the entire class.
-
-\item The method \java{public Point(int x, int y)} is called a {\bf constructor}.
-Its purpose is to initialize new objects, and it is called by the \java{new} operator.
-Notice that it has no return type (not even \java{void}).
-
-\item The parameters \java{x} and \java{y} in the constructor happen to have the same name as the attributes.
-In order to distinguish one variable from the other, the keyword \java{this} refers to the current object.
-
-%\item None of the variables or methods are \java{static}.
-%In other words, they apply to each object of the class as opposed to the class itself.
-%We will discuss this issue more deeply in the next chapter.
-
-\end{itemize}
-
-In practice, it's more convenient to look at high-level pictures than source code.
-{\bf Unified Modeling Language} (UML) defines a standard way to visualize class designs.
-Here is a {\bf class diagram} for the simplified \java{Point} class above:
-
-\begin{center}
-\vspace{1ex}
-\includegraphics{figs/point.pdf}
-\vspace{1ex}
-\end{center}
-
-The diagram is divided into two sections: the attributes (or variables) of the class, and the methods of the class.
-
-
-\index{instance variable}
-\index{variable!instance}
-
-The attributes that make up an object are also called instance variables, because each object has its own copy of the variables.
-Classes define new data types, and each object is an {\bf instance} of that type.
-
-It's like the glove compartment of a car.
-Each car is an instance of the type ``Car,'' and each car has its own glove compartment.
-If you ask me to get something from the glove compartment of your car, you have to tell me which car is yours.
