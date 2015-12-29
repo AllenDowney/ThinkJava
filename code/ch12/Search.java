@@ -77,17 +77,18 @@ public class Search {
         }
         
         // tracing the code
-        Card card = new Card(11, 1);
-        System.out.println(findCard(cards, card));
+        Card jack = new Card(11, 1);
+        System.out.println(findCard(cards, jack));
         System.out.println();
-        System.out.println(findCard(cards, card, 0, 51));
+        Card fake = new Card(15, 1);
+        System.out.println(findCard(cards, fake));
         System.out.println();
         
-        // search for all cards
+        // search for all cards (using recursive version)
         for (int suit = 0; suit <= 3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
                 Card each = new Card(rank, suit);
-                System.out.println(findCard(cards, each));
+                System.out.println(findCard(cards, each, 0, 51));
                 System.out.println();
             }
         }

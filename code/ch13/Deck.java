@@ -33,6 +33,13 @@ public class Deck {
     }
     
     /**
+     * Gets the internal cards array.
+     */
+    public Card[] getCards() {
+        return this.cards;
+    }
+    
+    /**
      * Randomly permute the deck of cards.
      */
     public void shuffle() {
@@ -40,21 +47,6 @@ public class Deck {
         for (int i = this.cards.length - 1; i > 0; i--) {
             int j = random.nextInt(i);
             swapCards(i, j);
-        }
-    }
-    
-    /**
-     * Reorders the deck using insertion sort.
-     */
-    public void sort() {
-        for (int i = 1; i < this.cards.length; i++) {
-            Card temp = this.cards[i];
-            int j = i - 1;
-            while (j >= 0 && temp.compareTo(this.cards[j]) < 0) {
-                this.cards[j + 1] = this.cards[j];
-                j--;
-            }
-            this.cards[j + 1] = temp;
         }
     }
     
