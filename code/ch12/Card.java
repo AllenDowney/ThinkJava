@@ -2,41 +2,40 @@
  * An individual playing card.
  * 
  * @author Chris Mayfield
- * @version 12/28/2015
+ * @version 12/29/2015
  */
 public class Card {
-
-    //TODO: swap the order of rank and suit
+    
     //TODO: use "that" for the name of the other argument
-
-    public static final String[] SUITS = {
-        "Clubs", "Diamonds", "Hearts", "Spades"};
     
     public static final String[] RANKS = {
         null, "Ace", "2", "3", "4", "5", "6", "7",
         "8", "9", "10", "Jack", "Queen", "King"};
     
-    private int suit;
+    public static final String[] SUITS = {
+        "Clubs", "Diamonds", "Hearts", "Spades"};
     
     private int rank;
     
+    private int suit;
+    
     /**
-     * Constructs a card of the given suit and rank.
+     * Constructs a card of the given rank and suit.
      * Invalid arguments are replaced with defaults.
-     * 
-     * @param suit the card's suit (default: 0)
+     *
      * @param rank the card's rank (default: 1)
+     * @param suit the card's suit (default: 0)
      */
-    public Card(int suit, int rank) {
-        if (suit >= 0 && suit < SUITS.length) {
-            this.suit = suit;
-        } else {
-            this.suit = 0;
-        }
+    public Card(int rank, int suit) {
         if (rank >= 1 && rank < RANKS.length) {
             this.rank = rank;
         } else {
             this.rank = 1;
+        }
+        if (suit >= 0 && suit < SUITS.length) {
+            this.suit = suit;
+        } else {
+            this.suit = 0;
         }
     }
     
@@ -70,11 +69,11 @@ public class Card {
     
     /**
      * Returns true if the given card has the same
-     * suit AND same rank; otherwise returns false.
+     * rank AND same suit; otherwise returns false.
      */
     public boolean equals(Card card) {
-        return this.suit == card.suit
-            && this.rank == card.rank;
+        return this.rank == card.rank
+            && this.suit == card.suit;
     }
     
     /**
@@ -93,11 +92,11 @@ public class Card {
     
     /**
      * Returns true if the given card has the same
-     * suit OR same rank; otherwise returns false.
+     * rank OR same suit; otherwise returns false.
      */
     public boolean isLike(Card card) {
-        return this.suit == card.suit
-            || this.rank == card.rank;
+        return this.rank == card.rank
+            || this.suit == card.suit;
     }
     
     /**
@@ -106,4 +105,5 @@ public class Card {
     public int position() {
         return this.suit * 13 + this.rank - 1;
     }
+    
 }

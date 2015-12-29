@@ -5,7 +5,7 @@ import java.util.Random;
  * A deck of playing cards (of fixed size).
  * 
  * @author Chris Mayfield
- * @version 12/28/2015
+ * @version 12/29/2015
  */
 public class Deck {
     
@@ -19,7 +19,7 @@ public class Deck {
         int index = 0;
         for (int suit = 0; suit <= 3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
-                this.cards[index] = new Card(suit, rank);
+                this.cards[index] = new Card(rank, suit);
                 index++;
             }
         }
@@ -37,8 +37,8 @@ public class Deck {
      */
     public String toString() {
         return Arrays.toString(this.cards);
-    }    
-
+    }
+    
     /**
      * Randomly permute the deck of cards.
      */
@@ -46,8 +46,8 @@ public class Deck {
         Random random = new Random();
         for (int i = this.cards.length - 1; i > 0; i--) {
             int j = random.nextInt(i);
-
-	    //TODO: factor out swapCards
+            
+            //TODO: factor out swapCards
             Card temp = this.cards[i];
             this.cards[i] = this.cards[j];
             this.cards[j] = temp;
@@ -62,7 +62,7 @@ public class Deck {
             Card temp = this.cards[i];
             int j = i - 1;
             while (j >= 0 && temp.compareTo(this.cards[j]) < 0) {
-	        //TODO: factor out indexLowestCard
+                //TODO: factor out indexLowestCard
                 this.cards[j + 1] = this.cards[j];
                 j--;
             }
@@ -80,4 +80,5 @@ public class Deck {
         }
         return sub;
     }
+    
 }

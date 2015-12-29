@@ -6,10 +6,10 @@ import java.util.Scanner;
  * for basic play and scoring rules.
  * 
  * @author Chris Mayfield
- * @version 12/28/2015
+ * @version 12/29/2015
  */
 public class Eights {
-
+    
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         
@@ -75,4 +75,5 @@ public class Eights {
         System.out.println(one.getName() + " has " + one.score() + " points");
         System.out.println(two.getName() + " has " + two.score() + " points");
     }
+    
 }
