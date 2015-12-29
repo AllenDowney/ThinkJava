@@ -19,22 +19,10 @@ public class Card {
     
     /**
      * Constructs a card of the given rank and suit.
-     * Invalid arguments are replaced with defaults.
-     *
-     * @param rank the card's rank (default: 1)
-     * @param suit the card's suit (default: 0)
      */
     public Card(int rank, int suit) {
-        if (rank >= 1 && rank < RANKS.length) {
-            this.rank = rank;
-        } else {
-            this.rank = 1;
-        }
-        if (suit >= 0 && suit < SUITS.length) {
-            this.suit = suit;
-        } else {
-            this.suit = 0;
-        }
+        this.rank = rank;
+        this.suit = suit;
     }
     
     /**

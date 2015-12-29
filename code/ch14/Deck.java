@@ -103,7 +103,6 @@ public class Deck {
             Card temp = this.cards.get(i);
             int j = i - 1;
             while (j >= 0 && temp.compareTo(this.cards.get(j)) < 0) {
-                //TODO: refactor indexLowestCard
                 this.cards.set(j + 1, this.cards.get(j));
                 j--;
             }
@@ -114,8 +113,9 @@ public class Deck {
     /**
      * Returns a subset of the cards in the deck.
      */
-    public List<Card> subdeck(int low, int high) {
-        return this.cards.subList(low, high + 1);
+    public Deck subdeck(int low, int high) {
+        List<Card> cards = this.cards.subList(low, high + 1);
+        return new Deck(cards);
     }
     
     /**
