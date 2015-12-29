@@ -12,3 +12,4 @@ thinkjava.toc
 
 # Java examples
 *.class
+checkstyle*.jar
