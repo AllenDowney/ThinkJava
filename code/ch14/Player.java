@@ -26,8 +26,8 @@ public class Player {
     /**
      * Replaces the player's hand with the given cards.
      */
-    public void deal(List<Card> hand) {
-        this.hand = new Deck(hand);
+    public void deal(Deck hand) {
+        this.hand = hand;
     }
     
     /**

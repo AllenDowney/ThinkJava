@@ -24,8 +24,8 @@ public class Eights {
         
         // remaining cards are placed face down
         // and the top card is turned face up
-        Deck pack = new Deck(deck.subdeck(16, 50));
-        Deck disc = new Deck(deck.subdeck(51, 51));
+        Deck pack = deck.subdeck(16, 50);
+        Deck disc = deck.subdeck(51, 51);
         
         // keep playing until there's a winner
         Player player = two;
