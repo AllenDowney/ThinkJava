@@ -10263,65 +10263,8 @@ There is no reason to read the program any differently.
 Well, almost.  You might have to give some thought to getting the base case right and making sure that you reach it eventually.
 But other than that, writing the recursive version should be no problem.
 
-
-\section{Insertion sort}
-
-%TODO: how can we motivate insertion sort better?
-% Or maybe make it an exercise where we provide the pseudo code and
-% the reader has to break it into helper functions and implement them.
-
-\index{insertion sort}
-\index{sort!insertion}
-
-One last sorting algorithm is called {\bf insertion sort}, because it's based on inserting an item into a previously sorted list.
-In the card playing example, humans typically apply the following algorithm when they are dealt new cards:
-
-\begin{enumerate}
-\item Use sequential search to find the insertion point; that is, the index in the array where the new card belongs.
-\item Insert the new card at that position.
-\end{enumerate}
-
-That's easy enough when holding a small set of cards in your hand: you generally can make room for one more card.
-But in Java, we're talking about modifying an array of fixed length.
-If the array has five \java{Card}s, you can't just insert a sixth \java{Card} in the middle of it.
-
-Consequently, the second step above is a bit more complicated:
-
-\begin{enumerate}
-\item Use sequential search to find the insertion point.
-\item Create a new array with a length of one more element.
-\item Copy existing elements from the old array to their corresponding position in the new array (skipping the insertion point).
-\item Insert the new card at the insertion point.
-\end{enumerate}
-
-We can extend this insertion algorithm to sort an entire (unsorted) deck of cards.
-Of course, we don't want to create a new array and copy elements over 52 times.
-But we'll need a way to run sequential search over and over again.
-
-The resulting algorithm consists of two loops.
-The outer loop (for $i$) starts at index 1 (not 0) and attempts to insert each card, treating all the cards to the left as a previously sorted array.
-The inner loop (for $j$) searches for the insertion point in the range $0$ to $i-1$, while at the same time shifting applicable cards to the right.
-The last statement performs the actual insertion of each card.
-
-\begin{code}
-public static Deck insertionSort(Deck deck) {
-    for (int i = 1; i < cards.length; i++) {
-        Card temp = cards[i];
-        int j = i - 1;
-        while (j >= 0 && Card.compareCard(temp, cards[j]) < 0) {
-            cards[j + 1] = cards[j];
-            j--;
-        }
-        cards[j + 1] = temp;
-    }
-}
-\end{code}
-
-It may be difficult to visualize how these algorithms work by simply looking at the source code.
-Fortunately the Internet is full of animations, video tutorials, and other resources to help you.
-
-As with other sorting algorithms, Wikipedia is a reasonable place to get more information: \url{https://en.wikipedia.org/wiki/Selection_sort}.
-You should also check out \url{http://www.sorting-algorithms.com/} which shows eight different algorithms side by side, comparing both their techniques and overall efficiency.
+In summary, selection sort is simple and mergesort is efficient for large arrays.
+You can read more about these algorithms and others at \url{http://www.sorting-algorithms.com/}, which shows eight different algorithms side by side, comparing their techniques and efficiency.
 
 
 \section{Vocabulary}
@@ -10401,7 +10344,43 @@ deck = deck.mergeSort();           // replaces old deck with new
 \end{exercise}
 
 
+\begin{exercise}
+The goal of this exercise is to practice top-down programming by implementing insertion sort.
+Here is an outline of the algorithm in pseudocode:
+\index{insertion sort}
+\index{sort!insertion}
 
+\begin{code}
+public static Deck insertionSort(Deck deck) {
+    // create a new deck with the same length as deck
+  
+    for each card in deck {
+        // find the index, i, where the card should go in the sorted deck
+        // starting at i, shift the cards to the right by one
+        // insert the cart at i
+    }
+}
+\end{code}
+
+
+\begin{enumerate}
+
+\item Based on this pseudocode, identify the helper functions you will need.
+
+\item Write the helper functions and test them one at a time.
+
+\item Write an implementation of insertion sort and test it.
+
+\item How many comparisons does insertion sort need to sort an array with $n$ elements.
+Do you expect it to be proportional to $n^2$ like selection sort, or proportional to $n \log n$ like mergesort?
+
+\item The version of insertion sort we described here creates a new array.
+There is another version that sorts the input array in place.
+Read about it at \url{https://en.wikipedia.org/wiki/Insertion_sort} write a function that implements it.
+
+\end{enumerate}
+
+\end{exercise}
 
 %TODO: explain the implicit this
 
