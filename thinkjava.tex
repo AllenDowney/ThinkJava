@@ -9962,25 +9962,25 @@ One of the exercises at the end of this chapter asks you to write \java{indexLow
 %TODO: make an exercise of validating the input to Card constructor
 
 
-\section{Mergesort}
+\section{Merge sort}
 \label{mergesort}
 
 \index{efficiency}
 \index{sorting}
-\index{mergesort}
+\index{merge sort}
 
 Selection sort is a simple algorithm, but it is not very efficient.
 To sort $n$ items, it has to traverse the array $n$ times.
 Each traversal takes an amount of time that is proportional to $n$.
 The total time, therefore, is proportional to $n^2$.
 
-In the next two sections, we'll develop a more efficient algorithm called {\bf mergesort}.
-To sort $n$ items, mergesort takes time proportional to $n \log_2 n$.
+In the next two sections, we'll develop a more efficient algorithm called {\bf merge sort}.
+To sort $n$ items, merge sort takes time proportional to $n \log_2 n$.
 That may not seem impressive, but as $n$ gets big, the difference between $n^2$ and $n \log_2 n$ can be enormous.
 For example, $\log_2$ of one million is around 20.
-So if you had to sort a million numbers, selection sort would require one trillion steps; mergesort would require only 20 million.
+So if you had to sort a million numbers, selection sort would require one trillion steps; merge sort would require only 20 million.
 
-The basic idea behind mergesort is this: if you have two subdecks, each of which has already been sorted, it is easy and fast to merge them into a single, sorted deck.
+The basic idea behind merge sort is this: if you have two subdecks, each of which has already been sorted, it is easy and fast to merge them into a single, sorted deck.
 Try this out with a deck of cards:
 
 \begin{enumerate}
@@ -10003,7 +10003,7 @@ In the next few sections, we'll explain how to implement this algorithm in Java.
 \section{Subdecks}
 \index{subdeck}
 
-The first step of mergesort is to split the deck into two subdecks, each with about half the cards.
+The first step of merge sort is to split the deck into two subdecks, each with about half the cards.
 So might want a method, \java{subdeck}, that takes a Deck and a range of indexes.
 It returns a new Deck that contains the specified subset of the cards:
 
@@ -10079,7 +10079,7 @@ One of the exercises at the end of the chapter asks you to implement \java{merge
 
 
 
-\section{Mergesort algorithm}
+\section{Merge sort algorithm}
 
 Once your \java{merge} method is working correctly, you can out try a simple version of \java{mergeSort}:
 
@@ -10093,7 +10093,7 @@ public Deck mergeSort() {
 
 An exercise at the end of this chapter asks you to implement this algorithm.
 Once you get it working, the real fun begins!
-The magical thing about mergesort is that it is inherently recursive.
+The magical thing about merge sort is that it is inherently recursive.
 At the point where you sort the subdecks, why should you invoke the slower algorithm, \java{selectionSort}?
 Why not invoke the spiffy new \java{mergeSort} you are in the process of writing?
 Not only is that a good idea, it is {\em necessary} to achieve the $\log_2$ performance advantage.
@@ -10101,9 +10101,9 @@ Not only is that a good idea, it is {\em necessary} to achieve the $\log_2$ perf
 
 To make \java{mergeSort} work recursively, you have to have a base case; otherwise it recurses forever.
 A simple base case is a subdeck with 0 or 1 cards.
-If \java{mergesort} receives such a small subdeck, it can return it unmodified since it is already sorted.
+If \java{mergeSort} receives such a small subdeck, it can return it unmodified since it is already sorted.
 
-The recursive version of \java{mergesort} should look something like this:
+The recursive version of \java{mergeSort} should look something like this:
 
 \begin{code}
 public Deck mergeSort() {
@@ -10127,7 +10127,7 @@ There is no reason to read the program any differently.
 Well, almost.  You might have to give some thought to getting the base case right and making sure that you reach it eventually.
 But other than that, writing the recursive version should be no problem.
 
-In summary, selection sort is simple and mergesort is efficient for large arrays.
+In summary, selection sort is simple and merge sort is efficient for large arrays.
 You can read more about these algorithms and others at \url{http://www.sorting-algorithms.com/}, which shows eight different algorithms side by side, comparing their techniques and efficiency.
 
 
@@ -10147,8 +10147,8 @@ A simple sorting algorithm that searches for the smallest element $n$ times.
 \term{helper method}
 Often a small method that does not do anything enormously useful by itself, but which helps another, more useful method.
 
-\term{mergesort}
-A recursive sorting algorithm that divides an array into two parts, sorts each part (using mergesort), and merges the results.
+\term{merge sort}
+A recursive sorting algorithm that divides an array into two parts, sorts each part (using merge sort), and merges the results.
 
 %TODO: maybe remove this
 \term{insertion sort}
@@ -10236,7 +10236,7 @@ public static Deck insertionSort(Deck deck) {
 \item Write an implementation of insertion sort and test it.
 
 \item How many comparisons does insertion sort need to sort an array with $n$ elements.
-Do you expect it to be proportional to $n^2$ like selection sort, or proportional to $n \log n$ like mergesort?
+Do you expect it to be proportional to $n^2$ like selection sort, or proportional to $n \log n$ like merge sort?
 
 \item The version of insertion sort we described here creates a new array.
 There is another version that sorts the input array in place.
