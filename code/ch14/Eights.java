@@ -9,6 +9,7 @@ import java.util.Scanner;
  * @version 12/28/2015
  */
 public class Eights {
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         

@@ -12,7 +12,9 @@ public class Player {
     private String name;
     
     private Deck hand;
-    
+
+    //TODO: get rid of the implicit this    
+
     /**
      * Constructs a player with an empty hand.
      */
@@ -97,6 +99,5 @@ public class Player {
      */
     public String toString() {
         return this.name + ": " + this.hand;
-    }
-    
+    }    
 }

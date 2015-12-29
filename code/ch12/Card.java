@@ -5,7 +5,10 @@
  * @version 12/28/2015
  */
 public class Card {
-    
+
+    //TODO: swap the order of rank and suit
+    //TODO: use "that" for the name of the other argument
+
     public static final String[] SUITS = {
         "Clubs", "Diamonds", "Hearts", "Spades"};
     
@@ -35,6 +38,13 @@ public class Card {
         } else {
             this.rank = 1;
         }
+    }
+    
+    /**
+     * Returns a string representation of the card.
+     */
+    public String toString() {
+        return RANKS[this.rank] + " of " + SUITS[this.suit];
     }
     
     /**
@@ -96,12 +106,4 @@ public class Card {
     public int position() {
         return this.suit * 13 + this.rank - 1;
     }
-    
-    /**
-     * Returns a string representation of the card.
-     */
-    public String toString() {
-        return RANKS[this.rank] + " of " + SUITS[this.suit];
-    }
-    
 }

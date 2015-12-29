@@ -33,12 +33,21 @@ public class Deck {
     }
     
     /**
+     * Returns a string representation of the deck.
+     */
+    public String toString() {
+        return Arrays.toString(this.cards);
+    }    
+
+    /**
      * Randomly permute the deck of cards.
      */
     public void shuffle() {
         Random random = new Random();
         for (int i = this.cards.length - 1; i > 0; i--) {
             int j = random.nextInt(i);
+
+	    //TODO: factor out swapCards
             Card temp = this.cards[i];
             this.cards[i] = this.cards[j];
             this.cards[j] = temp;
@@ -46,13 +55,14 @@ public class Deck {
     }
     
     /**
-     * Reorders the deck using insertion sort.
+     * Reorders the deck using selection sort.
      */
-    public void sort() {
+    public void selectionSort() {
         for (int i = 1; i < this.cards.length; i++) {
             Card temp = this.cards[i];
             int j = i - 1;
             while (j >= 0 && temp.compareTo(this.cards[j]) < 0) {
+	        //TODO: factor out indexLowestCard
                 this.cards[j + 1] = this.cards[j];
                 j--;
             }
@@ -70,12 +80,4 @@ public class Deck {
         }
         return sub;
     }
-    
-    /**
-     * Returns a string representation of the deck.
-     */
-    public String toString() {
-        return Arrays.toString(this.cards);
-    }
-    
 }

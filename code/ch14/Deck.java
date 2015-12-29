@@ -88,6 +88,7 @@ public class Deck {
         Random random = new Random();
         for (int i = this.cards.size() - 1; i > 0; i--) {
             int j = random.nextInt(i);
+            //TODO: refactor swapCards
             Card temp = this.cards.get(i);
             this.cards.set(i, this.cards.get(j));
             this.cards.set(j, temp);
@@ -102,6 +103,7 @@ public class Deck {
             Card temp = this.cards.get(i);
             int j = i - 1;
             while (j >= 0 && temp.compareTo(this.cards.get(j)) < 0) {
+	      //TODO: refactor indexLowestCard
                 this.cards.set(j + 1, this.cards.get(j));
                 j--;
             }
