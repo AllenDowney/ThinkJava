@@ -33,13 +33,6 @@ public class Deck {
     }
     
     /**
-     * Returns a string representation of the deck.
-     */
-    public String toString() {
-        return Arrays.toString(this.cards);
-    }
-    
-    /**
      * Randomly permute the deck of cards.
      */
     public void shuffle() {
@@ -79,6 +72,13 @@ public class Deck {
             sub.cards[i] = this.cards[low + i];
         }
         return sub;
+    }
+    
+    /**
+     * Returns a string representation of the deck.
+     */
+    public String toString() {
+        return Arrays.toString(this.cards);
     }
     
 }

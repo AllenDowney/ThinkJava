@@ -6,8 +6,6 @@
  */
 public class Card {
     
-    //TODO: use "that" for the name of the other argument
-    
     public static final String[] RANKS = {
         null, "Ace", "2", "3", "4", "5", "6", "7",
         "8", "9", "10", "Jack", "Queen", "King"};
@@ -40,28 +38,21 @@ public class Card {
     }
     
     /**
-     * Returns a string representation of the card.
-     */
-    public String toString() {
-        return RANKS[this.rank] + " of " + SUITS[this.suit];
-    }
-    
-    /**
      * Returns a negative integer if this card comes before
      * the given card, zero if the two cards are equal, or
      * a positive integer if this card comes after the card.
      */
-    public int compareTo(Card card) {
-        if (this.suit < card.suit) {
+    public int compareTo(Card that) {
+        if (this.suit < that.suit) {
             return -1;
         }
-        if (this.suit > card.suit) {
+        if (this.suit > that.suit) {
             return 1;
         }
-        if (this.rank < card.rank) {
+        if (this.rank < that.rank) {
             return -1;
         }
-        if (this.rank > card.rank) {
+        if (this.rank > that.rank) {
             return 1;
         }
         return 0;
@@ -71,9 +62,9 @@ public class Card {
      * Returns true if the given card has the same
      * rank AND same suit; otherwise returns false.
      */
-    public boolean equals(Card card) {
-        return this.rank == card.rank
-            && this.suit == card.suit;
+    public boolean equals(Card that) {
+        return this.rank == that.rank
+            && this.suit == that.suit;
     }
     
     /**
@@ -94,9 +85,9 @@ public class Card {
      * Returns true if the given card has the same
      * rank OR same suit; otherwise returns false.
      */
-    public boolean isLike(Card card) {
-        return this.rank == card.rank
-            || this.suit == card.suit;
+    public boolean isLike(Card that) {
+        return this.rank == that.rank
+            || this.suit == that.suit;
     }
     
     /**
@@ -104,6 +95,13 @@ public class Card {
      */
     public int position() {
         return this.suit * 13 + this.rank - 1;
+    }
+    
+    /**
+     * Returns a string representation of the card.
+     */
+    public String toString() {
+        return RANKS[this.rank] + " of " + SUITS[this.suit];
     }
     
 }
