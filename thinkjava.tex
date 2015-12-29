@@ -9679,7 +9679,7 @@ If it is not in the deck, we return -1.
 \begin{code}
 public static int findCard(Card[] cards, Card card) {
     for (int i = 0; i < cards.length; i++) {
-        if (card.equals(cards[i])) {
+        if (cards[i].equals(card)) {
             return i;
         }
     }
@@ -9712,9 +9712,9 @@ Since the words are in alphabetical order, you probably use an algorithm like th
 \begin{enumerate}
 \item Start in the middle of the dictionary.
 \item Compare a word on that page to the word you are looking for.
-If you find the word you are looking for, stop.
-\item If the word you are looking for comes after the word on the page, flip to somewhere later in the dictionary and go back to step 2.
-\item If the word you are looking for comes before the word on the page, flip to somewhere earlier in the dictionary and go back to step 2.
+If you find the word you are looking for, then stop.
+\item If the word on that page comes before the word you are looking for, flip to somewhere later in the dictionary and go back to step 2.
+\item If the word on that page comes after the word you are looking for, flip to somewhere earlier in the dictionary and go back to step 2.
 \end{enumerate}
 
 If you ever get to the point where there are two adjacent words on the page and your word comes between them, you can conclude that your word is not in the dictionary.
@@ -9729,21 +9729,18 @@ public static int findCard(Card[] cards, Card card) {
     while (low <= high) {
         int mid = (low + high) / 2;                   // step 1
         int comp = cards[mid].compareTo(card);
-
+        
         if (comp == 0) {                              // step 2
             return mid;
-        } else if (comp > 0) {                        // step 3
-            low = mid - 1;
+        } else if (comp < 0) {                        // step 3
+            low = mid + 1;
         } else {                                      // step 4
-            high = mid + 1;
+            high = mid - 1;
         }
     }
     return -1;
 }
 \end{code}
-
-% TODO: double check this code -- I just made some changes;
-% did I get it right?
 
 First, we declare \java{low} and \java{high} variables to represent the range we are searching.
 Initially we search the entire array, from index \java{0} to \java{length - 1}.
@@ -9753,13 +9750,13 @@ Inside the \java{while} loop, we repeat the four steps of binary search:
 
 \begin{enumerate}
 
-\item To search the array, choose an index between \java{low} and \java{high} -- call it \java{mid} -- and compare it to the card you are looking for.
+\item To search the array, choose an index between \java{low} and \java{high} --- call it \java{mid} --- and compare it to the card you are looking for.
 
-\item If you found it, return the index.
-
-\item If the card at \java{mid} is higher than your card, search the range from \java{low} to \java{mid - 1}.
+\item If you found the card, return the index.
 
 \item If the card at \java{mid} is lower than your card, search the range from \java{mid + 1} to \java{high}.
+
+\item If the card at \java{mid} is higher than your card, search the range from \java{low} to \java{mid - 1}.
 
 \end{enumerate}
 
@@ -9779,7 +9776,7 @@ If we invoke \java{findCard} like this:
     System.out.println(findCard(cards, card));
 \end{code}
 
-The result is \java{23}, since there are 13 cards in the zeroth suit followed by 11 in the first suit (and indices start at 0).
+The result is \java{23}, since there are 13 cards in the zeroth suit followed by 11 in the first suit (and indexes start at 0).
 Here is the complete output, thanks to the print statement in \java{findCard}:
 
 \begin{stdout}
@@ -9800,7 +9797,6 @@ If we try to find it using binary search, we get the following:
 26, 37
 26, 30
 26, 27
-26, 25
 -1
 \end{stdout}
 
@@ -9812,18 +9808,12 @@ If we try to find it using binary search, we get the following:
 %But looking at a few cases and examining the code, you might be able to convince yourself.
 
 Each time through the loop, we cut the distance between \java{low} and \java{high} in half.
-After $k$ iterations, the number of remaining cards
-is $52 / 2^k$.
-To find the number of steps it takes to complete, we set
-
-\[ 52 / 2^k = 1 \]
-
-And solve for $k$.
+After $k$ iterations, the number of remaining cards is $52 / 2^k$.
+To find the number of steps it takes to complete, we set $52 / 2^k = 1$ and solve for $k$.
 The result is $\log_2 52$, which is about 5.7.
 So we might have to look at 5 or 6 cards, as opposed to all 52 if we did a sequential search.
 
-More generally, if the array contains $n$ elements, binary search requires
-$\log_2 n$ comparisons and sequential search requires $n$.
+More generally, if the array contains $n$ elements, binary search requires $\log_2 n$ comparisons and sequential search requires $n$.
 For large values of $n$, binary search can be much faster.
 
 
@@ -9844,18 +9834,18 @@ public static int findCard(Card[] cards, Card card,
     }
     int mid = (low + high) / 2;                       // step 1
     int comp = cards[mid].compareTo(card);
-
+    
     if (comp == 0) {                                  // step 2
         return mid;
-    } else if (comp > 0) {                            // step 3
-        return findCard(cards, card, low, mid - 1);
-    } else {                                          // step 4
+    } else if (comp < 0) {                            // step 3
         return findCard(cards, card, mid + 1, high);
+    } else {                                          // step 4
+        return findCard(cards, card, low, mid - 1);
     }
 }
 \end{code}
 
-Instead of a \java{while} loop, we simply an \java{if} statement to terminate the recursion.
+Instead of a \java{while} loop, we simply have an \java{if} statement to terminate the recursion.
 If \java{high} is less than \java{low}, there are no cards between them, and we conclude that the card is not in the deck.
 
 \index{recursion!infinite}
@@ -9864,7 +9854,6 @@ If \java{high} is less than \java{low}, there are no cards between them, and we 
 
 Two common errors in recursive programs are (1) forgetting to include a base case, and (2) writing the recursive call so that the base case is never reached.
 Either error causes infinite recursion and a \java{StackOverflowException}.
-
 
 
 \section{Vocabulary}
