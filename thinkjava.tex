@@ -241,7 +241,8 @@ Compiling the \LaTeX\ source has the effect of generating a device-independent r
 The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 %-----------------------------------------------------------------
 
-%\input{todo-tex/preface.tex}
+%TODO: preface
+%\input{preface.tex}
 
 % table of contents
 \cleardoublepage
@@ -272,7 +273,7 @@ That's why this chapter is called, ``The way of the program.''
 On one level you will be learning to program, a useful skill by itself.
 But on another level you will use programming as a means to an end.
 As we go along, that end will become clearer.
-Learning how to think in terms of computation is much more valuable than simply learning how to write code.
+Learning how to think in terms of computation is much more valuable than just learning how to write code.
 
 
 \section{What is programming?}
@@ -310,7 +311,7 @@ That is where computer science comes in.
 \index{computer science}
 \index{algorithm}
 
-Put simply, {\bf computer science} is the science of algorithms, including their discovery and analysis.
+{\bf Computer science} is the science of algorithms, including their discovery and analysis.
 An {\bf algorithm} is a sequence of steps that specify exactly how to solve a problem.
 Some algorithms are better than others in terms of how long they take or how much memory they use.
 As you learn to develop algorithms for problems you haven't solved before, you also learn to think like a computer scientist.
@@ -658,15 +659,13 @@ Step-by-step instructions for installing the JDK and configuring DrJava are avai
 \index{command-line}
 \index{terminal}
 
-One of the most powerful and useful skills you can learn is how to use the {\bf command-line interface}, also called the {\em terminal}.
+One of the most powerful and useful skills you can learn is how to use the {\bf command-line interface}, also called the {\bf terminal}.
 The command line is a direct interface to the operating system.
 It allows you to run programs, manage files and directories, and monitor system resources.
 Many advanced tools, both for software development and general purpose computing, are available only at the command line.
 
-There are many good tutorials online for learning the command-line for your operating system; just search the web for ``command line tutorial.''
-To get started, you only need to know four commands: how to change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
-
-% ABD: There's a conflict here between ``Find the details for your system'' and ``Here are the UNIX commands''.
+There are many good tutorials online for learning the command line for your operating system; just search the web for ``command line tutorial.''
+On Unix systems like Linux and OS X, you can get started with just four commands: change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
 
 \begin{figure}[!h]
 \begin{center}
@@ -686,7 +685,6 @@ If you use DrJava, it runs these commands for you and displays the output in the
 Taking time to learn this efficient and elegant way of interacting with your operating system will make you more productive.
 People who don't use the command line don't know what they're missing.
 
-% ABD: Maybe add a reference to Neal Stephenson's book?
 
 
 \section{Printing strings}
@@ -993,7 +991,7 @@ A statement that causes output to be displayed on the screen.
 \term{comment}
 A part of a program that contains information about the program but has no effect when the program runs.
 
-\term{command-line}
+\term{command line}
 A means of interacting with the computer by issuing commands in the form of successive lines of text.
 
 \term{string}
@@ -1126,7 +1124,7 @@ Java is not so forgiving; if there is a single syntax error anywhere in your pro
 To make matters worse, the error messages you get from the compiler are often not very helpful.
 As shown in Figure~\ref{fig:syntax}, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
 The compiler also reports that the problem was found on line 6, which in this case is not at fault.
-Since line 8 was deleted, the compiler simply reported the last line of the file.
+Since line 8 was deleted, the compiler reported the last line of the file.
 
 During the first few weeks of your programming career, you will probably spend a lot of time tracking down syntax errors.
 But as you gain experience, you will make fewer mistakes and find them more quickly.
@@ -1658,6 +1656,7 @@ The difference is when the conversion from integer to string actually takes plac
 
 
 % TODO: add the following subsection before/after this section?
+% ABD: maybe not: we have an exercise about this
 %\section{Type conversion}
 %\index{type!conversion}
 %\index{typecasting}
@@ -1683,7 +1682,7 @@ The difference is when the conversion from integer to string actually takes plac
 
 %Whenever you try to ``add'' two
 %expressions, if one of them is a \java{String}, Java converts the
-%other to a \java{String} and then perform string concatenation.
+%other to a \java{String} and then performs string concatenation.
 %What do you think happens if you perform an operation between
 %an integer and a floating-point value?
 
@@ -2545,7 +2544,7 @@ What is your name? Hello , age 45
 \end{stdout}
 
 To understand what is happening, recall that computers do not {\em see} input as multiple lines like we do.
-Instead, they simply forward a stream of characters to your program via \java{System.in}:
+Instead, they forward a stream of characters to your program via \java{System.in}:
 
 \begin{center}
 \includegraphics{figs/vader1.pdf}
@@ -2591,7 +2590,7 @@ Most if not all testing is based on a simple idea: does the program do what we e
 For simple programs, it's not difficult to run them several times and see what happens.
 But at some point, you will get tired of typing the same test cases over and over.
 
-We can automate the process of entering input and comparing {\em expected output} with {\em actual output} using the command-line.
+We can automate the process of entering input and comparing {\em expected output} with {\em actual output} using the command line.
 The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
 Here are step by step instructions.
 
@@ -2614,9 +2613,7 @@ Enter the following line and save the file.
 193.04 cm = 6 ft, 4 in
 \end{stdout}
 
-%TODO: check the use of ``terminal''
-
-\item Open a command-line, and change to the directory with these files.
+\item Open a terminal, and change to the directory with these files.
 Run the following command to test the program.
 
 \begin{stdout}
@@ -2627,7 +2624,7 @@ java Convert < test.in > test.out
 
 \index{redirection operator}
 
-On the command-line, {\tt <} and {\tt >} are {\bf redirection operators}.
+On the command line, {\tt <} and {\tt >} are {\bf redirection operators}.
 The first one redirects the contents of {\tt test.in} to \java{System.in}, as if it were entered from the keyboard.
 The second one redirects the contents of \java{System.out} to a new file {\tt test.out}, much like a screen capture.
 In other words, the {\tt test.out} file contains the output of your program.
@@ -2641,13 +2638,13 @@ In other words, the {\tt test.out} file contains the output of your program.
 %In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
 %What's great is that doesn't change anything about how you write the code.
 
-By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command-line.
+By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command line.
 Knowing both techniques allows you to use the right tool for the job.
 
 At this point, we just need to compare the contents {\tt test.out} with {\tt test.exp}.
 If the files are the same, then the program outputted what we expected it to output.
 If not, then we found a bug, and we can use the output to begin debugging our program.
-Fortunately, there's a simple way to compare files on the command-line:
+Fortunately, there's a simple way to compare files on the command line:
 
 \begin{stdout}
 diff test.exp test.out
@@ -2747,7 +2744,7 @@ A command-line feature that substitutes \java{System.in} and/or \java{System.out
 \begin{exercise}
 
 When you use \java{printf}, the Java compiler does not check your formatting string.
-See what happens if you try to display value with type \java{int} using \verb"%f".
+See what happens if you try to display a value with type \java{int} using \verb"%f".
 And what happens if you display a \java{float} using \verb"%d"?
 What if you use two format specifiers, but then only provide one value?
 
@@ -2768,14 +2765,10 @@ What if you use two format specifiers, but then only provide one value?
 
 So far we've only written short programs that have a single class with a \java{main} method.
 In this chapter, we'll show you how to organize longer programs into multiple methods and classes.
-%We will also take a look at separate compilation.
 
 \index{method}
 
-% ABD: In theory I like the idea of providing a chapter overview, but
-% in practice I find them impossible to write without breaking the rules
-% (like using terms before defining them, etc)
-
+%We will also take a look at separate compilation.
 %At a conceptual level, a {\bf method} represents a mathematical {\em function} or a general {\em procedure}.
 %Some methods perform a computation and return a result.
 %For example, \java{Math.sqrt(25)} returns the value \java{5.0}.
@@ -3197,7 +3190,7 @@ Changing the value of \java{hour} or \java{minute} in \java{printTime} has no ef
 \index{documentation}
 
 For a comprehensive example of what methods are like, take a look at the documentation for \java{Scanner}.
-You can find it in the Java library (see the link in Section~\ref{sec:library}) or simply do a web search for ``java scanner.''
+You can find it in the Java library (see the link in Section~\ref{sec:library}) or do a web search for ``java scanner.''
 The latter technique is more useful in the long run, especially as Oracle releases new versions of Java.
 Either way, you should get something like Figure~\ref{fig:javadoc}.
 
@@ -3260,7 +3253,7 @@ Anything in between these two tokens becomes part of the documentation.
 public class Goodbye {
 
     /**
-     * Application entry point; simply prints a greeting.
+     * Application entry point; prints a greeting.
      */
     public static void main(String[] args) {
         System.out.print("Goodbye, ");  // note the space
@@ -3597,10 +3590,6 @@ Saturday, July 16, 2011
 
 \index{boolean}
 \index{type!boolean}
-
-% TODO(ABD): I'd like an intro that presents the contents of the chapter in
-% terms of new capabilities: what can we do at the end of this chapter
-% that we can't do now?
 
 The programs we've seen so far do pretty much the same thing every time, regardless of the input.
 For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
@@ -4874,7 +4863,7 @@ So here's a good starting place:
 \end{code}
 
 Next, we think about the base case.
-If the argument happens to be zero, we simply return 1.
+If the argument happens to be zero, we return 1.
 
 \begin{code}
     public static int factorial(int n) {
@@ -4976,7 +4965,7 @@ Another common recursively-defined mathematical function is the Fibonacci sequen
 \end{eqnarray*}
 \vspace{-1ex}
 
-Translated into Java, this function is simply:
+Translated into Java, this function is:
 
 \begin{code}
     public static int fibonacci(int n) {
@@ -6166,7 +6155,7 @@ To get the last character, you have to subtract 1 from \java{length}.
 \end{code}
 
 Many string traversals involve reading one string and creating another.
-For example, to reverse a string we simply add one character at a time:
+For example, to reverse a string we add one character at a time:
 
 \begin{code}
     public static String reverse(String s) {
@@ -6441,7 +6430,7 @@ For example, if \java{letter} refers to a lower-case letter, \java{letter - 'a'}
 
 Performing arithmetic on characters is rarely necessary in programs, but it helps demonstrate how text is represented in Java.
 For example, we often need to convert between characters that contain numbers, like \java{'0'} and \java{'1'}, and their corresponding integers.
-A common mistake beginning programmers make is simply to cast a \java{char} to an \java{int}:
+A common mistake beginning programmers make is to cast a \java{char} to an \java{int}:
 
 \begin{code}
     char letter = '3';
@@ -6504,7 +6493,7 @@ These classes are in the \java{java.lang} package, so can use them without expli
 
 Each of these classes defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
 For example, \java{Integer.MIN_VALUE} is the \java{int} $-2147483648$, and \java{Integer.MAX_VALUE} is the \java{int} $2147483647$.
-Rather than remember these unusual numbers, you can simply refer to the built-in constants.
+Rather than remember these unusual numbers, you can refer to the built-in constants.
 
 Another purpose of wrapper classes is converting values to and from strings.
 For example, we can convert a string to an integer using the \java{parseInt} method:
@@ -7545,7 +7534,7 @@ Here are the most important ideas:
 
 \begin{itemize}
 
-\item Defining a new class also creates a new object type with the same name.
+\item Defining a new class creates a new object type with the same name.
 
 \index{instance}
 
@@ -8395,7 +8384,7 @@ To create the array itself, use the \java{new} operator.
 \end{code}
 
 The first assignment makes \java{count} refer to an array of 4 integers.
-The second makes \java{values} refer to an array of \java{double}, but the number of elements in \java{values} depends on the variable \java{size}.
+The second makes \java{values} refer to an array of \java{double}; the number of elements in \java{values} depends on the variable \java{size}.
 You can use any integer expression for the size of an array.
 
 
@@ -8867,7 +8856,7 @@ The output indicates that we have an empty array:
 []
 \end{stdout}
 
-If you run Java from the command-line, you can pass optional arguments separated by spaces.
+If you run Java from the command line, you can pass optional arguments separated by spaces.
 Everything after the class name is considered an argument.
 For example, if you run:
 
@@ -9180,29 +9169,25 @@ Just describe the algorithm, using English, pseudocode, or Java.
 
 \chapter{Arrays of objects}
 
-%TODO: rewrite this after we redo the chapters
-
-In the remaining chapters, we will develop programs that work with playing cards and decks of cards.
+In next few chapters, we will develop programs that work with playing cards and decks of cards.
 Here is an outline of the road ahead:
 
 \begin{enumerate}
 
-\item In this chapter, we will define a \java{Card} class and write methods that work directly with \java{Card}s and arrays of \java{Card}s.
+\item In this chapter, we define a \java{Card} class and write methods that work with Cards and arrays of Cards.
 
-%TODO add \ref for each chapter
+\item In Chapter~\ref{deck}, we create a \java{Deck} class that encapsulates an array of Cards and write methods that operate on Decks.
 
-\item In Chapter 13, we will create a \java{Deck} class that encapsulates an array of Cards and write methods that operate on \java{Deck}s.
+\item In Chapter~\ref{hand}, we will introduce inheritance as a way to create new classes that extend existing classes, and define classes for ???
 
-\item In Chapter 14, we will introduce object-oriented programming (OOP) and redesign the \java{Card} and \java{Deck} classes accordingly.
+%TODO: fill in that last part after we write chapter 14
 
 \end{enumerate}
 
-Although we will see several versions of the same code, the main advantage of proceeding this way is that the explanations will be smoother.
-It may help you to create a {\tt Card.java} file and paste in the examples as we go.
+%Although we will see several versions of the same code, the main advantage of proceeding this way is that the explanations will be smoother.
+%It may help you to create a {\tt Card.java} file and paste in the examples as we go.
 
-%If it helps, you can download the code for each chapter as you go along.
-%The code for this chapter is here: \url{http://thinkapjava.com/code/Card1.java}.
-
+The code for this chapter is here: \url{http://thinkapjava.com/code/Card1.java}.
 %TODO: provide the code
 
 
@@ -9244,7 +9229,7 @@ Hearts & $\mapsto$ & 2 \\
 Spades & $\mapsto$ & 3
 \end{tabular}
 
-The nice feature of this mapping is that the suits map to integers in order, so we can compare suits simply by comparing integers.
+The nice feature of this mapping is that the suits map to integers in order, so we can compare suits by comparing integers.
 The mapping for ranks is fairly obvious: each of the numerical ranks maps to the corresponding integer, and for face cards:
 
 \begin{tabular}{l c l}
@@ -9845,7 +9830,7 @@ public static int findCard(Card[] cards, Card card,
 }
 \end{code}
 
-Instead of a \java{while} loop, we simply have an \java{if} statement to terminate the recursion.
+Instead of a \java{while} loop, we have an \java{if} statement to terminate the recursion.
 If \java{high} is less than \java{low}, there are no cards between them, and we conclude that the card is not in the deck.
 
 \index{recursion!infinite}
@@ -9917,7 +9902,7 @@ Your solution should only traverse the array once.
 
 
 \chapter{Objects of Arrays}
-
+\label{Deck}
 \index{array!of Cards}
 
 In the previous chapter we defined a class to represent cards and used an array of \java{Card} objects to represent a deck.
@@ -9932,9 +9917,8 @@ And we develop algorithms for shuffling and sorting arrays.
 %So many of the examples are non-idiomatic; that is, they are not good Java.
 %This transitional form should help you learn, but don't write code like this.
 
-%You can download the code in this chapter from \url{http://thinkapjava.com/code/Card2.java}.
-
-%TODO: how do we want them to work with the code in this chapter?
+You can download the code in this chapter from \url{http://thinkapjava.com/code/Card2.java}.
+%TODO: update the link to the code
 
 
 \section{The Deck class}
