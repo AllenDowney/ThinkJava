@@ -2,7 +2,7 @@
  * Search algorithms for arrays of cards.
  * 
  * @author Chris Mayfield
- * @version 12/28/2015
+ * @version 12/29/2015
  */
 public class Search {
     
@@ -71,13 +71,13 @@ public class Search {
         int index = 0;
         for (int suit = 0; suit <= 3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
-                cards[index] = new Card(suit, rank);
+                cards[index] = new Card(rank, suit);
                 index++;
             }
         }
         
         // tracing the code
-        Card card = new Card(1, 11);
+        Card card = new Card(11, 1);
         System.out.println(findCard(cards, card));
         System.out.println();
         System.out.println(findCard(cards, card, 0, 51));
@@ -86,10 +86,11 @@ public class Search {
         // search for all cards
         for (int suit = 0; suit <= 3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
-                Card each = new Card(suit, rank);
+                Card each = new Card(rank, suit);
                 System.out.println(findCard(cards, each));
                 System.out.println();
             }
         }
-    }    
+    }
+    
 }

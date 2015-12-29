@@ -5,16 +5,16 @@ import java.util.List;
  * A player of the card game.
  * 
  * @author Chris Mayfield
- * @version 12/28/2015
+ * @version 12/29/2015
  */
 public class Player {
     
     private String name;
     
     private Deck hand;
-
-    //TODO: get rid of the implicit this    
-
+    
+    //TODO: get rid of the implicit this
+    
     /**
      * Constructs a player with an empty hand.
      */
@@ -26,8 +26,8 @@ public class Player {
     /**
      * Replaces the player's hand with the given cards.
      */
-    public void deal(List<Card> hand) {
-        this.hand = new Deck(hand);
+    public void deal(Deck hand) {
+        this.hand = hand;
     }
     
     /**
@@ -99,5 +99,6 @@ public class Player {
      */
     public String toString() {
         return this.name + ": " + this.hand;
-    }    
+    }
+    
 }

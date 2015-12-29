@@ -7,7 +7,7 @@ import java.util.Random;
  * A deck of playing cards (of flexible size).
  * 
  * @author Chris Mayfield
- * @version 12/28/2015
+ * @version 12/29/2015
  */
 public class Deck {
     
@@ -20,7 +20,7 @@ public class Deck {
         this.cards = new ArrayList<Card>();
         for (int suit = 0; suit <= 3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
-                this.cards.add(new Card(suit, rank));
+                this.cards.add(new Card(rank, suit));
             }
         }
     }
@@ -88,10 +88,7 @@ public class Deck {
         Random random = new Random();
         for (int i = this.cards.size() - 1; i > 0; i--) {
             int j = random.nextInt(i);
-            //TODO: refactor swapCards
-            Card temp = this.cards.get(i);
-            this.cards.set(i, this.cards.get(j));
-            this.cards.set(j, temp);
+            swapCards(i, j);
         }
     }
     
@@ -103,7 +100,6 @@ public class Deck {
             Card temp = this.cards.get(i);
             int j = i - 1;
             while (j >= 0 && temp.compareTo(this.cards.get(j)) < 0) {
-	      //TODO: refactor indexLowestCard
                 this.cards.set(j + 1, this.cards.get(j));
                 j--;
             }
@@ -114,8 +110,18 @@ public class Deck {
     /**
      * Returns a subset of the cards in the deck.
      */
-    public List<Card> subdeck(int low, int high) {
-        return this.cards.subList(low, high + 1);
+    public Deck subdeck(int low, int high) {
+        List<Card> cards = this.cards.subList(low, high + 1);
+        return new Deck(cards);
+    }
+    
+    /**
+     * Swaps the cards at indexes i and j.
+     */
+    public void swapCards(int i, int j) {
+        Card temp = this.cards.get(i);
+        this.cards.set(i, this.cards.get(j));
+        this.cards.set(j, temp);
     }
     
     /**
