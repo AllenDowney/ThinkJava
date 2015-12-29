@@ -12,7 +12,6 @@ public class Eights {
     
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        
         Deck deck = new Deck();
         deck.shuffle();
         
@@ -28,8 +27,8 @@ public class Eights {
         Deck disc = deck.subdeck(51, 51);
         
         // keep playing until there's a winner
-        Player player = two;
-        while (!(one.empty() || two.empty())) {
+        Player player = one;
+        while (!one.empty() && !two.empty()) {
             
             // output the current state of the game
             System.out.println(one);
@@ -40,13 +39,6 @@ public class Eights {
             System.out.println();
             System.out.println(disc);
             in.nextLine();
-            
-            // pick the next player
-            if (player == one) {
-                player = two;
-            } else {
-                player = one;
-            }
             
             // play the next card
             Card prev = disc.last();
@@ -69,6 +61,13 @@ public class Eights {
             System.out.println(player.getName() + " plays " + next);
             System.out.println();
             disc.add(next);
+            
+            // pick the next player
+            if (player == one) {
+                player = two;
+            } else {
+                player = one;
+            }
         }
         
         // display the final score

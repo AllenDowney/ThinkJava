@@ -35,8 +35,8 @@ public class Deck {
     /**
      * Constructs a deck with the given cards.
      */
-    public Deck(List<Card> cards) {
-        cards = new ArrayList<Card>(cards);
+    public Deck(List<Card> list) {
+        cards = new ArrayList<Card>(list);
     }
     
     /**

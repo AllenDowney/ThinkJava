@@ -34,21 +34,21 @@ public class Player {
     public void draw(Deck deck) {
         Card card = deck.first();
         deck.remove(card);
-        this.hand.add(card);
+        hand.add(card);
     }
     
     /**
      * True if the deck is empty, false otherwise.
      */
     public boolean empty() {
-        return this.hand.empty();
+        return hand.empty();
     }
     
     /**
      * Gets the player's name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
     
     /**
@@ -59,11 +59,11 @@ public class Player {
      */
     public Card play(Card top) {
         // simply return the first card that works
-        Iterator<Card> iter = this.hand.iterator();
+        Iterator<Card> iter = hand.iterator();
         while (iter.hasNext()) {
             Card card = iter.next();
             if (card.isLike(top) || card.getRank() == 8) {
-                this.hand.remove(card);
+                hand.remove(card);
                 return card;
             }
         }
@@ -76,7 +76,7 @@ public class Player {
      */
     public int score() {
         int sum = 0;
-        Iterator<Card> iter = this.hand.iterator();
+        Iterator<Card> iter = hand.iterator();
         while (iter.hasNext()) {
             Card card = iter.next();
             int rank = card.getRank();
@@ -95,7 +95,7 @@ public class Player {
      * Returns a string representation of the player.
      */
     public String toString() {
-        return this.name + ": " + this.hand;
+        return name + ": " + hand;
     }
     
 }
