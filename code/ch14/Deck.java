@@ -93,21 +93,6 @@ public class Deck {
     }
     
     /**
-     * Reorders the deck using insertion sort.
-     */
-    public void sort() {
-        for (int i = 1; i < this.cards.size(); i++) {
-            Card temp = this.cards.get(i);
-            int j = i - 1;
-            while (j >= 0 && temp.compareTo(this.cards.get(j)) < 0) {
-                this.cards.set(j + 1, this.cards.get(j));
-                j--;
-            }
-            this.cards.set(j + 1, temp);
-        }
-    }
-    
-    /**
      * Returns a subset of the cards in the deck.
      */
     public Deck subdeck(int low, int high) {
