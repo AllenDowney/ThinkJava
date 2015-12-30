@@ -153,6 +153,29 @@ This is often a difficult bug to track down.
 Remember, you can write {\tt index = index+1}, or you can write {\tt index++}, but you shouldn't mix them.
 
 
+\section{Class definitions and object types}
+
+Here are some syntax issues about class definitions:
+
+\begin{itemize}
+
+\item Class names (and hence object types) should begin with a capital letter, which helps distinguish them from primitive types and variable names.
+
+\item You usually put one class definition in each file, and the name of the file must be the same as the name of the class, with the suffix {\tt .java}.
+For example, the \java {class Time} is defined in the file named {\tt Time.java}.
+
+\item In any program, one class is designated as the {\bf startup class} that contains a method named \java{main} where the execution of the program begins.
+Other classes {\em may} have a method named \java{main}, but it will not be executed (unless another method calls it directly for some reason).
+
+\end{itemize}
+
+\term{startup class}
+The class that contains the \java{main} method where execution of the program begins.
+
+\term{pure function}
+A method whose result depends only on its parameters, and that has no side-effects other than returning a value.
+
+
 \section{Objects and primitives}
 
 \index{type!object}
@@ -187,7 +210,7 @@ You cannot add new primitives to Java (unless you get yourself on the standards 
 
 % was in Chapter 8 Strings and Things
 \begin{exercise}
-If you did the GridWorld exercises in Chapter~\ref{gridworld}, you
+If you did the GridWorld exercises in Chapter~\ref{gridworld1}, you
 might enjoy this exercise.  The goal is to use trigonometry to get the
 Bugs to chase each other.
 
@@ -254,109 +277,6 @@ public class Enigma {
 
 Explain in 4-5 words what the method {\tt enigma} really does.
 \end{exercise}
-
-
-\section{Object methods and class methods}
-
-\index{object method}
-\index{method!object}
-\index{class method}
-\index{method!class}
-\index{static}
-
-There are two types of methods in Java, called {\bf class methods} and
-{\bf object methods}.  Class methods are identified by the keyword {\tt
-  static} in the first line.  Any method that does {\em not} have the
-keyword {\tt static} is an object method.
-
-Although we have not written object methods, we have invoked some.
-Whenever you invoke a method ``on'' an object, it's an object method.
-For example, {\tt charAt} and the other methods we invoked on {\tt String}
-objects are all object methods.
-
-For example, here is {\tt printCard} as a class method:
-
-\begin{code}
-    public static void printCard(Card c) {
-        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
-    }
-\end{code}
-
-Anything that can be written as a class method can also be written as an
-object method, and vice versa.  But sometimes it is more natural to
-use one or the other.
-Here it is re-written as an object method:
-
-\begin{code}
-    public void print() {
-        System.out.println(ranks[rank] + " of " + suits[suit]);
-    }
-\end{code}
-
-Here are the changes:
-
-\begin{enumerate}
-
-\item I removed {\tt static}.
-
-\item I changed the name of the method to be more idiomatic.
-
-\item I removed the parameter.
-
-\item Inside an object method you can refer to instance variables
-as if they were local variables, so I changed {\tt c.rank} to {\tt rank},
-and likewise for {\tt suit}.
-
-\end{enumerate}
-
-Here's how this method is invoked:
-
-\begin{code}
-    Card card = new Card(1, 1);
-    card.print();
-\end{code}
-
-When you invoke a method on an object, that object becomes the {\bf
-current object}, also known as {\tt this}.  Inside {\tt print},
-the keyword {\tt this} refers to the card the method was invoked on.
-\index{current object}
-\index{object!current}
-\index{this}
-
-
-\section{Oddities and errors}
-
-\index{method!object}
-\index{method!class}
-\index{overloading}
-
-If you have object methods and class methods in the same class, it is
-easy to get confused.  A common way to organize a class definition is
-to put all the constructors at the beginning, followed by all the
-object methods and then all the class methods.
-
-You can have an object method and a class method with the same
-name, as long as they do not have the same number and types of
-parameters.  As with other kinds of overloading, Java decides
-which version to invoke by looking at the arguments you provide.
-\index{static}
-
-Now that we know what the keyword {\tt static} means, you
-have probably figured out that {\tt main} is a class method,
-which means that there is no ``current object'' when it is invoked.
-\index{current object}
-\index{this}
-\index{instance variable}
-\index{variable!instance}
-%
-Since there is no current object in a class method, it is an
-error to use the keyword {\tt this}.  If you try, you get
-an error message like: ``Undefined variable: this.''
-
-Also, you cannot refer to instance variables without using dot
-notation and providing an object name.  If you try, you get a message
-like ``non-static variable... cannot be referenced from a static
-context.''  By ``non-static variable'' it means ``instance variable.''
 
 
 \section{Operations on objects}
@@ -582,29 +502,6 @@ algorithm.
 
 %\item[algorithm:]  A set of instructions for solving a class of
 %problems by a mechanical process.
-
-
-\section{Class definitions and object types}
-
-Here are some syntax issues about class definitions:
-
-\begin{itemize}
-
-\item Class names (and hence object types) should begin with a capital letter, which helps distinguish them from primitive types and variable names.
-
-\item You usually put one class definition in each file, and the name of the file must be the same as the name of the class, with the suffix {\tt .java}.
-For example, the \java {class Time} is defined in the file named {\tt Time.java}.
-
-\item In any program, one class is designated as the {\bf startup class} that contains a method named \java{main} where the execution of the program begins.
-Other classes {\em may} have a method named \java{main}, but it will not be executed (unless another method calls it directly for some reason).
-
-\end{itemize}
-
-\term{startup class}
-The class that contains the \java{main} method where execution of the program begins.
-
-\term{pure function}
-A method whose result depends only on its parameters, and that has no side-effects other than returning a value.
 
 
 \section{Cards graphics exercises}
