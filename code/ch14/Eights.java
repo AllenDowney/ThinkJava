@@ -15,16 +15,16 @@ public class Eights {
         Deck deck = new Deck();
         deck.shuffle();
         
-        // eight cards are dealt to each player
+        // five cards are dealt to each player
         Player one = new Player("Allen");
-        one.deal(deck.subdeck(0, 7));
+        one.deal(deck.subdeck(0, 4));
         Player two = new Player("Chris");
-        two.deal(deck.subdeck(8, 15));
+        two.deal(deck.subdeck(5, 9));
         
         // remaining cards are placed face down
         // and the top card is turned face up
-        Pile pack = new Pile("Draw Pile");
-        pack.deal(deck.subdeck(16, 50));
+        Pile draw = new Pile("Draw Pile");
+        draw.deal(deck.subdeck(10, 50));
         Pile disc = new Pile("Discard Pile");
         disc.deal(deck.subdeck(51, 51));
         
@@ -37,7 +37,7 @@ public class Eights {
             System.out.println();
             System.out.println(two);
             System.out.println();
-            System.out.println(pack);
+            System.out.println(draw);
             System.out.println();
             System.out.println(disc);
             in.nextLine();
@@ -46,16 +46,16 @@ public class Eights {
             Card prev = disc.last();
             Card next = current.play(prev);
             while (next == null) {
-                if (pack.empty()) {
+                if (draw.empty()) {
                     System.out.println("shuffling discard pile into draw pile");
-                    pack.swap(disc);
-                    prev = pack.remove();
+                    draw.swap(disc);
+                    prev = draw.remove();
                     disc.add(prev);
-                    pack.shuffle();
+                    draw.shuffle();
                 }
-                Card draw = pack.remove();
-                System.out.println(current.getName() + " draws " + draw);
-                current.add(draw);
+                Card temp = draw.remove();
+                System.out.println(current.getName() + " draws " + temp);
+                current.add(temp);
                 next = current.play(prev);
             }
             System.out.println(current.getName() + " plays " + next);

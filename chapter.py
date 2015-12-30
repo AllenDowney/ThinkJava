@@ -13,6 +13,8 @@ def main(n):
     # copy the chapter
     i = 0
     for line in src:
+        if line.startswith("\\backmatter"):
+            break
         if line.startswith("\\chapter{"):
             i += 1
             if i > n:

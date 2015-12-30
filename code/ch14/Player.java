@@ -74,7 +74,7 @@ public class Player {
         for (Card card : this.cards) {
             int rank = card.getRank();
             if (rank == 8) {
-                sum += 50;
+                sum += 20;
             } else if (rank > 10) {
                 sum += 10;
             } else {

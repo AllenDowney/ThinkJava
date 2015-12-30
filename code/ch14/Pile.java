@@ -55,16 +55,16 @@ public class Pile {
      * Returns the last card in the pile.
      */
     public Card last() {
-        int last = this.cards.size() - 1;
-        return this.cards.get(last);
+        int index = this.cards.size() - 1;
+        return this.cards.get(index);
     }
     
     /**
      * Removes the last card in the pile.
      */
     public Card remove() {
-        int last = this.cards.size() - 1;
-        return this.cards.remove(last);
+        int index = this.cards.size() - 1;
+        return this.cards.remove(index);
     }
     
     /**
