@@ -29,6 +29,7 @@ Checkstyle configuration for Think Java, 6th edition.
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
         <module name="StringLiteralEquality"/>
+        <module name="RequireThis"/>
         <module name="DeclarationOrder"/>
         <module name="ParameterAssignment"/>
         <module name="FallThrough"/>
