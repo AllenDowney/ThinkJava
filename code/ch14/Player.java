@@ -1,8 +1,7 @@
-import java.util.Iterator;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
- * A player of the card game.
+ * A player in a card game.
  * 
  * @author Chris Mayfield
  * @version 12/29/2015
@@ -11,40 +10,37 @@ public class Player {
     
     private String name;
     
-    private Deck hand;
-    
-    //TODO: get rid of the implicit this
+    private ArrayList<Card> cards;
     
     /**
      * Constructs a player with an empty hand.
      */
     public Player(String name) {
         this.name = name;
-        this.hand = new Deck(0);
+        this.cards = new ArrayList<Card>();
     }
     
     /**
-     * Replaces the player's hand with the given cards.
+     * Adds a card to the player's hand.
      */
-    public void deal(Deck hand) {
-        this.hand = hand;
+    public void add(Card card) {
+        this.cards.add(card);
     }
     
     /**
-     * Removes the first card from the deck
-     * and adds it to this player's hand.
+     * Adds the given cards to the player's hand.
      */
-    public void draw(Deck deck) {
-        Card card = deck.first();
-        deck.remove(card);
-        this.hand.add(card);
+    public void deal(Deck deck) {
+        for (Card card : deck.getCards()) {
+            this.cards.add(card);
+        }
     }
     
     /**
-     * True if the deck is empty, false otherwise.
+     * True if the player has no cards, false otherwise.
      */
     public boolean empty() {
-        return this.hand.empty();
+        return this.cards.size() == 0;
     }
     
     /**
@@ -57,17 +53,13 @@ public class Player {
     /**
      * Removes and returns a legal card from the player's
      * hand, or returns null if the player cannot play.
-     * 
-     * @param top the top of the discard pile
      */
-    public Card play(Card top) {
+    public Card play(Card prev) {
         // simply return the first card that works
-        Iterator<Card> iter = this.hand.iterator();
-        while (iter.hasNext()) {
-            Card card = iter.next();
-            if (card.isLike(top) || card.getRank() == 8) {
-                this.hand.remove(card);
-                return card;
+        for (int i = 0; i < this.cards.size(); i++) {
+            Card card = this.cards.get(i);
+            if (card.isLike(prev) || card.getRank() == 8) {
+                return this.cards.remove(i);
             }
         }
         // no legal moves are possible
@@ -79,9 +71,7 @@ public class Player {
      */
     public int score() {
         int sum = 0;
-        Iterator<Card> iter = this.hand.iterator();
-        while (iter.hasNext()) {
-            Card card = iter.next();
+        for (Card card : this.cards) {
             int rank = card.getRank();
             if (rank == 8) {
                 sum += 50;
@@ -91,14 +81,14 @@ public class Player {
                 sum += rank;
             }
         }
-        return sum;
+        return sum * -1;
     }
     
     /**
      * Returns a string representation of the player.
      */
     public String toString() {
-        return this.name + ": " + this.hand;
+        return this.name + ": " + this.cards;
     }
     
 }
