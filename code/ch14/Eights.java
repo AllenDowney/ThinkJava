@@ -5,74 +5,139 @@ import java.util.Scanner;
  * https://en.wikipedia.org/wiki/Crazy_Eights
  * for basic play and scoring rules.
  * 
- * @author Chris Mayfield
- * @version 12/29/2015
  */
 public class Eights {
-    
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        Deck deck = new Deck();
+
+    private Scanner in;
+    private Deck deck;
+    private Player one;
+    private Player two;
+    private Hand draw;
+    private Hand discards;
+
+    /**
+     * Initializes the state of the game.
+     */
+    public Eights() {
+        in = new Scanner(System.in);
+        deck = new Deck();
         deck.shuffle();
         
-        // five cards are dealt to each player
-        Player one = new Player("Allen");
-        one.deal(deck.subdeck(0, 4));
-        Player two = new Player("Chris");
-        two.deal(deck.subdeck(5, 9));
+        // deal cards to each player
+        int handSize = 5;
+        one = new Player("Allen");
+        deck.deal(one.getHand(), handSize);
+
+        two = new Player("Chris");
+        deck.deal(two.getHand(), handSize);
         
-        // remaining cards are placed face down
-        // and the top card is turned face up
-        Pile draw = new Pile("Draw Pile");
-        draw.deal(deck.subdeck(10, 50));
-        Pile disc = new Pile("Discard Pile");
-        disc.deal(deck.subdeck(51, 51));
+        // turn one card face up
+        discards = new Hand();
+        deck.deal(discards, 1);
+
+        // put the rest of the deck face down
+        drawPile = new Hand();
+        deck.deal(drawPile);
+    }
+
+    /**
+     * Displays the state of the game.
+     */
+    public void displayState() {
+        this.one.display();
+        System.out.println();
+        this.two.display();
+        System.out.println("\nDiscard pile");
+        this.discards.display();
+        System.out.println("\nDraw pile");
+        System.out.println(this.drawPile.size() + " cards");
+    }
+
+    /**
+     * Returns true if either hand is empty.
+     */
+    public boolean isDone() {
+        return this.one.getHand().empty() || this.two.getHand().empty();
+    }
+
+    /**
+     * Moves cards from the discard pile to the draw pile and shuffles.
+     */
+    public Card reshuffle() {
+        System.out.println("shuffling discard pile into draw pile");
+        discards.deal(drawPile);
+        drawPile.shuffle();
+
+        Card prev = drawPile.popCard();
+        discards.addCard(prev);
+        return prev;
+    }
+
+    /**
+     * One player takes a turn.
+     */
+    public void takeTurn(Player player) {
+        // play the next card, drawing cards if needed
+        Card prev = this.discards.last();
+        Card next = player.play(prev);
         
+        while (next == null) {
+            if (drawPile.empty()) {
+                prev = this.reshuffle();
+            }
+            Card card = drawPile.popCard();
+            System.out.println(player.getName() + " draws " + card);
+            player.getHand().addCard(card);
+            next = player.play(prev);
+        }
+        System.out.println(player.getName() + " plays " + next);
+        System.out.println();
+
+        this.discards.addCard(next);    
+    }
+
+    /**
+     * Waits for the user to press enter.
+     */
+    public void waitForUser() {
+        this.in.nextLine();
+    }
+
+    /**
+     * Switches players.
+     */
+    public Player otherPlayer(Player current) {
+        if (current == this.one) {
+            return this.two;
+        } else {
+            return this.one;
+        }
+    }
+
+    /**
+     * Plays the game.
+     */
+    public void playGame() {
+        Player player = this.one;
+
         // keep playing until there's a winner
-        Player current = one;
-        while (!one.empty() && !two.empty()) {
-            
-            // output the current state of the game
-            System.out.println(one);
-            System.out.println();
-            System.out.println(two);
-            System.out.println();
-            System.out.println(draw);
-            System.out.println();
-            System.out.println(disc);
-            in.nextLine();
-            
-            // play the next card, drawing cards if needed
-            Card prev = disc.last();
-            Card next = current.play(prev);
-            while (next == null) {
-                if (draw.empty()) {
-                    System.out.println("shuffling discard pile into draw pile");
-                    draw.swap(disc);
-                    prev = draw.remove();
-                    disc.add(prev);
-                    draw.shuffle();
-                }
-                Card temp = draw.remove();
-                System.out.println(current.getName() + " draws " + temp);
-                current.add(temp);
-                next = current.play(prev);
-            }
-            System.out.println(current.getName() + " plays " + next);
-            System.out.println();
-            disc.add(next);
-            
-            // select the next player
-            if (current == one) {
-                current = two;
-            } else {
-                current = one;
-            }
+        while (!this.isDone()) {
+            this.displayState();
+            this.waitForUser();
+            this.takeTurn(player);
+            player = otherPlayer(player);
         }
         
         // display the final score
-        System.out.println(one.getName() + " has " + one.score() + " points");
-        System.out.println(two.getName() + " has " + two.score() + " points");
+        this.one.displayScore();
+        this.two.displayScore();
     }
-    
+
+    /**
+     * Creates the game and runs it.
+     */
+    public static void main(String[] args) {        
+        Eights game = new Eights();
+        game.playGame();
+    }    
 }
