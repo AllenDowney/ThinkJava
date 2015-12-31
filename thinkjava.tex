@@ -10241,7 +10241,574 @@ Read about it at \url{https://en.wikipedia.org/wiki/Insertion_sort} write a func
 
 \end{exercise}
 
-%TODO: explain the implicit this
+
+\chapter{Objects of objects}
+
+Now that we've designed classes for \java{Card}s and \java{Deck}s, let's use them to make a game!
+Although there are many examples we could implement, we'll start with one that is easy to learn and involves some strategy.
+
+\index{Crazy Eights}
+
+{\it Crazy Eights} is a classic card game for two or more players.
+The basic objective is to be the first player to get rid of all your cards.
+Here is a short summary of how the game works:
+
+\begin{itemize}
+\item Deal five cards to each player and place the remaining cards face down at the center of the table.
+Turn over the first card to create the initial discard pile.
+
+\item Each player takes turns placing a single card on the discard pile.
+The card must match the rank or suit of the previously played card or be an eight, which is wild card.
+
+\item When players don't have either a matching card or an eight, they must draw new cards until they can play.
+If the draw pile ever runs out, the discard pile is shuffled to restock it.
+
+\item As soon as a player has no cards, the round ends and all other players score penalty points for their remaining cards.
+Eights are worth 20, face cards are worth 10, and all others are worth their rank.
+\end{itemize}
+
+There are a few more details and many variations to this game, but these rules will suffice for now.
+See \url{https://en.wikipedia.org/wiki/Crazy_Eights} for more information.
+
+
+\section{Array limitations}
+
+Looking at the game, we need a way to keep track of multiple sets of cards.
+Each player has their own hand, and there are two shared piles (one for drawing, and one for discarding).
+
+We could use a \java{Deck} object to represent each player and each pile, but that approach doesn't seem right.
+For one, we don't think of players holding a deck of cards, and we don't think of the draw and discard piles as separate decks.
+More importantly, players and piles have needs that don't apply to decks, such as determining which card to play and calculating scores.
+It doesn't make sense to add these kinds of methods to the \java{Deck} class.
+
+Taking a top-down approach, we will design a \java{Player} class that contains a name and a set of cards:
+
+\begin{code}
+public class Player {
+    private String name;
+    private Card[] cards;
+}
+\end{code}
+
+Before the deck is shuffled and dealt, each player will have no cards.
+We could represent that situation by initializing \java{this.cards = null} in the constructor, but then each method would have to deal with that possibility.
+For example, a \java{printCards} method would look like:
+
+\begin{code}
+    if (this.cards == null) {
+        System.out.println("empty");
+    } else {
+        for (int i = 0; i < cards.length; i++) {
+            System.out.println(cards[i]);
+        }
+    }
+\end{code}
+
+Without the \java{if} statement, the expression \java{cards.length} would result in a \java{NullPointerException} when \java{cards} is null.
+Rather than add this kind of \java{if} statement to each method, we'll design the constructor so that the \java{cards} array will always exist.
+
+\begin{code}
+    public Player(String name) {
+        this.name = name;
+        this.cards = new Card[0];  // no cards
+    }
+\end{code}
+
+At this point we've hit another obstacle: we need to change the \java{cards} array throughout the game.
+It would be inefficient to create a new array (and copy elements over) every time the player draws or discards a card.
+One way to deal with this issue is to initialize \java{this.cards = new Card[52]}, but then we have to store another variable to keep track of how many cards there are.
+
+If we take the latter approach, we will also need to write code to maintain the array.
+For example, if the player has ten cards and plays the third one, then we need to shift the other seven cards down in the array.
+Not to mention that the array itself wastes memory by storing more card references than needed.
+Fortunately, Java has a built-in way to deal with all of these problems.
+
+
+\section{java.util.ArrayList}
+
+Once arrays have been created with \java{new}, you can't change their \java{length}.
+This fixed, contiguous structure is both convenient and efficient if the array is full.
+But as we saw in the previous section, sometimes you need more flexibility.
+
+The Java library comes with a number utility classes for {\bf collections} of objects.
+A collection is an object that represents a group of objects, in a more general way than arrays do.
+One of the most common collection classes is \java{ArrayList}.
+It represents a list of objects (e.g., a list of cards) and is implemented internally using an array.
+
+% You can read more about the Java collections framework here: \url{https://docs.oracle.com/javase/7/docs/technotes/guides/collections/overview.html}
+
+When declaring an \java{ArrayList} (and other collections), you need to specify the type it will contain using angle-brackets:
+
+\begin{code}
+    ArrayList<Card> cards;
+\end{code}
+
+In other words, \java{cards} is not just an \java{ArrayList}, it's an \java{ArrayList} of \java{Card} objects.
+Note that Java collections can only store objects.
+If you need to store primitive types, use wrapper classes (e.g., \java{ArrayList<Integer>}).
+
+Think of an \java{ArrayList} as a {\em resizable array}.
+You can add and remove elements without specifying in advance how big the array should be.
+If the array fills up and you need to add another element, \java{ArrayList} will automatically allocate a new array and copy the previous elements over to it.
+And when you remove an element, \java{ArrayList} automatically shifts the remaining elements down.
+
+For example, you can populate an \java{ArrayList} with an entire deck of cards simply by adding cards one at a time:
+
+\label{cardarray}
+
+\begin{code}
+    cards = new ArrayList<Card>();
+    for (int suit = 0; suit <= 3; suit++) {
+        for (int rank = 1; rank <= 13; rank++) {
+            cards.add(new Card(rank, suit));
+        }
+    }
+\end{code}
+
+In contrast to Section~\ref{deck}, \java{ArrayList} does not require you to keep track of the index of the next card.
+And instead of accessing items using bracket notation (e.g., \java{cards[index]}), you invoke methods like \java{add}, \java{get}, \java{remove}, and \java{set}.
+See \url{https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html} for the complete list.
+
+Iterating an \java{ArrayList} is similar to iterating an array, except that you need to call the \java{size} method.
+\java{ArrayList}s do not have a \java{length} attribute, since it changes over time.
+
+\begin{code}
+    for (int i = 0; i < cards.size(); i++) {
+        Card card = cards.get(i);
+        System.out.println(card);
+    }
+\end{code}
+
+As with arrays, you can use the enhanced \java{for} loop if you don't need the index variable (\java{i}) inside the loop:
+
+\begin{code}
+    for (Card card : cards) {
+        System.out.println(card);
+    }
+\end{code}
+
+And if you're just trying to print its contents, \java{ArrayList} provides a correct \java{toString} method.
+
+\begin{code}
+    System.out.println(cards);
+\end{code}
+
+
+\section{The Player class}
+
+Now let's redesign the \java{Player} class to use \java{ArrayList<Card>} instead of \java{Card[]}.
+We can simply instantiate the \java{ArrayList} in the constructor, without worrying about how many cards we need to store.
+
+\begin{code}
+public class Player {
+    private String name;
+    private ArrayList<Card> cards;
+
+    public Player(String name) {
+        this.name = name;
+        this.cards = new ArrayList<Card>();
+    }
+\end{code}
+
+Getting back to the game, players need to be able to add cards to their hand when drawing cards and when cards are dealt.
+We will write a separate method for each requirement.
+
+\begin{code}
+    public void add(Card card) {
+        this.cards.add(card);
+    }
+    
+    public void deal(Deck deck) {
+        for (Card card : deck.getCards()) {
+            this.cards.add(card);
+        }
+    }
+\end{code}
+
+\index{abstraction}
+
+One nice aspect of designing your own classes is that you can control the level of {\bf abstraction}.
+For example, since we know the game ends when a player has no cards, we can write a method for that.
+Writing higher level methods like this one makes the main class easier to read and understand.
+
+\begin{code}
+    public boolean empty() {
+        return this.cards.size() == 0;
+    }
+\end{code}
+
+\index{artificial intelligence}
+
+Now comes the fun part: how do we decide which card to play on a given turn?
+This type of problem is related to {\bf artificial intelligence}, a sub-field of computer science.
+There are many possible strategies, and we will experiment with several in the exercises.
+
+As a starting point, here is an simple algorithm that uses sequential search to find a legal card:
+
+\begin{code}
+    public Card play(Card prev) {
+        for (int i = 0; i < this.cards.size(); i++) {
+            Card card = this.cards.get(i);
+            if (card.isLike(prev) || card.getRank() == 8) {
+                return this.cards.remove(i);
+            }
+        }
+        return null;
+    }
+\end{code}
+
+Looking at the \java{if} statement, the \java{isLike} method returns \java{true} if the card matches the rank or suit of the previously played card (which is given as an argument to this method).
+The \java{remove} of \java{ArrayList} both removes and returns the card at the given index.
+If no suitable cards are found, the \java{play} method returns \java{null}.
+
+At the end of the game, each player counts up how many penalty points they have in their hand.
+Here is a method that uses an enhanced for loop:
+
+\begin{code}
+    public int score() {
+        int sum = 0;
+        for (Card card : this.cards) {
+            int rank = card.getRank();
+            if (rank == 8) {
+                sum += 20;
+            } else if (rank > 10) {
+                sum += 10;
+            } else {
+                sum += rank;
+            }
+        }
+        return sum * -1;
+    }
+\end{code}
+
+
+\section{The Pile class}
+
+In addition to the players, we need to implement the draw pile and discard pile.
+We could just reuse the \java{Player} class for this purpose, since all we need is another \java{ArrayList} for each pile.
+But that approach doesn't seem right, given that piles and players have different roles.
+For example, a pile doesn't need to play cards or calculate score.
+
+For now, we'll create a copy of the \java{Player} class, rename it to \java{Pile}, and delete the parts we don't need (\java{play} and \java{score}).
+The first part of the class is identical, except for the class and constructor names.
+
+\begin{code}
+public class Pile {
+    private String name;
+    private ArrayList<Card> cards;
+
+    public Pile(String name) {
+        this.name = name;
+        this.cards = new ArrayList<Card>();
+    }
+\end{code}
+
+One new method we need is the ability to see the top of the discard pile.
+In terms of the underlying \java{ArrayList}, we need to return the card at \java{size() - 1}.
+
+\begin{code}
+    public Card last() {
+        int index = this.cards.size() - 1;
+        return this.cards.get(index);
+    }
+\end{code}
+
+We're using the \java{get} method here because we simply want to look at the card.
+For the draw pile, we need to be able to remove one card at a time.
+
+\begin{code}
+    public Card remove() {
+        int index = this.cards.size() - 1;
+        return this.cards.remove(index);
+    }
+\end{code}
+
+In real life, people don't think about drawing the ``last'' card from the pile.
+But in Java, it's more efficient to remove from the end of an \java{ArrayList} than the beginning.
+When you remove an element, \java{ArrayList} automatically shifts the remaining elements down.
+Since the deck is shuffled, it doesn't matter which end of the deck you draw from as long as you're consistent.
+
+When the draw pile runs out of cards, we need a way to restock it from the discard pile.
+Since \java{ArrayList}s are objects, we can simply swap references between the two piles.
+
+\begin{code}
+    public void swap(Pile pile) {
+        ArrayList<Card> temp = this.cards;
+        this.cards = pile.cards;
+        pile.cards = temp;
+    }
+\end{code}
+
+And finally, it would be nice to shuffle the draw pile after swapping the discard pile.
+We can't directly use the shuffle method from \java{Deck}, since it's designed for arrays.
+But we can adapt it for \java{ArrayList} as follows:
+
+\begin{code}
+    Random random = new Random();
+    for (int i = this.cards.size() - 1; i > 0; i--) {
+        int j = random.nextInt(i);
+        // swap cards using get and set
+        Card temp = this.cards.get(i);
+        this.cards.set(i, this.cards.get(j));
+        this.cards.set(j, temp);
+    }
+\end{code}
+
+In contrast to Section~\ref{shuffle} that uses \java{randomInt}, this algorithm uses the built-in \java{java.util.Random} class.
+\java{Random} provides a method \java{nextInt} that returns a number between 0 (inclusive) and \java{n} (exclusive).
+Rather than iterate the \java{ArrayList} in order and choose a random number between \java{i} and \java{size() - 1}, we iterate backwards and choose a random number less than \java{i}.
+
+
+\section{Playing the game}
+
+We now have everything we need to write the \java{main} method of the game.
+For simplicity, we'll implement a text-based application in this section.
+The exercises at the end of the chapter explain how to create a graphical version.
+
+To get started, we need to shuffle a deck of cards and deal five to each player.
+We'll start with two players in this example.
+
+\begin{code}
+    Deck deck = new Deck();
+    deck.shuffle();
+    
+    Player one = new Player("Allen");
+    one.deal(deck.subdeck(0, 4));
+    Player two = new Player("Chris");
+    two.deal(deck.subdeck(5, 9));
+\end{code}
+
+This code gives the first five (shuffled) cards to one player and the next five cards to the other.
+You may have thought about dealing one card at a time to each player.
+In real life, this convention is intended to mitigate imperfect shuffling and make it more difficult for the dealer to cheat.
+As with removing cards from the front of the draw pile, the dealing cards round-robin is unnecessary and inefficient for a computer program.
+
+In a similar fashion, we place the remaining cards in the draw pile and turn one up to start the discard pile.
+
+\begin{code}
+    Pile draw = new Pile("Draw Pile");
+    draw.deal(deck.subdeck(10, 50));
+    Pile disc = new Pile("Discard Pile");
+    disc.deal(deck.subdeck(51, 51));
+\end{code}
+
+It may seem pointless to get a \java{subdeck} of one card, but that is (currently) the only way we have to get cards out of a \java{Deck}.
+Furthermore, it's nice that all four game objects are created in a consistent way.
+
+The game itself is a \java{while} loop that keeps playing until one of the players has won.
+We will create a new variable to keep track of whose turn it is.
+
+\begin{code}
+    Player current = one;
+    while (!one.empty() && !two.empty()) {
+        // INSERT GAME LOGIC HERE
+        if (current == one) {
+            current = two;
+        } else {
+            current = one;
+        }    
+    }
+\end{code}
+
+Again, the abstraction provided by \java{one.empty()} is a lot easier to understand than \java{one.cards.size() > 0}.
+Since \java{cards} is \java{private}, we wouldn't be able to do that anyway.
+
+The game logic (inside the \java{while} loop above) proceeds as follows: (1) look at the previous card played, (2) keep drawing cards until you can play, and (3) discard the next card.
+Here's the code:
+
+\begin{code}
+    Card prev = disc.last();         // step 1
+    Card next = current.play(prev);
+    while (next == null) {           // step 2
+        // RESTOCK DRAW PILE HERE
+        Card temp = draw.remove();
+        current.add(temp);
+        next = current.play(prev);
+    }
+    disc.add(next);                  // step 3
+
+\end{code}
+
+Notice how the code removes a \java{Card} object from one object and adds it to another.
+In the case of drawing cards, they move from a \java{Pile} to a \java{Person}.
+Discarding moves \java{Card} objects in the other direction.
+Thinking about the code in terms of high-level classes (\java{Pile} and \java{Person}) is a lot easier to understand than if we had simply implemented this process using four \java{ArrayList}s.
+
+The last step of the game logic is to restock the draw pile as needed.
+This process involves swapping \java{ArrayList} references, moving the top card back to the discard pile, and shuffling the draw pile.
+
+\begin{code}
+    if (draw.empty()) {
+        draw.swap(disc);
+        prev = draw.remove();
+        disc.add(prev);
+        draw.shuffle();
+    }
+\end{code}
+
+All that's left to add are print statements, user input, and/or graphical details.
+A complete version of the source code presented in this chapter is available on \url{http://thinkjava.org/}.
+We encourage you to piece the examples together before jumping directly to the solution online.
+
+
+\section{Inheritance}
+
+Earlier in the chapter, we made a major programming mistake: we copied source code from one file to another.
+Our motivation was that the \java{Player} and \java{Pile} classes require a lot of the same methods: \java{add}, \java{deal}, \java{empty}, \java{getName}, and \java{toString}.
+The UML diagrams below summarize the resulting structure of the two classes.
+
+\begin{center}
+\includegraphics{uml/Player.pdf}
+~~~
+\includegraphics{uml/Pile.pdf}
+\end{center}
+
+Duplicating source code almost always leads to trouble in the long term.
+First and foremost, if there is bug or other defect in the code, you have to fix it in multiple places.
+Second, it can be very difficult to keep track of duplicate code fragments, especially if some of them are changed.
+If you find a way to enhance or improve one version of the code, you may forget to apply those same changes elsewhere.
+
+These issues are exacerbated when developing large or complex software with other developers.
+Duplicate code is longer than it needs to be, making it more difficult to read and understand.
+As a general rule, you should never write the same code twice, and you should try to reuse code that others have written whenever possible.
+
+\index{inheritance}
+\index{parent class}
+\index{class!parent}
+\index{child class}
+\index{class!child}
+
+The correct way to share functionality between \java{Player} and \java{Pile} is through {\bf inheritance} using the \java{extends} keyword.
+Inheritance is the ability to define a new class that is a modified version of an existing class.
+Extending the metaphor, the existing class is sometimes called the {\bf parent} class and the new class is called the {\bf child}.
+
+We first saw this feature way back in Section~\ref{JUnit} when discussing JUnit.
+All test classes extend the \java{junit.framework.TestCase} class, which defines methods like \java{assertEquals}, \java{assertTrue}, and so forth.
+
+\begin{code}
+public class SeriesTest extends TestCase {
+
+    public void testFibonacci() {
+        assertEquals(1, Series.fibonacci(1));
+        ...
+\end{code}
+
+The code \java{extends TestCase} means that \java{SeriesTest} is a new kind of \java{TestCase} that inherits the methods and instance variables of \java{TestCase}.
+In this example, \java{TestCase} is the parent and \java{SeriesTest} is the child.
+
+You can identify parent-child (or ``is-a'') relationships by asking whether one class is a version of another class.
+For example, a \java{Dog} is an \java{Animal}, a \java{Teacher} is a \java{Person}, and \java{SeriesTest} is a \java{TestCase}.
+But a \java{Player} is not a \java{Pile}, and vice versa.
+
+However both \java{Player} and \java{Pile} have similar roles in the card game, which suggests that they are related.
+We can define a new parent class named \java{Agent} that implements what they have in common.
+
+\begin{center}
+\includegraphics{uml/Agent.pdf}
+\end{center}
+
+This new UML diagram illustrates two new language features.
+First, the arrows mean inheritance (\java{extends} in Java).
+The \java{Player} and \java{Pile} classes inherit all attributes and methods defined in the \java{Agent} parent class.
+
+Second, the hash symbol (\java{#}) means \java{protected}.
+Similar to \java{private} attributes, \java{protected} attributes are only accessible in the class they are defined and its child classes.
+If \java{name} and \java{cards} were \java{private}, they would not be inherited by \java{Player} and \java{Pile}.
+
+
+\section{The class hierarchy}
+
+A primary advantage of inheritance is that you can add methods and attributes without modifying the parent.
+This is particularly useful for Java classes, since you can't modify them even if you want to.
+In addition, the child class can {\bf override} methods from the parent.
+We have already seen how classes can override the default \java{equals} and \java{toString} methods.
+
+\index{Object}
+
+In Java, all classes extend some other class.
+The most basic class is called \java{Object}.
+It contains no instance variables, but it provides the methods \java{equals} and \java{toString}, among others.
+Many classes extend \java{Object}, including most of the classes we have written.
+Any class that does not explicitly name a parent inherits from \java{Object} by default.
+
+Some inheritance chains are much longer, though.
+For example, the \java{JFrame} class (in \java{javax.swing}) extends \java{Frame}, which extends \java{Window}, which extends \java{Container}, which extends \java{Component}, which extends \java{Object}.
+No matter how long the chain, \java{Object} is the common ancestor of all classes.
+The ``family tree'' of classes is called the class hierarchy.
+If you look at the documentation of \java{JFrame}, you see the hierarchy that makes up \java{JFrame}'s pedigree.
+
+
+\section{Object-oriented design}
+
+Inheritance is a powerful feature.
+Some programs that would be complicated without it can be written concisely and simply with it.
+Also, inheritance can facilitate code reuse, since you can customize the behavior of existing classes without having to modify them.
+
+On the other hand, inheritance can make programs more difficult to read.
+When you see a method invocation, it can be hard to figure out which method gets invoked.
+It depends on whether the method has been overridden.
+
+Many things that can be done with inheritance can be done as well or better without it.
+A common alternative is {\bf composition}, where new objects are composed of existing objects, adding new capability without inheritance.
+For example, the \java{Player} class contains an \java{ArrayList} rather than extending it.
+
+\index{object-oriented design}
+
+Designing objects and the relationships among them is the topic of {\bf object-oriented design}, which is beyond the scope of this book.
+But if you are interested, be sure to check out {\em Head First Design Patterns}, published by O'Reilly Media.
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{abstraction}
+The process of reducing information and/or detail to focus on high-level concepts.
+
+\term{artificial intelligence}
+A sub-field of computer science that deals with designing algorithms capable of intelligent behavior.
+
+\term{inheritance}
+The ability to copy attributes and methods from one class to another, without duplicating source code.
+
+\term{parent class}
+A class that defines common functionality used by other classes.
+
+\term{child class}
+A class that \java{extends} another class.
+In Java, all classes inherit exactly one class.
+
+%TODO add other vocabulary and index terms to this chapter
+
+\end{description}
+
+
+\section{Exercises}
+
+
+\begin{exercise}
+%TODO implement the final design of the code where \java{Player extends Agent}
+\end{exercise}
+
+
+\begin{exercise}
+%TODO try out different strategies for Player.play()
+\end{exercise}
+
+
+\begin{exercise}
+%TODO write a simulation loop that plays the game 100 times and keeps track of how many times each player wins (to evaluate different strategies)
+\end{exercise}
+
+
+\begin{exercise}
+%TODO extend the code to support three or more players; for example, create an ArrayList<Player> and a loop that lets them take turns
+\end{exercise}
+
+
+\begin{exercise}
+%TODO implement a graphical version of the card game?
+\end{exercise}
 
 
 \backmatter

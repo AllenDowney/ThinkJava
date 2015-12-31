@@ -7,48 +7,13 @@ import java.util.Random;
  * @author Chris Mayfield
  * @version 12/29/2015
  */
-public class Pile {
-    
-    private String name;
-    
-    private ArrayList<Card> cards;
+public class Pile2 extends Agent {
     
     /**
      * Constructs an empty pile of cards.
      */
-    public Pile(String name) {
-        this.name = name;
-        this.cards = new ArrayList<Card>();
-    }
-    
-    /**
-     * Adds a card at the end of the pile.
-     */
-    public void add(Card card) {
-        this.cards.add(card);
-    }
-    
-    /**
-     * Adds the given cards to the pile.
-     */
-    public void deal(Deck deck) {
-        for (Card card : deck.getCards()) {
-            this.cards.add(card);
-        }
-    }
-    
-    /**
-     * True if the pile has no cards, false otherwise.
-     */
-    public boolean empty() {
-        return this.cards.size() == 0;
-    }
-    
-    /**
-     * Gets the pile's name.
-     */
-    public String getName() {
-        return this.name;
+    public Pile2(String name) {
+        super(name);
     }
     
     /**
@@ -83,17 +48,10 @@ public class Pile {
     /**
      * Swap cards with another pile.
      */
-    public void swap(Pile pile) {
+    public void swap(Pile2 pile) {
         ArrayList<Card> temp = this.cards;
         this.cards = pile.cards;
         pile.cards = temp;
-    }
-    
-    /**
-     * Returns a string representation of the pile.
-     */
-    public String toString() {
-        return this.name + ": " + this.cards;
     }
     
 }
