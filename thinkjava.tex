@@ -10298,6 +10298,201 @@ Read about it at \url{https://en.wikipedia.org/wiki/Insertion_sort} write a func
 \end{exercise}
 
 
+\documentclass[12pt]{book}
+
+\title{Think Java}
+\author{Allen Downey and Chris Mayfield}
+
+\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\newcommand{\theauthors}{Allen Downey and Chris Mayfield}
+\newcommand{\theversion}{Version 6.0 Draft -- \today}
+
+%%%% Both LATEX and PLASTEX
+
+% balanced index with TOC entry
+\usepackage{makeidx}
+\makeindex
+
+% automatically index glossary terms
+\newcommand{\term}[1]{%
+\index{#1}
+\item[#1:]}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+% format end of chapter excercises
+\newtheoremstyle{exercise}
+  {12pt}        % space above
+  {12pt}        % space below
+  {}            % body font
+  {}            % indent amount
+  {\bfseries}   % head font
+  {}            % punctuation
+  {12pt}        % head space
+  {}            % custom head
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}[chapter]
+
+\usepackage{graphicx}
+%\graphicspath{{figs/}}
+
+\usepackage{url}
+
+\newif\ifplastex
+\plastexfalse
+
+\ifplastex
+%%%% PLASTEX ONLY
+
+\usepackage{localdef}
+
+\newcount\anchorcnt
+\newcommand*{\Anchor}[1]{%
+  \@bsphack%
+    \Hy@GlobalStepCount\anchorcnt%
+    \edef\@currentHref{anchor.\the\anchorcnt}%
+    \Hy@raisedlink{\hyper@anchorstart{\@currentHref}\hyper@anchorend}%
+    \M@gettitle{}\label{#1}%
+    \@esphack%
+}
+
+\newcommand{\java}[1]{\verb"#1"}
+\newcommand{\stdout}[1]{\verb"#1"}
+
+\else
+%%%% LATEX ONLY
+
+\usepackage{geometry}
+\geometry{
+    width=5.5in,
+    height=8.5in,
+    hmarginratio=3:2,
+    vmarginratio=1:1,
+    includehead=true,
+    headheight=15pt
+}
+
+% paragraph spacing
+\setlength{\parindent}{0pt}                      % 17.62482pt
+\setlength{\parskip}{12pt plus 4pt minus 4pt}    % 0.0pt plus 1.0pt
+\linespread{1.05}
+\def\arraystretch{1.5}
+
+% list spacing
+\setlength{\topsep}{5pt plus 2pt minus 3pt}      % 10.0pt plus 4.0pt minus 6.0pt
+\setlength{\partopsep}{-6pt plus 2pt minus 2pt}  %  3.0pt plus 2.0pt minus 2.0pt
+\setlength{\itemsep}{0pt}                        %  5.0pt plus 2.5pt minus 1.0pt
+
+% these are copied from tex/latex/base/book.cls
+% all I changed is afterskip
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+    {-3.5ex \@plus -1ex \@minus -.2ex}%
+    {0.7ex \@plus.2ex}%
+    {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {0.3ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% table of contents vertical spacing
+\usepackage{tocloft}
+\setlength\cftparskip{8pt plus 4pt minus 4pt}
+\usepackage[totoc]{idxlayout}
+
+% The following line adds a little extra space to the column
+% in which the Section numbers appear in the table of contents
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.5em}{3.0em}}
+\makeatother
+
+% customize page headers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter ~~ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection ~~ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+%\rfoot{\textcolor{gray}{\tiny ThinkJava Draft \today}}
+
+%% tweak spacing of figures and captions
+%\usepackage{floatrow}
+%\usepackage{caption}
+%\captionsetup{
+%    font=small,
+%    labelformat=empty,
+%    justification=centering,
+%    skip=4pt
+%}
+
+% colors for code listings and output
+\usepackage{xcolor}
+\definecolor{bgcolor}{HTML}{FAFAFA}
+\definecolor{comment}{HTML}{007C00}
+\definecolor{keyword}{HTML}{0000FF}
+\definecolor{strings}{HTML}{B20000}
+
+% syntax highlighting in code listings
+\usepackage{textcomp}
+\usepackage{listings}
+\lstset{
+    language=java,
+    basicstyle=\ttfamily,
+    backgroundcolor=\color{bgcolor},
+    commentstyle=\color{comment},
+    keywordstyle=\color{keyword},
+    stringstyle=\color{strings},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    upquote=true,
+    aboveskip=\parskip,
+    belowskip=\parskip
+}
+
+% code listing environments
+\lstnewenvironment{code}
+{\minipage{\linewidth}}
+{\endminipage}
+\lstnewenvironment{stdout}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
+{\endminipage}
+
+% inline syntax formatting
+\newcommand{\java}[1]{\lstinline{#1}} %\end{
+
+% pdf hyperlinks, table of contents, and document properties
+\usepackage[pdftex]{hyperref}
+\hypersetup{%
+  pdftitle={\thetitle},
+  pdfauthor={\theauthors},
+  pdfsubject={\theversion},
+  pdfkeywords={},
+  bookmarksopen=false,
+  colorlinks=true,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+%%%% END OF LATEX ONLY
+\fi
+
+%%%% END OF PREAMBLE
+
+\begin{document}
+\setcounter{chapter}{13}
+
 \chapter{Objects of objects}
 
 Now that we've designed classes for \java{Card}s and \java{Deck}s, let's use them to make a game!
@@ -10704,17 +10899,114 @@ This process involves swapping \java{ArrayList} references, moving the top card 
 
 All that's left to add are print statements, user input, and/or graphical details.
 A complete version of the source code presented in this chapter is available on \url{http://thinkjava.org/}.
-As with previous chapters, we encourage you to piece the examples together before jumping directly to the solution online.
-
-
-\section{Abstract classes}
-
-%TODO base class for Player and Pile, talk about code reuse
+We encourage you to piece the examples together before jumping directly to the solution online.
 
 
 \section{Inheritance}
 
-%TODO extend the abstract base class, show the final UML
+Earlier in the chapter, we made a major programming mistake: we copied source code from one file to another.
+Our motivation was that the \java{Player} and \java{Pile} classes require a lot of the same methods: \java{add}, \java{deal}, \java{empty}, \java{getName}, and \java{toString}.
+The UML diagrams below summarize the resulting structure of the two classes.
+
+\begin{center}
+\includegraphics{uml/Player.pdf}
+~~~
+\includegraphics{uml/Pile.pdf}
+\end{center}
+
+Duplicating source code almost always leads to trouble in the long term.
+First and foremost, if there is bug or other defect in the code, you have to fix it in multiple places.
+Second, it can be very difficult to keep track of duplicate code fragments, especially if some of them are changed.
+If you find a way to enhance or improve one version of the code, you may forget to apply those same changes elsewhere.
+
+These issues are exacerbated when developing large or complex software with other developers.
+Duplicate code is longer than it needs to be, making it more difficult to read and understand.
+As a general rule, you should never write the same code twice, and you should try to reuse code that others have written whenever possible.
+
+\index{inheritance}
+\index{parent class}
+\index{class!parent}
+\index{child class}
+\index{class!child}
+
+The correct way to share functionality between \java{Player} and \java{Pile} is through {\bf inheritance} using the \java{extends} keyword.
+Inheritance is the ability to define a new class that is a modified version of an existing class.
+Extending the metaphor, the existing class is sometimes called the {\bf parent} class and the new class is called the {\bf child}.
+
+We first saw this feature way back in Section~\ref{JUnit} when discussing JUnit.
+All test classes extend the \java{junit.framework.TestCase} class, which defines methods like \java{assertEquals}, \java{assertTrue}, and so forth.
+
+\begin{code}
+public class SeriesTest extends TestCase {
+
+    public void testFibonacci() {
+        assertEquals(1, Series.fibonacci(1));
+        ...
+\end{code}
+
+The code \java{extends TestCase} means that \java{SeriesTest} is a new kind of \java{TestCase} that inherits the methods and instance variables of \java{TestCase}.
+In this example, \java{TestCase} is the parent and \java{SeriesTest} is the child.
+
+You can identify parent-child (or ``is-a'') relationships by asking whether one class is a version of another class.
+For example, a \java{Dog} is an \java{Animal}, a \java{Teacher} is a \java{Person}, and \java{SeriesTest} is a \java{TestCase}.
+But a \java{Player} is not a \java{Pile}, and vice versa.
+
+However both \java{Player} and \java{Pile} have similar roles in the card game, which suggests that they are related.
+We can define a new parent class named \java{Agent} that implements what they have in common.
+
+\begin{center}
+\includegraphics{uml/Agent.pdf}
+\end{center}
+
+This new UML diagram illustrates two new language features.
+First, the arrows mean inheritance (\java{extends} in Java).
+The \java{Player} and \java{Pile} classes inherit all attributes and methods defined in the \java{Agent} parent class.
+
+Second, the hash symbol (\java{#}) means \java{protected}.
+Similar to \java{private} attributes, \java{protected} attributes are only accessible in the class they are defined and its child classes.
+If \java{name} and \java{cards} were \java{private}, they would not be inherited by \java{Player} and \java{Pile}.
+
+
+\section{The class hierarchy}
+
+A primary advantage of inheritance is that you can add methods and attributes without modifying the parent.
+This is particularly useful for Java classes, since you can't modify them even if you want to.
+In addition, the child class can {\bf override} methods from the parent.
+We have already seen how classes can override the default \java{equals} and \java{toString} methods.
+
+\index{Object}
+
+In Java, all classes extend some other class.
+The most basic class is called \java{Object}.
+It contains no instance variables, but it provides the methods \java{equals} and \java{toString}, among others.
+Many classes extend \java{Object}, including most of the classes we have written.
+Any class that does not explicitly name a parent inherits from \java{Object} by default.
+
+Some inheritance chains are much longer, though.
+For example, the \java{JFrame} class (in \java{javax.swing}) extends \java{Frame}, which extends \java{Window}, which extends \java{Container}, which extends \java{Component}, which extends \java{Object}.
+No matter how long the chain, \java{Object} is the common ancestor of all classes.
+The ``family tree'' of classes is called the class hierarchy.
+If you look at the documentation of \java{JFrame}, you see the hierarchy that makes up \java{JFrame}'s pedigree.
+
+
+\section{Object-oriented design}
+
+Inheritance is a powerful feature.
+Some programs that would be complicated without it can be written concisely and simply with it.
+Also, inheritance can facilitate code reuse, since you can customize the behavior of existing classes without having to modify them.
+
+On the other hand, inheritance can make programs more difficult to read.
+When you see a method invocation, it can be hard to figure out which method gets invoked.
+It depends on whether the method has been overridden.
+
+Many things that can be done with inheritance can be done as well or better without it.
+A common alternative is {\bf composition}, where new objects are composed of existing objects, adding new capability without inheritance.
+For example, the \java{Player} class contains an \java{ArrayList} rather than extending it.
+
+\index{object-oriented design}
+
+Designing objects and the relationships among them is the topic of {\bf object-oriented design}, which is beyond the scope of this book.
+But if you are interested, be sure to check out {\em Head First Design Patterns}, published by O'Reilly Media.
 
 
 \section{Vocabulary}
@@ -10727,6 +11019,18 @@ The process of reducing information and/or detail to focus on high-level concept
 \term{artificial intelligence}
 A sub-field of computer science that deals with designing algorithms capable of intelligent behavior.
 
+\term{inheritance}
+The ability to copy attributes and methods from one class to another, without duplicating source code.
+
+\term{parent class}
+A class that defines common functionality used by other classes.
+
+\term{child class}
+A class that \java{extends} another class.
+In Java, all classes inherit exactly one class.
+
+%TODO add other vocabulary and index terms to this chapter
+
 \end{description}
 
 
@@ -10734,7 +11038,12 @@ A sub-field of computer science that deals with designing algorithms capable of 
 
 
 \begin{exercise}
-%TODO try out different strategies for Player.play
+%TODO implement the final design of the code where \java{Player extends Agent}
+\end{exercise}
+
+
+\begin{exercise}
+%TODO try out different strategies for Player.play()
 \end{exercise}
 
 
@@ -10744,12 +11053,12 @@ A sub-field of computer science that deals with designing algorithms capable of 
 
 
 \begin{exercise}
-%TODO implement a graphical version of the card game?
+%TODO extend the code to support three or more players; for example, create an ArrayList<Player> and a loop that lets them take turns
 \end{exercise}
 
 
 \begin{exercise}
-%TODO extend the code to support three or more players; for example, create an ArrayList<Player> and a loop that lets them take turns
+%TODO implement a graphical version of the card game?
 \end{exercise}
 
 
