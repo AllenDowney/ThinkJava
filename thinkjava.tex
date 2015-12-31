@@ -595,7 +595,7 @@ Phrases that appear in quotation marks are called {\bf strings}, because they co
 The name \java{println} is short for ``print line.''
 It appends a special character, called a {\bf newline}, that moves to the beginning of the next line.
 
-If you don't want a newline at the end, you can use \java{print} instead of \java{println}: 
+If you don't want a newline at the end, you can use \java{print} instead of \java{println}:
 
 \begin{code}
 public class Goodbye {
@@ -1116,7 +1116,7 @@ world!
 Assuming that we wanted the output on one line, this is not correct.
 The problem is that the first line uses \java{println}, when we probably meant to use \java{print}, as in the ``Goodbye, cruel world.'' example.
 
-Identifying semantic errors can be tricky because 
+Identifying semantic errors can be tricky because
 have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
 Usually the compiler and the interpreter can't help you, because they don't know what the right thing is.
 
@@ -1226,8 +1226,8 @@ You can also do both in one line, like this:
 
 \begin{code}
     String message = "Hello!";   // initialize message
-    int hour = 10;    
-    int minute = 59;  
+    int hour = 10;
+    int minute = 59;
 \end{code}
 
 A statement that creates a variable and assigns a value at the same time is called an {\bf initialization}.
@@ -1717,7 +1717,7 @@ You might not understand all of the guidelines now, because they refer to langua
 So might want to refer back to them periodically.
 
 In the meantime, there many tools that help programmers find and correct style violations.
-One of the most popular is Checkstyle, which enforces most of Google's guidelines.  
+One of the most popular is Checkstyle, which enforces most of Google's guidelines.
 Instructions for downloading and running Checkstyle are available on our website: \url{http://thinkjava.org/}
 
 % TODO: When we have the website up, let's update this with a more specific URL
@@ -2111,7 +2111,7 @@ The following lines declare the variables and create the \java{Scanner}:
 
 The next step is to prompt the user for the input.
 We'll use \java{print} instead of \java{println} so they can enter the input on the same line.
-And we'll use the \java{Scanner} method \java{nextInt}, which reads input from the keyboard and converts it to an integer: 
+And we'll use the \java{Scanner} method \java{nextInt}, which reads input from the keyboard and converts it to an integer:
 
 \begin{code}
     System.out.print("How many inches? ");
@@ -2488,7 +2488,7 @@ To solve this problem, you need an extra \java{nextLine} after \java{nextInt}.
 \begin{code}
     System.out.print("What is your age? ");
     age = in.nextInt();
-    in.nextLine();  
+    in.nextLine();
     System.out.print("What is your name? ");
     name = in.nextLine();
     System.out.printf("Hello %s, age %d\n", name, age);
@@ -9352,7 +9352,7 @@ If two object are identical, they are also equivalent.
 So \java{card1.equals(card2)} is true.
 
 But if two objects are equivalent, they are not necessarily identical.
-In this example, \java{card1 == card3} is false. 
+In this example, \java{card1 == card3} is false.
 
 %\index{aliasing}
 %What does it look like when \java{card1} and \java{card2} are identical?
@@ -9597,7 +9597,7 @@ public static int findCard(Card[] cards, Card card) {
     while (low <= high) {
         int mid = (low + high) / 2;                   // step 1
         int comp = cards[mid].compareTo(card);
-        
+
         if (comp == 0) {                              // step 2
             return mid;
         } else if (comp < 0) {                        // step 3
@@ -9702,7 +9702,7 @@ public static int findCard(Card[] cards, Card card,
     }
     int mid = (low + high) / 2;                       // step 1
     int comp = cards[mid].compareTo(card);
-    
+
     if (comp == 0) {                                  // step 2
         return mid;
     } else if (comp < 0) {                            // step 3
@@ -10212,7 +10212,7 @@ Here is an outline of the algorithm in pseudocode:
 \begin{code}
 public static Deck insertionSort(Deck deck) {
     // create a new deck with the same length as deck
-  
+
     for each card in deck {
         // find the index, i, where the card should go in the sorted deck
         // starting at i, shift the cards to the right by one
@@ -10417,7 +10417,7 @@ We will write a separate method for each requirement.
     public void add(Card card) {
         this.cards.add(card);
     }
-    
+
     public void deal(Deck deck) {
         for (Card card : deck.getCards()) {
             this.cards.add(card);
@@ -10560,6 +10560,7 @@ Rather than iterate the \java{ArrayList} in order and choose a random number bet
 
 
 \section{Playing the game}
+\label{sec:playing}
 
 We now have everything we need to write the \java{main} method of the game.
 For simplicity, we'll implement a text-based application in this section.
@@ -10571,7 +10572,7 @@ We'll start with two players in this example.
 \begin{code}
     Deck deck = new Deck();
     deck.shuffle();
-    
+
     Player one = new Player("Allen");
     one.deal(deck.subdeck(0, 4));
     Player two = new Player("Chris");
@@ -10606,7 +10607,7 @@ We will create a new variable to keep track of whose turn it is.
             current = two;
         } else {
             current = one;
-        }    
+        }
     }
 \end{code}
 
@@ -10787,27 +10788,54 @@ In Java, all classes inherit exactly one class.
 
 
 \begin{exercise}
-%TODO implement the final design of the code where \java{Player extends Agent}
+Implement the design of \java{Agent}, \java{Player}, and \java{Pile} as described in the final UML diagram.
+Almost all of the source code is presented in the chapter; you just need to put each method in the right file.
+The point of this exercise is to practice writing classes that extend other classes.
 \end{exercise}
 
 
 \begin{exercise}
-%TODO try out different strategies for Player.play()
+Create a new class named \java{Eights} that has a \java{main} method, and bring together the code snippets in Section~\ref{sec:playing}.
+Add print statements to show the contents of each \java{Player} and \java{Pile} at the beginning of every turn.
+Display a message when the discard pile is shuffled into the draw pile.
+Also output when cards are drawn or played, and show the final score at the end of the game.
 \end{exercise}
 
 
 \begin{exercise}
-%TODO write a simulation loop that plays the game 100 times and keeps track of how many times each player wins (to evaluate different strategies)
+Design and implement a better strategy for the \java{Player.play} method.
+For example, if there are multiple cards you can play, and one of them is an eight, then play the eight.
+Think of other ways you can minimize penalty points, such as playing the highest ranking cards first.
 \end{exercise}
 
 
 \begin{exercise}
-%TODO extend the code to support three or more players; for example, create an ArrayList<Player> and a loop that lets them take turns
+Write a simple simulation loop that plays the game 100 times and keeps track of how many times each player wins.
+If you implemented multiple strategies in the previous exercise, you can play them against each other to evaluate which one works best.
+For example, you could write a \java{class Genius extends Player} that overrides the \java{play} method, and use the Genius class for one of the players.
 \end{exercise}
 
 
 \begin{exercise}
-%TODO implement a graphical version of the card game?
+Adapt the code in \java{Eights.main} to support three or more players.
+For example, you could use an array (or \java{ArrayList}) to store multiple \java{Player} objects and an integer to keep track of whose turn it us.
+In terms of general running time, is the game longer or shorter with multiple players?
+\end{exercise}
+
+
+\begin{exercise}
+Working with cards is more interesting if you can display them on the screen.
+Download the following files into the same folder:
+
+\begin{itemize}
+\item \url{http://thinkapjava.com/code/CardTable.java}
+\item \url{http://thinkapjava.com/code/cardset.zip}
+\end{itemize}
+
+Unzip {\tt cardset.zip}, which contains a {\tt cardset-oxymoron} folder with all the card images.
+(Note the variable \java{cardset} in \java{CardTable.main} is the name of this folder.)
+Run \java{CardTable.java} and you should see images of a deck of cards laid out on a green table.
+You can use this class as a starting place to implement your own card games.
 \end{exercise}
 
 
