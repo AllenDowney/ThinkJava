@@ -6769,7 +6769,7 @@ Write a loop to try other possible values.
 \end{exercise}
 
 
-\chapter{Objects}
+\chapter{Shapes and graphics}
 \label{objects}
 
 \index{String}
@@ -7157,18 +7157,178 @@ So periodically as your program runs, the system looks for stranded objects and 
 Later, the memory space occupied by the object will be available to be used as part of a new object.
 
 You don't have to do anything to make garbage collection happen, and in general don't have to be aware of it.
-But we thought you might be interested.
+%But we thought you might be interested.
 
-% TODO: this might be a good place to introduce graphics; then we
-% can have exercises that draw Points and Rectangles
+
+\section{Java 2D graphics}
+\label{graphics}
+
+Now that we've seen how to work with \java{Point} and \java{Rectangle} objects, let's learn how to make them appear on the screen.
+The \java{java.awt} package stands for {\bf Abstract Window Toolkit}, which is Java's original library for drawing graphics.
+We are only going to scratch the surface of graphics programming, but you can read a lot more about it in the Java Tutorials: \url{https://docs.oracle.com/javase/tutorial/2d/}.
+
+\index{Canvas}
+\index{class!Canvas}
+\index{Graphics}
+\index{class!Graphics}
+
+There are several ways to create graphics in Java; the simplest way is to use \java{java.awt.Canvas} and \java{java.awt.Graphics}.
+A \java{Canvas} is a blank rectangular area of the screen onto which the application can draw.
+The \java{Graphics} class provides basic drawing methods such as \java{drawLine}, \java{drawRect}, and \java{drawString}.
+Here is an example program that draws a circle using the \java{fillOval} method:
+
+\begin{code}
+import java.awt.Canvas;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+
+public class Drawing extends Canvas {
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("My Drawing");
+        Canvas canvas = new Drawing();
+        canvas.setSize(400, 400);
+        frame.add(canvas);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void paint(Graphics g) {
+        g.fillOval(100, 100, 200, 200);
+    }
+}
+\end{code}
+
+The definition \java{Drawing extends Canvas} means that a \java{Drawing} object is a new kind of \java{Canvas}.
+We will learn more about \java{extends} in Section~\ref{sec:extends}.
+In the \java{main} method, we:
+
+\begin{enumerate}
+
+\index{JFrame}
+\index{class!JFrame}
+
+\item Create a \java{JFrame} object, which is a window that will contain the canvas (and other components like buttons and menus);
+
+\item Create a \java{Drawing} object, set its width and height, and add it to the frame; and
+
+\item Pack the frame (resize it) to fit the canvas, and display it on the screen.
+\end{enumerate}
+
+Once the canvas is visible, the \java{paint} method will be called whenever it needs to be drawn (for example, when the window is moved or resized).
+The application doesn't end after the \java{main} method returns; instead, it waits for the \java{JFrame} to close.
+If you run this code, you should see a black circle on a gray background.
+
+
+\section{Graphics methods}
+
+\index{coordinate}
+\index{pixel}
+
+You are probably used to Cartesian {\bf coordinates}, where x and y values can be either positive or negative.
+In contrast, Java uses a coordinate system where the origin is in the upper-left corner.
+That way, x and y are always positive integers.
+Coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
+
+\begin{center}
+\includegraphics[width=5in]{figs/coordinates.pdf}
+\end{center}
+
+To draw on the canvas, you invoke methods on the \java{Graphics} object.
+The previous example used \java{fillOval}, which is defined as follows:
+
+\begin{code}
+    public void fillOval(int x, int y, int width, int height)
+\end{code}
+
+\index{bounding box}
+
+The four parameters specify a {\bf bounding box}, which is the rectangle in which the oval is drawn.
+\java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
+(Note the bounding box itself is not drawn.)
+
+\begin{center}
+\includegraphics{figs/circle.pdf}
+\end{center}
+
+\index{Color}
+
+To choose the color of a shape, invoke \java{setColor} on the Graphics object:
+
+\begin{code}
+    g.setColor(Color.red);
+\end{code}
+
+The \java{setColor} method changes the current color for everything that gets drawn.
+\java{Color.red} is a constant provided by the {\tt Color} class; to use it you have to \java{import java.awt.Color}.
+Other colors include:
+
+\begin{stdout}
+    black       blue      cyan     darkGray   gray    green
+    lightGray   magenta   orange   pink       white   yellow
+\end{stdout}
+
+You can create your own colors by specifying the red, green, and blue (RGB) components.
+For example:
+
+\begin{code}
+    Color purple = new Color(128, 0, 128);
+\end{code}
+
+Each value is an integer in the range 0 (darkest) to 255 (lightest).
+The color \java{(0, 0, 0)} is black, and \java{(255, 255, 255)} is white.
+
+You can set the background color of the \java{Canvas} by invoking \java{setBackground} in the \java{main} method.
+
+\begin{code}
+    canvas.setBackground(Color.white);
+\end{code}
+
+\index{Mickey Mouse}
+
+Let's say we want to draw a picture of Mickey Mouse.
+We can use the oval we just drew as the face, and then add two ears.
+To make the code more readable, let's use \java{Rectangle}s to represent bounding boxes.
+
+Here's a method that takes a Rectangle and invokes \java{fillOval}.
+
+\begin{code}
+    public void boxOval(Graphics g, Rectangle bb) {
+        g.fillOval(bb.x, bb.y, bb.width, bb.height);
+    }
+\end{code}
+
+And here's a method that draws Mickey Mouse:
+
+\begin{code}
+    public void mickey(Graphics g, Rectangle bb) {
+        boxOval(g, bb);
+
+        int dx = bb.width / 2;
+        int dy = bb.height / 2;
+        Rectangle half = new Rectangle(bb.x, bb.y, dx, dy);
+
+        half.translate(-dx / 2, -dy / 2);
+        boxOval(g, half);
+
+        half.translate(dx * 2, 0);
+        boxOval(g, half);
+    }
+\end{code}
+
+The first line draws the face.
+The next three lines create a smaller rectangle for the ears.
+We \java{translate} the rectangle up and left for the first ear, then right for the second ear.
+The result looks like this:
+
+\begin{center}
+\includegraphics[height=2in]{figs/mickey.pdf}
+\end{center}
 
 
 \section{Vocabulary}
 
 \begin{description}
-
-%\term{AWT}
-%The Abstract Window Toolkit, one of the biggest and commonly-used Java packages.
 
 \term{reference}
 A value that indicates an object.
@@ -7201,6 +7361,18 @@ The condition when two or more variables refer to the same object.
 
 \term{garbage collection}
 The process of finding objects that have no references and reclaiming their storage space.
+
+\term{AWT}
+The Abstract Window Toolkit, one of the biggest and commonly-used Java packages.
+
+\term{coordinate}
+A variable or value that specifies a location in a two-dimensional graphical window.
+
+\term{pixel}
+The unit in which coordinates are measured.
+
+\term{bounding box}
+A common way to specify the coordinates of a rectangular area.
 
 \end{description}
 
@@ -7263,7 +7435,9 @@ Include all variables and parameters and the objects those variables refer to.
         int y = box.y + box.height / 2;
         return new Point(x, y);
     }
+\end{code}
 
+\begin{code}
     public static void main(String[] args) {
         Point blank = new Point(5, 8);
 
@@ -7401,7 +7575,68 @@ You can use the BigInteger methods \java{add} and \java{multiply}, but don't use
 \end{exercise}
 
 
-\chapter{Classes}
+% TODO: this might be a good place to introduce graphics; then we
+% can have exercises that draw Points and Rectangles
+
+
+\begin{exercise}
+Draw the flag of Japan, a red circle on white background
+that is wider than it is tall.
+\end{exercise}
+
+
+\begin{exercise}
+Modify {\tt Mickey.java} to draw ears on the ears, and ears on those
+ears, and more ears all the way down until the smallest ears are
+only 3 pixels wide.
+
+The result should look like Mickey Moose:
+
+\includegraphics[height=2in]{figs/moose.pdf}
+
+Hint: you should only have to add or modify a few lines of code.
+
+You can download a solution from
+\url{http://thinkapjava.com/code/MickeySoln.java}.
+
+\end{exercise}
+
+
+\begin{exercise}
+\begin{enumerate}
+
+\item Download
+\url{http://thinkapjava.com/code/Moire.java} and import it into
+your development environment.
+
+\item Read the {\tt paint} method and draw a sketch of
+what you expect it to do.  Now run it.  Did you get what you
+expected?  For an explanation of what is going on, see
+\url{http://en.wikipedia.org/wiki/Moire_pattern}.
+
+\item Modify the program so that the space between the circles is
+larger or smaller.  See what happens to the image.
+
+\item Modify the program so that the circles are drawn in the center
+of the screen and concentric, as in the following figure (left).
+The distance between the circles should be small enough
+that the Moir\'{e} interference is apparent.
+
+\includegraphics[height=1.5in]{figs/moire.pdf}
+
+\item Write a method named {\tt radial} that draws a radial set
+of line segments as shown in the figure (right), but they should be close
+enough together to create a Moir\'{e} pattern.
+
+\item Just about any kind of graphical pattern can generate
+Moir\'{e}-like interference patterns.  Play around and see what you
+can create.
+
+\end{enumerate}
+\end{exercise}
+
+
+\chapter{Designing classes}
 
 \index{object type}
 \index{type!object}
