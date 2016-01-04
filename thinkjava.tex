@@ -1533,8 +1533,8 @@ You can avoid the problem by representing the balance as an integer:
 \index{type!long}
 
 This solution works as long as the number of cents doesn't exceed the largest integer, which is about 2 billion.
-If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
-Hopefully nobody will ever need that much money!
+%If necessary you can use \java{long} instead, which has a max value of $2^{63}-1$ (about 92 quadrillion dollars).
+%Hopefully nobody will ever need that much money!
 
 
 \section{Operators for strings}
@@ -2619,7 +2619,7 @@ public class GuessStarter {
 Like the \java{Scanner} class we saw in this chapter, \java{Random} has to be imported before we can use it.
 And as we saw with \java{Scanner}, we have to use the keyword \java{new} operator to create a random number generator.
 Then we can use the method \java{nextInt} to generate a random number.
-With the argument 100, the result will be between 0 and 99, including both.
+In this example, the result will be between 0 and 99, including both.
 Adding 1 yields a number between 1 and 100, including both.
 
 \begin{itemize}
@@ -2643,8 +2643,11 @@ Adding 1 yields a number between 1 and 100, including both.
 \chapter{Void methods}
 \label{voidmeth}
 
-So far we've only written short programs that have a single class with a \java{main} method.
+So far we've only written short programs that have a single class and a single method, \java{main}.
 In this chapter, we'll show you how to organize longer programs into multiple methods and classes.
+
+We'll also present the \java{Math} class, which provides methods for common mathematical operations.
+
 
 \index{method}
 
@@ -2703,7 +2706,7 @@ Java does not recognize \java{Pi}, \java{pi}, or \java{pie}.
 Also, \java{PI} is the name of a variable, not a method, so it doesn't have parentheses.
 The same is true for the constant \java{Math.E}, which approximates Euler's number.
 
-It turns out that converting to/from radians is a common operation, so the \java{Math} class provides methods for that.
+Converting to and from radians is a common operation, so the \java{Math} class provides methods that do it for you.
 
 \begin{code}
     double radians = Math.toRadians(180.0);
@@ -2712,17 +2715,19 @@ It turns out that converting to/from radians is a common operation, so the \java
 
 \index{type!long}
 
-If you haven't already, take a look at the documentation for \java{Math} so you know what methods are provided.
-For example, another useful method is \java{round}, which rounds a floating-point value to the nearest integer and returns a \java{long}.
+Another useful method is \java{round}, which rounds a floating-point value to the nearest integer and returns a \java{long}.
+A \java{long} is like an \java{int}, but bigger.
+Specifically, and \java{int} uses 32 bits; the largest value it can hold is $2^{31}-1$, which is about 2 billion.
+A \java{long} uses 64 bits, so the largest value is $2^{63}-1$, which is about 9 quintillion.
 
 \begin{code}
     long x = Math.round(Math.PI * 20.0);
 \end{code}
 
-In Java, \java{int} values are stored using 32 bits (4 bytes) of memory, whereas \java{long} values are stored in 64 bits (8 bytes).
-As a result, \java{long} variables can represent much larger integers.
-In the above example, the multiplication happens first, before the method is invoked.
 The result is 63 (rounded up from 62.8319).
+
+You can read the documentation for these methods, and the other methods in the \java{Math} class at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html}.
+
 
 \section{Composition revisited}
 
@@ -2737,8 +2742,8 @@ For example, you can use any expression as an argument to a method:
     double x = Math.cos(angle + Math.PI / 2);
 \end{code}
 
-This statement takes the value \java{Math.PI}, divides it by two, and then adds the result to the value of the variable \java{angle}.
-The sum is then passed as an argument to \java{cos}.
+This statement divides \java{Math.PI} by two, adds the result to \java{angle}, and computes the cosine of the sum.
+
 You can also take the result of one method and pass it as an argument to another:
 
 \begin{code}
@@ -2748,16 +2753,27 @@ You can also take the result of one method and pass it as an argument to another
 In Java, the \java{log} method always uses base $e$.
 So this statement finds the log base $e$ of 10, and then raises $e$ to that power.
 The result gets assigned to \java{x}.
-%Do you know what it is without reaching for a calculator?
 
-When using \java{Math} methods, it is a common error to forget to specify the class name \java{Math}.
-For example, \java{Math.pow} takes two arguments and raises the first argument to the power of the second.
+Some math methods take more than one argument;
+for example, \java{Math.pow} takes two arguments and raises the first to the power of the second.
 
 \begin{code}
-    pow(2.0, 10.0);  // syntax error
+    Math.pow(2.0, 10.0);
 \end{code}
 
-If you try to invoke \java{Math.pow} this way, the compiler will say it ``cannot find symbol''; that is, there is no method named \java{pow} in the current class.
+When using \java{Math} methods, it is a common error to forget the \java{Math}.
+For example, if you try to invoke \java{pow(2.0, 10.0)}, you will get an error message like:
+
+\begin{stdout}
+File: Test.java  [line: 5]
+Error: cannot find symbol
+  symbol:   method pow(double,double)
+  location: class Test
+\end{stdout}
+
+The message ``cannot find symbol'' is confusing, but the last line provides a hint.
+The compiler is looking for \java{pow} in the same class where it is used, which is \java{Test}.
+If you don't specify a class name, the compiler looks in the current class.
 
 
 \section{Adding new methods}
@@ -2767,67 +2783,50 @@ If you try to invoke \java{Math.pow} this way, the compiler will say it ``cannot
 \index{main}
 \index{method!main}
 
-Like the \java{Math} class, you can write your own set of methods for use in other programs.
-%One of the most powerful features of a programming language is the ability to add new methods.
-Let's revisit the method definition for \java{main}:
-
-\begin{code}
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-\end{code}
-
-\index{public}
-\index{void}
-\index{type!void}
-
-The first line contains information about the method:
-\java{main} is a \java{public} method, which means it can be invoked from other classes;
-it is a \java{static} method, but we're not going to explain what that means yet;
-and it is a \java{void} method, which means that it doesn't yield a result (unlike the \java{Math} methods).
-
-\index{parameter}
-
-The statement in parentheses declares a parameter named \java{args}.
-A {\bf parameter} is a variable that stores an argument.
-This parameter has type \java{String[]}, which means that whoever invokes \java{main} must provide an array of Strings (we'll get to arrays in a later chapter).
-
-You can define other methods using syntax that is similar to \java{main}:
-
-\begin{code}
-    public static void NAME(PARAMETERS) {
-        STATEMENTS
-    }
-\end{code}
-
-By convention, methods start with a lower case letter and use ``camel case,'' which is a cute name for \java{jammingWordsTogetherLikeThis}.
-You can use any name you want for your method, except \java{main} or any of the Java keywords.
-
-% TODO: move the definition of ``argument'' to Ch3?
-
-The list of parameters specifies what values, if any, you have to provide in order to invoke the new method.
-The first methods we are going to write have no parameters, so the parameter list is empty.
+You have probably guessed by now that you can define more than one method in a class.
 Here's an example:
 
 \begin{code}
+public class NewLine {
+
     public static void newLine() {
         System.out.println();
     }
-\end{code}
 
-The name of this method is \java{newLine}.
-It contains only one statement, which prints a blank line.
-In \java{main}, we can invoke the new method like this:
-
-\begin{code}
     public static void main(String[] args) {
         System.out.println("First line.");
         newLine();
         System.out.println("Second line.");
     }
+}
 \end{code}
 
+The name of the class is \java{NewLine}.
+By convention, class names begin with a capital letter.
+
+\java{NewLine} contains two methods, \java{newLine} and \java{main}.
+Remember that Java is case-sensitive, so \java{NewLine} and \java{newLine} are not the same.
+
+By convention, method names start with a lower case letter and use ``camel case,'' which is a cute name for \java{jammingWordsTogetherLikeThis}.
+You can use any name you want for your methods, except \java{main} or any of the Java keywords.
+
+\java{newLine} and \java{main} are public, which means they can be invoked from other classes.
+Theya are both static, but we can't explain what that means yet.
+And they are both void, which means that they don't yield a result (unlike the \java{Math} methods, for example.
+
+\index{public}
+\index{void}
+\index{type!void}
+
+\index{parameter}
+
+The parentheses after the method name contain a list of variables, called {\bf parameters}, where the method stores its arguments.
+\java{main} has a single parameter, called \java{args}, which has type \java{String[]}.
+That means that whoever invokes \java{main} must provide an array of Strings (we'll get to arrays in a later chapter).
+
+\java{newLine} has no parameters, it requires no arguments, as shown when it is invoked in \java{main}.
 Because \java{newLine} is in the same class as \java{main}, we don't have to specify the class name.
+
 The output of this program is:
 
 \begin{stdout}
@@ -2868,9 +2867,6 @@ Or we could write a new method that prints three blank lines:
 You can invoke the same method more than once, and you can have one method invoke another.
 In this example, \java{main} invokes \java{threeLine}, and \java{threeLine} invokes \java{newLine}.
 
-%In \java{threeLine} I wrote three statements all on the same line, which is syntactically legal (remember that spaces and new lines usually don't change the meaning of a program).
-%It is usually a good idea to put each statement on its own line, but I sometimes break that rule.
-
 You might wonder why it is worth the trouble to create new methods.
 There are many reasons, but this example demonstrates a few of them:
 
@@ -2894,7 +2890,7 @@ Methods allow you to focus on each sub-problem in isolation, and then compose th
 %In Section~\ref{methods} we will come back to this question and list some additional benefits of dividing programs into methods.
 
 
-\section{Classes and methods}
+\section{Order of execution}
 
 \index{class}
 \index{method}
@@ -2923,32 +2919,23 @@ public class NewLine {
 \end{code}
 
 \index{case-sensitive}
-
-The first line is the class definition.
-Class names should be capitalized; this convention helps readers tell the difference between classes and methods in your source code.
-The \java{NewLine} class contains three \java{void} methods: \java{newLine}, \java{threeLine}, and \java{main}.
-Java is a case-sensitive language, so \java{NewLine} and \java{newLine} are considered different.
-
-%\subsection{Programs with multiple methods}
-
 \index{order of execution}
 
 When you look at a class definition that contains several methods, it is tempting to read it from top to bottom.
 But that is likely to be confusing, because that is not the {\bf order of execution} of the program.
 
 Execution always begins at the first statement of \java{main}, regardless of where it is in the source file.
-In the previous example, we deliberately put \java{main} at the bottom of the program.
-Statements are executed one at a time, in order, until you reach a method invocation.
-Think of method invocations as a detour in the flow of execution.
-Instead of going to the next statement, you go to the first line of the invoked method, execute the statements there, and then come back and pick up again where you left off.
+Statements are executed one at a time, in order, until you reach a method invocation, which you can think of as a detour.
+Instead of going to the next statement, you go to the first line of the invoked method, execute the statements there, and then come back and pick up where you left off.
 
 That sounds simple enough, but remember that one method can invoke another one.
 In the middle of \java{main}, we go off to execute the statements in \java{threeLine}.
-But while we are executing \java{threeLine}, we go off to execute \java{newLine}.
+While we are executing \java{threeLine}, we go off to execute \java{newLine}.
 Then \java{newLine} invokes \java{println}, which causes yet another detour.
 
-Fortunately, Java is adept at keeping track of where it is.
-So when \java{println} completes, it picks up where it left off in \java{newLine}, and then gets back to \java{threeLine}, and then finally gets back to \java{main} so the program can terminate.
+Fortunately, Java is good at keeping track of where it is.
+So when \java{println} completes, it picks up where it left off in \java{newLine}; when \java{newLine} completes, it goes back to \java{threeLine}, and when \java{threeLine} completes, it gets back to \java{main}.
+
 In summary, when you read a program, don't read from top to bottom.
 Instead, follow the flow of execution.
 
@@ -2962,36 +2949,34 @@ Instead, follow the flow of execution.
 \index{parameter}
 \index{argument}
 
-Some of the methods we have used require arguments, which are values that you provide when you invoke the method.
-For example, to find the sine of a number, you have to provide the number.
-So \java{sin} takes a \java{double} as an argument.
-To print a message, you have to provide the string.
-So \java{println} takes a \java{String} as an argument.
-Some methods take more than one argument.
-For example, \java{Math.pow} takes two \java{double}s: the base and the exponent.
+Some of the methods we have used require arguments, which are the values you provide when you invoke the method.
+For example, to find the sine of a number, you have to provide the number, so \java{sin} takes a \java{double} as an argument.
+To print a message, you have to provide the message, so \java{println} takes a \java{String}.
 
 When you use a method, you provide the arguments.
-When you write a method, you list the parameters.
-The parameter list indicates what arguments are required.
-Here's a method that takes a string and prints it twice:
+When you write a method, you name the parameters; the parameter list indicates what arguments are required.
+
+The following class shows an example:
 
 \begin{code}
+public class PrintTwice {
+
     public static void printTwice(String s) {
         System.out.println(s);
         System.out.println(s);
     }
+
+    public static void main(String[] args) {
+        printTwice("Don't make me say this twice!");
+    }
+}
 \end{code}
 
 \java{printTwice} has a parameter named \java{s} with type \java{String}.
-The parameter name hints that it is a \java{String}, but you could use any legal variable name.
 When we invoke \java{printTwice}, we have to provide an argument with type \java{String}.
+
 Before the method executes, the argument gets assigned to the parameter.
-
 In this example, the argument \java{"Don't make me say this twice!"} gets assigned to the parameter \java{s}.
-
-\begin{code}
-    printTwice("Don't make me say this twice!");
-\end{code}
 
 \index{parameter passing}
 
@@ -3010,16 +2995,26 @@ For example, if you try:
     printTwice(17);  // syntax error
 \end{code}
 
-You will get the compiler error ``cannot find symbol,'' which might be confusing.
-Java is looking for a method named \java{printTwice} that can take an integer.
-Since there isn't one in the current class, Java can't find such a ``symbol.''
+You will get an error message like this:
 
-There are some apparent exceptions to this rule, because sometimes Java converts from one type to another automatically.
-For example, \java{Math.sqrt} requires a \java{double} value.
-If you run \java{Math.sqrt(25)}, the interger value \java{25} is automatically converted to the floating-point value \java{25.0}.
+\begin{stdout}
+File: Test.java  [line: 10]
+Error: method printTwice in class Test cannot be applied to given types;
+  required: java.lang.String
+  found: int
+  reason: actual argument int cannot be converted to java.lang.String
+          by method invocation conversion
+\end{stdout}
 
-\java{System.out.println} can accept any type as an argument.
-But generally speaking, that is an exception; most methods are not so accommodating.
+Sometimes Java can convert an argument from one type to another automatically.
+For example, \java{Math.sqrt} requires a \java{double}, but if you run \java{Math.sqrt(25)}, the interger value \java{25} is automatically converted to the floating-point value \java{25.0}.
+But in this example, Java can't (or won't) convert the integer \java{17} to a \java{String}.
+
+Parameters and other variables only exist inside their own methods.
+Inside \java{main}, there is no such thing as \java{s}.
+If you try to use it there, the compiler will complain.
+Similarly, inside \java{printTwice} there is no such thing as \java{argument}.
+That variable belongs to \java{main}.
 
 
 \section{Methods with multiple parameters}
@@ -3029,8 +3024,7 @@ But generally speaking, that is an exception; most methods are not so accommodat
 \index{method!multiple parameter}
 \index{class!Time}
 
-The syntax for declaring and invoking methods with multiple parameters is a common source of confusion.
-For one, you have to declare the type of every parameter separately.
+Here is an example of a method that takes two parameters:
 
 \begin{code}
     public static void printTime(int hour, int minute) {
@@ -3040,9 +3034,25 @@ For one, you have to declare the type of every parameter separately.
     }
 \end{code}
 
-It might be tempting to write ``\java{int hour, minute}'' but that format is only legal for variable declarations, not parameter lists.
-Another common source of confusion is that you do not have to declare the types of arguments in a method call.
-The following is incorrect:
+In the parameter list, it is tempting to write
+
+\begin{code}
+    public static void printTime(int hour, minute) {
+        ...
+\end{code}
+ ``\java{int hour, minute}''
+
+But that format is only legal for variable declarations, not parameter lists.
+
+To invoke this method, we have to provide two integers as arguments, like this:
+
+\begin{code}
+    int hour = 11;
+    int minute = 59;
+    printTime(hour, minute);
+\end{code}
+
+A common error is to declare the types of the arguments, like this:
 
 \begin{code}
     int hour = 11;
@@ -3050,116 +3060,8 @@ The following is incorrect:
     printTime(int hour, int minute);  // syntax error
 \end{code}
 
-In this case, Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
-It is unnecessary (and therefore not allowed) to include the type when you pass them as arguments.
-The correct syntax is:
-
-\begin{code}
-    printTime(hour, minute);
-\end{code}
-
-When you call a method, Java {\it copies the value} of any arguments you provide into the method's parameters.
-It's common for two methods, like \java{main} and \java{printTime}, to have variables with the same name, to show how data passes from one method to the next.
-But remember that these variables are stored in different memory locations.
-Changing the value of \java{hour} or \java{minute} in \java{printTime} has no effect on the original variables in \java{main}.
-
-
-\section{Reading documentation}
-\label{sec:apidocs}
-
-\index{documentation}
-
-For a comprehensive example of what methods are like, take a look at the documentation for \java{Scanner}.
-You can find it in the Java library (see the link in Section~\ref{sec:library}) or do a web search for ``java scanner.''
-Either way, you should get something like Figure~\ref{fig:javadoc}.
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{figs/scanner.png}
-\caption{Screenshot of the documentation for \java{Scanner}.}
-\label{fig:javadoc}
-\end{center}
-\end{figure}
-
-Scroll down to the ``Method Summary'' section.
-In the previous chapter, we introduced methods for reading the ``next'' input.
-As you can see, the \java{Scanner} class provides quite a few of them.
-Click on the link for \java{nextInt}, and it will scroll down to more details:
-
-\begin{stdout}
-public int nextInt()
-Scans the next token of the input as an int.
-\end{stdout}
-
-\index{signature}
-
-The first line is the method's {\bf signature}, which specifies the name of the method, its return type, and parameters.
-In this example, \java{nextInt} returns an \java{int}.
-The empty parentheses mean that \java{nextInt} has no parameters.
-The next line explains what the method does.
-The subsequent lines (not shown) describe each parameter (if any) and the return value.
-Explanations are often redundant, but the documentation is supposed to fit this standard format.
-%The last line describes the exceptions this method might throw.
-
-It might take some time to get comfortable reading this kind of information, but it's well worth the effort.
-Knowing what methods a class provides helps you avoid reinventing the wheel.
-Whenever you learn about a new class, you should take a quick look at its documentation.
-On that note, take a few minutes to review the documentation for \java{System} and \java{String}.
-
-
-\section{Writing documentation}
-
-\index{Javadoc}
-
-A nice feature of the Java language is the ability to write documentation at the same time you are writing the source code.
-That way, the documentation stays in sync with the classes and methods themselves.
-In fact, the HTML pages you browsed in the previous section were automatically generated using a tool called {\bf Javadoc}.
-This tool is part of the standard JDK, and you can run it directly from DrJava by pressing the {\tt Javadoc} button on the toolbar.
-
-\index{comments!documentation}
-\index{documentation comments}
-
-Javadoc reads your source files for {\bf documentation comments} and extracts other relevant information about your class and method definitions.
-Given the prevalence of this tool, people sometimes refer to documentation as ``Javadoc comments.''
-In contrast to inline comments that begin with \java{//}, documentation comments begin with \java{/**} (two stars) and end with \java{*/} (one star).
-Anything in between these two tokens becomes part of the documentation.
-%As a rule of thumb, you should document every class and every method.
-
-\begin{code}
-/**
- * Example program that demonstrates print vs println.
- */
-public class Goodbye {
-
-    /**
-     * Application entry point; prints a greeting.
-     */
-    public static void main(String[] args) {
-        System.out.print("Goodbye, ");  // note the space
-        System.out.println("cruel world");
-    }
-
-}
-\end{code}
-
-This example has perhaps too many comments, since all the program does is print a single message.
-But it illustrates the differences between inline and documentation comments:
-
-\begin{itemize}
-\item Inline comments tend to be short phrases that help explain complex parts of a method.
-Documentation comments are typically complete sentences that begin with a capital letter and end with a period.
-
-\item Documentation comments often span multiple lines.
-By convention, each line begins with a \java{*} that is aligned vertically with the start and end of the comment.
-
-\item Some development environments, like Eclipse and NetBeans, automatically display documentation comments when you hover your mouse over the name of a class or method.
-
-\end{itemize}
-
-Writing documentation and inline comments is essential for making source code readable.
-As we discussed in an earlier chapter, people spend the majority of their development time understanding and modifying existing code.
-You should not only write good comments for others, but for yourself as well.
-When you haven't looked at your own code for a while, it takes a long time to remember how it works (or what you were trying to do) if there's no comments.
+That's not necessary, because Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
+And it's a syntax error.
 
 
 \section{Stack diagrams and scope}
@@ -3168,52 +3070,65 @@ When you haven't looked at your own code for a while, it takes a long time to re
 \index{stack diagram}
 \index{diagram!stack}
 
-Pulling together the code examples from the previous section, here is a complete class definition:
+Pulling together the code fragments from the previous section, here is a complete class definition:
 
 \begin{code}
-public class PrintTwice {
+public class PrintTime {
 
-    public static void printTwice(String s) {
-        System.out.println(s);
-        System.out.println(s);
+    public static void printTime(int hour, int minute) {
+        System.out.print(hour);
+        System.out.print(":");
+        System.out.println(minute);
     }
 
     public static void main(String[] args) {
-        String argument = "Never say never.";
-        printTwice(argument);
+        int hour = 11;
+        int minute = 59;
+        printTime(hour, minute);
     }
-
 }
 \end{code}
 
-Parameters and other variables only exist inside their own methods.
-Within the confines of \java{main}, there is no such thing as \java{s}.
-If you try to use it there, the compiler will complain.
-Similarly, inside \java{printTwice} there is no such thing as \java{argument}.
-That variable belongs to the \java{main} method.
+\java{printTime} has two parameters, named \java{hour} and \java{minute}.
+And \java{main} has two variables, also named \java{hour} and \java{minute}.
+Although the have the same names, these variables are not the same.
+\java{hour} in \java{printTime} and \java{hour} in \java{main} refer to different locations and they can have different values.
 
-One way to keep track of where each variable is defined is to draw a {\bf stack diagram}.
+For example, you could invoke \java{printTime} like this:
+
+\begin{code}
+        int hour = 11;
+        int minute = 59;
+        printTime(hour+1, 0);
+\end{code}
+
+Before the method in invoked, Java evaluates the arguments; in this example, the results are \java{12} and \java{0}.
+Then it assigns those values to the parameters.
+Inside \java{printTime}, the value of \java{hour} is \java{12}, not \java{11}, and the value of \java{minute} is \java{0}, not \java{59}.
+
+Furthermore, if \java{printTime} modifies one of its parameters, that change has no effect on the variables in \java{main}.
+
+One way to keep track of all of this is to draw a {\bf stack diagram}.
 The stack diagram for this example looks like this:
+
+%TODO: redo this figure in dia.
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[scale=0.9]{figs/stack.pdf}
-\caption{Stack diagram for the \java{PrintTwice} program.}
+\caption{Stack diagram for \java{PrintTwice}.}
 \end{center}
 \end{figure}
 
 \index{frame}
 
 For each method there is a box called a {\bf frame} that contains the method's parameters and variables.
-The name of the method appears outside the frame.
-The value of each variable is drawn inside a box with the name of the variable beside it.
-(Note for people who know too much: this diagram leaves out an important detail about strings that we will explain later.)
+The name of the method appears outside the frame; the variables and parameters appear inside.
 
-\index{scope}
+%\index{scope}
 
-Stack diagrams help you to visualize the {\bf scope} of a variable, which is the area of a program where a variable exists.
-It's possible to have two variables with the same name in two different methods.
-Each only exists within its own method, so they don't interfere with each other.
+%Stack diagrams help you to visualize the {\bf scope} of a variable, which is the area of a program where a variable exists.
+
 
 
 \section{Tracing with a debugger}
@@ -3221,17 +3136,19 @@ Each only exists within its own method, so they don't interfere with each other.
 
 \index{debugger}
 
-Keeping track of variables and methods on paper is a useful skill, and you should practice drawing stack diagrams.
-Another way to visualize the scope of variables and the flow of execution is to use a {\bf debugger}.
-Regardless which development environment you use, the overall process is the same:
+Another way to visualize variables and parameters is to use a {\bf debugger}.
+Most debuggers make it possible to:
 
 \index{breakpoint}
 
 \begin{enumerate}
-\item Set {\bf breakpoints} on lines where you want the program to pause.
+\item Set a {\bf breakpoint}, which is line where you want the program to pause.
 \item Step through the code one line at a time and watch what it does.
 \item Check the values of variables and see when and how they change.
 \end{enumerate}
+
+%ABD: Do we want to move this to the web page?  It is specific to DrJava,
+% and it's a little weird that we switch to the imperative here.
 
 For example, open any program in DrJava and move the cursor to the first line of \java{main}.
 Press Ctrl+B to toggle a breakpoint on the current line; it should now be highlighted in red.
@@ -3265,14 +3182,163 @@ You might expect the code do one thing, but then the debugger shows it doing som
 At that moment, you gain insight about what may be wrong with the code.
 
 
+\section{Reading documentation}
+\label{sec:apidocs}
+
+\index{documentation}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figs/scanner.png}
+\caption{Screenshot of the documentation for \java{Scanner}.}
+\label{fig:javadoc}
+\end{center}
+\end{figure}
+
+One of the nice things about Java is that it comes with an extensive library of classes and methods.
+But before you can use them, you have to read the documentation.
+And sometimes that's not easy.
+
+As an example, let's look a the documentation for \java{Scanner}, which we used in Section~\ref{scanner}.
+The documentation of this class is at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html}.
+Figure~\ref{fig:javadoc} shows a screenshot of this page.
+
+Documentation for all classes uses a similar format.
+The first line is the pacakage that contains the class, \java{java.util}.
+The second line is the name of the class.
+
+The next two lines indicate that every \java{Scanner} is also an \java{Object}; we'll learn more about \java{Object} in Section~\ref{???}.
+
+The ``Implemented interfaces'' list some of the things a \java{Scanner} can do; we won't say more about that for now.
+
+The next section of the documentation is a narrative that explains the purpose of the class and includes examples of how to use it.
+This text can be difficult to read because it uses terms we have not learned yet.
+But the examples are often very useful.
+A good way to get started with a new class is to paste the examples into a test file and see if you can compile and run them.
+
+After the narrative, you will find the following sections:
+
+\begin{description}
+
+\item[Constructor summary:]  This section lists the ways of creating, or ``constructing'' a \java{Scanner}.
+
+\item[Method summary:] A list of methods \java{Scanner} provides.
+
+\item[Constructor detail:] More information about how to construct a \java{Scanner}.
+
+\item[Method detail:] More information about each method.
+
+\end{description}
+
+As an example, here is the summary information for
+\java{nextInt}:
+
+\begin{stdout}
+public int nextInt()
+Scans the next token of the input as an int.
+\end{stdout}
+
+\index{signature}
+
+The first line is the method's {\bf signature}, which specifies the name of the method, its parameters (none), and what type it returns (\java{int}).
+The next line is a short description of what it does.
+
+The ``Method detail'' explains more:
+
+\begin{stdout}
+public int nextInt()
+Scans the next token of the input as an int.
+
+An invocation of this method of the form nextInt() behaves in exactly 
+the same way as the invocation nextInt(radix), where radix is the
+default radix of this scanner.
+
+Returns:
+the int scanned from the input
+
+Throws:
+InputMismatchException - if the next token does not match the Integer 
+regular expression, or is out of range
+NoSuchElementException - if input is exhausted
+IllegalStateException - if this scanner is closed
+\end{stdout}
+
+The ``Returns'' section describes the result when the method succeeds.
+The ``Throws'' section describes possible errors and their resulting exceptions.
+Exceptions are said to be ``thrown'', maybe like a referee throwing a flag, or like a toddler throwing a fit.
+
+It might take some time to get comfortable reading documentation, and learning which parts to ignore.
+But it's worth the effort.
+Knowing what's available in the library helps you avoid reinventing the wheel.
+And a little bit of documentation can save you a lot of debugging.
+
+
+\section{Writing documentation}
+
+\index{Javadoc}
+
+As you benefit from reading good documentation, you should ``pay it forward'' by writing good documentation.
+A nice feature of the Java language is the ability to embed documentation in your source code.
+That way, you can write it as you go, and as things change, it is easier to keep the documentation consistent with the code.
+
+If you include documentation in your source code, you can extract it automatically, and generate well-formatted HTML, using a tool called {\bf Javadoc}.
+This tool is part of the standard JDK, and widely used.
+In fact, the online documentation of the Java libraries is generated by JavaDoc.
+
+\index{comments!documentation}
+\index{documentation comments}
+
+Javadoc scans your source files looking for specially-formatted comments called {\bf documentation comments} or more commonly ``Javadoc comments''.
+
+Javadoc comments begin with \java{/**} (two stars) and end with \java{*/} (one star).
+Anything in between is considered part of the documentation.
+
+Here's a class definition with two Javadoc comments, one for the class and one for the method:
+
+\begin{code}
+/**
+ * Example program that demonstrates print vs println.
+ */
+public class Goodbye {
+
+    /**
+     * Prints a greeting.
+     */
+    public static void main(String[] args) {
+        System.out.print("Goodbye, ");  // note the space
+        System.out.println("cruel world");
+    }
+
+}
+\end{code}
+
+The class comment explains the purpose of the class.
+The method comment explains what the method does.
+
+Notice that this example also includes an inline comment, beginning with \java{\\}.
+In general, inline comments are short phrases that help explain complex parts of a program.  
+They are intended for other programmers reading the source code.
+
+In contrast, Javadoc comments are longer, usually complete sentences.
+They explain what each method does, but they omit details about how the method works.
+And they are intended for people who will use the methods without looking at the source code.
+
+Appropriate comments and documentation are essential for making source code readable.
+And remember that the person most likely to read your code in the future, and appreciate good documentation, is you.
+
+
 \section{Vocabulary}
 
 \begin{description}
 
 % Note: expanded definition from Chapter 1
-\term{method}
-A named sequence of statements that performs a procedure or function.
-Methods may or may not take parameters, and may or may not return a value.
+%\term{method}
+%A named sequence of statements that performs a procedure or function.
+%Methods may or may not take parameters, and may or may not return a value.
+
+\term{argument}
+A value that you provide when you invoke a method.
+This value must have the same type as the corresponding parameter.
 
 \term{invoke}
 To cause a method to execute.
@@ -3281,13 +3347,9 @@ To cause a method to execute.
 A piece of information that a method requires before it can run.
 Parameters are variables: they contain values and have types.
 
-\term{argument}
-A value that you provide when you invoke a method.
-This value must have the same type as the corresponding parameter.
-
 % Note: expanded definition from Chapter 2
-\term{composition}
-The ability to combine simple expressions and statements into compound expressions and statements, making it possible to use intermediate computations as arguments.
+%\term{composition}
+%The ability to combine simple expressions and statements into compound %expressions and statements, making it possible to use intermediate %computations as arguments.
 
 \term{order of execution}
 The order in which Java executes methods and statements.
@@ -3312,8 +3374,8 @@ The methods calls are ``stacked'' from top to bottom, in the order of execution.
 \term{frame}
 A structure (represented by a box in stack diagrams) that contains a method's parameters and variables.
 
-\term{scope}
-The area of a program where a variable exists.
+%\term{scope}
+%The area of a program where a variable exists.
 
 \term{debugger}
 A tool that allows you to run one statement at a time and see the contents of variables.
@@ -3411,22 +3473,21 @@ Make sure you understand both the order of execution and the flow of data.
 \end{exercise}
 
 
-\begin{exercise}
+%\begin{exercise}
 
-What is the difference between a variable and a method?
-In terms of their syntax, how does the Java compiler tell the difference between the two?
+%What is the difference between a variable and a method?
+%In terms of their syntax, how does the Java compiler tell the difference between the two?
 
 %A variable is a {\em location of data}, whereas a method is a {\em location of code}.
 %In Java, methods always have parentheses, even if they have no arguments like \java{System.out.println()}.
 
-\end{exercise}
+%\end{exercise}
 
 
-\begin{exercise}
-
-Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
-
-\end{exercise}
+%ABD: We don't need this any more since we used this as an example
+%\begin{exercise}
+%Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
+%\end{exercise}
 
 
 \begin{exercise}
@@ -6368,6 +6429,7 @@ As an exercise, you can modify the program to correct this error.
 
 
 \section{Wrapper classes}
+\label{wrappers}
 
 In the previous section, we introduced the \java{Character} class.
 There are similar classes for the other primitive data types such as \java{Boolean}, \java{Integer}, \java{Long}, and \java{Double}.
