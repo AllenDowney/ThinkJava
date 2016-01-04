@@ -268,7 +268,7 @@ And like scientists, they observe the behavior of complex systems, form hypothes
 The single most important skill for a computer scientist is {\bf problem-solving}.
 It involves the ability to formulate problems, think creatively about solutions, and express solutions clearly and accurately.
 As it turns out, the process of learning to program is an excellent opportunity to develop problem-solving skills.
-That's why this chapter is called, ``The way of the program.''
+That's why this chapter is called, ``The way of the program''.
 
 On one level you will be learning to program, a useful skill by itself.
 But on another level you will use programming as a means to an end.
@@ -464,7 +464,7 @@ In the hello world program, this line
 \end{code}
 
 is a {\bf print statement}, which displays a message on the screen.
-Confusingly, print can mean both ``display something on the screen'' and ``send something to the printer.''
+Confusingly, print can mean both ``display something on the screen'' and ``send something to the printer''.
 In this book, we'll try to say ``display'' when we mean ``display''.
 \index{println}
 \index{statement!print}
@@ -541,7 +541,7 @@ The command line is a direct interface to the operating system.
 It allows you to run programs, manage files and directories, and monitor system resources.
 Many advanced tools, both for software development and general purpose computing, are available only at the command line.
 
-There are many good tutorials online for learning the command line for your operating system; just search the web for ``command line tutorial.''
+There are many good tutorials online for learning the command line for your operating system; just search the web for ``command line tutorial''.
 On Unix systems like Linux and OS X, you can get started with just four commands: change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
 
 \begin{figure}[!h]
@@ -592,7 +592,7 @@ Phrases that appear in quotation marks are called {\bf strings}, because they co
 \index{print}
 \index{statement!print}
 
-The name \java{println} is short for ``print line.''
+The name \java{println} is short for ``print line''.
 It appends a special character, called a {\bf newline}, that moves to the beginning of the next line.
 
 If you don't want a newline at the end, you can use \java{print} instead of \java{println}:
@@ -812,7 +812,7 @@ A programming language that is designed to be easy for humans to read and write.
 
 \term{low-level language}
 A programming language that is designed to be easy for a computer to run.
-Also called ``machine language'' or ``assembly language.''
+Also called ``machine language'' or ``assembly language''.
 
 \term{portable}
 The ability of a program to run on more than one kind of computer.
@@ -847,9 +847,6 @@ Any of the languages people speak that have evolved naturally.
 
 %\term{grammar}
 %A set of rules that determines whether a statement is legal.
-
-%\term{parse}
-%To examine a program and analyze the syntactic structure.
 
 \term{statement}
 A part of a program that specifies a computation.
@@ -1171,7 +1168,7 @@ This example also demonstrates the syntax for declaring multiple variables with 
 Note that each declaration statement ends with a semicolon.
 
 You can use any name you want for a variable.
-But there are about 50 reserved words, called {\bf keywords}, that you are not allowed to use as variable names because they are used by the compiler to parse the structure of the program.
+But there are about 50 reserved words, called {\bf keywords}, that you are not allowed to use as variable names because they are used by the compiler to analyze the structure of the program.
 They include \java{public}, \java{class}, \java{static}, \java{void}, \java{int}.
 
 You can find the complete list at \url{http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html}, but you don't have to memorize them.
@@ -1192,7 +1189,6 @@ We do that with an {\bf assignment} statement.
     message = "Hello!";  // give message the value "Hello!"
     hour = 10;           // assign the value 10 to hour
     minute = 59;         // set minute to 59
-    hour = 11;           // change the hour to 11
 \end{code}
 
 This example shows four assignments, and the comments illustrate different ways people sometimes talk about assignment statements.
@@ -1201,7 +1197,6 @@ The vocabulary can be confusing here, but the idea is straightforward:
 \begin{itemize}
 \item When you declare a variable, you create a named storage location.
 \item When you make an assignment to a variable, you give it a value.
-\item If you reassign the variable, its value changes.
 \end{itemize}
 
 As a general rule, a variable has to have the same type as the value you assign to it.
@@ -1225,13 +1220,46 @@ You can declare a variable and then assign a value later, as in the previous exa
 You can also do both in one line, like this:
 
 \begin{code}
-    String message = "Hello!";   // initialize message
+    String message = "Hello!";
     int hour = 10;
     int minute = 59;
 \end{code}
 
 A statement that creates a variable and assigns a value at the same time is called an {\bf initialization}.
 \index{initialization}
+
+You can make more than one assignment to the same variable.
+For example:
+
+\begin{code}
+    int i = 1;
+    i = 2;
+\end{code}
+
+The first line initializes \java{i} to 1.
+The second line changes its value to \java{2}.
+In this example, there is no reason to make two assignments, but in
+many programs it is useful to reassign, or {\bf update}, variables.
+
+Because Java uses the \java{=} symbol for assignment, it is tempting to interpret a statement like \java{a = b} as a statement of equality.
+It is not!
+
+First, equality is commutative, and assignment is not.
+For example, in mathematics if $a = 7$ then $7 = a$.
+In Java \java{a = 7;} is a legal assignment statement, but \java{7 = a;} is not.
+The left side of an assigment statement has to be a variable name (at least for now).
+
+Also, in mathematics, a statement of equality is true for all time.
+If $a = b$ now, $a$ is always equal to $b$.
+In Java, an assignment statement can make two variables equal, but they don't have to stay that way.
+
+\begin{code}
+    int a = 5;
+    int b = a;     // a and b are now equal
+    a = 3;         // a and b are no longer equal
+\end{code}
+
+The third line changes the value of \java{a}, but does not change the value of \java{b}, so they are no longer equal.
 
 
 %\subsection{Memory diagrams}
@@ -1477,7 +1505,7 @@ The compiler won't make you do it, but you never know when a bug like this one w
 
 \section{Rounding errors}
 
-%The operations we have seen so far---addition, subtraction, multiplication, and division---also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
+%The operations we have seen so far -- addition, subtraction, multiplication, and division -- also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
 %In fact, most processors have special circuitry just for performing floating-point operations.
 
 \index{rounding error}
@@ -1647,7 +1675,7 @@ If it's not obvious by looking at the expression, use parentheses to make it cle
 
 \index{composition}
 
-So far we have looked at the elements of a programming language---variables, expressions, and statements---in isolation, without talking about how to put them together.
+So far we have looked at the elements of a programming language -- variables, expressions, and statements -- in isolation, without talking about how to put them together.
 
 One of the most useful features of programming languages is their ability to take small building blocks and {\bf compose} them.
 For example, we know how to multiply numbers and we know how to print.
@@ -1774,6 +1802,9 @@ A statement that stores a value in a memory location.
 \term{initialization}
 A statement that creates a variable and assigns a value.
 
+\term{update}
+An assignment that changes the value of a variable.
+
 \term{operator}
 A symbol that represents a computation like addition, multiplication, or string concatenation.
 
@@ -1856,7 +1887,7 @@ European format:
 Thursday 16 July, 2015
 \end{stdout}
 
-%HINT: You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
+%Hint: You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
 \end{enumerate}
 
 
@@ -1888,7 +1919,7 @@ Compute the elapsed time since you started working on this exercise.
 
 \end{enumerate}
 
-HINT: You might want to use additional variables to hold values during the computation.
+Hint: You might want to use additional variables to hold values during the computation.
 Variables that are used in a computation but never printed are sometimes called intermediate or temporary variables.
 
 \end{exercise}
@@ -1904,7 +1935,7 @@ Variables that are used in a computation but never printed are sometimes called 
 %\index{computer science}
 
 %\begin{quote}
-%{\bf ``Computer science is the study of computation---what can be computed and how to compute it.''}
+%{\bf ``Computer science is the study of computation -- what can be computed and how to compute it.''}
 %\end{quote}
 
 The programs we've looked at so far just display messages, which doesn't involve a lot of real computation.
@@ -2051,7 +2082,7 @@ public class Echo {
 }
 \end{code}
 
-If you omit the import statement and later refer to \java{Scanner}, you will get a compiler error like ``cannot find symbol.''
+If you omit the import statement and later refer to \java{Scanner}, you will get a compiler error like ``cannot find symbol''.
 That means the compiler doesn't know what you mean by \java{Scanner}.
 
 You might wonder why we can use the \java{System} class without importing it.
@@ -2262,7 +2293,7 @@ It is tempting to write:
     inch = cm / centPerInch;  // syntax error
 \end{code}
 
-But the result is an error---you get something like, ``Bad types in assignment: from double to int.''
+But the result is an error -- you get something like, ``Bad types in assignment: from double to int.''
 The problem is that the value on the right is floating-point and the variable on the left is an integer.
 
 %Java converts an \java{int} to a \java{double} automatically, since no information is lost in the process.
@@ -2587,7 +2618,8 @@ What if you use two format specifiers, but then only provide one value?
 
 
 \begin{exercise}
-The goal of this exercise is to write a simple ``Guess the number'' game.
+\label{guess}
+The goal of this exercise is to write a simple ``Guess the Number'' game.
 When it's finished, it will work like this:
 
 \begin{stdout}
@@ -2629,7 +2661,7 @@ Adding 1 yields a number between 1 and 100, including both.
 
 \item Modify the program to prompt the user, then use a Scanner to read a line of user input.  Compile and test the program.
 
-\item Parse the user input as an integer and display the result.  Again, compile and test.
+\item Read the user input as an integer and display the result.  Again, compile and test.
 
 \item Compute and display the difference between the user's guess and the number that was generated.
 
@@ -2692,7 +2724,7 @@ The third line finds the sine of the value of \java{angle}.
 \index{degrees}
 \index{radians}
 
-Arguments of the trigonometric functions---\java{sin}, \java{cos}, and \java{tan}---should be in {\em radians}.
+Arguments of the trigonometric functions -- \java{sin}, \java{cos}, and \java{tan} -- should be in {\em radians}.
 To convert from degrees to radians, you can divide by 180 and multiply by $\pi$.
 Conveniently, the \java{Math} class provides a \java{final double} named \java{PI} that contains an approximation of $\pi$:
 
@@ -3040,7 +3072,6 @@ In the parameter list, it is tempting to write
     public static void printTime(int hour, minute) {
         ...
 \end{code}
- ``\java{int hour, minute}''
 
 But that format is only legal for variable declarations, not parameter lists.
 
@@ -3064,7 +3095,7 @@ That's not necessary, because Java can tell the type of \java{hour} and \java{mi
 And it's a syntax error.
 
 
-\section{Stack diagrams and scope}
+\section{Stack diagrams}
 \label{stack}
 
 \index{stack diagram}
@@ -3533,7 +3564,7 @@ Saturday, July 16, 2011
 
 The programs we've seen so far do pretty much the same thing every time, regardless of the input.
 For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
-This chapter presents the features you need for programs to make complex decisions: a new data type called \java{boolean}, additional operators for expressing logic, and \java{if} statements.
+This chapter presents the features you need for programs to make complex decisions: a new data type called \java{boolean}, operators for expressing logic, and \java{if} statements.
 
 %\java{boolean} is named after George Boole, who developed a formal system that represents logic using the values {\it true} and {\it false} and operations like {\it and}, {\it or}, and {\it not}.
 %In Java, the values \java{true} and \java{false} belong to the data type \java{boolean}.
@@ -3543,60 +3574,6 @@ This chapter presents the features you need for programs to make complex decisio
 %In the case of \java{int}s, \java{double}s and \java{String}s, those sets are pretty big.
 %For \java{boolean}s, there are only two values.
 %The values \java{true} and \java{false} are keywords in Java, so they may appear in a different color, depending on your development environment.
-
-
-\section{Assignment revisited}
-
-\index{assignment}
-\index{statement!assignment}
-
-%TODO(ABD): we already showed an example of multiple assignment, so maybe
-% we should kill this section
-
-You can make more than one assignment to the same variable; the effect is to replace the old value with the new.
-One way to remember this behavior is to think of variables as {\em containers}.
-When you assign a value to a variable, you change the contents of the container.
-
-\begin{center}
-\includegraphics{figs/assign2.pdf}
-\end{center}
-
-%TODO(CSM): multiple assignment means "int x=0, y=0;" using the comma operator
-%\index{multiple assignment}
-%
-%\begin{code}
-%    int liz = 5;
-%    System.out.print(liz);
-%    liz = 7;
-%    System.out.println(liz);
-%\end{code}
-%
-%The output of this program is {\tt 57}, because the first time we print \java{liz} her value is 5, and the second time her value is 7.
-
-When there are multiple assignments to a variable, it is especially important to distinguish between an assignment statement and a statement of equality.
-Because Java uses the \java{=} symbol for assignment, it is tempting to interpret a statement like \java{a = b} as a statement of equality.
-It is not!
-
-First of all, equality is commutative, and assignment is not.
-For example, in mathematics if $a = 7$ then $7 = a$.
-In Java \java{a = 7;} is a legal assignment statement, but \java{7 = a;} is not.
-Assignment {\em always} executes from right to left.
-
-Furthermore, in mathematics, a statement of equality is true for all time.
-If $a = b$ now, then $a$ will always equal $b$.
-In Java, an assignment statement can make two variables equal, but they don't have to stay that way.
-
-\begin{code}
-    int a = 5;
-    int b = a;     // a and b are now equal
-    a = 3;         // a and b are no longer equal
-\end{code}
-
-The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
-In some programming languages a different symbol is used for assignment, such as {\tt <-} or {\tt :=}, to avoid this confusion.
-
-%Although multiple assignment is frequently useful, you should use it with caution.
-%If the values of variables change often, it can make the code difficult to read and debug.
 
 
 \section{Relational operators}
@@ -3619,41 +3596,38 @@ The following expressions show how they are used:
 \end{code}
 
 The result of a relational operator is one of two special values, \java{true} or \java{false}.
-These values belong to the type \java{boolean}; in fact, they are the only values for the type \java{boolean}.
+These values belong to the type \java{boolean}; in fact, they are the only boolean values.
 
-You are probably familiar with these operations, but notice that the Java syntax is different from mathematical symbols like $=$, $\neq$, and $\le$.
+You are probably familiar with these operations, but notice that the Java operators are different from the mathematical symbols like $=$, $\neq$, and $\le$.
 A common error is to use a single \java{=} instead of a double \java{==}.
 Remember that \java{=} is the assignment operator, and \java{==} is a comparison operator.
 Also, there is no such thing as \java{=<} or \java{=>} operators.
 
-The two sides of a relational operator have to be compatible.
+The two sides of a relational operator have to be compatible types.
 For example, the expression \java{5 < "6"} is invalid because \java{5} is an \java{int} and \java{"6"} is a \java{String}.
 When comparing values of different numeric types, Java applies the same conversion rules we saw previously with the assignment operator.
 For example, when evaluating the expression \java{5 < 6.0}, Java automatically converts the \java{5} to \java{5.0}.
 
 Most relational operators don't work with strings.
-Confusingly, \java{==} and \java{!=} do work with strings---they just don't do what you expect.
+Confusingly, \java{==} and \java{!=} do work with strings -- they just don't do what you expect.
 We'll explain what they do later; in the meantime, don't use them with strings.
-Instead, you should use the \java{String} methods \java{equals} and \java{compareTo}:
+Instead, you should use the \java{equals} method:
 
 \begin{code}
     String fruit1 = "Apple";
     String fruit2 = "Orange";
     System.out.println(fruit1.equals(fruit2));
-    System.out.println(fruit1.compareTo(fruit2));
 \end{code}
 
-%TODO: explain the return value from equals and compareTo
+The result is the boolean value \java{false}.
 
 
-\section{Conditional operators}
+\section{Logical operators}
 
-\index{conditional operator}
-\index{operator!conditional}
 \index{logical operator}
 \index{operator!logical}
 
-Java has three {\bf conditional operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
+Java has three {\bf logical operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
 The semantics of these operators are similar to their meanings in English.
 
 For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero and less than 10.
@@ -3663,7 +3637,7 @@ So \java{!evenFlag} is \java{true} if \java{evenFlag} is \java{false}.
 
 \index{short circuit}
 
-Conditional operators evaluate the second expression only when necessary.
+Logical operators evaluate the second expression only when necessary.
 For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
 Likewise, \java{false && anything} is always false.
 Ignoring the second operand, when possible, is called {\bf short circuit} evaluation, by analogy with an electrical circuit.
@@ -3672,16 +3646,16 @@ It can also avoid unnecessary errors, if \java{anything} might fail based on the
 
 \index{De Morgan's laws}
 
-When solving logic problems using conditional operators, you will often need to negate \java{&&} and \java{||} operations.
-{\bf De Morgan's laws} show how to simplify such expressions:
+If you ever have to negate an expression that contains logical operators,
+and you probably will, {\bf De Morgan's laws} can help:
 
 \begin{itemize}
 \item \java{!(A && B)} ~is the same as~ \java{!A || !B}
 \item \java{!(A || B)} ~is the same as~ \java{!A && !B}
 \end{itemize}
 
-In other words, negating a conditional expression is the same as negating each term and changing the operator.
-Note that since the \java{!} operator has higher precedence than \java{&&} and \java{||}, you don't need to put parentheses around the individual terms \java{!A} and \java{!B}.
+In words, negating a logical expression is the same as negating each term and changing the operator.
+The \java{!} operator has higher precedence than \java{&&} and \java{||}, so you don't have to put parentheses around the individual terms \java{!A} and \java{!B}.
 
 De Morgan's laws also apply to the relational operators.
 In this case, negating each term means using the ``opposite'' relational operator.
@@ -3695,49 +3669,16 @@ It may help to read these examples out loud in English.
 For instance, ``If I don't want x to be less than 5, and I don't want y to be 3, then I need x to be greater than or equal to 5, or I need y to be anything but 3.''
 
 
-\section{DrJava interactions}
+\section{Conditional statements}
 
-A good way to gain experience with relational and conditional operators is to use the Interactions Pane of DrJava.
-As shown in Figure~\ref{fig:drjava}, you can declare several variables and {\it interactively} test your logic skills.
-Don't forget that you can try out many of the examples in this book this same way.
-
-% try to determine their result before running the code.
-%
-% ABD: I worry about instructions like this, because students seldom follow them.
-% Can we create some exercises (and move this section to the end of the chapter)?
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=\textwidth]{figs/drjava-logic.png}
-\caption{Screenshot of the Interactions Pane in DrJava.}
-\label{fig:drjava}
-\end{center}
-\end{figure}
-
-There is one subtle detail to note when using the Interactions feature.
-If you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
-Notice in Figure~\ref{fig:drjava} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
-
-What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
-In addition, you can press the up/down arrows on the keyboard to repeat previous commands and experiment with incremental differences.
-
-\index{order of operations}
-\index{precedence}
-
-Notice how none of the expressions in this example require parentheses.
-Java evaluates arithmetic operators first, then the relational operators, then conditional operators, and finally the assignment operator.
-Do a web search for ``java operator precedence'' to see the complete list of rules.
-If two operators have the same precedence, Java evaluates them from left to right.
-
-
-\section{The if-else statement}
-
-\index{decision statement}
+\index{conditional statement}
+\index{statement!conditional}
+\index{if statement}
 \index{statement!if}
 
 To write useful programs, we almost always need to check conditions and react accordingly.
-{\bf Decision statements} give us this ability.
-The simplest decision statement in Java is the \java{if} statement:
+{\bf Conditional statements} give us this ability.
+The simplest conditional statement in Java is the \java{if} statement:
 
 \begin{code}
     if (x > 0) {
@@ -3748,7 +3689,7 @@ The simplest decision statement in Java is the \java{if} statement:
 The expression in parentheses is called the condition.
 If it is true, the statements in braces get executed.
 If the condition is false, execution skips over that block of code.
-The condition in parentheses can be {\it any} boolean expression.
+The condition in parentheses can be any boolean expression.
 
 \index{branch}
 \index{statement!else}
@@ -3765,9 +3706,9 @@ The possibilities are called {\bf branches}, and the condition determines which 
     }
 \end{code}
 
-If the remainder when \java{x} is divided by 2 is zero, we know that \java{x} is even, and this code prints a message to that effect.
+If the remainder when \java{x} is divided by 2 is zero, we know that \java{x} is even, and this fragment prints a message to that effect.
 If the condition is false, the second print statement is executed instead.
-Since the condition must be true or false, exactly one of the alternatives will be executed.
+Since the condition must be true or false, exactly one of the branches will run.
 
 %\label{alternative}
 %\index{parity}
@@ -3849,9 +3790,8 @@ Good indentation is essential to make the structure (or intended structure) appa
 
 \index{expression!boolean}
 
-Recall from Section~\ref{sec:arithops} that an expression is a combination of variables and operators that evaluates to a single value.
-Expressions can be as simple as the literal \java{0} or more complex like \java{Math.cos(angle + Math.PI / 2)}.
-Boolean expressions and variables work just like other types of expressions and variables:
+To store a boolean value, you need a boolean variable.
+You can create one like this:
 
 \begin{code}
     boolean flag;
@@ -3863,6 +3803,7 @@ Boolean expressions and variables work just like other types of expressions and 
 \index{statement!initialization}
 
 The first line is a variable declaration, the second is an assignment, and the third is an initialization.
+
 Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
 
 \begin{code}
@@ -3871,7 +3812,7 @@ Since relational operators evaluate to a \java{boolean} value, you can store the
 \end{code}
 
 The parentheses are unnecessary, but they make the code easier to read.
-A variable defined in this way is called a {\bf flag}, because it signals the presence or absence of some condition.
+A variable defined in this way is called a {\bf flag}, because it signals or ``flags'' the presence or absence of a condition.
 
 You can use flag variables as part of a conditional statement later:
 
@@ -3881,7 +3822,7 @@ You can use flag variables as part of a conditional statement later:
     }
 \end{code}
 
-Notice that you don't need to say \java{if (evenFlag == true)}.
+Notice that you don't have to write \java{if (evenFlag == true)}.
 Since \java{evenFlag} is a \java{boolean}, it's already a condition.
 Likewise, to check if a flag is \java{false}:
 
@@ -3917,15 +3858,13 @@ The flow of execution immediately returns to the caller, and the remaining lines
 
 \index{System.err}
 
-Notice the floating-point value \java{0.0} on the right side of the condition.
-Since \java{x} is a floating-point variable, you should compare it to a floating-point literal.
-This example also uses \java{System.err}, which is the {\it standard error} output stream.
-Your development environment might distinguish normal output and error output by using a different color.
+This example uses \java{System.err}, which is an \java{OutputStream} normally used for error messages and warnings.
+Some development enviroments display output to \java{System.err} in a different color or a separate window.
 
 
 \section{Validating input}
 
-Here is a simple program that makes use of the \java{printLogarithm} method defined in the previous section:
+Here is a simple program that uses \java{printLogarithm} from the previous section:
 
 \begin{code}
     public static void main(String args[]) {
@@ -3936,29 +3875,14 @@ Here is a simple program that makes use of the \java{printLogarithm} method defi
     }
 \end{code}
 
-Up to this point, we have assumed that users always do what they're told.
-But what happens if they make a mistake?
-
-% TODO: This is the first exception that has come up since they
-% were mentioned in Chapter 1.  And this is the first stack trace.
-% We define stack trace later, in Strings and Things.  We should either
-% explain stack traces here, or skip this example and wait for the
-% explanation later.
-
-\begin{stdout}
-Enter a number: Hello
-Exception in thread "main" java.util.InputMismatchException
-    at java.util.Scanner.throwFor(Scanner.java:909)
-    at java.util.Scanner.next(Scanner.java:1530)
-    at java.util.Scanner.nextDouble(Scanner.java:2456)
-    at Example.main(Example.java:17)
-\end{stdout}
+This example uses \java{nextDouble}, so the \java{Scanner} tries to read a \java{double}.
+If the user enters a floating-point number, the \java{Scanner} converts it to a \java{double}.
+But if the user types anything else, the \java{Scanner} throws an
+\java{InputMismatchException}.
 
 \index{exception}
 
-In this example, the program calls the \java{nextDouble} method, so the \java{Scanner} tries to read a \java{double}.
-However the user input is \java{"Hello"}, which causes an \java{InputMismatchException}.
-We can prevent this error from happening by checking the input before parsing it:
+We can prevent this error by checking the input before parsing it:
 
 \begin{code}
     public static void main(String args[]) {
@@ -3974,14 +3898,13 @@ We can prevent this error from happening by checking the input before parsing it
     }
 \end{code}
 
-The \java{Scanner} class provides \java{hasNext} methods for each of the \java{next} methods.
-They return \java{true} or \java{false}, depending on the format of the next token of input.
-In this example, we call \java{hasNextDouble} to check if the user entered a \java{double}.
-If not, then we display an error message (using \java{System.err}) and abort the program.
+The \java{Scanner} class provides \java{hasNextDouble}, which checks whether the next token in the input stream can be parsed as a \java{double}.
+If so, we can call \java{nextDouble} with no chance of throwing an exception.
+If not, we display an error message and return.
+Returning from \java{main} terminates the program. 
 
-If you \java{return} from \java{main}, the program ends immediately.
-Notice also the use of the \java{!} operator, instead of the test \java{hasNextDouble() == false}.
-Since the \java{hasNextDouble} method returns a boolean result, it is already a condition.
+%Notice also the use of the \java{!} operator, instead of the test \java{hasNextDouble() == false}.
+%Since the \java{hasNextDouble} method returns a boolean result, it is already a condition.
 
 
 \section{Recursive methods}
@@ -3989,9 +3912,7 @@ Since the \java{hasNextDouble} method returns a boolean result, it is already a 
 
 \index{recursion}
 
-Now that we have methods and if statements, we can explore one of the most magical and interesting things a program can do.
-It is common for one method to invoke another, but what happens if a method invokes {\em itself}?
-This process is called {\bf recursion}.
+Now that we have conditional statements, we can explore one of the most magical things a program can do: {\bf recursion}.
 Consider the following example:
 
 \begin{code}
@@ -4006,8 +3927,9 @@ Consider the following example:
 \end{code}
 
 The name of the method is \java{countdown}; it takes a single integer as a parameter.
-If the parameter is zero, it prints the word ``Blastoff.''
+If the parameter is zero, it prints the word ``Blastoff''.
 Otherwise, it prints the number and then invokes itself, passing \java{n - 1} as the argument.
+A method that invokes itself is {\bf recursive}.
 
 What happens if we invoke \java{countdown(3)} from \java{main}?
 
@@ -4055,7 +3977,7 @@ As a second example, we'll rewrite the methods \java{newLine} and \java{threeLin
 
 \index{newline}
 
-Although these methods work, they would not be much help if we wanted to print 2 newlines, or 106.
+Although these methods work, they would not help if we wanted to print 2 newlines, or 106.
 A better alternative would be:
 
 \begin{code}
@@ -4067,7 +3989,8 @@ A better alternative would be:
     }
 \end{code}
 
-This method is similar to \java{countdown}.
+This method takes an integer, \java{n}, as a parameter and prints \java{n} newlines.
+The structure is similar to \java{countdown}.
 As long as $n$ is greater than zero, it prints a newline and then invokes itself to print $(n-1)$ additional newlines.
 The total number of newlines is $1 + (n - 1)$, which is just what we wanted: $n$.
 
@@ -4080,7 +4003,7 @@ The total number of newlines is $1 + (n - 1)$, which is just what we wanted: $n$
 In the previous chapter, we used a stack diagram to represent the state of a program during a method invocation.
 The same kind of diagram can make it easier to interpret a recursive method.
 
-Remember that every time a method gets called, Java creates a new frame in memory that contains the current method's parameters and variables.
+Remember that every time a method gets called, Java creates a new frame that contains the current method's parameters and variables.
 The following figure is a stack diagram for countdown, called with \java{n == 3}:
 
 \begin{figure}[!h]
@@ -4090,17 +4013,17 @@ The following figure is a stack diagram for countdown, called with \java{n == 3}
 \end{center}
 \end{figure}
 
-Note that the ``stack'' of method calls is upside down.
-It's easier to draw stack diagrams from top to bottom, because you don't always know how much vertical space you will need in advance.
-
-The stack frame for \java{main} is empty because \java{main} does not have any local variables.
+By convention, the stack for \java{main} is at the top and the stack grows down.
+The stack frame for \java{main} is empty because \java{main} does not have any variables.
 It has one parameter, \java{args}, but since we're not using it, we left it out of the diagram.
 
 There are four frames for \java{countdown}, each with a different value for the parameter \java{n}.
 The last frame, with \java{n == 0}, is called the {\bf base case}.
 It does not make a recursive call, so there are no more frames below it.
 
-You should always check for a base case in your code, or else the recursion may keep going until the program runs out of memory.
+If there is no base case is a recursive method, or if the base case is never reached, the stack would grow forever.
+In most systems, the size of the stack is limited; if you exceed the limit, you get a \java{StackOverflowError}.
+
 For example, here is a recursive method without a base case:
 
 \begin{code}
@@ -4113,14 +4036,7 @@ For example, here is a recursive method without a base case:
 \index{call stack}
 \index{stack overflow}
 
-This \java{forever} method prints the string over 10,000 times, but then the program suddenly terminates with a \java{StackOverflowError}.
-In other words, there's no more room on the stack for additional method calls.
-
-Java sets aside a reasonable amount of memory for the call stack, so that it can remember where to return at the end of each method.
-But if that memory fills up, it's usually because you have infinite recursion.
-
-%Recall from Section~\ref{debugger} that Java automatically tracks the call and return of each method in memory, much like the stack diagrams we draw on paper.
-%Each method call takes a little memory, but that memory can be reused when the method returns.
+This method prints the string until the stack overflows, and then throws an exception.
 
 
 \section{Binary Numbers}
@@ -4151,7 +4067,7 @@ Blastoff!
 \end{stdout}
 
 This behavior comes in handy when it is easier to compute results in reverse order.
-For example, to convert a decimal integer into its {\bf binary} representation, you repeatedly divide the number by two:
+For example, to convert a decimal integer into its base 2, or {\bf binary}, representation, you repeatedly divide the number by two:
 
 \begin{stdout}
 23 / 2 is 11 remainder 1
@@ -4199,17 +4115,17 @@ A data type with only two values, \java{true} and \java{false}.
 \term{relational operator}
 An operator that compares two values and produces a boolean indicating the relationship between them.
 
-\index{operator!conditional}
-\term{conditional operator}
+\index{operator!logical}
+\term{logical operator}
 An operator that combines boolean values and produces boolean values.
 
 \term{short circuit}
-A way of evaluating conditional operators that only evaluates the second operand if necessary.
+A way of evaluating logical operators that only evaluates the second operand if necessary.
 
 \term{De Morgan's laws}
-Mathematical rules that show how to negate a conditional expression.
+Mathematical rules that show how to negate a logical expression.
 
-\term{decision statement}
+\term{conditional statement}
 A statement that uses a condition to determine which statements to execute.
 
 \term{branch}
@@ -4224,6 +4140,9 @@ Putting a conditional statement inside one or both branches of another condition
 \term{flag}
 A variable (usually \java{boolean}) that represents a condition or status.
 
+\term{recursive}
+A method that invokes itself.
+
 \term{recursion}
 The process of invoking the same method that you are currently executing.
 
@@ -4232,7 +4151,7 @@ A condition that causes a recursive method {\it not} to make another recursive c
 
 \term{binary}
 A system that uses only zeros and ones to represent numbers.
-Also known as ``base 2.''
+Also known as ``base 2''.
 
 \end{description}
 
@@ -4242,13 +4161,13 @@ Also known as ``base 2.''
 
 \begin{exercise}
 
-Conditional operators can simplify nested decision structures.
-For example, how can you rewrite this code using a single \java{if} statement?
+Logical operators can simplify nested decision structures.
+For example, can you rewrite this code using a single \java{if} statement?
 
 \begin{code}
     if (x > 0) {
         if (x < 10) {
-            System.out.println("x is a positive single digit.");
+            System.out.println("x is a positive single digit number.");
         }
     }
 \end{code}
@@ -4258,18 +4177,29 @@ For example, how can you rewrite this code using a single \java{if} statement?
 
 \begin{exercise}
 
-Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that $a^n + b^n = c^n$ except in the case when $n \leq 2$.
-
-Write a method named \java{checkFermat} that takes four integers as parameters---\java{a}, \java{b}, \java{c} and \java{n}---and that checks to see if Fermat's theorem holds.
-If $n$ is greater than 2 and it turns out to be true that $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
-Otherwise the program should print ``No, that doesn't work.''
-
-HINT: You may want to use \java{Math.pow} in your method.
+Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after \java{main} invokes \java{nLines} with the parameter \java{n == 4}, just before the last invocation of \java{nLines} returns.
 
 \end{exercise}
 
 
 \begin{exercise}
+
+Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that $a^n + b^n = c^n$, except when $n \leq 2$.
+
+Write a method named \java{checkFermat} that takes four integers as parameters -- \java{a}, \java{b}, \java{c} and \java{n} -- and checks to see if Fermat's theorem holds.
+If $n$ is greater than 2 and $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
+Otherwise the program should print ``No, that doesn't work.''
+
+Hint: You may want to use \java{Math.pow}.
+
+\end{exercise}
+
+
+\begin{exercise}
+
+%TODO(ABD): Do we really have to sanitize this song?  If so, can we add
+% a subversive note to the students encouraging them to think about
+% how they are being pandered to?
 
 The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods.
 Consider the first verse of the song ``99 Bottles of Pop'':
@@ -4290,18 +4220,11 @@ If that last bottle should happen to fall,\\
 No more bottles of pop on the wall.
 \end{quote}
 
-%And then the song (finally) ends.
+And then the song (finally) ends.
 
-Write a program that prints the entire lyrics of ``99 Bottles of Pop.''
+Write a program that prints the entire lyrics of ``99 Bottles of Pop''.
 Your program should include a {\it recursive} method that does the hard part, but you might want to write additional methods to separate the major functions of the program.
-As you develop your code, test it with a small number of verses like ``3 Bottles of Pop.''
-
-\end{exercise}
-
-
-\begin{exercise}
-
-Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after \java{main} invokes \java{nLines} with the parameter \java{n == 4}, just before the last invocation of \java{nLines} returns.
+As you develop your code, test it with a small number of verses, like \java{3}.
 
 \end{exercise}
 
@@ -4349,6 +4272,20 @@ If a statement is executed more than once, it might end up with more than one nu
 \item What is the output of this program?
 
 \end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}
+
+Now that we have conditional statements, we can get back to the ``Guess the Number'' game from Exercise~\ref{guess}.
+
+You should already have a program that chooses a random number, prompts the user to guess, and displays the difference between the guess and the chosen number.
+
+Adding a small amount of code at a time, and testing as you go, modfify the program so it tells the user whether the guess is too high or too low, and then prompts the user for another guess.
+
+The program should continue until the user gets it right.
+Hint: use two methods, and make one of them recursive.
 
 \end{exercise}
 
@@ -4883,7 +4820,7 @@ You just assume that they work properly.
 
 You should apply the same reasoning to your own methods.
 For example, in Section~\ref{boolean} we wrote a method called \java{isSingleDigit} that determines whether a number is between 0 and 9.
-Once we convince ourselves that this method is correct---by testing and examination of the code---we can use the method without ever looking at the implementation again.
+Once we convince ourselves that this method is correct -- by testing and examination of the code -- we can use the method without ever looking at the implementation again.
 
 The same is true of recursive programs.
 When you get to the recursive call, instead of following the flow of execution you should {\em assume} that the recursive invocation works.
@@ -5100,7 +5037,7 @@ Some processors even provide a hardware implementation of this operation for flo
 x e^{-x} + \sqrt{1 - e^{-x}}
 \end{eqnarray*}
 %
-HINT: The Math method for raising $e$ to a power is \java{Math.exp}.
+Hint: The Math method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
 
@@ -5587,6 +5524,8 @@ In later chapters we will present some alternatives.
 
 \section{Local variables}
 
+%TODO: this section is not up to date with previous discussion of this topic
+
 You might wonder how we can use the same variable \java{i} in both \java{printMultiples} and \java{printMultTable}.
 Isn't it true that you can only declare a variable once?
 And doesn't it cause problems when one of the methods changes the value of the variable?
@@ -5818,7 +5757,7 @@ Local variables cannot be accessed from outside their method and do not interfer
 
 \term{program development}
 A process for writing programs.
-So far we have seen ``incremental development'' and ``encapsulation and generalization.''
+So far we have seen ``incremental development'' and ``encapsulation and generalization''.
 
 \end{description}
 
@@ -6410,7 +6349,7 @@ Here is a loop that prints these names in order:
     }
 \end{code}
 
-Notice that in addition to the arithmetic operators, we can also use the conditional operators on characters.
+Notice that in addition to the arithmetic operators, we can also use the logical operators on characters.
 The output of this program is:
 
 \begin{stdout}
@@ -6424,7 +6363,7 @@ Pack
 Qack
 \end{stdout}
 
-Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack.''
+Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack''.
 As an exercise, you can modify the program to correct this error.
 
 
@@ -6447,7 +6386,7 @@ String str = "12345";
 int num = Integer.parseInt(str);
 \end{code}
 
-In this context, ``parse'' means something like ``read and translate''.
+In this context, {\bf parse} means something like ``read and translate''.
 You will find similar methods in the other wrapper classes, for example, \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
 
 These wrapper classes also provide \java{toString}, which returns a string representation of a number:
@@ -6724,7 +6663,7 @@ You can assume the input will be a two-digit positive integer.
 \begin{exercise}
 \label{palindrome}
 
-A palindrome is a word that reads the same both forward and backward, like ``otto'' and ``palindromeemordnilap.''
+A palindrome is a word that reads the same both forward and backward, like ``otto'' and ``palindromeemordnilap''.
 
 \begin{enumerate}
 
@@ -7162,7 +7101,7 @@ In general, aliasing should be avoided or used with care.
 
 When you create an object variable, remember that you are storing a {\em reference} to an object.
 %Until you make the variable point to an object, the value of the variable will be \java{null}.
-In Java, the keyword \java{null} is a special value that means ``no object.''
+In Java, the keyword \java{null} is a special value that means ``no object''.
 You can declare and initialize object variables this way:
 
 %TODO: we should define initialize more carefully
@@ -7396,6 +7335,9 @@ The result looks like this:
 A value that indicates an object.
 In a state diagram, a reference appears as an arrow.
 
+\term{parse}
+To read a string and analyze its structure.
+
 \term{attribute}
 One of the named data items that make up an object.
 %Each object has its own copy of the attributes for its class.
@@ -7598,7 +7540,7 @@ For example:
 Try out some of the other methods, like \java{multiply} and \java{pow}.
 
 \item Convert \java{factorial} so that it performs its calculation using BigIntegers and returns a BigInteger as a result.
-You can leave the parameter alone---it will still be an integer.
+You can leave the parameter alone -- it will still be an integer.
 
 \item Try printing the table again with your modified factorial method.
 Is it correct up to 30?
@@ -7706,7 +7648,7 @@ can create.
 Whenever you define a new class, you create a new type with the same name.
 So in Section~\ref{hello} when we defined the class \java{Hello}, we created a type named \java{Hello}.
 We didn't declare any variables with type \java{Hello}, and we didn't use \java{new} to create any \java{Hello} objects.
-It wouldn't have done much if we did---but we could have!
+It wouldn't have done much if we did -- but we could have!
 \index{class definition}
 
 In this chapter, we will define classes that create {\em useful} object types.
@@ -7955,7 +7897,7 @@ Or we could use \java{printf} to write it more concisely:
 \end{code}
 
 As a reminder, you need to use \java{\%d} with integers and \java{\%f} with floating-point numbers.
-The \java{02} option means ``two digits with leading zeros,'' and the \java{.0} option means ``zero decimal places.''
+The \java{02} option means ``two digits with leading zeros,'' and the \java{.0} option means ``zero decimal places''.
 %Note that \java{\%f} automatically rounds the floating-point value.
 
 
@@ -8360,7 +8302,7 @@ If we decide that \java{TimeClient} should be able to read the instance variable
     }
 \end{code}
 
-%TODO: sometime later we should let them know that ``this.'' is optional
+%TODO: sometime later we should let them know that ``this''. is optional
 
 Methods like these are formally called ``accessors'', but more often called {\bf getters}.
 By convention, the method that gets a variable named \java{something} is called \java{getSomething}.
@@ -8546,7 +8488,7 @@ An {\bf array} is a set of values where each value is identified by an index.
 You can make an array of \java{int}s, \java{double}s, or any other type, but all the values in an array must have the same type.
 
 Syntactically, array types look like other Java types except they are followed by square brackets \java{[]}.
-For example, \java{int[]} is the type ``integer array'' and \java{double[]} is the type ``double array.''
+For example, \java{int[]} is the type ``integer array'' and \java{double[]} is the type ``double array''.
 
 You can declare variables with these types in the usual way:
 
@@ -8852,7 +8794,7 @@ It is not always obvious where to start, but a good approach is to look for subp
 \index{looping and counting}
 
 In Section~\ref{loopcount}, we saw a loop that traversed a string and counted the number of times a given letter appeared.
-You can think of this program as an example of a pattern called ``traverse and count.''
+You can think of this program as an example of a pattern called ``traverse and count''.
 The elements of this pattern are:
 
 \begin{itemize}
@@ -8962,7 +8904,7 @@ Since looping through arrays is so common, Java provides an alternative syntax t
     }
 \end{code}
 
-You can read the enhanced \java{for} loop as, ``for each \java{value} in \java{values}.''
+You can read the enhanced \java{for} loop as, ``for each \java{value} in \java{values}''.
 It's common to use a plural nouns for array variables and singular nouns for element variables.
 
 Using the enhanced \java{for} loop, we can create the histogram from the previous section using even less code:
@@ -9139,7 +9081,7 @@ Encapsulate the code in Section~\ref{singlepass} in a method called \java{makeHi
 
 \begin{exercise}
 Write a method named \java{areFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all factors of \java{n}, which is to say that \java{n} is divisible by all of them.
-%HINT: See Exercise~\ref{ex.isdiv}.
+%Hint: See Exercise~\ref{ex.isdiv}.
 \end{exercise}
 
 
@@ -9265,7 +9207,7 @@ To find the largest element in an array, we have to provide a range for the enti
 Write a method called \java{max} that takes an array as a parameter and that uses \java{maxInRange} to find and return the largest value.
 
 Methods like \java{max} are sometimes called ``wrapper methods'' because they provide a layer of abstraction around an awkward method and make it easier to use.
-The method that actually performs the computation is called the ``helper method.''
+The method that actually performs the computation is called the ``helper method''.
 
 \item Write a recursive method named \java{find} using the wrapper-helper pattern.
 The \java{find} method should take an array of integers and a target integer.
@@ -9317,7 +9259,7 @@ Write a method called \java{isDoubloon} that returns \java{true} if the given wo
 
 \begin{exercise}
 Two words are anagrams if they contain the same letters (and the same number of each letter).
-For example, ``stop'' is an anagram of ``pots'' and ``allen downey'' is an anagram of ``well annoyed.''
+For example, ``stop'' is an anagram of ``pots'' and ``allen downey'' is an anagram of ``well annoyed''.
 
 Write a method that takes two Strings and returns \java{true} if the Strings are anagrams of each other.
 
@@ -9662,8 +9604,8 @@ In this example, \java{card1 == card3} is false.
 \label{compare}
 
 \index{compareCard}
-\index{operator!conditional}
-\index{conditional operator}
+\index{operator!logical}
+\index{logical operator}
 
 For primitive types, we can use the comparison operators -- \java{<}, \java{>}, and others -- to compare values.
 These operators don't work for object types.
@@ -9915,7 +9857,7 @@ Inside the \java{while} loop, we repeat the four steps of binary search:
 
 \begin{enumerate}
 
-\item To search the array, choose an index between \java{low} and \java{high} --- call it \java{mid} --- and compare it to the card you are looking for.
+\item To search the array, choose an index between \java{low} and \java{high}  --  call it \java{mid}  --  and compare it to the card you are looking for.
 
 \item If you found the card, return the index.
 
@@ -10214,7 +10156,7 @@ In this case, we need something like \java{randomInt}, which chooses a random in
 
 \index{program development}
 
-This process---writing pseudocode first and then writing methods to make it work---is called {\bf top-down development} (see \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
+This process -- writing pseudocode first and then writing methods to make it work -- is called {\bf top-down development} (see \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
 
 \index{shuffling}
 
@@ -10469,7 +10411,7 @@ The goal of this exercise is to implement the shuffling and sorting algorithms f
 
 \item Write a method called \java{swapCards} that takes a deck (array of cards) and two indexes, and that switches the cards at those two locations.
 
-HINT: it should switch references, not the contents of the objects.
+Hint: it should switch references, not the contents of the objects.
 This is also faster; it correctly handles the case where cards are aliased.
 
 \item Write a method called \java{shuffle} that uses the algorithm in Section~\ref{shuffle}.

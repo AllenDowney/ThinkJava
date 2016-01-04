@@ -833,3 +833,36 @@ Debug your program until the actual output is {\it identical} to the expected ou
 \end{center}
 \end{figure}
 
+
+
+\section{DrJava interactions}
+
+A good way to gain experience with relational and logical operators is to use the Interactions Pane of DrJava.
+As shown in Figure~\ref{fig:drjava}, you can declare several variables and {\it interactively} test your logic skills.
+Don't forget that you can try out many of the examples in this book this same way.
+
+% TODO: consider making this an exercise
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/drjava-logic.png}
+\caption{Screenshot of the Interactions Pane in DrJava.}
+\label{fig:drjava}
+\end{center}
+\end{figure}
+
+There is one subtle detail to note when using the Interactions feature.
+If you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
+Notice in Figure~\ref{fig:drjava} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
+
+What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
+In addition, you can press the up/down arrows on the keyboard to repeat previous commands and experiment with incremental differences.
+
+\index{order of operations}
+\index{precedence}
+
+Notice how none of the expressions in this example require parentheses.
+Java evaluates arithmetic operators first, then the relational operators, then logical operators, and finally the assignment operator.
+Do a web search for ``java operator precedence'' to see the complete list of rules.
+If two operators have the same precedence, Java evaluates them from left to right.
+
