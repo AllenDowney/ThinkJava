@@ -595,7 +595,7 @@ Phrases that appear in quotation marks are called {\bf strings}, because they co
 The name \java{println} is short for ``print line.''
 It appends a special character, called a {\bf newline}, that moves to the beginning of the next line.
 
-If you don't want a newline at the end, you can use \java{print} instead of \java{println}: 
+If you don't want a newline at the end, you can use \java{print} instead of \java{println}:
 
 \begin{code}
 public class Goodbye {
@@ -1116,7 +1116,7 @@ world!
 Assuming that we wanted the output on one line, this is not correct.
 The problem is that the first line uses \java{println}, when we probably meant to use \java{print}, as in the ``Goodbye, cruel world.'' example.
 
-Identifying semantic errors can be tricky because 
+Identifying semantic errors can be tricky because
 have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
 Usually the compiler and the interpreter can't help you, because they don't know what the right thing is.
 
@@ -1226,8 +1226,8 @@ You can also do both in one line, like this:
 
 \begin{code}
     String message = "Hello!";   // initialize message
-    int hour = 10;    
-    int minute = 59;  
+    int hour = 10;
+    int minute = 59;
 \end{code}
 
 A statement that creates a variable and assigns a value at the same time is called an {\bf initialization}.
@@ -1717,7 +1717,7 @@ You might not understand all of the guidelines now, because they refer to langua
 So might want to refer back to them periodically.
 
 In the meantime, there many tools that help programmers find and correct style violations.
-One of the most popular is Checkstyle, which enforces most of Google's guidelines.  
+One of the most popular is Checkstyle, which enforces most of Google's guidelines.
 Instructions for downloading and running Checkstyle are available on our website: \url{http://thinkjava.org/}
 
 % TODO: When we have the website up, let's update this with a more specific URL
@@ -2111,7 +2111,7 @@ The following lines declare the variables and create the \java{Scanner}:
 
 The next step is to prompt the user for the input.
 We'll use \java{print} instead of \java{println} so they can enter the input on the same line.
-And we'll use the \java{Scanner} method \java{nextInt}, which reads input from the keyboard and converts it to an integer: 
+And we'll use the \java{Scanner} method \java{nextInt}, which reads input from the keyboard and converts it to an integer:
 
 \begin{code}
     System.out.print("How many inches? ");
@@ -2488,7 +2488,7 @@ To solve this problem, you need an extra \java{nextLine} after \java{nextInt}.
 \begin{code}
     System.out.print("What is your age? ");
     age = in.nextInt();
-    in.nextLine();  
+    in.nextLine();
     System.out.print("What is your name? ");
     name = in.nextLine();
     System.out.printf("Hello %s, age %d\n", name, age);
@@ -6769,7 +6769,7 @@ Write a loop to try other possible values.
 \end{exercise}
 
 
-\chapter{Objects}
+\chapter{Shapes and graphics}
 \label{objects}
 
 \index{String}
@@ -7157,18 +7157,178 @@ So periodically as your program runs, the system looks for stranded objects and 
 Later, the memory space occupied by the object will be available to be used as part of a new object.
 
 You don't have to do anything to make garbage collection happen, and in general don't have to be aware of it.
-But we thought you might be interested.
+%But we thought you might be interested.
 
-% TODO: this might be a good place to introduce graphics; then we
-% can have exercises that draw Points and Rectangles
+
+\section{Java 2D graphics}
+\label{graphics}
+
+Now that we've seen how to work with \java{Point} and \java{Rectangle} objects, let's learn how to make them appear on the screen.
+The \java{java.awt} package stands for {\bf Abstract Window Toolkit}, which is Java's original library for drawing graphics.
+We are only going to scratch the surface of graphics programming, but you can read a lot more about it in the Java Tutorials: \url{https://docs.oracle.com/javase/tutorial/2d/}.
+
+\index{Canvas}
+\index{class!Canvas}
+\index{Graphics}
+\index{class!Graphics}
+
+There are several ways to create graphics in Java; the simplest way is to use \java{java.awt.Canvas} and \java{java.awt.Graphics}.
+A \java{Canvas} is a blank rectangular area of the screen onto which the application can draw.
+The \java{Graphics} class provides basic drawing methods such as \java{drawLine}, \java{drawRect}, and \java{drawString}.
+Here is an example program that draws a circle using the \java{fillOval} method:
+
+\begin{code}
+import java.awt.Canvas;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+
+public class Drawing extends Canvas {
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("My Drawing");
+        Canvas canvas = new Drawing();
+        canvas.setSize(400, 400);
+        frame.add(canvas);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void paint(Graphics g) {
+        g.fillOval(100, 100, 200, 200);
+    }
+}
+\end{code}
+
+The definition \java{Drawing extends Canvas} means that a \java{Drawing} object is a new kind of \java{Canvas}.
+We will learn more about \java{extends} in Section~\ref{sec:extends}.
+In the \java{main} method, we:
+
+\begin{enumerate}
+
+\index{JFrame}
+\index{class!JFrame}
+
+\item Create a \java{JFrame} object, which is a window that will contain the canvas (and other components like buttons and menus);
+
+\item Create a \java{Drawing} object, set its width and height, and add it to the frame; and
+
+\item Pack the frame (resize it) to fit the canvas, and display it on the screen.
+\end{enumerate}
+
+Once the canvas is visible, the \java{paint} method will be called whenever it needs to be drawn (for example, when the window is moved or resized).
+The application doesn't end after the \java{main} method returns; instead, it waits for the \java{JFrame} to close.
+If you run this code, you should see a black circle on a gray background.
+
+
+\section{Graphics methods}
+
+\index{coordinate}
+\index{pixel}
+
+You are probably used to Cartesian {\bf coordinates}, where x and y values can be either positive or negative.
+In contrast, Java uses a coordinate system where the origin is in the upper-left corner.
+That way, x and y are always positive integers.
+Coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
+
+\begin{center}
+\includegraphics[width=5in]{figs/coordinates.pdf}
+\end{center}
+
+To draw on the canvas, you invoke methods on the \java{Graphics} object.
+The previous example used \java{fillOval}, which is defined as follows:
+
+\begin{code}
+    public void fillOval(int x, int y, int width, int height)
+\end{code}
+
+\index{bounding box}
+
+The four parameters specify a {\bf bounding box}, which is the rectangle in which the oval is drawn.
+\java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
+(Note the bounding box itself is not drawn.)
+
+\begin{center}
+\includegraphics{figs/circle.pdf}
+\end{center}
+
+\index{Color}
+
+To choose the color of a shape, invoke \java{setColor} on the Graphics object:
+
+\begin{code}
+    g.setColor(Color.red);
+\end{code}
+
+The \java{setColor} method changes the current color for everything that gets drawn.
+\java{Color.red} is a constant provided by the {\tt Color} class; to use it you have to \java{import java.awt.Color}.
+Other colors include:
+
+\begin{stdout}
+    black       blue      cyan     darkGray   gray    green
+    lightGray   magenta   orange   pink       white   yellow
+\end{stdout}
+
+You can create your own colors by specifying the red, green, and blue (RGB) components.
+For example:
+
+\begin{code}
+    Color purple = new Color(128, 0, 128);
+\end{code}
+
+Each value is an integer in the range 0 (darkest) to 255 (lightest).
+The color \java{(0, 0, 0)} is black, and \java{(255, 255, 255)} is white.
+
+You can set the background color of the \java{Canvas} by invoking \java{setBackground} in the \java{main} method.
+
+\begin{code}
+    canvas.setBackground(Color.white);
+\end{code}
+
+\index{Mickey Mouse}
+
+Let's say we want to draw a picture of Mickey Mouse.
+We can use the oval we just drew as the face, and then add two ears.
+To make the code more readable, let's use \java{Rectangle}s to represent bounding boxes.
+
+Here's a method that takes a Rectangle and invokes \java{fillOval}.
+
+\begin{code}
+    public void boxOval(Graphics g, Rectangle bb) {
+        g.fillOval(bb.x, bb.y, bb.width, bb.height);
+    }
+\end{code}
+
+And here's a method that draws Mickey Mouse:
+
+\begin{code}
+    public void mickey(Graphics g, Rectangle bb) {
+        boxOval(g, bb);
+
+        int dx = bb.width / 2;
+        int dy = bb.height / 2;
+        Rectangle half = new Rectangle(bb.x, bb.y, dx, dy);
+
+        half.translate(-dx / 2, -dy / 2);
+        boxOval(g, half);
+
+        half.translate(dx * 2, 0);
+        boxOval(g, half);
+    }
+\end{code}
+
+The first line draws the face.
+The next three lines create a smaller rectangle for the ears.
+We \java{translate} the rectangle up and left for the first ear, then right for the second ear.
+The result looks like this:
+
+\begin{center}
+\includegraphics[height=2in]{figs/mickey.pdf}
+\end{center}
 
 
 \section{Vocabulary}
 
 \begin{description}
-
-%\term{AWT}
-%The Abstract Window Toolkit, one of the biggest and commonly-used Java packages.
 
 \term{reference}
 A value that indicates an object.
@@ -7201,6 +7361,18 @@ The condition when two or more variables refer to the same object.
 
 \term{garbage collection}
 The process of finding objects that have no references and reclaiming their storage space.
+
+\term{AWT}
+The Abstract Window Toolkit, one of the biggest and commonly-used Java packages.
+
+\term{coordinate}
+A variable or value that specifies a location in a two-dimensional graphical window.
+
+\term{pixel}
+The unit in which coordinates are measured.
+
+\term{bounding box}
+A common way to specify the coordinates of a rectangular area.
 
 \end{description}
 
@@ -7263,7 +7435,9 @@ Include all variables and parameters and the objects those variables refer to.
         int y = box.y + box.height / 2;
         return new Point(x, y);
     }
+\end{code}
 
+\begin{code}
     public static void main(String[] args) {
         Point blank = new Point(5, 8);
 
@@ -7401,7 +7575,68 @@ You can use the BigInteger methods \java{add} and \java{multiply}, but don't use
 \end{exercise}
 
 
-\chapter{Classes}
+% TODO: this might be a good place to introduce graphics; then we
+% can have exercises that draw Points and Rectangles
+
+
+\begin{exercise}
+Draw the flag of Japan, a red circle on white background
+that is wider than it is tall.
+\end{exercise}
+
+
+\begin{exercise}
+Modify {\tt Mickey.java} to draw ears on the ears, and ears on those
+ears, and more ears all the way down until the smallest ears are
+only 3 pixels wide.
+
+The result should look like Mickey Moose:
+
+\includegraphics[height=2in]{figs/moose.pdf}
+
+Hint: you should only have to add or modify a few lines of code.
+
+You can download a solution from
+\url{http://thinkapjava.com/code/MickeySoln.java}.
+
+\end{exercise}
+
+
+\begin{exercise}
+\begin{enumerate}
+
+\item Download
+\url{http://thinkapjava.com/code/Moire.java} and import it into
+your development environment.
+
+\item Read the {\tt paint} method and draw a sketch of
+what you expect it to do.  Now run it.  Did you get what you
+expected?  For an explanation of what is going on, see
+\url{http://en.wikipedia.org/wiki/Moire_pattern}.
+
+\item Modify the program so that the space between the circles is
+larger or smaller.  See what happens to the image.
+
+\item Modify the program so that the circles are drawn in the center
+of the screen and concentric, as in the following figure (left).
+The distance between the circles should be small enough
+that the Moir\'{e} interference is apparent.
+
+\includegraphics[height=1.5in]{figs/moire.pdf}
+
+\item Write a method named {\tt radial} that draws a radial set
+of line segments as shown in the figure (right), but they should be close
+enough together to create a Moir\'{e} pattern.
+
+\item Just about any kind of graphical pattern can generate
+Moir\'{e}-like interference patterns.  Play around and see what you
+can create.
+
+\end{enumerate}
+\end{exercise}
+
+
+\chapter{Designing classes}
 
 \index{object type}
 \index{type!object}
@@ -9352,7 +9587,7 @@ If two object are identical, they are also equivalent.
 So \java{card1.equals(card2)} is true.
 
 But if two objects are equivalent, they are not necessarily identical.
-In this example, \java{card1 == card3} is false. 
+In this example, \java{card1 == card3} is false.
 
 %\index{aliasing}
 %What does it look like when \java{card1} and \java{card2} are identical?
@@ -9597,7 +9832,7 @@ public static int findCard(Card[] cards, Card card) {
     while (low <= high) {
         int mid = (low + high) / 2;                   // step 1
         int comp = cards[mid].compareTo(card);
-        
+
         if (comp == 0) {                              // step 2
             return mid;
         } else if (comp < 0) {                        // step 3
@@ -9702,7 +9937,7 @@ public static int findCard(Card[] cards, Card card,
     }
     int mid = (low + high) / 2;                       // step 1
     int comp = cards[mid].compareTo(card);
-    
+
     if (comp == 0) {                                  // step 2
         return mid;
     } else if (comp < 0) {                            // step 3
@@ -10214,7 +10449,7 @@ Here is an outline of the algorithm in pseudocode:
 \begin{code}
 public static Deck insertionSort(Deck deck) {
     // create a new deck with the same length as deck
-  
+
     for each card in deck {
         // find the index, i, where the card should go in the sorted deck
         // starting at i, shift the cards to the right by one
@@ -10419,7 +10654,7 @@ We will write a separate method for each requirement.
     public void add(Card card) {
         this.cards.add(card);
     }
-    
+
     public void deal(Deck deck) {
         for (Card card : deck.getCards()) {
             this.cards.add(card);
@@ -10562,6 +10797,7 @@ Rather than iterate the \java{ArrayList} in order and choose a random number bet
 
 
 \section{Playing the game}
+\label{sec:playing}
 
 We now have everything we need to write the \java{main} method of the game.
 For simplicity, we'll implement a text-based application in this section.
@@ -10573,7 +10809,7 @@ We'll start with two players in this example.
 \begin{code}
     Deck deck = new Deck();
     deck.shuffle();
-    
+
     Player one = new Player("Allen");
     one.deal(deck.subdeck(0, 4));
     Player two = new Player("Chris");
@@ -10608,7 +10844,7 @@ We will create a new variable to keep track of whose turn it is.
             current = two;
         } else {
             current = one;
-        }    
+        }
     }
 \end{code}
 
@@ -10789,27 +11025,54 @@ In Java, all classes inherit exactly one class.
 
 
 \begin{exercise}
-%TODO implement the final design of the code where \java{Player extends Agent}
+Implement the design of \java{Agent}, \java{Player}, and \java{Pile} as described in the final UML diagram.
+Almost all of the source code is presented in the chapter; you just need to put each method in the right file.
+The point of this exercise is to practice writing classes that extend other classes.
 \end{exercise}
 
 
 \begin{exercise}
-%TODO try out different strategies for Player.play()
+Create a new class named \java{Eights} that has a \java{main} method, and bring together the code snippets in Section~\ref{sec:playing}.
+Add print statements to show the contents of each \java{Player} and \java{Pile} at the beginning of every turn.
+Display a message when the discard pile is shuffled into the draw pile.
+Also output when cards are drawn or played, and show the final score at the end of the game.
 \end{exercise}
 
 
 \begin{exercise}
-%TODO write a simulation loop that plays the game 100 times and keeps track of how many times each player wins (to evaluate different strategies)
+Design and implement a better strategy for the \java{Player.play} method.
+For example, if there are multiple cards you can play, and one of them is an eight, then play the eight.
+Think of other ways you can minimize penalty points, such as playing the highest ranking cards first.
 \end{exercise}
 
 
 \begin{exercise}
-%TODO extend the code to support three or more players; for example, create an ArrayList<Player> and a loop that lets them take turns
+Write a simple simulation loop that plays the game 100 times and keeps track of how many times each player wins.
+If you implemented multiple strategies in the previous exercise, you can play them against each other to evaluate which one works best.
+For example, you could write a \java{class Genius extends Player} that overrides the \java{play} method, and use the Genius class for one of the players.
 \end{exercise}
 
 
 \begin{exercise}
-%TODO implement a graphical version of the card game?
+Adapt the code in \java{Eights.main} to support three or more players.
+For example, you could use an array (or \java{ArrayList}) to store multiple \java{Player} objects and an integer to keep track of whose turn it us.
+In terms of general running time, is the game longer or shorter with multiple players?
+\end{exercise}
+
+
+\begin{exercise}
+Working with cards is more interesting if you can display them on the screen.
+Download the following files into the same folder:
+
+\begin{itemize}
+\item \url{http://thinkapjava.com/code/CardTable.java}
+\item \url{http://thinkapjava.com/code/cardset.zip}
+\end{itemize}
+
+Unzip {\tt cardset.zip}, which contains a {\tt cardset-oxymoron} folder with all the card images.
+(Note the variable \java{cardset} in \java{CardTable.main} is the name of this folder.)
+Run \java{CardTable.java} and you should see images of a deck of cards laid out on a green table.
+You can use this class as a starting place to implement your own card games.
 \end{exercise}
 
 
