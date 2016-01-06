@@ -866,3 +866,94 @@ Java evaluates arithmetic operators first, then the relational operators, then l
 Do a web search for ``java operator precedence'' to see the complete list of rules.
 If two operators have the same precedence, Java evaluates them from left to right.
 
+\section{Local variables}
+
+%TODO: this section is not up to date with previous discussion of this topic
+
+You might wonder how we can use the same variable \java{i} in both \java{printMultiples} and \java{printMultTable}.
+Isn't it true that you can only declare a variable once?
+And doesn't it cause problems when one of the methods changes the value of the variable?
+
+The answer to both questions is ``no,'' because the \java{i} in \java{printMultiples} and the \java{i} in \java{printMultTable} are {\em not the same variable}.
+They have the same name, but they do not refer to the same storage location.
+Changing the value of one variable has no effect on the other.
+Consider the stack diagram at the moment the program begins printing the second row of the table:
+
+\begin{center}
+\vspace{1em}
+\includegraphics{figs/stack4.pdf}
+\vspace{1em}
+\end{center}
+
+%\begin{tabular}{rl}
+%          main & \framebox[3cm][r]{\strut args ~\framebox[1cm]{\strut  }~} \\[1em]
+%printMultTable & \framebox[3cm][r]{\strut    i ~\framebox[1cm]{\strut 2}~} \\[1em]
+%printMultiples & \framebox[3cm][r]{\strut    i ~\framebox[1cm]{\strut 2}~} \\[1em]
+%\end{tabular}
+
+\index{local variable}
+\index{variable!local}
+
+Variables and parameters declared inside a method definition are called {\bf local variables} because they only exist inside the method.
+You cannot access a local variable from outside its method, and you are free to have multiple variables with the same name as long as they are not in the same method.
+
+\index{loop variable}
+\index{variable!loop}
+
+Although it can be confusing, there are good reasons to reuse names.
+For example, it is common to use the names \java{i}, \java{j} and \java{k} as loop variables.
+If you avoid using them in one method just because you used them somewhere else, you make the program harder to read.
+Another reason is when two or more methods are based on the same parameter.
+It's awkward to come up with many different names for the same data.
+
+
+%TODO: make these exercises
+
+Because they make the code more readable, you should use enhanced \java{for} loops whenever possible.
+For example, the following loop finds the maximum value in an array of integers:
+
+\begin{code}
+    int max = Integer.MIN_VALUE;
+    for (int value : numbers) {
+        if (value > max) {
+            max = value;
+        }
+    }
+\end{code}
+
+But notice that the enhanced \java{for} loop does not give you the index the value.
+If you need to find the index of the maximum value, you have to use a standard \java{for} loop.
+
+\begin{code}
+    int index = -1;
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            index = i;
+            max = numbers[i];
+        }
+    }
+\end{code}
+
+
+
+
+\begin{exercise}
+One not-very-efficient way to sort the elements of an array is to find the largest element and swap it with the first element, then find the second-largest element and swap it with the second, and so on.
+This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/Selection_sort}).
+
+\begin{enumerate}
+
+\item Write a method called \java{indexOfMaxInRange} that takes an array of integers, finds the largest element in the given range, and returns its {\em index}.
+%You can modify your recursive version of \java{maxInRange} or you can write an iterative version from scratch.
+
+\item Write a method called \java{swapElement} that takes an array of integers and two indexes, and that swaps the elements at the given indexes.
+
+\item Write a method called \java{selectionSort} that takes an array of integers and that uses \java{indexOfMaxInRange} and \java{swapElement} to sort the array from largest to smallest.
+
+\end{enumerate}
+
+% TODO: Should we cut this, since we do selection sort later? 
+%  call back to this exercise when we sort cards
+\end{exercise}
+
