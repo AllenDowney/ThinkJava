@@ -2255,6 +2255,8 @@ The values are matched up with the format specifiers in order, so \java{inch} is
 
 Like \java{print}, \java{printf} does not append a newline, so format strings often end with a newline character.
 
+%TODO: what kind of exception?
+
 If you try to print an integer with \java{\%f} or a floating-point number using \java{\%d}, you get an exception.
 Learning about format strings is like learning a sub-language within Java.
 There are many options, and the details can be overwhelming.
@@ -6153,8 +6155,6 @@ Any changes made through either variable will be seen by the other.
 For example, if we set \java{a[0] = 17.0}, and then print {\tt b[0]}, the result is 17.
 Because \java{a} and \java{b} are different names for the same thing, they are sometimes called {\bf aliases}.
 
-%TODO: add to vocab
-
 If you actually want to copy the array, not just a reference, you have to create a new array and copy the elements copy elements from one to the other, like this:
 
 \begin{code}
@@ -6565,6 +6565,25 @@ The \java{[]} operator selects elements.
 \term{index}
 An integer variable or value used to indicate an element of an array.
 
+\term{reference}
+A value that indicates another value, like an array.
+In a state diagram, a reference appears as an arrow.
+
+\term{aliases}
+References that refer to the same value.
+
+\item{traversal}
+Looping through the elements of an array.
+
+\item{search}
+A traversal pattern used to find a particular element of an array.
+
+\item{reduce}
+A traversal pattern that combines the elements of an array into a single value.
+
+\item{accumulator}
+A variable used to accumulate results during a traversal.
+
 \term{deterministic}
 A program that does the same thing every time it is invoked.
 %Technically speaking, all computer programs are deterministic: they simply execute the source code.
@@ -6579,8 +6598,8 @@ A sequence of numbers that appear to be random, but which are actually the produ
 \term{histogram}
 An array of integers where each integer counts the number of values that fall into a certain range.
 
-\term{bottom-up}
-A program development process that starts with simple methods and then assembles them into a working solution.
+\term{enhanced for loop}
+An alternative syntax for traversing the elements of an array.
 
 \end{description}
 
@@ -6754,6 +6773,7 @@ If the elements of the array are sorted, we can make this method more efficient 
 You can read about it at \url{https://en.wikipedia.org/wiki/Binary_search_algorithm}.
 
 Write method called \java{binarySearch} that implements this algorithm.
+Hint: you might find this easier to write recursively.
 
 \end{exercise}
 
@@ -6788,45 +6808,31 @@ It returns a \java{char}, a primitive type that can store individual characters 
 
 \begin{code}
     String fruit = "banana";
-    char letter = fruit.charAt(1);
-    System.out.println(letter);
-\end{code}
-
-The expression \java{fruit.charAt(1)} means that we invoke the \java{charAt} method on the object referenced by \java{fruit}.
-The argument \java{1} means that we want to know the letter at position 1.
-The result is a character, which is stored in a \java{char} variable named \java{letter}.
-When you print the value of \java{letter}, you might be surprised:
-
-\begin{stdout}
-a
-\end{stdout}
-
-Unless you already think like a computer scientist, the letter \java{a} is not the first letter of \java{"banana"}.
-For technical reasons, computer scientists start counting from zero.
-The 0th (``zeroeth'') letter of \java{"banana"} is the \java{b}.
-The 1th letter (``oneth'') is \java{a} and the 2th (``twooth'') letter is \java{n}.
-So if you want the {\em first} letter of a string, you have to pass 0 as the argument:
-
-\begin{code}
     char letter = fruit.charAt(0);
 \end{code}
+
+The argument \java{0} means that we want the letter at position 0.
+Like array indices, string indices start at 0, so the character assigned to \java{letter} is \java{b}.
 
 \index{quote}
 \index{double-quote}
 \index{value!char}
 
-Character literals appear in single quotes like \java{'c'}.
-Unlike string literals, which appear in double quotes, characters may only contain a single letter or symbol.
+Characters work like the other primitive types we have seen.
+You can compare them using relational operators:
 
 \begin{code}
-    char letter = 'c';
-    if (letter == 'd') {
+    if (letter == 'a') {
         System.out.println('?');
     }
 \end{code}
 
-Characters work like the other primitive types we have seen.
-You can use them in arithmetic, decisions, loops, and so forth.
+Character literals, like \java{'a'}, appear in single quotes.
+Unlike string literals, which appear in double quotes, character literals can only contain a single character.
+Escape sequences, like \java{'\\t'}, are legal because they represent a single character.
+
+The increment and decrement operators work with characters.
+So this loop prints the letters of the alphabet:
 
 \begin{code}
     System.out.print("Roman alphabet: ");
@@ -6838,9 +6844,11 @@ You can use them in arithmetic, decisions, loops, and so forth.
 
 \index{Unicode}
 
-Java uses {\bf Unicode} for its character set (see \url{http://unicode.org/}), so strings can store text in any language.
-Unicode supports alphabets like Cyrillic and Greek, and left-to-right scripts like Arabic and Hebrew.
-%Regardless, both the data type \java{char} and the method \java{charAt} work the same.
+Java uses {\bf Unicode} to represent characters, so strings can store text in other alphabets like Cyrillic and Greek, and non-alphabetic languages like Chinese.
+You can read more about it at \url{http://unicode.org/}. 
+
+In Unicode, each character is represented by a ``code unit'', which you can think of as an integer.
+The code units for uppercase Greek letters run from 913 to 937, so we can print the Greek alphabet like this:
 
 \begin{code}
     System.out.print("Greek alphabet: ");
@@ -6850,19 +6858,40 @@ Unicode supports alphabets like Cyrillic and Greek, and left-to-right scripts li
     System.out.println();
 \end{code}
 
-This example demonstrates how you can convert a Unicode ``code unit'', represented as an integer, to a \java{char} using a cast operator.
+This example uses a type cast to convert each integer to a character.
+
+
+\section{Strings are immutable}
+\label{immutable}
+
+\index{toUpperCase}
+\index{toLowerCase}
+\index{immutable}
+
+Strings provide methods, \java{toUpperCase} and \java{toLowerCase}, that convert from uppercase to lowercase and back.
+These methods are often a source of confusion, because it sounds like they modify strings.
+But neither these methods nor any others can change a string, because strings are {\bf immutable}.
+
+When you invoke \java{toUpperCase} on a string, you get a new string object as a return value.
+For example:
+
+\begin{code}
+    String name = "Alan Turing";
+    String upperName = name.toUpperCase();
+\end{code}
+
+\index{Turing, Alan}
+
+After these statements run, \java{upperName} refers to the string \java{"ALAN TURING"}.
+But \java{name} still refers to \java{"Alan Turing"}.
 
 
 \section{String traversal}
-\label{traverse}
+\label{stringtraverse}
 
 \index{traverse}
 
-%TODO: introduce length() and contrast with array.length
-
-A common task with strings is to start at the beginning, select each character in turn, do some computation with it, and continue until the end.
-This pattern is called a {\bf traversal}.
-A natural way to traverse a string is with a \java{for} statement:
+The following loop traverses the characters in \java{fruit} and prints them, one on each line.
 
 \begin{code}
     for (int i = 0; i < fruit.length(); i++) {
@@ -6871,35 +6900,43 @@ A natural way to traverse a string is with a \java{for} statement:
     }
 \end{code}
 
+Strings provide a method called \java{length} that returns the number of
+characters in the string.
+Because it is a method, you have to invoke it with the empty argument list, \java{()}.
+
 \index{loop variable}
 \index{variable!loop}
 \index{index}
 
-This loop prints each character of the string \java{fruit} on a line by itself.
-The name of the loop variable is \java{i}, which stands for ``index''; an {\bf index} is an integer that indicates the position of a character.
-Notice that the condition is \java{i < fruit.length()}, which means that when \java{i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
-%The last character we access is the one with the index \java{fruit.length() - 1}.
+The condition is \java{i < fruit.length()}, which means that when \java{i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
+
+The enhanced for loop also works with strings, so we could write the previous example like this:
+
+\begin{code}
+    for (char letter: fruit) {
+        System.out.println(letter);
+    }
+\end{code}
+
 
 \index{String!length}
 \index{length!String}
 
-The \java{length} method returns the number of characters in the string.
-It takes no arguments and returns an integer; the length of \java{"banana"} is 6.
-%Notice that it is legal to have a variable with the same name as a method (although it can be confusing for human readers).
 To find the last letter of a string, you might be tempted to try something like:
 
 \begin{code}
     int length = fruit.length();
-    char last = fruit.charAt(length);      // WRONG!
+    char last = fruit.charAt(length);      // wrong!
 \end{code}
 
-This code compiles and runs, but it causes a runtime error.
-The reason is that there is no sixth letter in \java{"banana"}.
+This code compiles and runs, but it throws a \java{StringIndexOutOfBoundsException}.
+The problem is that there is no sixth letter in \java{"banana"}.
 Since we started counting at 0, the 6 letters are indexed from 0 to 5.
 To get the last character, you have to subtract 1 from \java{length}.
 
 \begin{code}
-    char last = fruit.charAt(length - 1);  // CORRECT
+    int length = fruit.length();
+    char last = fruit.charAt(length - 1);  // correct
 \end{code}
 
 Many string traversals involve reading one string and creating another.
@@ -6923,38 +6960,13 @@ Each time through the loop, it creates a new string and assigns it to \java{r}.
 When the loop exits, \java{r} contains the letters from \java{s} in reverse order.
 So the result of \java{reverse("banana")} is \java{"ananab"}.
 
-\section{Looping and counting}
-\label{loopcount}
+%TODO: add an exercise with StringBuilder
 
-\index{loop!counting}
-\index{traverse!counting}
-
-Other string traversals involve looping and counting.
-The following method counts the number of times a given character appears in a string.
-For example, \java{numberOf("banana", 'a')} returns 3.
-
-\begin{code}
-    public static int numberOf(String s, char c) {
-        int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == c) {
-                count++;
-            }
-        }
-        return count;
-    }
-\end{code}
-
-\index{counter}
-
-This method demonstrates a common idiom, called a {\bf counter}.
-The variable \java{count} is initialized to zero and then incremented each time we find an \java{'a'}.
-When we exit the loop, \java{count} contains the result: the total number of a's.
 
 
 \section{Substrings}
 
-The \java{substring} method returns new string that copies letters from an existing string, beginning at the given index.
+The \java{substring} method returns new string that copies letters from an existing string, starting at the given index.
 
 \begin{itemize}
 \item \java{fruit.substring(0)} returns \java{"banana"}
@@ -6992,107 +7004,25 @@ If it's invoked with two argments, they are treated as a start and end index:
 \end{itemize}
 
 Notice that the character indicated by the end index is not included.
-%In other words, substrings are for the interval $[beg, end)$.
-One way to remember this detail is to think about how loops work.
-Here is a simplified version of \java{substring(2, 5)}:
-
-\begin{code}
-    String str = "banana";
-    int beg = 2;
-    int end = 5;
-    String sub = "";
-    for (int i = beg; i < end; i++) {
-        sub = sub + str.charAt(i);
-    }
-    System.out.println(sub);  // prints "nan"
-\end{code}
-
-Because of the \java{<} operator, the loop terminates when \java{i == end}.
-Designing substring this way simplifies many common operations.
+Defining substring this way simplifies some common operations.
 For example, to select a substring with length \java{len}, starting at index \java{i}, you could write \java{fruit.substring(i, i + len)}.
-
-
-\section{Bounds checking}
-\label{StringIndexOutOfBounds}
-
-\index{runtime error}
-\index{error!runtime}
-\index{exception}
-
-If you call the \java{charAt} method with an index that is either negative or greater than \java{length - 1}, you will get an exception, specifically a \java{StringIndexOutOfBounds} exception.
-%The same is true when calling \java{substring} with invalid start or end indexes.
-
-For example, notice the error in the \java{getLastLetter} method below.
-It should be looking at \java{index - 1} instead of \java{index}.
-
-\begin{code}
-public class BadString {
-    public static void main(String[] args) {
-        processWord("banana");
-    }
-
-    public static void processWord(String s) {
-        char c = getLastLetter(s);
-        System.out.println(c);
-    }
-
-    public static char getLastLetter(String s) {
-        int index = s.length();
-        char c = s.charAt(index);  // WRONG!
-        return c;
-    }
-}
-\end{code}
-
-When you run the \java{BadString} program, Java prints the following message.
-
-\begin{small}
-\begin{stdout}
-Exception in thread "main" java.lang.StringIndexOutOfBoundsException:
-String index out of range: 6
-    at java.lang.String.charAt(String.java:658)
-    at BadString.getLastLetter(BadString.java:14)
-    at BadString.processWord(BadString.java:8)
-    at BadString.main(BadString.java:4)
-\end{stdout}
-\end{small}
-
-\index{stack trace}
-
-% TODO: we should define stack trace earlier
-
-This information is called a {\bf stack trace}, which shows the methods that were running when the error occurred.
-The stack trace can be difficult to read, but it contains a lot of useful information.
-For one, it tells you that the index 6 was out of range.
-
-More importantly, it shows the line of code where the error occurred.
-It may be helpful to read the stack trace bottom-up.
-On line~4, \java{main} called \java{processWord}, which on line~8 called \java{getLastLetter}, which on line~14 called \java{charAt}.
-The actual error occurred on line 658 of String.java, which is in the source code for the \java{String} class itself.
-
-Although possible, it's unlikely that the Java library code has mistakes that cause programs to crash.
-When reading stack diagrams, look for the top line that refers to a file you wrote.
-In this example, \java{BadString.java:14} is the most useful debugging information.
 
 
 \section{The indexOf method}
 \index{indexOf}
 
 The \java{indexOf} method takes a character and finds an index where that character appears.
-%At first glance, \java{indexOf} is the inverse of \java{charAt}.
-%The \java{charAt} method takes an index and returns the character at that index.
 
 \begin{code}
     String fruit = "banana";
     int index = fruit.indexOf('a');
 \end{code}
 
-This example finds the index of the letter \java{'a'} in the string.
+This example finds the index of \java{'a'} in the string.
 But the letter appears three times, so it's not obvious what \java{indexOf} should do.
 According to the documentation, it returns the index of the {\em first} appearance.
 
 To find subsequent appearances, you can use another version of \java{indexOf}, which takes a second argument that indicates where in the string to start looking.
-%For an explanation of this kind of overloading, see Section~\ref{overloading}.
 
 \begin{code}
     int index = fruit.indexOf('a', 2);
@@ -7105,51 +7035,42 @@ So \java{fruit.indexOf('a', 5)} returns 5.
 If the character does not appear in the string, \java{indexOf} returns \java{-1}.
 
 You can also use \java{indexOf} to search for a substring, not just a single character.
-For example, the expression \java{fruit.indexOf("nan")} returns 2, whereas \java{fruit.indexOf("zzz")} returns -1 (not found).
+For example, the expression \java{fruit.indexOf("nan")} returns 2.
 
 
 \section{String comparison}
-\label{immutable}
-
-\index{toUpperCase}
-\index{toLowerCase}
-\index{immutable}
-
-As you read the documentation of the \java{String} methods, you might notice \java{toUpperCase} and \java{toLowerCase}.
-These methods are often a source of confusion, because it sounds like they have the effect of changing (or mutating) an existing string.
-But neither these methods nor any others can change a string, because strings are {\bf immutable}.
-
-When you invoke \java{toUpperCase} on a string object, you get a new string object as a return value.
-For example:
-
-\begin{code}
-    String name = "Alan Turing";
-    String upperName = name.toUpperCase();
-\end{code}
-
-\index{Turing, Alan}
-
-After the second line runs, \java{upperName} contains the value \java{"ALAN TURING"}.
-But \java{name} still contains \java{"Alan Turing"} as before.
 
 \index{equals}
 \index{compareTo}
 
-It is often useful to compare strings to see if they are the same, or to see which comes first in alphabetical order.
-It would be nice if we could use the comparison operators, like \java{==} and \java{>}, but we can't.
-To compare strings, we have to use the \java{equals} and \java{compareTo} methods.
+To compare two strings, it is tempting to use the \java{==} operator.
+For example:
 
 \begin{code}
     String name1 = "Alan Turing";
     String name2 = "Ada Lovelace";
+    if (name1 == name2) {                 // wrong!
+        System.out.println("The names are the same.");
+    }
+\end{code}
+
+This code compiles and runs, and most of the time it gets the answer right.
+But it is not correct, and sometimes it gets the answer wrong.
+The problem is that the \java{==} operator checks whether the two variables refer to the same object.
+If you give it two different strings that contain the same letters, it yields \java{false}.
+
+The right way to compare strings is with the \java{equals} methods, like this:
+
+\begin{code}
     if (name1.equals(name2)) {
         System.out.println("The names are the same.");
     }
 \end{code}
 
-The syntax here may seem awkward.
-To compare two strings, you have to invoke a method on one of them and pass the other as an argument.
-The return value from \java{equals} is \java{true} if the strings contain the same characters and \java{false} otherwise.
+This example invokes \java{equals} on \java{name1} and passes \java{name2} as an argument.
+java{equals} returns \java{true} if the strings contain the same characters and \java{false} otherwise.
+
+If the strings differ, we can use \java{compareTo} to see which comes first in alphabetical order:
 
 \begin{code}
     int diff = name1.compareTo(name2);
@@ -7162,90 +7083,31 @@ The return value from \java{equals} is \java{true} if the strings contain the sa
     }
 \end{code}
 
-The return value from \java{compareTo} is the {\em difference} between the first characters in the strings that differ.
+The return value from \java{compareTo} is the difference between the first characters in the strings that differ.
 If the strings are equal, their difference is 0.
 If the first string (the one on which the method is invoked) comes first in the alphabet, the difference is negative.
 Otherwise, the difference is positive.
 
 In the example above, \java{compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
 
-
-\section{Character arithmetic}
-\index{arithmetic!character}
-
-Like the \java{compareTo} method, you too can do arithmetic with characters.
-For example, if \java{letter} refers to a lower-case letter, \java{letter - 'a'} yields its position in the alphabet (keeping in mind that 'a' is the zeroeth letter of the alphabet and 'z' is the 25th).
-
-Performing arithmetic on characters is rarely necessary in programs, but it helps demonstrate how text is represented in Java.
-For example, we often need to convert between characters that contain numbers, like \java{'0'} and \java{'1'}, and their corresponding integers.
-A common mistake beginning programmers make is to cast a \java{char} to an \java{int}:
-
-\begin{code}
-    char letter = '3';
-    int x = (int) letter;
-    System.out.println(x);
-\end{code}
-
-You might expect the value to be 3, but instead you get 51, which is the Unicode value for the character \java{'3'}.
-%Remember, not all languages in the world use Arabic numerals like English does.
-To convert \java{'3'} to the corresponding integer value, you could subtract \java{'0'}:
-
-\begin{code}
-    int x = (int) (letter - '0');
-\end{code}
-
-But it is better to use the \java{digit} method in the \java{Character} class instead.
-For example, this code converts \java{letter} to the corresponding digit, interpreting it as a base 10 number.
-
-\begin{code}
-    int x = Character.digit(letter, 10);
-\end{code}
-
-\java{Character} is a built-in class that provides methods for working with characters.
-
-Another use for character arithmetic is to loop through the letters of the alphabet in order.
-For example, in Robert McCloskey's book {\em Make Way for Ducklings}, the names of the ducklings form an Abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack.
-Here is a loop that prints these names in order:
-
-\begin{code}
-    char letter = 'J';
-    while (letter <= 'Q') {
-        System.out.println(letter + "ack");
-        letter++;
-    }
-\end{code}
-
-Notice that in addition to the arithmetic operators, we can also use the logical operators on characters.
-The output of this program is:
-
-\begin{stdout}
-Jack
-Kack
-Lack
-Mack
-Nack
-Oack
-Pack
-Qack
-\end{stdout}
-
-Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack''.
-As an exercise, you can modify the program to correct this error.
+\java{equals} and \java{compareTo} are case-sensitive.
+The uppercase letters come before the lowercase letters, so \java{"Ada"} comes before \java{"ada"}.
 
 
 \section{Wrapper classes}
 \label{wrappers}
 
-In the previous section, we introduced the \java{Character} class.
-There are similar classes for the other primitive data types such as \java{Boolean}, \java{Integer}, \java{Long}, and \java{Double}.
-These classes are in the \java{java.lang} package, so can use them without explicitly importing them.
+For each primitive type, there is a corresponding class in the Java library.
+The class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
+These so-called {\bf wrapper classes} also include \java{Boolean}, \java{Long}, and \java{Double}.
+These classes are in the \java{java.lang} package, so you can use them without importing them.
 
-Each of these classes defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
-For example, \java{Integer.MIN_VALUE} is the \java{int} $-2147483648$, and \java{Integer.MAX_VALUE} is the \java{int} $2147483647$.
-Rather than remember these unusual numbers, you can refer to the built-in constants.
+Each wrapper class defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
+For example, \java{Integer.MIN_VALUE} is \java{-2147483648}, and \java{Integer.MAX_VALUE} is \java{2147483647}.
+Because these constants are available in wrapper classes, you don't have to remember them, and you don't have to include them in your programs.
 
-Another purpose of wrapper classes is converting values to and from strings.
-For example, we can convert a string to an integer using the \java{parseInt} method:
+Wrapper classes provide methods for converting strings to other types.
+For example, \java{Integer.parseInt} converts a string to (you guessed it) an integer:
 
 \begin{code}
 String str = "12345";
@@ -7253,35 +7115,18 @@ int num = Integer.parseInt(str);
 \end{code}
 
 In this context, {\bf parse} means something like ``read and translate''.
-You will find similar methods in the other wrapper classes, for example, \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
 
-These wrapper classes also provide \java{toString}, which returns a string representation of a number:
+The other wrapper classes provide similar methods, like \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
+
+They also provide \java{toString}, which returns a string representation of a value:
 
 \begin{code}
 int num = 12345;
 String str = Integer.toString(num);
 \end{code}
 
-% TODO: do we have a use case for instantiating one of these classes?
-% Maybe not until we use Collections.
-%We'll see more about the wrapper classes in Section~\ref{???}.
+The result is the string \java{"12345"}.
 
-% ABD: There is a jump here from talking about wrapper classes to talking
-% about instances of those classes.  I think we don't want to do the
-% second part yet.
-
-%As a convenience, Java will automatically convert primitive values to/from their wrapper types.
-%We will see later why this code is inefficient.
-
-%\begin{code}
-%Integer i = 12345;
-%Double d = 123.45;
-%\end{code}
-
-%For now, it's important to note that \java{i} and \java{d} are references to %objects.
-%In other words, the values {\tt 12345} and {\tt 123.45} have been wrapped %inside objects.
-%Like strings, these objects have a variety of methods that can be applied.
-%Refer to the documentation for \java{Integer} and \java{Double} for more details.
 
 
 \section{Vocabulary}
@@ -7294,23 +7139,25 @@ A collection of related data that comes with a set of methods that operate on it
 \term{Unicode}
 A standard for representing characters in most of the world's languages.
 
-\term{traverse}
-To iterate through the elements of a set performing a similar operation on each.
-
-\term{index}
-A variable or value used to indicate one of the members of a collection, like a character from a string.
-
 \term{empty string}
 The string \java{""}, what contains no characters and has a length of zero.
 
-\term{counter}
-A variable used to count something, usually initialized to zero and then incremented.
+%\term{traverse}
+%To iterate through the elements of a set performing a similar operation on each.
 
-\term{exception}
-A runtime error like ArithmeticException or IndexOutOfBoundsException.
+%\term{index}
+%A variable or value used to indicate one of the members of a collection, like a character from a string.
 
-\term{stack trace}
-An error message that shows the state of a program when an exception occurs.
+%\term{counter}
+%A variable used to count something, usually initialized to zero and then incremented.
+
+%\term{exception}
+%A runtime error like ArithmeticException or IndexOutOfBoundsException.
+
+%TODO: find a place to present stack trace, ideally someplace with
+% a non-trivial call stack
+%\term{stack trace}
+%An error message that shows the state of a program when an exception occurs.
 
 \term{immutable}
 An object that, once created, cannot be modified.
@@ -7327,48 +7174,34 @@ Strings are immutable.
 
 \begin{exercise}
 
-Encapsulate the code in Section~\ref{loopcount} into a method named \java{countLetters}, and generalize it so that it accepts the string and the letter as arguments.
-Then rewrite the method so that it uses \java{indexOf} to locate the a's, rather than checking the characters one by one.
-
-\end{exercise}
-
-
-\begin{exercise}
-
 The purpose of this exercise is to review encapsulation and generalization (see Section~\ref{encapsulation}).
 
-\begin{enumerate}
-
-\item Encapsulate the following code fragment, transforming it into a method that takes a string argument and returns the final value of \java{count}.
-
-\item In a sentence or two, describe what the resulting method does (without getting into the details of how).
-
-\item Now that you have generalized the code so that it works on any string, what could you do to generalize it more?
-
-\item Write test cases to verify that your generalized code works as expected (see Section~\ref{JUnit}).
-
-\end{enumerate}
+The following code fragment traverses a string and counts open and close parentheses:
 
 \begin{code}
     String s = "((3 + 7) * 2)";
-    int len = s.length();
-
-    int i = 0;
     int count = 0;
 
-    while (i < len) {
-        char c = s.charAt(i);
-
+    for (char c: s) {
         if (c == '(') {
-            count = count + 1;
+            count++;
         } else if (c == ')') {
-            count = count - 1;
+            count--;
         }
-        i = i + 1;
     }
 
     System.out.println(count);
 \end{code}
+
+\begin{enumerate}
+
+\item Encapsulate this fragment in a method that takes a string argument and returns the final value of \java{count}.
+
+\item Now that you have generalized the code so that it works on any string, what could you do to generalize it more?
+
+\item In a sentence or two, describe what the resulting method does (without getting into the details of how).
+
+\end{enumerate}
 
 \end{exercise}
 
@@ -7412,7 +7245,6 @@ In that case, \java{x++} is legal, but \java{x = x + 1} causes an error.
 Try it out and see what the error message is, then see if you can figure out what is going on.
 
 \item What happens when you add \java{""} (the empty string) to the other types; for example, \java{"" + 5}?
-How does this technique compare with methods provided by the wrapper classes?
 
 \item For each data type, what types of values can you assign to it?
 For example, you can assign an \java{int} to a \java{double} but not vice versa.
@@ -7427,18 +7259,30 @@ For example, you can assign an \java{int} to a \java{double} but not vice versa.
 Create a program called {\tt Recurse.java} and type in the following methods:
 
 \begin{code}
-    // first: returns the first character of the given String
+    /**
+     * Returns the first character of the given String.
+     */
     public static char first(String s) {
         return s.charAt(0);
     }
 
-    // last: returns a new String that contains all but the
-    // first letter of the given String
+    /**
+     * Returns all but the first letter of the given String.
+     */
     public static String rest(String s) {
-        return s.substring(1, s.length());
+        return s.substring(1);
     }
 
-    // length: returns the length of the given String
+    /**
+     * Returns all but the first and last letter of the given String.
+     */
+    public static String middle(String s) {
+        return s.substring(1, s.length() - 1);
+    }
+
+    /**
+     * Returns the length of the given String.
+     */
     public static int length(String s) {
         return s.length();
     }
@@ -7450,7 +7294,7 @@ Create a program called {\tt Recurse.java} and type in the following methods:
 Make sure they work, and you understand what they do.
 
 \item Using these methods, and without using any other String methods, write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.
-It should be a \java{void} method.
+It should be a void method.
 
 \item Again using only these methods, write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
 
@@ -7468,48 +7312,14 @@ For example, the output of the above code should be:
 eeffoc
 \end{stdout}
 
-\end{enumerate}
+\item A palindrome is a word that reads the same both forward and backward, like ``otto'' and ``palindromeemordnilap''.
+Here's one way to test whether a string is a palindrome:
 
-\end{exercise}
-
-
-
-
-\begin{exercise}
-\label{palindrome}
-
-A palindrome is a word that reads the same both forward and backward, like ``otto'' and ``palindromeemordnilap''.
-
-\begin{enumerate}
-
-\item Create a new program named {\tt Palindrome.java}.
-
-\item Write a method named \java{first} that takes a string and returns the first letter.
-Write another method named \java{last} that returns the last letter.
-
-\item Write a method named \java{middle} that takes a string and returns a substring that contains everything {\em except} the first and last characters.
-
-%Hint: read the documentation of the \java{substring} method in the \java{String} class.
-% Run a few tests to make sure you understand how \java{substring} works before you try to write \java{middle}.
-
-Hint: Think about what happens if you invoke \java{middle} on strings that have only two letters, one letter, and no letters.
-
-\item Here's one way to test whether a string is a palindrome:
+\begin{quotation}
 ``A single letter is a palindrome, and a two-letter word is a palindrome if the letters are the same, and any other word is a palindrome if the first letter is the same as the last and the middle is a palindrome.''
+\end{quotation}
 
-Write a recursive method named \java{isPalindrome} that takes a \java{String} and returns a \java{boolean} indicating whether the word is a palindrome or not.
-
-\item Once you have a working palindrome checker, look for ways to simplify it by reducing the number of conditions you check.
-Hint: It might be useful to adopt the definition that the empty string is a palindrome.
-
-\item On a piece of paper, figure out a strategy for checking palindromes iteratively, using a loop.
-There are several possible approaches, so make sure you have a solid plan before you start writing code.
-
-\item Implement your strategy in a method called \java{isPalindromeIter}.
-Make sure it returns the same results as your recursive method.
-
-%\item Optional: Appendix~\ref{javaio} provides code for reading a list
-%of words from a file.  Read a list of words and print the palindromes.
+Write a recursive method named \java{isPalindrome} that takes a \java{String} and returns a \java{boolean} indicating whether the word is a palindrome.
 
 \end{enumerate}
 
@@ -7528,70 +7338,20 @@ beknow, bijoux, biopsy, cestuy, chintz, deflux, dehors, dehort, %\\
 deinos, diluvy, dimpsy %\\
 \end{quote}
 
-\begin{enumerate}
-
-\item Describe a process for checking whether a given word is abecedarian, assuming that the word contains only lower-case letters.
-Your process can be iterative or recursive.
-
-\item Implement your process in a method called \java{isAbecedarian}.
-
-\end{enumerate}
+Write a method called \java{isAbecedarian} that takes a \java{String} and returns a \java{boolean} indicating whether the word is abecedarian.
+Your method can be iterative or recursive.
 
 \end{exercise}
 
 
-\begin{exercise}
-\label{dupledrome}
-
-A dupledrome is a word that contains only double letters, like ``llaammaa'' or ``ssaabb''.
-There are most likely no dupledromes in common English use.
-
-\begin{enumerate}
-
-\item Write a method named \java{isDupledrome} that takes a \java{String} and returns a \java{boolean} indicating whether the word is a dupledrome.
-
-\item Write a \java{main} program that reads words from \java{System.in} and checks them for dupledromity.
-Continue reading input until the user enters the word \java{"Done"} (ignoring case).
-
-\end{enumerate}
-
-\end{exercise}
-
 
 \begin{exercise}
-
-ROT13 is a {\em shift cipher} that works by taking each letter in a string and adding 13 to it.
-For example, \java{'a'} becomes \java{'n'} and \java{'b'} becomes \java{'o'}.
-The letters wrap around at the end, so \java{'z'} becomes \java{'m'}.
-
-\begin{enumerate}
-
-\item Write a method that takes a string and returns a new string containing the ROT13 encoded version.
-You should assume that the string contains upper and lower case letters and spaces, but no other characters.
-Lower case letters should be transformed into other lower-case letters, and uppercase into uppercase.
-You should not transform the spaces.
-
-\item Generalize the method so that instead of adding 13 to each letter, it adds any given amount.
-Now you should be able to encode things by adding 13 and decode them by adding -13.
-
-\item Use your method to decrypt the string \java{"Jnl gb Tb"}.
-
-\item Figure out how to decrypt \java{"Tjp adbpmzy do jpo"}.
-It wasn't created by adding 13 to each letter.
-Write a loop to try other possible values.
-
-\end{enumerate}
-
-\end{exercise}
-
-
-\begin{exercise}
-Write a method called \java{letterHist} that takes a String as a parameter and returns a histogram of the letters in the String.
+Write a method called \java{letterHist} that takes a string as a parameter and returns a histogram of the letters in the string.
 The zeroeth element of the histogram should contain the number of a's in the String (upper and lower case); the 25th element should contain the number of z's.
-Your solution should only traverse the String once.
+Your solution should only traverse the string once.
 \end{exercise}
 
-%TODO: check for consistency on String vs string
+%TODO: check for consistency on String vs string vs \java{String}
 
 
 \begin{exercise}
@@ -7602,17 +7362,15 @@ Here are some example doubloons found in the dictionary.
 Abba, Anna, appall, appearer, appeases, arraigning, beriberi, bilabial, boob, Caucasus, coco, Dada, deed, Emmett, Hannah, horseshoer, intestines, Isis, mama, Mimi, murmur, noon, Otto, papa, peep, reappear, redder, sees, Shanghaiings, Toto.
 \end{quote}
 
-Write a method called \java{isDoubloon} that returns \java{true} if the given word is a doubloon and \java{false} otherwise.
+Write a method called \java{isDoubloon} that takes a string and checks whether it is a doubloon.
 \end{exercise}
 
 
 \begin{exercise}
-Two words are anagrams if they contain the same letters (and the same number of each letter).
+Two words are anagrams if they contain the same letters and the same number of each letter.
 For example, ``stop'' is an anagram of ``pots'' and ``allen downey'' is an anagram of ``well annoyed''.
 
-Write a method that takes two Strings and returns \java{true} if the Strings are anagrams of each other.
-
-Optional challenge: read the letters of the Strings only once.
+Write a method that takes two strings and checks whether they are anagrams of each other.
 \end{exercise}
 
 % Note: we provided the copyright notice on Scrabble in a previous exercise
@@ -7621,11 +7379,10 @@ Optional challenge: read the letters of the Strings only once.
 In Scrabble each player has a set of tiles with letters on them, and the object of the game is to use those letters to spell words.
 The scoring system is complicated, but longer words are usually worth more than shorter words.
 
-Imagine you are given your set of tiles as a String, like \java{"quijibo"}, and you are given another String to test, like \java{"jib"}.
-Write a method called \java{canSpell} that takes two Strings and returns \java{true} if the set of tiles can be used to spell the word.
-You might have more than one tile with the same letter, but you can only use each tile once.
+Imagine you are given your set of tiles as a string, like \java{"quijibo"}, and you are given another string to test, like \java{"jib"}.
 
-Optional challenge: read the letters of the Strings only once.
+Write a method called \java{canSpell} that takes two Strings and checks whether the set of tiles can spell the word.
+You might have more than one tile with the same letter, but you can only use each tile once.
 \end{exercise}
 
 

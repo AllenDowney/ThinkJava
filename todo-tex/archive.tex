@@ -957,3 +957,268 @@ This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/S
 %  call back to this exercise when we sort cards
 \end{exercise}
 
+
+
+\begin{exercise}
+
+A friend shows you the following method and claims that if the value of \java{number} is any two-digit number, the program will output the number backwards.
+For example if \java{number} is 17, the code should output {\tt 71}.
+
+\begin{code}
+    Scanner in = new Scanner(System.in);
+    int number = in.nextInt();
+
+    int lastDigit = number % 10;
+    int firstDigit = number / 10;
+
+    System.out.println(lastDigit + firstDigit);
+\end{code}
+
+Explain what the program actually does, and modify it so that it does the right thing.
+You can assume the input will be a two-digit positive integer.
+
+\end{exercise}
+
+
+\begin{exercise}
+
+What is the output of the following program?
+Describe in a sentence what \java{mystery} does (not how it works).
+
+\begin{code}
+public class Mystery {
+
+    public static String mystery(String s) {
+        String total = "";
+        int i = s.length() - 1;
+
+        while (i >= 0) {
+            char ch = s.charAt(i);
+            System.out.println(i + "     " + ch);
+
+            total = total + ch;
+            i--;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(mystery("Think Java"));
+    }
+
+}
+\end{code}
+
+\end{exercise}
+
+
+
+\section{Looping and counting}
+\label{loopcount}
+
+\index{loop!counting}
+\index{traverse!counting}
+
+Other string traversals involve looping and counting.
+The following method counts the number of times a given character appears in a string.
+For example, \java{numberOf("banana", 'a')} returns 3.
+
+\begin{code}
+    public static int numberOf(String s, char c) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                count++;
+            }
+        }
+        return count;
+    }
+\end{code}
+
+\index{counter}
+
+This method demonstrates a common idiom, called a {\bf counter}.
+The variable \java{count} is initialized to zero and then incremented each time we find an \java{'a'}.
+When we exit the loop, \java{count} contains the result: the total number of a's.
+
+
+
+\section{Bounds checking}
+\label{StringIndexOutOfBounds}
+
+\index{runtime error}
+\index{error!runtime}
+\index{exception}
+
+If you call the \java{charAt} method with an index that is either negative or greater than \java{length - 1}, you will get an exception, specifically a \java{StringIndexOutOfBounds} exception.
+%The same is true when calling \java{substring} with invalid start or end indexes.
+
+For example, notice the error in the \java{getLastLetter} method below.
+It should be looking at \java{index - 1} instead of \java{index}.
+
+\begin{code}
+public class BadString {
+    public static void main(String[] args) {
+        processWord("banana");
+    }
+
+    public static void processWord(String s) {
+        char c = getLastLetter(s);
+        System.out.println(c);
+    }
+
+    public static char getLastLetter(String s) {
+        int index = s.length();
+        char c = s.charAt(index);  // WRONG!
+        return c;
+    }
+}
+\end{code}
+
+When you run the \java{BadString} program, Java prints the following message.
+
+\begin{small}
+\begin{stdout}
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException:
+String index out of range: 6
+    at java.lang.String.charAt(String.java:658)
+    at BadString.getLastLetter(BadString.java:14)
+    at BadString.processWord(BadString.java:8)
+    at BadString.main(BadString.java:4)
+\end{stdout}
+\end{small}
+
+\index{stack trace}
+
+% TODO: we should define stack trace earlier
+
+This information is called a {\bf stack trace}, which shows the methods that were running when the error occurred.
+The stack trace can be difficult to read, but it contains a lot of useful information.
+For one, it tells you that the index 6 was out of range.
+
+More importantly, it shows the line of code where the error occurred.
+It may be helpful to read the stack trace bottom-up.
+On line~4, \java{main} called \java{processWord}, which on line~8 called \java{getLastLetter}, which on line~14 called \java{charAt}.
+The actual error occurred on line 658 of String.java, which is in the source code for the \java{String} class itself.
+
+Although possible, it's unlikely that the Java library code has mistakes that cause programs to crash.
+When reading stack diagrams, look for the top line that refers to a file you wrote.
+In this example, \java{BadString.java:14} is the most useful debugging information.
+
+
+
+\label{immutable}
+
+\index{toUpperCase}
+\index{toLowerCase}
+\index{immutable}
+
+As you read the documentation of the \java{String} methods, you might notice \java{toUpperCase} and \java{toLowerCase}.
+These methods are often a source of confusion, because it sounds like they have the effect of changing (or mutating) an existing string.
+But neither these methods nor any others can change a string, because strings are {\bf immutable}.
+
+When you invoke \java{toUpperCase} on a string object, you get a new string object as a return value.
+For example:
+
+\begin{code}
+    String name = "Alan Turing";
+    String upperName = name.toUpperCase();
+\end{code}
+
+\index{Turing, Alan}
+
+After the second line runs, \java{upperName} contains the value \java{"ALAN TURING"}.
+But \java{name} still contains \java{"Alan Turing"} as before.
+
+
+\section{Character arithmetic}
+\index{arithmetic!character}
+
+Like the \java{compareTo} method, you too can do arithmetic with characters.
+For example, if \java{letter} refers to a lower-case letter, \java{letter - 'a'} yields its position in the alphabet (keeping in mind that 'a' is the zeroeth letter of the alphabet and 'z' is the 25th).
+
+Performing arithmetic on characters is rarely necessary in programs, but it helps demonstrate how text is represented in Java.
+For example, we often need to convert between characters that contain numbers, like \java{'0'} and \java{'1'}, and their corresponding integers.
+A common mistake beginning programmers make is to cast a \java{char} to an \java{int}:
+
+\begin{code}
+    char letter = '3';
+    int x = (int) letter;
+    System.out.println(x);
+\end{code}
+
+You might expect the value to be 3, but instead you get 51, which is the Unicode value for the character \java{'3'}.
+%Remember, not all languages in the world use Arabic numerals like English does.
+To convert \java{'3'} to the corresponding integer value, you could subtract \java{'0'}:
+
+\begin{code}
+    int x = (int) (letter - '0');
+\end{code}
+
+But it is better to use the \java{digit} method in the \java{Character} class instead.
+For example, this code converts \java{letter} to the corresponding digit, interpreting it as a base 10 number.
+
+\begin{code}
+    int x = Character.digit(letter, 10);
+\end{code}
+
+\java{Character} is a built-in class that provides methods for working with characters.
+
+Another use for character arithmetic is to loop through the letters of the alphabet in order.
+For example, in Robert McCloskey's book {\em Make Way for Ducklings}, the names of the ducklings form an Abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack.
+Here is a loop that prints these names in order:
+
+\begin{code}
+    char letter = 'J';
+    while (letter <= 'Q') {
+        System.out.println(letter + "ack");
+        letter++;
+    }
+\end{code}
+
+Notice that in addition to the arithmetic operators, we can also use the logical operators on characters.
+The output of this program is:
+
+\begin{stdout}
+Jack
+Kack
+Lack
+Mack
+Nack
+Oack
+Pack
+Qack
+\end{stdout}
+
+Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack''.
+As an exercise, you can modify the program to correct this error.
+
+
+
+\begin{exercise}
+
+ROT13 is a {\em shift cipher} that works by taking each letter in a string and adding 13 to it.
+For example, \java{'a'} becomes \java{'n'} and \java{'b'} becomes \java{'o'}.
+The letters wrap around at the end, so \java{'z'} becomes \java{'m'}.
+
+\begin{enumerate}
+
+\item Write a method that takes a string and returns a new string containing the ROT13 encoded version.
+You should assume that the string contains upper and lower case letters and spaces, but no other characters.
+Lower case letters should be transformed into other lower-case letters, and uppercase into uppercase.
+You should not transform the spaces.
+
+\item Generalize the method so that instead of adding 13 to each letter, it adds any given amount.
+Now you should be able to encode things by adding 13 and decode them by adding -13.
+
+\item Use your method to decrypt the string \java{"Jnl gb Tb"}.
+
+\item Figure out how to decrypt \java{"Tjp adbpmzy do jpo"}.
+It wasn't created by adding 13 to each letter.
+Write a loop to try other possible values.
+
+\end{enumerate}
+
+\end{exercise}
+
+
