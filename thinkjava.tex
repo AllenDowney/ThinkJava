@@ -6191,7 +6191,7 @@ We can do that by replacing the magic number, 3, with the expression \java{a.len
 
 \java{a.length} looks like a method invocation, but there are no parentheses and no arguments.
 \java{length} is actually an {\bf attribute} of the array, not a method.
-We will learn more about attributes in Section~\ref{point}.
+We will learn more about attributes in Section~\ref{attribute}.
 
 The last time this loop gets executed, \java{i} is \java{a.length - 1}, which is the index of the last element.
 When \java{i} is equal to \java{a.length}, the condition fails and the body is not executed, which is a good thing, because it would throw an exception.
@@ -6470,83 +6470,6 @@ Using the enhanced \java{for} loop, and removing the temporary variable, we can 
 
 Enhanced for loops often make code more readable.
 
-
-\section{Command-line arguments}
-
-Now that you know about arrays, we can {\em finally} explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter~\ref{theway}.
-Continuing the example from the previous section, let's write a program to find the largest in a sequence of numbers.
-Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
-Here is a starting point:
-
-\begin{code}
-public class Max {
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString(args));
-    }
-}
-\end{code}
-
-If you run this program on the command line like this:
-
-\begin{code}
-java Max
-\end{code}
-
-The output indicates that \java{args} is an {\bf empty} array; that is, it has no elements:
-
-\begin{stdout}
-[]
-\end{stdout}
-
-But if you provide additional values on the command line, they are passed as arguments to \java{main}.
-For example, if you run it like this
-
-\begin{stdout}
-java Max 10 -3 55 0 14
-\end{stdout}
-
-The output is:
-
-\begin{stdout}
-[10, -3, 55, 0, 14]
-\end{stdout}
-
-But remember that the elements of \java{args} are strings.
-To find the maximum number, we have to convert the arguments to integers.
-
-The following fragment uses an enhanced \java{for} loop to parse the arguments and find the largest:
-
-\begin{code}
-    int max = Integer.MIN_VALUE;
-    for (String arg : args) {
-        int value = Integer.parseInt(arg);
-        if (value > max) {
-            max = value;
-        }
-    }
-    System.out.println("The max is " + max);
-\end{code}
-
-The initial value of \java{max} is the smallest (most negative) integer, so any other value is greater.
-If \java{args} is empty, the result is \java{MIN_VALUE}.
-
-%In general, command-line arguments allow you to customize your programs based on user input before the program begins.
-%For example, the \java{javac} and \java{java} programs use command-line arguments for a variety of configuration settings.
-%You can run \java{javac -help} and \java{java -help} from the command-line to see what they are.
-
-
-%\section{java.util.Arrays}
-
-%TODO: write this section
-
-% ABD: we presented copyOf and toString.  What else?
-
-
-%\section{Two dimensional arrays}
-
-%TODO: write this section
-
-% ABD: this chapter is already getting long.  maybe we should postpone this?
 
 
 \section{Vocabulary}
@@ -7092,39 +7015,6 @@ In the example above, \java{compareTo} returns positive 8, because the second le
 The uppercase letters come before the lowercase letters, so \java{"Ada"} comes before \java{"ada"}.
 
 
-\section{Wrapper classes}
-\label{wrappers}
-
-For each primitive type, there is a corresponding class in the Java library.
-The class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
-These so-called {\bf wrapper classes} also include \java{Boolean}, \java{Long}, and \java{Double}.
-These classes are in the \java{java.lang} package, so you can use them without importing them.
-
-Each wrapper class defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
-For example, \java{Integer.MIN_VALUE} is \java{-2147483648}, and \java{Integer.MAX_VALUE} is \java{2147483647}.
-Because these constants are available in wrapper classes, you don't have to remember them, and you don't have to include them in your programs.
-
-Wrapper classes provide methods for converting strings to other types.
-For example, \java{Integer.parseInt} converts a string to (you guessed it) an integer:
-
-\begin{code}
-String str = "12345";
-int num = Integer.parseInt(str);
-\end{code}
-
-In this context, {\bf parse} means something like ``read and translate''.
-
-The other wrapper classes provide similar methods, like \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
-
-They also provide \java{toString}, which returns a string representation of a value:
-
-\begin{code}
-int num = 12345;
-String str = Integer.toString(num);
-\end{code}
-
-The result is the string \java{"12345"}.
-
 
 
 \section{Vocabulary}
@@ -7446,12 +7336,12 @@ Here is a state diagram showing the result:
 As usual, the name of the variable \java{blank} appears outside the box and its value appears inside the box.
 In this case, the value is a reference, which is represented with an arrow.
 The arrow points to the new object, which contains two variables, \java{x} and \java{y}.
-Variables like these that belong to an object are called {\bf attributes}.
-
 
 \section{Attributes}
+\label{attribute}
 
 \index{dot notation}
+Variables like these that belong to an object are called {\bf attributes}.
 To access an attribute of an object, Java uses {\bf dot notation}.
 For example:
 
@@ -7465,7 +7355,7 @@ There is no conflict between the local variable named \java{x} and the attribute
 The purpose of dot notation is to identify {\em which} variable you are referring to unambiguously.
 
 You can use dot notation as part of an expression.
-Here are several common examples:
+For example:
 
 \begin{code}
     System.out.println(blank.x + ", " + blank.y);
@@ -7489,7 +7379,7 @@ For example:
     }
 \end{code}
 
-This method takes a point as an argument and prints it's attributes in parentheses.
+This method takes a point as an argument and prints its attributes in parentheses.
 If you invoke \java{printPoint(blank)}, it prints \java{(3, 4)}.
 
 But we don't really need \java{printPoint}.
@@ -7500,7 +7390,7 @@ java.awt.Point[x=3,y=4]
 \end{stdout}
 
 Point objects provide a method called \java{toString} that returns a string representation of a point.
-When you call \java{println}, it calls {\tt toString} and then displays the result, which shows the name of the type and the names and values of the attributes.
+When you call \java{println}, it calls {\tt toString} and displays the result, which shows the name of the type and the names and values of the attributes.
 
 As another example, we can rewrite the \java{distance} method from Section~\ref{distance} so that it takes two \java{Point}s as parameters instead of four \java{double}s.
 
@@ -7563,7 +7453,7 @@ For example, \java{findCenter} takes a \java{Rectangle} as an argument and retur
 \end{code}
 
 The return type of this method is \java{Point}.
-The last line creates a new \java{Point} object, and then immediately returns a reference to it.
+The last line creates a new \java{Point} object and returns a reference to it.
 
 
 \section{Mutable objects}
@@ -7575,6 +7465,7 @@ You can change the contents of an object by making an assignment to one of its a
 For example, to ``move'' a rectangle without changing its size, you can modify the \java{x} and \java{y} values:
 
 \begin{code}
+    Rectangle box = new Rectangle(0, 0, 100, 200);
     box.x = box.x + 50;
     box.y = box.y + 100;
 \end{code}
@@ -7608,7 +7499,7 @@ Invoking this method has the effect of modifying the \java{Rectangle} that is pa
 
 The code prints \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
 
-Modifying objects by passing them as arguments to methods can be useful, but it can also make debugging more difficult because it is not always clear which method invocations do or do not modify their arguments.
+Modifying objects by passing them as arguments to methods can be useful, but it can also make debugging more difficult, because it is not always clear which method invocations modify their arguments.
 %Later, I discuss some pros and cons of this programming style.
 
 Java provides a number of methods that operate on \java{Point}s and \java{Rectangle}s.
@@ -7650,11 +7541,8 @@ This state diagram shows the result:
 
 \index{aliasing}
 
-Both variables refer to the same object, so the object has two names, \java{box1} and \java{box2}.
-When a person uses two names they are called {\bf aliases}.
-Same thing with objects.
-
-When two variables are aliased, any changes that affect one variable also affect the other.
+\java{box1} and \java{box2} are aliases for the same object,
+so any changes that affect one variable also affect the other.
 For example:
 
 \begin{code}
@@ -7703,7 +7591,7 @@ The value \java{null} is represented in state diagrams by a small box with no ar
 \index{exception!NullPointer}
 \index{run-time error}
 
-If you try to use a \java{null} object, either by accessing an attribute or invoking a method, Java throws a \java{NullPointerException}, prints an error message, and terminates the program.
+If you try to use a \java{null} object, either by accessing an attribute or invoking a method, Java throws a \java{NullPointerException}.
 
 \begin{code}
     Point blank = null;
@@ -7712,12 +7600,12 @@ If you try to use a \java{null} object, either by accessing an attribute or invo
 \end{code}
 
 On the other hand, it is legal to pass a null object as an argument or receive one as a return value.
-In fact, it is common to do so, for example to indicate an error condition.
+For example, \java{null} is often used to represent an exceptional condition or indicate an error.
 
 
 \section{Garbage collection}
 
-In Section~\ref{aliasing} we talked about what happens when more than one variable refers to the same object.
+In Section~\ref{aliasing} we saw what happens when more than one variable refers to the same object.
 What happens when {\em no} variable refers to an object?
 
 \begin{code}
@@ -7735,16 +7623,111 @@ In the state diagram, we have removed the arrow between them.
 
 \index{garbage collection}
 
-If no one refers to an object, then no one can read or write any of its attributes, or invoke a method on it.
+If there are no references to an object, there is no way to access its attributes or invoke a method on it.
 In effect, it ceases to exist.
 We could keep the object in memory, but it would only waste space.
-So periodically as your program runs, the system looks for stranded objects and reclaims them in a process called {\bf garbage collection}.
-Later, the memory space occupied by the object will be available to be used as part of a new object.
+As your program runs, the system looks for stranded objects and reclaims them;
+then the space can be reused for new objects.
+This process is called {\bf garbage collection}.
 
 You don't have to do anything to make garbage collection happen, and in general don't have to be aware of it.
 But we thought you might be interested.
 
 
+\section{Wrapper classes}
+\label{wrappers}
+
+For each primitive type, there is a corresponding class in the Java library.
+The class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
+These so-called {\bf wrapper classes} also include \java{Boolean}, \java{Long}, and \java{Double}.
+These classes are in the \java{java.lang} package, so you can use them without importing them.
+
+Each wrapper class defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
+For example, \java{Integer.MIN_VALUE} is \java{-2147483648}, and \java{Integer.MAX_VALUE} is \java{2147483647}.
+Because these constants are available in wrapper classes, you don't have to remember them, and you don't have to include them in your programs.
+
+Wrapper classes provide methods for converting strings to other types.
+For example, \java{Integer.parseInt} converts a string to (you guessed it) an integer:
+
+\begin{code}
+String str = "12345";
+int num = Integer.parseInt(str);
+\end{code}
+
+In this context, {\bf parse} means something like ``read and translate''.
+
+The other wrapper classes provide similar methods, like \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
+
+They also provide \java{toString}, which returns a string representation of a value:
+
+\begin{code}
+int num = 12345;
+String str = Integer.toString(num);
+\end{code}
+
+The result is the string \java{"12345"}.
+
+
+\section{Command-line arguments}
+
+Now that you know about arrays, we can {\em finally} explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter~\ref{theway}.
+Continuing the example from the previous section, let's write a program to find the largest in a sequence of numbers.
+Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
+Here is a starting point:
+
+\begin{code}
+public class Max {
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(args));
+    }
+}
+\end{code}
+
+If you run this program on the command line like this:
+
+\begin{code}
+java Max
+\end{code}
+
+%TODO: we should explain {\bf empty array} in the array chapter
+
+The output indicates that \java{args} is an empty array; that is, it has no elements:
+
+\begin{stdout}
+[]
+\end{stdout}
+
+But if you provide additional values on the command line, they are passed as arguments to \java{main}.
+For example, if you run it like this
+
+\begin{stdout}
+java Max 10 -3 55 0 14
+\end{stdout}
+
+The output is:
+
+\begin{stdout}
+[10, -3, 55, 0, 14]
+\end{stdout}
+
+But remember that the elements of \java{args} are strings.
+To find the maximum number, we have to convert the arguments to integers.
+
+The following fragment uses an enhanced \java{for} loop to parse the arguments and find the largest:
+
+\begin{code}
+    int max = Integer.MIN_VALUE;
+    for (String arg : args) {
+        int value = Integer.parseInt(arg);
+        if (value > max) {
+            max = value;
+        }
+    }
+    System.out.println("The max is " + max);
+\end{code}
+
+The initial value of \java{max} is the smallest (most negative) integer, so any other value is greater.
+If \java{args} is empty, the result is \java{MIN_VALUE}.
 
 
 \section{Vocabulary}
@@ -7778,23 +7761,16 @@ One of the named data items that make up an object.
 \term{garbage collection}
 The process of finding objects that have no references and reclaiming their storage space.
 
-\term{AWT}
-The Abstract Window Toolkit, one of the biggest and commonly-used Java packages.
+\term{wrapper class}
+Classes in \java{java.lang} that provide constants and methods for working with primitive types.
 
-\term{coordinate}
-A variable or value that specifies a location in a two-dimensional graphical window.
-
-\term{pixel}
-The unit in which coordinates are measured.
-
-\term{bounding box}
-A common way to specify the coordinates of a rectangular area.
+\term{parse}
+To read a string and interpret or translate it.
 
 \end{description}
 
 
 \section{Exercises}
-
 
 \begin{exercise}
 The point of this exercise is to make sure you understand the mechanism for passing objects as parameters.
@@ -7991,65 +7967,6 @@ You can use the BigInteger methods \java{add} and \java{multiply}, but don't use
 \end{exercise}
 
 
-% TODO: this might be a good place to introduce graphics; then we
-% can have exercises that draw Points and Rectangles
-
-
-\begin{exercise}
-Draw the flag of Japan, a red circle on white background
-that is wider than it is tall.
-\end{exercise}
-
-
-\begin{exercise}
-Modify {\tt Mickey.java} to draw ears on the ears, and ears on those
-ears, and more ears all the way down until the smallest ears are
-only 3 pixels wide.
-
-The result should look like Mickey Moose:
-
-\includegraphics[height=2in]{figs/moose.pdf}
-
-Hint: you should only have to add or modify a few lines of code.
-
-You can download a solution from
-\url{http://thinkapjava.com/code/MickeySoln.java}.
-
-\end{exercise}
-
-
-\begin{exercise}
-\begin{enumerate}
-
-\item Download
-\url{http://thinkapjava.com/code/Moire.java} and import it into
-your development environment.
-
-\item Read the {\tt paint} method and draw a sketch of
-what you expect it to do.  Now run it.  Did you get what you
-expected?  For an explanation of what is going on, see
-\url{http://en.wikipedia.org/wiki/Moire_pattern}.
-
-\item Modify the program so that the space between the circles is
-larger or smaller.  See what happens to the image.
-
-\item Modify the program so that the circles are drawn in the center
-of the screen and concentric, as in the following figure (left).
-The distance between the circles should be small enough
-that the Moir\'{e} interference is apparent.
-
-\includegraphics[height=1.5in]{figs/moire.pdf}
-
-\item Write a method named {\tt radial} that draws a radial set
-of line segments as shown in the figure (right), but they should be close
-enough together to create a Moir\'{e} pattern.
-
-\item Just about any kind of graphical pattern can generate
-Moir\'{e}-like interference patterns.  Play around and see what you
-can create.
-
-\end{enumerate}
-\end{exercise}
 
 
 \chapter{Classes}
@@ -10178,6 +10095,8 @@ When declaring an \java{ArrayList} (and other collections), you need to specify 
 
 In other words, \java{cards} is not just an \java{ArrayList}, it's an \java{ArrayList} of \java{Card} objects.
 Note that Java collections can only store objects.
+
+%TODO: we have not shown how to instantiate wrapper classes
 If you need to store primitive types, use wrapper classes (e.g., \java{ArrayList<Integer>}).
 
 Think of an \java{ArrayList} as a {\em resizable array}.
@@ -10852,3 +10771,77 @@ The result looks like this:
 \begin{center}
 \includegraphics[height=2in]{figs/mickey.pdf}
 \end{center}
+
+
+
+\term{AWT}
+The Abstract Window Toolkit, one of the biggest and commonly-used Java packages.
+
+\term{coordinate}
+A variable or value that specifies a location in a two-dimensional graphical window.
+
+\term{pixel}
+The unit in which coordinates are measured.
+
+\term{bounding box}
+A common way to specify the coordinates of a rectangular area.
+
+
+
+
+
+\begin{exercise}
+Draw the flag of Japan, a red circle on white background
+that is wider than it is tall.
+\end{exercise}
+
+
+\begin{exercise}
+Modify {\tt Mickey.java} to draw ears on the ears, and ears on those
+ears, and more ears all the way down until the smallest ears are
+only 3 pixels wide.
+
+The result should look like Mickey Moose:
+
+\includegraphics[height=2in]{figs/moose.pdf}
+
+Hint: you should only have to add or modify a few lines of code.
+
+You can download a solution from
+\url{http://thinkapjava.com/code/MickeySoln.java}.
+
+\end{exercise}
+
+
+\begin{exercise}
+\begin{enumerate}
+
+\item Download
+\url{http://thinkapjava.com/code/Moire.java} and import it into
+your development environment.
+
+\item Read the {\tt paint} method and draw a sketch of
+what you expect it to do.  Now run it.  Did you get what you
+expected?  For an explanation of what is going on, see
+\url{http://en.wikipedia.org/wiki/Moire_pattern}.
+
+\item Modify the program so that the space between the circles is
+larger or smaller.  See what happens to the image.
+
+\item Modify the program so that the circles are drawn in the center
+of the screen and concentric, as in the following figure (left).
+The distance between the circles should be small enough
+that the Moir\'{e} interference is apparent.
+
+\includegraphics[height=1.5in]{figs/moire.pdf}
+
+\item Write a method named {\tt radial} that draws a radial set
+of line segments as shown in the figure (right), but they should be close
+enough together to create a Moir\'{e} pattern.
+
+\item Just about any kind of graphical pattern can generate
+Moir\'{e}-like interference patterns.  Play around and see what you
+can create.
+
+\end{enumerate}
+\end{exercise}
