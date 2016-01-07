@@ -13,7 +13,7 @@ def insert(tex):
         if chap:
             print line,
 
-def main(n, tex):
+def main(tex, num):
     src = open("thinkjava.tex")
     # copy the preamble
     for line in src:
@@ -26,14 +26,14 @@ def main(n, tex):
         if line.startswith("\\backmatter") or line.startswith("\\chapter{"):
             i += 1
             # insert new chapter
-            if i == n + 1:
+            if i == num + 1:
                 insert(tex)
         # skip old chapter
-        if i != n:
+        if i != num:
             print line,
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:
-        main(int(sys.argv[1]), sys.argv[2])
+        main(sys.argv[1], int(sys.argv[2]))
     else:
-        print "Usage: python merge.py NUMBER TEXFILE"
+        print "Usage: python merge.py CHAP.tex NUMBER"

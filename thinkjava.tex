@@ -263,6 +263,7 @@ This way of thinking combines some of the best features of mathematics, engineer
 Like mathematicians, computer scientists use formal languages to denote ideas, specifically computations.
 Like engineers, they design things, assembling components into systems and evaluating trade-offs among alternatives.
 And like scientists, they observe the behavior of complex systems, form hypotheses, and test predictions.
+
 \index{problem-solving}
 
 The single most important skill for a computer scientist is {\bf problem-solving}.
@@ -279,6 +280,7 @@ As we go along, that end will become clearer.
 \section{What is programming?}
 
 \index{program}
+
 A {\bf program} is a sequence of instructions that specifies how to perform a computation.
 %\footnote{This definition does not apply to all programming languages; for alternatives, see \url{http://en.wikipedia.org/wiki/Declarative_programming}.}
 The computation might be something mathematical, like solving a system of equations or finding the roots of a polynomial.
@@ -287,7 +289,7 @@ The details look different in different languages, but a few basic instructions 
 
 \begin{description}
 \item[input:] Get data from the keyboard, a file, a sensor, or some other device.
-\item[output:] Display data on the screen or send data to a file, network, or other device.
+\item[output:] Display data on the screen, or send data to a file or other device.
 \item[math:] Perform basic mathematical operations like addition and division.
 \item[decisions:] Check for certain conditions and execute the appropriate code.
 \item[repetition:] Perform some action repeatedly, usually with some variation.
@@ -298,13 +300,14 @@ The details look different in different languages, but a few basic instructions 
 Believe it or not, that's pretty much all there is to it.
 Every program you've ever used, no matter how complicated, is made up of instructions that look much like these.
 So you can think of {\bf programming} as the process of breaking down a large, complex task into smaller and smaller subtasks.
-The process continues until the subtasks are simple enough to be performed with the basic instructions provided by computer.
+The process continues until the subtasks are simple enough to be performed with the basic instructions provided by the computer.
 
 
 \section{What is computer science?}
 
 One of the most interesting aspects of writing programs is deciding how to solve a particular problem, especially when there are multiple solutions.
 For example, there are numerous ways to sort a list of numbers, and each way has its advantages.
+%(see \url{http://www.sorting-algorithms.com/})
 In order to determine which way is best for a given situation, we need techniques for describing and analyzing solutions formally.
 That is where computer science comes in.
 
@@ -362,15 +365,17 @@ But high-level languages have two advantages:
 \begin{itemize}
 
 \item It is {\em much} easier to program in a high-level language.
-Programs take less time to write, are shorter and easier to read, and are more likely to be correct.
+Programs take less time to write, they are shorter and easier to read, and they are more likely to be correct.
+
+\index{portable}
 
 \item High-level languages are {\bf portable}, meaning that they can run on different kinds of computers with few or no modifications.
 Low-level programs can only run on one kind of computer, and have to be rewritten to run on another.
-\index{portable}
 
 \end{itemize}
 
 \index{interpreter}
+
 Two kinds of programs translate high-level languages into low-level languages: interpreters and compilers.
 An {\bf interpreter} reads a high-level program and executes it, meaning that it does what the program says.
 It processes the program a little at a time, alternately reading lines and performing computations.
@@ -414,7 +419,6 @@ Usually you only have press a button or type a single command to compile and run
 On the other hand, it is important to know what steps are happening in the background, so if something goes wrong you can figure out what it is.
 
 
-
 \section{The hello world program}
 \label{hello}
 
@@ -434,7 +438,7 @@ public class Hello {
 }
 \end{code}
 
-When this program runs it displays
+When this program runs it displays:
 
 \begin{stdout}
 Hello, World!
@@ -442,52 +446,54 @@ Hello, World!
 
 Notice that the output does not include the quotation marks.
 
-\index{public}
-\index{static}
+%\index{public}
+%\index{static}
+%The word \java{public} means the code can be accessed from other source files.
+%The word \java{static} means that memory is allocated for the program in advance.
 
-Unfortunately, this simple example uses several features that are hard to explain; in fact, we won't be able to explain all of them for several more chapters.
+Unfortunately, this simple example uses language features (like \java{public} and \java{static}) that are hard to explain.
+In fact, we won't be able to explain all of them for several more chapters.
 But we can start with the structure.
 
 \index{class!definition}
 \index{method!definition}
-
-Java programs are made up of ``class'' and ``method'' definitions, and methods are made up of ``statements''.
-
-\index{class!name}
-
-A {\bf statement} is a line of code that performs a basic operation.
-In the hello world program, this line
 \index{statement}
 
+Java programs are made up of {\em class} and {\em method} definitions, and methods are made up of {\em statements}.
+A {\bf statement} is a line of code that performs a basic operation.
+In the hello world program, this line is a {\bf print statement} that displays a message on the screen:
+
 \begin{code}
-        System.out.println("Hello, World!");
+    System.out.println("Hello, World!");
 \end{code}
 
-is a {\bf print statement}, which displays a message on the screen.
-Confusingly, print can mean both ``display something on the screen'' and ``send something to the printer''.
-In this book, we'll try to say ``display'' when we mean ``display''.
-\index{println}
 \index{statement!print}
-
-Like most statements, the print statement ends with a semicolon (\java{;}).
 \index{semicolon}
 
-A {\bf method} is a named sequence of statements.
-This program defines one method, named \java{main}:
+Confusingly, {\em print} can mean both ``display something on the screen'' and ``send something to the printer''.
+In this book, we'll try to say ``display'' when we mean output to the screen.
+Like most statements, the print statement ends with a semicolon (\java{;}).
+
 \index{method}
+
+A {\bf method} is a named sequence of statements.
+This program defines one method named \java{main}:
 
 \begin{code}
     public static void main(String[] args)
 \end{code}
 
+\index{main}
+
 The name and format of \java{main} is special: when the program runs, it starts at the first statement in \java{main} and ends when it finishes the last statement.
 Later, we will see programs that define more than one method.
-\index{main}
+
+\index{class}
 
 A {\bf class} is a collection of methods.
 This program defines a class named \java{Hello}.
 You can give a class any name you like, but it conventional to start with a capital letter.
-And the name of the class has to match the name of the file it is in, so this class has to be in a file named \java{hello.java}.
+The name of the class has to match the name of the file it is in, so this class has to be in a file named \java{Hello.java}.
 
 \index{braces}
 \index{squiggly braces}
@@ -507,7 +513,7 @@ Comments have no effect on the execution of the program, but they make it easier
 
 \index{JDK}
 
-In order to compile Java programs on your own computer, you will need to install the Java Development Kit (JDK).
+In order to compile Java programs on your own computer, you will need to install the {\bf Java Development Kit} (JDK).
 This free software includes tools for developing and debugging Java programs.
 All the examples in this book were developed and tested using Java SE Version 7.
 If you are using a more recent version, the examples in this book should still work.
@@ -535,6 +541,7 @@ Step-by-step instructions for installing the JDK and configuring DrJava are avai
 
 \section{Command-line interface}
 \label{commandline}
+
 \index{command-line}
 \index{terminal}
 
@@ -567,7 +574,7 @@ People who don't use the command line don't know what they're missing.
 
 \section{Printing strings}
 
-You can put as many statements as you want in \java{main}.
+You can put as many statements as you like in \java{main}.
 For example, to print more than one line:
 
 \begin{code}
@@ -587,15 +594,15 @@ As this example shows, you can put comments at the end of a line as well as on l
 \index{type!String}
 
 Phrases that appear in quotation marks are called {\bf strings}, because they contain a sequence of characters strung together.
-{\bf Characters} can be letters, numbers, punctuation marks, symbols, spaces, tabs, and more.
+{\bf Characters} can be letters, numbers, punctuation marks, symbols, spaces, tabs, etc.
 
+\index{println}
 \index{newline}
 \index{print}
 \index{statement!print}
 
 The name \java{println} is short for ``print line''.
 It appends a special character, called a {\bf newline}, that moves to the beginning of the next line.
-
 If you don't want a newline at the end, you can use \java{print} instead of \java{println}:
 
 \begin{code}
@@ -608,9 +615,7 @@ public class Goodbye {
 }
 \end{code}
 
-In this example, the first statement does not add a newline, so the
-output appears on a single line as {\tt Goodbye, cruel world}.
-
+In this example, the first statement does not add a newline, so the output appears on a single line as {\tt Goodbye, cruel world}.
 Notice that there is a space at the end of the first string, which appears in the output.
 
 
@@ -625,7 +630,6 @@ public class Hello {
     public static void main(String[] args) {
         System.out.print("Hello!\nHow are you doing?\n");
     }
-
 }
 \end{code}
 
@@ -638,7 +642,7 @@ How are you doing?
 
 \index{escape sequence}
 
-The code \verb"\n" is an {\bf escape sequence}, which is a sequence of characters in a string that represents a special character.
+The \verb"\n" is an {\bf escape sequence}, which is a sequence of characters that represents a special character.
 The backslash allows you to ``escape'' the string's literal interpretation.
 Notice there is no space between \verb"\n" and \verb"How".
 If you add a space there, there will be a space at the beginning of the second line.
@@ -712,6 +716,8 @@ System.out.print("Goodbye, "); System.out.println
 It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
 
+In DrJava, you can reformat the source code with consistent indenting by selecting all text (Ctrl-A) and pressing the Tab key.
+
 
 \section{Debugging}
 \label{sec:examples}
@@ -781,9 +787,9 @@ Don't hesitate to reach out to a friend and ask questions!
 
 \section{Vocabulary}
 
-Throughout the book, we try to define each term the first time we use it.
+Throughout the book, we'll try to define each term the first time we use it.
 And the end of each chapter, we include the new terms and their definitions.
-If you spend some time learning this vocablary, you will have an easier time reading the following chapters.
+If you spend some time learning this vocabulary, you will have an easier time reading the following chapters.
 
 \begin{description}
 
@@ -837,18 +843,6 @@ Another name for object code that is ready to run on specific hardware.
 A special kind of object code used for Java programs.
 Byte code is similar to a low-level language, but it is portable like a high-level language.
 
-\term{natural language}
-Any of the languages people speak that have evolved naturally.
-
-%\term{formal language}
-%A language people have designed for specific purposes, like representing mathematical ideas or computer programs.
-
-%\term{programming language}
-%A formal language that has been designed to express computations.
-
-%\term{grammar}
-%A set of rules that determines whether a statement is legal.
-
 \term{statement}
 A part of a program that specifies a computation.
 
@@ -885,7 +879,8 @@ A sequence of code that represents a special character when used inside a string
 
 At the end of each chapter we include exercises you can do with the things you've learned.
 We encourage you to at least attempt every problem.
-You can't learn to program by reading along; you have to practice.
+You can't learn to program by reading alone; you have to practice.
+
 
 \begin{exercise}
 
@@ -934,7 +929,8 @@ Adding (and changing) print statements is a simple way to be sure that the progr
 It is a good idea to commit as many errors as you can think of, so that you see what error messages the compiler produces.
 Sometimes the compiler tells you exactly what is wrong, and all you have to do is fix it.
 But sometimes the error messages are misleading.
-You will develop a sense for when you can trust the compiler and when you have to figure things out yourself.
+Over time you will develop a sense for when you can trust the compiler and when you have to figure things out yourself.
+In the hello world program:
 
 \begin{enumerate}
 \item Remove one of the open squiggly-braces.
@@ -953,7 +949,6 @@ Add an extra one.
 % the error messages we need to interpret
 
 \end{exercise}
-
 
 
 \chapter{Variables and arithmetic}
