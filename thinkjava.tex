@@ -1241,6 +1241,10 @@ The second line changes its value to \java{2}.
 In this example, there is no reason to make two assignments, but in
 many programs it is useful to reassign, or {\bf update}, variables.
 
+
+\section{State}
+\label{state}
+
 Because Java uses the \java{=} symbol for assignment, it is tempting to interpret a statement like \java{a = b} as a statement of equality.
 It is not!
 
@@ -1261,31 +1265,19 @@ In Java, an assignment statement can make two variables equal, but they don't ha
 
 The third line changes the value of \java{a}, but does not change the value of \java{b}, so they are no longer equal.
 
+\index{state}
 
-%\subsection{Memory diagrams}
-%
-%\index{memory diagram}
-%
-%A common way to represent variables on paper is to draw a box with the name of the variable on the outside and the value of the variable on the inside.
-%This diagram shows the effect of the four assignments in the previous section:
-%
-%\begin{center}
-%\begin{tabular}{rl}
-%message & \framebox[2cm]{Hello!} \\
-%   hour & \framebox[1cm]{11} \\
-% minute & \framebox[1cm]{59} \\
-%\end{tabular}
-%\end{center}
-%
-%% ABD: In the hour box, consider showing 10 crossed out, followed by 11?
-%
-%Each box represents the storage location that holds the variable's value.
-%Once declared, you cannot change the name of a variable, but you can change the value as many times as you like.
-%For example, \java{hour} was initially \java{10}, then reassigned to \java{11}.
-%The diagram shows only the final value.
-%
-%%Since these locations can be anywhere in memory, we refer to them by the variable name.
-%%The storage location does not change; those memory cells are simply reused.
+Taken together, the variables in a program and their values make up the program's {\bf state}.
+The following diagram shows the state of the program after these assignment statements run:
+
+%TODO: we need a diagram here
+
+
+\index{state diagram}
+
+Diagrams like this that show the state of the program are called {\bf state diagrams}.
+Each variable is represented with a box showing the name of the variable on the outside and the value inside.
+As the program runs, the state changes, so you should think of a state diagram as a snapshot of a particular point in the execution.
 
 
 \section{Printing variables}
@@ -1798,6 +1790,12 @@ You cannot use keywords (like \java{public}, \java{class}, and \java{void}) as v
 
 \term{assignment}
 A statement that stores a value in a memory location.
+
+\term{state}
+The variables in a program and their values.
+
+\term{state diagram}
+A graphical representation of the state of a program and a point in time.
 
 \term{initialization}
 A statement that creates a variable and assigns a value.
@@ -3401,11 +3399,11 @@ A tool that reads Java source code and generates documentation in HTML format.
 Comments that describe the technical operation of a class or method.
 
 \term{stack diagram}
-A memory diagram that shows which variables belong to which methods at a certain point in the program.
+A graphical representation of the variables belonging to each method.
 The methods calls are ``stacked'' from top to bottom, in the order of execution.
 
 \term{frame}
-A structure (represented by a box in stack diagrams) that contains a method's parameters and variables.
+In a stack diagram, a representation of the variables and parameters for a method, and their values.
 
 %\term{scope}
 %The area of a program where a variable exists.
@@ -3900,7 +3898,7 @@ We can prevent this error by checking the input before parsing it:
     }
 \end{code}
 
-The \java{Scanner} class provides \java{hasNextDouble}, which checks whether the next token in the input stream can be parsed as a \java{double}.
+The \java{Scanner} class provides \java{hasNextDouble}, which checks whether the next token in the input stream can be interpreted as a \java{double}.
 If so, we can call \java{nextDouble} with no chance of throwing an exception.
 If not, we display an error message and return.
 Returning from \java{main} terminates the program. 
@@ -4721,7 +4719,7 @@ This idea was developed by Alonzo Church and Alan Turing, so it is known as the 
 %You can read more about it at \url{http://en.wikipedia.org/wiki/Turing_thesis}.
 
 To give you an idea of what you can do with the tools we have learned, let's look at some methods for evaluating recursively-defined mathematical functions.
-A recursive definition is similar to a circular definition, in the sense that the definition contains a reference to the thing being defined.
+A recursive definition is similar to a circular definition, in the sense that the definition refers to the thing being defined.
 A truly circular definition is not very useful:
 
 \begin{description}
@@ -5998,10 +5996,10 @@ Of course, you can also declare the variable and create the array in a single li
 
 \section{Accessing elements}
 
-\index{memory diagram}
+\index{state diagram}
 
 When you allocate an array of \java{int}s, the elements are initialized to zero.
-Here is a memory diagram of the \java{counts} array so far:
+Here is a state diagram of the \java{counts} array so far:
 
 \begin{center}
 \includegraphics{figs/array.pdf}
@@ -7387,36 +7385,16 @@ You might have more than one tile with the same letter, but you can only use eac
 
 
 
-\chapter{Shapes and graphics}
+\chapter{Objects}
 \label{objects}
 
 \index{String}
 \index{type!String}
 
-As we learned in the previous chapter, an object is is a collection of data that provides a set of methods.
-For example, a String is a collection of characters that provides methods like \java{charAt} and \java{substring}.
+%As we learned in the previous chapter, an object is is a collection of data that provides a set of methods.
+%For example, a String is a collection of characters that provides methods like \java{charAt} and \java{substring}.
 
 In this chapter we introduce two new classes, \java{Point} and \java{Rectangle}, and show how to write methods that take objects as parameters and produce objects as return values.
-
-
-%\java{String}s are objects.
-%But they are atypical in Java because:
-
-%\begin{itemize}
-
-%\item You don't have to use the \java{new} operator to create a \java{String} object.
-%For convenience, Java allows you to define \java{String} literals.
-
-%\item They are immutable.
-%You cannot edit an existing \java{String} object directly; you can only create new ones.
-
-%\end{itemize}
-
-%In this chapter, we will learn about more classes from the Java library such as \java{Point} and \java{Rectangle}.
-%These classes are defined in the \java{java.awt} package, so you will need to \java{import} them before running the examples.
-%To be clear, these points and rectangles are not graphical objects that appear on the screen.
-%Like strings, they contain data and provide methods for manipulating that data.
-%But unlike strings, you can make changes to that data directly.
 
 
 \section{Point objects}
@@ -7447,15 +7425,17 @@ Then, to create a new point, you have to use the \java{new} operator:
 \index{declaration}
 \index{statement!declaration}
 
-The first line is a conventional variable declaration: \java{blank} has type \java{Point}.
-The second line invokes \java{new}, specifies the type of the new object, and provides arguments.
-The arguments are the coordinates of the new point: $(3, 4)$.
+The first line declares that \java{blank} has type \java{Point}.
+The second line creates the new \java{Point} with the given arguments as coordinates.
 
 \index{reference}
 
-The result of the \java{new} operator is a {\bf reference} to the new object.
-So \java{blank} contains a reference to the \java{Point}.
-Here is a standard way to diagram this assignment:
+The result of the \java{new} operator is a reference to the new object.
+So \java{blank} contains a reference to the new Point object.
+Here is a state diagram showing the result:
+
+\index{state}
+\index{state diagram}
 
 \begin{center}
 \includegraphics{figs/reference.pdf}
@@ -7464,23 +7444,9 @@ Here is a standard way to diagram this assignment:
 \index{attribute}
 
 As usual, the name of the variable \java{blank} appears outside the box and its value appears inside the box.
-In this case, that value is a reference, which is shown graphically with an arrow.
+In this case, the value is a reference, which is represented with an arrow.
 The arrow points to the new object, which contains two variables, \java{x} and \java{y}.
 Variables like these that belong to an object are called {\bf attributes}.
-
-% CSM: We already introduced memory diagrams (Ch1) and stack diagrams (Ch4).
-% State diagrams are the next aspect of this general diagraming convention.
-
-\index{state}
-\index{state diagram}
-
-Taken together, all the variables, values, and objects in a program are called the {\bf state}.
-Diagrams like this that show the state of the program are called {\bf state diagrams}.
-As the program runs, the state changes, so you should think of a state diagram as a snapshot of a particular point in the execution.
-
-
-%ABD: I removed the section that defined a Point class (it's at the
-% end of this file now)
 
 
 \section{Attributes}
@@ -7676,7 +7642,7 @@ It is possible to have multiple variables that refer to the same object.
     Rectangle box2 = box1;
 \end{code}
 
-This code generates a state diagram that looks like:
+This state diagram shows the result:
 
 \begin{center}
 \includegraphics{figs/aliasing.pdf}
@@ -7776,195 +7742,26 @@ So periodically as your program runs, the system looks for stranded objects and 
 Later, the memory space occupied by the object will be available to be used as part of a new object.
 
 You don't have to do anything to make garbage collection happen, and in general don't have to be aware of it.
-%But we thought you might be interested.
+But we thought you might be interested.
 
 
-\section{Java 2D graphics}
-\label{graphics}
-
-Now that we've seen how to work with \java{Point} and \java{Rectangle} objects, let's learn how to make them appear on the screen.
-The \java{java.awt} package stands for {\bf Abstract Window Toolkit}, which is Java's original library for drawing graphics.
-We are only going to scratch the surface of graphics programming, but you can read a lot more about it in the Java Tutorials: \url{https://docs.oracle.com/javase/tutorial/2d/}.
-
-\index{Canvas}
-\index{class!Canvas}
-\index{Graphics}
-\index{class!Graphics}
-
-There are several ways to create graphics in Java; the simplest way is to use \java{java.awt.Canvas} and \java{java.awt.Graphics}.
-A \java{Canvas} is a blank rectangular area of the screen onto which the application can draw.
-The \java{Graphics} class provides basic drawing methods such as \java{drawLine}, \java{drawRect}, and \java{drawString}.
-Here is an example program that draws a circle using the \java{fillOval} method:
-
-\begin{code}
-import java.awt.Canvas;
-import java.awt.Graphics;
-import javax.swing.JFrame;
-
-public class Drawing extends Canvas {
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("My Drawing");
-        Canvas canvas = new Drawing();
-        canvas.setSize(400, 400);
-        frame.add(canvas);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public void paint(Graphics g) {
-        g.fillOval(100, 100, 200, 200);
-    }
-}
-\end{code}
-
-The definition \java{Drawing extends Canvas} means that a \java{Drawing} object is a new kind of \java{Canvas}.
-We will learn more about \java{extends} in Section~\ref{sec:extends}.
-In the \java{main} method, we:
-
-\begin{enumerate}
-
-\index{JFrame}
-\index{class!JFrame}
-
-\item Create a \java{JFrame} object, which is a window that will contain the canvas (and other components like buttons and menus);
-
-\item Create a \java{Drawing} object, set its width and height, and add it to the frame; and
-
-\item Pack the frame (resize it) to fit the canvas, and display it on the screen.
-\end{enumerate}
-
-Once the canvas is visible, the \java{paint} method will be called whenever it needs to be drawn (for example, when the window is moved or resized).
-The application doesn't end after the \java{main} method returns; instead, it waits for the \java{JFrame} to close.
-If you run this code, you should see a black circle on a gray background.
-
-
-\section{Graphics methods}
-
-\index{coordinate}
-\index{pixel}
-
-You are probably used to Cartesian {\bf coordinates}, where x and y values can be either positive or negative.
-In contrast, Java uses a coordinate system where the origin is in the upper-left corner.
-That way, x and y are always positive integers.
-Coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
-
-\begin{center}
-\includegraphics[width=5in]{figs/coordinates.pdf}
-\end{center}
-
-To draw on the canvas, you invoke methods on the \java{Graphics} object.
-The previous example used \java{fillOval}, which is defined as follows:
-
-\begin{code}
-    public void fillOval(int x, int y, int width, int height)
-\end{code}
-
-\index{bounding box}
-
-The four parameters specify a {\bf bounding box}, which is the rectangle in which the oval is drawn.
-\java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
-(Note the bounding box itself is not drawn.)
-
-\begin{center}
-\includegraphics{figs/circle.pdf}
-\end{center}
-
-\index{Color}
-
-To choose the color of a shape, invoke \java{setColor} on the Graphics object:
-
-\begin{code}
-    g.setColor(Color.red);
-\end{code}
-
-The \java{setColor} method changes the current color for everything that gets drawn.
-\java{Color.red} is a constant provided by the {\tt Color} class; to use it you have to \java{import java.awt.Color}.
-Other colors include:
-
-\begin{stdout}
-    black       blue      cyan     darkGray   gray    green
-    lightGray   magenta   orange   pink       white   yellow
-\end{stdout}
-
-You can create your own colors by specifying the red, green, and blue (RGB) components.
-For example:
-
-\begin{code}
-    Color purple = new Color(128, 0, 128);
-\end{code}
-
-Each value is an integer in the range 0 (darkest) to 255 (lightest).
-The color \java{(0, 0, 0)} is black, and \java{(255, 255, 255)} is white.
-
-You can set the background color of the \java{Canvas} by invoking \java{setBackground} in the \java{main} method.
-
-\begin{code}
-    canvas.setBackground(Color.white);
-\end{code}
-
-\index{Mickey Mouse}
-
-Let's say we want to draw a picture of Mickey Mouse.
-We can use the oval we just drew as the face, and then add two ears.
-To make the code more readable, let's use \java{Rectangle}s to represent bounding boxes.
-
-Here's a method that takes a Rectangle and invokes \java{fillOval}.
-
-\begin{code}
-    public void boxOval(Graphics g, Rectangle bb) {
-        g.fillOval(bb.x, bb.y, bb.width, bb.height);
-    }
-\end{code}
-
-And here's a method that draws Mickey Mouse:
-
-\begin{code}
-    public void mickey(Graphics g, Rectangle bb) {
-        boxOval(g, bb);
-
-        int dx = bb.width / 2;
-        int dy = bb.height / 2;
-        Rectangle half = new Rectangle(bb.x, bb.y, dx, dy);
-
-        half.translate(-dx / 2, -dy / 2);
-        boxOval(g, half);
-
-        half.translate(dx * 2, 0);
-        boxOval(g, half);
-    }
-\end{code}
-
-The first line draws the face.
-The next three lines create a smaller rectangle for the ears.
-We \java{translate} the rectangle up and left for the first ear, then right for the second ear.
-The result looks like this:
-
-\begin{center}
-\includegraphics[height=2in]{figs/mickey.pdf}
-\end{center}
 
 
 \section{Vocabulary}
 
 \begin{description}
 
-\term{reference}
-A value that indicates an object.
-In a state diagram, a reference appears as an arrow.
+%\term{reference}
+%A value that indicates an object.
+%In a state diagram, a reference appears as an arrow.
 
+%TODO: fix the parse problem
 \term{parse}
 To read a string and analyze its structure.
 
 \term{attribute}
 One of the named data items that make up an object.
 %Each object has its own copy of the attributes for its class.
-
-\term{state}
-A complete description of all the variables, values, objects, and attributes at a given point during the execution of a program.
-
-\term{state diagram}
-A snapshot of the state of a program, shown graphically.
 
 %\term{constructor}
 %A special method called by \java{new} to initialize an object.
@@ -7977,9 +7774,6 @@ A snapshot of the state of a program, shown graphically.
 
 %\term{object-oriented programming}
 %A programming technique that focuses on objects rather than independent %methods.
-
-\term{aliasing}
-The condition when two or more variables refer to the same object.
 
 \term{garbage collection}
 The process of finding objects that have no references and reclaiming their storage space.
@@ -8079,7 +7873,7 @@ For the following program:
 
 \begin{enumerate}
 
-\item Draw a state diagram that shows the state of the program just before the end of \java{main}.
+\item Draw a diagram that shows the state of the program just before the end of \java{main}.
 Include all local variables and the objects they refer to.
 
 \item What is the output of the program?
@@ -8258,7 +8052,7 @@ can create.
 \end{exercise}
 
 
-\chapter{Designing classes}
+\chapter{Classes}
 
 \index{object type}
 \index{type!object}
@@ -8597,7 +8391,7 @@ Consider the following three \java{Time} variables:
 \end{code}
 
 The variables \java{time1}, \java{time2}, and \java{time3} are references to objects.
-Here is a memory diagram that shows these references.
+Here is a state diagram that shows these references.
 
 \begin{center}
 \includegraphics{figs/time2.pdf}
@@ -9226,10 +9020,10 @@ Creating an array and initializing the elements is such a common operation that 
     String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
 \end{code}
 
-\index{memory diagram}
+\index{state diagram}
 
 This statement is equivalent to the separate declaration, allocation, and assignment.
-The memory diagram of this array looks like:
+The state diagram of this array looks like:
 
 \begin{center}
 \includegraphics{figs/stringarray.pdf}
@@ -9379,9 +9173,7 @@ Now if we invoke:
 
 The result is \java{true}.
 
-The following diagram shows the objects in this example.
-
-%TODO: replace ``memory diagram'' with ``state diagram'' everywhere?
+The following state diagram shows the objects in this example.
 
 \begin{center}
 \includegraphics{figs/card.pdf}
@@ -9485,7 +9277,7 @@ The following line creates an array of 52 cards:
 
 \index{state diagram}
 
-Here is the memory diagram for this array:
+Here is the state diagram for this array:
 
 \begin{center}
 \includegraphics{figs/cardarray.pdf}
@@ -9538,7 +9330,7 @@ Since the outer loop runs 4 times, and the inner loop runs 13 times, the body is
 \index{index}
 
 We use a separate variable \java{index} to keep track of where in the deck the next card should go.
-The following memory diagram shows what the deck looks like after the first two cards have been allocated:
+The following state diagram shows what the deck looks like after the first two cards have been allocated:
 
 \begin{center}
 \includegraphics{figs/cardarray2.pdf}
@@ -10697,7 +10489,7 @@ We encourage you to piece the examples together before jumping directly to the s
 
 Earlier in the chapter, we made a major programming mistake: we copied source code from one file to another.
 Our motivation was that the \java{Player} and \java{Pile} classes require a lot of the same methods: \java{add}, \java{deal}, \java{empty}, \java{getName}, and \java{toString}.
-The UML diagrams below summarize the resulting structure of the two classes.
+The UML class diagrams below summarize the resulting structure of the two classes.
 
 \begin{center}
 \includegraphics{uml/Player.pdf}
@@ -10896,3 +10688,167 @@ You can use this class as a starting place to implement your own card games.
 
 
 
+\section{Java 2D graphics}
+\label{graphics}
+
+Now that we've seen how to work with \java{Point} and \java{Rectangle} objects, let's learn how to make them appear on the screen.
+The \java{java.awt} package stands for {\bf Abstract Window Toolkit}, which is Java's original library for drawing graphics.
+We are only going to scratch the surface of graphics programming, but you can read a lot more about it in the Java Tutorials: \url{https://docs.oracle.com/javase/tutorial/2d/}.
+
+\index{Canvas}
+\index{class!Canvas}
+\index{Graphics}
+\index{class!Graphics}
+
+There are several ways to create graphics in Java; the simplest way is to use \java{java.awt.Canvas} and \java{java.awt.Graphics}.
+A \java{Canvas} is a blank rectangular area of the screen onto which the application can draw.
+The \java{Graphics} class provides basic drawing methods such as \java{drawLine}, \java{drawRect}, and \java{drawString}.
+Here is an example program that draws a circle using the \java{fillOval} method:
+
+\begin{code}
+import java.awt.Canvas;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+
+public class Drawing extends Canvas {
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("My Drawing");
+        Canvas canvas = new Drawing();
+        canvas.setSize(400, 400);
+        frame.add(canvas);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void paint(Graphics g) {
+        g.fillOval(100, 100, 200, 200);
+    }
+}
+\end{code}
+
+The definition \java{Drawing extends Canvas} means that a \java{Drawing} object is a new kind of \java{Canvas}.
+We will learn more about \java{extends} in Section~\ref{sec:extends}.
+In the \java{main} method, we:
+
+\begin{enumerate}
+
+\index{JFrame}
+\index{class!JFrame}
+
+\item Create a \java{JFrame} object, which is a window that will contain the canvas (and other components like buttons and menus);
+
+\item Create a \java{Drawing} object, set its width and height, and add it to the frame; and
+
+\item Pack the frame (resize it) to fit the canvas, and display it on the screen.
+\end{enumerate}
+
+Once the canvas is visible, the \java{paint} method will be called whenever it needs to be drawn (for example, when the window is moved or resized).
+The application doesn't end after the \java{main} method returns; instead, it waits for the \java{JFrame} to close.
+If you run this code, you should see a black circle on a gray background.
+
+
+\section{Graphics methods}
+
+\index{coordinate}
+\index{pixel}
+
+You are probably used to Cartesian {\bf coordinates}, where x and y values can be either positive or negative.
+In contrast, Java uses a coordinate system where the origin is in the upper-left corner.
+That way, x and y are always positive integers.
+Coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
+
+\begin{center}
+\includegraphics[width=5in]{figs/coordinates.pdf}
+\end{center}
+
+To draw on the canvas, you invoke methods on the \java{Graphics} object.
+The previous example used \java{fillOval}, which is defined as follows:
+
+\begin{code}
+    public void fillOval(int x, int y, int width, int height)
+\end{code}
+
+\index{bounding box}
+
+The four parameters specify a {\bf bounding box}, which is the rectangle in which the oval is drawn.
+\java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
+(Note the bounding box itself is not drawn.)
+
+\begin{center}
+\includegraphics{figs/circle.pdf}
+\end{center}
+
+\index{Color}
+
+To choose the color of a shape, invoke \java{setColor} on the Graphics object:
+
+\begin{code}
+    g.setColor(Color.red);
+\end{code}
+
+The \java{setColor} method changes the current color for everything that gets drawn.
+\java{Color.red} is a constant provided by the {\tt Color} class; to use it you have to \java{import java.awt.Color}.
+Other colors include:
+
+\begin{stdout}
+    black       blue      cyan     darkGray   gray    green
+    lightGray   magenta   orange   pink       white   yellow
+\end{stdout}
+
+You can create your own colors by specifying the red, green, and blue (RGB) components.
+For example:
+
+\begin{code}
+    Color purple = new Color(128, 0, 128);
+\end{code}
+
+Each value is an integer in the range 0 (darkest) to 255 (lightest).
+The color \java{(0, 0, 0)} is black, and \java{(255, 255, 255)} is white.
+
+You can set the background color of the \java{Canvas} by invoking \java{setBackground} in the \java{main} method.
+
+\begin{code}
+    canvas.setBackground(Color.white);
+\end{code}
+
+\index{Mickey Mouse}
+
+Let's say we want to draw a picture of Mickey Mouse.
+We can use the oval we just drew as the face, and then add two ears.
+To make the code more readable, let's use \java{Rectangle}s to represent bounding boxes.
+
+Here's a method that takes a Rectangle and invokes \java{fillOval}.
+
+\begin{code}
+    public void boxOval(Graphics g, Rectangle bb) {
+        g.fillOval(bb.x, bb.y, bb.width, bb.height);
+    }
+\end{code}
+
+And here's a method that draws Mickey Mouse:
+
+\begin{code}
+    public void mickey(Graphics g, Rectangle bb) {
+        boxOval(g, bb);
+
+        int dx = bb.width / 2;
+        int dy = bb.height / 2;
+        Rectangle half = new Rectangle(bb.x, bb.y, dx, dy);
+
+        half.translate(-dx / 2, -dy / 2);
+        boxOval(g, half);
+
+        half.translate(dx * 2, 0);
+        boxOval(g, half);
+    }
+\end{code}
+
+The first line draws the face.
+The next three lines create a smaller rectangle for the ears.
+We \java{translate} the rectangle up and left for the first ear, then right for the second ear.
+The result looks like this:
+
+\begin{center}
+\includegraphics[height=2in]{figs/mickey.pdf}
+\end{center}
