@@ -5993,7 +5993,7 @@ Of course, you can also declare the variable and create the array in a single li
 
 \index{state diagram}
 
-When you allocate an array of \java{int}s, the elements are initialized to zero.
+When you create an array of \java{int}s, the elements are initialized to zero.
 Here is a state diagram of the \java{counts} array so far:
 
 \begin{center}
@@ -7259,7 +7259,7 @@ Write a method that takes two strings and checks whether they are anagrams of ea
 % Note: we provided the copyright notice on Scrabble in a previous exercise
 
 \begin{exercise}
-In Scrabble each player has a set of tiles with letters on them, and the object of the game is to use those letters to spell words.
+In Scrabble\footnote{Scrabble is a registered trademark owned in the USA and Canada by Hasbro Inc., and in the rest of the world by J.\ W.\ Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.} each player has a set of tiles with letters on them, and the object of the game is to use those letters to spell words.
 The scoring system is complicated, but longer words are usually worth more than shorter words.
 
 Imagine you are given your set of tiles as a string, like \java{"quijibo"}, and you are given another string to test, like \java{"jib"}.
@@ -7970,9 +7970,9 @@ You can use the BigInteger methods \java{add} and \java{multiply}, but don't use
 \index{type!object}
 
 Whenever you define a new class, you create a new type with the same name.
-So in Section~\ref{hello} when we defined the class \java{Hello}, we created a type named \java{Hello}.
-We didn't declare any variables with type \java{Hello}, and we didn't use \java{new} to create any \java{Hello} objects.
-It wouldn't have done much if we did -- but we could have!
+Way back in Section~\ref{hello}, when we defined the class \java{Hello}, we created a type named \java{Hello}.
+We didn't declare any variables with type \java{Hello}, and we didn't use \java{new} to create a \java{Hello} object.
+It wouldn't have done much if we had -- but we could have!
 \index{class definition}
 
 In this chapter, we will define classes that create {\em useful} object types.
@@ -7980,7 +7980,7 @@ Here are the most important ideas:
 
 \begin{itemize}
 
-\item Defining a new class creates a new object type with the same name.
+\item Defining a class creates a new object type with the same name.
 
 \index{instance}
 
@@ -8005,15 +8005,14 @@ Here are the most important ideas:
 \index{class!Time}
 \index{Time}
 
-%Let's take a look at an example of a user-defined class.
-A common motivation for designing a new class is to encapsulate related data in an object that can be treated as a single unit.
+One common reason to define a new class is to encapsulate related data in an object that can be treated as a single unit.
 That way, we can use objects as parameters and return values, rather than passing and returning multiple things.
 We have already seen two such types, \java{Point} and \java{Rectangle}.
 
 \index{instance variable}
 \index{variable!instance}
 
-Another example, which we will implement ourselves, is \java{Time}, which represents the time of day.
+Another example, which we will implement ourselves, is \java{Time}, which represents a time of day.
 The data encapsulated in a \java{Time} object are an hour, a minute, and a number of seconds.
 Because every \java{Time} object contains these data, we define attributes to hold them.
 Attributes are also called {\bf instance variables} because each instance has its own variables (as opposed to class variables, coming up in Section~\ref{classvar}).
@@ -8032,29 +8031,13 @@ public class Time {
 \end{code}
 
 By itself, this code fragment is a legal class definition.
-The state diagram for a \java{Time} object looks like this:
-
-\begin{center}
-\includegraphics{figs/time.pdf}
-\end{center}
-
-%\subsection{Public vs private}
-
 The Time class is public, which means that it can be used from other classes.
 But the instance variables are private, which means they can only be accessed from inside the Time class definition.
 If you try to read or write them from another class, you get a compiler error.
-Private instance variables help keep classes isolated from each other, so that changes in one class don't require changes in every other class.
+
+Private instance variables help keep classes isolated from each other so that changes in one class don't require changes in every other class.
 This kind of isolation is called {\bf data encapsulation}.
 \index{data encapsulation}
-
-%Limiting interactions between classes is a standard technique for managing complexity.
-
-%We can create {\bf accessor methods} like \java{getHour}, \java{getMinute}, and \java{getSecond}.
-%, but it provides no methods that modify the instance variables.
-%In effect, \java{Location} objects are immutable, which means that they can be shared without worrying about unexpected behavior due to aliasing.
-
-%Making methods private helps keep the API simple.
-%Classes often include helper methods that are used to implement other methods, but making those methods part of the public API might be unnecessary and error-prone.
 
 
 \section{Constructors}
@@ -8063,8 +8046,7 @@ This kind of isolation is called {\bf data encapsulation}.
 \index{method!constructor}
 \index{static}
 
-After declaring the instance variables, the next step is to define a constructor for the new class.
-A {\bf constructor} is a special method that initializes the instance variables.
+After declaring the instance variables, the next step is to define a {\bf constructor}, which is a special method that initializes the instance variables.
 The syntax for constructors is similar to that of other methods, except:
 
 \begin{itemize}
@@ -8083,14 +8065,12 @@ Here is an example for the \java{Time} class:
     }
 \end{code}
 
-Where you would expect to see a return type, between \java{public} and \java{Time}, there is nothing.
-That's how we (and the compiler) can tell it's a constructor as opposed to a \java{void} method.
 This constructor does not take any arguments.
-Each line of the constructor initializes an instance variable to zero (which in this example means midnight).
+Each line initializes an instance variable to zero (which in this example means midnight).
 
 \index{this}
 
-The variable \java{this} is a special keyword that refers to the object we are creating.
+The name \java{this} is a keyword that refers to the object we are creating.
 You can use \java{this} the same way you use the name of any other object.
 For example, you can read and write the instance variables of \java{this}, and you can pass \java{this} as an argument to other methods.
 But you do not declare \java{this}, and you can't make an assignment to it.
@@ -8104,26 +8084,32 @@ To create a Time object, you use the \java{new} operator:
     Time time = new Time();
 \end{code}
 
-%TODO: check the use of ``allocate''
+When you invoke \java{new}, Java creates the object and calls your constructor to initialize the instance variables.
+When the constructor is done, \java{new} returns a reference to the new object.
+In this example, the reference gets assigned to \java{time}, which has type \java{Time}.
 
-When you invoke \java{new}, it allocates space in memory for the new object, then it calls your constructor to initialize the instance variables.
-When your constructor is done, \java{new} returns a reference to the new object; in the example, the reference gets assigned to \java{time}.
-Notice that the type of \java{time} is \java{Time}, the new type we just created.
+This state diagram shows the result:
+
+\begin{center}
+\includegraphics{figs/time.pdf}
+\end{center}
 
 Beginners sometimes make the mistake of invoking \java{new} inside the constructor.
-You don't have to, and you shouldn't; for example, invoking \java{new Time()} in this constructor results in infinite recursion.
+You don't have to, and you shouldn't; in this example, invoking \java{new Time()} in the constructor causes an infinite recursion.
 
 
 \section{More constructors}
 
 \index{overloading}
 
-Constructors can be overloaded, just like other methods, which means that you can provide multiple constructors with different parameters.
-Java knows which constructor to invoke by matching the arguments after \java{new} with the parameters of the constructors.
+Like other methods, constructors can be overloaded, which means you can provide multiple constructors with different parameters.
+Java knows which constructor to invoke by matching the arguments you provide with the parameters of the constructors.
 
-It is common to have one constructor that takes no arguments (the ``default constructor'') and another one that takes a parameter list identical to the list of instance variables (the ``explicit value constructor'').
+%NOTE(ABD): What we used to call a default constructor is not a default
+% constructor if we provide it explicitly.
+% And I think the previous use of ``explicit'' confuses the issue.
 
-Here's an example:
+It is common to provide a constructor that takes no arguments, like the previous one, and a ``value constructor'', like this one:
 
 \begin{code}
     public Time(int hour, int minute, double second) {
@@ -8133,8 +8119,7 @@ Here's an example:
     }
 \end{code}
 
-Notice how the names and types of the parameters are the same as the names and types of the instance variables.
-All the constructor does is copy the information from the parameters into the instance variables.
+The names and types of the parameters are the same as the names and types of the instance variables; all the constructor does is copy values from the parameters to the instance variables.
 
 To invoke this constructor, you have to pass arguments to the \java{new} operator:
 
@@ -8144,12 +8129,11 @@ To invoke this constructor, you have to pass arguments to the \java{new} operato
 
 This example creates an object that represents a fraction of a second before noon.
 
-If you look at the documentation for \java{Point} and \java{Rectangle}, you will see that both classes provide similar constructors.
 Overloading constructors provides the flexibility to create an object first and then fill in the attributes, or collect all the information before creating the object.
 
 Once you get the hang of it, writing constructors gets boring.
-You will find that you can write them quickly just by looking at the list of instance variables.
-In fact, some IDEs will automatically generate them for you.
+You can write them quickly just by looking at the list of instance variables.
+In fact, some IDEs can generate them for you.
 
 Pulling it all together, here is the complete class definition:
 
@@ -8170,20 +8154,20 @@ public class Time {
         this.minute = minute;
         this.second = second;
     }
+}
 \end{code}
 
 
 \section{Printing objects}
 \label{printobject}
 
-If you create a time object and print it like this:
+If you create a \java{Time} object and print it like this:
 
 \begin{code}
     public static void main(String[] args) {
         Time time = new Time(11, 59, 59.9);
         System.out.println(time);
     }
-}
 \end{code}
 
 \index{print}
@@ -8197,7 +8181,7 @@ Time@80cc7c0
 \end{stdout}
 
 When Java prints the value of a user-defined type, it prints the name of the type and the address of the object in hexadecimal.
-This address can be useful for debugging, in case you want to keep track of individual objects.
+This address can be useful for debugging, if you want to keep track of individual objects.
 
 To print \java{Time} objects in a way that is more meaningful to users, you could write a method to print the hour, minute, and second.
 Using \java{printTime} in Section~\ref{time} as a starting point, we could write:
@@ -8217,14 +8201,13 @@ Or we could use \java{printf} to write it more concisely:
 
 \begin{code}
     public static void printTime(Time t) {
-        System.out.printf("%02d:%02d:%02.0f\n",
+        System.out.printf("%02d:%02d:%02.1f\n",
             t.hour, t.minute, t.second);
     }
 \end{code}
 
 As a reminder, you need to use \java{\%d} with integers and \java{\%f} with floating-point numbers.
-The \java{02} option means ``two digits with leading zeros,'' and the \java{.0} option means ``zero decimal places''.
-%Note that \java{\%f} automatically rounds the floating-point value.
+The \java{02} option means ``two digits with leading zeros,'' and the \java{2.1} option means ``two digits with leading zeros and one decimal place''.
 
 
 \section{The toString method}
@@ -8237,26 +8220,23 @@ When you print an object using \java{print} or \java{println}, Java invokes the 
 
 \index{override}
 
-The default version of \java{toString} returns a string that contains the type of the object and its current address (see Section~\ref{printobject}).
-But when you define a new object type, you can {\bf override} the default behavior by providing a new method with the behavior you want.
-
-For example, here is a \java{toString} method for \java{Time}:
+By default it displays the type of the object and its address, but you can {\bf override} this behavior by providing a your own \java{toString} method.  For example, here is a \java{toString} method for \java{Time}:
 
 \begin{code}
-public String toString() {
-    return String.format("%02d:%02d:%02.0f\n",
-            this.hour, this.minute, this.second);
-}
+    public String toString() {
+        return String.format("%02d:%02d:%02.1f\n",
+                             this.hour, this.minute, this.second);
+    }
 \end{code}
 
-The definition of \java{toString} does not have the keyword \java{static}, so it is not a static method.
-It is an {\bf instance method}, so-called because when you invoke it, you have to invoke it on an instance; in this case, an instance of \java{Time}.
+The definition does not have the keyword \java{static} because it is not a static method.
+It is an {\bf instance method}, so called because when you invoke it, you invoke it on an instance; in this case, an instance of \java{Time}.
 
 The body of the method is similar to \java{printTime} in the previous section, with two changes:
 
 \begin{itemize}
 
-\item Inside the method, we use the keyword \java{this} to refer to the current instance; that is, the \java{Time} object the method is invoked on.
+\item Inside the method, we use \java{this} to refer to the current instance; that is, the object the method is invoked on.
 
 \item Instead of \java{printf}, it uses \java{String.format}, which returns a formatted String rather than displaying it.
 
@@ -8275,7 +8255,7 @@ Or you can invoke it indirectly through \java{println}:
     System.out.println(time);
 \end{code}
 
-Inside \java{toString}, \java{this} refers to the same object as \java{time}.
+In this example, \java{this} in \java{toString} refers to the same object as \java{time}.  The result is \java{11:59:59.9}.
 
 
 \section{The equals method}
@@ -8286,15 +8266,18 @@ Inside \java{toString}, \java{this} refers to the same object as \java{time}.
 We have seen two ways to check whether values are equal: the \java{==} operator and the \java{equals} method.
 With objects you can use either one, but they are not the same.
 
+\index{identical}
+
 The \java{==} operator checks whether objects are {\bf identical}; that is, whether they are the same object.
 
-The \java{equals} method checks whether they are {\bf equivalent}; that is, they have the same value.
+\index{equivalent}
+
+The \java{equals} method checks whether they are {\bf equivalent}; that is, whether they have the same value.
 
 The definition of identity is always the same, so the \java{==} operator always does the same thing.
-But the definition of equivalence is different for different objects.
-So objects can define their own \java{equals} methods.
+But the definition of equivalence is different for different objects, so objects can define their own \java{equals} methods.
 
-Consider the following three \java{Time} variables:
+Consider the following variables:
 
 \begin{code}
     Time time1 = new Time(9, 30, 0.0);
@@ -8302,8 +8285,7 @@ Consider the following three \java{Time} variables:
     Time time3 = new Time(9, 30, 0.0);
 \end{code}
 
-The variables \java{time1}, \java{time2}, and \java{time3} are references to objects.
-Here is a state diagram that shows these references.
+Here is a state diagram that shows these variables and their values:
 
 \begin{center}
 \includegraphics{figs/time2.pdf}
@@ -8311,12 +8293,18 @@ Here is a state diagram that shows these references.
 
 The assignment operator copies references, so \java{time1} and \java{time2} refer to the same object, but \java{time3} points to a different object.
 
-\java{time1} and \java{time2} are identical: they refer to the same object.
-The \java{==} operator compares references, so \java{time1 == time2} is \java{true}.
-However \java{time1 == time3} is \java{false}, because their references are not the same.
+\java{time1} and \java{time2} refer to the same object.
+Because they are identical, \java{time1 == time2} is \java{true}.
 
-By default, the \java{equals} method does the same thing as \java{==}, but for \java{Time} objects, that's not what we want.
-\java{time1} and \java{time2} represent the same time of day, so we consider them equivalent.
+\java{time1} and \java{time3} refer to the different objects.
+They are not identical, so \java{time1 == time3} is \java{false}.
+
+By default, the \java{equals} method does the same thing as \java{==}.
+For \java{Time} objects, that's probably not what we want.
+For example, \java{time1} and \java{time3} represent the same time of day, so we should consider them equivalent.
+
+\index{equals method}
+\index{method!equals}
 
 We can provide an \java{equals} method that implements this notion of equivalence:
 
@@ -8328,16 +8316,16 @@ We can provide an \java{equals} method that implements this notion of equivalenc
     }
 \end{code}
 
-\java{equals} is an instance method, so it uses \java{this} to refer to the current object, and it doesn't have the keyword \java{static}.
+\java{equals} is an instance method, so it uses \java{this} to refer to the current object and it doesn't have the keyword \java{static}.
 
 We can invoke equals like this:
 
 \begin{code}
-    System.out.println(time1.equals(time3));
+    time1.equals(time3);
 \end{code}
 
 Inside \java{equals}, \java{this} refers to the same object as \java{time1}, and \java{that} refers to the same object as \java{time3}.
-Since these objects have the same instance variables, the result is \java{true}.
+Since their instance variables are equal, the result is \java{true}.
 
 % ABD: I believe this equals method is sufficient.  If someone passes
 % another object type, they'll get the default behavior, which will
@@ -8365,7 +8353,7 @@ Since these objects have the same instance variables, the result is \java{true}.
 %You could design it, for example, to allow \java{Time} and \java{String} objects to be equal if they represent the same time.
 %However that design would likely confuse other programmers, since normally objects are only considered equal if they are of the same type.
 
-For many objects, the definition of equivalence is that all the instance variables are equal.
+Many objects use a similar notion of equivalence; that is, two objects are equivalent if their instance variables are equal.
 But other definitions are possible.
 
 
@@ -8503,10 +8491,10 @@ Methods like \java{add} are called {\bf pure} because:
 \item The return value only depends on the parameters, not on any other state.
 \end{itemize}
 
-Methods like \java{increment}, that break the first rule, are sometimes called {\bf modifiers}.
+Methods like \java{increment}, which breaks the first rule, are sometimes called {\bf modifiers}.
 Modifiers are usually void methods, but sometimes they return a reference to the object they modify.
 
-Modifiers can be more efficient, because they don't create new objects.
+Modifiers can be more efficient because they don't create new objects.
 But they can also be error-prone.
 When objects are aliased, the effects of modifiers can be confusing.
 As a general rule, if you are using modifiers, you should avoid aliasing.
@@ -8579,12 +8567,10 @@ public class TimeClient {
         Time time = new Time(11, 59, 59.9);
         System.out.println(time.hour);
     }
-
 }
 \end{code}
 
-%TODO: let's find out what the error message is
-
+If you compile this, you will get a message like \java{hour has private access in Time}.
 There are three ways to solve this problem:
 
 \begin{itemize}
@@ -8598,10 +8584,10 @@ There are three ways to solve this problem:
 \end{itemize}
 
 The first choice is appealing because it is simple.
-The problem is that when Class A accesses the instance variables of Class B directly, A becomes {\bf dependent} on B.
+The problem is that when Class A accesses the instance variables of Class B directly, A becomes ``dependent'' on B.
 If anything in B changes later, it is likely that A will have to change, too.
 
-But if A only uses methods to interact with B, A and B are {\bf independent}, which means that we can make changes in B without affecting A.
+But if A only uses methods to interact with B, A and B are ``independent'', which means that we can make changes in B without affecting A.
 
 If we decide that \java{TimeClient} should be able to read the instance variables of \java{Time}, we can provide methods to do it:
 
@@ -8641,14 +8627,14 @@ If we decide that \java{TimeClient} should also be able to modify the instance v
 \end{code}
 
 These methods are formally called ``mutators'', but more often called {\bf setters}.
-And the naming convention is similar: the method that sets \java{something} is usually called \java{setSomething}.
+The naming convention is similar; the method that sets \java{something} is usually called \java{setSomething}.
 \index{mutator}
 \index{method!mutator}
 
-Writing getters and setters can get boring, so many IDEs will generate them for you.
+Writing getters and setters can get boring, but many IDEs can generate them for you.
 
-To make an object immutable, like Strings, you can provide getters but no setters, and pure methods but no modifiers.
-Immutable objects can be more difficult to work with, at first, but they can also save you from long hours of debugging.
+To make an object immutable, like \java{String}, you can provide getters but no setters and pure methods but no modifiers.
+Immutable objects can be more difficult to work with, at first, but they can save you from long hours of debugging.
 
 
 \section{Vocabulary}
@@ -8707,7 +8693,7 @@ Hint: remember the modulus operator.
 
 
 \begin{exercise}
-In the board game Scrabble\footnote{Scrabble is a registered trademark owned in the USA and Canada by Hasbro Inc., and in the rest of the world by J.\ W.\ Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.}, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
+In the board game Scrabble, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
 
 \begin{enumerate}
 
@@ -8739,7 +8725,7 @@ The second should take parameters named \java{year}, \java{month} and \java{day}
 Write a \java{main} method that creates a new \java{Date} object named \java{birthday}.
 The new object should contain your birth date.
 You can use either constructor.
-Compare your implementation to \java{java.util.Date}.
+%Compare your implementation to \java{java.util.Date}.
 \end{exercise}
 
 
@@ -8748,11 +8734,11 @@ Compare your implementation to \java{java.util.Date}.
 
 A rational number is a number that can be represented as the ratio of two integers.
 For example, $2/3$ is a rational number, and you can think of 7 as a rational number with an implicit 1 in the denominator.
-For this assignment, you are going to write a class definition for rational numbers.
+The goal of this exercise you are going to write a class definition for rational numbers.
 
 \begin{enumerate}
 
-\item Create a new program called \java{Rational.java} that defines a class named \java{Rational}.
+\item Define a class called \java{Rational}.
 A \java{Rational} object should have two integer instance variables to store the numerator and denominator.
 
 \item Write a constructor that takes no arguments and that sets the numerator to 0 and denominator to 1.
@@ -8780,7 +8766,7 @@ Add lines to \java{main} to test the new method.
 This method is a pure method; it does not modify the object.
 As always, test the new method.
 
-\item Write a modifier named \java{reduce} that reduces a rational number to its lowest terms by finding the greatest common divisor (GCD) of the numerator and denominator and dividing through.
+\item Write a method named \java{reduce} that reduces a rational number to its lowest terms by finding the greatest common divisor (GCD) of the numerator and denominator and dividing through.
 This method should be a pure method; it should not modify the instance variables of the object on which it is invoked.
 To find the GCD, see Exercise~\ref{gcd}).
 
@@ -9242,7 +9228,7 @@ Since the outer loop runs 4 times, and the inner loop runs 13 times, the body is
 \index{index}
 
 We use a separate variable \java{index} to keep track of where in the deck the next card should go.
-The following state diagram shows what the deck looks like after the first two cards have been allocated:
+The following state diagram shows what the deck looks like after the first two cards have been created:
 
 \begin{center}
 \includegraphics{figs/cardarray2.pdf}
@@ -9765,7 +9751,7 @@ Drawing a picture is usually the best way to avoid them.
 \index{overloading}
 
 Because the first line provides an argument with \java{new}, the non-default constructor gets invoked.
-It allocates the array without allocating any cards.
+It creates the array without creating any cards.
 Inside the \java{for} loop, the subdeck gets populated with copies of the references from the deck.
 
 The following is a state diagram of a subdeck being created with the parameters \java{low = 3} and \java{high = 7}.
@@ -10096,7 +10082,10 @@ If you need to store primitive types, use wrapper classes (e.g., \java{ArrayList
 
 Think of an \java{ArrayList} as a {\em resizable array}.
 You can add and remove elements without specifying in advance how big the array should be.
-If the array fills up and you need to add another element, \java{ArrayList} will automatically allocate a new array and copy the previous elements over to it.
+If the array fills up and you need to add another element, \java{ArrayList} will create a new array and copy the previous elements over to it.
+
+%NOTE: we don't need to know this
+
 And when you remove an element, \java{ArrayList} automatically shifts the remaining elements down.
 
 For example, you can populate an \java{ArrayList} with an entire deck of cards simply by adding cards one at a time:
