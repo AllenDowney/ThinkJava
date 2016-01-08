@@ -55,7 +55,6 @@ public class Player {
     /**
      * Checks whether two cards match.
      */
-    // TODO: consider making this an instance method of Card
     public static boolean cardMatches(Card card1, Card card2) {
         if (card1.getSuit() == card2.getSuit()) {
             return true;

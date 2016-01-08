@@ -5,14 +5,14 @@ import java.util.ArrayList;
  * 
   */
 public class Hand extends Deck {
-    
+
     /**
-     * Constructs a Hand with a capacity of n Cards (but no cards).
-     */
+     * Constructs a Hand with no cards.
+     */    
     public Hand() {
         this.cards = new ArrayList<Card>();
     }
-    
+
     /**
      * Returns a string representation of the deck.
      */

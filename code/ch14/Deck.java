@@ -13,7 +13,7 @@ public class Deck {
      * Constructs a standard deck of 52 cards.
      */
     public Deck() {
-        this.cards = new ArrayList<Card>(52);
+        this.cards = new ArrayList<Card>();
         for (int suit = 0; suit <= 3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
                 this.cards.add(new Card(rank, suit));
@@ -22,7 +22,7 @@ public class Deck {
     }
     
     /**
-     * Returns the number of cards in the deck
+     * Returns the number of cards in the deck.
      */
     public int size() {
         return this.cards.size();

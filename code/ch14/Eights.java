@@ -12,8 +12,8 @@ public class Eights {
     private Deck deck;
     private Player one;
     private Player two;
-    private Hand draw;
-    private Hand discards;
+    private Hand drawPile;
+    private Hand discardPile;
 
     /**
      * Initializes the state of the game.
@@ -32,8 +32,8 @@ public class Eights {
         deck.deal(two.getHand(), handSize);
         
         // turn one card face up
-        discards = new Hand();
-        deck.deal(discards, 1);
+        discardPile = new Hand();
+        deck.deal(discardPile, 1);
 
         // put the rest of the deck face down
         drawPile = new Hand();
@@ -48,7 +48,7 @@ public class Eights {
         System.out.println();
         this.two.display();
         System.out.println("\nDiscard pile");
-        this.discards.display();
+        this.discardPile.display();
         System.out.println("\nDraw pile");
         System.out.println(this.drawPile.size() + " cards");
     }
@@ -65,11 +65,11 @@ public class Eights {
      */
     public Card reshuffle() {
         System.out.println("shuffling discard pile into draw pile");
-        discards.deal(drawPile);
+        discardPile.deal(drawPile);
         drawPile.shuffle();
 
         Card prev = drawPile.popCard();
-        discards.addCard(prev);
+        discardPile.addCard(prev);
         return prev;
     }
 
@@ -78,7 +78,7 @@ public class Eights {
      */
     public void takeTurn(Player player) {
         // play the next card, drawing cards if needed
-        Card prev = this.discards.last();
+        Card prev = this.discardPile.last();
         Card next = player.play(prev);
         
         while (next == null) {
@@ -93,7 +93,7 @@ public class Eights {
         System.out.println(player.getName() + " plays " + next);
         System.out.println();
 
-        this.discards.addCard(next);    
+        this.discardPile.addCard(next);    
     }
 
     /**
