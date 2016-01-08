@@ -3040,9 +3040,11 @@ But in this example, Java can't (or won't) convert the integer \java{17} to a \j
 
 Parameters and other variables only exist inside their own methods.
 Inside \java{main}, there is no such thing as \java{s}.
-If you try to use it there, the compiler will complain.
+If you try to use it there, you'll get a compiler error.
 Similarly, inside \java{printTwice} there is no such thing as \java{argument}.
 That variable belongs to \java{main}.
+
+Because variables only exist inside the methods where they are defined, they are often called {\bf local variables}.
 
 
 \section{Methods with multiple parameters}
@@ -3384,6 +3386,10 @@ It may not necessarily be from top to bottom, left to right.
 
 \term{parameter passing}
 The process of assigning an argument value to a parameter variable.
+
+\term{local variable}
+A variable declared inside a method.
+Local variables cannot be accessed from outside their method.
 
 \term{signature}
 The first line of a method that defines its name, return type, and parameters.
@@ -5785,11 +5791,6 @@ To wrap a sequence of statements in a method.
 To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter).
 Generalization makes code more versatile, more likely to be reused, and sometimes easier to write.
 
-%TODO: define this earlier
-%\term{local variable}
-%A variable that is declared inside a method and that exists only within that %method.
-%Local variables cannot be accessed from outside their method and do not %interfere with any other methods.
-
 \term{program development}
 A process for writing programs.
 So far we have seen ``incremental development'' and ``encapsulation and generalization''.
@@ -7347,7 +7348,7 @@ For example:
 
 The expression \java{blank.x} means ``go to the object \java{blank} refers to, and get the value of the attribute \java{x}.''
 In this case, we assign that value to a local variable named \java{x}.
-There is no conflict between the local variable named \java{x} and the attribute named \java{x}.
+There is no conflict between the variable named \java{x} and the attribute named \java{x}.
 The purpose of dot notation is to identify {\em which} variable you are referring to unambiguously.
 
 You can use dot notation as part of an expression.
@@ -8974,8 +8975,6 @@ The output is {\tt Jack of Diamonds}.
 
 \section{Class variables}
 \label{classvar}
-
-%TODO: define local variables
 
 So far we have seen local variables, which are declared inside a method, and instance variables, which are declared in a class definition, usually before the method definitions.
 Local variables are created when a method is invoked and destroyed when the method ends.
@@ -10633,6 +10632,9 @@ You can use this class as a starting place to implement your own card games.
 
 
 
+% TODO: Find a new home for this.  I think it has to come after Chapter 11,
+% because we need instance methods.
+% I am leaning toward an appendix.
 
 \section{Java 2D graphics}
 \label{graphics}
