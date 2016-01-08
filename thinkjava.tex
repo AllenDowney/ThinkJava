@@ -241,8 +241,6 @@ Compiling the \LaTeX\ source has the effect of generating a device-independent r
 The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 %-----------------------------------------------------------------
 
-%TODO: preface
-%\input{preface.tex}
 
 % table of contents
 \cleardoublepage
@@ -251,6 +249,166 @@ The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 
 %%%% END OF LATEX ONLY
 \fi
+
+
+\chapter{Preface}
+
+Here are some of the ideas that make the book the way it is:
+
+\begin{itemize}
+
+\item Vocabulary is important.  
+We try to introduce the minimum number of terms and define them carefully
+when they are first used.
+We also organize them in glossaries at the end of each chapter.
+
+\item To write a program, students have to understand the
+algorithm, know the programming language, and they have to be
+able to debug.
+We discuss debugging methods throughout the book, and include an appendix that summarizes our advice.
+
+\item There are many ways to write programs, including bottom-up, top-down, and more.
+We demonstrate several program development processes, allowing students to choose methods that work for them.
+
+\item Some concepts take time to sink in.
+Some of the more difficult ideas in the book, like recursion, appear several times.
+By coming back to these ideas, we give students a chance to review and reinforce.
+
+\item We use the minimum amount of Java to get the maximum amount of programming power.
+The goal of this book is to teach programming and some introductory ideas from computer science, not Java.
+We leave out some language features, like the {\tt switch} statement, that are unnecessary, and present only a few of the many classes in the Java libraries.
+
+\end{itemize}
+
+The minimalism of this approach has some advantages.
+Each chapter is about ten pages, not including the exercises.
+
+% TODO: Chris, do you want to keep any of the following?
+%In my classes I ask students to read each chapter before we
+%discuss it, and I have found that they are willing to do that
+%and their comprehension is good.  Their preparation makes
+%class time available for discussion of the more abstract material,
+%in-class exercises, and additional topics that aren't in the
+%book.
+
+%But minimalism has some disadvantages.  There is not much here
+%that is intrinsically fun.  Most of my examples demonstrate the
+%most basic use of a language feature, and many of the exercises
+%involve string manipulation and mathematical ideas.  I think some
+%of them are fun, but many of the things that excite students
+%about computer science, like graphics, sound and network applications,
+%are given short shrift.
+
+%The problem is that many of the more exciting features involve
+%lots of details and not much concept.  Pedagogically, that means
+%a lot of effort for not much payoff.  So there is a tradeoff between
+%the material that students enjoy and the material that is most
+%intellectually rich.  I leave it to individual teachers to find
+%the balance that is best for their classes.  To help, the book
+%includes appendices that cover graphics, keyboard input and
+%file input.
+
+\subsection*{Object-oriented programming}
+
+Some books introduce objects immediately; others warm up with a more procedural style and develop object-oriented style more gradually.
+This book uses the ``objects late'' approach.
+
+Many of Java's object-oriented features are motivated by problems with previous languages, and their implementations are influenced by this history.  Some of these features are hard to explain if students aren't familiar with the problems they solve.
+
+We get to object-oriented programming as quickly as possible, limited by the requirement that we introduce concepts one at a time, as clearly as possible, in a way that allows students to practice each idea in isolation before adding the next.
+So it takes some time to get there.
+
+But you can't write Java programs without encountering some object-oriented features.
+In some case we explain a feature briefly when it first appears, and explain it more deeply later.
+
+
+%TODO: talk about the AP
+
+This book can be used to prepare for the Computer Science AP Exam in Java.
+We cover almost every topic in their syllabus, with only a few exceptions (like what?)
+
+
+
+\section*{Contributors List}
+
+Many people have contributed corrections and suggestions.
+If you have additional comments, please send them to: \\
+\href{mailto:feedback@greenteapress.com}{feedback@greenteapress.com}
+
+\begin{itemize}
+
+\item Ellen Hildreth used this book to teach Data Structures at
+Wellesley College, and she gave me a whole stack of corrections,
+along with some great suggestions.
+
+\item Tania Passfield pointed out that the glossary of Chapter 4
+has some leftover terms that no longer appear in the text.
+
+\item Elizabeth Wiethoff noticed that my series expansion of
+$\exp(-x^2)$ was wrong.  She is also working on a Ruby version of
+the book!
+
+\item Matt Crawford sent in a whole patch file full of corrections!
+
+\item Chi-Yu Li pointed out a typo and an error in one of the code
+examples.
+
+\item Doan Thanh Nam corrected an example in Chapter 3.
+
+\item Stijn Debrouwere found a math typo.
+
+\item Muhammad Saied translated the book into Arabic, and found
+several errors.
+
+\item Marius Margowski found an inconsistency in a code example.
+
+\item Guy Driesen found several typos.
+
+\item Leslie Klein discovered yet another error in the series expansion
+of $\exp(-x^2)$, identified typos in the card array figures, and gave
+helpful suggestions to clarify several exercises.
+
+\item Micah Lindstrom reported half a dozen typos and sent corrections.
+
+\item Andai Velican found another typo.
+
+\item Chris Kuszmaul found another typo.
+
+\item James Riely ported the textbook source from LaTeX to Sphinx.
+\url{http://fpl.cs.depaul.edu/jriely/thinkapjava/}
+
+\item Daniel Kurikesu two more typos.
+
+\item Peter Knaggs ported the book to C\#.
+\url{http://www.rigwit.co.uk/think/sharp/}
+
+\item Heidi Gentry-Kolen recorded several video lectures that follow the book.
+\url{https://www.youtube.com/user/digipipeline}
+
+\item Josh Donath found another typo.
+
+\item Rens Findhammer found another typo.
+
+\item Elisa Abedrapo reported that the GridWorld link no longer works.
+
+\item Yousef BaAfif found another typo.
+
+\item Bruce Hill found another typo.
+
+\item Matt Underwood found another typo.
+
+\end{itemize}
+
+
+% NOTE: Sorry, Chris -- now that you are an author, we don't have
+% to thank you.
+%Finally, I wish to acknowledge Chris Mayfield for his significant
+%contribution to version 5.1 of this book. His careful review
+%lead to over one hundred corrections and improvements throughout.
+%Several new features include embedded hypertext links and cross
+%references, consistent layout of all exercises, and Java syntax
+%highlighting in code examples.
+
 
 \mainmatter
 
