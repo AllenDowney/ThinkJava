@@ -9400,8 +9400,8 @@ One way to populate the deck is to write nested for loops:
 
 \begin{code}
     int index = 0;
-    for (int rank = 1; rank <= 13; rank++) {
-        for (int suit = 0; suit <= 3; suit++) {
+    for (int suit = 0; suit <= 3; suit++) {
+        for (int rank = 1; rank <= 13; rank++) {
             cards[index] = new Card(rank, suit);
             index++;
         }
@@ -9409,8 +9409,8 @@ One way to populate the deck is to write nested for loops:
 \end{code}
 
 The outer loop enumerates the suits from 0 to 3.
-For each suit, the inner loop enumerates the ranks from 1 to 13.
-Since the outer loop runs 4 times, and the inner loop runs 13 times, the body is executed is 52 times.
+For each suit, the inner loop enumerates the ranks from 1 to 13;
+Since the outer loop runs 4 times, and the inner loop runs 13 times for each suit, the body is executed is 52 times.
 
 \index{index}
 
@@ -9557,23 +9557,21 @@ To see how binary search works, it's helpful to add the following print statemen
 
 If we invoke \java{binarySearch} like this:
 
-%TODO: replace this with Card(11, 0) so the answer is more obvious
-
 \begin{code}
-    Card card = new Card(11, 1);
+    Card card = new Card(11, 0);
     System.out.println(binarySearch(cards, card));
 \end{code}
 
-The result is \java{23}, since there are 13 cards in the zeroth suit followed by 11 in the first suit (and indexes start at 0).
+We expect to find this card at position 10.
 Here is the result:
 
 \begin{stdout}
 0, 51
 0, 24
-13, 24
-19, 24
-22, 24
-23
+0, 11
+6, 11
+9, 11
+10
 \end{stdout}
 
 If we search for a card that's not in the deck, like \java{new Card(15, 1)}, which is the ``15 of Diamonds'', we get the following:
@@ -9757,8 +9755,8 @@ We'll add a second constructor that makes a standard 52-card deck and populates 
     public Deck() {
         this.cards = new Card[52];
         int index = 0;
-        for (int rank = 1; rank <= 13; rank++) {
-            for (int suit = 0; suit <= 3; suit++) {
+        for (int suit = 0; suit <= 3; suit++) {
+            for (int rank = 1; rank <= 13; rank++) {
                 this.cards[index] = new Card(rank, suit);
                 index++;
             }
@@ -10139,37 +10137,10 @@ deck = deck.mergeSort();           // replaces old deck with new
 
 
 \begin{exercise}
-The goal of this exercise is to practice top-down programming by implementing insertion sort.
-The following pseudocode describes the algorithm.
-
-\index{insertion sort}
-\index{sort!insertion}
-
-\begin{code}
-public void insertionSort() {
-    for (i = 0; i < n; i++) {
-        // swap element i backward until elements 1 through i are sorted
-    }
-}
-
-public void swapBack()
-    for (k = i; k > 0 and a[k] < a[k-1]; k--) { 
-        // swap elements k and k-1
-    }
-}
-\end{code}
-
-\begin{enumerate}
-
-\item Write \java{swapBack} and any other helper methods you need, and test them one at a time.
-
-\item Write \java{insertionSort} and test it.
-
-\end{enumerate}
-
-How many comparisons does insertion sort need to sort an array with $n$ elements?
-Do you expect it to be proportional to $n^2$ like selection sort, or proportional to $n \log n$ like merge sort?
-
+The goal of this exercise is to practice top-down programming by
+implementing insertion sort.
+Read about insertion sort at \url{http://www.sorting-algorithms.com/insertion-sort}.
+Write a method named \java{insertionSort} that implements this algorithm.
 \end{exercise}
 
 

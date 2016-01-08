@@ -23,7 +23,6 @@ public class Test {
      */
     public static void main(String[] args) {
         Deck deck;
-        Card[] cards;
         
         System.out.println("Testing selection...");
         deck = new Deck();
@@ -34,16 +33,13 @@ public class Test {
         System.out.println("Testing mergesort...");
         deck = new Deck();
         deck.shuffle();
-        cards = deck.getCards();
-        deck = Deck.mergeSort(deck);
+        deck = deck.mergeSort();
         checkSorted(deck);
         
         System.out.println("Testing insertion...");
         deck = new Deck();
         deck.shuffle();
-        cards = deck.getCards();
         deck.insertionSort();
         checkSorted(deck);
     }
-    
 }

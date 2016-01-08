@@ -10,6 +10,10 @@ import java.util.Random;
 public class Deck {
     
     private Card[] cards;
+
+    // this is a class variable so we don't have to create a new
+    // Random object every time we call randomInt
+    private static Random random = new Random();
     
     /**
      * Constructs a standard deck of 52 cards.
@@ -56,12 +60,19 @@ public class Deck {
     }
     
     /**
-     * Randomly permute the deck of cards.
+     * Chooses a random number between low and high, including both.
+     */
+    public int randomInt(int low, int high) {
+        int range = high - low + 1;
+        return low + random.nextInt(range);
+    }
+    
+    /**
+     * Randomly permutes the array of cards.
      */
     public void shuffle() {
-        Random random = new Random();
-        for (int i = this.cards.length - 1; i > 0; i--) {
-            int j = random.nextInt(i);
+        for (int i = 0; i < this.cards.length-1; i++) {
+            int j = this.randomInt(i, this.cards.length-1);
             this.swapCards(i, j);
         }
     }
@@ -84,7 +95,7 @@ public class Deck {
     }
     
     /**
-     * Reorders the cards (in place) using selection sort.
+     * Sorts the cards (in place) using selection sort.
      */
     public void selectionSort() {
         int high = this.cards.length - 1;
@@ -144,24 +155,24 @@ public class Deck {
     }
     
     /**
-     * Returns a copy of the deck using merge sort.
+     * Returns a sorted copy of the deck using merge sort.
      */
-    public static Deck mergeSort(Deck deck) {
+    public Deck mergeSort() {
         
-        // 0 or 1 cards already sorted
-        int len = deck.cards.length;
+        // 0 or 1 cards, already sorted
+        int len = this.cards.length;
         if (len < 2) {
-            return deck;
+            return this;
         }
         
         // cut the deck about in half
         int mid = len / 2;
-        Deck d1 = deck.subdeck(0, mid - 1);
-        Deck d2 = deck.subdeck(mid, len - 1);
+        Deck d1 = this.subdeck(0, mid - 1);
+        Deck d2 = this.subdeck(mid, len - 1);
         
         // sort each half and merge
-        d1 = mergeSort(d1);
-        d2 = mergeSort(d2);
+        d1 = d1.mergeSort();
+        d2 = d2.mergeSort();
         return merge(d1, d2);
     }
     
@@ -170,18 +181,17 @@ public class Deck {
      */
     public void insertionSort() {
         for (int i = 1; i < this.cards.length; i++) {
-            Card temp = this.cards[i];
-            
-            // find insertion point and shift to the right
-            int j = i - 1;
-            while (j >= 0 && temp.compareTo(this.cards[j]) < 0) {
-                this.cards[j + 1] = this.cards[j];
-                j--;
-            }
-            
-            // loop ends to the left of the insertion point
-            this.cards[j + 1] = temp;
+            Card card = this.cards[i];
+            this.insert(card, i);
         }
     }
-    
+
+    public void insert(Card card, int i) {
+        int j = i;
+        while (j > 0 && card.compareTo(this.cards[j-1]) < 0) {
+            this.cards[j] = this.cards[j-1];
+            j--;
+        }
+        this.cards[j] = card;
+    }
 }
