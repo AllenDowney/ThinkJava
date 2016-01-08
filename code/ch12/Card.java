@@ -13,9 +13,9 @@ public class Card {
     public static final String[] SUITS = {
         "Clubs", "Diamonds", "Hearts", "Spades"};
     
-    private int rank;
-    
-    private int suit;
+    final private int rank;
+
+    final private int suit;
     
     /**
      * Constructs a card of the given rank and suit.
@@ -90,6 +90,5 @@ public class Card {
      */
     public String toString() {
         return RANKS[this.rank] + " of " + SUITS[this.suit];
-    }
-    
+    }    
 }
