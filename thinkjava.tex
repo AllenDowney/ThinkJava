@@ -8508,7 +8508,7 @@ As a general rule, if you are using modifiers, you should avoid aliasing.
 %\index{pure function}
 %\index{method!pure function}
 %, and it has no side effects like modifying an argument or printing something.
-%The only result of invoking a pure function is the return value.
+%The only result of invoking a pure method is the return value.
 
 %In contrast to instance methods, \java{static} methods do not refer to a specific object.
 %The result of a \java{static} method depends only on the arguments.
@@ -9146,6 +9146,43 @@ If the suits are the same, it compares ranks.
 If the ranks are also the same, it returns 0.
 
 
+\section{Cards are immutable}
+
+The instance variables of \java{Card} are private, so they can't be accessed from other classes.
+We can provide getters to allow other classes to read \java{rank} and \java{suit}:
+
+\begin{code}
+    public int getRank() {
+        return this.rank;
+    }
+
+    public int getSuit() {
+        return this.suit;
+    }
+\end{code}
+
+Whether or not to provide setters is a design decision.
+If we did, cards would be mutable, so you could transform one card into another.
+That is probably not a feature we need, and in general mutable objects are more error prone.
+So it might be better to make cards immutable.
+To do that, all we have to do is {\em not} provide any modifier methods (including setters).
+
+That's easy enough, but it is not foolproof, because some fool might come along later and add a modifier.
+We can prevent that possibility by declaring the instance variables \java{final}:
+
+\begin{code}
+public class Card {
+    final private int rank;
+    final private int suit;
+
+    ...
+}
+\end{code}
+
+You can still assign values to these variables inside a constructor.
+But if someone writes a method that modifies these variables, they'll get a compiler error.
+
+
 \section{Arrays of cards}
 \label{cardarray}
 
@@ -9206,9 +9243,9 @@ One way to populate the deck is to write nested for loops:
 
 \begin{code}
     int index = 0;
-    for (int suit = 0; suit <= 3; suit++) {
-        for (int rank = 1; rank <= 13; rank++) {
-            cards[index] = new Card(suit, rank);
+    for (int rank = 1; rank <= 13; rank++) {
+        for (int suit = 0; suit <= 3; suit++) {
+            cards[index] = new Card(rank, suit);
             index++;
         }
     }
@@ -9362,6 +9399,8 @@ To see how binary search works, it's helpful to add the following print statemen
 \end{code}
 
 If we invoke \java{binarySearch} like this:
+
+%TODO: replace this with Card(11, 0) so the answer is more obvious
 
 \begin{code}
     Card card = new Card(11, 1);
@@ -9517,8 +9556,7 @@ Your solution should only traverse the array once.
 In the previous chapter we defined a class to represent cards and used an array of \java{Card} objects to represent a deck.
 
 In this chapter, we take another step toward object-oriented programming by defining a class to represent a deck of cards.
-
-And we develop algorithms for shuffling and sorting arrays.
+And we present algorithms for shuffling and sorting arrays.
 
 %While reading the following sections, we recommend that you create a {\tt Deck.java} file and paste in all the examples.
 %You will need {\tt Card.java} from the previous chapter for it to compile.
@@ -9562,9 +9600,9 @@ We'll add a second constructor that makes a standard 52-card deck and populates 
     public Deck() {
         this.cards = new Card[52];
         int index = 0;
-        for (int suit = 0; suit <= 3; suit++) {
-            for (int rank = 1; rank <= 13; rank++) {
-                this.cards[index] = new Card(suit, rank);
+        for (int rank = 1; rank <= 13; rank++) {
+            for (int suit = 0; suit <= 3; suit++) {
+                this.cards[index] = new Card(rank, suit);
                 index++;
             }
         }
@@ -9575,7 +9613,7 @@ We'll add a second constructor that makes a standard 52-card deck and populates 
 \index{statement!new}
 
 This method is similar to the example in Section~\ref{cardarray}; we just turned it into a constructor.
-To invoke it, we apply the \java{new} operator:
+Now we can create a \java{Deck} like this:
 
 \begin{code}
     Deck deck = new Deck();
@@ -9583,8 +9621,8 @@ To invoke it, we apply the \java{new} operator:
 
 \index{printDeck}
 
-Now it makes sense to put the methods that pertain to \java{Deck}s in the \java{Deck} class.
-Looking at the methods we have written so far, one obvious candidate is \java{printDeck} from Section~\ref{printdeck}.
+Now that we have a \java{Deck} class, we have a logical place to put methods that pertain to decks.
+Looking at the methods we have written so far, one obvious candidate is \java{printDeck} from Section~\ref{cardarray}.
 Here's how it looks, rewritten as an instance method of \java{Deck}:
 
 \begin{code}
@@ -9595,15 +9633,13 @@ Here's how it looks, rewritten as an instance method of \java{Deck}:
     }
 \end{code}
 
-Now we would invoke it like this:
+We can invoke it like this:
 
 \begin{code}
     deck.print()
 \end{code}
 
 When you transform a class method into an instance method, it usually gets shorter.
-
-%TODO: add an exercise to write toString
 
 
 \section{Shuffling}
@@ -9635,22 +9671,22 @@ This technique is sometimes called {\bf pseudocode}.
     }
 \end{code}
 
-\index{randomInt}
-\index{swapCards}
-
 The nice thing about pseudocode is that it often makes clear what methods you are going to need.
-In this case, we need something like \java{randomInt}, which chooses a random integer between \java{low} and \java{high}, and \java{swapCards}, which takes two indexes and switches the cards at those positions.
+In this case, we need a method that chooses a random integer between \java{low} and \java{high}, and a method that takes two indexes and switches the cards at those positions.
+Methods like these are called {\bf helper methods}, because they help you implement more complex algorithms. 
 
+\index{helper method}
 \index{program development}
+\index{top-down development}
 
-This process -- writing pseudocode first and then writing methods to make it work -- is called {\bf top-down development} (see \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
+And this process -- writing pseudocode first and then writing methods to make it work -- is called {\bf top-down development} (see \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
 
 \index{shuffling}
 
-One of the exercises at the end of this chapter asks you to write \java{swapCards} and \java{shuffle}.
+One of the exercises at the end of this chapter asks you to write these helper methods and \java{shuffle}.
 
 
-\section{Selection sort algorithm}
+\section{Selection sort}
 \label{sorting}
 
 \index{selection sort}
@@ -9665,10 +9701,12 @@ During the \java{i}th, we find the lowest card to the right of $i$ and swap it w
 Here is pseudocode for selection sort:
 
 \begin{code}
+public void selectionSort() {
     for each index i {
         // find the lowest card at or to the right of i
         // swap the ith card and the lowest card found
     }
+}
 \end{code}
 
 \index{helper method}
@@ -9692,7 +9730,7 @@ One of the exercises at the end of this chapter asks you to write \java{indexLow
 
 Selection sort is a simple algorithm, but it is not very efficient.
 To sort $n$ items, it has to traverse the array $n$ times.
-Each traversal takes an amount of time that is proportional to $n$.
+Each traversal takes an amount of time proportional to $n$.
 The total time, therefore, is proportional to $n^2$.
 
 In the next two sections, we'll develop a more efficient algorithm called {\bf merge sort}.
@@ -9701,7 +9739,7 @@ That may not seem impressive, but as $n$ gets big, the difference between $n^2$ 
 For example, $\log_2$ of one million is around 20.
 So if you had to sort a million numbers, selection sort would require one trillion steps; merge sort would require only 20 million.
 
-The basic idea behind merge sort is this: if you have two subdecks, each of which has already been sorted, it is easy and fast to merge them into a single, sorted deck.
+The idea behind merge sort is this: if you have two subdecks, each of which has already been sorted, it is easy and fast to merge them into a single, sorted deck.
 Try this out with a deck of cards:
 
 \begin{enumerate}
@@ -9740,18 +9778,16 @@ public Deck subdeck(int low, int high) {
 \end{code}
 
 The first line creates an unpopulated subdeck.
-Its length is \java{high - low + 1} because both the low card and the high card are included.
+Inside the \java{for} loop, the subdeck gets populated with copies of references from the deck.
+
+The length of the subdeck is \java{high - low + 1} because both the low card and the high card are included.
 This sort of computation can be confusing, and forgetting the \java{+ 1} often leads to ``off-by-one'' errors.
 Drawing a picture is usually the best way to avoid them.
 
 \index{constructor}
 \index{overloading}
 
-Because the first line provides an argument with \java{new}, the non-default constructor gets invoked.
-It creates the array without creating any cards.
-Inside the \java{for} loop, the subdeck gets populated with copies of the references from the deck.
-
-The following is a state diagram of a subdeck being created with the parameters \java{low = 3} and \java{high = 7}.
+The following is a state diagram of a subdeck with \java{low = 3} and \java{high = 7}.
 The result is a hand with 5 cards that are {\em shared} with the original deck; that is, they are aliased.
 
 \begin{center}
@@ -9762,20 +9798,19 @@ The result is a hand with 5 cards that are {\em shared} with the original deck; 
 \index{reference}
 
 Aliasing is not always a good idea, because changes to shared objects are reflected in multiple decks.
-However, since we designed \java{Card} objects to be immutable, they will never change.
-So for \java{Card}s, \java{String}s, and other immutable objects, aliasing is safe, and often efficient.
+But since \java{Card} objects are immutable, this kind of aliasing is not a problem.
 
-%TODO: we haven't said anything about making cards immutable.
-% Should we make the instance variables final?
+%TODO: make the variables final in the code
 
 
 \section{Merge}
 
-The next helper function we need is \java{merge}, which takes two sorted subdecks and returns a new deck containing all cards from both decks, in order.
+The next helper method we need is \java{merge}, which takes two sorted subdecks and returns a new deck containing all cards from both decks, in order.
 
 Here's what the algorithm looks like in pseudocode, assuming the subdecks are \java{d1} and \java{d2}:
 
 \begin{code}
+public Deck merge() {
     // create a new deck big enough for all the cards
 
     // use the index i to keep track of where we are at in
@@ -9790,25 +9825,26 @@ Here's what the algorithm looks like in pseudocode, assuming the subdecks are \j
         // if d2 is empty, d1 wins
         // otherwise, compare the two cards
 
-        // add the winner to the new deck
+        // add the winner to the new deck at position k
+        // increment either i or j
     }
-    return result;
+    // return the new deck
 }
 \end{code}
 
 One of the exercises at the end of the chapter asks you to implement \java{merge}.
 
 
-
 \section{Merge sort algorithm}
 
-Once your \java{merge} method is working correctly, you can out try a simple version of \java{mergeSort}:
+Once your \java{merge} method is working correctly, you can out try a simple version of merge sort:
 
 \begin{code}
-public Deck mergeSort() {
+public Deck almostMergeSort() {
     // divide the deck into two roughly equal subdecks
     // sort the subdecks using selectionSort
-    // merge the halves and return the result
+    // merge the halves
+    // return the result
 }
 \end{code}
 
@@ -9838,18 +9874,16 @@ public Deck mergeSort() {
 \index{leap of faith}
 
 As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the ``leap of faith'' (see Section~\ref{leap of faith}).
-This example should encourage you to make the leap of faith!
+This example should encourage you to make the leap of faith.
 
-When you use \java{selectionSort} to sort the subdecks, you don't feel compelled to follow the flow of execution, right?
+When you use \java{selectionSort} to sort the subdecks, you don't feel compelled to follow the flow of execution.
 You just assume it works because you already debugged it.
 Well, all you did to make \java{mergeSort} recursive was replace one sorting algorithm with another.
-There is no reason to read the program any differently.
+There is no reason to read the program differently.
 
 Well, almost.  You might have to give some thought to getting the base case right and making sure that you reach it eventually.
 But other than that, writing the recursive version should be no problem.
 
-In summary, selection sort is simple and merge sort is efficient for large arrays.
-You can read more about these algorithms and others at \url{http://www.sorting-algorithms.com/}, which shows eight different algorithms side by side, comparing their techniques and efficiency.
 
 
 \section{Vocabulary}
@@ -9859,26 +9893,45 @@ You can read more about these algorithms and others at \url{http://www.sorting-a
 \term{pseudocode}
 A way of designing programs by writing rough drafts in a combination of English and Java.
 
-\term{top-down development}
-Breaking down a problem into sub-problems, and solving each sub-problem one at a time.
-
 \term{selection sort}
 A simple sorting algorithm that searches for the smallest element $n$ times.
 
 \term{helper method}
 Often a small method that does not do anything enormously useful by itself, but which helps another, more useful method.
 
+%TODO: I think we killed bottom up.  Is there someplace we can fit it
+% back in?
+
+\term{top-down development}
+Breaking down a problem into sub-problems, and solving each sub-problem one at a time.
+
 \term{merge sort}
 A recursive sorting algorithm that divides an array into two parts, sorts each part (using merge sort), and merges the results.
 
-%TODO: maybe remove this
-\term{insertion sort}
-Another sorting algorithm that inserts elements into place, one at a time.
+%\term{insertion sort}
+%Another sorting algorithm that inserts elements into place, one at a time.
 
 \end{description}
 
 
 \section{Exercises}
+
+\begin{exercise}
+
+Write a \java{toString} method for the \java{Deck} class.
+It should return a single string that represents the cards in the deck.
+When it's printed, this string should display the same results as the \java{print} method in Section~\ref{deck}.
+
+Hint: You can use the \java{+} operator to concatenate strings, but it is not very efficient.
+Consider using \java{java.util.StringBuilder}, which you can read about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
+
+\end{exercise}
+
+
+\begin{exercise}
+You can read more about the sorting algorithms in this chapter, and others, at \url{http://www.sorting-algorithms.com/}.
+That site includes explanations of the algorithms, animations that show how they work, and analysis of their efficiency.
+\end{exercise}
 
 
 \begin{exercise}
@@ -9896,18 +9949,17 @@ The goal of this exercise is to implement the shuffling and sorting algorithms f
 %\item If you did Exercise~\ref{ex.randint}, you already wrote \java{randomInt}.
 %Otherwise, write it now and add code to test it.
 
-\item Write a method called \java{swapCards} that takes a deck (array of cards) and two indexes, and that switches the cards at those two locations.
+\item Write a method called \java{randomInt} that takes two integers, \java{low} and \java{high}, and returns a random integer between \java{low} and \java{high}, including both.
+You can use the \java{nextInt} provided by \java{java.util.Random}, which we saw in Section~\ref{random}.
+But you should avoid creating a \java{Random} object every time \java{randomInt} is invoked.
 
-Hint: it should switch references, not the contents of the objects.
-This is also faster; it correctly handles the case where cards are aliased.
+\item Write a method called \java{swapCards} that takes two indexes swaps the cards at the given locations.
 
 \item Write a method called \java{shuffle} that uses the algorithm in Section~\ref{shuffle}.
-You might want to use the \java{randomInt} method from Section~\ref{random}.
 
 \item Write a method called \java{indexLowestCard} that uses the \java{compareCard} method to find the lowest card in a given range of the deck (from \java{lowIndex} to \java{highIndex}, including both).
 
 \item Write a method called \java{selectionSort} that implements the selection sort algorithm in Section~\ref{???}.
-arranges a deck of cards from lowest to highest.
 
 \item Using the pseudocode in Section~\ref{mergesort}, write the method called \java{merge}.
 The best way to test it is to build and shuffle a deck.
@@ -9915,9 +9967,9 @@ Then use \java{subdeck} to form two small subdecks, and use selection sort to so
 Then you can pass the two halves to \java{merge} to see if it works.
 \index{testing}
 
-\item Write the simple version of \java{mergeSort}, the one that divides the deck in half, uses \java{selectionSort} to sort the two halves, and uses \java{merge} to create a new, fully-sorted deck.
+\item Write the simple version of \java{mergeSort}, the one that divides the deck in half, uses \java{selectionSort} to sort the two halves, and uses \java{merge} to create a new, sorted deck.
 
-\item Write the fully recursive version of \java{mergeSort}.
+\item Write the recursive version of \java{mergeSort}.
 Remember that \java{selectionSort} is a modifier and \java{mergeSort} is a pure method, which means that they get invoked differently:
 
 \begin{code}
@@ -9931,41 +9983,35 @@ deck = deck.mergeSort();           // replaces old deck with new
 
 \begin{exercise}
 The goal of this exercise is to practice top-down programming by implementing insertion sort.
-Here is an outline of the algorithm in pseudocode:
+The following pseudocode describes the algorithm.
+
 \index{insertion sort}
 \index{sort!insertion}
 
-%TODO: rewrite this to be consistent with the solution
-
 \begin{code}
-public static Deck insertionSort(Deck deck) {
-    // create a new deck with the same length as deck
+public void insertionSort() {
+    for (i = 0; i < n; i++) {
+        // swap element i backward until elements 1 through i are sorted
+    }
+}
 
-    for each card in deck {
-        // find the index, i, where the card should go in the sorted deck
-        // starting at i, shift the cards to the right by one
-        // insert the cart at i
+public void swapBack()
+    for (k = i; k > 0 and a[k] < a[k-1]; k--) { 
+        // swap elements k and k-1
     }
 }
 \end{code}
 
-
 \begin{enumerate}
 
-\item Based on this pseudocode, identify the helper functions you will need.
+\item Write \java{swapBack} and any other helper methods you need, and test them one at a time.
 
-\item Write the helper functions and test them one at a time.
-
-\item Write an implementation of insertion sort and test it.
-
-\item How many comparisons does insertion sort need to sort an array with $n$ elements.
-Do you expect it to be proportional to $n^2$ like selection sort, or proportional to $n \log n$ like merge sort?
-
-\item The version of insertion sort we described here creates a new array.
-There is another version that sorts the input array in place.
-Read about it at \url{https://en.wikipedia.org/wiki/Insertion_sort} write a function that implements it.
+\item Write \java{insertionSort} and test it.
 
 \end{enumerate}
+
+How many comparisons does insertion sort need to sort an array with $n$ elements?
+Do you expect it to be proportional to $n^2$ like selection sort, or proportional to $n \log n$ like merge sort?
 
 \end{exercise}
 
