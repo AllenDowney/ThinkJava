@@ -131,6 +131,77 @@ And you will learn to read and write programs more quickly.
 %To examine a program and analyze the syntactic structure.
 
 
+\section{Syntax errors}
+
+\index{syntax error}
+\index{error!syntax}
+
+{\bf Syntax} pertains to the structure of a program and the arrangement of the words and symbols it contains.
+Programming languages have syntax rules.
+For example, parentheses have to come in matching pairs.
+So \java{(1 + 2)} is legal, but \java{8)} is not.
+If you violate a syntax rule, you have committed a {\bf syntax error}.
+In that case, you program cannot be translated or run; instead, the compiler stops and displays an error message.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/syntax-error.png}
+\caption{A syntax error caused by a missing brace.}
+\label{fig:syntax}
+\end{center}
+\end{figure}
+
+As shown in Figure~\ref{fig:syntax}, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
+The compiler also reports that the problem was found on line 6, which in this case is not at fault.
+Since line 8 was deleted, the compiler reported the last line of the file.
+
+
+\section{Type conversion}
+
+%The difference is when the conversion from integer to string actually takes place.
+
+%Fortunately, this situation only happens when using the plus operator.
+%You cannot, for example, store an integer directly in a string variable.
+%
+%\begin{code}
+%     String number = 5;  // syntax error
+%\end{code}
+
+%In general, it's better not to compose multiple additions of varying data types.
+%Instead you can break those statements into multiple lines, or use another method like \java{printf} to achieve the same results.
+
+% TODO: add the following subsection before/after operators for strings?
+% ABD: maybe not: we have an exercise about this
+
+%\index{type!conversion}
+%\index{typecasting}
+
+%You might wonder how you can get away with an expression like \java{
+%"The log of x is " + result}, since one of the operands is a \java{String}
+%and the other is a \java{double}.  In this case Java is being
+%smart on our behalf, automatically converting the \java{double} to a
+%\java{String} before it does the string concatenation.
+
+%This kind of feature is an example of a common problem in designing a
+%programming language, which is that there is a conflict between {\em
+%formalism}, which is the requirement that formal languages should have
+%simple rules with few exceptions, and {\em convenience}, which is the
+%requirement that programming languages be easy to use in practice.
+
+%More often than not, convenience wins, which is usually good for
+%expert programmers (who are spared from rigorous but unwieldy
+%formalism), but bad for beginning programmers, who are often baffled
+%by the complexity of the rules and the number of exceptions.  In this
+%book I have tried to simplify things by emphasizing the rules and
+%omitting many of the exceptions.
+
+%Whenever you try to ``add'' two
+%expressions, if one of them is a \java{String}, Java converts the
+%other to a \java{String} and then performs string concatenation.
+%What do you think happens if you perform an operation between
+%an integer and a floating-point value?
+
+
 \section{Increment and decrement}
 
 \index{operator!increment}

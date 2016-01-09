@@ -632,6 +632,8 @@ Confusingly, {\em print} can mean both ``display something on the screen'' and `
 In this book, we'll try to say ``display'' when we mean output to the screen.
 Like most statements, the print statement ends with a semicolon (\java{;}).
 
+%TODO: check the use of ``print''
+
 \index{method}
 
 A {\bf method} is a named sequence of statements.
@@ -772,6 +774,8 @@ public class Goodbye {
     }
 }
 \end{code}
+
+\label{goodbye}
 
 In this example, the first statement does not add a newline, so the output appears on a single line as {\tt Goodbye, cruel world}.
 Notice that there is a space at the end of the first string, which appears in the output.
@@ -1109,49 +1113,30 @@ Add an extra one.
 \end{exercise}
 
 
-\chapter{Variables and arithmetic}
+\chapter{Variables and operators}
 
-This chapter describes three kinds of programming errors.
+This chapter describes how to write statements using variables, which store values like numbers and words, and operators, which are symbols that perform a computation.
+We also explain three kinds of programming errors.
 Understanding what can go wrong will help you get it right.
+Finally we discuss the rules of code style, which helps make programs easier to read and debug.
 
-We also present variables, which are named storage locations for values like numbers and words, and operators, which are symbols that perform basic arithmetic.
-
-This chapter also describes how to {\em compose} statements, assembling complex computations from simple pieces.
-
-And we discuss the rules of code style, which helps make programs easier to read and debug.
 
 \section{Types of errors}
 
+Three kinds of errors can occur in a program: compile-time errors, run-time errors, and logic errors.
+It is useful to distinguish between them in order to track them down more quickly.
+
+\index{error!compile-time}
+\index{syntax}
+
+{\bf Compile-time} errors occur when you violate the {\bf syntax} rules of the Java language.
+For example, parentheses and braces have to come in matching pairs.
+So \java{(1 + 2)} is legal, but \java{8)} is not.
+In the latter case, the program cannot be compiled, and the compiler displays an error.
+
 \index{error!message}
 
-Three kinds of errors can occur in a program: syntax errors, runtime errors, and semantic errors.
-It is useful to distinguish between them in order to track them down more quickly.
-%Regardless of what type of error occurs, remember to {\em read and think about the error messages carefully}.
-%They will usually point you in the right direction to fix your program.
-
-%\subsection{Syntax errors}
-
-\index{syntax error}
-\index{error!syntax}
-
-{\bf Syntax} pertains to the structure of a program and the arrangement of the words and symbols it contains.
-Programming languages have syntax rules.
-For example, parentheses have to come in matching pairs.
-So \java{(1 + 2)} is legal, but \java{8)} is not.
-If you violate a syntax rule, you have committed a {\bf syntax error}.
-In that case, you program cannot be translated or run; instead, the compiler stops and displays an error message.
-
-%TODO: check the use of ``print''
-
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[width=\textwidth]{figs/syntax-error.png}
-%\caption{A syntax error caused by a missing brace.}
-%\label{fig:syntax}
-%\end{center}
-%\end{figure}
-
-Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you what the error is.
+Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you exactly what the error is.
 As an example, let's get back to the hello world program from Section~\ref{hello}.
 
 \begin{code}
@@ -1174,10 +1159,10 @@ Error: ';' expected
 That's pretty good: the location of the error is correct, and the error message tells you what's wrong.
 
 But error messages are not always that helpful.
-Sometimes the compiler reports the place in the program where it detected the error, rather than where it occurred.
+Sometimes the compiler reports the place in the program where it detected the error, rather than where it actually occurred.
 And sometimes the description of the problem is more confusing than helpful.
 
-For example, if you leave out the close brace at the end of \java{main}, you might get a message like this:
+For example, if you leave out the closing brace at the end of \java{main}, you might get a message like this:
 
 \begin{stdout}
 File: Hello.java  [line: 7]
@@ -1194,27 +1179,21 @@ The compiler discovers the error at the end of the program (line 7), but the mis
 Error messages contain useful information, so you should make an effort to read and understand them.
 But don't take them too literally.
 
-%As shown in Figure~\ref{fig:syntax}, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
-%The compiler also reports that the problem was found on line 6, which in this case is not at fault.
-%Since line 8 was deleted, the compiler reported the last line of the file.
-
-During the first few weeks of your programming career, you will probably spend a lot of time tracking down syntax errors.
+During the first few weeks of your programming career, you will probably spend a lot of time tracking down compile-time errors.
 But as you gain experience, you will make fewer mistakes and find them more quickly.
 
-%\subsection{Runtime errors}
+%\subsection{Run-time errors}
 
-\index{runtime error}
-\index{error!runtime}
-%\index{type-safe}
-%\index{language!type-safe}
-
-The second type of error is a {\bf runtime error}, so-called because it does not appear until after the program has started running.
-In Java, these errors occur while the interpreter is executing byte code and something goes wrong.
-These errors are also called {\bf exceptions} because they usually indicate that something exceptional (and bad) has happened.
+\index{run-time error}
+\index{error!run-time}
 \index{exception}
 
-Runtime errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter one.
-When a runtime error occurs, the interpreter displays an error message that explains what happened and where.
+The second type of error is a {\bf run-time error}, so-called because it does not appear until after the program has started running.
+In Java, these errors occur while the interpreter is executing byte code and something goes wrong.
+These errors are also called {\bf exceptions} because they usually indicate that something exceptional (and bad) has happened.
+
+Run-time errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter one.
+When a run-time error occurs, the interpreter displays an error message that explains what happened and where.
 
 For example, if you accidentally divide by zero you will get a message like this:
 
@@ -1225,27 +1204,25 @@ Exception in thread "main" java.lang.ArithmeticException: / by zero
 \end{stdout}
 \end{small}
 
-Some parts of this are useful for debugging.
-The first line includes the name of the exception, \java{java.lang.ArithmeticException}, and a message that indicates more specifically what happened, (\java{/ by zero}).
-The next line reports the method where the error occurred; \java{Hello.main} indicates the method \java{main} in the class \java{Hello}.
-It also reports the file where the method is defined, \java{Hello.java}, and the line number where the error occurred.
+Some parts of this output are useful for debugging.
+The first line includes the name of the exception, \java{java.lang.ArithmeticException}, and a message that indicates more specifically what happened, \java{/ by zero}.
+The next line shows the method where the error occurred; \java{Hello.main} indicates the method \java{main} in the class \java{Hello}.
+It also reports the file where the method is defined, \java{Hello.java}, and the line number where the error occurred, \java{5}.
 
 Error messages sometimes contain additional information that doesn't make sense yet.
 So one of the challenges is to figure out where to find the useful parts without being overwhelmed by extraneous information.
-Also, keep in mind that the line where the program crashed may not be the line that needs to be fixed.
+Also, keep in mind that the line where the program crashed may not be the line that needs to be corrected.
 
-%\subsection{Semantic errors}
+%\subsection{Logic errors}
 
-\index{semantic error}
-\index{error!semantic}
+\index{logic error}
+\index{error!logic}
 
-The third type of error is the {\bf semantic error}.
-{\bf Semantics} pertains to the meaning of a program; that is, what it does when it runs.
-If your program has a semantic error, it will compile and run without generating error messages, but it will not do the right thing.
-It will do something else.
-Specifically, it will do what you told it to do.
-
-For example, here is a version of the hello world program with a semantic error:
+The third type of error is the {\bf logic error}.
+%{\bf Semantics} pertains to the meaning of a program; that is, what it does when it runs.
+If your program has a logic error, it will compile and run without generating error messages, but it will not do the right thing.
+Instead, it will do what you told it to do.
+For example, here is a version of the hello world program with a logic error:
 
 \begin{code}
 public class Hello {
@@ -1257,7 +1234,7 @@ public class Hello {
 }
 \end{code}
 
-This program compiles and runs, but the output is
+This program compiles and runs just fine, but the output is:
 
 \begin{stdout}
 Hello,
@@ -1265,11 +1242,10 @@ world!
 \end{stdout}
 
 Assuming that we wanted the output on one line, this is not correct.
-The problem is that the first line uses \java{println}, when we probably meant to use \java{print}, as in the ``Goodbye, cruel world.'' example.
+The problem is that the first line uses \java{println}, when we probably meant to use \java{print} (see the ``goodbye world'' example of Section~\ref{goodbye}).
 
-Identifying semantic errors can be tricky because
-have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
-Usually the compiler and the interpreter can't help you, because they don't know what the right thing is.
+Identifying logic errors can be hard because you have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
+Usually the compiler and the interpreter can't help you, since they don't know what the right thing is.
 
 
 \section{Creating variables}
@@ -1300,7 +1276,8 @@ For example, the \java{int} type can store integers, and the \java{char} type ca
 
 Some types begin with a capital letter and some with lower-case.
 We will learn the significance of this distinction later, but for now you should take care to get it right.
-There is no such type as \java{Int} or \java{string}, and the compiler will complain if you make one up.
+There is no such type as \java{Int} or \java{string}.
+%, and the compiler will complain if you make one up.
 
 To declare an integer variable, the syntax is:
 
@@ -1322,13 +1299,13 @@ This example also demonstrates the syntax for declaring multiple variables with 
 Note that each declaration statement ends with a semicolon.
 
 You can use any name you want for a variable.
-But there are about 50 reserved words, called {\bf keywords}, that you are not allowed to use as variable names because they are used by the compiler to analyze the structure of the program.
-They include \java{public}, \java{class}, \java{static}, \java{void}, \java{int}.
+But there are about 50 reserved words, called {\bf keywords}, that you are not allowed to use as variable names.
+These words include \java{public}, \java{class}, \java{static}, \java{void}, and \java{int}, which are used by the compiler to analyze the structure of the program.
 
-You can find the complete list at \url{http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html}, but you don't have to memorize them.
-Most program editors provide ``syntax highlighting'', which makes different parts of the program appear in different colors.
-For example, keywords are often blue, strings red, comments green, and other code black.
-If you type a variable name and it turns blue, watch out!
+You can find the complete list of keywords at \url{http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html}, but you don't have to memorize them.
+Most programming editors provide ``syntax highlighting'', which makes different parts of the program appear in different colors.
+%For example, keywords are often blue, strings red, comments green, and other code black.
+%If you type a variable name and it turns blue, watch out!
 
 
 \section{Assignment}
@@ -1350,7 +1327,7 @@ The vocabulary can be confusing here, but the idea is straightforward:
 
 \begin{itemize}
 \item When you declare a variable, you create a named storage location.
-\item When you make an assignment to a variable, you give it a value.
+\item When you make an assignment to a variable, you update its value.
 \end{itemize}
 
 As a general rule, a variable has to have the same type as the value you assign to it.
@@ -1370,6 +1347,9 @@ But that is not the same thing as the integer \java{123}.
     message = 123;      // not legal
 \end{code}
 
+\index{initialize}
+
+Variables bust be {\bf initialized} (assigned for the first time) before they can be used.
 You can declare a variable and then assign a value later, as in the previous example.
 You can also do both in one line, like this:
 
@@ -1379,33 +1359,29 @@ You can also do both in one line, like this:
     int minute = 59;
 \end{code}
 
-A statement that creates a variable and assigns a value at the same time is called an {\bf initialization}.
-\index{initialization}
-
-You can make more than one assignment to the same variable.
-For example:
-
-\begin{code}
-    int i = 1;
-    i = 2;
-\end{code}
-
-The first line initializes \java{i} to 1.
-The second line changes its value to \java{2}.
-In this example, there is no reason to make two assignments, but in
-many programs it is useful to reassign, or {\bf update}, variables.
+%You can make more than one assignment to the same variable.
+%For example:
+%
+%\begin{code}
+%    int i = 1;
+%    i = 2;
+%\end{code}
+%
+%The first line initializes \java{i} to 1.
+%The second line changes its value to \java{2}.
+%In this example, there is no reason to make two assignments, but in many programs it is useful to reassign, or {\bf update}, variables.
 
 
 \section{State}
 \label{state}
 
-Because Java uses the \java{=} symbol for assignment, it is tempting to interpret a statement like \java{a = b} as a statement of equality.
+Because Java uses the \java{=} symbol for assignment, it is tempting to interpret the statement \java{a = b} as a statement of equality.
 It is not!
 
-First, equality is commutative, and assignment is not.
+Equality is commutative, and assignment is not.
 For example, in mathematics if $a = 7$ then $7 = a$.
 In Java \java{a = 7;} is a legal assignment statement, but \java{7 = a;} is not.
-The left side of an assigment statement has to be a variable name (at least for now).
+The left side of an assignment statement has to be a variable name (storage location).
 
 Also, in mathematics, a statement of equality is true for all time.
 If $a = b$ now, $a$ is always equal to $b$.
@@ -1417,19 +1393,23 @@ In Java, an assignment statement can make two variables equal, but they don't ha
     a = 3;         // a and b are no longer equal
 \end{code}
 
-The third line changes the value of \java{a}, but does not change the value of \java{b}, so they are no longer equal.
+%The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
 
 \index{state}
 
-Taken together, the variables in a program and their values make up the program's {\bf state}.
+Taken together, the variables in a program and their current values make up the program's {\bf state}.
 The following diagram shows the state of the program after these assignment statements run:
 
-%TODO: we need a diagram here
-
+\begin{center}
+\begin{tabular}{rl}
+a & \framebox[1cm]{3} \\
+b & \framebox[1cm]{5} \\
+\end{tabular}
+\end{center}
 
 \index{state diagram}
 
-Diagrams like this that show the state of the program are called {\bf state diagrams}.
+Diagrams like this one that show the state of the program are called {\bf state diagrams}.
 Each variable is represented with a box showing the name of the variable on the outside and the value inside.
 As the program runs, the state changes, so you should think of a state diagram as a snapshot of a particular point in the execution.
 
@@ -1445,16 +1425,15 @@ The following statements declare a variable named \java{firstLine}, assign it th
     System.out.println(firstLine);
 \end{code}
 
-Assuming this code fragment is inside a method that is inside a class, the output is
-
-\begin{stdout}
-Hello, again!
-\end{stdout}
+%Assuming this code fragment is inside a method that is inside a class, the output is:
+%
+%\begin{stdout}
+%Hello, again!
+%\end{stdout}
 
 When we talk about printing a variable, we generally mean printing the {\em value} of the variable.
 To print the {\em name} of a variable, you have to put it in quotes.
 %For example: \java{System.out.println("firstLine");}
-For example, if you write
 
 \begin{code}
     String firstLine = "Hello, again!";
@@ -1462,13 +1441,13 @@ For example, if you write
     System.out.println(firstLine);
 \end{code}
 
-The output is
+For this example, the output is:
 
 \begin{stdout}
 The value of firstLine is Hello, again!
 \end{stdout}
 
-The syntax for printing a variable is the same regardless of its type.
+Conveniently, the syntax for printing a variable is the same regardless of its type.
 For example:
 
 \begin{code}
@@ -1501,12 +1480,12 @@ If you omit the \java{println}, the program might display the stored output at u
 
 \index{operator}
 
-{\bf Operators} are symbols that represent computations like addition and multiplication.
+{\bf Operators} are symbols that represent simple computations.
 %Most operators in Java do what you expect them to do, since they are common mathematical symbols.
-For example, the operator for addition is \java{+}, subtraction is \java{-}, multiplication is \java{*}, and division is \java{/}.
+For example, the addition operator is \java{+}, subtraction is \java{-}, multiplication is \java{*}, and division is \java{/}.
 %Variables are replaced with their values before the computation is performed.
 
-The following program converts the time of day to minutes:
+The following program converts a time of day to minutes:
 
 \begin{code}
     int hour = 11;
@@ -1526,7 +1505,7 @@ Number of minutes since midnight: 719
 \end{stdout}
 
 Expressions are generally a combination of numbers, variables, and operators.
-When complied and executed, they become a single value:
+When complied and executed, they become a single value.
 
 \begin{code}
     1 + 1     hour - 1     hour * 60 + minute     minute / 60
@@ -1536,14 +1515,14 @@ When complied and executed, they become a single value:
 \end{code}
 
 Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
-For example, the following fragment tries to compute the fraction of an hour that has elapsed, but it has a semantic error:
+For example, the following fragment tries to compute the fraction of an hour that has elapsed, but it has a logic error.
 
 \begin{code}
     System.out.print("Fraction of the hour that has passed: ");
     System.out.println(minute / 60);
 \end{code}
 
-The output is
+The output is:
 
 \begin{stdout}
 Fraction of the hour that has passed: 0
@@ -1554,11 +1533,10 @@ Fraction of the hour that has passed: 0
 
 This result often confuses people.
 The value of \java{minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
-The problem is that Java performs {\bf integer division}.
-When the values being divided are integers, the result is also an integer.
+The problem is that Java performs {\bf integer division} when the values being divided are integers.
 By definition, integer division always rounds toward zero, even in cases like this one where the next integer is close.
 
-One solution is to calculate a percentage rather than a fraction:
+We can alternatively calculate a percentage rather than a fraction:
 
 \begin{code}
     System.out.print("Percent of the hour that has passed: ");
@@ -1592,7 +1570,7 @@ You can create \java{double} variables and assign values to them using the same 
     pi = 3.14159;
 \end{code}
 
-So we can solve the problem we saw in the previous section
+So we can solve the problem we saw in the previous section:
 
 \begin{code}
     double minute = 59.0;
@@ -1600,7 +1578,7 @@ So we can solve the problem we saw in the previous section
     System.out.println(minute / 60.0);
 \end{code}
 
-The output is
+The output is:
 
 \begin{stdout}
 Fraction of the hour that has passed: 0.9833333333333333
@@ -1638,7 +1616,7 @@ But instead it gets the value \java{0.0}.
 The expression on the right divides two integers, so Java does {\em integer division}, which yields the \java{int} value \java{0}.
 Converted to \java{double}, the value assigned to \java{y} is \java{0.0}.
 
-One way to solve this problem (once you find the bug) is to make the right-hand side a floating-point expression.
+One way to solve this problem (once you figure out the bug) is to make the right-hand side a floating-point expression.
 The following sets \java{y} to \java{0.333333}, as expected:
 
 \begin{code}
@@ -1646,7 +1624,7 @@ The following sets \java{y} to \java{0.333333}, as expected:
 \end{code}
 
 As a matter of style, you should always assign floating-point values to floating-point variables.
-The compiler won't make you do it, but you never know when a bug like this one will come back and haunt you.
+The compiler won't make you do it, but you never know when a simple mistake will come back and haunt you.
 
 
 \section{Rounding errors}
@@ -1660,7 +1638,6 @@ Most floating-point numbers are only {\it approximately} correct.
 Some numbers, like reasonably-sized integers, can be represented exactly.
 But repeating fractions, like $1/3$, and irrational numbers, like $\pi$, cannot.
 To represent these numbers, computers have to round off to the nearest floating-point number.
-The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
 
 %Notwithstanding, there is a fundamental flaw with floating-point arithmetic.
 %In mathematics, there is an infinite number of real numbers.
@@ -1669,6 +1646,7 @@ The difference between the number we want and the floating-point number we get i
 
 \index{arithmetic!floating-point}
 
+The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
 For example, the following two statements should be equivalent:
 
 \begin{code}
@@ -1744,50 +1722,6 @@ Java executes these operations from left to right.
 In the first line, \java{1 + 2} is \java{3}, and \java{3 + "Hello"} is \java{"3Hello"}.
 But in the second line, \java{"Hello" + 1} is \java{"Hello1"}, and \java{"Hello1" + 2} is \java{"Hello12"}.
 
-%The difference is when the conversion from integer to string actually takes place.
-
-%Fortunately, this situation only happens when using the plus operator.
-%You cannot, for example, store an integer directly in a string variable.
-%
-%\begin{code}
-%     String number = 5;  // syntax error
-%\end{code}
-
-%In general, it's better not to compose multiple additions of varying data types.
-%Instead you can break those statements into multiple lines, or use another method like \java{printf} to achieve the same results.
-
-
-% TODO: add the following subsection before/after this section?
-% ABD: maybe not: we have an exercise about this
-%\section{Type conversion}
-%\index{type!conversion}
-%\index{typecasting}
-
-%You might wonder how you can get away with an expression like \java{
-%"The log of x is " + result}, since one of the operands is a \java{String}
-%and the other is a \java{double}.  In this case Java is being
-%smart on our behalf, automatically converting the \java{double} to a
-%\java{String} before it does the string concatenation.
-
-%This kind of feature is an example of a common problem in designing a
-%programming language, which is that there is a conflict between {\em
-%formalism}, which is the requirement that formal languages should have
-%simple rules with few exceptions, and {\em convenience}, which is the
-%requirement that programming languages be easy to use in practice.
-
-%More often than not, convenience wins, which is usually good for
-%expert programmers (who are spared from rigorous but unwieldy
-%formalism), but bad for beginning programmers, who are often baffled
-%by the complexity of the rules and the number of exceptions.  In this
-%book I have tried to simplify things by emphasizing the rules and
-%omitting many of the exceptions.
-
-%Whenever you try to ``add'' two
-%expressions, if one of them is a \java{String}, Java converts the
-%other to a \java{String} and then performs string concatenation.
-%What do you think happens if you perform an operation between
-%an integer and a floating-point value?
-
 
 \section{Order of operations}
 
@@ -1821,7 +1755,7 @@ If it's not obvious by looking at the expression, use parentheses to make it cle
 
 \index{composition}
 
-So far we have looked at the elements of a programming language -- variables, expressions, and statements -- in isolation, without talking about how to put them together.
+So far we have looked at the elements of a programming language --- variables, expressions, and statements --- in isolation, without talking about how to put them together.
 
 One of the most useful features of programming languages is their ability to take small building blocks and {\bf compose} them.
 For example, we know how to multiply numbers and we know how to print.
@@ -1831,7 +1765,7 @@ We can combine these operations into a single statement:
     System.out.println(17 * 3);
 \end{code}
 
-Any expression can be used inside a print statement.
+Any arithmetic expression can be used inside a print statement.
 We've already seen one example:
 
 \begin{code}
@@ -1856,7 +1790,6 @@ That's because the left side indicates where the result will be stored, and expr
 \index{readability}
 
 The ability to compose operations may not seem impressive now, but we will see examples later on that allow us to write complex computations neatly and concisely.
-
 But don't get too carried away.
 Large, complex expressions can be hard to read an debug.
 
@@ -1874,8 +1807,8 @@ Large, complex expressions can be hard to read an debug.
 As we saw in Section~\ref{sec:formatting}, the compiler generally ignores spaces, tabs, and newlines.
 These characters, which are called {\bf whitespace}, affect the format of the code, but they don't affect its behavior.
 
-So you have a lot of freedom in how you arrange your code.
-However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and to others who will be reading, understanding, and modifying it.
+You have a lot of freedom in how you arrange your code.
+However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and others who will be reading, understanding, and modifying it.
 
 \index{Google style}
 
@@ -1888,7 +1821,7 @@ For example, Google publishes its Java coding standards for use in open-source p
 \index{Checkstyle}
 
 You might not understand all of the guidelines now, because they refer to language features we haven't seen yet.
-So might want to refer back to them periodically.
+But you might want to refer back to them periodically.
 
 In the meantime, there many tools that help programmers find and correct style violations.
 One of the most popular is Checkstyle, which enforces most of Google's guidelines.
@@ -1908,19 +1841,17 @@ Instructions for downloading and running Checkstyle are available on our website
 \begin{description}
 
 \term{syntax}
-The structure of a program.
+The structure of a program; the arrangement of the words and symbols it contains.
 
-\term{semantics}
-The meaning of a program.
-
-\term{syntax error}
+\term{compile-time error}
 An error in a program that makes it impossible to compile.
+Also called a ``syntax error''.
 
-\term{runtime error}
+\term{run-time error}
 An error in a program that makes it impossible to run to completion.
 Also called an ``exception''.
 
-\term{semantic error}
+\term{logic error}
 An error in a program that makes it do something other than what the programmer intended.
 
 \term{variable}
@@ -1954,8 +1885,8 @@ A graphical representation of the state of a program and a point in time.
 \term{initialization}
 A statement that creates a variable and assigns a value.
 
-\term{update}
-An assignment that changes the value of a variable.
+%\term{update}
+%An assignment that changes the value of a variable.
 
 \term{operator}
 A symbol that represents a computation like addition, multiplication, or string concatenation.
@@ -1997,7 +1928,6 @@ Whitespace characters are used to separate words, but other than that, they don'
 
 
 \begin{exercise}
-
 If you are using this book in a class, you might enjoy this exercise.
 Find a partner and play {\it Stump the Chump}:
 
@@ -2005,7 +1935,6 @@ Start with a program that compiles and runs correctly.
 One player looks away while the other player adds an error to the program.
 Then the first player tries to find and fix the error.
 You get two points if you find the error without compiling the program, one point if you find it using the compiler, and your opponent gets a point if you don't find it.
-
 \end{exercise}
 
 
@@ -2017,10 +1946,10 @@ The point of this exercise is (1) to use string concatenation to display values 
 \begin{enumerate}
 
 \item Create a new program named {\tt Date.java}.
-Copy or type in something like the ``Hello, World!'' program and make sure you can compile and run it.
+Copy or type in something like the ``Hello, World!''\ program and make sure you can compile and run it.
 
 \item Following the example in Section~\ref{sec:printvar}, write a program that creates variables named \java{day}, \java{date}, \java{month}, and \java{year}.
-\java{day} will contain the day of the week (like Friday) and \java{date} will contain the day of the month (like the 13th).
+The variable \java{day} will contain the day of the week (like Friday), and \java{date} will contain the day of the month (like the 13th).
 What type is each variable?
 Assign values to those variables that represent today's date.
 
@@ -2042,7 +1971,6 @@ Thursday 16 July, 2015
 %Hint: You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
 \end{enumerate}
 
-
 \end{exercise}
 
 
@@ -2059,7 +1987,7 @@ From now on, we won't remind you to start with a small, working program, but you
 Assign values that are roughly the current time.
 Use a 24-hour clock so that at 2pm the value of \java{hour} is 14.
 
-\item Make the program calculate and print the number of seconds since midnight.
+\item Make the program calculate and display the number of seconds since midnight.
 
 \item Calculate and print the number of seconds remaining in the day.
 
@@ -2067,12 +1995,12 @@ Use a 24-hour clock so that at 2pm the value of \java{hour} is 14.
 You might run into problems when computing percentages with integers, so consider using floating-point.
 
 \item Change the values of \java{hour}, \java{minute}, and \java{second} to reflect the current time.
-Compute the elapsed time since you started working on this exercise.
+Then compute the elapsed time since you started working on this exercise.
 
 \end{enumerate}
 
 Hint: You might want to use additional variables to hold values during the computation.
-Variables that are used in a computation but never printed are sometimes called intermediate or temporary variables.
+Variables that are used in a computation but never printed are sometimes called intermediate or {\em temporary} variables.
 
 \end{exercise}
 

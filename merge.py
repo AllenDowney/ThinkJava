@@ -21,7 +21,7 @@ def main(tex, num):
         if line.startswith("\\begin{document}"):
             break
     # copy each chapter
-    i = 0
+    i = -1
     for line in src:
         if line.startswith("\\backmatter") or line.startswith("\\chapter{"):
             i += 1
