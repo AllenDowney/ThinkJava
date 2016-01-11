@@ -1124,6 +1124,8 @@ And we discuss the rules of code style, which helps make programs easier to read
 
 \index{error!message}
 
+%TODO: should we replace ``semantic'' with ``logic'' to line up with AP?
+
 Three kinds of errors can occur in a program: syntax errors, runtime errors, and semantic errors.
 It is useful to distinguish between them in order to track them down more quickly.
 %Regardless of what type of error occurs, remember to {\em read and think about the error messages carefully}.
@@ -1224,6 +1226,9 @@ Exception in thread "main" java.lang.ArithmeticException: / by zero
     at Hello.main(Hello.java:5)
 \end{stdout}
 \end{small}
+
+\index{ArithmeticException}
+\index{exception!Arithmetic}
 
 Some parts of this are useful for debugging.
 The first line includes the name of the exception, \java{java.lang.ArithmeticException}, and a message that indicates more specifically what happened, (\java{/ by zero}).
@@ -2210,7 +2215,6 @@ Next you have to create a \java{Scanner}:
 \end{code}
 
 This line declares a \java{Scanner} variable named \java{in} and creates a new \java{Scanner} that takes input from \java{System.in}.
-We'll explain the \java{new} operator in more detail in Section~\ref{???}.
 
 \java{Scanner} provides a method called \java{nextLine} that reads a line of input from the keyboard and returns a \java{String}.
 The following example reads two lines and repeats them back to the user.
@@ -2803,7 +2807,7 @@ public class GuessStarter {
 \end{code}
 
 Like the \java{Scanner} class we saw in this chapter, \java{Random} has to be imported before we can use it.
-And as we saw with \java{Scanner}, we have to use the keyword \java{new} operator to create a random number generator.
+And as we saw with \java{Scanner}, we have to use the \java{new} operator to create a random number generator.
 Then we can use the method \java{nextInt} to generate a random number.
 In this example, the result will be between 0 and 99, including both.
 Adding 1 yields a number between 1 and 100, including both.
@@ -4040,7 +4044,8 @@ If the user enters a floating-point number, the \java{Scanner} converts it to a 
 But if the user types anything else, the \java{Scanner} throws an
 \java{InputMismatchException}.
 
-\index{exception}
+\index{exception!InputMismatch}
+\index{InputMismatchException}
 
 We can prevent this error by checking the input before parsing it:
 
@@ -6229,6 +6234,9 @@ This type of array traversal is often written using a \java{for} loop.
 For this array, the only legal indexes are 0, 1, 2, and 3.
 If the index is negative or greater than 3, the result is an \java{ArrayIndexOutOfBoundsException}.
 
+\index{ArrayIndexOutOfBoundsException}
+\index{exception!ArrayIndexOutOfBounds}
+
 
 \section{Printing arrays}
 \label{printarray}
@@ -7010,6 +7018,9 @@ The problem is that there is no sixth letter in \java{"banana"}.
 Since we started counting at 0, the 6 letters are indexed from 0 to 5.
 To get the last character, you have to subtract 1 from \java{length}.
 
+\index{StringIndexOutOfBoundsException}
+\index{exception!StringIndexOutOfBounds}
+
 \begin{code}
     int length = fruit.length();
     char last = fruit.charAt(length - 1);  // correct
@@ -7744,6 +7755,7 @@ The value \java{null} is represented in state diagrams by a small box with no ar
 \end{center}
 
 \index{exception!NullPointer}
+\index{NullPointerException}
 \index{run-time error}
 
 If you try to use a \java{null} object, either by accessing an attribute or invoking a method, Java throws a \java{NullPointerException}.
@@ -8391,6 +8403,7 @@ By default it displays the type of the object and its address, but you can {\bf 
 
 The definition does not have the keyword \java{static} because it is not a static method.
 It is an {\bf instance method}, so called because when you invoke it, you invoke it on an instance; in this case, an instance of \java{Time}.
+Instance methods are sometimes called ``non-static''; you might see this term in an error message.
 
 The body of the method is similar to \java{printTime} in the previous section, with two changes:
 
@@ -10146,34 +10159,128 @@ Write a method named \java{insertionSort} that implements this algorithm.
 
 \chapter{Objects of objects}
 
-Now that we've designed classes for \java{Card}s and \java{Deck}s, let's use them to make a game!
-Although there are many examples we could implement, we'll start with one that is easy to learn and involves some strategy.
+Now that we have classes that represent cards and decks, let's use them to make a game!
+{\it Crazy Eights} is a classic card game for two or more players.
+The objective is to be the first player to get rid of all your cards.
+Here's how to play:
 
 \index{Crazy Eights}
 
-{\it Crazy Eights} is a classic card game for two or more players.
-The basic objective is to be the first player to get rid of all your cards.
-Here is a short summary of how the game works:
-
 \begin{itemize}
-\item Deal five cards to each player and place the remaining cards face down at the center of the table.
-Turn over the first card to create the initial discard pile.
+\item Deal five cards to each player.
+Deal one card face up to create the ``discard pile''.
+Place the remaining cards face down to create the ``draw pile''.
 
 \item Each player takes turns placing a single card on the discard pile.
 The card must match the rank or suit of the previously played card or be an eight, which is wild card.
 
-\item When players don't have either a matching card or an eight, they must draw new cards until they can play.
-If the draw pile ever runs out, the discard pile is shuffled to restock it.
+\item When players don't have a matching card or an eight, they must draw new cards until they can play.
 
-\item As soon as a player has no cards, the round ends and all other players score penalty points for their remaining cards.
+\item If the draw pile ever runs out, the discard pile is shuffled (except the top card) and becomes the new draw pile.
+
+\item As soon as a player has no cards, the game ends and all other players score penalty points for their remaining cards.
 Eights are worth 20, face cards are worth 10, and all others are worth their rank.
 \end{itemize}
 
-There are a few more details and many variations to this game, but these rules will suffice for now.
-See \url{https://en.wikipedia.org/wiki/Crazy_Eights} for more information.
+You can read \url{https://en.wikipedia.org/wiki/Crazy_Eights} for more details, but we have enough to get started.
 
 
-\section{Array limitations}
+\section{Decks and Hands}
+
+To implement this game, we need to represent a deck of cards, a discard
+pile, a draw pile, and a hand for each player.
+And we need to be able to deal, draw, and discard cards.
+
+The \java{Deck} class from the previous chapter meets some of these requirements, but there are two problems:
+
+\begin{itemize}
+
+\item Hands and piles have different sizes, and the sizes change as the game progresses.
+Our implementation of \java{Deck} uses a \java{Card} array, and the size of an array can't change.
+
+\item It's not clear that a \java{Deck} object is the right way to represent hands and piles.
+We might want new classes for other collections of cards.
+
+\end{itemize}
+
+We can solve the first problem by replacing the \java{Card} array with an \java{ArrayList}, which is in the \java{java.util} package.
+An \java{ArrayList} is a {\bf collection}, which is an object that contains other objects.
+The Java library provides a variety of collections.
+For our purposes, \java{ArrayList} is a good choice because it provides methods to add and remove elements, and it grows and shrinks automatically.
+
+Here's the beginning of a \java{Deck} class that uses an \java{ArrayList}:
+
+\begin{code}
+public class Deck {    
+    private ArrayList<Card> cards;
+}
+\end{code}
+
+When you declare an \java{ArrayList}, you specify the type it will contain in angle-brackets.
+This declaration says that \java{cards} is not just an \java{ArrayList}, it's an \java{ArrayList} of \java{Card} objects.
+Java collections can only store objects, not primitives like \java{int}.
+
+Since we changed the representation of the cards, we have to update the methods that access them, starting with the constructor:
+
+\begin{code}
+    public Deck() {
+        this.cards = new ArrayList<Card>();
+        for (int suit = 0; suit <= 3; suit++) {
+            for (int rank = 1; rank <= 13; rank++) {
+                this.cards.add(new Card(rank, suit));
+            }
+        }
+    }
+\end{code}
+
+The first line creates a new \java{ArrayList}.
+Inside the loop, we use the add method to add a card to the \java{Deck}.
+We don't have to use an index to tell the \java{ArrayList} where to put the card; by default it goes at the end.
+
+\java{ArrayList} provides a method, \java{size}, that returns the number of elements it contains.
+We'll provide a \java{Deck} method that does the same thing:
+
+\begin{code}
+    public int size() {
+        return this.cards.size();
+    }
+\end{code}
+
+We use \java{size} to implement \java{shuffle}, which we described in Section~\ref{shuffle}:
+
+\begin{code}
+    public void shuffle() {
+        Random random = new Random();
+        for (int i = this.size() - 1; i > 0; i--) {
+            int j = random.nextInt(i);
+            this.swapCards(i, j);
+        }
+    }
+\end{code}
+
+To access the elements of an \java{ArrayList}, you can't use the \java{[]} operator.
+Instead, you have to use the methods \java{get} and \java{set}.
+So here's what \java{swapCards} looks like:
+
+\begin{code}
+    public void swapCards(int i, int j) {
+        Card temp = this.cards.get(i);
+        this.cards.set(i, this.cards.get(j));
+        this.cards.set(j, temp);
+    }
+\end{code}
+
+???
+
+\begin{code}
+\end{code}
+
+\begin{code}
+\end{code}
+
+\begin{code}
+\end{code}
+
 
 Looking at the game, we need a way to keep track of multiple sets of cards.
 Each player has their own hand, and there are two shared piles (one for drawing, and one for discarding).
@@ -10232,24 +10339,17 @@ Once arrays have been created with \java{new}, you can't change their \java{leng
 This fixed, contiguous structure is both convenient and efficient if the array is full.
 But as we saw in the previous section, sometimes you need more flexibility.
 
-The Java library comes with a number utility classes for {\bf collections} of objects.
+The Java library comes with a number utility classes for 
+{\bf collections} of objects.
 A collection is an object that represents a group of objects, in a more general way than arrays do.
 One of the most common collection classes is \java{ArrayList}.
 It represents a list of objects (e.g., a list of cards) and is implemented internally using an array.
 
 % You can read more about the Java collections framework here: \url{https://docs.oracle.com/javase/7/docs/technotes/guides/collections/overview.html}
 
-When declaring an \java{ArrayList} (and other collections), you need to specify the type it will contain using angle-brackets:
-
-\begin{code}
-    ArrayList<Card> cards;
-\end{code}
-
-In other words, \java{cards} is not just an \java{ArrayList}, it's an \java{ArrayList} of \java{Card} objects.
-Note that Java collections can only store objects.
 
 %TODO: we have not shown how to instantiate wrapper classes
-If you need to store primitive types, use wrapper classes (e.g., \java{ArrayList<Integer>}).
+%If you need to store primitive types, use wrapper classes (e.g., %\java{ArrayList<Integer>}).
 
 Think of an \java{ArrayList} as a {\em resizable array}.
 You can add and remove elements without specifying in advance how big the array should be.
@@ -10277,7 +10377,7 @@ And instead of accessing items using bracket notation (e.g., \java{cards[index]}
 See \url{https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html} for the complete list.
 
 Iterating an \java{ArrayList} is similar to iterating an array, except that you need to call the \java{size} method.
-\java{ArrayList}s do not have a \java{length} attribute, since it changes over time.
+%\java{ArrayList}s do not have a \java{length} attribute, since it changes over time.
 
 \begin{code}
     for (int i = 0; i < cards.size(); i++) {
@@ -10286,7 +10386,7 @@ Iterating an \java{ArrayList} is similar to iterating an array, except that you 
     }
 \end{code}
 
-As with arrays, you can use the enhanced \java{for} loop if you don't need the index variable (\java{i}) inside the loop:
+As with arrays, you can use the enhanced \java{for} loop if you don't need the index variable, \java{i}, inside the loop:
 
 \begin{code}
     for (Card card : cards) {
@@ -10300,6 +10400,7 @@ And if you're just trying to print its contents, \java{ArrayList} provides a cor
     System.out.println(cards);
 \end{code}
 
+%TODO: show the result
 
 \section{The Player class}
 
