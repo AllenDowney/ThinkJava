@@ -1,23 +1,11 @@
-import java.util.ArrayList;
-
 /**
  * A hand of playing cards.
  * 
   */
-public class Hand extends Deck {
+public class Hand extends CardCollection {
 
-    /**
-     * Constructs a Hand with no cards.
-     */    
-    public Hand() {
-        this.cards = new ArrayList<Card>();
-    }
-
-    /**
-     * Returns a string representation of the deck.
-     */
-    public String toString() {
-        return "Hand: " + this.cards.toString();
+    public Hand(String label) {
+        super(label);
     }
 
     public void display() {

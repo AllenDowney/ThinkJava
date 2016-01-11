@@ -20,7 +20,7 @@ public class Eights {
      */
     public Eights() {
         in = new Scanner(System.in);
-        deck = new Deck();
+        deck = new Deck("Deck");
         deck.shuffle();
         
         // deal cards to each player
@@ -32,11 +32,11 @@ public class Eights {
         deck.deal(two.getHand(), handSize);
         
         // turn one card face up
-        discardPile = new Hand();
+        discardPile = new Hand("Discards");
         deck.deal(discardPile, 1);
 
         // put the rest of the deck face down
-        drawPile = new Hand();
+        drawPile = new Hand("Draw pile");
         deck.deal(drawPile);
     }
 

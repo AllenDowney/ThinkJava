@@ -12,7 +12,7 @@ public class Player {
      */
     public Player(String name) {
         this.name = name;
-        this.hand = new Hand();
+        this.hand = new Hand(name);
     }
     
     /**
