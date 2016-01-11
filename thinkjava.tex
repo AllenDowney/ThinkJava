@@ -10317,7 +10317,7 @@ So if you create a \java{Deck} like this:
 Java invokes the constructor in the \java{Deck} class.
 The first line of the contructor uses something new, \java{super}, which is a keyword that refers to the superclass of the current class.
 When \java{super} is used like a method, as in this example, it invokes the constructor of the superclass.
-In this case, the \java{CardCollection} constructor initializes the \java{ListArray}.
+In this case, the \java{CardCollection} constructor initializes the \java{ArrayList}.
 When it returns, the \java{Deck} constructor resumes and populates the \java{ArrayList} with cards.
 
 That's it for the \java{Deck} class.
@@ -10570,7 +10570,6 @@ Here is the class definition for \java{Eights}, which encapsulates the state of 
 \begin{code}
 public class Eights {
 
-    private Deck deck;
     private Player one;
     private Player two;
     private Hand drawPile;
@@ -10587,7 +10586,7 @@ Here's the constructor that initializes the instance variables and deals the car
 
 \begin{code}
     public Eights() {
-        deck = new Deck("Deck");
+        Deck deck = new Deck("Deck");
         deck.shuffle();
         
         int handSize = 5;
@@ -10677,7 +10676,7 @@ And \java{waitForUser}:
     }
 \end{code}
 
-Using these pieces, we can write a simple version of \java{takeTurn}, which executes one player's turn:
+Using these pieces, we can write \java{takeTurn}, which executes one player's turn:
 
 \begin{code}
     public void takeTurn(Player player) {
@@ -10693,7 +10692,7 @@ Using these pieces, we can write a simple version of \java{takeTurn}, which exec
 \java{takeTurn} reads the top card off the discard pile and passes it to \java{player.play}, which we saw in the previous section.
 The result is the card the player chose, which is added to the discard pile.
 
-Finally, we can use these pieces to write \java{playGame}:
+Finally, we use \java{takeTurn} and the other methods to write \java{playGame}:
 
 \begin{code}
     public void playGame() {
@@ -10714,6 +10713,7 @@ Finally, we can use these pieces to write \java{playGame}:
 \end{code}
 
 Done!
+
 
 \section{UML Class Diagrams}
 
@@ -10817,28 +10817,15 @@ You can use this class as a starting place to implement your own card games.
 \backmatter
 \appendix
 
-%\input{todo-tex/chapter17.tex}
-%\input{todo-tex/chapter18.tex}
-%\input{todo-tex/chapter19.tex}
-%\input{todo-tex/chapter20.tex}
+%TODO: fix the chapter numbering for the appendices
 
-\printindex
-\cleardoublepage
-
-\end{document}
-
-
-
-% TODO: Find a new home for this.  I think it has to come after Chapter 11,
-% because we need instance methods.
-% I am leaning toward an appendix.
-
-\section{Java 2D graphics}
+\chapter{Java 2D graphics}
 \label{graphics}
 
-Now that we've seen how to work with \java{Point} and \java{Rectangle} objects, let's learn how to make them appear on the screen.
-The \java{java.awt} package stands for {\bf Abstract Window Toolkit}, which is Java's original library for drawing graphics.
-We are only going to scratch the surface of graphics programming, but you can read a lot more about it in the Java Tutorials: \url{https://docs.oracle.com/javase/tutorial/2d/}.
+The Java library includes a simple package for drawing graphics, called \java{java.awt}.
+AWT stands for ``Abstract Window Toolkit''.
+
+We are only going to scratch the surface of graphics programming; you can read more about it in the Java tutorials at: \url{https://docs.oracle.com/javase/tutorial/2d/}.
 
 \index{Canvas}
 \index{class!Canvas}
@@ -10999,6 +10986,9 @@ The result looks like this:
 \end{center}
 
 
+\section{Vocabulary}
+
+\begin{description}
 
 \term{AWT}
 The Abstract Window Toolkit, one of the biggest and commonly-used Java packages.
@@ -11012,8 +11002,10 @@ The unit in which coordinates are measured.
 \term{bounding box}
 A common way to specify the coordinates of a rectangular area.
 
+\end{description}
 
 
+\section{Exercises}
 
 
 \begin{exercise}
@@ -11071,3 +11063,17 @@ can create.
 
 \end{enumerate}
 \end{exercise}
+
+
+%\input{todo-tex/chapter17.tex}
+%\input{todo-tex/chapter18.tex}
+%\input{todo-tex/chapter19.tex}
+%\input{todo-tex/chapter20.tex}
+
+\printindex
+\cleardoublepage
+
+\end{document}
+
+
+
