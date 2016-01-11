@@ -11,7 +11,7 @@ def main(tex, num):
             print "\\setcounter{chapter}{" + str(num - 1) + "}\n"
             break
     # copy the chapter
-    i = 0
+    i = -1
     for line in src:
         if line.startswith("\\backmatter"):
             break
