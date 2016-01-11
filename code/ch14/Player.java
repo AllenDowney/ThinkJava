@@ -19,37 +19,47 @@ public class Player {
      * Gets the player's name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
     
     /**
      * Gets the player's hand.
      */
     public Hand getHand() {
-        return this.hand;
-    }
-    
-    /**
-     * Adds a card to the player's hand.
-     */
-    public void addCard(Card card) {
-        this.hand.addCard(card);
+        return hand;
     }
     
     /**
      * Removes and returns a legal card from the player's
      * hand, or returns null if the player cannot play.
      */
-    public Card play(Card prev) {
-        // return the first card that works
-        for (int i = 0; i < this.hand.size(); i++) {
-            Card card = this.hand.getCard(i);
+    public Card play(Eights eights, Card prev) {
+        Card card = searchForMatch(prev);
+        if (card==null) {
+            card = drawForMatch(eights, prev);
+        }
+        return card;
+    }
+
+    public Card searchForMatch(Card prev) {
+        for (int i = 0; i < hand.size(); i++) {
+            Card card = hand.getCard(i);
             if (cardMatches(card, prev)) {
-                return this.hand.popCard(i);
+                return hand.popCard(i);
             }
         }
-        // no legal moves are possible
         return null;
+    }
+
+    public Card drawForMatch(Eights eights, Card prev) {
+        while (true) {
+            Card card = eights.draw();
+            System.out.println(name + " draws " + card);
+            if (cardMatches(card, prev)) {
+                return card;
+            }
+            hand.addCard(card);
+        }
     }
 
     /**
@@ -73,8 +83,8 @@ public class Player {
      */
     public int score() {
         int sum = 0;
-        for (int i = 0; i < this.hand.size(); i++) {
-            Card card = this.hand.getCard(i);
+        for (int i = 0; i < hand.size(); i++) {
+            Card card = hand.getCard(i);
             int rank = card.getRank();
             if (rank == 8) {
                 sum -= 20;
@@ -91,21 +101,20 @@ public class Player {
      * Returns a string representation of the player.
      */
     public String toString() {
-        return this.name + ": " + this.hand;
+        return name + ": " + hand;
     }
 
     /**
      * Displays the player's name and hand.
      */
     public void display() {
-        System.out.println(this.name);
-        this.hand.display();
+        hand.display();
     }
     
     /**
      * Displays the player's name and score.
      */
     public void displayScore() {
-        System.out.println(this.name + " has " + this.score() + " points");
+        System.out.println(name + " has " + score() + " points");
     }
 }

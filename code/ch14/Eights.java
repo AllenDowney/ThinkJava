@@ -8,18 +8,17 @@ import java.util.Scanner;
  */
 public class Eights {
 
-    private Scanner in;
     private Deck deck;
     private Player one;
     private Player two;
     private Hand drawPile;
     private Hand discardPile;
+    private Scanner in;
 
     /**
      * Initializes the state of the game.
      */
     public Eights() {
-        in = new Scanner(System.in);
         deck = new Deck("Deck");
         deck.shuffle();
         
@@ -37,80 +36,82 @@ public class Eights {
 
         // put the rest of the deck face down
         drawPile = new Hand("Draw pile");
-        deck.deal(drawPile);
+        deck.dealAll(drawPile);
+
+        // create the scanner we'll use to wait for the user
+        in = new Scanner(System.in);
     }
 
     /**
      * Displays the state of the game.
      */
     public void displayState() {
-        this.one.display();
-        System.out.println();
-        this.two.display();
-        System.out.println("\nDiscard pile");
-        this.discardPile.display();
-        System.out.println("\nDraw pile");
-        System.out.println(this.drawPile.size() + " cards");
+        one.display();
+        two.display();
+        discardPile.display();
+        System.out.println("Draw pile:");
+        System.out.println(drawPile.size() + " cards");
     }
 
     /**
      * Returns true if either hand is empty.
      */
     public boolean isDone() {
-        return this.one.getHand().empty() || this.two.getHand().empty();
+        return one.getHand().empty() || two.getHand().empty();
     }
 
     /**
      * Moves cards from the discard pile to the draw pile and shuffles.
      */
-    public Card reshuffle() {
-        System.out.println("shuffling discard pile into draw pile");
-        discardPile.deal(drawPile);
-        drawPile.shuffle();
+    public void reshuffle() {
+        // save the top card
+        Card prev = discardPile.popCard();
 
-        Card prev = drawPile.popCard();
+        // move the rest of the cards
+        discardPile.dealAll(drawPile);
+
+        // put the top card back
         discardPile.addCard(prev);
-        return prev;
+
+        // shuffle the draw pile
+        drawPile.shuffle();
     }
 
     /**
      * One player takes a turn.
      */
     public void takeTurn(Player player) {
-        // play the next card, drawing cards if needed
-        Card prev = this.discardPile.last();
-        Card next = player.play(prev);
+        Card prev = discardPile.last();
+        Card next = player.play(this, prev);
         
-        while (next == null) {
-            if (drawPile.empty()) {
-                prev = this.reshuffle();
-            }
-            Card card = drawPile.popCard();
-            System.out.println(player.getName() + " draws " + card);
-            player.getHand().addCard(card);
-            next = player.play(prev);
-        }
         System.out.println(player.getName() + " plays " + next);
         System.out.println();
 
-        this.discardPile.addCard(next);    
+        discardPile.addCard(next);    
+    }
+
+    public Card draw() {
+        if (drawPile.empty()) {
+            reshuffle();
+        }
+        return drawPile.popCard();
     }
 
     /**
      * Waits for the user to press enter.
      */
     public void waitForUser() {
-        this.in.nextLine();
+        in.nextLine();
     }
 
     /**
      * Switches players.
      */
-    public Player otherPlayer(Player current) {
-        if (current == this.one) {
-            return this.two;
+    public Player nextPlayer(Player current) {
+        if (current == one) {
+            return two;
         } else {
-            return this.one;
+            return one;
         }
     }
 
@@ -118,19 +119,19 @@ public class Eights {
      * Plays the game.
      */
     public void playGame() {
-        Player player = this.one;
+        Player player = one;
 
         // keep playing until there's a winner
-        while (!this.isDone()) {
-            this.displayState();
-            this.waitForUser();
-            this.takeTurn(player);
-            player = otherPlayer(player);
+        while (!isDone()) {
+            displayState();
+            waitForUser();
+            takeTurn(player);
+            player = nextPlayer(player);
         }
         
         // display the final score
-        this.one.displayScore();
-        this.two.displayScore();
+        one.displayScore();
+        two.displayScore();
     }
 
     /**

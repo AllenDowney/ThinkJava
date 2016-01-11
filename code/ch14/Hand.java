@@ -9,8 +9,10 @@ public class Hand extends CardCollection {
     }
 
     public void display() {
-        for (int i = 0; i < this.cards.size(); i++) {
-            System.out.println(this.cards.get(i));
+        System.out.println(getLabel() + ": ");
+        for (int i = 0; i < size(); i++) {
+            System.out.println(getCard(i));
         }
+        System.out.println();
     }
 }
