@@ -202,6 +202,57 @@ Since line 8 was deleted, the compiler reported the last line of the file.
 %an integer and a floating-point value?
 
 
+\section{Tracing with a debugger}
+\label{debugger}
+
+\index{debugger}
+
+Another way to visualize variables and parameters is to use a {\bf debugger}.
+Most debuggers make it possible to:
+
+\index{breakpoint}
+
+\begin{enumerate}
+\item Set a {\bf breakpoint}, which is line where you want the program to pause.
+\item Step through the code one line at a time and watch what it does.
+\item Check the values of variables and see when and how they change.
+\end{enumerate}
+
+%ABD: Do we want to move this to the web page?  It is specific to DrJava,
+% and it's a little weird that we switch to the imperative here.
+
+For example, open any program in DrJava and move the cursor to the first line of \java{main}.
+Press Ctrl+B to toggle a breakpoint on the current line; it should now be highlighted in red.
+Press Ctrl+Shift+D to turn on Debug Mode; a new pane should appear at the bottom of the window.
+(These commands are also available from the {\em Debugger} menu, in case you forget the shortcut keys.)
+
+\index{call stack}
+
+When you run the program, execution pauses at the first breakpoint.
+The debug pane shows the {\bf call stack}, with the current method on top of the stack.
+You might be surprised to see how many methods were called before the \java{main} method!
+To the right are several buttons that allow you to step through the code at your own pace.
+You can also press ``Automatic Trace'' to watch DrJava run your code one line at a time.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/debugger.png}
+\caption{Screenshot of the DrJava debugger.
+Execution is currently paused on the first line of \java{printTwice}.
+There is a breakpoint on the first line of \java{main}.}
+\end{center}
+\end{figure}
+
+Using a debugger is like having the computer proofread your code out loud.
+When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
+Tracing allows you to verify how control and data passes from one method to another.
+%You can edit your code while debugging it, but the changes won't take effect until after you compile.
+%The result can be confusing, so we don't recommend it.
+%The debugger may get out of sync if you add or delete multiple lines of code while the program is paused.
+You might expect the code do one thing, but then the debugger shows it doing something else.
+At that moment, you gain insight about what may be wrong with the code.
+
+
 \section{Increment and decrement}
 
 \index{operator!increment}
