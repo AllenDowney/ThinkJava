@@ -1355,7 +1355,7 @@ But that is not the same thing as the integer \java{123}.
 
 \index{initialize}
 
-Variables bust be {\bf initialized} (assigned for the first time) before they can be used.
+Variables must be {\bf initialized} (assigned for the first time) before they can be used.
 You can declare a variable and then assign a value later, as in the previous example.
 You can also do both in one line, like this:
 
@@ -1399,7 +1399,7 @@ In Java, an assignment statement can make two variables equal, but they don't ha
     a = 3;         // a and b are no longer equal
 \end{code}
 
-%The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
+The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
 
 \index{state}
 
@@ -1542,7 +1542,7 @@ The value of \java{minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
 The problem is that Java performs {\bf integer division} when the values being divided are integers.
 By definition, integer division always rounds toward zero, even in cases like this one where the next integer is close.
 
-We can alternatively calculate a percentage rather than a fraction:
+As an alternative, we can calculate a percentage rather than a fraction:
 
 \begin{code}
     System.out.print("Percent of the hour that has passed: ");
@@ -2398,7 +2398,7 @@ Like integer division, converting to an integer always rounds toward zero, even 
 In other words, it simply throws away the fractional part.
 
 Type casting takes precedence over arithmetic operations.
-In this example, the value of \java{pi} gets converted to an integer before multiplying.
+In this example, the value of \java{pi} gets converted to an integer before the multiplication.
 So the result is 60.0, not 62.0.
 
 \begin{code}
@@ -2450,7 +2450,7 @@ The modulus operator looks like a percent sign, but you might find it helpful to
 \index{divisible}
 \index{extract digits}
 
-The remainder turns out to be surprisingly useful.
+The modulus operator turns out to be surprisingly useful.
 For example, you can check whether one number is divisible by another: if \java{x \% y} is zero, then \java{x} is divisible by \java{y}.
 You can use modulus to ``extract'' digits from a number: \java{x \% 10} yields the rightmost digit of \java{x}, and \java{x \% 100} yields the last two digits.
 Also, many encryption algorithms use the modulus operator extensively.
@@ -2550,13 +2550,8 @@ The following code fragment asks users for their name and age.
 The output might look something like this:
 
 \begin{stdout}
-Hello Darth Vader, age 45
+Hello Grace Hopper, age 45
 \end{stdout}
-
-%TODO: I'd like to remove the reference to Darth Vader, just because
-% it's not related to anything else.  I put in James as a replacement
-% for now.  Whatever we choose, we have to update the figures.
-% (CSM put Darth Vader back so the text matches in the meantime.)
 
 When you read a \java{String} followed by an \java{int}, everything works just fine.
 But when you read an \java{int} followed by a \java{String}, something strange happens.
@@ -2580,14 +2575,14 @@ To understand what is happening, you have to understand that the \java{Scanner} 
 Instead, it gets a stream of characters like this:
 
 \begin{center}
-\includegraphics{figs/vader1.pdf}
+\includegraphics{figs/hopper1.pdf}
 \end{center}
 
 The arrow indicates the next character to be read by \java{Scanner}.
 When you call \java{nextInt}, it reads characters until it gets to a non-digit.
 
 \begin{center}
-\includegraphics{figs/vader2.pdf}
+\includegraphics{figs/hopper2.pdf}
 \end{center}
 
 At this point, \java{nextInt} returns \java{45}.
@@ -2764,8 +2759,6 @@ In this chapter, we'll show you how to organize longer programs into multiple me
 We'll also present the \java{Math} class, which provides methods for common mathematical operations.
 
 
-\index{method}
-
 %We will also take a look at separate compilation.
 %At a conceptual level, a {\bf method} represents a mathematical {\em function} or a general {\em procedure}.
 %Some methods perform a computation and return a result.
@@ -2777,8 +2770,6 @@ We'll also present the \java{Math} class, which provides methods for common math
 
 \section{Math methods}
 
-\index{Math class}
-\index{class!Math}
 \index{expression}
 \index{argument}
 
@@ -2789,7 +2780,10 @@ Then you can evaluate the function itself, maybe by punching it into a calculato
 This process can be applied repeatedly to evaluate more complex expressions like $\log(1/\sin(\pi/2))$.
 First we evaluate the argument of the innermost function, then evaluate the function itself, and so on.
 
+\index{Math class}
+\index{class!Math}
 \index{invoke}
+
 The Java library includes a \java{Math} class that provides most common mathematical operations.
 %These functions are called {\bf methods}.
 \java{Math} is in the \java{java.lang} package, so you don't have to import it.
@@ -2807,7 +2801,7 @@ The third line finds the sine of the value of \java{angle}.
 \index{degrees}
 \index{radians}
 
-Arguments of the trigonometric functions -- \java{sin}, \java{cos}, and \java{tan} -- should be in {\em radians}.
+Arguments of the trigonometric functions --- \java{sin}, \java{cos}, and \java{tan} --- should be in {\em radians}.
 To convert from degrees to radians, you can divide by 180 and multiply by $\pi$.
 Conveniently, the \java{Math} class provides a \java{final double} named \java{PI} that contains an approximation of $\pi$:
 
@@ -2828,11 +2822,12 @@ Converting to and from radians is a common operation, so the \java{Math} class p
     double degrees = Math.toDegrees(Math.PI);
 \end{code}
 
+\index{long}
 \index{type!long}
 
 Another useful method is \java{round}, which rounds a floating-point value to the nearest integer and returns a \java{long}.
 A \java{long} is like an \java{int}, but bigger.
-Specifically, and \java{int} uses 32 bits; the largest value it can hold is $2^{31}-1$, which is about 2 billion.
+Specifically, an \java{int} uses 32 bits; the largest value it can hold is $2^{31}-1$, which is about 2 billion.
 A \java{long} uses 64 bits, so the largest value is $2^{63}-1$, which is about 9 quintillion.
 
 \begin{code}
@@ -2841,7 +2836,7 @@ A \java{long} uses 64 bits, so the largest value is $2^{63}-1$, which is about 9
 
 The result is 63 (rounded up from 62.8319).
 
-You can read the documentation for these methods, and the other methods in the \java{Math} class at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html}.
+You can read the documentation for these and other methods in the \java{Math} class at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html}.
 
 
 \section{Composition revisited}
@@ -2858,7 +2853,6 @@ For example, you can use any expression as an argument to a method:
 \end{code}
 
 This statement divides \java{Math.PI} by two, adds the result to \java{angle}, and computes the cosine of the sum.
-
 You can also take the result of one method and pass it as an argument to another:
 
 \begin{code}
@@ -2877,7 +2871,7 @@ for example, \java{Math.pow} takes two arguments and raises the first to the pow
 \end{code}
 
 When using \java{Math} methods, it is a common error to forget the \java{Math}.
-For example, if you try to invoke \java{pow(2.0, 10.0)}, you will get an error message like:
+For example, if you try to invoke \java{pow(2.0, 10.0)}, you get an error message like:
 
 \begin{stdout}
 File: Test.java  [line: 5]
@@ -2886,7 +2880,7 @@ Error: cannot find symbol
   location: class Test
 \end{stdout}
 
-The message ``cannot find symbol'' is confusing, but the last line provides a hint.
+The message ``cannot find symbol'' is confusing, but the last line provides a useful hint.
 The compiler is looking for \java{pow} in the same class where it is used, which is \java{Test}.
 If you don't specify a class name, the compiler looks in the current class.
 
@@ -2918,29 +2912,28 @@ public class NewLine {
 
 The name of the class is \java{NewLine}.
 By convention, class names begin with a capital letter.
-
 \java{NewLine} contains two methods, \java{newLine} and \java{main}.
 Remember that Java is case-sensitive, so \java{NewLine} and \java{newLine} are not the same.
 
-By convention, method names start with a lower case letter and use ``camel case,'' which is a cute name for \java{jammingWordsTogetherLikeThis}.
-You can use any name you want for your methods, except \java{main} or any of the Java keywords.
-
-\java{newLine} and \java{main} are public, which means they can be invoked from other classes.
-Theya are both static, but we can't explain what that means yet.
-And they are both void, which means that they don't yield a result (unlike the \java{Math} methods, for example.
+By convention, method names start with a lowercase letter and use ``camel case,'' which is a cute name for \java{jammingWordsTogetherLikeThis}.
+You can use any name you want for methods, except \java{main} or any of the Java keywords.
 
 \index{public}
 \index{void}
 \index{type!void}
 
+\java{newLine} and \java{main} are public, which means they can be invoked from other classes.
+They are both \java{static}, but we can't explain what that means yet.
+And they are both \java{void}, which means that they don't yield a result (unlike the \java{Math} methods, for example).
+
 \index{parameter}
 
 The parentheses after the method name contain a list of variables, called {\bf parameters}, where the method stores its arguments.
 \java{main} has a single parameter, called \java{args}, which has type \java{String[]}.
-That means that whoever invokes \java{main} must provide an array of Strings (we'll get to arrays in a later chapter).
+That means that whoever invokes \java{main} must provide an array of strings (we'll get to arrays in a later chapter).
 
-\java{newLine} has no parameters, it requires no arguments, as shown when it is invoked in \java{main}.
-Because \java{newLine} is in the same class as \java{main}, we don't have to specify the class name.
+Since \java{newLine} has no parameters, it requires no arguments, as shown when it is invoked in \java{main}.
+And because \java{newLine} is in the same class as \java{main}, we don't have to specify the class name.
 
 The output of this program is:
 
@@ -3041,14 +3034,14 @@ But that is likely to be confusing, because that is not the {\bf order of execut
 
 Execution always begins at the first statement of \java{main}, regardless of where it is in the source file.
 Statements are executed one at a time, in order, until you reach a method invocation, which you can think of as a detour.
-Instead of going to the next statement, you go to the first line of the invoked method, execute the statements there, and then come back and pick up where you left off.
+Instead of going to the next statement, you go to the first line of the invoked method, execute all the statements there, and then come back and pick up where you left off.
 
 That sounds simple enough, but remember that one method can invoke another one.
 In the middle of \java{main}, we go off to execute the statements in \java{threeLine}.
 While we are executing \java{threeLine}, we go off to execute \java{newLine}.
 Then \java{newLine} invokes \java{println}, which causes yet another detour.
 
-Fortunately, Java is good at keeping track of where it is.
+Fortunately, Java is good at keeping track of where the program is running.
 So when \java{println} completes, it picks up where it left off in \java{newLine}; when \java{newLine} completes, it goes back to \java{threeLine}, and when \java{threeLine} completes, it gets back to \java{main}.
 
 In summary, when you read a program, don't read from top to bottom.
@@ -3070,7 +3063,6 @@ To print a message, you have to provide the message, so \java{println} takes a \
 
 When you use a method, you provide the arguments.
 When you write a method, you name the parameters; the parameter list indicates what arguments are required.
-
 The following class shows an example:
 
 \begin{code}
@@ -3112,18 +3104,20 @@ For example, if you try:
 
 You will get an error message like this:
 
+\begin{small}
 \begin{stdout}
 File: Test.java  [line: 10]
-Error: method printTwice in class Test cannot be applied to given types;
+Error: method printTwice in class T cannot be applied to given types;
   required: java.lang.String
   found: int
   reason: actual argument int cannot be converted to java.lang.String
           by method invocation conversion
 \end{stdout}
+\end{small}
 
 Sometimes Java can convert an argument from one type to another automatically.
-For example, \java{Math.sqrt} requires a \java{double}, but if you run \java{Math.sqrt(25)}, the interger value \java{25} is automatically converted to the floating-point value \java{25.0}.
-But in this example, Java can't (or won't) convert the integer \java{17} to a \java{String}.
+For example, \java{Math.sqrt} requires a \java{double}, but if you invoke \java{Math.sqrt(25)}, the interger value \java{25} is automatically converted to the floating-point value \java{25.0}.
+But in the example above, Java can't (or won't) convert the integer \java{17} to a \java{String}.
 
 Parameters and other variables only exist inside their own methods.
 Inside \java{main}, there is no such thing as \java{s}.
@@ -3131,10 +3125,13 @@ If you try to use it there, you'll get a compiler error.
 Similarly, inside \java{printTwice} there is no such thing as \java{argument}.
 That variable belongs to \java{main}.
 
+\index{local variable}
+\index{variable!local}
+
 Because variables only exist inside the methods where they are defined, they are often called {\bf local variables}.
 
 
-\section{Methods with multiple parameters}
+\section{Multiple parameters}
 \label{time}
 
 \index{parameter!multiple}
@@ -3151,7 +3148,7 @@ Here is an example of a method that takes two parameters:
     }
 \end{code}
 
-In the parameter list, it is tempting to write
+In the parameter list, it may be tempting to write:
 
 \begin{code}
     public static void printTime(int hour, minute) {
@@ -3159,7 +3156,6 @@ In the parameter list, it is tempting to write
 \end{code}
 
 But that format is only legal for variable declarations, not parameter lists.
-
 To invoke this method, we have to provide two integers as arguments, like this:
 
 \begin{code}
@@ -3176,8 +3172,12 @@ A common error is to declare the types of the arguments, like this:
     printTime(int hour, int minute);  // syntax error
 \end{code}
 
-That's not necessary, because Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
-And it's a syntax error.
+That's a syntax error, because Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
+You wouldn't declare the types of the arguments if they were simply integers:
+
+\begin{code}
+    printTime(int 11, int 59);  // syntax error
+\end{code}
 
 
 \section{Stack diagrams}
@@ -3207,109 +3207,47 @@ public class PrintTime {
 
 \java{printTime} has two parameters, named \java{hour} and \java{minute}.
 And \java{main} has two variables, also named \java{hour} and \java{minute}.
-Although the have the same names, these variables are not the same.
-\java{hour} in \java{printTime} and \java{hour} in \java{main} refer to different locations and they can have different values.
-
+Although they have the same names, these variables are not the same.
+\java{hour} in \java{printTime} and \java{hour} in \java{main} refer to different locations, and they can have different values.
 For example, you could invoke \java{printTime} like this:
 
 \begin{code}
         int hour = 11;
         int minute = 59;
-        printTime(hour+1, 0);
+        printTime(hour + 1, 0);
 \end{code}
 
 Before the method in invoked, Java evaluates the arguments; in this example, the results are \java{12} and \java{0}.
 Then it assigns those values to the parameters.
 Inside \java{printTime}, the value of \java{hour} is \java{12}, not \java{11}, and the value of \java{minute} is \java{0}, not \java{59}.
-
 Furthermore, if \java{printTime} modifies one of its parameters, that change has no effect on the variables in \java{main}.
 
-One way to keep track of all of this is to draw a {\bf stack diagram}.
-The stack diagram for this example looks like this:
+\index{frame}
 
-%TODO: redo this figure in dia.
+One way to keep track of everything is to draw a {\bf stack diagram}, which is a state diagram (see Section~\ref{state}) that shows method invocations.
+For each method there is a box called a {\bf frame} that contains the method's parameters and variables.
+The name of the method appears outside the frame; the variables and parameters appear inside.
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[scale=0.9]{figs/stack.pdf}
-\caption{Stack diagram for \java{PrintTwice}.}
+\caption{Stack diagram for \java{PrintTime}.}
+\label{fig:stack}
 \end{center}
 \end{figure}
 
-\index{frame}
-
-For each method there is a box called a {\bf frame} that contains the method's parameters and variables.
-The name of the method appears outside the frame; the variables and parameters appear inside.
+As with state diagrams, stack diagrams show variables and methods at a particular point in time.
+Figure~\ref{fig:stack} is a stack diagram at the beginning of the \java{printTime} method.
 
 %\index{scope}
 
 %Stack diagrams help you to visualize the {\bf scope} of a variable, which is the area of a program where a variable exists.
 
 
-
-\section{Tracing with a debugger}
-\label{debugger}
-
-\index{debugger}
-
-Another way to visualize variables and parameters is to use a {\bf debugger}.
-Most debuggers make it possible to:
-
-\index{breakpoint}
-
-\begin{enumerate}
-\item Set a {\bf breakpoint}, which is line where you want the program to pause.
-\item Step through the code one line at a time and watch what it does.
-\item Check the values of variables and see when and how they change.
-\end{enumerate}
-
-%ABD: Do we want to move this to the web page?  It is specific to DrJava,
-% and it's a little weird that we switch to the imperative here.
-
-For example, open any program in DrJava and move the cursor to the first line of \java{main}.
-Press Ctrl+B to toggle a breakpoint on the current line; it should now be highlighted in red.
-Press Ctrl+Shift+D to turn on Debug Mode; a new pane should appear at the bottom of the window.
-(These commands are also available from the {\em Debugger} menu, in case you forget the shortcut keys.)
-
-\index{call stack}
-
-When you run the program, execution pauses at the first breakpoint.
-The debug pane shows the {\bf call stack}, with the current method on top of the stack.
-You might be surprised to see how many methods were called before the \java{main} method!
-To the right are several buttons that allow you to step through the code at your own pace.
-You can also press ``Automatic Trace'' to watch DrJava run your code one line at a time.
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=\textwidth]{figs/debugger.png}
-\caption{Screenshot of the DrJava debugger.
-Execution is currently paused on the first line of \java{printTwice}.
-There is a breakpoint on the first line of \java{main}.}
-\end{center}
-\end{figure}
-
-Using a debugger is like having the computer proofread your code out loud.
-When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
-Tracing allows you to verify how control and data passes from one method to another.
-%You can edit your code while debugging it, but the changes won't take effect until after you compile.
-%The result can be confusing, so we don't recommend it.
-%The debugger may get out of sync if you add or delete multiple lines of code while the program is paused.
-You might expect the code do one thing, but then the debugger shows it doing something else.
-At that moment, you gain insight about what may be wrong with the code.
-
-
 \section{Reading documentation}
 \label{sec:apidocs}
 
 \index{documentation}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{figs/scanner.png}
-\caption{Screenshot of the documentation for \java{Scanner}.}
-\label{fig:javadoc}
-\end{center}
-\end{figure}
 
 One of the nice things about Java is that it comes with an extensive library of classes and methods.
 But before you can use them, you have to read the documentation.
@@ -3319,12 +3257,19 @@ As an example, let's look a the documentation for \java{Scanner}, which we used 
 The documentation of this class is at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html}.
 Figure~\ref{fig:javadoc} shows a screenshot of this page.
 
-Documentation for all classes uses a similar format.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figs/scanner.png}
+\caption{Screenshot of the documentation for \java{Scanner}.}
+\label{fig:javadoc}
+\end{center}
+\end{figure}
+
+Documentation for other classes uses a similar format.
 The first line is the pacakage that contains the class, \java{java.util}.
 The second line is the name of the class.
 
-The next two lines indicate that every \java{Scanner} is also an \java{Object}; we'll learn more about \java{Object} in Section~\ref{???}.
-
+The next two lines indicate that every \java{Scanner} is also an \java{Object}; we'll learn more about \java{Object} in Section~\ref{TODO}.
 The ``Implemented interfaces'' list some of the things a \java{Scanner} can do; we won't say more about that for now.
 
 The next section of the documentation is a narrative that explains the purpose of the class and includes examples of how to use it.
@@ -3336,18 +3281,21 @@ After the narrative, you will find the following sections:
 
 \begin{description}
 
-\item[Constructor summary:]  This section lists the ways of creating, or ``constructing'' a \java{Scanner}.
+\item[Constructor summary:]
+This section lists the ways of creating, or ``constructing'' a \java{Scanner}.
 
-\item[Method summary:] A list of methods \java{Scanner} provides.
+\item[Method summary:]
+A list of methods \java{Scanner} provides.
 
-\item[Constructor detail:] More information about how to construct a \java{Scanner}.
+\item[Constructor detail:]
+More information about how to construct a \java{Scanner}.
 
-\item[Method detail:] More information about each method.
+\item[Method detail:]
+More information about each method.
 
 \end{description}
 
-As an example, here is the summary information for
-\java{nextInt}:
+As an example, here is the summary information for \java{nextInt}:
 
 \begin{stdout}
 public int nextInt()
@@ -3365,23 +3313,23 @@ The ``Method detail'' explains more:
 public int nextInt()
 Scans the next token of the input as an int.
 
-An invocation of this method of the form nextInt() behaves in exactly 
-the same way as the invocation nextInt(radix), where radix is the
-default radix of this scanner.
+An invocation of this method of the form nextInt() behaves in
+exactly the same way as the invocation nextInt(radix), where
+radix is the default radix of this scanner.
 
 Returns:
 the int scanned from the input
 
 Throws:
-InputMismatchException - if the next token does not match the Integer 
-regular expression, or is out of range
+InputMismatchException - if the next token does not match
+    the Integer regular expression, or is out of range
 NoSuchElementException - if input is exhausted
 IllegalStateException - if this scanner is closed
 \end{stdout}
 
 The ``Returns'' section describes the result when the method succeeds.
-The ``Throws'' section describes possible errors and their resulting exceptions.
-Exceptions are said to be ``thrown'', maybe like a referee throwing a flag, or like a toddler throwing a fit.
+In contrast, the ``Throws'' section describes possible errors and their resulting exceptions.
+Exceptions are said to be ``thrown'', like a referee throwing a flag, or like a toddler throwing a fit.
 
 It might take some time to get comfortable reading documentation, and learning which parts to ignore.
 But it's worth the effort.
@@ -3399,14 +3347,13 @@ That way, you can write it as you go, and as things change, it is easier to keep
 
 If you include documentation in your source code, you can extract it automatically, and generate well-formatted HTML, using a tool called {\bf Javadoc}.
 This tool is part of the standard JDK, and widely used.
-In fact, the online documentation of the Java libraries is generated by JavaDoc.
+In fact, the online documentation of the Java libraries is generated by Javadoc.
 
 \index{comments!documentation}
 \index{documentation comments}
 
 Javadoc scans your source files looking for specially-formatted comments called {\bf documentation comments} or more commonly ``Javadoc comments''.
-
-Javadoc comments begin with \java{/**} (two stars) and end with \java{*/} (one star).
+They begin with \java{/**} (two stars) and end with \java{*/} (one star).
 Anything in between is considered part of the documentation.
 
 Here's a class definition with two Javadoc comments, one for the class and one for the method:
@@ -3431,9 +3378,9 @@ public class Goodbye {
 The class comment explains the purpose of the class.
 The method comment explains what the method does.
 
-Notice that this example also includes an inline comment, beginning with \java{\\}.
-In general, inline comments are short phrases that help explain complex parts of a program.  
-They are intended for other programmers reading the source code.
+Notice that this example also includes an inline comment, beginning with \java{//}.
+In general, inline comments are short phrases that help explain complex parts of a program.
+They are intended for other programmers reading and maintaining the source code.
 
 In contrast, Javadoc comments are longer, usually complete sentences.
 They explain what each method does, but they omit details about how the method works.
@@ -3497,14 +3444,14 @@ In a stack diagram, a representation of the variables and parameters for a metho
 %\term{scope}
 %The area of a program where a variable exists.
 
-\term{debugger}
-A tool that allows you to run one statement at a time and see the contents of variables.
+%\term{debugger}
+%A tool that allows you to run one statement at a time and see the contents of variables.
 
-\term{breakpoint}
-A line of code where the debugger will pause a running program.
+%\term{breakpoint}
+%A line of code where the debugger will pause a running program.
 
-\term{call stack}
-The history of method calls and where to resume execution after each method returns.
+%\term{call stack}
+%The history of method calls and where to resume execution after each method returns.
 
 \end{description}
 
@@ -3534,16 +3481,19 @@ Be precise about where there are spaces and where there are newlines.
         System.out.print("You wugga ");
         baffle();
     }
+
     public static void main(String[] args) {
         System.out.print("No, I ");
         zoop();
         System.out.print("I ");
         baffle();
     }
+
     public static void baffle() {
         System.out.print("wug");
         ping();
     }
+
     public static void ping() {
         System.out.println(".");
     }
