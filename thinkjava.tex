@@ -8395,6 +8395,8 @@ Consider the following variables:
 
 Here is a state diagram that shows these variables and their values:
 
+%TODO(Chris) Add ``Time'' above each time object in time2.dia
+
 \begin{center}
 \includegraphics{figs/time2.pdf}
 \end{center}
@@ -10367,6 +10369,9 @@ Another way to say the same thing is that \java{Deck} {\em inherits from} \java{
 
 We would also say that \java{CardCollection} is a {\bf superclass}, and \java{Deck} is one of its {\bf subclasses}.
 
+% NOTE: Let's stick with ``superclass'' and ``subclass'' and 
+% not use ``parent'' and ``child:.
+
 The only method in \java{Deck}, at least for now, is a constructor.
 This constructor replaces, or {\bf overrides}, the constructor from \java{CardCollection}.
 So if you create a \java{Deck} like this:
@@ -10778,12 +10783,46 @@ Done!
 
 \section{UML Class Diagrams}
 
-% TODO: We need UML diagrams for the classes in this chapter
+The examples in this chapter demonstrate two common relationships between classes:
 
-% Let's stick with ``superclass'' and ``subclass'' and 
-% not use ``parent'' and ``child:.
+\begin{description}
 
-TODO
+\item{composition:} Instances of one class contain references to instances of another class.
+For example, an instance of \java{Eights} contains references to two \java{Player} objects, two \java{Hand} objects and a \java{Scanner}.
+
+\item{inheritance:} One class extends another.  For example, \java{Hand} extends \java{CardCollection}, so every instance of \java{Hand} is also a \java{CardCollection}.
+
+\end{description}
+
+Composition is also known as a {\bf HAS-A} relationship, as in ``Eights HAS-A Scanner.''
+Inheritance is also known as a {\bf IS-A} relationship, as in ``A Hand IS-A CardCollection.''
+
+This vocabulary provides a concise way to talk about an object-oriented design.
+There is also a standard way to represented these relationships graphically, called a {\bf UML class diagram}.
+UML stands for ``Unified Modeling Language''.
+Class diagrams are one of many graphical representations defined in UML. 
+
+The UML representation of a class is a box with the name of the class inside, and sometimes a list of its public attributes and methods.
+Relationships between classes are represented by arrows: composition arrows have a standard arrow head; inheritance arrows have a hollow triangle head (and usually point up).
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics{figs/uml1.pdf}
+\caption{UML class diagram for the classes in this chapter.}
+\label{uml1}
+\end{center}
+\end{figure}
+
+%TODO(Chris): the PDF I generated with Dia seems broken.  Can you
+% diagnose?
+
+Figure~\ref{uml1} shows the classes defined in this chapter and the relationships among them.
+
+UML is an international standard, so almost any software engineer in the world could look at this diagram and understand our design.
+
+%\section{Last words}
+
+% TODO: write an outro?
 
 
 \section{Vocabulary}
