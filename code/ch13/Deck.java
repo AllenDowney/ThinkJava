@@ -3,16 +3,13 @@ import java.util.Random;
 
 /**
  * A deck of playing cards (of fixed size).
- * 
- * @author Chris Mayfield
- * @version 12/29/2015
  */
 public class Deck {
     
     private Card[] cards;
 
-    // this is a class variable so we don't have to create a new
-    // Random object every time we call randomInt
+    // This is a class variable so we don't have to create a new
+    // Random object every time we call randomInt.
     private static Random random = new Random();
     
     /**

@@ -1,8 +1,5 @@
 /**
  * Test sorting algorithms for decks of cards.
- * 
- * @author Chris Mayfield
- * @version 12/29/2015
  */
 public class Test {
     
