@@ -1355,7 +1355,7 @@ But that is not the same thing as the integer \java{123}.
 
 \index{initialize}
 
-Variables bust be {\bf initialized} (assigned for the first time) before they can be used.
+Variables must be {\bf initialized} (assigned for the first time) before they can be used.
 You can declare a variable and then assign a value later, as in the previous example.
 You can also do both in one line, like this:
 
@@ -1399,7 +1399,7 @@ In Java, an assignment statement can make two variables equal, but they don't ha
     a = 3;         // a and b are no longer equal
 \end{code}
 
-%The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
+The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
 
 \index{state}
 
@@ -1542,7 +1542,7 @@ The value of \java{minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
 The problem is that Java performs {\bf integer division} when the values being divided are integers.
 By definition, integer division always rounds toward zero, even in cases like this one where the next integer is close.
 
-We can alternatively calculate a percentage rather than a fraction:
+As an alternative, we can calculate a percentage rather than a fraction:
 
 \begin{code}
     System.out.print("Percent of the hour that has passed: ");
@@ -2398,7 +2398,7 @@ Like integer division, converting to an integer always rounds toward zero, even 
 In other words, it simply throws away the fractional part.
 
 Type casting takes precedence over arithmetic operations.
-In this example, the value of \java{pi} gets converted to an integer before multiplying.
+In this example, the value of \java{pi} gets converted to an integer before the multiplication.
 So the result is 60.0, not 62.0.
 
 \begin{code}
@@ -2450,7 +2450,7 @@ The modulus operator looks like a percent sign, but you might find it helpful to
 \index{divisible}
 \index{extract digits}
 
-The remainder turns out to be surprisingly useful.
+The modulus operator turns out to be surprisingly useful.
 For example, you can check whether one number is divisible by another: if \java{x \% y} is zero, then \java{x} is divisible by \java{y}.
 You can use modulus to ``extract'' digits from a number: \java{x \% 10} yields the rightmost digit of \java{x}, and \java{x \% 100} yields the last two digits.
 Also, many encryption algorithms use the modulus operator extensively.
@@ -2550,13 +2550,8 @@ The following code fragment asks users for their name and age.
 The output might look something like this:
 
 \begin{stdout}
-Hello Darth Vader, age 45
+Hello Grace Hopper, age 45
 \end{stdout}
-
-%TODO: I'd like to remove the reference to Darth Vader, just because
-% it's not related to anything else.  I put in James as a replacement
-% for now.  Whatever we choose, we have to update the figures.
-% (CSM put Darth Vader back so the text matches in the meantime.)
 
 When you read a \java{String} followed by an \java{int}, everything works just fine.
 But when you read an \java{int} followed by a \java{String}, something strange happens.
@@ -2580,14 +2575,14 @@ To understand what is happening, you have to understand that the \java{Scanner} 
 Instead, it gets a stream of characters like this:
 
 \begin{center}
-\includegraphics{figs/vader1.pdf}
+\includegraphics{figs/hopper1.pdf}
 \end{center}
 
 The arrow indicates the next character to be read by \java{Scanner}.
 When you call \java{nextInt}, it reads characters until it gets to a non-digit.
 
 \begin{center}
-\includegraphics{figs/vader2.pdf}
+\includegraphics{figs/hopper2.pdf}
 \end{center}
 
 At this point, \java{nextInt} returns \java{45}.
