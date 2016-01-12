@@ -1,8 +1,5 @@
 /**
  * Search algorithms for arrays of cards.
- * 
- * @author Chris Mayfield
- * @version 12/29/2015
  */
 public class Search {
     

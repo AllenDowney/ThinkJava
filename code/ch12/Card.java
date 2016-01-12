@@ -1,8 +1,5 @@
 /**
- * An individual playing card.
- * 
- * @author Chris Mayfield
- * @version 12/29/2015
+ * A standard playing card.
  */
 public class Card {
     
@@ -67,15 +64,6 @@ public class Card {
      */
     public int getSuit() {
         return this.suit;
-    }
-    
-    /**
-     * Returns true if the given card has the same
-     * rank OR same suit; otherwise returns false.
-     */
-    public boolean isLike(Card that) {
-        return this.rank == that.rank
-            || this.suit == that.suit;
     }
     
     /**
