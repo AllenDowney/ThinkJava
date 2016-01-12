@@ -328,6 +328,38 @@ This book can be used to prepare for the Computer Science AP Exam in Java.
 We cover almost every topic in their syllabus, with only a few exceptions (like what?)
 
 
+\section{Using the code}
+\label{code}
+
+The code and data used in this book are available from \url{https://github.com/AllenDowney/ThinkJavaCode}.
+Git is a version control system that allows you to keep track of the files that
+make up a project.
+A collection of files under Git's control is called a {\bf repository}.  GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
+
+\index{repository}
+\index{Git}
+\index{GitHub}
+
+The GitHub homepage for the repository provides several ways to work with the code:
+
+\begin{itemize}
+
+\item You can create a copy of the repository on GitHub by pressing the {\sf Fork} button.
+If you don't already have a GitHub account, you'll need to create one.
+After forking, you'll have your own repository on GitHub that you can use to keep track of code you write while working on this book.
+Then you can clone the repo, which means that you make a copy of the files on your computer.
+\index{fork}
+
+\item Or you could clone the repository without forking.
+You don't need a GitHub account to do this, but you won't be able to write your changes back to GitHub.
+\index{clone}
+
+\item If you don't want to use Git at all, you can download the code in a Zip file using the ``Download ZIP'' button on the GitHub page, or this link: \url{https://github.com/AllenDowney/ThinkJavaCode/archive/master.zip}.
+
+\end{itemize}
+
+After you clone the repository or unzip the zip file, you should have a directory called {\tt ThinkJavaCode} with a subdirectory for each chapter in the book.
+
 
 \section*{Contributors List}
 
@@ -1888,8 +1920,8 @@ The variables in a program and their values.
 \term{state diagram}
 A graphical representation of the state of a program and a point in time.
 
-\term{initialization}
-A statement that creates a variable and assigns a value.
+%\term{initialization}
+%A statement that creates a variable and assigns a value.
 
 %\term{update}
 %An assignment that changes the value of a variable.
@@ -2057,6 +2089,7 @@ This output indicates that \java{System.out} is a \java{PrintStream}, which is d
 A {\bf package} is a collection of related classes; \java{java.io} contains classes for ``I/O'' which stands for input and output.
 
 \index{address}
+\index{hexadecimal}
 
 The numbers and letters after the {\tt @} sign are the {\bf address} of \java{System.out}, represented as a hexadecimal (base 16) number.
 The address of a value is its location in the computer's memory, which might be different on different computers.
@@ -2732,8 +2765,10 @@ Adding 1 yields a number between 1 and 100, including both.
 
 \begin{itemize}
 
+\item The definition of \java{GuessStarter} is in a file called {\tt GuessStarter.java}, in a directory called {\tt ch03}, in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+
 \item Compile and run this program.
-%TODO: add instructions for where to find it. Is copy-paste enough?
 
 \item Modify the program to prompt the user, then use a \java{Scanner} to read a line of user input.
 Compile and test the program.
@@ -2744,8 +2779,6 @@ Again, compile and test.
 \item Compute and display the difference between the user's guess and the number that was generated.
 
 \end{itemize}
-
-%TODO: Add an exercise in chapter 5 to finish off the guessing game
 
 \end{exercise}
 
@@ -3041,7 +3074,7 @@ In the middle of \java{main}, we go off to execute the statements in \java{three
 While we are executing \java{threeLine}, we go off to execute \java{newLine}.
 Then \java{newLine} invokes \java{println}, which causes yet another detour.
 
-Fortunately, Java is good at keeping track of where the program is running.
+Fortunately, Java is good at keeping track of which methods are running.
 So when \java{println} completes, it picks up where it left off in \java{newLine}; when \java{newLine} completes, it goes back to \java{threeLine}, and when \java{threeLine} completes, it gets back to \java{main}.
 
 In summary, when you read a program, don't read from top to bottom.
@@ -3107,7 +3140,7 @@ You will get an error message like this:
 \begin{small}
 \begin{stdout}
 File: Test.java  [line: 10]
-Error: method printTwice in class T cannot be applied to given types;
+Error: method printTwice in class Test cannot be applied to given types;
   required: java.lang.String
   found: int
   reason: actual argument int cannot be converted to java.lang.String
@@ -3173,11 +3206,11 @@ A common error is to declare the types of the arguments, like this:
 \end{code}
 
 That's a syntax error, because Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
-You wouldn't declare the types of the arguments if they were simply integers:
+%You wouldn't declare the types of the arguments if they were simply integers:
 
-\begin{code}
-    printTime(int 11, int 59);  // syntax error
-\end{code}
+%\begin{code}
+%    printTime(int 11, int 59);  // syntax error
+%\end{code}
 
 
 \section{Stack diagrams}
@@ -3271,6 +3304,8 @@ The second line is the name of the class.
 
 The next two lines indicate that every \java{Scanner} is also an \java{Object}; we'll learn more about \java{Object} in Section~\ref{TODO}.
 The ``Implemented interfaces'' list some of the things a \java{Scanner} can do; we won't say more about that for now.
+
+%TODO: We still don't have a section on Object.
 
 The next section of the documentation is a narrative that explains the purpose of the class and includes examples of how to use it.
 This text can be difficult to read because it uses terms we have not learned yet.
@@ -3842,6 +3877,10 @@ You can create one like this:
 \index{statement!initialization}
 
 The first line is a variable declaration, the second is an assignment, and the third is an initialization.
+
+%TODO: we removed the previous use of ``initialization'' as a kind of
+% assignment statement.  We should either restore the definition or
+% not use the word in this way.
 
 Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
 
@@ -6922,9 +6961,6 @@ Each time through the loop, it creates a new string and assigns it to \java{r}.
 When the loop exits, \java{r} contains the letters from \java{s} in reverse order.
 So the result of \java{reverse("banana")} is \java{"ananab"}.
 
-%TODO: add an exercise with StringBuilder
-
-
 
 \section{Substrings}
 
@@ -7617,8 +7653,6 @@ When you create an object variable, remember that you are storing a {\em referen
 In Java, the keyword \java{null} is a special value that means ``no object''.
 You can declare and initialize object variables this way:
 
-%TODO: we should define initialize more carefully
-
 \begin{code}
     Point blank = null;
 \end{code}
@@ -7780,7 +7814,6 @@ If \java{args} is empty, the result is \java{MIN_VALUE}.
 %A value that indicates an object.
 %In a state diagram, a reference appears as an arrow.
 
-%TODO: fix the parse problem
 \term{parse}
 To read a string and analyze its structure.
 
@@ -8020,6 +8053,7 @@ Whenever you define a new class, you create a new type with the same name.
 Way back in Section~\ref{hello}, when we defined the class \java{Hello}, we created a type named \java{Hello}.
 We didn't declare any variables with type \java{Hello}, and we didn't use \java{new} to create a \java{Hello} object.
 It wouldn't have done much if we had -- but we could have!
+
 \index{class definition}
 
 In this chapter, we will define classes that create {\em useful} object types.
@@ -8082,9 +8116,14 @@ The Time class is public, which means that it can be used from other classes.
 But the instance variables are private, which means they can only be accessed from inside the Time class definition.
 If you try to read or write them from another class, you get a compiler error.
 
+\index{private variable}
+\index{variable!private}
+
 Private instance variables help keep classes isolated from each other so that changes in one class don't require changes in every other class.
 This kind of isolation is called {\bf data encapsulation}.
+
 \index{data encapsulation}
+\index{encapsulation!data}
 
 
 \section{Constructors}
@@ -8116,6 +8155,7 @@ This constructor does not take any arguments.
 Each line initializes an instance variable to zero (which in this example means midnight).
 
 \index{this}
+\index{keyword}
 
 The name \java{this} is a keyword that refers to the object we are creating.
 You can use \java{this} the same way you use the name of any other object.
@@ -8130,6 +8170,9 @@ To create a Time object, you use the \java{new} operator:
 \begin{code}
     Time time = new Time();
 \end{code}
+
+\index{new operator}
+\index{operator!new}
 
 When you invoke \java{new}, Java creates the object and calls your constructor to initialize the instance variables.
 When the constructor is done, \java{new} returns a reference to the new object.
@@ -8155,6 +8198,9 @@ Java knows which constructor to invoke by matching the arguments you provide wit
 %NOTE(ABD): What we used to call a default constructor is not a default
 % constructor if we provide it explicitly.
 % And I think the previous use of ``explicit'' confuses the issue.
+
+\index{value constructor}
+\index{constructor!value}
 
 It is common to provide a constructor that takes no arguments, like the previous one, and a ``value constructor'', like this one:
 
@@ -8230,6 +8276,9 @@ Time@80cc7c0
 When Java prints the value of a user-defined type, it prints the name of the type and the address of the object in hexadecimal.
 This address can be useful for debugging, if you want to keep track of individual objects.
 
+\index{address}
+\index{hexadecimal}
+
 To print \java{Time} objects in a way that is more meaningful to users, you could write a method to print the hour, minute, and second.
 Using \java{printTime} in Section~\ref{time} as a starting point, we could write:
 
@@ -8246,15 +8295,19 @@ Using \java{printTime} in Section~\ref{time} as a starting point, we could write
 The output of this method would be {\tt 11:59:59.9}.
 Or we could use \java{printf} to write it more concisely:
 
+\index{printf}
+\index{print statement}
+\index{format string}
+
 \begin{code}
     public static void printTime(Time t) {
-        System.out.printf("%02d:%02d:%02.1f\n",
+        System.out.printf("%02d:%02d:%04.1f\n",
             t.hour, t.minute, t.second);
     }
 \end{code}
 
 As a reminder, you need to use \java{\%d} with integers and \java{\%f} with floating-point numbers.
-The \java{02} option means ``two digits with leading zeros,'' and the \java{2.1} option means ``two digits with leading zeros and one decimal place''.
+The \java{02} option means ``total width 2, with leading zeros if necessary,'' and the \java{04.1} option means ``total width 4, one digit after the decimal point, leading zeros if necessary''.
 
 
 \section{The toString method}
@@ -8271,7 +8324,7 @@ By default it displays the type of the object and its address, but you can {\bf 
 
 \begin{code}
     public String toString() {
-        return String.format("%02d:%02d:%02.1f\n",
+        return String.format("%02d:%02d:%04.1f\n",
                              this.hour, this.minute, this.second);
     }
 \end{code}
@@ -8279,6 +8332,9 @@ By default it displays the type of the object and its address, but you can {\bf 
 The definition does not have the keyword \java{static} because it is not a static method.
 It is an {\bf instance method}, so called because when you invoke it, you invoke it on an instance; in this case, an instance of \java{Time}.
 Instance methods are sometimes called ``non-static''; you might see this term in an error message.
+
+\index{instance method}
+\index{method!instance}
 
 The body of the method is similar to \java{printTime} in the previous section, with two changes:
 
@@ -8289,6 +8345,8 @@ The body of the method is similar to \java{printTime} in the previous section, w
 \item Instead of \java{printf}, it uses \java{String.format}, which returns a formatted String rather than displaying it.
 
 \end{itemize}
+
+\index{string!format}
 
 Now you can call \java{toString} directly:
 
@@ -8314,6 +8372,8 @@ In this example, \java{this} in \java{toString} refers to the same object as \ja
 We have seen two ways to check whether values are equal: the \java{==} operator and the \java{equals} method.
 With objects you can use either one, but they are not the same.
 
+\index{== operator}
+\index{operator!==}
 \index{identical}
 
 The \java{==} operator checks whether objects are {\bf identical}; that is, whether they are the same object.
@@ -8407,11 +8467,12 @@ But other definitions are possible.
 
 \section{Adding times}
 
-%TODO: we need to add index terms to this chapter
-
 Suppose you are going to a movie that starts at 6:50 and the running time is 2 hours 16 minutes.
 What time does the movie end?
 We'll use \java{Time} objects to figure it out.
+
+\index{Time!addition}
+\index{addition!Time}
 
 There are two ways we could add \java{Time} objects:
 
@@ -8425,6 +8486,9 @@ There are two ways we could add \java{Time} objects:
 
 To demonstrate the difference, we'll do both.
 Here is a rough draft of a static method:
+
+\index{static method}
+\index{method!static}
 
 \begin{code}
     public static Time add(Time t1, Time t2) {
@@ -8445,6 +8509,9 @@ And here's how we would invoke it:
 \end{code}
 
 Here's what it looks like as an instance method:
+
+\index{instance method}
+\index{method!instance}
 
 \begin{code}
     public Time add(Time t2) {
@@ -8483,7 +8550,7 @@ You can convert from one to the other with just a few changes.
 You can even have both, although that is not common.
 
 There's only one problem: this method is not correct.
-For this example, it returns 8:66, which is not a valid time.
+For this example, it returns {\tt 8:66}, which is not a valid time.
 If \java{second} exceeds 59, we have to ``carry'' into the minutes column, and if \java{minute} exceeds 59, we have to carry into \java{hour}.
 
 Here's a better version of \java{add}:
@@ -8531,6 +8598,9 @@ As an alternative, we could have written a method like this:
 \java{increment} modifies an existing \java{Time} object.
 It doesn't create a new one, and it doesn't return anything.
 
+\index{pure method}
+\index{method!pure}
+
 Methods like \java{add} are called {\bf pure} because:
 
 \begin{itemize}
@@ -8541,6 +8611,9 @@ Methods like \java{add} are called {\bf pure} because:
 
 Methods like \java{increment}, which breaks the first rule, are sometimes called {\bf modifiers}.
 Modifiers are usually void methods, but sometimes they return a reference to the object they modify.
+
+\index{modifier method}
+\index{method!modifier}
 
 Modifiers can be more efficient because they don't create new objects.
 But they can also be error-prone.
@@ -8606,7 +8679,12 @@ As a general rule, if you are using modifiers, you should avoid aliasing.
 Recall that the instance variables of \java{Time} are private.
 We can access them from within the \java{Time} class, but if we try to access them from another class, the compiler generates an error.
 
+\index{private variable}
+\index{variable!private}
+
 For example, here's a class called \java{TimeClient}, because a class that uses objects defined in another class is called a {\bf client}:
+
+\index{client}
 
 \begin{code}
 public class TimeClient {
@@ -8635,6 +8713,9 @@ The first choice is appealing because it is simple.
 The problem is that when Class A accesses the instance variables of Class B directly, A becomes ``dependent'' on B.
 If anything in B changes later, it is likely that A will have to change, too.
 
+\index{dependent}
+\index{independent}
+
 But if A only uses methods to interact with B, A and B are ``independent'', which means that we can make changes in B without affecting A.
 
 If we decide that \java{TimeClient} should be able to read the instance variables of \java{Time}, we can provide methods to do it:
@@ -8653,7 +8734,10 @@ If we decide that \java{TimeClient} should be able to read the instance variable
     }
 \end{code}
 
-%TODO: sometime later we should let them know that ``this''. is optional
+\index{accessor method}
+\index{method!accessor}
+\index{getter method}
+\index{method!getter}
 
 Methods like these are formally called ``accessors'', but more often called {\bf getters}.
 By convention, the method that gets a variable named \java{something} is called \java{getSomething}.
@@ -8676,10 +8760,15 @@ If we decide that \java{TimeClient} should also be able to modify the instance v
 
 These methods are formally called ``mutators'', but more often called {\bf setters}.
 The naming convention is similar; the method that sets \java{something} is usually called \java{setSomething}.
+
 \index{mutator}
 \index{method!mutator}
+\index{setter method}
+\index{method!setter}
 
 Writing getters and setters can get boring, but many IDEs can generate them for you.
+
+\index{immutable}
 
 To make an object immutable, like \java{String}, you can provide getters but no setters and pure methods but no modifiers.
 Immutable objects can be more difficult to work with, at first, but they can save you from long hours of debugging.
@@ -8730,6 +8819,10 @@ Which methods are pure?
 Which are modifiers?
 
 If you review the documentation of \java{java.lang.String}, you should see that there are no modifiers, because strings are immutable.
+
+\index{Rectangle}
+\index{String}
+
 \end{exercise}
 
 
@@ -8737,12 +8830,16 @@ If you review the documentation of \java{java.lang.String}, you should see that 
 The implementation of \java{increment} in this chapter is not very efficient.
 Can you rewrite it do it doesn't use any loops?
 Hint: remember the modulus operator.
+
+\index{modulus operator}
+\index{operator!modulus}
 \end{exercise}
 
 
 \begin{exercise}
 In the board game Scrabble, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
 
+\index{Scrabble}
 \begin{enumerate}
 
 \item Write a definition for a class named \java{Tile} that represents Scrabble tiles.
@@ -8779,6 +8876,9 @@ You can use either constructor.
 
 \begin{exercise}
 \label{ex.rational}
+
+\index{rational number}
+\index{number!rational}
 
 A rational number is a number that can be represented as the ratio of two integers.
 For example, $2/3$ is a rational number, and you can think of 7 as a rational number with an implicit 1 in the denominator.
