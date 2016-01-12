@@ -8813,6 +8813,10 @@ It is usually \java{void} and modifies \java{this}.
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch11} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, make sure you can compile and run the code in your enviroment.
+
 \begin{exercise}
 Review the documentation of \java{java.awt.Rectangle}.
 Which methods are pure?
@@ -8947,8 +8951,8 @@ Here is an outline of the road ahead:
 %Although we will see several versions of the same code, the main advantage of proceeding this way is that the explanations will be smoother.
 %It may help you to create a {\tt Card.java} file and paste in the examples as we go.
 
-The code for this chapter is here: \url{http://thinkapjava.com/code/Card1.java}.
-%TODO: provide the code
+The code for this chapter is in \java{Card.java}, which is in the directory {\tt ch12} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
 
 
 \section{Card objects}
@@ -9649,6 +9653,10 @@ An algorithm that searches a sorted array by starting in the middle, comparing a
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch12} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, make sure you can compile and run the code in your enviroment.
+
 
 \begin{exercise}
 Encapsulate the deck-building code from Section~\ref{cardarray} in a method called \java{makeDeck} that takes no parameters and returns a fully-populated array of \java{Card}s.
@@ -9687,7 +9695,8 @@ Your solution should only traverse the array once.
 
 \end{exercise}
 
-%TODO: we could use another exercise.
+% TODO: we could use another exercise.  Maybe this is a good time for
+% graphics.
 
 
 \chapter{Objects of Arrays}
@@ -9705,8 +9714,8 @@ And we present algorithms for shuffling and sorting arrays.
 %So many of the examples are non-idiomatic; that is, they are not good Java.
 %This transitional form should help you learn, but don't write code like this.
 
-You can download the code in this chapter from \url{http://thinkapjava.com/code/Card2.java}.
-%TODO: update the link to the code
+The code for this chapter is in \java{Card.java} and \java{Deck.java}, which are in the directory {\tt ch13} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
 
 
 \section{The Deck class}
@@ -9858,8 +9867,6 @@ In this case we can use \java{swapCards} again, so we only need a method to find
 
 One of the exercises at the end of this chapter asks you to write \java{indexLowestCard} and \java{selectionSort}.
 
-%TODO: swap the order of rank and suit
-%TODO: make an exercise of validating the input to Card constructor
 
 
 \section{Merge sort}
@@ -9940,8 +9947,6 @@ The result is a hand with 5 cards that are {\em shared} with the original deck; 
 
 Aliasing is not always a good idea, because changes to shared objects are reflected in multiple decks.
 But since \java{Card} objects are immutable, this kind of aliasing is not a problem.
-
-%TODO: make the variables final in the code
 
 
 \section{Merge}
@@ -10040,9 +10045,6 @@ A simple sorting algorithm that searches for the smallest element $n$ times.
 \term{helper method}
 Often a small method that does not do anything enormously useful by itself, but which helps another, more useful method.
 
-%TODO: I think we killed bottom up.  Is there someplace we can fit it
-% back in?
-
 \term{top-down development}
 Breaking down a problem into sub-problems, and solving each sub-problem one at a time.
 
@@ -10056,6 +10058,12 @@ A recursive sorting algorithm that divides an array into two parts, sorts each p
 
 
 \section{Exercises}
+
+The code for this chapter is in the directory {\tt ch13} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, make sure you can compile and run the code in your enviroment.
+
+%TODO: make an exercise of validating the input to Card constructor?
 
 \begin{exercise}
 
@@ -10160,6 +10168,9 @@ Eights are worth 20, face cards are worth 10, and all others are worth their ran
 \end{itemize}
 
 You can read \url{https://en.wikipedia.org/wiki/Crazy_Eights} for more details, but we have enough to get started.
+
+The code for this chapter is in the directory {\tt ch14} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
 
 
 \section{Decks and Hands}
@@ -10769,7 +10780,8 @@ Done!
 
 % TODO: We need UML diagrams for the classes in this chapter
 
-% Let's stick with superclass and subclass and not use parent child.
+% Let's stick with ``superclass'' and ``subclass'' and 
+% not use ``parent'' and ``child:.
 
 TODO
 
@@ -10804,7 +10816,9 @@ A way of developing programs by identifying simple pieces, implementing them, an
 
 \section{Exercises}
 
-% TODO: how to download and run the code?
+The code for this chapter is in the directory {\tt ch14} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, make sure you can compile and run the code in your enviroment.
 
 \begin{exercise}
 Design a better strategy for the \java{Player.play} method.
