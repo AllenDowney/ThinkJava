@@ -30,17 +30,19 @@ public class Player {
     }
     
     /**
-     * Removes and returns a legal card from the player's
-     * hand, or returns null if the player cannot play.
+     * Removes and returns a legal card from the player's hand.
      */
     public Card play(Eights eights, Card prev) {
         Card card = searchForMatch(prev);
-        if (card==null) {
+        if (card == null) {
             card = drawForMatch(eights, prev);
         }
         return card;
     }
 
+    /**
+     * Searches the player's hand for a matching card.
+     */
     public Card searchForMatch(Card prev) {
         for (int i = 0; i < hand.size(); i++) {
             Card card = hand.getCard(i);
@@ -51,6 +53,9 @@ public class Player {
         return null;
     }
 
+    /**
+     * Draws cards until a match is found.
+     */
     public Card drawForMatch(Eights eights, Card prev) {
         while (true) {
             Card card = eights.draw();
@@ -105,7 +110,7 @@ public class Player {
     }
 
     /**
-     * Displays the player's name and hand.
+     * Displays the player's hand.
      */
     public void display() {
         hand.display();

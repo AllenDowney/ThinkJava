@@ -1,5 +1,5 @@
 /**
- * Test sorting algorithms for decks of cards.
+ * Test code for Deck and Hand.
  * 
  */
 public class Test {
@@ -12,9 +12,9 @@ public class Test {
         deck.shuffle();
         System.out.println(deck);
 
-        Hand hand1 = new Hand("Hand 1");
-        deck.deal(hand1, 5);
-        hand1.display();
+        Hand hand = new Hand("Hand");
+        deck.deal(hand, 5);
+        hand.display();
 
         Hand drawPile = new Hand("Draw Pile");
         deck.dealAll(drawPile);

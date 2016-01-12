@@ -1,14 +1,13 @@
 import java.util.Scanner;
 
 /**
- * Simulates a game of Crazy Eights. Refer to
+ * Simulates a game of Crazy Eights.  See
  * https://en.wikipedia.org/wiki/Crazy_Eights
  * for basic play and scoring rules.
  * 
  */
 public class Eights {
 
-    private Deck deck;
     private Player one;
     private Player two;
     private Hand drawPile;
@@ -19,7 +18,7 @@ public class Eights {
      * Initializes the state of the game.
      */
     public Eights() {
-        deck = new Deck("Deck");
+        Deck deck = new Deck("Deck");
         deck.shuffle();
         
         // deal cards to each player
@@ -49,7 +48,7 @@ public class Eights {
         one.display();
         two.display();
         discardPile.display();
-        System.out.println("Draw pile:");
+        System.out.print("Draw pile: ");
         System.out.println(drawPile.size() + " cards");
     }
 
@@ -90,6 +89,9 @@ public class Eights {
         discardPile.addCard(next);    
     }
 
+    /**
+     * Returns a card from the draw pile.
+     */
     public Card draw() {
         if (drawPile.empty()) {
             reshuffle();

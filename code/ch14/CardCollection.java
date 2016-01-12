@@ -60,7 +60,7 @@ public class CardCollection {
     }
     
     /**
-     * Moves n cards from this collect to the given collection.
+     * Moves n cards from this collection to the given collection.
      */
     public void deal(CardCollection that, int n) {
         for (int i=0; i<n; i++) {
@@ -70,7 +70,7 @@ public class CardCollection {
     }
     
     /**
-     * Moves all remaining cards to the given cc.
+     * Moves all remaining cards to the given collection.
      */
     public void dealAll(CardCollection that) {
         int n = size();
