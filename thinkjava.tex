@@ -6908,13 +6908,15 @@ Because it is a method, you have to invoke it with the empty argument list, \jav
 
 The condition is \java{i < fruit.length()}, which means that when \java{i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
 
-The enhanced for loop also works with strings, so we could write the previous example like this:
+% NOTE: apparently the enhanced for loop does NOT work with strings
 
-\begin{code}
-    for (char letter: fruit) {
-        System.out.println(letter);
-    }
-\end{code}
+%The enhanced for loop also works with strings, so we could write the previous example like this:
+
+%\begin{code}
+%    for (char letter: fruit) {
+%        System.out.println(letter);
+%    }
+%\end{code}
 
 
 \index{String!length}
@@ -10815,6 +10817,10 @@ Relationships between classes are represented by arrows: composition arrows have
 
 %TODO(Chris): the PDF I generated with Dia seems broken.  Can you
 % diagnose?
+
+%NOTE: I am not using standard arrows for aggregation and composition, but
+% a simplified version for all HAS-A relationships.  This is consistent
+% with the class diagrams in Head First Design Patterns.
 
 Figure~\ref{uml1} shows the classes defined in this chapter and the relationships among them.
 
