@@ -5339,7 +5339,7 @@ Using a \java{while} statement, we can rewrite \java{countdown} like this:
 
 You can almost read a \java{while} statement like English.
 The above code means: ``While \java{n} is greater than zero, print the value of \java{n} and then reduce the value of \java{n} by 1.
-When you get to zero, print `Blastoff!'''
+When you get to zero, print Blastoff!''
 
 The expression in parentheses is called the condition.
 The statements in braces are called the {\bf body}.
@@ -5349,7 +5349,7 @@ The flow of execution for a \java{while} statement is:
 
 \item Evaluate the condition, yielding \java{true} or \java{false}.
 
-\item If the condition is \java{false}, skip the body and go to the the next statement.
+\item If the condition is \java{false}, skip the body and go to the next statement.
 
 \item If the condition is \java{true}, execute the body and go back to step 1.
 
@@ -5409,10 +5409,10 @@ For more information, see \url{http://en.wikipedia.org/wiki/Collatz_conjecture}.
 Loops are good for generating and printing tabular data.
 Before computers were readily available, people had to calculate logarithms, sines and cosines, and other common mathematical functions by hand.
 To make that easier, there were books of tables where you could look up values of various functions.
-Creating these tables was slow and boring, and the results were often full of errors.
+Creating these tables by hand was slow and boring, and the results were often full of errors.
 
 When computers appeared on the scene, one of the initial reactions was, ``This is great!
-We can use the computers to generate the tables, so there will be no errors.''
+We can use a computer to generate the tables, so there will be no errors.''
 That turned out to be true (mostly), but shortsighted.
 Not much later, computers were so pervasive that printed tables became obsolete.
 
@@ -5423,6 +5423,8 @@ In some cases, there have been errors in the underlying tables, most famously in
 
 Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
 The following loop prints a table with a sequence of values in the left column and their logarithms in the right column:
+
+%TODO shouldn't we use integers (and cast to double) to avoid rounding errors?
 
 \begin{code}
     double x = 1.0;
@@ -5447,7 +5449,7 @@ The output of this program is:
 \end{stdout}
 
 \java{Math.log} computes natural logarithms; that is, logarithms base $e$.
-For computer science application, we often want logarithms with respect to base 2.
+For computer science applications, we often want logarithms with respect to base 2.
 To compute them, we can apply this equation:
 %
 \[ \log_2 x = \frac{log_e x}{log_e 2} \]
@@ -5476,8 +5478,7 @@ And here are the results.
 9.0   3.1699250014423126
 \end{stdout}
 
-Each time through the loop, we add something to \java{x}, so the result
-is an arithmetic sequence.
+Each time through the loop, we add something to \java{x}, so the result is an arithmetic sequence.
 If we multiply \java{x} by something instead, we get a geometric sequence:
 
 \begin{code}
@@ -5491,7 +5492,6 @@ If we multiply \java{x} by something instead, we get a geometric sequence:
 
 The first line stores \java{Math.log(2)} in a \java{final} variable to avoid computing that value over and over again.
 The last line multiplies \java{x} by 2.
-
 The result is:
 
 \begin{stdout}
@@ -5505,7 +5505,7 @@ The result is:
 \end{stdout}
 
 This table shows the powers of two and their logarithms, base 2.
-Log tables may not be useful any more, but for computer scientists, knowing the powers of two helps a lot!
+Log tables may not be useful anymore, but for computer scientists, knowing the powers of two helps a lot!
 %When you have an idle moment, you should memorize the powers of two up to 65536 (that's $2^{16}$).
 
 
@@ -5520,20 +5520,18 @@ The steps are:
 
 \begin{enumerate}
 
-\item Write a few lines of code in \java{main} or another method,
-and test them.
+\item Write a few lines of code in \java{main} or another method, and test them.
 
 \item When they are working, wrap them in a method and test again.
 
-\item If it's appropriate, replace literal values with variables and
-parameters.
+\item If it's appropriate, replace literal values with variables and parameters.
 
 \end{enumerate}
 
 The second step is called {\bf encapsulation}; the third step is {\bf generalization}.
 
-We'll demonstrate this process by developing methods that print a multiplication table.
-We'll start with a loop that prints the multiples of 2, all on one line.
+To demonstrate this process, we'll develop methods that print a multiplication table.
+Let's start with a loop that prints the multiples of 2, all on one line.
 
 \begin{code}
     int i = 1;
@@ -5564,7 +5562,7 @@ The output of the code so far is:
 \index{generalization}
 
 The next step is to encapsulate this code in a method.
-Here's what that looks like:
+Here's what that method looks like:
 
 \begin{code}
     public static void printRow() {
@@ -5577,7 +5575,7 @@ Here's what that looks like:
     }
 \end{code}
 
-Next we can replace the constant value, 2, with a parameter, \java{n}.
+Next we replace the constant value, 2, with a parameter, \java{n}.
 This step is called ``generalization'' because it makes the method more general (less specific):
 
 \begin{code}
@@ -5628,7 +5626,7 @@ And the output looks like this:
 
 The format specifier \java{"\%4d"} in \java{printRow} causes the output to align vertically, regardless of whether the numbers are one or two digits.
 
-Finally, we can encapsulate the previous loop in a method:
+Finally, we can encapsulate the second loop in a method:
 
 \begin{code}
     public static void printTable() {
@@ -5645,19 +5643,12 @@ Finally, we can encapsulate the previous loop in a method:
 One of the challenges of programming, especially for beginners, is figuring out how to divide up a program into methods.
 The process of encapsulation and generalization allows you design as you go along.
 
-%You start by adding code to \java{main} or some another method.
-%When you get the code working, you wrap it up in a new method and generalize it by adding parameters.
-%Then you repeat, alternately developing new code and creating new methods.
-
-%Encapsulation and generalization, as demonstrated in this section, is a useful and common process for {\bf program development}.
-%In later chapters we will present some alternatives.
-
 
 \section{More generalization}
 \index{generalization}
 
-The previous version of \java{printTable} always prints 6 rows.
-We can generalize it by replacing 6 with a parameter:
+The previous version of \java{printTable} always prints six rows.
+We can generalize it by replacing the literal \java{6} with a parameter:
 
 \begin{code}
     public static void printTable(int rows) {
@@ -5681,8 +5672,7 @@ Here is the output with the argument 7:
    7  14  21  28  35  42
 \end{stdout}
 
-That's better, but it still has a problem: it always prints the same
-number of columns.
+That's better, but it still has a problem: it always prints the same number of columns.
 We can generalize more by adding a parameter to \java{printRow}:
 
 \begin{code}
@@ -5725,7 +5715,7 @@ As a result, the number of columns equals the number of rows, so we get a square
 \end{stdout}
 
 When you generalize a method appropriately, you often find that it has capabilities you did not plan.
-For example, you might notice that the multiplication table is symmetric, because $ab = ba$, so all the entries in the table appear twice.
+For example, you might notice that the multiplication table is symmetric; since $ab = ba$, all the entries in the table appear twice.
 You could save ink by printing half the table, and you would only have to change one line of \java{printTable}:
 
 \begin{code}
@@ -5733,7 +5723,7 @@ You could save ink by printing half the table, and you would only have to change
 \end{code}
 
 In words, the length of each row is the same as its row number.
-The result is a triagonal multiplication table.
+The result is a triangular multiplication table.
 
 \begin{stdout}
    1
@@ -5745,8 +5735,12 @@ The result is a triagonal multiplication table.
    7  14  21  28  35  42  49
 \end{stdout}
 
+Generalization makes code more versatile, more likely to be reused, and sometimes easier to write.
+
 %Even though the second parameter in \java{printRow} is named \java{size} and we have a variable with the same name, we can still use any value or expression we want for the argument.
-%Remember you do not pass {\em variables} to methods; you pass their current {\em values}.
+
+%Remember, you do not pass {\em variables} to methods; you pass their current {\em values}.
+%In this last example, the value of \java{i} in \java{printTable} is assigned to both \java{n} and \java{cols} in \java{printRow}.
 
 
 \section{The for statement}
@@ -5757,7 +5751,7 @@ The result is a triagonal multiplication table.
 \index{statement!for}
 
 The loops we have written so far have several elements in common.
-They start by initializing a variable; they have a condition that depends on that variable; and inside the loop they do something to update that variable.
+They start by initializing a variable, they have a condition that depends on that variable, and inside the loop they do something to update that variable.
 This type of loop is so common that there is another statement, the \java{for} loop, that expresses it more concisely.
 
 For example, we could rewrite \java{printTable} like this:
@@ -5776,8 +5770,8 @@ There are three statements in parentheses, separated by semi-colons: the initial
 
 \item The initializer runs once at the beginning of the loop.
 
-\item The condition runs each time through the loop.
-If it is false, the loop ends. 
+\item The condition is checked each time through the loop.
+If it is \java{false}, the loop ends.
 
 \item Otherwise, the body of the loop runs.
 
@@ -5812,10 +5806,11 @@ If you need to use a loop variable outside the loop, you have to declare it outs
     }
 \end{code}
 
-
 \index{update operator}
 \index{increment}
 \index{decrement}
+
+%TODO the term update operator is not standard; use compound assignment?
 
 Assignments like \java{i = i + 1} often appear in for loops.
 In fact, they are so common, Java provides a more concise way to write them using {\bf update operators}.
@@ -5824,8 +5819,6 @@ And \java{--} is the {\bf decrement} operator; it has the same effect as \java{i
 
 If you want to increment or decrement a variable by an amount other than 1, you can use \java{+=} and \java{-=}.
 For example, \java{i += 2} increments \java{i} by \java{2}.
-
-
 
 
 %TODO: come back to nested loops, probably along with 2-D arrays
@@ -5843,9 +5836,6 @@ For example, \java{i += 2} increments \java{i} by \java{2}.
 
 %In contrast to \java{printTable} and \java{printRow}, this version of the code cannot use the variable \java{i} for both loops.
 %Instead, it uses the variables \java{row} and \java{col} to represent the positions in the table.
-
-
-%TODO(csm) tracing code by hand?
 
 
 \section{Vocabulary}
@@ -5872,7 +5862,6 @@ To wrap a sequence of statements in a method.
 
 \term{generalize}
 To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter).
-Generalization makes code more versatile, more likely to be reused, and sometimes easier to write.
 
 \term{program development}
 A process for writing programs.
@@ -5885,7 +5874,7 @@ Increase the value of a variable.
 Decrease the value of a variable.
 
 \term{update operator}
-One of the operators that increments or decrements a variable.
+An operator that increments or decrements a variable.
 
 \end{description}
 
@@ -5902,7 +5891,9 @@ Consider the following methods:
     public static void main(String[] args) {
         loop(10);
     }
+\end{code}
 
+\begin{code}
     public static void loop(int n) {
         int i = n;
         while (i > 0) {
@@ -6006,7 +5997,7 @@ The output should look something like:
 1.0     2.708333333333333     2.718281828459045
 \end{stdout}
 
-You can use the string \java{"\\t"} to put a tab character between columns of a table.
+You can use the escape sequence \java{"\\t"} to put a tab character between columns of a table.
 
 \item Vary the number of terms in the series (the second argument that \java{check} sends to \java{myexp}) and see the effect on the accuracy of the result.
 Adjust this value until the estimated value agrees with the correct answer when \java{x} is 1.
