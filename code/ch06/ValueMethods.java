@@ -103,10 +103,10 @@ public class ValueMethods {
         boolean bigFlag = !isSingleDigit(17);
 
         int z = 17;
-        if (isSingleDigit((int) x)) {
-            System.out.println("x is small");
+        if (isSingleDigit(z)) {
+            System.out.println("z is small");
         } else {
-            System.out.println("x is big");
+            System.out.println("z is big");
         }
     }
 }
