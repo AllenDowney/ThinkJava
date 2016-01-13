@@ -3631,7 +3631,7 @@ Saturday, July 16, 2011
 \end{exercise}
 
 
-\chapter{Decisions and logic}
+\chapter{Conditionals and logic}
 
 \index{boolean}
 \index{type!boolean}
@@ -3816,7 +3816,7 @@ Since the condition must be true or false, exactly one of the branches will run.
 %    printParity(int number);        // WRONG!!!
 %\end{code}
 
-\index{decision!chained}
+\index{conditional!chained}
 
 Sometimes you want to check related conditions and choose one of several actions.
 One way to do this is by {\bf chaining} a series of \java{if} and \java{else} statements:
@@ -3835,7 +3835,7 @@ These chains can be as long as you want, although they can be difficult to read 
 One way to make them easier to read is to use standard indentation, as demonstrated in these examples.
 If you keep all the statements and braces lined up, you are less likely to make syntax errors.
 
-\index{decision!nested}
+\index{conditional!nested}
 \index{nested structure}
 
 In addition to chaining, you can also make complex decisions by {\bf nesting} one conditional statement inside another.
@@ -3938,10 +3938,10 @@ Some development environments display output to \java{System.err} with a differe
 
 \section{Validating input}
 
-Here is a simple program that uses \java{printLogarithm} from the previous section:
+Here is a method that uses \java{printLogarithm} from the previous section:
 
 \begin{code}
-    public static void main(String args[]) {
+    public static void scanDouble() {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter a number: ");
         double x = in.nextDouble();
@@ -3959,7 +3959,7 @@ But if the user types anything else, the \java{Scanner} throws an \java{InputMis
 We can prevent this error by checking the input before parsing it:
 
 \begin{code}
-    public static void main(String args[]) {
+    public static void scanDouble() {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter a number: ");
         if (!in.hasNextDouble()) {
@@ -4153,25 +4153,26 @@ For example, to convert a decimal integer into its {\bf binary} representation, 
 
 Reading these remainders from bottom to top, 23 in binary is 10111.
 
-Here is a recursive method that prints the binary representation of any positive integer:
+Here is a recursive method that displays the binary representation of any positive integer:
 
 \begin{code}
-    public static void showBinary(int value) {
+    public static void displayBinary(int value) {
         if (value > 0) {
-            showBinary(value / 2);
+            displayBinary(value / 2);
             System.out.print(value % 2);
         }
     }
 \end{code}
 
-If \java{value} is zero, \java{showBinary} does nothing (that's the base case).
-If the argument is positive, the method divides it by two and calls \java{showBinary} recursively.
+If \java{value} is zero, \java{displayBinary} does nothing (that's the base case).
+If the argument is positive, the method divides it by two and calls \java{displayBinary} recursively.
 When the recursive call returns, the method prints one digit of the result and returns (again).
 The leftmost digit is at the bottom of the stack, so it gets printed first.
 The rightmost digit, at the top of the stack, gets printed last.
 
 \begin{code}
-    showBinary(23);
+    displayBinary(23);
+    System.out.println();
     // output is 10111
 \end{code}
 
@@ -4236,7 +4237,7 @@ Also known as ``base 2''.
 
 \begin{exercise}
 
-Logical operators can simplify nested decision structures.
+Logical operators can simplify nested conditional statements.
 For example, can you rewrite this code using a single \java{if} statement?
 
 \begin{code}
@@ -4455,7 +4456,7 @@ The type of the expression in the \java{return} statement must match the return 
 When you declare that the return type is \java{double}, you are making a promise that this method will eventually produce a \java{double} value.
 If you try to \java{return} with no expression, or an expression with the wrong type, the compiler will generate an error.
 
-Sometimes it is useful to have multiple return statements, for example, one in each branch of a decision:
+Sometimes it is useful to have multiple return statements, for example, one in each branch of a conditional:
 
 \begin{code}
     public static double absoluteValue(double x) {
