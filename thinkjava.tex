@@ -3670,14 +3670,14 @@ The following expressions show how they are used:
 \end{code}
 
 The result of a relational operator is one of two special values, \java{true} or \java{false}.
-These values belong to the type \java{boolean}; in fact, they are the only boolean values.
+These values belong to the data type \java{boolean}; in fact, they are the only boolean values.
 
 You are probably familiar with these operations, but notice that the Java operators are different from the mathematical symbols like $=$, $\neq$, and $\le$.
 A common error is to use a single \java{=} instead of a double \java{==}.
 Remember that \java{=} is the assignment operator, and \java{==} is a comparison operator.
-Also, there is no such thing as \java{=<} or \java{=>} operators.
+Also, there is no such thing as the \java{=<} or \java{=>} operators.
 
-The two sides of a relational operator have to be compatible types.
+The two sides of a relational operator have to be compatible.
 For example, the expression \java{5 < "6"} is invalid because \java{5} is an \java{int} and \java{"6"} is a \java{String}.
 When comparing values of different numeric types, Java applies the same conversion rules we saw previously with the assignment operator.
 For example, when evaluating the expression \java{5 < 6.0}, Java automatically converts the \java{5} to \java{5.0}.
@@ -3702,33 +3702,35 @@ The result is the boolean value \java{false}.
 \index{operator!logical}
 
 Java has three {\bf logical operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
-The semantics of these operators are similar to their meanings in English.
+The results of these operators are similar to their meanings in English.
 
 For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero and less than 10.
-The expression \java{evenFlag || n \% 3 == 0} is true if {\it either} condition is true, that is, if \java{evenFlag} is true or the number \java{n} is divisible by 3.
+The expression \java{evenFlag || n \% 3 == 0} is true if {\em either} condition is true, that is, if \java{evenFlag} is true or the number \java{n} is divisible by 3.
 Finally, the \java{!} operator inverts a boolean expression.
-So \java{!evenFlag} is \java{true} if \java{evenFlag} is \java{false}.
+So \java{!evenFlag} is true if \java{evenFlag} is false.
 
 \index{short circuit}
+
+%TODO uncomment the vocab term operand in chapter 2
+% or replace all instances of operand in chapter 5
 
 Logical operators evaluate the second expression only when necessary.
 For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
 Likewise, \java{false && anything} is always false.
 Ignoring the second operand, when possible, is called {\bf short circuit} evaluation, by analogy with an electrical circuit.
 Short circuit evaluation can save time, especially if \java{anything} is a method call.
-It can also avoid unnecessary errors, if \java{anything} might fail based on the first operand.
+It can also avoid unnecessary errors, if \java{anything} might fail based on the first expression.
 
 \index{De Morgan's laws}
 
-If you ever have to negate an expression that contains logical operators,
-and you probably will, {\bf De Morgan's laws} can help:
+If you ever have to negate an expression that contains logical operators, and you probably will, {\bf De Morgan's laws} can help:
 
 \begin{itemize}
 \item \java{!(A && B)} ~is the same as~ \java{!A || !B}
 \item \java{!(A || B)} ~is the same as~ \java{!A && !B}
 \end{itemize}
 
-In words, negating a logical expression is the same as negating each term and changing the operator.
+Negating a logical expression is the same as negating each term and changing the operator.
 The \java{!} operator has higher precedence than \java{&&} and \java{||}, so you don't have to put parentheses around the individual terms \java{!A} and \java{!B}.
 
 De Morgan's laws also apply to the relational operators.
@@ -3767,9 +3769,8 @@ The condition in parentheses can be any boolean expression.
 
 \index{branch}
 \index{statement!else}
-\index{decision!alternative}
 
-A second form of decision statement is alternative execution, in which there are two possibilities indicated by \java{if} and \java{else}.
+A second form of conditional statement has two possibilities, indicated by \java{if} and \java{else}.
 The possibilities are called {\bf branches}, and the condition determines which one gets executed:
 
 \begin{code}
@@ -3837,7 +3838,7 @@ If you keep all the statements and braces lined up, you are less likely to make 
 \index{decision!nested}
 \index{nested structure}
 
-In addition to chaining, you can also make complex decisions by {\bf nesting} one decision inside another.
+In addition to chaining, you can also make complex decisions by {\bf nesting} one conditional statement inside another.
 We could have written the previous example as:
 
 \begin{code}
@@ -3852,9 +3853,9 @@ We could have written the previous example as:
     }
 \end{code}
 
-The outer conditional has two branches:
-the first branch contains a \java{print} statement; the second branch contains another decision statement, which has two branches of its own.
-Each of them is a \java{print} statement, but they could have been decision statements as well.
+The outer conditional has two branches.
+The first branch contains a \java{print} statement, and the second branch contains another conditional statement, which has two branches of its own.
+Both of the latter branches are \java{print} statements, but they could have been conditional statements as well.
 
 These kinds of nested structures are common, but they get difficult to read very quickly.
 Good indentation is essential to make the structure (or intended structure) apparent to the reader.
@@ -3864,7 +3865,7 @@ Good indentation is essential to make the structure (or intended structure) appa
 
 \index{expression!boolean}
 
-To store a boolean value, you need a boolean variable.
+To store a \java{true} or \java{false} value, you need a \java{boolean} variable.
 You can create one like this:
 
 \begin{code}
@@ -3876,12 +3877,7 @@ You can create one like this:
 \index{initialization}
 \index{statement!initialization}
 
-The first line is a variable declaration, the second is an assignment, and the third is an initialization.
-
-%TODO: we removed the previous use of ``initialization'' as a kind of
-% assignment statement.  We should either restore the definition or
-% not use the word in this way.
-
+The first line is a variable declaration, the second is an assignment, and the third is both.
 Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
 
 \begin{code}
@@ -3934,10 +3930,14 @@ This example defines a method named \java{printLogarithm} that takes a \java{dou
 It checks whether \java{x} is less than or equal to zero, in which case it prints an error message and then uses \java{return} to exit the method.
 The flow of execution immediately returns to the caller, and the remaining lines of the method are not executed.
 
+%TODO the previous chapter always says invoke or invocation;
+% we should mention the word call (noun and verb) is a synonym
+% or replace caller with "invoker" (but that sounds weird)
+
 \index{System.err}
 
 This example uses \java{System.err}, which is an \java{OutputStream} normally used for error messages and warnings.
-Some development enviroments display output to \java{System.err} in a different color or a separate window.
+Some development environments display output to \java{System.err} with a different color or in a separate window.
 
 
 \section{Validating input}
@@ -3955,8 +3955,7 @@ Here is a simple program that uses \java{printLogarithm} from the previous secti
 
 This example uses \java{nextDouble}, so the \java{Scanner} tries to read a \java{double}.
 If the user enters a floating-point number, the \java{Scanner} converts it to a \java{double}.
-But if the user types anything else, the \java{Scanner} throws an
-\java{InputMismatchException}.
+But if the user types anything else, the \java{Scanner} throws an \java{InputMismatchException}.
 
 \index{exception!InputMismatch}
 \index{InputMismatchException}
@@ -3980,7 +3979,7 @@ We can prevent this error by checking the input before parsing it:
 The \java{Scanner} class provides \java{hasNextDouble}, which checks whether the next token in the input stream can be interpreted as a \java{double}.
 If so, we can call \java{nextDouble} with no chance of throwing an exception.
 If not, we display an error message and return.
-Returning from \java{main} terminates the program. 
+Returning from \java{main} terminates the program.
 
 %Notice also the use of the \java{!} operator, instead of the test \java{hasNextDouble() == false}.
 %Since the \java{hasNextDouble} method returns a boolean result, it is already a condition.
@@ -4007,8 +4006,8 @@ Consider the following example:
 
 The name of the method is \java{countdown}; it takes a single integer as a parameter.
 If the parameter is zero, it prints the word ``Blastoff''.
-Otherwise, it prints the number and then invokes itself, passing \java{n - 1} as the argument.
-A method that invokes itself is {\bf recursive}.
+Otherwise, it prints the number and then invokes {\em itself}, passing \java{n - 1} as the argument.
+A method that invokes itself is called {\bf recursive}.
 
 What happens if we invoke \java{countdown(3)} from \java{main}?
 
@@ -4056,7 +4055,7 @@ As a second example, we'll rewrite the methods \java{newLine} and \java{threeLin
 
 \index{newline}
 
-Although these methods work, they would not help if we wanted to print 2 newlines, or 106.
+Although these methods work, they would not help if we wanted to print two newlines, or maybe 100.
 A better alternative would be:
 
 \begin{code}
@@ -4093,14 +4092,14 @@ The following figure is a stack diagram for countdown, called with \java{n == 3}
 \end{figure}
 
 By convention, the stack for \java{main} is at the top and the stack grows down.
-The stack frame for \java{main} is empty because \java{main} does not have any variables.
+The frame for \java{main} is empty because \java{main} does not have any variables.
 It has one parameter, \java{args}, but since we're not using it, we left it out of the diagram.
 
 There are four frames for \java{countdown}, each with a different value for the parameter \java{n}.
 The last frame, with \java{n == 0}, is called the {\bf base case}.
 It does not make a recursive call, so there are no more frames below it.
 
-If there is no base case is a recursive method, or if the base case is never reached, the stack would grow forever.
+If there is no base case in a recursive method, or if the base case is never reached, the stack would grow forever.
 In most systems, the size of the stack is limited; if you exceed the limit, you get a \java{StackOverflowError}.
 
 For example, here is a recursive method without a base case:
@@ -4115,7 +4114,7 @@ For example, here is a recursive method without a base case:
 \index{call stack}
 \index{stack overflow}
 
-This method prints the string until the stack overflows, and then throws an exception.
+This method prints the string until the stack overflows, at which point it throws an exception.
 
 
 \section{Binary Numbers}
@@ -4146,7 +4145,7 @@ Blastoff!
 \end{stdout}
 
 This behavior comes in handy when it is easier to compute results in reverse order.
-For example, to convert a decimal integer into its base 2, or {\bf binary}, representation, you repeatedly divide the number by two:
+For example, to convert a decimal integer into its {\bf binary} representation, you repeatedly divide the number by two:
 
 \begin{stdout}
 23 / 2 is 11 remainder 1
@@ -4156,7 +4155,7 @@ For example, to convert a decimal integer into its base 2, or {\bf binary}, repr
  1 / 2 is  0 remainder 1
 \end{stdout}
 
-So 23 in binary is 10111, which is the remainders in the above example from bottom to top.
+So 23 in binary is 10111, reading the remainders in the above example from bottom to top.
 Here is a recursive method that prints the binary representation of any positive integer:
 
 \begin{code}
@@ -4208,7 +4207,7 @@ Mathematical rules that show how to negate a logical expression.
 A statement that uses a condition to determine which statements to execute.
 
 \term{branch}
-One of the alternative sets of statements inside a decision statement.
+One of the alternative sets of statements inside a conditional statement.
 
 \term{chaining}
 A way of joining several conditional statements in sequence.
@@ -4246,7 +4245,7 @@ For example, can you rewrite this code using a single \java{if} statement?
 \begin{code}
     if (x > 0) {
         if (x < 10) {
-            System.out.println("x is a positive single digit number.");
+            System.out.println("positive single digit number.");
         }
     }
 \end{code}
@@ -4302,7 +4301,7 @@ No more bottles of pop on the wall.
 And then the song (finally) ends.
 
 Write a program that prints the entire lyrics of ``99 Bottles of Pop''.
-Your program should include a {\it recursive} method that does the hard part, but you might want to write additional methods to separate the major functions of the program.
+Your program should include a recursive method that does the hard part, but you might want to write additional methods to separate other parts of the program.
 As you develop your code, test it with a small number of verses, like \java{3}.
 
 \end{exercise}
@@ -4330,7 +4329,9 @@ public class Buzz {
             System.out.println("boo-wa-ha-ha");
         }
     }
+\end{code}
 
+\begin{code}
     public static void main(String[] args) {
         zippo("rattle", 13);
     }
@@ -4359,9 +4360,9 @@ If a statement is executed more than once, it might end up with more than one nu
 
 Now that we have conditional statements, we can get back to the ``Guess the Number'' game from Exercise~\ref{guess}.
 
-You should already have a program that chooses a random number, prompts the user to guess, and displays the difference between the guess and the chosen number.
+You should already have a program that chooses a random number, prompts the user to guess it, and displays the difference between the guess and the chosen number.
 
-Adding a small amount of code at a time, and testing as you go, modfify the program so it tells the user whether the guess is too high or too low, and then prompts the user for another guess.
+Adding a small amount of code at a time, and testing as you go, modify the program so it tells the user whether the guess is too high or too low, and then prompts the user for another guess.
 
 The program should continue until the user gets it right.
 Hint: use two methods, and make one of them recursive.
