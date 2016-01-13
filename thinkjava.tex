@@ -3704,10 +3704,10 @@ The result is the boolean value \java{false}.
 Java has three {\bf logical operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
 The results of these operators are similar to their meanings in English.
 
-For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero and less than 10.
+For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero {\em and} less than 10.
 The expression \java{evenFlag || n \% 3 == 0} is true if {\em either} condition is true, that is, if \java{evenFlag} is true or the number \java{n} is divisible by 3.
 Finally, the \java{!} operator inverts a boolean expression.
-So \java{!evenFlag} is true if \java{evenFlag} is false.
+So \java{!evenFlag} is true if \java{evenFlag} is {\em not} true.
 
 \index{short circuit}
 
@@ -3718,8 +3718,8 @@ Logical operators evaluate the second expression only when necessary.
 For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
 Likewise, \java{false && anything} is always false.
 Ignoring the second operand, when possible, is called {\bf short circuit} evaluation, by analogy with an electrical circuit.
-Short circuit evaluation can save time, especially if \java{anything} is a method call.
-It can also avoid unnecessary errors, if \java{anything} might fail based on the first expression.
+Short circuit evaluation can save time, especially if \java{anything} takes a long time to evaluate.
+It can also avoid unnecessary errors, if \java{anything} might fail.
 
 \index{De Morgan's laws}
 
@@ -3855,7 +3855,7 @@ We could have written the previous example as:
 
 The outer conditional has two branches.
 The first branch contains a \java{print} statement, and the second branch contains another conditional statement, which has two branches of its own.
-Both of the latter branches are \java{print} statements, but they could have been conditional statements as well.
+These two branches are also \java{print} statements, but they could have been conditional statements as well.
 
 These kinds of nested structures are common, but they get difficult to read very quickly.
 Good indentation is essential to make the structure (or intended structure) apparent to the reader.
@@ -3928,11 +3928,7 @@ One reason to use \java{return} is if you detect an error condition:
 
 This example defines a method named \java{printLogarithm} that takes a \java{double} value (named \java{x}) as a parameter.
 It checks whether \java{x} is less than or equal to zero, in which case it prints an error message and then uses \java{return} to exit the method.
-The flow of execution immediately returns to the caller, and the remaining lines of the method are not executed.
-
-%TODO the previous chapter always says invoke or invocation;
-% we should mention the word call (noun and verb) is a synonym
-% or replace caller with "invoker" (but that sounds weird)
+The flow of execution immediately returns to where the method was invoked, and the remaining lines of the method are not executed.
 
 \index{System.err}
 
@@ -4155,7 +4151,8 @@ For example, to convert a decimal integer into its {\bf binary} representation, 
  1 / 2 is  0 remainder 1
 \end{stdout}
 
-So 23 in binary is 10111, reading the remainders in the above example from bottom to top.
+Reading these remainders from bottom to top, 23 in binary is 10111.
+
 Here is a recursive method that prints the binary representation of any positive integer:
 
 \begin{code}
@@ -4973,7 +4970,7 @@ For example, to test \java{fibonacci}, we could write:
     }
 \end{code}
 
-Writing code like this example can get repetitive, but there are tools to make it easier.
+Writing code like this can get repetitive, but there are tools to make it easier.
 JUnit is the most common testing tool for Java programs (see \url{http://junit.org/}).
 To use it, you have to create a test class that contains test methods.
 If the name of the class is \java{Class}, the name of the test class is \java{ClassTest}.
@@ -5008,7 +5005,9 @@ Normally the first argument is the ``expected value'', which we consider correct
 If they are not equal, the test fails.
 
 Using \java{assertEquals} is more concise than writing your own \java{if} statements and \java{System.err} messages.
-In addition, they are overloaded to provide advanced features beyond the scope of this chapter.
+
+% I think this is too mysterious:
+%In addition, they are overloaded to provide advanced features beyond the scope of this chapter.
 
 To run JUnit directly from DrJava, click the {\tt Test} button on the toolbar.
 If all your test methods pass, you will see a green bar in the lower right.
@@ -5148,8 +5147,8 @@ Hint: The Math method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
 
-In the last part, you will get to write a method that invokes a method you wrote.
-Whenever you do that, it is a good idea to test the first method carefully before you start working on the second.
+In the last part of this exercise, you write a method that invokes a method you wrote.
+Whenever you do that, it is a good idea to test the first method carefully before working on the second.
 Otherwise, you might find yourself debugging two methods at the same time, which can be difficult.
 
 One of the purposes of this exercise is to practice pattern-matching: the ability to recognize a specific problem as an instance of a general category of problems.
@@ -5187,8 +5186,7 @@ public class Prod {
 \item What is the output of this program?
 (Try to answer this question on paper first, then run the code to check your answer.)
 
-\item Explain in a few words what \java{prod} does.
-(Explain what the entire code does as a unit, rather than reciting what each line does.)
+\item Explain in a few words what \java{prod} does (without getting into the details of how it works).
 
 \item Rewrite \java{prod} without the temporary variables \java{recurse} and \java{result}.
 Hint: you only need one line for the \java{else} branch.
@@ -5420,13 +5418,12 @@ In some cases, there have been errors in the underlying tables, most famously in
 Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
 The following loop prints a table with a sequence of values in the left column and their logarithms in the right column:
 
-%TODO shouldn't we use integers (and cast to double) to avoid rounding errors?
-
 \begin{code}
-    double x = 1.0;
-    while (x < 10.0) {
+    int i = 1;
+    while (i < 10) {
+        double x = (double) i;
         System.out.println(x + "   " + Math.log(x));
-        x = x + 1.0;
+        i = i + 1;
     }
 \end{code}
 
@@ -5453,10 +5450,11 @@ To compute them, we can apply this equation:
 Here's the modified version of the loop:
 
 \begin{code}
-    double x = 1.0;
-    while (x < 10.0) {
+    int i = 1;
+    while (i < 10) {
+        double x = (double) i;
         System.out.println(x + "   " + Math.log(x) / Math.log(2));
-        x = x + 1.0;
+        i = i + 1;
     }
 \end{code}
 
@@ -5479,10 +5477,11 @@ If we multiply \java{x} by something instead, we get a geometric sequence:
 
 \begin{code}
     final double log2 = Math.log(2);
-    double x = 1.0;
-    while (x < 100.0) {
+    int i = 1;
+    while (i < 100) {
+        double x = double(i);
         System.out.println(x + "   " + Math.log(x) / log2);
-        x = x * 2.0;
+        i = i * 2.0;
     }
 \end{code}
 
@@ -5527,7 +5526,7 @@ The steps are:
 The second step is called {\bf encapsulation}; the third step is {\bf generalization}.
 
 To demonstrate this process, we'll develop methods that print a multiplication table.
-Let's start with a loop that prints the multiples of 2, all on one line.
+We'll start with a loop that prints the multiples of 2, all on one line.
 
 \begin{code}
     int i = 1;
@@ -5558,7 +5557,7 @@ The output of the code so far is:
 \index{generalization}
 
 The next step is to encapsulate this code in a method.
-Here's what that method looks like:
+Here's what it looks like:
 
 \begin{code}
     public static void printRow() {
@@ -5622,7 +5621,7 @@ And the output looks like this:
 
 The format specifier \java{"\%4d"} in \java{printRow} causes the output to align vertically, regardless of whether the numbers are one or two digits.
 
-Finally, we can encapsulate the second loop in a method:
+Finally, we encapsulate the second loop in a method:
 
 \begin{code}
     public static void printTable() {
@@ -5802,14 +5801,11 @@ If you need to use a loop variable outside the loop, you have to declare it outs
     }
 \end{code}
 
-\index{update operator}
 \index{increment}
 \index{decrement}
 
-%TODO the term update operator is not standard; use compound assignment?
-
 Assignments like \java{i = i + 1} often appear in for loops.
-In fact, they are so common, Java provides a more concise way to write them using {\bf update operators}.
+In fact, they are so common, Java provides a more concise way to write them using increment and decrement operators.
 For example, \java{++} is the {\bf increment} operator; it has the same effect as \java{i = i + 1}.
 And \java{--} is the {\bf decrement} operator; it has the same effect as \java{i = i - 1}.
 
@@ -5868,9 +5864,6 @@ Increase the value of a variable.
 
 \term{decrement}
 Decrease the value of a variable.
-
-\term{update operator}
-An operator that increments or decrements a variable.
 
 \end{description}
 
