@@ -6354,7 +6354,7 @@ If you generate a long series of random numbers, every value should appear, at l
 One way to test \java{nextInt} is to generate a large number of values, store them in an array, and count the number of times each value occurs.
 
 The following method creates an \java{int} array and fills it with random numbers.
-You specify the size of the array in the argument.
+The argument specifies the size of the array.
 The return type is \java{int[]}, which means that this method returns a reference to an \java{int} array.
 
 \begin{code}
@@ -6611,7 +6611,7 @@ Generalize it to take the number of counters as an argument.
 
 \begin{exercise}
 The purpose of this exercise is to practice reading code and recognizing the traversal patterns in this chapter.
-The following methods are hard to read, because instead of using meaningful names for the variables and methods, it uses names of fruit.
+The following methods are hard to read, because instead of using meaningful names for the variables and methods, they use names of fruit.
 
 \begin{code}
     public static int banana(int[] a) {
@@ -6648,7 +6648,7 @@ The following methods are hard to read, because instead of using meaningful name
     }
 \end{code}
 
-For each method, write one sentence that describes in general what the method does.
+For each method, write one sentence that describes what the method does, without getting into the details of how it works.
 For each variable, identify the role it plays.
 
 \end{exercise}
@@ -6750,7 +6750,7 @@ Write a method called \java{max} that takes an array and uses \java{maxInRange} 
 
 \begin{exercise}
 
-In Section~\ref{traversal} we wrote a method called \java{search} that traverses an array and returns the index of a given value, or -1 if the value is not found in the array.
+In Section~\ref{traversal} we wrote a method called \java{search} that traverses an array and returns the index of a given value, or -1 if the value is not in the array.
 
 If the elements of the array are sorted, we can make this method more efficient using a ``binary search''.
 You can read about it at \url{https://en.wikipedia.org/wiki/Binary_search_algorithm}.
