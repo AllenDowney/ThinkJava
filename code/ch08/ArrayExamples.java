@@ -2,10 +2,13 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Demonstates uses of arrays.
+ * Demonstrates uses of arrays.
  */
 public class ArrayExamples {
 
+    /**
+     * Example code from Chapter 8.
+     */
     public static void main(String[] args) {
         int size = 10;
         int[] counts = new int[4];
@@ -63,6 +66,9 @@ public class ArrayExamples {
         makeHistogram();
     }
     
+    /**
+     * Example code related to histograms.
+     */
     public static void makeHistogram() {
         int numValues = 8;
         int[] array = randomArray(numValues);
@@ -89,6 +95,9 @@ public class ArrayExamples {
         }
     }
     
+    /**
+     * Prints the elements of an array.
+     */
     public static void printArray(int[] array) {
         System.out.print("{" + array[0]);
         for (int i = 1; i < array.length; i++) {
@@ -97,6 +106,9 @@ public class ArrayExamples {
         System.out.println("}");
     }
 
+    /**
+     * Returns the index of the target in the array, or -1 if not found.
+     */
     public static int search(double[] a, double target) {
         for (int i = 0; i < a.length; i++) {
             if (a[i] == target) {
@@ -106,6 +118,9 @@ public class ArrayExamples {
         return -1;
     }
 
+    /**
+     * Returns the total of the elements in an array.
+     */
     public static double sum(double[] a) {
         double total = 0.0;
         for (int i = 0; i < a.length; i++) {
@@ -114,6 +129,9 @@ public class ArrayExamples {
         return total;
     }
 
+    /**
+     * Returns an array of random integers.
+     */
     public static int[] randomArray(int size) {
         Random random = new Random();
         int[] a = new int[size];
@@ -123,6 +141,9 @@ public class ArrayExamples {
         return a;
     }
 
+    /**
+     * Computes the number of array elements in [low, high).
+     */
     public static int inRange(int[] a, int low, int high) {
         int count = 0;
         for (int i = 0; i < a.length; i++) {
