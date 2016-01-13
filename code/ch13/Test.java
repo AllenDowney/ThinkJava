@@ -2,7 +2,7 @@
  * Test sorting algorithms for decks of cards.
  */
 public class Test {
-    
+
     /**
      * Checks that the deck is sorted.
      */
@@ -14,25 +14,25 @@ public class Test {
             }
         }
     }
-    
+
     /**
      * Demonstrates how to call the sorting methods.
      */
     public static void main(String[] args) {
         Deck deck;
-        
+
         System.out.println("Testing selection...");
         deck = new Deck();
         deck.shuffle();
         deck.selectionSort();
         checkSorted(deck);
-        
+
         System.out.println("Testing mergesort...");
         deck = new Deck();
         deck.shuffle();
         deck = deck.mergeSort();
         checkSorted(deck);
-        
+
         System.out.println("Testing insertion...");
         deck = new Deck();
         deck.shuffle();

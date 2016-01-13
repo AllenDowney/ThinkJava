@@ -43,7 +43,7 @@ public class Time {
         return String.format("%02d:%02d:%04.1f\n",
                              this.hour, this.minute, this.second);
     }
-    
+
     /**
      * Tests whether two times are equivalent.
      */
@@ -52,7 +52,7 @@ public class Time {
             && this.minute == that.minute
             && this.second == that.second;
     }
-    
+
     /**
      * Adds two Times and returns a new Time object (static method).
      */
@@ -83,7 +83,7 @@ public class Time {
         }
         return sum;
     }
-    
+
     /**
      * Adds the given number of seconds to this object (modifier).
      */
@@ -105,11 +105,11 @@ public class Time {
     public static void main(String[] args) {
         Time time = new Time(11, 59, 59.9);
         System.out.println(time);
-        
+
         Time time1 = new Time(9, 30, 0.0);
         Time time2 = time1;
         Time time3 = new Time(9, 30, 0.0);
-        
+
         System.out.println(time1 == time2);
         System.out.println(time1 == time3);
         System.out.println(time1.equals(time2));

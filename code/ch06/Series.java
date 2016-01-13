@@ -75,6 +75,7 @@ public class Series {
             return false;
         }
     }
+
     public static boolean isSingleDigit2(int x) {
         return x >= 0 && x < 10;
     }
@@ -107,25 +108,25 @@ public class Series {
 
         System.out.println("circleArea");
         System.out.println(circleArea(1.0, 2.0, 4.0, 6.0));
-        
+
         System.out.println("area with 4 doubles");
         System.out.println(area(1.0, 2.0, 4.0, 6.0));
-        
+
         System.out.println("absolute value");
         System.out.println(absoluteValue(-2));
 
         System.out.println("distance");
         System.out.println(distance(1.0, 2.0, 4.0, 6.0));
-        
+
         System.out.println("distance2");
         System.out.println(distance2(1.0, 2.0, 4.0, 6.0));
-        
+
         System.out.println("distance3");
         System.out.println(distance3(1.0, 2.0, 4.0, 6.0));
-        
+
         System.out.println(isSingleDigit(2));
         boolean bigFlag = !isSingleDigit2(17);
- 
+
         int i = 9;
         if (isSingleDigit(i)) {
             System.out.println("i is small");

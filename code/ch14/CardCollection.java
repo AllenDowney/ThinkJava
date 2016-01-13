@@ -3,13 +3,12 @@ import java.util.Random;
 
 /**
  * A collection of playing cards.
- * 
  */
 public class CardCollection {
-    
+
     private String label;
     private ArrayList<Card> cards;
-    
+
     /**
      * Constructs an empty collection.
      */
@@ -17,7 +16,7 @@ public class CardCollection {
         this.label = label;
         this.cards = new ArrayList<Card>();
     }
-    
+
     /**
      * Returns the label.
      */
@@ -31,7 +30,7 @@ public class CardCollection {
     public int size() {
         return cards.size();
     }
-    
+
     /**
      * True if the collection is empty, false otherwise.
      */
@@ -58,7 +57,7 @@ public class CardCollection {
         cards.set(i, cards.get(j));
         cards.set(j, temp);
     }
-    
+
     /**
      * Moves n cards from this collection to the given collection.
      */
@@ -68,7 +67,7 @@ public class CardCollection {
             that.addCard(card);
         }
     }
-    
+
     /**
      * Moves all remaining cards to the given collection.
      */
@@ -76,14 +75,14 @@ public class CardCollection {
         int n = size();
         deal(that, n);
     }
-    
+
     /**
      * Adds the given card to the collection.
      */
     public void addCard(Card card) {
         cards.add(card);
     }
- 
+
     /**
      * Returns the card with the given index.
      */
@@ -95,7 +94,7 @@ public class CardCollection {
      * Returns the last card.
      */
     public Card last() {
-        int i = size() - 1;        
+        int i = size() - 1;
         return cards.get(i);
     }
 
@@ -119,12 +118,12 @@ public class CardCollection {
      */
     public String toString() {
         return label + ": " + cards.toString();
-    }    
+    }
 
     /**
      * Gets the internal cards array (should only be used for testing).
      */
     public Card[] getCards() {
         return (Card[]) cards.toArray();
-    }    
+    }
 }

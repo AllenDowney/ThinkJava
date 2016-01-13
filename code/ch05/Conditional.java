@@ -6,20 +6,20 @@ public class Conditional {
         String fruit1 = "Apple";
         String fruit2 = "Orange";
         System.out.println(fruit1.equals(fruit2));
-        
+
         int x = 17;
         int n = 18;
 
         if (x > 0) {
             System.out.println("x is positive");
         }
-        
+
         if (x % 2 == 0) {
             System.out.println("x is even");
         } else {
             System.out.println("x is odd");
         }
-        
+
         if (x > 0) {
             System.out.println("x is positive");
         } else if (x < 0) {
@@ -27,7 +27,7 @@ public class Conditional {
         } else {
             System.out.println("x is zero");
         }
-        
+
         if (x == 0) {
             System.out.println("x is zero");
         } else {
@@ -39,11 +39,11 @@ public class Conditional {
         }
         boolean evenFlag = (n % 2 == 0);    // true if n is even
         boolean positiveFlag = (x > 0);     // true if x is positive
-        
+
         if (evenFlag) {
             System.out.println("n was even when I checked it");
         }
-        
+
         if (!evenFlag) {
             System.out.println("n was odd when I checked it");
         }
@@ -75,7 +75,7 @@ public class Conditional {
 
         System.out.println("scandouble2");
         scanDouble2();
-   }
+    }
 
     public static void printLogarithm(double x) {
         if (x <= 0.0) {

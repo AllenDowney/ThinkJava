@@ -2,7 +2,7 @@
  * Search algorithms for arrays of cards.
  */
 public class Search {
-    
+
     /**
      * Sequential search.
      */
@@ -14,7 +14,7 @@ public class Search {
         }
         return -1;
     }
-    
+
     /**
      * Binary search (iterative version).
      */
@@ -26,7 +26,7 @@ public class Search {
 
             int mid = (low + high) / 2;                   // step 1
             int comp = cards[mid].compareTo(target);
-            
+
             if (comp == 0) {                              // step 2
                 return mid;
             } else if (comp < 0) {                        // step 3
@@ -37,12 +37,12 @@ public class Search {
         }
         return -1;
     }
-    
+
     /**
      * Binary search (recursive version).
      */
     public static int binarySearchRec(Card[] cards, Card target,
-                               int low, int high) {
+                                      int low, int high) {
         System.out.println(low + ", " + high);
 
         if (high < low) {
@@ -50,7 +50,7 @@ public class Search {
         }
         int mid = (low + high) / 2;                       // step 1
         int comp = cards[mid].compareTo(target);
-        
+
         if (comp == 0) {                                  // step 2
             return mid;
         } else if (comp < 0) {                            // step 3
@@ -75,7 +75,6 @@ public class Search {
         return cards;
     }
 
-
     /**
      * Demonstrates how to call the search methods.
      */
@@ -95,9 +94,9 @@ public class Search {
         System.out.println("Failed binary search");
         System.out.println(binarySearch(cards, fake));
         System.out.println();
-        
+
         System.out.println("Recursive binary search");
         System.out.println(binarySearch(cards, jack));
         System.out.println();
-    }    
+    }
 }

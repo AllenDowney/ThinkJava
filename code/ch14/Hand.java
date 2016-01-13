@@ -1,7 +1,6 @@
 /**
  * A hand of playing cards.
- * 
-  */
+ */
 public class Hand extends CardCollection {
 
     /**

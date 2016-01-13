@@ -5,13 +5,13 @@ import java.util.Random;
  * A deck of playing cards (of fixed size).
  */
 public class Deck {
-    
+
     private Card[] cards;
 
     // This is a class variable so we don't have to create a new
     // Random object every time we call randomInt.
     private static Random random = new Random();
-    
+
     /**
      * Constructs a standard deck of 52 cards.
      */
@@ -25,28 +25,28 @@ public class Deck {
             }
         }
     }
-    
+
     /**
      * Constructs a deck of n cards (null).
      */
     public Deck(int n) {
         this.cards = new Card[n];
     }
-    
+
     /**
      * Gets the internal cards array.
      */
     public Card[] getCards() {
         return this.cards;
     }
-    
+
     /**
      * Returns a string representation of the deck.
      */
     public String toString() {
         return Arrays.toString(this.cards);
     }
-    
+
     /**
      * Swaps the cards at indexes i and j.
      */
@@ -55,7 +55,7 @@ public class Deck {
         this.cards[i] = this.cards[j];
         this.cards[j] = temp;
     }
-    
+
     /**
      * Chooses a random number between low and high, including both.
      */
@@ -63,7 +63,7 @@ public class Deck {
         int range = high - low + 1;
         return low + random.nextInt(range);
     }
-    
+
     /**
      * Randomly permutes the array of cards.
      */
@@ -73,7 +73,7 @@ public class Deck {
             this.swapCards(i, j);
         }
     }
-    
+
     /**
      * Finds the index of the lowest card
      * between low and high inclusive.
@@ -90,7 +90,7 @@ public class Deck {
         }
         return index;
     }
-    
+
     /**
      * Sorts the cards (in place) using selection sort.
      */
@@ -101,7 +101,7 @@ public class Deck {
             this.swapCards(i, j);
         }
     }
-    
+
     /**
      * Returns a subset of the cards in the deck.
      */
@@ -112,7 +112,7 @@ public class Deck {
         }
         return sub;
     }
-    
+
     /**
      * Combines two previously sorted subdecks.
      */
@@ -123,11 +123,11 @@ public class Deck {
         Card[] c3 = result.cards;
         int i = 0; // index in c1
         int j = 0; // index in c2
-        
+
         // for each index in the result
         for (int k = 0; k < c3.length; k++) {
             int choice;
-            
+
             // determine which card to merge next
             if (i >= c1.length) {
                 choice = 2;  // c1 is empty
@@ -138,7 +138,7 @@ public class Deck {
             } else {
                 choice = 2;  // c2 is lower
             }
-            
+
             // store the chosen card in the result
             if (choice == 1) {
                 c3[k] = c1[i];
@@ -150,29 +150,29 @@ public class Deck {
         }
         return result;
     }
-    
+
     /**
      * Returns a sorted copy of the deck using merge sort.
      */
     public Deck mergeSort() {
-        
+
         // 0 or 1 cards, already sorted
         int len = this.cards.length;
         if (len < 2) {
             return this;
         }
-        
+
         // cut the deck about in half
         int mid = len / 2;
         Deck d1 = this.subdeck(0, mid - 1);
         Deck d2 = this.subdeck(mid, len - 1);
-        
+
         // sort each half and merge
         d1 = d1.mergeSort();
         d2 = d2.mergeSort();
         return merge(d1, d2);
     }
-    
+
     /**
      * Reorders the cards (in place) using insertion sort.
      */

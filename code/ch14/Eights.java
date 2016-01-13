@@ -4,7 +4,6 @@ import java.util.Scanner;
  * Simulates a game of Crazy Eights.  See
  * https://en.wikipedia.org/wiki/Crazy_Eights
  * for basic play and scoring rules.
- * 
  */
 public class Eights {
 
@@ -20,7 +19,7 @@ public class Eights {
     public Eights() {
         Deck deck = new Deck("Deck");
         deck.shuffle();
-        
+
         // deal cards to each player
         int handSize = 5;
         one = new Player("Allen");
@@ -28,7 +27,7 @@ public class Eights {
 
         two = new Player("Chris");
         deck.deal(two.getHand(), handSize);
-        
+
         // turn one card face up
         discardPile = new Hand("Discards");
         deck.deal(discardPile, 1);
@@ -82,11 +81,11 @@ public class Eights {
     public void takeTurn(Player player) {
         Card prev = discardPile.last();
         Card next = player.play(this, prev);
-        
+
         System.out.println(player.getName() + " plays " + next);
         System.out.println();
 
-        discardPile.addCard(next);    
+        discardPile.addCard(next);
     }
 
     /**
@@ -130,7 +129,7 @@ public class Eights {
             takeTurn(player);
             player = nextPlayer(player);
         }
-        
+
         // display the final score
         one.displayScore();
         two.displayScore();
@@ -139,8 +138,8 @@ public class Eights {
     /**
      * Creates the game and runs it.
      */
-    public static void main(String[] args) {        
+    public static void main(String[] args) {
         Eights game = new Eights();
         game.playGame();
-    }    
+    }
 }

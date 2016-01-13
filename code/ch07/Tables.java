@@ -77,7 +77,6 @@ public class Tables {
         System.out.println();
     }
 
-
     public static void example5() {
         int i = 1;
         while (i <= 6) {

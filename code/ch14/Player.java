@@ -1,12 +1,11 @@
 /**
  * A player in a game of crazy eights.
- * 
  */
 public class Player {
-    
+
     private String name;
     private Hand hand;
-    
+
     /**
      * Constructs a player with an empty hand.
      */
@@ -14,21 +13,21 @@ public class Player {
         this.name = name;
         this.hand = new Hand(name);
     }
-    
+
     /**
      * Gets the player's name.
      */
     public String getName() {
         return name;
     }
-    
+
     /**
      * Gets the player's hand.
      */
     public Hand getHand() {
         return hand;
     }
-    
+
     /**
      * Removes and returns a legal card from the player's hand.
      */
@@ -82,7 +81,7 @@ public class Player {
         }
         return false;
     }
-    
+
     /**
      * Calculates the player's score (penalty points).
      */
@@ -101,7 +100,7 @@ public class Player {
         }
         return sum;
     }
-    
+
     /**
      * Returns a string representation of the player.
      */
@@ -115,7 +114,7 @@ public class Player {
     public void display() {
         hand.display();
     }
-    
+
     /**
      * Displays the player's name and score.
      */
