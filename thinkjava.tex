@@ -2182,6 +2182,7 @@ The following example reads two lines and repeats them back to the user.
 import java.util.Scanner;
 
 public class Echo {
+
     public static void main(String[] args) {
         String line;
         Scanner in = new Scanner(System.in);
@@ -2354,9 +2355,9 @@ Four thirds = 1.333
 The format string can contain any number of format specifiers; here's an example with two:
 
 \begin{code}
-   int inch = 100;
-   double cm = inch * cmPerInch;
-   System.out.printf("%d in = %f cm\n", inch, cm);
+    int inch = 100;
+    double cm = inch * cmPerInch;
+    System.out.printf("%d in = %f cm\n", inch, cm);
 \end{code}
 
 The result is:
@@ -2365,10 +2366,10 @@ The result is:
 100 in = 254.000000 cm
 \end{stdout}
 
+Like \java{print}, \java{printf} does not append a newline, so format strings often end with a newline character.
+
 The format specifier \java{\%d} displays integer values (``d'' stands for ``decimal'').
 The values are matched up with the format specifiers in order, so \java{inch} is displayed using \java{\%d}, and \java{cm} is displayed using \java{\%f}.
-
-Like \java{print}, \java{printf} does not append a newline, so format strings often end with a newline character.
 
 \begin{table}[!h]
 \begin{center}
@@ -2635,12 +2636,6 @@ To solve this problem, you need an extra \java{nextLine} after \java{nextInt}.
 
 This technique is common when reading \java{int} or \java{double} values that appear on their own line.
 First you read the number, and then you read the rest of the line, which is just a newline character.
-
-
-%ABD: I moved the section on command-line testing to the archive.
-%I think it gets into details that are specific to operating systems
-%and environments, and not everyone will need it.
-%We could consider putting it on the web page.
 
 
 \section{Vocabulary}

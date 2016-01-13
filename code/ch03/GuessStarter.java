@@ -1,7 +1,7 @@
 import java.util.Random;
 
 /**
- * Starter for for the "guess my number" exercise.
+ * Starter code for the "guess my number" exercise.
  */
 public class GuessStarter {
     
