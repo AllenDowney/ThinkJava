@@ -426,6 +426,109 @@ Explain in 4-5 words what the method {\tt enigma} really does.
 \end{exercise}
 
 
+\section{Object methods and class methods}
+
+\index{object method}
+\index{method!object}
+\index{class method}
+\index{method!class}
+\index{static}
+
+There are two types of methods in Java, called {\bf class methods} and
+{\bf object methods}.  Class methods are identified by the keyword {\tt
+  static} in the first line.  Any method that does {\em not} have the
+keyword {\tt static} is an object method.
+
+Although we have not written object methods, we have invoked some.
+Whenever you invoke a method ``on'' an object, it's an object method.
+For example, {\tt charAt} and the other methods we invoked on {\tt String}
+objects are all object methods.
+
+For example, here is {\tt printCard} as a class method:
+
+\begin{code}
+    public static void printCard(Card c) {
+        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
+    }
+\end{code}
+
+Anything that can be written as a class method can also be written as an
+object method, and vice versa.  But sometimes it is more natural to
+use one or the other.
+Here it is re-written as an object method:
+
+\begin{code}
+    public void print() {
+        System.out.println(ranks[rank] + " of " + suits[suit]);
+    }
+\end{code}
+
+Here are the changes:
+
+\begin{enumerate}
+
+\item I removed {\tt static}.
+
+\item I changed the name of the method to be more idiomatic.
+
+\item I removed the parameter.
+
+\item Inside an object method you can refer to instance variables
+as if they were local variables, so I changed {\tt c.rank} to {\tt rank},
+and likewise for {\tt suit}.
+
+\end{enumerate}
+
+Here's how this method is invoked:
+
+\begin{code}
+    Card card = new Card(1, 1);
+    card.print();
+\end{code}
+
+When you invoke a method on an object, that object becomes the {\bf
+current object}, also known as {\tt this}.  Inside {\tt print},
+the keyword {\tt this} refers to the card the method was invoked on.
+\index{current object}
+\index{object!current}
+\index{this}
+
+
+\section{Oddities and errors}
+
+\index{method!object}
+\index{method!class}
+\index{overloading}
+
+If you have object methods and class methods in the same class, it is
+easy to get confused.  A common way to organize a class definition is
+to put all the constructors at the beginning, followed by all the
+object methods and then all the class methods.
+
+You can have an object method and a class method with the same
+name, as long as they do not have the same number and types of
+parameters.  As with other kinds of overloading, Java decides
+which version to invoke by looking at the arguments you provide.
+\index{static}
+
+Now that we know what the keyword {\tt static} means, you
+have probably figured out that {\tt main} is a class method,
+which means that there is no ``current object'' when it is invoked.
+\index{current object}
+\index{this}
+\index{instance variable}
+\index{variable!instance}
+%
+Since there is no current object in a class method, it is an
+error to use the keyword {\tt this}.  If you try, you get
+an error message like: ``Undefined variable: this.''
+
+Also, you cannot refer to instance variables without using dot
+notation and providing an object name.  If you try, you get a message
+like ``non-static variable... cannot be referenced from a static
+context.''  By ``non-static variable'' it means ``instance variable.''
+
+
 \section{Operations on objects}
 \label{objectops}
 \index{object}
@@ -651,6 +754,37 @@ algorithm.
 %problems by a mechanical process.
 
 
+\section{Cards graphics exercises}
+
+\begin{exercise}
+Working with cards is more interesting if you can display them on the screen.
+If you haven't played with the graphics examples in Appendix~\ref{graphics}, you might want to do that now.
+
+First download
+\url{http://thinkapjava.com/code/CardTable.java}
+and
+\url{http://thinkapjava.com/code/cardset.zip} into the same folder.
+Then unzip {\tt cardset.zip}, which contains a {\tt cardset-oxymoron}
+subfolder with all the card images. (Note the variable \java{cardset}
+in \java{CardTable.main} is the name of this folder.)
+Run \java{CardTable.java} and you
+should see images of a pack of cards laid out on a green table.
+
+You can use this class as a starting place to implement your own
+card games.
+\end{exercise}
+
+% TODO from Leslie Klein:
+% Need more descriptive text on how to modify CardTable.java so that it can find the gif files that are extracted from cardset.zip.
+% If CardTable.java and all the .gif files are in the same package, and I run CardTable, I just get a green table, without the cards.
+% Need text on how to set the variable cardset: the String name of the folder that contains the card images.
+%-----
+% Create a folder under your project called “images”. Put all the .gif files from cardset.zip into this folder.
+% Make the following change in main(String[] args): change value of cardset to the name of the folder containing the images. For example,
+% cardset = "images";
+% Now when main() calls CardTable(cardset), CardTable can find all the gif files.
+
+
 \section{Decks and subdecks}
 \index{deck}
 \index{subdeck}
@@ -754,3 +888,484 @@ Classes define new data types, and each object is an {\bf instance} of that type
 It's like the glove compartment of a car.
 Each car is an instance of the type ``Car,'' and each car has its own glove compartment.
 If you ask me to get something from the glove compartment of your car, you have to tell me which car is yours.
+
+
+
+\section{Command-line testing}
+
+You should review the advice in Section~\ref{sec:examples}, now that you've written some more substantial programs.
+Remember, it's more effective to program and debug your code little by little than to attempt writing everything at once.
+And once you've completed programming an algorithm, it's important to test that it works correctly on a variety of inputs.
+
+Throughout the book, we will illustrate techniques for testing your programs.
+Most if not all testing is based on a simple idea: does the program do what we expect it to do?
+For simple programs, it's not difficult to run them several times and see what happens.
+But at some point, you will get tired of typing the same test cases over and over.
+
+We can automate the process of entering input and comparing {\em expected output} with {\em actual output} using the command line.
+The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
+Here are step by step instructions.
+
+\begin{enumerate}
+
+\item Make sure you can compile and run the {\tt Convert.java} example in the previous section.
+%You can also download a copy from \url{http://thinkjava.org/}.
+
+\item In the same directory as {\tt Convert.java}, create a plain text file named {\tt test.in} (``in'' is for input).
+Enter the following line and save the file.
+
+\begin{stdout}
+193.04
+\end{stdout}
+
+\item Create a second plain text file named {\tt test.exp} (``exp'' is for expected).
+Enter the following line and save the file.
+
+\begin{stdout}
+193.04 cm = 6 ft, 4 in
+\end{stdout}
+
+\item Open a terminal, and change to the directory with these files.
+Run the following command to test the program.
+
+\begin{stdout}
+java Convert < test.in > test.out
+\end{stdout}
+
+\end{enumerate}
+
+\index{redirection operator}
+
+On the command line, {\tt <} and {\tt >} are {\bf redirection operators}.
+The first one redirects the contents of {\tt test.in} to \java{System.in}, as if it were entered from the keyboard.
+The second one redirects the contents of \java{System.out} to a new file {\tt test.out}, much like a screen capture.
+In other words, the {\tt test.out} file contains the output of your program.
+
+% ABD: Since I killed the previous reference to abstraction, I am inclined
+% to kill this one too.  The problem in both places is that it pulls the
+% focus off topic.
+
+%Redirecting a program's input and output is an example of how computer scientists use abstraction.
+%Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
+%In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
+%What's great is that doesn't change anything about how you write the code.
+
+By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command line.
+Knowing both techniques allows you to use the right tool for the job.
+
+At this point, we just need to compare the contents {\tt test.out} with {\tt test.exp}.
+If the files are the same, then the program outputted what we expected it to output.
+If not, then we found a bug, and we can use the output to begin debugging our program.
+Fortunately, there's a simple way to compare files on the command line:
+
+\begin{stdout}
+diff test.exp test.out
+\end{stdout}
+
+The {\tt diff} utility summarizes the differences between two files.
+If there are no differences, then it prints nothing, which in our case is what we want.
+If the expected output differs from the actual output, then we need to continue debugging.
+Usually the program is at fault, and {\tt diff} provides some insight about what is broken.
+But there's also a chance that we have a correct program and the expected output is wrong.
+
+Interpreting the results from {\tt diff} can be confusing, but fortunately there are many graphical tools that show the differences between two files.
+For example, on Windows you can install WinMerge, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}.
+Regardless what tool you use, the goal is the same.
+Debug your program until the actual output is {\it identical} to the expected output.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figs/meld.png}
+\caption{Using {\tt meld} to compare the expected output with the actual output.}
+\end{center}
+\end{figure}
+
+
+
+\section{DrJava interactions}
+
+A good way to gain experience with relational and logical operators is to use the Interactions Pane of DrJava.
+As shown in Figure~\ref{fig:drjava}, you can declare several variables and {\it interactively} test your logic skills.
+Don't forget that you can try out many of the examples in this book this same way.
+
+% TODO: consider making this an exercise
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/drjava-logic.png}
+\caption{Screenshot of the Interactions Pane in DrJava.}
+\label{fig:drjava}
+\end{center}
+\end{figure}
+
+There is one subtle detail to note when using the Interactions feature.
+If you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
+Notice in Figure~\ref{fig:drjava} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
+
+What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
+In addition, you can press the up/down arrows on the keyboard to repeat previous commands and experiment with incremental differences.
+
+\index{order of operations}
+\index{precedence}
+
+Notice how none of the expressions in this example require parentheses.
+Java evaluates arithmetic operators first, then the relational operators, then logical operators, and finally the assignment operator.
+Do a web search for ``java operator precedence'' to see the complete list of rules.
+If two operators have the same precedence, Java evaluates them from left to right.
+
+\section{Local variables}
+
+%TODO: this section is not up to date with previous discussion of this topic
+
+You might wonder how we can use the same variable \java{i} in both \java{printMultiples} and \java{printMultTable}.
+Isn't it true that you can only declare a variable once?
+And doesn't it cause problems when one of the methods changes the value of the variable?
+
+The answer to both questions is ``no,'' because the \java{i} in \java{printMultiples} and the \java{i} in \java{printMultTable} are {\em not the same variable}.
+They have the same name, but they do not refer to the same storage location.
+Changing the value of one variable has no effect on the other.
+Consider the stack diagram at the moment the program begins printing the second row of the table:
+
+\begin{center}
+\vspace{1em}
+\includegraphics{figs/stack4.pdf}
+\vspace{1em}
+\end{center}
+
+%\begin{tabular}{rl}
+%          main & \framebox[3cm][r]{\strut args ~\framebox[1cm]{\strut  }~} \\[1em]
+%printMultTable & \framebox[3cm][r]{\strut    i ~\framebox[1cm]{\strut 2}~} \\[1em]
+%printMultiples & \framebox[3cm][r]{\strut    i ~\framebox[1cm]{\strut 2}~} \\[1em]
+%\end{tabular}
+
+\index{local variable}
+\index{variable!local}
+
+Variables and parameters declared inside a method definition are called {\bf local variables} because they only exist inside the method.
+You cannot access a local variable from outside its method, and you are free to have multiple variables with the same name as long as they are not in the same method.
+
+\index{loop variable}
+\index{variable!loop}
+
+Although it can be confusing, there are good reasons to reuse names.
+For example, it is common to use the names \java{i}, \java{j} and \java{k} as loop variables.
+If you avoid using them in one method just because you used them somewhere else, you make the program harder to read.
+Another reason is when two or more methods are based on the same parameter.
+It's awkward to come up with many different names for the same data.
+
+
+%TODO: make these exercises
+
+Because they make the code more readable, you should use enhanced \java{for} loops whenever possible.
+For example, the following loop finds the maximum value in an array of integers:
+
+\begin{code}
+    int max = Integer.MIN_VALUE;
+    for (int value : numbers) {
+        if (value > max) {
+            max = value;
+        }
+    }
+\end{code}
+
+But notice that the enhanced \java{for} loop does not give you the index the value.
+If you need to find the index of the maximum value, you have to use a standard \java{for} loop.
+
+\begin{code}
+    int index = -1;
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            index = i;
+            max = numbers[i];
+        }
+    }
+\end{code}
+
+
+
+
+\begin{exercise}
+One not-very-efficient way to sort the elements of an array is to find the largest element and swap it with the first element, then find the second-largest element and swap it with the second, and so on.
+This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/Selection_sort}).
+
+\begin{enumerate}
+
+\item Write a method called \java{indexOfMaxInRange} that takes an array of integers, finds the largest element in the given range, and returns its {\em index}.
+%You can modify your recursive version of \java{maxInRange} or you can write an iterative version from scratch.
+
+\item Write a method called \java{swapElement} that takes an array of integers and two indexes, and that swaps the elements at the given indexes.
+
+\item Write a method called \java{selectionSort} that takes an array of integers and that uses \java{indexOfMaxInRange} and \java{swapElement} to sort the array from largest to smallest.
+
+\end{enumerate}
+
+% TODO: Should we cut this, since we do selection sort later? 
+%  call back to this exercise when we sort cards
+\end{exercise}
+
+
+
+\begin{exercise}
+
+A friend shows you the following method and claims that if the value of \java{number} is any two-digit number, the program will output the number backwards.
+For example if \java{number} is 17, the code should output {\tt 71}.
+
+\begin{code}
+    Scanner in = new Scanner(System.in);
+    int number = in.nextInt();
+
+    int lastDigit = number % 10;
+    int firstDigit = number / 10;
+
+    System.out.println(lastDigit + firstDigit);
+\end{code}
+
+Explain what the program actually does, and modify it so that it does the right thing.
+You can assume the input will be a two-digit positive integer.
+
+\end{exercise}
+
+
+\begin{exercise}
+
+What is the output of the following program?
+Describe in a sentence what \java{mystery} does (not how it works).
+
+\begin{code}
+public class Mystery {
+
+    public static String mystery(String s) {
+        String total = "";
+        int i = s.length() - 1;
+
+        while (i >= 0) {
+            char ch = s.charAt(i);
+            System.out.println(i + "     " + ch);
+
+            total = total + ch;
+            i--;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(mystery("Think Java"));
+    }
+
+}
+\end{code}
+
+\end{exercise}
+
+
+
+\section{Looping and counting}
+\label{loopcount}
+
+\index{loop!counting}
+\index{traverse!counting}
+
+Other string traversals involve looping and counting.
+The following method counts the number of times a given character appears in a string.
+For example, \java{numberOf("banana", 'a')} returns 3.
+
+\begin{code}
+    public static int numberOf(String s, char c) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                count++;
+            }
+        }
+        return count;
+    }
+\end{code}
+
+\index{counter}
+
+This method demonstrates a common idiom, called a {\bf counter}.
+The variable \java{count} is initialized to zero and then incremented each time we find an \java{'a'}.
+When we exit the loop, \java{count} contains the result: the total number of a's.
+
+
+
+\section{Bounds checking}
+\label{StringIndexOutOfBounds}
+
+\index{runtime error}
+\index{error!runtime}
+\index{exception}
+
+If you call the \java{charAt} method with an index that is either negative or greater than \java{length - 1}, you will get an exception, specifically a \java{StringIndexOutOfBounds} exception.
+%The same is true when calling \java{substring} with invalid start or end indexes.
+
+For example, notice the error in the \java{getLastLetter} method below.
+It should be looking at \java{index - 1} instead of \java{index}.
+
+\begin{code}
+public class BadString {
+    public static void main(String[] args) {
+        processWord("banana");
+    }
+
+    public static void processWord(String s) {
+        char c = getLastLetter(s);
+        System.out.println(c);
+    }
+
+    public static char getLastLetter(String s) {
+        int index = s.length();
+        char c = s.charAt(index);  // WRONG!
+        return c;
+    }
+}
+\end{code}
+
+When you run the \java{BadString} program, Java prints the following message.
+
+\begin{small}
+\begin{stdout}
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException:
+String index out of range: 6
+    at java.lang.String.charAt(String.java:658)
+    at BadString.getLastLetter(BadString.java:14)
+    at BadString.processWord(BadString.java:8)
+    at BadString.main(BadString.java:4)
+\end{stdout}
+\end{small}
+
+\index{stack trace}
+
+% TODO: we should define stack trace earlier
+
+This information is called a {\bf stack trace}, which shows the methods that were running when the error occurred.
+The stack trace can be difficult to read, but it contains a lot of useful information.
+For one, it tells you that the index 6 was out of range.
+
+More importantly, it shows the line of code where the error occurred.
+It may be helpful to read the stack trace bottom-up.
+On line~4, \java{main} called \java{processWord}, which on line~8 called \java{getLastLetter}, which on line~14 called \java{charAt}.
+The actual error occurred on line 658 of String.java, which is in the source code for the \java{String} class itself.
+
+Although possible, it's unlikely that the Java library code has mistakes that cause programs to crash.
+When reading stack diagrams, look for the top line that refers to a file you wrote.
+In this example, \java{BadString.java:14} is the most useful debugging information.
+
+
+
+\label{immutable}
+
+\index{toUpperCase}
+\index{toLowerCase}
+\index{immutable}
+
+As you read the documentation of the \java{String} methods, you might notice \java{toUpperCase} and \java{toLowerCase}.
+These methods are often a source of confusion, because it sounds like they have the effect of changing (or mutating) an existing string.
+But neither these methods nor any others can change a string, because strings are {\bf immutable}.
+
+When you invoke \java{toUpperCase} on a string object, you get a new string object as a return value.
+For example:
+
+\begin{code}
+    String name = "Alan Turing";
+    String upperName = name.toUpperCase();
+\end{code}
+
+\index{Turing, Alan}
+
+After the second line runs, \java{upperName} contains the value \java{"ALAN TURING"}.
+But \java{name} still contains \java{"Alan Turing"} as before.
+
+
+\section{Character arithmetic}
+\index{arithmetic!character}
+
+Like the \java{compareTo} method, you too can do arithmetic with characters.
+For example, if \java{letter} refers to a lower-case letter, \java{letter - 'a'} yields its position in the alphabet (keeping in mind that 'a' is the zeroeth letter of the alphabet and 'z' is the 25th).
+
+Performing arithmetic on characters is rarely necessary in programs, but it helps demonstrate how text is represented in Java.
+For example, we often need to convert between characters that contain numbers, like \java{'0'} and \java{'1'}, and their corresponding integers.
+A common mistake beginning programmers make is to cast a \java{char} to an \java{int}:
+
+\begin{code}
+    char letter = '3';
+    int x = (int) letter;
+    System.out.println(x);
+\end{code}
+
+You might expect the value to be 3, but instead you get 51, which is the Unicode value for the character \java{'3'}.
+%Remember, not all languages in the world use Arabic numerals like English does.
+To convert \java{'3'} to the corresponding integer value, you could subtract \java{'0'}:
+
+\begin{code}
+    int x = (int) (letter - '0');
+\end{code}
+
+But it is better to use the \java{digit} method in the \java{Character} class instead.
+For example, this code converts \java{letter} to the corresponding digit, interpreting it as a base 10 number.
+
+\begin{code}
+    int x = Character.digit(letter, 10);
+\end{code}
+
+\java{Character} is a built-in class that provides methods for working with characters.
+
+Another use for character arithmetic is to loop through the letters of the alphabet in order.
+For example, in Robert McCloskey's book {\em Make Way for Ducklings}, the names of the ducklings form an Abecedarian series: Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack.
+Here is a loop that prints these names in order:
+
+\begin{code}
+    char letter = 'J';
+    while (letter <= 'Q') {
+        System.out.println(letter + "ack");
+        letter++;
+    }
+\end{code}
+
+Notice that in addition to the arithmetic operators, we can also use the logical operators on characters.
+The output of this program is:
+
+\begin{stdout}
+Jack
+Kack
+Lack
+Mack
+Nack
+Oack
+Pack
+Qack
+\end{stdout}
+
+Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack''.
+As an exercise, you can modify the program to correct this error.
+
+
+
+\begin{exercise}
+
+ROT13 is a {\em shift cipher} that works by taking each letter in a string and adding 13 to it.
+For example, \java{'a'} becomes \java{'n'} and \java{'b'} becomes \java{'o'}.
+The letters wrap around at the end, so \java{'z'} becomes \java{'m'}.
+
+\begin{enumerate}
+
+\item Write a method that takes a string and returns a new string containing the ROT13 encoded version.
+You should assume that the string contains upper and lower case letters and spaces, but no other characters.
+Lower case letters should be transformed into other lower-case letters, and uppercase into uppercase.
+You should not transform the spaces.
+
+\item Generalize the method so that instead of adding 13 to each letter, it adds any given amount.
+Now you should be able to encode things by adding 13 and decode them by adding -13.
+
+\item Use your method to decrypt the string \java{"Jnl gb Tb"}.
+
+\item Figure out how to decrypt \java{"Tjp adbpmzy do jpo"}.
+It wasn't created by adding 13 to each letter.
+Write a loop to try other possible values.
+
+\end{enumerate}
+
+\end{exercise}
+
+
