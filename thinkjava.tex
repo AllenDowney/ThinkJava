@@ -1793,7 +1793,7 @@ If it's not obvious by looking at the expression, use parentheses to make it cle
 
 \index{composition}
 
-So far we have looked at the elements of a programming language --- variables, expressions, and statements --- in isolation, without talking about how to put them together.
+So far we have looked at the elements of a programming language -- variables, expressions, and statements -- in isolation, without talking about how to put them together.
 
 One of the most useful features of programming languages is their ability to take small building blocks and {\bf compose} them.
 For example, we know how to multiply numbers and we know how to print.
@@ -2407,7 +2407,7 @@ It is tempting to write:
     inch = cm / centPerInch;  // syntax error
 \end{code}
 
-But the result is an error --- you get something like, ``Bad types in assignment: from double to int.''
+But the result is an error -- you get something like, ``Bad types in assignment: from double to int.''
 The problem is that the value on the right is floating-point, and the variable on the left is an integer.
 
 %Java converts an \java{int} to a \java{double} automatically, since no information is lost in the process.
@@ -2834,7 +2834,7 @@ The third line finds the sine of the value of \java{angle}.
 \index{degrees}
 \index{radians}
 
-Arguments of the trigonometric functions --- \java{sin}, \java{cos}, and \java{tan} --- should be in {\em radians}.
+Arguments of the trigonometric functions -- \java{sin}, \java{cos}, and \java{tan} -- should be in {\em radians}.
 To convert from degrees to radians, you can divide by 180 and multiply by $\pi$.
 Conveniently, the \java{Math} class provides a \java{final double} named \java{PI} that contains an approximation of $\pi$:
 
@@ -4275,32 +4275,28 @@ Hint: You may want to use \java{Math.pow}.
 
 \begin{exercise}
 
-%TODO(ABD): Do we really have to sanitize this song?  If so, can we add
-% a subversive note to the students encouraging them to think about
-% how they are being pandered to?
-
 The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods.
-Consider the first verse of the song ``99 Bottles of Pop'':
+Consider the first verse of the song ``99 Bottles of Beer'':
 
 \begin{quote}
-99 bottles of pop on the wall,\\
-99 bottles of pop,\\
-If one of those bottles should happen to fall,\\
-98 bottles of pop on the wall.
+99 bottles of beer on the wall,\\
+99 bottles of beer,\\
+ya' take one down, ya' pass it around,\\
+98 bottles of beer on the wall.
 \end{quote}
 
 Subsequent verses are identical except that the number of bottles gets smaller by one in each verse, until the last verse:
 
 \begin{quote}
-1 bottle of pop on the wall,\\
-1 bottle of pop,\\
-If that last bottle should happen to fall,\\
-No more bottles of pop on the wall.
+No bottles of beer on the wall,\\
+no bottles of beer,\\
+ya' can't take one down, ya' can't pass it around,\\
+'cause there are no more bottles of beer on the wall!
 \end{quote}
 
 And then the song (finally) ends.
 
-Write a program that prints the entire lyrics of ``99 Bottles of Pop''.
+Write a program that prints the entire lyrics of ``99 Bottles of Beer''.
 Your program should include a recursive method that does the hard part, but you might want to write additional methods to separate other parts of the program.
 As you develop your code, test it with a small number of verses, like \java{3}.
 
