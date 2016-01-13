@@ -257,7 +257,7 @@ Here are some of the ideas that make the book the way it is:
 
 \begin{itemize}
 
-\item Vocabulary is important.  
+\item Vocabulary is important.
 We try to introduce the minimum number of terms and define them carefully
 when they are first used.
 We also organize them in glossaries at the end of each chapter.
@@ -4701,7 +4701,7 @@ Java looks for a method named \java{area} that takes one \java{double} as an arg
 If you write:
 
 \begin{code}
-    double x = area(1.0, 2.0, 4.0, 6.0);
+    double y = area(1.0, 2.0, 4.0, 6.0);
 \end{code}
 
 Java uses the second version of \java{area}, which interprets the arguments as two points.
@@ -4760,14 +4760,14 @@ The second line sets \java{bigFlag} to \java{true}, because 17 is {\em not} a si
 Conditional statements often invoke \java{boolean} methods and use the result as the condition:
 
 \begin{code}
-    if (isSingleDigit(x)) {
-        System.out.println("x is small");
+    if (isSingleDigit(z)) {
+        System.out.println("z is small");
     } else {
-        System.out.println("x is big");
+        System.out.println("z is big");
     }
 \end{code}
 
-Examples like this one almost read like English: ``If is single digit x, print ... else print ...''
+Examples like this one almost read like English: ``If is single digit z, print ... else print ...''
 
 
 \section{More recursion}
@@ -6354,7 +6354,7 @@ The return type is \java{int[]}, which means that this method returns a referenc
 
 \begin{code}
     public static int[] randomArray(int size) {
-	Random random = new Random();
+    Random random = new Random();
         int[] a = new int[size];
         for (int i = 0; i < a.length; i++) {
             a[i] = random.nextInt(100);
@@ -6823,7 +6823,7 @@ So this loop prints the letters of the alphabet:
 \index{Unicode}
 
 Java uses {\bf Unicode} to represent characters, so strings can store text in other alphabets like Cyrillic and Greek, and non-alphabetic languages like Chinese.
-You can read more about it at \url{http://unicode.org/}. 
+You can read more about it at \url{http://unicode.org/}.
 
 In Unicode, each character is represented by a ``code unit'', which you can think of as an integer.
 The code units for uppercase Greek letters run from 913 to 937, so we can print the Greek alphabet like this:
@@ -9807,7 +9807,7 @@ This technique is sometimes called {\bf pseudocode}.
 
 The nice thing about pseudocode is that it often makes clear what methods you are going to need.
 In this case, we need a method that chooses a random integer between \java{low} and \java{high}, and a method that takes two indexes and switches the cards at those positions.
-Methods like these are called {\bf helper methods}, because they help you implement more complex algorithms. 
+Methods like these are called {\bf helper methods}, because they help you implement more complex algorithms.
 
 \index{helper method}
 \index{program development}
@@ -10192,11 +10192,11 @@ We'll see the details soon, but we'll start with \java{CardCollection}:
 Here's the beginning of a \java{CardCollection} class that uses an \java{ArrayList}:
 
 \begin{code}
-public class CardCollection {    
+public class CardCollection {
 
     private ArrayList<Card> cards;
     private String label;
-    
+
     public CardCollection(String label) {
         this.label = label;
         this.cards = new ArrayList<Card>();
@@ -10293,7 +10293,7 @@ And \java{last}, which gets the last card (but doesn't remove it):
 
 \begin{code}
     public Card last() {
-        int i = size() - 1;        
+        int i = size() - 1;
         return cards.get(i);
     }
 \end{code}
@@ -10333,7 +10333,7 @@ Here is the complete definition of \java{Deck}:
 
 \begin{code}
 public class Deck extends CardCollection {
-    
+
     public Deck(String label) {
         super(label);
 
@@ -10351,8 +10351,8 @@ Another way to say the same thing is that \java{Deck} {\em inherits from} \java{
 
 We would also say that \java{CardCollection} is a {\bf superclass}, and \java{Deck} is one of its {\bf subclasses}.
 
-% NOTE: Let's stick with ``superclass'' and ``subclass'' and 
-% not use ``parent'' and ``child:.
+% NOTE: Let's stick with ``superclass'' and ``subclass'' and
+% not use ``parent'' and ``child''.
 
 The only method in \java{Deck}, at least for now, is a constructor.
 This constructor replaces, or {\bf overrides}, the constructor from \java{CardCollection}.
@@ -10422,7 +10422,7 @@ Here's a simple example that deals 5 cards to a hand, and deals the rest into a 
 Here's the output of this example:
 
 \begin{stdout}
-Hand: 
+Hand:
 5 of Diamonds
 Ace of Hearts
 6 of Clubs
@@ -10476,10 +10476,10 @@ Here's the beginning of the \java{Player} definition:
 
 \begin{code}
 public class Player {
-    
+
     private String name;
     private Hand hand;
-    
+
     public Player(String name) {
         this.name = name;
         this.hand = new Hand(name);
@@ -10636,14 +10636,14 @@ Here's the constructor that initializes the instance variables and deals the car
     public Eights() {
         Deck deck = new Deck("Deck");
         deck.shuffle();
-        
+
         int handSize = 5;
         one = new Player("Allen");
         deck.deal(one.getHand(), handSize);
 
         two = new Player("Chris");
         deck.deal(two.getHand(), handSize);
-        
+
         discardPile = new Hand("Discards");
         deck.deal(discardPile, 1);
 
@@ -10730,8 +10730,8 @@ Using these pieces, we can write \java{takeTurn}, which executes one player's tu
     public void takeTurn(Player player) {
         Card prev = discardPile.last();
         Card next = player.play(this, prev);
-        discardPile.addCard(next);    
-       
+        discardPile.addCard(next);
+
         System.out.println(player.getName() + " plays " + next);
         System.out.println();
     }
@@ -10753,7 +10753,7 @@ Finally, we use \java{takeTurn} and the other methods to write \java{playGame}:
             takeTurn(player);
             player = nextPlayer(player);
         }
-        
+
         // display the final score
         one.displayScore();
         two.displayScore();
@@ -10782,7 +10782,7 @@ Inheritance is also known as a {\bf IS-A} relationship, as in ``A Hand IS-A Card
 This vocabulary provides a concise way to talk about an object-oriented design.
 There is also a standard way to represented these relationships graphically, called a {\bf UML class diagram}.
 UML stands for ``Unified Modeling Language''.
-Class diagrams are one of many graphical representations defined in UML. 
+Class diagrams are one of many graphical representations defined in UML.
 
 The UML representation of a class is a box with the name of the class inside, and sometimes a list of its public attributes and methods.
 Relationships between classes are represented by arrows: composition arrows have a standard arrow head; inheritance arrows have a hollow triangle head (and usually point up).
