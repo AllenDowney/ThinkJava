@@ -4377,8 +4377,9 @@ Hint: use two methods, and make one of them recursive.
 \index{value method}
 \index{void method}
 
-Some of the methods we have used, like the \java{Math} methods, return values, but the methods we have written are all void; that is, they don't return values.
-In this chapter we'll write methods that return values, which we call {\bf value methods}.
+Some of the methods we have used, like the \java{Math} methods, return values.
+But all the methods we have {\em written} so far have been \java{void}; that is, they don't return values.
+In this chapter, we'll write methods that return values, which we call {\bf value methods}.
 
 
 \section{Return values}
@@ -4386,7 +4387,7 @@ In this chapter we'll write methods that return values, which we call {\bf value
 \index{void}
 
 When you invoke a \java{void} method, the invocation is usually on a line all by itself.
-For example, here's the \java{countdown} method from Section~\ref{recursion}:
+For example, here's the \java{countup} method from Section~\ref{recursion}:
 
 \begin{code}
     public static void countup(int n) {
@@ -4406,8 +4407,7 @@ And here's how it is invoked:
     System.out.println("Have a nice day.");
 \end{code}
 
-On the other hand, when you invoke a value method, you have to do something with the return value -- usually assigning it to a variable or using it as
-part of an expression -- like this: 
+On the other hand, when you invoke a value method, you have to do something with the return value -- usually assigning it to a variable or using it as part of an expression -- like this:
 
 \begin{code}
     double error = Math.abs(expected - actual);
@@ -4456,6 +4456,8 @@ The expression you provide can be arbitrarily complex, so we could have written 
 
 On the other hand, {\bf temporary} variables like \java{area} often make debugging easier, especially when you are stepping through code using a debugger.
 
+%TODO first use of debugger? (or will we have already referred them to the appendix?)
+
 The type of the expression in the \java{return} statement must match the return type of the method.
 When you declare that the return type is \java{double}, you are making a promise that this method will eventually produce a \java{double} value.
 If you try to \java{return} with no expression, or an expression with the wrong type, the compiler will generate an error.
@@ -4477,7 +4479,7 @@ As soon as either of them executes, the method terminates without executing any 
 
 \index{dead code}
 
-Code that appears after a \java{return} statement, or any place else where it can never be executed, is called {\bf dead code}.
+Code that appears after a \java{return} statement (in the same block), or any place else where it can never be executed, is called {\bf dead code}.
 The compiler will give you an ``unreachable statement'' error if part of your code is dead.
 For example, this method contains dead code:
 
@@ -4556,9 +4558,9 @@ The stub includes the method signature and a \java{return} statement:
 \end{code}
 
 The return statement is a placeholder that is necessary for the program to compile.
-At this stage the program doesn't do anything useful, but it is worthwhile to compile it so we can find any syntax errors before we add more code.
+At this stage the program doesn't do anything useful, but it is good to compile it so we can find any syntax errors before we add more code.
 
-%It's always a good idea to think about testing {\it before} you develop new methods; it can help you figure out how to implement them.
+It's usually a good idea to think about testing {\it before} you develop new methods; doing so can help you figure out how to implement them.
 To test the method, we can invoke it from \java{main} using sample values:
 
 \begin{code}
@@ -4639,9 +4641,6 @@ Let's say the center point is stored in the variables \java{xc} and \java{yc}, a
 The first step is to find the radius of the circle, which is the distance between the two points.
 Fortunately, we have a method that does just that (\java{distance}).
 
-% ABD: I am inclined to uncomment these code snippets before showing
-% the complete function
-
 \begin{code}
     double radius = distance(xc, yc, xp, yp);
 \end{code}
@@ -4675,12 +4674,11 @@ The temporary variables \java{radius} and \java{area} are useful for development
 \end{code}
 
 This example demonstrates a process called {\bf functional decomposition}; that is, breaking a complex computation into simple methods, testing the methods in isolation, and then composing the methods to perform the computation.
-This process reduces debugging time and yields code that is more likely to be correct.
+This process reduces debugging time and yields code that is more likely to be correct and easier to maintain.
 
 %Computer scientists deal with the complexity of large programs by breaking down computations into simple methods (which in turn may call other methods).
 %Data is passed around the program via method parameters and return statements.
 %By using incremental development, scaffolding, and testing, you can be confident that your code is correct.
-
 
 
 \section{Overloading}
@@ -4753,7 +4751,7 @@ It is common to give \java{boolean} methods names that sound like yes/no questio
 Since the return type is \java{boolean}, the return statement has to provide a boolean expression.
 
 The code itself is straightforward, although it is longer than it needs to be.
-Remember that the expression \java{x >= 0 \&\& x < 10} has type boolean, so there is nothing wrong with returning it directly (without the \java{if} statement):
+Remember that the expression \java{x >= 0 \&\& x < 10} has type \java{boolean}, so there is nothing wrong with returning it directly (without the \java{if} statement):
 
 \begin{code}
     public static boolean isSingleDigit(int x) {
@@ -4781,7 +4779,7 @@ Conditional statements often invoke \java{boolean} methods and use the result as
     }
 \end{code}
 
-Examples like this almost read like English: ``If is single digit x, print ... else print ...''
+Examples like this one almost read like English: ``If is single digit x, print ... else print ...''
 
 
 \section{More recursion}
@@ -4863,7 +4861,7 @@ Otherwise, and this is the interesting part, we have to make a recursive call to
     }
 \end{code}
 
-The flow of execution for this program is similar to \java{countdown} from Section~5.8.
+The flow of execution for this program is similar to \java{countdown} from Section~\ref{recursion}.
 If we invoke \java{factorial} with the value 3:
 
 \vspace{-1ex}
@@ -4890,7 +4888,7 @@ The return value (2) gets multiplied by \java{n}, which is 3, and the result, 6,
 
 Figure~\ref{fig:stack3} shows what the stack diagram looks like for this sequence of method invocations.
 The return values are shown being passed back up the stack.
-Notice that \java{recurse} and \java{result} do not exist in the last frame, because when \java{n == 0} the code that creates them does not execute.
+Notice that \java{recurse} and \java{result} do not exist in the last frame, because when \java{n == 0} the code that declares them does not execute.
 
 \begin{figure}[!h]
 \begin{center}
@@ -4918,7 +4916,7 @@ You should apply the same reasoning to your own methods.
 For example, in Section~\ref{boolean} we wrote a method called \java{isSingleDigit} that determines whether a number is between 0 and 9.
 Once we convince ourselves that this method is correct -- by testing and examination of the code -- we can use the method without ever looking at the implementation again.
 
-The same is true of recursive programs.
+The same is true of recursive methods.
 When you get to the recursive call, instead of following the flow of execution you should {\em assume} that the recursive invocation works.
 For example, ``Assuming that I can find the factorial of $n-1$, can I compute the factorial of $n$?''
 Yes you can, by multiplying by $n$.
@@ -4953,14 +4951,16 @@ Translated into Java, this function is:
 \end{code}
 
 If you try to follow the flow of execution here, even for small values of \java{n}, your head will explode.
-But if we take a leap of faith and assume that the two recursive invocations work correctly, it is clear that their sum is the correct result.
+But if we take a leap of faith and assume that the two recursive invocations work correctly, it is clear that their sum is the result.
 
 
 \section{Testing with JUnit}
 \label{JUnit}
 
+\index{unit test}
+
 So far we have been testing methods by invoking them from \java{main} and checking the results by hand.
-For cases where we know the right answer, we can do better by writing {\bf automated tests}.
+For cases where we know the right answer, we can do better by writing {\bf unit tests}.
 For example, to test \java{fibonacci}, we could write:
 
 \begin{code}
@@ -4972,19 +4972,19 @@ For example, to test \java{fibonacci}, we could write:
             System.err.println("fibonacci(2) is incorrect");
         }
         if (fibonacci(3) != 2) {
-            System.err.println("fibonacci(2) is incorrect");
+            System.err.println("fibonacci(3) is incorrect");
         }
     }
 \end{code}
 
-Writing code like this can get repetitive, but there are tools to make it easier.
+Writing code like this example can get repetitive, but there are tools to make it easier.
 JUnit is the most common testing tool for Java programs (see \url{http://junit.org/}).
 To use it, you have to create a test class that contains test methods.
 If the name of the class is \java{Class}, the name of the test class is \java{ClassTest}.
 And if there is a method in \java{Class} named \java{method}, there should be a method in \java{TestClass} named \java{testMethod}.
 
 For example, suppose that the \java{fibonacci} method in the previous section belongs to a class named \java{Series}.
-Here is the corresponding test class and test method:
+Here is the corresponding JUnit test class and test method:
 
 \begin{code}
 import junit.framework.TestCase;
@@ -4999,19 +4999,20 @@ public class SeriesTest extends TestCase {
 }
 \end{code}
 
-This example uses some Java language features we have not see yet, like the keyword \java{extends}.
-We'll learn more about it later, but for now it indicates that the new class, \java{SeriesTest} is based on an existing class, \java{TestCase}, which is imported from the package \java{junit.framework}.
+This example uses some Java language features we have not yet seen, like the keyword \java{extends}.
+We'll learn more about that later, but for now it indicates that the new class, \java{SeriesTest} is based on an existing class, \java{TestCase}, which is imported from the package \java{junit.framework}.
 
 Generating test classes and methods can get repetitive, but many development environments do it for you.
-In \mbox{DrJava}, you can select ``New JUnit Test Case'' from the ``File'' menu to generate a test class and test methods.
+In \mbox{DrJava}, you can select ``New JUnit Test Case'' from the ``File'' menu to generate a test class.
 
-\java{assertEquals} is provides by \java{TestCase}.
+\java{assertEquals} is provided by the \java{TestCase} class.
 It takes two arguments and checks whether they are equal.
 If so, it does nothing; otherwise it displays an error message.
 Normally the first argument is the ``expected value'', which we consider correct, and the second argument is the ``actual value'' we want to check.
 If they are not equal, the test fails.
 
 Using \java{assertEquals} is more concise than writing your own \java{if} statements and \java{System.err} messages.
+In addition, they are overloaded to provide advanced features beyond the scope of this chapter.
 
 To run JUnit directly from DrJava, click the {\tt Test} button on the toolbar.
 If all your test methods pass, you will see a green bar in the lower right.
@@ -5068,8 +5069,8 @@ The product of all the integers up to and including a given integer.
 \term{leap of faith}
 A way to read recursive programs by assuming that the recursive call works, rather than following the flow of execution.
 
-\term{functional decomposition}
-A process of expressing a complex computation by writing and composing simple methods.
+\term{unit test}
+Code that exercises a single method of a program, testing for correctness and/or efficiency.
 
 \end{description}
 
@@ -5151,7 +5152,7 @@ Hint: The Math method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
 
-In the last part, you get a chance to write a method that invokes a method you wrote.
+In the last part, you will get to write a method that invokes a method you wrote.
 Whenever you do that, it is a good idea to test the first method carefully before you start working on the second.
 Otherwise, you might find yourself debugging two methods at the same time, which can be difficult.
 
@@ -5186,11 +5187,15 @@ public class Prod {
 \begin{enumerate}
 
 \item Draw a stack diagram showing the state of the program just before the last instance of \java{prod} completes.
-What is the output of this program?
+
+\item What is the output of this program?
+(Try to answer this question on paper first, then run the code to check your answer.)
 
 \item Explain in a few words what \java{prod} does.
+(Explain what the entire code does as a unit, rather than reciting what each line does.)
 
 \item Rewrite \java{prod} without the temporary variables \java{recurse} and \java{result}.
+Hint: you only need one line for the \java{else} branch.
 
 \end{enumerate}
 
@@ -5272,7 +5277,7 @@ You should try it only for small values of $m$ and $n$ (not bigger than 3).
 Write a recursive method called \java{power} that takes a double \java{x} and an integer \java{n} and returns $x^n$.
 
 Hint: a recursive definition of this operation is $x^n = x \cdot x^{n-1}$.
-Also, remember that anything raised to the zeroeth power is 1.
+Also, remember that anything raised to the zeroth power is 1.
 
 Optional challenge: you can make this method more efficient, when \java{n} is even, using $x^n = \left( x^{n/2} \right)^2$.
 
