@@ -6033,8 +6033,9 @@ You should not use \java{factorial} or \java{pow}.
 \index{array}
 \index{type!array}
 
-An {\bf array} is an ordered set of values; the values in the array are
-called {\bf elements}.
+%TODO add a short, motivating example?
+
+An {\bf array} is an ordered set of values, and the values in the array are called {\bf elements}.
 You can make an array of \java{int}s, \java{double}s, or any other type, but all the values in an array must have the same type.
 
 To create an array, you have to declare a variable with an {\bf array type} and then create the array itself.
@@ -6057,7 +6058,7 @@ The first assignment makes \java{count} refer to an array of 4 integers.
 The second makes \java{values} refer to an array of \java{double}, where the number of elements in \java{values} depends on \java{size}.
 You can use any integer expression for the size of an array.
 
-Of course, you can also declare the variable and create the array in a single line:
+Of course, you can also declare the variable and create the array in a single line of code:
 
 \begin{code}
     int[] counts = new int[4];
@@ -6092,7 +6093,7 @@ Notice that the index of the first element is 0, not 1, as you might have expect
 The \java{[]} operator selects elements from an array:
 
 \begin{code}
-    System.out.println("The zeroeth element is " + counts[0])
+    System.out.println("The zeroth element is " + counts[0]);
 \end{code}
 
 You can use the \java{[]} operator anywhere in an expression:
@@ -6131,7 +6132,7 @@ For example:
 
 This \java{while} loop counts from 0 up to 4.
 When \java{i} is 4, the condition fails and the loop terminates.
-So the body of the loop is only executed when \java{i} is 0, 1, 2 or 3.
+So the body of the loop is only executed when \java{i} is 0, 1, 2, and 3.
 
 Each time through the loop we use \java{i} as an index into the array, printing the \java{i}th element.
 This type of array traversal is often written using a \java{for} loop.
@@ -6179,7 +6180,7 @@ If we want to display the elements of the array, we can do it ourselves:
     }
 \end{code}
 
-The output of this method is
+The output of this method is:
 
 \begin{stdout}
 {1, 2, 3, 4}
@@ -6195,7 +6196,7 @@ We can invoke it like this:
     System.out.println(Arrays.toString(a));
 \end{code}
 
-And the output is
+And the output is:
 
 \begin{stdout}
 [1, 2, 3, 4]
@@ -6209,7 +6210,7 @@ As usual, we have import \java{java.utils.Arrays} before we can use it.
 \index{array!copying}
 
 Array variables contain references to arrays.
-When you make an assignment to an array variable, it copies the reference, but it doesn't copy the array.
+When you make an assignment to an array variable, it copies the reference, but it doesn't copy the array itself.
 For example:
 
 \begin{code}
@@ -6224,10 +6225,10 @@ These statements create an array of three \java{double}s and makes two different
 \end{center}
 
 Any changes made through either variable will be seen by the other.
-For example, if we set \java{a[0] = 17.0}, and then print {\tt b[0]}, the result is 17.
+For example, if we set \java{a[0] = 17.0}, and then print {\tt b[0]}, the result is \java{17.0}.
 Because \java{a} and \java{b} are different names for the same thing, they are sometimes called {\bf aliases}.
 
-If you actually want to copy the array, not just a reference, you have to create a new array and copy the elements copy elements from one to the other, like this:
+If you actually want to copy the array, not just a reference, you have to create a new array and copy the elements from one to the other, like this:
 
 \begin{code}
     double[] b = new double[3];
@@ -6236,8 +6237,7 @@ If you actually want to copy the array, not just a reference, you have to create
     }
 \end{code}
 
-Another option is to use \java{java.utils.Arrays}, which provides a method,
-\java{copyOf}, that copies an array.
+Another option is to use \java{java.utils.Arrays}, which provides a method, \java{copyOf}, that copies an array.
 You can invoke it like this:
 
 \begin{code}
@@ -6254,7 +6254,7 @@ The second parameter is the number of elements you want to copy, so you can use 
 
 The code in the previous section only works if the length of the array is 3.
 It would be better to generalize it to work with arrays of any size.
-We can do that by replacing the magic number, 3, with the expression \java{a.length}:
+We can do that by replacing the magic number, \java{3}, with \java{a.length}:
 
 \begin{code}
     double[] b = new double[a.length];
@@ -6263,12 +6263,13 @@ We can do that by replacing the magic number, 3, with the expression \java{a.len
     }
 \end{code}
 
-\java{a.length} looks like a method invocation, but there are no parentheses and no arguments.
-\java{length} is actually an {\bf attribute} of the array, not a method.
-We will learn more about attributes in Section~\ref{attribute}.
+All arrays have a built-in constant, \java{length}, that stores the number of elements.
+The expression \java{a.length} looks like a method invocation, but there are no parentheses and no arguments.
+%\java{length} is actually an {\bf attribute} of the array, not a method.
+%We will learn more about attributes in Section~\ref{attribute}.
 
 The last time this loop gets executed, \java{i} is \java{a.length - 1}, which is the index of the last element.
-When \java{i} is equal to \java{a.length}, the condition fails and the body is not executed, which is a good thing, because it would throw an exception.
+When \java{i} is equal to \java{a.length}, the condition fails and the body is not executed -- which is a good thing, because trying to access \java{a[a.length]} would throw an exception.
 
 You can also use \java{a.length} with \java{Arrays.copyOf}:
 
@@ -6281,6 +6282,7 @@ You can also use \java{a.length} with \java{Arrays.copyOf}:
 \label{traversal}
 
 \index{traversal}
+
 Many computations can be implemented by looping through the elements of an array and performing an operation on each element.
 For example, the following loop squares the elements of a \java{double} array:
 
@@ -6290,7 +6292,7 @@ For example, the following loop squares the elements of a \java{double} array:
     }
 \end{code}
 
-Looping through the elements of an array is sometimes called a {\bf traversal}.
+Looping through the elements of an array is called a {\bf traversal}.
 Another common pattern is a {\bf search}, which involves traversing an array looking for a particular element.
 For example, the following method takes an \java{int} array and an integer value and returns the index where the value appears:
 
@@ -6343,24 +6345,27 @@ Usually determinism is a good thing, since we expect the same calculation to yie
 But for some applications we want the computer to be unpredictable.
 Games are an obvious example, but there are others.
 
+%Technically speaking, all computer programs are deterministic: they simply execute the source code.
+
 \index{nondeterministic}
 
-Making a program nondeterministic turns out to be hard, because it's hard for a computer to generate truly random numbers.
+Making a program {\bf nondeterministic} turns out to be hard, because it's hard for a computer to generate truly random numbers.
 But there are algorithms that generate unpredictable sequences called {\bf pseudorandom} numbers.
 For most applications, they are as good as random.
+
+%Nondeterminism is a theoretical concept for analyzing the complexity of algorithms.
 
 \index{Random}
 \index{nextInt!Random}
 
 If you did Exercise~\ref{guess}, you have already seen \java{java.util.Random}, which generates pseudorandom numbers.
-The method \java{nextInt} takes an integer argument, \java{n}, and
-returns a random integer between \java{0} and \java{n-1}.
+The method \java{nextInt} takes an integer argument, \java{n}, and returns a random integer between \java{0} and \java{n - 1} (inclusive).
 
 If you generate a long series of random numbers, every value should appear, at least approximately, the same number of times.
 One way to test \java{nextInt} is to generate a large number of values, store them in an array, and count the number of times each value occurs.
 
 The following method creates an \java{int} array and fills it with random numbers.
-The argument is the size of the array.
+You specify the size of the array in the argument.
 The return type is \java{int[]}, which means that this method returns a reference to an \java{int} array.
 
 \begin{code}
@@ -6403,7 +6408,7 @@ For exam scores, we might have ten counters to keep track of how many students s
 %\index{bottom-up}
 
 %The next few sections develop the code to generate a histogram.
-%A good approach to solving problems like this one is to think of simple %methods that are easy to write and then combine them into a solution.
+%A good approach to solving problems like this one is to think of simple methods that are easy to write and then combine them into a solution.
 %This process is called {\bf bottom-up} development.
 %It is not always obvious where to start, but a good approach is to look for subproblems that fit a pattern you have seen before.
 
@@ -6411,7 +6416,7 @@ For exam scores, we might have ten counters to keep track of how many students s
 %\index{array!traverse}
 %\index{looping and counting}
 
-%In Section~\ref{loopcount}, we saw a loop that traversed a string and counted %the number of times a given letter appeared.
+%In Section~\ref{loopcount}, we saw a loop that traversed a string and counted the number of times a given letter appeared.
 %You can think of this program as an example of a pattern called ``traverse and count''.
 %The elements of this pattern are:
 
@@ -6441,7 +6446,6 @@ public static int inRange(int[] a, int low, int high) {
 \end{code}
 
 This pattern should look familiar; it is a form of the reduce operation.
-
 Notice that \java{low} is included in the range (\java{>=}), but \java{high} is excluded (\java{<}).
 This detail keeps us from counting any scores twice.
 
@@ -6485,14 +6489,14 @@ Then it stores the results in the array:
     }
 \end{code}
 
-Notice that we are using the loop variable twice: as in index into the array, and as the parameter to \java{inRange}.
+Notice that we are using the loop variable three times: as an index into the array, and in two arguments for \java{inRange}.
 
 
 \section{A single-pass solution}
 \label{singlepass}
 
 The previous code works, but it is not as efficient as it could be.
-Every time it invokes \java{inRange}, it traverses the entire array.
+Every time the loop invokes \java{inRange}, it traverses the entire array.
 
 It would be better to make a single pass through the array, and for each score, compute which range it falls in, and increment the corresponding counter.
 The following loop traverses an array of scores once and generates a histogram.
@@ -6506,14 +6510,14 @@ The following loop traverses an array of scores once and generates a histogram.
 \end{code}
 
 Each time through the loop, it selects one element from \java{scores} and uses it as an index to increment the corresponding element of \java{counts}.
-Because it only traverses the array of scores once, it is much faster.
+Because this code only traverses the array of scores once, it is much faster.
 
 
 \section{The enhanced for loop}
 \label{enhanced}
 
 Since traversing arrays is so common, Java provides an alternative syntax that makes the code more compact.
-For example, we could rewrite this loop
+For example, consider a for loop that prints the elements of an array.
 
 \begin{code}
     for (int i = 0; i < values.length; i++) {
@@ -6521,7 +6525,7 @@ For example, we could rewrite this loop
     }
 \end{code}
 
-Like this:
+We could rewrite the loop like this:
 
 \begin{code}
     for (int value : values) {
@@ -6529,11 +6533,11 @@ Like this:
     }
 \end{code}
 
-This statement is called an {\bf enhanced} for loop.
+This statement is called an {\bf enhanced for loop}.
 You can read it as, ``for each \java{value} in \java{values}''.
 It's common to use a plural nouns for array variables and singular nouns for element variables.
 
-Using the enhanced \java{for} loop, and removing the temporary variable, we can write the histogram code from the previous section more concisely:
+Using the enhanced for loop, and removing the temporary variable, we can write the histogram code from the previous section more concisely:
 
 \begin{code}
     int[] counts = new int[100];
@@ -6542,8 +6546,8 @@ Using the enhanced \java{for} loop, and removing the temporary variable, we can 
     }
 \end{code}
 
-Enhanced for loops often make code more readable.
-
+Enhanced for loops often make code more readable, especially for accumulating values.
+But they are not helpful when you need to refer to the index, as in search operations.
 
 
 \section{Vocabulary}
@@ -6567,25 +6571,23 @@ In a state diagram, a reference appears as an arrow.
 \term{aliases}
 References that refer to the same value.
 
-\item{traversal}
+\term{traversal}
 Looping through the elements of an array.
 
-\item{search}
+\term{search}
 A traversal pattern used to find a particular element of an array.
 
-\item{reduce}
+\term{reduce}
 A traversal pattern that combines the elements of an array into a single value.
 
-\item{accumulator}
+\term{accumulator}
 A variable used to accumulate results during a traversal.
 
 \term{deterministic}
 A program that does the same thing every time it is invoked.
-%Technically speaking, all computer programs are deterministic: they simply execute the source code.
 
 \term{nondeterministic}
 A program that behaves differently, even when run multiple times with the same input.
-%Nondeterminism is a theoretical concept for analyzing the complexity of algorithms.
 
 \term{pseudorandom}
 A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.
@@ -6618,10 +6620,9 @@ Generalize it to take the number of counters as an argument.
 \end{exercise}
 
 
-
 \begin{exercise}
 The purpose of this exercise is to practice reading code and recognizing the traversal patterns in this chapter.
-The following methods are hard to read because instead of using meaningful names for the variables and methods, it uses names of fruit.
+The following methods are hard to read, because instead of using meaningful names for the variables and methods, it uses names of fruit.
 
 \begin{code}
     public static int banana(int[] a) {
@@ -6658,7 +6659,7 @@ The following methods are hard to read because instead of using meaningful names
     }
 \end{code}
 
-For each method, write one sentence that describes abstractly what the method does.
+For each method, write one sentence that describes in general what the method does.
 For each variable, identify the role it plays.
 
 \end{exercise}
@@ -6713,13 +6714,11 @@ Can you write this method using an enhanced for loop?  Why not?
 \end{exercise}
 
 
-
 \begin{exercise}
-The Sieve of Eratosthanes is `` a simple, ancient algorithm for finding all prime numbers up to any given limit,'' which you can read about at \url{https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes}.
+The Sieve of Eratosthanes is ``a simple, ancient algorithm for finding all prime numbers up to any given limit,'' which you can read about at \url{https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes}.
 
-Write a method called \java{sieve} that takes a parameter, \java{n}, and returns a \java{boolean} array that indicates, for each number from \java{0} to \java{n-1}, whether the number is prime.
+Write a method called \java{sieve} that takes an integer parameter, \java{n}, and returns a \java{boolean} array that indicates, for each number from \java{0} to \java{n - 1}, whether the number is prime.
 \end{exercise}
-
 
 
 \begin{exercise}
@@ -6762,13 +6761,13 @@ Write a method called \java{max} that takes an array and uses \java{maxInRange} 
 
 \begin{exercise}
 
-In Section~\ref{traversal} we wrote a method called \java{search} that searches an array and returns the index of a given value, or -1 if the value is not in the array.
+In Section~\ref{traversal} we wrote a method called \java{search} that traverses an array and returns the index of a given value, or -1 if the value is not found in the array.
 
 If the elements of the array are sorted, we can make this method more efficient using a ``binary search''.
 You can read about it at \url{https://en.wikipedia.org/wiki/Binary_search_algorithm}.
 
-Write method called \java{binarySearch} that implements this algorithm.
-Hint: you might find this easier to write recursively.
+Write a method called \java{binarySearch} that implements this algorithm.
+Hint: you might find it easier to write this method recursively.
 
 \end{exercise}
 
