@@ -29,7 +29,7 @@ Checkstyle configuration for Think Java, 6th edition.
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
         <module name="StringLiteralEquality"/>
-        <module name="RequireThis"/>
+        <!-- <module name="RequireThis"/> -->
         <module name="DeclarationOrder"/>
         <module name="ParameterAssignment"/>
         <module name="FallThrough"/>
@@ -46,8 +46,8 @@ Checkstyle configuration for Think Java, 6th edition.
 
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocType">
-           <property name="authorFormat" value="\S"/>
-           <property name="versionFormat" value="\S"/>
+           <!-- <property name="authorFormat" value="\S"/> -->
+           <!-- <property name="versionFormat" value="\S"/> -->
         </module>
         <module name="JavadocMethod">
            <property name="allowMissingParamTags" value="true"/>
