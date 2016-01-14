@@ -8,7 +8,7 @@ public class Variables {
         String message;
 
         int x;
-        
+
         String firstName;
         String lastName;
         int hour, minute;
@@ -57,9 +57,7 @@ public class Variables {
         System.out.print("Fraction of the hour that has passed: ");
         System.out.println(minute3 / 60.0);
 
-
         double y = 1.0 / 3.0;  // correct
-
 
         System.out.println(0.1 * 10);
         System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
@@ -79,7 +77,7 @@ public class Variables {
 
         int percentage;
         percentage = (minute * 100) / 60;
-        
+
         hour = minute + 1;  // correct
         // minute + 1 = hour;    syntax error
     }

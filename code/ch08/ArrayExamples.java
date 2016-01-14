@@ -36,7 +36,7 @@ public class ArrayExamples {
 
         // printing an array as an object
         System.out.println(array);
-    
+
         // printing with Arrays class
         System.out.println(Arrays.toString(array));
 
@@ -46,7 +46,7 @@ public class ArrayExamples {
         for (int i = 0; i < a.length; i++) {
             b[i] = a[i];
         }
-        
+
         // copying with Arrays class
         double[] c = Arrays.copyOf(a, a.length);
 
@@ -65,7 +65,7 @@ public class ArrayExamples {
 
         makeHistogram();
     }
-    
+
     /**
      * Example code related to histograms.
      */
@@ -73,7 +73,7 @@ public class ArrayExamples {
         int numValues = 8;
         int[] array = randomArray(numValues);
         printArray(array);
-  
+
         int[] scores = randomArray(30);
         int a = inRange(scores, 90, 100);
         int b = inRange(scores, 80, 90);
@@ -87,14 +87,14 @@ public class ArrayExamples {
             int index = scores[i];
             counts[index]++;
         }
-        
+
         // histogram with enhanced for loop
         counts = new int[100];
         for (int score : scores) {
             counts[score]++;
         }
     }
-    
+
     /**
      * Prints the elements of an array.
      */

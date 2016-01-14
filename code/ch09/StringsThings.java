@@ -21,7 +21,7 @@ public class StringsThings {
             System.out.print(c);
         }
         System.out.println();
-        
+
         System.out.print("Greek alphabet: ");
         for (int i = 913; i <= 937; i++) {
             System.out.print((char) i);
@@ -29,7 +29,7 @@ public class StringsThings {
         System.out.println();
 
         String fruit = "banana";
-                
+
         for (int i = 0; i < fruit.length(); i++) {
             char letter = fruit.charAt(i);
             System.out.println(letter);
@@ -39,8 +39,8 @@ public class StringsThings {
         String name2 = "Ada Lovelace";
         if (name1.equals(name2)) {
             System.out.println("The names are the same.");
-        }    
-        
+        }
+
         int diff = name1.compareTo(name2);
         if (diff == 0) {
             System.out.println("The names are the same.");

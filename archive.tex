@@ -158,48 +158,48 @@ Since line 8 was deleted, the compiler reported the last line of the file.
 
 \section{Type conversion}
 
-%The difference is when the conversion from integer to string actually takes place.
+The difference is when the conversion from integer to string actually takes place.
 
-%Fortunately, this situation only happens when using the plus operator.
-%You cannot, for example, store an integer directly in a string variable.
-%
-%\begin{code}
-%     String number = 5;  // syntax error
-%\end{code}
+Fortunately, this situation only happens when using the plus operator.
+You cannot, for example, store an integer directly in a string variable.
 
-%In general, it's better not to compose multiple additions of varying data types.
-%Instead you can break those statements into multiple lines, or use another method like \java{printf} to achieve the same results.
+\begin{code}
+     String number = 5;  // syntax error
+\end{code}
+
+In general, it's better not to compose multiple additions of varying data types.
+Instead you can break those statements into multiple lines, or use another method like \java{printf} to achieve the same results.
 
 % TODO: add the following subsection before/after operators for strings?
 % ABD: maybe not: we have an exercise about this
 
-%\index{type!conversion}
-%\index{typecasting}
+\index{type!conversion}
+\index{typecasting}
 
-%You might wonder how you can get away with an expression like \java{
-%"The log of x is " + result}, since one of the operands is a \java{String}
-%and the other is a \java{double}.  In this case Java is being
-%smart on our behalf, automatically converting the \java{double} to a
-%\java{String} before it does the string concatenation.
+You might wonder how you can get away with an expression like \java{
+"The log of x is " + result}, since one of the operands is a \java{String}
+and the other is a \java{double}.  In this case Java is being
+smart on our behalf, automatically converting the \java{double} to a
+\java{String} before it does the string concatenation.
 
-%This kind of feature is an example of a common problem in designing a
-%programming language, which is that there is a conflict between {\em
-%formalism}, which is the requirement that formal languages should have
-%simple rules with few exceptions, and {\em convenience}, which is the
-%requirement that programming languages be easy to use in practice.
+This kind of feature is an example of a common problem in designing a
+programming language, which is that there is a conflict between {\em
+formalism}, which is the requirement that formal languages should have
+simple rules with few exceptions, and {\em convenience}, which is the
+requirement that programming languages be easy to use in practice.
 
-%More often than not, convenience wins, which is usually good for
-%expert programmers (who are spared from rigorous but unwieldy
-%formalism), but bad for beginning programmers, who are often baffled
-%by the complexity of the rules and the number of exceptions.  In this
-%book I have tried to simplify things by emphasizing the rules and
-%omitting many of the exceptions.
+More often than not, convenience wins, which is usually good for
+expert programmers (who are spared from rigorous but unwieldy
+formalism), but bad for beginning programmers, who are often baffled
+by the complexity of the rules and the number of exceptions.  In this
+book I have tried to simplify things by emphasizing the rules and
+omitting many of the exceptions.
 
-%Whenever you try to ``add'' two
-%expressions, if one of them is a \java{String}, Java converts the
-%other to a \java{String} and then performs string concatenation.
-%What do you think happens if you perform an operation between
-%an integer and a floating-point value?
+Whenever you try to ``add'' two
+expressions, if one of them is a \java{String}, Java converts the
+other to a \java{String} and then performs string concatenation.
+What do you think happens if you perform an operation between
+an integer and a floating-point value?
 
 
 \section{Increment and decrement}
@@ -827,7 +827,6 @@ Here is a {\bf class diagram} for the simplified \java{Point} class above:
 
 The diagram is divided into two sections: the attributes (or variables) of the class, and the methods of the class.
 
-
 \index{instance variable}
 \index{variable!instance}
 
@@ -909,8 +908,6 @@ If you need to find the index of the maximum value, you have to use a standard \
 \end{code}
 
 
-
-
 \begin{exercise}
 One not-very-efficient way to sort the elements of an array is to find the largest element and swap it with the first element, then find the second-largest element and swap it with the second, and so on.
 This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/Selection_sort}).
@@ -931,7 +928,7 @@ This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/S
 \end{exercise}
 
 
-
+%TODO add this exercise to the modulus chapter?
 \begin{exercise}
 
 A friend shows you the following method and claims that if the value of \java{number} is any two-digit number, the program will output the number backwards.
@@ -951,6 +948,35 @@ Explain what the program actually does, and modify it so that it does the right 
 You can assume the input will be a two-digit positive integer.
 
 \end{exercise}
+
+
+\section{Looping and counting}
+\label{loopcount}
+
+\index{loop!counting}
+\index{traverse!counting}
+
+Other string traversals involve looping and counting.
+The following method counts the number of times a given character appears in a string.
+For example, \java{numberOf("banana", 'a')} returns 3.
+
+\begin{code}
+    public static int numberOf(String s, char c) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                count++;
+            }
+        }
+        return count;
+    }
+\end{code}
+
+\index{counter}
+
+This method demonstrates a common idiom, called a {\bf counter}.
+The variable \java{count} is initialized to zero and then incremented each time we find an \java{'a'}.
+When we exit the loop, \java{count} contains the result: the total number of a's.
 
 
 \begin{exercise}
@@ -983,36 +1009,6 @@ public class Mystery {
 \end{code}
 
 \end{exercise}
-
-
-
-\section{Looping and counting}
-\label{loopcount}
-
-\index{loop!counting}
-\index{traverse!counting}
-
-Other string traversals involve looping and counting.
-The following method counts the number of times a given character appears in a string.
-For example, \java{numberOf("banana", 'a')} returns 3.
-
-\begin{code}
-    public static int numberOf(String s, char c) {
-        int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == c) {
-                count++;
-            }
-        }
-        return count;
-    }
-\end{code}
-
-\index{counter}
-
-This method demonstrates a common idiom, called a {\bf counter}.
-The variable \java{count} is initialized to zero and then incremented each time we find an \java{'a'}.
-When we exit the loop, \java{count} contains the result: the total number of a's.
 
 
 \section{Bounds checking}
@@ -1076,8 +1072,6 @@ The actual error occurred on line 658 of String.java, which is in the source cod
 Although possible, it's unlikely that the Java library code has mistakes that cause programs to crash.
 When reading stack diagrams, look for the top line that refers to a file you wrote.
 In this example, \java{BadString.java:14} is the most useful debugging information.
-
-
 
 \label{immutable}
 
@@ -1166,7 +1160,6 @@ Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack''.
 As an exercise, you can modify the program to correct this error.
 
 
-
 \begin{exercise}
 
 ROT13 is a {\em shift cipher} that works by taking each letter in a string and adding 13 to it.
@@ -1192,3 +1185,84 @@ Write a loop to try other possible values.
 \end{enumerate}
 
 \end{exercise}
+
+\section{The compareTo method}
+% ABD: It's hard to motivate compareTo in chapter 11. Let's postpone until Cards.
+
+\index{pure function}
+\index{method!pure function}
+
+, and it has no side effects like modifying an argument or printing something.
+The only result of invoking a pure method is the return value.
+
+In contrast to instance methods, \java{static} methods do not refer to a specific object.
+The result of a \java{static} method depends only on the arguments.
+For example, \java{isAfter} compares two \java{Time}s and returns a \java{boolean} that indicates whether the first operand comes after the second:
+
+\begin{code}
+    public static boolean isAfter(Time time1, Time time2) {
+        if (time1.hour < time2.hour) return false;
+        if (time1.hour > time2.hour) return true;
+
+        if (time1.minute < time2.minute) return false;
+        if (time1.minute > time2.minute) return true;
+
+        if (time1.second < time2.second) return false;
+        return true;
+    }
+\end{code}
+
+What is the result of this method if the two times are equal?
+Does that seem like the appropriate result for this method?
+If you were writing the documentation for this method, would you mention that case specifically?
+
+A better solution would be to define a \java{compareTo} method.
+We have already seen how to compare two strings in this way: \java{time1.compareTo(time2)}.
+
+\begin{code}
+    public int compareTo(Time t2) {
+        if (this.hour < t2.hour) return -1;
+        if (this.hour > t2.hour) return +1;
+
+        if (this.minute < t2.minute) return -1;
+        if (this.minute > t2.minute) return +1;
+
+        if (this.second < t2.second) return -1;
+        if (this.second > t2.second) return +1;
+
+        return 0;
+    }
+\end{code}
+
+If \java{this} time comes before the other time, then compareTo returns \java{-1}.
+It returns \java{+1} when \java{this} time comes after the other time.
+If both times are the same (in the \java{equals} sense), \java{compareTo} returns \java{0}.
+
+
+\section{Object equals instanceof}
+
+% ABD: I believe this equals method is sufficient.  If someone passes
+% another object type, they'll get the default behavior, which will
+% return false.  So let's avoid introducing Object here.
+
+So in order to override the default \java{equals} method, you need to write it this way:
+
+\begin{code}
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Time)) {
+            return false;
+        }
+        Time t2 = (Time) obj;
+        return this.hour == t2.hour
+            && this.minute == t2.minute
+            && this.second == t2.second;
+    }
+\end{code}
+
+Because the parameter is declared as an \java{Object}, one could in theory pass any type of data (like a \java{String} or \java{Scanner}) to this method.
+The \java{instanceof} operator tests whether \java{obj} references an actual \java{Time} object.
+If it passes the test, we can safely cast \java{obj} to a \java{Time} reference and perform the equality test as before.
+
+Of course, the \java{equals} method may be arbitrarily complex.
+You could design it, for example, to allow \java{Time} and \java{String} objects to be equal if they represent the same time.
+However that design would likely confuse other programmers, since normally objects are only considered equal if they are of the same type.

@@ -1,9 +1,8 @@
 /**
  * Test code for Deck and Hand.
- * 
  */
 public class Test {
-    
+
     /**
      * Test code.
      */

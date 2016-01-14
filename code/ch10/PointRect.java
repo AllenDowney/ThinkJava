@@ -50,10 +50,10 @@ public class PointRect {
         Rectangle box = new Rectangle(0, 0, 100, 200);
         moveRect(box, 50, 100);
         System.out.println(box);
-        
+
         Rectangle box1 = new Rectangle(0, 0, 100, 200);
         Rectangle box2 = box1;
-        
+
         System.out.println(box2.width);
         box1.grow(50, 50);
         System.out.println(box2.width);

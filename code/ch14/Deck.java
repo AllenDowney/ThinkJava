@@ -1,9 +1,8 @@
 /**
  * A deck of playing cards.
- * 
  */
 public class Deck extends CardCollection {
-    
+
     /**
      * Constructs a standard deck of 52 cards.
      */

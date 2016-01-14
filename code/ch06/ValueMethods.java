@@ -14,8 +14,7 @@ public class ValueMethods {
         return area;
     }
 
-
-    public static double area(double radius) {
+    public static double area2(double radius) {
         return Math.PI * radius * radius;
     }
 
@@ -36,7 +35,7 @@ public class ValueMethods {
         return 0.0;
     }
 
-    public static double distance
+    public static double distance2
             (double x1, double y1, double x2, double y2) {
         double dx = x2 - x1;
         double dy = y2 - y1;
@@ -45,7 +44,7 @@ public class ValueMethods {
         return 0.0;
     }
 
-    public static double distance
+    public static double distance3
             (double x1, double y1, double x2, double y2) {
         double dx = x2 - x1;
         double dy = y2 - y1;
@@ -62,7 +61,7 @@ public class ValueMethods {
     }
 
     public static double area
-            (double x1, double y1, double x2, double y2) {
+            (double xc, double yc, double xp, double yp) {
         return area(distance(xc, yc, xp, yp));
     }
 
@@ -73,7 +72,7 @@ public class ValueMethods {
             return false;
         }
     }
-    public static boolean isSingleDigit(int x) {
+    public static boolean isSingleDigit2(int x) {
         return x >= 0 && x < 10;
     }
 
@@ -97,16 +96,17 @@ public class ValueMethods {
         countup(3);
         System.out.println("Have a nice day.");
 
-    double x = area(3.0);
-    double x = area(1.0, 2.0, 4.0, 6.0);
+        double x = area(3.0);
+        double y = area(1.0, 2.0, 4.0, 6.0);
 
-    System.out.println(isSingleDigit(2));
-    boolean bigFlag = !isSingleDigit(17);
-    if (isSingleDigit(x)) {
-        System.out.println("x is small");
-    } else {
-        System.out.println("x is big");
-    }
+        System.out.println(isSingleDigit(2));
+        boolean bigFlag = !isSingleDigit(17);
 
+        int z = 17;
+        if (isSingleDigit(z)) {
+            System.out.println("z is small");
+        } else {
+            System.out.println("z is big");
+        }
     }
 }
