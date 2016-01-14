@@ -8045,7 +8045,7 @@ How high can you make it go?
 
 
 \begin{exercise}
-Many encryption techniques depend on the ability to raise large integers to an integer power.
+Many encryption algorithms depend on the ability to raise large integers to an integer power.
 Here is a method that implements an efficient algorithm for integer exponentiation:
 
 \begin{code}
@@ -9671,9 +9671,27 @@ Your solution should only traverse the array once.
 
 \end{exercise}
 
+\begin{exercise}
+%TODO: update this exercise
 
-% TODO: we could use another exercise.  Maybe this is a good time for
-% graphics.  See \section{Cards graphics exercises} in archive.tex.
+Working with cards is more interesting if you can display them on the screen.
+Download the following files into the same folder:
+
+\begin{itemize}
+
+\item \url{http://thinkapjava.com/code/CardTable.java}
+
+\item \url{http://thinkapjava.com/code/cardset.zip}
+
+\end{itemize}
+
+Unzip {\tt cardset.zip}, which contains a {\tt cardset-oxymoron} folder with all the card images.
+(Note the variable \java{cardset} in \java{CardTable.main} is the name of this folder.)
+Run \java{CardTable.java} and you should see images of a deck of cards laid out on a green table.
+You can use this class as a starting place to implement your own card games.
+
+\end{exercise}
+
 
 
 \chapter{Objects of Arrays}
@@ -10172,7 +10190,7 @@ An \java{ArrayList} is a {\bf collection}, which is an object that contains othe
 The Java library provides a variety of collections.
 For our purposes, \java{ArrayList} is a good choice because it provides methods to add and remove elements, and it grows and shrinks automatically.
 
-To solve the second problem, we can use a technique called {\bf inheritance}.
+To solve the second problem, we can use a language feature called {\bf inheritance}.
 We'll define a new class, \java{CardCollection}, to represent a collection of cards.
 Then we'll define \java{Deck} and \java{Hand} as subclasses of \java{CardCollection}.
 
@@ -10274,7 +10292,7 @@ The second parameter, \java{n}, is the number of cards to deal.
 To access the elements of an \java{ArrayList}, you can't use the \java{[]} operator.
 Instead, you have to use the methods \java{get} and \java{set}.
 
-We will provide a wrapper for \java{get}:
+We provide a wrapper for \java{get}:
 
 \begin{code}
     public Card getCard(int i) {
@@ -10449,7 +10467,7 @@ So why is this example legal?
 It's because \java{Hand} is a subclass of \java{CardCollection}, so a \java{Hand} object is also considered to be a \java{CardCollection} object.
 If a method expects a \java{CardCollection}, you can give it a \java{Hand}, a \java{Deck}, or a \java{CardCollection}.
 
-But it doesn't work the other way around: not every \java{CardCollection} is a \java{Hand}, so if a method expects a \java{Hand}, you have to give it a \java{Hand} (not a \java{Deck}).
+But it doesn't work the other way around: not every \java{CardCollection} is a \java{Hand}, so if a method expects a \java{Hand}, you have to give it a \java{Hand}, not a \java{CardCollection}.
 
 If it seems strange that an object can belong to more than one type, remember that this happens in real life, too.
 Every cat is also a mammal, and every mammal is also an animal.
@@ -10659,17 +10677,22 @@ When the draw pile is empty, we have to shuffle the discard pile:
 
 %TODO this code doesn't match Eights.java (review the whole chapter?)
 
+% ABD: I've update the code here to match what's in the file.
+% This was a late bug fix.  The rest of the chapter should be ok.
+% (famous last words)
+
 \begin{code}
     public void reshuffle() {
-        discardPile.deal(drawPile);
+        Card prev = discardPile.popCard();
+        discardPile.dealAll(drawPile);
+        discardPile.addCard(prev);
         drawPile.shuffle();
-        drawPile.deal(discardPile, 1);
     }
 \end{code}
 
-The first line deals all card from \java{discardPile} into \java{drawPile}.
-The next line shuffles.
-Then we draw a card from the new draw pile, add it to the discard pile, and return it.
+The first line saves the top card from \java{discardPile}.
+The next line transfers the rest of the cards to \java{drawPile}.
+Then we put the saved card back into \java{discardPile} and shuffle \java{drawPile}.
 
 Now we can use \java{reshuffle} as part of \java{draw}:
 
@@ -10759,6 +10782,10 @@ The main difference is the order we used to arrive at this solution.
 
 
 \section{UML diagrams}
+
+% ABD: I would like to call these UML class diagrams to distinguish
+% them from the 3172 other kinds of UML diagrams, and to be consistent
+% with https://en.wikipedia.org/wiki/Class_diagram
 
 This chapter demonstrates two common relationships between classes:
 
@@ -10854,7 +10881,7 @@ Write a new class that extends \java{Player} and overrides \java{play} to implem
 \begin{exercise}
 Write a loop that plays the game 100 times and keeps track of how many times each player wins.
 If you implemented multiple strategies in the previous exercise, you can play them against each other to evaluate which one works best.
-Hint: design a \java{class Genius extends Player} that overrides the \java{play} method, and use the Genius class for one of the players.
+Hint: design a \java{Genius} class that extends \java{Player} and overrides the \java{play} method, and replace one of the players with a \java{Genius} object.
 \end{exercise}
 
 
@@ -10877,27 +10904,6 @@ And while you're at it, you could add a method named \java{scoreCard} to \java{E
 Whether or not you actually make these changes, draw a UML class diagram that shows this alternative object hierarchy.
 \end{exercise}
 
-
-\begin{exercise}
-%TODO: update this exercise (and move to chater 12?)
-
-Working with cards is more interesting if you can display them on the screen.
-Download the following files into the same folder:
-
-\begin{itemize}
-
-\item \url{http://thinkapjava.com/code/CardTable.java}
-
-\item \url{http://thinkapjava.com/code/cardset.zip}
-
-\end{itemize}
-
-Unzip {\tt cardset.zip}, which contains a {\tt cardset-oxymoron} folder with all the card images.
-(Note the variable \java{cardset} in \java{CardTable.main} is the name of this folder.)
-Run \java{CardTable.java} and you should see images of a deck of cards laid out on a green table.
-You can use this class as a starting place to implement your own card games.
-
-\end{exercise}
 
 
 \appendix
