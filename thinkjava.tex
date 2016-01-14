@@ -10910,23 +10910,24 @@ public class Drawing extends Canvas {
 }
 \end{code}
 
-The definition \java{Drawing extends Canvas} means that a \java{Drawing} object is a new kind of \java{Canvas}.
-We will learn more about \java{extends} in Section~\ref{sec:extends}.
-In the \java{main} method, we:
+The \java{Drawing} class extends \java{Canvas}, so it has all the methods provided by \java{Canvas}, including \java{setSize}.
+You can read about the other methods at \url{https://docs.oracle.com/javase/7/docs/api/java/awt/Canvas.html}.
+
+In \java{main} we:
 
 \begin{enumerate}
 
 \index{JFrame}
 \index{class!JFrame}
 
-\item Create a \java{JFrame} object, which is a window that will contain the canvas (and other components like buttons and menus);
+\item Create a \java{JFrame} object, which is the window that will contain the canvas;
 
 \item Create a \java{Drawing} object, set its width and height, and add it to the frame; and
 
 \item Pack the frame (resize it) to fit the canvas, and display it on the screen.
 \end{enumerate}
 
-Once the canvas is visible, the \java{paint} method will be called whenever it needs to be drawn (for example, when the window is moved or resized).
+Once the canvas is visible, the \java{paint} method is called whenever the canvas needs to be drawn; for example, when the window is moved or resized.
 The application doesn't end after the \java{main} method returns; instead, it waits for the \java{JFrame} to close.
 If you run this code, you should see a black circle on a gray background.
 
@@ -10945,18 +10946,21 @@ Coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the
 \includegraphics[width=5in]{figs/coordinates.pdf}
 \end{center}
 
-To draw on the canvas, you invoke methods on the \java{Graphics} object.
-The previous example used \java{fillOval}, which is defined as follows:
+To draw on the canvas, you invoke methods on a \java{Graphics} object.
+You don't have to create the \java{Graphics} object; it gets created when you create the \java{Canvas}, and it gets passed as an argument to \java{paint}.
+
+The previous example used \java{fillOval}, which has the following signature:
 
 \begin{code}
-    public void fillOval(int x, int y, int width, int height)
+public void fillOval(int x, int y, int width, int height)
+Fills an oval bounded by the specified rectangle with the current color.
 \end{code}
 
 \index{bounding box}
 
 The four parameters specify a {\bf bounding box}, which is the rectangle in which the oval is drawn.
-\java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
-(Note the bounding box itself is not drawn.)
+As shown in the following figure, \java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
+The bounding box itself is not drawn.
 
 \begin{center}
 \includegraphics{figs/circle.pdf}
@@ -10970,7 +10974,7 @@ To choose the color of a shape, invoke \java{setColor} on the Graphics object:
     g.setColor(Color.red);
 \end{code}
 
-The \java{setColor} method changes the current color for everything that gets drawn.
+The \java{setColor} method determines the color of everything that gets drawn afterward.
 \java{Color.red} is a constant provided by the {\tt Color} class; to use it you have to \java{import java.awt.Color}.
 Other colors include:
 
@@ -10989,7 +10993,7 @@ For example:
 Each value is an integer in the range 0 (darkest) to 255 (lightest).
 The color \java{(0, 0, 0)} is black, and \java{(255, 255, 255)} is white.
 
-You can set the background color of the \java{Canvas} by invoking \java{setBackground} in the \java{main} method.
+You can set the background color of the \java{Canvas} by invoking \java{setBackground}:
 
 \begin{code}
     canvas.setBackground(Color.white);
@@ -10997,7 +11001,7 @@ You can set the background color of the \java{Canvas} by invoking \java{setBackg
 
 \index{Mickey Mouse}
 
-Let's say we want to draw a picture of Mickey Mouse.
+Suppose we want to draw a ``Hidden Mickey'', which is an icon that represents Mickey Mouse (see \url{https://en.wikipedia.org/wiki/Hidden_Mickey}.
 We can use the oval we just drew as the face, and then add two ears.
 To make the code more readable, let's use \java{Rectangle}s to represent bounding boxes.
 
@@ -11058,6 +11062,10 @@ A common way to specify the coordinates of a rectangular area.
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt app01} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, make sure you can compile and run the code in your environment.
+
 
 \begin{exercise}
 Draw the flag of Japan, a red circle on white background
@@ -11076,41 +11084,32 @@ The result should look like Mickey Moose:
 
 Hint: you should only have to add or modify a few lines of code.
 
-You can download a solution from
-\url{http://thinkapjava.com/code/MickeySoln.java}.
-
 \end{exercise}
 
 
 \begin{exercise}
 \begin{enumerate}
 
-\item Download
-\url{http://thinkapjava.com/code/Moire.java} and import it into
-your development environment.
+\item In the directory {\tt app01} in the repository for this book,
+you'll find a file named {\tt Moire.java}.
+Open it and read the {\tt paint} method.
+Draw a sketch of what you expect it to do.
+Now run it.
+Did you get what you expected?
+For an explanation of what is going on, see \url{http://en.wikipedia.org/wiki/Moire_pattern}.
 
-\item Read the {\tt paint} method and draw a sketch of
-what you expect it to do.  Now run it.  Did you get what you
-expected?  For an explanation of what is going on, see
-\url{http://en.wikipedia.org/wiki/Moire_pattern}.
+\item Modify the program so that the space between the circles is larger or smaller.
+See what happens to the image.
 
-\item Modify the program so that the space between the circles is
-larger or smaller.  See what happens to the image.
-
-\item Modify the program so that the circles are drawn in the center
-of the screen and concentric, as in the following figure (left).
-The distance between the circles should be small enough
-that the Moir\'{e} interference is apparent.
+\item Modify the program so that the circles are drawn in the center of the screen and concentric, as in the following figure (left).
+The distance between the circles should be small enough that the Moir\'{e} interference is apparent.
 
 \includegraphics[height=1.5in]{figs/moire.pdf}
 
-\item Write a method named {\tt radial} that draws a radial set
-of line segments as shown in the figure (right), but they should be close
-enough together to create a Moir\'{e} pattern.
+\item Write a method named {\tt radial} that draws a radial set of line segments as shown in the figure (right), but they should be close enough together to create a Moir\'{e} pattern.
 
-\item Just about any kind of graphical pattern can generate
-Moir\'{e}-like interference patterns.  Play around and see what you
-can create.
+\item Just about any kind of graphical pattern can generate Moir\'{e}-like interference patterns.
+Play around and see what you can create.
 
 \end{enumerate}
 \end{exercise}
