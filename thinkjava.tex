@@ -6760,18 +6760,21 @@ Hint: you might find it easier to write this method recursively.
 \label{strings}
 
 \index{object}
-\index{class!String}
-\index{method!string}
 
 In Java and other object-oriented languages, an {\bf object} is a collection of data that provides a set of methods.
-For example, \java{Scanner}, which we saw in Section~\ref{scanner} is an object that provides methods for parsing strings.
+For example, \java{Scanner}, which we saw in Section~\ref{scanner}, is an object that provides methods for parsing input.
 \java{System.out} and \java{System.in} are also objects.
+
+\index{class!String}
+\index{method!string}
 
 Strings are objects, too.
 They contain characters and provide methods for manipulating character data.
 We explore some of those methods in this chapter.
 
-Not everything in Java is an object: \java{int}, \java{float}, and \java{boolean} are so-called {\bf primitive} types.
+\index{primitive}
+
+Not everything in Java is an object: \java{int}, \java{double}, and \java{boolean} are so-called {\bf primitive} types.
 We will explain some of the differences between object types and primitive types as we go along.
 
 
@@ -6782,7 +6785,7 @@ We will explain some of the differences between object types and primitive types
 \index{type!char}
 
 Strings provide a method named \java{charAt}, which extracts a character.
-It returns a \java{char}, a primitive type that can store individual characters (as opposed to strings of them).
+It returns a \java{char}, a primitive type that stores an individual character (as opposed to strings of them).
 
 \begin{code}
     String fruit = "banana";
@@ -6792,8 +6795,6 @@ It returns a \java{char}, a primitive type that can store individual characters 
 The argument \java{0} means that we want the letter at position 0.
 Like array indices, string indices start at 0, so the character assigned to \java{letter} is \java{b}.
 
-\index{quote}
-\index{double-quote}
 \index{value!char}
 
 Characters work like the other primitive types we have seen.
@@ -6804,6 +6805,10 @@ You can compare them using relational operators:
         System.out.println('?');
     }
 \end{code}
+
+\index{quote}
+\index{single-quote}
+\index{escape sequence}
 
 Character literals, like \java{'a'}, appear in single quotes.
 Unlike string literals, which appear in double quotes, character literals can only contain a single character.
@@ -6878,8 +6883,7 @@ The following loop traverses the characters in \java{fruit} and prints them, one
     }
 \end{code}
 
-Strings provide a method called \java{length} that returns the number of
-characters in the string.
+Strings provide a method called \java{length} that returns the number of characters in the string.
 Because it is a method, you have to invoke it with the empty argument list, \java{()}.
 
 \index{loop variable}
@@ -6888,16 +6892,13 @@ Because it is a method, you have to invoke it with the empty argument list, \jav
 
 The condition is \java{i < fruit.length()}, which means that when \java{i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
 
-% NOTE: apparently the enhanced for loop does NOT work with strings
-
-%The enhanced for loop also works with strings, so we could write the previous example like this:
+%The enhanced for loop does NOT work with strings, so we can't write the previous example like this:
 
 %\begin{code}
-%    for (char letter: fruit) {
+%    for (char letter : fruit) {
 %        System.out.println(letter);
 %    }
 %\end{code}
-
 
 \index{String!length}
 \index{length!String}
@@ -6909,7 +6910,7 @@ To find the last letter of a string, you might be tempted to try something like:
     char last = fruit.charAt(length);      // wrong!
 \end{code}
 
-This code compiles and runs, but it throws a \java{StringIndexOutOfBoundsException}.
+This code compiles and runs, but invoking the \java{charAt} method throws a \java{StringIndexOutOfBoundsException}.
 The problem is that there is no sixth letter in \java{"banana"}.
 Since we started counting at 0, the 6 letters are indexed from 0 to 5.
 To get the last character, you have to subtract 1 from \java{length}.
@@ -6964,12 +6965,12 @@ To visualize how this method works, it helps to draw a picture:
 % it back and add text to explain it.
 
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
+\begin{tabular}{c|c|c|c|c|c}
+%\hline
 b & a & n & a & n & a \\
 \hline
 0 & 1 & 2 & 3 & 4 & 5 \\
-\hline
+%\hline
 \end{tabular}
 \end{center}
 
@@ -6991,7 +6992,7 @@ For example, to select a substring with length \java{len}, starting at index \ja
 \section{The indexOf method}
 \index{indexOf}
 
-The \java{indexOf} method takes a character and finds an index where that character appears.
+The \java{indexOf} method searches for a character in a string.
 
 \begin{code}
     String fruit = "banana";
@@ -7048,7 +7049,7 @@ The right way to compare strings is with the \java{equals} methods, like this:
 \end{code}
 
 This example invokes \java{equals} on \java{name1} and passes \java{name2} as an argument.
-java{equals} returns \java{true} if the strings contain the same characters and \java{false} otherwise.
+The \java{equals} method returns \java{true} if the strings contain the same characters and \java{false} otherwise.
 
 If the strings differ, we can use \java{compareTo} to see which comes first in alphabetical order:
 
@@ -7070,10 +7071,8 @@ Otherwise, the difference is positive.
 
 In the example above, \java{compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
 
-\java{equals} and \java{compareTo} are case-sensitive.
+Both \java{equals} and \java{compareTo} are case-sensitive.
 The uppercase letters come before the lowercase letters, so \java{"Ada"} comes before \java{"ada"}.
-
-
 
 
 \section{Vocabulary}
@@ -7103,33 +7102,34 @@ The string \java{""}, what contains no characters and has a length of zero.
 
 %TODO: find a place to present stack trace, ideally someplace with
 % a non-trivial call stack
+
 %\term{stack trace}
 %An error message that shows the state of a program when an exception occurs.
 
 \term{immutable}
 An object that, once created, cannot be modified.
-Strings are immutable.
+Strings are immutable by design.
 
 \end{description}
 
 
 \section{Exercises}
 
-\index{encapsulation}
-\index{generalization}
-
 
 \begin{exercise}
 
-The purpose of this exercise is to review encapsulation and generalization (see Section~\ref{encapsulation}).
+\index{encapsulation}
+\index{generalization}
 
+The purpose of this exercise is to review encapsulation and generalization (see Section~\ref{encapsulation}).
 The following code fragment traverses a string and counts open and close parentheses:
 
 \begin{code}
     String s = "((3 + 7) * 2)";
     int count = 0;
 
-    for (char c: s) {
+    for (int i = 0; i < s.length(); i++) {
+        char c = s.charAt(i);
         if (c == '(') {
             count++;
         } else if (c == ')') {
@@ -7212,21 +7212,27 @@ Create a program called {\tt Recurse.java} and type in the following methods:
     public static char first(String s) {
         return s.charAt(0);
     }
+\end{code}
 
+\begin{code}
     /**
      * Returns all but the first letter of the given String.
      */
     public static String rest(String s) {
         return s.substring(1);
     }
+\end{code}
 
+\begin{code}
     /**
      * Returns all but the first and last letter of the given String.
      */
     public static String middle(String s) {
         return s.substring(1, s.length() - 1);
     }
+\end{code}
 
+\begin{code}
     /**
      * Returns the length of the given String.
      */
@@ -7240,13 +7246,13 @@ Create a program called {\tt Recurse.java} and type in the following methods:
 \item Write some code in \java{main} that tests each of these methods.
 Make sure they work, and you understand what they do.
 
-\item Using these methods, and without using any other String methods, write a method called \java{printString} that takes a String as a parameter and that prints the letters of the String, one on each line.
-It should be a void method.
+\item Using these methods, and without using any other \java{String} methods, write a method called \java{printString} that takes a string as a parameter and that prints the letters of the string, one on each line.
+It should be a \java{void} method.
 
-\item Again using only these methods, write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the String backward (again, one character per line).
+\item Again using only these methods, write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the string backward (again, one character per line).
 
-\item Now write a method called \java{reverseString} that takes a String as a parameter and that returns a new String as a return value.
-The new String should contain the same letters as the parameter, but in reverse order.
+\item Now write a method called \java{reverseString} that takes a string as a parameter and that returns a new string as a return value.
+The new string should contain the same letters as the parameter, but in reverse order.
 
 \begin{code}
     String backwards = reverseString("coffee");
@@ -7259,11 +7265,14 @@ For example, the output of the above code should be:
 eeffoc
 \end{stdout}
 
+\index{palindrome}
+
 \item A palindrome is a word that reads the same both forward and backward, like ``otto'' and ``palindromeemordnilap''.
 Here's one way to test whether a string is a palindrome:
 
 \begin{quotation}
-``A single letter is a palindrome, and a two-letter word is a palindrome if the letters are the same, and any other word is a palindrome if the first letter is the same as the last and the middle is a palindrome.''
+\noindent
+``A single letter is a palindrome, a two-letter word is a palindrome if the letters are the same, and any other word is a palindrome if the first letter is the same as the last and the middle is a palindrome.''
 \end{quotation}
 
 Write a recursive method named \java{isPalindrome} that takes a \java{String} and returns a \java{boolean} indicating whether the word is a palindrome.
@@ -7275,6 +7284,7 @@ Write a recursive method named \java{isPalindrome} that takes a \java{String} an
 
 \begin{exercise}
 \label{abecedarian}
+\index{abecedarian}
 
 A word is said to be ``abecedarian'' if the letters in the word appear in alphabetical order.
 For example, the following are all 6-letter English abecedarian words.
@@ -7291,7 +7301,6 @@ Your method can be iterative or recursive.
 \end{exercise}
 
 
-
 \begin{exercise}
 Write a method called \java{letterHist} that takes a string as a parameter and returns a histogram of the letters in the string.
 The zeroeth element of the histogram should contain the number of a's in the String (upper and lower case); the 25th element should contain the number of z's.
@@ -7299,9 +7308,12 @@ Your solution should only traverse the string once.
 \end{exercise}
 
 %TODO: check for consistency on String vs string vs \java{String}
+% let's avoid String, use \java{String} for the type, and string for the concept
 
 
 \begin{exercise}
+\index{doubloon}
+
 A word is said to be a ``doubloon'' if every letter that appears in the word appears exactly twice.
 Here are some example doubloons found in the dictionary.
 
@@ -7310,28 +7322,33 @@ Abba, Anna, appall, appearer, appeases, arraigning, beriberi, bilabial, boob, Ca
 \end{quote}
 
 Write a method called \java{isDoubloon} that takes a string and checks whether it is a doubloon.
+To ignore case, invoke the \java{toLowerCase} method before checking.
 \end{exercise}
 
 
 \begin{exercise}
+\index{anagram}
+
 Two words are anagrams if they contain the same letters and the same number of each letter.
 For example, ``stop'' is an anagram of ``pots'' and ``allen downey'' is an anagram of ``well annoyed''.
 
 Write a method that takes two strings and checks whether they are anagrams of each other.
 \end{exercise}
 
-% Note: we provided the copyright notice on Scrabble in a previous exercise
 
 \begin{exercise}
-In Scrabble\footnote{Scrabble is a registered trademark owned in the USA and Canada by Hasbro Inc., and in the rest of the world by J.\ W.\ Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.} each player has a set of tiles with letters on them, and the object of the game is to use those letters to spell words.
-The scoring system is complicated, but longer words are usually worth more than shorter words.
+\index{Scrabble}
+
+In Scrabble\footnote{Scrabble is a registered trademark owned in the USA and Canada by Hasbro Inc., and in the rest of the world by J.\ W.\ Spear \& Sons Limited of Maidenhead, Berkshire, England, a subsidiary of Mattel Inc.} each player has a set of tiles with letters on them.
+The object of the game is to use those letters to spell words.
+The scoring system is complex, but longer words are usually worth more than shorter words.
 
 Imagine you are given your set of tiles as a string, like \java{"quijibo"}, and you are given another string to test, like \java{"jib"}.
 
-Write a method called \java{canSpell} that takes two Strings and checks whether the set of tiles can spell the word.
+Write a method called \java{canSpell} that takes two strings and checks whether the set of tiles can spell the word.
 You might have more than one tile with the same letter, but you can only use each tile once.
-\end{exercise}
 
+\end{exercise}
 
 
 \chapter{Objects}
@@ -8824,10 +8841,15 @@ Hint: remember the modulus operator.
 \end{exercise}
 
 
+%TODO add label and reference between the Scrabble exercises?
+
+% Note: we provided the copyright notice on Scrabble in a previous exercise
+
 \begin{exercise}
+\index{Scrabble}
+
 In the board game Scrabble, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
 
-\index{Scrabble}
 \begin{enumerate}
 
 \item Write a definition for a class named \java{Tile} that represents Scrabble tiles.

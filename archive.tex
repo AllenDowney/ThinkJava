@@ -827,7 +827,6 @@ Here is a {\bf class diagram} for the simplified \java{Point} class above:
 
 The diagram is divided into two sections: the attributes (or variables) of the class, and the methods of the class.
 
-
 \index{instance variable}
 \index{variable!instance}
 
@@ -909,8 +908,6 @@ If you need to find the index of the maximum value, you have to use a standard \
 \end{code}
 
 
-
-
 \begin{exercise}
 One not-very-efficient way to sort the elements of an array is to find the largest element and swap it with the first element, then find the second-largest element and swap it with the second, and so on.
 This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/Selection_sort}).
@@ -931,7 +928,7 @@ This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/S
 \end{exercise}
 
 
-
+%TODO add this exercise to the modulus chapter?
 \begin{exercise}
 
 A friend shows you the following method and claims that if the value of \java{number} is any two-digit number, the program will output the number backwards.
@@ -951,6 +948,35 @@ Explain what the program actually does, and modify it so that it does the right 
 You can assume the input will be a two-digit positive integer.
 
 \end{exercise}
+
+
+\section{Looping and counting}
+\label{loopcount}
+
+\index{loop!counting}
+\index{traverse!counting}
+
+Other string traversals involve looping and counting.
+The following method counts the number of times a given character appears in a string.
+For example, \java{numberOf("banana", 'a')} returns 3.
+
+\begin{code}
+    public static int numberOf(String s, char c) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                count++;
+            }
+        }
+        return count;
+    }
+\end{code}
+
+\index{counter}
+
+This method demonstrates a common idiom, called a {\bf counter}.
+The variable \java{count} is initialized to zero and then incremented each time we find an \java{'a'}.
+When we exit the loop, \java{count} contains the result: the total number of a's.
 
 
 \begin{exercise}
@@ -983,36 +1009,6 @@ public class Mystery {
 \end{code}
 
 \end{exercise}
-
-
-
-\section{Looping and counting}
-\label{loopcount}
-
-\index{loop!counting}
-\index{traverse!counting}
-
-Other string traversals involve looping and counting.
-The following method counts the number of times a given character appears in a string.
-For example, \java{numberOf("banana", 'a')} returns 3.
-
-\begin{code}
-    public static int numberOf(String s, char c) {
-        int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == c) {
-                count++;
-            }
-        }
-        return count;
-    }
-\end{code}
-
-\index{counter}
-
-This method demonstrates a common idiom, called a {\bf counter}.
-The variable \java{count} is initialized to zero and then incremented each time we find an \java{'a'}.
-When we exit the loop, \java{count} contains the result: the total number of a's.
 
 
 \section{Bounds checking}
@@ -1076,8 +1072,6 @@ The actual error occurred on line 658 of String.java, which is in the source cod
 Although possible, it's unlikely that the Java library code has mistakes that cause programs to crash.
 When reading stack diagrams, look for the top line that refers to a file you wrote.
 In this example, \java{BadString.java:14} is the most useful debugging information.
-
-
 
 \label{immutable}
 
@@ -1164,7 +1158,6 @@ Qack
 
 Of course, that's not quite right because it misspelled ``Ouack'' and ``Quack''.
 As an exercise, you can modify the program to correct this error.
-
 
 
 \begin{exercise}
