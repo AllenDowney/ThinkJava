@@ -7075,6 +7075,101 @@ Both \java{equals} and \java{compareTo} are case-sensitive.
 The uppercase letters come before the lowercase letters, so \java{"Ada"} comes before \java{"ada"}.
 
 
+\section{Wrapper classes}
+\label{wrappers}
+
+For each primitive type, there is a corresponding class in the Java library.
+The class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
+These so-called {\bf wrapper classes} also include \java{Boolean}, \java{Long}, and \java{Double}.
+They are in the \java{java.lang} package, so you can use them without importing them.
+
+Each wrapper class defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
+For example, \java{Integer.MIN_VALUE} is \java{-2147483648}, and \java{Integer.MAX_VALUE} is \java{2147483647}.
+Because these constants are available in wrapper classes, you don't have to remember them, and you don't have to include them in your programs.
+
+Wrapper classes provide methods for converting strings to other types.
+For example, \java{Integer.parseInt} converts a string to (you guessed it) an integer:
+
+\begin{code}
+String str = "12345";
+int num = Integer.parseInt(str);
+\end{code}
+
+In this context, {\bf parse} means something like ``read and translate''.
+
+The other wrapper classes provide similar methods, like \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
+They also provide \java{toString}, which returns a string representation of a value:
+
+\begin{code}
+int num = 12345;
+String str = Integer.toString(num);
+\end{code}
+
+The result is the string \java{"12345"}.
+
+
+\section{Command-line arguments}
+
+Now that you know about arrays and strings, we can {\em finally} explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter~\ref{theway}.
+Continuing the example from the previous section, let's write a program to find the largest in a sequence of numbers.
+Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
+Here is a starting point:
+
+\begin{code}
+public class Max {
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(args));
+    }
+}
+\end{code}
+
+If you run this program on the command line like this:
+
+\begin{code}
+java Max
+\end{code}
+
+%TODO: we should explain {\bf empty array} in the array chapter
+
+The output indicates that \java{args} is an empty array; that is, it has no elements:
+
+\begin{stdout}
+[]
+\end{stdout}
+
+But if you provide additional values on the command line, they are passed as arguments to \java{main}.
+For example, if you run it like this:
+
+\begin{stdout}
+java Max 10 -3 55 0 14
+\end{stdout}
+
+The output is:
+
+\begin{stdout}
+[10, -3, 55, 0, 14]
+\end{stdout}
+
+But remember that the elements of \java{args} are strings.
+To find the maximum number, we have to convert the arguments to integers.
+
+The following fragment uses an enhanced \java{for} loop to parse the arguments and find the largest:
+
+\begin{code}
+    int max = Integer.MIN_VALUE;
+    for (String arg : args) {
+        int value = Integer.parseInt(arg);
+        if (value > max) {
+            max = value;
+        }
+    }
+    System.out.println("The max is " + max);
+\end{code}
+
+The initial value of \java{max} is the smallest (most negative) integer possible, so any other value is greater.
+If \java{args} is empty, the result is \java{MIN_VALUE}.
+
+
 \section{Vocabulary}
 
 \begin{description}
@@ -7109,6 +7204,12 @@ The string \java{""}, what contains no characters and has a length of zero.
 \term{immutable}
 An object that, once created, cannot be modified.
 Strings are immutable by design.
+
+\term{wrapper class}
+Classes in \java{java.lang} that provide constants and methods for working with primitive types.
+
+\term{parse}
+To read a string and interpret or translate it.
 
 \end{description}
 
@@ -7712,101 +7813,6 @@ You don't have to do anything to make garbage collection happen, and in general 
 But we thought you might be interested.
 
 
-\section{Wrapper classes}
-\label{wrappers}
-
-For each primitive type, there is a corresponding class in the Java library.
-The class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
-These so-called {\bf wrapper classes} also include \java{Boolean}, \java{Long}, and \java{Double}.
-They are in the \java{java.lang} package, so you can use them without importing them.
-
-Each wrapper class defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
-For example, \java{Integer.MIN_VALUE} is \java{-2147483648}, and \java{Integer.MAX_VALUE} is \java{2147483647}.
-Because these constants are available in wrapper classes, you don't have to remember them, and you don't have to include them in your programs.
-
-Wrapper classes provide methods for converting strings to other types.
-For example, \java{Integer.parseInt} converts a string to (you guessed it) an integer:
-
-\begin{code}
-String str = "12345";
-int num = Integer.parseInt(str);
-\end{code}
-
-In this context, {\bf parse} means something like ``read and translate''.
-
-The other wrapper classes provide similar methods, like \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
-They also provide \java{toString}, which returns a string representation of a value:
-
-\begin{code}
-int num = 12345;
-String str = Integer.toString(num);
-\end{code}
-
-The result is the string \java{"12345"}.
-
-
-\section{Command-line arguments}
-
-Now that you know about arrays and strings, we can {\em finally} explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter~\ref{theway}.
-Continuing the example from the previous section, let's write a program to find the largest in a sequence of numbers.
-Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
-Here is a starting point:
-
-\begin{code}
-public class Max {
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString(args));
-    }
-}
-\end{code}
-
-If you run this program on the command line like this:
-
-\begin{code}
-java Max
-\end{code}
-
-%TODO: we should explain {\bf empty array} in the array chapter
-
-The output indicates that \java{args} is an empty array; that is, it has no elements:
-
-\begin{stdout}
-[]
-\end{stdout}
-
-But if you provide additional values on the command line, they are passed as arguments to \java{main}.
-For example, if you run it like this:
-
-\begin{stdout}
-java Max 10 -3 55 0 14
-\end{stdout}
-
-The output is:
-
-\begin{stdout}
-[10, -3, 55, 0, 14]
-\end{stdout}
-
-But remember that the elements of \java{args} are strings.
-To find the maximum number, we have to convert the arguments to integers.
-
-The following fragment uses an enhanced \java{for} loop to parse the arguments and find the largest:
-
-\begin{code}
-    int max = Integer.MIN_VALUE;
-    for (String arg : args) {
-        int value = Integer.parseInt(arg);
-        if (value > max) {
-            max = value;
-        }
-    }
-    System.out.println("The max is " + max);
-\end{code}
-
-The initial value of \java{max} is the smallest (most negative) integer possible, so any other value is greater.
-If \java{args} is empty, the result is \java{MIN_VALUE}.
-
-
 \section{Vocabulary}
 
 \begin{description}
@@ -7836,12 +7842,6 @@ A programming technique that focuses on objects rather than independent methods.
 
 \term{garbage collection}
 The process of finding objects that have no references and reclaiming their storage space.
-
-\term{wrapper class}
-Classes in \java{java.lang} that provide constants and methods for working with primitive types.
-
-\term{parse}
-To read a string and interpret or translate it.
 
 \end{description}
 
