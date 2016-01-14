@@ -4613,7 +4613,7 @@ Finally, we can use \java{Math.sqrt} to compute and return the result.
             (double x1, double y1, double x2, double y2) {
         double dx = x2 - x1;
         double dy = y2 - y1;
-        double dsquared = dx*dx + dy*dy;
+        double dsquared = dx * dx + dy * dy;
         double result = Math.sqrt(dsquared);
         return result;
     }
@@ -9284,8 +9284,8 @@ We can prevent that possibility by declaring the instance variables \java{final}
 
 \begin{code}
 public class Card {
-    final private int rank;
-    final private int suit;
+    private final int rank;
+    private final int suit;
 
     ...
 }

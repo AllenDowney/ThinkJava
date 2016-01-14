@@ -6,11 +6,11 @@ import java.util.Random;
  */
 public class Deck {
 
-    private Card[] cards;
-
     // This is a class variable so we don't have to create
     // a new Random object every time we call randomInt.
     private static Random random = new Random();
+
+    private Card[] cards;
 
     /**
      * Constructs a standard deck of 52 cards.
@@ -68,8 +68,8 @@ public class Deck {
      * Randomly permutes the array of cards.
      */
     public void shuffle() {
-        for (int i = 0; i < this.cards.length-1; i++) {
-            int j = this.randomInt(i, this.cards.length-1);
+        for (int i = 0; i < this.cards.length - 1; i++) {
+            int j = this.randomInt(i, this.cards.length - 1);
             this.swapCards(i, j);
         }
     }
@@ -188,8 +188,8 @@ public class Deck {
      */
     private void insert(Card card, int i) {
         int j = i;
-        while (j > 0 && card.compareTo(this.cards[j-1]) < 0) {
-            this.cards[j] = this.cards[j-1];
+        while (j > 0 && card.compareTo(this.cards[j - 1]) < 0) {
+            this.cards[j] = this.cards[j - 1];
             j--;
         }
         this.cards[j] = card;

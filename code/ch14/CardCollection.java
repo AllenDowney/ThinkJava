@@ -25,7 +25,7 @@ public class CardCollection {
     }
 
     /**
-     * Returns the number of cards
+     * Returns the number of cards.
      */
     public int size() {
         return cards.size();
@@ -62,7 +62,7 @@ public class CardCollection {
      * Moves n cards from this collection to the given collection.
      */
     public void deal(CardCollection that, int n) {
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             Card card = popCard();
             that.addCard(card);
         }
