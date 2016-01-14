@@ -7167,7 +7167,7 @@ The following fragment uses an enhanced \java{for} loop to parse the arguments a
     System.out.println("The max is " + max);
 \end{code}
 
-The initial value of \java{max} is the smallest (most negative) integer possible, so any other value is greater.
+The initial value of \java{max} is the smallest (most negative) number an \java{int} can represent, so any other value is greater.
 If \java{args} is empty, the result is \java{MIN_VALUE}.
 
 
@@ -7699,8 +7699,12 @@ For example, \java{translate} has the same effect as \java{moveRect}, but instea
 
 This line invokes the \java{translate} method on the object \java{box} refers to.
 
-To foreshadow what's to come in future chapters, this example illustrates {\bf object-oriented programming}.
-Rather than write \java{static} methods that manipulate external data (like \java{moveRect}), we make the methods non-static and bundle them with the objects themselves using dot notation.
+%To foreshadow what's to come in future chapters, this example illustrates {\bf object-oriented programming}.
+%Rather than write \java{static} methods that manipulate external data (like \java{moveRect}), we make the methods non-static and bundle them with the objects themselves using dot notation.
+
+% ABD: this is a use-before-def of ``non-static''.  And I don't think
+% it buys us much to introduce ``object oriented programming'' at this
+% point.
 
 
 \section{Aliasing}
@@ -7839,8 +7843,8 @@ One of the named data items that make up an object.
 %\term{class diagram}
 %An illustration of attributes and methods for a class.
 
-\term{object-oriented programming}
-A programming technique that focuses on objects rather than independent methods.
+%\term{object-oriented programming}
+%A programming technique that focuses on objects rather than independent methods.
 
 \term{garbage collection}
 The process of finding objects that have no references and reclaiming their storage space.
@@ -7982,7 +7986,7 @@ Why not?
 There is no upper bound except the limitations of memory size and processing speed.
 Read the documentation at \url{http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html}.
 
-\item To use BigIntegers, you have to \java{import java.math.BigInteger} at the beginning of your program.
+\item To use BigIntegers, you have to import \java{java.math.BigInteger} at the beginning of your program.
 
 \item There are several ways to create a BigInteger, but the simplest uses \java{valueOf}.
 The following code converts an integer to a BigInteger:
@@ -8071,7 +8075,7 @@ Here are the most important ideas:
 
 \item Every object belongs to some object type; that is, it is an {\bf instance} of some class.
 
-\item A class definition is like a template for objects: it defines what attributes the objects have and what methods can operate on them.
+\item A class definition is like a template for objects: it specifies what attributes the objects have and what methods can operate on them.
 
 \item The methods that operate on a type are defined in the class definition for that type.
 
@@ -8640,7 +8644,7 @@ public class TimeClient {
 }
 \end{code}
 
-If you attempt to compile this code, you will get a message like {\tt hour has private access in Time}.
+If you try to compile this code, you will get a message like {\tt hour has private access in Time}.
 There are three ways to solve this problem:
 
 \begin{itemize}
@@ -9147,7 +9151,7 @@ But \java{card1} and \java{card3} are references to different objects, so \java{
 
 When we compare cards, this is probably not the behavior we want.
 Rather, we want to check whether the cards are equivalent.
-To do that, we can implement an \java{equals} method.
+To do that, we can provide an \java{equals} method.
 
 \index{equivalent}
 
@@ -9259,7 +9263,7 @@ public class Card {
 \end{code}
 
 You can still assign values to these variables inside a constructor.
-But if someone writes a method that attempts to modify these variables, they'll get a compiler error.
+But if someone writes a method that tries to modify these variables, they'll get a compiler error.
 
 
 \section{Arrays of cards}
@@ -9964,7 +9968,7 @@ public Deck mergeSort() {
 As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the ``leap of faith'' (see Section~\ref{leap of faith}).
 This example should encourage you to make the leap of faith.
 
-When you use \java{selectionSort} to sort the subdecks, you don't feel compelled to follow the flow of execution.
+When you used \java{selectionSort} to sort the subdecks, you didn't feel compelled to follow the flow of execution.
 You just assumed it works because you had already debugged it.
 Well, all you did to make \java{mergeSort} recursive was replace one sorting algorithm with another.
 There is no reason to read the program any differently.
@@ -10016,7 +10020,7 @@ It should return a single string that represents the cards in the deck.
 When it's printed, this string should display the same results as the \java{print} method in Section~\ref{deck}.
 
 Hint: You can use the \java{+} operator to concatenate strings, but it is not very efficient.
-Consider using \java{java.util.StringBuilder}, which you can read more about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
+Consider using \java{java.util.StringBuilder}, which you can read about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
 
 \end{exercise}
 
@@ -10932,7 +10936,7 @@ If you run this code, you should see a black circle on a gray background.
 \index{coordinate}
 \index{pixel}
 
-You are probably used to Cartesian {\bf coordinates}, where x and y values can be either positive or negative.
+You are probably used to Cartesian {\bf coordinates}, where x and y values can be positive or negative.
 In contrast, Java uses a coordinate system where the origin is in the upper-left corner.
 That way, x and y are always positive integers.
 Coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
