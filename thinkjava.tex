@@ -327,6 +327,10 @@ This book can be used to prepare for the Computer Science AP Exam in Java.
 We cover almost every topic in their syllabus, with only a few exceptions (like what?)
 
 
+%TODO: Overview of the appendices: what's in them and when should they 
+% be used?
+
+
 \section{Using the code}
 \label{code}
 
@@ -961,23 +965,6 @@ If you are struggling with a difficult bug, you might feel angry, despondent, or
 Remember that you are not alone, and most if not all programmers have had similar experiences.
 Don't hesitate to reach out to a friend and ask questions!
 
-%\index{emotional debugging}
-%\index{debugging!emotional response}
-
-%There is evidence that people naturally respond to computers as if they were people.
-%When they work well, we think of them as teammates, and when they are obstinate or rude, we respond to them the same way we respond to rude, obstinate people.
-%(Reeves and Nass, {\it The Media Equation: How People Treat Computers, Television, and New Media Like Real People and Places})
-
-%Preparing for these reactions might help you deal with them.
-%One approach is to think of the computer as an employee with certain strengths, like speed and precision, and particular weaknesses, like lack of empathy and inability to grasp the big picture.
-
-%Your job is to be a good manager: find ways to take advantage of the strengths and mitigate the weaknesses.
-%And find ways to use your emotions to engage with the problem, without letting your reactions interfere with your ability to work effectively.
-
-%Learning to debug can be frustrating, but it is a valuable skill that is useful for many activities beyond programming.
-%At the end of each chapter there is a debugging section, like this one, with my thoughts about debugging.
-%I hope they help!
-
 
 \section{Vocabulary}
 
@@ -1075,6 +1062,10 @@ At the end of each chapter we include exercises you can do with the things you'v
 We encourage you to at least attempt every problem.
 You can't learn to program by reading alone; you have to practice.
 
+Also, the code examples in each chapter are available in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+The code for this chapter is in the directory {\tt ch01}. 
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 
@@ -1283,6 +1274,10 @@ The problem is that the first line uses \java{println}, when we probably meant t
 
 Identifying logic errors can be hard because you have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
 Usually the compiler and the interpreter can't help you, since they don't know what the right thing is.
+
+Now that you know about the three kinds of errors, you might want to read
+Appendix~\ref{debugappend}, where we've collected some of our favorite debugging advice.
+It refers to some language features we haven't talked about yet, so you might want to re-read it from time to time.
 
 
 \section{Creating variables}
@@ -1963,6 +1958,9 @@ Whitespace characters are used to separate words, but other than that, they don'
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch02} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 If you are using this book in a class, you might enjoy this exercise.
@@ -2708,6 +2706,9 @@ In Java, it is denoted with a percent sign; for example, \java{5 \% 2} is \java{
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch03} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 When you use \java{printf}, the Java compiler does not check your formatting string.
@@ -3486,6 +3487,9 @@ In a stack diagram, a representation of the variables and parameters for a metho
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch04} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 
@@ -4227,6 +4231,9 @@ Also known as ``base 2''.
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch05} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 
@@ -5066,6 +5073,9 @@ Code that exercises a single method of a program, testing for correctness and/or
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch06} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 
@@ -5864,6 +5874,9 @@ Decrease the value of a variable.
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch07} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 \label{infloop}
@@ -6586,6 +6599,9 @@ An alternative syntax for traversing the elements of an array.
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch08} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 The goal of this exercise is to practice encapsulation with some of the examples in this chapter.
@@ -7216,6 +7232,9 @@ To read a string and interpret or translate it.
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch09} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 
@@ -7853,6 +7872,9 @@ The process of finding objects that have no references and reclaiming their stor
 
 \section{Exercises}
 
+The code for this chapter is in the directory {\tt ch10} in the repository for this book.
+Instructions for downloading this code is in Section~\ref{code}.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 \begin{exercise}
 The point of this exercise is to make sure you understand the mechanism for passing objects as parameters.
@@ -8762,7 +8784,7 @@ It is usually \java{void} and modifies \java{this}.
 
 The code for this chapter is in the directory {\tt ch11} in the repository for this book.
 Instructions for downloading this code is in Section~\ref{code}.
-Before you start the exercises, make sure you can compile and run the code in your environment.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 
 \begin{exercise}
@@ -9604,7 +9626,7 @@ An algorithm that searches a sorted array by starting in the middle, comparing a
 
 The code for this chapter is in the directory {\tt ch12} in the repository for this book.
 Instructions for downloading this code is in Section~\ref{code}.
-Before you start the exercises, make sure you can compile and run the code in your environment.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 %TODO: make an exercise of validating the input to Card constructor?
 
@@ -10016,7 +10038,7 @@ A recursive sorting algorithm that divides an array into two parts, sorts each p
 
 The code for this chapter is in the directory {\tt ch13} in the repository for this book.
 Instructions for downloading this code is in Section~\ref{code}.
-Before you start the exercises, make sure you can compile and run the code in your environment.
+Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 
 \begin{exercise}
@@ -10812,7 +10834,7 @@ A way of developing programs by identifying simple pieces, implementing them, an
 
 The code for this chapter is in the directory {\tt ch14} in the repository for this book.
 Instructions for downloading this code is in Section~\ref{code}.
-Before you start the exercises, make sure you can compile and run the code in your enviroment.
+Before you start the exercises, we recommend that you compile and run the code in your enviroment.
 
 \begin{exercise}
 Design a better strategy for the \java{Player.play} method.
@@ -11068,7 +11090,7 @@ A common way to specify the coordinates of a rectangular area.
 
 \section{Exercises}
 
-The code for this chapter is in the directory {\tt app01} in the repository for this book.
+The code for this appendix is in the directory {\tt app01} in the repository for this book.
 Instructions for downloading this code is in Section~\ref{code}.
 Before you start the exercises, make sure you can compile and run the code in your environment.
 
@@ -11122,7 +11144,7 @@ Play around and see what you can create.
 
 
 \chapter{Debugging}
-\label{debug}
+\label{debugappendix}
 \index{debugging}
 
 Although there are debugging suggestions throughout the book, we thought it would be useful to organize them in an appendix.
