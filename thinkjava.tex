@@ -9596,6 +9596,8 @@ The code for this chapter is in the directory {\tt ch12} in the repository for t
 Instructions for downloading this code is in Section~\ref{code}.
 Before you start the exercises, make sure you can compile and run the code in your environment.
 
+%TODO: make an exercise of validating the input to Card constructor?
+
 
 \begin{exercise}
 Encapsulate the deck-building code from Section~\ref{cardarray} in a method called \java{makeDeck} that takes no parameters and returns a fully-populated array of \java{Card}s.
@@ -9643,6 +9645,7 @@ Your solution should only traverse the array once.
 
 \chapter{Objects of Arrays}
 \label{Deck}
+
 \index{array!of Cards}
 
 In the previous chapter we defined a class to represent cards and used an array of \java{Card} objects to represent a deck.
@@ -9705,7 +9708,7 @@ We'll add a second constructor that makes a standard 52-card deck and populates 
 \index{statement!new}
 
 This method is similar to the example in Section~\ref{cardarray}; we just turned it into a constructor.
-Now we can create a \java{Deck} like this:
+We can now create a standard \java{Deck} like this:
 
 \begin{code}
     Deck deck = new Deck();
@@ -9725,13 +9728,8 @@ Here's how it looks, rewritten as an instance method of \java{Deck}:
     }
 \end{code}
 
-We can invoke it like this:
-
-\begin{code}
-    deck.print()
-\end{code}
-
 When you transform a static method into an instance method, it usually gets shorter.
+We can simply type \java{deck.print()} to invoke the instance method.
 
 
 \section{Shuffling}
@@ -9789,7 +9787,7 @@ There is an algorithm for sorting that is ironically similar to the algorithm fo
 It's called {\bf selection sort} because it works by traversing the array repeatedly and selecting the lowest (or highest) remaining card each time.
 
 During the first iteration, we find the lowest card and swap it with the card in the 0th position.
-During the \java{i}th, we find the lowest card to the right of $i$ and swap it with the $i$th card.
+During the $i$th, we find the lowest card to the right of $i$ and swap it with the $i$th card.
 Here is pseudocode for selection sort:
 
 \begin{code}
@@ -9807,8 +9805,7 @@ public void selectionSort() {
 Again, the pseudocode helps with the design of the helper methods.
 In this case we can use \java{swapCards} again, so we only need a method to find the lowest card; we'll call it \java{indexLowestCard}.
 
-One of the exercises at the end of this chapter asks you to write \java{indexLowestCard} and \java{selectionSort}.
-
+One of the exercises at the end of this chapter asks you to write the helper method \java{indexLowestCard} and use it to implement \java{selectionSort}.
 
 
 \section{Merge sort}
@@ -9853,8 +9850,8 @@ In the next few sections, we'll explain how to implement this algorithm in Java.
 \index{subdeck}
 
 The first step of merge sort is to split the deck into two subdecks, each with about half the cards.
-So might want a method, \java{subdeck}, that takes a Deck and a range of indexes.
-It returns a new Deck that contains the specified subset of the cards:
+So we might want a method, \java{subdeck}, that takes a deck and a range of indexes.
+It returns a new deck that contains the specified subset of the cards:
 
 \begin{code}
 public Deck subdeck(int low, int high) {
@@ -9877,7 +9874,7 @@ Drawing a picture is usually the best way to avoid them.
 \index{constructor}
 \index{overloading}
 
-The following is a state diagram of a subdeck with \java{low = 3} and \java{high = 7}.
+The following is a state diagram of a subdeck with \java{low = 0} and \java{high = 4}.
 The result is a hand with 5 cards that are {\em shared} with the original deck; that is, they are aliased.
 
 \begin{center}
@@ -9898,14 +9895,16 @@ The next helper method we need is \java{merge}, which takes two sorted subdecks 
 Here's what the algorithm looks like in pseudocode, assuming the subdecks are \java{d1} and \java{d2}:
 
 \begin{code}
-public Deck merge() {
+public static Deck merge(Deck d1, Deck d2) {
     // create a new deck big enough for all the cards
 
     // use the index i to keep track of where we are at in
     // the first deck, and the index j for the second deck
     int i = 0;
     int j = 0;
+\end{code}
 
+\begin{code}
     // the index k traverses the result deck
     for (int k = 0; k < result.cards.length; k++) {
 
@@ -9923,7 +9922,7 @@ public Deck merge() {
 One of the exercises at the end of the chapter asks you to implement \java{merge}.
 
 
-\section{Merge sort algorithm}
+\section{Merge sort}
 
 Once your \java{merge} method is working correctly, you can out try a simple version of merge sort:
 
@@ -9939,6 +9938,7 @@ public Deck almostMergeSort() {
 An exercise at the end of this chapter asks you to implement this algorithm.
 Once you get it working, the real fun begins!
 The magical thing about merge sort is that it is inherently recursive.
+
 At the point where you sort the subdecks, why should you invoke the slower algorithm, \java{selectionSort}?
 Why not invoke the spiffy new \java{mergeSort} you are in the process of writing?
 Not only is that a good idea, it is {\em necessary} to achieve the $\log_2$ performance advantage.
@@ -9965,13 +9965,16 @@ As usual, there are two ways to think about recursive programs: you can think th
 This example should encourage you to make the leap of faith.
 
 When you use \java{selectionSort} to sort the subdecks, you don't feel compelled to follow the flow of execution.
-You just assume it works because you already debugged it.
+You just assumed it works because you had already debugged it.
 Well, all you did to make \java{mergeSort} recursive was replace one sorting algorithm with another.
-There is no reason to read the program differently.
+There is no reason to read the program any differently.
 
-Well, almost.  You might have to give some thought to getting the base case right and making sure that you reach it eventually.
+Well, almost.
+You might have to give some thought to getting the base case right and making sure that you reach it eventually.
 But other than that, writing the recursive version should be no problem.
 
+%TODO add insertion sort to the end of the chapter?
+% (motivate inserting a single card into your hand)
 
 
 \section{Vocabulary}
@@ -9985,7 +9988,7 @@ A way of designing programs by writing rough drafts in a combination of English 
 A simple sorting algorithm that searches for the smallest element $n$ times.
 
 \term{helper method}
-Often a small method that does not do anything enormously useful by itself, but which helps another, more useful method.
+Often a small method that does not do anything enormously useful by itself, but which helps another, more complex method.
 
 \term{top-down development}
 Breaking down a problem into sub-problems, and solving each sub-problem one at a time.
@@ -10003,9 +10006,8 @@ A recursive sorting algorithm that divides an array into two parts, sorts each p
 
 The code for this chapter is in the directory {\tt ch13} in the repository for this book.
 Instructions for downloading this code is in Section~\ref{code}.
-Before you start the exercises, make sure you can compile and run the code in your enviroment.
+Before you start the exercises, make sure you can compile and run the code in your environment.
 
-%TODO: make an exercise of validating the input to Card constructor?
 
 \begin{exercise}
 
@@ -10014,13 +10016,13 @@ It should return a single string that represents the cards in the deck.
 When it's printed, this string should display the same results as the \java{print} method in Section~\ref{deck}.
 
 Hint: You can use the \java{+} operator to concatenate strings, but it is not very efficient.
-Consider using \java{java.util.StringBuilder}, which you can read about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
+Consider using \java{java.util.StringBuilder}, which you can read more about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
 
 \end{exercise}
 
 
 \begin{exercise}
-You can read more about the sorting algorithms in this chapter, and others, at \url{http://www.sorting-algorithms.com/}.
+You can learn more about the sorting algorithms in this chapter, and others, at \url{http://www.sorting-algorithms.com/}.
 That site includes explanations of the algorithms, animations that show how they work, and analysis of their efficiency.
 \end{exercise}
 
@@ -10064,7 +10066,7 @@ Then you can pass the two halves to \java{merge} to see if it works.
 Remember that \java{selectionSort} is a modifier and \java{mergeSort} is a pure method, which means that they get invoked differently:
 
 \begin{code}
-deck.selectionSort();         // modifies existing deck
+deck.selectionSort();         // modifies an existing deck
 deck = deck.mergeSort();      // replaces old deck with new
 \end{code}
 
@@ -10073,8 +10075,7 @@ deck = deck.mergeSort();      // replaces old deck with new
 
 
 \begin{exercise}
-The goal of this exercise is to practice top-down programming by
-implementing insertion sort.
+The goal of this exercise is to practice top-down programming by implementing ``insertion sort''.
 Read about insertion sort at \url{http://www.sorting-algorithms.com/insertion-sort}.
 Write a method named \java{insertionSort} that implements this algorithm.
 \end{exercise}
