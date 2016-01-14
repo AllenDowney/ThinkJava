@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Examples from Chapter 5.
+ */
 public class Conditional {
 
     public static void main(String[] args) {
