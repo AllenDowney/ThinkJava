@@ -25,9 +25,10 @@ public class CardTable extends Canvas {
         images = new Image[14][4];
         String suits = "cdhs";
 
-        for (int rank = 1; rank <= 13; rank++) {
-            for (int suit = 0; suit <= 3; suit++) {
-                char c = suits.charAt(suit);
+        for (int suit = 0; suit <= 3; suit++) {
+            char c = suits.charAt(suit);
+
+            for (int rank = 1; rank <= 13; rank++) {
                 String s = String.format("%s/%02d%c.gif", cardset, rank, c);
                 images[rank][suit] = new ImageIcon(s).getImage();
             }

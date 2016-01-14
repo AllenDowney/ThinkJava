@@ -9672,23 +9672,69 @@ Your solution should only traverse the array once.
 \end{exercise}
 
 \begin{exercise}
-%TODO: update this exercise
 
 Working with cards is more interesting if you can display them on the screen.
-Download the following files into the same folder:
+If you have not already read Appendix~\ref{graphics} about 2-D graphics, you should read it before working on this exercise.
+In the code directory for this chapter, {\tt ch12}, you will find:
 
 \begin{itemize}
 
-\item \url{http://thinkapjava.com/code/CardTable.java}
+\item {\tt cardset-oxymoron}: A directory containing images of playing cards.
 
-\item \url{http://thinkapjava.com/code/cardset.zip}
+\item {\tt CardTable.java}: Code that demonstrates how to read and display images. 
 
 \end{itemize}
 
-Unzip {\tt cardset.zip}, which contains a {\tt cardset-oxymoron} folder with all the card images.
-(Note the variable \java{cardset} in \java{CardTable.main} is the name of this folder.)
-Run \java{CardTable.java} and you should see images of a deck of cards laid out on a green table.
+This code demonstrates the use of a 2-D array, specifically an array of images.
+The declaration looks like this:
+
+\begin{code}
+    private Image[][] images;
+\end{code}
+
+\java{images} is a 2-D array of \java{Image} objects, which are defined in the \java{java.awt} package.
+
+Here's the code that creates the array itself:
+
+\begin{code}
+    images = new Image[14][4];
+\end{code}
+
+The array has 14 rows -- one for each rank plus an unused row for rank 0 -- and 4 columns, one for each suit.
+
+Here's the loop that populates the array:
+
+\begin{code}
+    String cardset = "cardset-oxymoron";
+    String suits = "cdhs";
+
+    for (int suit = 0; suit <= 3; suit++) {
+        char c = suits.charAt(suit);
+
+        for (int rank = 1; rank <= 13; rank++) {
+            String s = String.format("%s/%02d%c.gif", cardset, rank, c);
+            images[rank][suit] = new ImageIcon(s).getImage();
+        }
+    }
+\end{code}
+
+\java{cardset} is the name of the directory that contains the image files.
+\java{suits} is a string that contains the single-letter abbreviations for the suits.
+These strings are used to assemble \java{s}, which contains the filename for each image.
+For example, when \java{rank=1} and \java{suit=2}, the value of \java{s} is \java{"cardset-oxymoron/01h.gif"}, which is an image of the Ace of Hearts.
+
+The last line of the loop reads the image file, extracts an \java{Image} object, and assigns it to a location in the array, as specified by the indices \java{rank} and \java{suit}.
+For example, the image of the Ace of Hearts is stored in row 1, column 2.
+
+If you compile and run \java{CardTable.java}, you should see images of a deck of cards laid out on a green table.
+
 You can use this class as a starting place to implement your own card games.
+
+% TODO: We should make an actual exercise out of this.  Maybe take
+% an array of cards and display them in a row at a given location?
+
+% Or we could make this a section of the book and emphasize the use of
+% 2-D arrays more
 
 \end{exercise}
 
