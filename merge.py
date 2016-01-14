@@ -6,7 +6,7 @@ def insert(tex):
     chap = False
     for line in open(tex):
         # don't copy preamble or end document
-        if line.startswith("\\chapter{"):
+        if line.startswith("\\chapter"):
             chap = True
         if line.startswith("\\end{document}"):
             chap = False
@@ -23,7 +23,7 @@ def main(tex, num):
     # copy each chapter
     i = -1
     for line in src:
-        if line.startswith("\\backmatter") or line.startswith("\\chapter{"):
+        if line.startswith("\\backmatter") or line.startswith("\\chapter"):
             i += 1
             # insert new chapter
             if i == num + 1:
