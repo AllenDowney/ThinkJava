@@ -252,157 +252,171 @@ The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 \fi
 
 
-\chapter{Preface}
+\chapter*{Preface}
+\markboth{PREFACE}{PREFACE}
 
-Here are some of the ideas that make the book the way it is:
+{\em Think Java} is an introduction to computer science and programming intended for people with little or no experience.
+We start with the most basic concepts and are careful to define all terms when they are first used.
+The book presents each new idea in a logical progression.
+Larger topics, like recursion and object-oriented programming, are divided into smaller examples and introduced over the course of several chapters.
+
+%Most textbooks on Java are huge, and the reality is that students don't read them.
+%This book features short chapters that (we know from experience) students read and understand.
+
+This book is intentionally concise.
+Each chapter is 12--14 pages and covers the material for one week of a college course.
+It is not meant to be a comprehensive presentation of Java, but rather, an initial exposure to programming constructs and techniques.
+We begin with small problems and basic algorithms and work up to object-oriented design.
+In the vocabulary of computer science pedagogy, this book uses the ``objects late'' approach.
+
+\section*{The philosophy behind it}
+
+Here are the guiding principles that make the book the way it is:
 
 \begin{itemize}
+%TODO not sure about the order and whether we need all of them
 
-\item Vocabulary is important.
-We try to introduce the minimum number of terms and define them carefully
-when they are first used.
+\item {\em One concept at a time.}
+We break down topics that give beginners trouble into a series of small steps, so that they can exercise each new concept in isolation before continuing.
+
+\item {\em Balance of language and concepts.}
+The book is not primarily about Java; it uses Java examples to demonstrate computer science.
+Most chapters start with language features and end with concepts.
+
+\item {\em Conciseness.}
+An important goal of the book is to be small enough that students can be expected to read and understand the entire book in a one-semester course.
+%Students can read 1--2 chapters per week, depending on the pace of the instruction.
+
+\item {\em Emphasis on vocabulary.}
+We try to introduce the minimum number of terms and define them carefully when they are first used.
 We also organize them in glossaries at the end of each chapter.
 
-\item To write a program, students have to understand the
-algorithm, know the programming language, and they have to be
-able to debug.
-We discuss debugging methods throughout the book, and include an appendix that summarizes our advice.
+\item {\em Program development.}
+There are many strategies for writing programs, including bottom-up, top-down, and more.
+We demonstrate multiple program development techniques, allowing readers to choose methods that work best for them.
 
-\item There are many ways to write programs, including bottom-up, top-down, and more.
-We demonstrate several program development processes, allowing students to choose methods that work for them.
+\item {\em Multiple learning curves.}
+To write a program, you have to understand the algorithm, know the programming language, and be able to debug errors.
+We discuss these and other aspects throughout the book, and include an appendix that summarizes our advice.
 
-\item Some concepts take time to sink in.
-Some of the more difficult ideas in the book, like recursion, appear several times.
-By coming back to these ideas, we give students a chance to review and reinforce.
+\item {\em Spiral approach.}
+Some concepts take time to sink in.
+The more difficult ideas in the book, like recursion, appear several times.
+By coming back to these topics, we give learners a chance to review and reinforce.
 
-\item We use the minimum amount of Java to get the maximum amount of programming power.
-The goal of this book is to teach programming and some introductory ideas from computer science, not Java.
-We leave out some language features, like the {\tt switch} statement, that are unnecessary, and present only a few of the many classes in the Java libraries.
+\item {\em Keep it simple.}
+We use the minimum amount of Java to get the maximum amount of programming ability.
+%The goal of this book is to teach fundamental ideas from computer science, not Java.
+We leave out some language features, like the \java{switch} statement, that are unnecessary, and we present only a few of the many classes in the Java libraries.
 
 \end{itemize}
 
-The minimalism of this approach has some advantages.
-Each chapter is about ten pages, not including the exercises.
+%TODO make a new section about implementing in courses, or archive?
 
-% TODO: Chris, do you want to keep any of the following?
-%In my classes I ask students to read each chapter before we
-%discuss it, and I have found that they are willing to do that
-%and their comprehension is good.  Their preparation makes
-%class time available for discussion of the more abstract material,
-%in-class exercises, and additional topics that aren't in the
-%book.
+%The minimalism of this approach has some advantages.
+%Each chapter is about twelve pages, not including vocabulary and exercises.
+%In my classes I ask students to read each chapter before we discuss it, and I have found that they are willing to do that and their comprehension is good.
+%Their preparation increases class time available for discussion of the more advanced material, in-class exercises, and additional topics that aren't in the book.
 
-%But minimalism has some disadvantages.  There is not much here
-%that is intrinsically fun.  Most of my examples demonstrate the
-%most basic use of a language feature, and many of the exercises
-%involve string manipulation and mathematical ideas.  I think some
-%of them are fun, but many of the things that excite students
-%about computer science, like graphics, sound and network applications,
-%are given short shrift.
+%But minimalism has some disadvantages.
+%There is not much here that is intrinsically fun.
+%Most of my examples demonstrate the most basic use of a language feature, and many of the exercises involve string manipulation and mathematical ideas.
+%I think some of them are fun, but many of the things that excite students about computer science, like graphics, sound and network applications, are given short shrift.
 
-%The problem is that many of the more exciting features involve
-%lots of details and not much concept.  Pedagogically, that means
-%a lot of effort for not much payoff.  So there is a tradeoff between
-%the material that students enjoy and the material that is most
-%intellectually rich.  I leave it to individual teachers to find
-%the balance that is best for their classes.  To help, the book
-%includes appendices that cover graphics, keyboard input and
-%file input.
+%The problem is that many of the more exciting features involve lots of details and not much concept.
+%Pedagogically, that means a lot of effort for not much payoff.
+%So there is a tradeoff between the material that students enjoy and the material that is most intellectually rich.
+%I leave it to individual teachers to find the balance that is best for their classes.
+%To help, the book includes appendices that cover graphics, keyboard input and file input.
 
-\subsection*{Object-oriented programming}
 
-Some books introduce objects immediately; others warm up with a more procedural style and develop object-oriented style more gradually.
-This book uses the ``objects late'' approach.
+\section*{Object-oriented programming}
 
-Many of Java's object-oriented features are motivated by problems with previous languages, and their implementations are influenced by this history.  Some of these features are hard to explain if students aren't familiar with the problems they solve.
+Some Java books introduce classes and objects immediately; others begin with procedural programming and transition to object-oriented more gradually.
 
-We get to object-oriented programming as quickly as possible, limited by the requirement that we introduce concepts one at a time, as clearly as possible, in a way that allows students to practice each idea in isolation before adding the next.
+Many of Java's object-oriented features are motivated by problems with previous languages, and their implementations are influenced by this history.
+Some of these features are hard to explain if people aren't familiar with the problems they solve.
+
+We get to object-oriented programming as quickly as possible, limited by the requirement that we introduce concepts one at a time, as clearly as possible, in a way that allows readers to practice each idea in isolation before moving on.
 So it takes some time to get there.
 
-But you can't write Java programs without encountering some object-oriented features.
-In some case we explain a feature briefly when it first appears, and explain it more deeply later.
+But you can't write Java programs (even hello world) without encountering object-oriented features.
+In some cases we explain a feature briefly when it first appears, and then explain it more deeply later on.
 
-%TODO: talk about the AP
+This book is well suited to prepare students for the AP Computer Science A exam, which focuses among other things on object-oriented design and implementation.
+(AP is a registered trademark of the College Board.)
+We introduce nearly every topic in the ``Java subset'' with a few exceptions.
+A mapping of {\em Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}.
 
-This book can be used to prepare for the Computer Science AP Exam in Java.
-We cover almost every topic in their syllabus, with only a few exceptions (like what?)
-
-
-%TODO: Overview of the appendices: what's in them and when should they 
-% be used?
+%TODO: Overview of the appendices: what's in them and when should they be used?
 
 
-\section{Using the code}
+\section*{Using the code examples}
 \label{code}
 
 The code and data used in this book are available from \url{https://github.com/AllenDowney/ThinkJavaCode}.
-Git is a version control system that allows you to keep track of the files that
-make up a project.
-A collection of files under Git's control is called a {\bf repository}.  GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
+Git is a version control system that allows you to keep track of the files that make up a project.
+A collection of files under Git's control is called a repository.
+GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
 
 \index{repository}
 \index{Git}
 \index{GitHub}
 
-The GitHub homepage for the repository provides several ways to work with the code:
+The GitHub link above provides several ways to work with the code:
 
 \begin{itemize}
 
 \item You can create a copy of the repository on GitHub by pressing the {\sf Fork} button.
 If you don't already have a GitHub account, you'll need to create one.
 After forking, you'll have your own repository on GitHub that you can use to keep track of code you write while working on this book.
-Then you can clone the repo, which means that you make a copy of the files on your computer.
+%Then you can clone the repository, which means that you download a copy of the files on your computer.
+
 \index{fork}
 
-\item Or you could clone the repository without forking.
-You don't need a GitHub account to do this, but you won't be able to write your changes back to GitHub.
+\item Or you could clone the repository (download a copy of the files to your computer) without forking.
+You don't need a GitHub account to do so, but you won't be able to save your changes back in GitHub.
+
 \index{clone}
 
-\item If you don't want to use Git at all, you can download the code in a Zip file using the ``Download ZIP'' button on the GitHub page, or this link: \url{https://github.com/AllenDowney/ThinkJavaCode/archive/master.zip}.
+\item If you don't want to use Git at all, you can download the code in a zip archive using the {\sf Download ZIP} button on the GitHub page, or this link: \\
+{\small \url{https://github.com/AllenDowney/ThinkJavaCode/archive/master.zip}}
 
 \end{itemize}
 
 After you clone the repository or unzip the zip file, you should have a directory called {\tt ThinkJavaCode} with a subdirectory for each chapter in the book.
 
 
-\section*{Contributors List}
+\section*{Contributors over the years}
 
-Many people have contributed corrections and suggestions.
-If you have additional comments, please send them to: \\
-\href{mailto:feedback@greenteapress.com}{feedback@greenteapress.com}
+%This list starts with the 4th Edition, so it omits many people who contributed to earlier versions.
+
+Many people have sent corrections and suggestions, and we appreciate their valuable feedback!
 
 \begin{itemize}
 
-\item Ellen Hildreth used this book to teach Data Structures at
-Wellesley College, and she gave me a whole stack of corrections,
-along with some great suggestions.
+\item Ellen Hildreth used this book to teach Data Structures at Wellesley College and submitted a whole stack of corrections, along with some great suggestions.
 
-\item Tania Passfield pointed out that the glossary of Chapter 4
-has some leftover terms that no longer appear in the text.
+\item Tania Passfield pointed out that some glossaries had leftover terms that no longer appeared in the text.
 
-\item Elizabeth Wiethoff noticed that my series expansion of
-$\exp(-x^2)$ was wrong.  She is also working on a Ruby version of
-the book!
+\item Elizabeth Wiethoff noticed that the series expansion of $\exp(-x^2)$ was wrong.
+She has also worked on a Ruby version of the book.
 
-\item Matt Crawford sent in a whole patch file full of corrections!
+\item Matt Crawford sent in a whole patch file full of corrections.
 
-\item Chi-Yu Li pointed out a typo and an error in one of the code
-examples.
+\item Chi-Yu Li pointed out a typo and an error in one of the code examples.
 
-\item Doan Thanh Nam corrected an example in Chapter 3.
+\item Doan Thanh Nam corrected an example.
 
 \item Stijn Debrouwere found a math typo.
 
-\item Muhammad Saied translated the book into Arabic, and found
-several errors.
+\item Muhammad Saied translated the book into Arabic, and found several errors in the process.
 
 \item Marius Margowski found an inconsistency in a code example.
 
 \item Guy Driesen found several typos.
 
-\item Leslie Klein discovered yet another error in the series expansion
-of $\exp(-x^2)$, identified typos in the card array figures, and gave
-helpful suggestions to clarify several exercises.
+\item Leslie Klein discovered yet another error in the series expansion of $\exp(-x^2)$, identified typos in the card array figures, and gave helpful suggestions to clarify several exercises.
 
 \item Micah Lindstrom reported half a dozen typos and sent corrections.
 
@@ -411,21 +425,21 @@ helpful suggestions to clarify several exercises.
 \item Chris Kuszmaul found another typo.
 
 \item James Riely ported the textbook source from LaTeX to Sphinx.
-\url{http://fpl.cs.depaul.edu/jriely/thinkapjava/}
+\\ \url{http://fpl.cs.depaul.edu/jriely/thinkapjava/}
 
 \item Daniel Kurikesu two more typos.
 
 \item Peter Knaggs ported the book to C\#.
-\url{http://www.rigwit.co.uk/think/sharp/}
+\\ \url{http://www.rigwit.co.uk/think/sharp/}
 
 \item Heidi Gentry-Kolen recorded several video lectures that follow the book.
-\url{https://www.youtube.com/user/digipipeline}
+\\ \url{https://www.youtube.com/user/digipipeline}
 
 \item Josh Donath found another typo.
 
 \item Rens Findhammer found another typo.
 
-\item Elisa Abedrapo reported that the GridWorld link no longer works.
+\item Elisa Abedrapo reported that a link no longer worked.
 
 \item Yousef BaAfif found another typo.
 
@@ -435,15 +449,7 @@ helpful suggestions to clarify several exercises.
 
 \end{itemize}
 
-
-% NOTE: Sorry, Chris -- now that you are an author, we don't have
-% to thank you.
-%Finally, I wish to acknowledge Chris Mayfield for his significant
-%contribution to version 5.1 of this book. His careful review
-%lead to over one hundred corrections and improvements throughout.
-%Several new features include embedded hypertext links and cross
-%references, consistent layout of all exercises, and Java syntax
-%highlighting in code examples.
+If you have additional comments or ideas about the text, please send them to: \href{mailto:feedback@greenteapress.com}{\bf feedback@greenteapress.com}
 
 
 \mainmatter
@@ -2699,9 +2705,6 @@ In Java it appears as a type name in parentheses, like \java{(int)}.
 An operator that yields the remainder when one integer is divided by another.
 In Java, it is denoted with a percent sign; for example, \java{5 \% 2} is \java{1}.
 
-%\term{redirection operator}
-%A command-line feature that substitutes \java{System.in} and/or %\java{System.out} with a plain text file.
-
 \end{description}
 
 
@@ -3473,15 +3476,6 @@ In a stack diagram, a representation of the variables and parameters for a metho
 
 %\term{scope}
 %The area of a program where a variable exists.
-
-%\term{debugger}
-%A tool that allows you to run one statement at a time and see the contents of variables.
-
-%\term{breakpoint}
-%A line of code where the debugger will pause a running program.
-
-%\term{call stack}
-%The history of method calls and where to resume execution after each method returns.
 
 \end{description}
 
@@ -10956,12 +10950,208 @@ Whether or not you actually make these changes, draw a UML class diagram that sh
 \renewcommand{\chaptermark}[1]{\markboth{Appendix \thechapter ~~ #1}{}}
 
 
+\chapter{Development tools}
+
+TODO: appendix introduction
+
+
+\section{Command-line testing}
+
+You should review the advice in Section~\ref{sec:examples}, now that you've written some more substantial programs.
+Remember, it's more effective to program and debug your code little by little than to attempt writing everything at once.
+And once you've completed programming an algorithm, it's important to test that it works correctly on a variety of inputs.
+
+Throughout the book, we will illustrate techniques for testing your programs.
+Most if not all testing is based on a simple idea: does the program do what we expect it to do?
+For simple programs, it's not difficult to run them several times and see what happens.
+But at some point, you will get tired of typing the same test cases over and over.
+
+We can automate the process of entering input and comparing {\em expected output} with {\em actual output} using the command line.
+The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
+Here are step by step instructions.
+
+\begin{enumerate}
+
+\item Make sure you can compile and run the {\tt Convert.java} example in the previous section.
+%You can also download a copy from \url{http://thinkjava.org/}.
+
+\item In the same directory as {\tt Convert.java}, create a plain text file named {\tt test.in} (``in'' is for input).
+Enter the following line and save the file.
+
+\begin{stdout}
+193.04
+\end{stdout}
+
+\item Create a second plain text file named {\tt test.exp} (``exp'' is for expected).
+Enter the following line and save the file.
+
+\begin{stdout}
+193.04 cm = 6 ft, 4 in
+\end{stdout}
+
+\item Open a terminal, and change to the directory with these files.
+Run the following command to test the program.
+
+\begin{stdout}
+java Convert < test.in > test.out
+\end{stdout}
+
+\end{enumerate}
+
+\index{redirection operator}
+
+On the command line, {\tt <} and {\tt >} are {\bf redirection operators}.
+The first one redirects the contents of {\tt test.in} to \java{System.in}, as if it were entered from the keyboard.
+The second one redirects the contents of \java{System.out} to a new file {\tt test.out}, much like a screen capture.
+In other words, the {\tt test.out} file contains the output of your program.
+
+% ABD: Since I killed the previous reference to abstraction, I am inclined
+% to kill this one too.  The problem in both places is that it pulls the
+% focus off topic.
+
+%Redirecting a program's input and output is an example of how computer scientists use abstraction.
+%Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
+%In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
+%What's great is that doesn't change anything about how you write the code.
+
+By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command line.
+Knowing both techniques allows you to use the right tool for the job.
+
+At this point, we just need to compare the contents {\tt test.out} with {\tt test.exp}.
+If the files are the same, then the program outputted what we expected it to output.
+If not, then we found a bug, and we can use the output to begin debugging our program.
+Fortunately, there's a simple way to compare files on the command line:
+
+\begin{stdout}
+diff test.exp test.out
+\end{stdout}
+
+The {\tt diff} utility summarizes the differences between two files.
+If there are no differences, then it prints nothing, which in our case is what we want.
+If the expected output differs from the actual output, then we need to continue debugging.
+Usually the program is at fault, and {\tt diff} provides some insight about what is broken.
+But there's also a chance that we have a correct program and the expected output is wrong.
+
+Interpreting the results from {\tt diff} can be confusing, but fortunately there are many graphical tools that show the differences between two files.
+For example, on Windows you can install WinMerge, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}.
+Regardless what tool you use, the goal is the same.
+Debug your program until the actual output is {\it identical} to the expected output.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figs/meld.png}
+\caption{Using {\tt meld} to compare the expected output with the actual output.}
+\end{center}
+\end{figure}
+
+
+\section{Tracing with a debugger}
+\label{debugger}
+
+\index{debugger}
+
+Another way to visualize variables and parameters is to use a {\bf debugger}.
+Most debuggers make it possible to:
+
+\index{breakpoint}
+
+\begin{enumerate}
+\item Set a {\bf breakpoint}, which is line where you want the program to pause.
+\item Step through the code one line at a time and watch what it does.
+\item Check the values of variables and see when and how they change.
+\end{enumerate}
+
+%ABD: Do we want to move this to the web page?  It is specific to DrJava,
+% and it's a little weird that we switch to the imperative here.
+
+For example, open any program in DrJava and move the cursor to the first line of \java{main}.
+Press Ctrl+B to toggle a breakpoint on the current line; it should now be highlighted in red.
+Press Ctrl+Shift+D to turn on Debug Mode; a new pane should appear at the bottom of the window.
+(These commands are also available from the {\em Debugger} menu, in case you forget the shortcut keys.)
+
+\index{call stack}
+
+When you run the program, execution pauses at the first breakpoint.
+The debug pane shows the {\bf call stack}, with the current method on top of the stack.
+You might be surprised to see how many methods were called before the \java{main} method!
+To the right are several buttons that allow you to step through the code at your own pace.
+You can also press ``Automatic Trace'' to watch DrJava run your code one line at a time.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/debugger.png}
+\caption{Screenshot of the DrJava debugger.
+Execution is currently paused on the first line of \java{printTwice}.
+There is a breakpoint on the first line of \java{main}.}
+\end{center}
+\end{figure}
+
+Using a debugger is like having the computer proofread your code out loud.
+When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
+Tracing allows you to verify how control and data passes from one method to another.
+%You can edit your code while debugging it, but the changes won't take effect until after you compile.
+%The result can be confusing, so we don't recommend it.
+%The debugger may get out of sync if you add or delete multiple lines of code while the program is paused.
+You might expect the code do one thing, but then the debugger shows it doing something else.
+At that moment, you gain insight about what may be wrong with the code.
+
+
+\section{DrJava interactions}
+
+A good way to gain experience with relational and logical operators is to use the Interactions Pane of DrJava.
+As shown in Figure~\ref{fig:drjava}, you can declare several variables and {\it interactively} test your logic skills.
+Don't forget that you can try out many of the examples in this book this same way.
+
+% TODO: consider making this an exercise
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/drjava-logic.png}
+\caption{Screenshot of the Interactions Pane in DrJava.}
+\label{fig:drjava}
+\end{center}
+\end{figure}
+
+There is one subtle detail to note when using the Interactions feature.
+If you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
+Notice in Figure~\ref{fig:drjava} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
+
+What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
+In addition, you can press the up/down arrows on the keyboard to repeat previous commands and experiment with incremental differences.
+
+\index{order of operations}
+\index{precedence}
+
+Notice how none of the expressions in this example require parentheses.
+Java evaluates arithmetic operators first, then the relational operators, then logical operators, and finally the assignment operator.
+Do a web search for ``java operator precedence'' to see the complete list of rules.
+If two operators have the same precedence, Java evaluates them from left to right.
+
+
+\section{Vocabulary}
+
+\begin{description}
+
+\term{redirection operator}
+A command-line feature that substitutes \java{System.in} and/or %\java{System.out} with a plain text file.
+
+\term{debugger}
+A tool that allows you to run one statement at a time and see the contents of variables.
+
+\term{breakpoint}
+A line of code where the debugger will pause a running program.
+
+\term{call stack}
+The history of method calls and where to resume execution after each method returns.
+
+\end{description}
+
+
 \chapter{Java 2D graphics}
 \label{graphics}
 
-The Java library includes a simple package for drawing graphics, called \java{java.awt}.
+The Java library includes a simple package for drawing 2D graphics, called \java{java.awt}.
 AWT stands for ``Abstract Window Toolkit''.
-
 We are only going to scratch the surface of graphics programming; you can read more about it in the Java tutorials at: \url{https://docs.oracle.com/javase/tutorial/2d/}.
 
 \index{Canvas}
@@ -10972,6 +11162,7 @@ We are only going to scratch the surface of graphics programming; you can read m
 There are several ways to create graphics in Java; the simplest way is to use \java{java.awt.Canvas} and \java{java.awt.Graphics}.
 A \java{Canvas} is a blank rectangular area of the screen onto which the application can draw.
 The \java{Graphics} class provides basic drawing methods such as \java{drawLine}, \java{drawRect}, and \java{drawString}.
+
 Here is an example program that draws a circle using the \java{fillOval} method:
 
 \begin{code}
@@ -10980,7 +11171,9 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 
 public class Drawing extends Canvas {
+\end{code}
 
+\begin{code}
     public static void main(String[] args) {
         JFrame frame = new JFrame("My Drawing");
         Canvas canvas = new Drawing();
@@ -11006,14 +11199,14 @@ In \java{main} we:
 \index{JFrame}
 \index{class!JFrame}
 
-\item Create a \java{JFrame} object, which is the window that will contain the canvas;
+\item Create a \java{JFrame} object, which is the window that will contain the canvas.
 
-\item Create a \java{Drawing} object, set its width and height, and add it to the frame; and
+\item Create a \java{Drawing} object (which is the canvas), set its width and height, and add it to the frame.
 
 \item Pack the frame (resize it) to fit the canvas, and display it on the screen.
 \end{enumerate}
 
-Once the canvas is visible, the \java{paint} method is called whenever the canvas needs to be drawn; for example, when the window is moved or resized.
+Once the frame is visible, the \java{paint} method is called whenever the canvas needs to be drawn; for example, when the window is moved or resized.
 The application doesn't end after the \java{main} method returns; instead, it waits for the \java{JFrame} to close.
 If you run this code, you should see a black circle on a gray background.
 
@@ -11038,14 +11231,17 @@ You don't have to create the \java{Graphics} object; it gets created when you cr
 The previous example used \java{fillOval}, which has the following signature:
 
 \begin{code}
-public void fillOval(int x, int y, int width, int height)
-Fills an oval bounded by the specified rectangle with the current color.
+    /**
+     * Fills an oval bounded by the specified rectangle with
+     * the current color.
+     */
+    public void fillOval(int x, int y, int width, int height)
 \end{code}
 
 \index{bounding box}
 
 The four parameters specify a {\bf bounding box}, which is the rectangle in which the oval is drawn.
-As shown in the following figure, \java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
+\java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
 The bounding box itself is not drawn.
 
 \begin{center}
@@ -11054,7 +11250,7 @@ The bounding box itself is not drawn.
 
 \index{Color}
 
-To choose the color of a shape, invoke \java{setColor} on the Graphics object:
+To choose the color of a shape, invoke \java{setColor} on the \java{Graphics} object:
 
 \begin{code}
     g.setColor(Color.red);
@@ -11084,6 +11280,9 @@ You can set the background color of the \java{Canvas} by invoking \java{setBackg
 \begin{code}
     canvas.setBackground(Color.white);
 \end{code}
+
+
+\section{Example drawing}
 
 \index{Mickey Mouse}
 
@@ -11119,7 +11318,7 @@ And here's a method that draws Mickey Mouse:
 
 The first line draws the face.
 The next three lines create a smaller rectangle for the ears.
-We \java{translate} the rectangle up and left for the first ear, then right for the second ear.
+We \java{translate} the rectangle up and left for the first ear, then to the right for the second ear.
 The result looks like this:
 
 \begin{center}
@@ -11148,25 +11347,26 @@ A common way to specify the coordinates of a rectangular area.
 
 \section{Exercises}
 
+%TODO use a page reference, rather than a section reference?
+
 The code for this appendix is in the directory {\tt app01} in the repository for this book.
-Instructions for downloading this code is in Section~\ref{code}.
+Instructions for downloading this code are in Section~\ref{code}.
 Before you start the exercises, make sure you can compile and run the code in your environment.
 
 
 \begin{exercise}
-Draw the flag of Japan, a red circle on white background
-that is wider than it is tall.
+Draw the flag of Japan: a red circle on white background that is wider than it is tall.
 \end{exercise}
 
 
 \begin{exercise}
-Modify {\tt Mickey.java} to draw ears on the ears, and ears on those
-ears, and more ears all the way down until the smallest ears are
-only 3 pixels wide.
+Modify {\tt Mickey.java} to draw ears on the ears, and ears on those ears, and more ears all the way down until the smallest ears are only 3 pixels wide.
 
-The result should look like Mickey Moose:
+The result should look like ``Mickey Moose'':
 
+\begin{center}
 \includegraphics[height=2in]{figs/moose.pdf}
+\end{center}
 
 Hint: you should only have to add or modify a few lines of code.
 
@@ -11174,15 +11374,16 @@ Hint: you should only have to add or modify a few lines of code.
 
 
 \begin{exercise}
+In this exercise, you will draw ``Moir\'{e} patterns'' that seem to shift around as you move.
+For an explanation of what is going on, see \url{http://en.wikipedia.org/wiki/Moire_pattern}.
+
 \begin{enumerate}
 
-\item In the directory {\tt app01} in the repository for this book,
-you'll find a file named {\tt Moire.java}.
+\item In the directory {\tt app01} in the repository for this book, you'll find a file named {\tt Moire.java}.
 Open it and read the {\tt paint} method.
 Draw a sketch of what you expect it to do.
 Now run it.
 Did you get what you expected?
-For an explanation of what is going on, see \url{http://en.wikipedia.org/wiki/Moire_pattern}.
 
 \item Modify the program so that the space between the circles is larger or smaller.
 See what happens to the image.
@@ -11190,9 +11391,11 @@ See what happens to the image.
 \item Modify the program so that the circles are drawn in the center of the screen and concentric, as in the following figure (left).
 The distance between the circles should be small enough that the Moir\'{e} interference is apparent.
 
+\begin{center}
 \includegraphics[height=1.5in]{figs/moire.pdf}
+\end{center}
 
-\item Write a method named {\tt radial} that draws a radial set of line segments as shown in the figure (right), but they should be close enough together to create a Moir\'{e} pattern.
+\item Write a method named \java{radial} that draws a radial set of line segments as shown in the figure (right), but they should be close enough together to create a Moir\'{e} pattern.
 
 \item Just about any kind of graphical pattern can generate Moir\'{e}-like interference patterns.
 Play around and see what you can create.
@@ -11203,6 +11406,7 @@ Play around and see what you can create.
 
 \chapter{Debugging}
 \label{debugappendix}
+
 \index{debugging}
 
 Although there are debugging suggestions throughout the book, we thought it would be useful to organize them in an appendix.
@@ -11212,14 +11416,20 @@ The best debugging strategy depends on what kind of error you have:
 
 \begin{itemize}
 
-\item Compile-time errors indicate that there is something wrong with the syntax of the program.  Example: omitting the semi-colon at the end of a statement.
+\item Compile-time errors indicate that there is something wrong with the syntax of the program.
+Example: omitting the semi-colon at the end of a statement.
+
 \index{compile-time error}
 
-\item Run-time errors are produced if something goes wrong while the program is running.  Example: an infinite recursion eventually causes a {\tt StackOverflowException}.
+\item Run-time errors are produced if something goes wrong while the program is running.
+Example: an infinite recursion eventually causes a \java{StackOverflowError}.
+
 \index{exception}
 \index{run-time error}
 
-\item Logic errors cause the program to do the wrong thing.  Example: an expression may not be evaluated in the order you expect.
+\item Logic errors cause the program to do the wrong thing.
+Example: an expression may not be evaluated in the order you expect.
+
 \index{logic error}
 
 \end{itemize}
@@ -11243,38 +11453,36 @@ For each situation, we have some suggestions about how to proceed.
 
 
 \subsection*{The compiler is spewing error messages.}
+
 \index{error messages}
 \index{compiler}
 
 If the compiler reports 100 error messages, that doesn't mean there are 100 errors in your program.
 When the compiler encounters an error, it often gets thrown off track for a while.
-It tries to recover and pick up again after the first error, but sometimes
-it reports spurious errors.
+It tries to recover and pick up again after the first error, but sometimes it reports spurious errors.
 
 Only the first error message is truly reliable.
-I suggest that you only fix one error at a time, and then recompile the
-program.
-You may find that one semi-colon ``fixes'' 100 errors.
+We suggest that you only fix one error at a time, and then recompile the program.
+You may find that one semi-colon or brace ``fixes'' 100 errors.
 
 
-\subsection*{I'm getting a weird compiler message and it
-won't go away.}
+\subsection*{I'm getting a weird compiler message, and it won't go away.}
 
 First of all, read the error message carefully.
-It is written in terse jargon, but often there is a carefully hidden kernel of
-information.
+It may be written in terse jargon, but often there is a carefully hidden kernel of information.
 
 If nothing else, the message will tell you where in the program the problem occurred.
 Actually, it tells you where the compiler was when it noticed a problem, which is not necessarily where the error is.
 Use the information the compiler gives you as a guideline, but if you don't see an error where the compiler is pointing, broaden the search.
 
 Generally the error will be prior to the location of the error message, but there are cases where it will be somewhere else entirely.
-For example, if you get an error message at a method invocation, the actual error may be in the method definition.
+For example, if you get an error message at a method invocation, the actual error may be in the method definition itself.
 
 If you don't find the error quickly, take a breath and look more broadly at the entire program.
 Make sure the program is indented properly; that makes it easier to spot syntax errors.
 
-Now, start looking for common errors:
+Now, start looking for common syntax errors:
+
 \index{syntax}
 
 \begin{enumerate}
@@ -11287,7 +11495,8 @@ All program statements should be within a method definition.
 
 \item Check for semi-colons at the end of statements (and no semi-colons after squiggly-braces).
 
-\item Make sure that any strings in the code have matching quotation marks.  Make sure that you use double-quotes for Strings and single quotes for characters.
+\item Make sure that any strings in the code have matching quotation marks.
+Make sure that you use double-quotes for strings and single quotes for characters.
 
 \item For each assignment statement, make sure that the type on the left is the same as the type on the right.
 Make sure that the expression on the left is a variable name or something else that you can assign a value to (like an element of an array).
@@ -11298,38 +11507,40 @@ Make sure that the expression on the left is a variable name or something else t
 If you are invoking a void method, make sure you are {\em not} trying to do something with the result.
 
 \item If you are invoking an instance method, make sure you are invoking it on an object with the right type.
-If you are invoking a static method from outside the class where it is defined, make sure you specify the class name.
+If you are invoking a static method from outside the class where it is defined, make sure you specify the class name (using dot notation).
 
 \item Inside an instance method you can refer to the instance variables without specifying an object.
-If you try that in a static method, you get a message like, ``Static reference to non-static variable.''
+If you try that in a static method -- with or without \java{this} -- you get a message like ``non-static variable x cannot be referenced from a static context.''
 
 \end{enumerate}
 
 If nothing works, move on to the next section...
 
 
-\subsection*{I can't get my program to compile no matter
-what I do.}
+\subsection*{I can't get my program to compile no matter what I do.}
 
 If the compiler says there is an error and you don't see it, that might be because you and the compiler are not looking at the same code.
 Check your development environment to make sure the program you are editing is the program the compiler is compiling.
+
+This situation is often the result of having multiple copies of the same program.
+You might be editing one version of the file, but compiling a different version.
+
 If you are not sure, try putting an obvious and deliberate syntax error right at the beginning of the program.
 Now compile again.
-If the compiler doesn't find the new error, there is probably something
-wrong with the way you set up the development environment.
+If the compiler doesn't find the new error, there is probably something wrong with the way you set up the development environment.
 
-If you have examined the code thoroughly, and you're sure the compiler is compiling the right code, it is time for desperate measures:
-{\bf debugging by bisection}.
+If you have examined the code thoroughly, and you are sure the compiler is compiling the right source file, it is time for desperate measures: {\bf debugging by bisection}.
+
 \index{bisection!debugging by}
 \index{debugging by bisection}
 
 \begin{itemize}
 
-\item Make a copy of the file you are working on.  If you are
-working on {\tt Bob.java}, make a copy called {\tt Bob.java.old}.
+\item Make a backup of the file you are working on.
+If you are working on {\tt Bob.java}, make a copy called {\tt Bob.java.old}.
 
-\item Delete about half the code from {\tt Bob.java}.  Try compiling
-again.
+\item Delete about half the code from {\tt Bob.java}.
+Try compiling again.
 
 \begin{itemize}
 
@@ -11346,18 +11557,17 @@ Delete about half of the remaining code and repeat.
 \end{itemize}
 
 This process is ugly, but it goes faster than you might think, and it is very reliable.
+It works for other programming languages too!
 
 
-\subsection*{I did what the compiler told me to do, but it
-still doesn't work.}
+\subsection*{I did what the compiler told me to do, but it still doesn't work.}
 
-Some error messages come with tidbits of advice, like ``class Golfer must be declared abstract. It does not define int compareTo(java.lang.Object) from
-interface java.lang.Comparable.''
-It sounds like the compiler is telling you to declare Golfer as an abstract class, and if you are reading this book, you probably don't know what that is
-or how to do it.
+Some error messages come with tidbits of advice, like ``class Golfer must be declared abstract.
+It does not define int compareTo(java.lang.Object) from interface java.lang.Comparable.''
+It sounds like the compiler is telling you to declare \java{Golfer} as an \java{abstract} class, and if you are reading this book, you probably don't know what that is or how to do it.
 
 Fortunately, the compiler is wrong.
-The solution in this case is to make sure {\tt Golfer} has a method called {\tt compareTo} that takes an {\tt Object} as a parameter.
+The solution in this case is to make sure \java{Golfer} has a method called \java{compareTo} that takes an \java{Object} as a parameter.
 
 Don't let the compiler lead you by the nose.
 Error messages give you evidence that something is wrong, but the remedies they suggest are unreliable.
@@ -11365,12 +11575,17 @@ Error messages give you evidence that something is wrong, but the remedies they 
 
 \section{Run-time errors}
 
+It's not always clear what causes a run-time error, but you can often figure things out by adding print statements to your program.
+
+
 \subsection*{My program hangs.}
+
 \index{infinite loop}
 \index{infinite recursion}
 \index{hanging}
 
-If a program stops and seems to be doing nothing, we say it is {\bf hanging}.  Often that means that it is caught in an infinite loop or an infinite recursion.
+If a program stops and seems to be doing nothing, we say it is ``hanging''.
+Often that means it is caught in an infinite loop or an infinite recursion.
 
 \begin{itemize}
 
@@ -11378,15 +11593,15 @@ If a program stops and seems to be doing nothing, we say it is {\bf hanging}.  O
 
 Run the program.
 If you get the first message and not the second, you know where the program is getting stuck.
-Go to the section titled ``Infinite loop.''
+Go to the section below titled ``Infinite loop''.
 
-\item Most of the time an infinite recursion will cause the program to run for a while and then produce a \java{StackOverflowException}.
-If that happens, go to the section titled ``Infinite recursion.''
+\item Most of the time an infinite recursion will cause the program to run for a while and then produce a \java{StackOverflowError}.
+If that happens, go to the section below titled ``Infinite recursion''.
 
-If you are not getting a \java{StackOverflowException}, but you suspect there is a problem with a recursive method, you can still use the techniques in the infinite recursion section.
+If you are not getting a \java{StackOverflowError}, but you suspect there is a problem with a recursive method, you can still use the techniques in the infinite recursion section.
 
-\item If neither of those suggestions helps, you might not understand the flow of execution in your program.
-Go to the section titled ``Flow of execution.''
+\item If neither of the above suggestions helps, you might not understand the flow of execution in your program.
+Go to the section below titled ``Flow of execution''.
 
 \end{itemize}
 
@@ -11395,7 +11610,7 @@ Go to the section titled ``Flow of execution.''
 
 If you think you have an infinite loop and you know which loop it is, add a print statement at the end of the loop that prints the values of the variables in the condition, and the value of the condition.
 
-For example,
+For example:
 
 \begin{code}
     while (x > 0 && y < 0) {
@@ -11409,101 +11624,101 @@ For example,
 \end{code}
 
 Now when you run the program you see three lines of output for each time through the loop.
-The last time through the loop, the condition should be {\tt false}.
-If the loop keeps going, you will see the values of {\tt x} and {\tt y} and you might figure out why they are not getting updated correctly.
+The last time through the loop, the condition should be \java{false}.
+If the loop keeps going, you will see the values of \java{x} and \java{y}, and you might figure out why they are not getting updated correctly.
 
 
 \subsubsection*{Infinite recursion}
 
-Most of the time an infinite recursion will cause the program to throw a {\tt StackOverflowException}.
-But if the program is slow it may take a long time to fill the stack.
+Most of the time, an infinite recursion will cause the program to throw a \java{StackOverflowError}.
+But if the program is slow, it may take a long time to fill the stack.
 
 If you know which method is causing an infinite recursion, check that there is a base case.
 There should be some condition that makes the method return without making a recursive invocation.
 If not, you need to rethink the algorithm and identify a base case.
 
-If there is a base case, but the program doesn't seem to be reaching it, add a print statement at the beginning of the method that prints the parameters.  Now when you run the program you see a few lines of output every time the method is invoked, and you see the values of the parameters.
+If there is a base case, but the program doesn't seem to be reaching it, add a print statement at the beginning of the method that prints the parameters.
+Now when you run the program you see a few lines of output every time the method is invoked, and you can see the values of the parameters.
 If the parameters are not moving toward the base case, you might see why not.
 
 
 \subsubsection*{Flow of execution}
+
 \index{flow of execution}
 
-If you are not sure how the flow of execution is moving through your program, add print statements to the beginning of each method with a message like ``entering method foo,'' where {\tt foo} is the name of the method.
-
-Now when you run the program it prints a trace of each method as it is invoked.
+If you are not sure how the flow of execution is moving through your program, add print statements to the beginning of each method with a message like ``entering method foo'', where \java{foo} is the name of the method.
+Now when you run the program, it prints a trace of each method as it is invoked.
 
 You can also print the arguments each method receives.
-When you run the program, check whether the values are reasonable, and check
-for one of the most common errors -- providing arguments in the wrong
-order.
+When you run the program, check whether the values are reasonable, and check for one of the most common errors -- providing arguments in the wrong order.
 
 
-\subsection*{When I run the program I get an Exception.}
+\subsection*{When I run the program I get an exception.}
+
 \index{Exception}
 
-When an exception occurs, Java prints a message that includes the name of the
-exception, the line of the program where the problem occurred, and a
-stack trace.
-
-The stack trace includes the method that was running, the method that invoked it, the method that invoked {\em that}, and so on.
+When an exception occurs, Java prints a message that includes the name of the exception, the line of the program where the exception occurred, and a ``stack trace''. The stack trace includes the method that was running, the method that invoked it, the method that invoked that one, and so on.
 
 The first step is to examine the place in the program where the error occurred and see if you can figure out what happened.
 
 \begin{description}
 
-\item[NullPointerException:] You tried to access an instance variable or invoke a method on an object that is currently {\tt null}.
-You should figure out which variable is {\tt null} and then figure out how it got to be that way.
+\item[NullPointerException:]
+You tried to access an instance variable or invoke a method on an object that is currently \java{null}.
+You should figure out which variable is \java{null} and then figure out how it got to be that way.
 
-Remember that when you declare a variable with an object type, it is initially {\tt null} until you assign a value to it.
+Remember that when you declare a variable with an array type, its elements are initially \java{null} until you assign a value to them.
 For example, this code causes a \java{NullPointerException}:
 
 \begin{code}
-Point blank;
-System.out.println(blank.x);
+    int[] array = new Point[5];
+    System.out.println(array[0].x);
 \end{code}
 
-\item[ArrayIndexOutOfBoundsException:] The index you are using to access an array is either negative or greater than {\tt array.length-1}.  If you can find the site where the problem is, add a print statement immediately before it to print the value of the index and the length of the array.
+\item[ArrayIndexOutOfBoundsException:]
+The index you are using to access an array is either negative or greater than \java{array.length - 1}.
+If you can find the site where the problem is, add a print statement immediately before it to print the value of the index and the length of the array.
 Is the array the right size?
 Is the index the right value?
 
 Now work your way backwards through the program and see where the array and the index come from.
 Find the nearest assignment statement and see if it is doing the right thing.
-
 If either one is a parameter, go to the place where the method is invoked and see where the values are coming from.
 
-\item[StackOverFlowException:] See ``Infinite recursion.''
+\item[StackOverflowError:]
+See ``Infinite recursion'' above.
 
-\item[FileNotFoundException:] This means Java didn't find the file
-it was looking for.
+\item[FileNotFoundException:]
+This means Java didn't find the file it was looking for.
 If you are using a project-based development environment like Eclipse, you might have to import the file into the project.
 Otherwise make sure the file exists and that the path is correct.
 This problem depends on your file system, so it can be hard to track down.
 
-\item[ArithmeticException:] Occurs when something goes wrong during an arithmetic operation; for example, division by zero.
+\item[ArithmeticException:]
+Something went wrong during an arithmetic operation; for example, division by zero.
 
 \end{description}
 
 
-\subsection*{I added so many print statements I get inundated with
-output.}
+\subsection*{I added so many print statements I get inundated with output.}
+
 \index{print statement}
 \index{statement!print}
 
 One of the problems with using print statements for debugging is that you can end up buried in output.
-There are two ways to proceed: either simplify the output or simplify the program.
+There are two ways to proceed: either simplify the output, or simplify the program.
 
 To simplify the output, you can remove or comment out print statements that aren't helping, or combine them, or format the output so it is easier to understand.
-As you develop a program, you should write code to generate concise, informative visualizations of what the program is doing.
+As you develop a program, you should write code to generate concise, informative traces of what the program is doing.
 
-To simplify the program, scale down the problem the program is working on.  For example, if you are sorting an array, sort a {\em small} array.
+To simplify the program, scale down the problem the program is working on.
+For example, if you are sorting an array, sort a {\em small} array.
 If the program takes input from the user, give it the simplest input that causes the error.
 
 Also, clean up the code.
-Remove dead code and reorganize the program to make it easier to read.
-For example, if you suspect that the error is in a deeply-nested part of the program, rewrite that part with simpler structure.
-If you suspect a large method, split it into smaller methods and test them
-separately.
+Remove unnecessary or experimental parts, and reorganize the program to make it easier to read.
+For example, if you suspect that the error is in a deeply-nested part of the program, rewrite that part with a simpler structure.
+If you suspect a large method, split it into smaller methods and test them separately.
 
 The process of finding the minimal test case often leads you to the bug.
 For example, if you find that a program works when the array has an even number of elements, but not when it has an odd number, that gives you a clue about what is going on.
@@ -11516,22 +11731,21 @@ If you make a change that you think doesn't affect the program, and it does, tha
 
 \subsection*{My program doesn't work.}
 
-Logic errors are hard to find because the compiler and the run-time system provide no information about what is wrong.
+Logic errors are hard to find because the compiler and interpreter provide no information about what is wrong.
 Only you know what the program is supposed to do, and only you know that it isn't doing it.
 
 The first step is to make a connection between the code and the behavior you get.
 You need a hypothesis about what the program is actually doing.
-%
 Here are some questions to ask yourself:
 
 \begin{itemize}
 
 \item Is there something the program was supposed to do, but doesn't seem to be happening?
-Find the section of the code that performs that function and make sure it is executing when you think it should.
+Find the section of the code that performs that function, and make sure it is executing when you think it should.
 See ``Flow of execution'' above.
 
 \item Is something happening that shouldn't?
-Find code in your program that performs that function and see if it is executing when it shouldn't.
+Find code in your program that performs that function, and see if it is executing when it shouldn't.
 
 \item Is a section of code producing an unexpected effect?
 Make sure you understand the code, especially if it invokes methods in the Java library.
@@ -11540,61 +11754,65 @@ They might not do what you think they do.
 
 \end{itemize}
 
-To program, you need a mental model what your code does.  If it doesn't do what you expect, the problem might not be the program; it might be in your head.
+To program, you need a mental model what your code does.
+If it doesn't do what you expect, the problem might not actually be the program; it might be in your head.
+
 \index{model!mental}
 \index{mental model}
 
-The best way to correct your mental model is to break the program into components (usually the classes and methods) and test them independently.  Once you find the discrepancy between your model and reality, you can solve the problem.
+The best way to correct your mental model is to break the program into components (usually the classes and methods) and test them independently.
+Once you find the discrepancy between your model and reality, you can solve the problem.
 
 Here are some common logic errors to check for:
 
 \begin{itemize}
 
-\item Remember that integer division always rounds down.  If you want fractions, use {\tt doubles}.
+\item Remember that integer division always rounds toward zero.
+If you want fractions, use \java{double}.
 More generally, use integers for countable things and floating-point numbers for measurable things.
 
-\item Floating-point numbers are only approximate, so don't rely on perfect accuracy.
-You should probably never use the {\tt ==} operator with floats or doubles.
+\item Floating-point numbers are only approximate, so don't rely on them to be perfectly accurate.
+You should probably never use the \java{==} operator with \java{double}s. Instead of writing \java{if (d == 1.23)}, do something like \java{if (Math.abs(d - 1.23) < .000001)}.
 
-\item If you use the assignment operator ({\tt =}) instead of the equality operator ({\tt ==}) in the condition of an {\tt if}, {\tt while}, or {\tt for} statement, you might get an expression that is syntactically legal and logically wrong.
+% NOTE: should not be possible in Java, because = can't be used in a boolean expression
+%\item If you use the assignment operator (\java{=}) instead of the equality operator (\java{==}) in the condition of an \java{if}, \java{while}, or \java{for} statement, you might get an expression that is syntactically legal and logically wrong.
 
-\item When you apply the equality operator ({\tt ==}) to an object, it checks identity.
-If you meant to check equivalence, you should use the {\tt equals} method.
+\item When you apply the equality operator (\java{==}) to objects, it checks whether they are identical.
+If you meant to check equivalence, you should use the \java{equals} method instead.
 
-\item For user defined types, {\tt equals} checks identity.
-If you want a different notion of equivalence, you have to
-override it.
+\item By default for user defined types, \java{equals} checks identity.
+If you want a different notion of equivalence, you have to override it.
 
-\item Inheritance can lead to subtle logic errors, because you can run inherited code without realizing it.  See ``Flow of Execution'' above.
+\item Inheritance can lead to subtle logic errors, because you can run inherited code without realizing it.
+See ``Flow of execution'' above.
 
 \end{itemize}
 
 
-\subsection*{I've got a big hairy expression and it doesn't
-do what I expect.}
+\subsection*{I've got a big hairy expression and it doesn't do what I expect.}
+
 \index{expression!big and hairy}
 
 Writing complex expressions is fine as long as they are readable, but they can be hard to debug.
 It is often a good idea to break a complex expression into a series of assignments to temporary variables.
 
-For example:
-
 \begin{code}
-rect.setLocation(rect.getLocation().translate(
-                -rect.getWidth(), -rect.getHeight()));
+    rect.setLocation(rect.getLocation().translate(
+                     -rect.getWidth(), -rect.getHeight()));
 \end{code}
 
-Can be rewritten as
+This example can be rewritten as:
 
 \begin{code}
-int dx = -rect.getWidth();
-int dy = -rect.getHeight();
-Point location = rect.getLocation();
-Point newLocation = location.translate(dx, dy);
-rect.setLocation(newLocation);
+    int dx = -rect.getWidth();
+    int dy = -rect.getHeight();
+    Point location = rect.getLocation();
+    Point newLocation = location.translate(dx, dy);
+    rect.setLocation(newLocation);
 \end{code}
 
-The explicit version is easier to read, because the variable names provide additional documentation, and easier to debug, because you can check the types of the temporary variables and display their values.
+The second version is easier to read, partly because the variable names provide additional documentation.
+It's also easier to debug, because you can check the types of the temporary variables and display their values.
 
 \index{temporary variable}
 \index{variable!temporary}
@@ -11602,102 +11820,100 @@ The explicit version is easier to read, because the variable names provide addit
 \index{precedence}
 
 Another problem that can occur with big expressions is that the order of evaluation may not be what you expect.
-For example, to evaluate $\frac{x}{2 \pi}$, you might write
+For example, to evaluate $\frac{x}{2 \pi}$, you might write:
 
 \begin{code}
-double y = x / 2 * Math.PI;
+    double y = x / 2 * Math.PI;
 \end{code}
 
 That is not correct, because multiplication and division have the same precedence, and they are evaluated from left to right.
-This expression computes $x \pi / 2$.
+This code computes $\frac{x}{2}\pi$.
 
-If you are not sure of the order of operations, use parentheses to make it explicit.
+If you are not sure of the order of operations, check the documentation, or use parentheses to make it explicit.
 
 \begin{code}
-double y = x / (2 * Math.PI);
+    double y = x / (2 * Math.PI);
 \end{code}
 
 This version is correct, and more readable for other people who haven't memorized the order of operations.
 
 
-
 \subsection*{My method doesn't return what I expect.}
+
 \index{return statement}
 \index{statement!return}
 
 If you have a return statement with a complex expression, you don't have a chance to print the value before returning.
-Again, you can use a temporary variable.  For example, instead of
 
 \begin{code}
-public Rectangle intersection(Rectangle a, Rectangle b) {
-    return new Rectangle(
-        Math.min(a.x, b.x),
-        Math.min(a.y, b.y),
-        Math.max(a.x+a.width, b.x+b.width) - Math.min(a.x, b.x)
-        Math.max(a.y+a.height, b.y+b.height) - Math.min(a.y, b.y));
-}
+    public Rectangle intersection(Rectangle a, Rectangle b) {
+        return new Rectangle(
+            Math.min(a.x, b.x), Math.min(a.y, b.y),
+            Math.max(a.x + a.width, b.x + b.width)
+                - Math.min(a.x, b.x)
+            Math.max(a.y + a.height, b.y + b.height)
+                - Math.min(a.y, b.y));
+    }
 \end{code}
 
-You could write
+Instead of writing everything in one statement, use temporary variables:
 
 \begin{code}
-public Rectangle intersection(Rectangle a, Rectangle b) {
-    int x1 = Math.min(a.x, b.x);
-    int y2 = Math.min(a.y, b.y);
-    int x2 = Math.max(a.x+a.width, b.x+b.width);
-    int y2 = Math.max(a.y+a.height, b.y+b.height);
-    Rectangle rect = new Rectangle(x1, y1, x2-x1, y2-y1);
-    return rect;
-}
+    public Rectangle intersection(Rectangle a, Rectangle b) {
+        int x1 = Math.min(a.x, b.x);
+        int y2 = Math.min(a.y, b.y);
+        int x2 = Math.max(a.x + a.width, b.x + b.width);
+        int y2 = Math.max(a.y + a.height, b.y + b.height);
+        Rectangle rect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
+        return rect;
+    }
 \end{code}
 
 Now you have the opportunity to display any of the intermediate variables before returning.
-And by reusing {\tt x1} and {\tt y1}, you made the code smaller, too.
+And by reusing \java{x1} and \java{y1}, you made the code smaller, too.
 
 
 \subsection*{My print statement isn't doing anything}
+
 \index{print statement}
 \index{statement!print}
 
-If you use the {\tt println} method, the output is displayed immediately, but if you use {\tt print} (at least in some environments) the output gets stored without being displayed until the next newline.
+If you use the \java{println} method, the output is displayed immediately, but if you use \java{print} (at least in some environments), the output gets stored without being displayed until the next newline.
 If the program terminates without printing a newline, you may never see the stored output.
-
-If you suspect that this is happening to, change some or all of the {\tt print} statements to {\tt println}.
+If you suspect that this is happening to, change some or all of the \java{print} statements to \java{println}.
 
 
 \subsection*{I'm really, really stuck and I need help}
 
 First, get away from the computer for a few minutes.
-Computers emit waves that affect the brain, causing the following
-symptoms:
+Computers emit waves that affect the brain, causing the following symptoms:
 
 \begin{itemize}
 
 \item Frustration and rage.
 
-\item Superstitious beliefs (``the computer hates me'') and
-magical thinking (``the program only works when I wear my
-hat backwards'').
+\item Superstitious beliefs (``the computer hates me'') and magical thinking (``the program only works when I wear my hat backwards'').
 
 \item Sour grapes (``this program is lame anyway'').
 
 \end{itemize}
 
-If you suffer from any of these symptoms, get up and go for a walk.  When you are calm, think about the program.
+If you suffer from any of these symptoms, get up and go for a walk.
+When you are calm, think about the program.
 What is it doing?
 What are possible causes of that behavior?
 When was the last time you had a working program, and what did you do next?
 
 Sometimes it just takes time to find a bug.
-I often find bugs when I let my mind wander.
-Good places to find bugs are trains, showers, and bed.
+People often find bugs when they let their mind wander.
+Good places to find bugs are buses, showers, and bed.
 
 
 \subsection*{No, I really need help.}
 
 It happens.
 Even the best programmers get stuck.
-Sometimes you need a fresh pair of eyes.
+Sometimes you need a another pair of eyes.
 
 Before you bring someone else in, make sure you have tried the techniques described above.
 Your program should be as simple as possible, and you should be working on the smallest input that causes the error.
@@ -11712,7 +11928,7 @@ When you bring someone in to help, give them the information they need.
 Compile-time, run-time, or logic?
 
 \item What was the last thing you did before this error occurred?
-What were the last lines of code that you wrote, or what is the new test case that fails?
+What were the last lines of code that you wrote, or what is the test case that fails?
 
 \item If the bug occurs at compile time or run time, what is the error message, and what part of the program does it indicate?
 
@@ -11720,15 +11936,16 @@ What were the last lines of code that you wrote, or what is the new test case th
 
 \end{itemize}
 
-By the time you explain the problem to someone, you might see the answer.  This phenomenon is so common that some people recommend a debugging technique
-called ``rubber ducking''.
+By the time you explain the problem to someone, you might see the answer.
+This phenomenon is so common that some people recommend a debugging technique called ``rubber ducking''.
 Here's how it works:
 
 \begin{enumerate}
 
 \item Buy a standard-issue rubber duck.
 
-\item When you are really stuck on a problem, put the rubber duck on the desk in front of you and say, ``Rubber duck, I am stuck on a problem.  Here's what's happening...''
+\item When you are really stuck on a problem, put the rubber duck on the desk in front of you and say, ``Rubber duck, I am stuck on a problem.
+Here's what's happening...''
 
 \item Explain the problem to the rubber duck.
 
@@ -11738,7 +11955,7 @@ Here's how it works:
 
 \end{enumerate}
 
-We're not kidding.
+We're not kidding, it works!
 See \url{http://en.wikipedia.org/wiki/Rubber_duck_debugging}.
 
 
@@ -11753,6 +11970,7 @@ Take some time away from the computer to think, work through test cases by hand,
 After you fix the bug, don't just start in making new errors.
 Take a minute to think about what kind of bug it was, why you made the error, how the error manifested itself, and what you could have done to find it faster.
 Next time you see something similar, you will be able to find the bug more quickly.
+Or even better, you will learn to avoid that type of bug for good.
 
 
 \backmatter

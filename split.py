@@ -15,7 +15,7 @@ def main(tex, num):
     for line in src:
         if line.startswith("\\backmatter"):
             break
-        if line.startswith("\\chapter{"):
+        if line.startswith("\\chapter"):
             i += 1
             if i > num:
                 break
