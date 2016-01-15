@@ -536,7 +536,7 @@ You will need to think creatively when unexpected errors happen.
 %In the old days, computer scientists had to deal with real bugs flying into their systems.
 %You probably won't have that problem, but you will need to think creatively when unexpected errors happen.
 
-%\begin{figure}[!h]
+%\begin{figure}[!ht]
 %\begin{center}
 %\includegraphics[height=2.2in]{figs/firstbug.jpg}
 %\caption{The first computer bug, taped to Grace Hopper's log book in 1947.
@@ -555,7 +555,7 @@ Thinking about how to correct programs and improve their performance sometimes e
 \section{Introduction to Java}
 
 \index{high-level language}
-\index{language!high-level}
+\index{language!htigh-level}
 
 The programming language you will learn is Java, which is a {\bf high-level language}.
 Other high-level languages you may have heard of include Python, C and C++, Ruby, and JavaScript.
@@ -586,7 +586,7 @@ An {\bf interpreter} reads a high-level program and executes it, meaning that it
 It processes the program a little at a time, alternately reading lines and performing computations.
 Figure~\ref{fig.interp} shows the structure of an interpreter.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/interpreter.pdf}
 \caption{How interpreted languages are executed.}
@@ -613,7 +613,7 @@ Similar to machine language, byte code is easy and fast to interpret.
 But it is also portable, so it is possible to compile a Java program on one machine, transfer the byte code to another machine, and run the byte code on the other machine.
 %This ability is an advantage of Java over some other high-level languages.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/compiler.pdf}
 \caption{The process of compiling and running a Java program.}
@@ -621,7 +621,8 @@ But it is also portable, so it is possible to compile a Java program on one mach
 \end{center}
 \end{figure}
 
-Although this process may seem complicated, in most program development environments these steps are automated for you.
+Figure~\ref{fig.compile} shows the steps of this process.
+Although they might seem complicated, in most program development environments these steps are automated for you.
 Usually you only have press a button or type a single command to compile and run your program.
 On the other hand, it is important to know what steps are happening in the background, so if something goes wrong you can figure out what it is.
 
@@ -728,7 +729,7 @@ All the examples in this book were developed and tested using Java SE Version 7.
 If you are using a more recent version, the examples in this book should still work.
 If you are using an older version, a few of them might not.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=\textwidth]{figs/drjava-hello.png}
 \caption{Screenshot of DrJava editing the hello world program.}
@@ -739,7 +740,7 @@ If you are using an older version, a few of them might not.
 \index{DrJava}
 
 We will use DrJava as the primary development environment throughout the book.
-A useful feature of DrJava is the Interactions Pane at the bottom of the window.
+A useful feature of DrJava is the Interactions Pane at the bottom of the window, shown in Figure~\ref{fig.drjava}.
 It provides the ability to try out code quickly, without having to write a class definition and save/compile/run the program.
 Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for more details.
 
@@ -763,7 +764,7 @@ Many advanced tools, both for software development and general purpose computing
 There are many good tutorials online for learning the command line for your operating system; just search the web for ``command line tutorial''.
 On Unix systems like Linux and OS X, you can get started with just four commands: change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=4.5in]{figs/terminal.png}
 \caption{Compiling and running {\tt Hello.java} from the command line.}
@@ -771,7 +772,9 @@ On Unix systems like Linux and OS X, you can get started with just four commands
 \end{center}
 \end{figure}
 
-In this example, the {\tt Hello.java} source file is stored in the {\tt Desktop} directory.
+%TODO: we need a grayscale-friendly version of this on a light background
+
+Figure~\ref{fig.commandline} shows an example where the {\tt Hello.java} source file is stored in the {\tt Desktop} directory.
 After changing to that location and listing the files, we use the {\tt javac} command to compile {\tt Hello.java}.
 Running {\tt ls} again, we see that the compiler generated a new file, {\tt Hello.class}, which contains the byte code.
 We run the program using the {\tt java} command, which displays the output on the following line.
@@ -860,7 +863,7 @@ The backslash allows you to ``escape'' the string's literal interpretation.
 Notice there is no space between \verb"\n" and \verb"How".
 If you add a space there, there will be a space at the beginning of the second line.
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
@@ -1292,7 +1295,7 @@ Identifying logic errors can be hard because you have to work backwards, looking
 Usually the compiler and the interpreter can't help you, since they don't know what the right thing is.
 
 Now that you know about the three kinds of errors, you might want to read
-Appendix~\ref{debugappend}, where we've collected some of our favorite debugging advice.
+Appendix~\ref{debugappendix}, where we've collected some of our favorite debugging advice.
 It refers to some language features we haven't talked about yet, so you might want to re-read it from time to time.
 
 
@@ -2113,38 +2116,16 @@ In this example the address is \java{685d72cd}, but if you run the same code you
 
 \index{library}
 
-\java{System} is defined in a file called {\tt System.java}, and {\tt PrintStream} is defined in {\tt PrintStream.java}.
+As shown in Figure~\ref{fig.system}, \java{System} is defined in a file called {\tt System.java}, and {\tt PrintStream} is defined in {\tt PrintStream.java}.
 These files are part of the Java {\bf library}, which is an extensive collection of classes you can use in your programs.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/system.pdf}
 \caption{\java{System.out.println} refers to the \java{out} variable of the \java{System} class, which is a \java{PrintStream} that provides a method called \java{println}.}
 \label{fig.system}
 \end{center}
 \end{figure}
-
-%\index{object}
-
-%Both \java{System} and \java{PrintStream} are written in Java, and later in the book we'll examine their source code.
-%For now, you should understand that \java{System.out} is a \java{PrintStream} object.
-%Because Java is an {\em object-oriented} language, much of the library is organized around objects that perform specific actions.
-
-% ABD: there is so much new vocab in these sections, I want to reduce the number of new ideas
-
-%\index{operating system}
-
-%As with most software, Java programs run on top of an {\bf operating system} that manages the keyboard, the display, main memory, disk drives, printers, the network, and other hardware resources.
-%Common examples of operating systems include Android, iOS, Linux, Mac OS~X, and Windows.
-%When starting Java programs, the operating system directs \java{System.out} to the screen.
-
-%\index{abstraction}
-
-%Note the exact type of display doesn't matter, whether it's a 5-inch touch screen or 30-inch monitor.
-%From the programmer's point of view, \java{System.out} simply provides the means for printing messages.
-%Computer scientists often use {\bf abstraction} to deal with the complexity of software.
-%The \java{System} class is a platform-independent abstraction of the operating system.
-%The operating system itself is a layer of abstraction on top of computer hardware.
 
 
 \section{The Scanner class}
@@ -2227,9 +2208,9 @@ The \java{String} class is also part of the \java{java.lang} package.
 \label{sec:library}
 
 At this point, we have seen all of the elements that make up Java programs.
-The following figure shows these organizational units.
+Figure~\ref{fig.package} shows these organizational units.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=4in]{figs/package.pdf}
 \caption{Elements of the Java language, from largest to smallest.}
@@ -2388,7 +2369,7 @@ Like \java{print}, \java{printf} does not append a newline, so format strings of
 The format specifier \java{\%d} displays integer values (``d'' stands for ``decimal'').
 The values are matched up with the format specifiers in order, so \java{inch} is displayed using \java{\%d}, and \java{cm} is displayed using \java{\%f}.
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|l|l|l|}
 \hline
@@ -2623,7 +2604,7 @@ What is your name? Hello , age 45
 \end{stdout}
 
 To understand what is happening, you have to understand that the \java{Scanner} doesn't see input as multiple lines, like we do.
-Instead, it gets a stream of characters like this:
+Instead, it gets a stream of characters as shown in Figure~\ref{fig.hopper1}.
 
 \begin{figure}
 \begin{center}
@@ -2635,6 +2616,7 @@ Instead, it gets a stream of characters like this:
 
 The arrow indicates the next character to be read by \java{Scanner}.
 When you call \java{nextInt}, it reads characters until it gets to a non-digit.
+Figure~\ref{fig.hopper2} shows the state of the stream after \java{nextInt} is invoked.
 
 \begin{figure}
 \begin{center}
@@ -3281,7 +3263,7 @@ One way to keep track of everything is to draw a {\bf stack diagram}, which is a
 For each method there is a box called a {\bf frame} that contains the method's parameters and variables.
 The name of the method appears outside the frame; the variables and parameters appear inside.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.9]{figs/stack.pdf}
 \caption{Stack diagram for \java{PrintTime}.}
@@ -3310,7 +3292,7 @@ As an example, let's look a the documentation for \java{Scanner}, which we used 
 The documentation of this class is at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html}.
 Figure~\ref{fig:javadoc} shows a screenshot of this page.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.9\textwidth]{figs/scanner.png}
 \caption{Screenshot of the documentation for \java{Scanner}.}
@@ -3322,7 +3304,8 @@ Documentation for other classes uses a similar format.
 The first line is the pacakage that contains the class, \java{java.util}.
 The second line is the name of the class.
 
-The next two lines indicate that every \java{Scanner} is also an \java{Object}; we'll learn more about \java{Object} in Section~\ref{TODO}.
+%The next two lines indicate that every \java{Scanner} is also an \java{Object}; that will make more sense after Section~\ref{inheritance}.
+
 The ``Implemented interfaces'' list some of the things a \java{Scanner} can do; we won't say more about that for now.
 
 %TODO: We still don't have a section on Object.
@@ -4091,9 +4074,9 @@ In the previous chapter, we used a stack diagram to represent the state of a pro
 The same kind of diagram can make it easier to interpret a recursive method.
 
 Remember that every time a method gets called, Java creates a new frame that contains the current method's parameters and variables.
-The following figure is a stack diagram for countdown, called with \java{n == 3}:
+Figure~\ref{fig.stack2} is a stack diagram for countdown, called with \java{n == 3}:
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/stack2.pdf}
 \caption{Stack diagram for the \java{countdown} program.}
@@ -4901,7 +4884,7 @@ Figure~\ref{fig:stack3} shows what the stack diagram looks like for this sequenc
 The return values are shown being passed back up the stack.
 Notice that \java{recurse} and \java{result} do not exist in the last frame, because when \java{n == 0} the code that declares them does not execute.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/stack3.pdf}
 \caption{Stack diagram for the \java{factorial} method.}
@@ -6084,7 +6067,7 @@ Of course, you can also declare the variable and create the array in a single li
 \index{state diagram}
 
 When you create an array of \java{int}s, the elements are initialized to zero.
-Here is a state diagram of the \java{counts} array so far:
+Figure~\ref{fig.array} shows a state diagram of the \java{counts} array so far.
 
 \begin{figure}
 \begin{center}
@@ -6122,7 +6105,7 @@ You can use the \java{[]} operator anywhere in an expression:
     counts[3] -= 60;
 \end{code}
 
-Here is the result of these statements:
+Figure~\ref{fig.array2} shows the result of these statements.
 
 \begin{figure}
 \begin{center}
@@ -6239,7 +6222,7 @@ For example:
     double[] b = a;
 \end{code}
 
-These statements create an array of three \java{double}s and makes two different variables refer to it, as shown in this diagram:
+These statements create an array of three \java{double}s and makes two different variables refer to it, as shown in Figure~\ref{fig.array3}.
 
 \begin{figure}
 \begin{center}
@@ -7656,7 +7639,7 @@ The following example creates a \java{Rectangle} object and makes the variable \
     Rectangle box = new Rectangle(0, 0, 100, 200);
 \end{code}
 
-This figure shows the effect of this assignment.
+Figure~\ref{fig.rectangle} shows the effect of this assignment.
 
 \begin{figure}
 \begin{center}
@@ -7706,7 +7689,7 @@ For example, to ``move'' a rectangle without changing its size, you can modify t
     box.y = box.y + 100;
 \end{code}
 
-The result is shown in the figure:
+The result is shown in Figure~\ref{fig.rectangle2}.
 
 \begin{figure}
 \begin{center}
@@ -7802,7 +7785,7 @@ For example:
 
 The first line prints {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
 The second line invokes the \java{grow} method on \java{box1}, which resizes the \java{Rectangle} horizontally and vertically.
-The effect is shown in the figure:
+The effect is shown in Figure~\ref{fig.aliasing2}:
 
 \begin{figure}
 \begin{center}
@@ -7833,7 +7816,7 @@ You can declare and initialize object variables this way:
     Point blank = null;
 \end{code}
 
-The value \java{null} is represented in state diagrams by a small box with no arrow.
+The value \java{null} is represented in state diagrams by a small box with no arrow, as in Figure~\ref{fig.reference2}.
 
 \begin{figure}
 \begin{center}
@@ -7871,7 +7854,7 @@ What happens when {\em no} variable refers to an object?
 
 The first line creates a new \java{Point} object and makes \java{blank} refer to it.
 The second line changes \java{blank} so that instead of referring to the object, it refers to nothing.
-In the state diagram, we have removed the arrow between them.
+In the state diagram, we remove the arrow between them, as in Figure~\ref{fig.reference3}.
 
 \begin{figure}
 \begin{center}
@@ -8131,6 +8114,7 @@ But don't use \java{pow}; that would spoil the fun.
 
 
 \chapter{Classes}
+\label{classes}
 
 \index{object type}
 \index{type!object}
@@ -8497,7 +8481,7 @@ Consider the following variables:
     Time time3 = new Time(9, 30, 0.0);
 \end{code}
 
-Here is a state diagram that shows these variables and their values:
+Figure~\ref{fig.time2} is a state diagram that shows these variables and their values.
 
 %TODO(Chris) Add ``Time'' above each time object in time2.dia
 
@@ -9116,7 +9100,7 @@ Or we can create the array and initialize the elements at the same time, as we s
 
 \index{state diagram}
 
-Either way, the state diagram looks like this:
+The state diagram in Figure~\ref{fig.stringarray} shows the result.
 
 \begin{figure}
 \begin{center}
@@ -9237,7 +9221,7 @@ For example, suppose we create three \java{Card} variables:
     Card card3 = new Card(11, 1);
 \end{code}
 
-The following state diagram shows the results.
+Figure~\ref{fig.card} is a state diagram showing the result.
 
 \begin{figure}
 \begin{center}
@@ -9391,7 +9375,7 @@ The following statement creates an array of 52 cards:
 
 \index{state diagram}
 
-Here is the state diagram for this array:
+Figure~\ref{fig.cardarray} shows the state diagram for this array.
 
 \begin{figure}
 \begin{center}
@@ -9438,7 +9422,7 @@ One way to populate the array is to write nested \java{for} loops:
     }
 \end{code}
 
-%TODO only uses of the word enumerate; should that be a vocab term?
+%TODO only use of the word enumerate; should that be a vocab term?
 
 The outer loop enumerates the suits from 0 to 3.
 For each suit, the inner loop enumerates the ranks from 1 to 13.
@@ -9447,9 +9431,7 @@ Since the outer loop runs 4 times, and the inner loop runs 13 times for each sui
 \index{index}
 
 We use a separate variable \java{index} to keep track of where in the array the next card should go.
-The following state diagram shows what the array looks like after the first two cards have been created:
-
-%TODO: Add the type at the top of the boxes for user defined types?
+Figure~\ref{fig.cardarray2} shows what the array looks like after the first two cards have been created.
 
 \begin{figure}
 \begin{center}
@@ -9860,7 +9842,7 @@ public class Deck {
 \index{state diagram}
 
 The constructor initializes the instance variable with an array of cards, but it doesn't create any cards.
-Here is a state diagram showing what a \java{Deck} looks like with no cards:
+Figure~\ref{fig.deckobject} shows what a \java{Deck} looks like with no cards.
 
 \begin{figure}
 \begin{center}
@@ -9981,7 +9963,7 @@ public void selectionSort() {
 \end{code}
 
 \index{helper method}
-\index{method!helper}
+\index{method!htelper}
 
 Again, the pseudocode helps with the design of the helper methods.
 In this case we can use \java{swapCards} again, so we only need a method to find the lowest card; we'll call it \java{indexLowestCard}.
@@ -10056,7 +10038,7 @@ Drawing a picture is usually the best way to avoid them.
 \index{overloading}
 
 The following is a state diagram of a subdeck with \java{low = 0} and \java{high = 4}.
-The result is a hand with 5 cards that are {\em shared} with the original deck; that is, they are aliased.
+The result is a hand with 5 cards that are {\em shared} with the original deck; that is, they are aliased, as shown in Figure~\ref{fig.subdeck}.
 
 \begin{figure}
 \begin{center}
@@ -10069,7 +10051,7 @@ The result is a hand with 5 cards that are {\em shared} with the original deck; 
 \index{aliasing}
 \index{reference}
 
-Aliasing is not always a good idea, because changes to shared objects are reflected in multiple decks.
+Aliasing might not be a good idea, because changes to shared cards would be reflected in multiple decks.
 But since \java{Card} objects are immutable, this kind of aliasing is not a problem.
 
 
@@ -10949,7 +10931,7 @@ Class diagrams are one of many graphical representations defined in UML.
 The UML representation of a class is a box with the name of the class inside, and sometimes a list of its public attributes and methods.
 Relationships between classes are represented by arrows: composition arrows have a standard arrow head, and inheritance arrows have a hollow triangle head (usually pointing up).
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.9\textwidth]{figs/uml1.pdf}
 \caption{UML diagram for the classes in this chapter.}
@@ -11127,11 +11109,12 @@ Usually the program is at fault, and {\tt diff} provides some insight about what
 But there's also a chance that we have a correct program and the expected output is wrong.
 
 Interpreting the results from {\tt diff} can be confusing, but fortunately there are many graphical tools that show the differences between two files.
-For example, on Windows you can install WinMerge, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}.
+For example, on Windows you can install WinMerge, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}, shown in Figure~\ref{fig.meld}.
+
 Regardless what tool you use, the goal is the same.
 Debug your program until the actual output is {\it identical} to the expected output.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.9\textwidth]{figs/meld.png}
 \caption{Using {\tt meld} to compare the expected output with the actual output.}
@@ -11156,23 +11139,21 @@ Most debuggers make it possible to:
 \item Check the values of variables and see when and how they change.
 \end{enumerate}
 
-%ABD: Do we want to move this to the web page?  It is specific to DrJava,
-% and it's a little weird that we switch to the imperative here.
-
 For example, open any program in DrJava and move the cursor to the first line of \java{main}.
 Press Ctrl+B to toggle a breakpoint on the current line; it should now be highlighted in red.
 Press Ctrl+Shift+D to turn on Debug Mode; a new pane should appear at the bottom of the window.
-(These commands are also available from the {\em Debugger} menu, in case you forget the shortcut keys.)
+
+These commands are also available from the {\em Debugger} menu, in case you forget the shortcut keys.
 
 \index{call stack}
 
 When you run the program, execution pauses at the first breakpoint.
-The debug pane shows the {\bf call stack}, with the current method on top of the stack.
+The debug pane displays the {\bf call stack}, with the current method on top of the stack, as shown in Figure~\ref{fig.debugger}.
 You might be surprised to see how many methods were called before the \java{main} method!
 To the right are several buttons that allow you to step through the code at your own pace.
 You can also press ``Automatic Trace'' to watch DrJava run your code one line at a time.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=\textwidth]{figs/debugger.png}
 \caption{Screenshot of the DrJava debugger.
@@ -11200,7 +11181,7 @@ Don't forget that you can try out many of the examples in this book this same wa
 
 % TODO: consider making this an exercise
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=\textwidth]{figs/drjava-logic.png}
 \caption{Screenshot of the Interactions Pane in DrJava.}
@@ -11315,7 +11296,9 @@ If you run this code, you should see a black circle on a gray background.
 You are probably used to Cartesian {\bf coordinates}, where x and y values can be positive or negative.
 In contrast, Java uses a coordinate system where the origin is in the upper-left corner.
 That way, x and y are always positive integers.
-Coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
+Figure~\ref{fig.coordinates} shows these coordinate systems.
+
+Graphical coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
 
 \begin{figure}
 \begin{center}
@@ -11342,7 +11325,7 @@ The previous example used \java{fillOval}, which has the following signature:
 
 The four parameters specify a {\bf bounding box}, which is the rectangle in which the oval is drawn.
 \java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
-The bounding box itself is not drawn.
+The bounding box itself is not drawn (see Figure~\ref{fig.circle}).
 
 \begin{figure}
 \begin{center}
@@ -11423,7 +11406,7 @@ And here's a method that draws Mickey Mouse:
 The first line draws the face.
 The next three lines create a smaller rectangle for the ears.
 We \java{translate} the rectangle up and left for the first ear, then to the right for the second ear.
-The result looks like this:
+The result is shown in Figure~\ref{fig.mickey}.
 
 \begin{figure}
 \begin{center}
@@ -11470,7 +11453,7 @@ Draw the flag of Japan: a red circle on white background that is wider than it i
 \begin{exercise}
 Modify {\tt Mickey.java} to draw ears on the ears, and ears on those ears, and more ears all the way down until the smallest ears are only 3 pixels wide.
 
-The result should look like ``Mickey Moose'':
+The result should look like ``Mickey Moose'', shown in Figure~\ref{fig.moose}.
 
 \begin{figure}
 \begin{center}
@@ -11500,7 +11483,7 @@ Did you get what you expected?
 \item Modify the program so that the space between the circles is larger or smaller.
 See what happens to the image.
 
-\item Modify the program so that the circles are drawn in the center of the screen and concentric, as in the following figure (left).
+\item Modify the program so that the circles are drawn in the center of the screen and concentric, as in Figure~\ref{fig.moire} (left).
 The distance between the circles should be small enough that the Moir\'{e} interference is apparent.
 
 \begin{figure}
@@ -11511,7 +11494,7 @@ The distance between the circles should be small enough that the Moir\'{e} inter
 \end{center}
 \end{figure}
 
-\item Write a method named \java{radial} that draws a radial set of line segments as shown in the figure (right), but they should be close enough together to create a Moir\'{e} pattern.
+\item Write a method named \java{radial} that draws a radial set of line segments as shown in Figure~\ref{fig.moire} (right), but they should be close enough together to create a Moir\'{e} pattern.
 
 \item Just about any kind of graphical pattern can generate Moir\'{e}-like interference patterns.
 Play around and see what you can create.
