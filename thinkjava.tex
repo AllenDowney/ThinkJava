@@ -7105,7 +7105,8 @@ The string \java{""}, what contains no characters and has a length of zero.
 %A runtime error like ArithmeticException or IndexOutOfBoundsException.
 
 %TODO: find a place to present stack trace, ideally someplace with
-% a non-trivial call stack
+% a non-trivial call stack (this one is important -- right now we have
+% nothing)
 
 %\term{stack trace}
 %An error message that shows the state of a program when an exception occurs.
@@ -7321,8 +7322,12 @@ Your solution should only traverse the string once.
 \end{exercise}
 
 %TODO: check for consistency on String vs string vs \java{String}
-% let's avoid String, use \java{String} for the type, and string for the concept
+% let's avoid String, use \java{String} for the type, and string for the concept (agreed)
+
 % we should also check Point, Rectangle, Time, Rational, BigInteger, etc.
+
+% Since we say ``print statement'' without \java{}, I would like to
+% do the same with ``for loop'', ``while loop'', and similar
 
 
 \begin{exercise}
@@ -8531,11 +8536,9 @@ In that case, \java{sum.hour -= 24} would yield the correct result.
 This implementation of \java{add} does not modify either of the parameters; instead, it creates and returns a new \java{Time} object.
 As an alternative, we could have written a method like this:
 
-%TODO is it a problem that secs sounds like sex? or does that fall into the beer category? :)
-
 \begin{code}
-    public void increment(double secs) {
-        this.second += secs;
+    public void increment(double seconds) {
+        this.second += seconds;
         while (this.second >= 60.0) {
             this.second -= 60.0;
             this.minute += 1;
@@ -8749,9 +8752,6 @@ Hint: remember the modulus operator.
 
 \begin{exercise}
 \index{Scrabble}
-
-% Note: we provided the copyright notice on Scrabble in a previous exercise
-%TODO add label and reference between the Scrabble exercises?
 
 In the board game Scrabble, each tile contains a letter, which is used to spell words in rows and columns, and a score, which is used to determine the value of words.
 
@@ -9304,6 +9304,7 @@ One way to populate the array is to write nested \java{for} loops:
 \end{code}
 
 %TODO only use of the word enumerate; should that be a vocab term?
+%ABD: I think it's ok as an English word
 
 The outer loop enumerates the suits from 0 to 3.
 For each suit, the inner loop enumerates the ranks from 1 to 13.
@@ -10058,18 +10059,6 @@ Before you start the exercises, we recommend that you compile and run the code i
 
 
 \begin{exercise}
-
-Write a \java{toString} method for the \java{Deck} class.
-It should return a single string that represents the cards in the deck.
-When it's printed, this string should display the same results as the \java{print} method in Section~\ref{deck}.
-
-Hint: You can use the \java{+} operator to concatenate strings, but it is not very efficient.
-Consider using \java{java.util.StringBuilder}, which you can read about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
-
-\end{exercise}
-
-
-\begin{exercise}
 You can learn more about the sorting algorithms in this chapter, and others, at \url{http://www.sorting-algorithms.com/}.
 That site includes explanations of the algorithms, animations that show how they work, and analysis of their efficiency.
 \end{exercise}
@@ -10080,17 +10069,10 @@ The goal of this exercise is to implement the shuffling and sorting algorithms f
 
 \begin{enumerate}
 
-%TODO: what do we want to do about starter code?
+\item In the repository for this book, you should find a file called \java{Deck.java} that contains the code in this chapter.
+Check that you can compile it in your environment.
 
-%\item Download the code from this chapter from \url{http://thinkapjava.com/code/Card2.java} and import it into your development environment.
-%I have provided outlines for the methods you will write, so the program should compile.
-%But when it runs it prints messages indicating that the empty methods are not working.
-%When you fill them in correctly, the messages should go away.
-
-%\item If you did Exercise~\ref{ex.randint}, you already wrote \java{randomInt}.
-%Otherwise, write it now and add code to test it.
-
-\item Write a method called \java{randomInt} that takes two integers, \java{low} and \java{high}, and returns a random integer between \java{low} and \java{high}, including both.
+\item Add a \java{Deck} a method called \java{randomInt} that takes two integers, \java{low} and \java{high}, and returns a random integer between \java{low} and \java{high}, including both.
 You can use the \java{nextInt} provided by \java{java.util.Random}, which we saw in Section~\ref{random}.
 But you should avoid creating a \java{Random} object every time \java{randomInt} is invoked.
 
@@ -10126,6 +10108,18 @@ deck = deck.mergeSort();      // replaces old deck with new
 The goal of this exercise is to practice top-down programming by implementing ``insertion sort''.
 Read about insertion sort at \url{http://www.sorting-algorithms.com/insertion-sort}.
 Write a method named \java{insertionSort} that implements this algorithm.
+\end{exercise}
+
+
+\begin{exercise}
+
+Write a \java{toString} method for the \java{Deck} class.
+It should return a single string that represents the cards in the deck.
+When it's printed, this string should display the same results as the \java{print} method in Section~\ref{deck}.
+
+Hint: You can use the \java{+} operator to concatenate strings, but it is not very efficient.
+Consider using \java{java.util.StringBuilder}, which you can read about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
+
 \end{exercise}
 
 
@@ -10471,6 +10465,7 @@ Every cat is also a mammal, and every mammal is also an animal.
 But not every animal is a mammal, and not every mammal is a cat.
 
 %TODO introduce the term polymorphism?
+%ABD: I don't think we need it unless we write Chapter 15: Interfaces
 
 
 \section{Player}
@@ -10672,12 +10667,6 @@ If either hand is empty, we're done:
 
 When the draw pile is empty, we have to shuffle the discard pile:
 
-%TODO this code doesn't match Eights.java (review the whole chapter?)
-
-% ABD: I've update the code here to match what's in the file.
-% This was a late bug fix.  The rest of the chapter should be ok.
-% (famous last words)
-
 \begin{code}
     public void reshuffle() {
         Card prev = discardPile.popCard();
@@ -10827,10 +10816,6 @@ Relationships between classes are represented by arrows: composition arrows have
 Figure~\ref{uml1} shows the classes defined in this chapter and the relationships among them.
 
 UML is an international standard, so almost any software engineer in the world could look at this diagram and understand our design.
-
-%\section{Last words}
-
-% TODO: write an outro? (not in this chapter -- it's already 16 pages)
 
 
 \section{Vocabulary}
@@ -10988,6 +10973,7 @@ Also, you can press the up/down arrows on the keyboard to repeat previous comman
 
 \section{Checkstyle}
 \label{checkstyle}
+
 TODO
 
 
@@ -11474,8 +11460,10 @@ A common way to specify the coordinates of a rectangular area.
 \section{Exercises}
 
 %TODO use a page reference, rather than a section reference?
+%ABD: This is not a problem for the O'Reilly version, but might be for
+% the latex version
 
-The code for this appendix is in the directory {\tt app01} in the repository for this book.
+The code for this appendix is in the directory {\tt ap02} in the repository for this book.
 Instructions for downloading this code are in Section~\ref{code}.
 Before you start the exercises, make sure you can compile and run the code in your environment.
 
@@ -11791,7 +11779,7 @@ When you run the program, check whether the values are reasonable, and check for
 
 \index{Exception}
 
-When an exception occurs, Java displays a message that includes the name of the exception, the line of the program where the exception occurred, and a ``stack trace''. The stack trace includes the method that was running, the method that invoked it, the method that invoked that one, and so on.
+When an exception occurs, Java displays a message that includes the name of the exception, the line of the program where the exception occurred, and a stack trace.  The stack trace includes the method that was running, the method that invoked it, the method that invoked that one, and so on.
 
 The first step is to examine the place in the program where the error occurred and see if you can figure out what happened.
 

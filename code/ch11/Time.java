@@ -87,8 +87,8 @@ public class Time {
     /**
      * Adds the given number of seconds to this object (modifier).
      */
-    public void increment(double secs) {
-        this.second += secs;
+    public void increment(double seconds) {
+        this.second += seconds;
         while (this.second >= 60.0) {
             this.second -= 60.0;
             this.minute += 1;
