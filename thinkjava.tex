@@ -274,7 +274,6 @@ In the vocabulary of computer science pedagogy, this book uses the ``objects lat
 Here are the guiding principles that make the book the way it is:
 
 \begin{itemize}
-%TODO not sure about the order and whether we need all of them
 
 \item {\em One concept at a time.}
 We break down topics that give beginners trouble into a series of small steps, so that they can exercise each new concept in isolation before continuing.
@@ -331,6 +330,7 @@ We introduce nearly every topic in the ``Java subset'' with a few exceptions.
 A mapping of {\em Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}.
 %TODO: replace this with a more specific link when it's ready
 
+
 \section*{Appendices}
 
 The chapters of this books are meant to be read in order, because each one builds on the previous ones.
@@ -351,7 +351,7 @@ These libraries use object-oriented features readers will not completely underst
 
 \item{Appendix 3: Debugging}
 
-We provide debugging suggestions throughout the book, but we also collect our debugging advice in this appendix.
+We provide debugging suggestions throughout the book, but we also collect our debugging advice in an appendix.
 We recommend that readers review this appendix several times as they work through the book.
 
 \end{description}
@@ -391,11 +391,9 @@ Then you can ``clone'' the repository, which downloads a copy of the files to yo
 
 After you clone the repository or unzip the zip file, you should have a directory called {\tt ThinkJavaCode} with a subdirectory for each chapter in the book.
 
-All the examples in this book were developed and tested using Java SE Version 7.
+All the examples in this book were developed and tested using Java SE Development Kit 7.
 If you are using a more recent version, the examples in this book should still work.
 If you are using an older version, a some of them will not.
-
-
 
 
 \section*{Contributors over the years}
@@ -642,6 +640,10 @@ Traditionally, the first program you write when learning a new programming langu
 All it does is display the words ``Hello, World!''\ on the screen.
 In Java, it looks like this:
 
+% NOTE(ABD): I changed a lot of ``print'' to ``display'', partly to be
+% more precise, but also to reduce the number of times ``print'' appears,
+% which is a lot!
+
 \begin{code}
 public class Hello {
 
@@ -688,8 +690,6 @@ Confusingly, {\em print} can mean both ``display something on the screen'' and `
 In this book, we'll try to say ``display'' when we mean output to the screen.
 Like most statements, the print statement ends with a semicolon (\java{;}).
 
-%TODO: check the use of ``print''
-
 \index{method}
 
 A {\bf method} is a named sequence of statements.
@@ -725,18 +725,18 @@ When the compiler sees \java{//}, it ignores everything from there until the end
 Comments have no effect on the execution of the program, but they make it easier for other programmers (and your future self) to understand what you meant to do.
 
 
-\section{Printing strings}
+\section{Displaying strings}
 
 You can put as many statements as you like in \java{main}.
-For example, to print more than one line:
+For example, to display more than one line of output:
 
 \begin{code}
 public class Hello {
 
     public static void main(String[] args) {
         // generate some simple output
-        System.out.println("Hello, World!");  // print one line
-        System.out.println("How are you?");   // print another
+        System.out.println("Hello, World!");  // display one line
+        System.out.println("How are you?");   // display another
     }
 }
 \end{code}
@@ -776,7 +776,7 @@ Notice that there is a space at the end of the first string, which appears in th
 
 \section{Escape sequences}
 
-It is possible to print multiple lines of output in just one line of code.
+It is possible to display multiple lines of output in just one line of code.
 You just have to tell Java where to put the line breaks.
 
 \begin{code}
@@ -1055,7 +1055,7 @@ Some environments provide sample programs similar to the example in Section~\ref
 \begin{enumerate}
 \item Type in the ``Hello, world'' program, then compile and run it.
 
-\item Add a print statement that prints a second message after the ``Hello, world!''.
+\item Add a print statement that displays a second message after the ``Hello, world!''.
 Say something witty like, ``How are you?''
 Compile and run the program again.
 
@@ -1415,7 +1415,7 @@ As the program runs, the state changes, so you should think of a state diagram a
 \label{sec:printvar}
 
 You can display the value of a variable using \java{print} or \java{println}.
-The following statements declare a variable named \java{firstLine}, assign it the value \java{"Hello, again!"}, and print that value.
+The following statements declare a variable named \java{firstLine}, assign it the value \java{"Hello, again!"}, and display that value.
 
 \begin{code}
     String firstLine = "Hello, again!";
@@ -1428,8 +1428,8 @@ The following statements declare a variable named \java{firstLine}, assign it th
 %Hello, again!
 %\end{stdout}
 
-When we talk about printing a variable, we generally mean printing the {\em value} of the variable.
-To print the {\em name} of a variable, you have to put it in quotes.
+When we talk about displaying a variable, we generally mean displaying the {\em value} of the variable.
+To display the {\em name} of a variable, you have to put it in quotes.
 %For example: \java{System.out.println("firstLine");}
 
 \begin{code}
@@ -1444,7 +1444,7 @@ For this example, the output is:
 The value of firstLine is Hello, again!
 \end{stdout}
 
-Conveniently, the syntax for printing a variable is the same regardless of its type.
+Conveniently, the syntax for displaying a variable is the same regardless of its type.
 For example:
 
 \begin{code}
@@ -1495,7 +1495,9 @@ The following program converts a time of day to minutes:
 
 In this program, \java{hour * 60 + minute} is an {\bf expression}, which represents a single value to be computed.
 When the program runs, each variable is replaced by its current value, and then the operators are applied.
-The result is:
+The values operators work with are called {\bf operands}.
+
+The result of the previous example is:
 
 \begin{stdout}
 Number of minutes since midnight: 719
@@ -1755,7 +1757,7 @@ If it's not obvious by looking at the expression, use parentheses to make it cle
 So far we have looked at the elements of a programming language -- variables, expressions, and statements -- in isolation, without talking about how to put them together.
 
 One of the most useful features of programming languages is their ability to take small building blocks and {\bf compose} them.
-For example, we know how to multiply numbers and we know how to print.
+For example, we know how to multiply numbers and we know how to display values.
 We can combine these operations into a single statement:
 
 \begin{code}
@@ -1824,8 +1826,6 @@ In the meantime, there many tools that help programmers find and correct style v
 One of the most popular is Checkstyle, which enforces most of Google's guidelines.
 Instructions for downloading and running Checkstyle are in Appendix~\ref{checkstyle}.
 
-% TODO: When we have the website up, let's update this with a more specific URL
-
 %There are limits to what automatic style checkers can do.
 %In particular, they can't evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, or the {\em structure} of your algorithms.
 %Good comments make it easier for experienced developers to identify errors in your code.
@@ -1888,8 +1888,8 @@ A graphical representation of the state of a program and a point in time.
 \term{operator}
 A symbol that represents a computation like addition, multiplication, or string concatenation.
 
-%\term{operand}
-%One of the values on which an operator operates.
+\term{operand}
+One of the values on which an operator operates.
 
 \term{expression}
 A combination of variables, operators, and values that represents a single value.
@@ -1957,12 +1957,12 @@ The variable \java{day} will contain the day of the week (like Friday), and \jav
 What type is each variable?
 Assign values to those variables that represent today's date.
 
-\item Print the value of each variable on a line by itself.
+\item Display the value of each variable on a line by itself.
 This is an intermediate step that is useful for checking that everything is working so far.
 
-\item Modify the program so that it prints the date in standard American format, for example: {\tt Thursday, July 16, 2015}.
+\item Modify the program so that it displays the date in standard American format, for example: {\tt Thursday, July 16, 2015}.
 
-\item Modify the program so it also prints the date in European format.
+\item Modify the program so it also displays the date in European format.
 The output should be:
 
 \begin{stdout}
@@ -1993,9 +1993,9 @@ Use a 24-hour clock so that at 2pm the value of \java{hour} is 14.
 
 \item Make the program calculate and display the number of seconds since midnight.
 
-\item Calculate and print the number of seconds remaining in the day.
+\item Calculate and display the number of seconds remaining in the day.
 
-\item Calculate and print the percentage of the day that has passed.
+\item Calculate and display the percentage of the day that has passed.
 You might run into problems when computing percentages with integers, so consider using floating-point.
 
 \item Change the values of \java{hour}, \java{minute}, and \java{second} to reflect the current time.
@@ -2004,7 +2004,7 @@ Then compute the elapsed time since you started working on this exercise.
 \end{enumerate}
 
 Hint: You might want to use additional variables to hold values during the computation.
-Variables that are used in a computation but never printed are sometimes called intermediate or {\em temporary} variables.
+Variables that are used in a computation but never displayed are sometimes called intermediate or {\em temporary} variables.
 
 \end{exercise}
 
@@ -2193,7 +2193,7 @@ Or they might want to convert height in inches to centimeters.
 %The focus will not only be on Java syntax and language features, but also on the {\em process} of solving the problem, documenting the code, and testing the solution.
 
 We can write a program to help.
-We'll use a \java{Scanner} to input a measurement in inches, convert to centimeters, and then print the results.
+We'll use a \java{Scanner} to input a measurement in inches, convert to centimeters, and then display the results.
 The following lines declare the variables and create the \java{Scanner}:
 
 \begin{code}
@@ -2510,8 +2510,6 @@ In both steps, you're dividing by the same number.
 
 When statements get long (generally wider than 80 characters), a common style convention is to break them across multiple lines.
 The reader should never have to scroll horizontally.
-
-%TODO: add a Checkstyle exercise in Chapter 2
 
 
 \section{The Scanner bug}
@@ -2943,7 +2941,7 @@ If we wanted more space between them, we could invoke the same method repeatedly
     }
 \end{code}
 
-Or we could write a new method that prints three blank lines:
+Or we could write a new method that displays three blank lines:
 
 \begin{code}
     public static void threeLine() {
@@ -2972,7 +2970,7 @@ There are many reasons, but this example demonstrates a few of them:
 %Which is clearer, \java{newLine} or \java{System.out.println()}?
 
 \item Introducing new methods can make a program smaller by eliminating repetitive code.
-For example, to print nine consecutive new lines, you could invoke \java{threeLine} three times.
+For example, to display nine consecutive new lines, you could invoke \java{threeLine} three times.
 
 \item A common problem-solving technique is to break things down into sub-problems.
 Methods allow you to focus on each sub-problem in isolation, and then compose them into a complete solution.
@@ -3046,7 +3044,7 @@ Instead, follow the flow of execution.
 
 Some of the methods we have used require arguments, which are the values you provide when you invoke the method.
 For example, to find the sine of a number, you have to provide the number, so \java{sin} takes a \java{double} as an argument.
-To print a message, you have to provide the message, so \java{println} takes a \java{String}.
+To display a message, you have to provide the message, so \java{println} takes a \java{String}.
 
 When you use a method, you provide the arguments.
 When you write a method, you name the parameters; the parameter list indicates what arguments are required.
@@ -3567,7 +3565,7 @@ You should start with a working solution to Exercise~\ref{ex:date}.
 
 \begin{enumerate}
 
-\item Write a method called \java{printAmerican} that takes the day, date, month and year as parameters and that prints them in American format.
+\item Write a method called \java{printAmerican} that takes the day, date, month and year as parameters and that displays them in American format.
 
 \item Test your method by invoking it from \java{main} and passing appropriate arguments.
 The output should look something like this (except that the date might be different):
@@ -3576,7 +3574,7 @@ The output should look something like this (except that the date might be differ
 Saturday, July 16, 2011
 \end{stdout}
 
-\item Once you have debugged \java{printAmerican}, write another method called \java{printEuropean} that prints the date in European format.
+\item Once you have debugged \java{printAmerican}, write another method called \java{printEuropean} that displays the date in European format.
 
 \end{enumerate}
 
@@ -3663,9 +3661,6 @@ So \java{!evenFlag} is true if \java{evenFlag} is {\em not} true.
 
 \index{short circuit}
 
-%TODO uncomment the vocab term operand in chapter 2
-% or replace all instances of operand in chapter 5
-
 Logical operators evaluate the second expression only when necessary.
 For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
 Likewise, \java{false && anything} is always false.
@@ -3733,7 +3728,7 @@ The possibilities are called {\bf branches}, and the condition determines which 
     }
 \end{code}
 
-If the remainder when \java{x} is divided by 2 is zero, we know that \java{x} is even, and this fragment prints a message to that effect.
+If the remainder when \java{x} is divided by 2 is zero, we know that \java{x} is even, and this fragment displays a message to that effect.
 If the condition is false, the second print statement is executed instead.
 Since the condition must be true or false, exactly one of the branches will run.
 
@@ -3879,7 +3874,7 @@ One reason to use \java{return} is if you detect an error condition:
 \end{code}
 
 This example defines a method named \java{printLogarithm} that takes a \java{double} value (named \java{x}) as a parameter.
-It checks whether \java{x} is less than or equal to zero, in which case it prints an error message and then uses \java{return} to exit the method.
+It checks whether \java{x} is less than or equal to zero, in which case it displays an error message and then uses \java{return} to exit the method.
 The flow of execution immediately returns to where the method was invoked, and the remaining lines of the method are not executed.
 
 \index{System.err}
@@ -3953,21 +3948,21 @@ Consider the following example:
 \end{code}
 
 The name of the method is \java{countdown}; it takes a single integer as a parameter.
-If the parameter is zero, it prints the word ``Blastoff''.
-Otherwise, it prints the number and then invokes {\em itself}, passing \java{n - 1} as the argument.
+If the parameter is zero, it displays the word ``Blastoff''.
+Otherwise, it displays the number and then invokes {\em itself}, passing \java{n - 1} as the argument.
 A method that invokes itself is called {\bf recursive}.
 
 What happens if we invoke \java{countdown(3)} from \java{main}?
 
 \vspace{-1ex}
 \begin{quote}
-The execution of \java{countdown} begins with \java{n == 3}, and since \java{n} is not zero, it prints the value 3, and then invokes itself...
+The execution of \java{countdown} begins with \java{n == 3}, and since \java{n} is not zero, it displays the value 3, and then invokes itself...
 \begin{quote}
-The execution of \java{countdown} begins with \java{n == 2}, and since \java{n} is not zero, it prints the value 2, and then invokes itself...
+The execution of \java{countdown} begins with \java{n == 2}, and since \java{n} is not zero, it displays the value 2, and then invokes itself...
 \begin{quote}
-The execution of \java{countdown} begins with \java{n == 1}, and since \java{n} is not zero, it prints the value 1, and then invokes itself...
+The execution of \java{countdown} begins with \java{n == 1}, and since \java{n} is not zero, it displays the value 1, and then invokes itself...
 \begin{quote}
-The execution of \java{countdown} begins with \java{n == 0}, and since \java{n} is zero, it prints the word ``Blastoff!'' and then returns.
+The execution of \java{countdown} begins with \java{n == 0}, and since \java{n} is zero, it displays the word ``Blastoff!'' and then returns.
 \end{quote}
 The \java{countdown} that got \java{n == 1} returns.
 \end{quote}
@@ -4003,7 +3998,7 @@ As a second example, we'll rewrite the methods \java{newLine} and \java{threeLin
 
 \index{newline}
 
-Although these methods work, they would not help if we wanted to print two newlines, or maybe 100.
+Although these methods work, they would not help if we wanted to display two newlines, or maybe 100.
 A better alternative would be:
 
 \begin{code}
@@ -4015,9 +4010,9 @@ A better alternative would be:
     }
 \end{code}
 
-This method takes an integer, \java{n}, as a parameter and prints \java{n} newlines.
+This method takes an integer, \java{n}, as a parameter and displays \java{n} newlines.
 The structure is similar to \java{countdown}.
-As long as $n$ is greater than zero, it prints a newline and then invokes itself to print $(n-1)$ additional newlines.
+As long as $n$ is greater than zero, it displays a newline and then invokes itself to display $(n-1)$ additional newlines.
 The total number of newlines is $1 + (n - 1)$, which is just what we wanted: $n$.
 
 
@@ -4063,13 +4058,13 @@ For example, here is a recursive method without a base case:
 \index{call stack}
 \index{stack overflow}
 
-This method prints the string until the stack overflows, at which point it throws an exception.
+This method displays the string until the stack overflows, at which point it throws an exception.
 
 
 \section{Binary Numbers}
 
-The \java{countdown} example has three parts: (1) it checks the base case, (2) prints something, and (3) makes a recursive call.
-What do you think happens if you reverse steps 2 and 3, making the recursive call {\it before} printing?
+The \java{countdown} example has three parts: (1) it checks the base case, (2) displays something, and (3) makes a recursive call.
+What do you think happens if you reverse steps 2 and 3, making the recursive call {\it before} displaying?
 
 \begin{code}
     public static void countup(int n) {
@@ -4119,9 +4114,9 @@ Here is a recursive method that displays the binary representation of any positi
 
 If \java{value} is zero, \java{displayBinary} does nothing (that's the base case).
 If the argument is positive, the method divides it by two and calls \java{displayBinary} recursively.
-When the recursive call returns, the method prints one digit of the result and returns (again).
-The leftmost digit is at the bottom of the stack, so it gets printed first.
-The rightmost digit, at the top of the stack, gets printed last.
+When the recursive call returns, the method displays one digit of the result and returns (again).
+The leftmost digit is at the bottom of the stack, so it gets displayed first.
+The rightmost digit, at the top of the stack, gets displayed last.
 
 \begin{code}
     displayBinary(23);
@@ -4223,8 +4218,8 @@ Draw a stack diagram that shows the state of the program in Section~\ref{recursi
 Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that $a^n + b^n = c^n$, except when $n \leq 2$.
 
 Write a method named \java{checkFermat} that takes four integers as parameters -- \java{a}, \java{b}, \java{c} and \java{n} -- and checks to see if Fermat's theorem holds.
-If $n$ is greater than 2 and $a^n + b^n = c^n$, the program should print ``Holy smokes, Fermat was wrong!''
-Otherwise the program should print ``No, that doesn't work.''
+If $n$ is greater than 2 and $a^n + b^n = c^n$, the program should display ``Holy smokes, Fermat was wrong!''
+Otherwise the program should display ``No, that doesn't work.''
 
 Hint: You may want to use \java{Math.pow}.
 
@@ -4254,7 +4249,7 @@ ya' can't take one down, ya' can't pass it around,\\
 
 And then the song (finally) ends.
 
-Write a program that prints the entire lyrics of ``99 Bottles of Beer''.
+Write a program that displays the entire lyrics of ``99 Bottles of Beer''.
 Your program should include a recursive method that does the hard part, but you might want to write additional methods to separate other parts of the program.
 As you develop your code, test it with a small number of verses, like \java{3}.
 
@@ -4718,7 +4713,7 @@ In \java{main}, you can invoke the method in the usual ways:
     boolean bigFlag = !isSingleDigit(17);
 \end{code}
 
-The first line prints \java{true} because 2 is a single-digit number.
+The first line displays \java{true} because 2 is a single-digit number.
 The second line sets \java{bigFlag} to \java{true}, because 17 is {\em not} a single-digit number.
 
 Conditional statements often invoke \java{boolean} methods and use the result as the condition:
@@ -5159,7 +5154,7 @@ A(m-1, A(m, n-1)) & \mbox{if } m > 0 \mbox{ and } n > 0.
 
 Write a method called \java{ack} that takes two \java{int}s as parameters and that computes and returns the value of the Ackermann function.
 
-Test your implementation of Ackermann by invoking it from \java{main} and printing the return value.
+Test your implementation of Ackermann by invoking it from \java{main} and displaying the return value.
 Note the return value gets very big very quickly.
 You should try it only for small values of $m$ and $n$ (not bigger than 3).
 
@@ -5280,7 +5275,7 @@ For example, this loop continues until \java{n} is 1 (which makes the condition 
     }
 \end{code}
 
-Each time through the loop, the program prints the value of \java{n} and then checks whether it is even or odd.
+Each time through the loop, the program displays the value of \java{n} and then checks whether it is even or odd.
 If it is even, the value of \java{n} is divided by two.
 If it is odd, the value is replaced by $3n+1$.
 For example, if the starting value (the argument passed to \java{sequence}) is 3, the resulting sequence is 3, 10, 5, 16, 8, 4, 2, 1.
@@ -5301,7 +5296,7 @@ For more information, see \url{http://en.wikipedia.org/wiki/Collatz_conjecture}.
 \index{table}
 \index{logarithm}
 
-Loops are good for generating and printing tabular data.
+Loops are good for generating and displaying tabular data.
 Before computers were readily available, people had to calculate logarithms, sines and cosines, and other common mathematical functions by hand.
 To make that easier, there were books of tables where you could look up values of various functions.
 Creating these tables by hand was slow and boring, and the results were often full of errors.
@@ -5317,7 +5312,7 @@ Even so, for some operations, computers use tables of values to get an approxima
 In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division (see \url{http://en.wikipedia.org/wiki/Pentium_FDIV_bug}).
 
 Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
-The following loop prints a table with a sequence of values in the left column and their logarithms in the right column:
+The following loop displays a table with a sequence of values in the left column and their logarithms in the right column:
 
 \begin{code}
     int i = 1;
@@ -5426,8 +5421,8 @@ The steps are:
 
 The second step is called {\bf encapsulation}; the third step is {\bf generalization}.
 
-To demonstrate this process, we'll develop methods that print a multiplication table.
-We'll start with a loop that prints the multiples of 2, all on one line.
+To demonstrate this process, we'll develop methods that display a multiplication table.
+We'll start with a loop that displays the multiples of 2, all on one line.
 
 \begin{code}
     int i = 1;
@@ -5443,7 +5438,7 @@ We'll start with a loop that prints the multiples of 2, all on one line.
 
 The first line initializes a variable named \java{i}, which is going to act as a {\bf loop variable}: as the loop executes, the value of \java{i} increases from 1 to 6; when \java{i} is 7, the loop terminates.
 
-Each time through the loop, we print the value \java{2 * i}, padded with spaces so it's four characters wide.
+Each time through the loop, we display the value \java{2 * i}, padded with spaces so it's four characters wide.
 Since we use \java{System.out.printf}, the output appears on a single line.
 After the loop, we call \java{println} to print a newline and complete the line.
 Remember that in some environments, none of the output is displayed until the line is complete.
@@ -5498,7 +5493,7 @@ And with argument 4, the output is:
     4    8   12   16   20   24
 \end{stdout}
 
-By now you can probably guess how we are going to print a multiplication table: we'll invoke \java{printRow} repeatedly with different arguments.
+By now you can probably guess how we are going to display a multiplication table: we'll invoke \java{printRow} repeatedly with different arguments.
 In fact, we'll use another loop to iterate through the rows.
 
 \begin{code}
@@ -5543,7 +5538,7 @@ The process of encapsulation and generalization allows you design as you go alon
 \section{More generalization}
 \index{generalization}
 
-The previous version of \java{printTable} always prints six rows.
+The previous version of \java{printTable} always displays six rows.
 We can generalize it by replacing the literal \java{6} with a parameter:
 
 \begin{code}
@@ -5568,7 +5563,7 @@ Here is the output with the argument 7:
    7  14  21  28  35  42
 \end{stdout}
 
-That's better, but it still has a problem: it always prints the same number of columns.
+That's better, but it still has a problem: it always displays the same number of columns.
 We can generalize more by adding a parameter to \java{printRow}:
 
 \begin{code}
@@ -5689,7 +5684,7 @@ For example, here is a version of \java{printRow} that uses a \java{for} loop:
     }
 \end{code}
 
-The last line tries to print \java{i} (for no reason other than demonstration) but it won't work.
+The last line tries to display \java{i} (for no reason other than demonstration) but it won't work.
 If you need to use a loop variable outside the loop, you have to declare it outside the loop, like this:
 
 \begin{code}
@@ -5712,23 +5707,6 @@ And \java{--} is the {\bf decrement} operator; it has the same effect as \java{i
 
 If you want to increment or decrement a variable by an amount other than 1, you can use \java{+=} and \java{-=}.
 For example, \java{i += 2} increments \java{i} by \java{2}.
-
-
-%TODO: come back to nested loops, probably along with 2-D arrays
-%Because \java{for} loops are so concise, they are particularly useful when iterating over two or more dimensions.
-%We can rewrite the final example of \java{printTable} in the previous section with just a few lines of code:
-
-%\begin{code}
-%    for (int i = 1; i <= size; i++) {
-%        for (int j = 1; j <= i; j++) {
-%            System.out.printf("%4d", row * col);
-%        }
-%        System.out.println();
-%    }
-%\end{code}
-
-%In contrast to \java{printTable} and \java{printRow}, this version of the code cannot use the variable \java{i} for both loops.
-%Instead, it uses the variables \java{row} and \java{col} to represent the positions in the table.
 
 
 \section{Vocabulary}
@@ -5777,6 +5755,8 @@ Before you start the exercises, we recommend that you compile and run the code i
 
 If you have not already read Section~\ref{checkstyle}, now might be a good time.
 It describes Checkstyle, a tool that checks whether your programs comply with style guidelines.
+
+%TODO: add a Checkstyle exercise
 
 
 \begin{exercise}
@@ -5887,7 +5867,7 @@ You can use the \java{factorial} method from Section~\ref{factorial} or your ite
 \item You can make this method more efficient if you realize that the numerator of each term is the same as its predecessor multiplied by \java{x}, and the denominator is the same as its predecessor multiplied by \java{i}.
 Use this observation to eliminate the use of \java{Math.pow} and \java{factorial}, and check that you get the same result.
 
-\item Write a method called \java{check} that takes a parameter, \java{x}, and prints \java{x}, \java{myexp(x)}, and \java{Math.exp(x)}.
+\item Write a method called \java{check} that takes a parameter, \java{x}, and displays \java{x}, \java{myexp(x)}, and \java{Math.exp(x)}.
 The output should look something like:
 
 \begin{stdout}
@@ -6039,7 +6019,7 @@ This \java{while} loop counts from 0 up to 4.
 When \java{i} is 4, the condition fails and the loop terminates.
 So the body of the loop is only executed when \java{i} is 0, 1, 2, and 3.
 
-Each time through the loop we use \java{i} as an index into the array, printing the \java{i}th element.
+Each time through the loop we use \java{i} as an index into the array, displaying the \java{i}th element.
 This type of array traversal is often written using a \java{for} loop.
 
 \begin{code}
@@ -6055,11 +6035,11 @@ If the index is negative or greater than 3, the result is an \java{ArrayIndexOut
 \index{exception!ArrayIndexOutOfBounds}
 
 
-\section{Printing arrays}
+\section{Displaying arrays}
 \label{printarray}
 
-You can use \java{println} to print an array, but it probably doesn't do what you want.
-For example, the following fragment creates an array variable, \java{a}, makes it refer to an array of four elements, and prints it:
+You can use \java{println} to display an array, but it probably doesn't do what you want.
+For example, the following fragment creates an array variable, \java{a}, makes it refer to an array of four elements, and displays it:
 
 \begin{code}
     int[] a = {1, 2, 3, 4};
@@ -6134,7 +6114,7 @@ These statements create an array of three \java{double}s and makes two different
 \end{figure}
 
 Any changes made through either variable will be seen by the other.
-For example, if we set \java{a[0] = 17.0}, and then print {\tt b[0]}, the result is \java{17.0}.
+For example, if we set \java{a[0] = 17.0}, and then display {\tt b[0]}, the result is \java{17.0}.
 Because \java{a} and \java{b} are different names for the same thing, they are sometimes called {\bf aliases}.
 
 If you actually want to copy the array, not just a reference, you have to create a new array and copy the elements from one to the other, like this:
@@ -6288,7 +6268,7 @@ The return type is \java{int[]}, which means that this method returns a referenc
     }
 \end{code}
 
-The following fragment generates an array and prints it using \java{printArray} from Section~\ref{printarray}:
+The following fragment generates an array and displays it using \java{printArray} from Section~\ref{printarray}:
 
 \begin{code}
     int numValues = 8;
@@ -6426,7 +6406,7 @@ Because this code only traverses the array of scores once, it is much faster.
 \label{enhanced}
 
 Since traversing arrays is so common, Java provides an alternative syntax that makes the code more compact.
-For example, consider a for loop that prints the elements of an array.
+For example, consider a for loop that displays the elements of an array.
 
 \begin{code}
     for (int i = 0; i < values.length; i++) {
@@ -6743,7 +6723,7 @@ Unlike string literals, which appear in double quotes, character literals can on
 Escape sequences, like \java{'\\t'}, are legal because they represent a single character.
 
 The increment and decrement operators work with characters.
-So this loop prints the letters of the alphabet:
+So this loop displays the letters of the alphabet:
 
 \begin{code}
     System.out.print("Roman alphabet: ");
@@ -6759,7 +6739,7 @@ Java uses {\bf Unicode} to represent characters, so strings can store text in ot
 You can read more about it at \url{http://unicode.org/}.
 
 In Unicode, each character is represented by a ``code unit'', which you can think of as an integer.
-The code units for uppercase Greek letters run from 913 to 937, so we can print the Greek alphabet like this:
+The code units for uppercase Greek letters run from 913 to 937, so we can display the Greek alphabet like this:
 
 \begin{code}
     System.out.print("Greek alphabet: ");
@@ -6802,7 +6782,7 @@ But \java{name} still refers to \java{"Alan Turing"}.
 
 \index{traverse}
 
-The following loop traverses the characters in \java{fruit} and prints them, one on each line.
+The following loop traverses the characters in \java{fruit} and displays them, one on each line.
 
 \begin{code}
     for (int i = 0; i < fruit.length(); i++) {
@@ -7279,10 +7259,10 @@ Create a program called {\tt Recurse.java} and type in the following methods:
 \item Write some code in \java{main} that tests each of these methods.
 Make sure they work, and you understand what they do.
 
-\item Using these methods, and without using any other \java{String} methods, write a method called \java{printString} that takes a string as a parameter and that prints the letters of the string, one on each line.
+\item Using these methods, and without using any other \java{String} methods, write a method called \java{printString} that takes a string as a parameter and that displays the letters of the string, one on each line.
 It should be a \java{void} method.
 
-\item Again using only these methods, write a method called \java{printBackward} that does the same thing as \java{printString} but that prints the string backward (again, one character per line).
+\item Again using only these methods, write a method called \java{printBackward} that does the same thing as \java{printString} but that displays the string backward (again, one character per line).
 
 \item Now write a method called \java{reverseString} that takes a string as a parameter and that returns a new string as a return value.
 The new string should contain the same letters as the parameter, but in reverse order.
@@ -7479,7 +7459,7 @@ For example:
     int sum = blank.x * blank.x + blank.y * blank.y;
 \end{code}
 
-The first line prints \java{3, 4}; the second line calculates the value \java{25}.
+The first line displays \java{3, 4}; the second line calculates the value \java{25}.
 
 
 \section{Objects as parameters}
@@ -7496,8 +7476,8 @@ For example:
     }
 \end{code}
 
-This method takes a point as an argument and prints its attributes in parentheses.
-If you invoke \java{printPoint(blank)}, it prints \java{(3, 4)}.
+This method takes a point as an argument and displays its attributes in parentheses.
+If you invoke \java{printPoint(blank)}, it displays \java{(3, 4)}.
 
 But we don't really need a method like \java{printPoint}, because if you invoke \java{System.out.println(blank)} you get:
 
@@ -7621,7 +7601,7 @@ Invoking this method has the effect of modifying the \java{Rectangle} that is pa
     System.out.println(box);
 \end{code}
 
-The code prints \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
+The code displays \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
 
 Modifying objects by passing them as arguments to methods can be useful.
 But it can also make debugging more difficult, because it is not always clear which method invocations modify their arguments.
@@ -7684,7 +7664,7 @@ For example:
     System.out.println(box2.width);
 \end{code}
 
-The first line prints {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
+The first line displays {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
 The second line invokes the \java{grow} method on \java{box1}, which resizes the \java{Rectangle} horizontally and vertically.
 The effect is shown in Figure~\ref{fig.aliasing2}:
 
@@ -7697,7 +7677,7 @@ The effect is shown in Figure~\ref{fig.aliasing2}:
 \end{figure}
 
 When we make a change using \java{box1}, we can see the change using \java{box2}.
-Thus, the value printed by the third line is {\tt 200}, the width of the expanded rectangle.
+Thus, the value displayed by the third line is {\tt 200}, the width of the expanded rectangle.
 %(As an aside, it is perfectly legal for the coordinates of a \java{Rectangle} %to be negative.)
 
 As you can tell even from this simple example, code that involves aliasing can get confusing fast and can be difficult to debug.
@@ -7938,7 +7918,7 @@ You might be sick of the factorial method by now, but we're going to do one more
 
 \item Create a new program called \java{Big.java} and write (or reuse) an iterative version of \java{factorial}.
 
-\item Print a table of the integers from 0 to 30 along with their factorials.
+\item Display a table of the integers from 0 to 30 along with their factorials.
 At some point around 15, you will probably see that the answers are not right any more.
 Why not?
 
@@ -7959,7 +7939,7 @@ The following code converts an integer to a BigInteger:
 \end{code}
 
 Type in this code and try it out.
-Try printing a BigInteger.
+Try displaying a BigInteger.
 
 \item Because BigIntegers are not primitive types, the usual math operators don't work.
 Instead we have to use methods like \java{add}.
@@ -7976,7 +7956,7 @@ Try out some of the other methods, like \java{multiply} and \java{pow}.
 \item Convert \java{factorial} so that it performs its calculation using BigIntegers and returns a BigInteger as a result.
 You can leave the parameter alone; it will still be an integer.
 
-\item Try printing the table again with your modified factorial method.
+\item Try displaying the table again with your modified factorial method.
 Is it correct up to 30?
 How high can you make it go?
 
@@ -8233,10 +8213,10 @@ public class Time {
 \end{code}
 
 
-\section{Printing objects}
+\section{Displaying objects}
 \label{printobject}
 
-If you create a \java{Time} object and print it like this:
+If you create a \java{Time} object and display it like this:
 
 \begin{code}
     public static void main(String[] args) {
@@ -8247,7 +8227,7 @@ If you create a \java{Time} object and print it like this:
 
 \index{print}
 \index{statement!print}
-\index{object!printing}
+\index{object!displaying}
 
 The output will look something like this:
 
@@ -8258,10 +8238,10 @@ Time@80cc7c0
 \index{address}
 \index{hexadecimal}
 
-When Java prints the value of an object type, it prints the name of the type and the address of the object in hexadecimal.
+When Java displays the value of an object type, it displays the name of the type and the address of the object in hexadecimal.
 This address can be useful for debugging, if you want to keep track of individual objects.
 
-To print \java{Time} objects in a way that is more meaningful to users, you could write a method to print the hour, minute, and second.
+To display \java{Time} objects in a way that is more meaningful to users, you could write a method to display the hour, minute, and second.
 Using \java{printTime} in Section~\ref{time} as a starting point, we could write:
 
 \begin{code}
@@ -8298,7 +8278,7 @@ The \java{02} option means ``total width 2, with leading zeros if necessary,'' a
 \index{method!toString}
 
 %Every object type has a method called \java{toString} that returns a string representation of the object.
-When you print an object using \java{print} or \java{println}, Java invokes the object's \java{toString} method.
+When you display an object using \java{print} or \java{println}, Java invokes the object's \java{toString} method.
 
 \index{override}
 
@@ -8782,9 +8762,9 @@ The instance variables should include a character named \java{letter} and an int
 
 \item Write a constructor that takes parameters named \java{letter} and \java{value} and initializes the instance variables.
 
-\item Write a method named \java{printTile} that takes a \java{Tile} object as a parameter and prints the instance variables in a reader-friendly format.
+\item Write a method named \java{printTile} that takes a \java{Tile} object as a parameter and displays the instance variables in a reader-friendly format.
 
-\item Write a method named \java{testTile} that creates a Tile object with the letter \java{Z} and the value 10, and then uses \java{printTile} to print the state of the object.
+\item Write a method named \java{testTile} that creates a Tile object with the letter \java{Z} and the value 10, and then uses \java{printTile} to display the state of the object.
 
 \item Implement the \java{toString} and \java{equals} methods for a \java{Tile}.
 
@@ -8826,9 +8806,9 @@ A \java{Rational} object should have two integer instance variables to store the
 
 \item Write a constructor that takes no arguments and that sets the numerator to 0 and denominator to 1.
 
-\item Write a method called \java{printRational} that takes a \java{Rational} object as an argument and prints it in some reasonable format.
+\item Write a method called \java{printRational} that takes a \java{Rational} object as an argument and displays it in some reasonable format.
 
-\item Write a \java{main} method that creates a new object with type \java{Rational}, sets its instance variables to some values, and prints the object.
+\item Write a \java{main} method that creates a new object with type \java{Rational}, sets its instance variables to some values, and displays the object.
 
 \item At this stage, you have a minimal testable program.
 Test it and, if necessary, debug it.
@@ -8976,7 +8956,7 @@ A good next step is to write \java{toString}, which is useful for debugging and 
 \index{String!array of}
 \index{array!of String}
 
-To print \java{Card} objects in a way that humans can read easily, we need to map the integer codes onto words.
+To display \java{Card} objects in a way that humans can read easily, we need to map the integer codes onto words.
 A natural way to do that is with an array of \java{String}s.
 We can create the array like this:
 
@@ -9046,7 +9026,7 @@ public String toString() {
 }
 \end{code}
 
-When we print a card, \java{println} automatically calls \java{toString}:
+When we display a card, \java{println} automatically calls \java{toString}:
 
 \begin{code}
     Card card = new Card(11, 1);
@@ -9344,7 +9324,7 @@ Figure~\ref{fig.cardarray2} shows what the array looks like after the first two 
 
 \index{print!array}
 
-When you work with arrays, it is convenient to have a method that prints the contents.
+When you work with arrays, it is convenient to have a method that displays the contents.
 We have seen the pattern for traversing an array several times, so the following method should be familiar:
 
 \begin{code}
@@ -10939,19 +10919,27 @@ Instead, we provide this appendix with a brief introduction to DrJava -- an inte
 \label{drjava}
 \index{JDK}
 
-To edit, compile, and run Java programs you need:
+The easiest way to start programming in Java is to use a web site that compiles and runs Java code in the browser.
+Examples include \url{https://www.jdoodle.com}, \url{https://www.compilejava.net}, and \url{http://www.tutorialspoint.com/compile_java_online.php}, but there are many more.
+
+If you are not comfortable installing software on your computer, you can use these online development environments for almost everything in this book.
+
+But if you want to compile and run Java programs on your computer, you will need:
 
 \begin{itemize}
 
 \item A text editor or an interactive development environment (IDE).
 
-\item A Java Software Development Kit (SDK), which includes the compiler.
-
-\item A Java Virtual Machine (JVM), which interprets the compiled byte code.
+\item A Java Development Kit (JDK), which includes the compiler and
+Java Virtual Machine (JVM), which interprets the compiled byte code.
 
 \end{itemize}
 
-TODO:
+The IDE we recommend is DrJava, which is a free, open-source development environment, and it is written in Java.
+
+The JDK we recommend is Oracle's Java SE Development Kit, version 7 or 8.  It is also free and open-source. 
+
+TODO
 
 1) Installing Oracle JDK.
 
@@ -10991,7 +10979,7 @@ Figure~\ref{fig:drjava} shows an example.
 \end{figure}
 
 There is one subtle detail to note when using the Interactions feature.
-If you don't end an expression (or statement) with a semicolon, DrJava automatically prints its value.
+If you don't end an expression (or statement) with a semicolon, DrJava automatically displays its value.
 %Notice in Figure~\ref{fig:drjava} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
 
 What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
@@ -11228,7 +11216,7 @@ diff test.exp test.out
 \end{stdout}
 
 The {\tt diff} utility summarizes the differences between two files.
-If there are no differences, then it prints nothing, which in our case is what we want.
+If there are no differences, then it displays nothing, which in our case is what we want.
 If the expected output differs from the actual output, then we need to continue debugging.
 Usually the program is at fault, and {\tt diff} provides some insight about what is broken.
 But there's also a chance that we have a correct program and the expected output is wrong.
@@ -11754,7 +11742,7 @@ Go to the section below titled ``Flow of execution''.
 
 \subsubsection*{Infinite loop}
 
-If you think you have an infinite loop and you know which loop it is, add a print statement at the end of the loop that prints the values of the variables in the condition, and the value of the condition.
+If you think you have an infinite loop and you know which loop it is, add a print statement at the end of the loop that displays the values of the variables in the condition, and the value of the condition.
 
 For example:
 
@@ -11783,7 +11771,7 @@ If you know which method is causing an infinite recursion, check that there is a
 There should be some condition that makes the method return without making a recursive invocation.
 If not, you need to rethink the algorithm and identify a base case.
 
-If there is a base case, but the program doesn't seem to be reaching it, add a print statement at the beginning of the method that prints the parameters.
+If there is a base case, but the program doesn't seem to be reaching it, add a print statement at the beginning of the method that displays the parameters.
 Now when you run the program you see a few lines of output every time the method is invoked, and you can see the values of the parameters.
 If the parameters are not moving toward the base case, you might see why not.
 
@@ -11793,9 +11781,9 @@ If the parameters are not moving toward the base case, you might see why not.
 \index{flow of execution}
 
 If you are not sure how the flow of execution is moving through your program, add print statements to the beginning of each method with a message like ``entering method foo'', where \java{foo} is the name of the method.
-Now when you run the program, it prints a trace of each method as it is invoked.
+Now when you run the program, it displays a trace of each method as it is invoked.
 
-You can also print the arguments each method receives.
+You can also display the arguments each method receives.
 When you run the program, check whether the values are reasonable, and check for one of the most common errors -- providing arguments in the wrong order.
 
 
@@ -11803,7 +11791,7 @@ When you run the program, check whether the values are reasonable, and check for
 
 \index{Exception}
 
-When an exception occurs, Java prints a message that includes the name of the exception, the line of the program where the exception occurred, and a ``stack trace''. The stack trace includes the method that was running, the method that invoked it, the method that invoked that one, and so on.
+When an exception occurs, Java displays a message that includes the name of the exception, the line of the program where the exception occurred, and a ``stack trace''. The stack trace includes the method that was running, the method that invoked it, the method that invoked that one, and so on.
 
 The first step is to examine the place in the program where the error occurred and see if you can figure out what happened.
 
@@ -11823,7 +11811,7 @@ For example, this code causes a \java{NullPointerException}:
 
 \item[ArrayIndexOutOfBoundsException:]
 The index you are using to access an array is either negative or greater than \java{array.length - 1}.
-If you can find the site where the problem is, add a print statement immediately before it to print the value of the index and the length of the array.
+If you can find the site where the problem is, add a print statement immediately before it to display the value of the index and the length of the array.
 Is the array the right size?
 Is the index the right value?
 
@@ -11989,7 +11977,7 @@ This version is correct, and more readable for other people who haven't memorize
 \index{return statement}
 \index{statement!return}
 
-If you have a return statement with a complex expression, you don't have a chance to print the value before returning.
+If you have a return statement with a complex expression, you don't have a chance to display the value before returning.
 
 \begin{code}
     public Rectangle intersection(Rectangle a, Rectangle b) {
@@ -12025,7 +12013,7 @@ And by reusing \java{x1} and \java{y1}, you made the code smaller, too.
 \index{statement!print}
 
 If you use the \java{println} method, the output is displayed immediately, but if you use \java{print} (at least in some environments), the output gets stored without being displayed until the next newline.
-If the program terminates without printing a newline, you may never see the stored output.
+If the program terminates without displaying a newline, you may never see the stored output.
 If you suspect that this is happening to, change some or all of the \java{print} statements to \java{println}.
 
 
