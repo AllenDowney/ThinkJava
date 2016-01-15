@@ -269,7 +269,7 @@ It is not meant to be a comprehensive presentation of Java, but rather, an initi
 We begin with small problems and basic algorithms and work up to object-oriented design.
 In the vocabulary of computer science pedagogy, this book uses the ``objects late'' approach.
 
-\section*{The philosophy behind it}
+\section*{The philosophy behind the book}
 
 Here are the guiding principles that make the book the way it is:
 
@@ -279,12 +279,12 @@ Here are the guiding principles that make the book the way it is:
 \item {\em One concept at a time.}
 We break down topics that give beginners trouble into a series of small steps, so that they can exercise each new concept in isolation before continuing.
 
-\item {\em Balance of language and concepts.}
+\item {\em Balance of Java and concepts.}
 The book is not primarily about Java; it uses Java examples to demonstrate computer science.
 Most chapters start with language features and end with concepts.
 
 \item {\em Conciseness.}
-An important goal of the book is to be small enough that students can be expected to read and understand the entire book in a one-semester course.
+An important goal of the book is to be small enough that students can read and understand the entire book in a one-semester course.
 %Students can read 1--2 chapters per week, depending on the pace of the instruction.
 
 \item {\em Emphasis on vocabulary.}
@@ -299,35 +299,17 @@ We demonstrate multiple program development techniques, allowing readers to choo
 To write a program, you have to understand the algorithm, know the programming language, and be able to debug errors.
 We discuss these and other aspects throughout the book, and include an appendix that summarizes our advice.
 
-\item {\em Spiral approach.}
-Some concepts take time to sink in.
-The more difficult ideas in the book, like recursion, appear several times.
-By coming back to these topics, we give learners a chance to review and reinforce.
+%\item {\em Spiral approach.}
+%Some concepts take time to sink in.
+%The more difficult ideas in the book, like recursion, appear several times.
+%By coming back to these topics, we give learners a chance to review and reinforce.
 
-\item {\em Keep it simple.}
-We use the minimum amount of Java to get the maximum amount of programming ability.
+%\item {\em Keep it simple.}
+%We use the minimum amount of Java to get the maximum amount of programming ability.
 %The goal of this book is to teach fundamental ideas from computer science, not Java.
-We leave out some language features, like the \java{switch} statement, that are unnecessary, and we present only a few of the many classes in the Java libraries.
+%We leave out some language features, like the \java{switch} statement, that are unnecessary, and we present only a few of the many classes in the Java libraries.
 
 \end{itemize}
-
-%TODO make a new section about implementing in courses, or archive?
-
-%The minimalism of this approach has some advantages.
-%Each chapter is about twelve pages, not including vocabulary and exercises.
-%In my classes I ask students to read each chapter before we discuss it, and I have found that they are willing to do that and their comprehension is good.
-%Their preparation increases class time available for discussion of the more advanced material, in-class exercises, and additional topics that aren't in the book.
-
-%But minimalism has some disadvantages.
-%There is not much here that is intrinsically fun.
-%Most of my examples demonstrate the most basic use of a language feature, and many of the exercises involve string manipulation and mathematical ideas.
-%I think some of them are fun, but many of the things that excite students about computer science, like graphics, sound and network applications, are given short shrift.
-
-%The problem is that many of the more exciting features involve lots of details and not much concept.
-%Pedagogically, that means a lot of effort for not much payoff.
-%So there is a tradeoff between the material that students enjoy and the material that is most intellectually rich.
-%I leave it to individual teachers to find the balance that is best for their classes.
-%To help, the book includes appendices that cover graphics, keyboard input and file input.
 
 
 \section*{Object-oriented programming}
@@ -340,24 +322,48 @@ Some of these features are hard to explain if people aren't familiar with the pr
 We get to object-oriented programming as quickly as possible, limited by the requirement that we introduce concepts one at a time, as clearly as possible, in a way that allows readers to practice each idea in isolation before moving on.
 So it takes some time to get there.
 
-But you can't write Java programs (even hello world) without encountering object-oriented features.
+But you can't write Java programs (even ``Hello, world'') without encountering object-oriented features.
 In some cases we explain a feature briefly when it first appears, and then explain it more deeply later on.
 
-This book is well suited to prepare students for the AP Computer Science A exam, which focuses among other things on object-oriented design and implementation.
-(AP is a registered trademark of the College Board.)
+This book is well suited to prepare students for the AP Computer Science A exam\footnote{AP is a registered trademark of the College Board.}, which includes object-oriented design and implementation.
+
 We introduce nearly every topic in the ``Java subset'' with a few exceptions.
 A mapping of {\em Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}.
+%TODO: replace this with a more specific link when it's ready
 
-%TODO: Overview of the appendices: what's in them and when should they be used?
+\section*{Appendices}
+
+The chapters of this books are meant to be read in order, because each one builds on the previous ones.
+We also include three appendices with material that can be read at any time:
+
+\begin{description}
+
+\item{Appendix 1: Development tools}
+
+The steps for compiling, running, and debugging Java code depend on the details of the development environment and operating system.
+We avoided putting these details in the main text, because they can be distracting.
+Instead, we provide this appendix with a brief introduction to DrJava, an interactive development environment (IDE) that is well suited for beginners, and other development tools, including Checkstyle for code quality and JUnit for testing.
+
+\item{Appendix 2: Graphics}
+
+Java provides libraries for working with graphics and animation, and these topics can be engaging for students.
+These libraries use object-oriented features readers will not completely understand until after Chapter~\ref{classes}, but they can be used earlier.
+
+\item{Appendix 3: Debugging}
+
+We provide debugging suggestions throughout the book, but we also collect our debugging advice in this appendix.
+We recommend that readers review this appendix several times as they work through the book.
+
+\end{description}
 
 
 \section*{Using the code examples}
 \label{code}
 
-The code and data used in this book are available from \url{https://github.com/AllenDowney/ThinkJavaCode}.
+The code and data used in this book are available from a Git repository at \url{https://github.com/AllenDowney/ThinkJavaCode}.
 Git is a version control system that allows you to keep track of the files that make up a project.
 A collection of files under Git's control is called a repository.
-GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
+%GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
 
 \index{repository}
 \index{Git}
@@ -370,17 +376,16 @@ The GitHub link above provides several ways to work with the code:
 \item You can create a copy of the repository on GitHub by pressing the {\sf Fork} button.
 If you don't already have a GitHub account, you'll need to create one.
 After forking, you'll have your own repository on GitHub that you can use to keep track of code you write while working on this book.
-%Then you can clone the repository, which means that you download a copy of the files on your computer.
+Then you can ``clone'' the repository, which downloads a copy of the files to your computer.
 
 \index{fork}
 
-\item Or you could clone the repository (download a copy of the files to your computer) without forking.
-You don't need a GitHub account to do so, but you won't be able to save your changes back in GitHub.
+\item Or you could clone the repository without forking.  If you choose this option, you don't need a GitHub account, but you won't be able to save your changes back in GitHub.
 
 \index{clone}
 
-\item If you don't want to use Git at all, you can download the code in a zip archive using the {\sf Download ZIP} button on the GitHub page, or this link: \\
-{\small \url{https://github.com/AllenDowney/ThinkJavaCode/archive/master.zip}}
+\item If you don't want to use Git at all, you can download the code in a zip archive using the {\sf Download ZIP} button on the GitHub page, or this link:
+\url{http://tinyurl.com/ThinkJavaCodeZip}.
 
 \end{itemize}
 
