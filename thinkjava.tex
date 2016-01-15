@@ -584,12 +584,13 @@ Low-level programs can only run on one kind of computer, and have to be rewritte
 Two kinds of programs translate high-level languages into low-level languages: interpreters and compilers.
 An {\bf interpreter} reads a high-level program and executes it, meaning that it does what the program says.
 It processes the program a little at a time, alternately reading lines and performing computations.
-% Figure 1.1 shows the structure of an interpreter.
+Figure~\ref{fig.interp} shows the structure of an interpreter.
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics{figs/interpreter.pdf}
 \caption{How interpreted languages are executed.}
+\label{fig.interp}
 \end{center}
 \end{figure}
 
@@ -616,6 +617,7 @@ But it is also portable, so it is possible to compile a Java program on one mach
 \begin{center}
 \includegraphics{figs/compiler.pdf}
 \caption{The process of compiling and running a Java program.}
+\label{fig.compile}
 \end{center}
 \end{figure}
 
@@ -730,6 +732,7 @@ If you are using an older version, a few of them might not.
 \begin{center}
 \includegraphics[width=\textwidth]{figs/drjava-hello.png}
 \caption{Screenshot of DrJava editing the hello world program.}
+\label{fig.drjava}
 \end{center}
 \end{figure}
 
@@ -764,6 +767,7 @@ On Unix systems like Linux and OS X, you can get started with just four commands
 \begin{center}
 \includegraphics[width=4.5in]{figs/terminal.png}
 \caption{Compiling and running {\tt Hello.java} from the command line.}
+\label{fig.commandline}
 \end{center}
 \end{figure}
 
@@ -1451,6 +1455,8 @@ b & \framebox[1cm]{5} \\
 \end{tabular}
 \end{center}
 
+%TODO: replace this with a diagram in the same style as the rest
+
 \index{state diagram}
 
 Diagrams like this one that show the state of the program are called {\bf state diagrams}.
@@ -2114,6 +2120,7 @@ These files are part of the Java {\bf library}, which is an extensive collection
 \begin{center}
 \includegraphics{figs/system.pdf}
 \caption{\java{System.out.println} refers to the \java{out} variable of the \java{System} class, which is a \java{PrintStream} that provides a method called \java{println}.}
+\label{fig.system}
 \end{center}
 \end{figure}
 
@@ -2226,6 +2233,7 @@ The following figure shows these organizational units.
 \begin{center}
 \includegraphics[width=4in]{figs/package.pdf}
 \caption{Elements of the Java language, from largest to smallest.}
+\label{fig.package}
 \end{center}
 \end{figure}
 
@@ -2617,16 +2625,24 @@ What is your name? Hello , age 45
 To understand what is happening, you have to understand that the \java{Scanner} doesn't see input as multiple lines, like we do.
 Instead, it gets a stream of characters like this:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/hopper1.pdf}
+\caption{A stream of characters as seen by a Scanner.}
+\label{fig.hopper1}
 \end{center}
+\end{figure}
 
 The arrow indicates the next character to be read by \java{Scanner}.
 When you call \java{nextInt}, it reads characters until it gets to a non-digit.
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/hopper2.pdf}
+\caption{A stream of characters after \java{nextInt} is invoked.}
+\label{fig.hopper2}
 \end{center}
+\end{figure}
 
 At this point, \java{nextInt} returns \java{45}.
 The program then displays the prompt \java{"What is your name? "} and calls \java{nextLine}, which reads characters until it gets to a newline.
@@ -4081,6 +4097,7 @@ The following figure is a stack diagram for countdown, called with \java{n == 3}
 \begin{center}
 \includegraphics{figs/stack2.pdf}
 \caption{Stack diagram for the \java{countdown} program.}
+\label{fig.stack2}
 \end{center}
 \end{figure}
 
@@ -6069,9 +6086,13 @@ Of course, you can also declare the variable and create the array in a single li
 When you create an array of \java{int}s, the elements are initialized to zero.
 Here is a state diagram of the \java{counts} array so far:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/array.pdf}
+\caption{State diagram of an \java{int} array.}
+\label{fig.array}
 \end{center}
+\end{figure}
 
 The arrow indicates that the value of \java{counts} is a {\bf reference} to the array.
 You should think of the array and the variable that refers to it as two different things.
@@ -6103,9 +6124,13 @@ You can use the \java{[]} operator anywhere in an expression:
 
 Here is the result of these statements:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/array2.pdf}
+\caption{State diagram after several assignment statements.}
+\label{fig.array2}
 \end{center}
+\end{figure}
 
 \index{exception!ArrayOutOfBounds}
 \index{run-time error}
@@ -6216,9 +6241,13 @@ For example:
 
 These statements create an array of three \java{double}s and makes two different variables refer to it, as shown in this diagram:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/array3.pdf}
+\caption{State diagram showing two variables that refer to the same array.}
+\label{fig.array3}
 \end{center}
+\end{figure}
 
 Any changes made through either variable will be seen by the other.
 For example, if we set \java{a[0] = 17.0}, and then print {\tt b[0]}, the result is \java{17.0}.
@@ -7525,9 +7554,13 @@ Here is a state diagram showing the result:
 \index{state}
 \index{state diagram}
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/reference.pdf}
+\caption{State diagram showing a variable that refers to a Point object.}
+\label{fit.reference}
 \end{center}
+\end{figure}
 
 \index{attribute}
 
@@ -7625,9 +7658,13 @@ The following example creates a \java{Rectangle} object and makes the variable \
 
 This figure shows the effect of this assignment.
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/rectangle.pdf}
+\caption{State diagram showing a variable that refers to a Rectangle object.}
+\label{fig.rectangle}
 \end{center}
+\end{figure}
 
 If you run \java{System.out.println(box)}, you get:
 
@@ -7671,9 +7708,13 @@ For example, to ``move'' a rectangle without changing its size, you can modify t
 
 The result is shown in the figure:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/rectangle2.pdf}
+\caption{State diagram showing updated attributes.}
+\label{fig.rectangle2}
 \end{center}
+\end{figure}
 
 \index{encapsulation}
 \index{generalization}
@@ -7740,9 +7781,13 @@ It is possible to have multiple variables that refer to the same object.
 
 This state diagram shows the result:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/aliasing.pdf}
+\caption{State diagram showing two variables that refer to the same object.}
+\label{figs.aliasing}
 \end{center}
+\end{figure}
 
 \index{aliasing}
 
@@ -7759,9 +7804,13 @@ The first line prints {\tt 100}, which is the width of the \java{Rectangle} refe
 The second line invokes the \java{grow} method on \java{box1}, which resizes the \java{Rectangle} horizontally and vertically.
 The effect is shown in the figure:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/aliasing2.pdf}
+\caption{State diagram showing the effect of invoking \java{grow}.}
+\label{fig.aliasing2}
 \end{center}
+\end{figure}
 
 When we make a change using \java{box1}, we can see the change using \java{box2}.
 Thus, the value printed by the third line is {\tt 200}, the width of the expanded rectangle.
@@ -7786,9 +7835,13 @@ You can declare and initialize object variables this way:
 
 The value \java{null} is represented in state diagrams by a small box with no arrow.
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/reference2.pdf}
+\caption{State diagram showing a variable that contains a null reference.}
+\label{fig.reference2}
 \end{center}
+\end{figure}
 
 \index{exception!NullPointer}
 \index{NullPointerException}
@@ -7820,9 +7873,13 @@ The first line creates a new \java{Point} object and makes \java{blank} refer to
 The second line changes \java{blank} so that instead of referring to the object, it refers to nothing.
 In the state diagram, we have removed the arrow between them.
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/reference3.pdf}
+\caption{State diagram showing the effect of setting a variable to \java{null}.}
+\label{fig.reference3}
 \end{center}
+\end{figure}
 
 \index{garbage collection}
 
@@ -8206,9 +8263,13 @@ In this example, the reference gets assigned to \java{time}, which has type \jav
 
 This state diagram shows the result:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/time.pdf}
+\caption{State diagram of a \java{Time} object.}
+\label{figs.time}
 \end{center}
+\end{figure}
 
 Beginners sometimes make the mistake of invoking \java{new} inside the constructor.
 You don't have to, and you shouldn't.
@@ -8440,9 +8501,13 @@ Here is a state diagram that shows these variables and their values:
 
 %TODO(Chris) Add ``Time'' above each time object in time2.dia
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/time2.pdf}
+\caption{State diagram of three \java{Time} variables.}
+\label{fig.time2}
 \end{center}
+\end{figure}
 
 The assignment operator copies references, so \java{time1} and \java{time2} refer to the same object.
 Because they are identical, \java{time1 == time2} is \java{true}.
@@ -9053,9 +9118,13 @@ Or we can create the array and initialize the elements at the same time, as we s
 
 Either way, the state diagram looks like this:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/stringarray.pdf}
+\caption{State diagram of an array of strings.}
+\label{fig.stringarray}
 \end{center}
+\end{figure}
 
 \index{reference}
 \index{String!reference to}
@@ -9170,9 +9239,13 @@ For example, suppose we create three \java{Card} variables:
 
 The following state diagram shows the results.
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/card.pdf}
+\caption{State diagram of three \java{Card} variables.}
+\label{fig.card}
 \end{center}
+\end{figure}
 
 Since \java{card1} and \java{card2} refer to the same object, \java{card1 == card2} is \java{true}.
 But \java{card1} and \java{card3} are references to different objects, so \java{card1 == card3} is \java{false}.
@@ -9320,9 +9393,13 @@ The following statement creates an array of 52 cards:
 
 Here is the state diagram for this array:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/cardarray.pdf}
+\caption{State diagram of an unpopulated \java{Card} array.}
+\label{fig.cardarray}
 \end{center}
+\end{figure}
 
 \index{null}
 
@@ -9374,9 +9451,13 @@ The following state diagram shows what the array looks like after the first two 
 
 %TODO: Add the type at the top of the boxes for user defined types?
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/cardarray2.pdf}
+\caption{State diagram of a \java{Card} array with two cards.}
+\label{fig.cardarray2}
 \end{center}
+\end{figure}
 
 \index{print!array}
 
@@ -9781,9 +9862,13 @@ public class Deck {
 The constructor initializes the instance variable with an array of cards, but it doesn't create any cards.
 Here is a state diagram showing what a \java{Deck} looks like with no cards:
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/deckobject.pdf}
+\caption{State diagram of an unpopulated \java{Deck} object.}
+\label{fig.deckobject}
 \end{center}
+\end{figure}
 
 We'll add a second constructor that makes a standard 52-card deck and populates it with \java{Card} objects:
 
@@ -9973,9 +10058,13 @@ Drawing a picture is usually the best way to avoid them.
 The following is a state diagram of a subdeck with \java{low = 0} and \java{high = 4}.
 The result is a hand with 5 cards that are {\em shared} with the original deck; that is, they are aliased.
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/subdeck.pdf}
+\caption{State diagram showing the effect of \java{subdeck}.}
+\label{fig.subdeck}
 \end{center}
+\end{figure}
 
 \index{aliasing}
 \index{reference}
@@ -11046,6 +11135,7 @@ Debug your program until the actual output is {\it identical} to the expected ou
 \begin{center}
 \includegraphics[width=0.9\textwidth]{figs/meld.png}
 \caption{Using {\tt meld} to compare the expected output with the actual output.}
+\label{fig.meld}
 \end{center}
 \end{figure}
 
@@ -11088,6 +11178,7 @@ You can also press ``Automatic Trace'' to watch DrJava run your code one line at
 \caption{Screenshot of the DrJava debugger.
 Execution is currently paused on the first line of \java{printTwice}.
 There is a breakpoint on the first line of \java{main}.}
+\label{fig.debugger}
 \end{center}
 \end{figure}
 
@@ -11226,9 +11317,13 @@ In contrast, Java uses a coordinate system where the origin is in the upper-left
 That way, x and y are always positive integers.
 Coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
 
+\begin{figure}
 \begin{center}
 \includegraphics[width=5in]{figs/coordinates.pdf}
+\caption{Diagram of the difference between Cartesian coodinates and Java graphical coordinates.}
+\label{fig.coordinates}
 \end{center}
+\end{figure}
 
 To draw on the canvas, you invoke methods on a \java{Graphics} object.
 You don't have to create the \java{Graphics} object; it gets created when you create the \java{Canvas}, and it gets passed as an argument to \java{paint}.
@@ -11249,9 +11344,13 @@ The four parameters specify a {\bf bounding box}, which is the rectangle in whic
 \java{x} and \java{y} specify the the location of the upper-left corner of the bounding box.
 The bounding box itself is not drawn.
 
+\begin{figure}
 \begin{center}
 \includegraphics{figs/circle.pdf}
+\caption{Diagram of an oval inside its bounding box.}
+\label{fig.circle}
 \end{center}
+\end{figure}
 
 \index{Color}
 
@@ -11326,9 +11425,13 @@ The next three lines create a smaller rectangle for the ears.
 We \java{translate} the rectangle up and left for the first ear, then to the right for the second ear.
 The result looks like this:
 
+\begin{figure}
 \begin{center}
 \includegraphics[height=2in]{figs/mickey.pdf}
+\caption{A ``hidden mickey'' drawn using Java graphics.}
+\label{fig.mickey}
 \end{center}
+\end{figure}
 
 
 \section{Vocabulary}
@@ -11369,9 +11472,13 @@ Modify {\tt Mickey.java} to draw ears on the ears, and ears on those ears, and m
 
 The result should look like ``Mickey Moose'':
 
+\begin{figure}
 \begin{center}
 \includegraphics[height=2in]{figs/moose.pdf}
+\caption{A recursive shape we call ``Mickey Moose''.}
+\label{fig.moose}
 \end{center}
+\end{figure}
 
 Hint: you should only have to add or modify a few lines of code.
 
@@ -11396,9 +11503,13 @@ See what happens to the image.
 \item Modify the program so that the circles are drawn in the center of the screen and concentric, as in the following figure (left).
 The distance between the circles should be small enough that the Moir\'{e} interference is apparent.
 
+\begin{figure}
 \begin{center}
 \includegraphics[height=1.5in]{figs/moire.pdf}
+\caption{Graphical patterns that can exhibit Moir\'{e} interference.}
+\label{fig.moire}
 \end{center}
+\end{figure}
 
 \item Write a method named \java{radial} that draws a radial set of line segments as shown in the figure (right), but they should be close enough together to create a Moir\'{e} pattern.
 
