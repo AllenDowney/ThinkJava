@@ -328,6 +328,7 @@ This book is well suited to prepare students for the AP Computer Science A exam\
 
 We introduce nearly every topic in the ``Java subset'' with a few exceptions.
 A mapping of {\em Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}.
+
 %TODO: replace this with a more specific link when it's ready
 
 
@@ -344,7 +345,7 @@ The steps for compiling, running, and debugging Java code depend on the details 
 We avoided putting these details in the main text, because they can be distracting.
 Instead, we provide this appendix with a brief introduction to DrJava -- an interactive development environment (IDE) that is well suited for beginners -- and other development tools, including Checkstyle for code quality and JUnit for testing.
 
-\item{Appendix 2: Graphics}
+\item{Appendix 2: Java 2D graphics}
 
 Java provides libraries for working with graphics and animation, and these topics can be engaging for students.
 These libraries use object-oriented features readers will not completely understand until after Chapter~\ref{classes}, but they can be used earlier.
@@ -380,7 +381,8 @@ Then you can ``clone'' the repository, which downloads a copy of the files to yo
 
 \index{fork}
 
-\item Or you could clone the repository without forking.  If you choose this option, you don't need a GitHub account, but you won't be able to save your changes back in GitHub.
+\item Or you could clone the repository without forking.
+If you choose this option, you don't need a GitHub account, but you won't be able to save your changes back in GitHub.
 
 \index{clone}
 
@@ -393,7 +395,7 @@ After you clone the repository or unzip the zip file, you should have a director
 
 All the examples in this book were developed and tested using Java SE Development Kit 7.
 If you are using a more recent version, the examples in this book should still work.
-If you are using an older version, a some of them will not.
+%If you are using an older version, a some of them will not.
 
 
 \section*{Contributors over the years}
@@ -559,7 +561,7 @@ Thinking about how to correct programs and improve their performance sometimes e
 \section{Introduction to Java}
 
 \index{high-level language}
-\index{language!htigh-level}
+\index{language!high-level}
 
 The programming language you will learn is Java, which is a {\bf high-level language}.
 Other high-level languages you may have heard of include Python, C and C++, Ruby, and JavaScript.
@@ -1022,7 +1024,7 @@ You can't learn to program by reading alone; you have to practice.
 
 The code examples in each chapter are available in the repository for this book.
 Instructions for downloading this code is in Section~\ref{code}.
-The code for this chapter is in the directory {\tt ch01}. 
+The code for this chapter is in the directory {\tt ch01}.
 Before you start the exercises, we recommend that you compile and run the code in your environment.
 
 Before you can compile and run Java programs, you have to set up a development environment.
@@ -1238,8 +1240,7 @@ The problem is that the first line uses \java{println}, when we probably meant t
 Identifying logic errors can be hard because you have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
 Usually the compiler and the interpreter can't help you, since they don't know what the right thing is.
 
-Now that you know about the three kinds of errors, you might want to read
-Appendix~\ref{debugappendix}, where we've collected some of our favorite debugging advice.
+Now that you know about the three kinds of errors, you might want to read Appendix~\ref{debugappendix}, where we've collected some of our favorite debugging advice.
 It refers to some language features we haven't talked about yet, so you might want to re-read it from time to time.
 
 
@@ -1825,12 +1826,6 @@ But you might want to refer back to them periodically.
 In the meantime, there many tools that help programmers find and correct style violations.
 One of the most popular is Checkstyle, which enforces most of Google's guidelines.
 Instructions for downloading and running Checkstyle are in Appendix~\ref{checkstyle}.
-
-%There are limits to what automatic style checkers can do.
-%In particular, they can't evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, or the {\em structure} of your algorithms.
-%Good comments make it easier for experienced developers to identify errors in your code.
-%Good variable names communicate the intent of your program and how the data is organized.
-%And good programs are designed to be efficient and demonstrably correct.
 
 
 \section{Vocabulary}
@@ -9303,9 +9298,6 @@ One way to populate the array is to write nested \java{for} loops:
     }
 \end{code}
 
-%TODO only use of the word enumerate; should that be a vocab term?
-%ABD: I think it's ok as an English word
-
 The outer loop enumerates the suits from 0 to 3.
 For each suit, the inner loop enumerates the ranks from 1 to 13.
 Since the outer loop runs 4 times, and the inner loop runs 13 times for each suit, the body is executed is 52 times.
@@ -9625,7 +9617,7 @@ In the code directory for this chapter, {\tt ch12}, you will find:
 
 \item {\tt cardset-oxymoron}: A directory containing images of playing cards.
 
-\item {\tt CardTable.java}: Code that demonstrates how to read and display images. 
+\item {\tt CardTable.java}: Code that demonstrates how to read and display images.
 
 \end{itemize}
 
@@ -9845,7 +9837,7 @@ public void selectionSort() {
 \end{code}
 
 \index{helper method}
-\index{method!htelper}
+\index{method!helper}
 
 Again, the pseudocode helps with the design of the helper methods.
 In this case we can use \java{swapCards} again, so we only need a method to find the lowest card; we'll call it \java{indexLowestCard}.
@@ -10767,7 +10759,7 @@ Notice the result of bottom-up development is similar to top-down: we have a hig
 The main difference is the order we used to arrive at this solution.
 
 
-\section{UML diagrams}
+\section{UML class diagrams}
 
 % ABD: I would like to call these UML class diagrams to distinguish
 % them from the 3172 other kinds of UML diagrams, and to be consistent
@@ -10794,7 +10786,7 @@ Composition is also known as a {\bf HAS-A} relationship, as in ``\java{Eights} H
 Inheritance is also known as an {\bf IS-A} relationship, as in ``a \java{Hand} IS-A \java{CardCollection}.''
 
 This vocabulary provides a concise way to talk about an object-oriented design.
-There is also a standard way to represented these relationships graphically using a {\bf UML diagram}.
+There is also a standard way to represented these relationships graphically using a {\bf UML class diagram}.
 UML stands for ``Unified Modeling Language''.
 Class diagrams are one of many graphical representations defined in UML.
 
@@ -10915,14 +10907,14 @@ But if you want to compile and run Java programs on your computer, you will need
 
 \item A text editor or an interactive development environment (IDE).
 
-\item A Java Development Kit (JDK), which includes the compiler and
-Java Virtual Machine (JVM), which interprets the compiled byte code.
+\item A Java Development Kit (JDK), which includes the compiler and Java Virtual Machine (JVM), which interprets the compiled byte code.
 
 \end{itemize}
 
 The IDE we recommend is DrJava, which is a free, open-source development environment, and it is written in Java.
 
-The JDK we recommend is Oracle's Java SE Development Kit, version 7 or 8.  It is also free and open-source. 
+The JDK we recommend is Oracle's Java SE Development Kit, version 7 or 8.
+It is also freely available.
 
 TODO
 
@@ -10975,6 +10967,12 @@ Also, you can press the up/down arrows on the keyboard to repeat previous comman
 \label{checkstyle}
 
 TODO
+
+There are limits to what automatic style checkers can do.
+In particular, they can't evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, or the {\em structure} of your algorithms.
+Good comments make it easier for experienced developers to identify errors in your code.
+Good variable names communicate the intent of your program and how the data is organized.
+And good programs are designed to be efficient and demonstrably correct.
 
 
 \section{Command-line interface}
@@ -11124,7 +11122,7 @@ Using \java{assertEquals} is more concise than writing your own \java{if} statem
 % I think this is too mysterious:
 %In addition, they are overloaded to provide advanced features beyond the scope of this chapter.
 
-To run JUnit directly from DrJava, click the {\tt Test} button on the toolbar.
+To run JUnit directly from DrJava, click the {\sf Test} button on the toolbar.
 If all your test methods pass, you will see a green bar in the lower right.
 Otherwise, DrJava will take you directly to the first assertion that failed.
 
@@ -11179,15 +11177,6 @@ On the command line, {\tt <} and {\tt >} are {\bf redirection operators}.
 The first one redirects the contents of {\tt test.in} to \java{System.in}, as if it were entered from the keyboard.
 The second one redirects the contents of \java{System.out} to a new file {\tt test.out}, much like a screen capture.
 In other words, the {\tt test.out} file contains the output of your program.
-
-% ABD: Since I killed the previous reference to abstraction, I am inclined
-% to kill this one too.  The problem in both places is that it pulls the
-% focus off topic.
-
-%Redirecting a program's input and output is an example of how computer scientists use abstraction.
-%Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
-%In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
-%What's great is that doesn't change anything about how you write the code.
 
 By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command line.
 Knowing both techniques allows you to use the right tool for the job.
@@ -11779,7 +11768,8 @@ When you run the program, check whether the values are reasonable, and check for
 
 \index{Exception}
 
-When an exception occurs, Java displays a message that includes the name of the exception, the line of the program where the exception occurred, and a stack trace.  The stack trace includes the method that was running, the method that invoked it, the method that invoked that one, and so on.
+When an exception occurs, Java displays a message that includes the name of the exception, the line of the program where the exception occurred, and a stack trace.
+The stack trace includes the method that was running, the method that invoked it, the method that invoked that one, and so on.
 
 The first step is to examine the place in the program where the error occurred and see if you can figure out what happened.
 
@@ -11894,7 +11884,8 @@ If you want fractions, use \java{double}.
 More generally, use integers for countable things and floating-point numbers for measurable things.
 
 \item Floating-point numbers are only approximate, so don't rely on them to be perfectly accurate.
-You should probably never use the \java{==} operator with \java{double}s. Instead of writing \java{if (d == 1.23)}, do something like \java{if (Math.abs(d - 1.23) < .000001)}.
+You should probably never use the \java{==} operator with \java{double}s.
+Instead of writing \java{if (d == 1.23)}, do something like \java{if (Math.abs(d - 1.23) < .000001)}.
 
 % NOTE: should not be possible in Java, because = can't be used in a boolean expression
 %\item If you use the assignment operator (\java{=}) instead of the equality operator (\java{==}) in the condition of an \java{if}, \java{while}, or \java{for} statement, you might get an expression that is syntactically legal and logically wrong.

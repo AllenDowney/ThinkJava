@@ -1,28 +1,3 @@
-\section{OS abstraction}
-
-\index{object}
-
-Both \java{System} and \java{PrintStream} are written in Java, and later in the book we'll examine their source code.
-For now, you should understand that \java{System.out} is a \java{PrintStream} object.
-Because Java is an {\em object-oriented} language, much of the library is organized around objects that perform specific actions.
-
-% ABD: there is so much new vocab in these sections, I want to reduce the number of new ideas
-
-\index{operating system}
-
-As with most software, Java programs run on top of an {\bf operating system} that manages the keyboard, the display, main memory, disk drives, printers, the network, and other hardware resources.
-Common examples of operating systems include Android, iOS, Linux, Mac OS~X, and Windows.
-When starting Java programs, the operating system directs \java{System.out} to the screen.
-
-\index{abstraction}
-
-Note the exact type of display doesn't matter, whether it's a 5-inch touch screen or 30-inch monitor.
-From the programmer's point of view, \java{System.out} simply provides the means for printing messages.
-Computer scientists often use {\bf abstraction} to deal with the complexity of software.
-The \java{System} class is a platform-independent abstraction of the operating system.
-The operating system itself is a layer of abstraction on top of computer hardware.
-
-
 \section{Formal languages}
 
 \index{natural language}
@@ -104,24 +79,24 @@ In contrast, formal languages mean exactly what they say.
 
 \end{description}
 
-%In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
+In some ways, the difference between natural and formal language is like the difference between poetry and prose, but more so.
 
-%\begin{description}
+\begin{description}
 
-%\term{poetry}
-%Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
-%Ambiguity is not only common but often deliberate.
+\term{poetry}
+Words are used for their sounds as well as for their meaning, and the whole poem together creates an effect or emotional response.
+Ambiguity is not only common but often deliberate.
 
-%\term{prose}
-%The literal meaning of words is more important, and the structure contributes more meaning.
-%Prose is more amenable to analysis than poetry but still often ambiguous.
+\term{prose}
+The literal meaning of words is more important, and the structure contributes more meaning.
+Prose is more amenable to analysis than poetry but still often ambiguous.
 
-%\term{program}
-%The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
+\term{program}
+The meaning of a computer program is unambiguous and literal, and can be understood entirely by analysis of the tokens and grammar.
 
-%\end{description}
+\end{description}
 
-%Here are some suggestions for reading programs (and other formal languages).
+Here are some suggestions for reading programs (and other formal languages).
 
 Small errors in spelling and punctuation, which you can get away with in natural languages, can make a big difference in a formal language.
 
@@ -131,29 +106,49 @@ Over time you will learn to parse programs in your head, identifying the tokens 
 And you will learn to read and write programs more quickly.
 
 
-%\term{natural language}
-%Any of the languages people speak that have evolved naturally.
+\term{natural language}
+Any of the languages people speak that have evolved naturally.
 
-%\term{formal language}
-%A language people have designed for specific purposes, like representing mathematical ideas or computer programs.
+\term{formal language}
+A language people have designed for specific purposes, like representing mathematical ideas or computer programs.
 
-%\term{programming language}
-%A formal language that has been designed to express computations.
+\term{programming language}
+A formal language that has been designed to express computations.
 
-%\term{syntax}
-%The structure of a program.
+\term{syntax}
+The structure of a program.
 
-%\term{semantics}
-%The meaning of a program.
+\term{semantics}
+The meaning of a program.
 
-%\term{token}
-%A basic element of a program, such as a word, space, symbol, or number.
+\term{token}
+A basic element of a program, such as a word, space, symbol, or number.
 
-%\term{grammar}
-%A set of rules that determines whether a statement is legal.
+\term{grammar}
+A set of rules that determines whether a statement is legal.
 
-%\term{parse}
-%To examine a program and analyze the syntactic structure.
+\term{parse}
+To examine a program and analyze the syntactic structure.
+
+
+\section{Emotional debugging}
+
+\index{emotional debugging}
+\index{debugging!emotional response}
+
+There is evidence that people naturally respond to computers as if they were people.
+When they work well, we think of them as teammates, and when they are obstinate or rude, we respond to them the same way we respond to rude, obstinate people.
+(Reeves and Nass, {\it The Media Equation: How People Treat Computers, Television, and New Media Like Real People and Places})
+
+Preparing for these reactions might help you deal with them.
+One approach is to think of the computer as an employee with certain strengths, like speed and precision, and particular weaknesses, like lack of empathy and inability to grasp the big picture.
+
+Your job is to be a good manager: find ways to take advantage of the strengths and mitigate the weaknesses.
+And find ways to use your emotions to engage with the problem, without letting your reactions interfere with your ability to work effectively.
+
+Learning to debug can be frustrating, but it is a valuable skill that is useful for many activities beyond programming.
+At the end of each chapter there is a debugging section, like this one, with my thoughts about debugging.
+I hope they help!
 
 
 \section{Syntax errors}
@@ -179,6 +174,40 @@ In that case, you program cannot be translated or run; instead, the compiler sto
 As shown in Figure~\ref{fig:syntax}, removing the closing brace on line 8 of the hello world program results in ``Error: reached end of file while parsing.''
 The compiler also reports that the problem was found on line 6, which in this case is not at fault.
 Since line 8 was deleted, the compiler reported the last line of the file.
+
+
+\section{OS abstraction}
+
+\index{object}
+
+Both \java{System} and \java{PrintStream} are written in Java, and later in the book we'll examine their source code.
+For now, you should understand that \java{System.out} is a \java{PrintStream} object.
+Because Java is an {\em object-oriented} language, much of the library is organized around objects that perform specific actions.
+
+% ABD: there is so much new vocab in these sections, I want to reduce the number of new ideas
+
+\index{operating system}
+
+As with most software, Java programs run on top of an {\bf operating system} that manages the keyboard, the display, main memory, disk drives, printers, the network, and other hardware resources.
+Common examples of operating systems include Android, iOS, Linux, Mac OS~X, and Windows.
+When starting Java programs, the operating system directs \java{System.out} to the screen.
+
+\index{abstraction}
+
+Note the exact type of display doesn't matter, whether it's a 5-inch touch screen or 30-inch monitor.
+From the programmer's point of view, \java{System.out} simply provides the means for printing messages.
+Computer scientists often use {\bf abstraction} to deal with the complexity of software.
+The \java{System} class is a platform-independent abstraction of the operating system.
+The operating system itself is a layer of abstraction on top of computer hardware.
+
+% ABD: Since I killed the previous reference to abstraction, I am inclined
+% to kill this one too.  The problem in both places is that it pulls the
+% focus off topic.
+
+Redirecting a program's input and output is an example of how computer scientists use abstraction.
+Notice that \java{System.in} is not called \java{Keyboard}, and \java{System.out} is not called \java{Display}.
+In practice, these objects could be text files, network connections, microphones and speakers, or some other byte streams.
+What's great is that doesn't change anything about how you write the code.
 
 
 \section{Type conversion}
