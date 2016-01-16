@@ -1,3 +1,28 @@
+\section{OS abstraction}
+
+\index{object}
+
+Both \java{System} and \java{PrintStream} are written in Java, and later in the book we'll examine their source code.
+For now, you should understand that \java{System.out} is a \java{PrintStream} object.
+Because Java is an {\em object-oriented} language, much of the library is organized around objects that perform specific actions.
+
+% ABD: there is so much new vocab in these sections, I want to reduce the number of new ideas
+
+\index{operating system}
+
+As with most software, Java programs run on top of an {\bf operating system} that manages the keyboard, the display, main memory, disk drives, printers, the network, and other hardware resources.
+Common examples of operating systems include Android, iOS, Linux, Mac OS~X, and Windows.
+When starting Java programs, the operating system directs \java{System.out} to the screen.
+
+\index{abstraction}
+
+Note the exact type of display doesn't matter, whether it's a 5-inch touch screen or 30-inch monitor.
+From the programmer's point of view, \java{System.out} simply provides the means for printing messages.
+Computer scientists often use {\bf abstraction} to deal with the complexity of software.
+The \java{System} class is a platform-independent abstraction of the operating system.
+The operating system itself is a layer of abstraction on top of computer hardware.
+
+
 \section{Formal languages}
 
 \index{natural language}
@@ -923,7 +948,7 @@ This algorithm is called selection sort (see \url{http://en.wikipedia.org/wiki/S
 
 \end{enumerate}
 
-% TODO: Should we cut this, since we do selection sort later? 
+% TODO: Should we cut this, since we do selection sort later?
 %  call back to this exercise when we sort cards
 \end{exercise}
 
