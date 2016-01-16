@@ -874,7 +874,7 @@ System.out.print("Goodbye, "); System.out.println
 It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
 
-In DrJava, you can reformat the source code with consistent indenting by selecting all text (Ctrl-A) and pressing the Tab key.
+In DrJava, you can reformat the source code with consistent indenting by selecting all text ({\sf Ctrl-A}) and pressing the {\sf Tab} key.
 
 
 \section{Debugging}
@@ -999,9 +999,6 @@ For now, a collection of related methods.
 
 \term{comment}
 A part of a program that contains information about the program but has no effect when the program runs.
-
-\term{command line}
-A means of interacting with the computer by issuing commands in the form of successive lines of text.
 
 \term{string}
 A sequence of characters; the primary data type for text.
@@ -1909,9 +1906,6 @@ The ability to combine simple expressions and statements into compound expressio
 Newlines, tab characters, and other spaces in a source program.
 Whitespace characters are used to separate words, but other than that, they don't affect the behavior of the program.
 
-%\term{wildcard}
-%A command-line feature that allows you to specify a pattern of file names.
-
 \end{description}
 
 
@@ -2658,7 +2652,7 @@ See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
 If you have not already read Section~\ref{commandline}, now might be a good time.
-It describes the command line interface, which is a powerful and efficient way to interact with your computer.
+It describes the command-line interface, which is a powerful and efficient way to interact with your computer.
 
 
 \begin{exercise}
@@ -5649,7 +5643,7 @@ For example, we could rewrite \java{printTable} like this:
     }
 \end{code}
 
-There are three statements in parentheses, separated by semi-colons: the initializer, the condition, and the update.
+There are three statements in parentheses, separated by semicolons: the initializer, the condition, and the update.
 
 \begin{enumerate}
 
@@ -7014,6 +7008,8 @@ The result is the string \java{"12345"}.
 \section{Command-line arguments}
 
 Now that you know about arrays and strings, we can {\em finally} explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter~\ref{theway}.
+If you are unfamiliar with the command-line interface, please read or review Section~\ref{commandline}.
+
 Continuing the example from the previous section, let's write a program to find the largest in a sequence of numbers.
 Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
 Here is a starting point:
@@ -10888,53 +10884,56 @@ Whether or not you actually make these changes, draw a UML class diagram that sh
 
 The steps for compiling, running, and debugging Java code depend on the details of your development environment and operating system.
 We avoided putting these details in the main text, because they can be distracting.
-Instead, we provide this appendix with a brief introduction to DrJava -- an interactive development environment (IDE) that is well suited for beginners -- and other development tools, including Checkstyle for code quality and JUnit for testing.
+Instead, we provide this appendix with a brief introduction to DrJava -- an integrated development environment (IDE) that is well suited for beginners -- and other development tools, including Checkstyle for code quality and JUnit for testing.
 
 
-\section{Programming environment}
+\section{Installing DrJava}
 \label{drjava}
+
+The easiest way to start programming in Java is to use a website that compiles and runs Java code in the browser.
+Examples include \url{jdoodle.com}, \url{compilejava.net}, \url{tutorialspoint.com}, and others.
+
+If you are unable to install software on your computer (which is often the case in public schools and Internet caf\'{e}s), you can use these online development environments for almost everything in this book.
+
+But if you want to compile and run Java programs on your own computer, you will need:
+
 \index{JDK}
-
-The easiest way to start programming in Java is to use a web site that compiles and runs Java code in the browser.
-Examples include \url{https://www.jdoodle.com}, \url{https://www.compilejava.net}, and \url{http://www.tutorialspoint.com/compile_java_online.php}, but there are many more.
-
-If you are not comfortable installing software on your computer, you can use these online development environments for almost everything in this book.
-
-But if you want to compile and run Java programs on your computer, you will need:
+\index{JVM}
+\index{IDE}
+\index{text editor}
+\index{DrJava}
 
 \begin{itemize}
 
-\item A text editor or an interactive development environment (IDE).
+\item A Java Development Kit (JDK), which includes the compiler, Java Virtual Machine (JVM) that interprets the compiled byte code, and other tools such as Javadoc.
 
-\item A Java Development Kit (JDK), which includes the compiler and Java Virtual Machine (JVM), which interprets the compiled byte code.
+\item A simple {\bf text editor} such as Notepad++ for Windows or TextWrangler for Mac OS X, and/or an IDE such as DrJava, Eclipse, or Netbeans.
 
 \end{itemize}
 
-The IDE we recommend is DrJava, which is a free, open-source development environment, and it is written in Java.
+The JDK we recommend is Java SE (Standard Edition), version 7 or 8, which Oracle makes available for free.
+The IDE we recommend is DrJava, which is a free and open-source development environment written in Java.
 
-The JDK we recommend is Oracle's Java SE Development Kit, version 7 or 8.
-It is also freely available.
+To install the JDK, search the web for ``download jdk'' which should take you to Oracle's website.
+Scroll down to ``Java Platform, Standard Edition'' and click the download button under JDK.
+Then accept the license agreement and select the installer for your operating system. Don't forget to run the installer after you download it!
 
-TODO
-
-1) Installing Oracle JDK.
-
-2) Installing and running DrJava.
-
+To install DrJava, visit \url{drjava.org} and download the JAR file.
+We recommend you save it to your Desktop or another convenient location.
+Simply double-click the JAR file to run DrJava.
+Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for more details.
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=\textwidth]{figs/drjava-hello.png}
 \caption{Screenshot of DrJava editing the hello world program.}
-\label{fig.drjava}
+\label{fig.drjava1}
 \end{center}
 \end{figure}
 
-\index{DrJava}
+When running DrJava for the first time, we recommend you change three settings from the {\sf Edit $>$ Preferences} menu under {\sf Miscellaneous}: set the {\sf Indent Level} to 4, check the {\sf Automatically Close Block Comments} box, and uncheck the {\sf Keep Emacs-style Backup Files} box.
 
-We will use DrJava as the primary development environment throughout the book.
-
-%Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for more details.
+%We will use DrJava as the primary development environment throughout this book.
 
 %Step-by-step instructions for installing the JDK and configuring DrJava are available on this book's website: \url{http://thinkjava.org/}
 
@@ -10942,36 +10941,24 @@ We will use DrJava as the primary development environment throughout the book.
 \section{DrJava interactions}
 \label{interactions}
 
-A useful feature of DrJava is the Interactions Panel at the bottom of the window, shown in Figure~\ref{fig.drjava}.
+One of the most useful features of DrJava is the Interactions Pane at the bottom of the window.
 It provides the ability to try out code quickly, without having to write a class definition and save/compile/run the program.
-Figure~\ref{fig:drjava} shows an example.
+Figure~\ref{fig.drjava2} shows an example.
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=\textwidth]{figs/drjava-logic.png}
 \caption{Screenshot of the Interactions Pane in DrJava.}
-\label{fig:drjava}
+\label{fig.drjava2}
 \end{center}
 \end{figure}
 
 There is one subtle detail to note when using the Interactions feature.
 If you don't end an expression (or statement) with a semicolon, DrJava automatically displays its value.
-%Notice in Figure~\ref{fig:drjava} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
+Notice in Figure~\ref{fig.drjava2} how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
 
-What's nice about this feature is that you don't have to create a new class, declare a main method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
+What's nice about this feature is that you don't have to create a new class, declare a \java{main} method, write arbitrary expressions inside \java{System.out.println} statements, save the source file, and get all of your code to compile in advance.
 Also, you can press the up/down arrows on the keyboard to repeat previous commands and experiment with incremental differences.
-
-
-\section{Checkstyle}
-\label{checkstyle}
-
-TODO
-
-There are limits to what automatic style checkers can do.
-In particular, they can't evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, or the {\em structure} of your algorithms.
-Good comments make it easier for experienced developers to identify errors in your code.
-Good variable names communicate the intent of your program and how the data is organized.
-And good programs are designed to be efficient and demonstrably correct.
 
 
 \section{Command-line interface}
@@ -10980,13 +10967,20 @@ And good programs are designed to be efficient and demonstrably correct.
 \index{command-line}
 \index{terminal}
 
-One of the most powerful and useful skills you can learn is how to use the {\bf command-line interface}, also called the {\bf terminal}.
+One of the most powerful and useful skills you can learn is how to use the {\bf command-line interface}, also called the ``terminal''.
 The command line is a direct interface to the operating system.
 It allows you to run programs, manage files and directories, and monitor system resources.
 Many advanced tools, both for software development and general purpose computing, are available only at the command line.
 
 There are many good tutorials online for learning the command line for your operating system; just search the web for ``command line tutorial''.
 On Unix systems like Linux and OS X, you can get started with just four commands: change the working directory ({\tt cd}), list directory contents ({\tt ls}), compile Java programs ({\tt javac}), and run Java programs ({\tt java}).
+
+Figure~\ref{fig.commandline} shows an example where the {\tt Hello.java} source file is stored in the {\tt Desktop} directory.
+After changing to that location and listing the files, we use the {\tt javac} command to compile {\tt Hello.java}.
+Running {\tt ls} again, we see that the compiler generated a new file, {\tt Hello.class}, which contains the byte code.
+We run the program using the {\tt java} command, which displays the output on the following line.
+
+%TODO: we need a grayscale-friendly version of this on a light background
 
 \begin{figure}[!ht]
 \begin{center}
@@ -10996,156 +10990,31 @@ On Unix systems like Linux and OS X, you can get started with just four commands
 \end{center}
 \end{figure}
 
-%TODO: we need a grayscale-friendly version of this on a light background
-
-Figure~\ref{fig.commandline} shows an example where the {\tt Hello.java} source file is stored in the {\tt Desktop} directory.
-After changing to that location and listing the files, we use the {\tt javac} command to compile {\tt Hello.java}.
-Running {\tt ls} again, we see that the compiler generated a new file, {\tt Hello.class}, which contains the byte code.
-We run the program using the {\tt java} command, which displays the output on the following line.
-
 Note that the {\tt javac} command requires a {\em file name} (or multiple source files separated by spaces), whereas the {\tt java} command requires a single {\em class name}.
-If you use DrJava, it runs these commands for you and displays the output in the Interactions Pane.
+If you use DrJava, it runs these commands for you behind the scenes and displays the output in the Interactions Pane.
 
 Taking time to learn this efficient and elegant way of interacting with your operating system will make you more productive.
 People who don't use the command line don't know what they're missing.
 
 
-\section{Tracing with a debugger}
-\label{debugger}
-
-\index{debugger}
-
-Another way to visualize variables and parameters is to use a {\bf debugger}.
-Most debuggers make it possible to:
-
-\index{breakpoint}
-
-\begin{enumerate}
-\item Set a {\bf breakpoint}, which is line where you want the program to pause.
-\item Step through the code one line at a time and watch what it does.
-\item Check the values of variables and see when and how they change.
-\end{enumerate}
-
-For example, open any program in DrJava and move the cursor to the first line of \java{main}.
-Press Ctrl+B to toggle a breakpoint on the current line; it should now be highlighted in red.
-Press Ctrl+Shift+D to turn on Debug Mode; a new pane should appear at the bottom of the window.
-
-These commands are also available from the {\em Debugger} menu, in case you forget the shortcut keys.
-
-\index{call stack}
-
-When you run the program, execution pauses at the first breakpoint.
-The debug pane displays the {\bf call stack}, with the current method on top of the stack, as shown in Figure~\ref{fig.debugger}.
-You might be surprised to see how many methods were called before the \java{main} method!
-To the right are several buttons that allow you to step through the code at your own pace.
-You can also press ``Automatic Trace'' to watch DrJava run your code one line at a time.
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=\textwidth]{figs/debugger.png}
-\caption{Screenshot of the DrJava debugger.
-Execution is currently paused on the first line of \java{printTwice}.
-There is a breakpoint on the first line of \java{main}.}
-\label{fig.debugger}
-\end{center}
-\end{figure}
-
-Using a debugger is like having the computer proofread your code out loud.
-When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
-Tracing allows you to verify how control and data passes from one method to another.
-You might expect the code do one thing, but then the debugger shows it doing something else.
-At that moment, you gain insight about what may be wrong with the code.
-
-%You can edit your code while debugging it, but we don't recommend it.
-%If you add or delete multiple lines of code while the program is paused, the results can be confusing.
-
-
-\section{Testing with JUnit}
-\label{JUnit}
-
-\index{unit test}
-
-When beginners start writing methods, they usually test them by invoking them from \java{main} and checking the results by hand.
-For cases where we know the right answer, we can do better by writing {\bf unit tests}.
-For example, to test \java{fibonacci} from Section~\ref{fibonacci}, we could write:
-
-\begin{code}
-    public static void main(String[] args) {
-        if (fibonacci(1) != 1) {
-            System.err.println("fibonacci(1) is incorrect");
-        }
-        if (fibonacci(2) != 1) {
-            System.err.println("fibonacci(2) is incorrect");
-        }
-        if (fibonacci(3) != 2) {
-            System.err.println("fibonacci(3) is incorrect");
-        }
-    }
-\end{code}
-
-Writing code like this can get repetitive, but there are tools to make it easier.
-JUnit is the most common testing tool for Java programs (see \url{http://junit.org/}).
-To use it, you have to create a test class that contains test methods.
-If the name of the class is \java{Class}, the name of the test class is \java{ClassTest}.
-And if there is a method in \java{Class} named \java{method}, there should be a method in \java{TestClass} named \java{testMethod}.
-
-For example, suppose that the \java{fibonacci} method in the previous section belongs to a class named \java{Series}.
-Here is the corresponding JUnit test class and test method:
-
-\begin{code}
-import junit.framework.TestCase;
-
-public class SeriesTest extends TestCase {
-
-    public void testFibonacci() {
-        assertEquals(1, Series.fibonacci(1));
-        assertEquals(1, Series.fibonacci(2));
-        assertEquals(2, Series.fibonacci(3));
-    }
-}
-\end{code}
-
-This example uses the keyword \java{extends}, which indicates that the new class, \java{SeriesTest} is based on an existing class, \java{TestCase}, which is imported from the package \java{junit.framework}.
-
-Many development environments can generate test classes and methods automatically.
-In \mbox{DrJava}, you can select ``New JUnit Test Case'' from the ``File'' menu to generate a test class.
-
-\java{assertEquals} is provided by the \java{TestCase} class.
-It takes two arguments and checks whether they are equal.
-If so, it does nothing; otherwise it displays an error message.
-Normally the first argument is the ``expected value'', which we consider correct, and the second argument is the ``actual value'' we want to check.
-If they are not equal, the test fails.
-
-Using \java{assertEquals} is more concise than writing your own \java{if} statements and \java{System.err} messages.
-
-% I think this is too mysterious:
-%In addition, they are overloaded to provide advanced features beyond the scope of this chapter.
-
-To run JUnit directly from DrJava, click the {\sf Test} button on the toolbar.
-If all your test methods pass, you will see a green bar in the lower right.
-Otherwise, DrJava will take you directly to the first assertion that failed.
-
-
 \section{Command-line testing}
 \label{cltesting}
 
-You should review the advice in Section~\ref{sec:examples}, now that you've written some more substantial programs.
-Remember, it's more effective to program and debug your code little by little than to attempt writing everything at once.
-And once you've completed programming an algorithm, it's important to test that it works correctly on a variety of inputs.
+As described in Section~\ref{sec:examples}, it's more effective to program and debug your code little by little than to attempt writing everything all at once.
+And after you've completed programming an algorithm, it's important to test that it works correctly on a variety of inputs.
 
-Throughout the book, we will illustrate techniques for testing your programs.
+Throughout the book, we illustrate techniques for testing your programs.
 Most if not all testing is based on a simple idea: does the program do what we expect it to do?
 For simple programs, it's not difficult to run them several times and see what happens.
 But at some point, you will get tired of typing the same test cases over and over.
 
-We can automate the process of entering input and comparing {\em expected output} with {\em actual output} using the command line.
+We can automate the process of entering input and comparing ``expected output'' with ``actual output'' using the command line.
 The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
 Here are step by step instructions.
 
 \begin{enumerate}
 
-\item Make sure you can compile and run the {\tt Convert.java} example in the previous section.
-%You can also download a copy from \url{http://thinkjava.org/}.
+\item Make sure you can compile and run the {\tt Convert.java} example in the {\tt ch03} directory of {\tt ThinkJavaCode}.
 
 \item In the same directory as {\tt Convert.java}, create a plain text file named {\tt test.in} (``in'' is for input).
 Enter the following line and save the file.
@@ -11198,27 +11067,185 @@ But there's also a chance that we have a correct program and the expected output
 Interpreting the results from {\tt diff} can be confusing, but fortunately there are many graphical tools that show the differences between two files.
 For example, on Windows you can install WinMerge, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}, shown in Figure~\ref{fig.meld}.
 
-Regardless what tool you use, the goal is the same.
-Debug your program until the actual output is {\it identical} to the expected output.
-
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.9\textwidth]{figs/meld.png}
-\caption{Using {\tt meld} to compare the expected output with the actual output.}
+\caption{Using {\tt meld} to compare expected output with the actual output.}
 \label{fig.meld}
 \end{center}
 \end{figure}
 
+Regardless what tool you use, the goal is the same.
+Debug your program until the actual output is {\it identical} to the expected output.
+
+
+\section{Running Checkstyle}
+\label{checkstyle}
+
+Checkstyle is a command-line tool that can be used to determine if your source code follows a set of style rules.
+It also checks for common programming mistakes, such as class and method design problems.
+
+You can download the latest version as a JAR file from \url{http://checkstyle.sourceforge.net/}.
+To run Checkstyle, move (or copy) the JAR file to the same directory as your program.
+Open a terminal in that location, and run the following command:
+
+\begin{stdout}
+java -jar checkstyle-*-all.jar -c /google_checks.xml *.java
+\end{stdout}
+
+Note the * characters are {\bf wildcards} that match whatever version of Checkstyle you have and whatever java source files are present.
+The output indicates the file and line number of each problem.
+This example refers to a method beginning on line 93, column 5 of Hello.java:
+
+\begin{stdout}
+Hello.java:93:5: Missing a Javadoc comment
+\end{stdout}
+
+The file \java{/google_checks.xml} is inside the JAR and represents most of Google's style rules.
+You can alternatively use \java{/sun_checks.xml} or provide your own configuration file.
+See Checkstyle's website for more information.
+
+If you apply Checkstyle to your source code often, you will likely internalize good style habits over time.
+But there are limits to what automatic style checkers can do.
+In particular, they can't evaluate the {\em quality} of your comments, the {\em meaning} of your variable names, or the {\em structure} of your algorithms.
+
+Good comments make it easier for experienced developers to identify errors in your code.
+Good variable names communicate the intent of your program and how the data is organized.
+And good programs are designed to be efficient and demonstrably correct.
+
+
+\section{Tracing with a debugger}
+\label{debugger}
+
+\index{debugger}
+
+A great way to visualize the flow of execution, including how parameters and arguments work, is to use a {\bf debugger}.
+Most debuggers make it possible to:
+
+\index{breakpoint}
+
+\begin{enumerate}
+\item Set a {\bf breakpoint}, which is line where you want the program to pause.
+\item Step through the code one line at a time and watch what it does.
+\item Check the values of variables and see when and how they change.
+\end{enumerate}
+
+For example, open any program in DrJava and move the cursor to the first line of \java{main}.
+Press {\sf Ctrl+B} to toggle a breakpoint on the current line; it should now be highlighted in red.
+Press {\sf Ctrl+Shift+D} to turn on Debug Mode; a new pane should appear at the bottom of the window.
+These commands are also available from the {\sf Debugger} menu, in case you forget the shortcut keys.
+
+\index{call stack}
+
+When you run the program, execution pauses at the first breakpoint.
+The debug pane displays the {\bf call stack}, with the current method on top of the stack, as shown in Figure~\ref{fig.debugger}.
+You might be surprised to see how many methods were called before the \java{main} method!
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=\textwidth]{figs/debugger.png}
+\caption{Screenshot of the DrJava debugger.
+Execution is currently paused on the first line of \java{printTwice}.
+There is a breakpoint on the first line of \java{main}.}
+\label{fig.debugger}
+\end{center}
+\end{figure}
+
+To the right are several buttons that allow you to step through the code at your own pace.
+You can also press {\sf Automatic Trace} to watch DrJava run your code one line at a time.
+
+Using a debugger is like having the computer proofread your code out loud.
+When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
+
+Tracing allows you to verify how control and data passes from one method to another.
+You might expect the code do one thing, but then the debugger shows it doing something else.
+At that moment, you gain insight about what may be wrong with the code.
+
+You can edit your code while debugging it, but we don't recommend it.
+If you add or delete multiple lines of code while the program is paused, the results can be confusing.
+
+See \url{http://drjava.org/docs/user/ch09.html} for more information about using the debugger feature of DrJava.
+
+\section{Testing with JUnit}
+\label{JUnit}
+
+\index{unit test}
+
+When beginners start writing methods, they usually test them by invoking them from \java{main} and checking the results by hand.
+Writing code like this can get repetitive, but there are tools to make it easier.
+For cases where we know the right answer, we can do better by writing {\bf unit tests}.
+
+For example, to test \java{fibonacci} from Section~\ref{fibonacci}, we could write:
+
+\begin{code}
+    public static void main(String[] args) {
+        if (fibonacci(1) != 1) {
+            System.err.println("fibonacci(1) is incorrect");
+        }
+        if (fibonacci(2) != 1) {
+            System.err.println("fibonacci(2) is incorrect");
+        }
+        if (fibonacci(3) != 2) {
+            System.err.println("fibonacci(3) is incorrect");
+        }
+    }
+\end{code}
+
+JUnit is the most common testing tool for Java programs (see \url{junit.org}).
+To use it, you have to create a test class that contains test methods.
+If the name of the class is \java{Class}, the name of the test class is \java{ClassTest}.
+And if there is a method in \java{Class} named \java{method}, there should be a method in \java{TestClass} named \java{testMethod}.
+
+For example, suppose that the \java{fibonacci} method belongs to a class named \java{Series}.
+Here is the corresponding JUnit test class and test method:
+
+\begin{code}
+import junit.framework.TestCase;
+
+public class SeriesTest extends TestCase {
+
+    public void testFibonacci() {
+        assertEquals(1, Series.fibonacci(1));
+        assertEquals(1, Series.fibonacci(2));
+        assertEquals(2, Series.fibonacci(3));
+    }
+}
+\end{code}
+
+This example uses the keyword \java{extends}, which indicates that the new class, \java{SeriesTest} is based on an existing class, \java{TestCase}, which is imported from the package \java{junit.framework}.
+
+Many development environments can generate test classes and methods automatically.
+In DrJava, you can select {\sf New JUnit Test Case} from the {\sf File} menu to generate a test class.
+
+\java{assertEquals} is provided by the \java{TestCase} class.
+It takes two arguments and checks whether they are equal.
+If so, it does nothing; otherwise it displays an error message.
+Normally the first argument is the ``expected value'', which we consider correct, and the second argument is the ``actual value'' we want to check.
+If they are not equal, the test fails.
+
+Using \java{assertEquals} is more concise than writing your own \java{if} statements and \java{System.err} messages.
+JUnit provides additional methods, such as \java{assertNull}, \java{assertSame}, and \java{assertTrue}, that can be used to design a variety of tests.
+
+To run JUnit directly from DrJava, click the {\sf Test} button on the toolbar.
+If all your test methods pass, you will see a green bar in the lower right.
+Otherwise, DrJava will take you directly to the first assertion that failed.
 
 
 \section{Vocabulary}
 
 \begin{description}
 
-%TODO: any more vocab?
+\term{text editor}
+A program that edits plain text files, the format used by most programming languages.
+
+\term{command line}
+A means of interacting with the computer by issuing commands in the form of successive lines of text.
 
 \term{redirection operator}
-A command-line feature that substitutes \java{System.in} and/or %\java{System.out} with a plain text file.
+A command-line feature that substitutes \java{System.in} and/or \java{System.out} with a plain text file.
+
+\term{wildcard}
+A command-line feature that allows you to specify a pattern of file names using the {\tt *} character.
 
 \term{debugger}
 A tool that allows you to run one statement at a time and see the contents of variables.
@@ -11229,8 +11256,10 @@ A line of code where the debugger will pause a running program.
 \term{call stack}
 The history of method calls and where to resume execution after each method returns.
 
-\end{description}
+\term{unit test}
+Code that exercises a single method of a program, testing for correctness and/or efficiency.
 
+\end{description}
 
 
 \chapter{Java 2D graphics}
@@ -11523,7 +11552,7 @@ The best debugging strategy depends on what kind of error you have:
 \begin{itemize}
 
 \item Compile-time errors indicate that there is something wrong with the syntax of the program.
-Example: omitting the semi-colon at the end of a statement.
+Example: omitting the semicolon at the end of a statement.
 
 \index{compile-time error}
 
@@ -11569,7 +11598,7 @@ It tries to recover and pick up again after the first error, but sometimes it re
 
 Only the first error message is truly reliable.
 We suggest that you only fix one error at a time, and then recompile the program.
-You may find that one semi-colon or brace ``fixes'' 100 errors.
+You may find that one semicolon or brace ``fixes'' 100 errors.
 
 
 \subsection*{I'm getting a weird compiler message, and it won't go away.}
@@ -11599,7 +11628,7 @@ All program statements should be within a method definition.
 
 \item Remember that upper case letters are not the same as lower case letters.
 
-\item Check for semi-colons at the end of statements (and no semi-colons after squiggly-braces).
+\item Check for semicolons at the end of statements (and no semicolons after squiggly-braces).
 
 \item Make sure that any strings in the code have matching quotation marks.
 Make sure that you use double-quotes for strings and single quotes for characters.
