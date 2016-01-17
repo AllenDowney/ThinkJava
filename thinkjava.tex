@@ -5697,6 +5697,16 @@ If you want to increment or decrement a variable by an amount other than 1, you 
 For example, \java{i += 2} increments \java{i} by \java{2}.
 
 
+\section{The do-while loop}
+
+TODO: refer to validating input section (Chapter 5), show how to convert into a do-while loop, discuss the use of flag variables when checking for multiple criteria
+
+
+\section{Break and continue}
+
+TODO: keep reading positive integers until the user enters a zero, then break; use continue to skip negative/odd/magic numbers before processing them
+
+
 \section{Vocabulary}
 
 \begin{description}
@@ -7618,11 +7628,10 @@ For example, \java{translate} has the same effect as \java{moveRect}, but instea
 This line invokes the \java{translate} method on the object \java{box} refers to.
 
 %To foreshadow what's to come in future chapters, this example illustrates {\bf object-oriented programming}.
-%Rather than write \java{static} methods that manipulate external data (like \java{moveRect}), we make the methods non-static and bundle them with the objects themselves using dot notation.
+%Rather than write \java{static} methods that manipulate parameters (like \java{moveRect}), we apply methods to objects themselves using dot notation.
 
-% ABD: this is a use-before-def of ``non-static''.  And I don't think
-% it buys us much to introduce ``object oriented programming'' at this
-% point.
+% ABD: I don't think it buys us much to introduce OOP at this point.
+% TODO discuss when we should explain what OOP actually means
 
 
 \section{Aliasing}
@@ -7751,6 +7760,14 @@ This process is called {\bf garbage collection}.
 
 You don't have to do anything to make garbage collection happen, and in general don't have to be aware of it.
 But we thought you might be interested.
+
+
+\section{Java library source}
+
+TODO: explain how to download and browse {\tt src.zip}, examine the contents of {\tt Point.java}, {\tt Rectangle.java}, and {\tt String.java}, and discuss how objects encapsulate data and provide methods to access/modify the data. For example, strings are implemented in Java and are nothing more than a character array.
+
+% explain the difference between Oracle java and OpenJDK?
+% or is it okay to simply say that Java is open source?
 
 
 \section{Vocabulary}
@@ -9428,13 +9445,6 @@ Inside the \java{while} loop, we repeat the four steps of binary search:
 \end{enumerate}
 
 If \java{low} exceeds \java{high}, there are no cards in the range, so we break out of the loop and return \java{-1}.
-
-%TODO: we should cover break and continue
-% they're not part of the AP Java subset, but useful for input processing
-% for example, keep reading positive integers until the user enters a zero
-% we could use continue to skip odd/magic numbers, or something like that
-% Chapter 7 Loops has plenty of room and could use a couple more sections
-% other topics (not in the subset) we could cover are do-while and switch
 
 
 \section{Tracing the code}
