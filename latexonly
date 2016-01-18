@@ -93,6 +93,17 @@
     belowskip=\parskip
 }
 
+% code listing environments
+\usepackage{listings}
+\lstnewenvironment{code}
+{\minipage{\linewidth}}
+{\endminipage}
+\lstnewenvironment{stdout}
+{\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
+{\endminipage}
+
+% inline syntax formatting
+\newcommand{\java}[1]{\lstinline{#1}} %\end{
 
 
 % pdf hyperlinks, table of contents, and document properties

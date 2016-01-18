@@ -31,16 +31,26 @@ oreilly:
 
 hevea:	thinkjava.tex header.html footer.html
 	# replace the pdfs with eps
-	sed s/\\.pdf/.eps/g thinkjava.tex > $(F)h.tex
-	pdflatex $(F)h
+	sed s/\\.pdf/.eps/g thinkjava.tex > $(F)6.tex
+	pdflatex $(F)6
 	rm -rf html
 	mkdir html
-	hevea -fix -O -e latexonly htmlonly $(F)h
+	hevea -fix -O -e latexonly htmlonly $(F)6
 # the following greps are a kludge to prevent imagen from seeing
 # the definitions in latexonly, and to avoid headers on the images
-	grep -v latexonly $(F)h.image.tex > a; mv a $(F)h.image.tex
-	grep -v fancyhdr $(F)h.image.tex > a; mv a $(F)h.image.tex
-	imagen -png $(F)h
-	hacha $(F)h.html
+	grep -v latexonly $(F)6.image.tex > a; mv a $(F)6.image.tex
+	grep -v fancyhdr $(F)6.image.tex > a; mv a $(F)6.image.tex
+	imagen -png $(F)6
+	hacha $(F)6.html
 	cp up.png next.png back.png html
-	mv index.html $(F)h.css $(F)h*.html $(F)h*.png *motif.gif html
+	mv index.html $(F)6.css $(F)6*.html $(F)6*.png *motif.gif html
+
+DEST = /home/downey/public_html/greent/thinkjava6
+
+distrib:
+	rm -rf dist
+	mkdir dist
+	rsync -a $(F).pdf html dist
+	rsync -a dist/* $(DEST)
+	chmod -R o+r $(DEST)/*
+	cd $(DEST)/..; sh back

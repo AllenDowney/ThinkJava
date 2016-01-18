@@ -21,3 +21,13 @@
 \htmlhead{\rawhtmlinput{header.html}}
 
 \htmlfoot{\rawhtmlinput{footer.html}}
+
+% code listing environments
+\usepackage{listings}
+\lstnewenvironment{code}{}{}
+\lstnewenvironment{stdout}{}{}
+
+% inline syntax formatting
+\newcommand{\java}[1]{\texttt{#1}}
+\newcommand{\stdout}[1]{\texttt{#1}}
+
