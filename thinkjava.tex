@@ -9,6 +9,19 @@
 
 %%%% Both LATEX and PLASTEX
 
+\usepackage{hevea}
+
+% these styles get translated in CSS for the HTML version
+\newstyle{a:link}{color:black;}
+\newstyle{p+p}{margin-top:1em;margin-bottom:1em}
+\newstyle{img}{border:0px}
+
+% change the arrows
+\setlinkstext
+  {\imgsrc[ALT="Previous"]{back.png}}
+  {\imgsrc[ALT="Up"]{up.png}}
+  {\imgsrc[ALT="Next"]{next.png}}
+
 % balanced index with TOC entry
 \usepackage{makeidx}
 \makeindex
@@ -2706,7 +2719,7 @@ Adding 1 yields a number between 1 and 100, including both.
 \begin{itemize}
 
 \item The definition of \java{GuessStarter} is in a file called {\tt GuessStarter.java}, in a directory called {\tt ch03}, in the repository for this book.
-Instructions for downloading this code are on page \pageref{code}.
+Instructions for downloading this code are on page~\pageref{code}.
 
 \item Compile and run this program.
 
@@ -7417,19 +7430,18 @@ The second line creates the new \java{Point} with the given arguments as coordin
 
 The result of the \java{new} operator is a reference to the new object.
 So \java{blank} contains a reference to the new \java{Point} object.
-Here is a state diagram showing the result:
-
-\index{state}
-\index{state diagram}
+Figure~\ref{fig.reference} shows the result.
 
 \begin{figure}
 \begin{center}
 \includegraphics{figs/reference.pdf}
 \caption{State diagram showing a variable that refers to a Point object.}
-\label{fit.reference}
+\label{fig.reference}
 \end{center}
 \end{figure}
 
+\index{state}
+\index{state diagram}
 \index{attribute}
 
 As usual, the name of the variable \java{blank} appears outside the box, and its value appears inside the box.
@@ -8866,7 +8878,7 @@ Here is an outline of the road ahead:
 %It may help you to create a {\tt Card.java} file and paste in the examples as we go.
 
 The code for this chapter is in \java{Card.java}, which is in the directory {\tt ch12} in the repository for this book.
-Instructions for downloading this code are on page \pageref{code}.
+Instructions for downloading this code are on page~\pageref{code}.
 
 
 \section{Card objects}
@@ -9691,7 +9703,7 @@ And we present algorithms for shuffling and sorting arrays.
 %This transitional form should help you learn, but don't write code like this.
 
 The code for this chapter is in \java{Card.java} and \java{Deck.java}, which are in the directory {\tt ch13} in the repository for this book.
-Instructions for downloading this code are on page \pageref{code}.
+Instructions for downloading this code are on page~\pageref{code}.
 
 
 \section{The Deck class}
