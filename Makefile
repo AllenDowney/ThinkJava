@@ -28,3 +28,19 @@ oreilly:
 	cd atlas; git add thinkjava.xml figs/*	
 	cd atlas; git commit -m "Automated check in."
 	cd atlas; git push
+
+hevea:	thinkjava.tex header.html footer.html
+	# replace the pdfs with eps
+	sed s/\\.pdf/.eps/g thinkjava.tex > $(F)h.tex
+	pdflatex $(F)h
+	rm -rf html
+	mkdir html
+	hevea -fix -O -e latexonly htmlonly $(F)h
+# the following greps are a kludge to prevent imagen from seeing
+# the definitions in latexonly, and to avoid headers on the images
+	grep -v latexonly $(F)h.image.tex > a; mv a $(F)h.image.tex
+	grep -v fancyhdr $(F)h.image.tex > a; mv a $(F)h.image.tex
+	imagen -png $(F)h
+	hacha $(F)h.html
+	cp up.png next.png back.png html
+	mv index.html $(F)h.css $(F)h*.html $(F)h*.png *motif.gif html

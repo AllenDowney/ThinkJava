@@ -1,12 +1,6 @@
 % put commands here that should be used for the HTML
 % version of the book but not Postscript or PDF
 
-\newcommand{\beforefig}{}
-\newcommand{\afterfig}{}
-
-\newcommand{\beforeverb}{\blue \large}
-\newcommand{\afterverb}{\black \normalsize}
-
 \newcommand{\adjustpage}[1]{}
 
 \newcommand{\clearemptydoublepage}{}
@@ -17,6 +11,7 @@
 
 \newcommand{\frontmatter}{}
 \newcommand{\mainmatter}{}
+\newcommand{\backmatter}{}
 
 \newcommand{\theoremstyle}[1]{}
 \newcommand{\newtheoremstyle}[1]{}
