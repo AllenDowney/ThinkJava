@@ -1,8 +1,8 @@
 %!PS-Adobe-3.0 EPSF-3.0
-%%Title: reference.fig
+%%Title: circle.fig
 %%Creator: fig2dev Version 3.2 Patchlevel 5d
-%%CreationDate: Mon Jan 18 10:34:51 2016
-%%BoundingBox: 0 0 112 83
+%%CreationDate: Mon Jan 18 11:24:20 2016
+%%BoundingBox: 0 0 146 106
 %Magnification: 1.0000
 %%EndComments
 %%BeginProlog
@@ -76,13 +76,26 @@ end
   bind def
 /shd {dup dup currentrgbcolor 4 -2 roll mul 4 -2 roll mul
   4 -2 roll mul srgb} bind def
+ /DrawEllipse {
+	/endangle exch def
+	/startangle exch def
+	/yrad exch def
+	/xrad exch def
+	/y exch def
+	/x exch def
+	/savematrix mtrx currentmatrix def
+	x y tr xrad yrad sc 0 0 1 startangle endangle arc
+	closepath
+	savematrix setmatrix
+	} def
+
 /$F2psBegin {$F2psDict begin /$F2psEnteredState save def} def
 /$F2psEnd {$F2psEnteredState restore end} def
 
 /pageheader {
 save
-newpath 0 83 moveto 0 0 lineto 112 0 lineto 112 83 lineto closepath clip newpath
--56.0 212.2 translate
+newpath 0 106 moveto 0 0 lineto 146 0 lineto 146 106 lineto closepath clip newpath
+-71.1 131.2 translate
 1 -1 scale
 $F2psBegin
 10 setmiterlimit
@@ -99,61 +112,22 @@ pageheader
 % Fig objects follow
 %
 % 
-% here starts figure with depth 52
-% Polyline
-0 slj
-0 slc
-7.500 slw
-n 2025 2400 m 2775 2400 l 2775 3525 l 2025 3525 l
- cp gs col7 0.90 shd ef gr gs col0 s gr 
-% here ends figure;
-% 
-% here starts figure with depth 50
-% Polyline
-0 slj
-0 slc
-7.500 slw
-n 2400 3075 m 2625 3075 l 2625 3375 l 2400 3375 l
- cp gs col0 s gr 
-% Polyline
-n 2400 2550 m 2625 2550 l 2625 2850 l 2400 2850 l
- cp gs col0 s gr 
-% Polyline
-gs  clippath
-1888 3030 m 2040 3030 l 2040 2970 l 1888 2970 l 1888 2970 l 2008 3000 l 1888 3030 l cp
-eoclip
-n 1650 3000 m
- 2025 3000 l gs col0 s gr gr
-
-% arrowhead
-n 1888 3030 m 2008 3000 l 1888 2970 l  col0 s
-/Helvetica ff 200.00 scf sf
-2550 3300 m
-gs 1 -1 sc (4) dup sw pop neg 0 rm  col0 sh gr
-/Helvetica ff 200.00 scf sf
-2325 3300 m
-gs 1 -1 sc (y) dup sw pop neg 0 rm  col0 sh gr
-/Helvetica ff 200.00 scf sf
-2550 2775 m
-gs 1 -1 sc (3) dup sw pop neg 0 rm  col0 sh gr
-/Helvetica ff 200.00 scf sf
-2325 2775 m
-gs 1 -1 sc (x) dup sw pop neg 0 rm  col0 sh gr
-/Helvetica ff 200.00 scf sf
-1425 3075 m
-gs 1 -1 sc (blank) dup sw pop neg 0 rm  col0 sh gr
-/Helvetica ff 200.00 scf sf
-2025 2325 m
-gs 1 -1 sc (Point) col0 sh gr
-% here ends figure;
-% 
 % here starts figure with depth 0
+% Ellipse
+7.500 slw
+n 2400 1425 1200 750 0 360 DrawEllipse gs col7 0.80 shd ef gr gs col0 s gr
+
 % Polyline
 0 slj
 0 slc
-7.500 slw
-n 1500 2925 m 1650 2925 l 1650 3075 l 1500 3075 l
- cp gs col7 0.90 shd ef gr gs col0 s gr 
+n 1200 675 m 3600 675 l 3600 2175 l 1200 2175 l
+ cp gs col0 s gr 
+/Helvetica ff 200.00 scf sf
+1200 600 m
+gs 1 -1 sc (bounding box) col0 sh gr
+/Helvetica ff 200.00 scf sf
+1800 1500 m
+gs 1 -1 sc (inscribed oval) col0 sh gr
 % here ends figure;
 pagefooter
 showpage
