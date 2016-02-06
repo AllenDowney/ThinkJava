@@ -9,18 +9,7 @@
 
 %%%% Both LATEX and PLASTEX
 
-\usepackage{hevea}
-
-% these styles get translated in CSS for the HTML version
-\newstyle{a:link}{color:black;}
-\newstyle{p+p}{margin-top:1em;margin-bottom:1em}
-\newstyle{img}{border:0px}
-
-% change the arrows
-\setlinkstext
-  {\imgsrc[ALT="Previous"]{back.png}}
-  {\imgsrc[ALT="Up"]{up.png}}
-  {\imgsrc[ALT="Next"]{next.png}}
+\IfFileExists{hevea.sty}{\usepackage{hevea}}{}
 
 % balanced index with TOC entry
 \usepackage{makeidx}
@@ -75,9 +64,6 @@
 
 \else
 %%%% LATEX ONLY
-
-\usepackage{textcomp}
-\usepackage{listings}
 
 \input{latexonly}
 
