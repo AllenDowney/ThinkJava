@@ -9,18 +9,7 @@
 
 %%%% Both LATEX and PLASTEX
 
-\usepackage{hevea}
-
-% these styles get translated in CSS for the HTML version
-\newstyle{a:link}{color:black;}
-\newstyle{p+p}{margin-top:1em;margin-bottom:1em}
-\newstyle{img}{border:0px}
-
-% change the arrows
-\setlinkstext
-  {\imgsrc[ALT="Previous"]{back.png}}
-  {\imgsrc[ALT="Up"]{up.png}}
-  {\imgsrc[ALT="Next"]{next.png}}
+\IfFileExists{hevea.sty}{\usepackage{hevea}}{}
 
 % balanced index with TOC entry
 \usepackage{makeidx}
@@ -75,9 +64,6 @@
 
 \else
 %%%% LATEX ONLY
-
-\usepackage{textcomp}
-\usepackage{listings}
 
 \input{latexonly}
 
@@ -336,12 +322,7 @@ She has also worked on a Ruby version of the book.
 \end{itemize}
 
 Additional contributors who found one or more typos: 
-Stijn Debrouwere,
-Guy Driesen,
-Andai Velican,
-Chris Kuszmaul,
-Daniel Kurikesu,
-Josh Donath, Rens Findhammer, Elisa Abedrapo, Yousef BaAfif, Bruce Hill,  Matt Underwood, Isaac Sultan, Dan Rice.
+Stijn Debrouwere, Guy Driesen, Andai Velican, Chris Kuszmaul, Daniel Kurikesu, Josh Donath, Rens Findhammer, Elisa Abedrapo, Yousef BaAfif, Bruce Hill, Matt Underwood, Isaac Sultan, Dan Rice, Robert Beard.
 
 If you have additional comments or ideas about the text, please send them to: \href{mailto:feedback@greenteapress.com}{\bf feedback@greenteapress.com}
 
@@ -1197,7 +1178,7 @@ We do that with an {\bf assignment} statement.
     minute = 59;         // set minute to 59
 \end{code}
 
-This example shows four assignments, and the comments illustrate different ways people sometimes talk about assignment statements.
+This example shows three assignments, and the comments illustrate different ways people sometimes talk about assignment statements.
 The vocabulary can be confusing here, but the idea is straightforward:
 
 \begin{itemize}
@@ -1702,7 +1683,7 @@ For example, Google publishes its Java coding standards for use in open-source p
 You might not understand all of the guidelines now, because they refer to language features we haven't seen yet.
 But you might want to refer back to them periodically.
 
-In the meantime, there many tools that help programmers find and correct style violations.
+In the meantime, there are many tools that help programmers find and correct style violations.
 One of the most popular is Checkstyle, which enforces most of Google's guidelines.
 Instructions for downloading and running Checkstyle are in Appendix~\ref{checkstyle}.
 
