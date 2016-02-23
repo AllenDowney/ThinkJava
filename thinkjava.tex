@@ -493,7 +493,7 @@ But it is also portable, so it is possible to compile a Java program on one mach
 
 Figure~\ref{fig.compile} shows the steps of this process.
 Although they might seem complicated, in most program development environments these steps are automated for you.
-Usually you only have press a button or type a single command to compile and run your program.
+Usually you only have to press a button or type a single command to compile and run your program.
 On the other hand, it is important to know what steps are happening in the background, so if something goes wrong you can figure out what it is.
 
 
@@ -552,7 +552,8 @@ In the hello world program, this line is a {\bf print statement} that displays a
 \index{statement!print}
 \index{semicolon}
 
-Confusingly, {\em print} can mean both ``display something on the screen'' and ``send something to the printer''.
+\java{System.out.println} displays results on the screen; the name \java{println} stands for ``print line''.
+Confusingly, {\em print} can mean both ``display on the screen'' and ``send to the printer''.
 In this book, we'll try to say ``display'' when we mean output to the screen.
 Like most statements, the print statement ends with a semicolon (\java{;}).
 
@@ -574,7 +575,7 @@ Later, we will see programs that define more than one method.
 
 A {\bf class} is a collection of methods.
 This program defines a class named \java{Hello}.
-You can give a class any name you like, but it conventional to start with a capital letter.
+You can give a class any name you like, but it is conventional to start with a capital letter.
 The name of the class has to match the name of the file it is in, so this class has to be in a file named \java{Hello.java}.
 
 \index{braces}
@@ -746,6 +747,7 @@ In DrJava, you can reformat the source code with consistent indenting by selecti
 
 It is a good idea to read this book in front of a computer so you can try out the examples as you go.
 You can run many of the examples directly in DrJava's Interactions Pane, but if you put the code in a source file, it will be easier to try out variations.
+For more information on working with DrJava, see Appendix~\ref{development}.
 
 Whenever you are experimenting with a new feature, you should also try to make mistakes.
 For example, in the hello world program, what happens if you leave out one of the quotation marks?
@@ -817,7 +819,7 @@ A procedure or formula for solving a problem, with or without a computer.
 An error in a program.
 
 \term{debugging}
-The process of finding and removing any of the three kinds of errors.
+The process of finding and removing errors.
 
 \term{high-level language}
 A programming language that is designed to be easy for humans to read and write.
@@ -940,7 +942,9 @@ It is a good idea to commit as many errors as you can think of, so that you see 
 Sometimes the compiler tells you exactly what is wrong, and all you have to do is fix it.
 But sometimes the error messages are misleading.
 Over time you will develop a sense for when you can trust the compiler and when you have to figure things out yourself.
-In the hello world program:
+
+Starting with the hello world program, try out each of the following errors.
+After you make each change, compile the program, read the error message (if there is one), and then fix the error.
 
 \begin{enumerate}
 \item Remove one of the open squiggly-braces.
@@ -1169,7 +1173,7 @@ Most programming editors provide ``syntax highlighting'', which makes different 
 \index{assignment}
 \index{statement!assignment}
 
-Now that we have created variables, we want to store values.
+Now that we have created variables, we want to use them to store values.
 We do that with an {\bf assignment} statement.
 
 \begin{code}
@@ -1197,6 +1201,8 @@ We will see some examples that seem to break this rule, but we'll get to that la
 A common source of confusion is that some strings {\em look} like integers, but they are not.
 For example, \java{message} can contain the string \java{"123"}, which is made up of the characters \java{'1'}, \java{'2'}, and \java{'3'}.
 But that is not the same thing as the integer \java{123}.
+
+% TODO: fix the broken quotation marks on ``123''
 
 \begin{code}
     message = "123";    // legal
@@ -1277,6 +1283,8 @@ As the program runs, the state changes, so you should think of a state diagram a
 
 You can display the value of a variable using \java{print} or \java{println}.
 The following statements declare a variable named \java{firstLine}, assign it the value \java{"Hello, again!"}, and display that value.
+
+%TODO: fix more broken quotation marks
 
 \begin{code}
     String firstLine = "Hello, again!";
@@ -1367,12 +1375,11 @@ Number of minutes since midnight: 719
 Expressions are generally a combination of numbers, variables, and operators.
 When complied and executed, they become a single value.
 
-\begin{code}
-    1 + 1     hour - 1     hour * 60 + minute     minute / 60
-    2         11 - 1       11 * 60 + 59           59 / 60
-              10           660 + 59               0
-                           719
-\end{code}
+For example, the expression \java{1 + 1} has the value \java{2}.
+In the expression \java{hour - 1}, Java replaces the variable with it's value, yielding \java{11 - 1}, which has the value \java{10}.
+In the expression \java{hour * 60 + minute}, both variables get replaced, yielding \java{11 * 60 + 59}.
+The multiplication happens first, yielding \java{660 + 59}.
+Then the addition yields \java{719}.
 
 Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
 For example, the following fragment tries to compute the fraction of an hour that has elapsed, but it has a logic error.
@@ -1549,7 +1556,7 @@ This solution works as long as the number of cents doesn't exceed the largest in
 %Hopefully nobody will ever need that much money!
 
 
-\section{Operators for strings}
+\section{Operators for Strings}
 
 \index{string operator}
 \index{operator!string}
@@ -1566,7 +1573,8 @@ The following expressions are illegal:
 The \java{+} operator works with strings, but it might not do what you expect.
 For strings, the \java{+} operator performs {\bf concatenation}, which means joining end-to-end.
 So \java{"Hello, " + "world!"} yields the string \java{"Hello, world!"}.
-Likewise, the expression \java{"Hello, " + name} appends the value of \java{name} to the hello string, which is handy for creating a personalized greeting.
+
+Or if you have a variable called \java{name} that has type \java{String}, the expression \java{"Hello, " + name} appends the value of \java{name} to the hello string, which creates a personalized greeting.
 
 Since addition is defined for both numbers and strings, Java performs automatic conversions you may not expect:
 
@@ -1598,7 +1606,7 @@ But for numeric operators, Java follows mathematical conventions:
 So \java{1 + 2 * 3} yields 7, not 9, and \java{2 + 4 / 2} yields 4, not 3.
 
 \item If the operators have the same precedence, they are evaluated from left to right.
-So in the expression \java{minute * 100 / 60}, the multiplication happens first, yielding \java{5900 / 60}, which in turn yields \java{98}.
+So in the expression \java{minute * 100 / 60}, the multiplication happens first; if the value of \java{minute} is 59, we get \java{5900 / 60}, which yields \java{98}.
 If these same operations had gone from right to left, the result would have been \java{59 * 1}, which is incorrect.
 
 \item Any time you want to override the rules of precedence (or you are not sure what they are) you can use parentheses.
@@ -1732,7 +1740,7 @@ A statement that stores a value in a memory location.
 The variables in a program and their values.
 
 \term{state diagram}
-A graphical representation of the state of a program and a point in time.
+A graphical representation of the state of a program at a point in time.
 
 %\term{initialization}
 %A statement that creates a variable and assigns a value.
@@ -1784,6 +1792,7 @@ It describes the DrJava Interactions Pane, which is a useful way to develop and 
 
 
 \begin{exercise}
+
 If you are using this book in a class, you might enjoy this exercise.
 Find a partner and play {\it Stump the Chump}:
 
@@ -1832,7 +1841,7 @@ Thursday 16 July, 2015
 
 \begin{exercise}
 
-The point of this exercise is to (1) use some of the arithmetic operators, and (2) start thinking about compound entities (like time of day) that that are represented with multiple values.
+The point of this exercise is to (1) use some of the arithmetic operators, and (2) start thinking about compound entities (like time of day) that are represented with multiple values.
 
 \begin{enumerate}
 
@@ -1892,7 +1901,7 @@ It also provides \java{System.out}, which is a special value that provides metho
 In fact, we can use \java{System.out.println} to display the value of \java{System.out}:
 
 \begin{code}
-    System.out.println(System.out);
+System.out.println(System.out);
 \end{code}
 
 The result is:
@@ -1900,6 +1909,8 @@ The result is:
 \begin{stdout}
 java.io.PrintStream@685d72cd
 \end{stdout}
+
+%TODO: check consistency of indendation for code examples
 
 \index{package}
 
@@ -2097,13 +2108,12 @@ A good practice is to assign magic numbers to variables with meaningful names, l
 \end{code}
 
 This version is easier to read and less error-prone, but it still has a problem.
-Variables are, well, variable.
-And the number of centimeters in an inch is not.
+Variables can vary, and the number of centimeters in an inch does not.
 Once we assign a value to \java{cmPerInch}, it should never change.
 Java provides a language feature that enforces that rule, the keyword \java{final}.
 
 \begin{code}
-    final double cmPerInch = 2.54;
+    final double CM_PER_INCH = 2.54;
 \end{code}
 
 \index{constant}
@@ -2112,6 +2122,7 @@ Java provides a language feature that enforces that rule, the keyword \java{fina
 Declaring that a variable is \java{final} means that it cannot be reassigned once it has been initialized.
 If you try, the compiler reports an error.
 Variables declared as \java{final} are called {\bf constants}.
+By convention, names for constants are all uppercase, with the underscore character, \java{_}, between words.
 
 
 \section{Formatting output}
@@ -2154,7 +2165,7 @@ The format string can contain any number of format specifiers; here's an example
 
 \begin{code}
     int inch = 100;
-    double cm = inch * cmPerInch;
+    double cm = inch * CM_PER_INCH;
     System.out.printf("%d in = %f cm\n", inch, cm);
 \end{code}
 
@@ -2952,7 +2963,7 @@ Error: method printTwice in class Test cannot be applied
 \end{stdout}
 
 Sometimes Java can convert an argument from one type to another automatically.
-For example, \java{Math.sqrt} requires a \java{double}, but if you invoke \java{Math.sqrt(25)}, the interger value \java{25} is automatically converted to the floating-point value \java{25.0}.
+For example, \java{Math.sqrt} requires a \java{double}, but if you invoke \java{Math.sqrt(25)}, the integer value \java{25} is automatically converted to the floating-point value \java{25.0}.
 But in the example above, Java can't (or won't) convert the integer \java{17} to a \java{String}.
 
 Parameters and other variables only exist inside their own methods.
@@ -3008,7 +3019,9 @@ A common error is to declare the types of the arguments, like this:
     printTime(int hour, int minute);  // syntax error
 \end{code}
 
-That's a syntax error, because Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
+That's a syntax error, the compiler interprets \java{int hour} and \java{int minute} as variable declarations, not expressions.
+
+%because Java can tell the type of \java{hour} and \java{minute} by looking at their declarations.
 %You wouldn't declare the types of the arguments if they were simply integers:
 
 %\begin{code}
@@ -3502,10 +3515,13 @@ The result is the boolean value \java{false}.
 \index{logical operator}
 \index{operator!logical}
 
-Java has three {\bf logical operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
+Java has three {\bf logical operators}: \tt{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
 The results of these operators are similar to their meanings in English.
 
-For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero {\em and} less than 10.
+%TODO: check that && appears correctly in Latex and Docbook in several
+% places
+
+For example, \tt{x > 0 && x < 10} is true when \java{x} is both greater than zero {\em and} less than 10.
 The expression \java{evenFlag || n \% 3 == 0} is true if {\em either} condition is true, that is, if \java{evenFlag} is true or the number \java{n} is divisible by 3.
 Finally, the \java{!} operator inverts a boolean expression.
 So \java{!evenFlag} is true if \java{evenFlag} is {\em not} true.
@@ -3514,7 +3530,7 @@ So \java{!evenFlag} is true if \java{evenFlag} is {\em not} true.
 
 Logical operators evaluate the second expression only when necessary.
 For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
-Likewise, \java{false && anything} is always false.
+Likewise, \tt{false && anything} is always false.
 Ignoring the second operand, when possible, is called {\bf short circuit} evaluation, by analogy with an electrical circuit.
 Short circuit evaluation can save time, especially if \java{anything} takes a long time to evaluate.
 It can also avoid unnecessary errors, if \java{anything} might fail.
@@ -3524,8 +3540,8 @@ It can also avoid unnecessary errors, if \java{anything} might fail.
 If you ever have to negate an expression that contains logical operators, and you probably will, {\bf De Morgan's laws} can help:
 
 \begin{itemize}
-\item \java{!(A && B)} ~is the same as~ \java{!A || !B}
-\item \java{!(A || B)} ~is the same as~ \java{!A && !B}
+\item \tt{!(A && B)} ~is the same as~ \java{!A || !B}
+\item \java{!(A || B)} ~is the same as~ \tt{!A && !B}
 \end{itemize}
 
 Negating a logical expression is the same as negating each term and changing the operator.
@@ -3535,8 +3551,8 @@ De Morgan's laws also apply to the relational operators.
 In this case, negating each term means using the ``opposite'' relational operator.
 
 \begin{itemize}
-\item \java{!(x < 5 && y == 3)} ~is the same as~ \java{x >= 5 || y != 3}
-\item \java{!(x >= 1 || y != 7)} ~is the same as~ \java{x < 1 && y == 7}
+\item \tt{!(x < 5 && y == 3)} ~is the same as~ \java{x >= 5 || y != 3}
+\item \java{!(x >= 1 || y != 7)} ~is the same as~ \tt{x < 1 && y == 7}
 \end{itemize}
 
 It may help to read these examples out loud in English.
@@ -4227,12 +4243,12 @@ Compared to void methods, value methods differ in two ways:
 
 \end{itemize}
 
-Here's an example:  \java{area} takes a \java{double} as a parameter and returns the area of a circle with that radius:
+Here's an example:  \java{calculateArea} takes a \java{double} as a parameter and returns the area of a circle with that radius:
 
 \begin{code}
-    public static double area(double radius) {
-        double area = Math.PI * radius * radius;
-        return area;
+    public static double calculateArea(double radius) {
+        double result = Math.PI * radius * radius;
+        return result;
     }
 \end{code}
 
@@ -4246,7 +4262,7 @@ This statement means, ``return immediately from this method and use the followin
 The expression you provide can be arbitrarily complex, so we could have written this method more concisely:
 
 \begin{code}
-    public static double area(double radius) {
+    public static double calculateArea(double radius) {
         return Math.PI * radius * radius;
     }
 \end{code}
@@ -4254,7 +4270,7 @@ The expression you provide can be arbitrarily complex, so we could have written 
 \index{temporary variable}
 \index{variable!temporary}
 
-On the other hand, {\bf temporary} variables like \java{area} often make debugging easier, especially when you are stepping through code using an interactive debugger (see Section~\ref{debugger}).
+On the other hand, {\bf temporary} variables like \java{result} often make debugging easier, especially when you are stepping through code using an interactive debugger (see Section~\ref{debugger}).
 
 The type of the expression in the \java{return} statement must match the return type of the method.
 When you declare that the return type is \java{double}, you are making a promise that this method will eventually produce a \java{double} value.
@@ -4444,10 +4460,10 @@ Fortunately, we have a method that does just that (\java{distance}).
 \end{code}
 
 The second step is to find the area of a circle with that radius.
-We have a method for that computation too (\java{area}).
+We have a method for that computation too (\java{calculateArea}).
 
 \begin{code}
-    double area = area(radius);
+    double area = calculateArea(radius);
     return area;
 \end{code}
 
@@ -4457,7 +4473,7 @@ Putting everything together in a new method, we get:
     public static double circleArea
             (double xc, double yc, double xp, double yp) {
         double radius = distance(xc, yc, xp, yp);
-        double area = area(radius);
+        double area = calculateArea(radius);
         return area;
     }
 \end{code}
@@ -4467,7 +4483,7 @@ The temporary variables \java{radius} and \java{area} are useful for development
 \begin{code}
     public static double circleArea
             (double xc, double yc, double xp, double yp) {
-        return area(distance(xc, yc, xp, yp));
+        return calculateArea(distance(xc, yc, xp, yp));
     }
 \end{code}
 
@@ -4482,39 +4498,39 @@ This process reduces debugging time and yields code that is more likely to be co
 \section{Overloading}
 \label{overloading}
 
-You might have noticed that \java{circleArea} and \java{area} perform similar functions.
+You might have noticed that \java{circleArea} and \java{calculateArea} perform similar functions.
 They both find the area of a circle, but they take different parameters.
-For \java{area}, we have to provide the radius; for \java{circleArea} we provide two points.
+For \java{calculateArea}, we have to provide the radius; for \java{circleArea} we provide two points.
 
 \index{overloading}
 
 If two methods do the same thing, it is natural to give them the same name.
 Having more than one method with the same name is called {\bf overloading}, and it is legal in Java as long as each version takes different parameters.
-So we could rename \java{circleArea} to \java{area}:
+So we could rename \java{circleArea} to \java{calculateArea}:
 
 \begin{code}
-    public static double area
+    public static double calculateArea
             (double xc, double yc, double xp, double yp) {
-        return area(distance(xc, yc, xp, yp));
+        return calculateArea(distance(xc, yc, xp, yp));
     }
 \end{code}
 
-Note that this new \java{area} method is {\em not} recursive.
+Note that this new \java{calculateArea} method is {\em not} recursive.
 When you invoke an overloaded method, Java knows which version you want by looking at the arguments that you provide.
 If you write:
 
 \begin{code}
-    double x = area(3.0);
+    double x = calculateArea(3.0);
 \end{code}
 
-Java looks for a method named \java{area} that takes one \java{double} as an argument, and so it uses the first version, which interprets the argument as a radius.
+Java looks for a method named \java{calculateArea} that takes one \java{double} as an argument, and so it uses the first version, which interprets the argument as a radius.
 If you write:
 
 \begin{code}
-    double y = area(1.0, 2.0, 4.0, 6.0);
+    double y = calculateArea(1.0, 2.0, 4.0, 6.0);
 \end{code}
 
-Java uses the second version of \java{area}, which interprets the arguments as two points.
+Java uses the second version of \java{calculateArea}, which interprets the arguments as two points.
 In this example, the second version actually invokes the first version.
 
 Many Java methods are overloaded, meaning that there are different versions that accept different numbers or types of parameters.
@@ -4619,9 +4635,9 @@ For example, the {\bf factorial} of an integer $n$, which is written $n!$ is def
 
 Don't confuse the mathematical symbol $!$, which means factorial, with the Java operator \java{!}, which means NOT.
 
-This definition says that the factorial of 0 is 1, and the factorial of any other value $n$ is $n$ multiplied by the factorial of $n-1$.
-So $3!$ is 3 times $2!$, which is 2 times $1!$, which is 1 times $0!$, which is 1.
-Putting it all together, we get 3 times 2 times 1 times 1, which is 6.
+This definition says that the factorial of 0 is 1, and \java{factorial(n)} is \java{n * factorial(n-1)}.
+So \java{factorial(3)} is \java{3 * factorial(2)}; \java{factorial(2)} is \java{2 * factorial(1)}; \java{factorial(1)} is \java{1 * factorial(0)}; and \java{factorial(0)} is \java{1}.
+Putting it all together, we get \java{3 * 2 * 1 * 1}, which is 6.
 
 If you can formulate a recursive definition of something, you can easily write a Java method to evaluate it.
 The first step is to decide what the parameters and return type are.
@@ -5134,7 +5150,7 @@ For example, if the starting value (the argument passed to \java{sequence}) is 3
 Since \java{n} sometimes increases and sometimes decreases, there is no obvious proof that \java{n} will ever reach 1 and that the program will ever terminate.
 For some values of \java{n}, we can prove that it terminates.
 For example, if the starting value is a power of two, then the value of \java{n} will be even every time through the loop until we get to 1.
-The previous example ends with such a sequence, starting with 16.
+The previous example ends with such a sequence, starting when \java{n} is 16.
 
 The hard question is whether this program terminates for {\em all} values of n.
 So far, no one has been able to prove it {\em or} disprove it!
@@ -5811,6 +5827,8 @@ Of course, you can also declare the variable and create the array in a single li
 When you create an array of \java{int}s, the elements are initialized to zero.
 Figure~\ref{fig.array} shows a state diagram of the \java{counts} array so far.
 
+%TODO: check why the figure is cut off
+
 \begin{figure}
 \begin{center}
 \includegraphics{figs/array.pdf}
@@ -6403,7 +6421,7 @@ The following methods are hard to read, because instead of using meaningful name
 \begin{code}
     public static int pineapple(int[] a, int apple) {
         int pear = 0;
-        for (pine: a) {
+        for (int pine: a) {
             if (pine == apple) {
                 pear++;
             }
@@ -6494,7 +6512,7 @@ It is not common, but it is a useful exercise.
 \item Write a method called \java{maxInRange} that takes an array of integers and two indexes,\java{lowIndex} and \java{highIndex}, and finds the maximum value in the array, considering only the elements between \java{lowIndex} and \java{highIndex}, including both.
 
 This method should be recursive.
-If the length of the range is 1, that is, \java{if lowIndex == highIndex}, we know immediately that the sole element in the range must be the maximum.
+If the length of the range is 1, that is, if \java{lowIndex == highIndex}, we know immediately that the sole element in the range must be the maximum.
 So that's the base case.
 
 If there is more than one element in the range, we can break the array into two pieces, find the maximum in each of the pieces, and then find the maximum of the maxima.
@@ -6503,7 +6521,7 @@ If there is more than one element in the range, we can break the array into two 
 To find the largest element in an array, we have to provide a range for the entire array.
 
 \begin{code}
-    double max = maxInRange(array, 0, a.length - 1);
+    double max = maxInRange(a, 0, a.length - 1);
 \end{code}
 
 Write a method called \java{max} that takes an array and uses \java{maxInRange} to find and return the largest element.
@@ -7034,9 +7052,11 @@ The following code fragment traverses a string and counts open and close parenth
 
 The point of this exercise is to explore Java types and fill in some of the details that aren't covered in the chapter.
 
-\begin{enumerate}
+%TODO: see why there are empty items at the beginning of this exercise
 
 \index{concatenate}
+
+\begin{enumerate}
 
 \item Create a new program named {\tt Test.java} and write a \java{main} method that contains expressions that combine various types using the \java{+} operator.
 For example, what happens when you ``add'' a \java{String} and a \java{char}?
@@ -8153,7 +8173,7 @@ When you display an object using \java{print} or \java{println}, Java invokes th
 
 \index{override}
 
-By default it simply displays the type of the object and its address, but you can {\bf override} this behavior by providing a your own \java{toString} method.
+By default it simply displays the type of the object and its address, but you can {\bf override} this behavior by providing your own \java{toString} method.
 For example, here is a \java{toString} method for \java{Time}:
 
 \begin{code}
@@ -8208,11 +8228,13 @@ The result is \java{11:59:59.9}.
 We have seen two ways to check whether values are equal: the \java{==} operator and the \java{equals} method.
 With objects you can use either one, but they are not the same.
 
-\begin{itemize}
+%TODO: check the bullet points in the Atlas version
 
 \index{== operator}
 \index{operator!==}
 \index{identical}
+
+\begin{itemize}
 
 \item The \java{==} operator checks whether objects are {\bf identical}; that is, whether they are the same object.
 
@@ -8275,7 +8297,7 @@ We can invoke equals as follows:
     time1.equals(time3);
 \end{code}
 
-Inside \java{equals}, \java{this} refers to the same object as \java{time1}, and \java{that} refers to the same object as \java{time3}.
+Inside the \java{equals} method, \java{this} refers to the same object as \java{time1}, and \java{that} refers to the same object as \java{time3}.
 Since their instance variables are equal, the result is \java{true}.
 %The parameter \java{that} is not a keyword and could have a different name, but it improves readability.
 %And it helps to think about comparing ``this'' object with ``that'' object.
@@ -8364,9 +8386,9 @@ And here's how we would invoke it:
 \end{code}
 
 That's all there is to it.
-Static methods and instance methods do the same thing.
-You can convert from one to the other with just a few changes.
-You can even have both, although that is not common.
+Static methods and instance methods do the same thing, and you can convert from one to the other with just a few changes.
+
+%You can even have both, although that is not common.
 
 There's only one problem: the addition code is not correct.
 For this example, it returns {\tt 8:66}, which is not a valid time.
@@ -8443,6 +8465,9 @@ When objects are aliased, the effects of modifiers can be confusing.
 
 
 \section{Getters and setters}
+
+%TODO: Blythe suggests moving this section after constructors.
+% Let's take a look.
 
 Recall that the instance variables of \java{Time} are \java{private}.
 We can access them from within the \java{Time} class, but if we try to access them from another class, the compiler generates an error.
@@ -8573,8 +8598,7 @@ Non-\java{static} methods that have access to \java{this} and the instance varia
 A method that returns a copy of a \java{private} variable.
 
 \term{setter}
-A method that changes one or more of the objects it receives as parameters.
-It is usually \java{void} and modifies \java{this}.
+A method that assigns a value to one of the instance variables of an object.
 
 \end{description}
 
@@ -8585,11 +8609,16 @@ The code for this chapter is in the {\tt ch11} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
+%TODO: get the pagerefs to work in Atlas
 
 \begin{exercise}
 \index{graphics}
+
+%TODO: check that the following sentence appears on Atlas
+
 At this point you know enough to read Appendix~\ref{graphics}, which is about simple 2D graphics and animations.
-At any point during the next few chapters, you could take a detour to read the appendix and work on the exercises.
+At any point during the next few chapters, you could take a detour to read this appendix and work on the exercises.
+
 \end{exercise}
 
 
@@ -8611,7 +8640,7 @@ If you review the documentation of \java{java.lang.String}, you should see that 
 \index{operator!modulus}
 
 The implementation of \java{increment} in this chapter is not very efficient.
-Can you rewrite it do it doesn't use any loops?
+Can you rewrite it so it doesn't use any loops?
 Hint: remember the modulus operator.
 \end{exercise}
 
@@ -8679,7 +8708,7 @@ A \java{Rational} object should have two integer instance variables to store the
 \item At this stage, you have a minimal testable program.
 Test it and, if necessary, debug it.
 
-\item Write a \java{toString} method for this class and test it using \java{println}.
+\item Write a \java{toString} method for \java{Rational} and test it using \java{println}.
 
 \item Write a second constructor that takes two arguments and uses them to initialize the instance variables.
 
@@ -9458,9 +9487,11 @@ Modify the \java{compareTo} method to implement this ordering.
 In Poker a ``flush'' is a hand that contains five or more cards of the same suit.
 A hand can contain any number of cards.
 
-\begin{enumerate}
+%TODO: check bullets on Atlas
 
 \index{histogram}
+
+\begin{enumerate}
 
 \item Write a method called \java{suitHist} that takes an array of cards as a parameter and that returns a histogram of the suits in the hand.
 Your solution should only traverse the array once.
@@ -9925,7 +9956,7 @@ The goal of this exercise is to implement the shuffling and sorting algorithms f
 \item In the repository for this book, you should find a file called \java{Deck.java} that contains the code in this chapter.
 Check that you can compile it in your environment.
 
-\item Add a \java{Deck} a method called \java{randomInt} that takes two integers, \java{low} and \java{high}, and returns a random integer between \java{low} and \java{high}, including both.
+\item Add a \java{Deck} method called \java{randomInt} that takes two integers, \java{low} and \java{high}, and returns a random integer between \java{low} and \java{high}, including both.
 You can use the \java{nextInt} provided by \java{java.util.Random}, which we saw in Section~\ref{random}.
 But you should avoid creating a \java{Random} object every time \java{randomInt} is invoked.
 
@@ -10221,6 +10252,8 @@ So you can create a \java{Deck} like this:
 The first line of the contructor uses something new, \java{super}, which is a keyword that refers to the superclass of the current class.
 When \java{super} is used like a method, as in this example, it invokes the constructor of the superclass.
 
+%TODO: Blythe suggests a diagram here
+
 So in this case, \java{super} invokes the \java{CardCollection} constructor, which initializes the attributes \java{label} and \java{cards}.
 When it returns, the \java{Deck} constructor resumes and populates the (empty) \java{ArrayList} with \java{Card} objects.
 
@@ -10316,6 +10349,8 @@ But it doesn't work the other way around: not every \java{CardCollection} is a \
 If it seems strange that an object can belong to more than one type, remember that this happens in real life, too.
 Every cat is also a mammal, and every mammal is also an animal.
 But not every animal is a mammal, and not every mammal is a cat.
+
+%TODO: Blythe suggests a diagram here
 
 %TODO introduce the term polymorphism?
 %ABD: I don't think we need it unless we write Chapter 15: Interfaces
@@ -10654,6 +10689,8 @@ Class diagrams are one of many graphical representations defined in UML.
 The UML representation of a class is a box with the name of the class inside, and sometimes a list of its public attributes and methods.
 Relationships between classes are represented by arrows: composition arrows have a standard arrow head, and inheritance arrows have a hollow triangle head (usually pointing up).
 
+%TODO: Blythe suggests picture of each arrow, but it's a pain.
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.9\textwidth]{figs/uml1.pdf}
@@ -10661,6 +10698,8 @@ Relationships between classes are represented by arrows: composition arrows have
 \label{uml1}
 \end{center}
 \end{figure}
+
+%TODO: fix the arrow between Eights and Player
 
 %NOTE: I am not using standard arrows for aggregation and composition, but
 % a simplified version for all HAS-A relationships.  This is consistent
@@ -11176,12 +11215,12 @@ public class Drawing extends Canvas {
 The \java{Drawing} class extends \java{Canvas}, so it has all the methods provided by \java{Canvas}, including \java{setSize}.
 You can read about the other methods at \url{https://docs.oracle.com/javase/7/docs/api/java/awt/Canvas.html}.
 
+\index{JFrame}
+\index{class!JFrame}
+
 In \java{main} we:
 
 \begin{enumerate}
-
-\index{JFrame}
-\index{class!JFrame}
 
 \item Create a \java{JFrame} object, which is the window that will contain the canvas.
 
@@ -11759,7 +11798,7 @@ They might not do what you think they do.
 
 \end{itemize}
 
-To program, you need a mental model what your code does.
+To program, you need a mental model of what your code does.
 If it doesn't do what you expect, the problem might not actually be the program; it might be in your head.
 
 \index{model!mental}
@@ -11886,7 +11925,7 @@ And by reusing \java{x1} and \java{y1}, you made the code smaller, too.
 
 If you use the \java{println} method, the output is displayed immediately, but if you use \java{print} (at least in some environments), the output gets stored without being displayed until the next newline.
 If the program terminates without displaying a newline, you may never see the stored output.
-If you suspect that this is happening to, change some or all of the \java{print} statements to \java{println}.
+If you suspect that this is happening, change some or all of the \java{print} statements to \java{println}.
 
 
 \subsection*{I'm really, really stuck and I need help}
