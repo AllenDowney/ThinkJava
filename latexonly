@@ -94,7 +94,6 @@
 }
 
 % code listing environments
-\usepackage{listings}
 \lstnewenvironment{code}
 {\minipage{\linewidth}}
 {\endminipage}
