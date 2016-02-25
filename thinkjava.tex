@@ -557,6 +557,9 @@ Confusingly, {\em print} can mean both ``display on the screen'' and ``send to t
 In this book, we'll try to say ``display'' when we mean output to the screen.
 Like most statements, the print statement ends with a semicolon (\java{;}).
 
+Java is ``case-sensitive'', which means that uppercase and lowercase are not the same.
+In this example, \java{System} has to begin with an uppercase letter; \java{system} and \java{SYSTEM} won't work.
+
 \index{method}
 
 A {\bf method} is a named sequence of statements.
@@ -1113,11 +1116,19 @@ It refers to some language features we haven't talked about yet, so you might wa
 \index{variable}
 \index{value}
 
+%NOTE: in response to review comments, I am cleaning up the use of
+% ``memory''.  I would like to avoid talking about hardware, or being
+% specific about where values are stored.  The addresses that appear
+% as object IDs are actually virtual addresses; the values themselves
+% might be in RAM or on HDD.  But we really don't want to get into
+% that.  I'd rather offer the abstract model that a variable indicates
+% a location that contains a value.
+
 One of the most powerful features of a programming language is the ability to define and manipulate {\bf variables}.
 A variable is a named location that stores a {\bf value}.
 Values may be numbers, text, images, sounds, and other types of data.
 %They can be printed, and as we'll see later, operated on.
-To store a value in memory, you first have to create a variable.
+To store a value, you first have to create a variable.
 %Since the values we want to store are text, we declare that the new variable is a string:
 
 \begin{code}
@@ -1155,7 +1166,12 @@ For example, if you saw these variable declarations, you could probably guess wh
     int hour, minute;
 \end{code}
 
-This example also demonstrates the syntax for declaring multiple variables with the same type: \java{hour} and \java{minute} are both integers.
+This example declares two variables with type \java{String} and two with type \java{int}.
+When a variable name contains more than one word, like \java{firstName}, it is conventional to capitalize the first letter of each word except the first.
+Variables names are case-sensitive, so \java{firstName} is not the same as \java{firstname} or \java{FirstName}.
+
+This example also demonstrates the syntax for declaring multiple variables with the same type on one line: \java{hour} and \java{minute} are both integers.
+
 Note that each declaration statement ends with a semicolon.
 
 You can use any name you want for a variable.
@@ -1621,6 +1637,8 @@ If it's not obvious by looking at the expression, use parentheses to make it cle
 
 \section{Composition}
 
+%TODO: DW suggests using celcius to fahrenheit as an example here
+
 \index{composition}
 
 So far we have looked at the elements of a programming language -- variables, expressions, and statements -- in isolation, without talking about how to put them together.
@@ -1734,7 +1752,7 @@ A reserved word used by the compiler to analyze programs.
 You cannot use keywords (like \java{public}, \java{class}, and \java{void}) as variable names.
 
 \term{assignment}
-A statement that stores a value in a memory location.
+A statement that gives a value to a variable.
 
 \term{state}
 The variables in a program and their values.
@@ -2345,6 +2363,7 @@ public class Convert {
         double cm;
         int feet, inches, remainder;
         final double centPerInch = 2.54;
+        final int inchesPerFoot = 12;
         Scanner in = new Scanner(System.in);
 
         // prompt the user and get the value
@@ -2353,13 +2372,15 @@ public class Convert {
 
         // convert and output the result
         inches = (int) (cm / centPerInch);
-        feet = inches / 12;
-        remainder = inches % 12;
+        feet = inches / inchesPerFoot;
+        remainder = inches % inchesPerFoot;
         System.out.printf("%.2f cm = %d ft, %d in\n",
                           cm, feet, remainder);
     }
 }
 \end{code}
+
+%TODO: Chris, please check the changes I made above
 
 Although not required, all variables and constants are declared at the top of \java{main}.
 This practice makes it easier to find their types later on and helps the reader know what data is involved in the algorithm.
@@ -2651,7 +2672,7 @@ The third line finds the sine of the value of \java{angle}.
 
 Arguments of the trigonometric functions -- \java{sin}, \java{cos}, and \java{tan} -- should be in {\em radians}.
 To convert from degrees to radians, you can divide by 180 and multiply by $\pi$.
-Conveniently, the \java{Math} class provides a \java{final double} named \java{PI} that contains an approximation of $\pi$:
+Conveniently, the \java{Math} class provides a constant double named \java{PI} that contains an approximation of $\pi$:
 
 \begin{code}
     double degrees = 90;
@@ -3093,6 +3114,7 @@ Figure~\ref{fig:stack} is a stack diagram at the beginning of the \java{printTim
 %Stack diagrams help you to visualize the {\bf scope} of a variable, which is the area of a program where a variable exists.
 
 
+
 \section{Reading documentation}
 \label{sec:apidocs}
 
@@ -3101,6 +3123,8 @@ Figure~\ref{fig:stack} is a stack diagram at the beginning of the \java{printTim
 One of the nice things about Java is that it comes with an extensive library of classes and methods.
 But before you can use them, you have to read the documentation.
 And sometimes that's not easy.
+
+%TODO: let's make a decision about whether to link to the Oracle documentation or use some standard verbiage about how to find it, and then check for consistency.
 
 As an example, let's look a the documentation for \java{Scanner}, which we used in Section~\ref{scanner}.
 The documentation of this class is at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html}.
@@ -3240,6 +3264,8 @@ And they are intended for people who will use the methods without looking at the
 Appropriate comments and documentation are essential for making source code readable.
 And remember that the person most likely to read your code in the future, and appreciate good documentation, is you.
 
+%TODO: DW suggests presenting @param and @return at some point
+
 
 \section{Vocabulary}
 
@@ -3350,46 +3376,6 @@ Be precise about where there are spaces and where there are newlines.
 
 \end{exercise}
 
-
-\begin{exercise}
-This exercise builds on the previous one by using parameters.
-Make sure you understand both the order of execution and the flow of data.
-
-\begin{enumerate}
-
-\item Draw a stack diagram that shows the state of the program the {\it second} time \java{ping} is invoked.
-
-\item What is the complete output of the program?
-
-\end{enumerate}
-
-\begin{code}
-    public static void zoop(String fred, int bob) {
-        System.out.println(fred);
-        if (bob == 5) {
-            ping("not ");
-        } else {
-            System.out.println("!");
-        }
-    }
-
-    public static void main(String[] args) {
-        int bizz = 5;
-        int buzz = 2;
-        zoop("just for", bizz);
-        clink(2 * buzz);
-    }
-
-    public static void clink(int fork) {
-        System.out.print("It's ");
-        zoop("breakfast ", fork) ;
-    }
-
-    public static void ping(String strangStrung) {
-        System.out.println("any " + strangStrung + "more ");
-    }
-\end{code}
-\end{exercise}
 
 
 %\begin{exercise}
@@ -3644,6 +3630,10 @@ One way to do this is by {\bf chaining} a series of \java{if} and \java{else} st
         System.out.println("x is zero");
     }
 \end{code}
+
+%TODO: DW suggests that at some point we show examples that omit the {}
+% or put the whole if statement on one line, since students will see
+% these versions.
 
 These chains can be as long as you want, although they can be difficult to read if they get out of hand.
 One way to make them easier to read is to use standard indentation, as demonstrated in these examples.
@@ -3968,6 +3958,8 @@ For example, to convert a decimal integer into its {\bf binary} representation, 
 
 Reading these remainders from bottom to top, 23 in binary is 10111.
 
+%TODO: DW suggests that we need to do a better job of explaining binary
+
 Here is a recursive method that displays the binary representation of any positive integer:
 
 \begin{code}
@@ -4081,6 +4073,46 @@ Draw a stack diagram that shows the state of the program in Section~\ref{recursi
 
 
 \begin{exercise}
+For the following program:
+
+\begin{enumerate}
+
+\item Draw a stack diagram that shows the state of the program the {\it second} time \java{ping} is invoked.
+
+\item What is the complete output?
+
+\end{enumerate}
+
+\begin{code}
+    public static void zoop(String fred, int bob) {
+        System.out.println(fred);
+        if (bob == 5) {
+            ping("not ");
+        } else {
+            System.out.println("!");
+        }
+    }
+
+    public static void main(String[] args) {
+        int bizz = 5;
+        int buzz = 2;
+        zoop("just for", bizz);
+        clink(2 * buzz);
+    }
+
+    public static void clink(int fork) {
+        System.out.print("It's ");
+        zoop("breakfast ", fork) ;
+    }
+
+    public static void ping(String strangStrung) {
+        System.out.println("any " + strangStrung + "more ");
+    }
+\end{code}
+\end{exercise}
+
+
+\begin{exercise}
 
 Fermat's Last Theorem says that there are no integers $a$, $b$, and $c$ such that $a^n + b^n = c^n$, except when $n \leq 2$.
 
@@ -4157,11 +4189,10 @@ public class Buzz {
 
 \begin{enumerate}
 
-\item Write the number {\tt 1} next to the first {\em statement} of this program that will be executed.
-Be careful to distinguish things that are statements from things that are not.
+\item Write the number {\tt 1} next to the first line of code in this program that will execute.
 
-\item Write the number {\tt 2} next to the second statement, and so on until the end of the program.
-If a statement is executed more than once, it might end up with more than one number next to it.
+\item Write the number {\tt 2} next to the second line of code, and so on until the end of the program.
+If a line is executed more than once, it might end up with more than one number next to it.
 
 \item What is the value of the parameter \java{blimp} when \java{baffle} gets invoked?
 
@@ -4959,6 +4990,8 @@ Hint: you only need one line for the \java{else} branch.
 \end{exercise}
 
 
+%TODO: DW suggests a simple recursion exercise, like adding up the numbers from 0 to N
+
 \begin{exercise}
 
 What is the output of the following program?
@@ -5399,7 +5432,7 @@ Finally, we encapsulate the second loop in a method:
 \index{program development}
 
 One of the challenges of programming, especially for beginners, is figuring out how to divide up a program into methods.
-The process of encapsulation and generalization allows you design as you go along.
+The process of encapsulation and generalization allows you to design as you go along.
 
 
 \section{More generalization}
@@ -5585,6 +5618,8 @@ TODO: refer to validating input section (Chapter 5), show how to convert into a 
 
 TODO: keep reading positive integers until the user enters a zero, then break; use continue to skip negative/odd/magic numbers before processing them
 
+
+%TODO: DW suggests we also cover PrintWriter to write files
 
 \section{Vocabulary}
 
@@ -5784,6 +5819,8 @@ You should not use \java{factorial} or \java{pow}.
 \chapter{Arrays}
 \label{arrays}
 
+%TODO: DW liked the previous version where Strings come before arrays
+
 \index{array}
 \index{type!array}
 
@@ -5820,6 +5857,9 @@ Of course, you can also declare the variable and create the array in a single li
 \end{code}
 
 
+%TODO: DW suggests we explain about empty array
+
+
 \section{Accessing elements}
 
 \index{state diagram}
@@ -5847,7 +5887,7 @@ As we'll see soon, we can assign a different variable to refer to the same array
 \index{array!index}
 
 The large numbers inside the boxes are the elements of the array.
-The small numbers outside the boxes are the {\bf indexes} (or indices) used to identify each memory location.
+The small numbers outside the boxes are the {\bf indexes} (or indices) used to identify each location in the array.
 Notice that the index of the first element is 0, not 1, as you might have expected.
 
 The \java{[]} operator selects elements from an array:
@@ -7325,7 +7365,7 @@ The arrow points to the new object, which contains two variables, \java{x} and \
 
 \index{dot notation}
 
-Variables that belong to an object are called {\bf attributes}.
+Variables that belong to an object are usually called {\bf attributes}, but you might also see them called ``fields''.
 To access an attribute of an object, Java uses {\bf dot notation}.
 For example:
 
@@ -7551,7 +7591,8 @@ For example:
 \end{code}
 
 The first line displays {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
-The second line invokes the \java{grow} method on \java{box1}, which resizes the \java{Rectangle} horizontally and vertically.
+The second line invokes the \java{grow} method on \java{box1}, which stretches the \java{Rectangle} horizontally and vertically.  In this example it adds 50 to all four sides of the rectangle, so it moves the corner up and to the left by 50, and it increases the height and width by 100.
+
 The effect is shown in Figure~\ref{fig.aliasing2}:
 
 \begin{figure}
@@ -7693,7 +7734,7 @@ The point of this exercise is to make sure you understand the mechanism for pass
 
 \begin{enumerate}
 
-\item For the following program, draw a stack diagram showing the local variables and parameters of \java{main} and \java{riddle}, and show any objects those variables refer to.
+\item For the following program, draw a stack diagram showing the local variables and parameters of \java{main} and \java{riddle}, and any objects those variables refer to, just before \java{riddle} returns.
 
 \item What is the output of this program?
 
@@ -7910,6 +7951,7 @@ Here are the most important ideas:
 \item Every object belongs to some object type; that is, it is an {\bf instance} of some class.
 
 \item A class definition is like a template for objects: it specifies what attributes the objects have and what methods can operate on them.
+You can think of it like a blueprint for a house; you can use the same blueprint to build any number of houses.
 
 \item The methods that operate on a type are defined in the class definition for that type.
 
@@ -8065,7 +8107,8 @@ It is common to provide a constructor that takes no arguments, like the previous
     }
 \end{code}
 
-The names and types of the parameters are the same as the names and types of the instance variables; all the constructor does is copy values from the parameters to the instance variables.
+All the constructor does is copy values from the parameters to the instance variables.
+In this example, the names and types of the parameters are the same as the names and types of the instance variables; in general, the names don't have to be the same, but this is a common style choice. 
 
 To invoke this constructor, you have to pass arguments after the \java{new} operator:
 
@@ -8390,6 +8433,9 @@ Static methods and instance methods do the same thing, and you can convert from 
 
 %You can even have both, although that is not common.
 
+%TODO: DW suggests that at some point we should warn students about
+% using `this` in a static method
+
 There's only one problem: the addition code is not correct.
 For this example, it returns {\tt 8:66}, which is not a valid time.
 If \java{second} exceeds 59, we have to ``carry'' into the minutes column, and if \java{minute} exceeds 59, we have to carry into \java{hour}.
@@ -8701,7 +8747,7 @@ A \java{Rational} object should have two integer instance variables to store the
 
 \item Write a constructor that takes no arguments and that sets the numerator to 0 and denominator to 1.
 
-\item Write a method called \java{printRational} that takes a \java{Rational} object as an argument and displays it in some reasonable format.
+\item Write an instance method called \java{printRational} that displays a \java{Rational} in some reasonable format.
 
 \item Write a \java{main} method that creates a new object with type \java{Rational}, sets its instance variables to some values, and displays the object.
 
@@ -8712,24 +8758,23 @@ Test it and, if necessary, debug it.
 
 \item Write a second constructor that takes two arguments and uses them to initialize the instance variables.
 
-\item Write a method called \java{negate} that reverses the sign of a rational number.
+\item Write an instance method called \java{negate} that reverses the sign of a rational number.
 This method should be a modifier, so it should be void.
 Add lines to \java{main} to test the new method.
 
-\item Write a method called \java{invert} that inverts the number by swapping the numerator and denominator.
+\item Write an instance method called \java{invert} that inverts the number by swapping the numerator and denominator.
 It should be a modifier.
 Add lines to \java{main} to test the new method.
 
-\item Write a method called \java{toDouble} that converts the rational number to a double (floating-point number) and returns the result.
+\item Write an instance method called \java{toDouble} that converts the rational number to a double (floating-point number) and returns the result.
 This method is a pure method; it does not modify the object.
 As always, test the new method.
 
-\item Write a method named \java{reduce} that reduces a rational number to its lowest terms by finding the greatest common divisor (GCD) of the numerator and denominator and dividing through.
+\item Write an instance method named \java{reduce} that reduces a rational number to its lowest terms by finding the greatest common divisor (GCD) of the numerator and denominator and dividing through.
 This method should be a pure method; it should not modify the instance variables of the object on which it is invoked.
 (To find the GCD, see Exercise~\ref{gcd}).
 
-\item Write a method called \java{add} that takes two \java{Rational} numbers as arguments and returns a new \java{Rational} object.
-The return object should contain the sum of the arguments.
+\item Write an instance method called \java{add} that takes a \java{Rational} numbers as an argument, add it to \java{this}, and returns a new \java{Rational} object.
 
 There are several ways to add fractions.
 You can use any one you want, but you should make sure that the result of the operation is reduced so that the numerator and denominator have no common divisor (other than 1).
@@ -8798,6 +8843,9 @@ Diamonds & $\mapsto$ & 1 \\
 Hearts & $\mapsto$ & 2 \\
 Spades & $\mapsto$ & 3
 \end{tabular}
+
+%TODO: DW suggests using constants for CLUBS, DIAMONDS, etc.  I think it's
+% a good idea, but will require changes in the code and book.
 
 We use the mathematical symbol $\mapsto$ to make it clear that these mappings are not part of the program.
 They are part of the program design, but they never appear explicitly in the code.
@@ -9142,7 +9190,7 @@ But if someone writes a method that tries to modify these variables, they'll get
 %Having seen this pattern, and having learned about arrays and objects, you should not be surprised to learn that you can make arrays of objects.
 %And you can define objects with arrays as instance variables; you can make arrays that contain arrays; you can define objects that contain objects, and so on.
 
-Just as you can create an array of \java{String} objects, you can create and array of \java{Card} objects.
+Just as you can create an array of \java{String} objects, you can create an array of \java{Card} objects.
 The following statement creates an array of 52 cards:
 
 \begin{code}
