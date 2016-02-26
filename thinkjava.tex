@@ -481,6 +481,7 @@ Java is {\em both} compiled and interpreted.
 Instead of translating programs directly into machine language, the Java compiler generates {\bf byte code}.
 Similar to machine language, byte code is easy and fast to interpret.
 But it is also portable, so it is possible to compile a Java program on one machine, transfer the byte code to another machine, and run the byte code on the other machine.
+The interpreter that runs byte code is called a Java Virtual Machine (JVM).
 %This ability is an advantage of Java over some other high-level languages.
 
 \begin{figure}[!ht]
@@ -1016,7 +1017,7 @@ Error: ';' expected
 That's pretty good: the location of the error is correct, and the error message tells you what's wrong.
 
 But error messages are not always that helpful.
-Sometimes the compiler reports the place in the program where it detected the error, rather than where it actually occurred.
+Sometimes the compiler reports the place in the program where the error was detected, not where it actually occurred.
 And sometimes the description of the problem is more confusing than helpful.
 
 For example, if you leave out the closing brace at the end of \java{main}, you might get a message like this:
@@ -3900,8 +3901,8 @@ There are four frames for \java{countdown}, each with a different value for the 
 The last frame, with \java{n == 0}, is called the {\bf base case}.
 It does not make a recursive call, so there are no more frames below it.
 
-If there is no base case in a recursive method, or if the base case is never reached, the stack would grow forever.
-In most systems, the size of the stack is limited; if you exceed the limit, you get a \java{StackOverflowError}.
+If there is no base case in a recursive method, or if the base case is never reached, the stack would grow forever, at least in theory.
+In practice, the size of the stack is limited; if you exceed the limit, you get a \java{StackOverflowError}.
 
 For example, here is a recursive method without a base case:
 
@@ -5826,7 +5827,7 @@ You should not use \java{factorial} or \java{pow}.
 
 %TODO add a short, motivating example?
 
-An {\bf array} is an ordered set of values, and the values in the array are called {\bf elements}.
+An {\bf array} is an sequence of values; the values in the array are called {\bf elements}.
 You can make an array of \java{int}s, \java{double}s, or any other type, but all the values in an array must have the same type.
 
 To create an array, you have to declare a variable with an {\bf array type} and then create the array itself.
@@ -7057,7 +7058,7 @@ Before you start the exercises, we recommend that you compile and run the exampl
 \index{generalization}
 
 The purpose of this exercise is to review encapsulation and generalization (see Section~\ref{encapsulation}).
-The following code fragment traverses a string and counts open and close parentheses:
+The following code fragment traverses a string and checks whether it has the same number of open and close parentheses:
 
 \begin{code}
     String s = "((3 + 7) * 2)";
@@ -7080,8 +7081,6 @@ The following code fragment traverses a string and counts open and close parenth
 \item Encapsulate this fragment in a method that takes a string argument and returns the final value of \java{count}.
 
 \item Now that you have generalized the code so that it works on any string, what could you do to generalize it more?
-
-\item In a sentence or two, describe what the resulting method does (without getting into the details of how).
 
 \end{enumerate}
 
