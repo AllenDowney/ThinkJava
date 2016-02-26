@@ -107,7 +107,7 @@
 \newcommand{\java}[1]{\lstinline{#1}} %\end{
 
 % pdf hyperlinks, table of contents, and document properties
-\usepackage[pdftex]{hyperref}
+\usepackage{hyperref}
 \hypersetup{%
   pdftitle={\thetitle},
   pdfauthor={\theauthors},
