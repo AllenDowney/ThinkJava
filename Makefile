@@ -30,20 +30,17 @@ oreilly:
 	cd atlas; git push
 
 hevea:	thinkjava.tex header.html footer.html
-	# replace the pdfs with eps
-	sed s/\\.pdf/.eps/g thinkjava.tex > $(F)6.tex
-	pdflatex $(F)6
+	cp $(F).tex $(F)6.tex
 	rm -rf html
 	mkdir html
-	hevea -fix -O -e latexonly htmlonly $(F)6
-# the following greps are a kludge to prevent imagen from seeing
-# the definitions in latexonly, and to avoid headers on the images
-	grep -v latexonly $(F)6.image.tex > a; mv a $(F)6.image.tex
-	grep -v fancyhdr $(F)6.image.tex > a; mv a $(F)6.image.tex
-	imagen -png $(F)6
+	hevea -O -exec xxdate.exe -e latexonly htmlonly $(F)6
+	hevea -O -exec xxdate.exe -e latexonly htmlonly $(F)6
+	imagen -png -pdf $(F)6
+	imagen -png -pdf $(F)6
 	hacha $(F)6.html
 	cp up.png next.png back.png html
-	mv index.html $(F)6.css $(F)6*.html $(F)6*.png *motif.gif html
+	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png html
+	rm *motif.gif $(F)6.*
 
 DEST = /home/downey/public_html/greent/thinkjava6
 

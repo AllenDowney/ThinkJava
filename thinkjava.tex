@@ -61,7 +61,7 @@
 }
 
 \newcommand{\java}[1]{\verb"#1"}
-\newcommand{\stdout}[1]{\verb"#1"}
+%\newcommand{\stdout}[1]{\verb"#1"}
 
 \else
 %%%% LATEX ONLY
@@ -2144,7 +2144,7 @@ Java provides a language feature that enforces that rule, the keyword \java{fina
 Declaring that a variable is \java{final} means that it cannot be reassigned once it has been initialized.
 If you try, the compiler reports an error.
 Variables declared as \java{final} are called {\bf constants}.
-By convention, names for constants are all uppercase, with the underscore character, \java{_}, between words.
+By convention, names for constants are all uppercase, with the underscore character (\verb|_|) between words.
 
 
 \section{Formatting output}
@@ -3136,7 +3136,7 @@ Figure~\ref{fig:javadoc} shows a screenshot of this page.
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[natwidth=660, width=0.9\textwidth]{figs/scanner}
+\includegraphics[width=0.9\textwidth]{figs/scanner.png}
 \caption{Screenshot of the documentation for \java{Scanner}.}
 \label{fig:javadoc}
 \end{center}
@@ -10881,7 +10881,7 @@ Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[natwidth=828, width=\textwidth]{figs/drjava-hello.png}
+\includegraphics[width=\textwidth]{figs/drjava-hello.png}
 \caption{Screenshot of DrJava editing the hello world program.}
 \label{fig.drjava1}
 \end{center}
@@ -10903,7 +10903,7 @@ Figure~\ref{fig.drjava2} shows an example.
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[natwidth=675, width=\textwidth]{figs/drjava-logic.png}
+\includegraphics[width=\textwidth]{figs/drjava-logic.png}
 \caption{Screenshot of the Interactions Pane in DrJava.}
 \label{fig.drjava2}
 \end{center}
@@ -10940,7 +10940,7 @@ We run the program using the {\tt java} command, which displays the output on th
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[natwidth=458, width=4.5in]{figs/terminal.png}
+\includegraphics[width=4.5in]{figs/terminal.png}
 \caption{Compiling and running {\tt Hello.java} from the command line.}
 \label{fig.commandline}
 \end{center}
@@ -11025,7 +11025,7 @@ For example, on Windows you can install WinMerge, on Mac you can use {\tt opendi
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[natwidth=713, width=0.9\textwidth]{figs/meld.png}
+\includegraphics[width=0.9\textwidth]{figs/meld.png}
 \caption{Using {\tt meld} to compare expected output with the actual output.}
 \label{fig.meld}
 \end{center}
@@ -11099,7 +11099,7 @@ You might be surprised to see how many methods were called before the \java{main
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[natwidth=674, width=\textwidth]{figs/debugger.png}
+\includegraphics[width=\textwidth]{figs/debugger.png}
 \caption{Screenshot of the DrJava debugger.
 Execution is currently paused on the first line of \java{printTwice}.
 There is a breakpoint on the first line of \java{main}.}

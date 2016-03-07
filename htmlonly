@@ -39,6 +39,5 @@
 \lstnewenvironment{stdout}{}{}
 
 % inline syntax formatting
-\newcommand{\java}[1]{\texttt{#1}}
-\newcommand{\stdout}[1]{\texttt{#1}}
-
+\newcommand{\java}[1]{\verb"#1"}
+%\newcommand{\stdout}[1]{\verb"#1"}
