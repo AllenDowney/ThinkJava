@@ -3,7 +3,7 @@ LaTeX source and code examples for Think Java, 6th edition.
 Copyright (C) 2016 Allen Downey and Chris Mayfield.
 
 **NOTE: This version of the book is a work in progress and won't be completed
-until February 2016.**
+until March 2016.**
 
 Permission is granted to copy, distribute, transmit, and adapt this work under
 the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License:
@@ -26,4 +26,4 @@ To compile the PDF version from source:
     pdflatex thinkjava
 
 The source code includes a Makefile that automates this process.
-You might have to install texlive-latex-extra (in Ubuntu).
+On Linux, you will need to install texlive-latex-extra and hevea.
