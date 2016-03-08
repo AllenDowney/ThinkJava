@@ -736,8 +736,35 @@ Newlines and spaces are important for organizing your program visually, making i
 Many editors will automatically format source code with consistent indenting and line breaks.
 For example, in DrJava (see Appendix~\ref{development}) you can indent the code by selecting all text ({\sf Ctrl-A}) and pressing the {\sf Tab} key.
 
+%\section{Style guidelines}
 
-\section{Debugging}
+%\index{whitespace}
+%
+%As we saw in Section~\ref{formatting}, the compiler generally ignores spaces, tabs, and newlines.
+%These characters, which are called {\bf whitespace}, affect the format of the code, but they don't affect its behavior.
+
+%You have a lot of freedom in how you arrange your code.
+%THowever with that freedom comes responsibility, both to yourself (when you look at the code in the future) and others who will be reading, understanding, and debugging it.
+
+\index{Google style}
+
+Organizations that do a lot of software development usually have strict guidelines on how to format source code.
+For example, Google publishes its Java coding standards for use in open-source projects:
+\url{http://google.github.io/styleguide/javaguide.html}
+%It is easier to understand a large codebase when all the source code is formatted consistently.
+%Plus following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
+
+\index{Checkstyle}
+
+You might not understand these guidelines now, because they refer to language features we haven't yet seen.
+But you might want to refer back to them periodically as you read this book.
+
+%In the meantime, there are many software tools that help programmers find and correct style issues.
+%One of the most popular is Checkstyle, which enforces most of Google's guidelines.
+%Instructions for downloading and running Checkstyle are in Appendix~\ref{checkstyle}.
+
+
+\section{Debugging code}
 \label{sec:examples}
 
 It is a good idea to read this book in front of a computer so you can try out the examples as you go.
@@ -785,34 +812,6 @@ Finally, programming sometimes brings out strong emotions.
 If you are struggling with a difficult bug, you might feel angry, despondent, or embarrassed.
 Remember that you are not alone, and most if not all programmers have had similar experiences.
 Don't hesitate to reach out to a friend and ask questions!
-
-
-\section{Style guidelines}
-
-\index{whitespace}
-
-As we saw in Section~\ref{formatting}, the compiler generally ignores spaces, tabs, and newlines.
-These characters, which are called {\bf whitespace}, affect the format of the code, but they don't affect its behavior.
-
-You have a lot of freedom in how you arrange your code.
-However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and others who will be reading, understanding, and debugging it.
-
-\index{Google style}
-
-Organizations that do a lot of software development usually have strict guidelines on how to format source code.
-For example, Google publishes its Java coding standards for use in open-source projects:
-\url{http://google.github.io/styleguide/javaguide.html}
-%It is easier to understand a large codebase when all the source code is formatted consistently.
-%Plus following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
-
-\index{Checkstyle}
-
-You might not understand these guidelines now, because they refer to language features we haven't yet seen.
-But you might want to refer back to them periodically as you read this book.
-
-In the meantime, there are many software tools that help programmers find and correct style issues.
-One of the most popular is Checkstyle, which enforces most of Google's guidelines.
-Instructions for downloading and running Checkstyle are in Appendix~\ref{checkstyle}.
 
 
 \section{Vocabulary}
@@ -899,9 +898,9 @@ Also known as line ending, end of line (EOL), or line break.
 \term{escape sequence}
 A sequence of code that represents a special character when used inside a string.
 
-\term{whitespace}
-Newlines, tab characters, and other spaces in a source program.
-Whitespace characters are used to separate words, but other than that, they don't affect the behavior of the program.
+%\term{whitespace}
+%Newlines, tab characters, and other spaces in a source program.
+%Whitespace characters are used to separate words, but other than that, they don't affect the behavior of the program.
 
 \end{description}
 
