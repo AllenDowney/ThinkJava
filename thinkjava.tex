@@ -997,9 +997,9 @@ Add an extra one.
 \chapter{Variables and operators}
 
 This chapter describes how to write statements using variables, which store values like numbers and words, and operators, which are symbols that perform a computation.
-We also explain three kinds of programming errors.
-Understanding what can go wrong will help you get it right.
-Finally we discuss the rules of code style, which helps make programs easier to read and debug.
+We also explain three kinds of programming errors and offer additional debugging advice.
+%Understanding what can go wrong will help you get it right.
+%Finally we discuss the rules of code style, which helps make programs easier to read and debug.
 
 
 \section{Types of errors}
@@ -1041,23 +1041,25 @@ Error: ';' expected
 
 That's pretty good: the location of the error is correct, and the error message tells you what's wrong.
 
-But error messages are not always that helpful.
+But error messages are not always easy to understand.
 Sometimes the compiler reports the place in the program where the error was detected, not where it actually occurred.
 And sometimes the description of the problem is more confusing than helpful.
 
-For example, if you leave out the closing brace at the end of \java{main}, you might get a message like this:
+For example, if you leave out the closing brace at the end of \java{main} (line 6), you might get a message like this:
 
 \begin{stdout}
 File: Hello.java  [line: 7]
 Error: reached end of file while parsing
 \end{stdout}
 
+\index{parse}
+
 There are two problems here.
 First, the error message is written from the compiler's point of view, not yours.
 {\bf Parsing} is the process of reading a program before translating; if the compiler gets to the end of the file while still parsing, that means something was omitted.
 But the compiler doesn't know what.
 It also doesn't know where.
-The compiler discovers the error at the end of the program (line 7), but the missing brace is on the previous line.
+The compiler discovers the error at the end of the program (line 7), but the missing brace should be on the previous line.
 
 Error messages contain useful information, so you should make an effort to read and understand them.
 But don't take them too literally.
@@ -1073,7 +1075,7 @@ But as you gain experience, you will make fewer mistakes and find them more quic
 
 The second type of error is a {\bf run-time error}, so-called because it does not appear until after the program has started running.
 In Java, these errors occur while the interpreter is executing byte code and something goes wrong.
-These errors are also called {\bf exceptions} because they usually indicate that something exceptional (and bad) has happened.
+These errors are also called ``exceptions'' because they usually indicate that something exceptional (and bad) has happened.
 
 Run-time errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter one.
 When a run-time error occurs, the interpreter displays an error message that explains what happened and where.
@@ -1095,7 +1097,7 @@ The first line includes the name of the exception, \java{java.lang.ArithmeticExc
 The next line shows the method where the error occurred; \java{Hello.main} indicates the method \java{main} in the class \java{Hello}.
 It also reports the file where the method is defined, \java{Hello.java}, and the line number where the error occurred, \java{5}.
 
-Error messages sometimes contain additional information that doesn't make sense yet.
+Error messages sometimes contain additional information that won't make sense yet.
 So one of the challenges is to figure out where to find the useful parts without being overwhelmed by extraneous information.
 Also, keep in mind that the line where the program crashed may not be the line that needs to be corrected.
 
@@ -1107,7 +1109,7 @@ Also, keep in mind that the line where the program crashed may not be the line t
 The third type of error is the {\bf logic error}.
 %{\bf Semantics} pertains to the meaning of a program; that is, what it does when it runs.
 If your program has a logic error, it will compile and run without generating error messages, but it will not do the right thing.
-Instead, it will do what you told it to do.
+Instead, it will do exactly what you told it to do.
 For example, here is a version of the hello world program with a logic error:
 
 \begin{code}
@@ -1115,7 +1117,7 @@ public class Hello {
 
     public static void main(String[] args) {
         System.out.println("Hello, ");
-        System.out.println("world!");
+        System.out.println("World!");
     }
 }
 \end{code}
@@ -1124,7 +1126,7 @@ This program compiles and runs just fine, but the output is:
 
 \begin{stdout}
 Hello,
-world!
+World!
 \end{stdout}
 
 Assuming that we wanted the output on one line, this is not correct.
@@ -1134,13 +1136,10 @@ Identifying logic errors can be hard because you have to work backwards, looking
 Usually the compiler and the interpreter can't help you, since they don't know what the right thing is.
 
 Now that you know about the three kinds of errors, you might want to read Appendix~\ref{debugappendix}, where we've collected some of our favorite debugging advice.
-It refers to some language features we haven't talked about yet, so you might want to re-read it from time to time.
+It refers to language features we haven't talked about yet, so you might want to re-read it from time to time.
 
 
-\section{Creating variables}
-
-\index{variable}
-\index{value}
+\section{Declaring variables}
 
 %NOTE: in response to review comments, I am cleaning up the use of
 % ``memory''.  I would like to avoid talking about hardware, or being
@@ -1150,11 +1149,14 @@ It refers to some language features we haven't talked about yet, so you might wa
 % that.  I'd rather offer the abstract model that a variable indicates
 % a location that contains a value.
 
+\index{variable}
+\index{value}
+
 One of the most powerful features of a programming language is the ability to define and manipulate {\bf variables}.
 A variable is a named location that stores a {\bf value}.
 Values may be numbers, text, images, sounds, and other types of data.
 %They can be printed, and as we'll see later, operated on.
-To store a value, you first have to create a variable.
+To store a value, you first have to declare a variable.
 %Since the values we want to store are text, we declare that the new variable is a string:
 
 \begin{code}
@@ -1171,7 +1173,7 @@ This statement is a {\bf declaration}, because it declares that the variable nam
 Each variable has a {\bf type} that determines what kind of values it can store.
 For example, the \java{int} type can store integers, and the \java{char} type can store characters.
 
-Some types begin with a capital letter and some with lower-case.
+Some types begin with a capital letter and some with lowercase.
 We will learn the significance of this distinction later, but for now you should take care to get it right.
 There is no such type as \java{Int} or \java{string}.
 %, and the compiler will complain if you make one up.
@@ -1184,7 +1186,7 @@ To declare an integer variable, the syntax is:
 
 Note that \java{x} is an arbitrary name for the variable.
 In general, you should use names that indicate what the variables mean.
-For example, if you saw these variable declarations, you could probably guess what values would be stored in them:
+For example, if you saw these declarations, you could probably guess what values would be stored:
 
 \begin{code}
     String firstName;
@@ -1194,11 +1196,12 @@ For example, if you saw these variable declarations, you could probably guess wh
 
 This example declares two variables with type \java{String} and two with type \java{int}.
 When a variable name contains more than one word, like \java{firstName}, it is conventional to capitalize the first letter of each word except the first.
-Variables names are case-sensitive, so \java{firstName} is not the same as \java{firstname} or \java{FirstName}.
+Variable names are case-sensitive, so \java{firstName} is not the same as \java{firstname} or \java{FirstName}.
 
 This example also demonstrates the syntax for declaring multiple variables with the same type on one line: \java{hour} and \java{minute} are both integers.
-
 Note that each declaration statement ends with a semicolon.
+
+\index{keyword}
 
 You can use any name you want for a variable.
 But there are about 50 reserved words, called {\bf keywords}, that you are not allowed to use as variable names.
@@ -1215,7 +1218,7 @@ Most programming editors provide ``syntax highlighting'', which makes different 
 \index{assignment}
 \index{statement!assignment}
 
-Now that we have created variables, we want to use them to store values.
+Now that we have declared variables, we want to use them to store values.
 We do that with an {\bf assignment} statement.
 
 \begin{code}
@@ -1253,7 +1256,7 @@ But that is not the same thing as the integer \java{123}.
 
 Variables must be {\bf initialized} (assigned for the first time) before they can be used.
 You can declare a variable and then assign a value later, as in the previous example.
-You can also do both in one line, like this:
+You can also declare and initialize on the same line:
 
 \begin{code}
     String message = "Hello!";
@@ -1274,7 +1277,7 @@ You can also do both in one line, like this:
 %In this example, there is no reason to make two assignments, but in many programs it is useful to reassign, or {\bf update}, variables.
 
 
-\section{State}
+\section{State diagrams}
 \label{state}
 
 Because Java uses the \java{=} symbol for assignment, it is tempting to interpret the statement \java{a = b} as a statement of equality.
@@ -1302,14 +1305,13 @@ The third line changes the value of \java{a}, but it does not change the value o
 Taken together, the variables in a program and their current values make up the program's {\bf state}.
 The following diagram shows the state of the program after these assignment statements run:
 
+\begin{figure}[!ht]
 \begin{center}
-\begin{tabular}{rl}
-a & \framebox[1cm]{3} \\
-b & \framebox[1cm]{5} \\
-\end{tabular}
+\includegraphics{figs/state.pdf}
+\caption{State diagram for the variables \java{a} and \java{b}.}
+\label{fig.state}
 \end{center}
-
-%TODO: replace this with a diagram in the same style as the rest
+\end{figure}
 
 \index{state diagram}
 
@@ -1337,7 +1339,7 @@ The following statements declare a variable named \java{firstLine}, assign it th
 %Hello, again!
 %\end{stdout}
 
-When we talk about displaying a variable, we generally mean displaying the {\em value} of the variable.
+When we talk about displaying a variable, we generally mean the {\em value} of the variable.
 To display the {\em name} of a variable, you have to put it in quotes.
 %For example: \java{System.out.println("firstLine");}
 
@@ -1401,6 +1403,7 @@ The following program converts a time of day to minutes:
 \end{code}
 
 \index{expression}
+\index{operand}
 
 In this program, \java{hour * 60 + minute} is an {\bf expression}, which represents a single value to be computed.
 When the program runs, each variable is replaced by its current value, and then the operators are applied.
@@ -1422,7 +1425,7 @@ The multiplication happens first, yielding \java{660 + 59}.
 Then the addition yields \java{719}.
 
 Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
-For example, the following fragment tries to compute the fraction of an hour that has elapsed, but it has a logic error.
+For example, the following fragment tries to compute the fraction of an hour that has elapsed.%, but it has a logic error.
 
 \begin{code}
     System.out.print("Fraction of the hour that has passed: ");
@@ -1440,8 +1443,8 @@ Fraction of the hour that has passed: 0
 
 This result often confuses people.
 The value of \java{minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
-The problem is that Java performs {\bf integer division} when the values being divided are integers.
-By definition, integer division always rounds toward zero, even in cases like this one where the next integer is close.
+The problem is that Java performs ``integer division'' when the operands are integers.
+By design, integer division always rounds toward zero, even in cases like this one where the next integer is close.
 
 As an alternative, we can calculate a percentage rather than a fraction:
 
@@ -1468,7 +1471,6 @@ Again the result is rounded down, but at least now it's approximately correct.
 
 A more general solution is to use {\bf floating-point} numbers, which can represent fractions as well as integers.
 %As the name implies, the decimal point floats around (i.e., you can have as many decimal places as you want).
-
 In Java, the default floating-point type is called \java{double}, which is short for double-precision.
 You can create \java{double} variables and assign values to them using the same syntax we used for the other types:
 
@@ -1477,6 +1479,7 @@ You can create \java{double} variables and assign values to them using the same 
     pi = 3.14159;
 \end{code}
 
+Java performs ``floating-point division'' when one or more operands are \java{double} values.
 So we can solve the problem we saw in the previous section:
 
 \begin{code}
@@ -1498,7 +1501,7 @@ They belong to different data types, and strictly speaking, you are not allowed 
 The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
 
 \begin{code}
-    int x = 1.1;  // syntax error
+    int x = 1.1;  // compiler error
 \end{code}
 
 It is easy to forget this rule because in many cases Java {\em automatically} converts from one type to another:
@@ -1512,7 +1515,7 @@ This leniency is convenient, but it often causes problems for beginners.
 For example:
 
 \begin{code}
-    double y = 1 / 3;  // semantic error
+    double y = 1 / 3;  // common mistake
 \end{code}
 
 \index{division!integer}
@@ -1520,7 +1523,7 @@ For example:
 
 You might expect the variable \java{y} to get the value \java{0.333333}, which is a legal floating-point value.
 But instead it gets the value \java{0.0}.
-The expression on the right divides two integers, so Java does {\em integer division}, which yields the \java{int} value \java{0}.
+The expression on the right divides two integers, so Java does integer division, which yields the \java{int} value \java{0}.
 Converted to \java{double}, the value assigned to \java{y} is \java{0.0}.
 
 One way to solve this problem (once you figure out the bug) is to make the right-hand side a floating-point expression.
@@ -1541,7 +1544,7 @@ The compiler won't make you do it, but you never know when a simple mistake will
 
 \index{rounding error}
 
-Most floating-point numbers are only {\it approximately} correct.
+Most floating-point numbers are only {\em approximately} correct.
 Some numbers, like reasonably-sized integers, can be represented exactly.
 But repeating fractions, like $1/3$, and irrational numbers, like $\pi$, cannot.
 To represent these numbers, computers have to round off to the nearest floating-point number.
@@ -1689,12 +1692,12 @@ You can also put arbitrary expressions on the right side of an assignment:
     percentage = (minute * 100) / 60;
 \end{code}
 
-The left side of an assignment must be a {\em variable name}, not an expression.
+The left side of an assignment must be a variable name, not an expression.
 That's because the left side indicates where the result will be stored, and expressions do not represent storage locations.
 
 \begin{code}
     hour = minute + 1;  // correct
-    minute + 1 = hour;  // syntax error
+    minute + 1 = hour;  // compiler error
 \end{code}
 
 \index{readability}
@@ -1718,8 +1721,11 @@ Large, complex expressions can be hard to read and debug.
 The structure of a program; the arrangement of the words and symbols it contains.
 
 \term{compile-time error}
-An error in a program that makes it impossible to compile.
+An error in the source code that makes it impossible to compile.
 Also called a ``syntax error''.
+
+\term{parse}
+To analyze the structure of a program; what the compiler does first.
 
 \term{run-time error}
 An error in a program that makes it impossible to run to completion.
@@ -1727,6 +1733,9 @@ Also called an ``exception''.
 
 \term{logic error}
 An error in a program that makes it do something other than what the programmer intended.
+
+%\term{semantics}
+%The meaning of a program; the low-level instructions it should perform.
 
 \term{variable}
 A named storage location for values.
@@ -1750,23 +1759,24 @@ You cannot use keywords (like \java{public}, \java{class}, and \java{void}) as v
 \term{assignment}
 A statement that gives a value to a variable.
 
-\term{state}
-The variables in a program and their values.
-
-\term{state diagram}
-A graphical representation of the state of a program at a point in time.
-
-%\term{initialization}
-%A statement that creates a variable and assigns a value.
+\term{initialize}
+To assign a variable for the first time.
 
 %\term{update}
 %An assignment that changes the value of a variable.
+
+\term{state}
+The variables in a program and their current values.
+
+\term{state diagram}
+A graphical representation of the state of a program at a point in time.
 
 \term{operator}
 A symbol that represents a computation like addition, multiplication, or string concatenation.
 
 \term{operand}
 One of the values on which an operator operates.
+Most operators in Java require two operands.
 
 \term{expression}
 A combination of variables, operators, and values that represents a single value.
@@ -1810,6 +1820,7 @@ Start with a program that compiles and runs correctly.
 One player looks away while the other player adds an error to the program.
 Then the first player tries to find and fix the error.
 You get two points if you find the error without compiling the program, one point if you find it using the compiler, and your opponent gets a point if you don't find it.
+
 \end{exercise}
 
 
@@ -1828,13 +1839,14 @@ The variable \java{day} will contain the day of the week (like Friday), and \jav
 What type is each variable?
 Assign values to those variables that represent today's date.
 
-\item Display the value of each variable on a line by itself.
+\item Display (print out) the value of each variable on a line by itself.
 This is an intermediate step that is useful for checking that everything is working so far.
+Compile and run your program before moving on.
 
 \item Modify the program so that it displays the date in standard American format, for example: {\tt Thursday, July 16, 2015}.
 
 \item Modify the program so it also displays the date in European format.
-The output should be:
+The final output should be:
 
 \begin{stdout}
 American format:
@@ -1870,12 +1882,12 @@ Use a 24-hour clock so that at 2pm the value of \java{hour} is 14.
 You might run into problems when computing percentages with integers, so consider using floating-point.
 
 \item Change the values of \java{hour}, \java{minute}, and \java{second} to reflect the current time.
-Then compute the elapsed time since you started working on this exercise.
+Then write code to compute the elapsed time since you started working on this exercise.
 
 \end{enumerate}
 
 Hint: You might want to use additional variables to hold values during the computation.
-Variables that are used in a computation but never displayed are sometimes called intermediate or {\em temporary} variables.
+Variables that are used in a computation but never displayed are sometimes called intermediate or ``temporary'' variables.
 
 \end{exercise}
 
