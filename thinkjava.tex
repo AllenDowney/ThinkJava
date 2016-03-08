@@ -1893,18 +1893,7 @@ Variables that are used in a computation but never displayed are sometimes calle
 
 \chapter{Input and output}
 
-%A number of years ago, Jeannette Wing published a terrific editorial with the title {\it Computational Thinking}, or in her own words, ``Ways to Think Like a Computer Scientist'' (see Communications of the ACM, March 2006).
-%This 3-page article summarizes many of the problem solving techniques you will discover while learning to program.
-%Everyone interested in learning computer science beyond programming should read it.
-%She defines the field this way:
-
-%\index{computer science}
-
-%\begin{quote}
-%{\bf ``Computer science is the study of computation -- what can be computed and how to compute it.''}
-%\end{quote}
-
-The programs we've looked at so far just display messages, which doesn't involve a lot of real computation.
+The programs we've looked at so far simply display messages, which doesn't involve a lot of real computation.
 This chapter will show you how to read input from the keyboard, use that input to calculate a result, and then format that result for output.
 %We will also look at some technical details about how operating systems work.
 
@@ -1922,7 +1911,7 @@ It also provides \java{System.out}, which is a special value that provides metho
 In fact, we can use \java{System.out.println} to display the value of \java{System.out}:
 
 \begin{code}
-System.out.println(System.out);
+    System.out.println(System.out);
 \end{code}
 
 The result is:
@@ -1932,6 +1921,7 @@ java.io.PrintStream@685d72cd
 \end{stdout}
 
 %TODO: check consistency of indendation for code examples
+% (need to discuss: should we indent code but not output?)
 
 \index{package}
 
@@ -1950,6 +1940,7 @@ In this example the address is \java{685d72cd}, but if you run the same code you
 
 As shown in Figure~\ref{fig.system}, \java{System} is defined in a file called {\tt System.java}, and {\tt PrintStream} is defined in {\tt PrintStream.java}.
 These files are part of the Java {\bf library}, which is an extensive collection of classes you can use in your programs.
+The source code for these classes is included with the JDK.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1962,6 +1953,7 @@ These files are part of the Java {\bf library}, which is an extensive collection
 
 \section{The Scanner class}
 \label{scanner}
+
 \index{Scanner class}
 \index{class!Scanner}
 
@@ -2050,15 +2042,15 @@ Figure~\ref{fig.package} shows these organizational units.
 \end{center}
 \end{figure}
 
+\index{token}
+
 To review, a package is a collection of classes, which define methods.
 Methods contain statements, some of which contain expressions.
 Expressions are made up of {\bf tokens}, which are the basic elements of a program, including numbers, variable names, operators, keywords, and punctuation like parentheses, braces and semicolons.
 
 The standard edition of Java comes with {\em several thousand} classes you can \java{import}, which can be both exciting and intimidating.
-You can browse this library at \url{http://docs.oracle.com/javase/7/docs/api/}
-Most of the Java library is written in Java.
-
-%TODO: add a forward reference to the source code reading exercise
+You can browse this library at \url{http://docs.oracle.com/javase/7/docs/api/}.
+Most of the Java library itself is written in Java.
 
 Note there is a major difference between the Java {\em language}, which defines the syntax and meaning of the elements above, and the Java {\em library}, which provides the built-in classes.
 
@@ -2114,22 +2106,21 @@ We'll demonstrate in the next section.
 \index{literal}
 \index{magic number}
 
-A value that appears in a program, like 2.54 or \verb|" in ="|, is called a {\bf literal}.
-In general, there's nothing wrong with literals, but when numbers like 2.54 appear in an expression with no explanation, they make code hard to read.
+A value that appears in a program, like 2.54 (or \verb|" in ="|), is called a {\bf literal}.
+In general, there's nothing wrong with literals.
+But when numbers like 2.54 appear in an expression with no explanation, they make code hard to read.
 And if the same value appears many times, and might have to change in the future, it makes code hard to maintain.
-Values like that are sometimes called {\bf magic numbers} (with the implication that being ``magic'' is not a good thing).
 
+Values like that are sometimes called {\bf magic numbers} (with the implication that being ``magic'' is not a good thing).
 A good practice is to assign magic numbers to variables with meaningful names, like this:
 
 \begin{code}
     double cmPerInch = 2.54;
     cm = inch * cmPerInch;
-    System.out.print(inch + " in = ");
-    System.out.println(cm + " cm");
 \end{code}
 
 This version is easier to read and less error-prone, but it still has a problem.
-Variables can vary, and the number of centimeters in an inch does not.
+Variables can vary, but the number of centimeters in an inch does not.
 Once we assign a value to \java{cmPerInch}, it should never change.
 Java provides a language feature that enforces that rule, the keyword \java{final}.
 
@@ -2160,17 +2151,18 @@ The result is:
 1.3333333333333333
 \end{stdout}
 
+\index{printf}
+
 That might be more than you want.
 \java{System.out} provides another method, called \java{printf}, that gives you more control of the format.
 The ``f'' in \java{printf} stands for ``formatted''.
-\index{printf}
-
 Here's an example:
 
 \begin{code}
     System.out.printf("Four thirds = %.3f", 4.0 / 3.0);
 \end{code}
 
+\index{format string}
 \index{format specifier}
 
 The first value in the parentheses is a {\bf format string} that specifies how the output should be displayed.
@@ -2196,7 +2188,8 @@ The result is:
 100 in = 254.000000 cm
 \end{stdout}
 
-Like \java{print}, \java{printf} does not append a newline, so format strings often end with a newline character.
+Like \java{print}, \java{printf} does not append a newline.
+So format strings often end with a newline character.
 
 The format specifier \java{\%d} displays integer values (``d'' stands for ``decimal'').
 The values are matched up with the format specifiers in order, so \java{inch} is displayed using \java{\%d}, and \java{cm} is displayed using \java{\%f}.
@@ -2231,11 +2224,11 @@ For more details, refer to the documentation of \java{java.util.Formatter}.
 \section{Centimeters to inches}
 \label{sec:rounding}
 
-Now suppose we have a measurement in centimeters and we want to round it off to the nearest inch.
+Now suppose we have a measurement in centimeters, and we want to round it off to the nearest inch.
 It is tempting to write:
 
 \begin{code}
-    inch = cm / centPerInch;  // syntax error
+    inch = cm / CM_PER_INCH;  // syntax error
 \end{code}
 
 But the result is an error -- you get something like, ``Bad types in assignment: from double to int.''
@@ -2275,11 +2268,11 @@ So the result is 60.0, not 62.0.
 Keeping that in mind, here's how we can convert a measurement in centimeters to inches.
 
 \begin{code}
-    inch = (int) (cm / centPerInch);
+    inch = (int) (cm / CM_PER_INCH);
     System.out.printf("%f cm = %d in\n", cent, inch);
 \end{code}
 
-The parentheses after the cast operator require the division to come before the type cast.
+The parentheses after the cast operator require the division to occur before the type cast.
 And the result is rounded toward zero; we will see in the next chapter how to round floating-point numbers to the closest integer.
 
 
@@ -2303,7 +2296,7 @@ Using division and modulus, we can convert to feet and inches like this:
 \end{code}
 
 The first line yields 6.
-The second line, which is pronounced ``76 mod 12,'' yields 4.
+The second line, which is pronounced ``76 mod 12'', yields 4.
 So 76 inches is 6 feet, 4 inches.
 
 The modulus operator looks like a percent sign, but you might find it helpful to think of it as a division sign ($\div$) rotated to the left.
@@ -2322,34 +2315,9 @@ Also, many encryption algorithms use the modulus operator extensively.
 
 \section{Putting it all together}
 
-%\begin{itemize}
-
-%% Chapter 1
-%\item Write a class and main
-%\item Display simple output
-%\item Compile and run programs
-%\item Correct syntax errors
-
-%% Chapter 2
-%\item Declare/assign variables
-%\item Create named constants
-%\item Perform basic arithmetic
-%\item Compose multiple operations
-
-%% Chapter 3
-%\item Browse the Java library
-%\item Import Java library classes
-%\item Initialize a Scanner object
-%\item Get input from the keyboard
-%\item Read/write documentation
-%\item Format output with printf
-%\item Divide and mod integers
-
-%\end{itemize}
-
-At this point you know enough Java to write useful programs that solve everyday problems.
-You've seen how to 1) import Java library classes, 2) create a \java{Scanner}, 3) get input from the keyboard, 4) format output with \java{printf}, and 5) divide and mod integers.
-Now we can put everything together in a complete program:
+At this point, you have seen enough Java to write useful programs that solve everyday problems.
+You can (1) import Java library classes, (2) create a \java{Scanner}, (3) get input from the keyboard, (4) format output with \java{printf}, and (5) divide and mod integers.
+Now we will put everything together in a complete program:
 
 %Since we've looked at each of these topics in isolation, it's important to see how they fit together in a complete program.
 %If you've been working through the examples on your computer as you've been reading (like we recommended in Section~\ref{sec:examples}), then good job!
@@ -2365,8 +2333,8 @@ public class Convert {
     public static void main(String[] args) {
         double cm;
         int feet, inches, remainder;
-        final double centPerInch = 2.54;
-        final int inchesPerFoot = 12;
+        final double CM_PER_INCH = 2.54;
+        final int IN_PER_FOOT = 12;
         Scanner in = new Scanner(System.in);
 
         // prompt the user and get the value
@@ -2374,26 +2342,23 @@ public class Convert {
         cm = in.nextDouble();
 
         // convert and output the result
-        inches = (int) (cm / centPerInch);
-        feet = inches / inchesPerFoot;
-        remainder = inches % inchesPerFoot;
+        inches = (int) (cm / CM_PER_INCH);
+        feet = inches / IN_PER_FOOT;
+        remainder = inches % IN_PER_FOOT;
         System.out.printf("%.2f cm = %d ft, %d in\n",
                           cm, feet, remainder);
     }
 }
 \end{code}
 
-%TODO: Chris, please check the changes I made above
-
 Although not required, all variables and constants are declared at the top of \java{main}.
-This practice makes it easier to find their types later on and helps the reader know what data is involved in the algorithm.
+This practice makes it easier to find their types later on, and it helps the reader know what data is involved in the algorithm.
 
 For readability, each major step of the algorithm is separated by a blank line and begins with a comment.
+It also includes a documentation comment (\java{/**}), which we'll learn more about in the next chapter.
 
 Many algorithms, including the example above, perform division and modulus together.
-In both steps, you're dividing by the same number.
-
-%Notice how \java{inches} gets reassigned (which replaces its value) just before the \java{printf}.
+In both steps, you divide by the same number (\java{IN_PER_FOOT}).
 
 When statements get long (generally wider than 80 characters), a common style convention is to break them across multiple lines.
 The reader should never have to scroll horizontally.
@@ -2430,16 +2395,16 @@ But when you read an \java{int} followed by a \java{String}, something strange h
 \end{code}
 
 Try running the above example.
-It doesn't let you input your name and immediately displays the output:
+It doesn't let you input your name, and it immediately displays the output:
 
 \begin{stdout}
 What is your name? Hello , age 45
 \end{stdout}
 
 To understand what is happening, you have to understand that the \java{Scanner} doesn't see input as multiple lines, like we do.
-Instead, it gets a stream of characters as shown in Figure~\ref{fig.hopper1}.
+Instead, it gets a ``stream of characters'' as shown in Figure~\ref{fig.hopper1}.
 
-\begin{figure}
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/hopper1.pdf}
 \caption{A stream of characters as seen by a Scanner.}
@@ -2451,7 +2416,7 @@ The arrow indicates the next character to be read by \java{Scanner}.
 When you call \java{nextInt}, it reads characters until it gets to a non-digit.
 Figure~\ref{fig.hopper2} shows the state of the stream after \java{nextInt} is invoked.
 
-\begin{figure}
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/hopper2.pdf}
 \caption{A stream of characters after \java{nextInt} is invoked.}
@@ -2487,21 +2452,18 @@ A group of classes that are related to each other.
 %Java classes are organized into packages.
 
 \term{address}
-The location of a value in memory, often represented as a hexadecimal integer.
-
-\term{token}
-A basic element of a program, such as a word, space, symbol, or number.
+The location of a value in computer memory, often represented as a hexadecimal integer.
 
 \term{library}
 A collection of packages and classes that are available for use in other programs.
 %Libraries are often distributed in {\tt .jar} (Java Archive) files.
 
+%\term{abstraction}
+%The process of reducing information and/or detail to focus on high-level concepts.
+
 %\term{operating system}
 %Software that is always running behind the scenes on your computer.
 %It controls the execution of application programs and manages hardware resources.
-
-%\term{abstraction}
-%The process of reducing information and/or detail to focus on high-level concepts.
 
 %\term{byte}
 %A single unit of data on a computer; enough to represent one character.
@@ -2512,8 +2474,11 @@ A collection of packages and classes that are available for use in other program
 \term{import}
 A statement that allows programs to use classes defined in other packages.
 
+\term{token}
+A basic element of a program, such as a word, space, symbol, or number.
+
 \term{literal}
-A value that appears in a program.
+A value that appears directly in source code.
 For example, \verb|"Hello"| is a string literal and \java{74} is an integer literal.
 
 \term{magic number}
@@ -2566,7 +2531,7 @@ What if you use two format specifiers, but then only provide one value?
 
 \begin{exercise}
 \label{guess}
-The goal of this exercise is to write a simple ``Guess My Number'' game.
+The goal of this exercise is to program a ``Guess My Number'' game.
 When it's finished, it will work like this:
 
 \begin{stdout}
@@ -2596,7 +2561,7 @@ public class GuessStarter {
 \end{code}
 
 Like the \java{Scanner} class we saw in this chapter, \java{Random} has to be imported before we can use it.
-And as we saw with \java{Scanner}, we have to use the \java{new} operator to create a random number generator.
+And as we saw with \java{Scanner}, we have to use the \java{new} operator to create a \java{Random} (number generator).
 
 Then we can use the method \java{nextInt} to generate a random number.
 In this example, the result of \java{nextInt(100)} will be between 0 and 99, including both.
@@ -2604,8 +2569,8 @@ Adding 1 yields a number between 1 and 100, including both.
 
 \begin{itemize}
 
-\item The definition of \java{GuessStarter} is in a file called {\tt GuessStarter.java}, in a directory called {\tt ch03}, in the repository for this book.
-Instructions for downloading this code are on page~\pageref{code}.
+\item The definition of \java{GuessStarter} is in a file called {\tt GuessStarter.java}, in the directory called {\tt ch03}, in the repository for this book.
+%Instructions for downloading this code are on page~\pageref{code}.
 
 \item Compile and run this program.
 
