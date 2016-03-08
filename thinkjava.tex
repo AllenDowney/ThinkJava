@@ -1002,143 +1002,6 @@ We also explain three kinds of programming errors and offer additional debugging
 %Finally we discuss the rules of code style, which helps make programs easier to read and debug.
 
 
-\section{Types of errors}
-
-\index{error!message}
-
-Three kinds of errors can occur in a program: compile-time errors, run-time errors, and logic errors.
-It is useful to distinguish between them in order to track them down more quickly.
-
-\index{error!compile-time}
-\index{syntax}
-
-{\bf Compile-time} errors occur when you violate the {\bf syntax} rules of the Java language.
-For example, parentheses and braces have to come in matching pairs.
-So \java{(1 + 2)} is legal, but \java{8)} is not.
-In the latter case, the program cannot be compiled, and the compiler displays an error.
-
-\index{error!message}
-
-Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you exactly what the error is.
-As an example, let's get back to the hello world program from Section~\ref{hello}.
-
-\begin{code}
-public class Hello {
-
-    public static void main(String[] args) {
-        // generate some simple output
-        System.out.println("Hello, World!");
-    }
-}
-\end{code}
-
-If you forget the semicolon at the end of the print statement, you might get an error message like this:
-
-\begin{stdout}
-File: Hello.java  [line: 5]
-Error: ';' expected
-\end{stdout}
-
-That's pretty good: the location of the error is correct, and the error message tells you what's wrong.
-
-But error messages are not always easy to understand.
-Sometimes the compiler reports the place in the program where the error was detected, not where it actually occurred.
-And sometimes the description of the problem is more confusing than helpful.
-
-For example, if you leave out the closing brace at the end of \java{main} (line 6), you might get a message like this:
-
-\begin{stdout}
-File: Hello.java  [line: 7]
-Error: reached end of file while parsing
-\end{stdout}
-
-\index{parse}
-
-There are two problems here.
-First, the error message is written from the compiler's point of view, not yours.
-{\bf Parsing} is the process of reading a program before translating; if the compiler gets to the end of the file while still parsing, that means something was omitted.
-But the compiler doesn't know what.
-It also doesn't know where.
-The compiler discovers the error at the end of the program (line 7), but the missing brace should be on the previous line.
-
-Error messages contain useful information, so you should make an effort to read and understand them.
-But don't take them too literally.
-
-During the first few weeks of your programming career, you will probably spend a lot of time tracking down compile-time errors.
-But as you gain experience, you will make fewer mistakes and find them more quickly.
-
-%\subsection{Run-time errors}
-
-\index{run-time error}
-\index{error!run-time}
-\index{exception}
-
-The second type of error is a {\bf run-time error}, so-called because it does not appear until after the program has started running.
-In Java, these errors occur while the interpreter is executing byte code and something goes wrong.
-These errors are also called ``exceptions'' because they usually indicate that something exceptional (and bad) has happened.
-
-Run-time errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter one.
-When a run-time error occurs, the interpreter displays an error message that explains what happened and where.
-
-For example, if you accidentally divide by zero you will get a message like this:
-
-\begin{small}
-\begin{stdout}
-Exception in thread "main" java.lang.ArithmeticException: / by zero
-    at Hello.main(Hello.java:5)
-\end{stdout}
-\end{small}
-
-\index{ArithmeticException}
-\index{exception!Arithmetic}
-
-Some parts of this output are useful for debugging.
-The first line includes the name of the exception, \java{java.lang.ArithmeticException}, and a message that indicates more specifically what happened, \java{/ by zero}.
-The next line shows the method where the error occurred; \java{Hello.main} indicates the method \java{main} in the class \java{Hello}.
-It also reports the file where the method is defined, \java{Hello.java}, and the line number where the error occurred, \java{5}.
-
-Error messages sometimes contain additional information that won't make sense yet.
-So one of the challenges is to figure out where to find the useful parts without being overwhelmed by extraneous information.
-Also, keep in mind that the line where the program crashed may not be the line that needs to be corrected.
-
-%\subsection{Logic errors}
-
-\index{logic error}
-\index{error!logic}
-
-The third type of error is the {\bf logic error}.
-%{\bf Semantics} pertains to the meaning of a program; that is, what it does when it runs.
-If your program has a logic error, it will compile and run without generating error messages, but it will not do the right thing.
-Instead, it will do exactly what you told it to do.
-For example, here is a version of the hello world program with a logic error:
-
-\begin{code}
-public class Hello {
-
-    public static void main(String[] args) {
-        System.out.println("Hello, ");
-        System.out.println("World!");
-    }
-}
-\end{code}
-
-This program compiles and runs just fine, but the output is:
-
-\begin{stdout}
-Hello,
-World!
-\end{stdout}
-
-Assuming that we wanted the output on one line, this is not correct.
-The problem is that the first line uses \java{println}, when we probably meant to use \java{print} (see the ``goodbye world'' example of Section~\ref{goodbye}).
-
-Identifying logic errors can be hard because you have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
-Usually the compiler and the interpreter can't help you, since they don't know what the right thing is.
-
-Now that you know about the three kinds of errors, you might want to read Appendix~\ref{debugappendix}, where we've collected some of our favorite debugging advice.
-It refers to language features we haven't talked about yet, so you might want to re-read it from time to time.
-
-
 \section{Declaring variables}
 
 %NOTE: in response to review comments, I am cleaning up the use of
@@ -1713,29 +1576,146 @@ Large, complex expressions can be hard to read and debug.
 %In general, each line of code should be a single step of the algorithm.
 
 
+\section{Types of errors}
+
+\index{error!message}
+
+Three kinds of errors can occur in a program: compile-time errors, run-time errors, and logic errors.
+It is useful to distinguish between them in order to track them down more quickly.
+
+\index{error!compile-time}
+\index{syntax}
+
+{\bf Compile-time} errors occur when you violate the {\bf syntax} rules of the Java language.
+For example, parentheses and braces have to come in matching pairs.
+So \java{(1 + 2)} is legal, but \java{8)} is not.
+In the latter case, the program cannot be compiled, and the compiler displays an error.
+
+\index{error!message}
+
+Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you exactly what the error is.
+As an example, let's get back to the hello world program from Section~\ref{hello}.
+
+\begin{code}
+public class Hello {
+
+    public static void main(String[] args) {
+        // generate some simple output
+        System.out.println("Hello, World!");
+    }
+}
+\end{code}
+
+If you forget the semicolon at the end of the print statement, you might get an error message like this:
+
+\begin{stdout}
+File: Hello.java  [line: 5]
+Error: ';' expected
+\end{stdout}
+
+That's pretty good: the location of the error is correct, and the error message tells you what's wrong.
+
+But error messages are not always easy to understand.
+Sometimes the compiler reports the place in the program where the error was detected, not where it actually occurred.
+And sometimes the description of the problem is more confusing than helpful.
+
+For example, if you leave out the closing brace at the end of \java{main} (line 6), you might get a message like this:
+
+\begin{stdout}
+File: Hello.java  [line: 7]
+Error: reached end of file while parsing
+\end{stdout}
+
+\index{parse}
+
+There are two problems here.
+First, the error message is written from the compiler's point of view, not yours.
+{\bf Parsing} is the process of reading a program before translating; if the compiler gets to the end of the file while still parsing, that means something was omitted.
+But the compiler doesn't know what.
+It also doesn't know where.
+The compiler discovers the error at the end of the program (line 7), but the missing brace should be on the previous line.
+
+Error messages contain useful information, so you should make an effort to read and understand them.
+But don't take them too literally.
+
+During the first few weeks of your programming career, you will probably spend a lot of time tracking down compile-time errors.
+But as you gain experience, you will make fewer mistakes and find them more quickly.
+
+%\subsection{Run-time errors}
+
+\index{run-time error}
+\index{error!run-time}
+\index{exception}
+
+The second type of error is a {\bf run-time error}, so-called because it does not appear until after the program has started running.
+In Java, these errors occur while the interpreter is executing byte code and something goes wrong.
+These errors are also called ``exceptions'' because they usually indicate that something exceptional (and bad) has happened.
+
+Run-time errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter one.
+When a run-time error occurs, the interpreter displays an error message that explains what happened and where.
+
+For example, if you accidentally divide by zero you will get a message like this:
+
+\begin{small}
+\begin{stdout}
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+    at Hello.main(Hello.java:5)
+\end{stdout}
+\end{small}
+
+\index{ArithmeticException}
+\index{exception!Arithmetic}
+
+Some parts of this output are useful for debugging.
+The first line includes the name of the exception, \java{java.lang.ArithmeticException}, and a message that indicates more specifically what happened, \java{/ by zero}.
+The next line shows the method where the error occurred; \java{Hello.main} indicates the method \java{main} in the class \java{Hello}.
+It also reports the file where the method is defined, \java{Hello.java}, and the line number where the error occurred, \java{5}.
+
+Error messages sometimes contain additional information that won't make sense yet.
+So one of the challenges is to figure out where to find the useful parts without being overwhelmed by extraneous information.
+Also, keep in mind that the line where the program crashed may not be the line that needs to be corrected.
+
+%\subsection{Logic errors}
+
+\index{logic error}
+\index{error!logic}
+
+The third type of error is the {\bf logic error}.
+%{\bf Semantics} pertains to the meaning of a program; that is, what it does when it runs.
+If your program has a logic error, it will compile and run without generating error messages, but it will not do the right thing.
+Instead, it will do exactly what you told it to do.
+For example, here is a version of the hello world program with a logic error:
+
+\begin{code}
+public class Hello {
+
+    public static void main(String[] args) {
+        System.out.println("Hello, ");
+        System.out.println("World!");
+    }
+}
+\end{code}
+
+This program compiles and runs just fine, but the output is:
+
+\begin{stdout}
+Hello,
+World!
+\end{stdout}
+
+Assuming that we wanted the output on one line, this is not correct.
+The problem is that the first line uses \java{println}, when we probably meant to use \java{print} (see the ``goodbye world'' example of Section~\ref{goodbye}).
+
+Identifying logic errors can be hard because you have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
+Usually the compiler and the interpreter can't help you, since they don't know what the right thing is.
+
+Now that you know about the three kinds of errors, you might want to read Appendix~\ref{debugappendix}, where we've collected some of our favorite debugging advice.
+It refers to language features we haven't talked about yet, so you might want to re-read it from time to time.
+
+
 \section{Vocabulary}
 
 \begin{description}
-
-\term{syntax}
-The structure of a program; the arrangement of the words and symbols it contains.
-
-\term{compile-time error}
-An error in the source code that makes it impossible to compile.
-Also called a ``syntax error''.
-
-\term{parse}
-To analyze the structure of a program; what the compiler does first.
-
-\term{run-time error}
-An error in a program that makes it impossible to run to completion.
-Also called an ``exception''.
-
-\term{logic error}
-An error in a program that makes it do something other than what the programmer intended.
-
-%\term{semantics}
-%The meaning of a program; the low-level instructions it should perform.
 
 \term{variable}
 A named storage location for values.
@@ -1797,6 +1777,26 @@ The order in which operations are evaluated.
 
 \term{composition}
 The ability to combine simple expressions and statements into compound expressions and statements.
+
+\term{syntax}
+The structure of a program; the arrangement of the words and symbols it contains.
+
+\term{compile-time error}
+An error in the source code that makes it impossible to compile.
+Also called a ``syntax error''.
+
+\term{parse}
+To analyze the structure of a program; what the compiler does first.
+
+\term{run-time error}
+An error in a program that makes it impossible to run to completion.
+Also called an ``exception''.
+
+\term{logic error}
+An error in a program that makes it do something other than what the programmer intended.
+
+%\term{semantics}
+%The meaning of a program; the low-level instructions it should perform.
 
 \end{description}
 
