@@ -2443,6 +2443,9 @@ This technique is common when reading \java{int} or \java{double} values that ap
 First you read the number, and then you read the rest of the line, which is just a newline character.
 
 
+%TODO: DW suggests we also cover PrintWriter to write files
+% add an appendix on File I/O since it involves try/catch?
+
 \section{Vocabulary}
 
 \begin{description}
@@ -4345,6 +4348,7 @@ But hopefully you will know what it means.
 \label{distance}
 
 \index{incremental development}
+\index{program development}
 
 Beginners often make the mistake of writing a lot of code before they try to compile and run it.
 Then they spend way too much time debugging.
@@ -5122,10 +5126,10 @@ Repeating tasks without making errors is something that computers do well and pe
 
 \index{iteration}
 
-Running the same code multiple times is called {\bf iteration}.
+Running the same code for a certain number of times is called {\bf iteration}.
 We have seen methods, like \java{countdown} and \java{factorial}, that use recursion to iterate.
 Although recursion is elegant and powerful, it takes some getting used to.
-Java provides language features that make iteration easier:
+Java provides language features that make iteration much easier:
 the \java{while} and \java{for} statements.
 
 
@@ -5220,7 +5224,7 @@ Before computers were readily available, people had to calculate logarithms, sin
 To make that easier, there were books of tables where you could look up values of various functions.
 Creating these tables by hand was slow and boring, and the results were often full of errors.
 
-When computers appeared on the scene, one of the initial reactions was, ``This is great!
+When computers appeared on the scene, one of the initial reactions was: ``This is great!
 We can use a computer to generate the tables, so there will be no errors.''
 That turned out to be true (mostly), but shortsighted.
 Not much later, computers were so pervasive that printed tables became obsolete.
@@ -5262,7 +5266,7 @@ To compute them, we can apply this equation:
 %
 \[ \log_2 x = \frac{log_e x}{log_e 2} \]
 %
-Here's the modified version of the loop:
+We can modify the loop as follows:
 
 \begin{code}
     int i = 1;
@@ -5273,7 +5277,7 @@ Here's the modified version of the loop:
     }
 \end{code}
 
-And here are the results.
+And here are the results:
 
 \begin{stdout}
 1.0   0.0
@@ -5287,15 +5291,15 @@ And here are the results.
 9.0   3.1699250014423126
 \end{stdout}
 
-Each time through the loop, we add something to \java{x}, so the result is an arithmetic sequence.
+Each time through the loop, we add one to \java{x}; so the result is an arithmetic sequence.
 If we multiply \java{x} by something instead, we get a geometric sequence:
 
 \begin{code}
-    final double log2 = Math.log(2);
+    final double LOG2 = Math.log(2);
     int i = 1;
     while (i < 100) {
         double x = (double) i;
-        System.out.println(x + "   " + Math.log(x) / log2);
+        System.out.println(x + "   " + Math.log(x) / LOG2);
         i = i * 2;
     }
 \end{code}
@@ -5323,25 +5327,29 @@ Log tables may not be useful anymore, but for computer scientists, knowing the p
 \label{encapsulation}
 
 \index{table!two-dimensional}
+\index{program development}
 
-In Section~\ref{distance} we presented a way of writing programs called incremental development.
-In this section we present another program development process called {\bf encapsulation and generalization}.
+In Section~\ref{distance}, we presented a way of writing programs called incremental development.
+In this section we present another {\bf program development} process called ``encapsulation and generalization''.
 The steps are:
 
 \begin{enumerate}
 
 \item Write a few lines of code in \java{main} or another method, and test them.
 
-\item When they are working, wrap them in a method and test again.
+\item When they are working, wrap them in a new method, and test again.
 
 \item If it's appropriate, replace literal values with variables and parameters.
 
 \end{enumerate}
 
+\index{encapsulation}
+\index{generalization}
+
 The second step is called {\bf encapsulation}; the third step is {\bf generalization}.
 
-To demonstrate this process, we'll develop methods that display a multiplication table.
-We'll start with a loop that displays the multiples of 2, all on one line.
+To demonstrate this process, we'll develop methods that display multiplication tables.
+Here is a loop that displays the multiples of two, all on one line:
 
 \begin{code}
     int i = 1;
@@ -5357,8 +5365,9 @@ We'll start with a loop that displays the multiples of 2, all on one line.
 
 The first line initializes a variable named \java{i}, which is going to act as a {\bf loop variable}: as the loop executes, the value of \java{i} increases from 1 to 6; when \java{i} is 7, the loop terminates.
 
-Each time through the loop, we display the value \java{2 * i}, padded with spaces so it's four characters wide.
+Each time through the loop, we display the value \java{2 * i} padded with spaces so it's four characters wide.
 Since we use \java{System.out.printf}, the output appears on a single line.
+
 After the loop, we call \java{println} to print a newline and complete the line.
 Remember that in some environments, none of the output is displayed until the line is complete.
 
@@ -5369,9 +5378,8 @@ The output of the code so far is:
 \end{stdout}
 
 \index{encapsulation}
-\index{generalization}
 
-The next step is to encapsulate this code in a method.
+The next step is to ``encapsulate'' this code in a new method.
 Here's what it looks like:
 
 \begin{code}
@@ -5385,8 +5393,10 @@ Here's what it looks like:
     }
 \end{code}
 
-Next we replace the constant value, 2, with a parameter, \java{n}.
-This step is called ``generalization'' because it makes the method more general (less specific):
+\index{generalization}
+
+Next we replace the constant value, \java{2}, with a parameter, \java{n}.
+This step is called ``generalization'' because it makes the method more general (less specific).
 
 \begin{code}
     public static void printRow(int n) {
@@ -5448,13 +5458,12 @@ Finally, we encapsulate the second loop in a method:
     }
 \end{code}
 
-\index{program development}
-
 One of the challenges of programming, especially for beginners, is figuring out how to divide up a program into methods.
 The process of encapsulation and generalization allows you to design as you go along.
 
 
 \section{More generalization}
+
 \index{generalization}
 
 The previous version of \java{printTable} always displays six rows.
@@ -5496,8 +5505,7 @@ We can generalize more by adding a parameter to \java{printRow}:
     }
 \end{code}
 
-Now \java{printRow} takes two parameters: \java{n} is the value whose multiples should be displayed; \java{cols} is the number of columns.
-
+Now \java{printRow} takes two parameters: \java{n} is the value whose multiples should be displayed, and \java{cols} is the number of columns.
 Since we added a parameter to \java{printRow}, we also have to change the line in \java{printTable} where it is invoked:
 
 \begin{code}
@@ -5526,7 +5534,7 @@ As a result, the number of columns equals the number of rows, so we get a square
 
 When you generalize a method appropriately, you often find that it has capabilities you did not plan.
 For example, you might notice that the multiplication table is symmetric; since $ab = ba$, all the entries in the table appear twice.
-You could save ink by printing half the table, and you would only have to change one line of \java{printTable}:
+You could save ink by showing half of the table, and you would only have to change one line of \java{printTable}:
 
 \begin{code}
       printRow(i, i);
@@ -5574,18 +5582,17 @@ For example, we could rewrite \java{printTable} like this:
     }
 \end{code}
 
-There are three statements in parentheses, separated by semicolons: the initializer, the condition, and the update.
+\java{for} loops have three components in parentheses, separated by semicolons: the initializer, the condition, and the update.
 
 \begin{enumerate}
 
-\item The initializer runs once at the beginning of the loop.
+\item The {\em initializer} runs once at the very beginning of the loop.
 
-\item The condition is checked each time through the loop.
+\item The {\em condition} is checked each time through the loop.
 If it is \java{false}, the loop ends.
+Otherwise, the body of the loop is executed (again).
 
-\item Otherwise, the body of the loop runs.
-
-\item Then the update runs, and we loop back to step 2.
+\item At the end of each iteration, the {\em update} runs, and we go back to step 2.
 
 \end{enumerate}
 
@@ -5599,7 +5606,7 @@ For example, here is a version of \java{printRow} that uses a \java{for} loop:
         for (int i = 1; i <= cols; i = i + 1) {
             System.out.printf("%4d", n * i);
         }
-        System.out.println(i);   // error
+        System.out.println(i);  // error
     }
 \end{code}
 
@@ -5619,12 +5626,11 @@ If you need to use a loop variable outside the loop, you have to declare it outs
 \index{increment}
 \index{decrement}
 
-Assignments like \java{i = i + 1} often appear in for loops.
-In fact, they are so common, Java provides a more concise way to write them using increment and decrement operators.
-For example, \java{++} is the {\bf increment} operator; it has the same effect as \java{i = i + 1}.
+Assignments like \java{i = i + 1} don't often appear in \java{for} loops, because Java provides a more concise way to add and subtract by one.
+Specifically, \java{++} is the {\bf increment} operator; it has the same effect as \java{i = i + 1}.
 And \java{--} is the {\bf decrement} operator; it has the same effect as \java{i = i - 1}.
 
-If you want to increment or decrement a variable by an amount other than 1, you can use \java{+=} and \java{-=}.
+If you want to increment or decrement a variable by an amount other than \java{1}, you can use \java{+=} and \java{-=}.
 For example, \java{i += 2} increments \java{i} by \java{2}.
 
 
@@ -5657,8 +5663,9 @@ The statements inside the loop.
 \term{infinite loop}
 A loop whose condition is always true.
 
-\term{loop variable}
-A variable that is initialized, tested, and updated in order to control a loop.
+\term{program development}
+A process for writing programs.
+So far we have seen ``incremental development'' and ``encapsulation and generalization''.
 
 \term{encapsulate}
 To wrap a sequence of statements in a method.
@@ -5666,9 +5673,8 @@ To wrap a sequence of statements in a method.
 \term{generalize}
 To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter).
 
-\term{program development}
-A process for writing programs.
-So far we have seen ``incremental development'' and ``encapsulation and generalization''.
+\term{loop variable}
+A variable that is initialized, tested, and updated in order to control a loop.
 
 \term{increment}
 Increase the value of a variable.
@@ -5700,9 +5706,7 @@ Consider the following methods:
     public static void main(String[] args) {
         loop(10);
     }
-\end{code}
 
-\begin{code}
     public static void loop(int n) {
         int i = n;
         while (i > 0) {
@@ -5806,7 +5810,7 @@ The output should look something like:
 1.0     2.708333333333333     2.718281828459045
 \end{stdout}
 
-You can use the escape sequence \verb|"\\t"| to put a tab character between columns of a table.
+You can use the escape sequence \verb|"\t"| to put a tab character between columns of a table.
 
 \item Vary the number of terms in the series (the second argument that \java{check} sends to \java{myexp}) and see the effect on the accuracy of the result.
 Adjust this value until the estimated value agrees with the correct answer when \java{x} is 1.
