@@ -4212,7 +4212,7 @@ In this chapter, we'll write methods that return values, which we call {\bf valu
 \index{void}
 
 When you invoke a \java{void} method, the invocation is usually on a line all by itself.
-For example, here's the \java{countup} method from Section~\ref{recursion}:
+For example, here is the \java{countup} method from Section~\ref{recursion}:
 
 \begin{code}
     public static void countup(int n) {
@@ -4225,14 +4225,15 @@ For example, here's the \java{countup} method from Section~\ref{recursion}:
     }
 \end{code}
 
-And here's how it is invoked:
+And here is how it is invoked:
 
 \begin{code}
     countup(3);
     System.out.println("Have a nice day.");
 \end{code}
 
-On the other hand, when you invoke a value method, you have to do something with the return value -- usually assigning it to a variable or using it as part of an expression -- like this:
+On the other hand, when you invoke a value method, you have to do something with the return value.
+We usually assign it to a variable or use it as part of an expression, like this:
 
 \begin{code}
     double error = Math.abs(expected - actual);
@@ -4244,15 +4245,18 @@ On the other hand, when you invoke a value method, you have to do something with
 
 Compared to void methods, value methods differ in two ways:
 
+\index{return type}
+\index{return value}
+
 \begin{itemize}
 
-\item They declare the type of the return value;
+\item They declare the type of the return value (the {\bf return type});
 
-\item They use at least one \java{return} statement to provide a return value.
+\item They use at least one \java{return} statement to provide a {\bf return value}.
 
 \end{itemize}
 
-Here's an example:  \java{calculateArea} takes a \java{double} as a parameter and returns the area of a circle with that radius:
+Here's an example: \java{calculateArea} takes a \java{double} as a parameter and returns the area of a circle with that radius:
 
 \begin{code}
     public static double calculateArea(double radius) {
@@ -4261,7 +4265,8 @@ Here's an example:  \java{calculateArea} takes a \java{double} as a parameter an
     }
 \end{code}
 
-As usual, this method is \java{public} and \java{static}, but in the place where we are used to seeing \java{void}, we see \java{double}, which means that the return value from this method is a \java{double}.
+As usual, this method is \java{public} and \java{static}.
+But in the place where we are used to seeing \java{void}, we see \java{double}, which means that the return value from this method is a \java{double}.
 
 \index{return}
 \index{statement!return}
@@ -4279,7 +4284,7 @@ The expression you provide can be arbitrarily complex, so we could have written 
 \index{temporary variable}
 \index{variable!temporary}
 
-On the other hand, {\bf temporary} variables like \java{result} often make debugging easier, especially when you are stepping through code using an interactive debugger (see Section~\ref{debugger}).
+On the other hand, {\bf temporary variables} like \java{result} often make debugging easier, especially when you are stepping through code using an interactive debugger (see Section~\ref{debugger}).
 
 The type of the expression in the \java{return} statement must match the return type of the method.
 When you declare that the return type is \java{double}, you are making a promise that this method will eventually produce a \java{double} value.
@@ -4317,8 +4322,9 @@ For example, this method contains dead code:
     }
 \end{code}
 
-If you put \java{return} statements inside a conditional statement, you have to guarantee that {\em every possible path} through the program reaches a \java{return} statement.
-So this method is not correct:
+If you put \java{return} statements inside a conditional statement, you have to make sure that {\em every possible path} through the program reaches a \java{return} statement.
+The compiler will let you know if that's not the case.
+For example, the following method is incomplete:
 
 \begin{code}
     public static double absoluteValue(double x) {
@@ -4342,8 +4348,8 @@ But hopefully you will know what it means.
 \index{incremental development}
 
 Beginners often make the mistake of writing a lot of code before they try to compile and run it.
-Then they spend a lot of time debugging.
-A better alternative is what we call {\bf incremental development}.
+Then they spend way too much time debugging.
+A better approach is what we call {\bf incremental development}.
 The key aspects of incremental development are:
 
 \begin{itemize}
@@ -4496,6 +4502,8 @@ The temporary variables \java{radius} and \java{area} are useful for development
     }
 \end{code}
 
+\index{functional decomposition}
+
 This example demonstrates a process called {\bf functional decomposition}; that is, breaking a complex computation into simple methods, testing the methods in isolation, and then composing the methods to perform the computation.
 This process reduces debugging time and yields code that is more likely to be correct and easier to maintain.
 
@@ -4621,30 +4629,30 @@ This idea was developed by Alonzo Church and Alan Turing, so it is known as the 
 
 To give you an idea of what you can do with the tools we have learned, let's look at some methods for evaluating recursively-defined mathematical functions.
 A recursive definition is similar to a circular definition, in the sense that the definition refers to the thing being defined.
-A truly circular definition is not very useful:
+
+Of course, a truly circular definition is not very useful:
 
 \begin{description}
 \term{recursive} an adjective used to describe a method that is recursive.
 \end{description}
 
 If you saw that definition in the dictionary, you might be annoyed.
-In fact, if you search for recursion on Google, it displays ``Did you mean: recursion'' as an inside joke.
+But if you search for recursion on Google, it displays ``Did you mean: recursion'' as an inside joke.
 
 \index{factorial}
 
-Many mathematical functions are defined recursively.
+Many mathematical functions are defined recursively, because that is often the simplest way.
 For example, the {\bf factorial} of an integer $n$, which is written $n!$ is defined like this:
 
-\vspace{-1ex}
+\vspace{-1em}
 \begin{eqnarray*}
 &&  0! = 1 \\
 &&  n! = n \cdot(n-1)!
 \end{eqnarray*}
-\vspace{-1ex}
 
-Don't confuse the mathematical symbol $!$, which means factorial, with the Java operator \java{!}, which means NOT.
+Don't confuse the mathematical symbol $!$, which means {\em factorial}, with the Java operator \java{!}, which means {\em not}.
+This definition says that \java{factorial(0)} is \java{1}, and that \java{factorial(n)} is \java{n * factorial(n-1)}.
 
-This definition says that the factorial of 0 is 1, and \java{factorial(n)} is \java{n * factorial(n-1)}.
 So \java{factorial(3)} is \java{3 * factorial(2)}; \java{factorial(2)} is \java{2 * factorial(1)}; \java{factorial(1)} is \java{1 * factorial(0)}; and \java{factorial(0)} is \java{1}.
 Putting it all together, we get \java{3 * 2 * 1 * 1}, which is 6.
 
@@ -4728,7 +4736,7 @@ Notice that \java{recurse} and \java{result} do not exist in the last frame, bec
 \index{leap of faith}
 
 Following the flow of execution is one way to read programs, but it can quickly become overwhelming.
-An alternative is a {\bf leap of faith}:
+An alternative is the {\bf leap of faith}:
 when you come to a method invocation, instead of following the flow of execution, you {\em assume} that the method works correctly and returns the appropriate value.
 
 In fact, you are already practicing a leap of faith when you use methods in the Java library.
@@ -4754,13 +4762,12 @@ Of course, it is strange to assume that the method works correctly when you have
 
 Another common recursively-defined mathematical function is the Fibonacci sequence, which has the following definition:
 
-\vspace{-1ex}
+\vspace{-1em}
 \begin{eqnarray*}
 && fibonacci(1) = 1 \\
 && fibonacci(2) = 1 \\
 && fibonacci(n) = fibonacci(n-1) + fibonacci(n-2);
 \end{eqnarray*}
-\vspace{-1ex}
 
 Translated into Java, this function is:
 
@@ -4777,25 +4784,24 @@ If you try to follow the flow of execution here, even for small values of \java{
 But if we take a leap of faith and assume that the two recursive invocations work correctly, it is clear that their sum is the result.
 
 
-
 \section{Vocabulary}
 
 \begin{description}
 
+\term{void method}
+A method that does not return a value.
+
 \term{value method}
 A method that returns a value.
 
-\term{void method}
-A method that does not return a value.
+%\term{void}
+%A special return type indicating the method does not return a value.
 
 \term{return type}
 The type of value a method returns.
 
 \term{return value}
 The value provided as the result of a method invocation.
-
-%\term{void}
-%A special return type indicating the method does not return a value.
 
 \term{temporary variable}
 A short-lived variable, often used for debugging.
@@ -4812,12 +4818,12 @@ A placeholder for an incomplete method so that the class will compile.
 \term{scaffolding}
 Code that is used during program development but is not part of the final version.
 
+\term{functional decomposition}
+A process for breaking down a complex computation into simple methods, then composing the methods to perform the computation.
+
 \term{overloading}
 Defining more than one method with the same name but different parameters.
 %When you invoke an overloaded method, Java knows which version to use by looking at the arguments you provide.
-
-\term{functional decomposition}
-A process for breaking a complex computation into simple methods, then composing the methods to perform the computation.
 
 \term{Turing complete}
 A programming language that can implement any theoretically possible algorithm.
@@ -4827,9 +4833,6 @@ The product of all the integers up to and including a given integer.
 
 \term{leap of faith}
 A way to read recursive programs by assuming that the recursive call works, rather than following the flow of execution.
-
-\term{unit test}
-Code that exercises a single method of a program, testing for correctness and/or efficiency.
 
 \end{description}
 
@@ -4842,7 +4845,6 @@ Before you start the exercises, we recommend that you compile and run the exampl
 
 If you have not already read Section~\ref{JUnit}, now might be a good time.
 It describes JUnit, a tool for efficiently testing value methods.
-
 
 
 \begin{exercise}
@@ -4919,7 +4921,7 @@ Hint: The Math method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
 
-In the last part of this exercise, you write a method that invokes a method you wrote.
+In the last part of this exercise, you need to write a method that invokes another method you wrote.
 Whenever you do that, it is a good idea to test the first method carefully before working on the second.
 Otherwise, you might find yourself debugging two methods at the same time, which can be difficult.
 
@@ -4927,48 +4929,6 @@ One of the purposes of this exercise is to practice pattern-matching: the abilit
 
 \end{exercise}
 
-
-\begin{exercise}
-
-In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
-
-\begin{code}
-public class Prod {
-
-    public static void main(String[] args) {
-        System.out.println(prod(1, 4));
-    }
-
-    public static int prod(int m, int n) {
-        if (m == n) {
-            return n;
-        } else {
-            int recurse = prod(m, n-1);
-            int result = n * recurse;
-            return result;
-        }
-    }
-}
-\end{code}
-
-\begin{enumerate}
-
-\item Draw a stack diagram showing the state of the program just before the last instance of \java{prod} completes.
-
-\item What is the output of this program?
-(Try to answer this question on paper first, then run the code to check your answer.)
-
-\item Explain in a few words what \java{prod} does (without getting into the details of how it works).
-
-\item Rewrite \java{prod} without the temporary variables \java{recurse} and \java{result}.
-Hint: you only need one line for the \java{else} branch.
-
-\end{enumerate}
-
-\end{exercise}
-
-
-%TODO: DW suggests a simple recursion exercise, like adding up the numbers from 0 to N
 
 \begin{exercise}
 
@@ -4999,9 +4959,7 @@ What is the output of the following program?
         }
         return hoopyFlag;
     }
-\end{code}
-
-\begin{code}
+    
     public static boolean isFrabjuous(int x) {
         boolean frabjuousFlag;
         if (x > 0) {
@@ -5015,6 +4973,50 @@ What is the output of the following program?
 
 The purpose of this exercise is to make sure you understand logical operators and the flow of execution through value methods.
 
+\end{exercise}
+
+
+\begin{exercise}
+
+In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
+
+\begin{code}
+    public static void main(String[] args) {
+        System.out.println(prod(1, 4));
+    }
+
+    public static int prod(int m, int n) {
+        if (m == n) {
+            return n;
+        } else {
+            int recurse = prod(m, n-1);
+            int result = n * recurse;
+            return result;
+        }
+    }
+\end{code}
+
+\begin{enumerate}
+
+\item Draw a stack diagram showing the state of the program just before the last instance of \java{prod} completes.
+
+\item What is the output of this program?
+(Try to answer this question on paper first, then run the code to check your answer.)
+
+\item Explain in a few words what \java{prod} does (without getting into the details of how it works).
+
+\item Rewrite \java{prod} without the temporary variables \java{recurse} and \java{result}.
+Hint: you only need one line for the \java{else} branch.
+
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}
+Write a recursive method named \java{oddSum} that takes a positive odd integer \java{n} and returns the sum of odd integers from 1 to n.
+Start with a base case, and use temporary variables to debug your solution.
+You may find it helpful to print the value of \java{n} each time \java{oddSum} is invoked.
 \end{exercise}
 
 
