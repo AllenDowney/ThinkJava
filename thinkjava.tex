@@ -1130,8 +1130,8 @@ int minute = 59;
 %For example:
 %
 %\begin{code}
-%    int i = 1;
-%    i = 2;
+%int i = 1;
+%i = 2;
 %\end{code}
 %
 %The first line initializes \java{i} to 1.
@@ -5371,7 +5371,7 @@ Remember that in some environments, none of the output is displayed until the li
 The output of the code so far is:
 
 \begin{stdout}
-    2    4    6    8   10   12
+   2   4   6   8  10  12
 \end{stdout}
 
 \index{encapsulation}
@@ -5410,13 +5410,13 @@ Invoking this method with the argument 2 yields the same output as before.
 With the argument 3, the output is:
 
 \begin{stdout}
-    3    6    9   12   15   18
+   3   6   9  12  15  18
 \end{stdout}
 
 And with argument 4, the output is:
 
 \begin{stdout}
-    4    8   12   16   20   24
+   4   8  12  16  20  24
 \end{stdout}
 
 By now you can probably guess how we are going to display a multiplication table: we'll invoke \java{printRow} repeatedly with different arguments.
@@ -5433,12 +5433,12 @@ while (i <= 6) {
 And the output looks like this:
 
 \begin{stdout}
-    1    2    3    4    5    6
-    2    4    6    8   10   12
-    3    6    9   12   15   18
-    4    8   12   16   20   24
-    5   10   15   20   25   30
-    6   12   18   24   30   36
+   1   2   3   4   5   6
+   2   4   6   8  10  12
+   3   6   9  12  15  18
+   4   8  12  16  20  24
+   5  10  15  20  25  30
+   6  12  18  24  30  36
 \end{stdout}
 
 The format specifier \verb|"\%4d"| in \java{printRow} causes the output to align vertically, regardless of whether the numbers are one or two digits.
@@ -6740,9 +6740,9 @@ The condition is \java{i < fruit.length()}, which means that when \java{i} is eq
 %The enhanced for loop does NOT work with strings, so we can't write the previous example like this:
 
 %\begin{code}
-%    for (char letter : fruit) {
-%        System.out.println(letter);
-%    }
+%for (char letter : fruit) {
+%    System.out.println(letter);
+%}
 %\end{code}
 
 \index{String!length}
@@ -11356,8 +11356,8 @@ The \java{setColor} method determines the color of everything that gets drawn af
 Other colors include:
 
 \begin{stdout}
-    black       blue      cyan     darkGray   gray    green
-    lightGray   magenta   orange   pink       white   yellow
+black       blue      cyan     darkGray   gray    green
+lightGray   magenta   orange   pink       white   yellow
 \end{stdout}
 
 You can create your own colors by specifying the red, green, and blue (RGB) components.

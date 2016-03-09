@@ -234,7 +234,7 @@ Fortunately, this situation only happens when using the plus operator.
 You cannot, for example, store an integer directly in a string variable.
 
 \begin{code}
-     String number = 5;  // syntax error
+String number = 5;  // syntax error
 \end{code}
 
 In general, it's better not to compose multiple additions of varying data types.
@@ -294,20 +294,20 @@ She defines the field this way:
 To follow up the previous chapter, if you need to check the {\bf parity} (evenness or oddness) of numbers often, you might want to ``wrap'' this code up in a method:
 
 \begin{code}
-    public static void printParity(int x) {
-        if (x % 2 == 0) {
-            System.out.println("x is even");
-        } else {
-            System.out.println("x is odd");
-        }
+public static void printParity(int x) {
+    if (x % 2 == 0) {
+        System.out.println("x is even");
+    } else {
+        System.out.println("x is odd");
     }
+}
 \end{code}
 
 Now you have a method named \java{printParity} that will print an appropriate message for any integer you care to provide.
 In \java{main} you would invoke this method as follows:
 
 \begin{code}
-    printParity(17);
+printParity(17);
 \end{code}
 
 Always remember that when you invoke a method, you do not have to declare the types of the arguments you provide.
@@ -315,8 +315,8 @@ Java can figure out what type they are.
 You should resist the temptation to write things like:
 
 \begin{code}
-    int number = 17;
-    printParity(int number);        // WRONG!!!
+int number = 17;
+printParity(int number);        // WRONG!!!
 \end{code}
 
 
@@ -334,7 +334,7 @@ Technically, it is legal to increment a variable and use it in an expression at 
 For example, you might see something like:
 
 \begin{code}
-    System.out.println(i++);
+System.out.println(i++);
 \end{code}
 
 Looking at this, it is not clear whether the increment will take effect before or after the value is printed.
@@ -345,19 +345,19 @@ If you really want to know, you can try it.
 Using the increment operators, we can rewrite the letter-counter:
 
 \begin{code}
-    int index = 0;
-    while (index < length) {
-        if (fruit.charAt(index) == 'a') {
-            count++;
-        }
-        index++;
+int index = 0;
+while (index < length) {
+    if (fruit.charAt(index) == 'a') {
+        count++;
     }
+    index++;
+}
 \end{code}
 
 It is a common error to write something like
 
 \begin{code}
-    index = index++;             // WRONG!!
+index = index++;             // WRONG!!
 \end{code}
 
 Unfortunately, this is syntactically legal, so the compiler will not warn you.
@@ -441,7 +441,7 @@ and computes the distance between them.  Remember that you can
 get the x-coordinate of a Bug like this:
 
 \begin{code}
-    int x = bug.getLocation().getCol();
+int x = bug.getLocation().getCol();
 \end{code}
 
 \item Write a method called {\tt turnToward} that takes two
@@ -514,9 +514,9 @@ objects are all object methods.
 For example, here is {\tt printCard} as a class method:
 
 \begin{code}
-    public static void printCard(Card c) {
-        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
-    }
+public static void printCard(Card c) {
+    System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
+}
 \end{code}
 
 Anything that can be written as a class method can also be written as an
@@ -525,9 +525,9 @@ use one or the other.
 Here it is re-written as an object method:
 
 \begin{code}
-    public void print() {
-        System.out.println(ranks[rank] + " of " + suits[suit]);
-    }
+public void print() {
+    System.out.println(ranks[rank] + " of " + suits[suit]);
+}
 \end{code}
 
 Here are the changes:
@@ -549,8 +549,8 @@ and likewise for {\tt suit}.
 Here's how this method is invoked:
 
 \begin{code}
-    Card card = new Card(1, 1);
-    card.print();
+Card card = new Card(1, 1);
+card.print();
 \end{code}
 
 When you invoke a method on an object, that object becomes the {\bf
@@ -632,20 +632,20 @@ Instead of creating a new object every time {\tt addTime} is invoked, we could r
 Compare this to the previous version:
 
 \begin{code}
-    public static void addTimeFill(Time t1, Time t2, Time sum) {
-        sum.hour = t1.hour + t2.hour;
-        sum.minute = t1.minute + t2.minute;
-        sum.second = t1.second + t2.second;
+public static void addTimeFill(Time t1, Time t2, Time sum) {
+    sum.hour = t1.hour + t2.hour;
+    sum.minute = t1.minute + t2.minute;
+    sum.second = t1.second + t2.second;
 
-        if (sum.second >= 60.0) {
-            sum.second -= 60.0;
-            sum.minute += 1;
-        }
-        if (sum.minute >= 60) {
-            sum.minute -= 60;
-            sum.hour += 1;
-        }
+    if (sum.second >= 60.0) {
+        sum.second -= 60.0;
+        sum.minute += 1;
     }
+    if (sum.minute >= 60) {
+        sum.minute -= 60;
+        sum.hour += 1;
+    }
+}
 \end{code}
 
 The result is stored in {\tt sum}, so the return type is {\tt void}.
@@ -705,11 +705,11 @@ the computer already knows how to do arithmetic with {\tt double}s.
 Here is a method that converts a {\tt Time} into a {\tt double}:
 
 \begin{code}
-    public static double convertToSeconds(Time t) {
-        int minutes = t.hour * 60 + t.minute;
-        double seconds = minutes * 60 + t.second;
-        return seconds;
-    }
+public static double convertToSeconds(Time t) {
+    int minutes = t.hour * 60 + t.minute;
+    double seconds = minutes * 60 + t.second;
+    return seconds;
+}
 \end{code}
 
 Now all we need is a way to convert from a {\tt double}
@@ -718,13 +718,13 @@ do it, but it might make more sense to write it as a third
 constructor:
 
 \begin{code}
-    public Time(double secs) {
-        this.hour =(int)(secs / 3600.0);
-        secs -= this.hour * 3600.0;
-        this.minute =(int)(secs / 60.0);
-        secs -= this.minute * 60;
-        this.second = secs;
-    }
+public Time(double secs) {
+    this.hour =(int)(secs / 3600.0);
+    secs -= this.hour * 3600.0;
+    this.minute =(int)(secs / 60.0);
+    secs -= this.minute * 60;
+    this.second = secs;
+}
 \end{code}
 
 This constructor is a little different from the others;
@@ -736,10 +736,10 @@ I am using to convert from one base to another is correct.  But once
 you're convinced, we can use these methods to rewrite {\tt addTime}:
 
 \begin{code}
-    public static Time addTime(Time t1, Time t2) {
-        double seconds = convertToSeconds(t1) + convertToSeconds(t2);
-        return new Time(seconds);
-    }
+public static Time addTime(Time t1, Time t2) {
+    double seconds = convertToSeconds(t1) + convertToSeconds(t2);
+    return new Time(seconds);
+}
 \end{code}
 
 This is shorter than the original version, and it is much easier
@@ -1003,26 +1003,26 @@ Because they make the code more readable, you should use enhanced \java{for} loo
 For example, the following loop finds the maximum value in an array of integers:
 
 \begin{code}
-    int max = Integer.MIN_VALUE;
-    for (int value : numbers) {
-        if (value > max) {
-            max = value;
-        }
+int max = Integer.MIN_VALUE;
+for (int value : numbers) {
+    if (value > max) {
+        max = value;
     }
+}
 \end{code}
 
 But notice that the enhanced \java{for} loop does not give you the index the value.
 If you need to find the index of the maximum value, you have to use a standard \java{for} loop.
 
 \begin{code}
-    int index = -1;
-    int max = Integer.MIN_VALUE;
-    for (int i = 0; i < numbers.length; i++) {
-        if (numbers[i] > max) {
-            index = i;
-            max = numbers[i];
-        }
+int index = -1;
+int max = Integer.MIN_VALUE;
+for (int i = 0; i < numbers.length; i++) {
+    if (numbers[i] > max) {
+        index = i;
+        max = numbers[i];
     }
+}
 \end{code}
 
 
@@ -1053,13 +1053,13 @@ A friend shows you the following method and claims that if the value of \java{nu
 For example if \java{number} is 17, the code should output {\tt 71}.
 
 \begin{code}
-    Scanner in = new Scanner(System.in);
-    int number = in.nextInt();
+Scanner in = new Scanner(System.in);
+int number = in.nextInt();
 
-    int lastDigit = number % 10;
-    int firstDigit = number / 10;
+int lastDigit = number % 10;
+int firstDigit = number / 10;
 
-    System.out.println(lastDigit + firstDigit);
+System.out.println(lastDigit + firstDigit);
 \end{code}
 
 Explain what the program actually does, and modify it so that it does the right thing.
@@ -1079,15 +1079,15 @@ The following method counts the number of times a given character appears in a s
 For example, \java{numberOf("banana", 'a')} returns 3.
 
 \begin{code}
-    public static int numberOf(String s, char c) {
-        int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == c) {
-                count++;
-            }
+public static int numberOf(String s, char c) {
+    int count = 0;
+    for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == c) {
+            count++;
         }
-        return count;
     }
+    return count;
+}
 \end{code}
 
 \index{counter}
@@ -1205,8 +1205,8 @@ When you invoke \java{toUpperCase} on a string object, you get a new string obje
 For example:
 
 \begin{code}
-    String name = "Alan Turing";
-    String upperName = name.toUpperCase();
+String name = "Alan Turing";
+String upperName = name.toUpperCase();
 \end{code}
 
 \index{Turing, Alan}
@@ -1226,9 +1226,9 @@ For example, we often need to convert between characters that contain numbers, l
 A common mistake beginning programmers make is to cast a \java{char} to an \java{int}:
 
 \begin{code}
-    char letter = '3';
-    int x = (int) letter;
-    System.out.println(x);
+char letter = '3';
+int x = (int) letter;
+System.out.println(x);
 \end{code}
 
 You might expect the value to be 3, but instead you get 51, which is the Unicode value for the character \java{'3'}.
@@ -1236,14 +1236,14 @@ You might expect the value to be 3, but instead you get 51, which is the Unicode
 To convert \java{'3'} to the corresponding integer value, you could subtract \java{'0'}:
 
 \begin{code}
-    int x = (int) (letter - '0');
+int x = (int) (letter - '0');
 \end{code}
 
 But it is better to use the \java{digit} method in the \java{Character} class instead.
 For example, this code converts \java{letter} to the corresponding digit, interpreting it as a base 10 number.
 
 \begin{code}
-    int x = Character.digit(letter, 10);
+int x = Character.digit(letter, 10);
 \end{code}
 
 \java{Character} is a built-in class that provides methods for working with characters.
@@ -1253,11 +1253,11 @@ For example, in Robert McCloskey's book {\em Make Way for Ducklings}, the names 
 Here is a loop that prints these names in order:
 
 \begin{code}
-    char letter = 'J';
-    while (letter <= 'Q') {
-        System.out.println(letter + "ack");
-        letter++;
-    }
+char letter = 'J';
+while (letter <= 'Q') {
+    System.out.println(letter + "ack");
+    letter++;
+}
 \end{code}
 
 Notice that in addition to the arithmetic operators, we can also use the logical operators on characters.
@@ -1319,16 +1319,16 @@ The result of a \java{static} method depends only on the arguments.
 For example, \java{isAfter} compares two \java{Time}s and returns a \java{boolean} that indicates whether the first operand comes after the second:
 
 \begin{code}
-    public static boolean isAfter(Time time1, Time time2) {
-        if (time1.hour < time2.hour) return false;
-        if (time1.hour > time2.hour) return true;
+public static boolean isAfter(Time time1, Time time2) {
+    if (time1.hour < time2.hour) return false;
+    if (time1.hour > time2.hour) return true;
 
-        if (time1.minute < time2.minute) return false;
-        if (time1.minute > time2.minute) return true;
+    if (time1.minute < time2.minute) return false;
+    if (time1.minute > time2.minute) return true;
 
-        if (time1.second < time2.second) return false;
-        return true;
-    }
+    if (time1.second < time2.second) return false;
+    return true;
+}
 \end{code}
 
 What is the result of this method if the two times are equal?
@@ -1339,18 +1339,18 @@ A better solution would be to define a \java{compareTo} method.
 We have already seen how to compare two strings in this way: \java{time1.compareTo(time2)}.
 
 \begin{code}
-    public int compareTo(Time t2) {
-        if (this.hour < t2.hour) return -1;
-        if (this.hour > t2.hour) return +1;
+public int compareTo(Time t2) {
+    if (this.hour < t2.hour) return -1;
+    if (this.hour > t2.hour) return +1;
 
-        if (this.minute < t2.minute) return -1;
-        if (this.minute > t2.minute) return +1;
+    if (this.minute < t2.minute) return -1;
+    if (this.minute > t2.minute) return +1;
 
-        if (this.second < t2.second) return -1;
-        if (this.second > t2.second) return +1;
+    if (this.second < t2.second) return -1;
+    if (this.second > t2.second) return +1;
 
-        return 0;
-    }
+    return 0;
+}
 \end{code}
 
 If \java{this} time comes before the other time, then compareTo returns \java{-1}.
@@ -1367,15 +1367,15 @@ If both times are the same (in the \java{equals} sense), \java{compareTo} return
 So in order to override the default \java{equals} method, you need to write it this way:
 
 \begin{code}
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Time)) {
-            return false;
-        }
-        Time t2 = (Time) obj;
-        return this.hour == t2.hour
-            && this.minute == t2.minute
-            && this.second == t2.second;
+public boolean equals(Object obj) {
+    if (!(obj instanceof Time)) {
+        return false;
     }
+    Time t2 = (Time) obj;
+    return this.hour == t2.hour
+        && this.minute == t2.minute
+        && this.second == t2.second;
+}
 \end{code}
 
 Because the parameter is declared as an \java{Object}, one could in theory pass any type of data (like a \java{String} or \java{Scanner}) to this method.
