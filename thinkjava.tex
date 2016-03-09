@@ -3716,6 +3716,7 @@ Some development environments display output to \java{System.err} with a differe
 
 
 \section{Validating input}
+\label{validate}
 
 Here is a method that uses \java{printLogarithm} from the previous section:
 
@@ -5633,12 +5634,98 @@ For example, \java{i += 2} increments \java{i} by \java{2}.
 
 \section{The do-while loop}
 
-TODO: refer to validating input section (Chapter 5), show how to convert into a do-while loop, discuss the use of flag variables when checking for multiple criteria
+\index{pretest loop}
+
+The \java{while} and \java{for} statements both implement a {\bf pretest loop}.
+That is, they test the condition at the beginning of each pass through the loop.
+
+\index{posttest loop}
+\index{do-while}
+
+Java also provides a {\bf posttest loop} in the form of a \java{do}-\java{while} statement.
+This type of loop is particularly useful when you need to run code at least one time and optionally repeat it.
+
+For example, in Section~\ref{validate} we used the \java{return} statement to avoid reading invalid input from the user.
+Now we can use a \java{do}-\java{while} loop to keep reading input until it's valid:
+
+\begin{code}
+Scanner in = new Scanner(System.in);
+boolean okay;
+do {
+    System.out.print("Enter a number: ");
+    if (in.hasNextDouble()) {
+        okay = true;
+    } else {
+        okay = false;
+        String word = in.next();
+        System.err.println(word + " is not a number");
+    }
+} while (!okay);
+double x = in.nextDouble();
+\end{code}
+
+Although this code looks complicated, it is essentially only three steps:
+
+\begin{enumerate}
+\item Display a prompt.
+\item Check the input; if invalid, display and error and start over.
+\item Read the input.
+\end{enumerate}
+
+The code uses a flag variable, \java{okay}, to indicate whether we need to repeat the loop body.
+If \java{hasNextDouble()} returns \java{false}, we consume the invalid input by calling \java{next()}.
+We then display an error message to the user via \java{System.err}.
+The loop terminates when \java{hasNextDouble()} return \java{true}.
 
 
 \section{Break and continue}
 
-TODO: keep reading positive integers until the user enters a zero, then break; use continue to skip negative/odd/magic numbers before processing them
+Sometimes neither a pretest nor a posttest loop will provide exactly what you need.
+In the previous example, the ``test'' needed to happen in the middle of the loop.
+As a result, we used a flag variable and a nested \java{if}-\java{else} statement.
+
+\index{break}
+
+A simpler way of solving this problem is to use a \java{break} statement.
+When a program reaches a \java{break} statement, it exits the current loop.
+
+\begin{code}
+Scanner in = new Scanner(System.in);
+while (true) {
+    System.out.print("Enter a number: ");
+    if (in.hasNextDouble()) {
+        break;
+    }
+    String word = in.next();
+    System.err.println(word + " is not a number");
+}
+double x = in.nextDouble();
+\end{code}
+
+Notice how this example sets up an infinite loop, but then \java{break}s when the condition is \java{true}.
+
+\index{continue}
+
+In addition to the \java{break} statement, which exits the loop, Java provides a \java{continue} statement that moves on to the next iteration.
+For example, the following code reads integers from the keyboard and computes a running total.
+The \java{continue} statement causes the program to skip over any negative values.
+
+\begin{code}
+Scanner in = new Scanner(System.in);
+int x = -1;
+int sum = 0;
+while (x != 0) {
+    x = in.nextInt();
+    if (x <= 0) {
+        continue;
+    }
+    System.out.println("Adding " + x);
+    sum += x;
+}
+\end{code}
+
+Although \java{break} and \java{continue} statements give you complete control of your loops, you should use them sparingly.
+Like multiple \java{return} statements, they can make the code difficult to understand and debug.
 
 
 %TODO: DW suggests we also cover PrintWriter to write files
@@ -5678,6 +5765,12 @@ Increase the value of a variable.
 
 \term{decrement}
 Decrease the value of a variable.
+
+\term{pretest loop}
+A loop that tests the condition before each iteration.
+
+\term{posttest loop}
+A loop that tests the condition after each iteration.
 
 \end{description}
 
