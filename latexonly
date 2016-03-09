@@ -71,7 +71,7 @@
 
 % colors for code listings and output
 \usepackage{xcolor}
-\definecolor{bgcolor}{HTML}{FAFAFA}
+\definecolor{bgcolor}{HTML}{FCFCFC}
 \definecolor{comment}{HTML}{007C00}
 \definecolor{keyword}{HTML}{0000FF}
 \definecolor{strings}{HTML}{B20000}
@@ -91,6 +91,8 @@
     keepspaces=true,
     showstringspaces=false,
     upquote=true,
+    xleftmargin=15pt,  % \parindent
+    framexleftmargin=3pt,
     aboveskip=\parskip,
     belowskip=\parskip
 }
