@@ -537,7 +537,7 @@ A {\bf statement} is a line of code that performs a basic operation.
 In the hello world program, this line is a {\bf print statement} that displays a message on the screen:
 
 \begin{code}
-    System.out.println("Hello, World!");
+System.out.println("Hello, World!");
 \end{code}
 
 \index{println}
@@ -557,7 +557,7 @@ A {\bf method} is a named sequence of statements.
 This program defines one method named \java{main}:
 
 \begin{code}
-    public static void main(String[] args)
+public static void main(String[] args)
 \end{code}
 
 \index{main}
@@ -683,7 +683,7 @@ Another common use of escape sequences is to have quotation marks inside of stri
 Since double quotes indicate the beginning and end of strings, you need to escape them with a backslash.
 
 \begin{code}
-    System.out.println("She said \"Hello!\" to me.");
+System.out.println("She said \"Hello!\" to me.");
 \end{code}
 
 The result is:
@@ -1022,7 +1022,7 @@ To store a value, you first have to declare a variable.
 %Since the values we want to store are text, we declare that the new variable is a string:
 
 \begin{code}
-    String message;
+String message;
 \end{code}
 
 \index{declaration}
@@ -1043,7 +1043,7 @@ There is no such type as \java{Int} or \java{string}.
 To declare an integer variable, the syntax is:
 
 \begin{code}
-    int x;
+int x;
 \end{code}
 
 Note that \java{x} is an arbitrary name for the variable.
@@ -1051,9 +1051,9 @@ In general, you should use names that indicate what the variables mean.
 For example, if you saw these declarations, you could probably guess what values would be stored:
 
 \begin{code}
-    String firstName;
-    String lastName;
-    int hour, minute;
+String firstName;
+String lastName;
+int hour, minute;
 \end{code}
 
 This example declares two variables with type \java{String} and two with type \java{int}.
@@ -1084,9 +1084,9 @@ Now that we have declared variables, we want to use them to store values.
 We do that with an {\bf assignment} statement.
 
 \begin{code}
-    message = "Hello!";  // give message the value "Hello!"
-    hour = 10;           // assign the value 10 to hour
-    minute = 59;         // set minute to 59
+message = "Hello!";  // give message the value "Hello!"
+hour = 10;           // assign the value 10 to hour
+minute = 59;         // set minute to 59
 \end{code}
 
 This example shows three assignments, and the comments illustrate different ways people sometimes talk about assignment statements.
@@ -1110,8 +1110,8 @@ For example, \java{message} can contain the string \verb|"123"|, which is made u
 But that is not the same thing as the integer \java{123}.
 
 \begin{code}
-    message = "123";    // legal
-    message = 123;      // not legal
+message = "123";    // legal
+message = 123;      // not legal
 \end{code}
 
 \index{initialize}
@@ -1121,9 +1121,9 @@ You can declare a variable and then assign a value later, as in the previous exa
 You can also declare and initialize on the same line:
 
 \begin{code}
-    String message = "Hello!";
-    int hour = 10;
-    int minute = 59;
+String message = "Hello!";
+int hour = 10;
+int minute = 59;
 \end{code}
 
 %You can make more than one assignment to the same variable.
@@ -1155,9 +1155,9 @@ If $a = b$ now, $a$ is always equal to $b$.
 In Java, an assignment statement can make two variables equal, but they don't have to stay that way.
 
 \begin{code}
-    int a = 5;
-    int b = a;     // a and b are now equal
-    a = 3;         // a and b are no longer equal
+int a = 5;
+int b = a;     // a and b are now equal
+a = 3;         // a and b are no longer equal
 \end{code}
 
 The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
@@ -1191,8 +1191,8 @@ The following statements declare a variable named \java{firstLine}, assign it th
 %TODO: fix more broken quotation marks
 
 \begin{code}
-    String firstLine = "Hello, again!";
-    System.out.println(firstLine);
+String firstLine = "Hello, again!";
+System.out.println(firstLine);
 \end{code}
 
 %Assuming this code fragment is inside a method that is inside a class, the output is:
@@ -1206,9 +1206,9 @@ To display the {\em name} of a variable, you have to put it in quotes.
 %For example: \java{System.out.println("firstLine");}
 
 \begin{code}
-    String firstLine = "Hello, again!";
-    System.out.print("The value of firstLine is ");
-    System.out.println(firstLine);
+String firstLine = "Hello, again!";
+System.out.print("The value of firstLine is ");
+System.out.println(firstLine);
 \end{code}
 
 For this example, the output is:
@@ -1221,13 +1221,13 @@ Conveniently, the syntax for displaying a variable is the same regardless of its
 For example:
 
 \begin{code}
-    int hour = 11;
-    int minute = 59;
-    System.out.print("The current time is ");
-    System.out.print(hour);
-    System.out.print(":");
-    System.out.print(minute);
-    System.out.println(".");
+int hour = 11;
+int minute = 59;
+System.out.print("The current time is ");
+System.out.print(hour);
+System.out.print(":");
+System.out.print(minute);
+System.out.println(".");
 \end{code}
 
 The output of this program is:
@@ -1258,10 +1258,10 @@ For example, the addition operator is \java{+}, subtraction is \java{-}, multipl
 The following program converts a time of day to minutes:
 
 \begin{code}
-    int hour = 11;
-    int minute = 59;
-    System.out.print("Number of minutes since midnight: ");
-    System.out.println(hour * 60 + minute);
+int hour = 11;
+int minute = 59;
+System.out.print("Number of minutes since midnight: ");
+System.out.println(hour * 60 + minute);
 \end{code}
 
 \index{expression}
@@ -1290,8 +1290,8 @@ Addition, subtraction, and multiplication all do what you expect, but you might 
 For example, the following fragment tries to compute the fraction of an hour that has elapsed.%, but it has a logic error.
 
 \begin{code}
-    System.out.print("Fraction of the hour that has passed: ");
-    System.out.println(minute / 60);
+System.out.print("Fraction of the hour that has passed: ");
+System.out.println(minute / 60);
 \end{code}
 
 The output is:
@@ -1311,8 +1311,8 @@ By design, integer division always rounds toward zero, even in cases like this o
 As an alternative, we can calculate a percentage rather than a fraction:
 
 \begin{code}
-    System.out.print("Percent of the hour that has passed: ");
-    System.out.println(minute * 100 / 60);
+System.out.print("Percent of the hour that has passed: ");
+System.out.println(minute * 100 / 60);
 \end{code}
 
 The new output is:
@@ -1337,17 +1337,17 @@ In Java, the default floating-point type is called \java{double}, which is short
 You can create \java{double} variables and assign values to them using the same syntax we used for the other types:
 
 \begin{code}
-    double pi;
-    pi = 3.14159;
+double pi;
+pi = 3.14159;
 \end{code}
 
 Java performs ``floating-point division'' when one or more operands are \java{double} values.
 So we can solve the problem we saw in the previous section:
 
 \begin{code}
-    double minute = 59.0;
-    System.out.print("Fraction of the hour that has passed: ");
-    System.out.println(minute / 60.0);
+double minute = 59.0;
+System.out.print("Fraction of the hour that has passed: ");
+System.out.println(minute / 60.0);
 \end{code}
 
 The output is:
@@ -1363,13 +1363,13 @@ They belong to different data types, and strictly speaking, you are not allowed 
 The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
 
 \begin{code}
-    int x = 1.1;  // compiler error
+int x = 1.1;  // compiler error
 \end{code}
 
 It is easy to forget this rule because in many cases Java {\em automatically} converts from one type to another:
 
 \begin{code}
-    double y = 1;  // legal, but bad style
+double y = 1;  // legal, but bad style
 \end{code}
 
 The above example should be illegal, but Java allows it by converting the \java{int} value \java{1} to the \java{double} value \java{1.0} automatically.
@@ -1377,7 +1377,7 @@ This leniency is convenient, but it often causes problems for beginners.
 For example:
 
 \begin{code}
-    double y = 1 / 3;  // common mistake
+double y = 1 / 3;  // common mistake
 \end{code}
 
 \index{division!integer}
@@ -1392,7 +1392,7 @@ One way to solve this problem (once you figure out the bug) is to make the right
 The following sets \java{y} to \java{0.333333}, as expected:
 
 \begin{code}
-    double y = 1.0 / 3.0;  // correct
+double y = 1.0 / 3.0;  // correct
 \end{code}
 
 As a matter of style, you should always assign floating-point values to floating-point variables.
@@ -1422,9 +1422,9 @@ The difference between the number we want and the floating-point number we get i
 For example, the following two statements should be equivalent:
 
 \begin{code}
-    System.out.println(0.1 * 10);
-    System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
-                     + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
+System.out.println(0.1 * 10);
+System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
+                 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
 \end{code}
 
 But on many machines, the output is:
@@ -1443,7 +1443,7 @@ But if you need {\em absolute} precision, use integers instead.
 For example, consider a bank account with a balance of \$123.45:
 
 \begin{code}
-    double balance = 123.45;  // potential rounding error
+double balance = 123.45;  // potential rounding error
 \end{code}
 
 In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
@@ -1451,7 +1451,7 @@ The result would be angry customers and potential law suits.
 You can avoid the problem by representing the balance as an integer:
 
 \begin{code}
-    int balance = 12345;      // total number of cents
+int balance = 12345;      // total number of cents
 \end{code}
 
 \index{type!long}
@@ -1470,7 +1470,7 @@ In general, you cannot perform mathematical operations on strings, even if the s
 The following expressions are illegal:
 
 \begin{code}
-    "Hello" - 1     "World" / 123     "Hello" * "World"
+"Hello" - 1     "World" / 123     "Hello" * "World"
 \end{code}
 
 \index{concatenate}
@@ -1484,11 +1484,11 @@ Or if you have a variable called \java{name} that has type \java{String}, the ex
 Since addition is defined for both numbers and strings, Java performs automatic conversions you may not expect:
 
 \begin{code}
-    System.out.println(1 + 2 + "Hello");
-    // the output is 3Hello
+System.out.println(1 + 2 + "Hello");
+// the output is 3Hello
 
-    System.out.println("Hello" + 1 + 2);
-    // the output is Hello12
+System.out.println("Hello" + 1 + 2);
+// the output is Hello12
 \end{code}
 
 Java executes these operations from left to right.
@@ -1537,29 +1537,29 @@ For example, we know how to multiply numbers and we know how to display values.
 We can combine these operations into a single statement:
 
 \begin{code}
-    System.out.println(17 * 3);
+System.out.println(17 * 3);
 \end{code}
 
 Any arithmetic expression can be used inside a print statement.
 We've already seen one example:
 
 \begin{code}
-    System.out.println(hour * 60 + minute);
+System.out.println(hour * 60 + minute);
 \end{code}
 
 You can also put arbitrary expressions on the right side of an assignment:
 
 \begin{code}
-    int percentage;
-    percentage = (minute * 100) / 60;
+int percentage;
+percentage = (minute * 100) / 60;
 \end{code}
 
 The left side of an assignment must be a variable name, not an expression.
 That's because the left side indicates where the result will be stored, and expressions do not represent storage locations.
 
 \begin{code}
-    hour = minute + 1;  // correct
-    minute + 1 = hour;  // compiler error
+hour = minute + 1;  // correct
+minute + 1 = hour;  // compiler error
 \end{code}
 
 \index{readability}
@@ -1911,7 +1911,7 @@ It also provides \java{System.out}, which is a special value that provides metho
 In fact, we can use \java{System.out.println} to display the value of \java{System.out}:
 
 \begin{code}
-    System.out.println(System.out);
+System.out.println(System.out);
 \end{code}
 
 The result is:
@@ -1919,9 +1919,6 @@ The result is:
 \begin{stdout}
 java.io.PrintStream@685d72cd
 \end{stdout}
-
-%TODO: check consistency of indendation for code examples
-% (need to discuss: should we indent code but not output?)
 
 \index{package}
 
@@ -1990,7 +1987,7 @@ By convention, they are usually at the beginning of the file.
 Next you have to create a \java{Scanner}:
 
 \begin{code}
-    Scanner in = new Scanner(System.in);
+Scanner in = new Scanner(System.in);
 \end{code}
 
 This line declares a \java{Scanner} variable named \java{in} and creates a new \java{Scanner} that takes input from \java{System.in}.
@@ -2073,9 +2070,9 @@ We'll use a \java{Scanner} to input a measurement in inches, convert to centimet
 The following lines declare the variables and create the \java{Scanner}:
 
 \begin{code}
-    int inch;
-    double cm;
-    Scanner in = new Scanner(System.in);
+int inch;
+double cm;
+Scanner in = new Scanner(System.in);
 \end{code}
 
 The next step is to prompt the user for the input.
@@ -2083,16 +2080,16 @@ We'll use \java{print} instead of \java{println} so they can enter the input on 
 And we'll use the \java{Scanner} method \java{nextInt}, which reads input from the keyboard and converts it to an integer:
 
 \begin{code}
-    System.out.print("How many inches? ");
-    inch = in.nextInt();
+System.out.print("How many inches? ");
+inch = in.nextInt();
 \end{code}
 
 Next we multiply the number of inches by 2.54, since that's how many centimeters there are per inch, and display the results:
 
 \begin{code}
-    cm = inch * 2.54;
-    System.out.print(inch + " in = ");
-    System.out.println(cm + " cm");
+cm = inch * 2.54;
+System.out.print(inch + " in = ");
+System.out.println(cm + " cm");
 \end{code}
 
 This code works correctly, but it has a minor problem.
@@ -2115,8 +2112,8 @@ Values like that are sometimes called {\bf magic numbers} (with the implication 
 A good practice is to assign magic numbers to variables with meaningful names, like this:
 
 \begin{code}
-    double cmPerInch = 2.54;
-    cm = inch * cmPerInch;
+double cmPerInch = 2.54;
+cm = inch * cmPerInch;
 \end{code}
 
 This version is easier to read and less error-prone, but it still has a problem.
@@ -2125,7 +2122,7 @@ Once we assign a value to \java{cmPerInch}, it should never change.
 Java provides a language feature that enforces that rule, the keyword \java{final}.
 
 \begin{code}
-    final double CM_PER_INCH = 2.54;
+final double CM_PER_INCH = 2.54;
 \end{code}
 
 \index{constant}
@@ -2142,7 +2139,7 @@ By convention, names for constants are all uppercase, with the underscore charac
 When you output a \java{double} using \java{print} or \java{println}, it displays up to 16 decimal places:
 
 \begin{code}
-    System.out.print(4.0 / 3.0);
+System.out.print(4.0 / 3.0);
 \end{code}
 
 The result is:
@@ -2159,7 +2156,7 @@ The ``f'' in \java{printf} stands for ``formatted''.
 Here's an example:
 
 \begin{code}
-    System.out.printf("Four thirds = %.3f", 4.0 / 3.0);
+System.out.printf("Four thirds = %.3f", 4.0 / 3.0);
 \end{code}
 
 \index{format string}
@@ -2177,9 +2174,9 @@ Four thirds = 1.333
 The format string can contain any number of format specifiers; here's an example with two:
 
 \begin{code}
-    int inch = 100;
-    double cm = inch * CM_PER_INCH;
-    System.out.printf("%d in = %f cm\n", inch, cm);
+int inch = 100;
+double cm = inch * CM_PER_INCH;
+System.out.printf("%d in = %f cm\n", inch, cm);
 \end{code}
 
 The result is:
@@ -2228,7 +2225,7 @@ Now suppose we have a measurement in centimeters, and we want to round it off to
 It is tempting to write:
 
 \begin{code}
-    inch = cm / CM_PER_INCH;  // syntax error
+inch = cm / CM_PER_INCH;  // syntax error
 \end{code}
 
 But the result is an error -- you get something like, ``Bad types in assignment: from double to int.''
@@ -2245,8 +2242,8 @@ The simplest way to convert a floating-point value to an integer is to use a {\b
 The syntax for type casting is to put the name of the type in parentheses and use it as an operator.
 
 \begin{code}
-    double pi = 3.14159;
-    int x = (int) pi;
+double pi = 3.14159;
+int x = (int) pi;
 \end{code}
 
 The \java{(int)} operator has the effect of converting what follows into an integer.
@@ -2259,8 +2256,8 @@ In this example, the value of \java{pi} gets converted to an integer before the 
 So the result is 60.0, not 62.0.
 
 \begin{code}
-    double pi = 3.14159;
-    double x = (int) pi * 20.0;
+double pi = 3.14159;
+double x = (int) pi * 20.0;
 \end{code}
 
 %Operator precedence and integer truncation make type casting somewhat error-prone.
@@ -2268,8 +2265,8 @@ So the result is 60.0, not 62.0.
 Keeping that in mind, here's how we can convert a measurement in centimeters to inches.
 
 \begin{code}
-    inch = (int) (cm / CM_PER_INCH);
-    System.out.printf("%f cm = %d in\n", cent, inch);
+inch = (int) (cm / CM_PER_INCH);
+System.out.printf("%f cm = %d in\n", cent, inch);
 \end{code}
 
 The parentheses after the cast operator require the division to occur before the type cast.
@@ -2291,8 +2288,8 @@ Java also provides the {\bf modulus} operator (\java{\%}), which divides two num
 Using division and modulus, we can convert to feet and inches like this:
 
 \begin{code}
-    quotient = 76 / 12;   // division
-    remainder = 76 % 12;  // modulus
+quotient = 76 / 12;   // division
+remainder = 76 % 12;  // modulus
 \end{code}
 
 The first line yields 6.
@@ -2370,11 +2367,11 @@ Now that you've had some experience with \java{Scanner}, there is an unexpected 
 The following code fragment asks users for their name and age.
 
 \begin{code}
-    System.out.print("What is your name? ");
-    name = in.nextLine();
-    System.out.print("What is your age? ");
-    age = in.nextInt();
-    System.out.printf("Hello %s, age %d\n", name, age);
+System.out.print("What is your name? ");
+name = in.nextLine();
+System.out.print("What is your age? ");
+age = in.nextInt();
+System.out.printf("Hello %s, age %d\n", name, age);
 \end{code}
 
 The output might look something like this:
@@ -2387,11 +2384,11 @@ When you read a \java{String} followed by an \java{int}, everything works just f
 But when you read an \java{int} followed by a \java{String}, something strange happens.
 
 \begin{code}
-    System.out.print("What is your age? ");
-    age = in.nextInt();
-    System.out.print("What is your name? ");
-    name = in.nextLine();
-    System.out.printf("Hello %s, age %d\n", name, age);
+System.out.print("What is your age? ");
+age = in.nextInt();
+System.out.print("What is your name? ");
+name = in.nextLine();
+System.out.printf("Hello %s, age %d\n", name, age);
 \end{code}
 
 Try running the above example.
@@ -2431,12 +2428,12 @@ But since the next character is already a newline, \java{nextLine} returns the e
 To solve this problem, you need an extra \java{nextLine} after \java{nextInt}.
 
 \begin{code}
-    System.out.print("What is your age? ");
-    age = in.nextInt();
-    in.nextLine();  // read the newline
-    System.out.print("What is your name? ");
-    name = in.nextLine();
-    System.out.printf("Hello %s, age %d\n", name, age);
+System.out.print("What is your age? ");
+age = in.nextInt();
+in.nextLine();  // read the newline
+System.out.print("What is your name? ");
+name = in.nextLine();
+System.out.printf("Hello %s, age %d\n", name, age);
 \end{code}
 
 This technique is common when reading \java{int} or \java{double} values that appear on their own line.
@@ -2629,9 +2626,9 @@ The Java library includes a \java{Math} class that provides common mathematical 
 You can use, or {\bf invoke}, Math methods like this:
 
 \begin{code}
-    double root = Math.sqrt(17.0);
-    double angle = 1.5;
-    double height = Math.sin(angle);
+double root = Math.sqrt(17.0);
+double angle = 1.5;
+double height = Math.sin(angle);
 \end{code}
 
 The first line sets \java{root} to the square root of 17.
@@ -2646,8 +2643,8 @@ To convert from degrees to radians, you can divide by 180 and multiply by $\pi$.
 Conveniently, the \java{Math} class provides a constant double named \java{PI} that contains an approximation of $\pi$:
 
 \begin{code}
-    double degrees = 90;
-    double angle = degrees / 180.0 * Math.PI;
+double degrees = 90;
+double angle = degrees / 180.0 * Math.PI;
 \end{code}
 
 Notice that \java{PI} is in capital letters.
@@ -2658,8 +2655,8 @@ The same is true for the constant \java{Math.E}, which approximates Euler's numb
 Converting to and from radians is a common operation, so the \java{Math} class provides methods that do it for you.
 
 \begin{code}
-    double radians = Math.toRadians(180.0);
-    double degrees = Math.toDegrees(Math.PI);
+double radians = Math.toRadians(180.0);
+double degrees = Math.toDegrees(Math.PI);
 \end{code}
 
 \index{long}
@@ -2671,7 +2668,7 @@ More specifically, an \java{int} uses 32 bits; the largest value it can hold is 
 A \java{long} uses 64 bits, so the largest value is $2^{63}-1$, which is about 9 quintillion.
 
 \begin{code}
-    long x = Math.round(Math.PI * 20.0);
+long x = Math.round(Math.PI * 20.0);
 \end{code}
 
 The result is 63 (rounded up from 62.8319).
@@ -2689,14 +2686,14 @@ That means you can use one expression as part of another.
 For example, you can use any expression as an argument to a method:
 
 \begin{code}
-    double x = Math.cos(angle + Math.PI / 2.0);
+double x = Math.cos(angle + Math.PI / 2.0);
 \end{code}
 
 This statement divides \java{Math.PI} by two, adds the result to \java{angle}, and computes the cosine of the sum.
 You can also take the result of one method and pass it as an argument to another:
 
 \begin{code}
-    double x = Math.exp(Math.log(10.0));
+double x = Math.exp(Math.log(10.0));
 \end{code}
 
 In Java, the \java{log} method always uses base $e$.
@@ -2708,7 +2705,7 @@ For example, \java{Math.pow} takes two arguments and raises the first to the pow
 This line of code assigns the value \java{1024.0} to the variable \java{x}:
 
 \begin{code}
-    double x = Math.pow(2.0, 10.0);
+double x = Math.pow(2.0, 10.0);
 \end{code}
 
 When using \java{Math} methods, it is a common error to forget the \java{Math}.
@@ -2792,29 +2789,29 @@ Notice the extra space between the lines.
 If we wanted more space between them, we could invoke the same method repeatedly:
 
 \begin{code}
-    public static void main(String[] args) {
-        System.out.println("First line.");
-        newLine();
-        newLine();
-        newLine();
-        System.out.println("Second line.");
-    }
+public static void main(String[] args) {
+    System.out.println("First line.");
+    newLine();
+    newLine();
+    newLine();
+    System.out.println("Second line.");
+}
 \end{code}
 
 Or we could write a new method that displays three blank lines:
 
 \begin{code}
-    public static void threeLine() {
-        newLine();
-        newLine();
-        newLine();
-    }
+public static void threeLine() {
+    newLine();
+    newLine();
+    newLine();
+}
 
-    public static void main(String[] args) {
-        System.out.println("First line.");
-        threeLine();
-        System.out.println("Second line.");
-    }
+public static void main(String[] args) {
+    System.out.println("First line.");
+    threeLine();
+    System.out.println("Second line.");
+}
 \end{code}
 
 You can invoke the same method more than once, and you can have one method invoke another.
@@ -2936,15 +2933,15 @@ This process is called {\bf parameter passing} because the value gets passed fro
 An argument can be any kind of expression, so if you have a \java{String} variable, you can use it as an argument:
 
 \begin{code}
-    String argument = "Never say never.";
-    printTwice(argument);
+String argument = "Never say never.";
+printTwice(argument);
 \end{code}
 
 The value you provide as an argument must have the same type as the parameter.
 For example, if you try:
 
 \begin{code}
-    printTwice(17);  // syntax error
+printTwice(17);  // syntax error
 \end{code}
 
 You will get an error message like this:
@@ -2984,18 +2981,18 @@ Because variables only exist inside the methods where they are defined, they are
 Here is an example of a method that takes two parameters:
 
 \begin{code}
-    public static void printTime(int hour, int minute) {
-        System.out.print(hour);
-        System.out.print(":");
-        System.out.println(minute);
-    }
+public static void printTime(int hour, int minute) {
+    System.out.print(hour);
+    System.out.print(":");
+    System.out.println(minute);
+}
 \end{code}
 
 In the parameter list, it may be tempting to write:
 
 \begin{code}
-    public static void printTime(int hour, minute) {
-        ...
+public static void printTime(int hour, minute) {
+    ...
 \end{code}
 
 But that format (without the second \java{int}) is only legal for variable declarations.
@@ -3004,24 +3001,24 @@ In parameter lists, you need to specify the type of each variable separately.
 To invoke this method, we have to provide two integers as arguments:
 
 \begin{code}
-    int hour = 11;
-    int minute = 59;
-    printTime(hour, minute);
+int hour = 11;
+int minute = 59;
+printTime(hour, minute);
 \end{code}
 
 A common error is to declare the types of the arguments, like this:
 
 \begin{code}
-    int hour = 11;
-    int minute = 59;
-    printTime(int hour, int minute);  // syntax error
+int hour = 11;
+int minute = 59;
+printTime(int hour, int minute);  // syntax error
 \end{code}
 
 That's a syntax error; the compiler sees \java{int hour} and \java{int minute} as variable declarations, not expressions.
 You wouldn't declare the types of the arguments if they were simply integers:
 
 \begin{code}
-    printTime(int 11, int 59);  // syntax error
+printTime(int 11, int 59);  // syntax error
 \end{code}
 
 
@@ -3055,9 +3052,9 @@ Although they have the same names, these variables are not the same.
 For example, you could invoke \java{printTime} like this:
 
 \begin{code}
-        int hour = 11;
-        int minute = 59;
-        printTime(hour + 1, 0);
+int hour = 11;
+int minute = 59;
+printTime(hour + 1, 0);
 \end{code}
 
 Before the method is invoked, Java evaluates the arguments; in this example, the results are \java{12} and \java{0}.
@@ -3130,8 +3127,8 @@ A good way to get started with a new class is to paste the examples into a test 
 One of the examples shows how you can use a \java{Scanner} to read input from a \java{String} instead of \java{System.in}:
 
 \begin{code}
-    String input = "1 fish 2 fish red fish blue fish";
-    Scanner s = new Scanner(input);
+String input = "1 fish 2 fish red fish blue fish";
+Scanner s = new Scanner(input);
 \end{code}
 
 After the narrative, code examples, and some other details, you will find the following tables:
@@ -3332,27 +3329,27 @@ Be precise about where there are spaces and where there are newlines.
 \end{enumerate}
 
 \begin{code}
-    public static void zoop() {
-        baffle();
-        System.out.print("You wugga ");
-        baffle();
-    }
+public static void zoop() {
+    baffle();
+    System.out.print("You wugga ");
+    baffle();
+}
 
-    public static void main(String[] args) {
-        System.out.print("No, I ");
-        zoop();
-        System.out.print("I ");
-        baffle();
-    }
+public static void main(String[] args) {
+    System.out.print("No, I ");
+    zoop();
+    System.out.print("I ");
+    baffle();
+}
 
-    public static void baffle() {
-        System.out.print("wug");
-        ping();
-    }
+public static void baffle() {
+    System.out.print("wug");
+    ping();
+}
 
-    public static void ping() {
-        System.out.println(".");
-    }
+public static void ping() {
+    System.out.println(".");
+}
 \end{code}
 
 \end{exercise}
@@ -3441,12 +3438,12 @@ This chapter presents the features you need for programs to make decisions: a ne
 The following expressions show how they are used:
 
 \begin{code}
-    x == y          // x is equal to y
-    x != y          // x is not equal to y
-    x > y           // x is greater than y
-    x < y           // x is less than y
-    x >= y          // x is greater than or equal to y
-    x <= y          // x is less than or equal to y
+x == y          // x is equal to y
+x != y          // x is not equal to y
+x > y           // x is greater than y
+x < y           // x is less than y
+x >= y          // x is greater than or equal to y
+x <= y          // x is less than or equal to y
 \end{code}
 
 The result of a relational operator is one of two special values, \java{true} or \java{false}.
@@ -3468,9 +3465,9 @@ We'll explain what they do later; in the meantime, don't use them with strings.
 Instead, you should use the \java{equals} method:
 
 \begin{code}
-    String fruit1 = "Apple";
-    String fruit2 = "Orange";
-    System.out.println(fruit1.equals(fruit2));
+String fruit1 = "Apple";
+String fruit2 = "Orange";
+System.out.println(fruit1.equals(fruit2));
 \end{code}
 
 The result of \java{fruit1.equals(fruit2)} is the boolean value \java{false}.
@@ -3534,9 +3531,9 @@ To write useful programs, we almost always need to check conditions and react ac
 The simplest conditional statement in Java is the \java{if} statement:
 
 \begin{code}
-    if (x > 0) {
-        System.out.println("x is positive");
-    }
+if (x > 0) {
+    System.out.println("x is positive");
+}
 \end{code}
 
 The expression in parentheses is called the condition.
@@ -3551,11 +3548,11 @@ A second form of conditional statement has two possibilities, indicated by \java
 The possibilities are called {\bf branches}, and the condition determines which one gets executed:
 
 \begin{code}
-    if (x % 2 == 0) {
-        System.out.println("x is even");
-    } else {
-        System.out.println("x is odd");
-    }
+if (x % 2 == 0) {
+    System.out.println("x is even");
+} else {
+    System.out.println("x is odd");
+}
 \end{code}
 
 If the remainder when \java{x} is divided by 2 is zero, we know that \java{x} is even, and this fragment displays a message to that effect.
@@ -3566,18 +3563,18 @@ The braces are optional for branches that have only one statement.
 So we could have written the previous example this way:
 
 \begin{code}
-    if (x % 2 == 0)
-        System.out.println("x is even");
-    else
-        System.out.println("x is odd");
+if (x % 2 == 0)
+    System.out.println("x is even");
+else
+    System.out.println("x is odd");
 \end{code}
 
 However, it's better to use braces -- even when they are optional -- to avoid making the mistake of adding statements to an \java{if} or \java{else} block and forgetting to add the braces.
 
 \begin{code}
-    if (x > 0)
-        System.out.println("x is positive");
-        System.out.println("x is not zero");
+if (x > 0)
+    System.out.println("x is positive");
+    System.out.println("x is not zero");
 \end{code}
 
 This code is misleading because it's not indented correctly.
@@ -3585,10 +3582,10 @@ Since there are no braces, only the first \java{println} is part of the \java{if
 Here is what the compiler actually sees:
 
 \begin{code}
-    if (x > 0) {
-        System.out.println("x is positive");
-    }
-        System.out.println("x is not zero");
+if (x > 0) {
+    System.out.println("x is positive");
+}
+    System.out.println("x is not zero");
 \end{code}
 
 As a result, the second \java{println} runs no matter what.
@@ -3604,13 +3601,13 @@ Sometimes you want to check related conditions and choose one of several actions
 One way to do this is by {\bf chaining} a series of \java{if} and \java{else} statements:
 
 \begin{code}
-    if (x > 0) {
-        System.out.println("x is positive");
-    } else if (x < 0) {
-        System.out.println("x is negative");
-    } else {
-        System.out.println("x is zero");
-    }
+if (x > 0) {
+    System.out.println("x is positive");
+} else if (x < 0) {
+    System.out.println("x is negative");
+} else {
+    System.out.println("x is zero");
+}
 \end{code}
 
 These chains can be as long as you want, although they can be difficult to read if they get out of hand.
@@ -3624,15 +3621,15 @@ In addition to chaining, you can also make complex decisions by {\bf nesting} on
 We could have written the previous example as:
 
 \begin{code}
-    if (x == 0) {
-        System.out.println("x is zero");
+if (x == 0) {
+    System.out.println("x is zero");
+} else {
+    if (x > 0) {
+        System.out.println("x is positive");
     } else {
-        if (x > 0) {
-            System.out.println("x is positive");
-        } else {
-            System.out.println("x is negative");
-        }
+        System.out.println("x is negative");
     }
+}
 \end{code}
 
 The outer conditional has two branches.
@@ -3651,9 +3648,9 @@ To store a \java{true} or \java{false} value, you need a \java{boolean} variable
 You can create one like this:
 
 \begin{code}
-    boolean flag;
-    flag = true;
-    boolean testResult = false;
+boolean flag;
+flag = true;
+boolean testResult = false;
 \end{code}
 
 \index{initialization}
@@ -3663,8 +3660,8 @@ The first line is a variable declaration, the second is an assignment, and the t
 Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
 
 \begin{code}
-    boolean evenFlag = (n % 2 == 0);    // true if n is even
-    boolean positiveFlag = (x > 0);     // true if x is positive
+boolean evenFlag = (n % 2 == 0);    // true if n is even
+boolean positiveFlag = (x > 0);     // true if x is positive
 \end{code}
 
 The parentheses are unnecessary, but they make the code easier to read.
@@ -3673,9 +3670,9 @@ A variable defined in this way is called a {\bf flag}, because it signals or ``f
 You can use flag variables as part of a conditional statement later:
 
 \begin{code}
-    if (evenFlag) {
-        System.out.println("n was even when I checked it");
-    }
+if (evenFlag) {
+    System.out.println("n was even when I checked it");
+}
 \end{code}
 
 Notice that you don't have to write \java{if (evenFlag == true)}.
@@ -3683,9 +3680,9 @@ Since \java{evenFlag} is a \java{boolean}, it's already a condition.
 Likewise, to check if a flag is \java{false}:
 
 \begin{code}
-    if (!evenFlag) {
-        System.out.println("n was odd when I checked it");
-    }
+if (!evenFlag) {
+    System.out.println("n was odd when I checked it");
+}
 \end{code}
 
 
@@ -3698,14 +3695,14 @@ The \java{return} statement allows you to terminate a method before you reach th
 One reason to use \java{return} is if you detect an error condition:
 
 \begin{code}
-    public static void printLogarithm(double x) {
-        if (x <= 0.0) {
-            System.err.println("Error: x must be positive.");
-            return;
-        }
-        double result = Math.log(x);
-        System.out.println("The log of x is " + result);
+public static void printLogarithm(double x) {
+    if (x <= 0.0) {
+        System.err.println("Error: x must be positive.");
+        return;
     }
+    double result = Math.log(x);
+    System.out.println("The log of x is " + result);
+}
 \end{code}
 
 This example defines a method named \java{printLogarithm} that takes a \java{double} value (named \java{x}) as a parameter.
@@ -3723,12 +3720,12 @@ Some development environments display output to \java{System.err} with a differe
 Here is a method that uses \java{printLogarithm} from the previous section:
 
 \begin{code}
-    public static void scanDouble() {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Enter a number: ");
-        double x = in.nextDouble();
-        printLogarithm(x);
-    }
+public static void scanDouble() {
+    Scanner in = new Scanner(System.in);
+    System.out.print("Enter a number: ");
+    double x = in.nextDouble();
+    printLogarithm(x);
+}
 \end{code}
 
 This example uses \java{nextDouble}, so the \java{Scanner} tries to read a \java{double}.
@@ -3741,17 +3738,17 @@ But if the user types anything else, the \java{Scanner} throws an \java{InputMis
 We can prevent this error by checking the input before parsing it:
 
 \begin{code}
-    public static void scanDouble() {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Enter a number: ");
-        if (!in.hasNextDouble()) {
-            String word = in.next();
-            System.err.println(word + " is not a number");
-            return;
-        }
-        double x = in.nextDouble();
-        printLogarithm(x);
+public static void scanDouble() {
+    Scanner in = new Scanner(System.in);
+    System.out.print("Enter a number: ");
+    if (!in.hasNextDouble()) {
+        String word = in.next();
+        System.err.println(word + " is not a number");
+        return;
     }
+    double x = in.nextDouble();
+    printLogarithm(x);
+}
 \end{code}
 
 The \java{Scanner} class provides \java{hasNextDouble}, which checks whether the next token in the input stream can be interpreted as a \java{double}.
@@ -3772,14 +3769,14 @@ Now that we have conditional statements, we can explore one of the most magical 
 Consider the following example:
 
 \begin{code}
-    public static void countdown(int n) {
-        if (n == 0) {
-            System.out.println("Blastoff!");
-        } else {
-            System.out.println(n);
-            countdown(n - 1);
-        }
+public static void countdown(int n) {
+    if (n == 0) {
+        System.out.println("Blastoff!");
+    } else {
+        System.out.println(n);
+        countdown(n - 1);
     }
+}
 \end{code}
 
 The name of the method is \java{countdown}; it takes a single integer as a parameter.
@@ -3820,15 +3817,15 @@ Blastoff!
 As a second example, we'll rewrite the methods \java{newLine} and \java{threeLine} from Section~\ref{adding_methods}.
 
 \begin{code}
-    public static void newLine() {
-        System.out.println();
-    }
+public static void newLine() {
+    System.out.println();
+}
 
-    public static void threeLine() {
-        newLine();
-        newLine();
-        newLine();
-    }
+public static void threeLine() {
+    newLine();
+    newLine();
+    newLine();
+}
 \end{code}
 
 \index{newline}
@@ -3837,12 +3834,12 @@ Although these methods work, they would not help if we wanted to display two new
 A better alternative would be:
 
 \begin{code}
-    public static void nLines(int n) {
-        if (n > 0) {
-            System.out.println();
-            nLines(n - 1);
-        }
+public static void nLines(int n) {
+    if (n > 0) {
+        System.out.println();
+        nLines(n - 1);
     }
+}
 \end{code}
 
 This method takes an integer, \java{n}, as a parameter and displays \java{n} newlines.
@@ -3884,10 +3881,10 @@ In practice, the size of the stack is limited; if you exceed the limit, you get 
 For example, here is a recursive method without a base case:
 
 \begin{code}
-    public static void forever(String s) {
-        System.out.println(s);
-        forever(s);
-    }
+public static void forever(String s) {
+    System.out.println(s);
+    forever(s);
+}
 \end{code}
 
 \index{call stack}
@@ -3902,14 +3899,14 @@ The \java{countdown} example has three parts: (1) it checks the base case, (2) d
 What do you think happens if you reverse steps 2 and 3, making the recursive call {\it before} displaying?
 
 \begin{code}
-    public static void countup(int n) {
-        if (n == 0) {
-            System.out.println("Blastoff!");
-        } else {
-            countup(n - 1);
-            System.out.println(n);
-        }
+public static void countup(int n) {
+    if (n == 0) {
+        System.out.println("Blastoff!");
+    } else {
+        countup(n - 1);
+        System.out.println(n);
     }
+}
 \end{code}
 
 The stack diagram is the same as before, and the method is still called $n$ times.
@@ -3941,12 +3938,12 @@ Reading these remainders from bottom to top, 23 in binary is 10111.
 Here is a recursive method that displays the binary representation of any positive integer:
 
 \begin{code}
-    public static void displayBinary(int value) {
-        if (value > 0) {
-            displayBinary(value / 2);
-            System.out.print(value % 2);
-        }
+public static void displayBinary(int value) {
+    if (value > 0) {
+        displayBinary(value / 2);
+        System.out.print(value % 2);
     }
+}
 \end{code}
 
 If \java{value} is zero, \java{displayBinary} does nothing (that's the base case).
@@ -3958,9 +3955,9 @@ The rightmost digit, at the top of the stack, gets displayed last.
 After invoking \java{displayBinary}, we use \java{println} to complete the output.
 
 \begin{code}
-    displayBinary(23);
-    System.out.println();
-    // output is 10111
+displayBinary(23);
+System.out.println();
+// output is 10111
 \end{code}
 
 Learning to think recursively is an important aspect of learning to think like a computer scientist.
@@ -4035,11 +4032,11 @@ Logical operators can simplify nested conditional statements.
 For example, can you rewrite this code using a single \java{if} statement?
 
 \begin{code}
-    if (x > 0) {
-        if (x < 10) {
-            System.out.println("positive single digit number.");
-        }
+if (x > 0) {
+    if (x < 10) {
+        System.out.println("positive single digit number.");
     }
+}
 \end{code}
 
 \end{exercise}
@@ -4057,32 +4054,32 @@ For the following program:
 \end{enumerate}
 
 \begin{code}
-    public static void zoop(String fred, int bob) {
-        System.out.println(fred);
-        if (bob == 5) {
-            ping("not ");
-        } else {
-            System.out.println("!");
-        }
+public static void zoop(String fred, int bob) {
+    System.out.println(fred);
+    if (bob == 5) {
+        ping("not ");
+    } else {
+        System.out.println("!");
     }
+}
 
-    public static void main(String[] args) {
-        int bizz = 5;
-        int buzz = 2;
-        zoop("just for", bizz);
-        clink(2 * buzz);
-    }
+public static void main(String[] args) {
+    int bizz = 5;
+    int buzz = 2;
+    zoop("just for", bizz);
+    clink(2 * buzz);
+}
 \end{code}
 
 \begin{code}
-    public static void clink(int fork) {
-        System.out.print("It's ");
-        zoop("breakfast ", fork) ;
-    }
+public static void clink(int fork) {
+    System.out.print("It's ");
+    zoop("breakfast ", fork) ;
+}
 
-    public static void ping(String strangStrung) {
-        System.out.println("any " + strangStrung + "more ");
-    }
+public static void ping(String strangStrung) {
+    System.out.println("any " + strangStrung + "more ");
+}
 \end{code}
 \end{exercise}
 
@@ -4217,29 +4214,29 @@ When you invoke a \java{void} method, the invocation is usually on a line all by
 For example, here is the \java{countup} method from Section~\ref{recursion}:
 
 \begin{code}
-    public static void countup(int n) {
-        if (n == 0) {
-            System.out.println("Blastoff!");
-        } else {
-            countup(n - 1);
-            System.out.println(n);
-        }
+public static void countup(int n) {
+    if (n == 0) {
+        System.out.println("Blastoff!");
+    } else {
+        countup(n - 1);
+        System.out.println(n);
     }
+}
 \end{code}
 
 And here is how it is invoked:
 
 \begin{code}
-    countup(3);
-    System.out.println("Have a nice day.");
+countup(3);
+System.out.println("Have a nice day.");
 \end{code}
 
 On the other hand, when you invoke a value method, you have to do something with the return value.
 We usually assign it to a variable or use it as part of an expression, like this:
 
 \begin{code}
-    double error = Math.abs(expected - actual);
-    double height = radius * Math.sin(angle);
+double error = Math.abs(expected - actual);
+double height = radius * Math.sin(angle);
 \end{code}
 
 \index{value method}
@@ -4261,10 +4258,10 @@ Compared to void methods, value methods differ in two ways:
 Here's an example: \java{calculateArea} takes a \java{double} as a parameter and returns the area of a circle with that radius:
 
 \begin{code}
-    public static double calculateArea(double radius) {
-        double result = Math.PI * radius * radius;
-        return result;
-    }
+public static double calculateArea(double radius) {
+    double result = Math.PI * radius * radius;
+    return result;
+}
 \end{code}
 
 As usual, this method is \java{public} and \java{static}.
@@ -4278,9 +4275,9 @@ This statement means, ``return immediately from this method and use the followin
 The expression you provide can be arbitrarily complex, so we could have written this method more concisely:
 
 \begin{code}
-    public static double calculateArea(double radius) {
-        return Math.PI * radius * radius;
-    }
+public static double calculateArea(double radius) {
+    return Math.PI * radius * radius;
+}
 \end{code}
 
 \index{temporary variable}
@@ -4295,13 +4292,13 @@ If you try to \java{return} with no expression, or an expression with the wrong 
 Sometimes it is useful to have multiple return statements, for example, one in each branch of a conditional:
 
 \begin{code}
-    public static double absoluteValue(double x) {
-        if (x < 0) {
-            return -x;
-        } else {
-            return x;
-        }
+public static double absoluteValue(double x) {
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
     }
+}
 \end{code}
 
 Since these \java{return} statements are in a conditional statement, only one will be executed.
@@ -4314,14 +4311,14 @@ The compiler will give you an ``unreachable statement'' error if part of your co
 For example, this method contains dead code:
 
 \begin{code}
-    public static double absoluteValue(double x) {
-        if (x < 0) {
-            return -x;
-        } else {
-            return x;
-        }
-        System.out.println("This line is dead.");
+public static double absoluteValue(double x) {
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
     }
+    System.out.println("This line is dead.");
+}
 \end{code}
 
 If you put \java{return} statements inside a conditional statement, you have to make sure that {\em every possible path} through the program reaches a \java{return} statement.
@@ -4329,14 +4326,14 @@ The compiler will let you know if that's not the case.
 For example, the following method is incomplete:
 
 \begin{code}
-    public static double absoluteValue(double x) {
-        if (x < 0) {
-            return -x;
-        } else if (x > 0) {
-            return x;
-        }
-        // syntax error
+public static double absoluteValue(double x) {
+    if (x < 0) {
+        return -x;
+    } else if (x > 0) {
+        return x;
     }
+    // syntax error
+}
 \end{code}
 
 When \java{x} is 0, neither condition is true, so the method ends without hitting a return statement.
@@ -4383,10 +4380,10 @@ Already we can write an outline for the method, which is sometimes called a {\bf
 The stub includes the method signature and a \java{return} statement:
 
 \begin{code}
-    public static double distance
-            (double x1, double y1, double x2, double y2) {
-        return 0.0;
-    }
+public static double distance
+        (double x1, double y1, double x2, double y2) {
+    return 0.0;
+}
 \end{code}
 
 The return statement is a placeholder that is necessary for the program to compile.
@@ -4396,7 +4393,7 @@ It's usually a good idea to think about testing {\it before} you develop new met
 To test the method, we can invoke it from \java{main} using sample values:
 
 \begin{code}
-    double dist = distance(1.0, 2.0, 4.0, 6.0);
+double dist = distance(1.0, 2.0, 4.0, 6.0);
 \end{code}
 
 With these values, the horizontal distance is 3.0 and the vertical distance is 4.0.
@@ -4411,14 +4408,14 @@ The next step is to find the differences $x_2 - x_1$ and $y_2 - y_1$.
 We store those values in temporary variables named \java{dx} and \java{dy}.
 
 \begin{code}
-    public static double distance
-            (double x1, double y1, double x2, double y2) {
-        double dx = x2 - x1;
-        double dy = y2 - y1;
-        System.out.println("dx is " + dx);
-        System.out.println("dy is " + dy);
-        return 0.0;
-    }
+public static double distance
+        (double x1, double y1, double x2, double y2) {
+    double dx = x2 - x1;
+    double dy = y2 - y1;
+    System.out.println("dx is " + dx);
+    System.out.println("dy is " + dy);
+    return 0.0;
+}
 \end{code}
 
 \index{scaffolding}
@@ -4432,28 +4429,28 @@ The next step is to square \java{dx} and \java{dy}.
 We could use the \java{Math.pow} method, but it is simpler to multiply each term by itself.
 
 \begin{code}
-    public static double distance
-            (double x1, double y1, double x2, double y2) {
-        double dx = x2 - x1;
-        double dy = y2 - y1;
-        double dsquared = dx * dx + dy * dy;
-        System.out.println("dsquared is " + dsquared);
-        return 0.0;
-    }
+public static double distance
+        (double x1, double y1, double x2, double y2) {
+    double dx = x2 - x1;
+    double dy = y2 - y1;
+    double dsquared = dx * dx + dy * dy;
+    System.out.println("dsquared is " + dsquared);
+    return 0.0;
+}
 \end{code}
 
 Again, you should compile and run the program at this stage and check the intermediate value, which should be 25.0.
 Finally, we can use \java{Math.sqrt} to compute and return the result.
 
 \begin{code}
-    public static double distance
-            (double x1, double y1, double x2, double y2) {
-        double dx = x2 - x1;
-        double dy = y2 - y1;
-        double dsquared = dx * dx + dy * dy;
-        double result = Math.sqrt(dsquared);
-        return result;
-    }
+public static double distance
+        (double x1, double y1, double x2, double y2) {
+    double dx = x2 - x1;
+    double dy = y2 - y1;
+    double dsquared = dx * dx + dy * dy;
+    double result = Math.sqrt(dsquared);
+    return result;
+}
 \end{code}
 
 %In \java{main}, we can print and check the value of the result.
@@ -4474,35 +4471,35 @@ The first step is to find the radius of the circle, which is the distance betwee
 Fortunately, we have a method that does just that (\java{distance}).
 
 \begin{code}
-    double radius = distance(xc, yc, xp, yp);
+double radius = distance(xc, yc, xp, yp);
 \end{code}
 
 The second step is to find the area of a circle with that radius.
 We have a method for that computation too (\java{calculateArea}).
 
 \begin{code}
-    double area = calculateArea(radius);
-    return area;
+double area = calculateArea(radius);
+return area;
 \end{code}
 
 Putting everything together in a new method, we get:
 
 \begin{code}
-    public static double circleArea
-            (double xc, double yc, double xp, double yp) {
-        double radius = distance(xc, yc, xp, yp);
-        double area = calculateArea(radius);
-        return area;
-    }
+public static double circleArea
+        (double xc, double yc, double xp, double yp) {
+    double radius = distance(xc, yc, xp, yp);
+    double area = calculateArea(radius);
+    return area;
+}
 \end{code}
 
 The temporary variables \java{radius} and \java{area} are useful for development and debugging, but once the program is working we can make it more concise by composing the method calls:
 
 \begin{code}
-    public static double circleArea
-            (double xc, double yc, double xp, double yp) {
-        return calculateArea(distance(xc, yc, xp, yp));
-    }
+public static double circleArea
+        (double xc, double yc, double xp, double yp) {
+    return calculateArea(distance(xc, yc, xp, yp));
+}
 \end{code}
 
 \index{functional decomposition}
@@ -4529,10 +4526,10 @@ Having more than one method with the same name is called {\bf overloading}, and 
 So we could rename \java{circleArea} to \java{calculateArea}:
 
 \begin{code}
-    public static double calculateArea
-            (double xc, double yc, double xp, double yp) {
-        return calculateArea(distance(xc, yc, xp, yp));
-    }
+public static double calculateArea
+        (double xc, double yc, double xp, double yp) {
+    return calculateArea(distance(xc, yc, xp, yp));
+}
 \end{code}
 
 Note that this new \java{calculateArea} method is {\em not} recursive.
@@ -4540,14 +4537,14 @@ When you invoke an overloaded method, Java knows which version you want by looki
 If you write:
 
 \begin{code}
-    double x = calculateArea(3.0);
+double x = calculateArea(3.0);
 \end{code}
 
 Java looks for a method named \java{calculateArea} that takes one \java{double} as an argument, and so it uses the first version, which interprets the argument as a radius.
 If you write:
 
 \begin{code}
-    double y = calculateArea(1.0, 2.0, 4.0, 6.0);
+double y = calculateArea(1.0, 2.0, 4.0, 6.0);
 \end{code}
 
 Java uses the second version of \java{calculateArea}, which interprets the arguments as two points.
@@ -4571,13 +4568,13 @@ Methods can return \java{boolean} values, just like any other type, which is oft
 For example:
 
 \begin{code}
-    public static boolean isSingleDigit(int x) {
-        if (x > -10 && x < 10) {
-            return true;
-        } else {
-            return false;
-        }
+public static boolean isSingleDigit(int x) {
+    if (x > -10 && x < 10) {
+        return true;
+    } else {
+        return false;
     }
+}
 \end{code}
 
 The name of this method is \java{isSingleDigit}.
@@ -4588,16 +4585,16 @@ The code itself is straightforward, although it is longer than it needs to be.
 Remember that the expression \java{x > -10 \&\& x < 10} has type \java{boolean}, so there is nothing wrong with returning it directly (without the \java{if} statement):
 
 \begin{code}
-    public static boolean isSingleDigit(int x) {
-        return x > -10 && x < 10;
-    }
+public static boolean isSingleDigit(int x) {
+    return x > -10 && x < 10;
+}
 \end{code}
 
 In \java{main}, you can invoke the method in the usual ways:
 
 \begin{code}
-    System.out.println(isSingleDigit(2));
-    boolean bigFlag = !isSingleDigit(17);
+System.out.println(isSingleDigit(2));
+boolean bigFlag = !isSingleDigit(17);
 \end{code}
 
 The first line displays \java{true} because 2 is a single-digit number.
@@ -4606,11 +4603,11 @@ The second line sets \java{bigFlag} to \java{true}, because 17 is {\em not} a si
 Conditional statements often invoke \java{boolean} methods and use the result as the condition:
 
 \begin{code}
-    if (isSingleDigit(z)) {
-        System.out.println("z is small");
-    } else {
-        System.out.println("z is big");
-    }
+if (isSingleDigit(z)) {
+    System.out.println("z is small");
+} else {
+    System.out.println("z is big");
+}
 \end{code}
 
 Examples like this one almost read like English: ``If is single digit z, print ... else print ...''
@@ -4631,13 +4628,13 @@ To organize the documentation into sections, Javadoc supports optional {\bf tags
 For example, we can use \java{@param} and \java{@return} to provide additional information about parameters and return values.
 
 \begin{code}
-    /**
-     * Tests whether x is a single digit integer.
-     * 
-     * @param x the integer to test
-     * @return true if x has one digit, false otherwise
-     */
-    public static boolean isSingleDigit(int x) {
+/**
+ * Tests whether x is a single digit integer.
+ *
+ * @param x the integer to test
+ * @return true if x has one digit, false otherwise
+ */
+public static boolean isSingleDigit(int x) {
 \end{code}
 
 Figure~\ref{fig.javadoc} shows part of the resulting HTML page generated by Javadoc.
@@ -4703,34 +4700,34 @@ Since factorial is defined for integers, the method takes an \java{int} as a par
 So here's a good starting place:
 
 \begin{code}
-    public static int factorial(int n) {
-        return 0;
-    }
+public static int factorial(int n) {
+    return 0;
+}
 \end{code}
 
 Next, we think about the base case.
 If the argument happens to be zero, we return 1.
 
 \begin{code}
-    public static int factorial(int n) {
-        if (n == 0) {
-            return 1;
-        }
-        return 0;
+public static int factorial(int n) {
+    if (n == 0) {
+        return 1;
     }
+    return 0;
+}
 \end{code}
 
 Otherwise, and this is the interesting part, we have to make a recursive call to find the factorial of $n-1$, and then multiply it by $n$.
 
 \begin{code}
-    public static int factorial(int n) {
-        if (n == 0) {
-            return 1;
-        }
-        int recurse = factorial(n - 1);
-        int result = n * recurse;
-        return result;
+public static int factorial(int n) {
+    if (n == 0) {
+        return 1;
     }
+    int recurse = factorial(n - 1);
+    int result = n * recurse;
+    return result;
+}
 \end{code}
 
 The flow of execution for this program is similar to \java{countdown} from Section~\ref{recursion}.
@@ -4812,12 +4809,12 @@ Another common recursively-defined mathematical function is the Fibonacci sequen
 Translated into Java, this function is:
 
 \begin{code}
-    public static int fibonacci(int n) {
-        if (n == 1 || n == 2) {
-            return 1;
-        }
-        return fibonacci(n - 1) + fibonacci(n - 2);
+public static int fibonacci(int n) {
+    if (n == 1 || n == 2) {
+        return 1;
     }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
 \end{code}
 
 If you try to follow the flow of execution here, even for small values of \java{n}, your head will explode.
@@ -4978,40 +4975,40 @@ One of the purposes of this exercise is to practice pattern-matching: the abilit
 What is the output of the following program?
 
 \begin{code}
-    public static void main(String[] args) {
-        boolean flag1 = isHoopy(202);
-        boolean flag2 = isFrabjuous(202);
-        System.out.println(flag1);
-        System.out.println(flag2);
-        if (flag1 && flag2) {
-            System.out.println("ping!");
-        }
-        if (flag1 || flag2) {
-            System.out.println("pong!");
-        }
+public static void main(String[] args) {
+    boolean flag1 = isHoopy(202);
+    boolean flag2 = isFrabjuous(202);
+    System.out.println(flag1);
+    System.out.println(flag2);
+    if (flag1 && flag2) {
+        System.out.println("ping!");
     }
+    if (flag1 || flag2) {
+        System.out.println("pong!");
+    }
+}
 \end{code}
 
 \begin{code}
-    public static boolean isHoopy(int x) {
-        boolean hoopyFlag;
-        if (x % 2 == 0) {
-            hoopyFlag = true;
-        } else {
-            hoopyFlag = false;
-        }
-        return hoopyFlag;
+public static boolean isHoopy(int x) {
+    boolean hoopyFlag;
+    if (x % 2 == 0) {
+        hoopyFlag = true;
+    } else {
+        hoopyFlag = false;
     }
-    
-    public static boolean isFrabjuous(int x) {
-        boolean frabjuousFlag;
-        if (x > 0) {
-            frabjuousFlag = true;
-        } else {
-            frabjuousFlag = false;
-        }
-        return frabjuousFlag;
+    return hoopyFlag;
+}
+
+public static boolean isFrabjuous(int x) {
+    boolean frabjuousFlag;
+    if (x > 0) {
+        frabjuousFlag = true;
+    } else {
+        frabjuousFlag = false;
     }
+    return frabjuousFlag;
+}
 \end{code}
 
 The purpose of this exercise is to make sure you understand logical operators and the flow of execution through value methods.
@@ -5024,19 +5021,19 @@ The purpose of this exercise is to make sure you understand logical operators an
 In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
 
 \begin{code}
-    public static void main(String[] args) {
-        System.out.println(prod(1, 4));
-    }
+public static void main(String[] args) {
+    System.out.println(prod(1, 4));
+}
 
-    public static int prod(int m, int n) {
-        if (m == n) {
-            return n;
-        } else {
-            int recurse = prod(m, n-1);
-            int result = n * recurse;
-            return result;
-        }
+public static int prod(int m, int n) {
+    if (m == n) {
+        return n;
+    } else {
+        int recurse = prod(m, n-1);
+        int result = n * recurse;
+        return result;
     }
+}
 \end{code}
 
 \begin{enumerate}
@@ -5858,15 +5855,15 @@ Syntactically, array types look like other Java types except they are followed b
 For example, the following lines declare that \java{counts} is an ``integer array'' and \java{values} is a ``double array'':
 
 \begin{code}
-    int[] counts;
-    double[] values;
+int[] counts;
+double[] values;
 \end{code}
 
 To create the array itself, you have to use the \java{new} operator, which we saw in Section~\ref{scanner}:
 
 \begin{code}
-    counts = new int[4];
-    values = new double[size];
+counts = new int[4];
+values = new double[size];
 \end{code}
 
 The first assignment makes \java{count} refer to an array of 4 integers.
@@ -5876,13 +5873,12 @@ You can use any integer expression for the size of an array.
 Of course, you can also declare the variable and create the array in a single line of code:
 
 \begin{code}
-    int[] counts = new int[4];
-    double[] values = new double[size];
+int[] counts = new int[4];
+double[] values = new double[size];
 \end{code}
 
 
 %TODO: DW suggests we explain about empty array (size must be positive or zero)
-
 
 \section{Accessing elements}
 
@@ -5915,16 +5911,16 @@ Notice that the index of the first element is 0, not 1, as you might have expect
 The \java{[]} operator selects elements from an array:
 
 \begin{code}
-    System.out.println("The zeroth element is " + counts[0]);
+System.out.println("The zeroth element is " + counts[0]);
 \end{code}
 
 You can use the \java{[]} operator anywhere in an expression:
 
 \begin{code}
-    counts[0] = 7;
-    counts[1] = counts[0] * 2;
-    counts[2]++;
-    counts[3] -= 60;
+counts[0] = 7;
+counts[1] = counts[0] * 2;
+counts[2]++;
+counts[3] -= 60;
 \end{code}
 
 Figure~\ref{fig.array2} shows the result of these statements.
@@ -5945,11 +5941,11 @@ One of the most common ways to index an array is with a loop variable.
 For example:
 
 \begin{code}
-    int i = 0;
-    while (i < 4) {
-        System.out.println(counts[i]);
-        i++;
-    }
+int i = 0;
+while (i < 4) {
+    System.out.println(counts[i]);
+    i++;
+}
 \end{code}
 
 \index{loop}
@@ -5964,9 +5960,9 @@ Each time through the loop we use \java{i} as an index into the array, displayin
 This type of array traversal is often written using a \java{for} loop.
 
 \begin{code}
-    for (int i = 0; i < 4; i++) {
-        System.out.println(counts[i]);
-    }
+for (int i = 0; i < 4; i++) {
+    System.out.println(counts[i]);
+}
 \end{code}
 
 For this array, the only legal indexes are 0, 1, 2, and 3.
@@ -5983,8 +5979,8 @@ You can use \java{println} to display an array, but it probably doesn't do what 
 For example, the following fragment creates an array variable, \java{a}, makes it refer to an array of four elements, and displays it:
 
 \begin{code}
-    int[] a = {1, 2, 3, 4};
-    System.out.println(a);
+int[] a = {1, 2, 3, 4};
+System.out.println(a);
 \end{code}
 
 Unfortunately, the output is:
@@ -5997,13 +5993,13 @@ The bracket indicates that the value is an array, \java{I} stands for ``integer'
 If we want to display the elements of the array, we can do it ourselves:
 
 \begin{code}
-    public static void printArray(int[] a) {
-        System.out.print("{" + a[0]);
-        for (int i = 1; i < a.length; i++) {
-            System.out.print(", " + a[i]);
-        }
-        System.out.println("}");
+public static void printArray(int[] a) {
+    System.out.print("{" + a[0]);
+    for (int i = 1; i < a.length; i++) {
+        System.out.print(", " + a[i]);
     }
+    System.out.println("}");
+}
 \end{code}
 
 The output of this method is:
@@ -6019,7 +6015,7 @@ One of them, \java{toString}, returns a string representation of the array.
 We can invoke it like this:
 
 \begin{code}
-    System.out.println(Arrays.toString(a));
+System.out.println(Arrays.toString(a));
 \end{code}
 
 And the output is:
@@ -6040,8 +6036,8 @@ When you make an assignment to an array variable, it copies the reference, but i
 For example:
 
 \begin{code}
-    double[] a = new double[3];
-    double[] b = a;
+double[] a = new double[3];
+double[] b = a;
 \end{code}
 
 These statements create an array of three \java{double}s and makes two different variables refer to it, as shown in Figure~\ref{fig.array3}.
@@ -6061,17 +6057,17 @@ Because \java{a} and \java{b} are different names for the same thing, they are s
 If you actually want to copy the array, not just a reference, you have to create a new array and copy the elements from one to the other, like this:
 
 \begin{code}
-    double[] b = new double[3];
-    for (int i = 0; i < 3; i++) {
-        b[i] = a[i];
-    }
+double[] b = new double[3];
+for (int i = 0; i < 3; i++) {
+    b[i] = a[i];
+}
 \end{code}
 
 Another option is to use \java{java.utils.Arrays}, which provides a method, \java{copyOf}, that copies an array.
 You can invoke it like this:
 
 \begin{code}
-    double[] b = Arrays.copyOf(a, 3);
+double[] b = Arrays.copyOf(a, 3);
 \end{code}
 
 The second parameter is the number of elements you want to copy, so you can use \java{copyOf} to copy just part of an array.
@@ -6087,10 +6083,10 @@ It would be better to generalize it to work with arrays of any size.
 We can do that by replacing the magic number, \java{3}, with \java{a.length}:
 
 \begin{code}
-    double[] b = new double[a.length];
-    for (int i = 0; i < a.length; i++) {
-        b[i] = a[i];
-    }
+double[] b = new double[a.length];
+for (int i = 0; i < a.length; i++) {
+    b[i] = a[i];
+}
 \end{code}
 
 All arrays have a built-in constant, \java{length}, that stores the number of elements.
@@ -6104,7 +6100,7 @@ When \java{i} is equal to \java{a.length}, the condition fails and the body is n
 You can also use \java{a.length} with \java{Arrays.copyOf}:
 
 \begin{code}
-    b = Arrays.copyOf(a, a.length);
+b = Arrays.copyOf(a, a.length);
 \end{code}
 
 
@@ -6117,9 +6113,9 @@ Many computations can be implemented by looping through the elements of an array
 For example, the following loop squares the elements of a \java{double} array:
 
 \begin{code}
-    for (int i = 0; i < a.length; i++) {
-        a[i] = Math.pow(a[i], 2.0);
-    }
+for (int i = 0; i < a.length; i++) {
+    a[i] = Math.pow(a[i], 2.0);
+}
 \end{code}
 
 Looping through the elements of an array is called a {\bf traversal}.
@@ -6199,22 +6195,22 @@ The argument specifies the size of the array.
 The return type is \java{int[]}, which means that this method returns a reference to an \java{int} array.
 
 \begin{code}
-    public static int[] randomArray(int size) {
-    Random random = new Random();
-        int[] a = new int[size];
-        for (int i = 0; i < a.length; i++) {
-            a[i] = random.nextInt(100);
-        }
-        return a;
+public static int[] randomArray(int size) {
+Random random = new Random();
+    int[] a = new int[size];
+    for (int i = 0; i < a.length; i++) {
+        a[i] = random.nextInt(100);
     }
+    return a;
+}
 \end{code}
 
 The following fragment generates an array and displays it using \java{printArray} from Section~\ref{printarray}:
 
 \begin{code}
-    int numValues = 8;
-    int[] array = randomArray(numValues);
-    printArray(array);
+int numValues = 8;
+int[] array = randomArray(numValues);
+printArray(array);
 \end{code}
 
 The output looks like this:
@@ -6282,12 +6278,12 @@ This detail keeps us from counting any scores twice.
 Now we can count the number of scores in each grade range:
 
 \begin{code}
-    int[] scores = randomArray(30);
-    int a = inRange(scores, 90, 100);
-    int b = inRange(scores, 80, 90);
-    int c = inRange(scores, 70, 80);
-    int d = inRange(scores, 60, 70);
-    int f = inRange(scores, 0, 60);
+int[] scores = randomArray(30);
+int a = inRange(scores, 90, 100);
+int b = inRange(scores, 80, 90);
+int c = inRange(scores, 70, 80);
+int d = inRange(scores, 60, 70);
+int f = inRange(scores, 0, 60);
 \end{code}
 
 
@@ -6298,11 +6294,11 @@ But suppose we want to keep track of the number of times each score appears.
 We would have to write 100 lines of code:
 
 \begin{code}
-    int count0 = inRange(scores, 0, 1);
-    int count1 = inRange(scores, 1, 2);
-    int count2 = inRange(scores, 2, 3);
-    ...
-    int count99 = inRange(scores, 99, 100);
+int count0 = inRange(scores, 0, 1);
+int count1 = inRange(scores, 1, 2);
+int count2 = inRange(scores, 2, 3);
+...
+int count99 = inRange(scores, 99, 100);
 \end{code}
 
 What we want is a way to store 100 counters, preferably so we can use an index to access them.
@@ -6313,10 +6309,10 @@ It loops through the scores and uses \java{inRange} to count how many times each
 Then it stores the results in the array:
 
 \begin{code}
-    int[] counts = new int[100];
-    for (int i = 0; i < counts.length; i++) {
-        counts[i] = inRange(scores, i, i + 1);
-    }
+int[] counts = new int[100];
+for (int i = 0; i < counts.length; i++) {
+    counts[i] = inRange(scores, i, i + 1);
+}
 \end{code}
 
 Notice that we are using the loop variable three times: as an index into the array, and in two arguments for \java{inRange}.
@@ -6332,11 +6328,11 @@ It would be better to make a single pass through the array, and for each score, 
 The following loop traverses an array of scores once and generates a histogram.
 
 \begin{code}
-    int[] counts = new int[100];
-    for (int i = 0; i < scores.length; i++) {
-        int index = scores[i];
-        counts[index]++;
-    }
+int[] counts = new int[100];
+for (int i = 0; i < scores.length; i++) {
+    int index = scores[i];
+    counts[index]++;
+}
 \end{code}
 
 Each time through the loop, it selects one element from \java{scores} and uses it as an index to increment the corresponding element of \java{counts}.
@@ -6350,17 +6346,17 @@ Since traversing arrays is so common, Java provides an alternative syntax that m
 For example, consider a for loop that displays the elements of an array.
 
 \begin{code}
-    for (int i = 0; i < values.length; i++) {
-        System.out.println(values[i]);
-    }
+for (int i = 0; i < values.length; i++) {
+    System.out.println(values[i]);
+}
 \end{code}
 
 We could rewrite the loop like this:
 
 \begin{code}
-    for (int value : values) {
-        System.out.println(value);
-    }
+for (int value : values) {
+    System.out.println(value);
+}
 \end{code}
 
 This statement is called an {\bf enhanced for loop}.
@@ -6370,10 +6366,10 @@ It's common to use a plural nouns for array variables and singular nouns for ele
 Using the enhanced for loop, and removing the temporary variable, we can write the histogram code from the previous section more concisely:
 
 \begin{code}
-    int[] counts = new int[100];
-    for (int score : scores) {
-        counts[score]++;
-    }
+int[] counts = new int[100];
+for (int score : scores) {
+    counts[score]++;
+}
 \end{code}
 
 Enhanced for loops often make code more readable, especially for accumulating values.
@@ -6458,38 +6454,38 @@ The purpose of this exercise is to practice reading code and recognizing the tra
 The following methods are hard to read, because instead of using meaningful names for the variables and methods, they use names of fruit.
 
 \begin{code}
-    public static int banana(int[] a) {
-        int kiwi = 1;
-        int i = 0;
-        while (i < a.length) {
-            kiwi = kiwi * a[i];
-            i++;
-        }
-        return kiwi;
+public static int banana(int[] a) {
+    int kiwi = 1;
+    int i = 0;
+    while (i < a.length) {
+        kiwi = kiwi * a[i];
+        i++;
     }
+    return kiwi;
+}
 \end{code}
 
 \begin{code}
-    public static int grapefruit(int[] a, int grape) {
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] == grape) {
-                return i;
-            }
+public static int grapefruit(int[] a, int grape) {
+    for (int i = 0; i < a.length; i++) {
+        if (a[i] == grape) {
+            return i;
         }
-        return -1;
     }
+    return -1;
+}
 \end{code}
 
 \begin{code}
-    public static int pineapple(int[] a, int apple) {
-        int pear = 0;
-        for (int pine: a) {
-            if (pine == apple) {
-                pear++;
-            }
+public static int pineapple(int[] a, int apple) {
+    int pear = 0;
+    for (int pine: a) {
+        if (pine == apple) {
+            pear++;
         }
-        return pear;
     }
+    return pear;
+}
 \end{code}
 
 For each method, write one sentence that describes what the method does, without getting into the details of how it works.
@@ -6504,39 +6500,39 @@ Draw a stack diagram that shows the state of the program just before \java{mus} 
 Describe in a few words what \java{mus} does.
 
 \begin{code}
-    public static int[] make(int n) {
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = i + 1;
-        }
-        return a;
+public static int[] make(int n) {
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+        a[i] = i + 1;
     }
+    return a;
+}
 \end{code}
 
 \begin{code}
-    public static void dub(int[] jub) {
-        for (int i = 0; i < jub.length; i++) {
-            jub[i] *= 2;
-        }
+public static void dub(int[] jub) {
+    for (int i = 0; i < jub.length; i++) {
+        jub[i] *= 2;
     }
+}
 \end{code}
 
 \begin{code}
-    public static int mus(int[] zoo) {
-        int fus = 0;
-        for (int i = 0; i < zoo.length; i++) {
-            fus += zoo[i];
-        }
-        return fus;
+public static int mus(int[] zoo) {
+    int fus = 0;
+    for (int i = 0; i < zoo.length; i++) {
+        fus += zoo[i];
     }
+    return fus;
+}
 \end{code}
 
 \begin{code}
-    public static void main(String[] args) {
-        int[] bob = make(5);
-        dub(bob);
-        System.out.println(mus(bob));
-    }
+public static void main(String[] args) {
+    int[] bob = make(5);
+    dub(bob);
+    System.out.println(mus(bob));
+}
 \end{code}
 \end{exercise}
 
@@ -6583,7 +6579,7 @@ If there is more than one element in the range, we can break the array into two 
 To find the largest element in an array, we have to provide a range for the entire array.
 
 \begin{code}
-    double max = maxInRange(a, 0, a.length - 1);
+double max = maxInRange(a, 0, a.length - 1);
 \end{code}
 
 Write a method called \java{max} that takes an array and uses \java{maxInRange} to find and return the largest element.
@@ -6637,8 +6633,8 @@ Strings provide a method named \java{charAt}, which extracts a character.
 It returns a \java{char}, a primitive type that stores an individual character (as opposed to strings of them).
 
 \begin{code}
-    String fruit = "banana";
-    char letter = fruit.charAt(0);
+String fruit = "banana";
+char letter = fruit.charAt(0);
 \end{code}
 
 The argument \java{0} means that we want the letter at position 0.
@@ -6650,9 +6646,9 @@ Characters work like the other primitive types we have seen.
 You can compare them using relational operators:
 
 \begin{code}
-    if (letter == 'a') {
-        System.out.println('?');
-    }
+if (letter == 'a') {
+    System.out.println('?');
+}
 \end{code}
 
 \index{quote}
@@ -6667,11 +6663,11 @@ The increment and decrement operators work with characters.
 So this loop displays the letters of the alphabet:
 
 \begin{code}
-    System.out.print("Roman alphabet: ");
-    for (char c = 'A'; c <= 'Z'; c++) {
-        System.out.print(c);
-    }
-    System.out.println();
+System.out.print("Roman alphabet: ");
+for (char c = 'A'; c <= 'Z'; c++) {
+    System.out.print(c);
+}
+System.out.println();
 \end{code}
 
 \index{Unicode}
@@ -6683,11 +6679,11 @@ In Unicode, each character is represented by a ``code unit'', which you can thin
 The code units for uppercase Greek letters run from 913 to 937, so we can display the Greek alphabet like this:
 
 \begin{code}
-    System.out.print("Greek alphabet: ");
-    for (int i = 913; i <= 937; i++) {
-        System.out.print((char) i);
-    }
-    System.out.println();
+System.out.print("Greek alphabet: ");
+for (int i = 913; i <= 937; i++) {
+    System.out.print((char) i);
+}
+System.out.println();
 \end{code}
 
 This example uses a type cast to convert each integer to a character.
@@ -6708,8 +6704,8 @@ When you invoke \java{toUpperCase} on a string, you get a new string object as a
 For example:
 
 \begin{code}
-    String name = "Alan Turing";
-    String upperName = name.toUpperCase();
+String name = "Alan Turing";
+String upperName = name.toUpperCase();
 \end{code}
 
 \index{Turing, Alan}
@@ -6726,10 +6722,10 @@ But \java{name} still refers to \verb|"Alan Turing"|.
 The following loop traverses the characters in \java{fruit} and displays them, one on each line.
 
 \begin{code}
-    for (int i = 0; i < fruit.length(); i++) {
-        char letter = fruit.charAt(i);
-        System.out.println(letter);
-    }
+for (int i = 0; i < fruit.length(); i++) {
+    char letter = fruit.charAt(i);
+    System.out.println(letter);
+}
 \end{code}
 
 Strings provide a method called \java{length} that returns the number of characters in the string.
@@ -6755,8 +6751,8 @@ The condition is \java{i < fruit.length()}, which means that when \java{i} is eq
 To find the last letter of a string, you might be tempted to try something like:
 
 \begin{code}
-    int length = fruit.length();
-    char last = fruit.charAt(length);      // wrong!
+int length = fruit.length();
+char last = fruit.charAt(length);      // wrong!
 \end{code}
 
 This code compiles and runs, but invoking the \java{charAt} method throws a \java{StringIndexOutOfBoundsException}.
@@ -6768,21 +6764,21 @@ To get the last character, you have to subtract 1 from \java{length}.
 \index{exception!StringIndexOutOfBounds}
 
 \begin{code}
-    int length = fruit.length();
-    char last = fruit.charAt(length - 1);  // correct
+int length = fruit.length();
+char last = fruit.charAt(length - 1);  // correct
 \end{code}
 
 Many string traversals involve reading one string and creating another.
 For example, to reverse a string we add one character at a time:
 
 \begin{code}
-    public static String reverse(String s) {
-        String r = "";
-        for (int i = s.length() - 1; i >= 0; i--) {
-            r = r + s.charAt(i);
-        }
-        return r;
+public static String reverse(String s) {
+    String r = "";
+    for (int i = s.length() - 1; i >= 0; i--) {
+        r = r + s.charAt(i);
     }
+    return r;
+}
 \end{code}
 
 \index{empty string}
@@ -6844,8 +6840,8 @@ For example, to select a substring with length \java{len}, starting at index \ja
 The \java{indexOf} method searches for a character in a string.
 
 \begin{code}
-    String fruit = "banana";
-    int index = fruit.indexOf('a');
+String fruit = "banana";
+int index = fruit.indexOf('a');
 \end{code}
 
 This example finds the index of \java{'a'} in the string.
@@ -6855,7 +6851,7 @@ According to the documentation, it returns the index of the {\em first} appearan
 To find subsequent appearances, you can use another version of \java{indexOf}, which takes a second argument that indicates where in the string to start looking.
 
 \begin{code}
-    int index = fruit.indexOf('a', 2);
+int index = fruit.indexOf('a', 2);
 \end{code}
 
 This code starts at index 2 (the first \java{'n'}) and finds the next \java{'a'}, which is at index 3.
@@ -6878,11 +6874,11 @@ To compare two strings, it is tempting to use the \java{==} operator.
 For example:
 
 \begin{code}
-    String name1 = "Alan Turing";
-    String name2 = "Ada Lovelace";
-    if (name1 == name2) {                 // wrong!
-        System.out.println("The names are the same.");
-    }
+String name1 = "Alan Turing";
+String name2 = "Ada Lovelace";
+if (name1 == name2) {                 // wrong!
+    System.out.println("The names are the same.");
+}
 \end{code}
 
 This code compiles and runs, and most of the time it gets the answer right.
@@ -6893,9 +6889,9 @@ If you give it two different strings that contain the same letters, it yields \j
 The right way to compare strings is with the \java{equals} methods, like this:
 
 \begin{code}
-    if (name1.equals(name2)) {
-        System.out.println("The names are the same.");
-    }
+if (name1.equals(name2)) {
+    System.out.println("The names are the same.");
+}
 \end{code}
 
 This example invokes \java{equals} on \java{name1} and passes \java{name2} as an argument.
@@ -6904,14 +6900,14 @@ The \java{equals} method returns \java{true} if the strings contain the same cha
 If the strings differ, we can use \java{compareTo} to see which comes first in alphabetical order:
 
 \begin{code}
-    int diff = name1.compareTo(name2);
-    if (diff == 0) {
-        System.out.println("The names are the same.");
-    } else if (diff < 0) {
-        System.out.println("name1 comes before name2.");
-    } else if (diff > 0) {
-        System.out.println("name2 comes before name1.");
-    }
+int diff = name1.compareTo(name2);
+if (diff == 0) {
+    System.out.println("The names are the same.");
+} else if (diff < 0) {
+    System.out.println("name1 comes before name2.");
+} else if (diff > 0) {
+    System.out.println("name2 comes before name1.");
+}
 \end{code}
 
 The return value from \java{compareTo} is the difference between the first characters in the strings that differ.
@@ -7008,14 +7004,14 @@ To find the maximum number, we have to convert the arguments to integers.
 The following fragment uses an enhanced \java{for} loop to parse the arguments and find the largest:
 
 \begin{code}
-    int max = Integer.MIN_VALUE;
-    for (String arg : args) {
-        int value = Integer.parseInt(arg);
-        if (value > max) {
-            max = value;
-        }
+int max = Integer.MIN_VALUE;
+for (String arg : args) {
+    int value = Integer.parseInt(arg);
+    if (value > max) {
+        max = value;
     }
-    System.out.println("The max is " + max);
+}
+System.out.println("The max is " + max);
 \end{code}
 
 The initial value of \java{max} is the smallest (most negative) number an \java{int} can represent, so any other value is greater.
@@ -7082,19 +7078,19 @@ The purpose of this exercise is to review encapsulation and generalization (see 
 The following code fragment traverses a string and checks whether it has the same number of open and close parentheses:
 
 \begin{code}
-    String s = "((3 + 7) * 2)";
-    int count = 0;
+String s = "((3 + 7) * 2)";
+int count = 0;
 
-    for (int i = 0; i < s.length(); i++) {
-        char c = s.charAt(i);
-        if (c == '(') {
-            count++;
-        } else if (c == ')') {
-            count--;
-        }
+for (int i = 0; i < s.length(); i++) {
+    char c = s.charAt(i);
+    if (c == '(') {
+        count++;
+    } else if (c == ')') {
+        count--;
     }
+}
 
-    System.out.println(count);
+System.out.println(count);
 \end{code}
 
 \begin{enumerate}
@@ -7163,39 +7159,39 @@ For example, you can assign an \java{int} to a \java{double} but not vice versa.
 Create a program called {\tt Recurse.java} and type in the following methods:
 
 \begin{code}
-    /**
-     * Returns the first character of the given String.
-     */
-    public static char first(String s) {
-        return s.charAt(0);
-    }
+/**
+ * Returns the first character of the given String.
+ */
+public static char first(String s) {
+    return s.charAt(0);
+}
 \end{code}
 
 \begin{code}
-    /**
-     * Returns all but the first letter of the given String.
-     */
-    public static String rest(String s) {
-        return s.substring(1);
-    }
+/**
+ * Returns all but the first letter of the given String.
+ */
+public static String rest(String s) {
+    return s.substring(1);
+}
 \end{code}
 
 \begin{code}
-    /**
-     * Returns all but the first and last letter of the String.
-     */
-    public static String middle(String s) {
-        return s.substring(1, s.length() - 1);
-    }
+/**
+ * Returns all but the first and last letter of the String.
+ */
+public static String middle(String s) {
+    return s.substring(1, s.length() - 1);
+}
 \end{code}
 
 \begin{code}
-    /**
-     * Returns the length of the given String.
-     */
-    public static int length(String s) {
-        return s.length();
-    }
+/**
+ * Returns the length of the given String.
+ */
+public static int length(String s) {
+    return s.length();
+}
 \end{code}
 
 \begin{enumerate}
@@ -7212,8 +7208,8 @@ It should be a \java{void} method.
 The new string should contain the same letters as the parameter, but in reverse order.
 
 \begin{code}
-    String backwards = reverseString("coffee");
-    System.out.println(backwards);
+String backwards = reverseString("coffee");
+System.out.println(backwards);
 \end{code}
 
 For example, the output of the above code should be:
@@ -7347,8 +7343,8 @@ import java.awt.Point;
 Then, to create a new point, you have to use the \java{new} operator:
 
 \begin{code}
-    Point blank;
-    blank = new Point(3, 4);
+Point blank;
+blank = new Point(3, 4);
 \end{code}
 
 \index{declaration}
@@ -7390,7 +7386,7 @@ To access an attribute of an object, Java uses {\bf dot notation}.
 For example:
 
 \begin{code}
-    int x = blank.x;
+int x = blank.x;
 \end{code}
 
 The expression \java{blank.x} means ``go to the object \java{blank} refers to, and get the value of the attribute \java{x}.''
@@ -7402,8 +7398,8 @@ You can use dot notation as part of an expression.
 For example:
 
 \begin{code}
-    System.out.println(blank.x + ", " + blank.y);
-    int sum = blank.x * blank.x + blank.y * blank.y;
+System.out.println(blank.x + ", " + blank.y);
+int sum = blank.x * blank.x + blank.y * blank.y;
 \end{code}
 
 The first line displays \java{3, 4}; the second line calculates the value \java{25}.
@@ -7418,9 +7414,9 @@ You can pass objects as parameters in the usual way.
 For example:
 
 \begin{code}
-    public static void printPoint(Point p) {
-        System.out.println("(" + p.x + ", " + p.y + ")");
-    }
+public static void printPoint(Point p) {
+    System.out.println("(" + p.x + ", " + p.y + ")");
+}
 \end{code}
 
 This method takes a point as an argument and displays its attributes in parentheses.
@@ -7438,11 +7434,11 @@ When you call \java{println}, it calls {\tt toString} and displays the result, w
 As another example, we can rewrite the \java{distance} method from Section~\ref{distance} so that it takes two \java{Point}s as parameters instead of four \java{double}s.
 
 \begin{code}
-    public static double distance(Point p1, Point p2) {
-        double dx = (double) (p2.x - p1.x);
-        double dy = (double) (p2.y - p1.y);
-        return Math.sqrt(dx * dx + dy * dy);
-    }
+public static double distance(Point p1, Point p2) {
+    double dx = (double) (p2.x - p1.x);
+    double dy = (double) (p2.y - p1.y);
+    return Math.sqrt(dx * dx + dy * dy);
+}
 \end{code}
 
 Passing objects as parameters makes the source code more readable and less error-prone.
@@ -7464,7 +7460,7 @@ import java.awt.Rectangle;
 The following example creates a \java{Rectangle} object and makes the variable \java{box} refer to it.
 
 \begin{code}
-    Rectangle box = new Rectangle(0, 0, 100, 200);
+Rectangle box = new Rectangle(0, 0, 100, 200);
 \end{code}
 
 Figure~\ref{fig.rectangle} shows the effect of this assignment.
@@ -7492,11 +7488,11 @@ You can write methods that return objects.
 For example, \java{findCenter} takes a \java{Rectangle} as an argument and returns a \java{Point} with the coordinates of the center of the rectangle:
 
 \begin{code}
-    public static Point findCenter(Rectangle box) {
-        int x = box.x + box.width / 2;
-        int y = box.y + box.height / 2;
-        return new Point(x, y);
-    }
+public static Point findCenter(Rectangle box) {
+    int x = box.x + box.width / 2;
+    int y = box.y + box.height / 2;
+    return new Point(x, y);
+}
 \end{code}
 
 The return type of this method is \java{Point}.
@@ -7512,9 +7508,9 @@ You can change the contents of an object by making an assignment to one of its a
 For example, to ``move'' a rectangle without changing its size, you can modify the \java{x} and \java{y} values:
 
 \begin{code}
-    Rectangle box = new Rectangle(0, 0, 100, 200);
-    box.x = box.x + 50;
-    box.y = box.y + 100;
+Rectangle box = new Rectangle(0, 0, 100, 200);
+box.x = box.x + 50;
+box.y = box.y + 100;
 \end{code}
 
 The result is shown in Figure~\ref{fig.rectangle2}.
@@ -7533,19 +7529,19 @@ The result is shown in Figure~\ref{fig.rectangle2}.
 We can encapsulate this code in a method and generalize it to move the rectangle by any amount:
 
 \begin{code}
-    public static void moveRect(Rectangle box, int dx, int dy) {
-        box.x = box.x + dx;
-        box.y = box.y + dy;
-    }
+public static void moveRect(Rectangle box, int dx, int dy) {
+    box.x = box.x + dx;
+    box.y = box.y + dy;
+}
 \end{code}
 
 The variables \java{dx} and \java{dy} indicate how far to move the rectangle in each direction.
 Invoking this method has the effect of modifying the \java{Rectangle} that is passed as an argument.
 
 \begin{code}
-    Rectangle box = new Rectangle(0, 0, 100, 200);
-    moveRect(box, 50, 100);
-    System.out.println(box);
+Rectangle box = new Rectangle(0, 0, 100, 200);
+moveRect(box, 50, 100);
+System.out.println(box);
 \end{code}
 
 The code displays \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
@@ -7564,7 +7560,7 @@ Java provides a number of methods that operate on \java{Point}s and \java{Rectan
 For example, \java{translate} has the same effect as \java{moveRect}, but instead of passing the rectangle as an argument, you use dot notation:
 
 \begin{code}
-    box.translate(50, 100);
+box.translate(50, 100);
 \end{code}
 
 This line invokes the \java{translate} method on the object \java{box} refers to.
@@ -7585,8 +7581,8 @@ Remember that when you assign an object to a variable, you are assigning a {\em 
 It is possible to have multiple variables that refer to the same object.
 
 \begin{code}
-    Rectangle box1 = new Rectangle(0, 0, 100, 200);
-    Rectangle box2 = box1;
+Rectangle box1 = new Rectangle(0, 0, 100, 200);
+Rectangle box2 = box1;
 \end{code}
 
 The state diagram in Figure~\ref{fig.aliasing} shows the result.
@@ -7605,9 +7601,9 @@ The state diagram in Figure~\ref{fig.aliasing} shows the result.
 For example:
 
 \begin{code}
-    System.out.println(box2.width);
-    box1.grow(50, 50);
-    System.out.println(box2.width);
+System.out.println(box2.width);
+box1.grow(50, 50);
+System.out.println(box2.width);
 \end{code}
 
 The first line displays {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
@@ -7641,7 +7637,7 @@ In Java, the keyword \java{null} is a special value that means ``no object''.
 You can declare and initialize object variables this way:
 
 \begin{code}
-    Point blank = null;
+Point blank = null;
 \end{code}
 
 The value \java{null} is represented in state diagrams by a small box with no arrow, as in Figure~\ref{fig.reference2}.
@@ -7661,9 +7657,9 @@ The value \java{null} is represented in state diagrams by a small box with no ar
 If you try to use a \java{null} object, either by accessing an attribute or invoking a method, Java throws a \java{NullPointerException}.
 
 \begin{code}
-    Point blank = null;
-    int x = blank.x;              // NullPointerException
-    blank.translate(50, 50);      // NullPointerException
+Point blank = null;
+int x = blank.x;              // NullPointerException
+blank.translate(50, 50);      // NullPointerException
 \end{code}
 
 On the other hand, it is legal to pass a null reference as an argument or receive one as a return value.
@@ -7676,8 +7672,8 @@ In Section~\ref{aliasing} we saw what happens when more than one variable refers
 What happens when {\em no} variable refers to an object?
 
 \begin{code}
-    Point blank = new Point(3, 4);
-    blank = null;
+Point blank = new Point(3, 4);
+blank = null;
 \end{code}
 
 The first line creates a new \java{Point} object and makes \java{blank} refer to it.
@@ -7761,20 +7757,20 @@ The point of this exercise is to make sure you understand the mechanism for pass
 \end{enumerate}
 
 \begin{code}
-    public static void main(String[] args) {
-        int x = 5;
-        Point blank = new Point(1, 2);
+public static void main(String[] args) {
+    int x = 5;
+    Point blank = new Point(1, 2);
 
-        System.out.println(riddle(x, blank));
-        System.out.println(x);
-        System.out.println(blank.x);
-        System.out.println(blank.y);
-    }
+    System.out.println(riddle(x, blank));
+    System.out.println(x);
+    System.out.println(blank.x);
+    System.out.println(blank.y);
+}
 
-    public static int riddle(int x, Point p) {
-        x = x + 7;
-        return x + p.x + p.y;
-    }
+public static int riddle(int x, Point p) {
+    x = x + 7;
+    return x + p.x + p.y;
+}
 \end{code}
 
 \end{exercise}
@@ -7793,29 +7789,29 @@ Include all variables and parameters and the objects those variables refer to.
 \end{enumerate}
 
 \begin{code}
-    public static double distance(Point p1, Point p2) {
-        int dx = p1.x - p2.x;
-        int dy = p1.y - p2.y;
-        return Math.sqrt(dx * dx + dy * dy);
-    }
+public static double distance(Point p1, Point p2) {
+    int dx = p1.x - p2.x;
+    int dy = p1.y - p2.y;
+    return Math.sqrt(dx * dx + dy * dy);
+}
 
-    public static Point findCenter(Rectangle box) {
-        int x = box.x + box.width / 2;
-        int y = box.y + box.height / 2;
-        return new Point(x, y);
-    }
+public static Point findCenter(Rectangle box) {
+    int x = box.x + box.width / 2;
+    int y = box.y + box.height / 2;
+    return new Point(x, y);
+}
 \end{code}
 
 \begin{code}
-    public static void main(String[] args) {
-        Point blank = new Point(5, 8);
+public static void main(String[] args) {
+    Point blank = new Point(5, 8);
 
-        Rectangle rect = new Rectangle(0, 2, 4, 4);
-        Point center = findCenter(rect);
+    Rectangle rect = new Rectangle(0, 2, 4, 4);
+    Point center = findCenter(rect);
 
-        double dist = distance(center, blank);
-        System.out.println(dist);
-    }
+    double dist = distance(center, blank);
+    System.out.println(dist);
+}
 \end{code}
 
 \end{exercise}
@@ -7837,25 +7833,25 @@ Why or why not?
 \end{enumerate}
 
 \begin{code}
-    public static void printPoint(Point p) {
-        System.out.println("(" + p.x + ", " + p.y + ")");
-    }
+public static void printPoint(Point p) {
+    System.out.println("(" + p.x + ", " + p.y + ")");
+}
 
-    public static Point findCenter(Rectangle box) {
-        int x = box.x + box.width / 2;
-        int y = box.y + box.height / 2;
-        return new Point(x, y);
-    }
+public static Point findCenter(Rectangle box) {
+    int x = box.x + box.width / 2;
+    int y = box.y + box.height / 2;
+    return new Point(x, y);
+}
 
-    public static void main(String[] args) {
-        Rectangle box1 = new Rectangle(2, 4, 7, 9);
-        Point p1 = findCenter(box1);
-        printPoint(p1);
+public static void main(String[] args) {
+    Rectangle box1 = new Rectangle(2, 4, 7, 9);
+    Point p1 = findCenter(box1);
+    printPoint(p1);
 
-        box1.grow(1, 1);
-        Point p2 = findCenter(box1);
-        printPoint(p2);
-    }
+    box1.grow(1, 1);
+    Point p2 = findCenter(box1);
+    printPoint(p2);
+}
 \end{code}
 
 \end{exercise}
@@ -7886,8 +7882,8 @@ Read the documentation at \url{http://docs.oracle.com/javase/7/docs/api/java/mat
 The following code converts an integer to a BigInteger:
 
 \begin{code}
-    int x = 17;
-    BigInteger big = BigInteger.valueOf(x);
+int x = 17;
+BigInteger big = BigInteger.valueOf(x);
 \end{code}
 
 Type in this code and try it out.
@@ -7898,9 +7894,9 @@ Instead we have to use methods like \java{add}.
 To add two BigIntegers, invoke \java{add} on one and pass the other as an argument.
 
 \begin{code}
-    BigInteger small = BigInteger.valueOf(17);
-    BigInteger big = BigInteger.valueOf(1700000000);
-    BigInteger total = small.add(big);
+BigInteger small = BigInteger.valueOf(17);
+BigInteger big = BigInteger.valueOf(1700000000);
+BigInteger total = small.add(big);
 \end{code}
 
 Try out some of the other methods, like \java{multiply} and \java{pow}.
@@ -7921,20 +7917,20 @@ Many encryption algorithms depend on the ability to raise large integers to an i
 Here is a method that implements an efficient algorithm for integer exponentiation:
 
 \begin{code}
-    public static int pow(int x, int n) {
-        if (n == 0) return 1;
+public static int pow(int x, int n) {
+    if (n == 0) return 1;
 
-        // find x to the n/2 recursively
-        int t = pow(x, n / 2);
+    // find x to the n/2 recursively
+    int t = pow(x, n / 2);
 
-        // if n is even, the result is t squared
-        // if n is odd, the result is t squared times x
-        if (n % 2 == 0) {
-            return t * t;
-        } else {
-            return t * t * x;
-        }
+    // if n is even, the result is t squared
+    // if n is odd, the result is t squared times x
+    if (n % 2 == 0) {
+        return t * t;
+    } else {
+        return t * t * x;
     }
+}
 \end{code}
 
 The problem with this method is that it only works if the result is small enough to be represented by an \java{int}.
@@ -8045,11 +8041,11 @@ The syntax for constructors is similar to that of other methods, except:
 Here is an example constructor for the \java{Time} class:
 
 \begin{code}
-    public Time() {
-        this.hour = 0;
-        this.minute = 0;
-        this.second = 0.0;
-    }
+public Time() {
+    this.hour = 0;
+    this.minute = 0;
+    this.second = 0.0;
+}
 \end{code}
 
 This constructor does not take any arguments.
@@ -8069,7 +8065,7 @@ Like \java{void} methods, constructors do not return values.
 To create a Time object, you use the \java{new} operator:
 
 \begin{code}
-    Time time = new Time();
+Time time = new Time();
 \end{code}
 
 \index{new operator}
@@ -8094,12 +8090,12 @@ You don't have to, and you shouldn't.
 In this example, invoking \java{new Time()} in the constructor causes an infinite recursion.
 
 \begin{code}
-    public Time() {
-        new Time();        // wrong!
-        this.hour = 0;
-        this.minute = 0;
-        this.second = 0.0;
-    }
+public Time() {
+    new Time();        // wrong!
+    this.hour = 0;
+    this.minute = 0;
+    this.second = 0.0;
+}
 \end{code}
 
 
@@ -8120,20 +8116,20 @@ Java knows which constructor to invoke by matching the arguments you provide wit
 It is common to provide a constructor that takes no arguments, like the previous one, and a ``value constructor'', like this one:
 
 \begin{code}
-    public Time(int hour, int minute, double second) {
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
-    }
+public Time(int hour, int minute, double second) {
+    this.hour = hour;
+    this.minute = minute;
+    this.second = second;
+}
 \end{code}
 
 All the constructor does is copy values from the parameters to the instance variables.
-In this example, the names and types of the parameters are the same as the names and types of the instance variables; in general, the names don't have to be the same, but this is a common style choice. 
+In this example, the names and types of the parameters are the same as the names and types of the instance variables; in general, the names don't have to be the same, but this is a common style choice.
 
 To invoke this constructor, you have to pass arguments after the \java{new} operator:
 
 \begin{code}
-    Time time = new Time(11, 59, 59.9);
+Time time = new Time(11, 59, 59.9);
 \end{code}
 
 This example creates a \java{Time} object that represents a fraction of a second before noon.
@@ -8173,10 +8169,10 @@ public class Time {
 If you create a \java{Time} object and display it like this:
 
 \begin{code}
-    public static void main(String[] args) {
-        Time time = new Time(11, 59, 59.9);
-        System.out.println(time);
-    }
+public static void main(String[] args) {
+    Time time = new Time(11, 59, 59.9);
+    System.out.println(time);
+}
 \end{code}
 
 \index{print}
@@ -8199,13 +8195,13 @@ To display \java{Time} objects in a way that is more meaningful to users, you co
 Using \java{printTime} in Section~\ref{time} as a starting point, we could write:
 
 \begin{code}
-    public static void printTime(Time t) {
-        System.out.print(t.hour);
-        System.out.print(":");
-        System.out.println(t.minute);
-        System.out.print(":");
-        System.out.println(t.second);
-    }
+public static void printTime(Time t) {
+    System.out.print(t.hour);
+    System.out.print(":");
+    System.out.println(t.minute);
+    System.out.print(":");
+    System.out.println(t.second);
+}
 \end{code}
 
 The output of this method would be {\tt 11:59:59.9}.
@@ -8216,10 +8212,10 @@ Or we could use \java{printf} to write it more concisely:
 \index{format string}
 
 \begin{code}
-    public static void printTime(Time t) {
-        System.out.printf("%02d:%02d:%04.1f\n",
-            t.hour, t.minute, t.second);
-    }
+public static void printTime(Time t) {
+    System.out.printf("%02d:%02d:%04.1f\n",
+        t.hour, t.minute, t.second);
+}
 \end{code}
 
 As a reminder, you need to use \java{\%d} with integers and \java{\%f} with floating-point numbers.
@@ -8240,10 +8236,10 @@ By default it simply displays the type of the object and its address, but you ca
 For example, here is a \java{toString} method for \java{Time}:
 
 \begin{code}
-    public String toString() {
-        return String.format("%02d:%02d:%04.1f\n",
-                             this.hour, this.minute, this.second);
-    }
+public String toString() {
+    return String.format("%02d:%02d:%04.1f\n",
+                         this.hour, this.minute, this.second);
+}
 \end{code}
 
 The definition does not have the keyword \java{static} because it is not a static method.
@@ -8268,14 +8264,14 @@ The body of the method is similar to \java{printTime} in the previous section, w
 Now you can call \java{toString} directly:
 
 \begin{code}
-    Time time = new Time(11, 59, 59.9);
-    String s = time.toString();
+Time time = new Time(11, 59, 59.9);
+String s = time.toString();
 \end{code}
 
 Or you can invoke it indirectly through \java{println}:
 
 \begin{code}
-    System.out.println(time);
+System.out.println(time);
 \end{code}
 
 In this example, \java{this} in \java{toString} refers to the same object as \java{time}.
@@ -8313,9 +8309,9 @@ But the definition of equivalence is different for different objects, so objects
 Consider the following variables:
 
 \begin{code}
-    Time time1 = new Time(9, 30, 0.0);
-    Time time2 = time1;
-    Time time3 = new Time(9, 30, 0.0);
+Time time1 = new Time(9, 30, 0.0);
+Time time2 = time1;
+Time time3 = new Time(9, 30, 0.0);
 \end{code}
 
 Figure~\ref{fig.time2} is a state diagram that shows these variables and their values.
@@ -8344,18 +8340,18 @@ For example, \java{time1} and \java{time3} represent the same time of day, so we
 We can provide an \java{equals} method that implements this notion of equivalence:
 
 \begin{code}
-    public boolean equals(Time that) {
-        return this.hour == that.hour
-            && this.minute == that.minute
-            && this.second == that.second;
-    }
+public boolean equals(Time that) {
+    return this.hour == that.hour
+        && this.minute == that.minute
+        && this.second == that.second;
+}
 \end{code}
 
 \java{equals} is an instance method, so it uses \java{this} to refer to the current object and it doesn't have the keyword \java{static}.
 We can invoke equals as follows:
 
 \begin{code}
-    time1.equals(time3);
+time1.equals(time3);
 \end{code}
 
 Inside the \java{equals} method, \java{this} refers to the same object as \java{time1}, and \java{that} refers to the same object as \java{time3}.
@@ -8393,21 +8389,21 @@ Here is a rough draft of a static method:
 \index{method!static}
 
 \begin{code}
-    public static Time add(Time t1, Time t2) {
-        Time sum = new Time();
-        sum.hour = t1.hour + t2.hour;
-        sum.minute = t1.minute + t2.minute;
-        sum.second = t1.second + t2.second;
-        return sum;
-    }
+public static Time add(Time t1, Time t2) {
+    Time sum = new Time();
+    sum.hour = t1.hour + t2.hour;
+    sum.minute = t1.minute + t2.minute;
+    sum.second = t1.second + t2.second;
+    return sum;
+}
 \end{code}
 
 And here's how we would invoke it:
 
 \begin{code}
-    Time startTime = new Time(6, 50, 0.0);
-    Time runningTime = new Time(2, 16, 0.0);
-    Time endTime = add(startTime, runningTime);
+Time startTime = new Time(6, 50, 0.0);
+Time runningTime = new Time(2, 16, 0.0);
+Time endTime = add(startTime, runningTime);
 \end{code}
 
 Here's what it looks like as an instance method:
@@ -8416,13 +8412,13 @@ Here's what it looks like as an instance method:
 \index{method!instance}
 
 \begin{code}
-    public Time add(Time t2) {
-        Time sum = new Time();
-        sum.hour = this.hour + t2.hour;
-        sum.minute = this.minute + t2.minute;
-        sum.second = this.second + t2.second;
-        return sum;
-    }
+public Time add(Time t2) {
+    Time sum = new Time();
+    sum.hour = this.hour + t2.hour;
+    sum.minute = this.minute + t2.minute;
+    sum.second = this.second + t2.second;
+    return sum;
+}
 \end{code}
 
 The changes are:
@@ -8443,7 +8439,7 @@ Unlike \java{this}, \java{that} is not a keyword; it's just a slightly clever va
 And here's how we would invoke it:
 
 \begin{code}
-    Time endTime = startTime.add(runningTime);
+Time endTime = startTime.add(runningTime);
 \end{code}
 
 That's all there is to it.
@@ -8461,22 +8457,22 @@ If \java{second} exceeds 59, we have to ``carry'' into the minutes column, and i
 Here is a better version of \java{add}:
 
 \begin{code}
-    public Time add(Time t2) {
-        Time sum = new Time();
-        sum.hour = this.hour + t2.hour;
-        sum.minute = this.minute + t2.minute;
-        sum.second = this.second + t2.second;
+public Time add(Time t2) {
+    Time sum = new Time();
+    sum.hour = this.hour + t2.hour;
+    sum.minute = this.minute + t2.minute;
+    sum.second = this.second + t2.second;
 
-        if (sum.second >= 60.0) {
-            sum.second -= 60.0;
-            sum.minute += 1;
-        }
-        if (sum.minute >= 60) {
-            sum.minute -= 60;
-            sum.hour += 1;
-        }
-        return sum;
+    if (sum.second >= 60.0) {
+        sum.second -= 60.0;
+        sum.minute += 1;
     }
+    if (sum.minute >= 60) {
+        sum.minute -= 60;
+        sum.hour += 1;
+    }
+    return sum;
+}
 \end{code}
 
 It's still possible that \java{hour} may exceed 23, but there's no \java{days} attribute to carry into.
@@ -8489,17 +8485,17 @@ This implementation of \java{add} does not modify either of the parameters; inst
 As an alternative, we could have written a method like this:
 
 \begin{code}
-    public void increment(double seconds) {
-        this.second += seconds;
-        while (this.second >= 60.0) {
-            this.second -= 60.0;
-            this.minute += 1;
-        }
-        while (this.minute >= 60) {
-            this.minute -= 60;
-            this.hour += 1;
-        }
+public void increment(double seconds) {
+    this.second += seconds;
+    while (this.second >= 60.0) {
+        this.second -= 60.0;
+        this.minute += 1;
     }
+    while (this.minute >= 60) {
+        this.minute -= 60;
+        this.hour += 1;
+    }
+}
 \end{code}
 
 The \java{increment} method modifies an existing \java{Time} object.
@@ -8578,17 +8574,17 @@ But if $A$ only uses methods to interact with $B$, $A$ and $B$ are ``independent
 So if we decide that \java{TimeClient} should be able to read the instance variables of \java{Time}, we can provide methods to do it:
 
 \begin{code}
-    public int getHour() {
-        return this.hour;
-    }
+public int getHour() {
+    return this.hour;
+}
 
-    public int getMinute() {
-        return this.minute;
-    }
+public int getMinute() {
+    return this.minute;
+}
 
-    public int getSecond() {
-        return this.second;
-    }
+public int getSecond() {
+    return this.second;
+}
 \end{code}
 
 \index{accessor method}
@@ -8602,17 +8598,17 @@ By convention, the method that gets a variable named \java{something} is called 
 If we decide that \java{TimeClient} should also be able to modify the instance variables of \java{Time}, we can provide methods to do that, too:
 
 \begin{code}
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
+public void setHour(int hour) {
+    this.hour = hour;
+}
 
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
+public void setMinute(int minute) {
+    this.minute = minute;
+}
 
-    public void setSecond(int second) {
-        this.second = second;
-    }
+public void setSecond(int second) {
+    this.second = second;
+}
 \end{code}
 
 These methods are formally called ``mutators'', but more commonly known as {\bf setters}.
@@ -8899,7 +8895,7 @@ The constructor takes a parameter for each instance variable.
 To create a \java{Card} object, we use the \java{new} operator:
 
 \begin{code}
-    Card threeOfClubs = new Card(3, 0);
+Card threeOfClubs = new Card(3, 0);
 \end{code}
 
 %The first argument, \java{0} represents the suit Clubs.
@@ -8922,22 +8918,22 @@ A natural way to do that is with an array of \java{String}s.
 We can create the array like this:
 
 \begin{code}
-    String[] suits = new String[4];
+String[] suits = new String[4];
 \end{code}
 
 And then assign values to the elements:
 
 \begin{code}
-    suits[0] = "Clubs";
-    suits[1] = "Diamonds";
-    suits[2] = "Hearts";
-    suits[3] = "Spades";
+suits[0] = "Clubs";
+suits[1] = "Diamonds";
+suits[2] = "Hearts";
+suits[3] = "Spades";
 \end{code}
 
 Or we can create the array and initialize the elements at the same time, as we saw in Section~\ref{printarray}:
 
 \begin{code}
-    String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
 \end{code}
 
 \index{state diagram}
@@ -8960,8 +8956,8 @@ Each element of the array is a reference to a \java{String}.
 Now we need an array to decode the ranks:
 
 \begin{code}
-    String[] ranks = {null, "Ace", "2", "3", "4", "5", "6",
-               "7", "8", "9", "10", "Jack", "Queen", "King"};
+String[] ranks = {null, "Ace", "2", "3", "4", "5", "6",
+           "7", "8", "9", "10", "Jack", "Queen", "King"};
 \end{code}
 
 The zeroth element should never be used, because the only valid ranks are 1--13.
@@ -8970,7 +8966,7 @@ We set it to \java{null} to indicate an unused element.
 Using these arrays, we can create a meaningful \java{String} using \java{suit} and \java{rank} as indexes.
 
 \begin{code}
-    String s = ranks[card.rank] + " of " + suits[card.suit];
+String s = ranks[card.rank] + " of " + suits[card.suit];
 \end{code}
 
 The expression \java{suits[card.suit]} means ``use the instance variable \java{suit} from the object \java{card} as an index into the array \java{suits}.''
@@ -8990,8 +8986,8 @@ public String toString() {
 When we display a card, \java{println} automatically calls \java{toString}:
 
 \begin{code}
-    Card card = new Card(11, 1);
-    System.out.println(card);
+Card card = new Card(11, 1);
+System.out.println(card);
 \end{code}
 
 The output is {\tt Jack of Diamonds}.
@@ -9058,9 +9054,9 @@ For example, suppose we create three \java{Card} variables:
 \index{identical}
 
 \begin{code}
-    Card card1 = new Card(11, 1);
-    Card card2 = card1;
-    Card card3 = new Card(11, 1);
+Card card1 = new Card(11, 1);
+Card card2 = card1;
+Card card3 = new Card(11, 1);
 \end{code}
 
 Figure~\ref{fig.card} is a state diagram showing the result.
@@ -9083,9 +9079,9 @@ To do that, we can provide an \java{equals} method.
 \index{equivalent}
 
 \begin{code}
-    public boolean equals(Card that) {
-        return this.suit == that.suit && this.rank == that.rank;
-    }
+public boolean equals(Card that) {
+    return this.suit == that.suit && this.rank == that.rank;
+}
 \end{code}
 
 This method defines what ``equivalent'' means for cards: they must have the same suit and the same rank.
@@ -9162,13 +9158,13 @@ The instance variables of \java{Card} are private, so they can't be accessed fro
 We can provide getters to allow other classes to read the \java{rank} and \java{suit} values:
 
 \begin{code}
-    public int getRank() {
-        return this.rank;
-    }
+public int getRank() {
+    return this.rank;
+}
 
-    public int getSuit() {
-        return this.suit;
-    }
+public int getSuit() {
+    return this.suit;
+}
 \end{code}
 
 Whether or not to provide setters is a design decision.
@@ -9212,7 +9208,7 @@ Just as you can create an array of \java{String} objects, you can create an arra
 The following statement creates an array of 52 cards:
 
 \begin{code}
-    Card[] cards = new Card[52];
+Card[] cards = new Card[52];
 \end{code}
 
 \index{state diagram}
@@ -9234,9 +9230,9 @@ The elements are initialized to \java{null}.
 You can access the elements of the array in the usual way:
 
 \begin{code}
-    if (cards[0] == null) {
-        System.out.println("No card yet!");
-    }
+if (cards[0] == null) {
+    System.out.println("No card yet!");
+}
 \end{code}
 
 \index{exception!NullPointer}
@@ -9245,7 +9241,7 @@ You can access the elements of the array in the usual way:
 But if you try to access the instance variables of the non-existent \java{Card}s, you will get a \java{NullPointerException}.
 
 \begin{code}
-    cards[0].rank      // NullPointerException
+cards[0].rank      // NullPointerException
 \end{code}
 
 \index{nesting}
@@ -9255,13 +9251,13 @@ It won't work until we put cards in the array.
 One way to populate the array is to write nested \java{for} loops:
 
 \begin{code}
-    int index = 0;
-    for (int suit = 0; suit <= 3; suit++) {
-        for (int rank = 1; rank <= 13; rank++) {
-            cards[index] = new Card(rank, suit);
-            index++;
-        }
+int index = 0;
+for (int suit = 0; suit <= 3; suit++) {
+    for (int rank = 1; rank <= 13; rank++) {
+        cards[index] = new Card(rank, suit);
+        index++;
     }
+}
 \end{code}
 
 The outer loop enumerates the suits from 0 to 3.
@@ -9287,11 +9283,11 @@ When you work with arrays, it is convenient to have a method that displays the c
 We have seen the pattern for traversing an array several times, so the following method should be familiar:
 
 \begin{code}
-    public static void printDeck(Card[] cards) {
-        for (int i = 0; i < cards.length; i++) {
-            System.out.println(cards[i]);
-        }
+public static void printDeck(Card[] cards) {
+    for (int i = 0; i < cards.length; i++) {
+        System.out.println(cards[i]);
     }
+}
 \end{code}
 
 Since \java{cards} has type \java{Card[]}, an element of \java{cards} has type \java{Card}.
@@ -9409,14 +9405,14 @@ If \java{low} exceeds \java{high}, there are no cards in the range, so we break 
 To see how binary search works, it's helpful to add the following print statement at the beginning of the loop.
 
 \begin{code}
-    System.out.println(low + ", " + high);
+System.out.println(low + ", " + high);
 \end{code}
 
 If we invoke \java{binarySearch} like this:
 
 \begin{code}
-    Card card = new Card(11, 0);
-    System.out.println(binarySearch(cards, card));
+Card card = new Card(11, 0);
+System.out.println(binarySearch(cards, card));
 \end{code}
 
 We expect to find this card at position 10.
@@ -9586,31 +9582,31 @@ This code demonstrates the use of a 2D array, specifically an array of images.
 The declaration looks like this:
 
 \begin{code}
-    private Image[][] images;
+private Image[][] images;
 \end{code}
 
 \java{images} is a 2D array of \java{Image} objects, which are defined in the \java{java.awt} package.
 Here's the code that creates the array itself:
 
 \begin{code}
-    images = new Image[14][4];
+images = new Image[14][4];
 \end{code}
 
 The array has 14 rows (one for each rank plus an unused row for rank 0) and 4 columns (one for each suit).
 Here's the loop that populates the array:
 
 \begin{code}
-    String cardset = "cardset-oxymoron";
-    String suits = "cdhs";
+String cardset = "cardset-oxymoron";
+String suits = "cdhs";
 
-    for (int suit = 0; suit <= 3; suit++) {
-        char c = suits.charAt(suit);
+for (int suit = 0; suit <= 3; suit++) {
+    char c = suits.charAt(suit);
 
-        for (int rank = 1; rank <= 13; rank++) {
-            String s = String.format("%s/%02d%c.gif", cardset, rank, c);
-            images[rank][suit] = new ImageIcon(s).getImage();
-        }
+    for (int rank = 1; rank <= 13; rank++) {
+        String s = String.format("%s/%02d%c.gif", cardset, rank, c);
+        images[rank][suit] = new ImageIcon(s).getImage();
     }
+}
 \end{code}
 
 \java{cardset} is the name of the directory that contains the image files.
@@ -9687,16 +9683,16 @@ Figure~\ref{fig.deckobject} shows what a \java{Deck} looks like with no cards.
 We'll add a second constructor that makes a standard 52-card deck and populates it with \java{Card} objects:
 
 \begin{code}
-    public Deck() {
-        this.cards = new Card[52];
-        int index = 0;
-        for (int suit = 0; suit <= 3; suit++) {
-            for (int rank = 1; rank <= 13; rank++) {
-                this.cards[index] = new Card(rank, suit);
-                index++;
-            }
+public Deck() {
+    this.cards = new Card[52];
+    int index = 0;
+    for (int suit = 0; suit <= 3; suit++) {
+        for (int rank = 1; rank <= 13; rank++) {
+            this.cards[index] = new Card(rank, suit);
+            index++;
         }
     }
+}
 \end{code}
 
 \index{new}
@@ -9706,7 +9702,7 @@ This method is similar to the example in Section~\ref{cardarray}; we just turned
 We can now create a standard \java{Deck} like this:
 
 \begin{code}
-    Deck deck = new Deck();
+Deck deck = new Deck();
 \end{code}
 
 \index{printDeck}
@@ -9716,11 +9712,11 @@ Looking at the methods we have written so far, one obvious candidate is \java{pr
 Here's how it looks, rewritten as an instance method of \java{Deck}:
 
 \begin{code}
-    public void print() {
-        for (int i = 0; i < this.cards.length; i++) {
-            System.out.println(this.cards[i]);
-        }
+public void print() {
+    for (int i = 0; i < this.cards.length; i++) {
+        System.out.println(this.cards[i]);
     }
+}
 \end{code}
 
 When you transform a static method into an instance method, it usually gets shorter.
@@ -9750,10 +9746,10 @@ To sketch the program, we will use a combination of Java statements and English.
 This technique is sometimes called {\bf pseudocode}.
 
 \begin{code}
-    for each index i {
-        // choose a random number between i and deck length - 1
-        // swap the ith card and the randomly-chosen card
-    }
+for each index i {
+    // choose a random number between i and deck length - 1
+    // swap the ith card and the randomly-chosen card
+}
 \end{code}
 
 The nice thing about pseudocode is that it often makes clear what methods you are going to need.
@@ -10171,17 +10167,17 @@ It also initializes \java{cards} with an empty \java{ArrayList}.
 We provide a \java{CardCollection} method that does the same thing:
 
 \begin{code}
-    public void addCard(Card card) {
-        this.cards.add(card);
-    }
+public void addCard(Card card) {
+    this.cards.add(card);
+}
 \end{code}
 
 Inside \java{addCard} and other instance methods, you can access instance variables without using the keyword \java{this}:
 
 \begin{code}
-    public void addCard(Card card) {
-        cards.add(card);
-    }
+public void addCard(Card card) {
+    cards.add(card);
+}
 \end{code}
 
 Until now we have used \java{this} explicitly to make it easy to identify attributes.
@@ -10191,9 +10187,9 @@ We also need to be able to remove cards from a collection.
 The following method takes an index, removes the card at that location, and shifts the following cards left to fill the gap.
 
 \begin{code}
-    public Card popCard(int i) {
-        return cards.remove(i);
-    }
+public Card popCard(int i) {
+    return cards.remove(i);
+}
 \end{code}
 
 If we are dealing cards from a shuffled deck, we don't care which card gets removed.
@@ -10201,30 +10197,30 @@ It is most efficient to choose the last one, so we don't have to shift any follo
 Here is an overloaded version of \java{popCard} that removes and returns the last card:
 
 \begin{code}
-    public Card popCard() {
-        int i = size() - 1;
-        return popCard(i);
-    }
+public Card popCard() {
+    int i = size() - 1;
+    return popCard(i);
+}
 \end{code}
 
 Notice that \java{popCard} uses \java{CardCollection}'s own \java{size} method:
 
 \begin{code}
-    public int size() {
-        return cards.size();
-    }
+public int size() {
+    return cards.size();
+}
 \end{code}
 
 Methods like \java{addCard}, \java{popCard}, and \java{size}, which invoke another method without doing much additional work, are called {\bf wrapper methods}.
 We will use these wrapper methods to implement less trivial methods, like \java{deal}:
 
 \begin{code}
-    public void deal(CardCollection that, int n) {
-        for (int i = 0; i < n; i++) {
-            Card card = popCard();
-            that.addCard(card);
-        }
+public void deal(CardCollection that, int n) {
+    for (int i = 0; i < n; i++) {
+        Card card = popCard();
+        that.addCard(card);
     }
+}
 \end{code}
 
 \java{deal} removes cards from the collection is it invoked on, \java{this}, and adds them to the collection it gets as a parameter, \java{that}.
@@ -10236,41 +10232,41 @@ Instead, you have to use the methods \java{get} and \java{set}.
 We provide a wrapper for \java{get}:
 
 \begin{code}
-    public Card getCard(int i) {
-        return cards.get(i);
-    }
+public Card getCard(int i) {
+    return cards.get(i);
+}
 \end{code}
 
 The \java{last} method gets the last card (but doesn't remove it):
 
 \begin{code}
-    public Card last() {
-        int i = size() - 1;
-        return cards.get(i);
-    }
+public Card last() {
+    int i = size() - 1;
+    return cards.get(i);
+}
 \end{code}
 
 In order to control the ways card collections are modified, we don't provide a wrapper for \java{set}.
 The only modifiers we provide are the two versions of \java{popCard} and the following version of \java{swapCards}:
 
 \begin{code}
-    public void swapCards(int i, int j) {
-        Card temp = cards.get(i);
-        cards.set(i, cards.get(j));
-        cards.set(j, temp);
-    }
+public void swapCards(int i, int j) {
+    Card temp = cards.get(i);
+    cards.set(i, cards.get(j));
+    cards.set(j, temp);
+}
 \end{code}
 
 We use \java{swapCards} to implement \java{shuffle}, which we described in Section~\ref{shuffle}:
 
 \begin{code}
-    public void shuffle() {
-        Random random = new Random();
-        for (int i = size() - 1; i > 0; i--) {
-            int j = random.nextInt(i);
-            swapCards(i, j);
-        }
+public void shuffle() {
+    Random random = new Random();
+    for (int i = size() - 1; i > 0; i--) {
+        int j = random.nextInt(i);
+        swapCards(i, j);
     }
+}
 \end{code}
 
 \java{ArrayList} provides additional methods we aren't using here.
@@ -10312,7 +10308,7 @@ The only additional method in \java{Deck}, at least for now, is a constructor.
 So you can create a \java{Deck} like this:
 
 \begin{code}
-    Deck deck = new Deck("Deck");
+Deck deck = new Deck("Deck");
 \end{code}
 
 The first line of the contructor uses something new, \java{super}, which is a keyword that refers to the superclass of the current class.
@@ -10360,15 +10356,15 @@ At this point we can create a \java{Deck} and start dealing cards.
 Here's a simple example that deals five cards to a hand, and deals the rest into a draw pile:
 
 \begin{code}
-        Deck deck = new Deck("Deck");
-        deck.shuffle();
+Deck deck = new Deck("Deck");
+deck.shuffle();
 
-        Hand hand = new Hand("Hand");
-        deck.deal(hand, 5);
-        hand.display();
+Hand hand = new Hand("Hand");
+deck.deal(hand, 5);
+hand.display();
 
-        Hand drawPile = new Hand("Draw Pile");
-        deck.dealAll(drawPile);
+Hand drawPile = new Hand("Draw Pile");
+deck.dealAll(drawPile);
 \end{code}
 
 \java{CardCollection} provides \java{dealAll}, which deals all of the remaining cards.
@@ -10389,20 +10385,20 @@ If you are a careful reader, you might notice something strange about this examp
 Take another look at the definition of \java{deal}:
 
 \begin{code}
-    public void deal(CardCollection that, int n) {
-        for (int i = 0; i < n; i++) {
-            Card card = popCard();
-            that.addCard(card);
-        }
+public void deal(CardCollection that, int n) {
+    for (int i = 0; i < n; i++) {
+        Card card = popCard();
+        that.addCard(card);
     }
+}
 \end{code}
 
 Notice that the first parameter is supposed to be a \java{CardCollection}.
 But we invoked it like this:
 
 \begin{code}
-    Hand hand1 = new Hand("Hand 1");
-    deck.deal(hand1, 5);
+Hand hand1 = new Hand("Hand 1");
+deck.deal(hand1, 5);
 \end{code}
 
 The argument is a \java{Hand}, not a \java{CardCollection}.
@@ -10450,13 +10446,13 @@ In this example, we have to use \java{this} to distinguish between the instance 
 The primary method that \java{Player} provides is \java{play}, which decides which card to discard.
 
 \begin{code}
-    public Card play(Eights eights, Card prev) {
-        Card card = searchForMatch(prev);
-        if (card == null) {
-            card = drawForMatch(eights, prev);
-        }
-        return card;
+public Card play(Eights eights, Card prev) {
+    Card card = searchForMatch(prev);
+    if (card == null) {
+        card = drawForMatch(eights, prev);
     }
+    return card;
+}
 \end{code}
 
 The first parameter is a reference to the \java{Eights} object that encapsulates the state of the game.
@@ -10469,15 +10465,15 @@ Using top-down development, we'll have \java{play} invoke two helper methods, \j
 \java{searchForMatch} looks in the players hand for a card that matches the previously played card:
 
 \begin{code}
-    public Card searchForMatch(Card prev) {
-        for (int i = 0; i < hand.size(); i++) {
-            Card card = hand.getCard(i);
-            if (cardMatches(card, prev)) {
-                return hand.popCard(i);
-            }
+public Card searchForMatch(Card prev) {
+    for (int i = 0; i < hand.size(); i++) {
+        Card card = hand.getCard(i);
+        if (cardMatches(card, prev)) {
+            return hand.popCard(i);
         }
-        return null;
     }
+    return null;
+}
 \end{code}
 
 The strategy is pretty simple: the for loop searches for the first card that's legal to play and returns it.
@@ -10485,16 +10481,16 @@ If there are no cards that match, it returns \java{null}.
 And in that case, we have to draw cards until we get a match:
 
 \begin{code}
-    public Card drawForMatch(Eights eights, Card prev) {
-        while (true) {
-            Card card = eights.draw();
-            System.out.println(name + " draws " + card);
-            if (cardMatches(card, prev)) {
-                return card;
-            }
-            hand.addCard(card);
+public Card drawForMatch(Eights eights, Card prev) {
+    while (true) {
+        Card card = eights.draw();
+        System.out.println(name + " draws " + card);
+        if (cardMatches(card, prev)) {
+            return card;
         }
+        hand.addCard(card);
     }
+}
 \end{code}
 
 The while loop runs until it finds a match (we'll assume for now that it always does).
@@ -10506,38 +10502,38 @@ Both \java{searchForMatch} and \java{drawForMatch} use \java{cardMatches}, which
 \java{cardMatches} is a straightforward translation of the rules of the game:
 
 \begin{code}
-    public static boolean cardMatches(Card card1, Card card2) {
-        if (card1.getSuit() == card2.getSuit()) {
-            return true;
-        }
-        if (card1.getRank() == card2.getRank()) {
-            return true;
-        }
-        if (card1.getRank() == 8) {
-            return true;
-        }
-        return false;
+public static boolean cardMatches(Card card1, Card card2) {
+    if (card1.getSuit() == card2.getSuit()) {
+        return true;
     }
+    if (card1.getRank() == card2.getRank()) {
+        return true;
+    }
+    if (card1.getRank() == 8) {
+        return true;
+    }
+    return false;
+}
 \end{code}
 
 Finally, \java{Player} provides \java{displayScore}, which computes and displays penalty points for cards left in a player's hand at the end of the game.
 
 \begin{code}
-    public int score() {
-        int sum = 0;
-        for (int i = 0; i < hand.size(); i++) {
-            Card card = hand.getCard(i);
-            int rank = card.getRank();
-            if (rank == 8) {
-                sum -= 20;
-            } else if (rank > 10) {
-                sum -= 10;
-            } else {
-                sum -= rank;
-            }
+public int score() {
+    int sum = 0;
+    for (int i = 0; i < hand.size(); i++) {
+        Card card = hand.getCard(i);
+        int rank = card.getRank();
+        if (rank == 8) {
+            sum -= 20;
+        } else if (rank > 10) {
+            sum -= 10;
+        } else {
+            sum -= rank;
         }
-        return sum;
     }
+    return sum;
+}
 \end{code}
 
 
@@ -10589,45 +10585,45 @@ The last instance variable is a \java{Scanner} we'll use to prompt the user afte
 Here's the constructor that initializes the instance variables and deals the cards:
 
 \begin{code}
-    public Eights() {
-        Deck deck = new Deck("Deck");
-        deck.shuffle();
+public Eights() {
+    Deck deck = new Deck("Deck");
+    deck.shuffle();
 
-        int handSize = 5;
-        one = new Player("Allen");
-        deck.deal(one.getHand(), handSize);
+    int handSize = 5;
+    one = new Player("Allen");
+    deck.deal(one.getHand(), handSize);
 
-        two = new Player("Chris");
-        deck.deal(two.getHand(), handSize);
+    two = new Player("Chris");
+    deck.deal(two.getHand(), handSize);
 
-        discardPile = new Hand("Discards");
-        deck.deal(discardPile, 1);
+    discardPile = new Hand("Discards");
+    deck.deal(discardPile, 1);
 
-        drawPile = new Hand("Draw pile");
-        deck.deal(drawPile);
+    drawPile = new Hand("Draw pile");
+    deck.deal(drawPile);
 
-        in = new Scanner(System.in);
-    }
+    in = new Scanner(System.in);
+}
 \end{code}
 
 The next piece we'll need is a method that checks whether the game is over.
 If either hand is empty, we're done:
 
 \begin{code}
-    public boolean isDone() {
-        return one.getHand().empty() || two.getHand().empty();
-    }
+public boolean isDone() {
+    return one.getHand().empty() || two.getHand().empty();
+}
 \end{code}
 
 When the draw pile is empty, we have to shuffle the discard pile:
 
 \begin{code}
-    public void reshuffle() {
-        Card prev = discardPile.popCard();
-        discardPile.dealAll(drawPile);
-        discardPile.addCard(prev);
-        drawPile.shuffle();
-    }
+public void reshuffle() {
+    Card prev = discardPile.popCard();
+    discardPile.dealAll(drawPile);
+    discardPile.addCard(prev);
+    drawPile.shuffle();
+}
 \end{code}
 
 The first line saves the top card from \java{discardPile}.
@@ -10637,25 +10633,25 @@ Then we put the saved card back into \java{discardPile} and shuffle \java{drawPi
 Now we can use \java{reshuffle} as part of \java{draw}:
 
 \begin{code}
-    public Card draw() {
-        if (drawPile.empty()) {
-            reshuffle();
-        }
-        return drawPile.popCard();
+public Card draw() {
+    if (drawPile.empty()) {
+        reshuffle();
     }
+    return drawPile.popCard();
+}
 \end{code}
 
 
 We can switch from one player to the next like this:
 
 \begin{code}
-    public Player nextPlayer(Player current) {
-        if (current == one) {
-            return two;
-        } else {
-            return one;
-        }
+public Player nextPlayer(Player current) {
+    if (current == one) {
+        return two;
+    } else {
+        return one;
     }
+}
 \end{code}
 
 This method takes the current player as a parameter and returns the player who should go next.
@@ -10663,34 +10659,34 @@ This method takes the current player as a parameter and returns the player who s
 The last two pieces are \java{displayState}:
 
 \begin{code}
-    public void displayState() {
-        one.display();
-        two.display();
-        discardPile.display();
-        System.out.println("Draw pile:");
-        System.out.println(drawPile.size() + " cards");
-    }
+public void displayState() {
+    one.display();
+    two.display();
+    discardPile.display();
+    System.out.println("Draw pile:");
+    System.out.println(drawPile.size() + " cards");
+}
 \end{code}
 
 And \java{waitForUser}:
 
 \begin{code}
-    public void waitForUser() {
-        in.nextLine();
-    }
+public void waitForUser() {
+    in.nextLine();
+}
 \end{code}
 
 Using these pieces, we can write \java{takeTurn}, which executes one player's turn:
 
 \begin{code}
-    public void takeTurn(Player player) {
-        Card prev = discardPile.last();
-        Card next = player.play(this, prev);
-        discardPile.addCard(next);
+public void takeTurn(Player player) {
+    Card prev = discardPile.last();
+    Card next = player.play(this, prev);
+    discardPile.addCard(next);
 
-        System.out.println(player.getName() + " plays " + next);
-        System.out.println();
-    }
+    System.out.println(player.getName() + " plays " + next);
+    System.out.println();
+}
 \end{code}
 
 \java{takeTurn} reads the top card off the discard pile and passes it to \java{player.play}, which we saw in the previous section.
@@ -10699,21 +10695,21 @@ The result is the card the player chose, which is added to the discard pile.
 Finally, we use \java{takeTurn} and the other methods to write \java{playGame}:
 
 \begin{code}
-    public void playGame() {
-        Player player = one;
+public void playGame() {
+    Player player = one;
 
-        // keep playing until there's a winner
-        while (!isDone()) {
-            displayState();
-            waitForUser();
-            takeTurn(player);
-            player = nextPlayer(player);
-        }
-
-        // display the final score
-        one.displayScore();
-        two.displayScore();
+    // keep playing until there's a winner
+    while (!isDone()) {
+        displayState();
+        waitForUser();
+        takeTurn(player);
+        player = nextPlayer(player);
     }
+
+    // display the final score
+    one.displayScore();
+    two.displayScore();
+}
 \end{code}
 
 Done!
@@ -11152,17 +11148,17 @@ For cases where we know the right answer, we can do better by writing {\bf unit 
 For example, to test \java{fibonacci} from Section~\ref{fibonacci}, we could write:
 
 \begin{code}
-    public static void main(String[] args) {
-        if (fibonacci(1) != 1) {
-            System.err.println("fibonacci(1) is incorrect");
-        }
-        if (fibonacci(2) != 1) {
-            System.err.println("fibonacci(2) is incorrect");
-        }
-        if (fibonacci(3) != 2) {
-            System.err.println("fibonacci(3) is incorrect");
-        }
+public static void main(String[] args) {
+    if (fibonacci(1) != 1) {
+        System.err.println("fibonacci(1) is incorrect");
     }
+    if (fibonacci(2) != 1) {
+        System.err.println("fibonacci(2) is incorrect");
+    }
+    if (fibonacci(3) != 2) {
+        System.err.println("fibonacci(3) is incorrect");
+    }
+}
 \end{code}
 
 JUnit is the most common testing tool for Java programs (see \url{junit.org}).
@@ -11326,11 +11322,11 @@ You don't have to create the \java{Graphics} object; it gets created when you cr
 The previous example used \java{fillOval}, which has the following signature:
 
 \begin{code}
-    /**
-     * Fills an oval bounded by the specified rectangle with
-     * the current color.
-     */
-    public void fillOval(int x, int y, int width, int height)
+/**
+ * Fills an oval bounded by the specified rectangle with
+ * the current color.
+ */
+public void fillOval(int x, int y, int width, int height)
 \end{code}
 
 \index{bounding box}
@@ -11352,7 +11348,7 @@ The bounding box itself is not drawn (see Figure~\ref{fig.circle}).
 To choose the color of a shape, invoke \java{setColor} on the \java{Graphics} object:
 
 \begin{code}
-    g.setColor(Color.red);
+g.setColor(Color.red);
 \end{code}
 
 The \java{setColor} method determines the color of everything that gets drawn afterward.
@@ -11368,7 +11364,7 @@ You can create your own colors by specifying the red, green, and blue (RGB) comp
 For example:
 
 \begin{code}
-    Color purple = new Color(128, 0, 128);
+Color purple = new Color(128, 0, 128);
 \end{code}
 
 Each value is an integer in the range 0 (darkest) to 255 (lightest).
@@ -11377,7 +11373,7 @@ The color \java{(0, 0, 0)} is black, and \java{(255, 255, 255)} is white.
 You can set the background color of the \java{Canvas} by invoking \java{setBackground}:
 
 \begin{code}
-    canvas.setBackground(Color.white);
+canvas.setBackground(Color.white);
 \end{code}
 
 
@@ -11392,27 +11388,27 @@ To make the code more readable, let's use \java{Rectangle}s to represent boundin
 Here's a method that takes a Rectangle and invokes \java{fillOval}.
 
 \begin{code}
-    public void boxOval(Graphics g, Rectangle bb) {
-        g.fillOval(bb.x, bb.y, bb.width, bb.height);
-    }
+public void boxOval(Graphics g, Rectangle bb) {
+    g.fillOval(bb.x, bb.y, bb.width, bb.height);
+}
 \end{code}
 
 And here's a method that draws Mickey Mouse:
 
 \begin{code}
-    public void mickey(Graphics g, Rectangle bb) {
-        boxOval(g, bb);
+public void mickey(Graphics g, Rectangle bb) {
+    boxOval(g, bb);
 
-        int dx = bb.width / 2;
-        int dy = bb.height / 2;
-        Rectangle half = new Rectangle(bb.x, bb.y, dx, dy);
+    int dx = bb.width / 2;
+    int dy = bb.height / 2;
+    Rectangle half = new Rectangle(bb.x, bb.y, dx, dy);
 
-        half.translate(-dx / 2, -dy / 2);
-        boxOval(g, half);
+    half.translate(-dx / 2, -dy / 2);
+    boxOval(g, half);
 
-        half.translate(dx * 2, 0);
-        boxOval(g, half);
-    }
+    half.translate(dx * 2, 0);
+    boxOval(g, half);
+}
 \end{code}
 
 The first line draws the face.
@@ -11722,14 +11718,14 @@ If you think you have an infinite loop and you know which loop it is, add a prin
 For example:
 
 \begin{code}
-    while (x > 0 && y < 0) {
-        // do something to x
-        // do something to y
+while (x > 0 && y < 0) {
+    // do something to x
+    // do something to y
 
-        System.out.println("x: " + x);
-        System.out.println("y: " + y);
-        System.out.println("condition: " + (x > 0 && y < 0));
-    }
+    System.out.println("x: " + x);
+    System.out.println("y: " + y);
+    System.out.println("condition: " + (x > 0 && y < 0));
+}
 \end{code}
 
 Now when you run the program you see three lines of output for each time through the loop.
@@ -11781,8 +11777,8 @@ Remember that when you declare a variable with an array type, its elements are i
 For example, this code causes a \java{NullPointerException}:
 
 \begin{code}
-    int[] array = new Point[5];
-    System.out.println(array[0].x);
+int[] array = new Point[5];
+System.out.println(array[0].x);
 \end{code}
 
 \item[ArrayIndexOutOfBoundsException:]
@@ -11908,18 +11904,18 @@ Writing complex expressions is fine as long as they are readable, but they can b
 It is often a good idea to break a complex expression into a series of assignments to temporary variables.
 
 \begin{code}
-    rect.setLocation(rect.getLocation().translate(
-                     -rect.getWidth(), -rect.getHeight()));
+rect.setLocation(rect.getLocation().translate(
+                 -rect.getWidth(), -rect.getHeight()));
 \end{code}
 
 This example can be rewritten as:
 
 \begin{code}
-    int dx = -rect.getWidth();
-    int dy = -rect.getHeight();
-    Point location = rect.getLocation();
-    Point newLocation = location.translate(dx, dy);
-    rect.setLocation(newLocation);
+int dx = -rect.getWidth();
+int dy = -rect.getHeight();
+Point location = rect.getLocation();
+Point newLocation = location.translate(dx, dy);
+rect.setLocation(newLocation);
 \end{code}
 
 The second version is easier to read, partly because the variable names provide additional documentation.
@@ -11934,7 +11930,7 @@ Another problem that can occur with big expressions is that the order of evaluat
 For example, to evaluate $\frac{x}{2 \pi}$, you might write:
 
 \begin{code}
-    double y = x / 2 * Math.PI;
+double y = x / 2 * Math.PI;
 \end{code}
 
 That is not correct, because multiplication and division have the same precedence, and they are evaluated from left to right.
@@ -11943,7 +11939,7 @@ This code computes $\frac{x}{2}\pi$.
 If you are not sure of the order of operations, check the documentation, or use parentheses to make it explicit.
 
 \begin{code}
-    double y = x / (2 * Math.PI);
+double y = x / (2 * Math.PI);
 \end{code}
 
 This version is correct, and more readable for other people who haven't memorized the order of operations.
@@ -11957,27 +11953,27 @@ This version is correct, and more readable for other people who haven't memorize
 If you have a return statement with a complex expression, you don't have a chance to display the value before returning.
 
 \begin{code}
-    public Rectangle intersection(Rectangle a, Rectangle b) {
-        return new Rectangle(
-            Math.min(a.x, b.x), Math.min(a.y, b.y),
-            Math.max(a.x + a.width, b.x + b.width)
-                - Math.min(a.x, b.x)
-            Math.max(a.y + a.height, b.y + b.height)
-                - Math.min(a.y, b.y));
-    }
+public Rectangle intersection(Rectangle a, Rectangle b) {
+    return new Rectangle(
+        Math.min(a.x, b.x), Math.min(a.y, b.y),
+        Math.max(a.x + a.width, b.x + b.width)
+            - Math.min(a.x, b.x)
+        Math.max(a.y + a.height, b.y + b.height)
+            - Math.min(a.y, b.y));
+}
 \end{code}
 
 Instead of writing everything in one statement, use temporary variables:
 
 \begin{code}
-    public Rectangle intersection(Rectangle a, Rectangle b) {
-        int x1 = Math.min(a.x, b.x);
-        int y2 = Math.min(a.y, b.y);
-        int x2 = Math.max(a.x + a.width, b.x + b.width);
-        int y2 = Math.max(a.y + a.height, b.y + b.height);
-        Rectangle rect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
-        return rect;
-    }
+public Rectangle intersection(Rectangle a, Rectangle b) {
+    int x1 = Math.min(a.x, b.x);
+    int y2 = Math.min(a.y, b.y);
+    int x2 = Math.max(a.x + a.width, b.x + b.width);
+    int y2 = Math.max(a.y + a.height, b.y + b.height);
+    Rectangle rect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
+    return rect;
+}
 \end{code}
 
 Now you have the opportunity to display any of the intermediate variables before returning.
