@@ -286,6 +286,40 @@ She defines the field this way:
 \end{quote}
 
 
+\section{Parity}
+\label{alternative}
+
+\index{parity}
+
+To follow up the previous chapter, if you need to check the {\bf parity} (evenness or oddness) of numbers often, you might want to ``wrap'' this code up in a method:
+
+\begin{code}
+    public static void printParity(int x) {
+        if (x % 2 == 0) {
+            System.out.println("x is even");
+        } else {
+            System.out.println("x is odd");
+        }
+    }
+\end{code}
+
+Now you have a method named \java{printParity} that will print an appropriate message for any integer you care to provide.
+In \java{main} you would invoke this method as follows:
+
+\begin{code}
+    printParity(17);
+\end{code}
+
+Always remember that when you invoke a method, you do not have to declare the types of the arguments you provide.
+Java can figure out what type they are.
+You should resist the temptation to write things like:
+
+\begin{code}
+    int number = 17;
+    printParity(int number);        // WRONG!!!
+\end{code}
+
+
 \section{Increment and decrement}
 
 \index{operator!increment}

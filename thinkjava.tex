@@ -3416,7 +3416,7 @@ Saturday, July 22, 2015
 
 The programs we've seen so far do pretty much the same thing every time, regardless of the input.
 For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
-This chapter presents the features you need for programs to make complex decisions: a new data type called \java{boolean}, operators for expressing logic, and \java{if} statements.
+This chapter presents the features you need for programs to make decisions: a new data type called \java{boolean}, operators for expressing logic, and \java{if} statements.
 
 %\java{boolean} is named after George Boole, who developed a formal system that represents logic using the values {\it true} and {\it false} and operations like {\it and}, {\it or}, and {\it not}.
 %In Java, the values \java{true} and \java{false} belong to the data type \java{boolean}.
@@ -3461,7 +3461,7 @@ When comparing values of different numeric types, Java applies the same conversi
 For example, when evaluating the expression \java{5 < 6.0}, Java automatically converts the \java{5} to \java{5.0}.
 
 Most relational operators don't work with strings.
-Confusingly, \java{==} and \java{!=} do work with strings -- they just don't do what you expect.
+But confusingly, \java{==} and \java{!=} do work with strings -- they just don't do what you expect.
 We'll explain what they do later; in the meantime, don't use them with strings.
 Instead, you should use the \java{equals} method:
 
@@ -3471,7 +3471,7 @@ Instead, you should use the \java{equals} method:
     System.out.println(fruit1.equals(fruit2));
 \end{code}
 
-The result is the boolean value \java{false}.
+The result of \java{fruit1.equals(fruit2)} is the boolean value \java{false}.
 
 
 \section{Logical operators}
@@ -3483,7 +3483,7 @@ Java has three {\bf logical operators}: \texttt{\&\&}, \java{||}, and \java{!}, 
 The results of these operators are similar to their meanings in English.
 
 For example, \texttt{x > 0 \&\& x < 10} is true when \java{x} is both greater than zero {\em and} less than 10.
-The expression \java{evenFlag || n \% 3 == 0} is true if {\em either} condition is true, that is, if \java{evenFlag} is true or the number \java{n} is divisible by 3.
+The expression \java{evenFlag || n \% 3 == 0} is true if either condition is true, that is, if \java{evenFlag} is true {\em or} the number \java{n} is divisible by 3.
 Finally, the \java{!} operator inverts a boolean expression.
 So \java{!evenFlag} is true if \java{evenFlag} is {\em not} true.
 
@@ -3560,37 +3560,42 @@ If the remainder when \java{x} is divided by 2 is zero, we know that \java{x} is
 If the condition is false, the second print statement is executed instead.
 Since the condition must be true or false, exactly one of the branches will run.
 
-%\label{alternative}
-%\index{parity}
-%
-%To follow up the previous chapter, if you need to check the {\bf parity} (evenness or oddness) of numbers often, you might want to ``wrap'' this code up in a method:
-%
-%\begin{code}
-%    public static void printParity(int x) {
-%        if (x % 2 == 0) {
-%            System.out.println("x is even");
-%        } else {
-%            System.out.println("x is odd");
-%        }
-%    }
-%\end{code}
-%
-%Now you have a method named \java{printParity} that will print an appropriate message for any integer you care to provide.
-%In \java{main} you would invoke this method as follows:
-%
-%\begin{code}
-%    printParity(17);
-%\end{code}
-%
-%Always remember that when you invoke a method, you do not have to declare the types of the arguments you provide.
-%Java can figure out what type they are.
-%You should resist the temptation to write things like:
-%
-%\begin{code}
-%    int number = 17;
-%    printParity(int number);        // WRONG!!!
-%\end{code}
+The braces are optional for branches that have only one statement.
+So we could have written the previous example this way:
 
+\begin{code}
+    if (x % 2 == 0)
+        System.out.println("x is even");
+    else
+        System.out.println("x is odd");
+\end{code}
+
+However, it's better to use braces -- even when they are optional -- to avoid making the mistake of adding statements to an \java{if} or \java{else} block and forgetting to add the braces.
+
+\begin{code}
+    if (x > 0)
+        System.out.println("x is positive");
+        System.out.println("x is not zero");
+\end{code}
+
+This code is misleading because it's not indented correctly.
+Since there are no braces, only the first \java{println} is part of the \java{if} statement.
+Here is what the compiler actually sees:
+
+\begin{code}
+    if (x > 0) {
+        System.out.println("x is positive");
+    }
+        System.out.println("x is not zero");
+\end{code}
+
+As a result, the second \java{println} runs no matter what.
+Even experienced programmers make this mistake; search the web for Apple's ``goto fail'' bug.
+
+
+\section{Chaining and nesting}
+
+\index{chaining}
 \index{conditional!chained}
 
 Sometimes you want to check related conditions and choose one of several actions.
@@ -3605,10 +3610,6 @@ One way to do this is by {\bf chaining} a series of \java{if} and \java{else} st
         System.out.println("x is zero");
     }
 \end{code}
-
-%TODO: DW suggests that at some point we show examples that omit the {}
-% or put the whole if statement on one line, since students will see
-% these versions.
 
 These chains can be as long as you want, although they can be difficult to read if they get out of hand.
 One way to make them easier to read is to use standard indentation, as demonstrated in these examples.
@@ -3756,7 +3757,7 @@ If so, we can call \java{nextDouble} with no chance of throwing an exception.
 If not, we display an error message and return.
 Returning from \java{main} terminates the program.
 
-%Notice also the use of the \java{!} operator, instead of the test \java{hasNextDouble() == false}.
+%Notice the use of the \java{!} operator, instead of the test \java{in.hasNextDouble() == false}.
 %Since the \java{hasNextDouble} method returns a boolean result, it is already a condition.
 
 
@@ -3869,7 +3870,7 @@ Figure~\ref{fig.stack2} is a stack diagram for countdown, called with \java{n ==
 
 By convention, the stack for \java{main} is at the top and the stack grows down.
 The frame for \java{main} is empty because \java{main} does not have any variables.
-It has one parameter, \java{args}, but since we're not using it, we left it out of the diagram.
+(It has the parameter \java{args}, but since we're not using it, we left it out of the diagram.)
 
 There are four frames for \java{countdown}, each with a different value for the parameter \java{n}.
 The last frame, with \java{n == 0}, is called the {\bf base case}.
@@ -3949,8 +3950,10 @@ Here is a recursive method that displays the binary representation of any positi
 If \java{value} is zero, \java{displayBinary} does nothing (that's the base case).
 If the argument is positive, the method divides it by two and calls \java{displayBinary} recursively.
 When the recursive call returns, the method displays one digit of the result and returns (again).
+
 The leftmost digit is at the bottom of the stack, so it gets displayed first.
 The rightmost digit, at the top of the stack, gets displayed last.
+After invoking \java{displayBinary}, we use \java{println} to complete the output.
 
 \begin{code}
     displayBinary(23);
@@ -3998,11 +4001,11 @@ Putting a conditional statement inside one or both branches of another condition
 \term{flag}
 A variable (usually \java{boolean}) that represents a condition or status.
 
-\term{recursive}
-A method that invokes itself.
-
 \term{recursion}
-The process of invoking the same method that you are currently executing.
+The process of invoking (and restarting) the same method that is currently executing.
+
+\term{recursive}
+A method that invokes itself, usually with different arguments.
 
 \term{base case}
 A condition that causes a recursive method {\it not} to make another recursive call.
@@ -4041,13 +4044,6 @@ For example, can you rewrite this code using a single \java{if} statement?
 
 
 \begin{exercise}
-
-Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after \java{main} invokes \java{nLines} with the parameter \java{n == 4}, just before the last invocation of \java{nLines} returns.
-
-\end{exercise}
-
-
-\begin{exercise}
 For the following program:
 
 \begin{enumerate}
@@ -4074,7 +4070,9 @@ For the following program:
         zoop("just for", bizz);
         clink(2 * buzz);
     }
+\end{code}
 
+\begin{code}
     public static void clink(int fork) {
         System.out.print("It's ");
         zoop("breakfast ", fork) ;
@@ -4084,6 +4082,13 @@ For the following program:
         System.out.println("any " + strangStrung + "more ");
     }
 \end{code}
+\end{exercise}
+
+
+\begin{exercise}
+
+Draw a stack diagram that shows the state of the program in Section~\ref{recursion} after \java{main} invokes \java{nLines} with the parameter \java{n == 4}, just before the last invocation of \java{nLines} returns.
+
 \end{exercise}
 
 
@@ -4152,9 +4157,7 @@ public class Buzz {
             System.out.println("boo-wa-ha-ha");
         }
     }
-\end{code}
 
-\begin{code}
     public static void main(String[] args) {
         zippo("rattle", 13);
     }
