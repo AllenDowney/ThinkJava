@@ -7458,30 +7458,32 @@ You might have more than one tile with the same letter, but you can only use eac
 \index{String}
 \index{type!String}
 
-As we learned in the previous chapter, an object is is a collection of data that provides a set of methods.
-For example, a String is a collection of characters that provides methods like \java{charAt} and \java{substring}.
+As we learned in the previous chapter, an object is an item of data that provides a set of methods.
+For example, a String is an array of characters that provides methods like \java{charAt} and \java{substring}.
 
 In this chapter we introduce two new types of objects, \java{Point} and \java{Rectangle}.
-We show how to write methods that take objects as parameters and produce objects as return values.
+We also show how to write methods that take objects as parameters and create objects as return values.
 
 
 \section{Point objects}
 \label{point}
 
+\index{java.awt}
+\index{Point}
+\index{class!Point}
+
 The \java{java.awt} package provides a class named \java{Point} intended to represent the coordinates of a location in a Cartesian plane.
 In mathematical notation, points are often written in parentheses with a comma separating the coordinates.
 For example, $(0,0)$ indicates the origin, and $(x,y)$ indicates the point $x$ units to the right and $y$ units up from the origin.
-
-\index{Point}
-\index{class!Point}
-\index{new}
-\index{statement!new}
 
 In order to use the \java{Point} class, you have to import it.
 
 \begin{code}
 import java.awt.Point;
 \end{code}
+
+\index{new}
+\index{statement!new}
 
 Then, to create a new point, you have to use the \java{new} operator:
 
@@ -7502,6 +7504,8 @@ The result of the \java{new} operator is a reference to the new object.
 So \java{blank} contains a reference to the new \java{Point} object.
 Figure~\ref{fig.reference} shows the result.
 
+\index{state diagram}
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/reference.pdf}
@@ -7509,10 +7513,6 @@ Figure~\ref{fig.reference} shows the result.
 \label{fig.reference}
 \end{center}
 \end{figure}
-
-\index{state}
-\index{state diagram}
-\index{attribute}
 
 As usual, the name of the variable \java{blank} appears outside the box, and its value appears inside the box.
 In this case, the value is a reference, which is represented with an arrow.
@@ -7522,6 +7522,7 @@ The arrow points to the new object, which contains two variables, \java{x} and \
 \section{Attributes}
 \label{attribute}
 
+\index{attribute}
 \index{dot notation}
 
 Variables that belong to an object are usually called {\bf attributes}, but you might also see them called ``fields''.
@@ -7572,7 +7573,8 @@ java.awt.Point[x=3,y=4]
 \end{stdout}
 
 \java{Point} objects provide a method called \java{toString} that returns a string representation of a point.
-When you call \java{println}, it calls {\tt toString} and displays the result, which in this case shows the name of the type and the names and values of the attributes.
+When you call \java{println} with objects, it automatically calls \java{toString} and displays the result.
+In this case, it shows the name of the type and the names and values of the attributes.
 
 As another example, we can rewrite the \java{distance} method from Section~\ref{distance} so that it takes two \java{Point}s as parameters instead of four \java{double}s.
 
@@ -7584,7 +7586,7 @@ public static double distance(Point p1, Point p2) {
 }
 \end{code}
 
-Passing objects as parameters makes the source code more readable and less error-prone.
+Passing objects as parameters makes the source code more readable and less error-prone, because related values are bundled together.
 
 
 \section{Objects as return types}
@@ -7687,17 +7689,10 @@ moveRect(box, 50, 100);
 System.out.println(box);
 \end{code}
 
-The code displays \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
+%The code displays \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
 
 Modifying objects by passing them as arguments to methods can be useful.
 But it can also make debugging more difficult, because it is not always clear which method invocations modify their arguments.
-%Later, I discuss some pros and cons of this programming style.
-
-%Now would be a good time to examine the documentation for these classes.
-%You can read the documentation at
-%\url{http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html}
-%and
-%\url{http://docs.oracle.com/javase/7/docs/api/java/awt/Rectangle.html}.
 
 Java provides a number of methods that operate on \java{Point}s and \java{Rectangle}s.
 For example, \java{translate} has the same effect as \java{moveRect}, but instead of passing the rectangle as an argument, you use dot notation:
@@ -7722,13 +7717,12 @@ This line invokes the \java{translate} method on the object \java{box} refers to
 
 Remember that when you assign an object to a variable, you are assigning a {\em reference} to an object.
 It is possible to have multiple variables that refer to the same object.
+The state diagram in Figure~\ref{fig.aliasing} shows the result.
 
 \begin{code}
 Rectangle box1 = new Rectangle(0, 0, 100, 200);
 Rectangle box2 = box1;
 \end{code}
-
-The state diagram in Figure~\ref{fig.aliasing} shows the result.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -7740,8 +7734,8 @@ The state diagram in Figure~\ref{fig.aliasing} shows the result.
 
 \index{aliasing}
 
-\java{box1} and \java{box2} are aliases for the same object, so any changes that affect one variable also affect the other.
-For example:
+Notice how \java{box1} and \java{box2} are aliases for the same object, so any changes that affect one variable also affect the other.
+This example adds 50 to all four sides of the rectangle, so it moves the corner up and to the left by 50, and it increases the height and width by 100:
 
 \begin{code}
 System.out.println(box2.width);
@@ -7750,8 +7744,7 @@ System.out.println(box2.width);
 \end{code}
 
 The first line displays {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
-The second line invokes the \java{grow} method on \java{box1}, which stretches the \java{Rectangle} horizontally and vertically.  In this example it adds 50 to all four sides of the rectangle, so it moves the corner up and to the left by 50, and it increases the height and width by 100.
-
+The second line invokes the \java{grow} method on \java{box1}, which stretches the \java{Rectangle} horizontally and vertically.
 The effect is shown in Figure~\ref{fig.aliasing2}.
 
 \begin{figure}[!ht]
@@ -7762,20 +7755,19 @@ The effect is shown in Figure~\ref{fig.aliasing2}.
 \end{center}
 \end{figure}
 
-When we make a change using \java{box1}, we can see the change using \java{box2}.
+When we make a change using \java{box1}, we see the change using \java{box2}.
 Thus, the value displayed by the third line is {\tt 200}, the width of the expanded rectangle.
 %(As an aside, it is perfectly legal for the coordinates of a \java{Rectangle} %to be negative.)
 
-As you can tell even from this simple example, code that involves aliasing can get confusing fast and can be difficult to debug.
-In general, aliasing should be avoided or used with care.
+%As you can tell from this simple example, code that involves aliasing can get confusing fast, and it can be difficult to debug.
+%In general, aliasing should be avoided or used with care.
 
 
 \section{The null keyword}
 
 \index{null}
 
-When you create an object variable, remember that you are storing a {\em reference} to an object.
-%Until you make the variable point to an object, the value of the variable will be \java{null}.
+When you create an object variable, remember that you are storing a reference to an object.
 In Java, the keyword \java{null} is a special value that means ``no object''.
 You can declare and initialize object variables this way:
 
@@ -7797,7 +7789,7 @@ The value \java{null} is represented in state diagrams by a small box with no ar
 \index{NullPointerException}
 \index{run-time error}
 
-If you try to use a \java{null} object, either by accessing an attribute or invoking a method, Java throws a \java{NullPointerException}.
+If you try to use a \java{null} variable, either by accessing an attribute or invoking a method, Java throws a \java{NullPointerException}.
 
 \begin{code}
 Point blank = null;
@@ -7806,7 +7798,7 @@ blank.translate(50, 50);      // NullPointerException
 \end{code}
 
 On the other hand, it is legal to pass a null reference as an argument or receive one as a return value.
-For example, \java{null} is often used to represent an exceptional condition or indicate an error.
+For example, \java{null} is often used to represent an special condition or indicate an error.
 
 
 \section{Garbage collection}
@@ -7834,14 +7826,15 @@ In the state diagram, we remove the arrow between them, as in Figure~\ref{fig.re
 \index{garbage collection}
 
 If there are no references to an object, there is no way to access its attributes or invoke a method on it.
-In effect, it ceases to exist.
-We could keep the object in memory, but it would only waste space.
-As your program runs, the system looks for stranded objects and reclaims them;
-then the space can be reused for new objects.
+From the programmer's view, it ceases to exist.
+However it's still in the computer's memory, taking up space.
+
+As your program runs, the system automatically looks for stranded objects and reclaims them; then the space can be reused for new objects.
 This process is called {\bf garbage collection}.
 
 You don't have to do anything to make garbage collection happen, and in general don't have to be aware of it.
-But we thought you might be interested.
+But in high performance applications, you may notice a slight delay every now and then when Java reclaims space from discarded objects.
+%You can manually run the garbage collector by invoking \java{System.gc()} method.
 
 
 \section{Java library source}
@@ -7856,22 +7849,15 @@ TODO: explain how to download and browse {\tt src.zip}, examine the contents of 
 
 \begin{description}
 
-%\term{reference}
-%A value that indicates an object.
-%In a state diagram, a reference appears as an arrow.
-
-\term{parse}
-To read a string and analyze its structure.
-
 \term{attribute}
 One of the named data items that make up an object.
 %Each object has its own copy of the attributes for its class.
 
-%\term{constructor}
-%A special method called by \java{new} to initialize an object.
+\term{dot notation}
+Use of the dot operator (\java{.}) to access an object's attributes or methods.
 
 %\term{UML}
-%Unified Modeling Language, a standard way to draw diagrams for software %engineering.
+%Unified Modeling Language, a standard way to draw diagrams for software engineering.
 
 %\term{class diagram}
 %An illustration of attributes and methods for a class.
@@ -7893,9 +7879,12 @@ The point of this exercise is to make sure you understand the mechanism for pass
 
 \begin{enumerate}
 
-\item For the following program, draw a stack diagram showing the local variables and parameters of \java{main} and \java{riddle}, and any objects those variables refer to, just before \java{riddle} returns.
+\item For the following program, draw a stack diagram showing the local variables and parameters of \java{main} and \java{riddle} just before \java{riddle} returns.
+Use arrows to show which objects each variable references.
 
-\item What is the output of this program?
+\item What is the output of the program?
+Is the \java{blank} object mutable or immutable?
+How can you tell?
 
 \end{enumerate}
 
@@ -7920,14 +7909,15 @@ public static int riddle(int x, Point p) {
 
 
 \begin{exercise}
-For the following program:
+The point of this exercise is to make sure you understand the mechanism for returning new objects from methods.
 
 \begin{enumerate}
 
 \item Draw a stack diagram showing the state of the program just before \java{distance} returns.
-Include all variables and parameters and the objects those variables refer to.
+Include all variables and parameters, and show the objects those variables refer to.
 
 \item What is the output of this program?
+(Can you tell without running it?)
 
 \end{enumerate}
 
@@ -7961,7 +7951,8 @@ public static void main(String[] args) {
 
 
 \begin{exercise}
-For the following program:
+This exercise is about aliasing.
+Recall that aliases are two variables that refer to the same object.
 
 \begin{enumerate}
 
@@ -8029,11 +8020,11 @@ int x = 17;
 BigInteger big = BigInteger.valueOf(x);
 \end{code}
 
-Type in this code and try it out.
-Try displaying a BigInteger.
+%Type in this code and try it out.
+%Try displaying a BigInteger.
 
-\item Because BigIntegers are not primitive types, the usual math operators don't work.
-Instead we have to use methods like \java{add}.
+\item Since BigIntegers are not primitive types, the usual math operators don't work.
+Instead, we have to use methods like \java{add}.
 To add two BigIntegers, invoke \java{add} on one and pass the other as an argument.
 
 \begin{code}
@@ -8051,12 +8042,15 @@ You can leave the parameter alone; it will still be an integer.
 Is it correct up to 30?
 How high can you make it go?
 
+\item Are \java{BigInteger} objects mutable or immutable?
+How can you tell?
+
 \end{enumerate}
 \end{exercise}
 
 
 \begin{exercise}
-Many encryption algorithms depend on the ability to raise large integers to an integer power.
+Many encryption algorithms depend on the ability to raise large integers to a power.
 Here is a method that implements an efficient algorithm for integer exponentiation:
 
 \begin{code}
@@ -8076,11 +8070,13 @@ public static int pow(int x, int n) {
 }
 \end{code}
 
+\index{BigInteger}
+
 The problem with this method is that it only works if the result is small enough to be represented by an \java{int}.
-Rewrite it so that the result is a BigInteger.
+Rewrite it so that the result is a \java{BigInteger}.
 The parameters should still be integers, though.
 
-You should use the BigInteger methods \java{add} and \java{multiply}.
+You should use the \java{BigInteger} methods \java{add} and \java{multiply}.
 But don't use \java{pow}; that would spoil the fun.
 \end{exercise}
 

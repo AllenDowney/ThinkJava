@@ -71,7 +71,7 @@
 
 % colors for code listings and output
 \usepackage{xcolor}
-\definecolor{bgcolor}{HTML}{FCFCFC}
+\definecolor{bgcolor}{HTML}{FAFAFA}
 \definecolor{comment}{HTML}{007C00}
 \definecolor{keyword}{HTML}{0000FF}
 \definecolor{strings}{HTML}{B20000}
