@@ -5041,7 +5041,7 @@ public static int prod(int m, int n) {
 
 \begin{enumerate}
 
-\item Draw a stack diagram showing the state of the program just before the last instance of \java{prod} completes.
+\item Draw a stack diagram showing the state of the program just before the last invocation of \java{prod} completes.
 
 \item What is the output of this program?
 (Try to answer this question on paper first, then run the code to check your answer.)
@@ -7459,10 +7459,16 @@ You might have more than one tile with the same letter, but you can only use eac
 \index{type!String}
 
 As we learned in the previous chapter, an object is an item of data that provides a set of methods.
-For example, a String is an array of characters that provides methods like \java{charAt} and \java{substring}.
+For example, a \java{String} is an array of characters that provides methods like \java{charAt} and \java{substring}.
 
-In this chapter we introduce two new types of objects, \java{Point} and \java{Rectangle}.
-We also show how to write methods that take objects as parameters and create objects as return values.
+\index{object-oriented}
+
+Java is an ``object-oriented'' language, which means that it uses objects to represent data {\em and} provide methods related to them.
+This way of organizing programs is a powerful design concept, and we will introduce it a little at a time throughout the remainder of the book.
+
+In this chapter, we introduce two new types of objects: \java{Point} and \java{Rectangle}.
+We show how to write methods that take objects as parameters and use objects as return values.
+We also take a look at the source code for the Java library.
 
 
 \section{Point objects}
@@ -7701,13 +7707,13 @@ For example, \java{translate} has the same effect as \java{moveRect}, but instea
 box.translate(50, 100);
 \end{code}
 
-This line invokes the \java{translate} method on the object \java{box} refers to.
+This line invokes the \java{translate} method for the object that \java{box} refers to.
+As a result, the \java{box} object is updated directly.
 
-%To foreshadow what's to come in future chapters, this example illustrates {\bf object-oriented programming}.
-%Rather than write \java{static} methods that manipulate parameters (like \java{moveRect}), we apply methods to objects themselves using dot notation.
+\index{object-oriented}
 
-% ABD: I don't think it buys us much to introduce OOP at this point.
-% TODO discuss when we should explain what OOP actually means
+This example is a good illustration of {\bf object-oriented} programming.
+Rather than write methods like \java{moveRect} that modify one or more parameters, we apply methods to objects themselves using dot notation.
 
 
 \section{Aliasing}
@@ -7837,12 +7843,80 @@ But in high performance applications, you may notice a slight delay every now an
 %You can manually run the garbage collector by invoking \java{System.gc()} method.
 
 
+\section{Class diagrams}
+
+To summarize what we've learned so far, \java{Point} and \java{Rectangle} objects each have their own attributes and methods.
+Attributes are an object's {\em data}, and methods are an object's {\em code}.
+An object's \java{class} defines which attributes and methods it will have.
+
+\index{UML}
+
+In practice, it's more convenient to look at high-level pictures than to examine the source code.
+{\bf Unified Modeling Language} (UML) defines a standard way to summarize the design of a class.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{figs/point-rect.pdf}
+\caption{UML class diagrams for \java{Point} and \java{Rectangle}.}
+\label{fig.umlPoint}
+\end{center}
+\end{figure}
+
+\index{class diagram}
+
+As shown in Figure~\ref{fig.umlPoint}, a {\bf class diagram} is divided into two sections.
+The top half lists the attributes, and the bottom half lists the methods.
+UML uses a language-independent format; so rather than showing \java{int x}, the diagram uses {\tt x:~int}.
+
+\index{state diagram}
+
+In contrast to state diagrams, which visualize objects (and variables) at run-time, a class diagram visualizes the source code at compile-time.
+
+Both \java{Point} and \java{Rectangle} have additional methods; we are only showing the ones introduced in this chapter.
+See the documentation for these classes to learn more about what they can do.
+
+
 \section{Java library source}
 
-TODO: explain how to download and browse {\tt src.zip}, examine the contents of {\tt Point.java}, {\tt Rectangle.java}, and {\tt String.java}, and discuss how objects encapsulate data and provide methods to access/modify the data. For example, strings are implemented in Java and are nothing more than a character array.
+\index{library}
 
-% explain the difference between Oracle java and OpenJDK?
-% or is it okay to simply say that Java is open source?
+Throughout the book, you have been using many classes from the Java library including \java{System}, \java{String}, \java{Scanner}, \java{Math}, \java{Random}, and others.
+What you may not have realized, is that these classes are written in Java.
+In fact, you can take a look at the source code to see how they work.
+
+\index{src.zip}
+
+The Java library contains thousands of files, many of which are thousands of lines of code.
+That is more than any one person could ever read and understand fully, so please don't be intimidated!
+
+Because it's so large, the library source code is stored in a file named \java{src.zip}.
+Take a few minutes to locate this file on your machine:
+
+\begin{itemize}
+\item On Windows, it's likely under: \verb|C:\Program Files\Java\jdk...\|
+\item On OS X, it's likely under: \\ \verb|/Library/Java/JavaVirtualMachines/jdk.../Contents/Home/|
+\item On Linux, it's likely under: \verb|/usr/lib/jvm/openjdk-7/| \\ (You may need to install the {\tt openjdk-7-source} package.)
+\end{itemize}
+
+When you open (or unzip) the file, you will see folders that correspond to Java packages.
+For example, open the {\tt java} folder and then open the {\tt awt} folder.
+You should now see {\tt Point.java} and {\tt Rectangle.java}, along with the other classes in the \java{java.awt} package.
+
+Open {\tt Point.java} in your editor and skim through the file.
+It uses language features we haven't yet discussed, so you probably won't understand everything.
+But you can get a sense of what professional Java software looks like browsing through the library.
+
+\index{documentation}
+
+Notice how much of {\tt Point.java} is documentation.
+Each method is thoroughly commented including \java{@param}, \java{@return}, and other Javadoc tags.
+You can see the HTML version of these comments on \url{http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html}.
+
+Now take a look at \java{Rectangle}'s \java{grow} and \java{translate} methods.
+There's a lot more to them than you may have realized, but that doesn't limit your ability to use and understand these methods in a program.
+
+To summarize the whole chapter, objects encapsulate data and provide methods to access and modify the data directly.
+Object-oriented programming makes it possible to hide messy details so that you can easily use and understand methods that other people wrote.
 
 
 \section{Vocabulary}
@@ -7856,14 +7930,17 @@ One of the named data items that make up an object.
 \term{dot notation}
 Use of the dot operator (\java{.}) to access an object's attributes or methods.
 
-%\term{UML}
-%Unified Modeling Language, a standard way to draw diagrams for software engineering.
-
-%\term{class diagram}
-%An illustration of attributes and methods for a class.
+\term{object-oriented}
+A way of organizing code and data into objects, rather than independent methods.
 
 \term{garbage collection}
 The process of finding objects that have no references and reclaiming their storage space.
+
+\term{UML}
+Unified Modeling Language, a standard way to draw diagrams for software engineering.
+
+\term{class diagram}
+An illustration of the attributes and methods for a class.
 
 \end{description}
 
@@ -7883,10 +7960,18 @@ The point of this exercise is to make sure you understand the mechanism for pass
 Use arrows to show which objects each variable references.
 
 \item What is the output of the program?
-Is the \java{blank} object mutable or immutable?
+
+\item Is the \java{blank} object mutable or immutable?
 How can you tell?
 
 \end{enumerate}
+
+\begin{code}
+public static int riddle(int x, Point p) {
+    x = x + 7;
+    return x + p.x + p.y;
+}
+\end{code}
 
 \begin{code}
 public static void main(String[] args) {
@@ -7897,11 +7982,6 @@ public static void main(String[] args) {
     System.out.println(x);
     System.out.println(blank.x);
     System.out.println(blank.y);
-}
-
-public static int riddle(int x, Point p) {
-    x = x + 7;
-    return x + p.x + p.y;
 }
 \end{code}
 
@@ -7976,7 +8056,9 @@ public static Point findCenter(Rectangle box) {
     int y = box.y + box.height / 2;
     return new Point(x, y);
 }
+\end{code}
 
+\begin{code}
 public static void main(String[] args) {
     Rectangle box1 = new Rectangle(2, 4, 7, 9);
     Point p1 = findCenter(box1);
@@ -8042,7 +8124,7 @@ You can leave the parameter alone; it will still be an integer.
 Is it correct up to 30?
 How high can you make it go?
 
-\item Are \java{BigInteger} objects mutable or immutable?
+\item Are BigInteger objects mutable or immutable?
 How can you tell?
 
 \end{enumerate}
@@ -8073,10 +8155,10 @@ public static int pow(int x, int n) {
 \index{BigInteger}
 
 The problem with this method is that it only works if the result is small enough to be represented by an \java{int}.
-Rewrite it so that the result is a \java{BigInteger}.
+Rewrite it so that the result is a BigInteger.
 The parameters should still be integers, though.
 
-You should use the \java{BigInteger} methods \java{add} and \java{multiply}.
+You should use the BigInteger methods \java{add} and \java{multiply}.
 But don't use \java{pow}; that would spoil the fun.
 \end{exercise}
 
@@ -10935,9 +11017,6 @@ An existing class that is extended by another class.
 
 \term{bottom-up development}
 A way of developing programs by identifying simple pieces, implementing them, and then assembling them into more complex algorithms.
-
-\term{object-oriented}
-A way of organizing code and data into objects, rather than independent methods.
 
 \end{description}
 
