@@ -286,7 +286,7 @@ She defines the field this way:
 \end{quote}
 
 
-\section{Parity}
+\section{Parity (in a method)}
 \label{alternative}
 
 \index{parity}
@@ -365,6 +365,35 @@ The effect of this statement is to leave the value of {\tt index} unchanged.
 This is often a difficult bug to track down.
 
 Remember, you can write {\tt index = index+1}, or you can write {\tt index++}, but you shouldn't mix them.
+
+
+\section{Bottom-up development}
+
+\index{program development}
+\index{bottom-up}
+
+The next few sections develop the code to generate a histogram.
+A good approach to solving problems like this one is to think of simple methods that are easy to write and then combine them into a solution.
+This process is called {\bf bottom-up} development.
+It is not always obvious where to start, but a good approach is to look for subproblems that fit a pattern you have seen before.
+
+\index{traverse!array}
+\index{array!traverse}
+\index{looping and counting}
+
+In Section~\ref{loopcount}, we saw a loop that traversed a string and counted the number of times a given letter appeared.
+You can think of this program as an example of a pattern called ``traverse and count''.
+The elements of this pattern are:
+
+\begin{itemize}
+\item A container that can be traversed, like an array or a string.
+\item A test you can apply to each element in the container.
+\item A counter that keeps track of how many elements pass the test.
+\end{itemize}
+
+In the case of building a histogram, the container is an array of integers.
+The test is whether or not a given score falls in a given range of values.
+And the counter is the histogram itself.
 
 
 \section{Class definitions and object types}
