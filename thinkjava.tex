@@ -6738,7 +6738,7 @@ char letter = fruit.charAt(0);
 \end{code}
 
 The argument \java{0} means that we want the letter at position 0.
-Like array indices, string indices start at 0, so the character assigned to \java{letter} is \java{b}.
+Like array indexes, string indexes start at 0, so the character assigned to \java{letter} is \java{b}.
 
 \index{value!char}
 
@@ -6786,7 +6786,7 @@ for (int i = 913; i <= 937; i++) {
 System.out.println();
 \end{code}
 
-This example uses a type cast to convert each integer to a character.
+This example uses a type cast to convert each integer (in the range) to the corresponding character.
 
 
 \section{Strings are immutable}
@@ -6813,6 +6813,23 @@ String upperName = name.toUpperCase();
 After these statements run, \java{upperName} refers to the string \verb|"ALAN TURING"|.
 But \java{name} still refers to \verb|"Alan Turing"|.
 
+\index{replace}
+
+Another useful method is \java{replace}, which finds and substitutes instances of one string in another.
+This example replaces \verb|"Computer Science"| with \verb|"CS"|:
+
+\begin{code}
+String text = "Computer Science is fun!";
+text = text.replace("Computer Science", "CS");
+\end{code}
+
+Simply invoking \java{text.replace} does not change the value of \java{text}.
+It returns a reference to a new string \verb|"CS is fun!"|, which is then assigned back to the variable \java{text}.
+Without the assignment, \java{text.replace} would have no effect.
+
+Strings are immutable by design, because it simplifies passing them between methods as parameters and return values.
+And since the contents of a string can never change, two variables can reference the same string without one accidentally corrupting the other.
+
 
 \section{String traversal}
 \label{stringtraverse}
@@ -6830,20 +6847,23 @@ for (int i = 0; i < fruit.length(); i++) {
 
 Strings provide a method called \java{length} that returns the number of characters in the string.
 Because it is a method, you have to invoke it with the empty argument list, \java{()}.
+%Do not confuse \java{string.length()}, which is a method, with \java{array.length}, which is a constant.
 
 \index{loop variable}
 \index{variable!loop}
-\index{index}
 
 The condition is \java{i < fruit.length()}, which means that when \java{i} is equal to the length of the string, the condition is \java{false} and the loop terminates.
 
-%The enhanced for loop does NOT work with strings, so we can't write the previous example like this:
+\index{toCharArray}
 
-%\begin{code}
-%for (char letter : fruit) {
-%    System.out.println(letter);
-%}
-%\end{code}
+Unfortunately, the enhanced for loop does not work with strings.
+But you can convert any string to a character array and iterate that:
+
+\begin{code}
+for (char letter : fruit.toCharArray()) {
+    System.out.println(letter);
+}
+\end{code}
 
 \index{String!length}
 \index{length!String}
@@ -6855,13 +6875,13 @@ int length = fruit.length();
 char last = fruit.charAt(length);      // wrong!
 \end{code}
 
+\index{StringIndexOutOfBoundsException}
+\index{exception!StringIndexOutOfBounds}
+
 This code compiles and runs, but invoking the \java{charAt} method throws a \java{StringIndexOutOfBoundsException}.
 The problem is that there is no sixth letter in \verb|"banana"|.
 Since we started counting at 0, the 6 letters are indexed from 0 to 5.
 To get the last character, you have to subtract 1 from \java{length}.
-
-\index{StringIndexOutOfBoundsException}
-\index{exception!StringIndexOutOfBounds}
 
 \begin{code}
 int length = fruit.length();
@@ -6869,7 +6889,7 @@ char last = fruit.charAt(length - 1);  // correct
 \end{code}
 
 Many string traversals involve reading one string and creating another.
-For example, to reverse a string we add one character at a time:
+For example, to reverse a string, we simply add one character at a time:
 
 \begin{code}
 public static String reverse(String s) {
@@ -6903,23 +6923,28 @@ The \java{substring} method returns new string that copies letters from an exist
 The first example returns a copy of the entire string.
 The second example returns all but the first two characters.
 As the last example shows, \java{substring} returns the empty string if the argument is the length of the string.
-To visualize how this method works, it helps to draw a picture:
 
-% TODO: There is a version of this picture with the lines between
-% the letters, which helps with understanding substring.  Let's bring
-% it back and add text to explain it.
+To visualize how the \java{substring} method works, it helps to draw a picture like Figure~\ref{fig.banana}.
 
+\begin{figure}[!ht]
 \begin{center}
-\begin{tabular}{c|c|c|c|c|c}
-%\hline
-b & a & n & a & n & a \\
-\hline
-0 & 1 & 2 & 3 & 4 & 5 \\
-%\hline
-\end{tabular}
+\includegraphics{figs/banana.pdf}
+\caption{State diagram for a \java{String} of six characters.}
+\label{fig.banana}
 \end{center}
+\end{figure}
 
-Like many string methods, \java{substring} is overloaded.
+%\begin{center}
+%\begin{tabular}{c|c|c|c|c|c}
+%%\hline
+%b & a & n & a & n & a \\
+%\hline
+%0 & 1 & 2 & 3 & 4 & 5 \\
+%%\hline
+%\end{tabular}
+%\end{center}
+
+Like most string methods, \java{substring} is overloaded.
 That is, there are other versions of \java{substring} that have different parameters.
 If it's invoked with two argments, they are treated as a start and end index:
 
@@ -6935,6 +6960,7 @@ For example, to select a substring with length \java{len}, starting at index \ja
 
 
 \section{The indexOf method}
+
 \index{indexOf}
 
 The \java{indexOf} method searches for a character in a string.
@@ -6959,6 +6985,7 @@ If the letter happens to appear at the starting index, the starting index is the
 So \java{fruit.indexOf('a', 5)} returns 5.
 
 If the character does not appear in the string, \java{indexOf} returns \java{-1}.
+Since indexes cannot be negative, \java{-1} indicates the character was not found.
 
 You can also use \java{indexOf} to search for a substring, not just a single character.
 For example, the expression \java{fruit.indexOf("nan")} returns 2.
@@ -6970,8 +6997,7 @@ For example, the expression \java{fruit.indexOf("nan")} returns 2.
 \index{equals}
 \index{compareTo}
 
-To compare two strings, it is tempting to use the \java{==} operator.
-For example:
+To compare two strings, it may be tempting to use the \java{==} or \java{!=} operators.
 
 \begin{code}
 String name1 = "Alan Turing";
@@ -6983,7 +7009,7 @@ if (name1 == name2) {                 // wrong!
 
 This code compiles and runs, and most of the time it gets the answer right.
 But it is not correct, and sometimes it gets the answer wrong.
-The problem is that the \java{==} operator checks whether the two variables refer to the same object.
+The problem is that the \java{==} operator checks whether the two variables refer to the same object (by comparing the references).
 If you give it two different strings that contain the same letters, it yields \java{false}.
 
 The right way to compare strings is with the \java{equals} methods, like this:
@@ -6995,7 +7021,7 @@ if (name1.equals(name2)) {
 \end{code}
 
 This example invokes \java{equals} on \java{name1} and passes \java{name2} as an argument.
-The \java{equals} method returns \java{true} if the strings contain the same characters and \java{false} otherwise.
+The \java{equals} method returns \java{true} if the strings contain the same characters, otherwise it returns \java{false}.
 
 If the strings differ, we can use \java{compareTo} to see which comes first in alphabetical order:
 
@@ -7011,7 +7037,7 @@ if (diff == 0) {
 \end{code}
 
 The return value from \java{compareTo} is the difference between the first characters in the strings that differ.
-If the strings are equal, their difference is 0.
+If the strings are equal, their difference is zero.
 If the first string (the one on which the method is invoked) comes first in the alphabet, the difference is negative.
 Otherwise, the difference is positive.
 
@@ -7023,6 +7049,15 @@ The uppercase letters come before the lowercase letters, so \verb|"Ada"| comes b
 
 \section{Wrapper classes}
 \label{wrappers}
+
+In this chapter, we have begun to look more closely at objects (like strings) that provide methods.
+Primitive values (like \java{int}s, \java{double}s, and \java{char}s) do not come with any methods.
+For example, you can't call \java{equals} on an \java{int}:
+
+\begin{code}
+int i = 5;
+System.out.println(i.equals(5));  // compiler error
+\end{code}
 
 For each primitive type, there is a corresponding class in the Java library.
 The class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
@@ -7059,7 +7094,7 @@ The result is the string \verb|"12345"|.
 Now that you know about arrays and strings, we can {\em finally} explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter~\ref{theway}.
 If you are unfamiliar with the command-line interface, please read or review Section~\ref{commandline}.
 
-Continuing the example from the previous section, let's write a program to find the largest in a sequence of numbers.
+Continuing an earlier example, let's write a program to find the largest value in a sequence of numbers.
 Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
 Here is a starting point:
 
@@ -7071,15 +7106,15 @@ public class Max {
 }
 \end{code}
 
-If you run this program on the command line like this:
+You can run this program via the command line by typing:
 
 \begin{code}
 java Max
 \end{code}
 
-%TODO: we should explain {\bf empty array} in the array chapter
+\index{empty array}
 
-The output indicates that \java{args} is an empty array; that is, it has no elements:
+The output indicates that \java{args} is an {\bf empty array}; that is, it has no elements:
 
 \begin{stdout}
 []
@@ -7101,7 +7136,7 @@ The output is:
 But remember that the elements of \java{args} are strings.
 To find the maximum number, we have to convert the arguments to integers.
 
-The following fragment uses an enhanced \java{for} loop to parse the arguments and find the largest:
+The following fragment uses an enhanced \java{for} loop to parse the arguments (using the \java{Integer} wrapper class) and find the largest value:
 
 \begin{code}
 int max = Integer.MIN_VALUE;
@@ -7125,11 +7160,11 @@ If \java{args} is empty, the result is \java{MIN_VALUE}.
 \term{object}
 A collection of related data that comes with a set of methods that operate on it.
 
+\term{primitive}
+A data type that stores a single value and serves as a building block for other types.
+
 \term{Unicode}
 A standard for representing characters in most of the world's languages.
-
-\term{empty string}
-The string \verb|""|, what contains no characters and has a length of zero.
 
 %\term{traverse}
 %To iterate through the elements of a set performing a similar operation on each.
@@ -7143,9 +7178,8 @@ The string \verb|""|, what contains no characters and has a length of zero.
 %\term{exception}
 %A runtime error like ArithmeticException or IndexOutOfBoundsException.
 
-%TODO: find a place to present stack trace, ideally someplace with
-% a non-trivial call stack (this one is important -- right now we have
-% nothing)
+%TODO: find a place to present stack trace, ideally someplace with a
+% non-trivial call stack (this one is important -- right now we have nothing)
 
 %\term{stack trace}
 %An error message that shows the state of a program when an exception occurs.
@@ -7154,11 +7188,17 @@ The string \verb|""|, what contains no characters and has a length of zero.
 An object that, once created, cannot be modified.
 Strings are immutable by design.
 
+\term{empty string}
+The string \verb|""|, what contains no characters and has a length of zero.
+
 \term{wrapper class}
 Classes in \java{java.lang} that provide constants and methods for working with primitive types.
 
 \term{parse}
 To read a string and interpret or translate it.
+
+\term{empty array}
+An array with no elements and a length of zero.
 
 \end{description}
 
@@ -7168,40 +7208,6 @@ To read a string and interpret or translate it.
 The code for this chapter is in the {\tt ch09} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
-
-\begin{exercise}
-
-\index{encapsulation}
-\index{generalization}
-
-The purpose of this exercise is to review encapsulation and generalization (see Section~\ref{encapsulation}).
-The following code fragment traverses a string and checks whether it has the same number of open and close parentheses:
-
-\begin{code}
-String s = "((3 + 7) * 2)";
-int count = 0;
-
-for (int i = 0; i < s.length(); i++) {
-    char c = s.charAt(i);
-    if (c == '(') {
-        count++;
-    } else if (c == ')') {
-        count--;
-    }
-}
-
-System.out.println(count);
-\end{code}
-
-\begin{enumerate}
-
-\item Encapsulate this fragment in a method that takes a string argument and returns the final value of \java{count}.
-
-\item Now that you have generalized the code so that it works on any string, what could you do to generalize it more?
-
-\end{enumerate}
-
-\end{exercise}
 
 
 \begin{exercise}
@@ -7248,6 +7254,58 @@ Try it out and see what the error message is, then see if you can figure out wha
 
 \item For each data type, what types of values can you assign to it?
 For example, you can assign an \java{int} to a \java{double} but not vice versa.
+
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}
+Write a method called \java{letterHist} that takes a string as a parameter and returns a histogram of the letters in the string.
+The zeroeth element of the histogram should contain the number of a's in the String (upper and lower case); the 25th element should contain the number of z's.
+Your solution should only traverse the string once.
+\end{exercise}
+
+%TODO: check for consistency on String vs string vs \java{String}
+% let's avoid String, use \java{String} for the type, and string for the concept (agreed)
+
+% we should also check Point, Rectangle, Time, Rational, BigInteger, etc.
+
+% Since we say ``print statement'' without \java{}, I would like to
+% do the same with ``for loop'', ``while loop'', and similar
+
+
+\begin{exercise}
+
+\index{encapsulation}
+\index{generalization}
+
+The purpose of this exercise is to review encapsulation and generalization (see Section~\ref{encapsulation}).
+The following code fragment traverses a string and checks whether it has the same number of open and close parentheses:
+
+\begin{code}
+String s = "((3 + 7) * 2)";
+int count = 0;
+
+for (int i = 0; i < s.length(); i++) {
+    char c = s.charAt(i);
+    if (c == '(') {
+        count++;
+    } else if (c == ')') {
+        count--;
+    }
+}
+
+System.out.println(count);
+\end{code}
+
+\begin{enumerate}
+
+\item Encapsulate this fragment in a method that takes a string argument and returns the final value of \java{count}.
+
+\item Now that you have generalized the code so that it works on any string, what could you do to generalize it more?
+
+\item Test your method with multiple strings, including some that are balanced and some that are not.
 
 \end{enumerate}
 
@@ -7352,21 +7410,6 @@ Write a method called \java{isAbecedarian} that takes a \java{String} and return
 Your method can be iterative or recursive.
 
 \end{exercise}
-
-
-\begin{exercise}
-Write a method called \java{letterHist} that takes a string as a parameter and returns a histogram of the letters in the string.
-The zeroeth element of the histogram should contain the number of a's in the String (upper and lower case); the 25th element should contain the number of z's.
-Your solution should only traverse the string once.
-\end{exercise}
-
-%TODO: check for consistency on String vs string vs \java{String}
-% let's avoid String, use \java{String} for the type, and string for the concept (agreed)
-
-% we should also check Point, Rectangle, Time, Rational, BigInteger, etc.
-
-% Since we say ``print statement'' without \java{}, I would like to
-% do the same with ``for loop'', ``while loop'', and similar
 
 
 \begin{exercise}
@@ -9714,7 +9757,7 @@ for (int suit = 0; suit <= 3; suit++) {
 These strings are used to assemble \java{s}, which contains the filename for each image.
 For example, when \java{rank=1} and \java{suit=2}, the value of \java{s} is \verb|"cardset-oxymoron/01h.gif"|, which is an image of the Ace of Hearts.
 
-The last line of the loop reads the image file, extracts an \java{Image} object, and assigns it to a location in the array, as specified by the indices \java{rank} and \java{suit}.
+The last line of the loop reads the image file, extracts an \java{Image} object, and assigns it to a location in the array, as specified by the indexes \java{rank} and \java{suit}.
 For example, the image of the Ace of Hearts is stored in row 1, column 2.
 
 If you compile and run \java{CardTable.java}, you should see images of a deck of cards laid out on a green table.
