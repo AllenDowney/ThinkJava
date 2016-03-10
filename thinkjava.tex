@@ -7515,7 +7515,7 @@ The second line creates the new \java{Point} with the given arguments as coordin
 
 \index{reference}
 
-The result of the \java{new} operator is a reference to the new object.
+The result of the \java{new} operator is a {\em reference} to the new object.
 So \java{blank} contains a reference to the new \java{Point} object.
 Figure~\ref{fig.reference} shows the result.
 
@@ -7550,7 +7550,7 @@ int x = blank.x;
 
 The expression \java{blank.x} means ``go to the object \java{blank} refers to, and get the value of the attribute \java{x}.''
 In this case, we assign that value to a local variable named \java{x}.
-There is no conflict between the variable named \java{x} and the attribute named \java{x}.
+There is no conflict between the local variable named \java{x} and the attribute named \java{x}.
 The purpose of dot notation is to identify {\em which} variable you are referring to unambiguously.
 
 You can use dot notation as part of an expression.
@@ -7589,7 +7589,7 @@ java.awt.Point[x=3,y=4]
 
 \java{Point} objects provide a method called \java{toString} that returns a string representation of a point.
 When you call \java{println} with objects, it automatically calls \java{toString} and displays the result.
-In this case, it shows the name of the type and the names and values of the attributes.
+In this case, it shows the name of the type (\java{java.awt.Point}) and the names and values of the attributes.
 
 As another example, we can rewrite the \java{distance} method from Section~\ref{distance} so that it takes two \java{Point}s as parameters instead of four \java{double}s.
 
@@ -7813,13 +7813,13 @@ blank.translate(50, 50);      // NullPointerException
 \end{code}
 
 On the other hand, it is legal to pass a null reference as an argument or receive one as a return value.
-For example, \java{null} is often used to represent an special condition or indicate an error.
+For example, \java{null} is often used to represent a special condition or indicate an error.
 
 
 \section{Garbage collection}
 
-In Section~\ref{aliasing} we saw what happens when more than one variable refers to the same object.
-What happens when {\em no} variable refers to an object?
+In Section~\ref{aliasing}, we saw what happens when more than one variable refers to the same object.
+What happens when {\em no} variables refer to an object?
 
 \begin{code}
 Point blank = new Point(3, 4);
@@ -7842,7 +7842,7 @@ In the state diagram, we remove the arrow between them, as in Figure~\ref{fig.re
 
 If there are no references to an object, there is no way to access its attributes or invoke a method on it.
 From the programmer's view, it ceases to exist.
-However it's still in the computer's memory, taking up space.
+However it's still present in the computer's memory, taking up space.
 
 As your program runs, the system automatically looks for stranded objects and reclaims them; then the space can be reused for new objects.
 This process is called {\bf garbage collection}.
@@ -7890,7 +7890,7 @@ See the documentation for these classes to learn more about what they can do.
 \index{library}
 
 Throughout the book, you have been using many classes from the Java library including \java{System}, \java{String}, \java{Scanner}, \java{Math}, \java{Random}, and others.
-What you may not have realized, is that these classes are written in Java.
+What you may not have realized is that these classes are written in Java.
 In fact, you can take a look at the source code to see how they work.
 
 \index{src.zip}
@@ -7902,9 +7902,10 @@ Because it's so large, the library source code is stored in a file named \java{s
 Take a few minutes to locate this file on your machine:
 
 \begin{itemize}
-\item On Windows, it's likely under: \verb|C:\Program Files\Java\jdk...\|
+\item On Linux, it's likely under: \verb|/usr/lib/jvm/openjdk-7/|
+\\ (You may need to install the {\tt openjdk-7-source} package.)
 \item On OS X, it's likely under: \\ \verb|/Library/Java/JavaVirtualMachines/jdk.../Contents/Home/|
-\item On Linux, it's likely under: \verb|/usr/lib/jvm/openjdk-7/| \\ (You may need to install the {\tt openjdk-7-source} package.)
+\item On Windows, it's likely under: \verb|C:\Program Files\Java\jdk...\|
 \end{itemize}
 
 When you open (or unzip) the file, you will see folders that correspond to Java packages.
@@ -7925,7 +7926,7 @@ Now take a look at \java{Rectangle}'s \java{grow} and \java{translate} methods.
 There's a lot more to them than you may have realized, but that doesn't limit your ability to use and understand these methods in a program.
 
 To summarize the whole chapter, objects encapsulate data and provide methods to access and modify the data directly.
-Object-oriented programming makes it possible to hide messy details so that you can easily use and understand methods that other people wrote.
+Object-oriented programming makes it possible to hide messy details so that you can more easily use and understand code that other people wrote.
 
 
 \section{Vocabulary}
