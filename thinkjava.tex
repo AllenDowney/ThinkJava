@@ -3316,6 +3316,8 @@ It describes an efficient way to test programs that take input from the user and
 
 \begin{exercise}
 
+% TODO: we never define ``flow of execution''
+
 The point of this exercise is to practice reading code and to make sure that you understand the flow of execution through a program with multiple methods.
 
 \begin{enumerate}
@@ -5134,6 +5136,7 @@ the \java{while} and \java{for} statements.
 
 
 \section{The while statement}
+\label{while}
 
 \index{statement!while}
 \index{while statement}
@@ -5638,17 +5641,20 @@ For example, \java{i += 2} increments \java{i} by \java{2}.
 
 \index{pretest loop}
 
-The \java{while} and \java{for} statements both implement a {\bf pretest loop}.
-That is, they test the condition at the beginning of each pass through the loop.
+The \java{while} and \java{for} statements are {\bf pretest loops};
+that is, they test the condition first and at the beginning of each pass through the loop.
 
 \index{posttest loop}
 \index{do-while}
 
-Java also provides a {\bf posttest loop} in the form of a \java{do}-\java{while} statement.
-This type of loop is particularly useful when you need to run code at least one time and optionally repeat it.
+Java also provides a {\bf posttest loop}: the \java{do}-\java{while} statement.
+This type of loop is useful when you need to run the body of the loop at least once.
+
+%TODO: can we find an example that's better using do-while than using
+% while-break?
 
 For example, in Section~\ref{validate} we used the \java{return} statement to avoid reading invalid input from the user.
-Now we can use a \java{do}-\java{while} loop to keep reading input until it's valid:
+We can use a \java{do}-\java{while} loop to keep reading input until it's valid:
 
 \begin{code}
 Scanner in = new Scanner(System.in);
@@ -5666,6 +5672,9 @@ do {
 double x = in.nextDouble();
 \end{code}
 
+%ABD: I'd like to replace this with an example that makes better use
+% of do-while; this one is actually better with break.
+
 Although this code looks complicated, it is essentially only three steps:
 
 \begin{enumerate}
@@ -5682,13 +5691,16 @@ The loop terminates when \java{hasNextDouble()} return \java{true}.
 
 \section{Break and continue}
 
+% ABD: or maybe the bad example in the previous section is good motivation
+% for this.
+
 Sometimes neither a pretest nor a posttest loop will provide exactly what you need.
 In the previous example, the ``test'' needed to happen in the middle of the loop.
 As a result, we used a flag variable and a nested \java{if}-\java{else} statement.
 
 \index{break}
 
-A simpler way of solving this problem is to use a \java{break} statement.
+A simpler way to solve this problem is to use a \java{break} statement.
 When a program reaches a \java{break} statement, it exits the current loop.
 
 \begin{code}
@@ -5704,7 +5716,9 @@ while (true) {
 double x = in.nextDouble();
 \end{code}
 
-Notice how this example sets up an infinite loop, but then \java{break}s when the condition is \java{true}.
+Using \java{true} as a conditional in a \java{while} loop is an idiom that means ``loop forever'', or in this case ``loop until you get to a \java{break} statement.
+
+%Notice how this example sets up an infinite loop, but then \java{break}s when the condition is \java{true}.
 
 \index{continue}
 
@@ -5726,9 +5740,11 @@ while (x != 0) {
 }
 \end{code}
 
-Although \java{break} and \java{continue} statements give you complete control of your loops, you should use them sparingly.
-Like multiple \java{return} statements, they can make the code difficult to understand and debug.
+Although \java{break} and \java{continue} statements give you more control of the flow of execution, but they can make code difficult to understand and debug.
+Use them sparingly.
 
+%ABD: I maintain that there is nothing wrong with multiple return statements
+%Like multiple \java{return} statements, 
 
 %TODO: DW suggests we also cover PrintWriter to write files
 % add an appendix on File I/O since it involves try/catch?
@@ -7837,9 +7853,11 @@ But in high performance applications, you may notice a slight delay every now an
 %You can manually run the garbage collector by invoking \java{System.gc()} method.
 
 
-\section{Java library source}
+% Let's keep the TODOs in comments
 
-TODO: explain how to download and browse {\tt src.zip}, examine the contents of {\tt Point.java}, {\tt Rectangle.java}, and {\tt String.java}, and discuss how objects encapsulate data and provide methods to access/modify the data. For example, strings are implemented in Java and are nothing more than a character array.
+%\section{Java library source}
+
+%TODO: explain how to download and browse {\tt src.zip}, examine the contents of {\tt Point.java}, {\tt Rectangle.java}, and {\tt String.java}, and discuss how objects encapsulate data and provide methods to access/modify the data. For example, strings are implemented in Java and are nothing more than a character array.
 
 % explain the difference between Oracle java and OpenJDK?
 % or is it okay to simply say that Java is open source?
