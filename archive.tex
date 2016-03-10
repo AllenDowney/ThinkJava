@@ -1402,3 +1402,54 @@ If it passes the test, we can safely cast \java{obj} to a \java{Time} reference 
 Of course, the \java{equals} method may be arbitrarily complex.
 You could design it, for example, to allow \java{Time} and \java{String} objects to be equal if they represent the same time.
 However that design would likely confuse other programmers, since normally objects are only considered equal if they are of the same type.
+
+
+%(CM) I just realized we have this same figure/example twice,
+% for Time and again for Card; but maybe that's a good thing?
+
+\section{The equals method}
+\label{equivalence}
+
+As we saw in Section~\ref{equals}, you can use the \java{==} operator with object types, but it might not do what you want.
+The \java{==} operator checks whether two objects are identical.
+For example, suppose we create three \java{Card} variables:
+
+\index{identical}
+
+\begin{code}
+Card card1 = new Card(11, 1);
+Card card2 = card1;
+Card card3 = new Card(11, 1);
+\end{code}
+
+Figure~\ref{fig.card} is a state diagram showing the result.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics{figs/card.pdf}
+\caption{State diagram of three \java{Card} variables.}
+\label{fig.card}
+\end{center}
+\end{figure}
+
+Since \java{card1} and \java{card2} refer to the same object, \java{card1 == card2} is \java{true}.
+But \java{card1} and \java{card3} are references to different objects, so \java{card1 == card3} is \java{false}.
+
+When we compare cards, this is probably not the behavior we want.
+Rather, we want to check whether the cards are equivalent.
+To do that, we can provide an \java{equals} method.
+
+\index{equivalent}
+
+\begin{code}
+public boolean equals(Card that) {
+    return this.suit == that.suit && this.rank == that.rank;
+}
+\end{code}
+
+This method defines what ``equivalent'' means for cards: they must have the same suit and the same rank.
+Because \java{suit} and \java{rank} are primitive types, we can use \java{==} to compare them.
+
+Now if we invoke \java{card1.equals(card3)}, the result is \java{true}.
+Note that if two objects are identical, they are also equivalent.
+So \java{card1.equals(card2)} is \java{true} as well.

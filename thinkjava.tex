@@ -9085,16 +9085,17 @@ The purpose of this exercise is to write a class definition that includes a vari
 
 \chapter{Arrays of objects}
 
-In the next few chapters, we will develop programs that work with playing cards and decks of cards.
+In the remaining chapters, we will develop programs that work with playing cards and decks of cards.
 Here is an outline of the road ahead:
 
 \begin{enumerate}
 
 \item In this chapter, we define a \java{Card} class and write methods that work with cards and arrays of cards.
 
-\item In Chapter~\ref{deck}, we create a \java{Deck} class that encapsulates an array of cards and write methods that operate on decks.
+\item In Chapter~\ref{deck}, we create a \java{Deck} class that encapsulates an array of cards, and we write methods that operate on decks.
 
-\item In Chapter~\ref{eights}, we will introduce inheritance as a way to create new classes that extend existing classes, and define classes to implement the card game {\em Crazy Eights}.
+\item In Chapter~\ref{eights}, we introduce inheritance as a way to create new classes that extend existing classes.
+We then use all these classes to implement the card game {\em Crazy Eights}.
 
 \end{enumerate}
 
@@ -9127,14 +9128,13 @@ One possibility is a \java{String} containing things like \verb|"Spade"| for sui
 A problem with this design is that it would not be easy to compare cards to see which had a higher rank or suit.
 
 \index{encode}
-\index{encrypt}
 \index{map to}
 
 An alternative is to use integers to {\bf encode} the ranks and suits.
 By ``encode'' we don't mean to encrypt or translate into a secret code.
 We mean ``define a mapping between a sequence of numbers and the things we want to represent.''
 
-Here's the mapping for suits:
+Here is a mapping for suits:
 
 \begin{tabular}{l c l}
 Clubs & $\mapsto$ & 0 \\
@@ -9158,7 +9158,7 @@ Queen & $\mapsto$ & 12 \\
 King & $\mapsto$ & 13 \\
 \end{tabular}
 
-So far the class definition for the \java{Card} type looks like this:
+So far, the class definition for the \java{Card} type looks like this:
 
 \begin{code}
 public class Card {
@@ -9174,7 +9174,7 @@ public class Card {
 
 \index{constructor}
 
-The instance variables are private: we can access them from inside this class, but not from other classes.
+The instance variables are \java{private}: we can access them from inside this class, but not from other classes.
 
 The constructor takes a parameter for each instance variable.
 To create a \java{Card} object, we use the \java{new} operator:
@@ -9183,7 +9183,7 @@ To create a \java{Card} object, we use the \java{new} operator:
 Card threeOfClubs = new Card(3, 0);
 \end{code}
 
-%The first argument, \java{0} represents the suit Clubs.
+%The second argument, \java{0} represents the suit Clubs.
 The result is a reference to a \java{Card} that represents the 3 of Clubs.
 
 
@@ -9222,8 +9222,11 @@ String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
 \end{code}
 
 \index{state diagram}
+\index{reference}
+\index{String!reference to}
 
 The state diagram in Figure~\ref{fig.stringarray} shows the result.
+Each element of the array is a reference to a \java{String}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -9232,11 +9235,6 @@ The state diagram in Figure~\ref{fig.stringarray} shows the result.
 \label{fig.stringarray}
 \end{center}
 \end{figure}
-
-\index{reference}
-\index{String!reference to}
-
-Each element of the array is a reference to a \java{String}.
 
 Now we need an array to decode the ranks:
 
@@ -9282,25 +9280,19 @@ The output is {\tt Jack of Diamonds}.
 \label{classvar}
 
 So far we have seen local variables, which are declared inside a method, and instance variables, which are declared in a class definition, usually before the method definitions.
-Local variables are created when a method is invoked and destroyed when the method ends.
-Instance variables are created when you create an object and destroyed when the object is garbage collected.
+
+Local variables are created when a method is invoked, and their space is reclaimed when the method ends.
+Instance variables are created when you construct an object and reclaimed when the object is garbage collected.
 
 \index{class variables}
 
 Now it's time to learn about {\bf class variables}.
 Like instance variables, class variables are defined in a class definition, before the method definitions.
 But they are identified by the keyword \java{static}.
-They are created when the program starts (or when the class is used for the first time) and survive until the program ends.
+They are created when the program begins (or when the class is used for the first time) and survive until the program ends.
 Class variables are {\em shared} across all instances of the class.
 
-You can refer to a class variable from anywhere inside the class definition.
-Class variables are often used to store constant values that are needed in several places.
-In that case, they should also be defined as \java{final}.
-
-%Note that whether a variable is \java{static} or \java{final} involves two separate considerations:
-%\java{static} means the variable is shared, and \java{final} means the variable is constant.
-
-As an example, here is a version of \java{Card} where \java{suits} and \java{ranks} are defined as class variables:
+%As an example, here is a version of \java{Card} where \java{SUITS} and \java{RANKS} are defined as class variables:
 
 \begin{code}
 public class Card {
@@ -9321,47 +9313,26 @@ public class Card {
 }
 \end{code}
 
+%You can refer to a class variable from anywhere inside the class definition.
+Class variables are often used to store constant values that are needed in several places.
+In that case, they should also be defined as \java{final}.
+Note that whether a variable is \java{static} or \java{final} involves two separate considerations:
+\java{static} means the variable is shared, and \java{final} means the variable is constant.
+
 Naming \java{static final} variables with capital letters is a common convention that makes it easier to recognize their role in the class.
-Inside \java{toString} we can refer to \java{SUITS} and \java{RANKS} as if they were local variables.
+Inside \java{toString} we can refer to \java{SUITS} and \java{RANKS} as if they were local variables, but we can tell that they are class variables.
 
 One advantage of defining \java{SUITS} and \java{RANKS} as class variables is that they don't need to be created (and garbage collected) every time \java{toString} is called.
 They may also be needed in other methods and classes, so it's helpful to make them available everywhere.
 Since the array variables are \java{final}, and the strings they reference are immutable, there is no danger in making them \java{public}.
 
 
-\section{The equals method}
-\label{equivalence}
-
-As we saw in Section~\ref{equals}, you can use the \java{==} operator with object types, but it might not do what you want.
-The \java{==} operator checks whether two objects are identical.
-For example, suppose we create three \java{Card} variables:
-
-\index{identical}
-
-\begin{code}
-Card card1 = new Card(11, 1);
-Card card2 = card1;
-Card card3 = new Card(11, 1);
-\end{code}
-
-Figure~\ref{fig.card} is a state diagram showing the result.
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics{figs/card.pdf}
-\caption{State diagram of three \java{Card} variables.}
-\label{fig.card}
-\end{center}
-\end{figure}
-
-Since \java{card1} and \java{card2} refer to the same object, \java{card1 == card2} is \java{true}.
-But \java{card1} and \java{card3} are references to different objects, so \java{card1 == card3} is \java{false}.
-
-When we compare cards, this is probably not the behavior we want.
-Rather, we want to check whether the cards are equivalent.
-To do that, we can provide an \java{equals} method.
+\section{The compareTo method}
+\label{compare}
 
 \index{equivalent}
+
+As we saw in Section~\ref{equals}, it's helpful to create an \java{equals} method to test whether two objects are equivalent.
 
 \begin{code}
 public boolean equals(Card that) {
@@ -9369,26 +9340,15 @@ public boolean equals(Card that) {
 }
 \end{code}
 
-This method defines what ``equivalent'' means for cards: they must have the same suit and the same rank.
-Because \java{suit} and \java{rank} are primitive types, we can use \java{==} to compare them.
-
-Now if we invoke \java{card1.equals(card3)}, the result is \java{true}.
-Note that if two objects are identical, they are also equivalent.
-So \java{card1.equals(card2)} is \java{true} as well.
-
-
-\section{The compareTo method}
-\label{compare}
-
-\index{compareCard}
 \index{operator!logical}
 \index{logical operator}
 
+It would also be nice to have a method for comparing cards, so we can tell if one is higher or lower than another.
 For primitive types, we can use the comparison operators -- \java{<}, \java{>}, etc.\ -- to compare values.
 But these operators don't work for object types.
 
 For \java{String}s, Java provides a \java{compareTo} method, as we saw in Section~\ref{strcmp}.
-For user-defined types, we have to write \java{compareTo} ourselves.
+Like the \java{equals} method, we can write our own version of \java{compareTo} for the classes that we define.
 %Later we will use this method to sort a deck of cards.
 
 \index{ordering}
@@ -9397,6 +9357,7 @@ For user-defined types, we have to write \java{compareTo} ourselves.
 
 Some types are ``totally ordered'', which means that you can compare any two values and tell which is bigger.
 Integers and strings are totally ordered.
+
 Other types are ``unordered'', which means that there is no meaningful way to say that one element is bigger than another.
 In Java, the \java{boolean} type is unordered; if you try to compare \java{true < false}, you get a compiler error.
 
@@ -9412,7 +9373,7 @@ The choice is arbitrary, and it might be different for different games.
 But when you buy a new deck of cards, it comes sorted with all the Clubs together, followed by all the Diamonds, and so on.
 So for now, let's say that suit is more important.
 
-With that decided, we can write \java{compareTo}.
+With that decided, we can write \java{compareTo} as follows:
 
 \begin{code}
 public int compareTo(Card that) {
@@ -9452,11 +9413,15 @@ public int getSuit() {
 }
 \end{code}
 
+\index{immutable}
+
 Whether or not to provide setters is a design decision.
 If we did, cards would be mutable, so you could transform one card into another.
 That is probably not a feature we need, and in general mutable objects are more error-prone.
 So it might be better to make cards immutable.
 To do that, all we have to do is {\em not} provide any modifier methods (including setters).
+
+\index{final}
 
 That's easy enough, but it is not foolproof, because some fool might come along later and add a modifier.
 We can prevent that possibility by declaring the instance variables \java{final}:
@@ -9477,10 +9442,7 @@ But if someone writes a method that tries to modify these variables, they'll get
 \section{Arrays of cards}
 \label{cardarray}
 
-\index{array!of object}
-\index{object!array of}
-
-\index{composition}
+%\index{composition}
 
 %By now we have seen several examples of composition; that is, the ability to combine language features in a variety of arrangements.
 %One of the first examples we saw was using a method invocation as part of an expression.
@@ -9488,6 +9450,9 @@ But if someone writes a method that tries to modify these variables, they'll get
 
 %Having seen this pattern, and having learned about arrays and objects, you should not be surprised to learn that you can make arrays of objects.
 %And you can define objects with arrays as instance variables; you can make arrays that contain arrays; you can define objects that contain objects, and so on.
+
+\index{array!of object}
+\index{object!array of}
 
 Just as you can create an array of \java{String} objects, you can create an array of \java{Card} objects.
 The following statement creates an array of 52 cards:
@@ -9532,7 +9497,7 @@ cards[0].rank      // NullPointerException
 \index{nesting}
 \index{loop!nested}
 
-It won't work until we put cards in the array.
+That code won't work until we put cards in the array.
 One way to populate the array is to write nested \java{for} loops:
 
 \begin{code}
@@ -9545,9 +9510,9 @@ for (int suit = 0; suit <= 3; suit++) {
 }
 \end{code}
 
-The outer loop enumerates the suits from 0 to 3.
-For each suit, the inner loop enumerates the ranks from 1 to 13.
-Since the outer loop runs 4 times, and the inner loop runs 13 times for each suit, the body is executed is 52 times.
+The outer loop iterates suits from 0 to 3.
+For each suit, the inner loop iterates ranks from 1 to 13.
+Since the outer loop runs 4 times, and the inner loop runs 13 times for each suit, the body is executed 52 times.
 
 \index{index}
 
@@ -9577,7 +9542,7 @@ public static void printDeck(Card[] cards) {
 
 Since \java{cards} has type \java{Card[]}, an element of \java{cards} has type \java{Card}.
 So \java{println} invokes the \java{toString} method in the \java{Card} class.
-%This method is similar to invoking \java{System.out.println(Arrays.toString(cards))}.
+This method is similar to invoking \java{System.out.println(Arrays.toString(cards))}.
 
 
 \section{Sequential search}
@@ -9603,22 +9568,20 @@ public static int search(Card[] cards, Card target) {
 }
 \end{code}
 
-%The parameters of \java{search} are \java{cards} and \java{card}.
-%It might seem odd to have a variable with the same name as a type (the \java{card} variable has type \java{Card}).
-%We can tell the difference because the variable begins with a lower-case letter.
-
 \index{statement!return}
 \index{return!inside loop}
 
 The method returns as soon as it discovers the card, which means we don't have to traverse the entire array if we find the target.
 If we get to the end of the loop, we know the card is not in the array.
+Notice that this algorithm depends on the \java{equals} method.
 
 If the cards in the array are not in order, there is no way to search faster than sequential search.
 We have to look at every card, because otherwise we can't be certain the card we want is not there.
 But if the cards are in order, we can use better algorithms.
 
-%However for large arrays, sequential search is rather inefficient.
-%If you pay the price to keep them sorted, finding elements becomes much easier.
+We will learn in the next chapter how to sort arrays.
+If you pay the price to keep them sorted, finding elements becomes much easier.
+Especially for large arrays, sequential search is rather inefficient.
 
 
 \section{Binary search}
@@ -9643,21 +9606,21 @@ If you find it, stop.
 
 If you find two adjacent words on the page and your word comes between them, you can conclude that your word is not in the dictionary.
 
-Getting back to the array of cards, we can write a faster version of \java{search} if we know the cards are in order.
+Getting back to the array of cards, we can write a faster version of \java{search} if we know the cards are in order:
 
 \begin{code}
 public static int binarySearch(Card[] cards, Card card) {
     int low = 0;
     int high = cards.length - 1;
     while (low <= high) {
-        int mid = (low + high) / 2;                   // step 1
+        int mid = (low + high) / 2;                 // step 1
         int comp = cards[mid].compareTo(card);
 
-        if (comp == 0) {                              // step 2
+        if (comp == 0) {                            // step 2
             return mid;
-        } else if (comp < 0) {                        // step 3
+        } else if (comp < 0) {                      // step 3
             low = mid + 1;
-        } else {                                      // step 4
+        } else {                                    // step 4
             high = mid - 1;
         }
     }
@@ -9683,7 +9646,7 @@ Inside the \java{while} loop, we repeat the four steps of binary search:
 \end{enumerate}
 
 If \java{low} exceeds \java{high}, there are no cards in the range, so we break out of the loop and return \java{-1}.
-
+Notice that this algorithm depends on the \java{compareTo} method of the object.
 
 \section{Tracing the code}
 
@@ -9736,7 +9699,7 @@ To find the number of iterations it takes to complete, we set $52 / 2^k = 1$ and
 The result is $\log_2 52$, which is about 5.7.
 So we might have to look at 5 or 6 cards, as opposed to all 52 if we did a sequential search.
 
-More generally, if the array contains $n$ elements, binary search requires $\log_2 n$ comparisons and sequential search requires $n$.
+More generally, if the array contains $n$ elements, binary search requires $\log_2 n$ comparisons, and sequential search requires $n$.
 For large values of $n$, binary search can be much faster.
 
 
@@ -9755,14 +9718,14 @@ public static int binarySearch(Card[] cards, Card card,
     if (high < low) {
         return -1;
     }
-    int mid = (low + high) / 2;                       // step 1
+    int mid = (low + high) / 2;                     // step 1
     int comp = cards[mid].compareTo(card);
 
-    if (comp == 0) {                                  // step 2
+    if (comp == 0) {                                // step 2
         return mid;
-    } else if (comp < 0) {                            // step 3
+    } else if (comp < 0) {                          // step 3
         return binarySearch(cards, card, mid + 1, high);
-    } else {                                          // step 4
+    } else {                                        // step 4
         return binarySearch(cards, card, low, mid - 1);
     }
 }
@@ -9859,9 +9822,11 @@ In the code directory for this chapter, {\tt ch12}, you will find:
 
 \item {\tt cardset-oxymoron}: A directory containing images of playing cards.
 
-\item {\tt CardTable.java}: Sample program that demonstrates how to read and display images.
+\item {\tt CardTable.java}: A sample program that demonstrates how to read and display images.
 
 \end{itemize}
+
+\index{array!2D}
 
 This code demonstrates the use of a 2D array, specifically an array of images.
 The declaration looks like this:
@@ -9870,7 +9835,7 @@ The declaration looks like this:
 private Image[][] images;
 \end{code}
 
-\java{images} is a 2D array of \java{Image} objects, which are defined in the \java{java.awt} package.
+The variable \java{images} references a 2D array of \java{Image} objects, which are defined in the \java{java.awt} package.
 Here's the code that creates the array itself:
 
 \begin{code}
@@ -9888,13 +9853,14 @@ for (int suit = 0; suit <= 3; suit++) {
     char c = suits.charAt(suit);
 
     for (int rank = 1; rank <= 13; rank++) {
-        String s = String.format("%s/%02d%c.gif", cardset, rank, c);
+        String s = String.format("%s/%02d%c.gif",
+                                 cardset, rank, c);
         images[rank][suit] = new ImageIcon(s).getImage();
     }
 }
 \end{code}
 
-\java{cardset} is the name of the directory that contains the image files.
+The variable \java{cardset} contains the name of the directory that contains the image files.
 \java{suits} is a string that contains the single-letter abbreviations for the suits.
 These strings are used to assemble \java{s}, which contains the filename for each image.
 For example, when \java{rank=1} and \java{suit=2}, the value of \java{s} is \verb|"cardset-oxymoron/01h.gif"|, which is an image of the Ace of Hearts.
