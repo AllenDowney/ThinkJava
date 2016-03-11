@@ -7523,6 +7523,7 @@ We also take a look at the source code for the Java library.
 \section{Point objects}
 \label{point}
 
+\index{AWT}
 \index{java.awt}
 \index{Point}
 \index{class!Point}
@@ -11547,9 +11548,14 @@ Code that exercises a single method of a program, testing for correctness and/or
 \chapter{Java 2D graphics}
 \label{graphics}
 
+\index{AWT}
+
 The Java library includes a simple package for drawing 2D graphics, called \java{java.awt}.
-AWT stands for ``Abstract Window Toolkit''.
+{\bf AWT} stands for ``Abstract Window Toolkit''.
 We are only going to scratch the surface of graphics programming; you can read more about it in the Java tutorials at: \url{https://docs.oracle.com/javase/tutorial/2d/}.
+
+
+\section{Creating graphics}
 
 \index{Canvas}
 \index{class!Canvas}
@@ -11592,7 +11598,7 @@ You can read about the other methods at \url{https://docs.oracle.com/javase/7/do
 \index{JFrame}
 \index{class!JFrame}
 
-In \java{main} we:
+In the \java{main} method, we:
 
 \begin{enumerate}
 
@@ -11613,9 +11619,9 @@ If you run this code, you should see a black circle on a gray background.
 \index{coordinate}
 \index{pixel}
 
-You are probably used to Cartesian {\bf coordinates}, where x and y values can be positive or negative.
+You are probably used to Cartesian {\bf coordinates}, where $x$ and $y$ values can be positive or negative.
 In contrast, Java uses a coordinate system where the origin is in the upper-left corner.
-That way, x and y are always positive integers.
+That way, $x$ and $y$ are always positive integers.
 Figure~\ref{fig.coordinates} shows these coordinate systems.
 
 Graphical coordinates are measured in {\bf pixels}; each pixel corresponds to a dot on the screen.
@@ -11672,7 +11678,9 @@ black       blue      cyan     darkGray   gray    green
 lightGray   magenta   orange   pink       white   yellow
 \end{stdout}
 
-You can create your own colors by specifying the red, green, and blue (RGB) components.
+\index{RGB}
+
+You can create your own colors by specifying the red, green, and blue ({\bf RGB}) components.
 For example:
 
 \begin{code}
@@ -11693,11 +11701,11 @@ canvas.setBackground(Color.white);
 
 \index{Mickey Mouse}
 
-Suppose we want to draw a ``Hidden Mickey'', which is an icon that represents Mickey Mouse (see \url{https://en.wikipedia.org/wiki/Hidden_Mickey}.
+Suppose we want to draw a ``Hidden Mickey'', which is an icon that represents Mickey Mouse (see \url{https://en.wikipedia.org/wiki/Hidden_Mickey}).
 We can use the oval we just drew as the face, and then add two ears.
-To make the code more readable, let's use \java{Rectangle}s to represent bounding boxes.
+To make the code more readable, let's use \java{Rectangle} objects to represent bounding boxes.
 
-Here's a method that takes a Rectangle and invokes \java{fillOval}.
+Here's a method that takes a Rectangle and invokes \java{fillOval}:
 
 \begin{code}
 public void boxOval(Graphics g, Rectangle bb) {
@@ -11736,6 +11744,9 @@ The result is shown in Figure~\ref{fig.mickey}.
 \end{center}
 \end{figure}
 
+You can read more about \java{Rectangle} and \java{translate} in Chapter~\ref{objects}.
+See the exercises at the end of this appendix for more example drawings.
+
 
 \section{Vocabulary}
 
@@ -11752,6 +11763,9 @@ The unit in which coordinates are measured.
 
 \term{bounding box}
 A common way to specify the coordinates of a rectangular area.
+
+\term{RGB}
+A color model based on adding red, green, and blue light.
 
 \end{description}
 
@@ -11772,6 +11786,7 @@ Draw the flag of Japan: a red circle on white background that is wider than it i
 Modify {\tt Mickey.java} to draw ears on the ears, and ears on those ears, and more ears all the way down until the smallest ears are only 3 pixels wide.
 
 The result should look like ``Mickey Moose'', shown in Figure~\ref{fig.moose}.
+{\em Hint:} You should only have to add or modify a few lines of code.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -11780,8 +11795,6 @@ The result should look like ``Mickey Moose'', shown in Figure~\ref{fig.moose}.
 \label{fig.moose}
 \end{center}
 \end{figure}
-
-{\em Hint:} You should only have to add or modify a few lines of code.
 
 \end{exercise}
 
@@ -11792,7 +11805,7 @@ For an explanation of what is going on, see \url{http://en.wikipedia.org/wiki/Mo
 
 \begin{enumerate}
 
-\item In the directory {\tt app01} in the repository for this book, you'll find a file named {\tt Moire.java}.
+\item In the directory {\tt app02} in the repository for this book, you'll find a file named {\tt Moire.java}.
 Open it and read the {\tt paint} method.
 Draw a sketch of what you expect it to do.
 Now run it.
