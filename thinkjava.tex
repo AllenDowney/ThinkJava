@@ -60,8 +60,7 @@
     \@esphack%
 }
 
-\newcommand{\java}{\verb}
-%\newcommand{\stdout}[1]{\verb"#1"}
+\newcommand{\java}{\verb}   %}% fixes syntax highlighting
 
 \else
 %%%% LATEX ONLY
@@ -570,7 +569,7 @@ Later, we will see programs that define more than one method.
 A {\bf class} is a collection of methods.
 This program defines a class named \java{Hello}.
 You can give a class any name you like, but it is conventional to start with a capital letter.
-The name of the class has to match the name of the file it is in, so this class has to be in a file named \java{Hello.java}.
+The name of the class has to match the name of the file it is in, so this class has to be in a file named {\tt Hello.java}.
 
 \index{braces}
 \index{squiggly braces}
@@ -1668,7 +1667,7 @@ Exception in thread "main" java.lang.ArithmeticException: / by zero
 Some parts of this output are useful for debugging.
 The first line includes the name of the exception, \java{java.lang.ArithmeticException}, and a message that indicates more specifically what happened, \java{/ by zero}.
 The next line shows the method where the error occurred; \java{Hello.main} indicates the method \java{main} in the class \java{Hello}.
-It also reports the file where the method is defined, \java{Hello.java}, and the line number where the error occurred, \java{5}.
+It also reports the file where the method is defined, {\tt Hello.java}, and the line number where the error occurred, \java{5}.
 
 Error messages sometimes contain additional information that won't make sense yet.
 So one of the challenges is to figure out where to find the useful parts without being overwhelmed by extraneous information.
@@ -1935,7 +1934,7 @@ In this example the address is \java{685d72cd}, but if you run the same code you
 
 \index{library}
 
-As shown in Figure~\ref{fig.system}, \java{System} is defined in a file called {\tt System.java}, and {\tt PrintStream} is defined in {\tt PrintStream.java}.
+As shown in Figure~\ref{fig.system}, \java{System} is defined in a file called {\tt System.java}, and \java{PrintStream} is defined in {\tt PrintStream.java}.
 These files are part of the Java {\bf library}, which is an extensive collection of classes you can use in your programs.
 The source code for these classes is included with the JDK.
 
@@ -2133,7 +2132,7 @@ final double CM_PER_INCH = 2.54;
 Declaring that a variable is \java{final} means that it cannot be reassigned once it has been initialized.
 If you try, the compiler reports an error.
 Variables declared as \java{final} are called {\bf constants}.
-By convention, names for constants are all uppercase, with the underscore character (\verb|_|) between words.
+By convention, names for constants are all uppercase, with the underscore character (\java{_}) between words.
 
 
 \section{Formatting output}
@@ -2200,7 +2199,7 @@ The values are matched up with the format specifiers in order, so \java{inch} is
 \hline
 \java{\%d} & decimal integer & 12345 \\
 \hline
-%\verb"%,d" & decimal integer with comma separators & 12,345 \\
+%\java{\%,d} & decimal integer with comma separators & 12,345 \\
 %\hline
 \java{\%08d} & padded with zeros, at least 8 digits wide & 00012345 \\
 \hline
@@ -7938,10 +7937,10 @@ Because it's so large, the library source code is stored in a file named \java{s
 Take a few minutes to locate this file on your machine:
 
 \begin{itemize}
-\item On Linux, it's likely under: \verb|/usr/lib/jvm/openjdk-7/|
+\item On Linux, it's likely under: \verb"/usr/lib/jvm/openjdk-7/"
 \\ (You might need to install the {\tt openjdk-7-source} package.)
-\item On OS X, it's likely under: \\ \verb|/Library/Java/JavaVirtualMachines/jdk.../Contents/Home/|
-\item On Windows, it's likely under: \verb|C:\Program Files\Java\jdk...\|
+\item On OS X, it's likely under: \\ \verb"/Library/Java/JavaVirtualMachines/jdk.../Contents/Home/"
+\item On Windows, it's likely under: \verb"C:\Program Files\Java\jdk...\"
 \end{itemize}
 
 When you open (or unzip) the file, you will see folders that correspond to Java packages.
@@ -8127,7 +8126,7 @@ You might be sick of the factorial method by now, but we're going to do one more
 
 \begin{enumerate}
 
-\item Create a new program called \java{Big.java} and write (or reuse) an iterative version of \java{factorial}.
+\item Create a new program called {\tt Big.java} and write (or reuse) an iterative version of \java{factorial}.
 
 \item Display a table of the integers from 0 to 30 along with their factorials.
 At some point around 15, you will probably see that the answers are not right any more.
@@ -9098,7 +9097,7 @@ We then use all these classes to implement the card game {\em Crazy Eights}.
 %Although we will see several versions of the same code, the main advantage of proceeding this way is that the explanations will be smoother.
 %It may help you to create a {\tt Card.java} file and paste in the examples as we go.
 
-The code for this chapter is in \java{Card.java}, which is in the directory {\tt ch12} in the repository for this book.
+The code for this chapter is in {\tt Card.java}, which is in the directory {\tt ch12} in the repository for this book.
 Instructions for downloading this code are on page~\pageref{code}.
 
 
@@ -9867,7 +9866,7 @@ For example, when \java{rank=1} and \java{suit=2}, the value of \java{s} is \jav
 The last line of the loop reads the image file, extracts an \java{Image} object, and assigns it to a location in the array, as specified by the indexes \java{rank} and \java{suit}.
 For example, the image of the Ace of Hearts is stored in row 1, column 2.
 
-If you compile and run \java{CardTable.java}, you should see images of a deck of cards laid out on a green table.
+If you compile and run {\tt CardTable.java}, you should see images of a deck of cards laid out on a green table.
 You can use this class as a starting place to implement your own card games.
 
 % TODO: We should make an actual exercise out of this.  Maybe take
@@ -9896,7 +9895,7 @@ And we present algorithms for shuffling and sorting arrays.
 %So many of the examples are non-idiomatic; that is, they are not good Java.
 %This transitional form should help you learn, but don't write code like this.
 
-The code for this chapter is in \java{Card.java} and \java{Deck.java}, which are in the directory {\tt ch13} in the repository for this book.
+The code for this chapter is in {\tt Card.java} and {\tt Deck.java}, which are in the directory {\tt ch13} in the repository for this book.
 Instructions for downloading this code are on page~\pageref{code}.
 
 
@@ -10313,7 +10312,7 @@ The goal of this exercise is to implement the shuffling algorithms from this cha
 
 \begin{enumerate}
 
-\item In the repository for this book, you should find a file called \java{Deck.java} that contains the code in this chapter.
+\item In the repository for this book, you should find a file called {\tt Deck.java} that contains the code in this chapter.
 Check that you can compile it in your environment.
 
 \item Add a \java{Deck} method called \java{randomInt} that takes two integers, \java{low} and \java{high}, and returns a random integer between \java{low} and \java{high}, including both.
@@ -10330,7 +10329,7 @@ But you should avoid creating a \java{Random} object every time \java{randomInt}
 
 \begin{exercise}
 The goal of this exercise is to implement the sorting algorithms from this chapter.
-Use the \java{Deck.java} file from the previous exercise.
+Use the {\tt Deck.java} file from the previous exercise.
 
 \begin{enumerate}
 
@@ -11861,7 +11860,7 @@ For an explanation of what is going on, see \url{http://en.wikipedia.org/wiki/Mo
 \begin{enumerate}
 
 \item In the directory {\tt app02} in the repository for this book, you'll find a file named {\tt Moire.java}.
-Open it and read the {\tt paint} method.
+Open it and read the \java{paint} method.
 Draw a sketch of what you expect it to do.
 Now run it.
 Did you get what you expected?
