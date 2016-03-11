@@ -203,7 +203,8 @@ So it takes some time to get there.
 But you can't write Java programs (even hello world) without encountering object-oriented features.
 In some cases we explain a feature briefly when it first appears, and then explain it more deeply later on.
 
-This book is well suited to prepare students for the AP Computer Science A exam, which includes object-oriented design and implementation. (AP is a registered trademark of the College Board.)
+This book is well suited to prepare students for the AP Computer Science A exam, which includes object-oriented design and implementation.
+(AP is a registered trademark of the College Board.)
 We introduce nearly every topic in the ``AP Java subset'' with a few exceptions.
 A mapping of {\em Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}.
 
@@ -242,13 +243,13 @@ We recommend that readers review this appendix several times as they work throug
 Most of the code examples in this book are available from a Git repository at \url{https://github.com/AllenDowney/ThinkJavaCode}.
 Git is a ``version control system'' that allows you to keep track of the files that make up a project.
 A collection of files under Git's control is called a ``repository''.
-%GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
 
 \index{repository}
 \index{Git}
 \index{GitHub}
 
-The GitHub link above provides several ways to work with the code:
+GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
+It provides several ways to work with the code:
 
 \begin{itemize}
 
@@ -1371,7 +1372,7 @@ It is easy to forget this rule because in many cases Java {\em automatically} co
 double y = 1;  // legal, but bad style
 \end{code}
 
-The above example should be illegal, but Java allows it by converting the \java{int} value \java{1} to the \java{double} value \java{1.0} automatically.
+The preceding example should be illegal, but Java allows it by converting the \java{int} value \java{1} to the \java{double} value \java{1.0} automatically.
 This leniency is convenient, but it often causes problems for beginners.
 For example:
 
@@ -2048,7 +2049,7 @@ The standard edition of Java comes with {\em several thousand} classes you can \
 You can browse this library at \url{http://docs.oracle.com/javase/7/docs/api/}.
 Most of the Java library itself is written in Java.
 
-Note there is a major difference between the Java {\em language}, which defines the syntax and meaning of the elements above, and the Java {\em library}, which provides the built-in classes.
+Note there is a major difference between the Java {\em language}, which defines the syntax and meaning of the elements in Figure~\ref{fig.package}, and the Java {\em library}, which provides the built-in classes.
 
 
 \section{Inches to centimeters}
@@ -2358,7 +2359,7 @@ This practice makes it easier to find their types later on, and it helps the rea
 For readability, each major step of the algorithm is separated by a blank line and begins with a comment.
 It also includes a documentation comment (\java{/**}), which we'll learn more about in the next chapter.
 
-Many algorithms, including the example above, perform division and modulus together.
+Many algorithms, including the \java{Convert} program, perform division and modulus together.
 In both steps, you divide by the same number (\java{IN_PER_FOOT}).
 
 When statements get long (generally wider than 80 characters), a common style convention is to break them across multiple lines.
@@ -2395,7 +2396,7 @@ name = in.nextLine();
 System.out.printf("Hello %s, age %d\n", name, age);
 \end{code}
 
-Try running the above example.
+Try running this example code.
 It doesn't let you input your name, and it immediately displays the output:
 
 \begin{stdout}
@@ -2963,7 +2964,7 @@ Error: method printTwice in class Test cannot be applied
 
 Sometimes Java can convert an argument from one type to another automatically.
 For example, \java{Math.sqrt} requires a \java{double}, but if you invoke \java{Math.sqrt(25)}, the integer value \java{25} is automatically converted to the floating-point value \java{25.0}.
-But in the example above, Java can't (or won't) convert the integer \java{17} to a \java{String}.
+But in the case of \java{printTwice}, Java can't (or won't) convert the integer \java{17} to a \java{String}.
 
 Parameters and other variables only exist inside their own methods.
 Inside \java{main}, there is no such thing as \java{s}.
@@ -4615,7 +4616,8 @@ if (isSingleDigit(z)) {
 }
 \end{code}
 
-Examples like this one almost read like English: ``If is single digit z, print ... else print ...''
+Examples like this one almost read like English:
+``If is single digit z, print ... else print ...''
 
 
 \section{Javadoc tags}
@@ -5153,8 +5155,8 @@ public static void countdown(int n) {
 }
 \end{code}
 
-You can almost read a \java{while} statement like English.
-The above code means: ``While \java{n} is greater than zero, print the value of \java{n} and then reduce the value of \java{n} by 1.
+You can almost read the \java{while} statement like English:
+``While \java{n} is greater than zero, print the value of \java{n} and then reduce the value of \java{n} by 1.
 When you get to zero, print Blastoff!''
 
 The expression in parentheses is called the condition.
@@ -5793,7 +5795,6 @@ It describes Checkstyle, a tool that analyzes many aspects of your source code.
 
 
 \begin{exercise}
-\label{infloop}
 
 Consider the following methods:
 
@@ -6115,7 +6116,7 @@ public static void printArray(int[] a) {
 }
 \end{code}
 
-Given the array above, the output of this method is:
+Given the previous array, the output of this method is:
 
 \begin{stdout}
 {1, 2, 3, 4}
@@ -7050,7 +7051,7 @@ If the strings are equal, their difference is zero.
 If the first string (the one on which the method is invoked) comes first in the alphabet, the difference is negative.
 Otherwise, the difference is positive.
 
-In the example above, \java{compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
+In the preceding code, \java{compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
 
 Both \java{equals} and \java{compareTo} are case-sensitive.
 The uppercase letters come before the lowercase letters, so \java{"Ada"} comes before \java{"ada"}.
@@ -7405,7 +7406,7 @@ String backwards = reverseString("coffee");
 System.out.println(backwards);
 \end{code}
 
-For example, the output of the above code should be:
+The output of this example code should be:
 
 \begin{stdout}
 eeffoc
@@ -8348,6 +8349,9 @@ Figure~\ref{fig.time} shows the result.
 \label{fig.time}
 \end{center}
 \end{figure}
+
+\index{recursion!infinite}
+\index{infinite recursion}
 
 Beginners sometimes make the mistake of invoking \java{new} inside the constructor.
 You don't have to, and you shouldn't.
@@ -11176,7 +11180,8 @@ The IDE we recommend is DrJava, which is a free and open-source development envi
 
 To install the JDK, search the web for ``download jdk'' which should take you to Oracle's website.
 Scroll down to ``Java Platform, Standard Edition'' and click the download button under JDK.
-Then accept the license agreement and select the installer for your operating system. Don't forget to run the installer after you download it!
+Then accept the license agreement and select the installer for your operating system.
+Don't forget to run the installer after you download it!
 
 \index{JAR}
 
@@ -11589,7 +11594,7 @@ public class Drawing extends Canvas {
 \end{code}
 
 The \java{Drawing} class extends \java{Canvas}, so it has all the methods provided by \java{Canvas}, including \java{setSize}.
-You can read about the other methods in the documentation, which you can find by doing a web search for ``Java Canvas''. 
+You can read about the other methods in the documentation, which you can find by doing a web search for ``Java Canvas''.
 
 \index{JFrame}
 \index{class!JFrame}
@@ -12007,9 +12012,9 @@ It's not always clear what causes a run-time error, but you can often figure thi
 
 \subsection*{My program hangs.}
 
+\index{hanging}
 \index{infinite loop}
 \index{infinite recursion}
-\index{hanging}
 
 If a program stops and seems to be doing nothing, we say it is ``hanging''.
 Often that means it is caught in an infinite loop or an infinite recursion.
@@ -12020,22 +12025,23 @@ Often that means it is caught in an infinite loop or an infinite recursion.
 
 Run the program.
 If you get the first message and not the second, you know where the program is getting stuck.
-Go to the section below titled ``Infinite loop''.
+Go to the section titled ``Infinite loop''.% on page~\pageref{infloop}.
 
 \index{StackOverflowError}
 
 \item Most of the time an infinite recursion will cause the program to run for a while and then produce a \java{StackOverflowError}.
-If that happens, go to the section below titled ``Infinite recursion''.
+If that happens, go to the section titled ``Infinite recursion''.% on page~\pageref{infrec}.
 
 If you are not getting a \java{StackOverflowError}, but you suspect there is a problem with a recursive method, you can still use the techniques in the infinite recursion section.
 
-\item If neither of the above suggestions helps, you might not understand the flow of execution in your program.
-Go to the section below titled ``Flow of execution''.
+\item If neither of the previous suggestions helps, you might not understand the flow of execution in your program.
+Go to the section titled ``Flow of execution''.% on page~\pageref{flowexec}.
 
 \end{itemize}
 
 
 \subsubsection*{Infinite loop}
+\label{infloop}
 
 If you think you have an infinite loop and you know which loop it is, add a print statement at the end of the loop that displays the values of the variables in the condition, and the value of the condition.
 
@@ -12058,6 +12064,10 @@ If the loop keeps going, you will see the values of \java{x} and \java{y}, and y
 
 
 \subsubsection*{Infinite recursion}
+\label{infrec}
+
+\index{recursion!infinite}
+\index{infinite recursion}
 
 Most of the time, an infinite recursion will cause the program to throw a \java{StackOverflowError}.
 But if the program is slow, it may take a long time to fill the stack.
@@ -12072,6 +12082,7 @@ If the parameters are not moving toward the base case, you might see why not.
 
 
 \subsubsection*{Flow of execution}
+\label{flowexec}
 
 \index{flow of execution}
 
@@ -12117,7 +12128,7 @@ Find the nearest assignment statement and see if it is doing the right thing.
 If either one is a parameter, go to the place where the method is invoked and see where the values are coming from.
 
 \term{StackOverflowError}
-See ``Infinite recursion'' above.
+See ``Infinite recursion'' on page~\pageref{infrec}.
 
 \term{FileNotFoundException}
 This means Java didn't find the file it was looking for.
@@ -12173,7 +12184,7 @@ Here are some questions to ask yourself:
 
 \item Is there something the program was supposed to do, but doesn't seem to be happening?
 Find the section of the code that performs that function, and make sure it is executing when you think it should.
-See ``Flow of execution'' above.
+See ``Flow of execution'' on page~\pageref{flowexec}.
 
 \item Is something happening that shouldn't?
 Find code in your program that performs that function, and see if it is executing when it shouldn't.
@@ -12219,7 +12230,7 @@ If you meant to check equivalence, you should use the \java{equals} method inste
 If you want a different notion of equivalence, you have to override it.
 
 \item Inheritance can lead to subtle logic errors, because you can run inherited code without realizing it.
-See ``Flow of execution'' above.
+See ``Flow of execution'' on page~\pageref{flowexec}.
 
 \end{itemize}
 
@@ -12350,12 +12361,13 @@ It happens.
 Even the best programmers get stuck.
 Sometimes you need a another pair of eyes.
 
-Before you bring someone else in, make sure you have tried the techniques described above.
+Before you bring someone else in, make sure you have tried the techniques described in this appendix.
+
 Your program should be as simple as possible, and you should be working on the smallest input that causes the error.
 You should have print statements in the appropriate places (and the output they produce should be comprehensible).
 You should understand the problem well enough to describe it concisely.
 
-When you bring someone in to help, give them the information they need.
+When you bring someone in to help, give them the information they need:
 
 \begin{itemize}
 
