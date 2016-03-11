@@ -1170,7 +1170,7 @@ Figure~\ref{fig.state} shows the state of the program after these assignment sta
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/state.pdf}
-\caption{State diagram for the variables \java{a} and \java{b}.}
+\caption{State diagram of the variables \java{a} and \java{b}.}
 \label{fig.state}
 \end{center}
 \end{figure}
@@ -1461,7 +1461,7 @@ This solution works as long as the number of cents doesn't exceed the largest in
 %Hopefully nobody will ever need that much money!
 
 
-\section{Operators for Strings}
+\section{Operators for strings}
 
 \index{string operator}
 \index{operator!string}
@@ -2407,7 +2407,7 @@ Instead, it gets a ``stream of characters'' as shown in Figure~\ref{fig.hopper1}
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/hopper1.pdf}
-\caption{A stream of characters as seen by a Scanner.}
+\caption{A stream of characters as seen by a \java{Scanner}.}
 \label{fig.hopper1}
 \end{center}
 \end{figure}
@@ -3898,7 +3898,7 @@ public static void forever(String s) {
 This method displays the string until the stack overflows, at which point it throws an exception.
 
 
-\section{Binary Numbers}
+\section{Binary numbers}
 
 The \java{countdown} example has three parts: (1) it checks the base case, (2) displays something, and (3) makes a recursive call.
 What do you think happens if you reverse steps 2 and 3, making the recursive call {\it before} displaying?
@@ -7566,7 +7566,7 @@ Figure~\ref{fig.reference} shows the result.
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/reference.pdf}
-\caption{State diagram showing a variable that refers to a Point object.}
+\caption{State diagram showing a variable that refers to a \java{Point} object.}
 \label{fig.reference}
 \end{center}
 \end{figure}
@@ -7670,7 +7670,7 @@ Figure~\ref{fig.rectangle} shows the effect of this assignment.
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/rectangle.pdf}
-\caption{State diagram showing a variable that refers to a Rectangle object.}
+\caption{State diagram showing a \java{Rectangle} object.}
 \label{fig.rectangle}
 \end{center}
 \end{figure}
@@ -7837,7 +7837,7 @@ The value \java{null} is represented in state diagrams by a small box with no ar
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics{figs/reference2.pdf}
-\caption{State diagram showing a variable that contains a null reference.}
+\caption{State diagram showing a variable that contains a \java{null} reference.}
 \label{fig.reference2}
 \end{center}
 \end{figure}
@@ -8250,7 +8250,7 @@ Here are the most important ideas:
 \end{itemize}
 
 
-\section{Time class}
+\section{The Time class}
 
 \index{data encapsulation}
 \index{encapsulation!data}
@@ -9191,7 +9191,7 @@ Card threeOfClubs = new Card(3, 0);
 The result is a reference to a \java{Card} that represents the 3 of Clubs.
 
 
-\section{The toString method}
+\section{Card toString}
 \label{printcard}
 
 \index{print!Card}
@@ -9977,7 +9977,7 @@ When you transform a \java{static} method into an instance method, it usually ge
 We can simply type \java{deck.print()} to invoke the instance method.
 
 
-\section{Shuffling}
+\section{Shuffling decks}
 \label{shuffle}
 
 \index{shuffle}
@@ -10143,7 +10143,7 @@ Aliasing might not be a good idea, because changes to shared cards would be refl
 But since \java{Card} objects are immutable, this kind of aliasing is not a problem at all.
 
 
-\section{Merge}
+\section{Merging decks}
 
 The next helper method we need is \java{merge}, which takes two sorted subdecks and returns a new deck containing all cards from both decks, in order.
 Here's what the algorithm looks like in pseudocode, assuming the subdecks are named \java{d1} and \java{d2}:
@@ -10176,7 +10176,7 @@ public static Deck merge(Deck d1, Deck d2) {
 One of the exercises at the end of the chapter asks you to implement \java{merge}.
 
 
-\section{Merge sort}
+\section{Adding recursion}
 
 Once your \java{merge} method is working correctly, you can try out a simple version of merge sort:
 
