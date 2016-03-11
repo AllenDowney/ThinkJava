@@ -1854,7 +1854,7 @@ European format:
 Thursday 16 July, 2015
 \end{stdout}
 
-%Hint: You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
+%{\em Hint:} You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
 \end{enumerate}
 
 \end{exercise}
@@ -1885,7 +1885,7 @@ Then write code to compute the elapsed time since you started working on this ex
 
 \end{enumerate}
 
-Hint: You might want to use additional variables to hold values during the computation.
+{\em Hint:} You might want to use additional variables to hold values during the computation.
 Variables that are used in a computation but never displayed are sometimes called intermediate or ``temporary'' variables.
 
 \end{exercise}
@@ -3323,7 +3323,8 @@ The point of this exercise is to practice reading code and to make sure that you
 
 \item What is the output of the following program?
 Be precise about where there are spaces and where there are newlines.
-(Hint: Start by describing in words what \java{ping} and \java{baffle} do when they are invoked.)
+
+{\em Hint:} Start by describing in words what \java{ping} and \java{baffle} do when they are invoked.
 
 \item Draw a stack diagram that shows the state of the program the first time \java{ping} is invoked.
 
@@ -4103,7 +4104,7 @@ Write a method named \java{checkFermat} that takes four integers as parameters -
 If $n$ is greater than 2 and $a^n + b^n = c^n$, the program should display ``Holy smokes, Fermat was wrong!''
 Otherwise the program should display ``No, that doesn't work.''
 
-Hint: You may want to use \java{Math.pow}.
+{\em Hint:} You may want to use \java{Math.pow}.
 
 \end{exercise}
 
@@ -4193,7 +4194,7 @@ You should already have a program that chooses a random number, prompts the user
 Adding a small amount of code at a time, and testing as you go, modify the program so it tells the user whether the guess is too high or too low, and then prompts the user for another guess.
 
 The program should continue until the user gets it right.
-Hint: use two methods, and make one of them recursive.
+{\em Hint:} Use two methods, and make one of them recursive.
 
 \end{exercise}
 
@@ -4961,7 +4962,7 @@ Some processors even provide a hardware implementation of this operation for flo
 x e^{-x} + \sqrt{1 - e^{-x}}
 \end{eqnarray*}
 %
-Hint: The Math method for raising $e$ to a power is \java{Math.exp}.
+{\em Hint:} The Math method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
 
@@ -5050,7 +5051,7 @@ public static int prod(int m, int n) {
 \item Explain in a few words what \java{prod} does (without getting into the details of how it works).
 
 \item Rewrite \java{prod} without the temporary variables \java{recurse} and \java{result}.
-Hint: you only need one line for the \java{else} branch.
+{\em Hint:} You only need one line for the \java{else} branch.
 
 \end{enumerate}
 
@@ -5090,7 +5091,7 @@ You should try it only for small values of $m$ and $n$ (not bigger than 3).
 
 Write a recursive method called \java{power} that takes a double \java{x} and an integer \java{n} and returns $x^n$.
 
-Hint: a recursive definition of this operation is $x^n = x \cdot x^{n-1}$.
+{\em Hint:} A recursive definition of this operation is $x^n = x \cdot x^{n-1}$.
 Also, remember that anything raised to the zeroth power is 1.
 
 Optional challenge: you can make this method more efficient, when \java{n} is even, using $x^n = \left( x^{n/2} \right)^2$.
@@ -6660,7 +6661,7 @@ Write a method called \java{sieve} that takes an integer parameter, \java{n}, an
 
 \begin{exercise}
 Write a method named \java{areFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all factors of \java{n} (which is to say that \java{n} is divisible by all of them).
-%Hint: See Exercise~\ref{ex.isdiv}.
+%{\em Hint:} See Exercise~\ref{ex.isdiv}.
 \end{exercise}
 
 
@@ -6706,7 +6707,7 @@ Write a method called \java{max} that takes an array and uses \java{maxInRange} 
 %You can read about it at \url{https://en.wikipedia.org/wiki/Binary_search_algorithm}.
 %
 %Write a method called \java{binarySearch} that implements this algorithm.
-%Hint: you might find it easier to write this method recursively.
+%{\em Hint:} You might find it easier to write this method recursively.
 %
 %\end{exercise}
 
@@ -7892,6 +7893,7 @@ But in high performance applications, you may notice a slight delay every now an
 
 
 \section{Class diagrams}
+\label{UML}
 
 To summarize what we've learned so far, \java{Point} and \java{Rectangle} objects each have their own attributes and methods.
 Attributes are an object's {\em data}, and methods are an object's {\em code}.
@@ -8986,7 +8988,7 @@ If you review the documentation of \java{java.lang.String}, you should see that 
 
 The implementation of \java{increment} in this chapter is not very efficient.
 Can you rewrite it so it doesn't use any loops?
-Hint: remember the modulus operator.
+{\em Hint:} Remember the modulus operator.
 \end{exercise}
 
 
@@ -10319,7 +10321,7 @@ When it's printed, this string should display the same results as the \java{prin
 
 \index{StringBuilder}
 
-Hint: You can use the \java{+} operator to concatenate strings, but it is not very efficient.
+{\em Hint:} You can use the \java{+} operator to concatenate strings, but it is not very efficient.
 Consider using \java{java.util.StringBuilder}, which you can read more about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
 
 \end{exercise}
@@ -10566,12 +10568,11 @@ public class Deck extends CardCollection {
 
 \index{extends}
 \index{superclass}
-\index{subclass}
 
 The first line uses the keyword \java{extends} to indicate that \java{Deck} extends the class \java{CardCollection}.
 That means a \java{Deck} object has the same instance variables and methods as a \java{CardCollection}.
 Another way to say the same thing is that \java{Deck} ``inherits from'' \java{CardCollection}.
-We could also say that \java{CardCollection} is a {\bf superclass}, and \java{Deck} is one of its {\bf subclasses}.
+We could also say that \java{CardCollection} is a {\bf superclass}, and \java{Deck} is one of its subclasses.
 
 % NOTE: Let's stick with ``superclass'' and ``subclass'' and
 % not use ``parent'' and ``child''.
@@ -10693,7 +10694,7 @@ But not every animal is a mammal, and not every mammal is a cat.
 %ABD: I don't think we need it unless we write Chapter 15: Interfaces
 
 
-\section{Player}
+\section{The Player class}
 
 The classes we have defined so far could be used for any card game; we have not yet implemented any of the rules specific to {\em Crazy Eights}.
 And that's probably a good thing, since it makes it easy to reuse these classes if we want to make another game in the future.
@@ -10812,7 +10813,7 @@ public int score() {
 \end{code}
 
 
-\section{Eights}
+\section{The Eights class}
 
 \index{top-down development}
 
@@ -10994,39 +10995,46 @@ Notice the result of bottom-up development is similar to top-down: we have a hig
 The main difference is the order we used to arrive at this solution.
 
 
-\section{UML class diagrams}
-
-% ABD: I would like to call these UML class diagrams to distinguish
-% them from the 3172 other kinds of UML diagrams, and to be consistent
-% with https://en.wikipedia.org/wiki/Class_diagram
+\section{Class relationships}
 
 This chapter demonstrates two common relationships between classes:
 
 \begin{description}
 
-\item{composition:}
+\term{composition}
 Instances of one class contain references to instances of another class.
 For example, an instance of \java{Eights} contains references to two \java{Player} objects, two \java{Hand} objects, and a \java{Scanner}.
 
-\item{inheritance:}
-One class extends another class.
+\term{inheritance}
+One class \java{extends} another class.
 For example, \java{Hand} extends \java{CardCollection}, so every instance of \java{Hand} is also a \java{CardCollection}.
 
 \end{description}
 
 \index{has-a}
 \index{is-a}
+\index{object-oriented}
 
 Composition is also known as a {\bf HAS-A} relationship, as in ``\java{Eights} HAS-A \java{Scanner}.''
 Inheritance is also known as an {\bf IS-A} relationship, as in ``a \java{Hand} IS-A \java{CardCollection}.''
+This vocabulary provides a concise way to talk about an object-oriented design.
 
-This vocabulary provides a concise way to talk about an {\bf object-oriented} design.
-There is also a standard way to represented these relationships graphically using a {\bf UML class diagram}.
-UML stands for ``Unified Modeling Language''.
-Class diagrams are one of many graphical representations defined in UML.
+% ABD: I would like to call these UML class diagrams to distinguish
+% them from the 3172 other kinds of UML diagrams, and to be consistent
+% with https://en.wikipedia.org/wiki/Class_diagram
 
-The UML representation of a class is a box with the name of the class inside, and sometimes a list of its public attributes and methods.
+\index{UML}
+
+There is also a standard way to represent these relationships graphically in UML class diagrams.
+As we saw in Section~\ref{UML}, the UML representation of a class is a box with three sections: the class name, the attributes, and the methods.
+The latter two sections are optional when showing relationships.
+
+%NOTE: I am not using standard arrows for aggregation and composition, but
+% a simplified version for all HAS-A relationships.  This is consistent
+% with the class diagrams in Head First Design Patterns.
+
 Relationships between classes are represented by arrows: composition arrows have a standard arrow head, and inheritance arrows have a hollow triangle head (usually pointing up).
+Figure~\ref{uml1} shows the classes defined in this chapter and the relationships among them.
 
 %TODO: Blythe suggests picture of each arrow, but it's a pain.
 
@@ -11040,21 +11048,16 @@ Relationships between classes are represented by arrows: composition arrows have
 
 %TODO: fix the arrow between Eights and Player
 
-%NOTE: I am not using standard arrows for aggregation and composition, but
-% a simplified version for all HAS-A relationships.  This is consistent
-% with the class diagrams in Head First Design Patterns.
-
-Figure~\ref{uml1} shows the classes defined in this chapter and the relationships among them.
-
 UML is an international standard, so almost any software engineer in the world could look at this diagram and understand our design.
+And class diagrams are only one of many graphical representations defined in the UML standard.
+
+We hope this final chapter has been a useful summary of all the techniques presented in the book, including variables, methods, conditionals, loops, arrays, objects, and algorithms.
+Congratulations on making it to the end!
 
 
 \section{Vocabulary}
 
 \begin{description}
-
-\term{wrapper method}
-A method that calls another method without doing much additional work.
 
 \term{collection}
 An object that contains other objects, or more specifically, one of the objects in the Java library, like \java{ArrayList}, that contains objects.
@@ -11071,8 +11074,17 @@ An existing class that is extended by another class.
 %\term{override}
 %To define a method in a subclass that replaces a method with the same name in a superclass.
 
+\term{wrapper method}
+A method that calls another method without doing much additional work.
+
 \term{bottom-up development}
 A way of developing programs by identifying simple pieces, implementing them, and then assembling them into more complex algorithms.
+
+\term{HAS-A}
+A relationship between two classes where one class ``has'' an instance of another class as one of its attributes.
+
+\term{IS-A}
+A relationship between two classes where one class \java{extends} another class; the subclass ``is'' an instance of the superclass.
 
 \end{description}
 
@@ -11086,6 +11098,9 @@ Before you start the exercises, we recommend that you compile and run the exampl
 \begin{exercise}
 Design a better strategy for the \java{Player.play} method.
 For example, if there are multiple cards you can play, and one of them is an eight, you might want to play the eight.
+
+\index{override}
+
 Think of other ways you can minimize penalty points, such as playing the highest ranking cards first.
 Write a new class that extends \java{Player} and overrides \java{play} to implement your strategy.
 \end{exercise}
@@ -11094,7 +11109,8 @@ Write a new class that extends \java{Player} and overrides \java{play} to implem
 \begin{exercise}
 Write a loop that plays the game 100 times and keeps track of how many times each player wins.
 If you implemented multiple strategies in the previous exercise, you can play them against each other to evaluate which one works best.
-Hint: design a \java{Genius} class that extends \java{Player} and overrides the \java{play} method, and replace one of the players with a \java{Genius} object.
+
+{\em Hint:} Design a \java{Genius} class that extends \java{Player} and overrides the \java{play} method, and then replace one of the players with a \java{Genius} object.
 \end{exercise}
 
 
@@ -11107,7 +11123,8 @@ Modify the \java{Eights} class to create an \java{ArrayList} of players, and mod
 \begin{exercise}
 When we designed the program for this chapter, we tried to minimize the number of classes.
 As a result, we ended up with a few awkward methods.
-For example, \java{cardMatches} is a static method in \java{Player}, but it would be more natural if it were an instance method in \java{Card}.
+For example, \java{cardMatches} is a \java{static} method in \java{Player}, but it would be more natural if it were an instance method in \java{Card}.
+
 The problem is that \java{Card} is supposed to be useful for any card game, not just {\em Crazy Eights}.
 You can solve this problem by adding a new class, \java{EightsCard}, that extends \java{Card} and provides a method, \java{match}, that checks whether two cards match according to the rules of {\em Crazy Eights}.
 
@@ -11116,7 +11133,6 @@ And while you're at it, you could add a method named \java{scoreCard} to \java{E
 
 Whether or not you actually make these changes, draw a UML class diagram that shows this alternative object hierarchy.
 \end{exercise}
-
 
 
 \appendix
@@ -11743,7 +11759,7 @@ The result should look like ``Mickey Moose'', shown in Figure~\ref{fig.moose}.
 \end{center}
 \end{figure}
 
-Hint: you should only have to add or modify a few lines of code.
+{\em Hint:} You should only have to add or modify a few lines of code.
 
 \end{exercise}
 
