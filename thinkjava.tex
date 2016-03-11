@@ -1501,26 +1501,26 @@ But in the second line, \verb|"Hello" + 1| is \verb|"Hello1"|, and \verb|"Hello1
 \index{order of operations}
 \index{precedence}
 
-When more than one operator appears in an expression, the order of evaluation depends on the rules of {\bf precedence}.
-Generally speaking, Java executes operations from left to right (as we saw in the previous section).
+When more than one operator appears in an expression, they are evaluated according to {\bf order of operations}.
+Generally speaking, Java evaluates operators from left to right (as we saw in the previous section).
 But for numeric operators, Java follows mathematical conventions:
 
 \begin{itemize}
 
-\item Multiplication and division happen before addition and subtraction.
+\item Multiplication and division take ``precedence'' over addition and subtraction, which means they happen first.
 So \java{1 + 2 * 3} yields 7, not 9, and \java{2 + 4 / 2} yields 4, not 3.
 
 \item If the operators have the same precedence, they are evaluated from left to right.
 So in the expression \java{minute * 100 / 60}, the multiplication happens first; if the value of \java{minute} is 59, we get \java{5900 / 60}, which yields \java{98}.
 If these same operations had gone from right to left, the result would have been \java{59 * 1}, which is incorrect.
 
-\item Any time you want to override the rules of precedence (or you are not sure what they are) you can use parentheses.
+\item Any time you want to override the order of operations (or you are not sure what it is) you can use parentheses.
 Expressions in parentheses are evaluated first, so \java{(1 + 2) * 3} is 9.
 You can also use parentheses to make an expression easier to read, as in \java{(minute * 100) / 60}, even though it doesn't change the result.
 
 \end{itemize}
 
-Don't work too hard to remember the rules of precedence, especially for other operators.
+Don't work too hard to remember the order of operations, especially for other operators.
 If it's not obvious by looking at the expression, use parentheses to make it clear.
 
 
@@ -1771,8 +1771,8 @@ The difference between the number we want to represent and the nearest floating-
 \term{concatenate}
 To join two values, often strings, end-to-end.
 
-\term{precedence}
-The order in which operations are evaluated.
+\term{order of operations}
+The rules that determine in what order operations are evaluated.
 
 \term{composition}
 The ability to combine simple expressions and statements into compound expressions and statements.
@@ -2843,7 +2843,7 @@ Methods allow you to focus on each sub-problem in isolation, and then compose th
 %In Section~\ref{methods} we will come back to this question and list some additional benefits of dividing programs into methods.
 
 
-\section{Order of execution}
+\section{flow of execution}
 
 \index{class}
 \index{method}
@@ -2871,10 +2871,10 @@ public class NewLine {
 }
 \end{code}
 
-\index{order of execution}
+\index{flow of execution}
 
 When you look at a class definition that contains several methods, it is tempting to read it from top to bottom.
-But that is likely to be confusing, because that is not the {\bf order of execution} of the program.
+But that is likely to be confusing, because that is not the {\bf flow of execution} of the program.
 
 Execution always begins at the first statement of \java{main}, regardless of where it is in the source file.
 Statements are executed one at a time, in order, until you reach a method invocation, which you can think of as a detour.
@@ -2889,7 +2889,7 @@ Fortunately, Java is good at keeping track of which methods are running.
 So when \java{println} completes, it picks up where it left off in \java{newLine}; when \java{newLine} completes, it goes back to \java{threeLine}, and when \java{threeLine} completes, it gets back to \java{main}.
 
 In summary, when you read a program, don't read from top to bottom.
-Instead, follow the order of execution.
+Instead, follow the flow of execution.
 
 %Technically, the program does not terminate at the end of \java{main}.
 %Instead, execution picks up where it left off in the program that invoked \java{main}, which is the Java interpreter.
@@ -3272,7 +3272,7 @@ Parameters are variables: they contain values and have types.
 %\term{composition}
 %The ability to combine simple expressions and statements into compound %expressions and statements, making it possible to use intermediate %computations as arguments.
 
-\term{order of execution}
+\term{flow of execution}
 The order in which Java executes methods and statements.
 It may not necessarily be from top to bottom, left to right.
 
@@ -3285,7 +3285,7 @@ Local variables cannot be accessed from outside their method.
 
 \term{stack diagram}
 A graphical representation of the variables belonging to each method.
-The methods calls are ``stacked'' from top to bottom, in the order of execution.
+The methods calls are ``stacked'' from top to bottom, in the flow of execution.
 
 \term{frame}
 In a stack diagram, a representation of the variables and parameters for a method, along with their current values.
@@ -3317,7 +3317,7 @@ It describes an efficient way to test programs that take input from the user and
 
 \begin{exercise}
 
-The point of this exercise is to practice reading code and to make sure that you understand the order of execution through a program with multiple methods.
+The point of this exercise is to practice reading code and to make sure that you understand the flow of execution through a program with multiple methods.
 
 \begin{enumerate}
 
@@ -3509,7 +3509,7 @@ If you ever have to negate an expression that contains logical operators, and yo
 \end{itemize}
 
 Negating a logical expression is the same as negating each term and changing the operator.
-The \java{!} operator has higher precedence than \java{\&\&} and \java{||}, so you don't have to put parentheses around the individual terms \java{!A} and \java{!B}.
+The \java{!} operator takes precedence over \java{\&\&} and \java{||}, so you don't have to put parentheses around the individual terms \java{!A} and \java{!B}.
 
 De Morgan's laws also apply to the relational operators.
 In this case, negating each term means using the ``opposite'' relational operator.
@@ -7264,8 +7264,6 @@ Before you start the exercises, we recommend that you compile and run the exampl
 
 The point of this exercise is to explore Java types and fill in some of the details that aren't covered in the chapter.
 
-%TODO: see why there are empty items at the beginning of this exercise
-
 \index{concatenate}
 
 \begin{enumerate}
@@ -8663,8 +8661,6 @@ The output is {\tt 11:59:59.9}.
 
 We have seen two ways to check whether values are equal: the \java{==} operator and the \java{equals} method.
 With objects you can use either one, but they are not the same.
-
-%TODO: check the bullet points in the Atlas version
 
 \begin{itemize}
 
@@ -10214,10 +10210,10 @@ public Deck mergeSort() {
 
 \index{leap of faith}
 
-As usual, there are two ways to think about recursive programs: you can think through the entire order of execution, or you can make the ``leap of faith'' (see Section~\ref{leap of faith}).
+As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the ``leap of faith'' (see Section~\ref{leap of faith}).
 This example should encourage you to make the leap of faith.
 
-When you used \java{selectionSort} to sort the subdecks, you didn't feel compelled to follow the order of execution.
+When you used \java{selectionSort} to sort the subdecks, you didn't feel compelled to follow the flow of execution.
 You just assumed it works because you had already debugged it.
 And all you did to make \java{mergeSort} recursive was replace one sorting algorithm with another.
 There is no reason to read the program any differently.
