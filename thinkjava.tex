@@ -214,7 +214,7 @@ A mapping of {\em Think Java} section numbers to the current AP course descripti
 \section*{Appendices}
 
 The chapters of this book are meant to be read in order, because each one builds on the previous one.
-We also include three appendices with material that can be read at any time:
+We also include three appendixes with material that can be read at any time:
 
 \begin{description}
 
@@ -265,11 +265,11 @@ If you choose this option, you don't need a GitHub account, but you won't be abl
 
 \index{clone}
 
-\item If you don't want to use Git at all, you can download the code in a zip archive using the {\sf Download ZIP} button on the GitHub page, or this link: \url{http://tinyurl.com/ThinkJavaCodeZip}
+\item If you don't want to use Git at all, you can download the code in a ZIP archive using the {\sf Download ZIP} button on the GitHub page, or this link: \url{http://tinyurl.com/ThinkJavaCodeZip}
 
 \end{itemize}
 
-After you clone the repository or unzip the zip file, you should have a directory called {\tt ThinkJavaCode} with a subdirectory for each chapter in the book.
+After you clone the repository or unzip the ZIP file, you should have a directory called {\tt ThinkJavaCode} with a subdirectory for each chapter in the book.
 
 All examples in this book were developed and tested using Java SE Development Kit 7.
 If you are using a more recent version, the examples in this book should still work.
@@ -733,7 +733,7 @@ It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
 
 Many editors will automatically format source code with consistent indenting and line breaks.
-For example, in DrJava (see Appendix~\ref{development}) you can indent the code by selecting all text ({\sf Ctrl-A}) and pressing the {\sf Tab} key.
+For example, in DrJava (see Appendix~\ref{development}) you can indent the code by selecting all text ({\sf Ctrl+A}) and pressing the {\sf Tab} key.
 
 %\section{Style guidelines}
 
@@ -3978,11 +3978,11 @@ A data type with only two values, \java{true} and \java{false}.
 
 \index{operator!relational}
 \term{relational operator}
-An operator that compares two values and produces a boolean indicating the relationship between them.
+An operator that compares two values and produces a \java{boolean} indicating the relationship between them.
 
 \index{operator!logical}
 \term{logical operator}
-An operator that combines boolean values and produces boolean values.
+An operator that combines boolean values and produces a boolean value.
 
 \term{short circuit}
 A way of evaluating logical operators that only evaluates the second operand if necessary.
@@ -6757,7 +6757,7 @@ if (letter == 'a') {
 \end{code}
 
 \index{quote}
-\index{single-quote}
+\index{single quote}
 \index{escape sequence}
 
 Character literals, like \java{'a'}, appear in single quotes.
@@ -7305,7 +7305,7 @@ For example, you can assign an \java{int} to a \java{double} but not vice versa.
 
 \begin{exercise}
 Write a method called \java{letterHist} that takes a string as a parameter and returns a histogram of the letters in the string.
-The zeroeth element of the histogram should contain the number of a's in the string (upper and lower case); the 25th element should contain the number of z's.
+The zeroeth element of the histogram should contain the number of a's in the string (upper- and lowercase); the 25th element should contain the number of z's.
 Your solution should only traverse the string once.
 \end{exercise}
 
@@ -11255,7 +11255,7 @@ We run the program using the {\tt java} command, which displays the output on th
 \end{center}
 \end{figure}
 
-Note that the {\tt javac} command requires a {\em file name} (or multiple source files separated by spaces), whereas the {\tt java} command requires a single {\em class name}.
+Note that the {\tt javac} command requires a {\em filename} (or multiple source files separated by spaces), whereas the {\tt java} command requires a single {\em class name}.
 If you use DrJava, it runs these commands for you behind the scenes and displays the output in the Interactions Pane.
 
 Taking time to learn this efficient and elegant way of interacting with your operating system will make you more productive.
@@ -11368,7 +11368,7 @@ This example refers to a method beginning on line 93, column 5 of Hello.java:
 Hello.java:93:5: Missing a Javadoc comment
 \end{stdout}
 
-The file \java{/google_checks.xml} is inside the JAR and represents most of Google's style rules.
+The file \java{/google_checks.xml} is inside the JAR file and represents most of Google's style rules.
 You can alternatively use \java{/sun_checks.xml} or provide your own configuration file.
 See Checkstyle's website for more information.
 
@@ -11498,7 +11498,7 @@ Using \java{assertEquals} is more concise than writing your own \java{if} statem
 JUnit provides additional assert methods, such as \java{assertNull}, \java{assertSame}, and \java{assertTrue}, that can be used to design a variety of tests.
 
 To run JUnit directly from DrJava, click the {\sf Test} button on the toolbar.
-If all your test methods pass, you will see a green bar in the lower right.
+If all your test methods pass, you will see a green bar in the lower-right corner.
 Otherwise, DrJava will take you directly to the first assertion that failed.
 
 
@@ -11519,7 +11519,7 @@ The ``Java Virtual Machine'' that interprets the compiled byte code.
 A program that edits plain text files, the format used by most programming languages.
 
 \term{JAR}
-A ``Java Archive'', which is essentially a zip file containing classes and other resources.
+A ``Java Archive'', which is essentially a ZIP file containing classes and other resources.
 
 \term{command line}
 A means of interacting with the computer by issuing commands in the form of successive lines of text.
@@ -11528,7 +11528,7 @@ A means of interacting with the computer by issuing commands in the form of succ
 A command-line feature that substitutes \java{System.in} and/or \java{System.out} with a plain text file.
 
 \term{wildcard}
-A command-line feature that allows you to specify a pattern of file names using the {\tt *} character.
+A command-line feature that allows you to specify a pattern of filenames using the {\tt *} character.
 
 \term{debugger}
 A tool that allows you to run one statement at a time and see the contents of variables.
