@@ -1501,26 +1501,26 @@ But in the second line, \verb|"Hello" + 1| is \verb|"Hello1"|, and \verb|"Hello1
 \index{order of operations}
 \index{precedence}
 
-When more than one operator appears in an expression, the order of evaluation depends on the rules of {\bf precedence}.
-Generally speaking, Java executes operations from left to right (as we saw in the previous section).
+When more than one operator appears in an expression, they are evaluated according to {\bf order of operations}.
+Generally speaking, Java evaluates operators from left to right (as we saw in the previous section).
 But for numeric operators, Java follows mathematical conventions:
 
 \begin{itemize}
 
-\item Multiplication and division happen before addition and subtraction.
+\item Multiplication and division take ``precedence'' over addition and subtraction, which means they happen first.
 So \java{1 + 2 * 3} yields 7, not 9, and \java{2 + 4 / 2} yields 4, not 3.
 
 \item If the operators have the same precedence, they are evaluated from left to right.
 So in the expression \java{minute * 100 / 60}, the multiplication happens first; if the value of \java{minute} is 59, we get \java{5900 / 60}, which yields \java{98}.
 If these same operations had gone from right to left, the result would have been \java{59 * 1}, which is incorrect.
 
-\item Any time you want to override the rules of precedence (or you are not sure what they are) you can use parentheses.
+\item Any time you want to override the order of operations (or you are not sure what it is) you can use parentheses.
 Expressions in parentheses are evaluated first, so \java{(1 + 2) * 3} is 9.
 You can also use parentheses to make an expression easier to read, as in \java{(minute * 100) / 60}, even though it doesn't change the result.
 
 \end{itemize}
 
-Don't work too hard to remember the rules of precedence, especially for other operators.
+Don't work too hard to remember the order of operations, especially for other operators.
 If it's not obvious by looking at the expression, use parentheses to make it clear.
 
 
@@ -1771,8 +1771,8 @@ The difference between the number we want to represent and the nearest floating-
 \term{concatenate}
 To join two values, often strings, end-to-end.
 
-\term{precedence}
-The order in which operations are evaluated.
+\term{order of operations}
+The rules that determine in what order operations are evaluated.
 
 \term{composition}
 The ability to combine simple expressions and statements into compound expressions and statements.
@@ -2218,6 +2218,8 @@ Learning about format strings is like learning a sub-language within Java.
 There are many options, and the details can be overwhelming.
 Table~\ref{tab:format} lists a few common uses, to give you an idea of how things work.
 For more details, refer to the documentation of \java{java.util.Formatter}.
+The easiest way to find documentation for Java classes is to do a Web search for ``Java'' and the name of the class.
+
 %at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html}.
 
 
@@ -2676,7 +2678,8 @@ long x = Math.round(Math.PI * 20.0);
 
 The result is 63 (rounded up from 62.8319).
 
-You can read the documentation for these and other methods in the \java{Math} class at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html}.
+Take a minute to read the documentation for these and other methods in the \java{Math} class.
+The easiest way to find documentation for Java classes is to do a Web search for ``Java'' and the name of the class.
 
 
 \section{Composition revisited}
@@ -2843,7 +2846,7 @@ Methods allow you to focus on each sub-problem in isolation, and then compose th
 %In Section~\ref{methods} we will come back to this question and list some additional benefits of dividing programs into methods.
 
 
-\section{Order of execution}
+\section{flow of execution}
 
 \index{class}
 \index{method}
@@ -2871,10 +2874,10 @@ public class NewLine {
 }
 \end{code}
 
-\index{order of execution}
+\index{flow of execution}
 
 When you look at a class definition that contains several methods, it is tempting to read it from top to bottom.
-But that is likely to be confusing, because that is not the {\bf order of execution} of the program.
+But that is likely to be confusing, because that is not the {\bf flow of execution} of the program.
 
 Execution always begins at the first statement of \java{main}, regardless of where it is in the source file.
 Statements are executed one at a time, in order, until you reach a method invocation, which you can think of as a detour.
@@ -2889,7 +2892,7 @@ Fortunately, Java is good at keeping track of which methods are running.
 So when \java{println} completes, it picks up where it left off in \java{newLine}; when \java{newLine} completes, it goes back to \java{threeLine}, and when \java{threeLine} completes, it gets back to \java{main}.
 
 In summary, when you read a program, don't read from top to bottom.
-Instead, follow the order of execution.
+Instead, follow the flow of execution.
 
 %Technically, the program does not terminate at the end of \java{main}.
 %Instead, execution picks up where it left off in the program that invoked \java{main}, which is the Java interpreter.
@@ -3101,9 +3104,8 @@ And sometimes that's not easy.
 %TODO: let's make a decision about whether to link to the Oracle documentation or use some standard verbiage about how to find it, and then check for consistency.
 
 As an example, let's look a the documentation for \java{Scanner}, which we used in Section~\ref{scanner}.
-The documentation of this class is at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html}.
-The easiest way to find official documentation pages is to search the web using the word Java plus the name of the class (for example, ``Java Scanner'').
-Figure~\ref{fig.scanner} shows a screenshot of this page.
+You can find it by doing a Web search for ``Java Scanner''.
+Figure~\ref{fig.scanner} shows a screenshot of the page.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -3270,7 +3272,7 @@ Parameters are variables: they contain values and have types.
 %\term{composition}
 %The ability to combine simple expressions and statements into compound %expressions and statements, making it possible to use intermediate %computations as arguments.
 
-\term{order of execution}
+\term{flow of execution}
 The order in which Java executes methods and statements.
 It may not necessarily be from top to bottom, left to right.
 
@@ -3283,7 +3285,7 @@ Local variables cannot be accessed from outside their method.
 
 \term{stack diagram}
 A graphical representation of the variables belonging to each method.
-The methods calls are ``stacked'' from top to bottom, in the order of execution.
+The methods calls are ``stacked'' from top to bottom, in the flow of execution.
 
 \term{frame}
 In a stack diagram, a representation of the variables and parameters for a method, along with their current values.
@@ -3315,7 +3317,7 @@ It describes an efficient way to test programs that take input from the user and
 
 \begin{exercise}
 
-The point of this exercise is to practice reading code and to make sure that you understand the order of execution through a program with multiple methods.
+The point of this exercise is to practice reading code and to make sure that you understand the flow of execution through a program with multiple methods.
 
 \begin{enumerate}
 
@@ -3507,7 +3509,7 @@ If you ever have to negate an expression that contains logical operators, and yo
 \end{itemize}
 
 Negating a logical expression is the same as negating each term and changing the operator.
-The \java{!} operator has higher precedence than \java{\&\&} and \java{||}, so you don't have to put parentheses around the individual terms \java{!A} and \java{!B}.
+The \java{!} operator takes precedence over \java{\&\&} and \java{||}, so you don't have to put parentheses around the individual terms \java{!A} and \java{!B}.
 
 De Morgan's laws also apply to the relational operators.
 In this case, negating each term means using the ``opposite'' relational operator.
@@ -7263,8 +7265,6 @@ Before you start the exercises, we recommend that you compile and run the exampl
 
 The point of this exercise is to explore Java types and fill in some of the details that aren't covered in the chapter.
 
-%TODO: see why there are empty items at the beginning of this exercise
-
 \index{concatenate}
 
 \begin{enumerate}
@@ -7931,14 +7931,14 @@ See the documentation for these classes to learn more about what they can do.
 
 \index{library}
 
-Throughout the book, you have been using many classes from the Java library including \java{System}, \java{String}, \java{Scanner}, \java{Math}, \java{Random}, and others.
-What you may not have realized is that these classes are written in Java.
+Throughout the book, you have used classes from the Java library including \java{System}, \java{String}, \java{Scanner}, \java{Math}, \java{Random}, and others.
+You may not have realized that these classes are written in Java.
 In fact, you can take a look at the source code to see how they work.
 
 \index{src.zip}
 
 The Java library contains thousands of files, many of which are thousands of lines of code.
-That is more than any one person could ever read and understand fully, so please don't be intimidated!
+That's more than one person could read and understand fully, so please don't be intimidated!
 
 Because it's so large, the library source code is stored in a file named \java{src.zip}.
 Take a few minutes to locate this file on your machine:
@@ -7956,16 +7956,17 @@ You should now see {\tt Point.java} and {\tt Rectangle.java}, along with the oth
 
 Open {\tt Point.java} in your editor and skim through the file.
 It uses language features we haven't yet discussed, so you probably won't understand everything.
-But you can get a sense of what professional Java software looks like browsing through the library.
+But you can get a sense of what professional Java software looks like by browsing through the library.
 
 \index{documentation}
 
 Notice how much of {\tt Point.java} is documentation.
-Each method is thoroughly commented including \java{@param}, \java{@return}, and other Javadoc tags.
-You can see the HTML version of these comments on \url{http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html}.
+Each method is thoroughly commented, including \java{@param}, \java{@return}, and other Javadoc tags.
+Javadoc reads these comments and generates documentation in HTML.
+You can see the results by reading the documentation for the \java{Point} class, which you can find by doing a Web search for ``Java Point''.
 
 Now take a look at \java{Rectangle}'s \java{grow} and \java{translate} methods.
-There is more to them than you may have realized, but that doesn't limit your ability to use and understand these methods in a program.
+There is more to them than you may have realized, but that doesn't limit your ability to use these methods in a program.
 
 To summarize the whole chapter, objects encapsulate data and provide methods to access and modify the data directly.
 Object-oriented programming makes it possible to hide messy details so that you can more easily use and understand code that other people wrote.
@@ -8142,7 +8143,7 @@ Why not?
 
 \item \java{BigInteger} is a Java class that can represent arbitrarily big integers.
 There is no upper bound except the limitations of memory size and processing speed.
-Read the documentation at \url{http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html}.
+Take a minute to read the documentation, which you can find by doing a Web search for ``Java BigInteger''.
 
 \item To use BigIntegers, you have to import \java{java.math.BigInteger} at the beginning of your program.
 
@@ -8662,8 +8663,6 @@ The output is {\tt 11:59:59.9}.
 
 We have seen two ways to check whether values are equal: the \java{==} operator and the \java{equals} method.
 With objects you can use either one, but they are not the same.
-
-%TODO: check the bullet points in the Atlas version
 
 \begin{itemize}
 
@@ -10214,10 +10213,10 @@ public Deck mergeSort() {
 
 \index{leap of faith}
 
-As usual, there are two ways to think about recursive programs: you can think through the entire order of execution, or you can make the ``leap of faith'' (see Section~\ref{leap of faith}).
+As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the ``leap of faith'' (see Section~\ref{leap of faith}).
 This example should encourage you to make the leap of faith.
 
-When you used \java{selectionSort} to sort the subdecks, you didn't feel compelled to follow the order of execution.
+When you used \java{selectionSort} to sort the subdecks, you didn't feel compelled to follow the flow of execution.
 You just assumed it works because you had already debugged it.
 And all you did to make \java{mergeSort} recursive was replace one sorting algorithm with another.
 There is no reason to read the program any differently.
@@ -10324,7 +10323,8 @@ When it's printed, this string should display the same results as the \java{prin
 \index{StringBuilder}
 
 {\em Hint:} You can use the \java{+} operator to concatenate strings, but it is not very efficient.
-Consider using \java{java.util.StringBuilder}, which you can read more about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
+Consider using \java{java.util.StringBuilder}; you can find the documentation by doing a Web search for ``Java StringBuilder''.
+
 
 \end{exercise}
 
@@ -10403,7 +10403,7 @@ We'll see the details soon, but let's start with \java{CardCollection}:
 
 \section{CardCollection}
 
-Here's the beginning of a \java{CardCollection} class that uses \java{ArrayList} instead of a standard array:
+Here's the beginning of a \java{CardCollection} class that uses \java{ArrayList} instead of a primitive array:
 
 \begin{code}
 public class CardCollection {
@@ -10544,7 +10544,7 @@ public void shuffle() {
 \end{code}
 
 \java{ArrayList} provides additional methods we aren't using here.
-You can read about them at \url{https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html}.
+You can read about them in the documentation, which you can find by doing a web search for ``Java ArrayList''.
 
 
 \section{Inheritance}
@@ -11430,7 +11430,7 @@ You can also press {\sf Automatic Trace} to watch DrJava run your code one line 
 Using a debugger is like having the computer proofread your code out loud.
 When the program is paused, you can examine (or even change) the value of any variable using the Interactions Pane.
 
-Tracing allows you to verify how execution (and data) passes from one method to another.
+Tracing allows you to follow the flow of execution and see how data pass from one method to another.
 You might expect the code do one thing, but then the debugger shows it doing something else.
 At that moment, you gain insight about what may be wrong with the code.
 
@@ -11599,7 +11599,7 @@ public class Drawing extends Canvas {
 \end{code}
 
 The \java{Drawing} class extends \java{Canvas}, so it has all the methods provided by \java{Canvas}, including \java{setSize}.
-You can read about the other methods at \url{https://docs.oracle.com/javase/7/docs/api/java/awt/Canvas.html}.
+You can read about the other methods in the documentation, which you can find by doing a web search for ``Java Canvas''. 
 
 \index{JFrame}
 \index{class!JFrame}
