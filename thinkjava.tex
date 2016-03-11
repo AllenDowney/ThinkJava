@@ -60,7 +60,7 @@
     \@esphack%
 }
 
-\newcommand{\java}[1]{\verb"#1"}
+\newcommand{\java}{\verb}
 %\newcommand{\stdout}[1]{\verb"#1"}
 
 \else
@@ -1106,7 +1106,7 @@ We will see some examples that seem to break this rule, but we'll get to that la
 %For now you should remember the general rule, and we'll talk about exceptions later.
 
 A common source of confusion is that some strings {\em look} like integers, but they are not.
-For example, \java{message} can contain the string \verb|"123"|, which is made up of the characters \java{'1'}, \java{'2'}, and \java{'3'}.
+For example, \java{message} can contain the string \java{"123"}, which is made up of the characters \java{'1'}, \java{'2'}, and \java{'3'}.
 But that is not the same thing as the integer \java{123}.
 
 \begin{code}
@@ -3482,10 +3482,10 @@ The result of \java{fruit1.equals(fruit2)} is the boolean value \java{false}.
 \index{logical operator}
 \index{operator!logical}
 
-Java has three {\bf logical operators}: \texttt{\&\&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
+Java has three {\bf logical operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
 The results of these operators are similar to their meanings in English.
 
-For example, \texttt{x > 0 \&\& x < 10} is true when \java{x} is both greater than zero {\em and} less than 10.
+For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero {\em and} less than 10.
 The expression \java{evenFlag || n \% 3 == 0} is true if either condition is true, that is, if \java{evenFlag} is true {\em or} the number \java{n} is divisible by 3.
 Finally, the \java{!} operator inverts a boolean expression.
 So \java{!evenFlag} is true if \java{evenFlag} is {\em not} true.
@@ -3494,7 +3494,7 @@ So \java{!evenFlag} is true if \java{evenFlag} is {\em not} true.
 
 Logical operators evaluate the second expression only when necessary.
 For example, \java{true || anything} is always true, so Java does not need to evaluate the expression \java{anything}.
-Likewise, \texttt{false \&\& anything} is always false.
+Likewise, \java{false && anything} is always false.
 Ignoring the second operand, when possible, is called {\bf short circuit} evaluation, by analogy with an electrical circuit.
 Short circuit evaluation can save time, especially if \java{anything} takes a long time to evaluate.
 It can also avoid unnecessary errors, if \java{anything} might fail.
@@ -3504,19 +3504,19 @@ It can also avoid unnecessary errors, if \java{anything} might fail.
 If you ever have to negate an expression that contains logical operators, and you probably will, {\bf De Morgan's laws} can help:
 
 \begin{itemize}
-\item \texttt{!(A \&\& B)} ~is the same as~ \java{!A || !B}
-\item \java{!(A || B)} ~is the same as~ \texttt{!A \&\& !B}
+\item \java{!(A && B)} ~is the same as~ \java{!A || !B}
+\item \java{!(A || B)} ~is the same as~ \java{!A && !B}
 \end{itemize}
 
 Negating a logical expression is the same as negating each term and changing the operator.
-The \java{!} operator takes precedence over \java{\&\&} and \java{||}, so you don't have to put parentheses around the individual terms \java{!A} and \java{!B}.
+The \java{!} operator takes precedence over \java{&&} and \java{||}, so you don't have to put parentheses around the individual terms \java{!A} and \java{!B}.
 
 De Morgan's laws also apply to the relational operators.
 In this case, negating each term means using the ``opposite'' relational operator.
 
 \begin{itemize}
-\item \texttt{!(x < 5 \&\& y == 3)} ~is the same as~ \java{x >= 5 || y != 3}
-\item \java{!(x >= 1 || y != 7)} ~is the same as~ \texttt{x < 1 \&\& y == 7}
+\item \java{!(x < 5 && y == 3)} ~is the same as~ \java{x >= 5 || y != 3}
+\item \java{!(x >= 1 || y != 7)} ~is the same as~ \java{x < 1 && y == 7}
 \end{itemize}
 
 It may help to read these examples out loud in English.
