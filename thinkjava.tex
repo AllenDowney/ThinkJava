@@ -3122,8 +3122,6 @@ The ``Implemented Interfaces'' section lists some of the things a \java{Scanner}
 
 %The next two lines indicate that every \java{Scanner} is also an \java{Object}; that will make more sense after Section~\ref{inheritance}.
 
-%TODO: We still don't have a section on Object.
-
 The next section of the documentation is a narrative that explains the purpose of the class and includes examples of how to use it.
 This text can be difficult to read because it uses terms we have not learned yet.
 But the examples are often very useful.
@@ -3927,6 +3925,8 @@ Blastoff!
 3
 \end{stdout}
 
+\index{binary}
+
 This behavior comes in handy when it is easier to compute results in reverse order.
 For example, to convert a decimal integer into its {\bf binary} representation, you repeatedly divide the number by two:
 
@@ -3939,8 +3939,7 @@ For example, to convert a decimal integer into its {\bf binary} representation, 
 \end{stdout}
 
 Reading these remainders from bottom to top, 23 in binary is 10111.
-
-%TODO: DW suggests that we need to do a better job of explaining binary
+(For more background on binary numbers, see \url{https://www.mathsisfun.com/binary-number-system.html}.)
 
 Here is a recursive method that displays the binary representation of any positive integer:
 
@@ -5737,8 +5736,6 @@ while (x != 0) {
 Although \java{break} and \java{continue} statements give you more control of the loop execution, they can make code difficult to understand and debug.
 Use them sparingly.
 
-%TODO: DW suggests we also cover PrintWriter to write files
-% add an appendix on File I/O since it involves try/catch?
 
 \section{Vocabulary}
 
@@ -5943,6 +5940,8 @@ You should not use \java{factorial} or \java{pow}.
 \label{arrays}
 
 %TODO: DW liked the previous version where Strings come before arrays
+% CSM: the transition is better from strings to things to objects
+% Plus we moved command-line arguments to the strings chapter
 
 Up to this point, the only variables we have used were for individual values such as numbers or strings.
 In this chapter, we'll learn how to store multiple values of the same type using a single variable.
@@ -6693,7 +6692,7 @@ Write a method called \java{max} that takes an array and uses \java{maxInRange} 
 \end{exercise}
 
 
-%CSM: we now discuss binary search in Chapter 12
+% CSM: we now discuss binary search in Chapter 12
 
 %\begin{exercise}
 %
@@ -9142,6 +9141,7 @@ Spades & $\mapsto$ & 3
 
 %TODO: DW suggests using constants for CLUBS, DIAMONDS, etc.  I think it's
 % a good idea, but will require changes in the code and book.
+% CSM: an object-oriented solution would use enums instead of constants
 
 We use the mathematical symbol $\mapsto$ to make it clear that these mappings are not part of the program.
 They are part of the program design, but they never appear explicitly in the code.
@@ -10573,6 +10573,13 @@ We could also say that \java{CardCollection} is a {\bf superclass}, and \java{De
 % NOTE: Let's stick with ``superclass'' and ``subclass'' and
 % not use ``parent'' and ``child''.
 
+\index{Object}
+
+In Java, classes may only extend one superclass.
+Classes that do not specify a superclass with \java{extends} automatically inherit from \java{java.lang.Object}.
+So in this example, \java{Deck} extends \java{CardCollection}, which in turn extends \java{Object}.
+The \java{Object} class provides the default \java{equals} and \java{toString} methods, among other things.
+
 Constructors are not inherited, but all other \java{public} attributes and methods are.
 The only additional method in \java{Deck}, at least for now, is a constructor.
 So you can create a \java{Deck} object like this:
@@ -11042,8 +11049,6 @@ Figure~\ref{uml1} shows the classes defined in this chapter and the relationship
 \end{center}
 \end{figure}
 
-%TODO: fix the arrow between Eights and Player
-
 UML is an international standard, so almost any software engineer in the world could look at this diagram and understand our design.
 And class diagrams are only one of many graphical representations defined in the UML standard.
 
@@ -11309,7 +11314,7 @@ In other words, the {\tt test.out} file contains the output of your program.
 By the way, it's perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command line.
 Knowing both techniques allows you to use the right tool for the job.
 
-%(CSM) moving fig.meld here so it's not in the middle of Checkstyle
+% CSM: moving fig.meld here so it's not in the middle of Checkstyle
 
 \begin{figure}[!ht]
 \begin{center}
