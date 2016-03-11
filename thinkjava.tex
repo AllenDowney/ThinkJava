@@ -5685,7 +5685,7 @@ Although this code looks complicated, it is essentially only three steps:
 
 The code uses a flag variable, \java{okay}, to indicate whether we need to repeat the loop body.
 If \java{hasNextDouble()} returns \java{false}, we consume the invalid input by calling \java{next()}.
-We then display an error message to the user via \java{System.err}.
+We then display an error message via \java{System.err}.
 The loop terminates when \java{hasNextDouble()} return \java{true}.
 
 
@@ -6313,7 +6313,7 @@ For most applications, they are as good as random.
 \index{Random}
 \index{nextInt!Random}
 
-If you did Exercise~\ref{guess}, you have already seen \java{java.util.Random}, a class that generates pseudorandom numbers.
+If you did Exercise~\ref{guess}, you have already seen \java{java.util.Random}, which generates pseudorandom numbers.
 The method \java{nextInt} takes an integer argument, \java{n}, and returns a random integer between \java{0} and \java{n - 1} (inclusive).
 
 If you generate a long series of random numbers, every value should appear, at least approximately, the same number of times.
@@ -6530,7 +6530,7 @@ A sequence of numbers that appear to be random, but which are actually the produ
 An array of integers where each integer counts the number of values that fall into a certain range.
 
 \term{enhanced for loop}
-An alternative syntax for traversing the elements (the values) of an array.
+An alternative syntax for traversing the elements (values) of an array.
 
 \end{description}
 
@@ -6826,7 +6826,7 @@ But \java{name} still refers to \verb|"Alan Turing"|.
 
 \index{replace}
 
-Another useful method is \java{replace}, which finds and substitutes instances of one string in another.
+Another useful method is \java{replace}, which finds and replaces instances of one string within another.
 This example replaces \verb|"Computer Science"| with \verb|"CS"|:
 
 \begin{code}
@@ -6834,12 +6834,15 @@ String text = "Computer Science is fun!";
 text = text.replace("Computer Science", "CS");
 \end{code}
 
-Simply invoking \java{text.replace} does not change the value of \java{text}.
-It returns a reference to a new string \verb|"CS is fun!"|, which is then assigned back to the variable \java{text}.
-Without the assignment, \java{text.replace} would have no effect.
+This example demonstrates a common way to work with string methods.
+It invokes \java{text.replace}, which returns a reference to a new string, \verb|"CS is fun!"|.
+Then assigns the new string to \java{text}, replacing the old string.
 
-Strings are immutable by design, because it simplifies passing them between methods as parameters and return values.
-And since the contents of a string can never change, two variables can reference the same string without one accidentally corrupting the other.
+This assignment is important; if you don't save the return value, invoking \java{text.replace} has no effect.
+
+% ABD: Too many new ideas here: the most important one is that you have to do something with the return value.  It's not a good time to appreciate the glory of immutability.
+%Strings are immutable by design, because it simplifies passing them between methods as parameters and return values.
+%And since the contents of a string can never change, two variables can reference the same string without one accidentally corrupting the other.
 
 
 \section{String traversal}
@@ -6996,7 +6999,7 @@ If the letter happens to appear at the starting index, the starting index is the
 So \java{fruit.indexOf('a', 5)} returns 5.
 
 If the character does not appear in the string, \java{indexOf} returns \java{-1}.
-Since indexes cannot be negative, \java{-1} indicates the character was not found.
+Since indexes cannot be negative, this value indicates the character was not found.
 
 You can also use \java{indexOf} to search for a substring, not just a single character.
 For example, the expression \java{fruit.indexOf("nan")} returns 2.
@@ -7008,7 +7011,7 @@ For example, the expression \java{fruit.indexOf("nan")} returns 2.
 \index{equals}
 \index{compareTo}
 
-To compare two strings, it may be tempting to use the \java{==} or \java{!=} operators.
+To compare two strings, it may be tempting to use the \java{==} and \java{!=} operators.
 
 \begin{code}
 String name1 = "Alan Turing";
@@ -7096,8 +7099,7 @@ The difference is that \java{printf} displays text on the screen, whereas \java{
 \section{Wrapper classes}
 \label{wrappers}
 
-In this chapter, we have begun to look more closely at objects (like strings) that provide methods.
-Primitive values (like \java{int}s, \java{double}s, and \java{char}s) do not come with any methods.
+Primitive values (like \java{int}s, \java{double}s, and \java{char}s) do not provide methods.
 For example, you can't call \java{equals} on an \java{int}:
 
 \begin{code}
@@ -7105,9 +7107,9 @@ int i = 5;
 System.out.println(i.equals(5));  // compiler error
 \end{code}
 
-For each primitive type, there is a corresponding class in the Java library.
-The class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
-These so-called {\bf wrapper classes} also include \java{Boolean}, \java{Long}, and \java{Double}.
+But for each primitive type, there is a corresponding class in the Java library, called a {\bf wrapper class}.
+The wrapper class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
+Other wrapper classes include \java{Boolean}, \java{Long}, and \java{Double}.
 They are in the \java{java.lang} package, so you can use them without importing them.
 
 Each wrapper class defines constants \java{MIN_VALUE} and \java{MAX_VALUE}.
@@ -7152,7 +7154,7 @@ public class Max {
 }
 \end{code}
 
-You can run this program via the command line by typing:
+You can run this program from the command line by typing:
 
 \begin{code}
 java Max
@@ -7207,7 +7209,7 @@ If \java{args} is empty, the result is \java{MIN_VALUE}.
 A collection of related data that comes with a set of methods that operate on it.
 
 \term{primitive}
-A data type that stores a single value and serves as a building block for other types.
+A data type that stores a single value and provides no methods.
 
 \term{Unicode}
 A standard for representing characters in most of the world's languages.
@@ -7235,7 +7237,7 @@ An object that, once created, cannot be modified.
 Strings are immutable by design.
 
 \term{empty string}
-The string \verb|""|, what contains no characters and has a length of zero.
+The string \verb|""|, which contains no characters and has a length of zero.
 
 \term{utility method}
 A method that provides commonly needed functionality.
