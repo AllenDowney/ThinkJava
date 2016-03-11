@@ -11847,18 +11847,18 @@ The best debugging strategy depends on what kind of error you have:
 
 \begin{itemize}
 
-\item Compile-time errors indicate that there is something wrong with the syntax of the program.
+\item {\bf Compile-time errors} indicate that there is something wrong with the syntax of the program.
 Example: omitting the semicolon at the end of a statement.
 
 \index{compile-time error}
 
-\item Run-time errors are produced if something goes wrong while the program is running.
+\item {\bf Run-time errors} are produced if something goes wrong while the program is running.
 Example: an infinite recursion eventually causes a \java{StackOverflowError}.
 
 \index{exception}
 \index{run-time error}
 
-\item Logic errors cause the program to do the wrong thing.
+\item {\bf Logic errors} cause the program to do the wrong thing.
 Example: an expression may not be evaluated in the order you expect.
 
 \index{logic error}
@@ -11914,7 +11914,8 @@ Make sure the program is indented properly; that makes it easier to spot syntax 
 
 Now, start looking for common syntax errors:
 
-\index{syntax}
+\index{syntax errors}
+\index{error!syntax}
 
 \begin{enumerate}
 
@@ -11922,17 +11923,17 @@ Now, start looking for common syntax errors:
 All method definitions should be nested within a class definition.
 All program statements should be within a method definition.
 
-\item Remember that upper case letters are not the same as lower case letters.
+\item Remember that uppercase letters are not the same as lowercase letters.
 
 \item Check for semicolons at the end of statements (and no semicolons after squiggly-braces).
 
 \item Make sure that any strings in the code have matching quotation marks.
-Make sure that you use double-quotes for strings and single quotes for characters.
+Make sure that you use double quotes for strings and single quotes for characters.
 
 \item For each assignment statement, make sure that the type on the left is the same as the type on the right.
 Make sure that the expression on the left is a variable name or something else that you can assign a value to (like an element of an array).
 
-\item For each method invocation, make sure that the arguments you provide are in the right order, and have right type, and that the object you are invoking the method on is the right type.
+\item For each method invocation, make sure that the arguments you provide are in the right order and have right type, and that the object you are invoking the method on is the right type.
 
 \item If you are invoking a value method, make sure you are doing something with the result.
 If you are invoking a void method, make sure you are {\em not} trying to do something with the result.
@@ -12020,11 +12021,13 @@ Often that means it is caught in an infinite loop or an infinite recursion.
 
 \begin{itemize}
 
-\item If there is a particular loop that you suspect is the problem, add a print statement immediately before the loop that says ``entering the loop'' and another immediately after that says ``exiting the loop.''
+\item If there is a particular loop that you suspect is the problem, add a print statement immediately before the loop that says ``entering the loop'' and another immediately after that says ``exiting the loop''.
 
 Run the program.
 If you get the first message and not the second, you know where the program is getting stuck.
 Go to the section below titled ``Infinite loop''.
+
+\index{StackOverflowError}
 
 \item Most of the time an infinite recursion will cause the program to run for a while and then produce a \java{StackOverflowError}.
 If that happens, go to the section below titled ``Infinite recursion''.
@@ -12086,16 +12089,17 @@ When you run the program, check whether the values are reasonable, and check for
 
 \subsection*{When I run the program I get an exception.}
 
-\index{Exception}
+\index{exception}
+\index{stack trace}
 
-When an exception occurs, Java displays a message that includes the name of the exception, the line of the program where the exception occurred, and a stack trace.
+When an exception occurs, Java displays a message that includes the name of the exception, the line of the program where the exception occurred, and a ``stack trace''.
 The stack trace includes the method that was running, the method that invoked it, the method that invoked that one, and so on.
 
 The first step is to examine the place in the program where the error occurred and see if you can figure out what happened.
 
 \begin{description}
 
-\item[NullPointerException:]
+\term{NullPointerException}
 You tried to access an instance variable or invoke a method on an object that is currently \java{null}.
 You should figure out which variable is \java{null} and then figure out how it got to be that way.
 
@@ -12107,7 +12111,7 @@ int[] array = new Point[5];
 System.out.println(array[0].x);
 \end{code}
 
-\item[ArrayIndexOutOfBoundsException:]
+\term{ArrayIndexOutOfBoundsException}
 The index you are using to access an array is either negative or greater than \java{array.length - 1}.
 If you can find the site where the problem is, add a print statement immediately before it to display the value of the index and the length of the array.
 Is the array the right size?
@@ -12117,16 +12121,16 @@ Now work your way backwards through the program and see where the array and the 
 Find the nearest assignment statement and see if it is doing the right thing.
 If either one is a parameter, go to the place where the method is invoked and see where the values are coming from.
 
-\item[StackOverflowError:]
+\term{StackOverflowError}
 See ``Infinite recursion'' above.
 
-\item[FileNotFoundException:]
+\term{FileNotFoundException}
 This means Java didn't find the file it was looking for.
 If you are using a project-based development environment like Eclipse, you might have to import the file into the project.
 Otherwise make sure the file exists and that the path is correct.
 This problem depends on your file system, so it can be hard to track down.
 
-\item[ArithmeticException:]
+\term{ArithmeticException}
 Something went wrong during an arithmetic operation; for example, division by zero.
 
 \end{description}
@@ -12197,6 +12201,9 @@ Once you find the discrepancy between your model and reality, you can solve the 
 
 Here are some common logic errors to check for:
 
+\index{logic errors}
+\index{error!logic}
+
 \begin{itemize}
 
 \item Remember that integer division always rounds toward zero.
@@ -12249,10 +12256,10 @@ It's also easier to debug, because you can check the types of the temporary vari
 
 \index{temporary variable}
 \index{variable!temporary}
-\index{order of evaluation}
+\index{order of operations}
 \index{precedence}
 
-Another problem that can occur with big expressions is that the order of evaluation may not be what you expect.
+Another problem that can occur with big expressions is that the order of operations may not be what you expect.
 For example, to evaluate $\frac{x}{2 \pi}$, you might write:
 
 \begin{code}
@@ -12372,6 +12379,9 @@ What were the last lines of code that you wrote, or what is the test case that f
 By the time you explain the problem to someone, you might see the answer.
 This phenomenon is so common that some people recommend a debugging technique called ``rubber ducking''.
 Here's how it works:
+
+\index{rubber duck}
+\index{debugging!rubber duck}
 
 \begin{enumerate}
 
