@@ -7067,8 +7067,8 @@ The uppercase letters come before the lowercase letters, so \verb|"Ada"| comes b
 \index{utility method}
 
 In Section~\ref{printf}, we learned how to use \java{printf} to display formatted output.
-Sometimes programs need to create strings that are formatted a certain way, but not display them via \java{System.out}.
-For example, you may want to write a {\bf utility method} that returns a \java{String} based on parameters:
+Sometimes programs need to create strings that are formatted a certain way, but not display them immediately, or ever.
+For example, the following method returns a time string in 12-hour format:
 
 \begin{code}
 public static String timeString(int hour, int minute) {
@@ -7086,14 +7086,13 @@ public static String timeString(int hour, int minute) {
 }
 \end{code}
 
+\java{String.format} takes the same arguments as \java{System.out.printf}: a format specifier followed by a sequence of values.
+The difference is that \java{System.out.printf} displays the result on the screen; \java{String.format} creates a new string, but does not display anything.
+
+In this example, the format specifier \verb|"%02d"| means ``two digit integer padded with zeros'', so \java{timeString(19, 5)} returns the string \verb|"07:05 PM"|.
+
 \index{String.format}
-
-This method returns a time string in 12-hour format.
-As a reminder, the format specifier \verb|"%02d"| means ``two digit integer padded with zeros''.
-So \java{timeString(19, 5)} returns the string \verb|"07:05 PM"|.
-
-\java{String.format} works the same way as \java{System.out.printf} -- in fact, the later method calls the former.
-The difference is that \java{printf} displays text on the screen, whereas \java{format} simply creates a new string.
+\index{printf}
 
 
 \section{Wrapper classes}
@@ -7239,8 +7238,8 @@ Strings are immutable by design.
 \term{empty string}
 The string \verb|""|, which contains no characters and has a length of zero.
 
-\term{utility method}
-A method that provides commonly needed functionality.
+%\term{utility method}
+%A method that provides commonly needed functionality.
 
 \term{wrapper class}
 Classes in \java{java.lang} that provide constants and methods for working with primitive types.
