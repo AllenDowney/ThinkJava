@@ -1453,3 +1453,61 @@ Because \java{suit} and \java{rank} are primitive types, we can use \java{==} to
 Now if we invoke \java{card1.equals(card3)}, the result is \java{true}.
 Note that if two objects are identical, they are also equivalent.
 So \java{card1.equals(card2)} is \java{true} as well.
+
+
+\section{Insertion sort}
+\label{insertion}
+
+\index{insertion sort}
+\index{sort!insertion}
+
+The final sorting algorithm we'll look at is called {\bf insertion sort}.
+It's based on inserting an item into a previously sorted list.
+People often use this algorithm when they are dealt new cards:
+
+\begin{enumerate}
+\item Use sequential search to find the ``insertion point''; that is, the index in the array where the new card belongs.
+\item Insert the new card at that position.
+\end{enumerate}
+
+That's easy enough when holding a few cards in your hand; you generally can make room for one more card.
+But in Java, you can't change the length of an array.
+If the array has capacity for only five \java{Card}s, you can't just insert a sixth \java{Card} in the middle of it.
+
+Consequently, the actual algorithm is a bit more complicated:
+
+\begin{enumerate}
+\item Use sequential search to find the insertion point.
+\item Create a new array with room for one more element.
+\item Copy existing elements from the old array to their corresponding position in the new array (skipping the insertion point).
+\item Insert the new card at the insertion point.
+\end{enumerate}
+
+We can refine this insertion algorithm to sort an entire (unsorted) deck of cards.
+For efficiency, we will avoid running steps 2--3 over and over again by creating the new array just once.
+Here is the pseudocode:
+
+\begin{code}
+public Deck insertionSort() {
+    // create a new deck with the same length as this deck
+  
+    for each card in this deck {
+        // find the insertion point, i, in the sorted deck
+        // starting at i, shift cards to the right by one
+        // insert the card at i (into the sorted deck)
+    }
+}
+\end{code}
+
+One of the exercises at the end of the chapter asks you to implement this version of \java{insertionSort}.%, which creates and returns the sorted array.
+
+%There is another version that sorts the original array in place.
+%Read about it at \url{https://en.wikipedia.org/wiki/Insertion_sort}.
+
+
+%%% Exercises
+
+\item Write a method called \java{insertionSort} that implements the insertion sort algorithm in Section~\ref{insertion}.
+
+\item How many comparisons does insertion sort need to sort an array with $n$ elements?
+Do you expect it to be proportional to $n^2$ like selection sort, or proportional to $n \log n$ like merge sort?

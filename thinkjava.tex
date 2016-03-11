@@ -10219,56 +10219,6 @@ You might have to give some thought to getting the base case right and making su
 But other than that, writing the recursive version should be no problem.
 
 
-\section{Insertion sort}
-\label{insertion}
-
-\index{insertion sort}
-\index{sort!insertion}
-
-The final sorting algorithm we'll look at is called {\bf insertion sort}.
-It's based on inserting an item into a previously sorted list.
-People often use this algorithm when they are dealt new cards:
-
-\begin{enumerate}
-\item Use sequential search to find the ``insertion point''; that is, the index in the array where the new card belongs.
-\item Insert the new card at that position.
-\end{enumerate}
-
-That's easy enough when holding a few cards in your hand; you generally can make room for one more card.
-But in Java, you can't change the length of an array.
-If the array has capacity for only five \java{Card}s, you can't just insert a sixth \java{Card} in the middle of it.
-
-Consequently, the actual algorithm is a bit more complicated:
-
-\begin{enumerate}
-\item Use sequential search to find the insertion point.
-\item Create a new array with room for one more element.
-\item Copy existing elements from the old array to their corresponding position in the new array (skipping the insertion point).
-\item Insert the new card at the insertion point.
-\end{enumerate}
-
-We can refine this insertion algorithm to sort an entire (unsorted) deck of cards.
-For efficiency, we will avoid running steps 2--3 over and over again by creating the new array just once.
-Here is the pseudocode:
-
-\begin{code}
-public Deck insertionSort() {
-    // create a new deck with the same length as this deck
-  
-    for each card in this deck {
-        // find the insertion point, i, in the sorted deck
-        // starting at i, shift cards to the right by one
-        // insert the card at i (into the sorted deck)
-    }
-}
-\end{code}
-
-One of the exercises at the end of the chapter asks you to implement this version of \java{insertionSort}.%, which creates and returns the sorted array.
-
-%There is another version that sorts the original array in place.
-%Read about it at \url{https://en.wikipedia.org/wiki/Insertion_sort}.
-
-
 \section{Vocabulary}
 
 \begin{description}
@@ -10288,8 +10238,8 @@ A simple sorting algorithm that searches for the smallest or largest element $n$
 \term{merge sort}
 A recursive sorting algorithm that divides an array into two parts, sorts each part (using merge sort), and merges the results.
 
-\term{insertion sort}
-Another sorting algorithm that inserts elements into place, one at a time.
+%\term{insertion sort}
+%Another sorting algorithm that inserts elements into place, one at a time.
 
 \end{description}
 
@@ -10308,7 +10258,7 @@ This site includes explanations of the algorithms, animations that show how they
 
 
 \begin{exercise}
-The goal of this exercise is to implement the shuffling algorithms from this chapter.
+The goal of this exercise is to implement the shuffling algorithm from this chapter.
 
 \begin{enumerate}
 
@@ -10329,7 +10279,7 @@ But you should avoid creating a \java{Random} object every time \java{randomInt}
 
 \begin{exercise}
 The goal of this exercise is to implement the sorting algorithms from this chapter.
-Use the {\tt Deck.java} file from the previous exercise.
+Use the {\tt Deck.java} file from the previous exercise (or create a new one from scratch).
 
 \begin{enumerate}
 
@@ -10353,15 +10303,14 @@ deck.selectionSort();      // modifies an existing deck
 deck = deck.mergeSort();   // replaces old deck with new
 \end{code}
 
-\item Write a method called \java{insertionSort} that implements the insertion sort algorithm in Section~\ref{insertion}.
-
 \end{enumerate}
 \end{exercise}
 
 
 \begin{exercise}
-How many comparisons does insertion sort need to sort an array with $n$ elements?
-Do you expect it to be proportional to $n^2$ like selection sort, or proportional to $n \log n$ like merge sort?
+The goal of this exercise is to practice top-down programming by implementing ``insertion sort''.
+Read about insertion sort at \url{http://www.sorting-algorithms.com/insertion-sort}.
+Write a method named \java{insertionSort} that implements this algorithm.
 \end{exercise}
 
 
