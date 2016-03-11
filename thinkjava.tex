@@ -1186,7 +1186,7 @@ As the program runs, the state changes, so you should think of a state diagram a
 \label{sec:printvar}
 
 You can display the value of a variable using \java{print} or \java{println}.
-The following statements declare a variable named \java{firstLine}, assign it the value \verb|"Hello, again!"|, and display that value.
+The following statements declare a variable named \java{firstLine}, assign it the value \java{"Hello, again!"}, and display that value.
 
 %TODO: fix more broken quotation marks
 
@@ -1477,9 +1477,9 @@ The following expressions are illegal:
 
 The \java{+} operator works with strings, but it might not do what you expect.
 For strings, the \java{+} operator performs {\bf concatenation}, which means joining end-to-end.
-So \verb|"Hello, " + "World!"| yields the string \verb|"Hello, World!"|.
+So \java{"Hello, " + "World!"} yields the string \java{"Hello, World!"}.
 
-Or if you have a variable called \java{name} that has type \java{String}, the expression \verb|"Hello, " + name| appends the value of \java{name} to the hello string, which creates a personalized greeting.
+Or if you have a variable called \java{name} that has type \java{String}, the expression \java{"Hello, " + name} appends the value of \java{name} to the hello string, which creates a personalized greeting.
 
 Since addition is defined for both numbers and strings, Java performs automatic conversions you may not expect:
 
@@ -1492,8 +1492,8 @@ System.out.println("Hello" + 1 + 2);
 \end{code}
 
 Java executes these operations from left to right.
-In the first line, \java{1 + 2} is \java{3}, and \verb|3 + "Hello"| is \verb|"3Hello"|.
-But in the second line, \verb|"Hello" + 1| is \verb|"Hello1"|, and \verb|"Hello1" + 2| is \verb|"Hello12"|.
+In the first line, \java{1 + 2} is \java{3}, and \java{3 + "Hello"} is \java{"3Hello"}.
+But in the second line, \java{"Hello" + 1} is \java{"Hello1"}, and \java{"Hello1" + 2} is \java{"Hello12"}.
 
 
 %\section{Order of operations}
@@ -2105,7 +2105,7 @@ We'll demonstrate in the next section.
 \index{literal}
 \index{magic number}
 
-A value that appears in a program, like 2.54 (or \verb|" in ="|), is called a {\bf literal}.
+A value that appears in a program, like 2.54 (or \java{" in ="}), is called a {\bf literal}.
 In general, there's nothing wrong with literals.
 But when numbers like 2.54 appear in an expression with no explanation, they make code hard to read.
 And if the same value appears many times, and might have to change in the future, it makes code hard to maintain.
@@ -2167,7 +2167,7 @@ System.out.printf("Four thirds = %.3f", 4.0 / 3.0);
 
 The first value in the parentheses is a {\bf format string} that specifies how the output should be displayed.
 This format string contains ordinary text followed by a {\bf format specifier}, which is a special sequence that starts with a percent sign.
-The format specifier \verb"%.3f" indicates that the following value should be displayed as floating-point with three decimal places.
+The format specifier \java{\%.3f} indicates that the following value should be displayed as floating-point with three decimal places.
 The result is:
 
 \begin{stdout}
@@ -2198,15 +2198,15 @@ The values are matched up with the format specifiers in order, so \java{inch} is
 \begin{center}
 \begin{tabular}{|l|l|l|}
 \hline
-\verb"%d" & decimal integer & 12345 \\
+\java{\%d} & decimal integer & 12345 \\
 \hline
 %\verb"%,d" & decimal integer with comma separators & 12,345 \\
 %\hline
-\verb"%08d" & padded with zeros, at least 8 digits wide & 00012345 \\
+\java{\%08d} & padded with zeros, at least 8 digits wide & 00012345 \\
 \hline
-\verb"%f" & floating-point & 6.789000 \\
+\java{\%f} & floating-point & 6.789000 \\
 \hline
-\verb"%.2f" & rounded to 2 decimal places & 6.79 \\
+\java{\%.2f} & rounded to 2 decimal places & 6.79 \\
 \hline
 \end{tabular}
 \caption{Example format specifiers}
@@ -2427,8 +2427,8 @@ Figure~\ref{fig.hopper2} shows the state of the stream after \java{nextInt} is i
 \end{figure}
 
 At this point, \java{nextInt} returns \java{45}.
-The program then displays the prompt \verb|"What is your name? "| and calls \java{nextLine}, which reads characters until it gets to a newline.
-But since the next character is already a newline, \java{nextLine} returns the empty string \verb|""|.
+The program then displays the prompt \java{"What is your name? "} and calls \java{nextLine}, which reads characters until it gets to a newline.
+But since the next character is already a newline, \java{nextLine} returns the empty string \java{""}.
 
 To solve this problem, you need an extra \java{nextLine} after \java{nextInt}.
 
@@ -2484,7 +2484,7 @@ A basic element of a program, such as a word, space, symbol, or number.
 
 \term{literal}
 A value that appears in source code.
-For example, \verb|"Hello"| is a string literal and \java{74} is an integer literal.
+For example, \java{"Hello"} is a string literal and \java{74} is an integer literal.
 
 \term{magic number}
 A number that appears without explanation as part of an expression.
@@ -2526,8 +2526,8 @@ It describes the command-line interface, which is a powerful and efficient way t
 
 \begin{exercise}
 When you use \java{printf}, the Java compiler does not check your formatting string.
-See what happens if you try to display a value with type \java{int} using \verb"%f".
-And what happens if you display a \java{float} using \verb"%d"?
+See what happens if you try to display a value with type \java{int} using \java{\%f}".
+And what happens if you display a \java{float} using \java{\%d}?
 What if you use two format specifiers, but then only provide one value?
 \end{exercise}
 
@@ -2931,7 +2931,7 @@ public class PrintTwice {
 When we invoke \java{printTwice}, we have to provide an argument with type \java{String}.
 
 Before the method executes, the argument gets assigned to the parameter.
-In this example, the argument \verb|"Don't make me say this twice!"| gets assigned to the parameter \java{s}.
+In this example, the argument \java{"Don't make me say this twice!"} gets assigned to the parameter \java{s}.
 
 \index{parameter passing}
 
@@ -3459,7 +3459,7 @@ Remember that \java{=} is the assignment operator, and \java{==} is a comparison
 Also, there is no such thing as the \java{=<} or \java{=>} operators.
 
 The two sides of a relational operator have to be compatible.
-For example, the expression \verb|5 < "6"| is invalid because \java{5} is an \java{int} and \verb|"6"| is a \java{String}.
+For example, the expression \java{5 < "6"} is invalid because \java{5} is an \java{int} and \java{"6"} is a \java{String}.
 When comparing values of different numeric types, Java applies the same conversion rules we saw previously with the assignment operator.
 For example, when evaluating the expression \java{5 < 6.0}, Java automatically converts the \java{5} to \java{5.0}.
 
@@ -5448,7 +5448,7 @@ And the output looks like this:
    6  12  18  24  30  36
 \end{stdout}
 
-The format specifier \verb|"\%4d"| in \java{printRow} causes the output to align vertically, regardless of whether the numbers are one or two digits.
+The format specifier \java{\%4d} in \java{printRow} causes the output to align vertically, regardless of whether the numbers are one or two digits.
 
 Finally, we encapsulate the second loop in a method:
 
@@ -5906,7 +5906,7 @@ The output should look something like:
 1.0     2.708333333333333     2.718281828459045
 \end{stdout}
 
-You can use the escape sequence \verb|"\t"| to put a tab character between columns of a table.
+You can use the escape sequence \java{"\t"} to put a tab character between columns of a table.
 
 \item Vary the number of terms in the series (the second argument that \java{check} sends to \java{myexp}) and see the effect on the accuracy of the result.
 Adjust this value until the estimated value agrees with the correct answer when \java{x} is 1.
@@ -6763,7 +6763,7 @@ if (letter == 'a') {
 
 Character literals, like \java{'a'}, appear in single quotes.
 Unlike string literals, which appear in double quotes, character literals can only contain a single character.
-Escape sequences, like \java{'\\t'}, are legal because they represent a single character.
+Escape sequences, like \java{'\t'}, are legal because they represent a single character.
 
 The increment and decrement operators work with characters.
 So this loop displays the letters of the alphabet:
@@ -6816,13 +6816,13 @@ String upperName = name.toUpperCase();
 
 \index{Turing, Alan}
 
-After these statements run, \java{upperName} refers to the string \verb|"ALAN TURING"|.
-But \java{name} still refers to \verb|"Alan Turing"|.
+After these statements run, \java{upperName} refers to the string \java{"ALAN TURING"}.
+But \java{name} still refers to \java{"Alan Turing"}.
 
 \index{replace}
 
 Another useful method is \java{replace}, which finds and replaces instances of one string within another.
-This example replaces \verb|"Computer Science"| with \verb|"CS"|:
+This example replaces \java{"Computer Science"} with \java{"CS"}:
 
 \begin{code}
 String text = "Computer Science is fun!";
@@ -6830,7 +6830,7 @@ text = text.replace("Computer Science", "CS");
 \end{code}
 
 This example demonstrates a common way to work with string methods.
-It invokes \java{text.replace}, which returns a reference to a new string, \verb|"CS is fun!"|.
+It invokes \java{text.replace}, which returns a reference to a new string, \java{"CS is fun!"}.
 Then assigns the new string to \java{text}, replacing the old string.
 
 This assignment is important; if you don't save the return value, invoking \java{text.replace} has no effect.
@@ -6888,7 +6888,7 @@ char last = fruit.charAt(length);      // wrong!
 \index{exception!StringIndexOutOfBounds}
 
 This code compiles and runs, but invoking the \java{charAt} method throws a \java{StringIndexOutOfBoundsException}.
-The problem is that there is no sixth letter in \verb|"banana"|.
+The problem is that there is no sixth letter in \java{"banana"}.
 Since we started counting at 0, the 6 letters are indexed from 0 to 5.
 To get the last character, you have to subtract 1 from \java{length}.
 
@@ -6912,11 +6912,11 @@ public static String reverse(String s) {
 
 \index{empty string}
 
-The initial value of \java{r} is \verb|""|, which is the {\bf empty string}.
+The initial value of \java{r} is \java{""}, which is the {\bf empty string}.
 The loop traverses the letters of \java{s} in reverse order.
 Each time through the loop, it creates a new string and assigns it to \java{r}.
 When the loop exits, \java{r} contains the letters from \java{s} in reverse order.
-So the result of \java{reverse("banana")} is \verb|"ananab"|.
+So the result of \java{reverse("banana")} is \java{"ananab"}.
 
 
 \section{Substrings}
@@ -6924,9 +6924,9 @@ So the result of \java{reverse("banana")} is \verb|"ananab"|.
 The \java{substring} method returns new string that copies letters from an existing string, starting at the given index.
 
 \begin{itemize}
-\item \java{fruit.substring(0)} returns \verb|"banana"|
-\item \java{fruit.substring(2)} returns \verb|"nana"|
-\item \java{fruit.substring(6)} returns \verb|""|
+\item \java{fruit.substring(0)} returns \java{"banana"}
+\item \java{fruit.substring(2)} returns \java{"nana"}
+\item \java{fruit.substring(6)} returns \java{""}
 \end{itemize}
 
 The first example returns a copy of the entire string.
@@ -6958,9 +6958,9 @@ That is, there are other versions of \java{substring} that have different parame
 If it's invoked with two argments, they are treated as a start and end index:
 
 \begin{itemize}
-\item \java{fruit.substring(0, 3)} returns \verb|"ban"|
-\item \java{fruit.substring(2, 5)} returns \verb|"nan"|
-\item \java{fruit.substring(6, 6)} returns \verb|""|
+\item \java{fruit.substring(0, 3)} returns \java{"ban"}
+\item \java{fruit.substring(2, 5)} returns \java{"nan"}
+\item \java{fruit.substring(6, 6)} returns \java{""}
 \end{itemize}
 
 Notice that the character indicated by the end index is not included.
@@ -7050,10 +7050,10 @@ If the strings are equal, their difference is zero.
 If the first string (the one on which the method is invoked) comes first in the alphabet, the difference is negative.
 Otherwise, the difference is positive.
 
-In the example above, \java{compareTo} returns positive 8, because the second letter of \verb|"Ada"| comes before the second letter of \verb|"Alan"| by 8 letters.
+In the example above, \java{compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
 
 Both \java{equals} and \java{compareTo} are case-sensitive.
-The uppercase letters come before the lowercase letters, so \verb|"Ada"| comes before \verb|"ada"|.
+The uppercase letters come before the lowercase letters, so \java{"Ada"} comes before \java{"ada"}.
 
 
 \section{String formatting}
@@ -7084,7 +7084,7 @@ public static String timeString(int hour, int minute) {
 \java{String.format} takes the same arguments as \java{System.out.printf}: a format specifier followed by a sequence of values.
 The difference is that \java{System.out.printf} displays the result on the screen; \java{String.format} creates a new string, but does not display anything.
 
-In this example, the format specifier \verb|"%02d"| means ``two digit integer padded with zeros'', so \java{timeString(19, 5)} returns the string \verb|"07:05 PM"|.
+In this example, the format specifier \java{\%02d} means ``two digit integer padded with zeros'', so \java{timeString(19, 5)} returns the string \java{"07:05 PM"}.
 
 \index{String.format}
 \index{printf}
@@ -7128,7 +7128,7 @@ int num = 12345;
 String str = Integer.toString(num);
 \end{code}
 
-The result is the string \verb|"12345"|.
+The result is the string \java{"12345"}.
 
 
 \section{Command-line arguments}
@@ -7231,7 +7231,7 @@ An object that, once created, cannot be modified.
 Strings are immutable by design.
 
 \term{empty string}
-The string \verb|""|, which contains no characters and has a length of zero.
+The string \java{""}, which contains no characters and has a length of zero.
 
 %\term{utility method}
 %A method that provides commonly needed functionality.
@@ -7293,7 +7293,7 @@ But if \java{x} is a \java{char}, it's not exactly the same!
 In that case, \java{x++} is legal, but \java{x = x + 1} causes an error.
 Try it out and see what the error message is, then see if you can figure out what is going on.
 
-\item What happens when you add \verb|""| (the empty string) to the other types; for example, \verb|"" + 5|?
+\item What happens when you add \java{""} (the empty string) to the other types; for example, \java{"" + 5}?
 
 \item For each data type, what types of values can you assign to it?
 For example, you can assign an \java{int} to a \java{double} but not vice versa.
@@ -7487,7 +7487,7 @@ In Scrabble\footnote{Scrabble is a registered trademark owned in the USA and Can
 The object of the game is to use those letters to spell words.
 The scoring system is complex, but longer words are usually worth more than shorter words.
 
-Imagine you are given your set of tiles as a string, like \verb|"quijibo"|, and you are given another string to test, like \verb|"jib"|.
+Imagine you are given your set of tiles as a string, like \java{"quijibo"}, and you are given another string to test, like \java{"jib"}.
 
 Write a method called \java{canSpell} that takes two strings and checks whether the set of tiles can spell the word.
 You might have more than one tile with the same letter, but you can only use each tile once.
@@ -9120,7 +9120,7 @@ The ranks are Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, and King.
 
 If we want to define a class to represent a playing card, it is pretty obvious what the instance variables should be: \java{rank} and \java{suit}.
 It is not as obvious what types they should be.
-One possibility is a \java{String} containing things like \verb|"Spade"| for suits and \verb|"Queen"| for ranks.
+One possibility is a \java{String} containing things like \java{"Spade"} for suits and \java{"Queen"} for ranks.
 A problem with this design is that it would not be easy to compare cards to see which had a higher rank or suit.
 
 \index{encode}
@@ -9862,7 +9862,7 @@ for (int suit = 0; suit <= 3; suit++) {
 The variable \java{cardset} contains the name of the directory that contains the image files.
 \java{suits} is a string that contains the single-letter abbreviations for the suits.
 These strings are used to assemble \java{s}, which contains the filename for each image.
-For example, when \java{rank=1} and \java{suit=2}, the value of \java{s} is \verb|"cardset-oxymoron/01h.gif"|, which is an image of the Ace of Hearts.
+For example, when \java{rank=1} and \java{suit=2}, the value of \java{s} is \java{"cardset-oxymoron/01h.gif"}, which is an image of the Ace of Hearts.
 
 The last line of the loop reads the image file, extracts an \java{Image} object, and assigns it to a location in the array, as specified by the indexes \java{rank} and \java{suit}.
 For example, the image of the Ace of Hearts is stored in row 1, column 2.
