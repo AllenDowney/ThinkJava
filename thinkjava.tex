@@ -8244,7 +8244,7 @@ Here are the most important ideas:
 
 \item Think of a class like a blueprint for a house: you can use the same blueprint to build any number of houses.
 
-\item The methods that operate on a type are defined and implemented in the class for that type.
+\item The methods that operate on a type are defined in the class for that type.
 
 \end{itemize}
 
@@ -8255,13 +8255,13 @@ Here are the most important ideas:
 \index{encapsulation!data}
 
 One common reason to define a new class is to encapsulate related data in an object that can be treated as a single unit.
-That way, we can use objects as parameters and return values, rather than passing and returning multiple variables.
+That way, we can use objects as parameters and return values, rather than passing and returning multiple values.
 This design principle is called {\bf data encapsulation}.
 
 \index{class!Time}
 \index{Time}
 
-We have already seen two such types, \java{Point} and \java{Rectangle}.
+We have seen two types that encapsulate data in this way: \java{Point} and \java{Rectangle}.
 Another example, which we will implement ourselves, is \java{Time}, which represents a time of day.
 The data encapsulated in a \java{Time} object are an hour, a minute, and a number of seconds.
 Because every \java{Time} object contains these data, we define attributes to hold them.
@@ -8406,7 +8406,7 @@ In this example, the names and types of the parameters are the same as the insta
 As a result, the parameters {\bf shadow} (or hide) the instance variables, so the keyword \java{this} is necessary to tell them apart.
 Parameters don't have to use the same names, but that's a common style.
 
-To invoke this second constructor, you need to specify the arguments after the \java{new} operator.
+To invoke this second constructor, you have to provide arguments after the \java{new} operator.
 This example creates a \java{Time} object that represents a fraction of a second before noon:
 
 \begin{code}
@@ -9840,7 +9840,7 @@ The declaration looks like this:
 private Image[][] images;
 \end{code}
 
-The variable \java{images} references a 2D array of \java{Image} objects, which are defined in the \java{java.awt} package.
+The variable \java{images} refers to a 2D array of \java{Image} objects, which are defined in the \java{java.awt} package.
 Here's the code that creates the array itself:
 
 \begin{code}
@@ -10213,7 +10213,7 @@ public Deck mergeSort() {
 
 \index{leap of faith}
 
-As usual, there are two ways to think about recursive programs: you can think through the entire orger of execution, or you can make the ``leap of faith'' (see Section~\ref{leap of faith}).
+As usual, there are two ways to think about recursive programs: you can think through the entire order of execution, or you can make the ``leap of faith'' (see Section~\ref{leap of faith}).
 This example should encourage you to make the leap of faith.
 
 When you used \java{selectionSort} to sort the subdecks, you didn't feel compelled to follow the order of execution.
