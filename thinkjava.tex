@@ -816,7 +816,7 @@ Don't hesitate to reach out to a friend and ask questions!
 
 \section{Vocabulary}
 
-Throughout the book, we will try to define each term the first time we use it.
+Throughout the book, we try to define each term the first time we use it.
 And the end of each chapter, we include the new terms and their definitions in order of appearance.
 If you spend some time learning this vocabulary, you will have an easier time reading the following chapters.
 
@@ -907,11 +907,11 @@ A sequence of code that represents a special character when used inside a string
 
 \section{Exercises}
 
-At the end of each chapter, we will include exercises you can do with the things you've learned.
+At the end of each chapter, we include exercises you can do with the things you've learned.
 We encourage you to at least attempt every problem.
 You can't learn to program only by reading about it; you have to practice.
 
-Before you can compile and run Java programs, you may have to download and install a few tools.
+Before you can compile and run Java programs, you might have to download and install a few tools.
 There are many good options, but we recommend DrJava, which is an ``integrated development environment'' (IDE) well-suited for beginners.
 Instructions for getting started are in Section~\ref{drjava}.
 
@@ -2272,7 +2272,7 @@ inch = (int) (cm / CM_PER_INCH);
 System.out.printf("%f cm = %d in\n", cent, inch);
 \end{code}
 
-The parentheses after the cast operator require the division to occur before the type cast.
+The parentheses after the cast operator require the division to happen before the type cast.
 And the result is rounded toward zero; we will see in the next chapter how to round floating-point numbers to the closest integer.
 
 
@@ -2481,7 +2481,7 @@ A statement that allows programs to use classes defined in other packages.
 A basic element of a program, such as a word, space, symbol, or number.
 
 \term{literal}
-A value that appears directly in source code.
+A value that appears in source code.
 For example, \verb|"Hello"| is a string literal and \java{74} is an integer literal.
 
 \term{magic number}
@@ -3095,7 +3095,7 @@ Figure~\ref{fig.stack} is a stack diagram at the beginning of the \java{printTim
 \index{documentation}
 
 One of the nice things about Java is that it comes with an extensive library of classes and methods.
-But before you use them, you may have to read the documentation.
+But before you use them, you might have to read the documentation.
 And sometimes that's not easy.
 
 %TODO: let's make a decision about whether to link to the Oracle documentation or use some standard verbiage about how to find it, and then check for consistency.
@@ -4626,8 +4626,8 @@ In Section~\ref{sec:javadoc}, we discussed how to write documentation comments u
 It's generally a good idea to document each class and method, so that other programmers can understand what they do without having to read the code.
 
 \index{tag}
-\index{"@param}
-\index{"@return}
+\index{param tag}
+\index{return tag}
 
 To organize the documentation into sections, Javadoc supports optional {\bf tags} that begin with the at sign (\java{@}).
 For example, we can use \java{@param} and \java{@return} to provide additional information about parameters and return values.
@@ -5061,7 +5061,7 @@ public static int prod(int m, int n) {
 \begin{exercise}
 Write a recursive method named \java{oddSum} that takes a positive odd integer \java{n} and returns the sum of odd integers from 1 to n.
 Start with a base case, and use temporary variables to debug your solution.
-You may find it helpful to print the value of \java{n} each time \java{oddSum} is invoked.
+You might find it helpful to print the value of \java{n} each time \java{oddSum} is invoked.
 \end{exercise}
 
 
@@ -5128,7 +5128,7 @@ Repeating tasks without making errors is something that computers do well and pe
 
 \index{iteration}
 
-Running the same code for a certain number of times is called {\bf iteration}.
+Running the same code multiple times is called {\bf iteration}.
 We have seen methods, like \java{countdown} and \java{factorial}, that use recursion to iterate.
 Although recursion is elegant and powerful, it takes some getting used to.
 Java provides language features that make iteration much easier:
@@ -5537,7 +5537,7 @@ As a result, the number of columns equals the number of rows, so we get a square
 
 When you generalize a method appropriately, you often find that it has capabilities you did not plan.
 For example, you might notice that the multiplication table is symmetric; since $ab = ba$, all the entries in the table appear twice.
-You could save ink by showing half of the table, and you would only have to change one line of \java{printTable}:
+You could save ink by printing half of the table, and you would only have to change one line of \java{printTable}:
 
 \begin{code}
 printRow(i, i);
@@ -5992,7 +5992,7 @@ double[] values = new double[size];
 \index{NegativeArraySizeException}
 \index{exception!NegativeArraySizeException}
 
-You may use any integer expression for the size of an array, as long as the value is nonnegative.
+You can use any integer expression for the size of an array, as long as the value is nonnegative.
 If you try to create an array with -4 elements, for example, you will get a \java{NegativeArraySizeException}.
 An array with zero elements is allowed, and there are special uses for such arrays that we'll see later on.
 
@@ -6056,7 +6056,7 @@ Figure~\ref{fig.array2} shows the result of these statements.
 \index{exception!ArrayOutOfBounds}
 \index{run-time error}
 
-You may use any expression as an index, as long as it has type \java{int}.
+You can use any expression as an index, as long as it has type \java{int}.
 One of the most common ways to index an array is with a loop variable.
 For example:
 
@@ -7944,7 +7944,7 @@ Take a few minutes to locate this file on your machine:
 
 \begin{itemize}
 \item On Linux, it's likely under: \verb|/usr/lib/jvm/openjdk-7/|
-\\ (You may need to install the {\tt openjdk-7-source} package.)
+\\ (You might need to install the {\tt openjdk-7-source} package.)
 \item On OS X, it's likely under: \\ \verb|/Library/Java/JavaVirtualMachines/jdk.../Contents/Home/|
 \item On Windows, it's likely under: \verb|C:\Program Files\Java\jdk...\|
 \end{itemize}
@@ -7964,7 +7964,7 @@ Each method is thoroughly commented including \java{@param}, \java{@return}, and
 You can see the HTML version of these comments on \url{http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html}.
 
 Now take a look at \java{Rectangle}'s \java{grow} and \java{translate} methods.
-There's a lot more to them than you may have realized, but that doesn't limit your ability to use and understand these methods in a program.
+There is more to them than you may have realized, but that doesn't limit your ability to use and understand these methods in a program.
 
 To summarize the whole chapter, objects encapsulate data and provide methods to access and modify the data directly.
 Object-oriented programming makes it possible to hide messy details so that you can more easily use and understand code that other people wrote.
