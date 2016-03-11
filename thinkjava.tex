@@ -913,7 +913,7 @@ You can't learn to program only by reading about it; you have to practice.
 
 Before you can compile and run Java programs, you might have to download and install a few tools.
 There are many good options, but we recommend DrJava, which is an ``integrated development environment'' (IDE) well-suited for beginners.
-Instructions for getting started are in Section~\ref{drjava}.
+Instructions for getting started are in Appendix~\ref{drjava}.
 
 The code for this chapter is in the {\tt ch01} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
@@ -1496,7 +1496,7 @@ In the first line, \java{1 + 2} is \java{3}, and \verb|3 + "Hello"| is \verb|"3H
 But in the second line, \verb|"Hello" + 1| is \verb|"Hello1"|, and \verb|"Hello1" + 2| is \verb|"Hello12"|.
 
 
-\section{Order of operations}
+%\section{Order of operations}
 
 \index{order of operations}
 \index{precedence}
@@ -1806,7 +1806,7 @@ The code for this chapter is in the {\tt ch02} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
-If you have not already read Section~\ref{interactions}, now might be a good time.
+If you have not already read Appendix~\ref{interactions}, now might be a good time.
 It describes the DrJava Interactions Pane, which is a useful way to develop and test short fragments of code without writing a complete class definition.
 
 
@@ -2520,7 +2520,7 @@ The code for this chapter is in the {\tt ch03} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
-If you have not already read Section~\ref{commandline}, now might be a good time.
+If you have not already read Appendix~\ref{commandline}, now might be a good time.
 It describes the command-line interface, which is a powerful and efficient way to interact with your computer.
 
 
@@ -3311,7 +3311,7 @@ The code for this chapter is in the {\tt ch04} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
-If you have not already read Section~\ref{cltesting}, now might be a good time.
+If you have not already read Appendix~\ref{cltesting}, now might be a good time.
 It describes an efficient way to test programs that take input from the user and display specific output.
 
 
@@ -3417,7 +3417,7 @@ Saturday, July 22, 2015
 \index{boolean}
 \index{type!boolean}
 
-The programs we've seen so far do pretty much the same thing every time, regardless of the input.
+The programs we've seen in previous chapters do pretty much the same thing every time, regardless of the input.
 For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
 This chapter presents the features you need for programs to make decisions: a new data type called \java{boolean}, operators for expressing logic, and \java{if} statements.
 
@@ -4028,7 +4028,7 @@ The code for this chapter is in the {\tt ch05} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
-If you have not already read Section~\ref{debugger}, now might be a good time.
+If you have not already read Appendix~\ref{debugger}, now might be a good time.
 It describes the DrJava debugger, which is a useful tool for tracing the flow of execution.
 
 
@@ -4289,7 +4289,7 @@ public static double calculateArea(double radius) {
 \index{temporary variable}
 \index{variable!temporary}
 
-On the other hand, {\bf temporary variables} like \java{result} often make debugging easier, especially when you are stepping through code using an interactive debugger (see Section~\ref{debugger}).
+On the other hand, {\bf temporary variables} like \java{result} often make debugging easier, especially when you are stepping through code using an interactive debugger (see Appendix~\ref{debugger}).
 
 The type of the expression in the \java{return} statement must match the return type of the method.
 When you declare that the return type is \java{double}, you are making a promise that this method will eventually produce a \java{double} value.
@@ -4889,7 +4889,7 @@ The code for this chapter is in the {\tt ch06} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
-If you have not already read Section~\ref{JUnit}, now might be a good time.
+If you have not already read Appendix~\ref{JUnit}, now might be a good time.
 It describes JUnit, a tool for efficiently testing value methods.
 
 
@@ -5793,7 +5793,7 @@ The code for this chapter is in the {\tt ch07} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
-If you have not already read Section~\ref{checkstyle}, now might be a good time.
+If you have not already read Appendix~\ref{checkstyle}, now might be a good time.
 It describes Checkstyle, a tool that analyzes many aspects of your source code.
 
 %TODO: add a Checkstyle exercise
@@ -7140,7 +7140,7 @@ The result is the string \verb|"12345"|.
 \section{Command-line arguments}
 
 Now that you know about arrays and strings, we can {\em finally} explain the \java{args} parameter for \java{main} that we have been ignoring since Chapter~\ref{theway}.
-If you are unfamiliar with the command-line interface, please read or review Section~\ref{commandline}.
+If you are unfamiliar with the command-line interface, please read or review Appendix~\ref{commandline}.
 
 Continuing an earlier example, let's write a program to find the largest value in a sequence of numbers.
 Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
@@ -11043,7 +11043,7 @@ The latter two sections are optional when showing relationships.
 % with the class diagrams in Head First Design Patterns.
 
 Relationships between classes are represented by arrows: composition arrows have a standard arrow head, and inheritance arrows have a hollow triangle head (usually pointing up).
-Figure~\ref{uml1} shows the classes defined in this chapter and the relationships among them.
+Figure~\ref{fig.uml1} shows the classes defined in this chapter and the relationships among them.
 
 %TODO: Blythe suggests picture of each arrow, but it's a pain.
 
@@ -11051,7 +11051,7 @@ Figure~\ref{uml1} shows the classes defined in this chapter and the relationship
 \begin{center}
 \includegraphics[width=0.9\textwidth]{figs/uml1.pdf}
 \caption{UML diagram for the classes in this chapter.}
-\label{uml1}
+\label{fig.uml1}
 \end{center}
 \end{figure}
 
