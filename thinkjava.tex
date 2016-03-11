@@ -2524,7 +2524,7 @@ It describes the command-line interface, which is a powerful and efficient way t
 
 
 \begin{exercise}
-When you use \java{printf}, the Java compiler does not check your formatting string.
+When you use \java{printf}, the Java compiler does not check your format string.
 See what happens if you try to display a value with type \java{int} using \java{\%f}".
 And what happens if you display a \java{float} using \java{\%d}?
 What if you use two format specifiers, but then only provide one value?
@@ -2627,7 +2627,7 @@ First we evaluate the argument of the innermost function, then evaluate the func
 The Java library includes a \java{Math} class that provides common mathematical operations.
 %These functions are called {\bf methods}.
 \java{Math} is in the \java{java.lang} package, so you don't have to import it.
-You can use, or {\bf invoke}, Math methods like this:
+You can use, or {\bf invoke}, \java{Math} methods like this:
 
 \begin{code}
 double root = Math.sqrt(17.0);
@@ -3380,7 +3380,7 @@ public static void ping() {
 The point of this exercise is to make sure you understand how to write and invoke methods that take parameters.
 
 \begin{enumerate}
-\item Write the first line of a method named \java{zool} that takes three parameters: an \java{int} and two \java{Strings}.
+\item Write the first line of a method named \java{zool} that takes three parameters: an \java{int} and two \java{String}s.
 
 \item Write a line of code that calls \java{zool}, passing as arguments the value \java{11}, the name of your first pet, and the name of the street you grew up on.
 \end{enumerate}
@@ -5601,7 +5601,7 @@ Otherwise, the body of the loop is executed (again).
 
 The \java{for} loop is often easier to read because it puts all the loop-related statements at the top of the loop.
 
-There is one difference between \java{for} loops and \java{while} loops: if you declare a variable in the initializer, it only exists inside the for loop.
+There is one difference between \java{for} loops and \java{while} loops: if you declare a variable in the initializer, it only exists inside the \java{for} loop.
 For example, here is a version of \java{printRow} that uses a \java{for} loop:
 
 \begin{code}
@@ -5938,7 +5938,7 @@ You should not use \java{factorial} or \java{pow}.
 \chapter{Arrays}
 \label{arrays}
 
-%TODO: DW liked the previous version where Strings come before arrays
+%TODO: DW liked the previous version where strings come before arrays
 % CSM: the transition is better from strings to things to objects
 % Plus we moved command-line arguments to the strings chapter
 
@@ -6465,7 +6465,7 @@ This statement is called an {\bf enhanced for loop}.
 You can read it as, ``for each \java{value} in \java{values}''.
 It's conventional to use plural nouns for array variables and singular nouns for element variables.
 
-Using the enhanced for loop, and removing the temporary variable, we can write the histogram code from the previous section more concisely:
+Using the enhanced \java{for} loop, and removing the temporary variable, we can write the histogram code from the previous section more concisely:
 
 \begin{code}
 int[] counts = new int[100];
@@ -6474,7 +6474,7 @@ for (int score : scores) {
 }
 \end{code}
 
-Enhanced for loops often make the code more readable, especially for accumulating values.
+Enhanced \java{for} loops often make the code more readable, especially for accumulating values.
 But they are not helpful when you need to refer to the index, as in search operations.
 
 
@@ -6641,7 +6641,7 @@ public static void main(String[] args) {
 
 \begin{exercise}
 Write a method called \java{indexOfMax} that takes an array of integers and returns the index of the largest element.
-Can you write this method using an enhanced for loop?
+Can you write this method using an enhanced \java{for} loop?
 Why or why not?
 \end{exercise}
 
@@ -6835,6 +6835,7 @@ Then assigns the new string to \java{text}, replacing the old string.
 This assignment is important; if you don't save the return value, invoking \java{text.replace} has no effect.
 
 % ABD: Too many new ideas here: the most important one is that you have to do something with the return value.  It's not a good time to appreciate the glory of immutability.
+
 %Strings are immutable by design, because it simplifies passing them between methods as parameters and return values.
 %And since the contents of a string can never change, two variables can reference the same string without one accidentally corrupting the other.
 
@@ -6864,7 +6865,7 @@ The condition is \java{i < fruit.length()}, which means that when \java{i} is eq
 
 \index{toCharArray}
 
-Unfortunately, the enhanced for loop does not work with strings.
+Unfortunately, the enhanced \java{for} loop does not work with strings.
 But you can convert any string to a character array and iterate that:
 
 \begin{code}
@@ -7304,17 +7305,9 @@ For example, you can assign an \java{int} to a \java{double} but not vice versa.
 
 \begin{exercise}
 Write a method called \java{letterHist} that takes a string as a parameter and returns a histogram of the letters in the string.
-The zeroeth element of the histogram should contain the number of a's in the String (upper and lower case); the 25th element should contain the number of z's.
+The zeroeth element of the histogram should contain the number of a's in the string (upper and lower case); the 25th element should contain the number of z's.
 Your solution should only traverse the string once.
 \end{exercise}
-
-%TODO: check for consistency on String vs string vs \java{String}
-% let's avoid String, use \java{String} for the type, and string for the concept (agreed)
-
-% we should also check Point, Rectangle, Time, Rational, BigInteger, etc.
-
-% Since we say ``print statement'' without \java{}, I would like to
-% do the same with ``for loop'', ``while loop'', and similar
 
 
 \begin{exercise}
