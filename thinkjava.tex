@@ -2218,6 +2218,8 @@ Learning about format strings is like learning a sub-language within Java.
 There are many options, and the details can be overwhelming.
 Table~\ref{tab:format} lists a few common uses, to give you an idea of how things work.
 For more details, refer to the documentation of \java{java.util.Formatter}.
+The easiest way to find documentation for Java classes is to do a Web search for ``Java'' and the name of the class.
+
 %at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html}.
 
 
@@ -2676,7 +2678,8 @@ long x = Math.round(Math.PI * 20.0);
 
 The result is 63 (rounded up from 62.8319).
 
-You can read the documentation for these and other methods in the \java{Math} class at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html}.
+Take a minute to read the documentation for these and other methods in the \java{Math} class.
+The easiest way to find documentation for Java classes is to do a Web search for ``Java'' and the name of the class.
 
 
 \section{Composition revisited}
@@ -3101,9 +3104,8 @@ And sometimes that's not easy.
 %TODO: let's make a decision about whether to link to the Oracle documentation or use some standard verbiage about how to find it, and then check for consistency.
 
 As an example, let's look a the documentation for \java{Scanner}, which we used in Section~\ref{scanner}.
-The documentation of this class is at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html}.
-The easiest way to find official documentation pages is to search the web using the word Java plus the name of the class (for example, ``Java Scanner'').
-Figure~\ref{fig.scanner} shows a screenshot of this page.
+You can find it by doing a Web search for ``Java Scanner''.
+Figure~\ref{fig.scanner} shows a screenshot of the page.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -7930,14 +7932,14 @@ See the documentation for these classes to learn more about what they can do.
 
 \index{library}
 
-Throughout the book, you have been using many classes from the Java library including \java{System}, \java{String}, \java{Scanner}, \java{Math}, \java{Random}, and others.
-What you may not have realized is that these classes are written in Java.
+Throughout the book, you have used classes from the Java library including \java{System}, \java{String}, \java{Scanner}, \java{Math}, \java{Random}, and others.
+You may not have realized that these classes are written in Java.
 In fact, you can take a look at the source code to see how they work.
 
 \index{src.zip}
 
 The Java library contains thousands of files, many of which are thousands of lines of code.
-That is more than any one person could ever read and understand fully, so please don't be intimidated!
+That's more than one person could read and understand fully, so please don't be intimidated!
 
 Because it's so large, the library source code is stored in a file named \java{src.zip}.
 Take a few minutes to locate this file on your machine:
@@ -7955,16 +7957,17 @@ You should now see {\tt Point.java} and {\tt Rectangle.java}, along with the oth
 
 Open {\tt Point.java} in your editor and skim through the file.
 It uses language features we haven't yet discussed, so you probably won't understand everything.
-But you can get a sense of what professional Java software looks like browsing through the library.
+But you can get a sense of what professional Java software looks like by browsing through the library.
 
 \index{documentation}
 
 Notice how much of {\tt Point.java} is documentation.
-Each method is thoroughly commented including \java{@param}, \java{@return}, and other Javadoc tags.
-You can see the HTML version of these comments on \url{http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html}.
+Each method is thoroughly commented, including \java{@param}, \java{@return}, and other Javadoc tags.
+Javadoc reads these comments and generates documentation in HTML.
+You can see the results by reading the documentation for the \java{Point} class, which you can find by doing a Web search for ``Java Point''.
 
 Now take a look at \java{Rectangle}'s \java{grow} and \java{translate} methods.
-There is more to them than you may have realized, but that doesn't limit your ability to use and understand these methods in a program.
+There is more to them than you may have realized, but that doesn't limit your ability to use these methods in a program.
 
 To summarize the whole chapter, objects encapsulate data and provide methods to access and modify the data directly.
 Object-oriented programming makes it possible to hide messy details so that you can more easily use and understand code that other people wrote.
@@ -8141,7 +8144,7 @@ Why not?
 
 \item \java{BigInteger} is a Java class that can represent arbitrarily big integers.
 There is no upper bound except the limitations of memory size and processing speed.
-Read the documentation at \url{http://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html}.
+Take a minute to read the documentation, which you can find by doing a Web search for ``Java BigInteger''.
 
 \item To use BigIntegers, you have to import \java{java.math.BigInteger} at the beginning of your program.
 
@@ -10320,7 +10323,8 @@ When it's printed, this string should display the same results as the \java{prin
 \index{StringBuilder}
 
 {\em Hint:} You can use the \java{+} operator to concatenate strings, but it is not very efficient.
-Consider using \java{java.util.StringBuilder}, which you can read more about at \url{https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html}.
+Consider using \java{java.util.StringBuilder}; you can find the documentation by doing a Web search for ``Java StringBuilder''.
+
 
 \end{exercise}
 
@@ -10540,7 +10544,7 @@ public void shuffle() {
 \end{code}
 
 \java{ArrayList} provides additional methods we aren't using here.
-You can read about them at \url{https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html}.
+You can read about them in the documentation, which you can find by doing a web search for ``Java ArrayList''.
 
 
 \section{Inheritance}
@@ -11590,7 +11594,7 @@ public class Drawing extends Canvas {
 \end{code}
 
 The \java{Drawing} class extends \java{Canvas}, so it has all the methods provided by \java{Canvas}, including \java{setSize}.
-You can read about the other methods at \url{https://docs.oracle.com/javase/7/docs/api/java/awt/Canvas.html}.
+You can read about the other methods in the documentation, which you can find by doing a web search for ``Java Canvas''. 
 
 \index{JFrame}
 \index{class!JFrame}
