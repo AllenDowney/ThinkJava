@@ -5,7 +5,7 @@
 
 \newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
 \newcommand{\theauthors}{Allen Downey and Chris Mayfield}
-\newcommand{\theversion}{Version 6.0.1 Draft -- \today}
+\newcommand{\theversion}{Version 6.0.2 Draft -- \today}
 
 %%%% Both LATEX and PLASTEX
 
@@ -590,8 +590,8 @@ public class Hello {
 
     public static void main(String[] args) {
         // generate some simple output
-        System.out.println("Hello, World!");  // display one line
-        System.out.println("How are you?");   // display another
+        System.out.println("Hello, World!");  // first line
+        System.out.println("How are you?");   // another line
     }
 }
 \end{code}
@@ -722,8 +722,8 @@ The newlines are optional, too.
 So we could just write:
 
 \begin{code}
-public class Goodbye { public static void main(String[] args) {
-System.out.print("Goodbye, "); System.out.println
+public class Goodbye { public static void main(String[] args)
+{ System.out.print("Goodbye, "); System.out.println
 ("cruel world");}}
 \end{code}
 
@@ -767,7 +767,7 @@ You can run many of the examples directly in DrJava's Interactions Pane (see App
 But if you put the code in a source file, it will be easier to try out variations.
 %For more information on working with DrJava, see Appendix~\ref{development}.
 
-\index{error!message} 
+\index{error!message}
 
 Whenever you are experimenting with a new feature, you should also try to make mistakes.
 For example, in the hello world program, what happens if you leave out one of the quotation marks?
@@ -1285,7 +1285,7 @@ Number of minutes since midnight: 719
 Expressions are generally a combination of numbers, variables, and operators.
 When complied and executed, they become a single value.
 
-For example, the expression \java{1 + 1} has the value \java{2}.
+For example, the expression \java{1 + 1} is the value \java{2}.
 In the expression \java{hour - 1}, Java replaces the variable with it's value, yielding \java{11 - 1}, which has the value \java{10}.
 In the expression \java{hour * 60 + minute}, both variables get replaced, yielding \java{11 * 60 + 59}.
 The multiplication happens first, yielding \java{660 + 59}.
@@ -7121,7 +7121,7 @@ public static String timeString(int hour, int minute) {
 \index{string!format}
 
 \java{String.format} takes the same arguments as \java{System.out.printf}: a format specifier followed by a sequence of values.
-The difference is that \java{System.out.printf} displays the result on the screen; \java{String.format} creates a new string, but does not display anything.
+The main difference is that \java{System.out.printf} displays the result on the screen; \java{String.format} creates a new string, but does not display anything.
 
 In this example, the format specifier \java{\%02d} means ``two digit integer padded with zeros'', so \java{timeString(19, 5)} returns the string \java{"07:05 PM"}.
 
@@ -8295,7 +8295,7 @@ This design principle is called {\bf data encapsulation}.
 \index{class!Time}
 \index{Time}
 
-We have seen two types that encapsulate data in this way: \java{Point} and \java{Rectangle}.
+We have already seen two types that encapsulate data in this way: \java{Point} and \java{Rectangle}.
 Another example, which we will implement ourselves, is \java{Time}, which represents a time of day.
 The data encapsulated in a \java{Time} object are an hour, a minute, and a number of seconds.
 Because every \java{Time} object contains these data, we define attributes to hold them.
