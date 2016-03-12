@@ -352,7 +352,7 @@ As we go along, that end will become clearer.
 \index{program}
 
 A {\bf program} is a sequence of instructions that specifies how to perform a computation.
-%\footnote{This definition does not apply to all programming languages; for alternatives, see \url{http://en.wikipedia.org/wiki/Declarative_programming}.}
+%\footnote{This definition does not apply to all programming languages; for alternatives, see \url{https://en.wikipedia.org/wiki/Declarative_programming}.}
 The computation might be something mathematical, like solving a system of equations or finding the roots of a polynomial.
 It can also be a symbolic computation, like searching and replacing text in a document or (strangely enough) compiling a program.
 The details look different in different languages, but a few basic instructions appear in just about every language.
@@ -2233,8 +2233,6 @@ Table~\ref{tab:format} lists a few common uses, to give you an idea of how thing
 For more details, refer to the documentation of \java{java.util.Formatter}.
 The easiest way to find documentation for Java classes is to do a web search for ``Java'' and the name of the class.
 
-%at \url{https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html}.
-
 
 \section{Centimeters to inches}
 \label{sec:rounding}
@@ -3977,7 +3975,7 @@ For example, to convert a decimal integer into its {\bf binary} representation, 
 \end{stdout}
 
 Reading these remainders from bottom to top, 23 in binary is 10111.
-(For more background on binary numbers, see \url{https://www.mathsisfun.com/binary-number-system.html}.)
+(For more background on binary numbers, see \url{http://www.mathsisfun.com/binary-number-system.html}.)
 
 Here is a recursive method that displays the binary representation of any positive integer:
 
@@ -4711,7 +4709,7 @@ Void methods should not have an \java{@return} tag, since they do not return a v
 Now that we have methods that return values, we have a {\bf Turing complete} programming language.
 That means Java can compute anything computable, for any reasonable definition of ``computable''.
 This idea was developed by Alonzo Church and Alan Turing, so it is known as the Church-Turing thesis.
-%You can read more about it at \url{http://en.wikipedia.org/wiki/Turing_thesis}.
+%You can read more about it at \url{https://en.wikipedia.org/wiki/Turing_thesis}.
 
 \index{recursion}
 
@@ -5236,7 +5234,7 @@ The previous example ends with such a sequence, starting when \java{n} is 16.
 
 The hard question is whether this program terminates for {\em all} values of n.
 So far, no one has been able to prove it {\em or} disprove it!
-For more information, see \url{http://en.wikipedia.org/wiki/Collatz_conjecture}.
+For more information, see \url{https://en.wikipedia.org/wiki/Collatz_conjecture}.
 %The field of computer science is interested in these types of questions, because their answers give insight to the limits of what computers can and cannot do.
 
 
@@ -5258,7 +5256,7 @@ Not much later, computers were so pervasive that printed tables became obsolete.
 \index{division!floating-point}
 
 Even so, for some operations, computers use tables of values to get an approximate answer, and then perform computations to improve the approximation.
-In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division (see \url{http://en.wikipedia.org/wiki/Pentium_FDIV_bug}).
+In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division (see \url{https://en.wikipedia.org/wiki/Pentium_FDIV_bug}).
 
 Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
 The following loop displays a table with a sequence of values in the left column and their logarithms in the right column:
@@ -6676,7 +6674,7 @@ Why or why not?
 
 
 \begin{exercise}
-The Sieve of Eratosthanes is ``a simple, ancient algorithm for finding all prime numbers up to any given limit,'' which you can read about at \url{https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes}.
+The Sieve of Eratosthenes is ``a simple, ancient algorithm for finding all prime numbers up to any given limit,'' which you can read about at \url{https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes}.
 
 Write a method called \java{sieve} that takes an integer parameter, \java{n}, and returns a \java{boolean} array that indicates, for each number from \java{0} to \java{n - 1}, whether the number is prime.
 \end{exercise}
@@ -6980,7 +6978,7 @@ To visualize how the \java{substring} method works, it helps to draw a picture l
 
 Like most string methods, \java{substring} is overloaded.
 That is, there are other versions of \java{substring} that have different parameters.
-If it's invoked with two argments, they are treated as a start and end index:
+If it's invoked with two arguments, they are treated as a start and end index:
 
 \begin{itemize}
 \item \java{fruit.substring(0, 3)} returns \java{"ban"}
@@ -7338,7 +7336,7 @@ For example, you can assign an \java{int} to a \java{double} but not vice versa.
 
 \begin{exercise}
 Write a method called \java{letterHist} that takes a string as a parameter and returns a histogram of the letters in the string.
-The zeroeth element of the histogram should contain the number of a's in the string (upper- and lowercase); the 25th element should contain the number of z's.
+The zeroth element of the histogram should contain the number of a's in the string (upper- and lowercase); the 25th element should contain the number of z's.
 Your solution should only traverse the string once.
 \end{exercise}
 
@@ -10012,7 +10010,7 @@ Since humans usually don't shuffle perfectly, after about seven iterations the o
 
 But a computer program would have the annoying property of doing a perfect shuffle every time, which is not very random.
 In fact, after eight perfect shuffles, you would find the deck back in the order you started in!
-(For more information, see \url{http://en.wikipedia.org/wiki/Faro_shuffle}.)
+(For more information, see \url{https://en.wikipedia.org/wiki/Faro_shuffle}.)
 
 \index{pseudocode}
 
@@ -10038,7 +10036,7 @@ Methods like these are called {\bf helper methods}, because they help you implem
 \index{top-down development}
 \index{program development}
 
-And this process -- writing pseudocode first and then writing methods to make it work -- is called {\bf top-down development} (see \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
+And this process -- writing pseudocode first and then writing methods to make it work -- is called {\bf top-down development} (see \url{https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
 
 \index{shuffle}
 
@@ -10624,7 +10622,7 @@ Deck deck = new Deck("Deck");
 
 \index{super}
 
-The first line of the contructor uses something new, \java{super}, which is a keyword that refers to the superclass of the current class.
+The first line of the constructor uses something new, \java{super}, which is a keyword that refers to the superclass of the current class.
 When \java{super} is used like a method, as in this example, it invokes the constructor of the superclass.
 
 %TODO: Blythe suggests a diagram here
@@ -11211,22 +11209,22 @@ But if you want to compile and run Java programs on your own computer, you will 
 \index{text editor}
 \index{DrJava}
 
-\item A simple {\bf text editor} such as Notepad++ or Sublime Text, and/or an IDE such as DrJava, Eclipse, jGrasp, or Netbeans.
+\item A simple {\bf text editor} such as Notepad++ or Sublime Text, and/or an IDE such as DrJava, Eclipse, jGrasp, or NetBeans.
 
 \end{itemize}
 
 The JDK we recommend is Java SE (Standard Edition), version 7 or 8, which Oracle makes available for free.
 The IDE we recommend is DrJava, which is a free and open-source development environment written in Java.
 
-To install the JDK, search the web for ``download jdk'' which should take you to Oracle's website.
+To install the JDK, search the web for ``download JDK'' which should take you to Oracle's website.
 Scroll down to ``Java Platform, Standard Edition'' and click the download button under JDK.
 Then accept the license agreement and select the installer for your operating system.
 Don't forget to run the installer after you download it!
 
 \index{JAR}
 
-To install DrJava, visit \url{drjava.org} and download the {\bf JAR} file.
-We recommend you save it to your Desktop or another convenient location.
+To install DrJava, visit \url{http://drjava.org} and download the {\bf JAR} file.
+We recommend that you save it to your Desktop or another convenient location.
 Simply double-click the JAR file to run DrJava.
 Refer to the DrJava documentation (\url{http://drjava.org/docs/quickstart/}) for more details.
 
@@ -11509,7 +11507,7 @@ This test code is self-explanatory, but it's longer than it needs to be and it d
 In addition, the error messages provide limited information.
 Using a unit test framework addresses these and other issues.
 
-JUnit is the most common testing tool for Java programs (see \url{junit.org}).
+JUnit is a common testing tool for Java programs (see \url{http://junit.org}).
 To use it, you have to create a test class that contains test methods.
 If the name of your class is \java{Class}, the name of the test class is \java{ClassTest}.
 And if there is a method in \java{Class} named \java{method}, there should be a method in \java{TestClass} named \java{testMethod}.
@@ -11680,7 +11678,7 @@ Graphical coordinates are measured in {\bf pixels}; each pixel corresponds to a 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=5in]{figs/coordinates.pdf}
-\caption{Diagram of the difference between Cartesian coodinates and Java graphical coordinates.}
+\caption{Diagram of the difference between Cartesian coordinates and Java graphical coordinates.}
 \label{fig.coordinates}
 \end{center}
 \end{figure}
@@ -11852,7 +11850,7 @@ The result should look like ``Mickey Moose'', shown in Figure~\ref{fig.moose}.
 
 \begin{exercise}
 In this exercise, you will draw ``Moir\'{e} patterns'' that seem to shift around as you move.
-For an explanation of what is going on, see \url{http://en.wikipedia.org/wiki/Moire_pattern}.
+For an explanation of what is going on, see \url{https://en.wikipedia.org/wiki/Moire_pattern}.
 
 \begin{enumerate}
 
@@ -12455,7 +12453,7 @@ Here's what's happening...''
 \end{enumerate}
 
 We're not kidding, it works!
-See \url{http://en.wikipedia.org/wiki/Rubber_duck_debugging}.
+See \url{https://en.wikipedia.org/wiki/Rubber_duck_debugging}.
 
 
 \subsection*{I found the bug!}
