@@ -1894,7 +1894,7 @@ Then write code to compute the elapsed time since you started working on this ex
 \end{enumerate}
 
 {\em Hint:} You might want to use additional variables to hold values during the computation.
-Variables that are used in a computation but never displayed are sometimes called intermediate or ``temporary'' variables.
+Variables that are used in a computation but never displayed are sometimes called ``intermediate'' or ``temporary'' variables.
 
 \end{exercise}
 
@@ -5139,28 +5139,6 @@ Write a recursive method called \java{power} that takes a double \java{x} and an
 Also, remember that anything raised to the zeroth power is 1.
 
 Optional challenge: you can make this method more efficient, when \java{n} is even, using $x^n = \left( x^{n/2} \right)^2$.
-
-\end{exercise}
-
-
-\begin{exercise}
-\label{gcd}
-
-Write a method called \java{gcd} that takes two integer parameters and that uses Euclid's algorithm to compute and return the greatest common divisor of the two numbers.
-
-Euclid's Algorithm, which appears in Euclid's {\it Elements} (ca.~300 BC), might be the oldest recorded nontrivial algorithm.
-The process is based on the observation that, if $r$ is the remainder when $a$ is divided by $b$, the common divisors of $a$ and $b$ are the same as the common divisors of $b$ and $r$.
-\[ gcd(a, b) = gcd(b, r) \]
-%
-We can use this fact to reduce the problem of computing a GCD to the problem of computing the GCD of smaller and smaller pairs of integers.
-For example:
-\[ gcd(36, 20) = gcd(20, 16) = gcd(16, 4) = gcd(4, 0) = 4 \]
-%implies that the GCD of 36 and 20 is 4.
-
-%It can be shown that for any two starting numbers, this repeated reduction eventually produces a pair where the second number is 0.
-%Then the GCD is the other number in the pair.
-
-(This exercise is based on page 44 of Abelson and Sussman's {\it Structure and Interpretation of Computer Programs}, MIT Press, 1984.)
 
 \end{exercise}
 
@@ -9114,7 +9092,9 @@ As always, test the new method.
 
 \item Write an instance method named \java{reduce} that reduces a rational number to its lowest terms by finding the greatest common divisor (GCD) of the numerator and denominator and dividing through.
 This method should be a pure method; it should not modify the instance variables of the object on which it is invoked.
-(To find the GCD, see Exercise~\ref{gcd}).
+
+{\em Hint:} Finding the GCD only takes a few lines of code.
+Search the web for ``Euclidean algorithm''.
 
 \item Write an instance method called \java{add} that takes a \java{Rational} number as an argument, adds it to \java{this}, and returns a new \java{Rational} object.
 
