@@ -1533,8 +1533,6 @@ If it's not obvious by looking at the expression, use parentheses to make it cle
 
 \section{Composition}
 
-%TODO: DW suggests using celcius to fahrenheit as an example here
-
 \index{composition}
 
 So far we have looked at the elements of a programming language -- variables, expressions, and statements -- in isolation, without talking about how to put them together.
@@ -1823,7 +1821,7 @@ It describes the DrJava Interactions Pane, which is a useful way to develop and 
 \begin{exercise}
 
 If you are using this book in a class, you might enjoy this exercise.
-Find a partner and play {\it Stump the Chump}:
+Find a partner and play ``Stump the Chump'':
 
 Start with a program that compiles and runs correctly.
 One player looks away while the other player adds an error to the program.
@@ -1913,7 +1911,7 @@ This chapter will show you how to read input from the keyboard, use that input t
 
 \index{class!System}
 
-We have been using {\tt System.out.println} for a while, but you might not have thought about what it means.
+We have been using \java{System.out.println} for a while, but you might not have thought about what it means.
 \java{System} is a class that provides methods related to the ``system'' or environment where programs run.
 It also provides \java{System.out}, which is a special value that provides methods for displaying output, including \java{println}.
 
@@ -2543,11 +2541,27 @@ It describes the command-line interface, which is a powerful and efficient way t
 \begin{exercise}
 When you use \java{printf}, the Java compiler does not check your format string.
 See what happens if you try to display a value with type \java{int} using \java{\%f}".
-And what happens if you display a \java{float} using \java{\%d}?
+And what happens if you display a \java{double} using \java{\%d}?
 What if you use two format specifiers, but then only provide one value?
 \end{exercise}
 
 %If you try to print an integer with \java{\%f} or a floating-point number using \java{\%d}, you get an \java{IllegalFormatConversionException}.
+
+
+\begin{exercise}
+Write a program that converts a temperature from Celsius to Fahrenheit. It should (1) prompt the user for input, (2) read a \java{double} value from the keyboard, (3) calculate the result, and (4) format the output to one decimal place. For example, it should display {\tt "24.0 C = 75.2 F"}.
+
+Here is the formula. Be careful not to use integer division!
+%
+\[ F = C \times \frac{9}{5} + 32 \]
+\end{exercise}
+
+
+\begin{exercise}
+Write a program that converts a total number of seconds to hours, minutes, and seconds. It should (1) prompt the user for input, (2) read an integer from the keyboard, (3) calculate the result, and (4) use \java{printf} to display the output. For example, {\tt "5000 seconds = 1 hours, 23 minutes, and 20 seconds"}.
+
+{\em Hint:} Use the modulus operator.
+\end{exercise}
 
 
 \begin{exercise}
@@ -6208,7 +6222,7 @@ These statements create an array of three \java{double}s and makes two different
 \index{alias}
 
 Any changes made through either variable will be seen by the other.
-For example, if we set \java{a[0] = 17.0}, and then display {\tt b[0]}, the result is \java{17.0}.
+For example, if we set \java{a[0] = 17.0}, and then display \java{b[0]}, the result is {\tt 17.0}.
 Because \java{a} and \java{b} are different names for the same thing, they are sometimes called {\bf aliases}.
 
 If you actually want to copy the array, not just a reference, you have to create a new array and copy the elements from the one to the other, like this:
@@ -11728,7 +11742,7 @@ g.setColor(Color.red);
 \end{code}
 
 The \java{setColor} method determines the color of everything that gets drawn afterward.
-\java{Color.red} is a constant provided by the {\tt Color} class; to use it you have to \java{import java.awt.Color}.
+\java{Color.red} is a constant provided by the \java{Color} class; to use it you have to \java{import java.awt.Color}.
 Other colors include:
 
 \begin{stdout}
