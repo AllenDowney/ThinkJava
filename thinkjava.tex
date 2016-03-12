@@ -10430,7 +10430,7 @@ Then we'll define \java{Deck} and \java{Hand} as subclasses of \java{CardCollect
 \index{subclass}
 \index{extends}
 
-A {\bf subclass} is a new class that \java{extends} an existing class; that is, it has the attributes and methods of the existing class, plus more.
+A {\bf subclass} is a new class that ``extends'' an existing class; that is, it has the attributes and methods of the existing class, plus more.
 We'll see the details soon, but let's start with \java{CardCollection}:
 
 
@@ -10678,11 +10678,15 @@ Here's a simple example that deals five cards to a hand, and deals the rest into
 \begin{code}
 Deck deck = new Deck("Deck");
 deck.shuffle();
+\end{code}
 
+\begin{code}
 Hand hand = new Hand("Hand");
 deck.deal(hand, 5);
 hand.display();
+\end{code}
 
+\begin{code}
 Hand drawPile = new Hand("Draw Pile");
 deck.dealAll(drawPile);
 \end{code}
@@ -11051,7 +11055,7 @@ Instances of one class contain references to instances of another class.
 For example, an instance of \java{Eights} contains references to two \java{Player} objects, two \java{Hand} objects, and a \java{Scanner}.
 
 \term{inheritance}
-One class \java{extends} another class.
+One class extends another class.
 For example, \java{Hand} extends \java{CardCollection}, so every instance of \java{Hand} is also a \java{CardCollection}.
 
 \end{description}
@@ -11127,7 +11131,7 @@ A way of developing programs by identifying simple pieces, implementing them, an
 A relationship between two classes where one class ``has'' an instance of another class as one of its attributes.
 
 \term{IS-A}
-A relationship between two classes where one class \java{extends} another class; the subclass ``is'' an instance of the superclass.
+A relationship between two classes where one class extends another class; the subclass ``is'' an instance of the superclass.
 
 \end{description}
 
