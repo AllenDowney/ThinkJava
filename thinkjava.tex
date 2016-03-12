@@ -245,7 +245,6 @@ Git is a ``version control system'' that allows you to keep track of the files t
 A collection of files under Git's control is called a ``repository''.
 
 \index{repository}
-\index{Git}
 \index{GitHub}
 
 GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
@@ -258,12 +257,8 @@ If you don't already have a GitHub account, you'll need to create one.
 After forking, you'll have your own repository on GitHub that you can use to keep track of code you write.
 Then you can ``clone'' the repository, which downloads a copy of the files to your computer.
 
-\index{fork}
-
 \item Alternatively, you could clone the repository without forking.
 If you choose this option, you don't need a GitHub account, but you won't be able to save your changes on GitHub.
-
-\index{clone}
 
 \item If you don't want to use Git at all, you can download the code in a ZIP archive using the {\sf Download ZIP} button on the GitHub page, or this link: \url{http://tinyurl.com/ThinkJavaCodeZip}
 
@@ -436,7 +431,7 @@ Low-level programs can only run on one kind of computer, and have to be rewritte
 
 \end{itemize}
 
-\index{interpreter}
+\index{interpret}
 
 Two kinds of programs translate high-level languages into low-level languages: interpreters and compilers.
 An {\bf interpreter} reads a high-level program and executes it, meaning that it does what the program says.
@@ -451,7 +446,7 @@ Figure~\ref{fig.interpreter} shows the structure of an interpreter.
 \end{center}
 \end{figure}
 
-\index{compiler}
+\index{compile}
 \index{source code}
 \index{object code}
 \index{executable}
@@ -572,9 +567,6 @@ This program defines a class named \java{Hello}.
 You can give a class any name you like, but it is conventional to start with a capital letter.
 The name of the class has to match the name of the file it is in, so this class has to be in a file named {\tt Hello.java}.
 
-\index{braces}
-\index{squiggly braces}
-
 Java uses squiggly braces (\{ and \}) to group things together.
 In {\tt Hello.java}, the outermost braces contain the class definition, and the inner braces contain the method definition.
 
@@ -604,9 +596,10 @@ public class Hello {
 
 As this example shows, you can put comments at the end of a line as well as on lines all by themselves.
 
-\index{String}
+\index{quote mark}
+\index{string}
 \index{type!String}
-\index{character}
+\index{char}
 
 Phrases that appear in quotation marks are called {\bf strings}, because they contain a sequence of ``characters'' strung together.
 Characters can be letters, numbers, punctuation marks, symbols, spaces, tabs, etc.
@@ -678,6 +671,8 @@ If you add a space there, there will be a space at the beginning of the second l
 \caption{Common escape sequences}
 \end{center}
 \end{table}
+
+\index{quote mark}
 
 Another common use of escape sequences is to have quotation marks inside of strings.
 Since double quotes indicate the beginning and end of strings, you need to escape them with a backslash.
@@ -754,8 +749,6 @@ For example, Google publishes its Java coding standards for use in open-source p
 %It is easier to understand a large codebase when all the source code is formatted consistently.
 %Plus following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
 
-\index{Checkstyle}
-
 You might not understand these guidelines now, because they refer to language features we haven't yet seen.
 But you might want to refer back to them periodically as you read this book.
 
@@ -771,6 +764,8 @@ It is a good idea to read this book in front of a computer so you can try out th
 You can run many of the examples directly in DrJava's Interactions Pane (see Appendix~\ref{development}).
 But if you put the code in a source file, it will be easier to try out variations.
 %For more information on working with DrJava, see Appendix~\ref{development}.
+
+\index{error!message} 
 
 Whenever you are experimenting with a new feature, you should also try to make mistakes.
 For example, in the hello world program, what happens if you leave out one of the quotation marks?
@@ -1060,6 +1055,8 @@ This example declares two variables with type \java{String} and two with type \j
 When a variable name contains more than one word, like \java{firstName}, it is conventional to capitalize the first letter of each word except the first.
 Variable names are case-sensitive, so \java{firstName} is not the same as \java{firstname} or \java{FirstName}.
 
+\index{semicolon}
+
 This example also demonstrates the syntax for declaring multiple variables with the same type on one line: \java{hour} and \java{minute} are both integers.
 Note that each declaration statement ends with a semicolon.
 
@@ -1333,7 +1330,7 @@ Again the result is rounded down, but at least now it's approximately correct.
 \section{Floating-point numbers}
 
 \index{floating-point}
-\index{double (floating-point)}
+\index{double}
 \index{type!double}
 
 A more general solution is to use {\bf floating-point} numbers, which can represent fractions as well as integers.
@@ -1468,7 +1465,7 @@ This solution works as long as the number of cents doesn't exceed the largest in
 
 \section{Operators for strings}
 
-\index{string operator}
+\index{string!operator}
 \index{operator!string}
 
 In general, you cannot perform mathematical operations on strings, even if the strings look like numbers.
@@ -1611,6 +1608,8 @@ public class Hello {
     }
 }
 \end{code}
+
+\index{semicolon}
 
 If you forget the semicolon at the end of the print statement, you might get an error message like this:
 
@@ -1908,12 +1907,13 @@ This chapter will show you how to read input from the keyboard, use that input t
 \section{The System class}
 \label{sec:system}
 
-\index{System class}
 \index{class!System}
 
 We have been using {\tt System.out.println} for a while, but you might not have thought about what it means.
 \java{System} is a class that provides methods related to the ``system'' or environment where programs run.
 It also provides \java{System.out}, which is a special value that provides methods for displaying output, including \java{println}.
+
+\index{System.out}
 
 In fact, we can use \java{System.out.println} to display the value of \java{System.out}:
 
@@ -1967,11 +1967,14 @@ The source code for these classes is included with the JDK.
 %The operating system translates these signals into a stream of {\bf bytes} (small integers), which in turn need to be translated into characters.
 %\java{System.in} provides the means for reading one byte of input at a time, which is hardly useful for programs that would rather read in an entire word or line of input.
 
+\index{System.in}
+
 The \java{System} class also provides the special value \java{System.in}, which is an \java{InputStream} that provides methods for reading input from the keyboard.
 These methods are not easy to use; fortunately, Java provides other classes that make it easier to handle common input tasks.
 
 \index{class!utility}
 \index{utility class}
+\index{java.util}
 
 For example, \java{Scanner} is a class that provides methods for inputting words, numbers, and other data.
 \java{Scanner} is provided by \java{java.util}, which is a package that contains classes so useful they are called ``utility classes''.
@@ -2292,6 +2295,7 @@ Let's take the example one step further: suppose you have a measurement in inche
 The goal is divide by 12 (the number of inches in a foot) and keep the remainder.
 
 \index{modulus}
+\index{\% operator}
 \index{operator!modulus}
 
 We have already seen the division operator (\java{/}), which computes the quotient of two numbers.
@@ -2763,7 +2767,6 @@ public class NewLine {
 \end{code}
 
 \index{main}
-\index{method!main}
 \index{case-sensitive}
 
 The name of the class is \java{NewLine}.
@@ -3211,6 +3214,7 @@ As you benefit from reading good documentation, you should ``pay it forward'' by
 A nice feature of the Java language is the ability to embed documentation in your source code.
 That way, you can write it as you go, and as things change, it is easier to keep the documentation consistent with the code.
 
+\index{HTML}
 \index{Javadoc}
 
 If you include documentation in your source code, you can extract it automatically, and generate well-formatted HTML, using a tool called {\bf Javadoc}.
@@ -3218,7 +3222,7 @@ This tool is part of the standard JDK, and widely used.
 In fact, the online documentation of the Java libraries is generated by Javadoc.
 
 \index{comment!documentation}
-\index{documentation comment}
+\index{documentation!Javadoc comments}
 
 Javadoc scans your source files looking for specially-formatted {\bf documentation comments}, also known as ``Javadoc comments''.
 They begin with \java{/**} (two stars) and end with \java{*/} (one star).
@@ -3462,6 +3466,9 @@ x <= y          // x is less than or equal to y
 The result of a relational operator is one of two special values, \java{true} or \java{false}.
 These values belong to the data type \java{boolean}; in fact, they are the only boolean values.
 
+\index{assignment}
+\index{operator!assignment}
+
 You are probably familiar with these operations, but notice that the Java operators are different from the mathematical symbols like $=$, $\neq$, and $\le$.
 A common error is to use a single \java{=} instead of a double \java{==}.
 Remember that \java{=} is the assignment operator, and \java{==} is a comparison operator.
@@ -3608,7 +3615,6 @@ Even experienced programmers make this mistake; search the web for Apple's ``got
 \section{Chaining and nesting}
 
 \index{chaining}
-\index{conditional!chained}
 
 Sometimes you want to check related conditions and choose one of several actions.
 One way to do this is by {\bf chaining} a series of \java{if} and \java{else} statements:
@@ -3628,7 +3634,6 @@ One way to make them easier to read is to use standard indentation, as demonstra
 If you keep all the statements and braces lined up, you are less likely to make syntax errors.
 
 \index{nesting}
-\index{conditional!nested}
 
 In addition to chaining, you can also make complex decisions by {\bf nesting} one conditional statement inside another.
 We could have written the previous example as:
@@ -3666,7 +3671,7 @@ flag = true;
 boolean testResult = false;
 \end{code}
 
-\index{initialization}
+\index{initialize}
 \index{statement!initialization}
 
 The first line is a variable declaration, the second is an assignment, and the third is both.
@@ -3719,6 +3724,8 @@ public static void printLogarithm(double x) {
     System.out.println("The log of x is " + result);
 }
 \end{code}
+
+\index{logarithm}
 
 This example defines a method named \java{printLogarithm} that takes a \java{double} value (named \java{x}) as a parameter.
 It checks whether \java{x} is less than or equal to zero, in which case it displays an error message and then uses \java{return} to exit the method.
@@ -4540,7 +4547,7 @@ You might have noticed that \java{circleArea} and \java{calculateArea} perform s
 They both find the area of a circle, but they take different parameters.
 For \java{calculateArea}, we have to provide the radius; for \java{circleArea} we provide two points.
 
-\index{overloading}
+\index{overload}
 
 If two methods do the same thing, it is natural to give them the same name.
 Having more than one method with the same name is called {\bf overloading}, and it is legal in Java as long as each version takes different parameters.
@@ -4637,14 +4644,13 @@ Examples like this one almost read like English:
 
 \section{Javadoc tags}
 
-\index{Javadoc}
-
 In Section~\ref{sec:javadoc}, we discussed how to write documentation comments using \java{/**}.
 It's generally a good idea to document each class and method, so that other programmers can understand what they do without having to read the code.
 
 \index{tag}
 \index{param tag}
 \index{return tag}
+\index{documentation!Javadoc tags}
 
 To organize the documentation into sections, Javadoc supports optional {\bf tags} that begin with the at sign (\java{@}).
 For example, we can use \java{@param} and \java{@return} to provide additional information about parameters and return values.
@@ -4658,6 +4664,9 @@ For example, we can use \java{@param} and \java{@return} to provide additional i
  */
 public static boolean isSingleDigit(int x) {
 \end{code}
+
+\index{HTML}
+\index{Javadoc}
 
 Figure~\ref{fig.javadoc} shows part of the resulting HTML page generated by Javadoc.
 Notice the relationship between the source code and the documentation.
@@ -4882,8 +4891,8 @@ Code that is used during program development but is not part of the final versio
 \term{functional decomposition}
 A process for breaking down a complex computation into simple methods, then composing the methods to perform the computation.
 
-\term{overloading}
-Defining more than one method with the same name but different parameters.
+\term{overload}
+To define more than one method with the same name but different parameters.
 %When you invoke an overloaded method, Java knows which version to use by looking at the arguments you provide.
 
 \term{tag}
@@ -5177,8 +5186,7 @@ You can almost read the \java{while} statement like English:
 ``While \java{n} is greater than zero, print the value of \java{n} and then reduce the value of \java{n} by 1.
 When you get to zero, print Blastoff!''
 
-\index{body}
-\index{loop!body}
+\index{loop body}
 
 The expression in parentheses is called the condition.
 The statements in braces are called the {\bf body}.
@@ -5328,6 +5336,8 @@ while (i < 100) {
 }
 \end{code}
 
+\index{final}
+
 The first line stores \java{Math.log(2)} in a \java{final} variable to avoid computing that value over and over again.
 The last line multiplies \java{x} by 2.
 The result is:
@@ -5367,8 +5377,8 @@ The steps are:
 
 \end{enumerate}
 
-\index{encapsulation}
-\index{generalization}
+\index{encapsulate}
+\index{generalize}
 
 The second step is called {\bf encapsulation}; the third step is {\bf generalization}.
 
@@ -5699,6 +5709,8 @@ Although this code looks complicated, it is essentially only three steps:
 \item Read the input.
 \end{enumerate}
 
+\index{System.err}
+
 The code uses a flag variable, \java{okay}, to indicate whether we need to repeat the loop body.
 If \java{hasNextDouble()} returns \java{false}, we consume the invalid input by calling \java{next()}.
 We then display an error message via \java{System.err}.
@@ -5912,6 +5924,8 @@ The $i$th term in the series is $x^i / i!$.
 
 \item Write a method called \java{myexp} that takes \java{x} and \java{n} as parameters and estimates $e^x$ by adding the first \java{n} terms of this series.
 You can use the \java{factorial} method from Section~\ref{factorial} or your iterative version from the previous exercise.
+
+\item{efficiency}
 
 \item You can make this method more efficient if you realize that the numerator of each term is the same as its predecessor multiplied by \java{x}, and the denominator is the same as its predecessor multiplied by \java{i}.
 Use this observation to eliminate the use of \java{Math.pow} and \java{factorial}, and check that you get the same result.
@@ -6141,7 +6155,7 @@ Given the previous array, the output of this method is:
 \end{stdout}
 
 \index{utility class}
-\index{java.util.Arrays}
+\index{Arrays class}
 
 The Java library provides a utility class \java{java.util.Arrays} that provides methods for working with arrays.
 One of them, \java{toString}, returns a string representation of an array.
@@ -6157,7 +6171,7 @@ And the output is:
 [1, 2, 3, 4]
 \end{stdout}
 
-As usual, we have to import \java{java.utils.Arrays} before we can use it.
+As usual, we have to import \java{java.util.Arrays} before we can use it.
 Notice that the string format is slightly different: it uses square brackets instead of curly braces.
 But it beats having to write the \java{printArray} method.
 
@@ -6202,9 +6216,9 @@ for (int i = 0; i < 3; i++) {
 }
 \end{code}
 
-\index{java.utils.Arrays}
+\index{Arrays class}
 
-Another option is to use \java{java.utils.Arrays}, which provides a method named \java{copyOf} that copies an array.
+Another option is to use \java{java.util.Arrays}, which provides a method named \java{copyOf} that copies an array.
 You can invoke it like this:
 
 \begin{code}
@@ -6443,6 +6457,8 @@ Notice that we are using the loop variable \java{i} three times: as an index int
 The code works, but it is not as efficient as it could be.
 Every time the loop invokes \java{inRange}, it traverses the entire array.
 
+\index{efficiency}
+
 It would be better to make a single pass through the array, and for each score, compute which range it falls in and increment the corresponding counter.
 This code traverses the array of scores {\em only once} to generate the histogram:
 
@@ -6515,8 +6531,8 @@ An integer variable or value used to indicate an element of an array.
 A value that indicates another value, like an array.
 In a state diagram, a reference appears as an arrow.
 
-\term{aliases}
-References that refer to the same value.
+\term{alias}
+A variable that refers to the same object as another variable.
 
 \term{traversal}
 Looping through the elements of an array (or other collection).
@@ -6729,6 +6745,8 @@ Write a method called \java{max} that takes an array and uses \java{maxInRange} 
 \label{strings}
 
 \index{object}
+\index{System.in}
+\index{System.out}
 
 In Java and other object-oriented languages, an {\bf object} is a collection of data that provides a set of methods.
 For example, \java{Scanner}, which we saw in Section~\ref{scanner}, is an object that provides methods for parsing input.
@@ -6770,8 +6788,7 @@ if (letter == 'a') {
 }
 \end{code}
 
-\index{quote}
-\index{single quote}
+\index{quote mark}
 \index{escape sequence}
 
 Character literals, like \java{'a'}, appear in single quotes.
@@ -6868,7 +6885,7 @@ for (int i = 0; i < fruit.length(); i++) {
 }
 \end{code}
 
-\index{String!length}
+\index{string!length}
 \index{length!string}
 
 Strings provide a method called \java{length} that returns the number of characters in the string.
@@ -7095,7 +7112,7 @@ public static String timeString(int hour, int minute) {
 }
 \end{code}
 
-\index{String.format}
+\index{string!format}
 
 \java{String.format} takes the same arguments as \java{System.out.printf}: a format specifier followed by a sequence of values.
 The difference is that \java{System.out.printf} displays the result on the screen; \java{String.format} creates a new string, but does not display anything.
@@ -7510,7 +7527,7 @@ You might have more than one tile with the same letter, but you can only use eac
 \chapter{Objects}
 \label{objects}
 
-\index{String}
+\index{String class}
 \index{type!String}
 
 As we learned in the previous chapter, an object is a collection of data that provides a set of methods.
@@ -7965,6 +7982,8 @@ It uses language features we haven't yet discussed, so you probably won't unders
 But you can get a sense of what professional Java software looks like by browsing through the library.
 
 \index{documentation}
+\index{HTML}
+\index{Javadoc}
 
 Notice how much of {\tt Point.java} is documentation.
 Each method is thoroughly commented, including \java{@param}, \java{@return}, and other Javadoc tags.
@@ -8135,6 +8154,8 @@ public static void main(String[] args) {
 \begin{exercise}
 \label{ex.biginteger}
 
+\index{factorial}
+
 You might be sick of the factorial method by now, but we're going to do one more version.
 
 \begin{enumerate}
@@ -8225,7 +8246,7 @@ But don't use \java{pow}; that would spoil the fun.
 \chapter{Classes}
 \label{classes}
 
-\index{object type}
+\index{object!type}
 \index{type!object}
 
 Whenever you define a new class, you also create a new type with the same name.
@@ -8293,7 +8314,7 @@ public class Time {
 }
 \end{code}
 
-\index{private variable}
+\index{private}
 \index{variable!private}
 
 The \java{Time} class is \java{public}, which means that it can be used in other classes.
@@ -8353,7 +8374,7 @@ To create a Time object, you must use the \java{new} operator:
 Time time = new Time();
 \end{code}
 
-\index{new operator}
+\index{new}
 \index{operator!new}
 
 When you invoke \java{new}, Java creates the object and calls your constructor to initialize the instance variables.
@@ -8391,13 +8412,13 @@ public Time() {
 
 \section{More constructors}
 
-\index{overloading}
+\index{overload}
 
 Like other methods, constructors can be overloaded, which means you can provide multiple constructors with different parameters.
 Java knows which constructor to invoke by matching the arguments you provide with the parameters of the constructors.
 
 \index{value constructor}
-\index{constructor}
+\index{constructor!value}
 
 It is common to provide a constructor that takes no arguments, like the previous one, and a ``value constructor'', like this one:
 
@@ -8457,7 +8478,7 @@ public class Time {
 Recall that the instance variables of \java{Time} are \java{private}.
 We can access them from within the \java{Time} class, but if we try to access them from another class, the compiler generates an error.
 
-\index{private variable}
+\index{private}
 \index{variable!private}
 
 For example, here's a new class called \java{TimeClient}, because a class that uses objects defined in another class is called a {\bf client}:
@@ -8512,9 +8533,9 @@ public int getSecond() {
 }
 \end{code}
 
-\index{accessor method}
+\index{accessor}
 \index{method!accessor}
-\index{getter method}
+\index{getter}
 \index{method!getter}
 
 Methods like these are formally called ``accessors'', but more commonly referred to as {\bf getters}.
@@ -8538,7 +8559,7 @@ public void setSecond(int second) {
 
 \index{mutator}
 \index{method!mutator}
-\index{setter method}
+\index{setter}
 \index{method!setter}
 
 These methods are formally called ``mutators'', but more commonly known as {\bf setters}.
@@ -8643,7 +8664,7 @@ The body of the method is similar to \java{printTime} in the previous section, w
 
 \end{itemize}
 
-\index{String!format}
+\index{string!format}
 
 Now you can call \java{toString} directly:
 
@@ -8666,7 +8687,6 @@ The output is {\tt 11:59:59.9}.
 \label{equals}
 
 \index{== operator}
-\index{operator!==}
 \index{equals}
 \index{method!equals}
 
@@ -8716,7 +8736,7 @@ By default, the \java{equals} method does the same thing as \java{==}.
 For \java{Time} objects, that's probably not what we want.
 For example, \java{time1} and \java{time3} represent the same time of day, so we should consider them equivalent.
 
-\index{equals method}
+\index{equals}
 \index{method!equals}
 
 We can provide an \java{equals} method that implements this notion of equivalence:
@@ -8750,7 +8770,7 @@ Suppose you are going to a movie that starts at 18:50 (or 6:50 PM), and the runn
 What time does the movie end?
 
 \index{Time!addition}
-\index{addition!Time}
+\index{addition!time}
 
 We'll use \java{Time} objects to figure it out.
 Here are two ways we could ``add'' \java{Time} objects:
@@ -8766,7 +8786,7 @@ Here are two ways we could ``add'' \java{Time} objects:
 To demonstrate the difference, we'll do both.
 Here is a rough draft that uses the \java{static} approach:
 
-\index{static method}
+\index{static}
 \index{method!static}
 
 \begin{code}
@@ -8956,7 +8976,7 @@ Two objects that are ``equal'' but not necessarily identical, as defined by the 
 \term{pure method}
 A \java{static} method that depends only on its parameters and no other data.
 
-\term{modifier}
+\term{modifier method}
 A method that changes the state (instance variables) of an object.
 
 \end{description}
@@ -8971,8 +8991,6 @@ See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
 
 %TODO: check that the following sentence appears on Atlas
-
-\index{graphics}
 
 At this point you know enough to read Appendix~\ref{graphics}, which is about simple 2D graphics and animations.
 During the next few chapters, you should take a detour to read this appendix and work through the exercises.
@@ -8990,12 +9008,11 @@ If you review the documentation of \java{java.lang.String}, you should see that 
 
 
 \begin{exercise}
-\index{modulus operator}
-\index{operator!modulus}
 
 The implementation of \java{increment} in this chapter is not very efficient.
 Can you rewrite it so it doesn't use any loops?
 {\em Hint:} Remember the modulus operator.
+
 \end{exercise}
 
 
@@ -9042,7 +9059,6 @@ You can use either constructor.
 \label{ex.rational}
 
 \index{rational number}
-\index{number!rational}
 
 A rational number is a number that can be represented as the ratio of two integers.
 For example, $2/3$ is a rational number, and you can think of 7 as a rational number with an implicit 1 in the denominator.
@@ -9205,7 +9221,7 @@ The result is a reference to a \java{Card} that represents the 3 of Clubs.
 When you create a new class, the first step is to declare the instance variables and write constructors.
 A good next step is to write \java{toString}, which is useful for debugging and incremental development.
 
-\index{String!array of}
+\index{string!array of}
 \index{array!of strings}
 
 To display \java{Card} objects in a way that humans can read easily, we need to map the integer codes onto words.
@@ -9233,7 +9249,7 @@ String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
 
 \index{state diagram}
 \index{reference}
-\index{String!reference to}
+\index{string!reference to}
 
 The state diagram in Figure~\ref{fig.stringarray} shows the result.
 Each element of the array is a reference to a \java{String}.
@@ -9294,7 +9310,9 @@ So far we have seen local variables, which are declared inside a method, and ins
 Local variables are created when a method is invoked, and their space is reclaimed when the method ends.
 Instance variables are created when you construct an object and reclaimed when the object is garbage collected.
 
-\index{class variables}
+\index{class variable}
+\index{static}
+\index{variable!static}
 
 Now it's time to learn about {\bf class variables}.
 Like instance variables, class variables are defined in a class definition, before the method definitions.
@@ -9322,6 +9340,8 @@ public class Card {
     }
 }
 \end{code}
+
+\index{final}
 
 %You can refer to a class variable from anywhere inside the class definition.
 Class variables are often used to store constant values that are needed in several places.
@@ -9894,7 +9914,7 @@ You can use this class as a starting place to implement your own card games.
 \chapter{Objects of arrays}
 \label{Deck}
 
-\index{array!of Cards}
+\index{array!of cards}
 
 In the previous chapter, we defined a class to represent cards and used an array of \java{Card} objects to represent a deck.
 
@@ -10011,6 +10031,7 @@ for each index i {
 \end{code}
 
 \index{helper method}
+\index{method!helper}
 
 The nice thing about pseudocode is that it often makes clear what methods you are going to need.
 In this case, we need a method that chooses a random integer between \java{low} and \java{high}, and a method that takes two indexes and switches the cards at those positions.
@@ -10021,7 +10042,7 @@ Methods like these are called {\bf helper methods}, because they help you implem
 
 And this process -- writing pseudocode first and then writing methods to make it work -- is called {\bf top-down development} (see \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
 
-\index{shuffling}
+\index{shuffle}
 
 One of the exercises at the end of the chapter asks you to write these helper methods and use them to implement \java{shuffle}.
 
@@ -10048,9 +10069,6 @@ public void selectionSort() {
     }
 }
 \end{code}
-
-\index{helper method}
-\index{method!helper}
 
 Again, the pseudocode helps with the design of the helper methods.
 In this algorithm we can use \java{swapCards} again, so we only need a method to find the lowest card; we'll call it \java{indexLowestCard}.
@@ -10127,7 +10145,7 @@ This sort of computation can be confusing, and forgetting the \java{+ 1} often l
 Drawing a picture is usually the best way to avoid them.
 
 \index{constructor}
-\index{overloading}
+\index{overload}
 
 Figure~\ref{fig.subdeck} is a state diagram of a subdeck with \java{low = 0} and \java{high = 4}.
 The result is a hand with 5 cards that are {\em shared} with the original deck; that is, they are aliased.
@@ -10471,6 +10489,8 @@ public Card popCard(int i) {
 }
 \end{code}
 
+\index{efficiency}
+
 If we are dealing cards from a shuffled deck, we don't care which card gets removed.
 It is most efficient to choose the last one, so we don't have to shift any following cards.
 Here is an overloaded version of \java{popCard} that removes and returns the last card:
@@ -10588,7 +10608,7 @@ We could also say that \java{CardCollection} is a {\bf superclass}, and \java{De
 % NOTE: Let's stick with ``superclass'' and ``subclass'' and
 % not use ``parent'' and ``child''.
 
-\index{Object}
+\index{Object class}
 
 In Java, classes may only extend one superclass.
 Classes that do not specify a superclass with \java{extends} automatically inherit from \java{java.lang.Object}.
@@ -11030,8 +11050,8 @@ For example, \java{Hand} extends \java{CardCollection}, so every instance of \ja
 
 \end{description}
 
-\index{has-a}
-\index{is-a}
+\index{HAS-A}
+\index{IS-A}
 \index{object-oriented}
 
 Composition is also known as a {\bf HAS-A} relationship, as in ``\java{Eights} HAS-A \java{Scanner}''.
@@ -11180,6 +11200,7 @@ But if you want to compile and run Java programs on your own computer, you will 
 
 \index{JDK}
 \index{JVM}
+\index{virtual machine}
 \index{Javadoc}
 
 \item The {\bf Java Development Kit} (JDK), which includes the compiler, the {\bf Java Virtual Machine} (JVM) that interprets the compiled byte code, and other tools such as Javadoc.
@@ -11322,6 +11343,8 @@ java Convert < test.in > test.out
 \end{enumerate}
 
 \index{redirection operator}
+\index{System.in}
+\index{System.out}
 
 On the command line, {\tt <} and {\tt >} are {\bf redirection operators}.
 The first one redirects the contents of {\tt test.in} to \java{System.in}, as if it were entered from the keyboard.
@@ -11365,6 +11388,8 @@ Debug your program until the actual output is {\it identical} to the expected ou
 
 \section{Running Checkstyle}
 \label{checkstyle}
+
+\index{Checkstyle}
 
 Checkstyle is a command-line tool that can be used to determine if your source code follows a set of style rules.
 It also checks for common programming mistakes, such as class and method design problems.
@@ -11513,6 +11538,8 @@ If so, it does nothing; otherwise it displays a detailed error message.
 Normally the first argument is the ``expected value'', which we consider correct, and the second argument is the ``actual value'' we want to check.
 If they are not equal, the test fails.
 
+\index{System.err}
+
 Using \java{assertEquals} is more concise than writing your own \java{if} statements and \java{System.err} messages.
 JUnit provides additional assert methods, such as \java{assertNull}, \java{assertSame}, and \java{assertTrue}, that can be used to design a variety of tests.
 
@@ -11627,6 +11654,8 @@ In the \java{main} method, we:
 
 \item Pack the frame (resize it) to fit the canvas, and display it on the screen.
 \end{enumerate}
+
+\index{paint}
 
 Once the frame is visible, the \java{paint} method is called whenever the canvas needs to be drawn; for example, when the window is moved or resized.
 The application doesn't end after the \java{main} method returns; instead, it waits for the \java{JFrame} to close.
@@ -11903,8 +11932,8 @@ For each situation, we have some suggestions about how to proceed.
 
 \subsection*{The compiler is spewing error messages.}
 
-\index{error messages}
-\index{compiler}
+\index{compile}
+\index{error!message}
 
 If the compiler reports 100 error messages, that doesn't mean there are 100 errors in your program.
 When the compiler encounters an error, it often gets thrown off track for a while.
@@ -11979,10 +12008,9 @@ If you are not sure, try putting an obvious and deliberate syntax error right at
 Now compile again.
 If the compiler doesn't find the new error, there is probably something wrong with the way you set up the development environment.
 
-If you have examined the code thoroughly, and you are sure the compiler is compiling the right source file, it is time for desperate measures: {\bf debugging by bisection}.
-
-\index{bisection!debugging by}
 \index{debugging!by bisection}
+
+If you have examined the code thoroughly, and you are sure the compiler is compiling the right source file, it is time for desperate measures: {\bf debugging by bisection}.
 
 \begin{itemize}
 
@@ -12225,7 +12253,7 @@ Once you find the discrepancy between your model and reality, you can solve the 
 
 Here are some common logic errors to check for:
 
-\index{logic errors}
+\index{logic error}
 \index{error!logic}
 
 \begin{itemize}
