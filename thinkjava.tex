@@ -137,7 +137,7 @@ The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 \markboth{PREFACE}{PREFACE}
 \addcontentsline{toc}{chapter}{Preface}
 
-{\em Think Java} is an introduction to computer science and programming intended for readers with little or no experience.
+{\it Think Java} is an introduction to computer science and programming intended for readers with little or no experience.
 We start with the most basic concepts and are careful to define all terms when they are first used.
 The book presents each new idea in a logical progression.
 Larger topics, like recursion and object-oriented programming, are divided into smaller examples and introduced over the course of several chapters.
@@ -206,7 +206,7 @@ In some cases we explain a feature briefly when it first appears, and then expla
 This book is well suited to prepare students for the AP Computer Science A exam, which includes object-oriented design and implementation.
 (AP is a registered trademark of the College Board.)
 We introduce nearly every topic in the ``AP Java subset'' with a few exceptions.
-A mapping of {\em Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}
+A mapping of {\it Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}
 
 %TODO: replace this with a more specific link when it's ready
 
@@ -543,6 +543,8 @@ Confusingly, {\em print} can mean both ``display on the screen'' and ``send to t
 In this book, we'll try to say ``display'' when we mean output to the screen.
 Like most statements, the print statement ends with a semicolon (\java{;}).
 
+\index{case-sensitive}
+
 Java is ``case-sensitive'', which means that uppercase and lowercase are not the same.
 In this example, \java{System} has to begin with an uppercase letter; \java{system} and \java{SYSTEM} won't work.
 
@@ -799,7 +801,7 @@ That way you will always have a working program, and it will be easier to isolat
 A great example of this principle is the Linux operating system, which contains millions of lines of code.
 It started out as a simple program Linus Torvalds used to explore the Intel 80386 chip.
 According to Larry Greenfield, ``One of Linus's earlier projects was a program that would switch between printing AAAA and BBBB.
-This later evolved to Linux.'' ({\em The Linux Users' Guide})
+This later evolved to Linux.'' ({\it The Linux Users' Guide})
 
 %Later chapters will make more suggestions about debugging and other programming practices.
 
@@ -1050,6 +1052,8 @@ String firstName;
 String lastName;
 int hour, minute;
 \end{code}
+
+\index{case-sensitive}
 
 This example declares two variables with type \java{String} and two with type \java{int}.
 When a variable name contains more than one word, like \java{firstName}, it is conventional to capitalize the first letter of each word except the first.
@@ -3435,7 +3439,7 @@ The programs we've seen in previous chapters do pretty much the same thing every
 For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
 This chapter presents the features you need for programs to make decisions: a new data type called \java{boolean}, operators for expressing logic, and \java{if} statements.
 
-%\java{boolean} is named after George Boole, who developed a formal system that represents logic using the values {\it true} and {\it false} and operations like {\it and}, {\it or}, and {\it not}.
+%\java{boolean} is named after George Boole, who developed a formal system that represents logic using the values {\em true} and {\em false} and operations like {\em and}, {\em or}, and {\em not}.
 %In Java, the values \java{true} and \java{false} belong to the data type \java{boolean}.
 
 %\java{true} and \java{false} are special values in Java, and together they make up a type called {\bf boolean}.
@@ -3498,7 +3502,7 @@ The result of \java{fruit1.equals(fruit2)} is the boolean value \java{false}.
 \index{logical operator}
 \index{operator!logical}
 
-Java has three {\bf logical operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\it and}, {\it or}, and {\it not}.
+Java has three {\bf logical operators}: \java{&&}, \java{||}, and \java{!}, which respectively stand for {\em and}, {\em or}, and {\em not}.
 The results of these operators are similar to their meanings in English.
 
 For example, \java{x > 0 && x < 10} is true when \java{x} is both greater than zero {\em and} less than 10.
@@ -3923,7 +3927,7 @@ This method displays the string until the stack overflows, at which point it thr
 \section{Binary numbers}
 
 The \java{countdown} example has three parts: (1) it checks the base case, (2) displays something, and (3) makes a recursive call.
-What do you think happens if you reverse steps 2 and 3, making the recursive call {\it before} displaying?
+What do you think happens if you reverse steps 2 and 3, making the recursive call {\em before} displaying?
 
 \begin{code}
 public static void countup(int n) {
@@ -4035,7 +4039,7 @@ The process of invoking (and restarting) the same method that is currently execu
 A method that invokes itself, usually with different arguments.
 
 \term{base case}
-A condition that causes a recursive method {\it not} to make another recursive call.
+A condition that causes a recursive method {\em not} to make another recursive call.
 
 \term{binary}
 A system that uses only zeros and ones to represent numbers.
@@ -4075,7 +4079,7 @@ For the following program:
 
 \begin{enumerate}
 
-\item Draw a stack diagram that shows the state of the program the {\it second} time \java{ping} is invoked.
+\item Draw a stack diagram that shows the state of the program the {\em second} time \java{ping} is invoked.
 
 \item What is the complete output?
 
@@ -4238,7 +4242,7 @@ In this chapter, we'll write methods that return values, which we call {\bf valu
 
 \index{void}
 
-When you invoke a \java{void} method, the invocation is usually on a line all by itself.
+When you invoke a void method, the invocation is usually on a line all by itself.
 For example, here is the \java{countup} method from Section~\ref{recursion}:
 
 \begin{code}
@@ -4417,7 +4421,7 @@ public static double distance
 The return statement is a placeholder that is necessary for the program to compile.
 At this stage the program doesn't do anything useful, but it is good to compile it so we can find any syntax errors before we add more code.
 
-It's usually a good idea to think about testing {\it before} you develop new methods; doing so can help you figure out how to implement them.
+It's usually a good idea to think about testing {\em before} you develop new methods; doing so can help you figure out how to implement them.
 To test the method, we can invoke it from \java{main} using sample values:
 
 \begin{code}
@@ -5132,7 +5136,7 @@ Optional challenge: you can make this method more efficient, when \java{n} is ev
 
 Write a method called \java{gcd} that takes two integer parameters and that uses Euclid's algorithm to compute and return the greatest common divisor of the two numbers.
 
-Euclid's Algorithm, which appears in Euclid's {\em Elements} (ca.~300 BC), might be the oldest recorded nontrivial algorithm.
+Euclid's Algorithm, which appears in Euclid's {\it Elements} (ca.~300 BC), might be the oldest recorded nontrivial algorithm.
 The process is based on the observation that, if $r$ is the remainder when $a$ is divided by $b$, the common divisors of $a$ and $b$ are the same as the common divisors of $b$ and $r$.
 \[ gcd(a, b) = gcd(b, r) \]
 %
@@ -5144,7 +5148,7 @@ For example:
 %It can be shown that for any two starting numbers, this repeated reduction eventually produces a pair where the second number is 0.
 %Then the GCD is the other number in the pair.
 
-(This exercise is based on page 44 of Abelson and Sussman's {\em Structure and Interpretation of Computer Programs}, MIT Press, 1984.)
+(This exercise is based on page 44 of Abelson and Sussman's {\it Structure and Interpretation of Computer Programs}, MIT Press, 1984.)
 
 \end{exercise}
 
@@ -6046,7 +6050,7 @@ Figure~\ref{fig.array} shows a state diagram of the \java{counts} array so far.
 \index{reference}
 
 The arrow indicates that the value of \java{counts} is a {\bf reference} to the array.
-You should think of {\em the array} and {\em the variable that refers to it} as two different things.
+You should think of {\em the array} and {\em the variable} that refers to it as two different things.
 As we'll soon see, we can assign a different variable to refer to the same array, and we can change the value of \java{counts} to refer to a different array.
 
 \index{element}
@@ -7083,6 +7087,8 @@ Otherwise, the difference is positive.
 
 In the preceding code, \java{compareTo} returns positive 8, because the second letter of \java{"Ada"} comes before the second letter of \java{"Alan"} by 8 letters.
 
+\index{case-sensitive}
+
 Both \java{equals} and \java{compareTo} are case-sensitive.
 The uppercase letters come before the lowercase letters, so \java{"Ada"} comes before \java{"ada"}.
 
@@ -7430,7 +7436,7 @@ public static int length(String s) {
 Make sure they work, and you understand what they do.
 
 \item Using these methods, and without using any other \java{String} methods, write a method called \java{printString} that takes a string as a parameter and that displays the letters of the string, one on each line.
-It should be a \java{void} method.
+It should be a void method.
 
 \item Again using only these methods, write a method called \java{printBackward} that does the same thing as \java{printString} but that displays the string backward (again, one character per line).
 
@@ -8366,7 +8372,7 @@ For example, you can read and write the instance variables of \java{this}, and y
 But you do not declare \java{this}, and you can't make an assignment to it.
 
 A common error when writing constructors is to put a \java{return} statement at the end.
-Like \java{void} methods, constructors do not return values.
+Like void methods, constructors do not return values.
 
 To create a Time object, you must use the \java{new} operator:
 
@@ -8500,7 +8506,7 @@ There are three ways to solve this problem:
 
 \begin{itemize}
 
-\item We could make the instance variables public.
+\item We could make the instance variables \java{public}.
 
 \item We could provide methods to access the instance variables.
 
@@ -8777,14 +8783,14 @@ Here are two ways we could ``add'' \java{Time} objects:
 
 \begin{itemize}
 
-\item We could write a \java{static} method that takes the two \java{Time} objects as parameters.
+\item We could write a static method that takes the two \java{Time} objects as parameters.
 
 \item We could write an instance method that gets invoked on one object and takes the other as a parameter.
 
 \end{itemize}
 
 To demonstrate the difference, we'll do both.
-Here is a rough draft that uses the \java{static} approach:
+Here is a rough draft that uses the static approach:
 
 \index{static}
 \index{method!static}
@@ -8799,7 +8805,7 @@ public static Time add(Time t1, Time t2) {
 }
 \end{code}
 
-And here's how we would invoke the \java{static} method:
+And here's how we would invoke the static method:
 
 \begin{code}
 Time startTime = new Time(18, 50, 0.0);
@@ -8941,7 +8947,7 @@ Every object is an instance of some class.
 A technique for bundling multiple named variables into a single object.
 
 \term{instance variable}
-An attribute of an object; a non-\java{static} variable defined at the class level.
+An attribute of an object; a non-static variable defined at the class level.
 
 \term{information hiding}
 The practice of making instance variables \java{private} to limit dependencies between classes.
@@ -8965,7 +8971,7 @@ A method that assigns a value to an instance variable.
 Replacing a default implementation of a method, such as \java{toString}.
 
 \term{instance method}
-A non-\java{static} method that has access to \java{this} and the instance variables.
+A non-static method that has access to \java{this} and the instance variables.
 
 \term{identical}
 Two values that are the same; in the case of objects, two variables that refer to the same object.
@@ -8974,7 +8980,7 @@ Two values that are the same; in the case of objects, two variables that refer t
 Two objects that are ``equal'' but not necessarily identical, as defined by the \java{equals} method.
 
 \term{pure method}
-A \java{static} method that depends only on its parameters and no other data.
+A static method that depends only on its parameters and no other data.
 
 \term{modifier method}
 A method that changes the state (instance variables) of an object.
@@ -9104,7 +9110,7 @@ There are several ways to add fractions.
 You can use any one you want, but you should make sure that the result of the operation is reduced so that the numerator and denominator have no common divisor (other than 1).
 \end{enumerate}
 
-The purpose of this exercise is to write a class definition that includes a variety of methods, including constructors, \java{static} methods, instance methods, modifiers, and pure methods.
+The purpose of this exercise is to write a class definition that includes a variety of methods, including constructors, static methods, instance methods, modifiers, and pure methods.
 \end{exercise}
 
 
@@ -9120,7 +9126,7 @@ Here is an outline of the road ahead:
 \item In Chapter~\ref{deck}, we create a \java{Deck} class that encapsulates an array of cards, and we write methods that operate on decks.
 
 \item In Chapter~\ref{eights}, we introduce inheritance as a way to create new classes that extend existing classes.
-We then use all these classes to implement the card game {\em Crazy Eights}.
+We then use all these classes to implement the card game {\it Crazy Eights}.
 
 \end{enumerate}
 
@@ -9430,7 +9436,7 @@ If the ranks are also the same, it returns 0.
 
 \section{Cards are immutable}
 
-The instance variables of \java{Card} are private, so they can't be accessed from other classes.
+The instance variables of \java{Card} are \java{private}, so they can't be accessed from other classes.
 We can provide getters to allow other classes to read the \java{rank} and \java{suit} values:
 
 \begin{code}
@@ -9997,7 +10003,7 @@ public void print() {
 }
 \end{code}
 
-When you transform a \java{static} method into an instance method, it usually gets shorter.
+When you transform a static method into an instance method, it usually gets shorter.
 We can simply type \java{deck.print()} to invoke the instance method.
 
 
@@ -10734,7 +10740,7 @@ But not every animal is a mammal, and not every mammal is a cat.
 
 \section{The Player class}
 
-The classes we have defined so far could be used for any card game; we have not yet implemented any of the rules specific to {\em Crazy Eights}.
+The classes we have defined so far could be used for any card game; we have not yet implemented any of the rules specific to {\it Crazy Eights}.
 And that's probably a good thing, since it makes it easy to reuse these classes if we want to make another game in the future.
 
 But now it's time to implement the rules.
@@ -10812,7 +10818,7 @@ It uses the \java{Eights} object to draw a card.
 If it matches, it returns the card.
 Otherwise it adds the card to the player's hand and continues.
 
-Both \java{searchForMatch} and \java{drawForMatch} use \java{cardMatches}, which is a \java{static} method, also defined in \java{Player}.
+Both \java{searchForMatch} and \java{drawForMatch} use \java{cardMatches}, which is a static method, also defined in \java{Player}.
 \java{cardMatches} is a straightforward translation of the rules of the game:
 
 \begin{code}
@@ -10862,7 +10868,7 @@ In Section~\ref{shuffle} we introduced top-down development, which is a way of d
 
 In this section we present {\bf bottom-up development}, which goes the other way around: first we identify simple pieces we need, then we assemble them into more complex algorithms.
 
-Looking at the rules of {\em Crazy Eights}, we can identify some methods we'll need:
+Looking at the rules of {\it Crazy Eights}, we can identify some methods we'll need:
 
 \begin{itemize}
 
@@ -11160,10 +11166,10 @@ Modify the \java{Eights} class to create an \java{ArrayList} of players, and mod
 \begin{exercise}
 When we designed the program for this chapter, we tried to minimize the number of classes.
 As a result, we ended up with a few awkward methods.
-For example, \java{cardMatches} is a \java{static} method in \java{Player}, but it would be more natural if it were an instance method in \java{Card}.
+For example, \java{cardMatches} is a static method in \java{Player}, but it would be more natural if it were an instance method in \java{Card}.
 
-The problem is that \java{Card} is supposed to be useful for any card game, not just {\em Crazy Eights}.
-You can solve this problem by adding a new class, \java{EightsCard}, that extends \java{Card} and provides a method, \java{match}, that checks whether two cards match according to the rules of {\em Crazy Eights}.
+The problem is that \java{Card} is supposed to be useful for any card game, not just {\it Crazy Eights}.
+You can solve this problem by adding a new class, \java{EightsCard}, that extends \java{Card} and provides a method, \java{match}, that checks whether two cards match according to the rules of {\it Crazy Eights}.
 
 At the same time, you could create a new class, \java{EightsHand}, that extends \java{Hand} and provides a method, \java{scoreHand}, that adds up the scores of the cards in the hand.
 And while you're at it, you could add a method named \java{scoreCard} to \java{EightsCard}.
@@ -11383,7 +11389,7 @@ Interpreting the results from {\tt diff} can be confusing, but fortunately there
 For example, on Windows you can install {\tt WinMerge}, on Mac you can use {\tt opendiff} (which comes with Xcode), and on Linux there's {\tt meld}, shown in Figure~\ref{fig.meld}.
 
 Regardless what tool you use, the goal is the same.
-Debug your program until the actual output is {\it identical} to the expected output.
+Debug your program until the actual output is {\em identical} to the expected output.
 
 
 \section{Running Checkstyle}
