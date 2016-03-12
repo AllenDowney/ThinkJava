@@ -530,6 +530,7 @@ Notice that the output does not include the quotation marks.
 \index{class!definition}
 \index{method!definition}
 \index{statement}
+\index{print statement}
 
 Java programs are made up of {\em class} and {\em method} definitions, and methods are made up of {\em statements}.
 A {\bf statement} is a line of code that performs a basic operation.
@@ -577,7 +578,7 @@ The name of the class has to match the name of the file it is in, so this class 
 Java uses squiggly braces (\{ and \}) to group things together.
 In {\tt Hello.java}, the outermost braces contain the class definition, and the inner braces contain the method definition.
 
-\index{comments!inline}
+\index{comment!inline}
 \index{statement!comment}
 
 The line that begins with two slashes (\java{//}) is a {\bf comment}, which is a bit of English text that explains the code.
@@ -1133,6 +1134,8 @@ int minute = 59;
 %i = 2;
 %\end{code}
 %
+%\index{update}
+%
 %The first line initializes \java{i} to 1.
 %The second line changes its value to \java{2}.
 %In this example, there is no reason to make two assignments, but in many programs it is useful to reassign, or {\bf update}, variables.
@@ -1175,6 +1178,7 @@ Figure~\ref{fig.state} shows the state of the program after these assignment sta
 \end{figure}
 
 \index{state diagram}
+\index{diagram!state}
 
 Diagrams like this one that show the state of the program are called {\bf state diagrams}.
 Each variable is represented with a box showing the name of the variable on the outside and the value inside.
@@ -1248,6 +1252,7 @@ If you omit the \java{println}, the program might display the stored output at u
 %Most statements consist of one or more {\bf expressions}.
 
 \index{operator}
+\index{addition!integer}
 
 {\bf Operators} are symbols that represent simple computations.
 %Most operators in Java do what you expect them to do, since they are common mathematical symbols.
@@ -1301,6 +1306,7 @@ Fraction of the hour that has passed: 0
 
 \index{division!integer}
 \index{integer division}
+\index{arithmetic!integer}
 
 This result often confuses people.
 The value of \java{minute} is 59, and 59 divided by 60 should be 0.98333, not 0.
@@ -1381,6 +1387,7 @@ double y = 1 / 3;  // common mistake
 
 \index{division!integer}
 \index{integer division}
+\index{arithmetic!integer}
 
 You might expect the variable \java{y} to get the value \java{0.333333}, which is a legal floating-point value.
 But instead it gets the value \java{0.0}.
@@ -1403,8 +1410,6 @@ The compiler won't make you do it, but you never know when a simple mistake will
 %The operations we have seen so far -- addition, subtraction, multiplication, and division -- also work on floating-point values, although you might be interested to know that the underlying mechanism is completely different.
 %In fact, most processors have special circuitry just for performing floating-point operations.
 
-\index{rounding error}
-
 Most floating-point numbers are only {\em approximately} correct.
 Some numbers, like reasonably-sized integers, can be represented exactly.
 But repeating fractions, like $1/3$, and irrational numbers, like $\pi$, cannot.
@@ -1415,6 +1420,7 @@ To represent these numbers, computers have to round off to the nearest floating-
 %But computer processors are finite; they cannot represent {\em every} possible floating-point number.
 %Even with double-precision, you will frequently run into problems.
 
+\index{rounding error}
 \index{arithmetic!floating-point}
 
 The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
@@ -1473,6 +1479,7 @@ The following expressions are illegal:
 \end{code}
 
 \index{concatenate}
+\index{addition!string}
 
 The \java{+} operator works with strings, but it might not do what you expect.
 For strings, the \java{+} operator performs {\bf concatenation}, which means joining end-to-end.
@@ -1581,6 +1588,7 @@ Large, complex expressions can be hard to read and debug.
 Three kinds of errors can occur in a program: compile-time errors, run-time errors, and logic errors.
 It is useful to distinguish among them in order to track them down more quickly.
 
+\index{compile-time error}
 \index{error!compile-time}
 \index{syntax}
 
@@ -1950,7 +1958,7 @@ The source code for these classes is included with the JDK.
 \section{The Scanner class}
 \label{scanner}
 
-\index{Scanner class}
+\index{Scanner}
 \index{class!Scanner}
 
 %\index{byte}
@@ -2102,12 +2110,13 @@ We'll demonstrate in the next section.
 \section{Literals and constants}
 
 \index{literal}
-\index{magic number}
 
 A value that appears in a program, like 2.54 (or \java{" in ="}), is called a {\bf literal}.
 In general, there's nothing wrong with literals.
 But when numbers like 2.54 appear in an expression with no explanation, they make code hard to read.
 And if the same value appears many times, and might have to change in the future, it makes code hard to maintain.
+
+\index{magic number}
 
 Values like that are sometimes called {\bf magic numbers} (with the implication that being ``magic'' is not a good thing).
 A good practice is to assign magic numbers to variables with meaningful names, like this:
@@ -2126,8 +2135,8 @@ Java provides a language feature that enforces that rule, the keyword \java{fina
 final double CM_PER_INCH = 2.54;
 \end{code}
 
-\index{constant}
 \index{final}
+\index{constant}
 
 Declaring that a variable is \java{final} means that it cannot be reassigned once it has been initialized.
 If you try, the compiler reports an error.
@@ -2564,6 +2573,9 @@ public class GuessStarter {
 }
 \end{code}
 
+\index{new}
+\index{operator!new}
+
 Like the \java{Scanner} class we saw in this chapter, \java{Random} has to be imported before we can use it.
 And as we saw with \java{Scanner}, we have to use the \java{new} operator to create a \java{Random} (number generator).
 
@@ -2625,7 +2637,6 @@ First we evaluate the argument of the innermost function, then evaluate the func
 \index{invoke}
 
 The Java library includes a \java{Math} class that provides common mathematical operations.
-%These functions are called {\bf methods}.
 \java{Math} is in the \java{java.lang} package, so you don't have to import it.
 You can use, or {\bf invoke}, \java{Math} methods like this:
 
@@ -2981,7 +2992,7 @@ Because variables only exist inside the methods where they are defined, they are
 \label{time}
 
 \index{parameter!multiple}
-\index{method!multiple parameter}
+\index{method!parameters}
 
 Here is an example of a method that takes two parameters:
 
@@ -3206,8 +3217,8 @@ If you include documentation in your source code, you can extract it automatical
 This tool is part of the standard JDK, and widely used.
 In fact, the online documentation of the Java libraries is generated by Javadoc.
 
-\index{comments!documentation}
-\index{documentation comments}
+\index{comment!documentation}
+\index{documentation comment}
 
 Javadoc scans your source files looking for specially-formatted {\bf documentation comments}, also known as ``Javadoc comments''.
 They begin with \java{/**} (two stars) and end with \java{*/} (one star).
@@ -3434,7 +3445,6 @@ This chapter presents the features you need for programs to make decisions: a ne
 
 \index{operator!relational}
 \index{relational operator}
-\index{operator!comparison}
 \index{comparison operator}
 
 {\bf Relational operators} are used to check conditions like whether two values are equal, or whether one is greater than the other.
@@ -3617,8 +3627,8 @@ These chains can be as long as you want, although they can be difficult to read 
 One way to make them easier to read is to use standard indentation, as demonstrated in these examples.
 If you keep all the statements and braces lined up, you are less likely to make syntax errors.
 
+\index{nesting}
 \index{conditional!nested}
-\index{nested structure}
 
 In addition to chaining, you can also make complex decisions by {\bf nesting} one conditional statement inside another.
 We could have written the previous example as:
@@ -3666,6 +3676,8 @@ Since relational operators evaluate to a \java{boolean} value, you can store the
 boolean evenFlag = (n % 2 == 0);    // true if n is even
 boolean positiveFlag = (x > 0);     // true if x is positive
 \end{code}
+
+\index{flag}
 
 The parentheses are unnecessary, but they make the code easier to read.
 A variable defined in this way is called a {\bf flag}, because it signals or ``flags'' the presence or absence of a condition.
@@ -3783,6 +3795,8 @@ public static void countdown(int n) {
 }
 \end{code}
 
+\index{recursive}
+
 The name of the method is \java{countdown}; it takes a single integer as a parameter.
 If the parameter is zero, it displays the word ``Blastoff''.
 Otherwise, it displays the number and then invokes {\em itself}, passing \java{n - 1} as the argument.
@@ -3874,6 +3888,8 @@ Figure~\ref{fig.stack2} is a stack diagram for countdown, called with \java{n ==
 By convention, the stack for \java{main} is at the top and the stack grows down.
 The frame for \java{main} is empty because \java{main} does not have any variables.
 (It has the parameter \java{args}, but since we're not using it, we left it out of the diagram.)
+
+\index{base case}
 
 There are four frames for \java{countdown}, each with a different value for the parameter \java{n}.
 The last frame, with \java{n == 0}, is called the {\bf base case}.
@@ -4661,7 +4677,7 @@ Void methods should not have an \java{@return} tag, since they do not return a v
 \section{More recursion}
 \label{factorial}
 
-\index{recursion}
+\index{Turing complete}
 \index{language!complete}
 
 \index{Turing, Alan}
@@ -4671,6 +4687,8 @@ Now that we have methods that return values, we have a {\bf Turing complete} pro
 That means Java can compute anything computable, for any reasonable definition of ``computable''.
 This idea was developed by Alonzo Church and Alan Turing, so it is known as the Church-Turing thesis.
 %You can read more about it at \url{http://en.wikipedia.org/wiki/Turing_thesis}.
+
+\index{recursion}
 
 To give you an idea of what you can do with the tools we have learned, let's look at some methods for evaluating recursively-defined mathematical functions.
 A recursive definition is similar to a circular definition, in the sense that the definition refers to the thing being defined.
@@ -5139,8 +5157,9 @@ the \java{while} and \java{for} statements.
 \section{The while statement}
 \label{while}
 
+\index{while}
+\index{loop!while}
 \index{statement!while}
-\index{while statement}
 
 Using a \java{while} statement, we can rewrite \java{countdown} like this:
 
@@ -5158,6 +5177,9 @@ You can almost read the \java{while} statement like English:
 ``While \java{n} is greater than zero, print the value of \java{n} and then reduce the value of \java{n} by 1.
 When you get to zero, print Blastoff!''
 
+\index{body}
+\index{loop!body}
+
 The expression in parentheses is called the condition.
 The statements in braces are called the {\bf body}.
 The flow of execution for a \java{while} statement is:
@@ -5173,17 +5195,15 @@ The flow of execution for a \java{while} statement is:
 \end{enumerate}
 
 \index{loop}
-\index{loop!body}
-\index{body}
 
 This type of flow is called a {\bf loop}, because the last step loops back around to the first.
+
+\index{infinite loop}
+\index{loop!infinite}
 
 The body of the loop should change the value of one or more variables so that, eventually, the condition becomes \java{false} and the loop terminates.
 Otherwise the loop will repeat forever, which is called an {\bf infinite loop}.
 An endless source of amusement for computer scientists is the observation that the directions on shampoo, ``Lather, rinse, repeat,'' are an infinite loop.
-
-\index{loop!infinite}
-\index{infinite loop}
 
 In the case of \java{countdown}, we can prove that the loop terminates when \java{n} is positive.
 But in general, it is not so easy to tell whether a loop terminates.
@@ -5380,8 +5400,6 @@ The output of the code so far is:
 \begin{stdout}
    2   4   6   8  10  12
 \end{stdout}
-
-\index{encapsulation}
 
 The next step is to ``encapsulate'' this code in a new method.
 Here's what it looks like:
@@ -5966,6 +5984,9 @@ int[] counts;
 double[] values;
 \end{code}
 
+\index{new}
+\index{operator!new}
+
 To create the array itself, you have to use the \java{new} operator, which we first saw in Section~\ref{scanner}:
 
 \begin{code}
@@ -5984,7 +6005,7 @@ double[] values = new double[size];
 \end{code}
 
 \index{NegativeArraySizeException}
-\index{exception!NegativeArraySizeException}
+\index{exception!NegativeArraySize}
 
 You can use any integer expression for the size of an array, as long as the value is nonnegative.
 If you try to create an array with -4 elements, for example, you will get a \java{NegativeArraySizeException}.
@@ -5995,6 +6016,7 @@ An array with zero elements is allowed, and there are special uses for such arra
 \label{elements}
 
 \index{state diagram}
+\index{diagram!state}
 
 When you create an array of \java{int}s, the elements are initialized to zero.
 Figure~\ref{fig.array} shows a state diagram of the \java{counts} array so far.
@@ -6046,9 +6068,6 @@ Figure~\ref{fig.array2} shows the result of these statements.
 \label{fig.array2}
 \end{center}
 \end{figure}
-
-\index{exception!ArrayOutOfBounds}
-\index{run-time error}
 
 You can use any expression as an index, as long as it has type \java{int}.
 One of the most common ways to index an array is with a loop variable.
@@ -6715,9 +6734,6 @@ In Java and other object-oriented languages, an {\bf object} is a collection of 
 For example, \java{Scanner}, which we saw in Section~\ref{scanner}, is an object that provides methods for parsing input.
 \java{System.out} and \java{System.in} are also objects.
 
-\index{class!String}
-\index{method!string}
-
 Strings are objects, too.
 They contain characters and provide methods for manipulating character data.
 We explore some of those methods in this chapter.
@@ -6744,8 +6760,6 @@ char letter = fruit.charAt(0);
 
 The argument \java{0} means that we want the letter at position 0.
 Like array indexes, string indexes start at 0, so the character assigned to \java{letter} is \java{b}.
-
-\index{value!char}
 
 Characters work like the other primitive types we have seen.
 You can compare them using relational operators:
@@ -6854,6 +6868,9 @@ for (int i = 0; i < fruit.length(); i++) {
 }
 \end{code}
 
+\index{String!length}
+\index{length!string}
+
 Strings provide a method called \java{length} that returns the number of characters in the string.
 Because it is a method, you have to invoke it with the empty argument list, \java{()}.
 %Do not confuse \java{string.length()}, which is a method, with \java{array.length}, which is a constant.
@@ -6873,9 +6890,6 @@ for (char letter : fruit.toCharArray()) {
     System.out.println(letter);
 }
 \end{code}
-
-\index{String!length}
-\index{length!String}
 
 To find the last letter of a string, you might be tempted to try something like:
 
@@ -7081,13 +7095,12 @@ public static String timeString(int hour, int minute) {
 }
 \end{code}
 
+\index{String.format}
+
 \java{String.format} takes the same arguments as \java{System.out.printf}: a format specifier followed by a sequence of values.
 The difference is that \java{System.out.printf} displays the result on the screen; \java{String.format} creates a new string, but does not display anything.
 
 In this example, the format specifier \java{\%02d} means ``two digit integer padded with zeros'', so \java{timeString(19, 5)} returns the string \java{"07:05 PM"}.
-
-\index{String.format}
-\index{printf}
 
 
 \section{Wrapper classes}
@@ -7100,6 +7113,11 @@ For example, you can't call \java{equals} on an \java{int}:
 int i = 5;
 System.out.println(i.equals(5));  // compiler error
 \end{code}
+
+\index{wrapper class}
+\index{Character}
+\index{Integer}
+\index{Double}
 
 But for each primitive type, there is a corresponding class in the Java library, called a {\bf wrapper class}.
 The wrapper class for \java{char} is called \java{Character}; for \java{int} it's called \java{Integer}.
@@ -7117,6 +7135,8 @@ For example, \java{Integer.parseInt} converts a string to (you guessed it) an in
 String str = "12345";
 int num = Integer.parseInt(str);
 \end{code}
+
+\index{parse}
 
 In this context, {\bf parse} means something like ``read and translate''.
 
@@ -7525,7 +7545,7 @@ import java.awt.Point;
 \end{code}
 
 \index{new}
-\index{statement!new}
+\index{operator!new}
 
 Then, to create a new point, you have to use the \java{new} operator:
 
@@ -7547,6 +7567,7 @@ So \java{blank} contains a reference to the new \java{Point} object.
 Figure~\ref{fig.reference} shows the result.
 
 \index{state diagram}
+\index{diagram!state}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -7865,11 +7886,11 @@ In the state diagram, we remove the arrow between them, as in Figure~\ref{fig.re
 \end{center}
 \end{figure}
 
-\index{garbage collection}
-
 If there are no references to an object, there is no way to access its attributes or invoke a method on it.
 From the programmer's view, it ceases to exist.
 However it's still present in the computer's memory, taking up space.
+
+\index{garbage collection}
 
 As your program runs, the system automatically looks for stranded objects and reclaims them; then the space can be reused for new objects.
 This process is called {\bf garbage collection}.
@@ -7900,12 +7921,11 @@ In practice, it's more convenient to look at high-level pictures than to examine
 \end{figure}
 
 \index{class diagram}
+\index{diagram!class}
 
 As shown in Figure~\ref{fig.umlPoint}, a {\bf class diagram} is divided into two sections.
 The top half lists the attributes, and the bottom half lists the methods.
 UML uses a language-independent format; so rather than showing \java{int x}, the diagram uses {\tt x:~int}.
-
-\index{state diagram}
 
 In contrast to state diagrams, which visualize objects (and variables) at run-time, a class diagram visualizes the source code at compile-time.
 
@@ -8213,7 +8233,7 @@ So way back in Section~\ref{hello}, when we defined the class \java{Hello}, we c
 We didn't declare any variables with type \java{Hello}, and we didn't use \java{new} to create a \java{Hello} object.
 It wouldn't have done much if we had -- but we could have!
 
-\index{class definition}
+\index{class!definition}
 
 In this chapter, we will define classes that represent {\em useful} object types.
 We will also clarify the difference between classes and objects.
@@ -8377,7 +8397,7 @@ Like other methods, constructors can be overloaded, which means you can provide 
 Java knows which constructor to invoke by matching the arguments you provide with the parameters of the constructors.
 
 \index{value constructor}
-\index{constructor!value}
+\index{constructor}
 
 It is common to provide a constructor that takes no arguments, like the previous one, and a ``value constructor'', like this one:
 
@@ -8516,13 +8536,13 @@ public void setSecond(int second) {
 }
 \end{code}
 
-These methods are formally called ``mutators'', but more commonly known as {\bf setters}.
-The naming convention is similar; the method that sets \java{something} is usually called \java{setSomething}.
-
 \index{mutator}
 \index{method!mutator}
 \index{setter method}
 \index{method!setter}
+
+These methods are formally called ``mutators'', but more commonly known as {\bf setters}.
+The naming convention is similar; the method that sets \java{something} is usually called \java{setSomething}.
 
 Writing getters and setters can get boring, but many IDEs can generate them for you based on the instance variables.
 
@@ -8623,7 +8643,7 @@ The body of the method is similar to \java{printTime} in the previous section, w
 
 \end{itemize}
 
-\index{string!format}
+\index{String!format}
 
 Now you can call \java{toString} directly:
 
@@ -8868,11 +8888,11 @@ In contrast, methods like \java{add} are called {\bf pure} because:
 \item The return value only depends on the parameters, not on any other state.
 \end{itemize}
 
-Methods like \java{increment}, which breaks the first rule, are sometimes called {\bf modifiers}.
-They are usually void methods, but sometimes they return a reference to the object they modify.
-
 \index{modifier method}
 \index{method!modifier}
+
+Methods like \java{increment}, which breaks the first rule, are sometimes called {\bf modifiers}.
+They are usually void methods, but sometimes they return a reference to the object they modify.
 
 Modifiers can be more efficient because they don't create new objects.
 But they can also be error-prone.
@@ -8959,8 +8979,6 @@ During the next few chapters, you should take a detour to read this appendix and
 
 
 \begin{exercise}
-\index{Rectangle}
-\index{String}
 
 Review the documentation of \java{java.awt.Rectangle}.
 Which methods are pure?
@@ -9188,7 +9206,7 @@ When you create a new class, the first step is to declare the instance variables
 A good next step is to write \java{toString}, which is useful for debugging and incremental development.
 
 \index{String!array of}
-\index{array!of String}
+\index{array!of strings}
 
 To display \java{Card} objects in a way that humans can read easily, we need to map the integer codes onto words.
 A natural way to do that is with an array of \java{String}s.
@@ -9443,7 +9461,7 @@ But if someone writes a method that tries to modify these variables, they'll get
 %Having seen this pattern, and having learned about arrays and objects, you should not be surprised to learn that you can make arrays of objects.
 %And you can define objects with arrays as instance variables; you can make arrays that contain arrays; you can define objects that contain objects, and so on.
 
-\index{array!of object}
+\index{array!of objects}
 \index{object!array of}
 
 Just as you can create an array of \java{String} objects, you can create an array of \java{Card} objects.
@@ -9452,8 +9470,6 @@ The following statement creates an array of 52 cards:
 \begin{code}
 Card[] cards = new Card[52];
 \end{code}
-
-\index{state diagram}
 
 Figure~\ref{fig.cardarray} shows the state diagram for this array.
 
@@ -10000,8 +10016,8 @@ The nice thing about pseudocode is that it often makes clear what methods you ar
 In this case, we need a method that chooses a random integer between \java{low} and \java{high}, and a method that takes two indexes and switches the cards at those positions.
 Methods like these are called {\bf helper methods}, because they help you implement more complex algorithms.
 
-\index{program development}
 \index{top-down development}
+\index{program development}
 
 And this process -- writing pseudocode first and then writing methods to make it work -- is called {\bf top-down development} (see \url{http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design}).
 
@@ -10822,6 +10838,7 @@ public int score() {
 In Section~\ref{shuffle} we introduced top-down development, which is a way of developing programs by identifying high-level goals, like shuffling a deck, and breaking them into smaller problems, like finding the lowest element in an array or swapping two elements.
 
 \index{bottom-up development}
+\index{program development}
 
 In this section we present {\bf bottom-up development}, which goes the other way around: first we identify simple pieces we need, then we assemble them into more complex algorithms.
 
@@ -11360,6 +11377,8 @@ Open a terminal in that location, and run the following command:
 java -jar checkstyle-*-all.jar -c /google_checks.xml *.java
 \end{stdout}
 
+\index{wildcard}
+
 The {\tt *} characters are {\bf wildcards} that match whatever version of Checkstyle you have and whatever java source files are present.
 The output indicates the file and line number of each problem.
 This example refers to a method beginning on line 93, column 5 of Hello.java:
@@ -11850,23 +11869,23 @@ The best debugging strategy depends on what kind of error you have:
 Example: omitting the semicolon at the end of a statement.
 
 \index{compile-time error}
+\index{error!compile-time}
+\index{syntax}
 
 \item {\bf Run-time errors} are produced if something goes wrong while the program is running.
 Example: an infinite recursion eventually causes a \java{StackOverflowError}.
 
-\index{exception}
 \index{run-time error}
+\index{error!run-time}
+\index{exception}
 
 \item {\bf Logic errors} cause the program to do the wrong thing.
 Example: an expression may not be evaluated in the order you expect.
 
 \index{logic error}
+\index{error!logic}
 
 \end{itemize}
-
-\index{error!compile-time}
-\index{error!run-time}
-\index{error!logic}
 
 The following sections are organized by error type; some techniques are useful for more than one type.
 
@@ -11963,7 +11982,7 @@ If the compiler doesn't find the new error, there is probably something wrong wi
 If you have examined the code thoroughly, and you are sure the compiler is compiling the right source file, it is time for desperate measures: {\bf debugging by bisection}.
 
 \index{bisection!debugging by}
-\index{debugging by bisection}
+\index{debugging!by bisection}
 
 \begin{itemize}
 
