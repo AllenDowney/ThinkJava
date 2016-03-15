@@ -2,9 +2,6 @@
 LaTeX source and code examples for Think Java, 6th edition.
 Copyright (C) 2016 Allen Downey and Chris Mayfield.
 
-**NOTE: This version of the book is a work in progress and won't be completed
-until March 2016.**
-
 Permission is granted to copy, distribute, transmit, and adapt this work under
 the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License:
 http://creativecommons.org/licenses/by-nc-sa/3.0/
