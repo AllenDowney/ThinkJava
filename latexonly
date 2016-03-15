@@ -98,9 +98,10 @@
 }
 
 % code listing environments
-\lstnewenvironment{code}
-{\minipage{\linewidth}}
-{\endminipage}
+%\lstnewenvironment{code}
+%{\minipage{\linewidth}}
+%{\endminipage}
+
 \lstnewenvironment{stdout}
 {\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
 {\endminipage}
