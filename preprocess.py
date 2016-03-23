@@ -7,7 +7,7 @@ def main(name, filename, *argv):
     ft = Filist(filename)
     ft.move_indexterms()
     ft.sub_lines(r'section\*', r'section')
-    ft.sub_lines(r'\\begin{code}', r'\\begin{verbatim}java')
+    ft.sub_lines(r'\\begin{code}', r'\\begin{verbatim}plasTeXjava')
     ft.sub_lines(r'\\end{code}', r'\\end{verbatim}')
     ft.sub_lines(r'\\begin{stdout}', r'\\begin{verbatim}')
     ft.sub_lines(r'\\end{stdout}', r'\\end{verbatim}')

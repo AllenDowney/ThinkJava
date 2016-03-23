@@ -5,7 +5,7 @@ from Filist import Filist
 def main(name, filename, *argv):
     # print the contents of the given file
     ft = Filist(filename)
-    ft.sub_lines(r'<programlisting>java', r'<programlisting language="java">')
+    ft.sub_lines(r'<programlisting>plasTeXjava', r'<programlisting language="java">')
 
     # label the last three chapters as appendices
     i, match = ft.search_lines('<chapter id="development">')
