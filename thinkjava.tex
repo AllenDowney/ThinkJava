@@ -5,7 +5,7 @@
 
 \newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
 \newcommand{\theauthors}{Allen Downey and Chris Mayfield}
-\newcommand{\theversion}{Version 6.0.2}
+\newcommand{\theversion}{Version 6.0.3}
 
 %%%% Both LATEX and PLASTEX
 
@@ -58,7 +58,7 @@
 % code listing environments:
 % we don't need these for plastex because they get replaced
 % by preprocess.py
-%\newenvironment{codenv}{\begin{verbatim}}{\end{verbatim}}
+%\newenvironment{code}{\begin{verbatim}}{\end{verbatim}}
 %\newenvironment{stdout}{\begin{verbatim}}{\end{verbatim}}
 
 % inline syntax formatting
@@ -1196,8 +1196,6 @@ As the program runs, the state changes, so you should think of a state diagram a
 
 You can display the value of a variable using \java{print} or \java{println}.
 The following statements declare a variable named \java{firstLine}, assign it the value \java{"Hello, again!"}, and display that value.
-
-%TODO: fix more broken quotation marks
 
 \begin{code}
 String firstLine = "Hello, again!";
@@ -2552,16 +2550,21 @@ What if you use two format specifiers, but then only provide one value?
 
 
 \begin{exercise}
-Write a program that converts a temperature from Celsius to Fahrenheit. It should (1) prompt the user for input, (2) read a \java{double} value from the keyboard, (3) calculate the result, and (4) format the output to one decimal place. For example, it should display {\tt "24.0 C = 75.2 F"}.
+Write a program that converts a temperature from Celsius to Fahrenheit.
+It should (1) prompt the user for input, (2) read a \java{double} value from the keyboard, (3) calculate the result, and (4) format the output to one decimal place.
+For example, it should display {\tt "24.0 C = 75.2 F"}.
 
-Here is the formula. Be careful not to use integer division!
+Here is the formula.
+Be careful not to use integer division!
 %
 \[ F = C \times \frac{9}{5} + 32 \]
 \end{exercise}
 
 
 \begin{exercise}
-Write a program that converts a total number of seconds to hours, minutes, and seconds. It should (1) prompt the user for input, (2) read an integer from the keyboard, (3) calculate the result, and (4) use \java{printf} to display the output. For example, {\tt "5000 seconds = 1 hours, 23 minutes, and 20 seconds"}.
+Write a program that converts a total number of seconds to hours, minutes, and seconds.
+It should (1) prompt the user for input, (2) read an integer from the keyboard, (3) calculate the result, and (4) use \java{printf} to display the output.
+For example, {\tt "5000 seconds = 1 hours, 23 minutes, and 20 seconds"}.
 
 {\em Hint:} Use the modulus operator.
 \end{exercise}
@@ -8983,8 +8986,6 @@ A method that changes the state (instance variables) of an object.
 
 \section{Exercises}
 
-%TODO: get the pagerefs to work in Atlas
-
 The code for this chapter is in the {\tt ch11} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
@@ -12181,7 +12182,7 @@ Find the nearest assignment statement and see if it is doing the right thing.
 If either one is a parameter, go to the place where the method is invoked and see where the values are coming from.
 
 \term{StackOverflowError}
-See ``Infinite recursion''%. on page~\pageref{infrec}.
+See ``Infinite recursion''.% on page~\pageref{infrec}.
 
 \term{FileNotFoundException}
 This means Java didn't find the file it was looking for.
