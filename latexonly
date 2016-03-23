@@ -39,6 +39,8 @@
 % table of contents vertical spacing
 \usepackage{tocloft}
 \setlength\cftparskip{8pt plus 4pt minus 4pt}
+
+% balanced index with TOC entry
 \usepackage[totoc]{idxlayout}
 
 % The following line adds a little extra space to the column
@@ -98,16 +100,15 @@
 }
 
 % code listing environments
-%\lstnewenvironment{code}
-%{\minipage{\linewidth}}
-%{\endminipage}
-
+\lstnewenvironment{codenv}
+{\minipage{\linewidth}}
+{\endminipage}
 \lstnewenvironment{stdout}
 {\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
 {\endminipage}
 
 % inline syntax formatting
-\newcommand{\java}[1]{\lstinline{#1}} %\end{
+\newcommand{\java}[1]{\lstinline{#1}}%{
 
 % pdf hyperlinks, table of contents, and document properties
 \usepackage{hyperref}
