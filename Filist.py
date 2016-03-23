@@ -66,11 +66,13 @@ class Filist(list):
             if match:
                 return i, match
 
-    def sub_lines(self, pattern, replace):
+    def sub_lines(self, pattern, replace, start=0):
         """
         """
         pat = re.compile(pattern)
         for i, line in enumerate(self):
+            if i < start:
+                continue
             line, n = pat.subn(replace, self[i])
             if n:
                 self[i] = line
