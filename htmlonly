@@ -1,5 +1,4 @@
-% put commands here that should be used for the HTML
-% version of the book but not Postscript or PDF
+\usepackage{hevea}
 
 \newcommand{\adjustpage}[1]{}
 
@@ -55,7 +54,7 @@
 }
 
 % code listing environments
-\lstnewenvironment{code}
+\lstnewenvironment{codenv}
 {}
 {}
 \lstnewenvironment{stdout}
@@ -63,7 +62,7 @@
 {}
 
 % inline syntax formatting
-\newcommand{\java}{\lstinline}
+\newcommand{\java}{\lstinline}%}
 
 % CSS for code listings
 \newstyle{.lstframe}{margin: 1em; width: calc(100\% - 1em);}

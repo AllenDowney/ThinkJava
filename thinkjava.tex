@@ -9,10 +9,8 @@
 
 %%%% Both LATEX and PLASTEX
 
-%\IfFileExists{hevea.sty}{\usepackage{hevea}}{}
-\usepackage{hevea}
+\usepackage{graphicx}
 
-% balanced index with TOC entry
 \usepackage{makeidx}
 \makeindex
 
@@ -37,18 +35,15 @@
 \theoremstyle{exercise}
 \newtheorem{exercise}{Exercise}[chapter]
 
-\usepackage{graphicx}
-%\graphicspath{{figs/}}
-
-\usepackage{url}
-
 \newif\ifplastex
 \plastexfalse
 
-\ifplastex
 %%%% PLASTEX ONLY
+\ifplastex
 
 \usepackage{localdef}
+
+\usepackage{url}
 
 \newcount\anchorcnt
 \newcommand*{\Anchor}[1]{%
@@ -60,14 +55,19 @@
     \@esphack%
 }
 
+% code listing environments
+\newenvironment{codenv}
+{\begin{verbatim}}
+{\end{verbatim}}
+\newenvironment{stdout}  %TODO use other for Atlas?
+{\begin{verbatim}}
+{\end{verbatim}}
+
+% inline syntax formatting
 \newcommand{\java}{\verb}%}
 
-%\renewenvironment{code}
-%{\begin{verbatim}blarf}
-%{\end{verbatim}}
-
-\else
 %%%% LATEX ONLY
+\else
 
 \input{latexonly}
 
@@ -75,17 +75,17 @@
 \fi
 
 %%%% END OF PREAMBLE
-
 \begin{document}
 
 \frontmatter
 
-\ifplastex
 %%%% PLASTEX ONLY
-    \maketitle
+\ifplastex
 
-\else
+\maketitle
+
 %%%% LATEX ONLY
+\else
 
 %--title page--------------------------------------------------
 \pagebreak
@@ -127,7 +127,6 @@ Compiling the \LaTeX\ source has the effect of generating a device-independent r
 The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
 %-----------------------------------------------------------------
 
-
 % table of contents
 \cleardoublepage
 \setcounter{tocdepth}{1}
@@ -153,6 +152,7 @@ Each chapter is 12--14 pages and covers the material for one week of a college c
 It is not meant to be a comprehensive presentation of Java, but rather, an initial exposure to programming constructs and techniques.
 We begin with small problems and basic algorithms and work up to object-oriented design.
 In the vocabulary of computer science pedagogy, this book uses the ``objects late'' approach.
+
 
 \section*{The philosophy behind the book}
 
@@ -501,7 +501,7 @@ In Java, it looks like this:
 % more precise, but also to reduce the number of times ``print'' appears,
 % which is a lot!
 
-\begin{code}
+\begin{codenv}
 public class Hello {
 
     public static void main(String[] args) {
@@ -509,7 +509,7 @@ public class Hello {
         System.out.println("Hello, World!");
     }
 }
-\end{code}
+\end{codenv}
 
 When this program runs it displays:
 
@@ -537,9 +537,9 @@ Java programs are made up of {\em class} and {\em method} definitions, and metho
 A {\bf statement} is a line of code that performs a basic operation.
 In the hello world program, this line is a {\bf print statement} that displays a message on the screen:
 
-\begin{code}
+\begin{codenv}
 System.out.println("Hello, World!");
-\end{code}
+\end{codenv}
 
 \index{println}
 \index{semicolon}
@@ -559,9 +559,9 @@ In this example, \java{System} has to begin with an uppercase letter; \java{syst
 A {\bf method} is a named sequence of statements.
 This program defines one method named \java{main}:
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args)
-\end{code}
+\end{codenv}
 
 \index{main}
 
@@ -591,7 +591,7 @@ Comments have no effect on the execution of the program, but they make it easier
 You can put as many statements as you like in \java{main}.
 For example, to display more than one line of output:
 
-\begin{code}
+\begin{codenv}
 public class Hello {
 
     public static void main(String[] args) {
@@ -600,7 +600,7 @@ public class Hello {
         System.out.println("How are you?");   // another line
     }
 }
-\end{code}
+\end{codenv}
 
 As this example shows, you can put comments at the end of a line as well as on lines all by themselves.
 
@@ -619,7 +619,7 @@ Characters can be letters, numbers, punctuation marks, symbols, spaces, tabs, et
 \java{System.out.println} appends a special character, called a {\bf newline}, that moves to the beginning of the next line.
 If you don't want a newline at the end, you can use \java{print} instead of \java{println}:
 
-\begin{code}
+\begin{codenv}
 public class Goodbye {
 
     public static void main(String[] args) {
@@ -627,7 +627,7 @@ public class Goodbye {
         System.out.println("cruel world");
     }
 }
-\end{code}
+\end{codenv}
 
 \label{goodbye}
 
@@ -640,14 +640,14 @@ Notice that there is a space at the end of the first string, which appears in th
 It is possible to display multiple lines of output in just one line of code.
 You just have to tell Java where to put the line breaks.
 
-\begin{code}
+\begin{codenv}
 public class Hello {
 
     public static void main(String[] args) {
         System.out.print("Hello!\nHow are you doing?\n");
     }
 }
-\end{code}
+\end{codenv}
 
 The output is two lines, each ending with a newline character:
 
@@ -685,9 +685,9 @@ If you add a space there, there will be a space at the beginning of the second l
 Another common use of escape sequences is to have quotation marks inside of strings.
 Since double quotes indicate the beginning and end of strings, you need to escape them with a backslash.
 
-\begin{code}
+\begin{codenv}
 System.out.println("She said \"Hello!\" to me.");
-\end{code}
+\end{codenv}
 
 The result is:
 
@@ -702,7 +702,7 @@ She said "Hello!" to me.
 In Java programs, some spaces are required.
 For example, you need at least one space between words, so this program is not legal:
 
-\begin{code}
+\begin{codenv}
 publicclassGoodbye{
 
     publicstaticvoidmain(String[] args) {
@@ -710,34 +710,35 @@ publicclassGoodbye{
         System.out.println("cruel world");
     }
 }
-\end{code}
+\end{codenv}
 
 But most other spaces are optional.
 For example, this program is legal:
 
-\begin{code}
+\begin{codenv}
 public class Goodbye {
 public static void main(String[] args) {
 System.out.print("Goodbye, ");
 System.out.println("cruel world");
 }
 }
-\end{code}
+\end{codenv}
 
 The newlines are optional, too.
 So we could just write:
 
-\begin{code}
+\begin{codenv}
 public class Goodbye { public static void main(String[] args)
 { System.out.print("Goodbye, "); System.out.println
 ("cruel world");}}
-\end{code}
+\end{codenv}
 
 It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
 
 Many editors will automatically format source code with consistent indenting and line breaks.
 For example, in DrJava (see Appendix~\ref{development}) you can indent the code by selecting all text ({\sf Ctrl+A}) and pressing the {\sf Tab} key.
+
 
 %\section{Style guidelines}
 
@@ -1024,9 +1025,9 @@ Values may be numbers, text, images, sounds, and other types of data.
 To store a value, you first have to declare a variable.
 %Since the values we want to store are text, we declare that the new variable is a string:
 
-\begin{code}
+\begin{codenv}
 String message;
-\end{code}
+\end{codenv}
 
 \index{declaration}
 \index{statement!declaration}
@@ -1045,19 +1046,19 @@ There is no such type as \java{Int} or \java{string}.
 
 To declare an integer variable, the syntax is:
 
-\begin{code}
+\begin{codenv}
 int x;
-\end{code}
+\end{codenv}
 
 Note that \java{x} is an arbitrary name for the variable.
 In general, you should use names that indicate what the variables mean.
 For example, if you saw these declarations, you could probably guess what values would be stored:
 
-\begin{code}
+\begin{codenv}
 String firstName;
 String lastName;
 int hour, minute;
-\end{code}
+\end{codenv}
 
 \index{case-sensitive}
 
@@ -1090,11 +1091,11 @@ Most programming editors provide ``syntax highlighting'', which makes different 
 Now that we have declared variables, we want to use them to store values.
 We do that with an {\bf assignment} statement.
 
-\begin{code}
+\begin{codenv}
 message = "Hello!";  // give message the value "Hello!"
 hour = 10;           // assign the value 10 to hour
 minute = 59;         // set minute to 59
-\end{code}
+\end{codenv}
 
 This example shows three assignments, and the comments illustrate different ways people sometimes talk about assignment statements.
 The vocabulary can be confusing here, but the idea is straightforward:
@@ -1116,10 +1117,10 @@ A common source of confusion is that some strings {\em look} like integers, but 
 For example, \java{message} can contain the string \java{"123"}, which is made up of the characters \java{'1'}, \java{'2'}, and \java{'3'}.
 But that is not the same thing as the integer \java{123}.
 
-\begin{code}
+\begin{codenv}
 message = "123";    // legal
 message = 123;      // not legal
-\end{code}
+\end{codenv}
 
 \index{initialize}
 
@@ -1127,19 +1128,19 @@ Variables must be {\bf initialized} (assigned for the first time) before they ca
 You can declare a variable and then assign a value later, as in the previous example.
 You can also declare and initialize on the same line:
 
-\begin{code}
+\begin{codenv}
 String message = "Hello!";
 int hour = 10;
 int minute = 59;
-\end{code}
+\end{codenv}
 
 %You can make more than one assignment to the same variable.
 %For example:
 %
-%\begin{code}
+%\begin{codenv}
 %int i = 1;
 %i = 2;
-%\end{code}
+%\end{codenv}
 %
 %\index{update}
 %
@@ -1163,11 +1164,11 @@ Also, in mathematics, a statement of equality is true for all time.
 If $a = b$ now, $a$ is always equal to $b$.
 In Java, an assignment statement can make two variables equal, but they don't have to stay that way.
 
-\begin{code}
+\begin{codenv}
 int a = 5;
 int b = a;     // a and b are now equal
 a = 3;         // a and b are no longer equal
-\end{code}
+\end{codenv}
 
 The third line changes the value of \java{a}, but it does not change the value of \java{b}, so they are no longer equal.
 
@@ -1200,10 +1201,10 @@ The following statements declare a variable named \java{firstLine}, assign it th
 
 %TODO: fix more broken quotation marks
 
-\begin{code}
+\begin{codenv}
 String firstLine = "Hello, again!";
 System.out.println(firstLine);
-\end{code}
+\end{codenv}
 
 %Assuming this code fragment is inside a method that is inside a class, the output is:
 %
@@ -1215,11 +1216,11 @@ When we talk about displaying a variable, we generally mean the {\em value} of t
 To display the {\em name} of a variable, you have to put it in quotes.
 %For example: \java{System.out.println("firstLine");}
 
-\begin{code}
+\begin{codenv}
 String firstLine = "Hello, again!";
 System.out.print("The value of firstLine is ");
 System.out.println(firstLine);
-\end{code}
+\end{codenv}
 
 For this example, the output is:
 
@@ -1230,7 +1231,7 @@ The value of firstLine is Hello, again!
 Conveniently, the syntax for displaying a variable is the same regardless of its type.
 For example:
 
-\begin{code}
+\begin{codenv}
 int hour = 11;
 int minute = 59;
 System.out.print("The current time is ");
@@ -1238,7 +1239,7 @@ System.out.print(hour);
 System.out.print(":");
 System.out.print(minute);
 System.out.println(".");
-\end{code}
+\end{codenv}
 
 The output of this program is:
 
@@ -1268,12 +1269,12 @@ For example, the addition operator is \java{+}, subtraction is \java{-}, multipl
 
 The following program converts a time of day to minutes:
 
-\begin{code}
+\begin{codenv}
 int hour = 11;
 int minute = 59;
 System.out.print("Number of minutes since midnight: ");
 System.out.println(hour * 60 + minute);
-\end{code}
+\end{codenv}
 
 \index{expression}
 \index{operand}
@@ -1300,10 +1301,10 @@ Then the addition yields \java{719}.
 Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
 For example, the following fragment tries to compute the fraction of an hour that has elapsed.%, but it has a logic error.
 
-\begin{code}
+\begin{codenv}
 System.out.print("Fraction of the hour that has passed: ");
 System.out.println(minute / 60);
-\end{code}
+\end{codenv}
 
 The output is:
 
@@ -1322,10 +1323,10 @@ By design, integer division always rounds toward zero, even in cases like this o
 
 As an alternative, we can calculate a percentage rather than a fraction:
 
-\begin{code}
+\begin{codenv}
 System.out.print("Percent of the hour that has passed: ");
 System.out.println(minute * 100 / 60);
-\end{code}
+\end{codenv}
 
 The new output is:
 
@@ -1348,19 +1349,19 @@ A more general solution is to use {\bf floating-point} numbers, which can repres
 In Java, the default floating-point type is called \java{double}, which is short for double-precision.
 You can create \java{double} variables and assign values to them using the same syntax we used for the other types:
 
-\begin{code}
+\begin{codenv}
 double pi;
 pi = 3.14159;
-\end{code}
+\end{codenv}
 
 Java performs ``floating-point division'' when one or more operands are \java{double} values.
 So we can solve the problem we saw in the previous section:
 
-\begin{code}
+\begin{codenv}
 double minute = 59.0;
 System.out.print("Fraction of the hour that has passed: ");
 System.out.println(minute / 60.0);
-\end{code}
+\end{codenv}
 
 The output is:
 
@@ -1374,23 +1375,23 @@ They belong to different data types, and strictly speaking, you are not allowed 
 
 The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
 
-\begin{code}
+\begin{codenv}
 int x = 1.1;  // compiler error
-\end{code}
+\end{codenv}
 
 It is easy to forget this rule because in many cases Java {\em automatically} converts from one type to another:
 
-\begin{code}
+\begin{codenv}
 double y = 1;  // legal, but bad style
-\end{code}
+\end{codenv}
 
 The preceding example should be illegal, but Java allows it by converting the \java{int} value \java{1} to the \java{double} value \java{1.0} automatically.
 This leniency is convenient, but it often causes problems for beginners.
 For example:
 
-\begin{code}
+\begin{codenv}
 double y = 1 / 3;  // common mistake
-\end{code}
+\end{codenv}
 
 \index{division!integer}
 \index{integer division}
@@ -1404,9 +1405,9 @@ Converted to \java{double}, the value assigned to \java{y} is \java{0.0}.
 One way to solve this problem (once you figure out the bug) is to make the right-hand side a floating-point expression.
 The following sets \java{y} to \java{0.333333}, as expected:
 
-\begin{code}
+\begin{codenv}
 double y = 1.0 / 3.0;  // correct
-\end{code}
+\end{codenv}
 
 As a matter of style, you should always assign floating-point values to floating-point variables.
 The compiler won't make you do it, but you never know when a simple mistake will come back and haunt you.
@@ -1433,11 +1434,11 @@ To represent these numbers, computers have to round off to the nearest floating-
 The difference between the number we want and the floating-point number we get is called {\bf rounding error}.
 For example, the following two statements should be equivalent:
 
-\begin{code}
+\begin{codenv}
 System.out.println(0.1 * 10);
 System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
                  + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);
-\end{code}
+\end{codenv}
 
 But on many machines, the output is:
 
@@ -1454,17 +1455,17 @@ For many applications, like computer graphics, encryption, statistical analysis,
 But if you need {\em absolute} precision, use integers instead.
 For example, consider a bank account with a balance of \$123.45:
 
-\begin{code}
+\begin{codenv}
 double balance = 123.45;  // potential rounding error
-\end{code}
+\end{codenv}
 
 In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
 The result would be angry customers and potential law suits.
 You can avoid the problem by representing the balance as an integer:
 
-\begin{code}
+\begin{codenv}
 int balance = 12345;      // total number of cents
-\end{code}
+\end{codenv}
 
 \index{type!long}
 
@@ -1481,9 +1482,9 @@ This solution works as long as the number of cents doesn't exceed the largest in
 In general, you cannot perform mathematical operations on strings, even if the strings look like numbers.
 The following expressions are illegal:
 
-\begin{code}
+\begin{codenv}
 "Hello" - 1     "World" / 123     "Hello" * "World"
-\end{code}
+\end{codenv}
 
 \index{concatenate}
 \index{addition!string}
@@ -1496,13 +1497,13 @@ Or if you have a variable called \java{name} that has type \java{String}, the ex
 
 Since addition is defined for both numbers and strings, Java performs automatic conversions you may not expect:
 
-\begin{code}
+\begin{codenv}
 System.out.println(1 + 2 + "Hello");
 // the output is 3Hello
 
 System.out.println("Hello" + 1 + 2);
 // the output is Hello12
-\end{code}
+\end{codenv}
 
 Java executes these operations from left to right.
 In the first line, \java{1 + 2} is \java{3}, and \java{3 + "Hello"} is \java{"3Hello"}.
@@ -1547,31 +1548,31 @@ One of the most useful features of programming languages is their ability to tak
 For example, we know how to multiply numbers and we know how to display values.
 We can combine these operations into a single statement:
 
-\begin{code}
+\begin{codenv}
 System.out.println(17 * 3);
-\end{code}
+\end{codenv}
 
 Any arithmetic expression can be used inside a print statement.
 We've already seen one example:
 
-\begin{code}
+\begin{codenv}
 System.out.println(hour * 60 + minute);
-\end{code}
+\end{codenv}
 
 You can also put arbitrary expressions on the right side of an assignment:
 
-\begin{code}
+\begin{codenv}
 int percentage;
 percentage = (minute * 100) / 60;
-\end{code}
+\end{codenv}
 
 The left side of an assignment must be a variable name, not an expression.
 That's because the left side indicates where the result will be stored, and expressions do not represent storage locations.
 
-\begin{code}
+\begin{codenv}
 hour = minute + 1;  // correct
 minute + 1 = hour;  // compiler error
-\end{code}
+\end{codenv}
 
 \index{readability}
 
@@ -1607,7 +1608,7 @@ In the latter case, the program cannot be compiled, and the compiler displays an
 Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you exactly what the error is.
 As an example, let's get back to the hello world program from Section~\ref{hello}.
 
-\begin{code}
+\begin{codenv}
 public class Hello {
 
     public static void main(String[] args) {
@@ -1615,7 +1616,7 @@ public class Hello {
         System.out.println("Hello, World!");
     }
 }
-\end{code}
+\end{codenv}
 
 \index{semicolon}
 
@@ -1699,7 +1700,7 @@ If your program has a logic error, it will compile and run without generating er
 Instead, it will do exactly what you told it to do.
 For example, here is a version of the hello world program with a logic error:
 
-\begin{code}
+\begin{codenv}
 public class Hello {
 
     public static void main(String[] args) {
@@ -1707,7 +1708,7 @@ public class Hello {
         System.out.println("World!");
     }
 }
-\end{code}
+\end{codenv}
 
 This program compiles and runs just fine, but the output is:
 
@@ -1925,9 +1926,9 @@ It also provides \java{System.out}, which is a special value that provides metho
 
 In fact, we can use \java{System.out.println} to display the value of \java{System.out}:
 
-\begin{code}
+\begin{codenv}
 System.out.println(System.out);
-\end{code}
+\end{codenv}
 
 The result is:
 
@@ -1988,9 +1989,9 @@ For example, \java{Scanner} is a class that provides methods for inputting words
 \java{Scanner} is provided by \java{java.util}, which is a package that contains classes so useful they are called ``utility classes''.
 Before you can use \java{Scanner}, you have to import it like this:
 
-\begin{code}
+\begin{codenv}
 import java.util.Scanner;
-\end{code}
+\end{codenv}
 
 \index{import}
 \index{statement!import}
@@ -2004,9 +2005,9 @@ By convention, they are usually at the beginning of the file.
 
 Next you have to create a \java{Scanner}:
 
-\begin{code}
+\begin{codenv}
 Scanner in = new Scanner(System.in);
-\end{code}
+\end{codenv}
 
 This line declares a \java{Scanner} variable named \java{in} and creates a new \java{Scanner} that takes input from \java{System.in}.
 %We'll explain the \java{new} operator in more detail in Section~\ref{point}.
@@ -2014,7 +2015,7 @@ This line declares a \java{Scanner} variable named \java{in} and creates a new \
 \java{Scanner} provides a method called \java{nextLine} that reads a line of input from the keyboard and returns a \java{String}.
 The following example reads two lines and repeats them back to the user.
 
-\begin{code}
+\begin{codenv}
 import java.util.Scanner;
 
 public class Echo {
@@ -2032,7 +2033,7 @@ public class Echo {
         System.out.println("You also said: " + line);
     }
 }
-\end{code}
+\end{codenv}
 
 If you omit the import statement and later refer to \java{Scanner}, you will get a compiler error like ``cannot find symbol''.
 That means the compiler doesn't know what you mean by \java{Scanner}.
@@ -2087,11 +2088,11 @@ We can write a program to help.
 We'll use a \java{Scanner} to input a measurement in inches, convert to centimeters, and then display the results.
 The following lines declare the variables and create the \java{Scanner}:
 
-\begin{code}
+\begin{codenv}
 int inch;
 double cm;
 Scanner in = new Scanner(System.in);
-\end{code}
+\end{codenv}
 
 \index{nextInt!Scanner}
 
@@ -2099,18 +2100,18 @@ The next step is to prompt the user for the input.
 We'll use \java{print} instead of \java{println} so they can enter the input on the same line as the prompt.
 And we'll use the \java{Scanner} method \java{nextInt}, which reads input from the keyboard and converts it to an integer:
 
-\begin{code}
+\begin{codenv}
 System.out.print("How many inches? ");
 inch = in.nextInt();
-\end{code}
+\end{codenv}
 
 Next we multiply the number of inches by 2.54, since that's how many centimeters there are per inch, and display the results:
 
-\begin{code}
+\begin{codenv}
 cm = inch * 2.54;
 System.out.print(inch + " in = ");
 System.out.println(cm + " cm");
-\end{code}
+\end{codenv}
 
 This code works correctly, but it has a minor problem.
 If another programmer reads this code, they might wonder where 2.54 comes from.
@@ -2132,19 +2133,19 @@ And if the same value appears many times, and might have to change in the future
 Values like that are sometimes called {\bf magic numbers} (with the implication that being ``magic'' is not a good thing).
 A good practice is to assign magic numbers to variables with meaningful names, like this:
 
-\begin{code}
+\begin{codenv}
 double cmPerInch = 2.54;
 cm = inch * cmPerInch;
-\end{code}
+\end{codenv}
 
 This version is easier to read and less error-prone, but it still has a problem.
 Variables can vary, but the number of centimeters in an inch does not.
 Once we assign a value to \java{cmPerInch}, it should never change.
 Java provides a language feature that enforces that rule, the keyword \java{final}.
 
-\begin{code}
+\begin{codenv}
 final double CM_PER_INCH = 2.54;
-\end{code}
+\end{codenv}
 
 \index{final}
 \index{constant}
@@ -2160,9 +2161,9 @@ By convention, names for constants are all uppercase, with the underscore charac
 
 When you output a \java{double} using \java{print} or \java{println}, it displays up to 16 decimal places:
 
-\begin{code}
+\begin{codenv}
 System.out.print(4.0 / 3.0);
-\end{code}
+\end{codenv}
 
 The result is:
 
@@ -2177,9 +2178,9 @@ That might be more than you want.
 The ``f'' in \java{printf} stands for ``formatted''.
 Here's an example:
 
-\begin{code}
+\begin{codenv}
 System.out.printf("Four thirds = %.3f", 4.0 / 3.0);
-\end{code}
+\end{codenv}
 
 \index{format string}
 \index{format specifier}
@@ -2195,11 +2196,11 @@ Four thirds = 1.333
 
 The format string can contain any number of format specifiers; here's an example with two:
 
-\begin{code}
+\begin{codenv}
 int inch = 100;
 double cm = inch * CM_PER_INCH;
 System.out.printf("%d in = %f cm\n", inch, cm);
-\end{code}
+\end{codenv}
 
 The result is:
 
@@ -2246,9 +2247,9 @@ The easiest way to find documentation for Java classes is to do a web search for
 Now suppose we have a measurement in centimeters, and we want to round it off to the nearest inch.
 It is tempting to write:
 
-\begin{code}
+\begin{codenv}
 inch = cm / CM_PER_INCH;  // syntax error
-\end{code}
+\end{codenv}
 
 But the result is an error -- you get something like, ``Bad types in assignment: from double to int.''
 The problem is that the value on the right is floating-point, and the variable on the left is an integer.
@@ -2263,10 +2264,10 @@ The problem is that the value on the right is floating-point, and the variable o
 The simplest way to convert a floating-point value to an integer is to use a {\bf type cast}, so called because it molds or ``casts'' a value from one type to another.
 The syntax for type casting is to put the name of the type in parentheses and use it as an operator.
 
-\begin{code}
+\begin{codenv}
 double pi = 3.14159;
 int x = (int) pi;
-\end{code}
+\end{codenv}
 
 The \java{(int)} operator has the effect of converting what follows into an integer.
 In this example, \java{x} gets the value \java{3}.
@@ -2277,19 +2278,19 @@ Type casting takes precedence over arithmetic operations.
 In this example, the value of \java{pi} gets converted to an integer before the multiplication.
 So the result is 60.0, not 62.0.
 
-\begin{code}
+\begin{codenv}
 double pi = 3.14159;
 double x = (int) pi * 20.0;
-\end{code}
+\end{codenv}
 
 %Operator precedence and integer truncation make type casting somewhat error-prone.
 
 Keeping that in mind, here's how we can convert a measurement in centimeters to inches.
 
-\begin{code}
+\begin{codenv}
 inch = (int) (cm / CM_PER_INCH);
 System.out.printf("%f cm = %d in\n", cent, inch);
-\end{code}
+\end{codenv}
 
 The parentheses after the cast operator require the division to happen before the type cast.
 And the result is rounded toward zero; we will see in the next chapter how to round floating-point numbers to the closest integer.
@@ -2310,10 +2311,10 @@ Java also provides the {\bf modulus} operator (\java{\%}), which divides two num
 
 Using division and modulus, we can convert to feet and inches like this:
 
-\begin{code}
+\begin{codenv}
 quotient = 76 / 12;   // division
 remainder = 76 % 12;  // modulus
-\end{code}
+\end{codenv}
 
 The first line yields 6.
 The second line, which is pronounced ``76 mod 12'', yields 4.
@@ -2342,7 +2343,7 @@ Now we will put everything together in a complete program:
 %Since we've looked at each of these topics in isolation, it's important to see how they fit together in a complete program.
 %If you've been working through the examples on your computer as you've been reading (like we recommended in Section~\ref{sec:examples}), then good job!
 
-\begin{code}
+\begin{codenv}
 import java.util.Scanner;
 
 /**
@@ -2369,7 +2370,7 @@ public class Convert {
                           cm, feet, remainder);
     }
 }
-\end{code}
+\end{codenv}
 
 Although not required, all variables and constants are declared at the top of \java{main}.
 This practice makes it easier to find their types later on, and it helps the reader know what data is involved in the algorithm.
@@ -2389,13 +2390,13 @@ The reader should never have to scroll horizontally.
 Now that you've had some experience with \java{Scanner}, there is an unexpected behavior we want to warn you about.
 The following code fragment asks users for their name and age.
 
-\begin{code}
+\begin{codenv}
 System.out.print("What is your name? ");
 name = in.nextLine();
 System.out.print("What is your age? ");
 age = in.nextInt();
 System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
+\end{codenv}
 
 The output might look something like this:
 
@@ -2406,13 +2407,13 @@ Hello Grace Hopper, age 45
 When you read a \java{String} followed by an \java{int}, everything works just fine.
 But when you read an \java{int} followed by a \java{String}, something strange happens.
 
-\begin{code}
+\begin{codenv}
 System.out.print("What is your age? ");
 age = in.nextInt();
 System.out.print("What is your name? ");
 name = in.nextLine();
 System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
+\end{codenv}
 
 Try running this example code.
 It doesn't let you input your name, and it immediately displays the output:
@@ -2450,14 +2451,14 @@ But since the next character is already a newline, \java{nextLine} returns the e
 
 To solve this problem, you need an extra \java{nextLine} after \java{nextInt}.
 
-\begin{code}
+\begin{codenv}
 System.out.print("What is your age? ");
 age = in.nextInt();
 in.nextLine();  // read the newline
 System.out.print("What is your name? ");
 name = in.nextLine();
 System.out.printf("Hello %s, age %d\n", name, age);
-\end{code}
+\end{codenv}
 
 This technique is common when reading \java{int} or \java{double} values that appear on their own line.
 First you read the number, and then you read the rest of the line, which is just a newline character.
@@ -2585,7 +2586,7 @@ You were off by: 31
 To choose a random number, you can use the \java{Random} class in \java{java.util}.
 Here's how it works:
 
-\begin{code}
+\begin{codenv}
 import java.util.Random;
 
 public class GuessStarter {
@@ -2597,7 +2598,7 @@ public class GuessStarter {
         System.out.println(number);
     }
 }
-\end{code}
+\end{codenv}
 
 \index{new}
 \index{operator!new}
@@ -2666,11 +2667,11 @@ The Java library includes a \java{Math} class that provides common mathematical 
 \java{Math} is in the \java{java.lang} package, so you don't have to import it.
 You can use, or {\bf invoke}, \java{Math} methods like this:
 
-\begin{code}
+\begin{codenv}
 double root = Math.sqrt(17.0);
 double angle = 1.5;
 double height = Math.sin(angle);
-\end{code}
+\end{codenv}
 
 The first line sets \java{root} to the square root of 17.
 The third line finds the sine of 1.5 (the value of \java{angle}).
@@ -2683,10 +2684,10 @@ Arguments of the trigonometric functions -- \java{sin}, \java{cos}, and \java{ta
 To convert from degrees to radians, you can divide by 180 and multiply by $\pi$.
 Conveniently, the \java{Math} class provides a constant double named \java{PI} that contains an approximation of $\pi$:
 
-\begin{code}
+\begin{codenv}
 double degrees = 90;
 double angle = degrees / 180.0 * Math.PI;
-\end{code}
+\end{codenv}
 
 Notice that \java{PI} is in capital letters.
 Java does not recognize \java{Pi}, \java{pi}, or \java{pie}.
@@ -2695,10 +2696,10 @@ The same is true for the constant \java{Math.E}, which approximates Euler's numb
 
 Converting to and from radians is a common operation, so the \java{Math} class provides methods that do it for you.
 
-\begin{code}
+\begin{codenv}
 double radians = Math.toRadians(180.0);
 double degrees = Math.toDegrees(Math.PI);
-\end{code}
+\end{codenv}
 
 \index{long}
 \index{type!long}
@@ -2708,9 +2709,9 @@ A \java{long} is like an \java{int}, but bigger.
 More specifically, an \java{int} uses 32 bits; the largest value it can hold is $2^{31}-1$, which is about 2 billion.
 A \java{long} uses 64 bits, so the largest value is $2^{63}-1$, which is about 9 quintillion.
 
-\begin{code}
+\begin{codenv}
 long x = Math.round(Math.PI * 20.0);
-\end{code}
+\end{codenv}
 
 The result is 63 (rounded up from 62.8319).
 
@@ -2727,16 +2728,16 @@ Just as with mathematical functions, Java methods can be {\em composed}.
 That means you can use one expression as part of another.
 For example, you can use any expression as an argument to a method:
 
-\begin{code}
+\begin{codenv}
 double x = Math.cos(angle + Math.PI / 2.0);
-\end{code}
+\end{codenv}
 
 This statement divides \java{Math.PI} by two, adds the result to \java{angle}, and computes the cosine of the sum.
 You can also take the result of one method and pass it as an argument to another:
 
-\begin{code}
+\begin{codenv}
 double x = Math.exp(Math.log(10.0));
-\end{code}
+\end{codenv}
 
 In Java, the \java{log} method always uses base $e$.
 So this statement finds the log base $e$ of 10, and then raises $e$ to that power.
@@ -2746,9 +2747,9 @@ Some math methods take more than one argument.
 For example, \java{Math.pow} takes two arguments and raises the first to the power of the second.
 This line of code assigns the value \java{1024.0} to the variable \java{x}:
 
-\begin{code}
+\begin{codenv}
 double x = Math.pow(2.0, 10.0);
-\end{code}
+\end{codenv}
 
 When using \java{Math} methods, it is a common error to forget the \java{Math}.
 For example, if you try to invoke \java{pow(2.0, 10.0)}, you get an error message like:
@@ -2773,7 +2774,7 @@ If you don't specify a class name, the compiler looks in the current class.
 You have probably guessed by now that you can define more than one method in a class.
 Here's an example:
 
-\begin{code}
+\begin{codenv}
 public class NewLine {
 
     public static void newLine() {
@@ -2786,7 +2787,7 @@ public class NewLine {
         System.out.println("Second line.");
     }
 }
-\end{code}
+\end{codenv}
 
 \index{main}
 \index{case-sensitive}
@@ -2829,7 +2830,7 @@ Second line.
 Notice the extra space between the lines.
 If we wanted more space between them, we could invoke the same method repeatedly:
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     System.out.println("First line.");
     newLine();
@@ -2837,11 +2838,11 @@ public static void main(String[] args) {
     newLine();
     System.out.println("Second line.");
 }
-\end{code}
+\end{codenv}
 
 Or we could write a new method that displays three blank lines:
 
-\begin{code}
+\begin{codenv}
 public static void threeLine() {
     newLine();
     newLine();
@@ -2853,7 +2854,7 @@ public static void main(String[] args) {
     threeLine();
     System.out.println("Second line.");
 }
-\end{code}
+\end{codenv}
 
 You can invoke the same method more than once, and you can have one method invoke another.
 In this example, \java{main} invokes \java{threeLine}, and \java{threeLine} invokes \java{newLine}.
@@ -2888,7 +2889,7 @@ Methods allow you to focus on each sub-problem in isolation, and then compose th
 
 Pulling together the code from the previous section, the complete program looks like this:
 
-\begin{code}
+\begin{codenv}
 public class NewLine {
 
     public static void newLine() {
@@ -2907,7 +2908,7 @@ public class NewLine {
         System.out.println("Second line.");
     }
 }
-\end{code}
+\end{codenv}
 
 \index{flow of execution}
 
@@ -2948,7 +2949,7 @@ When you write a method, you name the parameters.
 The parameter list indicates what arguments are required.
 The following class shows an example:
 
-\begin{code}
+\begin{codenv}
 public class PrintTwice {
 
     public static void printTwice(String s) {
@@ -2960,7 +2961,7 @@ public class PrintTwice {
         printTwice("Don't make me say this twice!");
     }
 }
-\end{code}
+\end{codenv}
 
 \java{printTwice} has a parameter named \java{s} with type \java{String}.
 When we invoke \java{printTwice}, we have to provide an argument with type \java{String}.
@@ -2973,17 +2974,17 @@ In this example, the argument \java{"Don't make me say this twice!"} gets assign
 This process is called {\bf parameter passing} because the value gets passed from outside the method to the inside.
 An argument can be any kind of expression, so if you have a \java{String} variable, you can use it as an argument:
 
-\begin{code}
+\begin{codenv}
 String argument = "Never say never.";
 printTwice(argument);
-\end{code}
+\end{codenv}
 
 The value you provide as an argument must have the same type as the parameter.
 For example, if you try:
 
-\begin{code}
+\begin{codenv}
 printTwice(17);  // syntax error
-\end{code}
+\end{codenv}
 
 You will get an error message like this:
 
@@ -3021,46 +3022,46 @@ Because variables only exist inside the methods where they are defined, they are
 
 Here is an example of a method that takes two parameters:
 
-\begin{code}
+\begin{codenv}
 public static void printTime(int hour, int minute) {
     System.out.print(hour);
     System.out.print(":");
     System.out.println(minute);
 }
-\end{code}
+\end{codenv}
 
 In the parameter list, it may be tempting to write:
 
-\begin{code}
+\begin{codenv}
 public static void printTime(int hour, minute) {
     ...
-\end{code}
+\end{codenv}
 
 But that format (without the second \java{int}) is only legal for variable declarations.
 In parameter lists, you need to specify the type of each variable separately.
 
 To invoke this method, we have to provide two integers as arguments:
 
-\begin{code}
+\begin{codenv}
 int hour = 11;
 int minute = 59;
 printTime(hour, minute);
-\end{code}
+\end{codenv}
 
 A common error is to declare the types of the arguments, like this:
 
-\begin{code}
+\begin{codenv}
 int hour = 11;
 int minute = 59;
 printTime(int hour, int minute);  // syntax error
-\end{code}
+\end{codenv}
 
 That's a syntax error; the compiler sees \java{int hour} and \java{int minute} as variable declarations, not expressions.
 You wouldn't declare the types of the arguments if they were simply integers:
 
-\begin{code}
+\begin{codenv}
 printTime(int 11, int 59);  // syntax error
-\end{code}
+\end{codenv}
 
 
 \section{Stack diagrams}
@@ -3068,7 +3069,7 @@ printTime(int 11, int 59);  // syntax error
 
 Pulling together the code fragments from the previous section, here is a complete class definition:
 
-\begin{code}
+\begin{codenv}
 public class PrintTime {
 
     public static void printTime(int hour, int minute) {
@@ -3083,7 +3084,7 @@ public class PrintTime {
         printTime(hour, minute);
     }
 }
-\end{code}
+\end{codenv}
 
 \java{printTime} has two parameters, named \java{hour} and \java{minute}.
 And \java{main} has two variables, also named \java{hour} and \java{minute}.
@@ -3092,11 +3093,11 @@ Although they have the same names, these variables are not the same.
 
 For example, you could invoke \java{printTime} like this:
 
-\begin{code}
+\begin{codenv}
 int hour = 11;
 int minute = 59;
 printTime(hour + 1, 0);
-\end{code}
+\end{codenv}
 
 Before the method is invoked, Java evaluates the arguments; in this example, the results are \java{12} and \java{0}.
 Then it assigns those values to the parameters.
@@ -3162,10 +3163,10 @@ A good way to get started with a new class is to paste the examples into a test 
 
 One of the examples shows how you can use a \java{Scanner} to read input from a \java{String} instead of \java{System.in}:
 
-\begin{code}
+\begin{codenv}
 String input = "1 fish 2 fish red fish blue fish";
 Scanner s = new Scanner(input);
-\end{code}
+\end{codenv}
 
 After the narrative, code examples, and some other details, you will find the following tables:
 
@@ -3250,7 +3251,7 @@ Anything in between is considered part of the documentation.
 
 Here's a class definition with two Javadoc comments, one for the class and one for the \java{main} method:
 
-\begin{code}
+\begin{codenv}
 /**
  * Example program that demonstrates print vs println.
  */
@@ -3264,7 +3265,7 @@ public class Goodbye {
         System.out.println("cruel world");
     }
 }
-\end{code}
+\end{codenv}
 
 The class comment explains the purpose of the class.
 The method comment explains what the method does.
@@ -3366,7 +3367,7 @@ Be precise about where there are spaces and where there are newlines.
 
 \end{enumerate}
 
-\begin{code}
+\begin{codenv}
 public static void zoop() {
     baffle();
     System.out.print("You wugga ");
@@ -3388,7 +3389,7 @@ public static void baffle() {
 public static void ping() {
     System.out.println(".");
 }
-\end{code}
+\end{codenv}
 
 \end{exercise}
 
@@ -3474,14 +3475,14 @@ This chapter presents the features you need for programs to make decisions: a ne
 {\bf Relational operators} are used to check conditions like whether two values are equal, or whether one is greater than the other.
 The following expressions show how they are used:
 
-\begin{code}
+\begin{codenv}
 x == y          // x is equal to y
 x != y          // x is not equal to y
 x > y           // x is greater than y
 x < y           // x is less than y
 x >= y          // x is greater than or equal to y
 x <= y          // x is less than or equal to y
-\end{code}
+\end{codenv}
 
 The result of a relational operator is one of two special values, \java{true} or \java{false}.
 These values belong to the data type \java{boolean}; in fact, they are the only boolean values.
@@ -3504,11 +3505,11 @@ But confusingly, \java{==} and \java{!=} do work with strings -- they just don't
 We'll explain what they do later; in the meantime, don't use them with strings.
 Instead, you should use the \java{equals} method:
 
-\begin{code}
+\begin{codenv}
 String fruit1 = "Apple";
 String fruit2 = "Orange";
 System.out.println(fruit1.equals(fruit2));
-\end{code}
+\end{codenv}
 
 The result of \java{fruit1.equals(fruit2)} is the boolean value \java{false}.
 
@@ -3570,11 +3571,11 @@ To write useful programs, we almost always need to check conditions and react ac
 {\bf Conditional statements} give us this ability.
 The simplest conditional statement in Java is the \java{if} statement:
 
-\begin{code}
+\begin{codenv}
 if (x > 0) {
     System.out.println("x is positive");
 }
-\end{code}
+\end{codenv}
 
 The expression in parentheses is called the condition.
 If it is true, the statements in braces get executed.
@@ -3587,13 +3588,13 @@ The condition in parentheses can be any boolean expression.
 A second form of conditional statement has two possibilities, indicated by \java{if} and \java{else}.
 The possibilities are called {\bf branches}, and the condition determines which one gets executed:
 
-\begin{code}
+\begin{codenv}
 if (x % 2 == 0) {
     System.out.println("x is even");
 } else {
     System.out.println("x is odd");
 }
-\end{code}
+\end{codenv}
 
 If the remainder when \java{x} is divided by 2 is zero, we know that \java{x} is even, and this fragment displays a message to that effect.
 If the condition is false, the second print statement is executed instead.
@@ -3602,31 +3603,31 @@ Since the condition must be true or false, exactly one of the branches will run.
 The braces are optional for branches that have only one statement.
 So we could have written the previous example this way:
 
-\begin{code}
+\begin{codenv}
 if (x % 2 == 0)
     System.out.println("x is even");
 else
     System.out.println("x is odd");
-\end{code}
+\end{codenv}
 
 However, it's better to use braces -- even when they are optional -- to avoid making the mistake of adding statements to an \java{if} or \java{else} block and forgetting to add the braces.
 
-\begin{code}
+\begin{codenv}
 if (x > 0)
     System.out.println("x is positive");
     System.out.println("x is not zero");
-\end{code}
+\end{codenv}
 
 This code is misleading because it's not indented correctly.
 Since there are no braces, only the first \java{println} is part of the \java{if} statement.
 Here is what the compiler actually sees:
 
-\begin{code}
+\begin{codenv}
 if (x > 0) {
     System.out.println("x is positive");
 }
     System.out.println("x is not zero");
-\end{code}
+\end{codenv}
 
 As a result, the second \java{println} runs no matter what.
 Even experienced programmers make this mistake; search the web for Apple's ``goto fail'' bug.
@@ -3639,7 +3640,7 @@ Even experienced programmers make this mistake; search the web for Apple's ``got
 Sometimes you want to check related conditions and choose one of several actions.
 One way to do this is by {\bf chaining} a series of \java{if} and \java{else} statements:
 
-\begin{code}
+\begin{codenv}
 if (x > 0) {
     System.out.println("x is positive");
 } else if (x < 0) {
@@ -3647,7 +3648,7 @@ if (x > 0) {
 } else {
     System.out.println("x is zero");
 }
-\end{code}
+\end{codenv}
 
 These chains can be as long as you want, although they can be difficult to read if they get out of hand.
 One way to make them easier to read is to use standard indentation, as demonstrated in these examples.
@@ -3658,7 +3659,7 @@ If you keep all the statements and braces lined up, you are less likely to make 
 In addition to chaining, you can also make complex decisions by {\bf nesting} one conditional statement inside another.
 We could have written the previous example as:
 
-\begin{code}
+\begin{codenv}
 if (x == 0) {
     System.out.println("x is zero");
 } else {
@@ -3668,7 +3669,7 @@ if (x == 0) {
         System.out.println("x is negative");
     }
 }
-\end{code}
+\end{codenv}
 
 The outer conditional has two branches.
 The first branch contains a \java{print} statement, and the second branch contains another conditional statement, which has two branches of its own.
@@ -3685,11 +3686,11 @@ Good indentation is essential to make the structure (or intended structure) appa
 To store a \java{true} or \java{false} value, you need a \java{boolean} variable.
 You can create one like this:
 
-\begin{code}
+\begin{codenv}
 boolean flag;
 flag = true;
 boolean testResult = false;
-\end{code}
+\end{codenv}
 
 \index{initialize}
 \index{statement!initialization}
@@ -3697,10 +3698,10 @@ boolean testResult = false;
 The first line is a variable declaration, the second is an assignment, and the third is both.
 Since relational operators evaluate to a \java{boolean} value, you can store the result of a comparison in a variable:
 
-\begin{code}
+\begin{codenv}
 boolean evenFlag = (n % 2 == 0);    // true if n is even
 boolean positiveFlag = (x > 0);     // true if x is positive
-\end{code}
+\end{codenv}
 
 \index{flag}
 
@@ -3709,21 +3710,21 @@ A variable defined in this way is called a {\bf flag}, because it signals or ``f
 
 You can use flag variables as part of a conditional statement later:
 
-\begin{code}
+\begin{codenv}
 if (evenFlag) {
     System.out.println("n was even when I checked it");
 }
-\end{code}
+\end{codenv}
 
 Notice that you don't have to write \java{if (evenFlag == true)}.
 Since \java{evenFlag} is a \java{boolean}, it's already a condition.
 Likewise, to check if a flag is \java{false}:
 
-\begin{code}
+\begin{codenv}
 if (!evenFlag) {
     System.out.println("n was odd when I checked it");
 }
-\end{code}
+\end{codenv}
 
 
 \section{The return statement}
@@ -3734,7 +3735,7 @@ if (!evenFlag) {
 The \java{return} statement allows you to terminate a method before you reach the end of it.
 One reason to use \java{return} is if you detect an error condition:
 
-\begin{code}
+\begin{codenv}
 public static void printLogarithm(double x) {
     if (x <= 0.0) {
         System.err.println("Error: x must be positive.");
@@ -3743,7 +3744,7 @@ public static void printLogarithm(double x) {
     double result = Math.log(x);
     System.out.println("The log of x is " + result);
 }
-\end{code}
+\end{codenv}
 
 \index{logarithm}
 
@@ -3762,14 +3763,14 @@ Some development environments display output to \java{System.err} with a differe
 
 Here is a method that uses \java{printLogarithm} from the previous section:
 
-\begin{code}
+\begin{codenv}
 public static void scanDouble() {
     Scanner in = new Scanner(System.in);
     System.out.print("Enter a number: ");
     double x = in.nextDouble();
     printLogarithm(x);
 }
-\end{code}
+\end{codenv}
 
 This example uses \java{nextDouble}, so the \java{Scanner} tries to read a \java{double}.
 If the user enters a floating-point number, the \java{Scanner} converts it to a \java{double}.
@@ -3780,7 +3781,7 @@ But if the user types anything else, the \java{Scanner} throws an \java{InputMis
 
 We can prevent this error by checking the input before parsing it:
 
-\begin{code}
+\begin{codenv}
 public static void scanDouble() {
     Scanner in = new Scanner(System.in);
     System.out.print("Enter a number: ");
@@ -3792,7 +3793,7 @@ public static void scanDouble() {
     double x = in.nextDouble();
     printLogarithm(x);
 }
-\end{code}
+\end{codenv}
 
 The \java{Scanner} class provides \java{hasNextDouble}, which checks whether the next token in the input stream can be interpreted as a \java{double}.
 If so, we can call \java{nextDouble} with no chance of throwing an exception.
@@ -3811,7 +3812,7 @@ Returning from \java{main} terminates the program.
 Now that we have conditional statements, we can explore one of the most magical things a program can do: {\bf recursion}.
 Consider the following example:
 
-\begin{code}
+\begin{codenv}
 public static void countdown(int n) {
     if (n == 0) {
         System.out.println("Blastoff!");
@@ -3820,7 +3821,7 @@ public static void countdown(int n) {
         countdown(n - 1);
     }
 }
-\end{code}
+\end{codenv}
 
 \index{recursive}
 
@@ -3861,7 +3862,7 @@ Blastoff!
 
 As a second example, we'll rewrite the methods \java{newLine} and \java{threeLine} from Section~\ref{adding_methods}.
 
-\begin{code}
+\begin{codenv}
 public static void newLine() {
     System.out.println();
 }
@@ -3871,21 +3872,21 @@ public static void threeLine() {
     newLine();
     newLine();
 }
-\end{code}
+\end{codenv}
 
 \index{newline}
 
 Although these methods work, they would not help if we wanted to display two newlines, or maybe 100.
 A better alternative would be:
 
-\begin{code}
+\begin{codenv}
 public static void nLines(int n) {
     if (n > 0) {
         System.out.println();
         nLines(n - 1);
     }
 }
-\end{code}
+\end{codenv}
 
 This method takes an integer, \java{n}, as a parameter and displays \java{n} newlines.
 The structure is similar to \java{countdown}.
@@ -3927,12 +3928,12 @@ In practice, the size of the stack is limited; if you exceed the limit, you get 
 
 For example, here is a recursive method without a base case:
 
-\begin{code}
+\begin{codenv}
 public static void forever(String s) {
     System.out.println(s);
     forever(s);
 }
-\end{code}
+\end{codenv}
 
 \index{call stack}
 \index{stack overflow}
@@ -3945,7 +3946,7 @@ This method displays the string until the stack overflows, at which point it thr
 The \java{countdown} example has three parts: (1) it checks the base case, (2) displays something, and (3) makes a recursive call.
 What do you think happens if you reverse steps 2 and 3, making the recursive call {\em before} displaying?
 
-\begin{code}
+\begin{codenv}
 public static void countup(int n) {
     if (n == 0) {
         System.out.println("Blastoff!");
@@ -3954,7 +3955,7 @@ public static void countup(int n) {
         System.out.println(n);
     }
 }
-\end{code}
+\end{codenv}
 
 The stack diagram is the same as before, and the method is still called $n$ times.
 But now the \java{System.out.println} happens just before each recursive call returns.
@@ -3985,14 +3986,14 @@ For more background about binary numbers, see \url{http://www.mathsisfun.com/bin
 
 Here is a recursive method that displays the binary representation of any positive integer:
 
-\begin{code}
+\begin{codenv}
 public static void displayBinary(int value) {
     if (value > 0) {
         displayBinary(value / 2);
         System.out.print(value % 2);
     }
 }
-\end{code}
+\end{codenv}
 
 If \java{value} is zero, \java{displayBinary} does nothing (that's the base case).
 If the argument is positive, the method divides it by two and calls \java{displayBinary} recursively.
@@ -4002,11 +4003,11 @@ The leftmost digit is at the bottom of the stack, so it gets displayed first.
 The rightmost digit, at the top of the stack, gets displayed last.
 After invoking \java{displayBinary}, we use \java{println} to complete the output.
 
-\begin{code}
+\begin{codenv}
 displayBinary(23);
 System.out.println();
 // output is 10111
-\end{code}
+\end{codenv}
 
 Learning to think recursively is an important aspect of learning to think like a computer scientist.
 Many algorithms can be written concisely with recursive methods that perform computations on the way down, on the way up, or both.
@@ -4079,13 +4080,13 @@ It describes the DrJava debugger, which is a useful tool for tracing the flow of
 Logical operators can simplify nested conditional statements.
 For example, can you rewrite this code using a single \java{if} statement?
 
-\begin{code}
+\begin{codenv}
 if (x > 0) {
     if (x < 10) {
         System.out.println("positive single digit number.");
     }
 }
-\end{code}
+\end{codenv}
 
 \end{exercise}
 
@@ -4101,7 +4102,7 @@ For the following program:
 
 \end{enumerate}
 
-\begin{code}
+\begin{codenv}
 public static void zoop(String fred, int bob) {
     System.out.println(fred);
     if (bob == 5) {
@@ -4117,9 +4118,9 @@ public static void main(String[] args) {
     zoop("just for", bizz);
     clink(2 * buzz);
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static void clink(int fork) {
     System.out.print("It's ");
     zoop("breakfast ", fork) ;
@@ -4128,7 +4129,7 @@ public static void clink(int fork) {
 public static void ping(String strangStrung) {
     System.out.println("any " + strangStrung + "more ");
 }
-\end{code}
+\end{codenv}
 \end{exercise}
 
 
@@ -4187,7 +4188,7 @@ As you develop your code, test it with a small number of verses, like \java{3}.
 This exercise reviews the flow of execution through a program with multiple methods.
 Read the following code and answer the questions.
 
-\begin{code}
+\begin{codenv}
 public class Buzz {
 
     public static void baffle(String blimp) {
@@ -4210,7 +4211,7 @@ public class Buzz {
     }
 
 }
-\end{code}
+\end{codenv}
 
 \begin{enumerate}
 
@@ -4261,7 +4262,7 @@ In this chapter, we'll write methods that return values, which we call {\bf valu
 When you invoke a void method, the invocation is usually on a line all by itself.
 For example, here is the \java{countup} method from Section~\ref{recursion}:
 
-\begin{code}
+\begin{codenv}
 public static void countup(int n) {
     if (n == 0) {
         System.out.println("Blastoff!");
@@ -4270,22 +4271,22 @@ public static void countup(int n) {
         System.out.println(n);
     }
 }
-\end{code}
+\end{codenv}
 
 And here is how it is invoked:
 
-\begin{code}
+\begin{codenv}
 countup(3);
 System.out.println("Have a nice day.");
-\end{code}
+\end{codenv}
 
 On the other hand, when you invoke a value method, you have to do something with the return value.
 We usually assign it to a variable or use it as part of an expression, like this:
 
-\begin{code}
+\begin{codenv}
 double error = Math.abs(expected - actual);
 double height = radius * Math.sin(angle);
-\end{code}
+\end{codenv}
 
 \index{value method}
 \index{method!value}
@@ -4305,12 +4306,12 @@ Compared to void methods, value methods differ in two ways:
 
 Here's an example: \java{calculateArea} takes a \java{double} as a parameter and returns the area of a circle with that radius:
 
-\begin{code}
+\begin{codenv}
 public static double calculateArea(double radius) {
     double result = Math.PI * radius * radius;
     return result;
 }
-\end{code}
+\end{codenv}
 
 As usual, this method is \java{public} and \java{static}.
 But in the place where we are used to seeing \java{void}, we see \java{double}, which means that the return value from this method is a \java{double}.
@@ -4322,11 +4323,11 @@ The last line is a new form of the \java{return} statement that includes a retur
 This statement means, ``return immediately from this method and use the following expression as the return value.''
 The expression you provide can be arbitrarily complex, so we could have written this method more concisely:
 
-\begin{code}
+\begin{codenv}
 public static double calculateArea(double radius) {
     return Math.PI * radius * radius;
 }
-\end{code}
+\end{codenv}
 
 \index{temporary variable}
 \index{variable!temporary}
@@ -4339,7 +4340,7 @@ If you try to \java{return} with no expression, or an expression with the wrong 
 
 Sometimes it is useful to have multiple return statements, for example, one in each branch of a conditional:
 
-\begin{code}
+\begin{codenv}
 public static double absoluteValue(double x) {
     if (x < 0) {
         return -x;
@@ -4347,7 +4348,7 @@ public static double absoluteValue(double x) {
         return x;
     }
 }
-\end{code}
+\end{codenv}
 
 Since these \java{return} statements are in a conditional statement, only one will be executed.
 As soon as either of them executes, the method terminates without executing any more statements.
@@ -4358,7 +4359,7 @@ Code that appears after a \java{return} statement (in the same block), or any pl
 The compiler will give you an ``unreachable statement'' error if part of your code is dead.
 For example, this method contains dead code:
 
-\begin{code}
+\begin{codenv}
 public static double absoluteValue(double x) {
     if (x < 0) {
         return -x;
@@ -4367,13 +4368,13 @@ public static double absoluteValue(double x) {
     }
     System.out.println("This line is dead.");
 }
-\end{code}
+\end{codenv}
 
 If you put \java{return} statements inside a conditional statement, you have to make sure that {\em every possible path} through the program reaches a \java{return} statement.
 The compiler will let you know if that's not the case.
 For example, the following method is incomplete:
 
-\begin{code}
+\begin{codenv}
 public static double absoluteValue(double x) {
     if (x < 0) {
         return -x;
@@ -4382,7 +4383,7 @@ public static double absoluteValue(double x) {
     }
     // syntax error
 }
-\end{code}
+\end{codenv}
 
 When \java{x} is 0, neither condition is true, so the method ends without hitting a return statement.
 The error message in this case might be something like ``missing return statement'', which is confusing since there are already two of them.
@@ -4427,12 +4428,12 @@ The return value is the distance, which should also have type \java{double}.
 Already we can write an outline for the method, which is sometimes called a {\bf stub}.
 The stub includes the method signature and a \java{return} statement:
 
-\begin{code}
+\begin{codenv}
 public static double distance
         (double x1, double y1, double x2, double y2) {
     return 0.0;
 }
-\end{code}
+\end{codenv}
 
 The return statement is a placeholder that is necessary for the program to compile.
 At this stage the program doesn't do anything useful, but it is good to compile it so we can find any syntax errors before we add more code.
@@ -4440,9 +4441,9 @@ At this stage the program doesn't do anything useful, but it is good to compile 
 It's usually a good idea to think about testing {\em before} you develop new methods; doing so can help you figure out how to implement them.
 To test the method, we can invoke it from \java{main} using sample values:
 
-\begin{code}
+\begin{codenv}
 double dist = distance(1.0, 2.0, 4.0, 6.0);
-\end{code}
+\end{codenv}
 
 With these values, the horizontal distance is 3.0 and the vertical distance is 4.0.
 So the result should be 5.0, the hypotenuse of a 3-4-5 triangle.
@@ -4455,7 +4456,7 @@ If there is an error at any point, we have a good idea where to look: the last l
 The next step is to find the differences $x_2 - x_1$ and $y_2 - y_1$.
 We store those values in temporary variables named \java{dx} and \java{dy}.
 
-\begin{code}
+\begin{codenv}
 public static double distance
         (double x1, double y1, double x2, double y2) {
     double dx = x2 - x1;
@@ -4464,7 +4465,7 @@ public static double distance
     System.out.println("dy is " + dy);
     return 0.0;
 }
-\end{code}
+\end{codenv}
 
 \index{scaffolding}
 
@@ -4476,7 +4477,7 @@ Code like that is called {\bf scaffolding}, because it is helpful for building t
 The next step is to square \java{dx} and \java{dy}.
 We could use the \java{Math.pow} method, but it is simpler to multiply each term by itself.
 
-\begin{code}
+\begin{codenv}
 public static double distance
         (double x1, double y1, double x2, double y2) {
     double dx = x2 - x1;
@@ -4485,12 +4486,12 @@ public static double distance
     System.out.println("dsquared is " + dsquared);
     return 0.0;
 }
-\end{code}
+\end{codenv}
 
 Again, you should compile and run the program at this stage and check the intermediate value, which should be 25.0.
 Finally, we can use \java{Math.sqrt} to compute and return the result.
 
-\begin{code}
+\begin{codenv}
 public static double distance
         (double x1, double y1, double x2, double y2) {
     double dx = x2 - x1;
@@ -4499,7 +4500,7 @@ public static double distance
     double result = Math.sqrt(dsquared);
     return result;
 }
-\end{code}
+\end{codenv}
 
 %In \java{main}, we can print and check the value of the result.
 
@@ -4518,37 +4519,37 @@ Let's say the center point is stored in the variables \java{xc} and \java{yc}, a
 The first step is to find the radius of the circle, which is the distance between the two points.
 Fortunately, we have a method that does just that (\java{distance}).
 
-\begin{code}
+\begin{codenv}
 double radius = distance(xc, yc, xp, yp);
-\end{code}
+\end{codenv}
 
 The second step is to find the area of a circle with that radius.
 We have a method for that computation too (\java{calculateArea}).
 
-\begin{code}
+\begin{codenv}
 double area = calculateArea(radius);
 return area;
-\end{code}
+\end{codenv}
 
 Putting everything together in a new method, we get:
 
-\begin{code}
+\begin{codenv}
 public static double circleArea
         (double xc, double yc, double xp, double yp) {
     double radius = distance(xc, yc, xp, yp);
     double area = calculateArea(radius);
     return area;
 }
-\end{code}
+\end{codenv}
 
 The temporary variables \java{radius} and \java{area} are useful for development and debugging, but once the program is working we can make it more concise by composing the method calls:
 
-\begin{code}
+\begin{codenv}
 public static double circleArea
         (double xc, double yc, double xp, double yp) {
     return calculateArea(distance(xc, yc, xp, yp));
 }
-\end{code}
+\end{codenv}
 
 \index{functional decomposition}
 
@@ -4573,27 +4574,27 @@ If two methods do the same thing, it is natural to give them the same name.
 Having more than one method with the same name is called {\bf overloading}, and it is legal in Java as long as each version takes different parameters.
 So we could rename \java{circleArea} to \java{calculateArea}:
 
-\begin{code}
+\begin{codenv}
 public static double calculateArea
         (double xc, double yc, double xp, double yp) {
     return calculateArea(distance(xc, yc, xp, yp));
 }
-\end{code}
+\end{codenv}
 
 Note that this new \java{calculateArea} method is {\em not} recursive.
 When you invoke an overloaded method, Java knows which version you want by looking at the arguments that you provide.
 If you write:
 
-\begin{code}
+\begin{codenv}
 double x = calculateArea(3.0);
-\end{code}
+\end{codenv}
 
 Java looks for a method named \java{calculateArea} that takes one \java{double} as an argument, and so it uses the first version, which interprets the argument as a radius.
 If you write:
 
-\begin{code}
+\begin{codenv}
 double y = calculateArea(1.0, 2.0, 4.0, 6.0);
-\end{code}
+\end{codenv}
 
 Java uses the second version of \java{calculateArea}, which interprets the arguments as two points.
 In this example, the second version actually invokes the first version.
@@ -4615,7 +4616,7 @@ You might get yourself nicely confused if you are trying to debug one version of
 Methods can return \java{boolean} values, just like any other type, which is often convenient for hiding tests inside methods.
 For example:
 
-\begin{code}
+\begin{codenv}
 public static boolean isSingleDigit(int x) {
     if (x > -10 && x < 10) {
         return true;
@@ -4623,7 +4624,7 @@ public static boolean isSingleDigit(int x) {
         return false;
     }
 }
-\end{code}
+\end{codenv}
 
 The name of this method is \java{isSingleDigit}.
 It is common to give \java{boolean} methods names that sound like yes/no questions.
@@ -4632,31 +4633,31 @@ Since the return type is \java{boolean}, the return statement has to provide a b
 The code itself is straightforward, although it is longer than it needs to be.
 Remember that the expression \java{x > -10 \&\& x < 10} has type \java{boolean}, so there is nothing wrong with returning it directly (without the \java{if} statement):
 
-\begin{code}
+\begin{codenv}
 public static boolean isSingleDigit(int x) {
     return x > -10 && x < 10;
 }
-\end{code}
+\end{codenv}
 
 In \java{main}, you can invoke the method in the usual ways:
 
-\begin{code}
+\begin{codenv}
 System.out.println(isSingleDigit(2));
 boolean bigFlag = !isSingleDigit(17);
-\end{code}
+\end{codenv}
 
 The first line displays \java{true} because 2 is a single-digit number.
 The second line sets \java{bigFlag} to \java{true}, because 17 is {\em not} a single-digit number.
 
 Conditional statements often invoke \java{boolean} methods and use the result as the condition:
 
-\begin{code}
+\begin{codenv}
 if (isSingleDigit(z)) {
     System.out.println("z is small");
 } else {
     System.out.println("z is big");
 }
-\end{code}
+\end{codenv}
 
 Examples like this one almost read like English:
 ``If is single digit z, print ... else print ...''
@@ -4675,7 +4676,7 @@ It's generally a good idea to document each class and method, so that other prog
 To organize the documentation into sections, Javadoc supports optional {\bf tags} that begin with the at sign (\java{@}).
 For example, we can use \java{@param} and \java{@return} to provide additional information about parameters and return values.
 
-\begin{code}
+\begin{codenv}
 /**
  * Tests whether x is a single digit integer.
  *
@@ -4683,7 +4684,7 @@ For example, we can use \java{@param} and \java{@return} to provide additional i
  * @return true if x has one digit, false otherwise
  */
 public static boolean isSingleDigit(int x) {
-\end{code}
+\end{codenv}
 
 \index{HTML}
 \index{Javadoc}
@@ -4752,27 +4753,27 @@ The first step is to decide what the parameters and return type are.
 Since factorial is defined for integers, the method takes an \java{int} as a parameter and returns an \java{int}.
 So here's a good starting place:
 
-\begin{code}
+\begin{codenv}
 public static int factorial(int n) {
     return 0;
 }
-\end{code}
+\end{codenv}
 
 Next, we think about the base case.
 If the argument happens to be zero, we return 1.
 
-\begin{code}
+\begin{codenv}
 public static int factorial(int n) {
     if (n == 0) {
         return 1;
     }
     return 0;
 }
-\end{code}
+\end{codenv}
 
 Otherwise, and this is the interesting part, we have to make a recursive call to find the factorial of $n-1$, and then multiply it by $n$.
 
-\begin{code}
+\begin{codenv}
 public static int factorial(int n) {
     if (n == 0) {
         return 1;
@@ -4781,7 +4782,7 @@ public static int factorial(int n) {
     int result = n * recurse;
     return result;
 }
-\end{code}
+\end{codenv}
 
 The flow of execution for this program is similar to \java{countdown} from Section~\ref{recursion}.
 If we invoke \java{factorial} with the value 3:
@@ -4861,14 +4862,14 @@ Another common recursively-defined mathematical function is the Fibonacci sequen
 
 Translated into Java, this function is:
 
-\begin{code}
+\begin{codenv}
 public static int fibonacci(int n) {
     if (n == 1 || n == 2) {
         return 1;
     }
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
-\end{code}
+\end{codenv}
 
 If you try to follow the flow of execution here, even for small values of \java{n}, your head will explode.
 But if we take a leap of faith and assume that the two recursive invocations work correctly, it is clear that their sum is the result.
@@ -5027,7 +5028,7 @@ One of the purposes of this exercise is to practice pattern-matching: the abilit
 
 What is the output of the following program?
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     boolean flag1 = isHoopy(202);
     boolean flag2 = isFrabjuous(202);
@@ -5040,9 +5041,9 @@ public static void main(String[] args) {
         System.out.println("pong!");
     }
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static boolean isHoopy(int x) {
     boolean hoopyFlag;
     if (x % 2 == 0) {
@@ -5062,7 +5063,7 @@ public static boolean isFrabjuous(int x) {
     }
     return frabjuousFlag;
 }
-\end{code}
+\end{codenv}
 
 The purpose of this exercise is to make sure you understand logical operators and the flow of execution through value methods.
 
@@ -5073,7 +5074,7 @@ The purpose of this exercise is to make sure you understand logical operators an
 
 In this exercise, you will use a stack diagram to understand the execution of the following recursive program.
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     System.out.println(prod(1, 4));
 }
@@ -5087,7 +5088,7 @@ public static int prod(int m, int n) {
         return result;
     }
 }
-\end{code}
+\end{codenv}
 
 \begin{enumerate}
 
@@ -5170,7 +5171,7 @@ the \java{while} and \java{for} statements.
 
 Using a \java{while} statement, we can rewrite \java{countdown} like this:
 
-\begin{code}
+\begin{codenv}
 public static void countdown(int n) {
     while (n > 0) {
         System.out.println(n);
@@ -5178,7 +5179,7 @@ public static void countdown(int n) {
     }
     System.out.println("Blastoff!");
 }
-\end{code}
+\end{codenv}
 
 You can almost read the \java{while} statement like English:
 ``While \java{n} is greater than zero, print the value of \java{n} and then reduce the value of \java{n} by 1.
@@ -5215,7 +5216,7 @@ In the case of \java{countdown}, we can prove that the loop terminates when \jav
 But in general, it is not so easy to tell whether a loop terminates.
 For example, this loop continues until \java{n} is 1 (which makes the condition \java{false}).
 
-\begin{code}
+\begin{codenv}
 public static void sequence(int n) {
     while (n != 1) {
         System.out.println(n);
@@ -5226,7 +5227,7 @@ public static void sequence(int n) {
         }
     }
 }
-\end{code}
+\end{codenv}
 
 Each time through the loop, the program displays the value of \java{n} and then checks whether it is even or odd.
 If it is even, the value of \java{n} is divided by two.
@@ -5267,14 +5268,14 @@ In some cases, there have been errors in the underlying tables, most famously in
 Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
 The following loop displays a table with a sequence of values in the left column and their logarithms in the right column:
 
-\begin{code}
+\begin{codenv}
 int i = 1;
 while (i < 10) {
     double x = (double) i;
     System.out.println(x + "   " + Math.log(x));
     i = i + 1;
 }
-\end{code}
+\end{codenv}
 
 The output of this program is:
 
@@ -5298,14 +5299,14 @@ To compute them, we can apply this equation:
 %
 We can modify the loop as follows:
 
-\begin{code}
+\begin{codenv}
 int i = 1;
 while (i < 10) {
     double x = (double) i;
     System.out.println(x + "   " + Math.log(x) / Math.log(2));
     i = i + 1;
 }
-\end{code}
+\end{codenv}
 
 And here are the results:
 
@@ -5324,7 +5325,7 @@ And here are the results:
 Each time through the loop, we add one to \java{x}; so the result is an arithmetic sequence.
 If we multiply \java{x} by something instead, we get a geometric sequence:
 
-\begin{code}
+\begin{codenv}
 final double LOG2 = Math.log(2);
 int i = 1;
 while (i < 100) {
@@ -5332,7 +5333,7 @@ while (i < 100) {
     System.out.println(x + "   " + Math.log(x) / LOG2);
     i = i * 2;
 }
-\end{code}
+\end{codenv}
 
 \index{final}
 
@@ -5383,14 +5384,14 @@ The second step is called {\bf encapsulation}; the third step is {\bf generaliza
 To demonstrate this process, we'll develop methods that display multiplication tables.
 Here is a loop that displays the multiples of two, all on one line:
 
-\begin{code}
+\begin{codenv}
 int i = 1;
 while (i <= 6) {
     System.out.printf("%4d", 2 * i);
     i = i + 1;
 }
 System.out.println();
-\end{code}
+\end{codenv}
 
 \index{loop variable}
 \index{variable!loop}
@@ -5412,7 +5413,7 @@ The output of the code so far is:
 The next step is to ``encapsulate'' this code in a new method.
 Here's what it looks like:
 
-\begin{code}
+\begin{codenv}
 public static void printRow() {
     int i = 1;
     while (i <= 6) {
@@ -5421,14 +5422,14 @@ public static void printRow() {
     }
     System.out.println();
 }
-\end{code}
+\end{codenv}
 
 \index{generalization}
 
 Next we replace the constant value, \java{2}, with a parameter, \java{n}.
 This step is called ``generalization'' because it makes the method more general (less specific).
 
-\begin{code}
+\begin{codenv}
 public static void printRow(int n) {
     int i = 1;
     while (i <= 6) {
@@ -5437,7 +5438,7 @@ public static void printRow(int n) {
     }
     System.out.println();
 }
-\end{code}
+\end{codenv}
 
 Invoking this method with the argument 2 yields the same output as before.
 With the argument 3, the output is:
@@ -5455,13 +5456,13 @@ And with argument 4, the output is:
 By now you can probably guess how we are going to display a multiplication table: we'll invoke \java{printRow} repeatedly with different arguments.
 In fact, we'll use another loop to iterate through the rows.
 
-\begin{code}
+\begin{codenv}
 int i = 1;
 while (i <= 6) {
     printRow(i);
     i = i + 1;
 }
-\end{code}
+\end{codenv}
 
 And the output looks like this:
 
@@ -5478,7 +5479,7 @@ The format specifier \java{\%4d} in \java{printRow} causes the output to align v
 
 Finally, we encapsulate the second loop in a method:
 
-\begin{code}
+\begin{codenv}
 public static void printTable() {
     int i = 1;
     while (i <= 6) {
@@ -5486,7 +5487,7 @@ public static void printTable() {
         i = i + 1;
     }
 }
-\end{code}
+\end{codenv}
 
 One of the challenges of programming, especially for beginners, is figuring out how to divide up a program into methods.
 The process of encapsulation and generalization allows you to design as you go along.
@@ -5499,7 +5500,7 @@ The process of encapsulation and generalization allows you to design as you go a
 The previous version of \java{printTable} always displays six rows.
 We can generalize it by replacing the literal \java{6} with a parameter:
 
-\begin{code}
+\begin{codenv}
 public static void printTable(int rows) {
     int i = 1;
     while (i <= rows) {
@@ -5507,7 +5508,7 @@ public static void printTable(int rows) {
         i = i + 1;
     }
 }
-\end{code}
+\end{codenv}
 
 Here is the output with the argument 7:
 
@@ -5524,7 +5525,7 @@ Here is the output with the argument 7:
 That's better, but it still has a problem: it always displays the same number of columns.
 We can generalize more by adding a parameter to \java{printRow}:
 
-\begin{code}
+\begin{codenv}
 public static void printRow(int n, int cols) {
     int i = 1;
     while (i <= cols) {
@@ -5533,12 +5534,12 @@ public static void printRow(int n, int cols) {
     }
     System.out.println();
 }
-\end{code}
+\end{codenv}
 
 Now \java{printRow} takes two parameters: \java{n} is the value whose multiples should be displayed, and \java{cols} is the number of columns.
 Since we added a parameter to \java{printRow}, we also have to change the line in \java{printTable} where it is invoked:
 
-\begin{code}
+\begin{codenv}
 public static void printTable(int rows) {
     int i = 1;
     while (i <= rows) {
@@ -5546,7 +5547,7 @@ public static void printTable(int rows) {
         i = i + 1;
     }
 }
-\end{code}
+\end{codenv}
 
 When this line executes, it evaluates \java{rows} and passes the value, which is 7 in this example, as an argument.
 In \java{printRow}, this value is assigned to \java{cols}.
@@ -5566,9 +5567,9 @@ When you generalize a method appropriately, you often find that it has capabilit
 For example, you might notice that the multiplication table is symmetric; since $ab = ba$, all the entries in the table appear twice.
 You could save ink by printing half of the table, and you would only have to change one line of \java{printTable}:
 
-\begin{code}
+\begin{codenv}
 printRow(i, i);
-\end{code}
+\end{codenv}
 
 In words, the length of each row is the same as its row number.
 The result is a triangular multiplication table.
@@ -5604,13 +5605,13 @@ This type of loop is so common that there is another statement, the \java{for} l
 
 For example, we could rewrite \java{printTable} like this:
 
-\begin{code}
+\begin{codenv}
 public static void printTable(int rows) {
     for (int i = 1; i <= rows; i = i + 1) {
         printRow(i, rows);
     }
 }
-\end{code}
+\end{codenv}
 
 \java{for} loops have three components in parentheses, separated by semicolons: the initializer, the condition, and the update.
 
@@ -5631,19 +5632,19 @@ The \java{for} loop is often easier to read because it puts all the loop-related
 There is one difference between \java{for} loops and \java{while} loops: if you declare a variable in the initializer, it only exists inside the \java{for} loop.
 For example, here is a version of \java{printRow} that uses a \java{for} loop:
 
-\begin{code}
+\begin{codenv}
 public static void printRow(int n, int cols) {
     for (int i = 1; i <= cols; i = i + 1) {
         System.out.printf("%4d", n * i);
     }
     System.out.println(i);  // error
 }
-\end{code}
+\end{codenv}
 
 The last line tries to display \java{i} (for no reason other than demonstration) but it won't work.
 If you need to use a loop variable outside the loop, you have to declare it outside the loop, like this:
 
-\begin{code}
+\begin{codenv}
 public static void printRow(int n, int cols) {
     int i;
     for (i = 1; i <= cols; i = i + 1) {
@@ -5651,7 +5652,7 @@ public static void printRow(int n, int cols) {
     }
     System.out.println(i);
 }
-\end{code}
+\end{codenv}
 
 \index{increment}
 \index{decrement}
@@ -5683,7 +5684,7 @@ This type of loop is useful when you need to run the body of the loop at least o
 For example, in Section~\ref{validate} we used the \java{return} statement to avoid reading invalid input from the user.
 We can use a \java{do}-\java{while} loop to keep reading input until it's valid:
 
-\begin{code}
+\begin{codenv}
 Scanner in = new Scanner(System.in);
 boolean okay;
 do {
@@ -5697,7 +5698,7 @@ do {
     }
 } while (!okay);
 double x = in.nextDouble();
-\end{code}
+\end{codenv}
 
 Although this code looks complicated, it is essentially only three steps:
 
@@ -5726,7 +5727,7 @@ As a result, we used a flag variable and a nested \java{if}-\java{else} statemen
 A simpler way to solve this problem is to use a \java{break} statement.
 When a program reaches a \java{break} statement, it exits the current loop.
 
-\begin{code}
+\begin{codenv}
 Scanner in = new Scanner(System.in);
 while (true) {
     System.out.print("Enter a number: ");
@@ -5737,7 +5738,7 @@ while (true) {
     System.err.println(word + " is not a number");
 }
 double x = in.nextDouble();
-\end{code}
+\end{codenv}
 
 Using \java{true} as a conditional in a \java{while} loop is an idiom that means ``loop forever'', or in this case ``loop until you get to a \java{break} statement.''
 
@@ -5747,7 +5748,7 @@ In addition to the \java{break} statement, which exits the loop, Java provides a
 For example, the following code reads integers from the keyboard and computes a running total.
 The \java{continue} statement causes the program to skip over any negative values.
 
-\begin{code}
+\begin{codenv}
 Scanner in = new Scanner(System.in);
 int x = -1;
 int sum = 0;
@@ -5759,7 +5760,7 @@ while (x != 0) {
     System.out.println("Adding " + x);
     sum += x;
 }
-\end{code}
+\end{codenv}
 
 Although \java{break} and \java{continue} statements give you more control of the loop execution, they can make code difficult to understand and debug.
 Use them sparingly.
@@ -5825,7 +5826,7 @@ It describes Checkstyle, a tool that analyzes many aspects of your source code.
 
 Consider the following methods:
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     loop(10);
 }
@@ -5841,7 +5842,7 @@ public static void loop(int n) {
         }
     }
 }
-\end{code}
+\end{codenv}
 
 \begin{enumerate}
 
@@ -5991,30 +5992,30 @@ To create an array, you have to declare a variable with an {\em array type} and 
 Array types look like other Java types, except they are followed by square brackets (\java{[]}).
 For example, the following lines declare that \java{counts} is an ``integer array'' and \java{values} is a ``double array'':
 
-\begin{code}
+\begin{codenv}
 int[] counts;
 double[] values;
-\end{code}
+\end{codenv}
 
 \index{new}
 \index{operator!new}
 
 To create the array itself, you have to use the \java{new} operator, which we first saw in Section~\ref{scanner}:
 
-\begin{code}
+\begin{codenv}
 counts = new int[4];
 values = new double[size];
-\end{code}
+\end{codenv}
 
 The first assignment makes \java{count} refer to an array of four integers.
 The second makes \java{values} refer to an array of \java{double}, where the number of elements in \java{values} depends on the value of \java{size}.
 
 Of course, you can also declare the variable and create the array in a single line of code:
 
-\begin{code}
+\begin{codenv}
 int[] counts = new int[4];
 double[] values = new double[size];
-\end{code}
+\end{codenv}
 
 \index{NegativeArraySizeException}
 \index{exception!NegativeArraySize}
@@ -6058,18 +6059,18 @@ Notice that the index of the first element is 0, not 1, as you might have expect
 
 The \java{[]} operator selects elements from an array:
 
-\begin{code}
+\begin{codenv}
 System.out.println("The zeroth element is " + counts[0]);
-\end{code}
+\end{codenv}
 
 You can use the \java{[]} operator anywhere in an expression:
 
-\begin{code}
+\begin{codenv}
 counts[0] = 7;
 counts[1] = counts[0] * 2;
 counts[2]++;
 counts[3] -= 60;
-\end{code}
+\end{codenv}
 
 Figure~\ref{fig.array2} shows the result of these statements.
 
@@ -6085,13 +6086,13 @@ You can use any expression as an index, as long as it has type \java{int}.
 One of the most common ways to index an array is with a loop variable.
 For example:
 
-\begin{code}
+\begin{codenv}
 int i = 0;
 while (i < 4) {
     System.out.println(counts[i]);
     i++;
 }
-\end{code}
+\end{codenv}
 
 This \java{while} loop counts from 0 up to 4.
 When \java{i} is 4, the condition fails and the loop terminates.
@@ -6103,11 +6104,11 @@ So the body of the loop is only executed when \java{i} is 0, 1, 2, and 3.
 Each time through the loop we use \java{i} as an index into the array, displaying the \java{i}th element.
 This type of array processing is often written using a \java{for} loop.
 
-\begin{code}
+\begin{codenv}
 for (int i = 0; i < 4; i++) {
     System.out.println(counts[i]);
 }
-\end{code}
+\end{codenv}
 
 \index{ArrayIndexOutOfBoundsException}
 \index{exception!ArrayIndexOutOfBounds}
@@ -6122,10 +6123,10 @@ If the index is negative or greater than 3, the result is an \java{ArrayIndexOut
 You can use \java{println} to display an array, but it probably doesn't do what you would like.
 For example, the following fragment (1) declares an array variable, (2) makes it refer to an array of four elements, and (3) attempts to display the contents of the array using \java{println}:
 
-\begin{code}
+\begin{codenv}
 int[] a = {1, 2, 3, 4};
 System.out.println(a);
-\end{code}
+\end{codenv}
 
 Unfortunately, the output is something like:
 
@@ -6136,7 +6137,7 @@ Unfortunately, the output is something like:
 The bracket indicates that the value is an array, \java{I} stands for ``integer'', and the rest of the address of the array.
 If we want to display the elements of the array, we can do it ourselves:
 
-\begin{code}
+\begin{codenv}
 public static void printArray(int[] a) {
     System.out.print("{" + a[0]);
     for (int i = 1; i < a.length; i++) {
@@ -6144,7 +6145,7 @@ public static void printArray(int[] a) {
     }
     System.out.println("}");
 }
-\end{code}
+\end{codenv}
 
 Given the previous array, the output of this method is:
 
@@ -6159,9 +6160,9 @@ The Java library provides a utility class \java{java.util.Arrays} that provides 
 One of them, \java{toString}, returns a string representation of an array.
 We can invoke it like this:
 
-\begin{code}
+\begin{codenv}
 System.out.println(Arrays.toString(a));
-\end{code}
+\end{codenv}
 
 And the output is:
 
@@ -6184,10 +6185,10 @@ When you make an assignment to an array variable, it simply copies the reference
 But it doesn't copy the array itself!
 For example:
 
-\begin{code}
+\begin{codenv}
 double[] a = new double[3];
 double[] b = a;
-\end{code}
+\end{codenv}
 
 These statements create an array of three \java{double}s and makes two different variables refer to it, as shown in Figure~\ref{fig.array3}.
 
@@ -6207,21 +6208,21 @@ Because \java{a} and \java{b} are different names for the same thing, they are s
 
 If you actually want to copy the array, not just a reference, you have to create a new array and copy the elements from the one to the other, like this:
 
-\begin{code}
+\begin{codenv}
 double[] b = new double[3];
 for (int i = 0; i < 3; i++) {
     b[i] = a[i];
 }
-\end{code}
+\end{codenv}
 
 \index{Arrays class}
 
 Another option is to use \java{java.util.Arrays}, which provides a method named \java{copyOf} that copies an array.
 You can invoke it like this:
 
-\begin{code}
+\begin{codenv}
 double[] b = Arrays.copyOf(a, 3);
-\end{code}
+\end{codenv}
 
 The second parameter is the number of elements you want to copy, so you can also use \java{copyOf} to copy just part of an array.
 
@@ -6235,12 +6236,12 @@ The examples in the previous section only work if the array has three elements.
 It would be better to generalize the code to work with arrays of any size.
 We can do that by replacing the magic number, \java{3}, with \java{a.length}:
 
-\begin{code}
+\begin{codenv}
 double[] b = new double[a.length];
 for (int i = 0; i < a.length; i++) {
     b[i] = a[i];
 }
-\end{code}
+\end{codenv}
 
 All arrays have a built-in constant, \java{length}, that stores the number of elements.
 The expression \java{a.length} may look like a method invocation, but there are no parentheses and no arguments.
@@ -6252,9 +6253,9 @@ When \java{i} is equal to \java{a.length}, the condition fails and the body is n
 
 You can also use \java{a.length} with \java{Arrays.copyOf}:
 
-\begin{code}
+\begin{codenv}
 double[] b = Arrays.copyOf(a, a.length);
-\end{code}
+\end{codenv}
 
 
 \section{Array traversal}
@@ -6263,11 +6264,11 @@ double[] b = Arrays.copyOf(a, a.length);
 Many computations can be implemented by looping through the elements of an array and performing an operation on each element.
 For example, the following loop squares the elements of a \java{double} array:
 
-\begin{code}
+\begin{codenv}
 for (int i = 0; i < a.length; i++) {
     a[i] = Math.pow(a[i], 2.0);
 }
-\end{code}
+\end{codenv}
 
 \index{traversal}
 \index{search}
@@ -6276,7 +6277,7 @@ Looping through the elements of an array is called a {\bf traversal}.
 Another common pattern is a {\bf search}, which involves traversing an array looking for a particular element.
 For example, the following method takes an \java{int} array and an integer value, and it returns the index where the value appears:
 
-\begin{code}
+\begin{codenv}
 public static int search(int[] a, int target) {
     for (int i = 0; i < a.length; i++) {
         if (a[i] == target) {
@@ -6285,7 +6286,7 @@ public static int search(int[] a, int target) {
     }
     return -1;
 }
-\end{code}
+\end{codenv}
 
 If we find the target value in the array, we return its index immediately.
 If the loop exits without finding the target, it returns \java{-1}, a special value chosen to indicate a failed search.
@@ -6296,7 +6297,7 @@ Another common traversal is a {\bf reduce} operation, which ``reduces'' an array
 Examples include the sum or product of the elements, the minimum, and the maximum.
 The following method takes a \java{double} array and returns the sum of the elements:
 
-\begin{code}
+\begin{codenv}
 public static int sum(double[] a) {
     double total = 0.0;
     for (int i = 0; i < a.length; i++) {
@@ -6304,7 +6305,7 @@ public static int sum(double[] a) {
     }
     return total;
 }
-\end{code}
+\end{codenv}
 
 \index{accumulator}
 
@@ -6347,7 +6348,7 @@ One way to test this behavior of \java{nextInt} is to generate a large number of
 The following method creates an \java{int} array and fills it with random numbers between 0 and 99.
 The argument specifies the size of the array, and the return value is a reference to the new array.
 
-\begin{code}
+\begin{codenv}
 public static int[] randomArray(int size) {
     Random random = new Random();
     int[] a = new int[size];
@@ -6356,15 +6357,15 @@ public static int[] randomArray(int size) {
     }
     return a;
 }
-\end{code}
+\end{codenv}
 
 The following fragment generates an array and displays it using \java{printArray} from Section~\ref{printarray}:
 
-\begin{code}
+\begin{codenv}
 int numValues = 8;
 int[] array = randomArray(numValues);
 printArray(array);
-\end{code}
+\end{codenv}
 
 The output looks like this:
 
@@ -6389,7 +6390,7 @@ To do that, we can traverse the array and count the number of elements that fall
 The following method takes an array and a two integers, \java{low} and \java{high}.
 It returns the number of elements that fall in the range from  \java{low} to \java{high}.
 
-\begin{code}
+\begin{codenv}
 public static int inRange(int[] a, int low, int high) {
     int count = 0;
     for (int i = 0; i < a.length; i++) {
@@ -6399,7 +6400,7 @@ public static int inRange(int[] a, int low, int high) {
     }
     return count;
 }
-\end{code}
+\end{codenv}
 
 \index{reduce}
 
@@ -6409,14 +6410,14 @@ This detail keeps us from counting any scores twice.
 
 Now we can count the number of scores in each grade range:
 
-\begin{code}
+\begin{codenv}
 int[] scores = randomArray(30);
 int a = inRange(scores, 90, 100);
 int b = inRange(scores, 80, 90);
 int c = inRange(scores, 70, 80);
 int d = inRange(scores, 60, 70);
 int f = inRange(scores, 0, 60);
-\end{code}
+\end{codenv}
 
 
 \section{Building a histogram}
@@ -6425,13 +6426,13 @@ The previous code is repetitious, but it is acceptable as long as the number of 
 But suppose we wanted to keep track of the number of times each score appears.
 We would have to write 100 lines of code:
 
-\begin{code}
+\begin{codenv}
 int count0 = inRange(scores, 0, 1);
 int count1 = inRange(scores, 1, 2);
 int count2 = inRange(scores, 2, 3);
 ...
 int count99 = inRange(scores, 99, 100);
-\end{code}
+\end{codenv}
 
 What we need is a way to store 100 counters, preferably so we can use an index to access them.
 In other words, we need another array!
@@ -6440,12 +6441,12 @@ The following fragment creates an array of 100 counters, one for each possible s
 It loops through the scores and uses \java{inRange} to count how many times each score appears.
 Then it stores the results in the array:
 
-\begin{code}
+\begin{codenv}
 int[] counts = new int[100];
 for (int i = 0; i < counts.length; i++) {
     counts[i] = inRange(scores, i, i + 1);
 }
-\end{code}
+\end{codenv}
 
 Notice that we are using the loop variable \java{i} three times: as an index into the \java{counts} array, and as two arguments for \java{inRange}.
 %
@@ -6460,13 +6461,13 @@ Every time the loop invokes \java{inRange}, it traverses the entire array.
 It would be better to make a single pass through the array, and for each score, compute which range it falls in and increment the corresponding counter.
 This code traverses the array of scores {\em only once} to generate the histogram:
 
-\begin{code}
+\begin{codenv}
 int[] counts = new int[100];
 for (int i = 0; i < scores.length; i++) {
     int index = scores[i];
     counts[index]++;
 }
-\end{code}
+\end{codenv}
 
 Each time through the loop, it selects one element from \java{scores} and uses it as an index to increment the corresponding element of \java{counts}.
 Because this code only traverses the array of scores once, it is much more efficient.
@@ -6478,19 +6479,19 @@ Because this code only traverses the array of scores once, it is much more effic
 Since traversing arrays is so common, Java provides an alternative syntax that makes the code more compact.
 For example, consider a \java{for} loop that displays the elements of an array on separate lines.
 
-\begin{code}
+\begin{codenv}
 for (int i = 0; i < values.length; i++) {
     System.out.println(values[i]);
 }
-\end{code}
+\end{codenv}
 
 We could rewrite the loop like this:
 
-\begin{code}
+\begin{codenv}
 for (int value : values) {
     System.out.println(value);
 }
-\end{code}
+\end{codenv}
 
 \index{enhanced for loop}
 
@@ -6500,12 +6501,12 @@ It's conventional to use plural nouns for array variables and singular nouns for
 
 Using the enhanced \java{for} loop, and removing the temporary variable, we can write the histogram code from the previous section more concisely:
 
-\begin{code}
+\begin{codenv}
 int[] counts = new int[100];
 for (int score : scores) {
     counts[score]++;
 }
-\end{code}
+\end{codenv}
 
 Enhanced \java{for} loops often make the code more readable, especially for accumulating values.
 But they are not helpful when you need to refer to the index, as in search operations.
@@ -6588,7 +6589,7 @@ Generalize it to take the number of counters as an argument.
 The purpose of this exercise is to practice reading code and recognizing the traversal patterns in this chapter.
 The following methods are hard to read, because instead of using meaningful names for the variables and methods, they use names of fruit.
 
-\begin{code}
+\begin{codenv}
 public static int banana(int[] a) {
     int kiwi = 1;
     int i = 0;
@@ -6598,9 +6599,9 @@ public static int banana(int[] a) {
     }
     return kiwi;
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static int grapefruit(int[] a, int grape) {
     for (int i = 0; i < a.length; i++) {
         if (a[i] == grape) {
@@ -6609,9 +6610,9 @@ public static int grapefruit(int[] a, int grape) {
     }
     return -1;
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static int pineapple(int[] a, int apple) {
     int pear = 0;
     for (int pine: a) {
@@ -6621,7 +6622,7 @@ public static int pineapple(int[] a, int apple) {
     }
     return pear;
 }
-\end{code}
+\end{codenv}
 
 For each method, write one sentence that describes what the method does, without getting into the details of how it works.
 For each variable, identify the role it plays.
@@ -6634,7 +6635,7 @@ What is the output of the following program?
 Draw a stack diagram that shows the state of the program just before \java{mus} returns.
 Describe in a few words what \java{mus} does.
 
-\begin{code}
+\begin{codenv}
 public static int[] make(int n) {
     int[] a = new int[n];
     for (int i = 0; i < n; i++) {
@@ -6642,17 +6643,17 @@ public static int[] make(int n) {
     }
     return a;
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static void dub(int[] jub) {
     for (int i = 0; i < jub.length; i++) {
         jub[i] *= 2;
     }
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static int mus(int[] zoo) {
     int fus = 0;
     for (int i = 0; i < zoo.length; i++) {
@@ -6660,15 +6661,15 @@ public static int mus(int[] zoo) {
     }
     return fus;
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     int[] bob = make(5);
     dub(bob);
     System.out.println(mus(bob));
 }
-\end{code}
+\end{codenv}
 \end{exercise}
 
 
@@ -6714,9 +6715,9 @@ If there is more than one element in the range, we can break the array into two 
 \item Methods like \java{maxInRange} can be awkward to use.
 To find the largest element in an array, we have to provide the range for the entire array.
 
-\begin{code}
+\begin{codenv}
 double max = maxInRange(a, 0, a.length - 1);
-\end{code}
+\end{codenv}
 
 Write a method called \java{max} that takes an array and uses \java{maxInRange} to find and return the largest element.
 
@@ -6769,10 +6770,10 @@ We will explain some of the differences between object types and primitive types
 Strings provide a method named \java{charAt}, which extracts a character.
 It returns a \java{char}, a primitive type that stores an individual character (as opposed to strings of them).
 
-\begin{code}
+\begin{codenv}
 String fruit = "banana";
 char letter = fruit.charAt(0);
-\end{code}
+\end{codenv}
 
 The argument \java{0} means that we want the letter at position 0.
 Like array indexes, string indexes start at 0, so the character assigned to \java{letter} is \java{b}.
@@ -6780,11 +6781,11 @@ Like array indexes, string indexes start at 0, so the character assigned to \jav
 Characters work like the other primitive types we have seen.
 You can compare them using relational operators:
 
-\begin{code}
+\begin{codenv}
 if (letter == 'a') {
     System.out.println('?');
 }
-\end{code}
+\end{codenv}
 
 \index{quote mark}
 \index{escape sequence}
@@ -6796,13 +6797,13 @@ Escape sequences, like \java{'\t'}, are legal because they represent a single ch
 The increment and decrement operators work with characters.
 So this loop displays the letters of the alphabet:
 
-\begin{code}
+\begin{codenv}
 System.out.print("Roman alphabet: ");
 for (char c = 'A'; c <= 'Z'; c++) {
     System.out.print(c);
 }
 System.out.println();
-\end{code}
+\end{codenv}
 
 \index{Unicode}
 
@@ -6812,13 +6813,13 @@ You can read more about it at \url{http://unicode.org/}.
 In Unicode, each character is represented by a ``code unit'', which you can think of as an integer.
 The code units for uppercase Greek letters run from 913 to 937, so we can display the Greek alphabet like this:
 
-\begin{code}
+\begin{codenv}
 System.out.print("Greek alphabet: ");
 for (int i = 913; i <= 937; i++) {
     System.out.print((char) i);
 }
 System.out.println();
-\end{code}
+\end{codenv}
 
 This example uses a type cast to convert each integer (in the range) to the corresponding character.
 
@@ -6837,10 +6838,10 @@ But neither these methods nor any others can change a string, because strings ar
 When you invoke \java{toUpperCase} on a string, you get a new string object as a return value.
 For example:
 
-\begin{code}
+\begin{codenv}
 String name = "Alan Turing";
 String upperName = name.toUpperCase();
-\end{code}
+\end{codenv}
 
 \index{Turing, Alan}
 
@@ -6852,10 +6853,10 @@ But \java{name} still refers to \java{"Alan Turing"}.
 Another useful method is \java{replace}, which finds and replaces instances of one string within another.
 This example replaces \java{"Computer Science"} with \java{"CS"}:
 
-\begin{code}
+\begin{codenv}
 String text = "Computer Science is fun!";
 text = text.replace("Computer Science", "CS");
-\end{code}
+\end{codenv}
 
 This example demonstrates a common way to work with string methods.
 It invokes \java{text.replace}, which returns a reference to a new string, \java{"CS is fun!"}.
@@ -6876,12 +6877,12 @@ This assignment is important; if you don't save the return value, invoking \java
 
 The following loop traverses the characters in \java{fruit} and displays them, one on each line.
 
-\begin{code}
+\begin{codenv}
 for (int i = 0; i < fruit.length(); i++) {
     char letter = fruit.charAt(i);
     System.out.println(letter);
 }
-\end{code}
+\end{codenv}
 
 \index{string!length}
 \index{length!string}
@@ -6900,18 +6901,18 @@ The condition is \java{i < fruit.length()}, which means that when \java{i} is eq
 Unfortunately, the enhanced \java{for} loop does not work with strings.
 But you can convert any string to a character array and iterate that:
 
-\begin{code}
+\begin{codenv}
 for (char letter : fruit.toCharArray()) {
     System.out.println(letter);
 }
-\end{code}
+\end{codenv}
 
 To find the last letter of a string, you might be tempted to try something like:
 
-\begin{code}
+\begin{codenv}
 int length = fruit.length();
 char last = fruit.charAt(length);      // wrong!
-\end{code}
+\end{codenv}
 
 \index{StringIndexOutOfBoundsException}
 \index{exception!StringIndexOutOfBounds}
@@ -6921,15 +6922,15 @@ The problem is that there is no sixth letter in \java{"banana"}.
 Since we started counting at 0, the 6 letters are indexed from 0 to 5.
 To get the last character, you have to subtract 1 from \java{length}.
 
-\begin{code}
+\begin{codenv}
 int length = fruit.length();
 char last = fruit.charAt(length - 1);  // correct
-\end{code}
+\end{codenv}
 
 Many string traversals involve reading one string and creating another.
 For example, to reverse a string, we simply add one character at a time:
 
-\begin{code}
+\begin{codenv}
 public static String reverse(String s) {
     String r = "";
     for (int i = s.length() - 1; i >= 0; i--) {
@@ -6937,7 +6938,7 @@ public static String reverse(String s) {
     }
     return r;
 }
-\end{code}
+\end{codenv}
 
 \index{empty string}
 
@@ -7003,10 +7004,10 @@ For example, to select a substring with length \java{len}, starting at index \ja
 
 The \java{indexOf} method searches for a character in a string.
 
-\begin{code}
+\begin{codenv}
 String fruit = "banana";
 int index = fruit.indexOf('a');
-\end{code}
+\end{codenv}
 
 This example finds the index of \java{'a'} in the string.
 But the letter appears three times, so it's not obvious what \java{indexOf} should do.
@@ -7014,9 +7015,9 @@ According to the documentation, it returns the index of the {\em first} appearan
 
 To find subsequent appearances, you can use another version of \java{indexOf}, which takes a second argument that indicates where in the string to start looking.
 
-\begin{code}
+\begin{codenv}
 int index = fruit.indexOf('a', 2);
-\end{code}
+\end{codenv}
 
 This code starts at index 2 (the first \java{'n'}) and finds the next \java{'a'}, which is at index 3.
 If the letter happens to appear at the starting index, the starting index is the answer.
@@ -7037,13 +7038,13 @@ For example, the expression \java{fruit.indexOf("nan")} returns 2.
 
 To compare two strings, it may be tempting to use the \java{==} and \java{!=} operators.
 
-\begin{code}
+\begin{codenv}
 String name1 = "Alan Turing";
 String name2 = "Ada Lovelace";
 if (name1 == name2) {                 // wrong!
     System.out.println("The names are the same.");
 }
-\end{code}
+\end{codenv}
 
 This code compiles and runs, and most of the time it gets the answer right.
 But it is not correct, and sometimes it gets the answer wrong.
@@ -7052,18 +7053,18 @@ If you give it two different strings that contain the same letters, it yields \j
 
 The right way to compare strings is with the \java{equals} methods, like this:
 
-\begin{code}
+\begin{codenv}
 if (name1.equals(name2)) {
     System.out.println("The names are the same.");
 }
-\end{code}
+\end{codenv}
 
 This example invokes \java{equals} on \java{name1} and passes \java{name2} as an argument.
 The \java{equals} method returns \java{true} if the strings contain the same characters, otherwise it returns \java{false}.
 
 If the strings differ, we can use \java{compareTo} to see which comes first in alphabetical order:
 
-\begin{code}
+\begin{codenv}
 int diff = name1.compareTo(name2);
 if (diff == 0) {
     System.out.println("The names are the same.");
@@ -7072,7 +7073,7 @@ if (diff == 0) {
 } else if (diff > 0) {
     System.out.println("name2 comes before name1.");
 }
-\end{code}
+\end{codenv}
 
 The return value from \java{compareTo} is the difference between the first characters in the strings that differ.
 If the strings are equal, their difference is zero.
@@ -7096,7 +7097,7 @@ In Section~\ref{printf}, we learned how to use \java{printf} to display formatte
 Sometimes programs need to create strings that are formatted a certain way, but not display them immediately, or ever.
 For example, the following method returns a time string in 12-hour format:
 
-\begin{code}
+\begin{codenv}
 public static String timeString(int hour, int minute) {
     String ampm;
     if (hour < 12) {
@@ -7110,7 +7111,7 @@ public static String timeString(int hour, int minute) {
     }
     return String.format("%02d:%02d %s", hour, minute, ampm);
 }
-\end{code}
+\end{codenv}
 
 \index{string!format}
 
@@ -7126,10 +7127,10 @@ In this example, the format specifier \java{\%02d} means ``two digit integer pad
 Primitive values (like \java{int}s, \java{double}s, and \java{char}s) do not provide methods.
 For example, you can't call \java{equals} on an \java{int}:
 
-\begin{code}
+\begin{codenv}
 int i = 5;
 System.out.println(i.equals(5));  // compiler error
-\end{code}
+\end{codenv}
 
 \index{wrapper class}
 \index{Character}
@@ -7148,10 +7149,10 @@ Because these constants are available in wrapper classes, you don't have to reme
 Wrapper classes provide methods for converting strings to other types.
 For example, \java{Integer.parseInt} converts a string to (you guessed it) an integer:
 
-\begin{code}
+\begin{codenv}
 String str = "12345";
 int num = Integer.parseInt(str);
-\end{code}
+\end{codenv}
 
 \index{parse}
 
@@ -7160,10 +7161,10 @@ In this context, {\bf parse} means something like ``read and translate''.
 The other wrapper classes provide similar methods, like \java{Double.parseDouble} and \java{Boolean.parseBoolean}.
 They also provide \java{toString}, which returns a string representation of a value:
 
-\begin{code}
+\begin{codenv}
 int num = 12345;
 String str = Integer.toString(num);
-\end{code}
+\end{codenv}
 
 The result is the string \java{"12345"}.
 
@@ -7177,19 +7178,19 @@ Continuing an earlier example, let's write a program to find the largest value i
 Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
 Here is a starting point:
 
-\begin{code}
+\begin{codenv}
 public class Max {
     public static void main(String[] args) {
         System.out.println(Arrays.toString(args));
     }
 }
-\end{code}
+\end{codenv}
 
 You can run this program from the command line by typing:
 
-\begin{code}
+\begin{codenv}
 java Max
-\end{code}
+\end{codenv}
 
 \index{empty array}
 
@@ -7217,7 +7218,7 @@ To find the maximum number, we have to convert the arguments to integers.
 
 The following fragment uses an enhanced \java{for} loop to parse the arguments (using the \java{Integer} wrapper class) and find the largest value:
 
-\begin{code}
+\begin{codenv}
 int max = Integer.MIN_VALUE;
 for (String arg : args) {
     int value = Integer.parseInt(arg);
@@ -7226,7 +7227,7 @@ for (String arg : args) {
     }
 }
 System.out.println("The max is " + max);
-\end{code}
+\end{codenv}
 
 The initial value of \java{max} is the smallest (most negative) number an \java{int} can represent, so any other value is greater.
 If \java{args} is empty, the result is \java{MIN_VALUE}.
@@ -7355,7 +7356,7 @@ Your solution should only traverse the string once.
 The purpose of this exercise is to review encapsulation and generalization (see Section~\ref{encapsulation}).
 The following code fragment traverses a string and checks whether it has the same number of open and close parentheses:
 
-\begin{code}
+\begin{codenv}
 String s = "((3 + 7) * 2)";
 int count = 0;
 
@@ -7369,7 +7370,7 @@ for (int i = 0; i < s.length(); i++) {
 }
 
 System.out.println(count);
-\end{code}
+\end{codenv}
 
 \begin{enumerate}
 
@@ -7388,41 +7389,41 @@ System.out.println(count);
 
 Create a program called {\tt Recurse.java} and type in the following methods:
 
-\begin{code}
+\begin{codenv}
 /**
  * Returns the first character of the given String.
  */
 public static char first(String s) {
     return s.charAt(0);
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 /**
  * Returns all but the first letter of the given String.
  */
 public static String rest(String s) {
     return s.substring(1);
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 /**
  * Returns all but the first and last letter of the String.
  */
 public static String middle(String s) {
     return s.substring(1, s.length() - 1);
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 /**
  * Returns the length of the given String.
  */
 public static int length(String s) {
     return s.length();
 }
-\end{code}
+\end{codenv}
 
 \begin{enumerate}
 
@@ -7437,10 +7438,10 @@ It should be a void method.
 \item Now write a method called \java{reverseString} that takes a string as a parameter and that returns a new string as a return value.
 The new string should contain the same letters as the parameter, but in reverse order.
 
-\begin{code}
+\begin{codenv}
 String backwards = reverseString("coffee");
 System.out.println(backwards);
-\end{code}
+\end{codenv}
 
 The output of this example code should be:
 
@@ -7557,19 +7558,19 @@ For example, $(0,0)$ indicates the origin, and $(x,y)$ indicates the point $x$ u
 
 In order to use the \java{Point} class, you have to import it.
 
-\begin{code}
+\begin{codenv}
 import java.awt.Point;
-\end{code}
+\end{codenv}
 
 \index{new}
 \index{operator!new}
 
 Then, to create a new point, you have to use the \java{new} operator:
 
-\begin{code}
+\begin{codenv}
 Point blank;
 blank = new Point(3, 4);
-\end{code}
+\end{codenv}
 
 \index{declaration}
 \index{statement!declaration}
@@ -7609,9 +7610,9 @@ Variables that belong to an object are usually called {\bf attributes}, but you 
 To access an attribute of an object, Java uses {\bf dot notation}.
 For example:
 
-\begin{code}
+\begin{codenv}
 int x = blank.x;
-\end{code}
+\end{codenv}
 
 The expression \java{blank.x} means ``go to the object \java{blank} refers to, and get the value of the attribute \java{x}.''
 In this case, we assign that value to a local variable named \java{x}.
@@ -7621,10 +7622,10 @@ The purpose of dot notation is to identify {\em which} variable you are referrin
 You can use dot notation as part of an expression.
 For example:
 
-\begin{code}
+\begin{codenv}
 System.out.println(blank.x + ", " + blank.y);
 int sum = blank.x * blank.x + blank.y * blank.y;
-\end{code}
+\end{codenv}
 
 The first line displays \java{3, 4}; the second line calculates the value \java{25}.
 
@@ -7637,11 +7638,11 @@ The first line displays \java{3, 4}; the second line calculates the value \java{
 You can pass objects as parameters in the usual way.
 For example:
 
-\begin{code}
+\begin{codenv}
 public static void printPoint(Point p) {
     System.out.println("(" + p.x + ", " + p.y + ")");
 }
-\end{code}
+\end{codenv}
 
 This method takes a point as an argument and displays its attributes in parentheses.
 If you invoke \java{printPoint(blank)}, it displays \java{(3, 4)}.
@@ -7658,13 +7659,13 @@ In this case, it shows the name of the type (\java{java.awt.Point}) and the name
 
 As another example, we can rewrite the \java{distance} method from Section~\ref{distance} so that it takes two \java{Point}s as parameters instead of four \java{double}s.
 
-\begin{code}
+\begin{codenv}
 public static double distance(Point p1, Point p2) {
     double dx = (double) (p2.x - p1.x);
     double dy = (double) (p2.y - p1.y);
     return Math.sqrt(dx * dx + dy * dy);
 }
-\end{code}
+\end{codenv}
 
 Passing objects as parameters makes the source code more readable and less error-prone, because related values are bundled together.
 
@@ -7677,16 +7678,16 @@ Passing objects as parameters makes the source code more readable and less error
 The \java{java.awt} package also provides a class called \java{Rectangle}.
 To use it, you have to import it:
 
-\begin{code}
+\begin{codenv}
 import java.awt.Rectangle;
-\end{code}
+\end{codenv}
 
 \java{Rectangle} objects are similar to points, but they have four attributes: \java{x}, \java{y}, \java{width}, and \java{height}.
 The following example creates a \java{Rectangle} object and makes the variable \java{box} refer to it.
 
-\begin{code}
+\begin{codenv}
 Rectangle box = new Rectangle(0, 0, 100, 200);
-\end{code}
+\end{codenv}
 
 Figure~\ref{fig.rectangle} shows the effect of this assignment.
 
@@ -7712,13 +7713,13 @@ Again, \java{println} uses the \java{toString} method provided by \java{Rectangl
 You can write methods that return objects.
 For example, \java{findCenter} takes a \java{Rectangle} as an argument and returns a \java{Point} with the coordinates of the center of the rectangle:
 
-\begin{code}
+\begin{codenv}
 public static Point findCenter(Rectangle box) {
     int x = box.x + box.width / 2;
     int y = box.y + box.height / 2;
     return new Point(x, y);
 }
-\end{code}
+\end{codenv}
 
 The return type of this method is \java{Point}.
 The last line creates a new \java{Point} object and returns a reference to it.
@@ -7732,11 +7733,11 @@ The last line creates a new \java{Point} object and returns a reference to it.
 You can change the contents of an object by making an assignment to one of its attributes.
 For example, to ``move'' a rectangle without changing its size, you can modify the \java{x} and \java{y} values:
 
-\begin{code}
+\begin{codenv}
 Rectangle box = new Rectangle(0, 0, 100, 200);
 box.x = box.x + 50;
 box.y = box.y + 100;
-\end{code}
+\end{codenv}
 
 The result is shown in Figure~\ref{fig.rectangle2}.
 
@@ -7753,21 +7754,21 @@ The result is shown in Figure~\ref{fig.rectangle2}.
 
 We can encapsulate this code in a method and generalize it to move the rectangle by any amount:
 
-\begin{code}
+\begin{codenv}
 public static void moveRect(Rectangle box, int dx, int dy) {
     box.x = box.x + dx;
     box.y = box.y + dy;
 }
-\end{code}
+\end{codenv}
 
 The variables \java{dx} and \java{dy} indicate how far to move the rectangle in each direction.
 Invoking this method has the effect of modifying the \java{Rectangle} that is passed as an argument.
 
-\begin{code}
+\begin{codenv}
 Rectangle box = new Rectangle(0, 0, 100, 200);
 moveRect(box, 50, 100);
 System.out.println(box);
-\end{code}
+\end{codenv}
 
 %The code displays \java{java.awt.Rectangle[x=50,y=100,width=100,height=200]}.
 
@@ -7777,9 +7778,9 @@ But it can also make debugging more difficult, because it is not always clear wh
 Java provides a number of methods that operate on \java{Point}s and \java{Rectangle}s.
 For example, \java{translate} has the same effect as \java{moveRect}, but instead of passing the rectangle as an argument, you use dot notation:
 
-\begin{code}
+\begin{codenv}
 box.translate(50, 100);
-\end{code}
+\end{codenv}
 
 This line invokes the \java{translate} method for the object that \java{box} refers to.
 As a result, the \java{box} object is updated directly.
@@ -7799,10 +7800,10 @@ Remember that when you assign an object to a variable, you are assigning a {\em 
 It is possible to have multiple variables that refer to the same object.
 The state diagram in Figure~\ref{fig.aliasing} shows the result.
 
-\begin{code}
+\begin{codenv}
 Rectangle box1 = new Rectangle(0, 0, 100, 200);
 Rectangle box2 = box1;
-\end{code}
+\end{codenv}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -7817,11 +7818,11 @@ Rectangle box2 = box1;
 Notice how \java{box1} and \java{box2} are aliases for the same object, so any changes that affect one variable also affect the other.
 This example adds 50 to all four sides of the rectangle, so it moves the corner up and to the left by 50, and it increases the height and width by 100:
 
-\begin{code}
+\begin{codenv}
 System.out.println(box2.width);
 box1.grow(50, 50);
 System.out.println(box2.width);
-\end{code}
+\end{codenv}
 
 The first line displays {\tt 100}, which is the width of the \java{Rectangle} referred to by \java{box2}.
 The second line invokes the \java{grow} method on \java{box1}, which stretches the \java{Rectangle} horizontally and vertically.
@@ -7851,9 +7852,9 @@ When you create an object variable, remember that you are storing a reference to
 In Java, the keyword \java{null} is a special value that means ``no object''.
 You can declare and initialize object variables this way:
 
-\begin{code}
+\begin{codenv}
 Point blank = null;
-\end{code}
+\end{codenv}
 
 The value \java{null} is represented in state diagrams by a small box with no arrow, as in Figure~\ref{fig.reference2}.
 
@@ -7871,11 +7872,11 @@ The value \java{null} is represented in state diagrams by a small box with no ar
 
 If you try to use a \java{null} value, either by accessing an attribute or invoking a method, Java throws a \java{NullPointerException}.
 
-\begin{code}
+\begin{codenv}
 Point blank = null;
 int x = blank.x;              // NullPointerException
 blank.translate(50, 50);      // NullPointerException
-\end{code}
+\end{codenv}
 
 On the other hand, it is legal to pass a null reference as an argument or receive one as a return value.
 For example, \java{null} is often used to represent a special condition or indicate an error.
@@ -7886,10 +7887,10 @@ For example, \java{null} is often used to represent a special condition or indic
 In Section~\ref{aliasing}, we saw what happens when more than one variable refers to the same object.
 What happens when {\em no} variables refer to an object?
 
-\begin{code}
+\begin{codenv}
 Point blank = new Point(3, 4);
 blank = null;
-\end{code}
+\end{codenv}
 
 The first line creates a new \java{Point} object and makes \java{blank} refer to it.
 The second line changes \java{blank} so that instead of referring to the object, it refers to nothing.
@@ -8044,14 +8045,14 @@ How can you tell?
 
 \end{enumerate}
 
-\begin{code}
+\begin{codenv}
 public static int riddle(int x, Point p) {
     x = x + 7;
     return x + p.x + p.y;
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     int x = 5;
     Point blank = new Point(1, 2);
@@ -8061,7 +8062,7 @@ public static void main(String[] args) {
     System.out.println(blank.x);
     System.out.println(blank.y);
 }
-\end{code}
+\end{codenv}
 
 \end{exercise}
 
@@ -8079,7 +8080,7 @@ Include all variables and parameters, and show the objects those variables refer
 
 \end{enumerate}
 
-\begin{code}
+\begin{codenv}
 public static double distance(Point p1, Point p2) {
     int dx = p1.x - p2.x;
     int dy = p1.y - p2.y;
@@ -8091,9 +8092,9 @@ public static Point findCenter(Rectangle box) {
     int y = box.y + box.height / 2;
     return new Point(x, y);
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     Point blank = new Point(5, 8);
 
@@ -8103,7 +8104,7 @@ public static void main(String[] args) {
     double dist = distance(center, blank);
     System.out.println(dist);
 }
-\end{code}
+\end{codenv}
 
 \end{exercise}
 
@@ -8124,7 +8125,7 @@ Why or why not?
 
 \end{enumerate}
 
-\begin{code}
+\begin{codenv}
 public static void printPoint(Point p) {
     System.out.println("(" + p.x + ", " + p.y + ")");
 }
@@ -8134,9 +8135,9 @@ public static Point findCenter(Rectangle box) {
     int y = box.y + box.height / 2;
     return new Point(x, y);
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     Rectangle box1 = new Rectangle(2, 4, 7, 9);
     Point p1 = findCenter(box1);
@@ -8146,7 +8147,7 @@ public static void main(String[] args) {
     Point p2 = findCenter(box1);
     printPoint(p2);
 }
-\end{code}
+\end{codenv}
 
 \end{exercise}
 
@@ -8177,10 +8178,10 @@ Take a minute to read the documentation, which you can find by doing a web searc
 \item There are several ways to create a BigInteger, but the simplest uses \java{valueOf}.
 The following code converts an integer to a BigInteger:
 
-\begin{code}
+\begin{codenv}
 int x = 17;
 BigInteger big = BigInteger.valueOf(x);
-\end{code}
+\end{codenv}
 
 %Type in this code and try it out.
 %Try displaying a BigInteger.
@@ -8189,11 +8190,11 @@ BigInteger big = BigInteger.valueOf(x);
 Instead, we have to use methods like \java{add}.
 To add two BigIntegers, invoke \java{add} on one and pass the other as an argument.
 
-\begin{code}
+\begin{codenv}
 BigInteger small = BigInteger.valueOf(17);
 BigInteger big = BigInteger.valueOf(1700000000);
 BigInteger total = small.add(big);
-\end{code}
+\end{codenv}
 
 Try out some of the other methods, like \java{multiply} and \java{pow}.
 
@@ -8215,7 +8216,7 @@ How can you tell?
 Many encryption algorithms depend on the ability to raise large integers to a power.
 Here is a method that implements an efficient algorithm for integer exponentiation:
 
-\begin{code}
+\begin{codenv}
 public static int pow(int x, int n) {
     if (n == 0) return 1;
 
@@ -8230,7 +8231,7 @@ public static int pow(int x, int n) {
         return t * t * x;
     }
 }
-\end{code}
+\end{codenv}
 
 \index{BigInteger}
 
@@ -8306,13 +8307,13 @@ Just to keep things interesting, let's make \java{second} a \java{double}.
 Instance variables are declared at the beginning of the class definition, outside of any method.
 By itself, this code fragment is a legal class definition:
 
-\begin{code}
+\begin{codenv}
 public class Time {
     private int hour;
     private int minute;
     private double second;
 }
-\end{code}
+\end{codenv}
 
 \index{private}
 \index{variable!private}
@@ -8346,13 +8347,13 @@ The syntax for constructors is similar to that of other methods, except:
 
 Here is an example constructor for the \java{Time} class:
 
-\begin{code}
+\begin{codenv}
 public Time() {
     this.hour = 0;
     this.minute = 0;
     this.second = 0.0;
 }
-\end{code}
+\end{codenv}
 
 This constructor does not take any arguments.
 Each line initializes an instance variable to zero (which in this example means midnight).
@@ -8370,9 +8371,9 @@ Like void methods, constructors do not return values.
 
 To create a Time object, you must use the \java{new} operator:
 
-\begin{code}
+\begin{codenv}
 Time time = new Time();
-\end{code}
+\end{codenv}
 
 \index{new}
 \index{operator!new}
@@ -8397,14 +8398,14 @@ Beginners sometimes make the mistake of invoking \java{new} inside the construct
 You don't have to, and you shouldn't.
 In this example, invoking \java{new Time()} in the constructor causes an infinite recursion.
 
-\begin{code}
+\begin{codenv}
 public Time() {
     new Time();        // wrong!
     this.hour = 0;
     this.minute = 0;
     this.second = 0.0;
 }
-\end{code}
+\end{codenv}
 
 %If you don't provide a constructor for a class, then Java will generate one for you automatically.
 %The default constructor takes no arguments and initializes all attributes to zero (or an equivalent value like \java{false} or \java{null}).
@@ -8422,13 +8423,13 @@ Java knows which constructor to invoke by matching the arguments you provide wit
 
 It is common to provide a constructor that takes no arguments, like the previous one, and a ``value constructor'', like this one:
 
-\begin{code}
+\begin{codenv}
 public Time(int hour, int minute, double second) {
     this.hour = hour;
     this.minute = minute;
     this.second = second;
 }
-\end{code}
+\end{codenv}
 
 \index{shadowing}
 
@@ -8440,9 +8441,9 @@ Parameters don't have to use the same names, but that's a common style.
 To invoke this second constructor, you have to provide arguments after the \java{new} operator.
 This example creates a \java{Time} object that represents a fraction of a second before noon:
 
-\begin{code}
+\begin{codenv}
 Time time = new Time(11, 59, 59.9);
-\end{code}
+\end{codenv}
 
 Overloading constructors provides the flexibility to create an object first and then fill in the attributes, or collect all the information before creating the object itself.
 
@@ -8452,7 +8453,7 @@ In fact, some IDEs can generate them for you.
 
 Pulling it all together, here is the complete class definition so far:
 
-\begin{code}
+\begin{codenv}
 public class Time {
     private int hour;
     private int minute;
@@ -8470,7 +8471,7 @@ public class Time {
         this.second = second;
     }
 }
-\end{code}
+\end{codenv}
 
 
 \section{Getters and setters}
@@ -8485,7 +8486,7 @@ For example, here's a new class called \java{TimeClient}, because a class that u
 
 \index{client}
 
-\begin{code}
+\begin{codenv}
 public class TimeClient {
 
     public static void main(String[] args) {
@@ -8493,7 +8494,7 @@ public class TimeClient {
         System.out.println(time.hour);
     }
 }
-\end{code}
+\end{codenv}
 
 If you try to compile this code, you will get a message like {\tt hour has private access in Time}.
 There are three ways to solve this problem:
@@ -8519,7 +8520,7 @@ But if $A$ only uses methods to interact with $B$, $A$ and $B$ are ``independent
 
 So if we decide that \java{TimeClient} should be able to read the instance variables of \java{Time}, we can provide methods to do it:
 
-\begin{code}
+\begin{codenv}
 public int getHour() {
     return this.hour;
 }
@@ -8531,7 +8532,7 @@ public int getMinute() {
 public int getSecond() {
     return this.second;
 }
-\end{code}
+\end{codenv}
 
 \index{accessor}
 \index{method!accessor}
@@ -8543,7 +8544,7 @@ By convention, the method that gets a variable named \java{something} is called 
 
 If we decide that \java{TimeClient} should also be able to modify the instance variables of \java{Time}, we can provide methods to do that, too:
 
-\begin{code}
+\begin{codenv}
 public void setHour(int hour) {
     this.hour = hour;
 }
@@ -8555,7 +8556,7 @@ public void setMinute(int minute) {
 public void setSecond(int second) {
     this.second = second;
 }
-\end{code}
+\end{codenv}
 
 \index{mutator}
 \index{method!mutator}
@@ -8573,12 +8574,12 @@ Writing getters and setters can get boring, but many IDEs can generate them for 
 
 If you create a \java{Time} object and display it with \java{println}:
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     Time time = new Time(11, 59, 59.9);
     System.out.println(time);
 }
-\end{code}
+\end{codenv}
 
 \index{print}
 \index{statement!print}
@@ -8599,7 +8600,7 @@ This address can be useful for debugging, if you want to keep track of individua
 To display \java{Time} objects in a way that is more meaningful to users, you could write a method to display the hour, minute, and second.
 Using \java{printTime} in Section~\ref{time} as a starting point, we could write:
 
-\begin{code}
+\begin{codenv}
 public static void printTime(Time t) {
     System.out.print(t.hour);
     System.out.print(":");
@@ -8607,7 +8608,7 @@ public static void printTime(Time t) {
     System.out.print(":");
     System.out.println(t.second);
 }
-\end{code}
+\end{codenv}
 
 The output of this method, given the \java{time} object from the previous section, would be {\tt 11:59:59.9}.
 We can use \java{printf} to write it more concisely:
@@ -8616,12 +8617,12 @@ We can use \java{printf} to write it more concisely:
 \index{print statement}
 \index{format string}
 
-\begin{code}
+\begin{codenv}
 public static void printTime(Time t) {
     System.out.printf("%02d:%02d:%04.1f\n",
         t.hour, t.minute, t.second);
 }
-\end{code}
+\end{codenv}
 
 As a reminder, you need to use \java{\%d} with integers and \java{\%f} with floating-point numbers.
 The \java{02} option means ``total width 2, with leading zeros if necessary'', and the \java{04.1} option means ``total width 4, one digit after the decimal point, leading zeros if necessary''.
@@ -8640,12 +8641,12 @@ When you display an object using \java{print} or \java{println}, Java invokes th
 By default it simply displays the type of the object and its address, but you can {\bf override} this behavior by providing your own \java{toString} method.
 For example, here is a \java{toString} method for \java{Time}:
 
-\begin{code}
+\begin{codenv}
 public String toString() {
     return String.format("%02d:%02d:%04.1f\n",
         this.hour, this.minute, this.second);
 }
-\end{code}
+\end{codenv}
 
 \index{instance method}
 \index{method!instance}
@@ -8668,16 +8669,16 @@ The body of the method is similar to \java{printTime} in the previous section, w
 
 Now you can call \java{toString} directly:
 
-\begin{code}
+\begin{codenv}
 Time time = new Time(11, 59, 59.9);
 String s = time.toString();
-\end{code}
+\end{codenv}
 
 Or you can invoke it indirectly through \java{println}:
 
-\begin{code}
+\begin{codenv}
 System.out.println(time);
-\end{code}
+\end{codenv}
 
 In this example, \java{this} in \java{toString} refers to the same object as \java{time}.
 The output is {\tt 11:59:59.9}.
@@ -8710,11 +8711,11 @@ But the definition of equivalence is different for different objects, so objects
 
 Consider the following variables:
 
-\begin{code}
+\begin{codenv}
 Time time1 = new Time(9, 30, 0.0);
 Time time2 = time1;
 Time time3 = new Time(9, 30, 0.0);
-\end{code}
+\end{codenv}
 
 Figure~\ref{fig.time2} is a state diagram that shows these variables and their values.
 
@@ -8741,20 +8742,20 @@ For example, \java{time1} and \java{time3} represent the same time of day, so we
 
 We can provide an \java{equals} method that implements this notion of equivalence:
 
-\begin{code}
+\begin{codenv}
 public boolean equals(Time that) {
     return this.hour == that.hour
         && this.minute == that.minute
         && this.second == that.second;
 }
-\end{code}
+\end{codenv}
 
 \java{equals} is an instance method, so it uses \java{this} to refer to the current object and it doesn't have the keyword \java{static}.
 We can invoke equals as follows:
 
-\begin{code}
+\begin{codenv}
 time1.equals(time3);
-\end{code}
+\end{codenv}
 
 Inside the \java{equals} method, \java{this} refers to the same object as \java{time1}, and \java{that} refers to the same object as \java{time3}.
 Since their instance variables are equal, the result is \java{true}.
@@ -8789,7 +8790,7 @@ Here is a rough draft that uses the static approach:
 \index{static}
 \index{method!static}
 
-\begin{code}
+\begin{codenv}
 public static Time add(Time t1, Time t2) {
     Time sum = new Time();
     sum.hour = t1.hour + t2.hour;
@@ -8797,22 +8798,22 @@ public static Time add(Time t1, Time t2) {
     sum.second = t1.second + t2.second;
     return sum;
 }
-\end{code}
+\end{codenv}
 
 And here's how we would invoke the static method:
 
-\begin{code}
+\begin{codenv}
 Time startTime = new Time(18, 50, 0.0);
 Time runningTime = new Time(2, 16, 0.0);
 Time endTime = add(startTime, runningTime);
-\end{code}
+\end{codenv}
 
 On the other hand, here's what it looks like as an instance method:
 
 \index{instance method}
 \index{method!instance}
 
-\begin{code}
+\begin{codenv}
 public Time add(Time t2) {
     Time sum = new Time();
     sum.hour = this.hour + t2.hour;
@@ -8820,7 +8821,7 @@ public Time add(Time t2) {
     sum.second = this.second + t2.second;
     return sum;
 }
-\end{code}
+\end{codenv}
 
 The changes are:
 
@@ -8835,9 +8836,9 @@ Unlike \java{this}, \java{that} is not a keyword; it's just a slightly clever va
 
 And here's how we would invoke the instance method:
 
-\begin{code}
+\begin{codenv}
 Time endTime = startTime.add(runningTime);
-\end{code}
+\end{codenv}
 
 That's all there is to it.
 Static methods and instance methods do the same thing, and you can convert from one to the other with just a few changes.
@@ -8851,7 +8852,7 @@ If \java{second} exceeds 59, we have to ``carry'' into the minutes column, and i
 
 Here is a better version of \java{add}:
 
-\begin{code}
+\begin{codenv}
 public Time add(Time t2) {
     Time sum = new Time();
     sum.hour = this.hour + t2.hour;
@@ -8868,7 +8869,7 @@ public Time add(Time t2) {
     }
     return sum;
 }
-\end{code}
+\end{codenv}
 
 It's still possible that \java{hour} may exceed 23, but there's no \java{days} attribute to carry into.
 In that case, \java{sum.hour -= 24} would yield the correct result.
@@ -8880,7 +8881,7 @@ This implementation of \java{add} does not modify either of the parameters.
 Instead, it creates and returns a new \java{Time} object.
 As an alternative, we could have written a method like this:
 
-\begin{code}
+\begin{codenv}
 public void increment(double seconds) {
     this.second += seconds;
     while (this.second >= 60.0) {
@@ -8892,7 +8893,7 @@ public void increment(double seconds) {
         this.hour += 1;
     }
 }
-\end{code}
+\end{codenv}
 
 The \java{increment} method modifies an existing \java{Time} object.
 It doesn't create a new one, and it doesn't return anything.
@@ -9188,7 +9189,7 @@ King & $\mapsto$ & 13 \\
 
 So far, the class definition for the \java{Card} type looks like this:
 
-\begin{code}
+\begin{codenv}
 public class Card {
     private int rank;
     private int suit;
@@ -9198,7 +9199,7 @@ public class Card {
         this.suit = suit;
     }
 }
-\end{code}
+\end{codenv}
 
 \index{constructor}
 
@@ -9207,9 +9208,9 @@ The instance variables are \java{private}: we can access them from inside this c
 The constructor takes a parameter for each instance variable.
 To create a \java{Card} object, we use the \java{new} operator:
 
-\begin{code}
+\begin{codenv}
 Card threeOfClubs = new Card(3, 0);
-\end{code}
+\end{codenv}
 
 %The second argument, \java{0} represents the suit Clubs.
 The result is a reference to a \java{Card} that represents the 3 of Clubs.
@@ -9230,24 +9231,24 @@ To display \java{Card} objects in a way that humans can read easily, we need to 
 A natural way to do that is with an array of \java{String}s.
 We can create the array like this:
 
-\begin{code}
+\begin{codenv}
 String[] suits = new String[4];
-\end{code}
+\end{codenv}
 
 And then assign values to the elements:
 
-\begin{code}
+\begin{codenv}
 suits[0] = "Clubs";
 suits[1] = "Diamonds";
 suits[2] = "Hearts";
 suits[3] = "Spades";
-\end{code}
+\end{codenv}
 
 Or we can create the array and initialize the elements at the same time, as we saw in Section~\ref{printarray}:
 
-\begin{code}
+\begin{codenv}
 String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
-\end{code}
+\end{codenv}
 
 \index{state diagram}
 \index{reference}
@@ -9266,25 +9267,25 @@ Each element of the array is a reference to a \java{String}.
 
 Now we need an array to decode the ranks:
 
-\begin{code}
+\begin{codenv}
 String[] ranks = {null, "Ace", "2", "3", "4", "5", "6",
            "7", "8", "9", "10", "Jack", "Queen", "King"};
-\end{code}
+\end{codenv}
 
 The zeroth element should never be used, because the only valid ranks are 1--13.
 We set it to \java{null} to indicate an unused element.
 
 Using these arrays, we can create a meaningful \java{String} using \java{suit} and \java{rank} as indexes.
 
-\begin{code}
+\begin{codenv}
 String s = ranks[card.rank] + " of " + suits[card.suit];
-\end{code}
+\end{codenv}
 
 The expression \java{suits[card.suit]} means ``use the instance variable \java{suit} from the object \java{card} as an index into the array \java{suits}.''
 
 Now we can wrap all that in a \java{toString} method.
 
-\begin{code}
+\begin{codenv}
 public String toString() {
     String[] ranks = {null, "Ace", "2", "3", "4", "5", "6",
                "7", "8", "9", "10", "Jack", "Queen", "King"};
@@ -9292,14 +9293,14 @@ public String toString() {
     String s = ranks[this.rank] + " of " + suits[this.suit];
     return s;
 }
-\end{code}
+\end{codenv}
 
 When we display a card, \java{println} automatically calls \java{toString}:
 
-\begin{code}
+\begin{codenv}
 Card card = new Card(11, 1);
 System.out.println(card);
-\end{code}
+\end{codenv}
 
 The output is {\tt Jack of Diamonds}.
 
@@ -9324,7 +9325,7 @@ Class variables are {\em shared} across all instances of the class.
 
 %As an example, here is a version of \java{Card} where \java{SUITS} and \java{RANKS} are defined as class variables:
 
-\begin{code}
+\begin{codenv}
 public class Card {
 
     public static final String[] RANKS = {
@@ -9341,7 +9342,7 @@ public class Card {
         return s;
     }
 }
-\end{code}
+\end{codenv}
 
 \index{final}
 
@@ -9366,11 +9367,11 @@ Since the array variables are \java{final}, and the strings they reference are i
 
 As we saw in Section~\ref{equals}, it's helpful to create an \java{equals} method to test whether two objects are equivalent.
 
-\begin{code}
+\begin{codenv}
 public boolean equals(Card that) {
     return this.suit == that.suit && this.rank == that.rank;
 }
-\end{code}
+\end{codenv}
 
 \index{operator!logical}
 \index{logical operator}
@@ -9407,7 +9408,7 @@ So for now, let's say that suit is more important.
 
 With that decided, we can write \java{compareTo} as follows:
 
-\begin{code}
+\begin{codenv}
 public int compareTo(Card that) {
     if (this.suit > that.suit) {
         return 1;
@@ -9422,7 +9423,7 @@ public int compareTo(Card that) {
         return -1;
     }
     return 0;
-\end{code}
+\end{codenv}
 
 \java{compareTo} returns 1 if \java{this} wins, -1 if \java{that} wins, and 0 if they are equivalent.
 It compares suits first.
@@ -9435,7 +9436,7 @@ If the ranks are also the same, it returns 0.
 The instance variables of \java{Card} are \java{private}, so they can't be accessed from other classes.
 We can provide getters to allow other classes to read the \java{rank} and \java{suit} values:
 
-\begin{code}
+\begin{codenv}
 public int getRank() {
     return this.rank;
 }
@@ -9443,7 +9444,7 @@ public int getRank() {
 public int getSuit() {
     return this.suit;
 }
-\end{code}
+\end{codenv}
 
 \index{immutable}
 
@@ -9458,14 +9459,14 @@ To do that, all we have to do is {\em not} provide any modifier methods (includi
 That's easy enough, but it is not foolproof, because some fool might come along later and add a modifier.
 We can prevent that possibility by declaring the instance variables \java{final}:
 
-\begin{code}
+\begin{codenv}
 public class Card {
     private final int rank;
     private final int suit;
 
     ...
 }
-\end{code}
+\end{codenv}
 
 You can still assign values to these variables inside a constructor.
 But if someone writes a method that tries to modify these variables, they'll get a compiler error.
@@ -9489,9 +9490,9 @@ But if someone writes a method that tries to modify these variables, they'll get
 Just as you can create an array of \java{String} objects, you can create an array of \java{Card} objects.
 The following statement creates an array of 52 cards:
 
-\begin{code}
+\begin{codenv}
 Card[] cards = new Card[52];
-\end{code}
+\end{codenv}
 
 Figure~\ref{fig.cardarray} shows the state diagram for this array.
 
@@ -9509,20 +9510,20 @@ Although we call it an ``array of cards'', the array contains {\em references} t
 The elements are initialized to \java{null}.
 You can access the elements of the array in the usual way:
 
-\begin{code}
+\begin{codenv}
 if (cards[0] == null) {
     System.out.println("No card yet!");
 }
-\end{code}
+\end{codenv}
 
 \index{exception!NullPointer}
 \index{run-time error}
 
 But if you try to access the instance variables of the non-existent \java{Card}s, you will get a \java{NullPointerException}.
 
-\begin{code}
+\begin{codenv}
 cards[0].rank      // NullPointerException
-\end{code}
+\end{codenv}
 
 \index{nesting}
 \index{loop!nested}
@@ -9530,7 +9531,7 @@ cards[0].rank      // NullPointerException
 That code won't work until we put cards in the array.
 One way to populate the array is to write nested \java{for} loops:
 
-\begin{code}
+\begin{codenv}
 int index = 0;
 for (int suit = 0; suit <= 3; suit++) {
     for (int rank = 1; rank <= 13; rank++) {
@@ -9538,7 +9539,7 @@ for (int suit = 0; suit <= 3; suit++) {
         index++;
     }
 }
-\end{code}
+\end{codenv}
 
 The outer loop iterates suits from 0 to 3.
 For each suit, the inner loop iterates ranks from 1 to 13.
@@ -9562,13 +9563,13 @@ Figure~\ref{fig.cardarray2} shows what the array looks like after the first two 
 When you work with arrays, it is convenient to have a method that displays the contents.
 We have seen the pattern for traversing an array several times, so the following method should be familiar:
 
-\begin{code}
+\begin{codenv}
 public static void printDeck(Card[] cards) {
     for (int i = 0; i < cards.length; i++) {
         System.out.println(cards[i]);
     }
 }
-\end{code}
+\end{codenv}
 
 Since \java{cards} has type \java{Card[]}, an element of \java{cards} has type \java{Card}.
 So \java{println} invokes the \java{toString} method in the \java{Card} class.
@@ -9587,7 +9588,7 @@ This version of \java{search} uses the algorithm we saw in Section~\ref{traversa
 \index{traverse}
 \index{loop!search}
 
-\begin{code}
+\begin{codenv}
 public static int search(Card[] cards, Card target) {
     for (int i = 0; i < cards.length; i++) {
         if (cards[i].equals(target)) {
@@ -9596,7 +9597,7 @@ public static int search(Card[] cards, Card target) {
     }
     return -1;
 }
-\end{code}
+\end{codenv}
 
 \index{statement!return}
 \index{return!inside loop}
@@ -9640,7 +9641,7 @@ If you find two adjacent words on the page and your word comes between them, you
 
 Getting back to the array of cards, we can write a faster version of \java{search} if we know the cards are in order:
 
-\begin{code}
+\begin{codenv}
 public static int binarySearch(Card[] cards, Card card) {
     int low = 0;
     int high = cards.length - 1;
@@ -9658,7 +9659,7 @@ public static int binarySearch(Card[] cards, Card card) {
     }
     return -1;
 }
-\end{code}
+\end{codenv}
 
 First, we declare \java{low} and \java{high} variables to represent the range we are searching.
 Initially we search the entire array, from \java{0} to \java{length - 1}.
@@ -9680,20 +9681,21 @@ Inside the \java{while} loop, we repeat the four steps of binary search:
 If \java{low} exceeds \java{high}, there are no cards in the range, so we break out of the loop and return \java{-1}.
 Notice that this algorithm depends on the \java{compareTo} method of the object.
 
+
 \section{Tracing the code}
 
 To see how binary search works, it's helpful to add the following print statement at the beginning of the loop.
 
-\begin{code}
+\begin{codenv}
 System.out.println(low + ", " + high);
-\end{code}
+\end{codenv}
 
 If we invoke \java{binarySearch} like this:
 
-\begin{code}
+\begin{codenv}
 Card card = new Card(11, 0);
 System.out.println(binarySearch(cards, card));
-\end{code}
+\end{codenv}
 
 We expect to find this card at position 10.
 Here is the result:
@@ -9744,7 +9746,7 @@ The trick is to write a method that takes \java{low} and \java{high} as paramete
 %They indicate the segment of the array that should be searched (including both \java{low} and \java{high}).
 Here's what the code looks like:
 
-\begin{code}
+\begin{codenv}
 public static int binarySearch(Card[] cards, Card card,
                            int low, int high) {
     if (high < low) {
@@ -9761,7 +9763,7 @@ public static int binarySearch(Card[] cards, Card card,
         return binarySearch(cards, card, low, mid - 1);
     }
 }
-\end{code}
+\end{codenv}
 
 Instead of a \java{while} loop, we have an \java{if} statement to terminate the recursion.
 If \java{high} is less than \java{low}, there are no cards between them, and we conclude that the card is not in the array.
@@ -9863,21 +9865,21 @@ In the code directory for this chapter, {\tt ch12}, you will find:
 This code demonstrates the use of a 2D array, specifically an array of images.
 The declaration looks like this:
 
-\begin{code}
+\begin{codenv}
 private Image[][] images;
-\end{code}
+\end{codenv}
 
 The variable \java{images} refers to a 2D array of \java{Image} objects, which are defined in the \java{java.awt} package.
 Here's the code that creates the array itself:
 
-\begin{code}
+\begin{codenv}
 images = new Image[14][4];
-\end{code}
+\end{codenv}
 
 The array has 14 rows (one for each rank plus an unused row for rank 0) and 4 columns (one for each suit).
 Here's the loop that populates the array:
 
-\begin{code}
+\begin{codenv}
 String cardset = "cardset-oxymoron";
 String suits = "cdhs";
 
@@ -9890,7 +9892,7 @@ for (int suit = 0; suit <= 3; suit++) {
         images[rank][suit] = new ImageIcon(s).getImage();
     }
 }
-\end{code}
+\end{codenv}
 
 The variable \java{cardset} contains the name of the directory that contains the image files.
 \java{suits} is a string that contains the single-letter abbreviations for the suits.
@@ -9910,7 +9912,6 @@ You can use this class as a starting place to implement your own card games.
 % 2D arrays more
 
 \end{exercise}
-
 
 
 \chapter{Objects of arrays}
@@ -9939,7 +9940,7 @@ Instructions for downloading this code are on page~\pageref{code}.
 The main idea of this chapter is to create a \java{Deck} class that encapsulates an array of \java{Card}s.
 The initial class definition looks like this:
 
-\begin{code}
+\begin{codenv}
 public class Deck {
     private Card[] cards;
 
@@ -9947,7 +9948,7 @@ public class Deck {
         this.cards = new Card[n];
     }
 }
-\end{code}
+\end{codenv}
 
 \index{constructor}
 \index{state diagram}
@@ -9965,7 +9966,7 @@ Figure~\ref{fig.deckobject} shows what a \java{Deck} looks like with no cards.
 
 We'll add a second constructor that makes a standard 52-card deck and populates it with \java{Card} objects:
 
-\begin{code}
+\begin{codenv}
 public Deck() {
     this.cards = new Card[52];
     int index = 0;
@@ -9976,14 +9977,14 @@ public Deck() {
         }
     }
 }
-\end{code}
+\end{codenv}
 
 This method is similar to the example in Section~\ref{cardarray}; we just turned it into a constructor.
 We can now create a standard \java{Deck} like this:
 
-\begin{code}
+\begin{codenv}
 Deck deck = new Deck();
-\end{code}
+\end{codenv}
 
 \index{printDeck}
 
@@ -9991,13 +9992,13 @@ Now that we have a \java{Deck} class, we have a logical place to put methods tha
 Looking at the methods we have written so far, one obvious candidate is \java{printDeck} from Section~\ref{cardarray}.
 %Here's how it looks, rewritten as an instance method of \java{Deck}:
 
-\begin{code}
+\begin{codenv}
 public void print() {
     for (int i = 0; i < this.cards.length; i++) {
         System.out.println(this.cards[i]);
     }
 }
-\end{code}
+\end{codenv}
 
 When you transform a static method into an instance method, it usually gets shorter.
 We can simply type \java{deck.print()} to invoke the instance method.
@@ -10025,12 +10026,12 @@ Here is an outline of how this algorithm works.
 To sketch the program, we will use a combination of Java statements and English.
 This technique is sometimes called {\bf pseudocode}.
 
-\begin{code}
+\begin{codenv}
 for each index i {
     // choose a random number between i and length - 1
     // swap the ith card and the randomly-chosen card
 }
-\end{code}
+\end{codenv}
 
 \index{helper method}
 \index{method!helper}
@@ -10063,14 +10064,14 @@ During the first iteration, we find the lowest card and swap it with the card in
 During the $i$th, we find the lowest card to the right of $i$ and swap it with the $i$th card.
 Here is pseudocode for selection sort:
 
-\begin{code}
+\begin{codenv}
 public void selectionSort() {
     for each index i {
         // find the lowest card at or to the right of i
         // swap the ith card and the lowest card found
     }
 }
-\end{code}
+\end{codenv}
 
 Again, the pseudocode helps with the design of the helper methods.
 In this algorithm we can use \java{swapCards} again, so we only need a method to find the lowest card; we'll call it \java{indexLowestCard}.
@@ -10126,7 +10127,7 @@ The first step of merge sort is to split the deck into two subdecks, each with a
 So we might want a method, \java{subdeck}, that takes a deck and a range of indexes.
 It returns a new deck that contains the specified subset of the cards:
 
-\begin{code}
+\begin{codenv}
 public Deck subdeck(int low, int high) {
     Deck sub = new Deck(high - low + 1);
 
@@ -10135,7 +10136,7 @@ public Deck subdeck(int low, int high) {
     }
     return sub;
 }
-\end{code}
+\end{codenv}
 
 The first line creates an unpopulated subdeck.
 Inside the \java{for} loop, the subdeck gets populated with copies of references from the deck.
@@ -10172,7 +10173,7 @@ But since \java{Card} objects are immutable, this kind of aliasing is not a prob
 The next helper method we need is \java{merge}, which takes two sorted subdecks and returns a new deck containing all cards from both decks, in order.
 Here's what the algorithm looks like in pseudocode, assuming the subdecks are named \java{d1} and \java{d2}:
 
-\begin{code}
+\begin{codenv}
 public static Deck merge(Deck d1, Deck d2) {
     // create a new deck big enough for all the cards
 
@@ -10180,9 +10181,9 @@ public static Deck merge(Deck d1, Deck d2) {
     // the first deck, and the index j for the second deck
     int i = 0;
     int j = 0;
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
     // the index k traverses the result deck
     for (int k = 0; k < result.cards.length; k++) {
 
@@ -10195,7 +10196,7 @@ public static Deck merge(Deck d1, Deck d2) {
     }
     // return the new deck
 }
-\end{code}
+\end{codenv}
 
 One of the exercises at the end of the chapter asks you to implement \java{merge}.
 
@@ -10204,13 +10205,13 @@ One of the exercises at the end of the chapter asks you to implement \java{merge
 
 Once your \java{merge} method is working correctly, you can try out a simple version of merge sort:
 
-\begin{code}
+\begin{codenv}
 public Deck almostMergeSort() {
     // divide the deck into two subdecks
     // sort the subdecks using selectionSort
     // merge the two halves and return the result
 }
-\end{code}
+\end{codenv}
 
 An exercise at the end of the chapter asks you to implement this algorithm.
 Once you get it working, the real fun begins!
@@ -10227,14 +10228,14 @@ If \java{mergeSort} receives such a small subdeck, it can return it unmodified s
 
 The recursive version of \java{mergeSort} should look something like this:
 
-\begin{code}
+\begin{codenv}
 public Deck mergeSort() {
     // if the deck is 0 or 1 cards, return it
     // divide the deck into two subdecks
     // sort the subdecks using mergeSort
     // merge the two halves and return the result
 }
-\end{code}
+\end{codenv}
 
 \index{leap of faith}
 
@@ -10330,10 +10331,10 @@ Then you can pass the two halves to \java{merge} to see if it works.
 \item Write a recursive version of \java{mergeSort}.
 Remember that \java{selectionSort} is a modifier and \java{mergeSort} is a pure method, which means that they get invoked differently:
 
-\begin{code}
+\begin{codenv}
 deck.selectionSort();      // modifies an existing deck
 deck = deck.mergeSort();   // replaces old deck with new
-\end{code}
+\end{codenv}
 
 \end{enumerate}
 \end{exercise}
@@ -10435,7 +10436,7 @@ We'll see the details soon, but let's start with \java{CardCollection}:
 
 Here's the beginning of a \java{CardCollection} class that uses \java{ArrayList} instead of a primitive array:
 
-\begin{code}
+\begin{codenv}
 public class CardCollection {
 
     private ArrayList<Card> cards;
@@ -10446,7 +10447,7 @@ public class CardCollection {
         this.cards = new ArrayList<Card>();
     }
 }
-\end{code}
+\end{codenv}
 
 \index{angle brackets}
 
@@ -10465,11 +10466,11 @@ It also initializes \java{cards} with an empty \java{ArrayList}.
 \java{ArrayList} provides a method, \java{add}, that adds an element to the collection.
 We will write a \java{CardCollection} method that does the same thing:
 
-\begin{code}
+\begin{codenv}
 public void addCard(Card card) {
     this.cards.add(card);
 }
-\end{code}
+\end{codenv}
 
 \index{this}
 
@@ -10477,20 +10478,20 @@ Until now, we have used \java{this} explicitly to make it easy to identify attri
 Inside \java{addCard} and other instance methods, you can access instance variables without using the keyword \java{this}.
 So from here on, we will drop it:
 
-\begin{code}
+\begin{codenv}
 public void addCard(Card card) {
     cards.add(card);
 }
-\end{code}
+\end{codenv}
 
 We also need to be able to remove cards from a collection.
 The following method takes an index, removes the card at that location, and shifts the following cards left to fill the gap.
 
-\begin{code}
+\begin{codenv}
 public Card popCard(int i) {
     return cards.remove(i);
 }
-\end{code}
+\end{codenv}
 
 \index{efficiency}
 
@@ -10498,34 +10499,34 @@ If we are dealing cards from a shuffled deck, we don't care which card gets remo
 It is most efficient to choose the last one, so we don't have to shift any following cards.
 Here is an overloaded version of \java{popCard} that removes and returns the last card:
 
-\begin{code}
+\begin{codenv}
 public Card popCard() {
     int i = size() - 1;
     return popCard(i);
 }
-\end{code}
+\end{codenv}
 
 Notice that \java{popCard} uses \java{CardCollection}'s own \java{size} method, which in turn calls the \java{ArrayList}'s \java{size} method:
 
-\begin{code}
+\begin{codenv}
 public int size() {
     return cards.size();
 }
-\end{code}
+\end{codenv}
 
 \index{wrapper method}
 
 Methods like \java{addCard}, \java{popCard}, and \java{size}, which invoke another method without doing much additional work, are called {\bf wrapper methods}.
 We will use these wrapper methods to implement less trivial methods, like \java{deal}:
 
-\begin{code}
+\begin{codenv}
 public void deal(CardCollection that, int n) {
     for (int i = 0; i < n; i++) {
         Card card = popCard();
         that.addCard(card);
     }
 }
-\end{code}
+\end{codenv}
 
 The \java{deal} method removes cards from the collection is it invoked on, \java{this}, and adds them to the collection it gets as a parameter, \java{that}.
 The second parameter, \java{n}, is the number of cards to deal.
@@ -10534,20 +10535,20 @@ To access the elements of an \java{ArrayList}, you can't use the array \java{[]}
 Instead, you have to use the methods \java{get} and \java{set}.
 Here is a wrapper for \java{get}:
 
-\begin{code}
+\begin{codenv}
 public Card getCard(int i) {
     return cards.get(i);
 }
-\end{code}
+\end{codenv}
 
 The \java{last} method gets the last card (but doesn't remove it):
 
-\begin{code}
+\begin{codenv}
 public Card last() {
     int i = size() - 1;
     return cards.get(i);
 }
-\end{code}
+\end{codenv}
 
 \index{modifier method}
 \index{method!modifier}
@@ -10555,17 +10556,17 @@ public Card last() {
 In order to control the ways card collections are modified, we don't provide a wrapper for \java{set}.
 The only modifiers we provide are the two versions of \java{popCard} and the following version of \java{swapCards}:
 
-\begin{code}
+\begin{codenv}
 public void swapCards(int i, int j) {
     Card temp = cards.get(i);
     cards.set(i, cards.get(j));
     cards.set(j, temp);
 }
-\end{code}
+\end{codenv}
 
 We use \java{swapCards} to implement \java{shuffle}, which we described in Section~\ref{shuffle}:
 
-\begin{code}
+\begin{codenv}
 public void shuffle() {
     Random random = new Random();
     for (int i = size() - 1; i > 0; i--) {
@@ -10573,7 +10574,7 @@ public void shuffle() {
         swapCards(i, j);
     }
 }
-\end{code}
+\end{codenv}
 
 \java{ArrayList} provides additional methods we aren't using here.
 You can read about them in the documentation, which you can find by doing a web search for ``Java ArrayList''.
@@ -10585,7 +10586,7 @@ At this point we have a class that represents a collection of cards.
 Next we'll use it to define \java{Deck} and \java{Hand}.
 Here is the complete definition of \java{Deck}:
 
-\begin{code}
+\begin{codenv}
 public class Deck extends CardCollection {
 
     public Deck(String label) {
@@ -10598,7 +10599,7 @@ public class Deck extends CardCollection {
         }
     }
 }
-\end{code}
+\end{codenv}
 
 \index{extends}
 \index{superclass}
@@ -10622,9 +10623,9 @@ Constructors are not inherited, but all other \java{public} attributes and metho
 The only additional method in \java{Deck}, at least for now, is a constructor.
 So you can create a \java{Deck} object like this:
 
-\begin{code}
+\begin{codenv}
 Deck deck = new Deck("Deck");
-\end{code}
+\end{codenv}
 
 \index{super}
 
@@ -10642,7 +10643,7 @@ We could define two classes, one for hands and one for piles, but there is not m
 So we'll use one class, called \java{Hand}, for both hands and piles.
 Here's what the definition looks like:
 
-\begin{code}
+\begin{codenv}
 public class Hand extends CardCollection {
 
     public Hand(String label) {
@@ -10657,7 +10658,7 @@ public class Hand extends CardCollection {
         System.out.println();
     }
 }
-\end{code}
+\end{codenv}
 
 Like \java{Deck}, \java{Hand} extends \java{CardCollection}, so it inherits methods like \java{getLabel}, \java{size}, and \java{getCard}, which are used in \java{display}.
 \java{Hand} also provides a constructor, which invokes the constructor of \java{CardCollection} (and nothing else).
@@ -10672,21 +10673,21 @@ And a \java{Hand} is just like a \java{CardCollection}, but it provides an addit
 At this point we can create a \java{Deck} and start dealing cards.
 Here's a simple example that deals five cards to a hand, and deals the rest into a draw pile:
 
-\begin{code}
+\begin{codenv}
 Deck deck = new Deck("Deck");
 deck.shuffle();
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 Hand hand = new Hand("Hand");
 deck.deal(hand, 5);
 hand.display();
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 Hand drawPile = new Hand("Draw Pile");
 deck.dealAll(drawPile);
-\end{code}
+\end{codenv}
 
 \java{CardCollection} provides \java{dealAll}, which deals all of the remaining cards.
 Here's the output of the previous example:
@@ -10705,22 +10706,22 @@ Of course, if you run this example you will probably get a different hand, becau
 If you are a careful reader, you might notice something strange about this example.
 Take another look at the definition of \java{deal}:
 
-\begin{code}
+\begin{codenv}
 public void deal(CardCollection that, int n) {
     for (int i = 0; i < n; i++) {
         Card card = popCard();
         that.addCard(card);
     }
 }
-\end{code}
+\end{codenv}
 
 Notice that the first parameter is supposed to be a \java{CardCollection}.
 But we invoked it like this:
 
-\begin{code}
+\begin{codenv}
 Hand hand1 = new Hand("Hand 1");
 deck.deal(hand1, 5);
-\end{code}
+\end{codenv}
 
 The argument is a \java{Hand}, not a \java{CardCollection}.
 So why is this example legal?
@@ -10748,7 +10749,7 @@ But now it's time to implement the rules.
 We'll use two classes: \java{Player}, which encapsulates player strategy, and \java{Eights}, which creates and maintains the state of the game.
 Here is the beginning of the \java{Player} definition:
 
-\begin{code}
+\begin{codenv}
 public class Player {
 
     private String name;
@@ -10758,7 +10759,7 @@ public class Player {
         this.name = name;
         this.hand = new Hand(name);
     }
-\end{code}
+\end{codenv}
 
 A \java{Player} has two \java{private} attributes: a name and a hand.
 The constructor takes the player's name as a string and saves it in an instance variable.
@@ -10766,7 +10767,7 @@ In this example, we have to use \java{this} to distinguish between the instance 
 
 The primary method that \java{Player} provides is \java{play}, which decides which card to discard during each turn.
 
-\begin{code}
+\begin{codenv}
 public Card play(Eights eights, Card prev) {
     Card card = searchForMatch(prev);
     if (card == null) {
@@ -10774,7 +10775,7 @@ public Card play(Eights eights, Card prev) {
     }
     return card;
 }
-\end{code}
+\end{codenv}
 
 The first parameter is a reference to the \java{Eights} object that encapsulates the state of the game.
 We'll need it if we have to draw a new card.
@@ -10785,7 +10786,7 @@ The second parameter, \java{prev} is the card on top of the discard pile.
 Using top-down development, we'll have \java{play} invoke two helper methods, \java{searchForMatch} and \java{drawForMatch}.
 \java{searchForMatch} looks in the player's hand for a card that matches the previously played card:
 
-\begin{code}
+\begin{codenv}
 public Card searchForMatch(Card prev) {
     for (int i = 0; i < hand.size(); i++) {
         Card card = hand.getCard(i);
@@ -10795,13 +10796,13 @@ public Card searchForMatch(Card prev) {
     }
     return null;
 }
-\end{code}
+\end{codenv}
 
 The strategy is pretty simple: the \java{for} loop searches for the first card that's legal to play and returns it.
 If there are no cards that match, it returns \java{null}.
 And in that case, we have to draw cards until we get a match:
 
-\begin{code}
+\begin{codenv}
 public Card drawForMatch(Eights eights, Card prev) {
     while (true) {
         Card card = eights.draw();
@@ -10812,7 +10813,7 @@ public Card drawForMatch(Eights eights, Card prev) {
         hand.addCard(card);
     }
 }
-\end{code}
+\end{codenv}
 
 The \java{while} loop runs until it finds a match (we'll assume for now that it always does).
 It uses the \java{Eights} object to draw a card.
@@ -10822,7 +10823,7 @@ Otherwise it adds the card to the player's hand and continues.
 Both \java{searchForMatch} and \java{drawForMatch} use \java{cardMatches}, which is a static method, also defined in \java{Player}.
 \java{cardMatches} is a straightforward translation of the rules of the game:
 
-\begin{code}
+\begin{codenv}
 public static boolean cardMatches(Card card1, Card card2) {
     if (card1.getSuit() == card2.getSuit()) {
         return true;
@@ -10835,11 +10836,11 @@ public static boolean cardMatches(Card card1, Card card2) {
     }
     return false;
 }
-\end{code}
+\end{codenv}
 
 Finally, \java{Player} provides \java{displayScore}, which computes and displays penalty points for cards left in a player's hand at the end of the game.
 
-\begin{code}
+\begin{codenv}
 public int score() {
     int sum = 0;
     for (int i = 0; i < hand.size(); i++) {
@@ -10855,7 +10856,7 @@ public int score() {
     }
     return sum;
 }
-\end{code}
+\end{codenv}
 
 
 \section{The Eights class}
@@ -10894,7 +10895,7 @@ Looking at the rules of {\it Crazy Eights}, we can identify some methods we'll n
 Now we can start implementing the pieces.
 Here is the class definition for \java{Eights}, which encapsulates the state of the game:
 
-\begin{code}
+\begin{codenv}
 public class Eights {
 
     private Player one;
@@ -10902,7 +10903,7 @@ public class Eights {
     private Hand drawPile;
     private Hand discardPile;
     private Scanner in;
-\end{code}
+\end{codenv}
 
 In this version, there are always two players.
 One of the exercises at the end of the chapter asks you to modify this code to handle more players.
@@ -10910,7 +10911,7 @@ One of the exercises at the end of the chapter asks you to modify this code to h
 The last instance variable is a \java{Scanner} that we'll use to prompt the user after each move.
 Here's a constructor that initializes the instance variables and deals the cards:
 
-\begin{code}
+\begin{codenv}
 public Eights() {
     Deck deck = new Deck("Deck");
     deck.shuffle();
@@ -10930,28 +10931,28 @@ public Eights() {
 
     in = new Scanner(System.in);
 }
-\end{code}
+\end{codenv}
 
 The next piece we'll need is a method that checks whether the game is over.
 If either hand is empty, we're done:
 
-\begin{code}
+\begin{codenv}
 public boolean isDone() {
     return one.getHand().empty() || two.getHand().empty();
 }
-\end{code}
+\end{codenv}
 
 When the draw pile is empty, we have to shuffle the discard pile.
 Here is a method for that:
 
-\begin{code}
+\begin{codenv}
 public void reshuffle() {
     Card prev = discardPile.popCard();
     discardPile.dealAll(drawPile);
     discardPile.addCard(prev);
     drawPile.shuffle();
 }
-\end{code}
+\end{codenv}
 
 The first line saves the top card from \java{discardPile}.
 The next line transfers the rest of the cards to \java{drawPile}.
@@ -10959,18 +10960,18 @@ Then we put the saved card back into \java{discardPile} and shuffle \java{drawPi
 
 Now we can use \java{reshuffle} as part of \java{draw}:
 
-\begin{code}
+\begin{codenv}
 public Card draw() {
     if (drawPile.empty()) {
         reshuffle();
     }
     return drawPile.popCard();
 }
-\end{code}
+\end{codenv}
 
 We can switch from one player to the next like this:
 
-\begin{code}
+\begin{codenv}
 public Player nextPlayer(Player current) {
     if (current == one) {
         return two;
@@ -10978,13 +10979,13 @@ public Player nextPlayer(Player current) {
         return one;
     }
 }
-\end{code}
+\end{codenv}
 
 The \java{nextPlayer} method takes the current player as a parameter and returns the player who should go next.
 
 The last two pieces are \java{displayState} and \java{waitForUser}:
 
-\begin{code}
+\begin{codenv}
 public void displayState() {
     one.display();
     two.display();
@@ -10992,17 +10993,17 @@ public void displayState() {
     System.out.println("Draw pile:");
     System.out.println(drawPile.size() + " cards");
 }
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
 public void waitForUser() {
     in.nextLine();
 }
-\end{code}
+\end{codenv}
 
 Using these pieces, we can write \java{takeTurn}, which executes one player's turn:
 
-\begin{code}
+\begin{codenv}
 public void takeTurn(Player player) {
     Card prev = discardPile.last();
     Card next = player.play(this, prev);
@@ -11011,14 +11012,14 @@ public void takeTurn(Player player) {
     System.out.println(player.getName() + " plays " + next);
     System.out.println();
 }
-\end{code}
+\end{codenv}
 
 \java{takeTurn} reads the top card off the discard pile and passes it to \java{player.play}, which we saw in the previous section.
 The result is the card the player chose, which is added to the discard pile.
 
 Finally, we use \java{takeTurn} and the other methods to write \java{playGame}:
 
-\begin{code}
+\begin{codenv}
 public void playGame() {
     Player player = one;
 
@@ -11034,7 +11035,7 @@ public void playGame() {
     one.displayScore();
     two.displayScore();
 }
-\end{code}
+\end{codenv}
 
 Done!
 Notice the result of bottom-up development is similar to top-down: we have a high-level method that calls helper methods.
@@ -11186,12 +11187,12 @@ Whether or not you actually make these changes, draw a UML class diagram that sh
 \chapter{Development tools}
 \label{development}
 
-
 The steps for compiling, running, and debugging Java code depend on your development environment and operating system.
 We avoided putting these details in the main text, because they can be distracting.
 Instead, we provide this appendix with a brief introduction to DrJava -- an {\bf integrated development environment} (IDE) that is well suited for beginners -- and other development tools, including Checkstyle for code quality and JUnit for testing.
 
 \index{IDE}
+
 
 \section{Installing DrJava}
 \label{drjava}
@@ -11484,6 +11485,7 @@ If you add or delete multiple lines of code while the program is paused, the res
 
 See \url{http://drjava.org/docs/user/ch09.html} for more information about using the debugger feature of DrJava.
 
+
 \section{Testing with JUnit}
 \label{JUnit}
 
@@ -11495,7 +11497,7 @@ For cases where we know the right answer, we can do better by writing {\bf unit 
 
 For example, to test \java{fibonacci} from Section~\ref{fibonacci}, we could write:
 
-\begin{code}
+\begin{codenv}
 public static void main(String[] args) {
     if (fibonacci(1) != 1) {
         System.err.println("fibonacci(1) is incorrect");
@@ -11507,7 +11509,7 @@ public static void main(String[] args) {
         System.err.println("fibonacci(3) is incorrect");
     }
 }
-\end{code}
+\end{codenv}
 
 This test code is self-explanatory, but it's longer than it needs to be and it doesn't scale very well.
 In addition, the error messages provide limited information.
@@ -11521,7 +11523,7 @@ And if there is a method in \java{Class} named \java{method}, there should be a 
 For example, suppose that the \java{fibonacci} method belongs to a class named \java{Series}.
 Here is the corresponding JUnit test class and test method:
 
-\begin{code}
+\begin{codenv}
 import junit.framework.TestCase;
 
 public class SeriesTest extends TestCase {
@@ -11532,7 +11534,7 @@ public class SeriesTest extends TestCase {
         assertEquals(2, Series.fibonacci(3));
     }
 }
-\end{code}
+\end{codenv}
 
 This example uses the keyword \java{extends}, which indicates that the new class, \java{SeriesTest} is based on an existing class, \java{TestCase}, which is imported from the package \java{junit.framework}.
 
@@ -11621,15 +11623,15 @@ The \java{Graphics} class provides basic drawing methods such as \java{drawLine}
 
 Here is an example program that draws a circle using the \java{fillOval} method:
 
-\begin{code}
+\begin{codenv}
 import java.awt.Canvas;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 
 public class Drawing extends Canvas {
-\end{code}
+\end{codenv}
 
-\begin{code}
+\begin{codenv}
     public static void main(String[] args) {
         JFrame frame = new JFrame("My Drawing");
         Canvas canvas = new Drawing();
@@ -11643,7 +11645,7 @@ public class Drawing extends Canvas {
         g.fillOval(100, 100, 200, 200);
     }
 }
-\end{code}
+\end{codenv}
 
 The \java{Drawing} class extends \java{Canvas}, so it has all the methods provided by \java{Canvas}, including \java{setSize}.
 You can read about the other methods in the documentation, which you can find by doing a web search for ``Java Canvas''.
@@ -11694,13 +11696,13 @@ You don't have to create the \java{Graphics} object; it gets created when you cr
 
 The previous example used \java{fillOval}, which has the following signature:
 
-\begin{code}
+\begin{codenv}
 /**
  * Fills an oval bounded by the specified rectangle with
  * the current color.
  */
 public void fillOval(int x, int y, int width, int height)
-\end{code}
+\end{codenv}
 
 \index{bounding box}
 
@@ -11720,9 +11722,9 @@ The bounding box itself is not drawn (see Figure~\ref{fig.circle}).
 
 To choose the color of a shape, invoke \java{setColor} on the \java{Graphics} object:
 
-\begin{code}
+\begin{codenv}
 g.setColor(Color.red);
-\end{code}
+\end{codenv}
 
 The \java{setColor} method determines the color of everything that gets drawn afterward.
 \java{Color.red} is a constant provided by the \java{Color} class; to use it you have to \java{import java.awt.Color}.
@@ -11738,18 +11740,18 @@ lightGray   magenta   orange   pink       white   yellow
 You can create your own colors by specifying the red, green, and blue ({\bf RGB}) components.
 For example:
 
-\begin{code}
+\begin{codenv}
 Color purple = new Color(128, 0, 128);
-\end{code}
+\end{codenv}
 
 Each value is an integer in the range 0 (darkest) to 255 (lightest).
 The color \java{(0, 0, 0)} is black, and \java{(255, 255, 255)} is white.
 
 You can set the background color of the \java{Canvas} by invoking \java{setBackground}:
 
-\begin{code}
+\begin{codenv}
 canvas.setBackground(Color.white);
-\end{code}
+\end{codenv}
 
 
 \section{Example drawing}
@@ -11762,15 +11764,15 @@ To make the code more readable, let's use \java{Rectangle} objects to represent 
 
 Here's a method that takes a Rectangle and invokes \java{fillOval}:
 
-\begin{code}
+\begin{codenv}
 public void boxOval(Graphics g, Rectangle bb) {
     g.fillOval(bb.x, bb.y, bb.width, bb.height);
 }
-\end{code}
+\end{codenv}
 
 And here's a method that draws Mickey Mouse:
 
-\begin{code}
+\begin{codenv}
 public void mickey(Graphics g, Rectangle bb) {
     boxOval(g, bb);
 
@@ -11784,7 +11786,7 @@ public void mickey(Graphics g, Rectangle bb) {
     half.translate(dx * 2, 0);
     boxOval(g, half);
 }
-\end{code}
+\end{codenv}
 
 The first line draws the face.
 The next three lines create a smaller rectangle for the ears.
@@ -12100,7 +12102,7 @@ If you think you have an infinite loop and you know which loop it is, add a prin
 
 For example:
 
-\begin{code}
+\begin{codenv}
 while (x > 0 && y < 0) {
     // do something to x
     // do something to y
@@ -12109,7 +12111,7 @@ while (x > 0 && y < 0) {
     System.out.println("y: " + y);
     System.out.println("condition: " + (x > 0 && y < 0));
 }
-\end{code}
+\end{codenv}
 
 Now when you run the program you see three lines of output for each time through the loop.
 The last time through the loop, the condition should be \java{false}.
@@ -12165,10 +12167,10 @@ You should figure out which variable is \java{null} and then figure out how it g
 Remember that when you declare a variable with an array type, its elements are initially \java{null} until you assign a value to them.
 For example, this code causes a \java{NullPointerException}:
 
-\begin{code}
+\begin{codenv}
 int[] array = new Point[5];
 System.out.println(array[0].x);
-\end{code}
+\end{codenv}
 
 \term{ArrayIndexOutOfBoundsException}
 The index you are using to access an array is either negative or greater than \java{array.length - 1}.
@@ -12295,20 +12297,20 @@ See ``Flow of execution''.% on page~\pageref{flowexec}.
 Writing complex expressions is fine as long as they are readable, but they can be hard to debug.
 It is often a good idea to break a complex expression into a series of assignments to temporary variables.
 
-\begin{code}
+\begin{codenv}
 rect.setLocation(rect.getLocation().translate(
                  -rect.getWidth(), -rect.getHeight()));
-\end{code}
+\end{codenv}
 
 This example can be rewritten as:
 
-\begin{code}
+\begin{codenv}
 int dx = -rect.getWidth();
 int dy = -rect.getHeight();
 Point location = rect.getLocation();
 Point newLocation = location.translate(dx, dy);
 rect.setLocation(newLocation);
-\end{code}
+\end{codenv}
 
 The second version is easier to read, partly because the variable names provide additional documentation.
 It's also easier to debug, because you can check the types of the temporary variables and display their values.
@@ -12321,18 +12323,18 @@ It's also easier to debug, because you can check the types of the temporary vari
 Another problem that can occur with big expressions is that the order of operations may not be what you expect.
 For example, to evaluate $\frac{x}{2 \pi}$, you might write:
 
-\begin{code}
+\begin{codenv}
 double y = x / 2 * Math.PI;
-\end{code}
+\end{codenv}
 
 That is not correct, because multiplication and division have the same precedence, and they are evaluated from left to right.
 This code computes $\frac{x}{2}\pi$.
 
 If you are not sure of the order of operations, check the documentation, or use parentheses to make it explicit.
 
-\begin{code}
+\begin{codenv}
 double y = x / (2 * Math.PI);
-\end{code}
+\end{codenv}
 
 This version is correct, and more readable for other people who haven't memorized the order of operations.
 
@@ -12344,7 +12346,7 @@ This version is correct, and more readable for other people who haven't memorize
 
 If you have a return statement with a complex expression, you don't have a chance to display the value before returning.
 
-\begin{code}
+\begin{codenv}
 public Rectangle intersection(Rectangle a, Rectangle b) {
     return new Rectangle(
         Math.min(a.x, b.x), Math.min(a.y, b.y),
@@ -12353,11 +12355,11 @@ public Rectangle intersection(Rectangle a, Rectangle b) {
         Math.max(a.y + a.height, b.y + b.height)
             - Math.min(a.y, b.y));
 }
-\end{code}
+\end{codenv}
 
 Instead of writing everything in one statement, use temporary variables:
 
-\begin{code}
+\begin{codenv}
 public Rectangle intersection(Rectangle a, Rectangle b) {
     int x1 = Math.min(a.x, b.x);
     int y2 = Math.min(a.y, b.y);
@@ -12366,7 +12368,7 @@ public Rectangle intersection(Rectangle a, Rectangle b) {
     Rectangle rect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
     return rect;
 }
-\end{code}
+\end{codenv}
 
 Now you have the opportunity to display any of the intermediate variables before returning.
 And by reusing \java{x1} and \java{y1}, you made the code smaller, too.
