@@ -12,8 +12,9 @@ clean:
 plastex:
 	# Before running plastex, we need the current directory in PYTHONPATH
 	# export PYTHONPATH=$PYTHONPATH:.
-	python Filist.py $(F).tex > $(F).plastex
+	python preprocess.py $(F).tex > $(F).plastex
 	plastex --renderer=DocBook --theme=book --image-resolution=300 --filename=$(F).xml $(F).plastex
+	cd $(F); python ../postprocess.py $(F).xml > temp; mv temp $(F).xml
 
 xxe:
 	xmlcopyeditor ~/ThinkJava/$(F)/$(F).xml &

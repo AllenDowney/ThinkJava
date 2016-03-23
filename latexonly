@@ -100,7 +100,7 @@
 }
 
 % code listing environments
-\lstnewenvironment{codenv}
+\lstnewenvironment{code}
 {\minipage{\linewidth}}
 {\endminipage}
 \lstnewenvironment{stdout}

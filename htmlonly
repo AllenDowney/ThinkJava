@@ -54,7 +54,7 @@
 }
 
 % code listing environments
-\lstnewenvironment{codenv}
+\lstnewenvironment{code}
 {}
 {}
 \lstnewenvironment{stdout}
