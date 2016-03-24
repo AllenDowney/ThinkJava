@@ -2,7 +2,7 @@ F=thinkjava
 
 all:
 	pdflatex $(F)
-	makeindex $(F)
+	makeindex $(F).idx        # shouldn't need .idx here, but we do
 	pdflatex $(F)
 	pdflatex $(F)
 
