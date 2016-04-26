@@ -110,6 +110,11 @@
 % inline syntax formatting
 \newcommand{\java}[1]{\lstinline{#1}}%{
 
+% prevent hyphens in names
+\hyphenation{DrJava}
+\hyphenation{GitHub}
+\hyphenation{Javadoc}
+
 % pdf hyperlinks, table of contents, and document properties
 \usepackage{hyperref}
 \hypersetup{%

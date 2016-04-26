@@ -117,7 +117,7 @@ Copyright \copyright ~2016 Allen Downey and Chris Mayfield.
 
 \vspace{0.25in}
 
-Permission is granted to copy, distribute, transmit, and adapt this work under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License: \url{http://creativecommons.org/licenses/by-nc-sa/3.0/}
+Permission is granted to copy, distribute, transmit, and adapt this work under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License: \url{http://creativecommons.org/licenses/by-nc-sa/3.0/}.
 
 The original form of this book is \LaTeX\ source code.
 Compiling the \LaTeX\ source has the effect of generating a device-independent representation of the book, which can be converted to other formats and printed.
@@ -210,12 +210,12 @@ In some cases we explain a feature briefly when it first appears, and then expla
 This book is well suited to prepare students for the AP Computer Science A exam, which includes object-oriented design and implementation.
 (AP is a registered trademark of the College Board.)
 We introduce nearly every topic in the ``AP Java subset'' with a few exceptions.
-A mapping of {\it Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}
+A mapping of {\it Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}.
 
 %TODO: replace this with a more specific link when it's ready
 
 
-\section*{Appendices}
+\section*{Appendixes}
 
 The chapters of this book are meant to be read in order, because each one builds on the previous one.
 We also include three appendixes with material that can be read at any time:
@@ -264,7 +264,7 @@ Then you can ``clone'' the repository, which downloads a copy of the files to yo
 \item Alternatively, you could clone the repository without forking.
 If you choose this option, you don't need a GitHub account, but you won't be able to save your changes on GitHub.
 
-\item If you don't want to use Git at all, you can download the code in a ZIP archive using the {\sf Download ZIP} button on the GitHub page, or this link: \url{http://tinyurl.com/ThinkJavaCodeZip}
+\item If you don't want to use Git at all, you can download the code in a ZIP archive using the {\sf Download ZIP} button on the GitHub page, or this link: \url{http://tinyurl.com/ThinkJavaCodeZip}.
 
 \end{itemize}
 
@@ -751,8 +751,7 @@ For example, in DrJava (see Appendix~\ref{development}) you can indent the code 
 \index{Google style}
 
 Organizations that do a lot of software development usually have strict guidelines on how to format source code.
-For example, Google publishes its Java coding standards for use in open-source projects:
-\url{http://google.github.io/styleguide/javaguide.html}
+For example, Google publishes its Java coding standards for use in open-source projects: \url{http://google.github.io/styleguide/javaguide.html}.
 %It is easier to understand a large codebase when all the source code is formatted consistently.
 %Plus following style guidelines helps you to avoid common programming mistakes that are difficult to debug.
 
@@ -914,7 +913,7 @@ We encourage you to at least attempt every problem.
 You can't learn to program only by reading about it; you have to practice.
 
 Before you can compile and run Java programs, you might have to download and install a few tools.
-There are many good options, but we recommend DrJava, which is an ``integrated development environment'' (IDE) well-suited for beginners.
+There are many good options, but we recommend DrJava, which is an ``integrated development environment'' (IDE) for beginners.
 Instructions for getting started are in Appendix~\ref{drjava}.
 
 The code for this chapter is in the {\tt ch01} directory of {\tt ThinkJavaCode}.
@@ -977,8 +976,8 @@ Starting with the hello world program, try out each of the following errors.
 After you make each change, compile the program, read the error message (if there is one), and then fix the error.
 
 \begin{enumerate}
-\item Remove one of the open squiggly-braces.
-\item Remove one of the close squiggly-braces.
+\item Remove one of the open squiggly braces.
+\item Remove one of the close squiggly braces.
 \item Instead of \java{main}, write \java{mian}.
 \item Remove the word \java{static}.
 \item Remove the word \java{public}.
@@ -1104,7 +1103,7 @@ The vocabulary can be confusing here, but the idea is straightforward:
 \end{itemize}
 
 As a general rule, a variable has to have the same type as the value you assign to it.
-For example, you cannot store a \java{String} in \java{minute} or an integer in \java{message}.
+For example, you cannot store a string in \java{minute} or an integer in \java{message}.
 We will see some examples that seem to break this rule, but we'll get to that later.
 
 %On the other hand, that rule can be confusing.
@@ -1295,7 +1294,7 @@ The multiplication happens first, yielding \java{660 + 59}.
 Then the addition yields \java{719}.
 
 Addition, subtraction, and multiplication all do what you expect, but you might be surprised by division.
-For example, the following fragment tries to compute the fraction of an hour that has elapsed.%, but it has a logic error.
+For example, the following fragment tries to compute the fraction of an hour that has elapsed:%, but it has a logic error:
 
 \begin{code}
 System.out.print("Fraction of the hour that has passed: ");
@@ -1862,7 +1861,7 @@ The final output should be:
 American format:
 Thursday, July 16, 2015
 European format:
-Thursday 16 July, 2015
+Thursday 16 July 2015
 \end{stdout}
 
 %{\em Hint:} You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
@@ -2210,6 +2209,12 @@ So format strings often end with a newline character.
 The format specifier \java{\%d} displays integer values (``d'' stands for ``decimal'').
 The values are matched up with the format specifiers in order, so \java{inch} is displayed using \java{\%d}, and \java{cm} is displayed using \java{\%f}.
 
+Learning about format strings is like learning a sub-language within Java.
+There are many options, and the details can be overwhelming.
+Table~\ref{tab:format} lists a few common uses, to give you an idea of how things work.
+For more details, refer to the documentation of \java{java.util.Formatter}.
+The easiest way to find documentation for Java classes is to do a web search for ``Java'' and the name of the class.
+
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{|l|l|l|}
@@ -2229,12 +2234,6 @@ The values are matched up with the format specifiers in order, so \java{inch} is
 \label{tab:format}
 \end{center}
 \end{table}
-
-Learning about format strings is like learning a sub-language within Java.
-There are many options, and the details can be overwhelming.
-Table~\ref{tab:format} lists a few common uses, to give you an idea of how things work.
-For more details, refer to the documentation of \java{java.util.Formatter}.
-The easiest way to find documentation for Java classes is to do a web search for ``Java'' and the name of the class.
 
 
 \section{Centimeters to inches}
@@ -2491,7 +2490,7 @@ A collection of packages and classes that are available for use in other program
 %\term{utility class}
 %A class that provides commonly needed functionality.
 
-\term{import}
+\term{import statement}
 A statement that allows programs to use classes defined in other packages.
 
 \term{token}
@@ -2503,7 +2502,7 @@ For example, \java{"Hello"} is a string literal and \java{74} is an integer lite
 
 \term{magic number}
 A number that appears without explanation as part of an expression.
-They should generally be replaced with constants.
+It should generally be replaced with a constant.
 
 \term{constant}
 A variable, declared \java{final}, whose value cannot be changed.
@@ -3904,7 +3903,7 @@ In the previous chapter, we used a stack diagram to represent the state of a pro
 The same kind of diagram can make it easier to interpret a recursive method.
 
 Remember that every time a method gets called, Java creates a new frame that contains the current method's parameters and variables.
-Figure~\ref{fig.stack2} is a stack diagram for countdown, called with \java{n == 3}.
+Figure~\ref{fig.stack2} is a stack diagram for \java{countdown}, called with \java{n == 3}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -4602,7 +4601,7 @@ In this example, the second version actually invokes the first version.
 
 Many Java methods are overloaded, meaning that there are different versions that accept different numbers or types of parameters.
 For example, there are versions of \java{print} and \java{println} that accept a single parameter of any data type.
-In the Math class, there is a version of \java{abs} that works on \java{double}s, and there is also a version for \java{int}s.
+In the \java{Math} class, there is a version of \java{abs} that works on \java{double}s, and there is also a version for \java{int}s.
 
 Although overloading is a useful feature, it should be used with caution.
 You might get yourself nicely confused if you are trying to debug one version of a method while accidentally invoking a different one.
@@ -4632,7 +4631,7 @@ It is common to give \java{boolean} methods names that sound like yes/no questio
 Since the return type is \java{boolean}, the return statement has to provide a boolean expression.
 
 The code itself is straightforward, although it is longer than it needs to be.
-Remember that the expression \java{x > -10 \&\& x < 10} has type \java{boolean}, so there is nothing wrong with returning it directly (without the \java{if} statement):
+Remember that the expression \java{x > -10 && x < 10} has type \java{boolean}, so there is nothing wrong with returning it directly (without the \java{if} statement):
 
 \begin{code}
 public static boolean isSingleDigit(int x) {
@@ -4727,7 +4726,7 @@ A recursive definition is similar to a circular definition, in the sense that th
 Of course, a truly circular definition is not very useful:
 
 \begin{description}
-\term{recursive} an adjective used to describe a method that is recursive.
+\term{recursive} An adjective used to describe a method that is recursive.
 \end{description}
 
 If you saw that definition in the dictionary, you might be annoyed.
@@ -4736,7 +4735,7 @@ But if you search for recursion on Google, it displays ``Did you mean: recursion
 \index{factorial}
 
 Many mathematical functions are defined recursively, because that is often the simplest way.
-For example, the {\bf factorial} of an integer $n$, which is written $n!$ is defined like this:
+For example, the {\bf factorial} of an integer $n$, which is written $n!$, is defined like this:
 %
 \begin{eqnarray*}
 &&  0! = 1 \\
@@ -5012,7 +5011,7 @@ Some processors even provide a hardware implementation of this operation for flo
 x e^{-x} + \sqrt{1 - e^{-x}}
 \end{eqnarray*}
 %
-{\em Hint:} The Math method for raising $e$ to a power is \java{Math.exp}.
+{\em Hint:} The method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
 
@@ -5123,7 +5122,7 @@ The Ackermann function is defined for non-negative integers as follows:
 A(m, n) = \begin{cases}
               n+1 & \mbox{if } m = 0 \\
         A(m-1, 1) & \mbox{if } m > 0 \mbox{ and } n = 0 \\
-A(m-1, A(m, n-1)) & \mbox{if } m > 0 \mbox{ and } n > 0.
+A(m-1, A(m, n-1)) & \mbox{if } m > 0 \mbox{ and } n > 0
 \end{cases}
 \end{eqnarray*}
 
@@ -5215,7 +5214,7 @@ An endless source of amusement for computer scientists is the observation that t
 
 In the case of \java{countdown}, we can prove that the loop terminates when \java{n} is positive.
 But in general, it is not so easy to tell whether a loop terminates.
-For example, this loop continues until \java{n} is 1 (which makes the condition \java{false}).
+For example, this loop continues until \java{n} is 1 (which makes the condition \java{false}):
 
 \begin{code}
 public static void sequence(int n) {
@@ -5292,7 +5291,7 @@ The output of this program is:
 9.0   2.1972245773362196
 \end{stdout}
 
-\java{Math.log} computes natural logarithms; that is, logarithms base $e$.
+\java{Math.log} computes natural logarithms, that is, logarithms base $e$.
 For computer science applications, we often want logarithms with respect to base 2.
 To compute them, we can apply this equation:
 %
@@ -5323,7 +5322,7 @@ And here are the results:
 9.0   3.1699250014423126
 \end{stdout}
 
-Each time through the loop, we add one to \java{x}; so the result is an arithmetic sequence.
+Each time through the loop, we add one to \java{x}, so the result is an arithmetic sequence.
 If we multiply \java{x} by something instead, we get a geometric sequence:
 
 \begin{code}
@@ -5670,8 +5669,7 @@ For example, \java{i += 2} increments \java{i} by \java{2}.
 
 \index{pretest loop}
 
-The \java{while} and \java{for} statements are {\bf pretest loops};
-that is, they test the condition first and at the beginning of each pass through the loop.
+The \java{while} and \java{for} statements are {\bf pretest loops}; that is, they test the condition first and at the beginning of each pass through the loop.
 
 \index{posttest loop}
 \index{do-while}
@@ -5937,7 +5935,7 @@ The output should look something like:
 1.0     2.708333333333333     2.718281828459045
 \end{stdout}
 
-You can use the escape sequence \java{"\t"} to put a tab character between columns of a table.
+You can use the escape sequence \java{"\\t"} to put a tab character between columns of a table.
 
 \item Vary the number of terms in the series (the second argument that \java{check} sends to \java{myexp}) and see the effect on the accuracy of the result.
 Adjust this value until the estimated value agrees with the correct answer when \java{x} is 1.
@@ -6022,7 +6020,7 @@ double[] values = new double[size];
 \index{exception!NegativeArraySize}
 
 You can use any integer expression for the size of an array, as long as the value is nonnegative.
-If you try to create an array with -4 elements, for example, you will get a \java{NegativeArraySizeException}.
+If you try to create an array with $-4$ elements, for example, you will get a \java{NegativeArraySizeException}.
 An array with zero elements is allowed, and there are special uses for such arrays that we'll see later on.
 
 
@@ -6135,7 +6133,7 @@ Unfortunately, the output is something like:
 [I@bf3f7e0
 \end{stdout}
 
-The bracket indicates that the value is an array, \java{I} stands for ``integer'', and the rest is the address of the array.
+The bracket indicates that the value is an array, \java{I} stands for ``integer'', and the rest represents the address of the array.
 If we want to display the elements of the array, we can do it ourselves:
 
 \begin{code}
@@ -6405,7 +6403,7 @@ public static int inRange(int[] a, int low, int high) {
 
 \index{reduce}
 
-This pattern should look familiar; it is another reduce operation.
+This pattern should look familiar: it is another reduce operation.
 Notice that \java{low} is included in the range (\java{>=}), but \java{high} is excluded (\java{<}).
 This detail keeps us from counting any scores twice.
 
@@ -6478,7 +6476,7 @@ Because this code only traverses the array of scores once, it is much more effic
 \label{enhanced}
 
 Since traversing arrays is so common, Java provides an alternative syntax that makes the code more compact.
-For example, consider a \java{for} loop that displays the elements of an array on separate lines.
+For example, consider a \java{for} loop that displays the elements of an array on separate lines:
 
 \begin{code}
 for (int i = 0; i < values.length; i++) {
@@ -6793,7 +6791,7 @@ if (letter == 'a') {
 
 Character literals, like \java{'a'}, appear in single quotes.
 Unlike string literals, which appear in double quotes, character literals can only contain a single character.
-Escape sequences, like \java{'\t'}, are legal because they represent a single character.
+Escape sequences, like \java{'\\t'}, are legal because they represent a single character.
 
 The increment and decrement operators work with characters.
 So this loop displays the letters of the alphabet:
@@ -6876,7 +6874,7 @@ This assignment is important; if you don't save the return value, invoking \java
 
 \index{traverse}
 
-The following loop traverses the characters in \java{fruit} and displays them, one on each line.
+The following loop traverses the characters in \java{fruit} and displays them, one on each line:
 
 \begin{code}
 for (int i = 0; i < fruit.length(); i++) {
@@ -7022,13 +7020,13 @@ int index = fruit.indexOf('a', 2);
 
 This code starts at index 2 (the first \java{'n'}) and finds the next \java{'a'}, which is at index 3.
 If the letter happens to appear at the starting index, the starting index is the answer.
-So \java{fruit.indexOf('a', 5)} returns 5.
+So \java{fruit.indexOf('a', 5)} returns \java{5}.
 
 If the character does not appear in the string, \java{indexOf} returns \java{-1}.
 Since indexes cannot be negative, this value indicates the character was not found.
 
 You can also use \java{indexOf} to search for a substring, not just a single character.
-For example, the expression \java{fruit.indexOf("nan")} returns 2.
+For example, the expression \java{fruit.indexOf("nan")} returns \java{2}.
 
 
 \section{String comparison}
@@ -7472,7 +7470,7 @@ Write a recursive method named \java{isPalindrome} that takes a \java{String} an
 \index{abecedarian}
 
 A word is said to be ``abecedarian'' if the letters in the word appear in alphabetical order.
-For example, the following are all 6-letter English abecedarian words.
+For example, the following are all 6-letter English abecedarian words:
 
 \begin{quote}
 abdest, acknow, acorsy, adempt, adipsy, agnosy, befist, behint, %\\
@@ -7490,10 +7488,10 @@ Your method can be iterative or recursive.
 \index{doubloon}
 
 A word is said to be a ``doubloon'' if every letter that appears in the word appears exactly twice.
-Here are some example doubloons found in the dictionary.
+Here are some example doubloons found in the dictionary:
 
 \begin{quote}
-Abba, Anna, appall, appearer, appeases, arraigning, beriberi, bilabial, boob, Caucasus, coco, Dada, deed, Emmett, Hannah, horseshoer, intestines, Isis, mama, Mimi, murmur, noon, Otto, papa, peep, reappear, redder, sees, Shanghaiings, Toto.
+Abba, Anna, appall, appearer, appeases, arraigning, beriberi, bilabial, boob, Caucasus, coco, Dada, deed, Emmett, Hannah, horseshoer, intestines, Isis, mama, Mimi, murmur, noon, Otto, papa, peep, reappear, redder, sees, Shanghaiings, Toto
 \end{quote}
 
 Write a method called \java{isDoubloon} that takes a string and checks whether it is a doubloon.
@@ -7557,7 +7555,7 @@ The \java{java.awt} package provides a class named \java{Point} intended to repr
 In mathematical notation, points are often written in parentheses with a comma separating the coordinates.
 For example, $(0,0)$ indicates the origin, and $(x,y)$ indicates the point $x$ units to the right and $y$ units up from the origin.
 
-In order to use the \java{Point} class, you have to import it.
+In order to use the \java{Point} class, you have to import it:
 
 \begin{code}
 import java.awt.Point;
@@ -8303,7 +8301,7 @@ Attributes are also called {\bf instance variables}, because each instance has i
 
 The first step is to decide what type each variable should be.
 It seems clear that \java{hour} and \java{minute} should be integers.
-Just to keep things interesting, let's make \java{second} a \java{double}.
+Just to keep things interesting, let's make \java{second} a double.
 
 Instance variables are declared at the beginning of the class definition, outside of any method.
 By itself, this code fragment is a legal class definition:
@@ -9030,7 +9028,7 @@ The instance variables should include a character named \java{letter} and an int
 
 \item Write a method named \java{printTile} that takes a \java{Tile} object as a parameter and displays the instance variables in a reader-friendly format.
 
-\item Write a method named \java{testTile} that creates a Tile object with the letter \java{Z} and the value \java{10}, and then uses \java{printTile} to display the state of the object.
+\item Write a method named \java{testTile} that creates a \java{Tile} object with the letter \java{Z} and the value \java{10}, and then uses \java{printTile} to display the state of the object.
 
 \item Implement the \java{toString} and \java{equals} methods for a \java{Tile}.
 
@@ -9354,7 +9352,7 @@ Note that whether a variable is \java{static} or \java{final} involves two separ
 Naming \java{static final} variables with capital letters is a common convention that makes it easier to recognize their role in the class.
 Inside \java{toString} we can refer to \java{SUITS} and \java{RANKS} as if they were local variables, but we can tell that they are class variables.
 
-One advantage of defining \java{SUITS} and \java{RANKS} as class variables is that they don't need to be created (and garbage collected) every time \java{toString} is called.
+One advantage of defining \java{SUITS} and \java{RANKS} as class variables is that they don't need to be created (and garbage-collected) every time \java{toString} is called.
 They may also be needed in other methods and classes, so it's helpful to make them available everywhere.
 Since the array variables are \java{final}, and the strings they reference are immutable, there is no danger in making them \java{public}.
 
@@ -10060,7 +10058,7 @@ There is an algorithm for sorting that is ironically similar to the algorithm fo
 It's called {\bf selection sort}, because it works by traversing the array repeatedly and selecting the lowest (or highest) remaining card each time.
 
 During the first iteration, we find the lowest card and swap it with the card in the 0th position.
-During the $i$th, we find the lowest card to the right of $i$ and swap it with the $i$th card.
+During the $i$th iteration, we find the lowest card to the right of $i$ and swap it with the $i$th card.
 Here is pseudocode for selection sort:
 
 \begin{code}
@@ -10484,7 +10482,7 @@ public void addCard(Card card) {
 \end{code}
 
 We also need to be able to remove cards from a collection.
-The following method takes an index, removes the card at that location, and shifts the following cards left to fill the gap.
+The following method takes an index, removes the card at that location, and shifts the following cards left to fill the gap:
 
 \begin{code}
 public Card popCard(int i) {
@@ -10837,7 +10835,7 @@ public static boolean cardMatches(Card card1, Card card2) {
 }
 \end{code}
 
-Finally, \java{Player} provides \java{score}, which computes penalty points for cards left in a player's hand at the end of the game.
+Finally, \java{Player} provides \java{score}, which computes penalty points for cards left in a player's hand at the end of the game:
 
 \begin{code}
 public int score() {
@@ -11220,7 +11218,7 @@ But if you want to compile and run Java programs on your own computer, you will 
 \end{itemize}
 
 The JDK we recommend is Java SE (Standard Edition), which Oracle makes available for free.
-The IDE we recommend is DrJava, which is an open-source development environment written in Java.
+The IDE we recommend is DrJava, which is an open-source development environment written in Java (see Figure~\ref{fig.drjava1}).
 
 To install the JDK, search the web for ``download JDK'' which should take you to Oracle's website.
 Scroll down to ``Java Platform, Standard Edition'' and click the download button under JDK.
@@ -11246,7 +11244,7 @@ When running DrJava for the first time, we recommend you change three settings f
 
 %We will use DrJava as the primary development environment throughout this book.
 
-%Step-by-step instructions for installing the JDK and configuring DrJava are available on this book's website: \url{http://thinkjava.org/}
+%Step-by-step instructions for installing the JDK and configuring DrJava are available on this book's website: \url{http://thinkjava.org/}.
 
 
 \section{DrJava interactions}
@@ -11276,7 +11274,7 @@ Also, you can press the up/down arrows on the keyboard to repeat previous comman
 \section{Command-line interface}
 \label{commandline}
 
-\index{command line}
+\index{command-line interface}
 \index{terminal}
 
 One of the most powerful and useful skills you can learn is how to use the {\bf command-line interface}, also called the ``terminal''.
@@ -11320,28 +11318,28 @@ But at some point, you will get tired of typing the same test cases over and ove
 
 We can automate the process of entering input and comparing ``expected output'' with ``actual output'' using the command line.
 The basic idea is to store the test cases in plain text files and trick Java into thinking they are coming from the keyboard.
-Here are step by step instructions:
+Here are step-by-step instructions:
 
 \begin{enumerate}
 
 \item Make sure you can compile and run the {\tt Convert.java} example in the {\tt ch03} directory of {\tt ThinkJavaCode}.
 
 \item In the same directory as {\tt Convert.java}, create a plain text file named {\tt test.in} (``in'' is for input).
-Enter the following line and save the file.
+Enter the following line and save the file:
 
 \begin{stdout}
 193.04
 \end{stdout}
 
 \item Create a second plain text file named {\tt test.exp} (``exp'' is for expected).
-Enter the following line and save the file.
+Enter the following line and save the file:
 
 \begin{stdout}
 193.04 cm = 6 ft, 4 in
 \end{stdout}
 
 \item Open a terminal, and change to the directory with these files.
-Run the following command to test the program.
+Run the following command to test the program:
 
 \begin{stdout}
 java Convert < test.in > test.out
@@ -11413,7 +11411,7 @@ java -jar checkstyle-*-all.jar -c /google_checks.xml *.java
 
 The {\tt *} characters are {\bf wildcards} that match whatever version of Checkstyle you have and whatever Java source files are present.
 The output indicates the file and line number of each problem.
-This example refers to a method beginning on line 93, column 5 of Hello.java:
+This example refers to a method beginning on line 93, column 5 of {\tt Hello.java}:
 
 \begin{stdout}
 Hello.java:93:5: Missing a Javadoc comment
@@ -11761,7 +11759,7 @@ Suppose we want to draw a ``Hidden Mickey'', which is an icon that represents Mi
 We can use the oval we just drew as the face, and then add two ears.
 To make the code more readable, let's use \java{Rectangle} objects to represent bounding boxes.
 
-Here's a method that takes a Rectangle and invokes \java{fillOval}:
+Here's a method that takes a \java{Rectangle} and invokes \java{fillOval}:
 
 \begin{code}
 public void boxOval(Graphics g, Rectangle bb) {
@@ -11795,7 +11793,7 @@ The result is shown in Figure~\ref{fig.mickey}.
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[height=2in]{figs/mickey.pdf}
-\caption{A ``hidden mickey'' drawn using Java graphics.}
+\caption{A ``Hidden Mickey'' drawn using Java graphics.}
 \label{fig.mickey}
 \end{center}
 \end{figure}
@@ -11809,9 +11807,7 @@ See the exercises at the end of this appendix for more example drawings.
 \begin{description}
 
 \term{AWT}
-\end{description}
 The ``Abstract Window Toolkit'', a Java package for creating graphical user interfaces.
-\begin{description}
 
 \term{coordinate}
 A variable or value that specifies a location in a two-dimensional graphical window.
@@ -11982,7 +11978,7 @@ All program statements should be within a method definition.
 
 \item Remember that uppercase letters are not the same as lowercase letters.
 
-\item Check for semicolons at the end of statements (and no semicolons after squiggly-braces).
+\item Check for semicolons at the end of statements (and no semicolons after squiggly braces).
 
 \item Make sure that any strings in the code have matching quotation marks.
 Make sure that you use double quotes for strings and single quotes for characters.
@@ -12184,7 +12180,7 @@ Find the nearest assignment statement and see if it is doing the right thing.
 If either one is a parameter, go to the place where the method is invoked and see where the values are coming from.
 
 \term{StackOverflowError}
-See ``Infinite recursion''.% on page~\pageref{infrec}.
+See ``Infinite recursion'' on page~\pageref{infrec}.
 
 \term{FileNotFoundException}
 This means Java didn't find the file it was looking for.
@@ -12240,7 +12236,7 @@ Here are some questions to ask yourself:
 
 \item Is there something the program was supposed to do, but doesn't seem to be happening?
 Find the section of the code that performs that function, and make sure it is executing when you think it should.
-See ``Flow of execution''.% on page~\pageref{flowexec}.
+See ``Flow of execution'' on page~\pageref{flowexec}.
 
 \item Is something happening that shouldn't?
 Find code in your program that performs that function, and see if it is executing when it shouldn't.
@@ -12282,11 +12278,11 @@ Instead of writing \java{if (d == 1.23)}, do something like \java{if (Math.abs(d
 \item When you apply the equality operator (\java{==}) to objects, it checks whether they are identical.
 If you meant to check equivalence, you should use the \java{equals} method instead.
 
-\item By default for user defined types, \java{equals} checks identity.
+\item By default for user-defined types, \java{equals} checks identity.
 If you want a different notion of equivalence, you have to override it.
 
 \item Inheritance can lead to subtle logic errors, because you can run inherited code without realizing it.
-See ``Flow of execution''.% on page~\pageref{flowexec}.
+See ``Flow of execution'' on page~\pageref{flowexec}.
 
 \end{itemize}
 
@@ -12375,7 +12371,7 @@ Now you have the opportunity to display any of the intermediate variables before
 And by reusing \java{x1} and \java{y1}, you made the code smaller, too.
 
 
-\subsection*{My print statement isn't doing anything}
+\subsection*{My print statement isn't doing anything.}
 
 \index{print statement}
 \index{statement!print}
@@ -12385,7 +12381,7 @@ If the program terminates without displaying a newline, you may never see the st
 If you suspect that this is happening, change some or all of the \java{print} statements to \java{println}.
 
 
-\subsection*{I'm really, really stuck and I need help}
+\subsection*{I'm really, really stuck and I need help.}
 
 First, get away from the computer for a few minutes.
 Computers emit waves that affect the brain, causing the following symptoms:
