@@ -1090,7 +1090,7 @@ We do that with an {\bf assignment} statement.
 
 \begin{code}
 message = "Hello!";  // give message the value "Hello!"
-hour = 10;           // assign the value 10 to hour
+hour = 11;           // assign the value 11 to hour
 minute = 59;         // set minute to 59
 \end{code}
 
@@ -1115,8 +1115,8 @@ For example, \java{message} can contain the string \java{"123"}, which is made u
 But that is not the same thing as the integer \java{123}.
 
 \begin{code}
-message = "123";    // legal
-message = 123;      // not legal
+message = "123";     // legal
+message = 123;       // not legal
 \end{code}
 
 \index{initialize}
@@ -1127,7 +1127,7 @@ You can also declare and initialize on the same line:
 
 \begin{code}
 String message = "Hello!";
-int hour = 10;
+int hour = 11;
 int minute = 59;
 \end{code}
 
@@ -1212,7 +1212,6 @@ To display the {\em name} of a variable, you have to put it in quotes.
 %For example: \java{System.out.println("firstLine");}
 
 \begin{code}
-String firstLine = "Hello, again!";
 System.out.print("The value of firstLine is ");
 System.out.println(firstLine);
 \end{code}
@@ -5084,7 +5083,7 @@ public static int prod(int m, int n) {
     if (m == n) {
         return n;
     } else {
-        int recurse = prod(m, n-1);
+        int recurse = prod(m, n - 1);
         int result = n * recurse;
         return result;
     }
