@@ -4632,7 +4632,7 @@ It is common to give \java{boolean} methods names that sound like yes/no questio
 Since the return type is \java{boolean}, the return statement has to provide a boolean expression.
 
 The code itself is straightforward, although it is longer than it needs to be.
-Remember that the expression \java{x > -10 \&\& x < 10} has type \java{boolean}, so there is nothing wrong with returning it directly (without the \java{if} statement):
+Remember that the expression \java{x > -10 && x < 10} has type \java{boolean}, so there is nothing wrong with returning it directly (without the \java{if} statement):
 
 \begin{code}
 public static boolean isSingleDigit(int x) {
