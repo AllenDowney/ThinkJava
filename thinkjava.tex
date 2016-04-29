@@ -5053,7 +5053,9 @@ public static boolean isHoopy(int x) {
     }
     return hoopyFlag;
 }
+\end{code}
 
+\begin{code}
 public static boolean isFrabjuous(int x) {
     boolean frabjuousFlag;
     if (x > 0) {
@@ -5637,7 +5639,7 @@ public static void printRow(int n, int cols) {
     for (int i = 1; i <= cols; i = i + 1) {
         System.out.printf("%4d", n * i);
     }
-    System.out.println(i);  // error
+    System.out.println(i);  // compiler error
 }
 \end{code}
 
@@ -5832,7 +5834,7 @@ public static void main(String[] args) {
 
 public static void loop(int n) {
     int i = n;
-    while (i > 0) {
+    while (i > 1) {
         System.out.println(i);
         if (i % 2 == 0) {
             i = i / 2;
@@ -6277,7 +6279,7 @@ Another common pattern is a {\bf search}, which involves traversing an array loo
 For example, the following method takes an \java{int} array and an integer value, and it returns the index where the value appears:
 
 \begin{code}
-public static int search(int[] a, int target) {
+public static int search(double[] a, double target) {
     for (int i = 0; i < a.length; i++) {
         if (a[i] == target) {
             return i;
@@ -7660,8 +7662,8 @@ As another example, we can rewrite the \java{distance} method from Section~\ref{
 
 \begin{code}
 public static double distance(Point p1, Point p2) {
-    double dx = (double) (p2.x - p1.x);
-    double dy = (double) (p2.y - p1.y);
+    int dx = p2.x - p1.x;
+    int dy = p2.y - p1.y;
     return Math.sqrt(dx * dx + dy * dy);
 }
 \end{code}
@@ -8235,11 +8237,11 @@ public static int pow(int x, int n) {
 \index{BigInteger}
 
 The problem with this method is that it only works if the result is small enough to be represented by an \java{int}.
-Rewrite it so that the result is a BigInteger.
+Rewrite it so that the result is a \java{BigInteger}.
 The parameters should still be integers, though.
 
-You should use the BigInteger methods \java{add} and \java{multiply}.
-But don't use \java{pow}; that would spoil the fun.
+You should use the \java{BigInteger} methods \java{add} and \java{multiply}.
+But don't use \java{BigInteger.pow}; that would spoil the fun.
 \end{exercise}
 
 
@@ -8490,7 +8492,7 @@ public class TimeClient {
 
     public static void main(String[] args) {
         Time time = new Time(11, 59, 59.9);
-        System.out.println(time.hour);
+        System.out.println(time.hour);      // compiler error
     }
 }
 \end{code}
@@ -8804,7 +8806,7 @@ And here's how we would invoke the static method:
 \begin{code}
 Time startTime = new Time(18, 50, 0.0);
 Time runningTime = new Time(2, 16, 0.0);
-Time endTime = add(startTime, runningTime);
+Time endTime = Time.add(startTime, runningTime);
 \end{code}
 
 On the other hand, here's what it looks like as an instance method:
@@ -9335,8 +9337,7 @@ public class Card {
     // instance variables and constructors go here
 
     public String toString() {
-        String s = RANKS[this.rank] + " of " + SUITS[this.suit];
-        return s;
+        return RANKS[this.rank] + " of " + SUITS[this.suit];
     }
 }
 \end{code}
@@ -9366,7 +9367,8 @@ As we saw in Section~\ref{equals}, it's helpful to create an \java{equals} metho
 
 \begin{code}
 public boolean equals(Card that) {
-    return this.suit == that.suit && this.rank == that.rank;
+    return this.rank == that.rank
+        && this.suit == that.suit;
 }
 \end{code}
 
@@ -9407,19 +9409,20 @@ With that decided, we can write \java{compareTo} as follows:
 
 \begin{code}
 public int compareTo(Card that) {
-    if (this.suit > that.suit) {
-        return 1;
-    }
     if (this.suit < that.suit) {
         return -1;
     }
-    if (this.rank > that.rank) {
+    if (this.suit > that.suit) {
         return 1;
     }
     if (this.rank < that.rank) {
         return -1;
     }
+    if (this.rank > that.rank) {
+        return 1;
+    }
     return 0;
+}
 \end{code}
 
 \java{compareTo} returns 1 if \java{this} wins, -1 if \java{that} wins, and 0 if they are equivalent.
@@ -9639,12 +9642,12 @@ If you find two adjacent words on the page and your word comes between them, you
 Getting back to the array of cards, we can write a faster version of \java{search} if we know the cards are in order:
 
 \begin{code}
-public static int binarySearch(Card[] cards, Card card) {
+public static int binarySearch(Card[] cards, Card target) {
     int low = 0;
     int high = cards.length - 1;
     while (low <= high) {
         int mid = (low + high) / 2;                 // step 1
-        int comp = cards[mid].compareTo(card);
+        int comp = cards[mid].compareTo(target);
 
         if (comp == 0) {                            // step 2
             return mid;
@@ -9744,20 +9747,20 @@ The trick is to write a method that takes \java{low} and \java{high} as paramete
 Here's what the code looks like:
 
 \begin{code}
-public static int binarySearch(Card[] cards, Card card,
-                           int low, int high) {
+public static int binarySearch(Card[] cards, Card target,
+                               int low, int high) {
     if (high < low) {
         return -1;
     }
     int mid = (low + high) / 2;                     // step 1
-    int comp = cards[mid].compareTo(card);
+    int comp = cards[mid].compareTo(target);
 
     if (comp == 0) {                                // step 2
         return mid;
     } else if (comp < 0) {                          // step 3
-        return binarySearch(cards, card, mid + 1, high);
+        return binarySearch(cards, target, mid + 1, high);
     } else {                                        // step 4
-        return binarySearch(cards, card, low, mid - 1);
+        return binarySearch(cards, target, low, mid - 1);
     }
 }
 \end{code}
@@ -10044,7 +10047,7 @@ And this process -- writing pseudocode first and then writing methods to make it
 
 \index{shuffle}
 
-One of the exercises at the end of the chapter asks you to write these helper methods and use them to implement \java{shuffle}.
+One of the exercises at the end of the chapter asks you to write the helper methods \java{randomInt} and \java{swapCards} and use them to implement \java{shuffle}.
 
 
 \section{Selection sort}
@@ -10071,9 +10074,9 @@ public void selectionSort() {
 \end{code}
 
 Again, the pseudocode helps with the design of the helper methods.
-In this algorithm we can use \java{swapCards} again, so we only need a method to find the lowest card; we'll call it \java{indexLowestCard}.
+In this algorithm we can use \java{swapCards} again, so we only need a method to find the lowest card; we'll call it \java{indexLowest}.
 
-One of the exercises at the end of the chapter asks you to write the helper method \java{indexLowestCard} and use it to implement \java{selectionSort}.
+One of the exercises at the end of the chapter asks you to write the helper method \java{indexLowest} and use it to implement \java{selectionSort}.
 
 
 \section{Merge sort}
@@ -10127,7 +10130,6 @@ It returns a new deck that contains the specified subset of the cards:
 \begin{code}
 public Deck subdeck(int low, int high) {
     Deck sub = new Deck(high - low + 1);
-
     for (int i = 0; i < sub.cards.length; i++) {
         sub.cards[i] = this.cards[low + i];
     }
@@ -10313,7 +10315,7 @@ Use the {\tt Deck.java} file from the previous exercise (or create a new one fro
 
 \begin{enumerate}
 
-\item Write a method called \java{indexLowestCard} that uses the \java{compareCard} method to find the lowest card in a given range of the deck (from \java{lowIndex} to \java{highIndex}, including both).
+\item Write a method called \java{indexLowest} that uses the \java{compareCard} method to find the lowest card in a given range of the deck (from \java{lowIndex} to \java{highIndex}, including both).
 
 \item Write a method called \java{selectionSort} that implements the selection sort algorithm in Section~\ref{sorting}.
 
@@ -10436,8 +10438,8 @@ Here's the beginning of a \java{CardCollection} class that uses \java{ArrayList}
 \begin{code}
 public class CardCollection {
 
-    private ArrayList<Card> cards;
     private String label;
+    private ArrayList<Card> cards;
 
     public CardCollection(String label) {
         this.label = label;
@@ -10454,8 +10456,8 @@ This declaration says that \java{cards} is not just an \java{ArrayList}, it's an
 %Java collections can only store objects, not primitives like \java{int}.
 %But you can use wrapper classes, for example \java{ArrayList<Integer>}.
 
-Both instance variables are \java{private}, so we will not be able to access them from other classes (including subclasses).
-That will turn out to be too restrictive; in the next section we will have to change it.
+%Both instance variables are \java{private}, so we will not be able to access them from other classes (including subclasses).
+%That will turn out to be too restrictive; in the next section we will have to change it.
 
 The constructor takes a string as an argument and assigns it to an instance variable, \java{label}.
 It also initializes \java{cards} with an empty \java{ArrayList}.
@@ -10508,6 +10510,14 @@ Notice that \java{popCard} uses \java{CardCollection}'s own \java{size} method, 
 \begin{code}
 public int size() {
     return cards.size();
+}
+\end{code}
+
+For convenience, \java{CardCollection} also provides an \java{empty} method that returns \java{true} when \java{size} is zero:
+
+\begin{code}
+public boolean empty() {
+    return cards.size() == 0;
 }
 \end{code}
 
@@ -10673,9 +10683,7 @@ Here's a simple example that deals five cards to a hand, and deals the rest into
 \begin{code}
 Deck deck = new Deck("Deck");
 deck.shuffle();
-\end{code}
 
-\begin{code}
 Hand hand = new Hand("Hand");
 deck.deal(hand, 5);
 hand.display();
@@ -10684,6 +10692,8 @@ hand.display();
 \begin{code}
 Hand drawPile = new Hand("Draw Pile");
 deck.dealAll(drawPile);
+System.out.printf("Draw Pile has %d cards.\n",
+                  drawPile.size());
 \end{code}
 
 \java{CardCollection} provides \java{dealAll}, which deals all of the remaining cards.
@@ -10696,6 +10706,8 @@ Ace of Hearts
 6 of Clubs
 6 of Diamonds
 2 of Clubs
+
+Draw Pile has 47 cards.
 \end{stdout}
 
 Of course, if you run this example you will probably get a different hand, because the deck is shuffled randomly.
@@ -10716,8 +10728,8 @@ Notice that the first parameter is supposed to be a \java{CardCollection}.
 But we invoked it like this:
 
 \begin{code}
-Hand hand1 = new Hand("Hand 1");
-deck.deal(hand1, 5);
+Hand hand = new Hand("Hand");
+deck.deal(hand, 5);
 \end{code}
 
 The argument is a \java{Hand}, not a \java{CardCollection}.
@@ -10890,7 +10902,7 @@ Looking at the rules of {\it Crazy Eights}, we can identify some methods we'll n
 \end{itemize}
 
 Now we can start implementing the pieces.
-Here is the class definition for \java{Eights}, which encapsulates the state of the game:
+Here is the beginning of the class definition for \java{Eights}, which encapsulates the state of the game:
 
 \begin{code}
 public class Eights {
@@ -10924,7 +10936,7 @@ public Eights() {
     deck.deal(discardPile, 1);
 
     drawPile = new Hand("Draw pile");
-    deck.deal(drawPile);
+    deck.dealAll(drawPile);
 
     in = new Scanner(System.in);
 }

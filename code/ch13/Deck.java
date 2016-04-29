@@ -41,10 +41,32 @@ public class Deck {
     }
 
     /**
+     * Displays each of the cards in the deck.
+     */
+    public void print() {
+        for (int i = 0; i < this.cards.length; i++) {
+            System.out.println(this.cards[i]);
+        }
+    }
+
+    /**
      * Returns a string representation of the deck.
      */
     public String toString() {
-        return Arrays.toString(this.cards);
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < this.cards.length; i++) {
+            str.append(this.cards[i]);
+            str.append('\n');
+        }
+        return str.toString();
+    }
+
+    /**
+     * Chooses a random number between low and high, including both.
+     */
+    public int randomInt(int low, int high) {
+        int range = high - low + 1;
+        return low + random.nextInt(range);
     }
 
     /**
@@ -54,14 +76,6 @@ public class Deck {
         Card temp = this.cards[i];
         this.cards[i] = this.cards[j];
         this.cards[j] = temp;
-    }
-
-    /**
-     * Chooses a random number between low and high, including both.
-     */
-    public int randomInt(int low, int high) {
-        int range = high - low + 1;
-        return low + random.nextInt(range);
     }
 
     /**
@@ -186,7 +200,7 @@ public class Deck {
     /**
      * Helper method for insertion sort.
      */
-    private void insert(Card card, int i) {
+    public void insert(Card card, int i) {
         int j = i;
         while (j > 0 && card.compareTo(this.cards[j - 1]) < 0) {
             this.cards[j] = this.cards[j - 1];
@@ -194,4 +208,5 @@ public class Deck {
         }
         this.cards[j] = card;
     }
+
 }
