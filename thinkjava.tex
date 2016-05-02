@@ -913,7 +913,7 @@ We encourage you to at least attempt every problem.
 You can't learn to program only by reading about it; you have to practice.
 
 Before you can compile and run Java programs, you might have to download and install a few tools.
-There are many good options, but we recommend DrJava, which is an ``integrated development environment'' (IDE) for beginners.
+There are many good options, but we recommend DrJava, which is an ``integrated development environment'' (IDE) well suited for beginners.
 Instructions for getting started are in Appendix~\ref{drjava}.
 
 The code for this chapter is in the {\tt ch01} directory of {\tt ThinkJavaCode}.
@@ -1367,7 +1367,7 @@ Although floating-point numbers are useful, they can be a source of confusion.
 For example, Java distinguishes the integer value \java{1} from the floating-point value \java{1.0}, even though they seem to be the same number.
 They belong to different data types, and strictly speaking, you are not allowed to make assignments between types.
 
-The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}.
+The following is illegal because the variable on the left is an \java{int} and the value on the right is a \java{double}:
 
 \begin{code}
 int x = 1.1;  // compiler error
@@ -1454,7 +1454,7 @@ double balance = 123.45;  // potential rounding error
 \end{code}
 
 In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
-The result would be angry customers and potential law suits.
+The result would be angry customers and potential lawsuits.
 You can avoid the problem by representing the balance as an integer:
 
 \begin{code}
@@ -1987,7 +1987,7 @@ Before you can use \java{Scanner}, you have to import it like this:
 import java.util.Scanner;
 \end{code}
 
-\index{import}
+\index{import statement}
 \index{statement!import}
 
 This {\bf import statement} tells the compiler that when you say \java{Scanner}, you mean the one defined in \java{java.util}.
@@ -2007,7 +2007,7 @@ This line declares a \java{Scanner} variable named \java{in} and creates a new \
 %We'll explain the \java{new} operator in more detail in Section~\ref{point}.
 
 \java{Scanner} provides a method called \java{nextLine} that reads a line of input from the keyboard and returns a \java{String}.
-The following example reads two lines and repeats them back to the user.
+The following example reads two lines and repeats them back to the user:
 
 \begin{code}
 import java.util.Scanner;
@@ -2279,7 +2279,7 @@ double x = (int) pi * 20.0;
 
 %Operator precedence and integer truncation make type casting somewhat error-prone.
 
-Keeping that in mind, here's how we can convert a measurement in centimeters to inches.
+Keeping that in mind, here's how we can convert a measurement in centimeters to inches:
 
 \begin{code}
 inch = (int) (cm / CM_PER_INCH);
@@ -2382,7 +2382,7 @@ The reader should never have to scroll horizontally.
 \section{The Scanner bug}
 
 Now that you've had some experience with \java{Scanner}, there is an unexpected behavior we want to warn you about.
-The following code fragment asks users for their name and age.
+The following code fragment asks users for their name and age:
 
 \begin{code}
 System.out.print("What is your name? ");
@@ -3319,7 +3319,7 @@ Local variables cannot be accessed from outside their method.
 
 \term{stack diagram}
 A graphical representation of the variables belonging to each method.
-The methods calls are ``stacked'' from top to bottom, in the flow of execution.
+The method calls are ``stacked'' from top to bottom, in the flow of execution.
 
 \term{frame}
 In a stack diagram, a representation of the variables and parameters for a method, along with their current values.
@@ -5705,7 +5705,7 @@ Although this code looks complicated, it is essentially only three steps:
 
 \begin{enumerate}
 \item Display a prompt.
-\item Check the input; if invalid, display and error and start over.
+\item Check the input; if invalid, display an error and start over.
 \item Read the input.
 \end{enumerate}
 
@@ -5984,7 +5984,7 @@ This language feature will enable you to write programs that manipulate larger a
 \index{array}
 \index{element}
 
-An {\bf array} is an sequence of values; the values in the array are called {\bf elements}.
+An {\bf array} is a sequence of values; the values in the array are called {\bf elements}.
 You can make an array of \java{int}s, \java{double}s, or any other type, but all the values in an array must have the same type.
 
 \index{type!array}
@@ -6191,7 +6191,7 @@ double[] a = new double[3];
 double[] b = a;
 \end{code}
 
-These statements create an array of three \java{double}s and makes two different variables refer to it, as shown in Figure~\ref{fig.array3}.
+These statements create an array of three \java{double}s and make two different variables refer to it, as shown in Figure~\ref{fig.array3}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -6388,7 +6388,7 @@ In statistics, a histogram is a set of counters that keeps track of the number o
 For exam scores, we might have ten counters to keep track of how many students scored in the 90s, the 80s, etc.
 To do that, we can traverse the array and count the number of elements that fall in a given range.
 
-The following method takes an array and a two integers, \java{low} and \java{high}.
+The following method takes an array and two integers, \java{low} and \java{high}.
 It returns the number of elements that fall in the range from  \java{low} to \java{high}.
 
 \begin{code}
@@ -6952,7 +6952,7 @@ So the result of \java{reverse("banana")} is \java{"ananab"}.
 
 \section{Substrings}
 
-The \java{substring} method returns new string that copies letters from an existing string, starting at the given index.
+The \java{substring} method returns a new string that copies letters from an existing string, starting at the given index.
 
 \begin{itemize}
 \item \java{fruit.substring(0)} returns \java{"banana"}
@@ -7052,7 +7052,7 @@ But it is not correct, and sometimes it gets the answer wrong.
 The problem is that the \java{==} operator checks whether the two variables refer to the same object (by comparing the references).
 If you give it two different strings that contain the same letters, it yields \java{false}.
 
-The right way to compare strings is with the \java{equals} methods, like this:
+The right way to compare strings is with the \java{equals} method, like this:
 
 \begin{code}
 if (name1.equals(name2)) {
@@ -7332,7 +7332,7 @@ But if \java{x} is a \java{char}, it's not exactly the same!
 In that case, \java{x++} is legal, but \java{x = x + 1} causes an error.
 Try it out and see what the error message is, then see if you can figure out what is going on.
 
-\item What happens when you add \java{""} (the empty string) to the other types; for example, \java{"" + 5}?
+\item What happens when you add \java{""} (the empty string) to the other types, for example, \java{"" + 5}?
 
 \item For each data type, what types of values can you assign to it?
 For example, you can assign an \java{int} to a \java{double} but not vice versa.
@@ -7684,7 +7684,7 @@ import java.awt.Rectangle;
 \end{code}
 
 \java{Rectangle} objects are similar to points, but they have four attributes: \java{x}, \java{y}, \java{width}, and \java{height}.
-The following example creates a \java{Rectangle} object and makes the variable \java{box} refer to it.
+The following example creates a \java{Rectangle} object and makes the variable \java{box} refer to it:
 
 \begin{code}
 Rectangle box = new Rectangle(0, 0, 100, 200);
@@ -7944,7 +7944,7 @@ In practice, it's more convenient to look at high-level pictures than to examine
 
 As shown in Figure~\ref{fig.umlPoint}, a {\bf class diagram} is divided into two sections.
 The top half lists the attributes, and the bottom half lists the methods.
-UML uses a language-independent format; so rather than showing \java{int x}, the diagram uses {\tt x:~int}.
+UML uses a language-independent format, so rather than showing \java{int x}, the diagram uses {\tt x:~int}.
 
 In contrast to state diagrams, which visualize objects (and variables) at run-time, a class diagram visualizes the source code at compile-time.
 
@@ -8397,7 +8397,7 @@ Figure~\ref{fig.time} shows the result.
 
 Beginners sometimes make the mistake of invoking \java{new} inside the constructor.
 You don't have to, and you shouldn't.
-In this example, invoking \java{new Time()} in the constructor causes an infinite recursion.
+In this example, invoking \java{new Time()} in the constructor causes an infinite recursion:
 
 \begin{code}
 public Time() {
@@ -9310,7 +9310,7 @@ The output is {\tt Jack of Diamonds}.
 So far we have seen local variables, which are declared inside a method, and instance variables, which are declared in a class definition, usually before the method definitions.
 
 Local variables are created when a method is invoked, and their space is reclaimed when the method ends.
-Instance variables are created when you construct an object and reclaimed when the object is garbage collected.
+Instance variables are created when you construct an object and reclaimed when the object is garbage-collected.
 
 \index{class variable}
 \index{static}
@@ -9684,7 +9684,7 @@ Notice that this algorithm depends on the \java{compareTo} method of the object.
 
 \section{Tracing the code}
 
-To see how binary search works, it's helpful to add the following print statement at the beginning of the loop.
+To see how binary search works, it's helpful to add the following print statement at the beginning of the loop:
 
 \begin{code}
 System.out.println(low + ", " + high);
@@ -10774,7 +10774,7 @@ A \java{Player} has two \java{private} attributes: a name and a hand.
 The constructor takes the player's name as a string and saves it in an instance variable.
 In this example, we have to use \java{this} to distinguish between the instance variable and the parameter with the same name.
 
-The primary method that \java{Player} provides is \java{play}, which decides which card to discard during each turn.
+The primary method that \java{Player} provides is \java{play}, which decides which card to discard during each turn:
 
 \begin{code}
 public Card play(Eights eights, Card prev) {
@@ -10788,7 +10788,7 @@ public Card play(Eights eights, Card prev) {
 
 The first parameter is a reference to the \java{Eights} object that encapsulates the state of the game.
 We'll need it if we have to draw a new card.
-The second parameter, \java{prev} is the card on top of the discard pile.
+The second parameter, \java{prev}, is the card on top of the discard pile.
 
 \index{top-down development}
 
@@ -12263,7 +12263,6 @@ They might not do what you think they do.
 To program, you need a mental model of what your code does.
 If it doesn't do what you expect, the problem might not actually be the program; it might be in your head.
 
-\index{model!mental}
 \index{mental model}
 
 The best way to correct your mental model is to break the program into components (usually the classes and methods) and test them independently.
