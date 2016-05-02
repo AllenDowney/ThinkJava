@@ -804,8 +804,8 @@ That way you will always have a working program, and it will be easier to isolat
 
 A great example of this principle is the Linux operating system, which contains millions of lines of code.
 It started out as a simple program Linus Torvalds used to explore the Intel 80386 chip.
-According to Larry Greenfield, ``One of Linus's earlier projects was a program that would switch between printing AAAA and BBBB.
-This later evolved to Linux.'' ({\it The Linux Users' Guide})
+According to Larry Greenfield in {\it The Linux Users' Guide}, ``One of Linus's earlier projects was a program that would switch between printing AAAA and BBBB.
+This later evolved to Linux.''
 
 %Later chapters will make more suggestions about debugging and other programming practices.
 
@@ -4742,7 +4742,7 @@ For example, the {\bf factorial} of an integer $n$, which is written $n!$, is de
 \end{eqnarray*}
 
 Don't confuse the mathematical symbol $!$, which means {\em factorial}, with the Java operator \java{!}, which means {\em not}.
-This definition says that \java{factorial(0)} is \java{1}, and that \java{factorial(n)} is \java{n * factorial(n-1)}.
+This definition says that \java{factorial(0)} is \java{1}, and that \java{factorial(n)} is \java{n * factorial(n - 1)}.
 
 So \java{factorial(3)} is \java{3 * factorial(2)}; \java{factorial(2)} is \java{2 * factorial(1)}; \java{factorial(1)} is \java{1 * factorial(0)}; and \java{factorial(0)} is \java{1}.
 Putting it all together, we get \java{3 * 2 * 1 * 1}, which is 6.
@@ -8083,8 +8083,8 @@ Include all variables and parameters, and show the objects those variables refer
 
 \begin{code}
 public static double distance(Point p1, Point p2) {
-    int dx = p1.x - p2.x;
-    int dy = p1.y - p2.y;
+    int dx = p2.x - p1.x;
+    int dy = p2.y - p1.y;
     return Math.sqrt(dx * dx + dy * dy);
 }
 
