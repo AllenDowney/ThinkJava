@@ -323,7 +323,7 @@ They found errors, made many great suggestions, and helped make the book much be
 
 Additional contributors who found one or more typos: Stijn Debrouwere, Guy Driesen, Andai Velican, Chris Kuszmaul, Daniel Kurikesu, Josh Donath, Rens Findhammer, Elisa Abedrapo, Yousef BaAfif, Bruce Hill, Matt Underwood, Isaac Sultan, Dan Rice, Robert Beard, Daniel Pierce.
 
-If you have additional comments or ideas about the text, please send them to: {\bf feedback@greenteapress.com}
+If you have additional comments or ideas about the text, please send them to: \href{mailto:feedback@greenteapress.com}{\tt feedback@greenteapress.com}.
 
 
 \mainmatter
@@ -389,7 +389,7 @@ In order to determine which way is best for a given situation, we need technique
 \index{algorithm}
 
 {\bf Computer science} is the science of algorithms, including their discovery and analysis.
-An {\bf algorithm} is a sequence of steps that specify how to solve a problem.
+An {\bf algorithm} is a sequence of steps that specifies how to solve a problem.
 Some algorithms are faster than others, and some use less space in computer memory.
 As you learn to develop algorithms for problems you haven't solved before, you also learn to think like a computer scientist.
 %It's much more fun to discover new algorithms than to write the code for solutions that other people came up with!
@@ -827,7 +827,7 @@ If you spend some time learning this vocabulary, you will have an easier time re
 The process of formulating a problem, finding a solution, and expressing the solution.
 
 \term{program}
-A sequence of instructions that specify how to perform tasks on a computer.
+A sequence of instructions that specifies how to perform tasks on a computer.
 
 \term{programming}
 The application of problem solving to creating executable computer programs.
@@ -1287,7 +1287,7 @@ Expressions are generally a combination of numbers, variables, and operators.
 When complied and executed, they become a single value.
 
 For example, the expression \java{1 + 1} has the value \java{2}.
-In the expression \java{hour - 1}, Java replaces the variable with it's value, yielding \java{11 - 1}, which has the value \java{10}.
+In the expression \java{hour - 1}, Java replaces the variable with its value, yielding \java{11 - 1}, which has the value \java{10}.
 In the expression \java{hour * 60 + minute}, both variables get replaced, yielding \java{11 * 60 + 59}.
 The multiplication happens first, yielding \java{660 + 59}.
 Then the addition yields \java{719}.
@@ -3404,7 +3404,7 @@ public static void ping() {
 %\end{exercise}
 
 
-%ABD: We don't need this any more since we used this as an example
+%ABD: We don't need this anymore since we used this as an example
 %\begin{exercise}
 %Draw a stack diagram that shows the state of the program in Section~\ref{time} when \java{main} invokes \java{printTime} with the arguments \java{11} and \java{59}.
 %\end{exercise}
@@ -4659,7 +4659,7 @@ if (isSingleDigit(z)) {
 \end{code}
 
 Examples like this one almost read like English:
-``If is single digit z, print ... else print ...''
+``If is single digit z, print ... else print ...''.
 
 
 \section{Javadoc tags}
@@ -5916,7 +5916,7 @@ Write an iterative version of \java{factorial}.
 
 One way to calculate $e^x$ is to use the infinite series expansion:
 %
-\[ e^x = 1 + x + x^2 / 2! + x^3 / 3! + x^4 / 4! + ... \]
+\[ e^x = 1 + x + x^2 / 2! + x^3 / 3! + x^4 / 4! + \ldots \]
 %
 The $i$th term in the series is $x^i / i!$.
 
@@ -7061,7 +7061,7 @@ if (name1.equals(name2)) {
 \end{code}
 
 This example invokes \java{equals} on \java{name1} and passes \java{name2} as an argument.
-The \java{equals} method returns \java{true} if the strings contain the same characters, otherwise it returns \java{false}.
+The \java{equals} method returns \java{true} if the strings contain the same characters; otherwise it returns \java{false}.
 
 If the strings differ, we can use \java{compareTo} to see which comes first in alphabetical order:
 
@@ -7472,7 +7472,7 @@ Write a recursive method named \java{isPalindrome} that takes a \java{String} an
 \index{abecedarian}
 
 A word is said to be ``abecedarian'' if the letters in the word appear in alphabetical order.
-For example, the following are all 6-letter English abecedarian words:
+For example, the following are all six-letter English abecedarian words:
 
 \begin{quote}
 abdest, acknow, acorsy, adempt, adipsy, agnosy, befist, behint, %\\
@@ -7915,7 +7915,7 @@ As your program runs, the system automatically looks for stranded objects and re
 This process is called {\bf garbage collection}.
 
 You don't have to do anything to make garbage collection happen, and in general don't have to be aware of it.
-But in high performance applications, you may notice a slight delay every now and then when Java reclaims space from discarded objects.
+But in high-performance applications, you may notice a slight delay every now and then when Java reclaims space from discarded objects.
 %You can manually run the garbage collector by invoking \java{System.gc()} method.
 
 
@@ -8165,7 +8165,7 @@ You might be sick of the factorial method by now, but we're going to do one more
 \item Create a new program called {\tt Big.java} and write (or reuse) an iterative version of \java{factorial}.
 
 \item Display a table of the integers from 0 to 30 along with their factorials.
-At some point around 15, you will probably see that the answers are not right any more.
+At some point around 15, you will probably see that the answers are not right anymore.
 Why not?
 
 \index{BigInteger}
@@ -8662,7 +8662,7 @@ The body of the method is similar to \java{printTime} in the previous section, w
 
 \item Inside the method, we use \java{this} to refer to the current instance; that is, the object the method is invoked on.
 
-\item Instead of \java{printf}, it uses \java{String.format}, which returns a formatted String rather than displaying it.
+\item Instead of \java{printf}, it uses \java{String.format}, which returns a formatted \java{String} rather than displaying it.
 
 \end{itemize}
 
@@ -10150,7 +10150,7 @@ Drawing a picture is usually the best way to avoid them.
 \index{overload}
 
 Figure~\ref{fig.subdeck} is a state diagram of a subdeck with \java{low = 0} and \java{high = 4}.
-The result is a hand with 5 cards that are {\em shared} with the original deck; that is, they are aliased.
+The result is a hand with five cards that are {\em shared} with the original deck; that is, they are aliased.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -11207,7 +11207,7 @@ Instead, we provide this appendix with a brief introduction to DrJava -- an {\bf
 \label{drjava}
 
 The easiest way to start programming in Java is to use a website that compiles and runs Java code in the browser.
-Examples include \href{https://www.jdoodle.com/}{jdoodle.com}, \href{https://www.compilejava.net/}{compilejava.net}, \href{http://tutorialspoint.com/}{tutorialspoint.com}, and others.
+Examples include \href{https://www.jdoodle.com/}{\tt jdoodle.com}, \href{https://www.compilejava.net/}{\tt compilejava.net}, \href{http://tutorialspoint.com/}{\tt tutorialspoint.com}, and others.
 
 If you are unable to install software on your computer (which is often the case in public schools and Internet caf\'{e}s), you can use these online development environments for almost everything in this book.
 
