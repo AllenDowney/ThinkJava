@@ -118,9 +118,9 @@
 % pdf hyperlinks, table of contents, and document properties
 \usepackage{hyperref}
 \hypersetup{%
-  pdftitle={\thetitle},
+  pdftitle={\thetitle: \thesubtitle},
   pdfauthor={\theauthors},
-  pdfsubject={\theversion},
+  pdfsubject={Version \theversion},
   pdfkeywords={},
   bookmarksopen=false,
   colorlinks=true,

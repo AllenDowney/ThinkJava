@@ -3,21 +3,23 @@
 \title{Think Java}
 \author{Allen B. Downey and Chris Mayfield}
 
-\newcommand{\thetitle}{Think Java: How to Think Like a Computer Scientist}
+\newcommand{\thetitle}{Think Java}
+\newcommand{\thesubtitle}{How to Think Like a Computer Scientist}
 \newcommand{\theauthors}{Allen B. Downey and Chris Mayfield}
-\newcommand{\theversion}{Version 6.0.4}
+\newcommand{\theversion}{6.1.0}
 
 %%%% Both LATEX and PLASTEX
 
 \usepackage{graphicx}
-
+\usepackage{hevea}
 \usepackage{makeidx}
+\usepackage{setspace}
+
 \makeindex
 
 % automatically index glossary terms
 \newcommand{\term}[1]{%
-\index{#1}
-\item[#1:]}
+\item[#1:]\index{#1}}
 
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -69,7 +71,6 @@
 
 \input{latexonly}
 
-%%%% END OF LATEX ONLY
 \fi
 
 %%%% END OF PREAMBLE
@@ -85,52 +86,113 @@
 %%%% LATEX ONLY
 \else
 
-%--title page--------------------------------------------------
-\pagebreak
+\begin{latexonly}
+
+%--half title-------------------------------------------------
 \thispagestyle{empty}
 
 \begin{flushright}
 \vspace*{2.0in}
 
-{\huge Think Java}
+\begin{spacing}{3}
+{\huge \thetitle} \\
+{\Large \thesubtitle}
+\end{spacing}
 
 \vspace{0.25in}
-{\LARGE How to Think Like a Computer Scientist}
 
-\vspace{1in}
-{\Large \theauthors}
-
-\vspace{1in}
-{\large \theversion}
+Version \theversion
 
 \vfill
+\end{flushright}
 
+%--verso------------------------------------------------------
+\newpage
+\thispagestyle{empty}
+
+\quad
+
+%--title page-------------------------------------------------
+\newpage
+\thispagestyle{empty}
+
+\begin{flushright}
+\vspace*{2.0in}
+
+\begin{spacing}{3}
+{\huge \thetitle} \\
+{\Large \thesubtitle}
+\end{spacing}
+
+\vspace{0.25in}
+
+Version \theversion
+
+\vspace{1in}
+
+{\Large \theauthors}
+
+\vspace{0.5in}
+
+{\Large Green Tea Press}
+
+{\small Needham, Massachusetts}
+
+\vfill
 \end{flushright}
 
 %--copyright--------------------------------------------------
-\pagebreak
+\newpage
 \thispagestyle{empty}
 
-Copyright \copyright ~2016 Allen B. Downey and Chris Mayfield.
+Copyright \copyright ~2016 \theauthors.
 
-%{\bf NOTE: This version of the book is a work in progress and won't be completed until March 2016.}
+\vspace{0.2in}
 
-\vspace{0.25in}
+\begin{flushleft}
+Green Tea Press \\
+9 Washburn Ave \\
+Needham, MA 02492
+\end{flushleft}
 
-Permission is granted to copy, distribute, transmit, and adapt this work under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License: \url{http://creativecommons.org/licenses/by-nc-sa/3.0/}.
+Permission is granted to copy, distribute, and/or modify this work under the Creative Commons Attribution-NonCommercial 3.0 Unported License, which is available at \url{http://creativecommons.org/licenses/by-nc/3.0/}.
 
 The original form of this book is \LaTeX\ source code.
-Compiling the \LaTeX\ source has the effect of generating a device-independent representation of the book, which can be converted to other formats and printed.
+Compiling this code has the effect of generating a device-independent representation of the book, which can be converted to other formats and printed.
 
 The \LaTeX\ source for this book is available from \url{http://thinkjava.org}.
-%-----------------------------------------------------------------
 
-% table of contents
+%--table of contents------------------------------------------
+
 \cleardoublepage
 \setcounter{tocdepth}{1}
 \tableofcontents
 
-%%%% END OF LATEX ONLY
+\end{latexonly}
+
+%--HTML title page--------------------------------------------
+
+\begin{htmlonly}
+
+{\Large \thetitle: \thesubtitle}
+
+{\large \theauthors}
+
+Version \theversion
+
+\vspace{0.25in}
+
+Copyright \copyright ~2016 \theauthors.
+
+\vspace{0.25in}
+
+Permission is granted to copy, distribute, and/or modify this work under the Creative Commons Attribution-NonCommercial 3.0 Unported License, which is available at \url{http://creativecommons.org/licenses/by-nc/3.0/}.
+
+\end{htmlonly}
+
+%-------------------------------------------------------------
+
+% END OF THE PART WE SKIP FOR PLASTEX
 \fi
 
 
@@ -11822,7 +11884,7 @@ See the exercises at the end of this appendix for more example drawings.
 The ``Abstract Window Toolkit'', a Java package for creating graphical user interfaces.
 
 \term{coordinate}
-A variable or value that specifies a location in a two-dimensional graphical window.
+A value that specifies a location in a two-dimensional graphical window.
 
 \term{pixel}
 The unit in which coordinates are measured.
@@ -11885,7 +11947,7 @@ The distance between the circles should be small enough that the Moir\'{e} inter
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[height=1.5in]{figs/moire.pdf}
+\includegraphics[height=2in]{figs/moire.pdf}
 \caption{Graphical patterns that can exhibit Moir\'{e} interference.}
 \label{fig.moire}
 \end{center}

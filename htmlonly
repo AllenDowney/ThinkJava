@@ -1,5 +1,3 @@
-\usepackage{hevea}
-
 \newcommand{\adjustpage}[1]{}
 
 \newcommand{\clearemptydoublepage}{}
@@ -16,6 +14,8 @@
 \newcommand{\newtheoremstyle}[1]{}
 
 \newcommand{\vfill}{}
+
+\newcommand{\href}{\ahref}
 
 \htmlhead{\rawhtmlinput{header.html}}
 
