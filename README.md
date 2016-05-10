@@ -3,8 +3,8 @@ LaTeX source and code for Think Java, 6th edition.
 Copyright (C) 2016 Allen Downey and Chris Mayfield.
 
 Permission is granted to copy, distribute, and/or modify this work under the
-Creative Commons Attribution-NonCommercial 3.0 Unported License, which is
-available at http://creativecommons.org/licenses/by-nc/3.0/.
+terms of the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported
+License, which is available at http://creativecommons.org/licenses/by-nc-sa/3.0/.
 
 The original form of this book is the LaTeX source code available from
 http://thinkjava.org and https://github.com/AllenDowney/ThinkJava.
