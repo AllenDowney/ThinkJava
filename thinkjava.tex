@@ -720,6 +720,7 @@ How are you doing?
 
 \index{escape sequence}
 
+%TODO what do we mean by escape the literal interpretation?
 The \verb"\n" is an {\bf escape sequence}, which is a sequence of characters that represents a special character.
 The backslash allows you to ``escape'' the string's literal interpretation.
 Notice there is no space between \verb"\n" and \verb"How".
@@ -1105,6 +1106,7 @@ We will learn the significance of this distinction later, but for now you should
 There is no such type as \java{Int} or \java{string}.
 %, and the compiler will complain if you make one up.
 
+%TODO first use of syntax (it used to be defined in Chapter 1)
 To declare an integer variable, the syntax is:
 
 \begin{code}
@@ -1505,6 +1507,7 @@ But on many machines, the output is:
 0.9999999999999999
 \end{stdout}
 
+%TODO replace base 2 with binary, or explain what that means?
 The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
 So its floating-point representation is only approximate.
 When we add up the approximations, the rounding errors accumulate.
@@ -2354,6 +2357,7 @@ The parentheses after the cast operator require the division to happen before th
 And the result is rounded toward zero; we will see in the next chapter how to round floating-point numbers to the closest integer.
 
 
+%TODO replace modulus with modulo?
 \section{Modulus operator}
 
 Let's take the example one step further: suppose you have a measurement in inches and you want to convert to feet and inches.
@@ -3226,6 +3230,7 @@ A good way to get started with a new class is to paste the examples into a test 
 
 One of the examples shows how you can use a \java{Scanner} to read input from a \java{String} instead of \java{System.in}:
 
+%TODO only use of Scanner w/o System.in; mention this again in String chapter?
 \begin{code}
 String input = "1 fish 2 fish red fish blue fish";
 Scanner s = new Scanner(input);
@@ -3826,6 +3831,7 @@ Some development environments display output to \java{System.err} with a differe
 
 Here is a method that uses \java{printLogarithm} from the previous section:
 
+%TODO multiple issues here: a void method that constructs a Scanner?
 \begin{code}
 public static void scanDouble() {
     Scanner in = new Scanner(System.in);
@@ -5333,6 +5339,8 @@ In some cases, there have been errors in the underlying tables, most famously in
 
 Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
 The following loop displays a table with a sequence of values in the left column and their logarithms in the right column:
+
+%TODO do we really need to cast to double? (throughout this section)
 
 \begin{code}
 int i = 1;
@@ -8330,6 +8338,7 @@ Here are the most important ideas:
 
 \item Defining a {\bf class} creates a new object type with the same name.
 
+%TODO add vocab term "instantiate"
 \index{instance}
 
 \item Every object belongs to some object type; that is, it is an {\bf instance} of some class.
