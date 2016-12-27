@@ -6,7 +6,7 @@
 \newcommand{\thetitle}{Think Java}
 \newcommand{\thesubtitle}{How to Think Like a Computer Scientist}
 \newcommand{\theauthors}{Allen B. Downey and Chris Mayfield}
-\newcommand{\theversion}{6.1.1}
+\newcommand{\theversion}{6.1.2}
 
 %%%% Both LATEX and PLASTEX
 
@@ -275,8 +275,6 @@ This book is well suited to prepare students for the AP Computer Science A exam,
 (AP is a registered trademark of the College Board.)
 We introduce nearly every topic in the ``AP Java subset'' with a few exceptions.
 A mapping of {\it Think Java} section numbers to the current AP course description is available on our website: \url{http://thinkjava.org}.
-
-%TODO: replace this with a more specific link when it's ready
 
 
 \section*{Appendixes}
@@ -720,9 +718,8 @@ How are you doing?
 
 \index{escape sequence}
 
-%TODO what do we mean by escape the literal interpretation?
 The \verb"\n" is an {\bf escape sequence}, which is a sequence of characters that represents a special character.
-The backslash allows you to ``escape'' the string's literal interpretation.
+%The backslash allows you to ``escape'' the string's literal interpretation.
 Notice there is no space between \verb"\n" and \verb"How".
 If you add a space there, there will be a space at the beginning of the second line.
 
@@ -811,7 +808,7 @@ For example, in DrJava (see Appendix~\ref{development}) you can indent the code 
 %These characters, which are called {\bf whitespace}, affect the format of the code, but they don't affect its behavior.
 
 %You have a lot of freedom in how you arrange your code.
-%THowever with that freedom comes responsibility, both to yourself (when you look at the code in the future) and others who will be reading, understanding, and debugging it.
+%However with that freedom comes responsibility, both to yourself (when you look at the code in the future) and others who will be reading, understanding, and debugging it.
 
 \index{Google style}
 
@@ -1053,9 +1050,6 @@ After you make each change, compile the program, read the error message (if ther
 Add an extra one.
 \end{enumerate}
 
-%TODO: do this exercise and see if there are any vocabulary words in
-% the error messages we need to interpret
-
 \end{exercise}
 
 
@@ -1106,8 +1100,7 @@ We will learn the significance of this distinction later, but for now you should
 There is no such type as \java{Int} or \java{string}.
 %, and the compiler will complain if you make one up.
 
-%TODO first use of syntax (it used to be defined in Chapter 1)
-To declare an integer variable, the syntax is:
+To declare an integer variable named \java{x}, you simply type:
 
 \begin{code}
 int x;
@@ -1129,9 +1122,10 @@ This example declares two variables with type \java{String} and two with type \j
 When a variable name contains more than one word, like \java{firstName}, it is conventional to capitalize the first letter of each word except the first.
 Variable names are case-sensitive, so \java{firstName} is not the same as \java{firstname} or \java{FirstName}.
 
+\index{syntax}
 \index{semicolon}
 
-This example also demonstrates the syntax for declaring multiple variables with the same type on one line: \java{hour} and \java{minute} are both integers.
+This example also demonstrates the {\bf syntax} for declaring multiple variables with the same type on one line: \java{hour} and \java{minute} are both integers.
 Note that each declaration statement ends with a semicolon.
 
 \index{keyword}
@@ -1507,8 +1501,7 @@ But on many machines, the output is:
 0.9999999999999999
 \end{stdout}
 
-%TODO replace base 2 with binary, or explain what that means?
-The problem is that \java{0.1}, which is a terminating fraction in base 10, is a repeating fraction in base 2.
+The problem is that \java{0.1}, which is a terminating fraction in decimal, is a repeating fraction in binary.
 So its floating-point representation is only approximate.
 When we add up the approximations, the rounding errors accumulate.
 
@@ -1657,9 +1650,8 @@ It is useful to distinguish among them in order to track them down more quickly.
 
 \index{compile-time error}
 \index{error!compile-time}
-\index{syntax}
 
-{\bf Compile-time} errors occur when you violate the {\bf syntax} rules of the Java language.
+{\bf Compile-time} errors occur when you violate the syntax rules of the Java language.
 For example, parentheses and braces have to come in matching pairs.
 So \java{(1 + 2)} is legal, but \java{8)} is not.
 In the latter case, the program cannot be compiled, and the compiler displays an error.
@@ -1807,6 +1799,9 @@ A statement that creates a new variable and specifies its type.
 Mathematically speaking, a set of values.
 The type of a variable determines which values it can have.
 
+\term{syntax}
+The structure of a program; the arrangement of the words and symbols it contains.
+
 \term{keyword}
 A reserved word used by the compiler to analyze programs.
 You cannot use keywords (like \java{public}, \java{class}, and \java{void}) as variable names.
@@ -1852,9 +1847,6 @@ The rules that determine in what order operations are evaluated.
 
 \term{composition}
 The ability to combine simple expressions and statements into compound expressions and statements.
-
-\term{syntax}
-The structure of a program; the arrangement of the words and symbols it contains.
 
 \term{compile-time error}
 An error in the source code that makes it impossible to compile.
@@ -2357,7 +2349,6 @@ The parentheses after the cast operator require the division to happen before th
 And the result is rounded toward zero; we will see in the next chapter how to round floating-point numbers to the closest integer.
 
 
-%TODO replace modulus with modulo?
 \section{Modulus operator}
 
 Let's take the example one step further: suppose you have a measurement in inches and you want to convert to feet and inches.
@@ -3230,7 +3221,7 @@ A good way to get started with a new class is to paste the examples into a test 
 
 One of the examples shows how you can use a \java{Scanner} to read input from a \java{String} instead of \java{System.in}:
 
-%TODO only use of Scanner w/o System.in; mention this again in String chapter?
+%NOTE: only use of Scanner w/o System.in; mention this again in String chapter?
 \begin{code}
 String input = "1 fish 2 fish red fish blue fish";
 Scanner s = new Scanner(input);
@@ -3831,17 +3822,15 @@ Some development environments display output to \java{System.err} with a differe
 
 Here is a method that uses \java{printLogarithm} from the previous section:
 
-%TODO multiple issues here: a void method that constructs a Scanner?
 \begin{code}
-public static void scanDouble() {
-    Scanner in = new Scanner(System.in);
+public static void scanDouble(Scanner in) {
     System.out.print("Enter a number: ");
     double x = in.nextDouble();
     printLogarithm(x);
 }
 \end{code}
 
-This example uses \java{nextDouble}, so the \java{Scanner} tries to read a \java{double}.
+This example uses \java{nextDouble}, so the \java{Scanner} (provided by the \java{main} method) tries to read a \java{double}.
 If the user enters a floating-point number, the \java{Scanner} converts it to a \java{double}.
 But if the user types anything else, the \java{Scanner} throws an \java{InputMismatchException}.
 
@@ -3852,7 +3841,6 @@ We can prevent this error by checking the input before parsing it:
 
 \begin{code}
 public static void scanDouble() {
-    Scanner in = new Scanner(System.in);
     System.out.print("Enter a number: ");
     if (!in.hasNextDouble()) {
         String word = in.next();
@@ -3867,7 +3855,7 @@ public static void scanDouble() {
 The \java{Scanner} class provides \java{hasNextDouble}, which checks whether the next token in the input stream can be interpreted as a \java{double}.
 If so, we can call \java{nextDouble} with no chance of throwing an exception.
 If not, we display an error message and return.
-Returning from \java{main} terminates the program.
+%Returning from \java{main} terminates the program.
 
 %Notice the use of the \java{!} operator, instead of the test \java{in.hasNextDouble() == false}.
 %Since the \java{hasNextDouble} method returns a boolean result, it is already a condition.
@@ -5022,8 +5010,6 @@ Answer the following questions by trying them out.
 \item What happens if you use a void method as part of an expression?
 For example, try \java{System.out.println("boo!") + 7;}
 
-%TODO: any more?
-
 \end{enumerate}
 
 \end{exercise}
@@ -5340,12 +5326,10 @@ In some cases, there have been errors in the underlying tables, most famously in
 Although a ``log table'' is not as useful as it once was, it still makes a good example of iteration.
 The following loop displays a table with a sequence of values in the left column and their logarithms in the right column:
 
-%TODO do we really need to cast to double? (throughout this section)
-
 \begin{code}
 int i = 1;
 while (i < 10) {
-    double x = (double) i;
+    double x = i;
     System.out.println(x + "   " + Math.log(x));
     i = i + 1;
 }
@@ -5376,7 +5360,7 @@ We can modify the loop as follows:
 \begin{code}
 int i = 1;
 while (i < 10) {
-    double x = (double) i;
+    double x = i;
     System.out.println(x + "   " + Math.log(x) / Math.log(2));
     i = i + 1;
 }
@@ -5403,7 +5387,7 @@ If we multiply \java{x} by something instead, we get a geometric sequence:
 final double LOG2 = Math.log(2);
 int i = 1;
 while (i < 100) {
-    double x = (double) i;
+    double x = i;
     System.out.println(x + "   " + Math.log(x) / LOG2);
     i = i * 2;
 }
@@ -5751,8 +5735,7 @@ The \java{while} and \java{for} statements are {\bf pretest loops}; that is, the
 Java also provides a {\bf posttest loop}: the \java{do}-\java{while} statement.
 This type of loop is useful when you need to run the body of the loop at least once.
 
-%TODO: can we find an example that's better using do-while than using
-% while-break?
+%NOTE: can we find an example that's better using do-while than using while-break?
 
 For example, in Section~\ref{validate} we used the \java{return} statement to avoid reading invalid input from the user.
 We can use a \java{do}-\java{while} loop to keep reading input until it's valid:
@@ -5891,8 +5874,6 @@ Before you start the exercises, we recommend that you compile and run the exampl
 
 If you have not already read Appendix~\ref{checkstyle}, now might be a good time.
 It describes Checkstyle, a tool that analyzes many aspects of your source code.
-
-%TODO: add a Checkstyle exercise
 
 
 \begin{exercise}
@@ -6042,7 +6023,7 @@ You should not use \java{factorial} or \java{pow}.
 \chapter{Arrays}
 \label{arrays}
 
-%TODO: DW liked the previous version where strings come before arrays
+%NOTE: DW liked the previous version where strings come before arrays
 % CSM: the transition is better from strings to things to objects
 % Plus we moved command-line arguments to the strings chapter
 
@@ -6554,7 +6535,8 @@ For example, consider a \java{for} loop that displays the elements of an array o
 
 \begin{code}
 for (int i = 0; i < values.length; i++) {
-    System.out.println(values[i]);
+    int value = values[i];
+    System.out.println(value);
 }
 \end{code}
 
@@ -6572,6 +6554,9 @@ This statement is called an {\bf enhanced for loop}.
 You can read it as, ``for each \java{value} in \java{values}''.
 It's conventional to use plural nouns for array variables and singular nouns for element variables.
 
+Notice how the single line \java{for (int value : values)} replaces the first two lines of the standard \java{for} loop.
+It hides the details of iterating each index of the array, and instead, focuses on the values themselves.
+
 Using the enhanced \java{for} loop, and removing the temporary variable, we can write the histogram code from the previous section more concisely:
 
 \begin{code}
@@ -6584,6 +6569,13 @@ for (int score : scores) {
 Enhanced \java{for} loops often make the code more readable, especially for accumulating values.
 But they are not helpful when you need to refer to the index, as in search operations.
 
+\begin{code}
+for (double d : array) {
+    if (d == target) {
+        // array contains d, but we don't know the index
+    }
+}
+\end{code}
 
 \section{Vocabulary}
 
@@ -6662,6 +6654,9 @@ Generalize it to take the number of counters as an argument.
 The purpose of this exercise is to practice reading code and recognizing the traversal patterns in this chapter.
 The following methods are hard to read, because instead of using meaningful names for the variables and methods, they use names of fruit.
 
+For each method, write one sentence that describes what the method does, without getting into the details of how it works.
+For each variable, identify the role it plays.
+
 \begin{code}
 public static int banana(int[] a) {
     int kiwi = 1;
@@ -6697,16 +6692,14 @@ public static int pineapple(int[] a, int apple) {
 }
 \end{code}
 
-For each method, write one sentence that describes what the method does, without getting into the details of how it works.
-For each variable, identify the role it plays.
-
 \end{exercise}
 
 
 \begin{exercise}
 What is the output of the following program?
-Draw a stack diagram that shows the state of the program just before \java{mus} returns.
 Describe in a few words what \java{mus} does.
+Draw a stack diagram just before \java{mus} returns.
+%that shows the state of the program 
 
 \begin{code}
 public static int[] make(int n) {
@@ -7331,7 +7324,7 @@ A standard for representing characters in most of the world's languages.
 %\term{exception}
 %A runtime error like ArithmeticException or IndexOutOfBoundsException.
 
-%TODO: find a place to present stack trace, ideally someplace with a
+%TODO: find a place to explain how to read a stack trace, ideally with a
 % non-trivial call stack (this one is important -- right now we have nothing)
 
 %\term{stack trace}
@@ -8338,12 +8331,15 @@ Here are the most important ideas:
 
 \item Defining a {\bf class} creates a new object type with the same name.
 
-%TODO add vocab term "instantiate"
 \index{instance}
 
 \item Every object belongs to some object type; that is, it is an {\bf instance} of some class.
 
 \item A class definition is like a template for objects: it specifies what attributes the objects have and what methods can operate on them.
+
+\index{instantiate}
+
+\item The \java{new} operator {\bf instantiates} objects, that is, it creates new instances of a class.
 
 \item Think of a class like a blueprint for a house: you can use the same blueprint to build any number of houses.
 
@@ -9012,6 +9008,9 @@ Now you know that a class is also a template for a new type of object.
 A member of a class.
 Every object is an instance of some class.
 
+\term{instantiate}
+Create a new instance of a class in the computer's memory.
+
 \term{data encapsulation}
 A technique for bundling multiple named variables into a single object.
 
@@ -9062,8 +9061,6 @@ A method that changes the state (instance variables) of an object.
 The code for this chapter is in the {\tt ch11} directory of {\tt ThinkJavaCode}.
 See page~\pageref{code} for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.
-
-%TODO: check that the following sentence appears on Atlas
 
 At this point you know enough to read Appendix~\ref{graphics}, which is about simple 2D graphics and animations.
 During the next few chapters, you should take a detour to read this appendix and work through the exercises.
@@ -9903,8 +9900,6 @@ Modify the \java{compareTo} method to implement this ordering.
 \begin{exercise}
 In Poker a ``flush'' is a hand that contains five or more cards of the same suit.
 A hand can contain any number of cards.
-
-%TODO: check bullets on Atlas
 
 \index{histogram}
 
