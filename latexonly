@@ -123,9 +123,15 @@
   pdfsubject={Version \theversion},
   pdfkeywords={},
   bookmarksopen=false,
+  bookmarksnumbered=true,
   colorlinks=true,
   citecolor=black,
   filecolor=black,
   linkcolor=black,
   urlcolor=blue
 }
+
+% add dot after numbers in pdf bookmarks
+\makeatletter
+\renewcommand{\Hy@numberline}[1]{#1. }
+\makeatother
