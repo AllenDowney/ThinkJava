@@ -719,7 +719,7 @@ How are you doing?
 \index{escape sequence}
 
 The \verb"\n" is an {\bf escape sequence}, which is a sequence of characters that represents a special character.
-%The backslash allows you to ``escape'' the string's literal interpretation.
+The backslash allows you to ``escape'' the string's literal interpretation.
 Notice there is no space between \verb"\n" and \verb"How".
 If you add a space there, there will be a space at the beginning of the second line.
 
@@ -2349,6 +2349,7 @@ The parentheses after the cast operator require the division to happen before th
 And the result is rounded toward zero; we will see in the next chapter how to round floating-point numbers to the closest integer.
 
 
+%TODO replace modulus with modulo operation? or remainder operator?
 \section{Modulus operator}
 
 Let's take the example one step further: suppose you have a measurement in inches and you want to convert to feet and inches.
@@ -3840,7 +3841,7 @@ But if the user types anything else, the \java{Scanner} throws an \java{InputMis
 We can prevent this error by checking the input before parsing it:
 
 \begin{code}
-public static void scanDouble() {
+public static void scanDouble(Scanner in) {
     System.out.print("Enter a number: ");
     if (!in.hasNextDouble()) {
         String word = in.next();
