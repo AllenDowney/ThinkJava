@@ -23,14 +23,15 @@ lint:
 	xmllint -noout $(F)/$(F).xml
 
 oreilly:
-	rsync -a thinkjava/thinkjava.xml atlas	
+	rsync -a thinkjava/thinkjava.xml atlas
 	rsync -a figs/*.pdf atlas/figs/
 	rsync -a figs/*.png atlas/figs/
-	cd atlas; git add thinkjava.xml figs/*	
+	cd atlas; git add thinkjava.xml figs/*
 	cd atlas; git commit -m "Automated check in."
 	cd atlas; git push
 
-hevea:	thinkjava.tex header.html footer.html
+# a bug (in ocaml?) causes "make hevea" to fail; use "make -i hevea" instead
+hevea: thinkjava.tex header.html footer.html
 	cp $(F).tex $(F)6.tex
 	rm -rf html
 	mkdir html
@@ -52,3 +53,17 @@ distrib:
 	rsync -a dist/* $(DEST)
 	chmod -R o+r $(DEST)/*
 	cd $(DEST)/..; sh back
+
+# a bug (in ocaml?) causes "make trinket" to fail; use "make -i trinket" instead
+trinket: thinkjava.tex header.html footer.html
+	cp $(F).tex $(F)6.tex
+	rm -rf html
+	mkdir html
+	hevea -O -exec xxdate.exe -e latexonly trinket $(F)6
+	hevea -O -exec xxdate.exe -e latexonly trinket $(F)6
+	imagen -png -pdf $(F)6
+	imagen -png -pdf $(F)6
+	hacha $(F)6.html
+	cp up.png next.png back.png html
+	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png html
+	rm *motif.gif $(F)6.*

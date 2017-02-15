@@ -61,10 +61,11 @@
 {\lstset{commentstyle=\relax,keywordstyle=\relax,stringstyle=\relax}}
 {}
 
-% interactive code listing
-\lstnewenvironment{trinket}
-{}
-{}
+% custom HTML for Trinket publisher tools
+% see http://hevea.inria.fr/doc/manual018.html
+\newenvironment{trinket}
+{\@print{<b>TODO begin Trinket</b>}\rawhtml}
+{\endrawhtml\@print{<b>TODO end Trinket</b>}}
 
 % inline syntax formatting
 \newcommand{\java}{\lstinline}%}

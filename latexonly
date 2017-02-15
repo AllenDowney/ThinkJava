@@ -107,6 +107,11 @@
 {\lstset{commentstyle=,keywordstyle=,stringstyle=}\minipage{\linewidth}}
 {\endminipage}
 
+% interactive code listing
+\lstnewenvironment{trinket}
+{\minipage{\linewidth}}
+{\endminipage}
+
 % inline syntax formatting
 \newcommand{\java}[1]{\lstinline{#1}}%{
 
