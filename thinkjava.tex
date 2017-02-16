@@ -651,7 +651,7 @@ Comments have no effect on the execution of the program, but they make it easier
 You can put as many statements as you like in \java{main}.
 For example, to display more than one line of output:
 
-\begin{trinket}
+\begin{trinket}{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -762,7 +762,7 @@ She said "Hello!" to me.
 In Java programs, some spaces are required.
 For example, you need at least one space between words, so this program is not legal:
 
-\begin{trinket}
+\begin{trinket}{Goodbye.java}
 publicclassGoodbye{
 
     publicstaticvoidmain(String[] args) {
@@ -775,7 +775,7 @@ publicclassGoodbye{
 But most other spaces are optional.
 For example, this program is legal:
 
-\begin{trinket}
+\begin{trinket}{Goodbye.java}
 public class Goodbye {
 public static void main(String[] args) {
 System.out.print("Goodbye, ");
@@ -787,11 +787,11 @@ System.out.println("cruel world");
 The newlines are optional, too.
 So we could just write:
 
-\begin{trinket}
+\begin{trinket}{Goodbye.java}
 public class Goodbye { public static void main(String[] args)
 { System.out.print("Goodbye, "); System.out.println
 ("cruel world");}}
-\end{trinket)
+\end{trinket}
 
 It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
@@ -2086,7 +2086,7 @@ public class Echo {
         System.out.println("You also said: " + line);
     }
 }
-\end{code}
+\end{trinket}
 
 If you omit the import statement and later refer to \java{Scanner}, you will get a compiler error like ``cannot find symbol''.
 That means the compiler doesn't know what you mean by \java{Scanner}.
