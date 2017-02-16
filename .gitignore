@@ -15,5 +15,5 @@ thinkjava.toc
 checkstyle*.jar
 
 # HTML output
-trinket/*
+trinkethtml/*
 html/*
