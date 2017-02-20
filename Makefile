@@ -66,7 +66,7 @@ trinket: thinkjava.tex header.html footer.html
 	imagen -png -pdf $(F)6
 	imagen -png -pdf $(F)6
 	hacha $(F)6.html
-	cp up.png next.png back.png html
+	cp up.png next.png back.png trinkethtml
 	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png trinkethtml
 	rm *motif.gif $(F)6.*
 	# perl postprocessing (woot) seems easier than escaping through Latex and Hevea
