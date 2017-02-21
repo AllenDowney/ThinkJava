@@ -1,5 +1,7 @@
 F=thinkjava
 
+.PHONY: trinket
+
 all:
 	pdflatex $(F)
 	makeindex $(F).idx        # shouldn't need .idx here, but we do
@@ -57,13 +59,15 @@ distrib:
 # a bug (in ocaml?) causes "make trinket" to fail; use "make -i trinket" instead
 trinket: thinkjava.tex header.html footer.html
 	cp $(F).tex $(F)6.tex
-	rm -rf html
-	mkdir html
+	rm -rf trinkethtml
+	mkdir trinkethtml
 	hevea -O -exec xxdate.exe -e latexonly trinket $(F)6
 	hevea -O -exec xxdate.exe -e latexonly trinket $(F)6
 	imagen -png -pdf $(F)6
 	imagen -png -pdf $(F)6
 	hacha $(F)6.html
-	cp up.png next.png back.png html
-	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png html
+	cp up.png next.png back.png trinkethtml
+	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png trinkethtml
 	rm *motif.gif $(F)6.*
+	# perl postprocessing (woot) seems easier than escaping through Latex and Hevea
+	perl -i -pe 's/\[\[\[\[\s?(\S*?)\s?\]\]\]\]/----{\1}----/g' trinkethtml/*.html

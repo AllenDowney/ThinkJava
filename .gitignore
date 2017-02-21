@@ -13,3 +13,7 @@ thinkjava.toc
 # Java examples
 *.class
 checkstyle*.jar
+
+# HTML output
+trinkethtml/*
+html/*

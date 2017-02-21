@@ -561,7 +561,7 @@ In Java, it looks like this:
 % more precise, but also to reduce the number of times ``print'' appears,
 % which is a lot!
 
-\begin{trinket}
+\begin{trinket}{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -651,7 +651,7 @@ Comments have no effect on the execution of the program, but they make it easier
 You can put as many statements as you like in \java{main}.
 For example, to display more than one line of output:
 
-\begin{code}
+\begin{trinket}{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -660,7 +660,7 @@ public class Hello {
         System.out.println("How are you?");   // another line
     }
 }
-\end{code}
+\end{trinket}
 
 As this example shows, you can put comments at the end of a line as well as on lines all by themselves.
 
@@ -762,7 +762,7 @@ She said "Hello!" to me.
 In Java programs, some spaces are required.
 For example, you need at least one space between words, so this program is not legal:
 
-\begin{code}
+\begin{trinket}{Goodbye.java}
 publicclassGoodbye{
 
     publicstaticvoidmain(String[] args) {
@@ -770,28 +770,28 @@ publicclassGoodbye{
         System.out.println("cruel world");
     }
 }
-\end{code}
+\end{trinket}
 
 But most other spaces are optional.
 For example, this program is legal:
 
-\begin{code}
+\begin{trinket}{Goodbye.java}
 public class Goodbye {
 public static void main(String[] args) {
 System.out.print("Goodbye, ");
 System.out.println("cruel world");
 }
 }
-\end{code}
+\end{trinket}
 
 The newlines are optional, too.
 So we could just write:
 
-\begin{code}
+\begin{trinket}{Goodbye.java}
 public class Goodbye { public static void main(String[] args)
 { System.out.print("Goodbye, "); System.out.println
 ("cruel world");}}
-\end{code}
+\end{trinket}
 
 It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.
@@ -1661,7 +1661,7 @@ In the latter case, the program cannot be compiled, and the compiler displays an
 Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you exactly what the error is.
 As an example, let's get back to the hello world program from Section~\ref{hello}.
 
-\begin{code}
+\begin{trinket}{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -1669,7 +1669,7 @@ public class Hello {
         System.out.println("Hello, World!");
     }
 }
-\end{code}
+\end{trinket}
 
 \index{semicolon}
 
@@ -1753,7 +1753,7 @@ If your program has a logic error, it will compile and run without generating er
 Instead, it will do exactly what you told it to do.
 For example, here is a version of the hello world program with a logic error:
 
-\begin{code}
+\begin{trinket}{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -1761,7 +1761,7 @@ public class Hello {
         System.out.println("World!");
     }
 }
-\end{code}
+\end{trinket}
 
 This program compiles and runs just fine, but the output is:
 
@@ -2068,7 +2068,7 @@ This line declares a \java{Scanner} variable named \java{in} and creates a new \
 \java{Scanner} provides a method called \java{nextLine} that reads a line of input from the keyboard and returns a \java{String}.
 The following example reads two lines and repeats them back to the user:
 
-\begin{code}
+\begin{trinket}{Echo.java}
 import java.util.Scanner;
 
 public class Echo {
@@ -2086,7 +2086,7 @@ public class Echo {
         System.out.println("You also said: " + line);
     }
 }
-\end{code}
+\end{trinket}
 
 If you omit the import statement and later refer to \java{Scanner}, you will get a compiler error like ``cannot find symbol''.
 That means the compiler doesn't know what you mean by \java{Scanner}.
@@ -2397,7 +2397,7 @@ Now we will put everything together in a complete program:
 %Since we've looked at each of these topics in isolation, it's important to see how they fit together in a complete program.
 %If you've been working through the examples on your computer as you've been reading (like we recommended in Section~\ref{sec:examples}), then good job!
 
-\begin{code}
+\begin{trinket}{Convert.java}
 import java.util.Scanner;
 
 /**
@@ -2424,7 +2424,7 @@ public class Convert {
                           cm, feet, remainder);
     }
 }
-\end{code}
+\end{trinket}
 
 Although not required, all variables and constants are declared at the top of \java{main}.
 This practice makes it easier to find their types later on, and it helps the reader know what data is involved in the algorithm.
@@ -2645,7 +2645,7 @@ You were off by: 31
 To choose a random number, you can use the \java{Random} class in \java{java.util}.
 Here's how it works:
 
-\begin{code}
+\begin{trinket}{GuessStarter.java}
 import java.util.Random;
 
 public class GuessStarter {
@@ -2657,7 +2657,7 @@ public class GuessStarter {
         System.out.println(number);
     }
 }
-\end{code}
+\end{trinket}
 
 \index{new}
 \index{operator!new}
@@ -2833,7 +2833,7 @@ If you don't specify a class name, the compiler looks in the current class.
 You have probably guessed by now that you can define more than one method in a class.
 Here's an example:
 
-\begin{code}
+\begin{trinket}{NweLine.java}
 public class NewLine {
 
     public static void newLine() {
@@ -2846,7 +2846,7 @@ public class NewLine {
         System.out.println("Second line.");
     }
 }
-\end{code}
+\end{trinket}
 
 \index{main}
 \index{case-sensitive}
@@ -2948,7 +2948,7 @@ Methods allow you to focus on each sub-problem in isolation, and then compose th
 
 Pulling together the code from the previous section, the complete program looks like this:
 
-\begin{code}
+\begin{trinket}{NewLine.java}
 public class NewLine {
 
     public static void newLine() {
@@ -2967,7 +2967,7 @@ public class NewLine {
         System.out.println("Second line.");
     }
 }
-\end{code}
+\end{trinket}
 
 \index{flow of execution}
 
@@ -3008,7 +3008,7 @@ When you write a method, you name the parameters.
 The parameter list indicates what arguments are required.
 The following class shows an example:
 
-\begin{code}
+\begin{trinket}{PrintTwice.java}
 public class PrintTwice {
 
     public static void printTwice(String s) {
@@ -3020,7 +3020,7 @@ public class PrintTwice {
         printTwice("Don't make me say this twice!");
     }
 }
-\end{code}
+\end{trinket}
 
 \java{printTwice} has a parameter named \java{s} with type \java{String}.
 When we invoke \java{printTwice}, we have to provide an argument with type \java{String}.
@@ -3128,7 +3128,7 @@ printTime(int 11, int 59);  // syntax error
 
 Pulling together the code fragments from the previous section, here is a complete class definition:
 
-\begin{code}
+\begin{trinket}{PrintTime.java}
 public class PrintTime {
 
     public static void printTime(int hour, int minute) {
@@ -3143,7 +3143,7 @@ public class PrintTime {
         printTime(hour, minute);
     }
 }
-\end{code}
+\end{trinket}
 
 \java{printTime} has two parameters, named \java{hour} and \java{minute}.
 And \java{main} has two variables, also named \java{hour} and \java{minute}.
@@ -3311,7 +3311,7 @@ Anything in between is considered part of the documentation.
 
 Here's a class definition with two Javadoc comments, one for the class and one for the \java{main} method:
 
-\begin{code}
+\begin{trinket}{Goodbye.java}
 /**
  * Example program that demonstrates print vs println.
  */
@@ -3325,7 +3325,7 @@ public class Goodbye {
         System.out.println("cruel world");
     }
 }
-\end{code}
+\end{trinket}
 
 The class comment explains the purpose of the class.
 The method comment explains what the method does.
@@ -4246,7 +4246,7 @@ As you develop your code, test it with a small number of verses, like \java{3}.
 This exercise reviews the flow of execution through a program with multiple methods.
 Read the following code and answer the questions.
 
-\begin{code}
+\begin{trinket}{Buzz.java}
 public class Buzz {
 
     public static void baffle(String blimp) {
@@ -4269,7 +4269,7 @@ public class Buzz {
     }
 
 }
-\end{code}
+\end{trinket}
 
 \begin{enumerate}
 
@@ -7245,13 +7245,13 @@ Continuing an earlier example, let's write a program to find the largest value i
 Rather than read the numbers from \java{System.in}, we'll pass them as command-line arguments.
 Here is a starting point:
 
-\begin{code}
+\begin{trinket}{Max.java}
 public class Max {
     public static void main(String[] args) {
         System.out.println(Arrays.toString(args));
     }
 }
-\end{code}
+\end{trinket}
 
 You can run this program from the command line by typing:
 
