@@ -108,7 +108,7 @@
 {\endminipage}
 
 % interactive code listing
-\lstnewenvironment{trinket}
+\lstnewenvironment{trinket}[1]
 {\minipage{\linewidth}}
 {\endminipage}
 

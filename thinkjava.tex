@@ -679,7 +679,7 @@ Characters can be letters, numbers, punctuation marks, symbols, spaces, tabs, et
 \java{System.out.println} appends a special character, called a {\bf newline}, that moves to the beginning of the next line.
 If you don't want a newline at the end, you can use \java{print} instead of \java{println}:
 
-\begin{code}
+\begin{trinket}{Goodbye.java}
 public class Goodbye {
 
     public static void main(String[] args) {
@@ -687,7 +687,7 @@ public class Goodbye {
         System.out.println("cruel world");
     }
 }
-\end{code}
+\end{trinket}
 
 \label{goodbye}
 
@@ -700,14 +700,14 @@ Notice that there is a space at the end of the first string, which appears in th
 It is possible to display multiple lines of output in just one line of code.
 You just have to tell Java where to put the line breaks.
 
-\begin{code}
+\begin{trinket}{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
         System.out.print("Hello!\nHow are you doing?\n");
     }
 }
-\end{code}
+\end{trinket}
 
 The output is two lines, each ending with a newline character:
 
@@ -2833,7 +2833,7 @@ If you don't specify a class name, the compiler looks in the current class.
 You have probably guessed by now that you can define more than one method in a class.
 Here's an example:
 
-\begin{trinket}{NweLine.java}
+\begin{trinket}{NewLine.java}
 public class NewLine {
 
     public static void newLine() {
@@ -6700,7 +6700,7 @@ public static int pineapple(int[] a, int apple) {
 What is the output of the following program?
 Describe in a few words what \java{mus} does.
 Draw a stack diagram just before \java{mus} returns.
-%that shows the state of the program 
+%that shows the state of the program
 
 \begin{code}
 public static int[] make(int n) {
