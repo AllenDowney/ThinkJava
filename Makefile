@@ -61,8 +61,8 @@ trinket: thinkjava.tex header.html footer.html
 	cp $(F).tex $(F)6.tex
 	rm -rf trinkethtml
 	mkdir trinkethtml
-	hevea -O -exec xxdate.exe -e latexonly trinket $(F)6
-	hevea -O -exec xxdate.exe -e latexonly trinket $(F)6
+	hevea -O -exec xxdate.exe -e latexonly trinket/trinket.tex $(F)6
+	hevea -O -exec xxdate.exe -e latexonly trinket/trinket.tex $(F)6
 	imagen -png -pdf $(F)6
 	imagen -png -pdf $(F)6
 	hacha $(F)6.html
