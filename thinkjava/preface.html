@@ -1,0 +1,90 @@
+
+            
+{% extends 'books/thinkjava/base.html' %}
+{% block chaptercontent %}
+<div class="row">
+<div class="columns small-12">
+
+
+      <div class="row">
+        <div class="columns small-12"><h1 id="preface" class="chapter">Preface</h1>
+<p><span style="font-style:italic">Think Java</span> is an introduction to computer science and programming intended for readers with little or no experience.
+We start with the most basic concepts and are careful to define all terms when they are first used.
+The book presents each new idea in a logical progression.
+Larger topics, like recursion and object-oriented programming, are divided into smaller examples and introduced over the course of several chapters.</p><p>This book is intentionally concise.
+Each chapter is 12–14 pages and covers the material for one week of a college course.
+It is not meant to be a comprehensive presentation of Java, but rather, an initial exposure to programming constructs and techniques.
+We begin with small problems and basic algorithms and work up to object-oriented design.
+In the vocabulary of computer science pedagogy, this book uses the “objects late” approach.</p><h2 id="sec2" class="section">The philosophy behind the book</h2>
+<p>Here are the guiding principles that make the book the way it is:</p><ul class="itemize"><li class="li-itemize"><em>One concept at a time.</em>
+We break down topics that give beginners trouble into a series of small steps, so that they can exercise each new concept in isolation before continuing.</li><li class="li-itemize"><em>Balance of Java and concepts.</em>
+The book is not primarily about Java; it uses code examples to demonstrate computer science.
+Most chapters start with language features and end with concepts.</li><li class="li-itemize"><em>Conciseness.</em>
+An important goal of the book is to be small enough so that students can read and understand the entire text in a one-semester college or AP course.
+</li><li class="li-itemize"><em>Emphasis on vocabulary.</em>
+We try to introduce the minimum number of terms and define them carefully when they are first used.
+We also organize them in glossaries at the end of each chapter.</li><li class="li-itemize"><em>Program development.</em>
+There are many strategies for writing programs, including bottom-up, top-down, and others.
+We demonstrate multiple program development techniques, allowing readers to choose methods that work best for them.</li><li class="li-itemize"><em>Multiple learning curves.</em>
+To write a program, you have to understand the algorithm, know the programming language, and be able to debug errors.
+We discuss these and other aspects throughout the book, and include an appendix that summarizes our advice.</li></ul><h2 id="sec3" class="section">Object-oriented programming</h2>
+<p>Some Java books introduce classes and objects immediately; others begin with procedural programming and transition to object-oriented more gradually.</p><p>Many of Java’s object-oriented features are motivated by problems with previous languages, and their implementations are influenced by this history.
+Some of these features are hard to explain when people aren’t familiar with the problems they solve.</p><p>We get to object-oriented programming as quickly as possible, limited by the requirement that we introduce concepts one at a time, as clearly as possible, in a way that allows readers to practice each idea in isolation before moving on.
+So it takes some time to get there.</p><p>But you can’t write Java programs (even hello world) without encountering object-oriented features.
+In some cases we explain a feature briefly when it first appears, and then explain it more deeply later on.</p><p>This book is well suited to prepare students for the AP Computer Science A exam, which includes object-oriented design and implementation.
+(AP is a registered trademark of the College Board.)
+We introduce nearly every topic in the “AP Java subset” with a few exceptions.
+A mapping of <span style="font-style:italic">Think Java</span> section numbers to the current AP course description is available on our website: <a href="http://thinkjava.org"><span style="font-family:monospace">http://thinkjava.org</span></a>.</p><h2 id="sec4" class="section">Appendixes</h2>
+<p>The chapters of this book are meant to be read in order, because each one builds on the previous one.
+We also include three appendixes with material that can be read at any time:</p><dl class="description"><dt class="dt-description"/><dd class="dd-description"><span style="font-weight:bold">Appendix 1: Development tools</span><p>The steps for compiling, running, and debugging Java code depend on the details of the development environment and operating system.
+We avoided putting these details in the main text, because they can be distracting.
+Instead, we provide this appendix with a brief introduction to DrJava – an interactive development environment (IDE) that is helpful for beginners – and other development tools, including Checkstyle for code quality and JUnit for testing.</p></dd><dt class="dt-description"/><dd class="dd-description"><span style="font-weight:bold">Appendix 2: Java 2D graphics</span><p>Java provides libraries for working with graphics and animation, and these topics can be engaging for students.
+The libraries require object-oriented features that readers will not completely understand until after Chapter <a href="/thinkjava/chapter11.html#classes">11</a>, but they can be used much earlier.</p></dd><dt class="dt-description"/><dd class="dd-description"><span style="font-weight:bold">Appendix 3: Debugging</span><p>We provide debugging suggestions throughout the book, but we also collect our debugging advice in an appendix.
+We recommend that readers review this appendix several times as they work through the book.</p></dd></dl><h2 id="code" class="section">Using the code examples</h2>
+<p>Most of the code examples in this book are available from a Git repository at <a href="https://github.com/AllenDowney/ThinkJavaCode"><span style="font-family:monospace">https://github.com/AllenDowney/ThinkJavaCode</span></a>.
+Git is a “version control system” that allows you to keep track of the files that make up a project.
+A collection of files under Git’s control is called a “repository”.</p><p><a id="hevea_default0"/>
+<a id="hevea_default1"/></p><p>GitHub is a hosting service that provides storage for Git repositories and a convenient web interface.
+It provides several ways to work with the code:</p><ul class="itemize"><li class="li-itemize">You can create a copy of the repository on GitHub by pressing the <span style="font-family:sans-serif">Fork</span> button.
+If you don’t already have a GitHub account, you’ll need to create one.
+After forking, you’ll have your own repository on GitHub that you can use to keep track of code you write.
+Then you can “clone” the repository, which downloads a copy of the files to your computer.</li><li class="li-itemize">Alternatively, you could clone the repository without forking.
+If you choose this option, you don’t need a GitHub account, but you won’t be able to save your changes on GitHub.</li><li class="li-itemize">If you don’t want to use Git at all, you can download the code in a ZIP archive using the <span style="font-family:sans-serif">Download ZIP</span> button on the GitHub page, or this link: <a href="http://tinyurl.com/ThinkJavaCodeZip"><span style="font-family:monospace">http://tinyurl.com/ThinkJavaCodeZip</span></a>.</li></ul><p>After you clone the repository or unzip the ZIP file, you should have a directory called <span style="font-family:monospace">ThinkJavaCode</span> with a subdirectory for each chapter in the book.</p><p>All examples in this book were developed and tested using Java SE Development Kit 8.
+If you are using a more recent version, the examples in this book should still work.
+If you are using an older version, some of them may not.</p><h2 id="sec6" class="section">Contributors over the years</h2>
+<p>Many people have sent corrections and suggestions, and we appreciate their valuable feedback!</p><ul class="itemize"><li class="li-itemize">Ellen Hildreth used this book to teach Data Structures at Wellesley College and submitted a whole stack of corrections, along with some great suggestions.</li><li class="li-itemize">Tania Passfield pointed out that some glossaries had leftover terms that no longer appeared in the text.</li><li class="li-itemize">Elizabeth Wiethoff noticed that the series expansion of exp(−<span style="font-style:italic">x</span><sup>2</sup>) was wrong.
+She has also worked on a Ruby version of the book.</li><li class="li-itemize">Matt Crawford sent in a whole patch file full of corrections.</li><li class="li-itemize">Chi-Yu Li pointed out a typo and an error in one of the code examples.</li><li class="li-itemize">Doan Thanh Nam corrected an example.</li><li class="li-itemize">Muhammad Saied translated the book into Arabic, and found several errors in the process.</li><li class="li-itemize">Marius Margowski found an inconsistency in a code example.</li><li class="li-itemize">Leslie Klein discovered another error in the series expansion of exp(−<span style="font-style:italic">x</span><sup>2</sup>), identified typos in the card array figures, and gave helpful suggestions to clarify several exercises.</li><li class="li-itemize">Micah Lindstrom reported half a dozen typos and sent corrections.</li><li class="li-itemize">James Riely ported the textbook source from LaTeX to Sphinx.
+<br/>
+<a href="http://fpl.cs.depaul.edu/jriely/thinkapjava/"><span style="font-family:monospace">http://fpl.cs.depaul.edu/jriely/thinkapjava/</span></a></li><li class="li-itemize">Peter Knaggs ported the book to C#.
+<br/>
+<a href="http://www.rigwit.co.uk/think/sharp/"><span style="font-family:monospace">http://www.rigwit.co.uk/think/sharp/</span></a></li><li class="li-itemize">Heidi Gentry-Kolen recorded several video lectures that follow the book.
+<br/>
+<a href="https://www.youtube.com/user/digipipeline"><span style="font-family:monospace">https://www.youtube.com/user/digipipeline</span></a></li></ul><p>We are especially grateful to our technical reviewers: Blythe Samuels, David Wisneski, and Stephen Rose.
+They found errors, made many great suggestions, and helped make the book much better.</p><p>Additional contributors who found one or more typos: Stijn Debrouwere, Guy Driesen, Andai Velican, Chris Kuszmaul, Daniel Kurikesu, Josh Donath, Rens Findhammer, Elisa Abedrapo, Yousef BaAfif, Bruce Hill, Matt Underwood, Isaac Sultan, Dan Rice, Robert Beard, Daniel Pierce, Michael Giftthaler.</p><p>If you have additional comments or ideas about the text, please send them to: <a href="mailto:feedback@greenteapress.com"><span style="font-family:monospace">feedback@greenteapress.com</span></a>.</p>
+</div>
+</div>
+
+</div>
+    
+</div>
+{% endblock %}
+
+{% block toc %}
+<li class="has-dropdown"><a href="/thinkjava/preface.html">Preface</a>
+    <ul class="dropdown">
+      <li><a href="/thinkjava/preface.html#sec2">The philosophy behind the book</a>
+      </li>
+      <li><a href="/thinkjava/preface.html#sec3">Object-oriented programming</a>
+      </li>
+      <li><a href="/thinkjava/preface.html#sec4">Appendixes</a>
+      </li>
+      <li><a href="/thinkjava/preface.html#code">Using the code examples</a>
+      </li>
+      <li><a href="/thinkjava/preface.html#sec6">Contributors over the years</a>
+      </li>
+    </ul>
+  </li>
+  
+{% endblock %}
+
+{% block title%}Preface | Think Java | Trinket{% endblock %}

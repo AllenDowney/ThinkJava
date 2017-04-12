@@ -67,7 +67,7 @@ trinket: thinkjava.tex header.html footer.html
 	imagen -png -pdf $(F)6
 	hacha $(F)6.html
 	cp up.png next.png back.png trinkethtml
-	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png trinkethtml
+	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png trinket/*.css trinket/*.js trinkethtml
 	rm *motif.gif $(F)6.*
 	# perl postprocessing (woot) seems easier than escaping through Latex and Hevea
 	perl -i -pe 's/\[\[\[\[\s?(\S*?)\s?\]\]\]\]/----{\1}----/g' trinkethtml/*.html
@@ -81,7 +81,7 @@ testtrinket: trinket/testtrinket.tex trinket/template.html trinket/trinket.css t
 	imagen -png -pdf trinket/testtrinket
 	imagen -png -pdf trinket/testtrinket
 	hacha testtrinket.html
-	cp up.png next.png back.png trinkethtml
+	cp up.png next.png back.png trinket/*.css trinket/*.js trinkethtml
 	mv index.html testtrinket.css testtrinket?*.html testtrinket*.png trinkethtml
 	rm *motif.gif testtrinket.*
 	# perl postprocessing (woot) seems easier than escaping through Latex and Hevea

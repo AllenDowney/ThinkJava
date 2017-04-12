@@ -1,0 +1,430 @@
+
+            
+{% extends 'books/thinkjava/base.html' %}
+{% block chaptercontent %}
+<div class="row">
+<div class="columns small-12">
+
+
+      <div class="row">
+        <div class="columns small-12"><h1 id="sec56" class="chapter">Chapter 5  Conditionals and logic</h1>
+<p><a id="hevea_default245"/>
+<a id="hevea_default246"/></p><p>The programs we’ve seen in previous chapters do pretty much the same thing every time, regardless of the input.
+For more complex computations, programs usually react to the inputs, check for certain conditions, and generate appropriate results.
+This chapter presents the features you need for programs to make decisions: a new data type called <code><span style="color:blue">boolean</span></code>, operators for expressing logic, and <code><span style="color:blue">if</span></code> statements.</p>
+<h2 id="sec57" class="section">5.1  Relational operators</h2>
+<p><a id="hevea_default247"/>
+<a id="hevea_default248"/>
+<a id="hevea_default249"/></p><p><span style="font-weight:bold">Relational operators</span> are used to check conditions like whether two values are equal, or whether one is greater than the other.
+The following expressions show how they are used:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">x == y          <span style="color:#007C00">// x is equal to y</span>
+x != y          <span style="color:#007C00">// x is not equal to y</span>
+x &gt; y           <span style="color:#007C00">// x is greater than y</span>
+x &lt; y           <span style="color:#007C00">// x is less than y</span>
+x &gt;= y          <span style="color:#007C00">// x is greater than or equal to y</span>
+x &lt;= y          <span style="color:#007C00">// x is less than or equal to y</span></td></tr>
+</table><p>The result of a relational operator is one of two special values, <code><span style="color:blue">true</span></code> or <code><span style="color:blue">false</span></code>.
+These values belong to the data type <code><span style="color:blue">boolean</span></code>; in fact, they are the only boolean values.</p><p><a id="hevea_default250"/>
+<a id="hevea_default251"/></p><p>You are probably familiar with these operations, but notice that the Java operators are different from the mathematical symbols like =, ≠, and ≤.
+A common error is to use a single <code>=</code> instead of a double <code>==</code>.
+Remember that <code>=</code> is the assignment operator, and <code>==</code> is a comparison operator.
+Also, there is no such thing as the <code>=&lt;</code> or <code>=&gt;</code> operators.</p><p>The two sides of a relational operator have to be compatible.
+For example, the expression <code>5 &lt; <span style="color:#B20000">"6"</span></code> is invalid because <code>5</code> is an <code><span style="color:blue">int</span></code> and <span style="color:#B20000"><code>"6"</code></span> is a <code>String</code>.
+When comparing values of different numeric types, Java applies the same conversion rules we saw previously with the assignment operator.
+For example, when evaluating the expression <code>5 &lt; 6.0</code>, Java automatically converts the <code>5</code> to <code>5.0</code>.</p><p>Most relational operators don’t work with strings.
+But confusingly, <code>==</code> and <code>!=</code> do work with strings – they just don’t do what you expect.
+We’ll explain what they do later; in the meantime, don’t use them with strings.
+Instead, you should use the <code>equals</code> method:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">String fruit1 = <span style="color:#B20000">"Apple"</span>;
+String fruit2 = <span style="color:#B20000">"Orange"</span>;
+System.out.println(fruit1.equals(fruit2));</td></tr>
+</table><p>The result of <code>fruit1.equals(fruit2)</code> is the boolean value <code><span style="color:blue">false</span></code>.</p>
+<h2 id="sec58" class="section">5.2  Logical operators</h2>
+<p><a id="hevea_default252"/>
+<a id="hevea_default253"/></p><p>Java has three <span style="font-weight:bold">logical operators</span>: <code>&amp;&amp;</code>, <code>||</code>, and <code>!</code>, which respectively stand for <em>and</em>, <em>or</em>, and <em>not</em>.
+The results of these operators are similar to their meanings in English.</p><p>For example, <code>x &gt; 0 &amp;&amp; x &lt; 10</code> is true when <code>x</code> is both greater than zero <em>and</em> less than 10.
+The expression <code>evenFlag || n \% 3 == 0</code> is true if either condition is true, that is, if <code>evenFlag</code> is true <em>or</em> the number <code>n</code> is divisible by 3.
+Finally, the <code>!</code> operator inverts a boolean expression.
+So <code>!evenFlag</code> is true if <code>evenFlag</code> is <em>not</em> true.</p><p><a id="hevea_default254"/></p><p>Logical operators evaluate the second expression only when necessary.
+For example, <code><span style="color:blue">true</span> || anything</code> is always true, so Java does not need to evaluate the expression <code>anything</code>.
+Likewise, <code><span style="color:blue">false</span> &amp;&amp; anything</code> is always false.
+Ignoring the second operand, when possible, is called <span style="font-weight:bold">short circuit</span> evaluation, by analogy with an electrical circuit.
+Short circuit evaluation can save time, especially if <code>anything</code> takes a long time to evaluate.
+It can also avoid unnecessary errors, if <code>anything</code> might fail.</p><p><a id="hevea_default255"/></p><p>If you ever have to negate an expression that contains logical operators, and you probably will, <span style="font-weight:bold">De Morgan’s laws</span> can help:</p><ul class="itemize"><li class="li-itemize">
+<code>!(A &amp;&amp; B)</code>  is the same as  <code>!A || !B</code>
+</li><li class="li-itemize"><code>!(A || B)</code>  is the same as  <code>!A &amp;&amp; !B</code>
+</li></ul><p>Negating a logical expression is the same as negating each term and changing the operator.
+The <code>!</code> operator takes precedence over <code>&amp;&amp;</code> and <code>||</code>, so you don’t have to put parentheses around the individual terms <code>!A</code> and <code>!B</code>.</p><p>De Morgan’s laws also apply to the relational operators.
+In this case, negating each term means using the “opposite” relational operator.</p><ul class="itemize"><li class="li-itemize">
+<code>!(x &lt; 5 &amp;&amp; y == 3)</code>  is the same as  <code>x &gt;= 5 || y != 3</code>
+</li><li class="li-itemize"><code>!(x &gt;= 1 || y != 7)</code>  is the same as  <code>x &lt; 1 &amp;&amp; y == 7</code>
+</li></ul><p>It may help to read these examples out loud in English.
+For instance, “If I don’t want x to be less than 5, and I don’t want y to be 3, then I need x to be greater than or equal to 5, or I need y to be anything but 3.”</p>
+<h2 id="sec59" class="section">5.3  Conditional statements</h2>
+<p><a id="hevea_default256"/>
+<a id="hevea_default257"/>
+<a id="hevea_default258"/>
+<a id="hevea_default259"/></p><p>To write useful programs, we almost always need to check conditions and react accordingly.
+<span style="font-weight:bold">Conditional statements</span> give us this ability.
+The simplest conditional statement in Java is the <code><span style="color:blue">if</span></code> statement:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (x &gt; 0) {
+    System.out.println(<span style="color:#B20000">"x is positive"</span>);
+}</td></tr>
+</table><p>The expression in parentheses is called the condition.
+If it is true, the statements in braces get executed.
+If the condition is false, execution skips over that block of code.
+The condition in parentheses can be any boolean expression.</p><p><a id="hevea_default260"/>
+<a id="hevea_default261"/></p><p>A second form of conditional statement has two possibilities, indicated by <code><span style="color:blue">if</span></code> and <code><span style="color:blue">else</span></code>.
+The possibilities are called <span style="font-weight:bold">branches</span>, and the condition determines which one gets executed:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (x % 2 == 0) {
+    System.out.println(<span style="color:#B20000">"x is even"</span>);
+} <span style="color:blue">else</span> {
+    System.out.println(<span style="color:#B20000">"x is odd"</span>);
+}</td></tr>
+</table><p>If the remainder when <code>x</code> is divided by 2 is zero, we know that <code>x</code> is even, and this fragment displays a message to that effect.
+If the condition is false, the second print statement is executed instead.
+Since the condition must be true or false, exactly one of the branches will run.</p><p>The braces are optional for branches that have only one statement.
+So we could have written the previous example this way:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (x % 2 == 0)
+    System.out.println(<span style="color:#B20000">"x is even"</span>);
+<span style="color:blue">else</span>
+    System.out.println(<span style="color:#B20000">"x is odd"</span>);</td></tr>
+</table><p>However, it’s better to use braces – even when they are optional – to avoid making the mistake of adding statements to an <code><span style="color:blue">if</span></code> or <code><span style="color:blue">else</span></code> block and forgetting to add the braces.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (x &gt; 0)
+    System.out.println(<span style="color:#B20000">"x is positive"</span>);
+    System.out.println(<span style="color:#B20000">"x is not zero"</span>);</td></tr>
+</table><p>This code is misleading because it’s not indented correctly.
+Since there are no braces, only the first <code>println</code> is part of the <code><span style="color:blue">if</span></code> statement.
+Here is what the compiler actually sees:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (x &gt; 0) {
+    System.out.println(<span style="color:#B20000">"x is positive"</span>);
+}
+    System.out.println(<span style="color:#B20000">"x is not zero"</span>);</td></tr>
+</table><p>As a result, the second <code>println</code> runs no matter what.
+Even experienced programmers make this mistake; search the web for Apple’s “goto fail” bug.</p>
+<h2 id="sec60" class="section">5.4  Chaining and nesting</h2>
+<p><a id="hevea_default262"/></p><p>Sometimes you want to check related conditions and choose one of several actions.
+One way to do this is by <span style="font-weight:bold">chaining</span> a series of <code><span style="color:blue">if</span></code> and <code><span style="color:blue">else</span></code> statements:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (x &gt; 0) {
+    System.out.println(<span style="color:#B20000">"x is positive"</span>);
+} <span style="color:blue">else if</span> (x &lt; 0) {
+    System.out.println(<span style="color:#B20000">"x is negative"</span>);
+} <span style="color:blue">else</span> {
+    System.out.println(<span style="color:#B20000">"x is zero"</span>);
+}</td></tr>
+</table><p>These chains can be as long as you want, although they can be difficult to read if they get out of hand.
+One way to make them easier to read is to use standard indentation, as demonstrated in these examples.
+If you keep all the statements and braces lined up, you are less likely to make syntax errors.</p><p><a id="hevea_default263"/></p><p>In addition to chaining, you can also make complex decisions by <span style="font-weight:bold">nesting</span> one conditional statement inside another.
+We could have written the previous example as:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (x == 0) {
+    System.out.println(<span style="color:#B20000">"x is zero"</span>);
+} <span style="color:blue">else</span> {
+    <span style="color:blue">if</span> (x &gt; 0) {
+        System.out.println(<span style="color:#B20000">"x is positive"</span>);
+    } <span style="color:blue">else</span> {
+        System.out.println(<span style="color:#B20000">"x is negative"</span>);
+    }
+}</td></tr>
+</table><p>The outer conditional has two branches.
+The first branch contains a <code>print</code> statement, and the second branch contains another conditional statement, which has two branches of its own.
+These two branches are also <code>print</code> statements, but they could have been conditional statements as well.</p><p>These kinds of nested structures are common, but they get difficult to read very quickly.
+Good indentation is essential to make the structure (or intended structure) apparent to the reader.</p>
+<h2 id="sec61" class="section">5.5  Flag variables</h2>
+<p><a id="hevea_default264"/></p><p>To store a <code><span style="color:blue">true</span></code> or <code><span style="color:blue">false</span></code> value, you need a <code><span style="color:blue">boolean</span></code> variable.
+You can create one like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">boolean</span> flag;
+flag = <span style="color:blue">true</span>;
+<span style="color:blue">boolean</span> testResult = <span style="color:blue">false</span>;</td></tr>
+</table><p><a id="hevea_default265"/>
+<a id="hevea_default266"/></p><p>The first line is a variable declaration, the second is an assignment, and the third is both.
+Since relational operators evaluate to a <code><span style="color:blue">boolean</span></code> value, you can store the result of a comparison in a variable:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">boolean</span> evenFlag = (n % 2 == 0);    <span style="color:#007C00">// true if n is even</span>
+<span style="color:blue">boolean</span> positiveFlag = (x &gt; 0);     <span style="color:#007C00">// true if x is positive</span></td></tr>
+</table><p><a id="hevea_default267"/></p><p>The parentheses are unnecessary, but they make the code easier to read.
+A variable defined in this way is called a <span style="font-weight:bold">flag</span>, because it signals or “flags” the presence or absence of a condition.</p><p>You can use flag variables as part of a conditional statement later:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (evenFlag) {
+    System.out.println(<span style="color:#B20000">"n was even when I checked it"</span>);
+}</td></tr>
+</table><p>Notice that you don’t have to write <code><span style="color:blue">if</span> (evenFlag == <span style="color:blue">true</span>)</code>.
+Since <code>evenFlag</code> is a <code><span style="color:blue">boolean</span></code>, it’s already a condition.
+Likewise, to check if a flag is <code><span style="color:blue">false</span></code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">if</span> (!evenFlag) {
+    System.out.println(<span style="color:#B20000">"n was odd when I checked it"</span>);
+}</td></tr>
+</table>
+<h2 id="sec62" class="section">5.6  The return statement</h2>
+<p><a id="hevea_default268"/>
+<a id="hevea_default269"/></p><p>The <code><span style="color:blue">return</span></code> statement allows you to terminate a method before you reach the end of it.
+One reason to use <code><span style="color:blue">return</span></code> is if you detect an error condition:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> printLogarithm(<span style="color:blue">double</span> x) {
+    <span style="color:blue">if</span> (x &lt;= 0.0) {
+        System.err.println(<span style="color:#B20000">"Error: x must be positive."</span>);
+        <span style="color:blue">return</span>;
+    }
+    <span style="color:blue">double</span> result = Math.log(x);
+    System.out.println(<span style="color:#B20000">"The log of x is "</span> + result);
+}</td></tr>
+</table><p><a id="hevea_default270"/></p><p>This example defines a method named <code>printLogarithm</code> that takes a <code><span style="color:blue">double</span></code> value (named <code>x</code>) as a parameter.
+It checks whether <code>x</code> is less than or equal to zero, in which case it displays an error message and then uses <code><span style="color:blue">return</span></code> to exit the method.
+The flow of execution immediately returns to where the method was invoked, and the remaining lines of the method are not executed.</p><p><a id="hevea_default271"/></p><p>This example uses <code>System.err</code>, which is an <code>OutputStream</code> normally used for error messages and warnings.
+Some development environments display output to <code>System.err</code> with a different color or in a separate window.</p>
+<h2 id="sec63" class="section">5.7  Validating input</h2>
+<p>
+<a id="validate"/></p><p>Here is a method that uses <code>printLogarithm</code> from the previous section:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> scanDouble(Scanner in) {
+    System.out.print(<span style="color:#B20000">"Enter a number: "</span>);
+    <span style="color:blue">double</span> x = in.nextDouble();
+    printLogarithm(x);
+}</td></tr>
+</table><p>This example uses <code>nextDouble</code>, so the <code>Scanner</code> (provided by the <code>main</code> method) tries to read a <code><span style="color:blue">double</span></code>.
+If the user enters a floating-point number, the <code>Scanner</code> converts it to a <code><span style="color:blue">double</span></code>.
+But if the user types anything else, the <code>Scanner</code> throws an <code>InputMismatchException</code>.</p><p><a id="hevea_default272"/>
+<a id="hevea_default273"/></p><p>We can prevent this error by checking the input before parsing it:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> scanDouble(Scanner in) {
+    System.out.print(<span style="color:#B20000">"Enter a number: "</span>);
+    <span style="color:blue">if</span> (!in.hasNextDouble()) {
+        String word = in.next();
+        System.err.println(word + <span style="color:#B20000">" is not a number"</span>);
+        <span style="color:blue">return</span>;
+    }
+    <span style="color:blue">double</span> x = in.nextDouble();
+    printLogarithm(x);
+}</td></tr>
+</table><p>The <code>Scanner</code> class provides <code>hasNextDouble</code>, which checks whether the next token in the input stream can be interpreted as a <code><span style="color:blue">double</span></code>.
+If so, we can call <code>nextDouble</code> with no chance of throwing an exception.
+If not, we display an error message and return.
+</p>
+<h2 id="sec64" class="section">5.8  Recursive methods</h2>
+<p>
+<a id="recursion"/></p><p><a id="hevea_default274"/></p><p>Now that we have conditional statements, we can explore one of the most magical things a program can do: <span style="font-weight:bold">recursion</span>.
+Consider the following example:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> countdown(<span style="color:blue">int</span> n) {
+    <span style="color:blue">if</span> (n == 0) {
+        System.out.println(<span style="color:#B20000">"Blastoff!"</span>);
+    } <span style="color:blue">else</span> {
+        System.out.println(n);
+        countdown(n - 1);
+    }
+}</td></tr>
+</table><p><a id="hevea_default275"/></p><p>The name of the method is <code>countdown</code>; it takes a single integer as a parameter.
+If the parameter is zero, it displays the word “Blastoff”.
+Otherwise, it displays the number and then invokes <em>itself</em>, passing <code>n - 1</code> as the argument.
+A method that invokes itself is called <span style="font-weight:bold">recursive</span>.</p><p>What happens if we invoke <code>countdown(3)</code> from <code>main</code>?</p><blockquote class="quote">
+The execution of <code>countdown</code> begins with <code>n == 3</code>, and since <code>n</code> is not zero, it displays the value 3, and then invokes itself...
+<blockquote class="quote">
+The execution of <code>countdown</code> begins with <code>n == 2</code>, and since <code>n</code> is not zero, it displays the value 2, and then invokes itself...
+<blockquote class="quote">
+The execution of <code>countdown</code> begins with <code>n == 1</code>, and since <code>n</code> is not zero, it displays the value 1, and then invokes itself...
+<blockquote class="quote">
+The execution of <code>countdown</code> begins with <code>n == 0</code>, and since <code>n</code> is zero, it displays the word “Blastoff!” and then returns.
+</blockquote>
+The <code>countdown</code> that got <code>n == 1</code> returns.
+</blockquote>
+The <code>countdown</code> that got <code>n == 2</code> returns.
+</blockquote>
+The <code>countdown</code> that got <code>n == 3</code> returns.
+</blockquote><p>And then you’re back in <code>main</code>.
+So the total output looks like:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">3
+2
+1
+Blastoff!</td></tr>
+</table><p>As a second example, we’ll rewrite the methods <code>newLine</code> and <code>threeLine</code> from Section <a href="/thinkjava/chapter4.html#adding_methods">4.3</a>.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> newLine() {
+    System.out.println();
+}
+
+<span style="color:blue">public static void</span> threeLine() {
+    newLine();
+    newLine();
+    newLine();
+}</td></tr>
+</table><p><a id="hevea_default276"/></p><p>Although these methods work, they would not help if we wanted to display two newlines, or maybe 100.
+A better alternative would be:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> nLines(<span style="color:blue">int</span> n) {
+    <span style="color:blue">if</span> (n &gt; 0) {
+        System.out.println();
+        nLines(n - 1);
+    }
+}</td></tr>
+</table><p>This method takes an integer, <code>n</code>, as a parameter and displays <code>n</code> newlines.
+The structure is similar to <code>countdown</code>.
+As long as <span style="font-style:italic">n</span> is greater than zero, it displays a newline and then invokes itself to display (<span style="font-style:italic">n</span>−1) additional newlines.
+The total number of newlines is 1 + (<span style="font-style:italic">n</span> − 1), which is just what we wanted: <span style="font-style:italic">n</span>.</p>
+<h2 id="sec65" class="section">5.9  Recursive stack diagrams</h2>
+<p><a id="hevea_default277"/>
+<a id="hevea_default278"/></p><p>In the previous chapter, we used a stack diagram to represent the state of a program during a method invocation.
+The same kind of diagram can make it easier to interpret a recursive method.</p><p>Remember that every time a method gets called, Java creates a new frame that contains the current method’s parameters and variables.
+Figure <a href="#fig.stack2">5.1</a> is a stack diagram for <code>countdown</code>, called with <code>n == 3</code>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+<div class="center">
+<img src="thinkjava6010.png"/>
+<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 5.1: Stack diagram for the <code>countdown</code> program.</td></tr>
+</table></div>
+<a id="fig.stack2"/>
+</div>
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>By convention, the stack for <code>main</code> is at the top and the stack grows down.
+The frame for <code>main</code> is empty because <code>main</code> does not have any variables.
+(It has the parameter <code>args</code>, but since we’re not using it, we left it out of the diagram.)</p><p><a id="hevea_default279"/></p><p>There are four frames for <code>countdown</code>, each with a different value for the parameter <code>n</code>.
+The last frame, with <code>n == 0</code>, is called the <span style="font-weight:bold">base case</span>.
+It does not make a recursive call, so there are no more frames below it.</p><p>If there is no base case in a recursive method, or if the base case is never reached, the stack would grow forever, at least in theory.
+In practice, the size of the stack is limited; if you exceed the limit, you get a <code>StackOverflowError</code>.</p><p>For example, here is a recursive method without a base case:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> forever(String s) {
+    System.out.println(s);
+    forever(s);
+}</td></tr>
+</table><p><a id="hevea_default280"/>
+<a id="hevea_default281"/></p><p>This method displays the string until the stack overflows, at which point it throws an exception.</p>
+<h2 id="sec66" class="section">5.10  Binary numbers</h2>
+<p>The <code>countdown</code> example has three parts: (1) it checks the base case, (2) displays something, and (3) makes a recursive call.
+What do you think happens if you reverse steps 2 and 3, making the recursive call <em>before</em> displaying?</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> countup(<span style="color:blue">int</span> n) {
+    <span style="color:blue">if</span> (n == 0) {
+        System.out.println(<span style="color:#B20000">"Blastoff!"</span>);
+    } <span style="color:blue">else</span> {
+        countup(n - 1);
+        System.out.println(n);
+    }
+}</td></tr>
+</table><p>The stack diagram is the same as before, and the method is still called <span style="font-style:italic">n</span> times.
+But now the <code>System.out.println</code> happens just before each recursive call returns.
+As a result, it counts up instead of down:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Blastoff!
+1
+2
+3</td></tr>
+</table><p><a id="hevea_default282"/></p><p>This behavior comes in handy when it is easier to compute results in reverse order.
+For example, to convert a decimal integer into its <span style="font-weight:bold">binary</span> representation, you repeatedly divide the number by two:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">23 / 2 is 11 remainder 1
+11 / 2 is  5 remainder 1
+ 5 / 2 is  2 remainder 1
+ 2 / 2 is  1 remainder 0
+ 1 / 2 is  0 remainder 1</td></tr>
+</table><p>Reading these remainders from bottom to top, 23 in binary is 10111.
+For more background about binary numbers, see <a href="http://www.mathsisfun.com/binary-number-system.html"><span style="font-family:monospace">http://www.mathsisfun.com/binary-number-system.html</span></a>.</p><p>Here is a recursive method that displays the binary representation of any positive integer:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> displayBinary(<span style="color:blue">int</span> value) {
+    <span style="color:blue">if</span> (value &gt; 0) {
+        displayBinary(value / 2);
+        System.out.print(value % 2);
+    }
+}</td></tr>
+</table><p>If <code>value</code> is zero, <code>displayBinary</code> does nothing (that’s the base case).
+If the argument is positive, the method divides it by two and calls <code>displayBinary</code> recursively.
+When the recursive call returns, the method displays one digit of the result and returns (again).</p><p>The leftmost digit is at the bottom of the stack, so it gets displayed first.
+The rightmost digit, at the top of the stack, gets displayed last.
+After invoking <code>displayBinary</code>, we use <code>println</code> to complete the output.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">displayBinary(23);
+System.out.println();
+<span style="color:#007C00">// output is 10111</span></td></tr>
+</table><p>Learning to think recursively is an important aspect of learning to think like a computer scientist.
+Many algorithms can be written concisely with recursive methods that perform computations on the way down, on the way up, or both.</p>
+<h2 id="sec67" class="section">5.11  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">boolean:</span></dt><dd class="dd-description"><a id="hevea_default283"/>
+A data type with only two values, <code><span style="color:blue">true</span></code> and <code><span style="color:blue">false</span></code>.<p><a id="hevea_default284"/>
+</p></dd><dt class="dt-description"><span style="font-weight:bold">relational operator:</span></dt><dd class="dd-description"><a id="hevea_default285"/>
+An operator that compares two values and produces a <code><span style="color:blue">boolean</span></code> indicating the relationship between them.<p><a id="hevea_default286"/>
+</p></dd><dt class="dt-description"><span style="font-weight:bold">logical operator:</span></dt><dd class="dd-description"><a id="hevea_default287"/>
+An operator that combines boolean values and produces a boolean value.</dd><dt class="dt-description"><span style="font-weight:bold">short circuit:</span></dt><dd class="dd-description"><a id="hevea_default288"/>
+A way of evaluating logical operators that only evaluates the second operand if necessary.</dd><dt class="dt-description"><span style="font-weight:bold">De Morgan’s laws:</span></dt><dd class="dd-description"><a id="hevea_default289"/>
+Mathematical rules that show how to negate a logical expression.</dd><dt class="dt-description"><span style="font-weight:bold">conditional statement:</span></dt><dd class="dd-description"><a id="hevea_default290"/>
+A statement that uses a condition to determine which statements to execute.</dd><dt class="dt-description"><span style="font-weight:bold">branch:</span></dt><dd class="dd-description"><a id="hevea_default291"/>
+One of the alternative sets of statements inside a conditional statement.</dd><dt class="dt-description"><span style="font-weight:bold">chaining:</span></dt><dd class="dd-description"><a id="hevea_default292"/>
+A way of joining several conditional statements in sequence.</dd><dt class="dt-description"><span style="font-weight:bold">nesting:</span></dt><dd class="dd-description"><a id="hevea_default293"/>
+Putting a conditional statement inside one or both branches of another conditional statement.</dd><dt class="dt-description"><span style="font-weight:bold">flag:</span></dt><dd class="dd-description"><a id="hevea_default294"/>
+A variable (usually <code><span style="color:blue">boolean</span></code>) that represents a condition or status.</dd><dt class="dt-description"><span style="font-weight:bold">recursion:</span></dt><dd class="dd-description"><a id="hevea_default295"/>
+The process of invoking (and restarting) the same method that is currently executing.</dd><dt class="dt-description"><span style="font-weight:bold">recursive:</span></dt><dd class="dd-description"><a id="hevea_default296"/>
+A method that invokes itself, usually with different arguments.</dd><dt class="dt-description"><span style="font-weight:bold">base case:</span></dt><dd class="dd-description"><a id="hevea_default297"/>
+A condition that causes a recursive method <em>not</em> to make another recursive call.</dd><dt class="dt-description"><span style="font-weight:bold">binary:</span></dt><dd class="dd-description"><a id="hevea_default298"/>
+A system that uses only zeros and ones to represent numbers.
+Also known as “base 2”.</dd></dl>
+<h2 id="sec68" class="section">5.12  Exercises</h2>
+<p>The code for this chapter is in the <span style="font-family:monospace">ch05</span> directory of <span style="font-family:monospace">ThinkJavaCode</span>.
+See page <a href="/thinkjava/preface.html#code">??</a> for instructions on how to download the repository.
+Before you start the exercises, we recommend that you compile and run the examples.</p><p>If you have not already read Appendix <a href="/thinkjava/appendix-a.html#debugger">A.6</a>, now might be a good time.
+It describes the DrJava debugger, which is a useful tool for tracing the flow of execution.</p><div class="theorem"><span style="font-weight:bold">Exercise 1</span>  <p><em>Logical operators can simplify nested conditional statements.
+For example, can you rewrite this code using a single <span style="color:blue"><code>if</code></span> statement?</em></p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><em><span style="color:blue">if</span> (x &gt; 0) {
+    <span style="color:blue">if</span> (x &lt; 10) {
+        System.out.println(<span style="color:#B20000">"positive single digit number."</span>);
+    }
+}</em></td></tr>
+</table></div><div class="theorem"><span style="font-weight:bold">Exercise 2</span>  <em>
+For the following program:</em><ol class="enumerate" type="1"><li class="li-enumerate"><em>Draw a stack diagram that shows the state of the program the </em>second<em> time <code>ping</code> is invoked.</em></li><li class="li-enumerate"><em>What is the complete output?</em></li></ol><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><em><span style="color:blue">public static void</span> zoop(String fred, <span style="color:blue">int</span> bob) {
+    System.out.println(fred);
+    <span style="color:blue">if</span> (bob == 5) {
+        ping(<span style="color:#B20000">"not "</span>);
+    } <span style="color:blue">else</span> {
+        System.out.println(<span style="color:#B20000">"!"</span>);
+    }
+}
+
+<span style="color:blue">public static void</span> main(String[] args) {
+    <span style="color:blue">int</span> bizz = 5;
+    <span style="color:blue">int</span> buzz = 2;
+    zoop(<span style="color:#B20000">"just for"</span>, bizz);
+    clink(2 * buzz);
+}</em></td></tr>
+</table><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><em><span style="color:blue">public static void</span> clink(<span style="color:blue">int</span> fork) {
+    System.out.print(<span style="color:#B20000">"It's "</span>);
+    zoop(<span style="color:#B20000">"breakfast "</span>, fork);
+}
+
+<span style="color:blue">public static void</span> ping(String strangStrung) {
+    System.out.println(<span style="color:#B20000">"any "</span> + strangStrung + <span style="color:#B20000">"more "</span>);
+}</em></td></tr>
+</table></div><div class="theorem"><span style="font-weight:bold">Exercise 3</span>  <p><em>Draw a stack diagram that shows the state of the program in Section </em><a href="#recursion"><em>5.8</em></a><em> after <code>main</code> invokes <code>nLines</code> with the parameter <code>n == 4</code>, just before the last invocation of <code>nLines</code> returns.</em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 4</span>  <p><em>Fermat’s Last Theorem says that there are no integers </em><span style="font-style:italic">a</span><em>, </em><span style="font-style:italic">b</span><em>, and </em><span style="font-style:italic">c</span><em> such that </em><span style="font-style:italic">a</span><sup><span style="font-style:italic">n</span></sup> + <span style="font-style:italic">b</span><sup><span style="font-style:italic">n</span></sup> = <span style="font-style:italic">c</span><sup><span style="font-style:italic">n</span></sup><em>, except when </em><span style="font-style:italic">n</span> ≤ 2<em>.</em></p><p><em>Write a method named <code>checkFermat</code> that takes four integers as parameters – <code>a</code>, <code>b</code>, <code>c</code> and <code>n</code> – and checks to see if Fermat’s theorem holds.
+If </em><span style="font-style:italic">n</span><em> is greater than 2 and </em><span style="font-style:italic">a</span><sup><span style="font-style:italic">n</span></sup> + <span style="font-style:italic">b</span><sup><span style="font-style:italic">n</span></sup> = <span style="font-style:italic">c</span><sup><span style="font-style:italic">n</span></sup><em>, the program should display “Holy smokes, Fermat was wrong!”
+Otherwise the program should display “No, that doesn’t work.”</em></p><p>Hint:<em> You may want to use <code>Math.pow</code>.</em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 5</span>  <p><em>The purpose of this exercise is to take a problem and break it into smaller problems, and to solve the smaller problems by writing simple methods.
+Consider the first verse of the song “99 Bottles of Beer”:</em></p><blockquote class="quote"><em>
+99 bottles of beer on the wall,<br/>
+99 bottles of beer,<br/>
+ya’ take one down, ya’ pass it around,<br/>
+98 bottles of beer on the wall.
+</em></blockquote><p><em>Subsequent verses are identical except that the number of bottles gets smaller by one in each verse, until the last verse:</em></p><blockquote class="quote"><em>
+No bottles of beer on the wall,<br/>
+no bottles of beer,<br/>
+ya’ can’t take one down, ya’ can’t pass it around,<br/>
+’cause there are no more bottles of beer on the wall!
+</em></blockquote><p><em>And then the song (finally) ends.</em></p><p><em>Write a program that displays the entire lyrics of “99 Bottles of Beer”.
+Your program should include a recursive method that does the hard part, but you might want to write additional methods to separate other parts of the program.
+As you develop your code, test it with a small number of verses, like <code>3</code>.</em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 6</span>  <p><em>This exercise reviews the flow of execution through a program with multiple methods.
+Read the following code and answer the questions.</em></p><p><em><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
+----{Buzz.java}----
+public class Buzz {
+
+    public static void baffle(String blimp) {
+        System.out.println(blimp);
+        zippo("ping", -5);
+    }
+
+    public static void zippo(String quince, int flag) {
+        if (flag < 0) {
+            System.out.println(quince + " zoop");
+        } else {
+            System.out.println("ik");
+            baffle(quince);
+            System.out.println("boo-wa-ha-ha");
+        }
+    }
+
+    public static void main(String[] args) {
+        zippo("rattle", 13);
+    }
+
+}
+--></em></p><ol class="enumerate" type="1"><li class="li-enumerate"><em>Write the number <span style="font-family:monospace">1</span> next to the first line of code in this program that will execute.</em></li><li class="li-enumerate"><em>Write the number <span style="font-family:monospace">2</span> next to the second line of code, and so on until the end of the program.
+If a line is executed more than once, it might end up with more than one number next to it.</em></li><li class="li-enumerate"><em>What is the value of the parameter <code>blimp</code> when <code>baffle</code> gets invoked?</em></li><li class="li-enumerate"><em>What is the output of this program?</em></li></ol></div><div class="theorem"><span style="font-weight:bold">Exercise 7</span>  <p><em>Now that we have conditional statements, we can get back to the “Guess My Number” game from Exercise </em><a href="/thinkjava/chapter3.html#guess"><em>4</em></a><em>.</em></p><p><em>You should already have a program that chooses a random number, prompts the user to guess it, and displays the difference between the guess and the chosen number.</em></p><p><em>Adding a small amount of code at a time, and testing as you go, modify the program so it tells the user whether the guess is too high or too low, and then prompts the user for another guess.</em></p><p><em>The program should continue until the user gets it right.
+</em>Hint:<em> Use two methods, and make one of them recursive.</em></p></div>
+</div>
+</div>
+
+</div>
+    
+</div>
+{% endblock %}
+
+{% block toc %}
+<li class="has-dropdown"><a href="/thinkjava/chapter5.html">Conditionals and logic</a>
+    <ul class="dropdown">
+      <li><a href="/thinkjava/chapter5.html#sec57">Relational operators</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec58">Logical operators</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec59">Conditional statements</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec60">Chaining and nesting</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec61">Flag variables</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec62">The return statement</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec63">Validating input</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec64">Recursive methods</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec65">Recursive stack diagrams</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec66">Binary numbers</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec67">Vocabulary</a>
+      </li>
+      <li><a href="/thinkjava/chapter5.html#sec68">Exercises</a>
+      </li>
+    </ul>
+  </li>
+  
+{% endblock %}
+
+{% block title%}Conditionals and logic | Think Java | Trinket{% endblock %}
