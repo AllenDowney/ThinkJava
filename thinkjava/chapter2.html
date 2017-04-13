@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,22 +7,22 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec18" class="chapter">Chapter 2  Variables and operators</h1>
+        <div class="columns small-12"><h1 name="sec18" class="chapter">Chapter 2  Variables and operators</h1>
 <p>This chapter describes how to write statements using variables, which store values like numbers and words, and operators, which are symbols that perform a computation.
 We also explain three kinds of programming errors and offer additional debugging advice.
 </p>
-<h2 id="sec19" class="section">2.1  Declaring variables</h2>
-<p><a id="hevea_default75"/>
-<a id="hevea_default76"/></p><p>One of the most powerful features of a programming language is the ability to define and manipulate <span style="font-weight:bold">variables</span>.
+<h2 name="sec19" class="section">2.1  Declaring variables</h2>
+<p><a name="hevea_default75"></a>
+<a name="hevea_default76"></a></p><p>One of the most powerful features of a programming language is the ability to define and manipulate <span style="font-weight:bold">variables</span>.
 A variable is a named location that stores a <span style="font-weight:bold">value</span>.
 Values may be numbers, text, images, sounds, and other types of data.
 To store a value, you first have to declare a variable.
 </p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">String message;</td></tr>
-</table><p><a id="hevea_default77"/>
-<a id="hevea_default78"/>
-<a id="hevea_default79"/>
-<a id="hevea_default80"/>
-<a id="hevea_default81"/></p><p>This statement is a <span style="font-weight:bold">declaration</span>, because it declares that the variable named <code>message</code> has the type <code>String</code>.
+</table><p><a name="hevea_default77"></a>
+<a name="hevea_default78"></a>
+<a name="hevea_default79"></a>
+<a name="hevea_default80"></a>
+<a name="hevea_default81"></a></p><p>This statement is a <span style="font-weight:bold">declaration</span>, because it declares that the variable named <code>message</code> has the type <code>String</code>.
 Each variable has a <span style="font-weight:bold">type</span> that determines what kind of values it can store.
 For example, the <code><span style="color:blue">int</span></code> type can store integers, and the <code><span style="color:blue">char</span></code> type can store characters.</p><p>Some types begin with a capital letter and some with lowercase.
 We will learn the significance of this distinction later, but for now you should take care to get it right.
@@ -33,18 +33,18 @@ In general, you should use names that indicate what the variables mean.
 For example, if you saw these declarations, you could probably guess what values would be stored:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">String firstName;
 String lastName;
 <span style="color:blue">int</span> hour, minute;</td></tr>
-</table><p><a id="hevea_default82"/></p><p>This example declares two variables with type <code>String</code> and two with type <code><span style="color:blue">int</span></code>.
+</table><p><a name="hevea_default82"></a></p><p>This example declares two variables with type <code>String</code> and two with type <code><span style="color:blue">int</span></code>.
 When a variable name contains more than one word, like <code>firstName</code>, it is conventional to capitalize the first letter of each word except the first.
-Variable names are case-sensitive, so <code>firstName</code> is not the same as <code>firstname</code> or <code>FirstName</code>.</p><p><a id="hevea_default83"/>
-<a id="hevea_default84"/></p><p>This example also demonstrates the <span style="font-weight:bold">syntax</span> for declaring multiple variables with the same type on one line: <code>hour</code> and <code>minute</code> are both integers.
-Note that each declaration statement ends with a semicolon.</p><p><a id="hevea_default85"/></p><p>You can use any name you want for a variable.
+Variable names are case-sensitive, so <code>firstName</code> is not the same as <code>firstname</code> or <code>FirstName</code>.</p><p><a name="hevea_default83"></a>
+<a name="hevea_default84"></a></p><p>This example also demonstrates the <span style="font-weight:bold">syntax</span> for declaring multiple variables with the same type on one line: <code>hour</code> and <code>minute</code> are both integers.
+Note that each declaration statement ends with a semicolon.</p><p><a name="hevea_default85"></a></p><p>You can use any name you want for a variable.
 But there are about 50 reserved words, called <span style="font-weight:bold">keywords</span>, that you are not allowed to use as variable names.
 These words include <code><span style="color:blue">public</span></code>, <code><span style="color:blue">class</span></code>, <code><span style="color:blue">static</span></code>, <code><span style="color:blue">void</span></code>, and <code><span style="color:blue">int</span></code>, which are used by the compiler to analyze the structure of the program.</p><p>You can find the complete list of keywords at <a href="http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html"><span style="font-family:monospace">http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html</span></a>, but you don’t have to memorize them.
 Most programming editors provide “syntax highlighting”, which makes different parts of the program appear in different colors.
 </p>
-<h2 id="sec20" class="section">2.2  Assignment</h2>
-<p><a id="hevea_default86"/>
-<a id="hevea_default87"/></p><p>Now that we have declared variables, we want to use them to store values.
+<h2 name="sec20" class="section">2.2  Assignment</h2>
+<p><a name="hevea_default86"></a>
+<a name="hevea_default87"></a></p><p>Now that we have declared variables, we want to use them to store values.
 We do that with an <span style="font-weight:bold">assignment</span> statement.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">message = <span style="color:#B20000">"Hello!"</span>;  <span style="color:#007C00">// give message the value "Hello!"</span>
 hour = 11;           <span style="color:#007C00">// assign the value 11 to hour</span>
 minute = 59;         <span style="color:#007C00">// set minute to 59</span></td></tr>
@@ -58,15 +58,15 @@ We will see some examples that seem to break this rule, but we’ll get to that 
 For example, <code>message</code> can contain the string <span style="color:#B20000"><code>"123"</code></span>, which is made up of the characters <span style="color:#B20000"><code>'1'</code></span>, <span style="color:#B20000"><code>'2'</code></span>, and <span style="color:#B20000"><code>'3'</code></span>.
 But that is not the same thing as the integer <code>123</code>.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">message = <span style="color:#B20000">"123"</span>;     <span style="color:#007C00">// legal</span>
 message = 123;       <span style="color:#007C00">// not legal</span></td></tr>
-</table><p><a id="hevea_default88"/></p><p>Variables must be <span style="font-weight:bold">initialized</span> (assigned for the first time) before they can be used.
+</table><p><a name="hevea_default88"></a></p><p>Variables must be <span style="font-weight:bold">initialized</span> (assigned for the first time) before they can be used.
 You can declare a variable and then assign a value later, as in the previous example.
 You can also declare and initialize on the same line:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">String message = <span style="color:#B20000">"Hello!"</span>;
 <span style="color:blue">int</span> hour = 11;
 <span style="color:blue">int</span> minute = 59;</td></tr>
 </table>
-<h2 id="sec21" class="section">2.3  State diagrams</h2>
+<h2 name="sec21" class="section">2.3  State diagrams</h2>
 <p>
-<a id="state"/></p><p>Because Java uses the <code>=</code> symbol for assignment, it is tempting to interpret the statement <code>a = b</code> as a statement of equality.
+<a name="state"></a></p><p>Because Java uses the <code>=</code> symbol for assignment, it is tempting to interpret the statement <code>a = b</code> as a statement of equality.
 It is not!</p><p>Equality is commutative, and assignment is not.
 For example, in mathematics if <span style="font-style:italic">a</span> = 7 then 7 = <span style="font-style:italic">a</span>.
 In Java <code>a = 7;</code> is a legal assignment statement, but <code>7 = a;</code> is not.
@@ -75,21 +75,21 @@ If <span style="font-style:italic">a</span> = <span style="font-style:italic">b<
 In Java, an assignment statement can make two variables equal, but they don’t have to stay that way.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">int</span> a = 5;
 <span style="color:blue">int</span> b = a;     <span style="color:#007C00">// a and b are now equal</span>
 a = 3;         <span style="color:#007C00">// a and b are no longer equal</span></td></tr>
-</table><p>The third line changes the value of <code>a</code>, but it does not change the value of <code>b</code>, so they are no longer equal.</p><p><a id="hevea_default89"/></p><p>Taken together, the variables in a program and their current values make up the program’s <span style="font-weight:bold">state</span>.
-Figure <a href="#fig.state">2.1</a> shows the state of the program after these assignment statements run.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+</table><p>The third line changes the value of <code>a</code>, but it does not change the value of <code>b</code>, so they are no longer equal.</p><p><a name="hevea_default89"></a></p><p>Taken together, the variables in a program and their current values make up the program’s <span style="font-weight:bold">state</span>.
+Figure <a href="#fig.state">2.1</a> shows the state of the program after these assignment statements run.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6003.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 2.1: State diagram of the variables <code>a</code> and <code>b</code>.</td></tr>
 </table></div>
-<a id="fig.state"/>
+<a name="fig.state"></a>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default90"/>
-<a id="hevea_default91"/></p><p>Diagrams like this one that show the state of the program are called <span style="font-weight:bold">state diagrams</span>.
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default90"></a>
+<a name="hevea_default91"></a></p><p>Diagrams like this one that show the state of the program are called <span style="font-weight:bold">state diagrams</span>.
 Each variable is represented with a box showing the name of the variable on the outside and the value inside.
 As the program runs, the state changes, so you should think of a state diagram as a snapshot of a particular point in time.</p>
-<h2 id="sec22" class="section">2.4  Printing variables</h2>
+<h2 name="sec22" class="section">2.4  Printing variables</h2>
 <p>
-<a id="sec:printvar"/></p><p>You can display the value of a variable using <code>print</code> or <code>println</code>.
+<a name="sec:printvar"></a></p><p>You can display the value of a variable using <code>print</code> or <code>println</code>.
 The following statements declare a variable named <code>firstLine</code>, assign it the value <span style="color:#B20000"><code>"Hello, again!"</code></span>, and display that value.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">String firstLine = <span style="color:#B20000">"Hello, again!"</span>;
 System.out.println(firstLine);</td></tr>
 </table><p>When we talk about displaying a variable, we generally mean the <em>value</em> of the variable.
@@ -110,17 +110,17 @@ System.out.println(<span style="color:#B20000">"."</span>);</td></tr>
 But don’t forget the <code>println</code>!
 On many computers, the output from <code>print</code> is stored without being displayed until <code>println</code> is run; then the entire line is displayed at once.
 If you omit the <code>println</code>, the program might display the stored output at unexpected times or even terminate without displaying anything.</p>
-<h2 id="sec23" class="section">2.5  Arithmetic operators</h2>
+<h2 name="sec23" class="section">2.5  Arithmetic operators</h2>
 <p>
-<a id="sec:arithops"/></p><p><a id="hevea_default92"/>
-<a id="hevea_default93"/></p><p><span style="font-weight:bold">Operators</span> are symbols that represent simple computations.
+<a name="sec:arithops"></a></p><p><a name="hevea_default92"></a>
+<a name="hevea_default93"></a></p><p><span style="font-weight:bold">Operators</span> are symbols that represent simple computations.
 For example, the addition operator is <code>+</code>, subtraction is <code>-</code>, multiplication is <code>*</code>, and division is <code>/</code>.
 </p><p>The following program converts a time of day to minutes:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">int</span> hour = 11;
 <span style="color:blue">int</span> minute = 59;
 System.out.print(<span style="color:#B20000">"Number of minutes since midnight: "</span>);
 System.out.println(hour * 60 + minute);</td></tr>
-</table><p><a id="hevea_default94"/>
-<a id="hevea_default95"/></p><p>In this program, <code>hour * 60 + minute</code> is an <span style="font-weight:bold">expression</span>, which represents a single value to be computed.
+</table><p><a name="hevea_default94"></a>
+<a name="hevea_default95"></a></p><p>In this program, <code>hour * 60 + minute</code> is an <span style="font-weight:bold">expression</span>, which represents a single value to be computed.
 When the program runs, each variable is replaced by its current value, and then the operators are applied.
 The values operators work with are called <span style="font-weight:bold">operands</span>.</p><p>The result of the previous example is:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Number of minutes since midnight: 719</td></tr>
 </table><p>Expressions are generally a combination of numbers, variables, and operators.
@@ -132,9 +132,9 @@ Then the addition yields <code>719</code>.</p><p>Addition, subtraction, and mult
 For example, the following fragment tries to compute the fraction of an hour that has elapsed:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.print(<span style="color:#B20000">"Fraction of the hour that has passed: "</span>);
 System.out.println(minute / 60);</td></tr>
 </table><p>The output is:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Fraction of the hour that has passed: 0</td></tr>
-</table><p><a id="hevea_default96"/>
-<a id="hevea_default97"/>
-<a id="hevea_default98"/></p><p>This result often confuses people.
+</table><p><a name="hevea_default96"></a>
+<a name="hevea_default97"></a>
+<a name="hevea_default98"></a></p><p>This result often confuses people.
 The value of <code>minute</code> is 59, and 59 divided by 60 should be 0.98333, not 0.
 The problem is that Java performs “integer division” when the operands are integers.
 By design, integer division always rounds toward zero, even in cases like this one where the next integer is close.</p><p>As an alternative, we can calculate a percentage rather than a fraction:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.print(<span style="color:#B20000">"Percent of the hour that has passed: "</span>);
@@ -142,10 +142,10 @@ System.out.println(minute * 100 / 60);</td></tr>
 </table><p>The new output is:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Percent of the hour that has passed: 98</td></tr>
 </table><p>Again the result is rounded down, but at least now it’s approximately correct.
 </p>
-<h2 id="sec24" class="section">2.6  Floating-point numbers</h2>
-<p><a id="hevea_default99"/>
-<a id="hevea_default100"/>
-<a id="hevea_default101"/></p><p>A more general solution is to use <span style="font-weight:bold">floating-point</span> numbers, which can represent fractions as well as integers.
+<h2 name="sec24" class="section">2.6  Floating-point numbers</h2>
+<p><a name="hevea_default99"></a>
+<a name="hevea_default100"></a>
+<a name="hevea_default101"></a></p><p>A more general solution is to use <span style="font-weight:bold">floating-point</span> numbers, which can represent fractions as well as integers.
 In Java, the default floating-point type is called <code><span style="color:blue">double</span></code>, which is short for double-precision.
 You can create <code><span style="color:blue">double</span></code> variables and assign values to them using the same syntax we used for the other types:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> pi;
 pi = 3.14159;</td></tr>
@@ -161,21 +161,21 @@ They belong to different data types, and strictly speaking, you are not allowed 
 </table><p>The preceding example should be illegal, but Java allows it by converting the <code><span style="color:blue">int</span></code> value <code>1</code> to the <code><span style="color:blue">double</span></code> value <code>1.0</code> automatically.
 This leniency is convenient, but it often causes problems for beginners.
 For example:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> y = 1 / 3;  <span style="color:#007C00">// common mistake</span></td></tr>
-</table><p><a id="hevea_default102"/>
-<a id="hevea_default103"/>
-<a id="hevea_default104"/></p><p>You might expect the variable <code>y</code> to get the value <code>0.333333</code>, which is a legal floating-point value.
+</table><p><a name="hevea_default102"></a>
+<a name="hevea_default103"></a>
+<a name="hevea_default104"></a></p><p>You might expect the variable <code>y</code> to get the value <code>0.333333</code>, which is a legal floating-point value.
 But instead it gets the value <code>0.0</code>.
 The expression on the right divides two integers, so Java does integer division, which yields the <code><span style="color:blue">int</span></code> value <code>0</code>.
 Converted to <code><span style="color:blue">double</span></code>, the value assigned to <code>y</code> is <code>0.0</code>.</p><p>One way to solve this problem (once you figure out the bug) is to make the right-hand side a floating-point expression.
 The following sets <code>y</code> to <code>0.333333</code>, as expected:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> y = 1.0 / 3.0;  <span style="color:#007C00">// correct</span></td></tr>
 </table><p>As a matter of style, you should always assign floating-point values to floating-point variables.
 The compiler won’t make you do it, but you never know when a simple mistake will come back and haunt you.</p>
-<h2 id="sec25" class="section">2.7  Rounding errors</h2>
+<h2 name="sec25" class="section">2.7  Rounding errors</h2>
 <p>Most floating-point numbers are only <em>approximately</em> correct.
 Some numbers, like reasonably-sized integers, can be represented exactly.
 But repeating fractions, like 1/3, and irrational numbers, like π, cannot.
-To represent these numbers, computers have to round off to the nearest floating-point number.</p><p><a id="hevea_default105"/>
-<a id="hevea_default106"/></p><p>The difference between the number we want and the floating-point number we get is called <span style="font-weight:bold">rounding error</span>.
+To represent these numbers, computers have to round off to the nearest floating-point number.</p><p><a name="hevea_default105"></a>
+<a name="hevea_default106"></a></p><p>The difference between the number we want and the floating-point number we get is called <span style="font-weight:bold">rounding error</span>.
 For example, the following two statements should be equivalent:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(0.1 * 10);
 System.out.println(0.1 + 0.1 + 0.1 + 0.1 + 0.1
                  + 0.1 + 0.1 + 0.1 + 0.1 + 0.1);</td></tr>
@@ -189,14 +189,14 @@ For example, consider a bank account with a balance of $123.45:</p><table class=
 </table><p>In this example, balances will become inaccurate over time as the variable is used in arithmetic operations like deposits and withdrawals.
 The result would be angry customers and potential lawsuits.
 You can avoid the problem by representing the balance as an integer:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">int</span> balance = 12345;      <span style="color:#007C00">// total number of cents</span></td></tr>
-</table><p><a id="hevea_default107"/></p><p>This solution works as long as the number of cents doesn’t exceed the largest integer, which is about 2 billion.
+</table><p><a name="hevea_default107"></a></p><p>This solution works as long as the number of cents doesn’t exceed the largest integer, which is about 2 billion.
 </p>
-<h2 id="sec26" class="section">2.8  Operators for strings</h2>
-<p><a id="hevea_default108"/>
-<a id="hevea_default109"/></p><p>In general, you cannot perform mathematical operations on strings, even if the strings look like numbers.
+<h2 name="sec26" class="section">2.8  Operators for strings</h2>
+<p><a name="hevea_default108"></a>
+<a name="hevea_default109"></a></p><p>In general, you cannot perform mathematical operations on strings, even if the strings look like numbers.
 The following expressions are illegal:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:#B20000">"Hello"</span> - 1     <span style="color:#B20000">"World"</span> / 123     <span style="color:#B20000">"Hello"</span> * <span style="color:#B20000">"World"</span></td></tr>
-</table><p><a id="hevea_default110"/>
-<a id="hevea_default111"/></p><p>The <code>+</code> operator works with strings, but it might not do what you expect.
+</table><p><a name="hevea_default110"></a>
+<a name="hevea_default111"></a></p><p>The <code>+</code> operator works with strings, but it might not do what you expect.
 For strings, the <code>+</code> operator performs <span style="font-weight:bold">concatenation</span>, which means joining end-to-end.
 So <code><span style="color:#B20000">"Hello, "</span> + <span style="color:#B20000">"World!"</span></code> yields the string <span style="color:#B20000"><code>"Hello, World!"</code></span>.</p><p>Or if you have a variable called <code>name</code> that has type <code>String</code>, the expression <code><span style="color:#B20000">"Hello, "</span> + name</code> appends the value of <code>name</code> to the hello string, which creates a personalized greeting.</p><p>Since addition is defined for both numbers and strings, Java performs automatic conversions you may not expect:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(1 + 2 + <span style="color:#B20000">"Hello"</span>);
 <span style="color:#007C00">// the output is 3Hello</span>
@@ -205,8 +205,8 @@ System.out.println(<span style="color:#B20000">"Hello"</span> + 1 + 2);
 <span style="color:#007C00">// the output is Hello12</span></td></tr>
 </table><p>Java executes these operations from left to right.
 In the first line, <code>1 + 2</code> is <code>3</code>, and <code>3 + <span style="color:#B20000">"Hello"</span></code> is <span style="color:#B20000"><code>"3Hello"</code></span>.
-But in the second line, <code><span style="color:#B20000">"Hello"</span> + 1</code> is <span style="color:#B20000"><code>"Hello1"</code></span>, and <code><span style="color:#B20000">"Hello1"</span> + 2</code> is <span style="color:#B20000"><code>"Hello12"</code></span>.</p><p><a id="hevea_default112"/>
-<a id="hevea_default113"/></p><p>When more than one operator appears in an expression, they are evaluated according to <span style="font-weight:bold">order of operations</span>.
+But in the second line, <code><span style="color:#B20000">"Hello"</span> + 1</code> is <span style="color:#B20000"><code>"Hello1"</code></span>, and <code><span style="color:#B20000">"Hello1"</span> + 2</code> is <span style="color:#B20000"><code>"Hello12"</code></span>.</p><p><a name="hevea_default112"></a>
+<a name="hevea_default113"></a></p><p>When more than one operator appears in an expression, they are evaluated according to <span style="font-weight:bold">order of operations</span>.
 Generally speaking, Java evaluates operators from left to right (as we saw in the previous section).
 But for numeric operators, Java follows mathematical conventions:</p><ul class="itemize"><li class="li-itemize">Multiplication and division take “precedence” over addition and subtraction, which means they happen first.
 So <code>1 + 2 * 3</code> yields 7, not 9, and <code>2 + 4 / 2</code> yields 4, not 3.</li><li class="li-itemize">If the operators have the same precedence, they are evaluated from left to right.
@@ -215,8 +215,8 @@ If these same operations had gone from right to left, the result would have been
 Expressions in parentheses are evaluated first, so <code>(1 + 2) * 3</code> is 9.
 You can also use parentheses to make an expression easier to read, as in <code>(minute * 100) / 60</code>, even though it doesn’t change the result.</li></ul><p>Don’t work too hard to remember the order of operations, especially for other operators.
 If it’s not obvious by looking at the expression, use parentheses to make it clear.</p>
-<h2 id="sec27" class="section">2.9  Composition</h2>
-<p><a id="hevea_default114"/></p><p>So far we have looked at the elements of a programming language – variables, expressions, and statements – in isolation, without talking about how to put them together.</p><p>One of the most useful features of programming languages is their ability to take small building blocks and <span style="font-weight:bold">compose</span> them.
+<h2 name="sec27" class="section">2.9  Composition</h2>
+<p><a name="hevea_default114"></a></p><p>So far we have looked at the elements of a programming language – variables, expressions, and statements – in isolation, without talking about how to put them together.</p><p>One of the most useful features of programming languages is their ability to take small building blocks and <span style="font-weight:bold">compose</span> them.
 For example, we know how to multiply numbers and we know how to display values.
 We can combine these operations into a single statement:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(17 * 3);</td></tr>
 </table><p>Any arithmetic expression can be used inside a print statement.
@@ -226,17 +226,17 @@ percentage = (minute * 100) / 60;</td></tr>
 </table><p>The left side of an assignment must be a variable name, not an expression.
 That’s because the left side indicates where the result will be stored, and expressions do not represent storage locations.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">hour = minute + 1;  <span style="color:#007C00">// correct</span>
 minute + 1 = hour;  <span style="color:#007C00">// compiler error</span></td></tr>
-</table><p><a id="hevea_default115"/></p><p>The ability to compose operations may not seem impressive now, but we will see examples later on that allow us to write complex computations neatly and concisely.
+</table><p><a name="hevea_default115"></a></p><p>The ability to compose operations may not seem impressive now, but we will see examples later on that allow us to write complex computations neatly and concisely.
 But don’t get too carried away.
 Large, complex expressions can be hard to read and debug.</p>
-<h2 id="sec28" class="section">2.10  Types of errors</h2>
-<p><a id="hevea_default116"/></p><p>Three kinds of errors can occur in a program: compile-time errors, run-time errors, and logic errors.
-It is useful to distinguish among them in order to track them down more quickly.</p><p><a id="hevea_default117"/>
-<a id="hevea_default118"/></p><p><span style="font-weight:bold">Compile-time</span> errors occur when you violate the syntax rules of the Java language.
+<h2 name="sec28" class="section">2.10  Types of errors</h2>
+<p><a name="hevea_default116"></a></p><p>Three kinds of errors can occur in a program: compile-time errors, run-time errors, and logic errors.
+It is useful to distinguish among them in order to track them down more quickly.</p><p><a name="hevea_default117"></a>
+<a name="hevea_default118"></a></p><p><span style="font-weight:bold">Compile-time</span> errors occur when you violate the syntax rules of the Java language.
 For example, parentheses and braces have to come in matching pairs.
 So <code>(1 + 2)</code> is legal, but <code>8)</code> is not.
-In the latter case, the program cannot be compiled, and the compiler displays an error.</p><p><a id="hevea_default119"/></p><p>Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you exactly what the error is.
-As an example, let’s get back to the hello world program from Section <a href="/thinkjava/chapter1.html#hello">1.4</a>.</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
+In the latter case, the program cannot be compiled, and the compiler displays an error.</p><p><a name="hevea_default119"></a></p><p>Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you exactly what the error is.
+As an example, let’s get back to the hello world program from Section <a href="/thinkjava/chapter1.html#hello">1.4</a>.</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""></a><!--
 ----{Hello.java}----
 public class Hello {
 
@@ -245,34 +245,34 @@ public class Hello {
         System.out.println("Hello, World!");
     }
 }
---></p><p><a id="hevea_default120"/></p><p>If you forget the semicolon at the end of the print statement, you might get an error message like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">File: Hello.java  [line: 5]
+--></p><p><a name="hevea_default120"></a></p><p>If you forget the semicolon at the end of the print statement, you might get an error message like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">File: Hello.java  [line: 5]
 Error: ';' expected</td></tr>
 </table><p>That’s pretty good: the location of the error is correct, and the error message tells you what’s wrong.</p><p>But error messages are not always easy to understand.
 Sometimes the compiler reports the place in the program where the error was detected, not where it actually occurred.
 And sometimes the description of the problem is more confusing than helpful.</p><p>For example, if you leave out the closing brace at the end of <code>main</code> (line 6), you might get a message like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">File: Hello.java  [line: 7]
 Error: reached end of file while parsing</td></tr>
-</table><p><a id="hevea_default121"/></p><p>There are two problems here.
+</table><p><a name="hevea_default121"></a></p><p>There are two problems here.
 First, the error message is written from the compiler’s point of view, not yours.
 <span style="font-weight:bold">Parsing</span> is the process of reading a program before translating; if the compiler gets to the end of the file while still parsing, that means something was omitted.
 But the compiler doesn’t know what.
 It also doesn’t know where.
 The compiler discovers the error at the end of the program (line 7), but the missing brace should be on the previous line.</p><p>Error messages contain useful information, so you should make an effort to read and understand them.
 But don’t take them too literally.</p><p>During the first few weeks of your programming career, you will probably spend a lot of time tracking down compile-time errors.
-But as you gain experience, you will make fewer mistakes and find them more quickly.</p><p><a id="hevea_default122"/>
-<a id="hevea_default123"/>
-<a id="hevea_default124"/></p><p>The second type of error is a <span style="font-weight:bold">run-time error</span>, so-called because it does not appear until after the program has started running.
+But as you gain experience, you will make fewer mistakes and find them more quickly.</p><p><a name="hevea_default122"></a>
+<a name="hevea_default123"></a>
+<a name="hevea_default124"></a></p><p>The second type of error is a <span style="font-weight:bold">run-time error</span>, so-called because it does not appear until after the program has started running.
 In Java, these errors occur while the interpreter is executing byte code and something goes wrong.
 These errors are also called “exceptions” because they usually indicate that something exceptional (and bad) has happened.</p><p>Run-time errors are rare in the simple programs you will see in the first few chapters, so it might be a while before you encounter one.
 When a run-time error occurs, the interpreter displays an error message that explains what happened and where.</p><p>For example, if you accidentally divide by zero you will get a message like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="font-size:small">Exception in thread "main" java.lang.ArithmeticException: / by zero
     at Hello.main(Hello.java:5)</span></td></tr>
-</table><p><a id="hevea_default125"/>
-<a id="hevea_default126"/></p><p>Some parts of this output are useful for debugging.
+</table><p><a name="hevea_default125"></a>
+<a name="hevea_default126"></a></p><p>Some parts of this output are useful for debugging.
 The first line includes the name of the exception, <code>java.lang.ArithmeticException</code>, and a message that indicates more specifically what happened, <code>/ by zero</code>.
 The next line shows the method where the error occurred; <code>Hello.main</code> indicates the method <code>main</code> in the class <code>Hello</code>.
 It also reports the file where the method is defined, <span style="font-family:monospace">Hello.java</span>, and the line number where the error occurred, <code>5</code>.</p><p>Error messages sometimes contain additional information that won’t make sense yet.
 So one of the challenges is to figure out where to find the useful parts without being overwhelmed by extraneous information.
-Also, keep in mind that the line where the program crashed may not be the line that needs to be corrected.</p><p><a id="hevea_default127"/>
-<a id="hevea_default128"/></p><p>The third type of error is the <span style="font-weight:bold">logic error</span>.
+Also, keep in mind that the line where the program crashed may not be the line that needs to be corrected.</p><p><a name="hevea_default127"></a>
+<a name="hevea_default128"></a></p><p>The third type of error is the <span style="font-weight:bold">logic error</span>.
 If your program has a logic error, it will compile and run without generating error messages, but it will not do the right thing.
 Instead, it will do exactly what you told it to do.
 For example, here is a version of the hello world program with a logic error:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
@@ -290,40 +290,40 @@ World!</td></tr>
 The problem is that the first line uses <code>println</code>, when we probably meant to use <code>print</code> (see the “goodbye world” example of Section <a href="/thinkjava/chapter1.html#goodbye">1.5</a>).</p><p>Identifying logic errors can be hard because you have to work backwards, looking at the output of the program, trying to figure out why it is doing the wrong thing, and how to make it do the right thing.
 Usually the compiler and the interpreter can’t help you, since they don’t know what the right thing is.</p><p>Now that you know about the three kinds of errors, you might want to read Appendix <a href="/thinkjava/appendix-c.html#debugappendix">C</a>, where we’ve collected some of our favorite debugging advice.
 It refers to language features we haven’t talked about yet, so you might want to re-read it from time to time.</p>
-<h2 id="sec29" class="section">2.11  Vocabulary</h2>
-<dl class="description"><dt class="dt-description"><span style="font-weight:bold">variable:</span></dt><dd class="dd-description"><a id="hevea_default129"/>
+<h2 name="sec29" class="section">2.11  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">variable:</span></dt><dd class="dd-description"><a name="hevea_default129"></a>
 A named storage location for values.
-All variables have a type, which is declared when the variable is created.</dd><dt class="dt-description"><span style="font-weight:bold">value:</span></dt><dd class="dd-description"><a id="hevea_default130"/>
+All variables have a type, which is declared when the variable is created.</dd><dt class="dt-description"><span style="font-weight:bold">value:</span></dt><dd class="dd-description"><a name="hevea_default130"></a>
 A number, string, or other data that can be stored in a variable.
-Every value belongs to a type (for example, <code><span style="color:blue">int</span></code> or <code>String</code>).</dd><dt class="dt-description"><span style="font-weight:bold">declaration:</span></dt><dd class="dd-description"><a id="hevea_default131"/>
-A statement that creates a new variable and specifies its type.</dd><dt class="dt-description"><span style="font-weight:bold">type:</span></dt><dd class="dd-description"><a id="hevea_default132"/>
+Every value belongs to a type (for example, <code><span style="color:blue">int</span></code> or <code>String</code>).</dd><dt class="dt-description"><span style="font-weight:bold">declaration:</span></dt><dd class="dd-description"><a name="hevea_default131"></a>
+A statement that creates a new variable and specifies its type.</dd><dt class="dt-description"><span style="font-weight:bold">type:</span></dt><dd class="dd-description"><a name="hevea_default132"></a>
 Mathematically speaking, a set of values.
-The type of a variable determines which values it can have.</dd><dt class="dt-description"><span style="font-weight:bold">syntax:</span></dt><dd class="dd-description"><a id="hevea_default133"/>
-The structure of a program; the arrangement of the words and symbols it contains.</dd><dt class="dt-description"><span style="font-weight:bold">keyword:</span></dt><dd class="dd-description"><a id="hevea_default134"/>
+The type of a variable determines which values it can have.</dd><dt class="dt-description"><span style="font-weight:bold">syntax:</span></dt><dd class="dd-description"><a name="hevea_default133"></a>
+The structure of a program; the arrangement of the words and symbols it contains.</dd><dt class="dt-description"><span style="font-weight:bold">keyword:</span></dt><dd class="dd-description"><a name="hevea_default134"></a>
 A reserved word used by the compiler to analyze programs.
-You cannot use keywords (like <code><span style="color:blue">public</span></code>, <code><span style="color:blue">class</span></code>, and <code><span style="color:blue">void</span></code>) as variable names.</dd><dt class="dt-description"><span style="font-weight:bold">assignment:</span></dt><dd class="dd-description"><a id="hevea_default135"/>
-A statement that gives a value to a variable.</dd><dt class="dt-description"><span style="font-weight:bold">initialize:</span></dt><dd class="dd-description"><a id="hevea_default136"/>
-To assign a variable for the first time.</dd><dt class="dt-description"><span style="font-weight:bold">state:</span></dt><dd class="dd-description"><a id="hevea_default137"/>
-The variables in a program and their current values.</dd><dt class="dt-description"><span style="font-weight:bold">state diagram:</span></dt><dd class="dd-description"><a id="hevea_default138"/>
-A graphical representation of the state of a program at a point in time.</dd><dt class="dt-description"><span style="font-weight:bold">operator:</span></dt><dd class="dd-description"><a id="hevea_default139"/>
-A symbol that represents a computation like addition, multiplication, or string concatenation.</dd><dt class="dt-description"><span style="font-weight:bold">operand:</span></dt><dd class="dd-description"><a id="hevea_default140"/>
+You cannot use keywords (like <code><span style="color:blue">public</span></code>, <code><span style="color:blue">class</span></code>, and <code><span style="color:blue">void</span></code>) as variable names.</dd><dt class="dt-description"><span style="font-weight:bold">assignment:</span></dt><dd class="dd-description"><a name="hevea_default135"></a>
+A statement that gives a value to a variable.</dd><dt class="dt-description"><span style="font-weight:bold">initialize:</span></dt><dd class="dd-description"><a name="hevea_default136"></a>
+To assign a variable for the first time.</dd><dt class="dt-description"><span style="font-weight:bold">state:</span></dt><dd class="dd-description"><a name="hevea_default137"></a>
+The variables in a program and their current values.</dd><dt class="dt-description"><span style="font-weight:bold">state diagram:</span></dt><dd class="dd-description"><a name="hevea_default138"></a>
+A graphical representation of the state of a program at a point in time.</dd><dt class="dt-description"><span style="font-weight:bold">operator:</span></dt><dd class="dd-description"><a name="hevea_default139"></a>
+A symbol that represents a computation like addition, multiplication, or string concatenation.</dd><dt class="dt-description"><span style="font-weight:bold">operand:</span></dt><dd class="dd-description"><a name="hevea_default140"></a>
 One of the values on which an operator operates.
-Most operators in Java require two operands.</dd><dt class="dt-description"><span style="font-weight:bold">expression:</span></dt><dd class="dd-description"><a id="hevea_default141"/>
+Most operators in Java require two operands.</dd><dt class="dt-description"><span style="font-weight:bold">expression:</span></dt><dd class="dd-description"><a name="hevea_default141"></a>
 A combination of variables, operators, and values that represents a single value.
-Expressions also have types, as determined by their operators and operands.</dd><dt class="dt-description"><span style="font-weight:bold">floating-point:</span></dt><dd class="dd-description"><a id="hevea_default142"/>
+Expressions also have types, as determined by their operators and operands.</dd><dt class="dt-description"><span style="font-weight:bold">floating-point:</span></dt><dd class="dd-description"><a name="hevea_default142"></a>
 A data type that represents numbers with an integer part and a fractional part.
-In Java, the default floating-point type is <code><span style="color:blue">double</span></code>.</dd><dt class="dt-description"><span style="font-weight:bold">rounding error:</span></dt><dd class="dd-description"><a id="hevea_default143"/>
-The difference between the number we want to represent and the nearest floating-point number.</dd><dt class="dt-description"><span style="font-weight:bold">concatenate:</span></dt><dd class="dd-description"><a id="hevea_default144"/>
-To join two values, often strings, end-to-end.</dd><dt class="dt-description"><span style="font-weight:bold">order of operations:</span></dt><dd class="dd-description"><a id="hevea_default145"/>
-The rules that determine in what order operations are evaluated.</dd><dt class="dt-description"><span style="font-weight:bold">composition:</span></dt><dd class="dd-description"><a id="hevea_default146"/>
-The ability to combine simple expressions and statements into compound expressions and statements.</dd><dt class="dt-description"><span style="font-weight:bold">compile-time error:</span></dt><dd class="dd-description"><a id="hevea_default147"/>
+In Java, the default floating-point type is <code><span style="color:blue">double</span></code>.</dd><dt class="dt-description"><span style="font-weight:bold">rounding error:</span></dt><dd class="dd-description"><a name="hevea_default143"></a>
+The difference between the number we want to represent and the nearest floating-point number.</dd><dt class="dt-description"><span style="font-weight:bold">concatenate:</span></dt><dd class="dd-description"><a name="hevea_default144"></a>
+To join two values, often strings, end-to-end.</dd><dt class="dt-description"><span style="font-weight:bold">order of operations:</span></dt><dd class="dd-description"><a name="hevea_default145"></a>
+The rules that determine in what order operations are evaluated.</dd><dt class="dt-description"><span style="font-weight:bold">composition:</span></dt><dd class="dd-description"><a name="hevea_default146"></a>
+The ability to combine simple expressions and statements into compound expressions and statements.</dd><dt class="dt-description"><span style="font-weight:bold">compile-time error:</span></dt><dd class="dd-description"><a name="hevea_default147"></a>
 An error in the source code that makes it impossible to compile.
-Also called a “syntax error”.</dd><dt class="dt-description"><span style="font-weight:bold">parse:</span></dt><dd class="dd-description"><a id="hevea_default148"/>
-To analyze the structure of a program; what the compiler does first.</dd><dt class="dt-description"><span style="font-weight:bold">run-time error:</span></dt><dd class="dd-description"><a id="hevea_default149"/>
+Also called a “syntax error”.</dd><dt class="dt-description"><span style="font-weight:bold">parse:</span></dt><dd class="dd-description"><a name="hevea_default148"></a>
+To analyze the structure of a program; what the compiler does first.</dd><dt class="dt-description"><span style="font-weight:bold">run-time error:</span></dt><dd class="dd-description"><a name="hevea_default149"></a>
 An error in a program that makes it impossible to run to completion.
-Also called an “exception”.</dd><dt class="dt-description"><span style="font-weight:bold">logic error:</span></dt><dd class="dd-description"><a id="hevea_default150"/>
+Also called an “exception”.</dd><dt class="dt-description"><span style="font-weight:bold">logic error:</span></dt><dd class="dd-description"><a name="hevea_default150"></a>
 An error in a program that makes it do something other than what the programmer intended.</dd></dl>
-<h2 id="sec30" class="section">2.12  Exercises</h2>
+<h2 name="sec30" class="section">2.12  Exercises</h2>
 <p>The code for this chapter is in the <span style="font-family:monospace">ch02</span> directory of <span style="font-family:monospace">ThinkJavaCode</span>.
 See page <a href="/thinkjava/preface.html#code">??</a> for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.</p><p>If you have not already read Appendix <a href="/thinkjava/appendix-a.html#interactions">A.2</a>, now might be a good time.
@@ -332,7 +332,7 @@ Find a partner and play “Stump the Chump”:</em></p><p><em>Start with a progr
 One player looks away while the other player adds an error to the program.
 Then the first player tries to find and fix the error.
 You get two points if you find the error without compiling the program, one point if you find it using the compiler, and your opponent gets a point if you don’t find it.</em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 2</span>  
-<a id="ex:date"/><p><em>The point of this exercise is (1) to use string concatenation to display values with different types (<span style="color:blue"><code>int</code></span> and <code>String</code>), and (2) to practice developing programs gradually by adding a few statements at a time.</em></p><ol class="enumerate" type="1"><li class="li-enumerate"><em>Create a new program named <span style="font-family:monospace">Date.java</span>.
+<a name="ex:date"></a><p><em>The point of this exercise is (1) to use string concatenation to display values with different types (<span style="color:blue"><code>int</code></span> and <code>String</code>), and (2) to practice developing programs gradually by adding a few statements at a time.</em></p><ol class="enumerate" type="1"><li class="li-enumerate"><em>Create a new program named <span style="font-family:monospace">Date.java</span>.
 Copy or type in something like the hello world program and make sure you can compile and run it.</em></li><li class="li-enumerate"><em>Following the example in Section </em><a href="#sec%3Aprintvar"><em>2.4</em></a><em>, write a program that creates variables named <code>day</code>, <code>date</code>, <code>month</code>, and <code>year</code>.
 The variable <code>day</code> will contain the day of the week (like Friday), and <code>date</code> will contain the day of the month (like the 13th).
 What type is each variable?
@@ -354,40 +354,27 @@ Variables that are used in a computation but never displayed are sometimes calle
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/chapter2.html">Variables and operators</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/chapter2.html#sec19">Declaring variables</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec20">Assignment</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec21">State diagrams</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec22">Printing variables</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec23">Arithmetic operators</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec24">Floating-point numbers</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec25">Rounding errors</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec26">Operators for strings</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec27">Composition</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec28">Types of errors</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec29">Vocabulary</a>
-      </li>
-      <li><a href="/thinkjava/chapter2.html#sec30">Exercises</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/chapter2.html#sec19">Declaring variables</a>
+</li><li><a href="/thinkjava/chapter2.html#sec20">Assignment</a>
+</li><li><a href="/thinkjava/chapter2.html#sec21">State diagrams</a>
+</li><li><a href="/thinkjava/chapter2.html#sec22">Printing variables</a>
+</li><li><a href="/thinkjava/chapter2.html#sec23">Arithmetic operators</a>
+</li><li><a href="/thinkjava/chapter2.html#sec24">Floating-point numbers</a>
+</li><li><a href="/thinkjava/chapter2.html#sec25">Rounding errors</a>
+</li><li><a href="/thinkjava/chapter2.html#sec26">Operators for strings</a>
+</li><li><a href="/thinkjava/chapter2.html#sec27">Composition</a>
+</li><li><a href="/thinkjava/chapter2.html#sec28">Types of errors</a>
+</li><li><a href="/thinkjava/chapter2.html#sec29">Vocabulary</a>
+</li><li><a href="/thinkjava/chapter2.html#sec30">Exercises</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}Variables and operators | Think Java | Trinket{% endblock %}

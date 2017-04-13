@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,27 +7,27 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec44" class="chapter">Chapter 4  Void methods</h1>
+        <div class="columns small-12"><h1 name="sec44" class="chapter">Chapter 4  Void methods</h1>
 <p>
-<a id="voidmeth"/></p><p>So far we’ve only written short programs that have a single class and a single method (<code>main</code>).
+<a name="voidmeth"></a></p><p>So far we’ve only written short programs that have a single class and a single method (<code>main</code>).
 In this chapter, we’ll show you how to organize longer programs into multiple methods and classes.
 We’ll also present the <code>Math</code> class, which provides methods for common mathematical operations.</p>
-<h2 id="sec45" class="section">4.1  Math methods</h2>
-<p><a id="hevea_default195"/>
-<a id="hevea_default196"/></p><p>In mathematics, you have probably seen functions like sin and log, and you have learned to evaluate expressions like sin(π/2) and log(1/<span style="font-style:italic">x</span>).
+<h2 name="sec45" class="section">4.1  Math methods</h2>
+<p><a name="hevea_default195"></a>
+<a name="hevea_default196"></a></p><p>In mathematics, you have probably seen functions like sin and log, and you have learned to evaluate expressions like sin(π/2) and log(1/<span style="font-style:italic">x</span>).
 First, you evaluate the expression in parentheses, which is called the <span style="font-weight:bold">argument</span> of the function.
 Then you can evaluate the function itself, maybe by punching it into a calculator.</p><p>This process can be applied repeatedly to evaluate more complex expressions like log(1/sin(π/2)).
-First we evaluate the argument of the innermost function, then evaluate the function itself, and so on.</p><p><a id="hevea_default197"/>
-<a id="hevea_default198"/>
-<a id="hevea_default199"/></p><p>The Java library includes a <code>Math</code> class that provides common mathematical operations.
+First we evaluate the argument of the innermost function, then evaluate the function itself, and so on.</p><p><a name="hevea_default197"></a>
+<a name="hevea_default198"></a>
+<a name="hevea_default199"></a></p><p>The Java library includes a <code>Math</code> class that provides common mathematical operations.
 <code>Math</code> is in the <code>java.lang</code> package, so you don’t have to import it.
 You can use, or <span style="font-weight:bold">invoke</span>, <code>Math</code> methods like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> root = Math.sqrt(17.0);
 <span style="color:blue">double</span> angle = 1.5;
 <span style="color:blue">double</span> height = Math.sin(angle);</td></tr>
 </table><p>The first line sets <code>root</code> to the square root of 17.
-The third line finds the sine of 1.5 (the value of <code>angle</code>).</p><p><a id="hevea_default200"/>
-<a id="hevea_default201"/>
-<a id="hevea_default202"/></p><p>Arguments of the trigonometric functions – <code>sin</code>, <code>cos</code>, and <code>tan</code> – should be in <em>radians</em>.
+The third line finds the sine of 1.5 (the value of <code>angle</code>).</p><p><a name="hevea_default200"></a>
+<a name="hevea_default201"></a>
+<a name="hevea_default202"></a></p><p>Arguments of the trigonometric functions – <code>sin</code>, <code>cos</code>, and <code>tan</code> – should be in <em>radians</em>.
 To convert from degrees to radians, you can divide by 180 and multiply by π.
 Conveniently, the <code>Math</code> class provides a constant double named <code>PI</code> that contains an approximation of π:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> degrees = 90;
 <span style="color:blue">double</span> angle = degrees / 180.0 * Math.PI;</td></tr>
@@ -36,16 +36,16 @@ Java does not recognize <code>Pi</code>, <code>pi</code>, or <code>pie</code>.
 Also, <code>PI</code> is the name of a variable, not a method, so it doesn’t have parentheses.
 The same is true for the constant <code>Math.E</code>, which approximates Euler’s number.</p><p>Converting to and from radians is a common operation, so the <code>Math</code> class provides methods that do it for you.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> radians = Math.toRadians(180.0);
 <span style="color:blue">double</span> degrees = Math.toDegrees(Math.PI);</td></tr>
-</table><p><a id="hevea_default203"/>
-<a id="hevea_default204"/></p><p>Another useful method is <code>round</code>, which rounds a floating-point value to the nearest integer and returns a <code><span style="color:blue">long</span></code>.
+</table><p><a name="hevea_default203"></a>
+<a name="hevea_default204"></a></p><p>Another useful method is <code>round</code>, which rounds a floating-point value to the nearest integer and returns a <code><span style="color:blue">long</span></code>.
 A <code><span style="color:blue">long</span></code> is like an <code><span style="color:blue">int</span></code>, but bigger.
 More specifically, an <code><span style="color:blue">int</span></code> uses 32 bits; the largest value it can hold is 2<sup>31</sup>−1, which is about 2 billion.
 A <code><span style="color:blue">long</span></code> uses 64 bits, so the largest value is 2<sup>63</sup>−1, which is about 9 quintillion.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">long</span> x = Math.round(Math.PI * 20.0);</td></tr>
 </table><p>The result is 63 (rounded up from 62.8319).</p><p>Take a minute to read the documentation for these and other methods in the <code>Math</code> class.
 The easiest way to find documentation for Java classes is to do a web search for “Java” and the name of the class.</p>
-<h2 id="sec46" class="section">4.2  Composition revisited</h2>
-<p><a id="hevea_default205"/>
-<a id="hevea_default206"/></p><p>Just as with mathematical functions, Java methods can be <em>composed</em>.
+<h2 name="sec46" class="section">4.2  Composition revisited</h2>
+<p><a name="hevea_default205"></a>
+<a name="hevea_default206"></a></p><p>Just as with mathematical functions, Java methods can be <em>composed</em>.
 That means you can use one expression as part of another.
 For example, you can use any expression as an argument to a method:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> x = Math.cos(angle + Math.PI / 2.0);</td></tr>
 </table><p>This statement divides <code>Math.PI</code> by two, adds the result to <code>angle</code>, and computes the cosine of the sum.
@@ -63,9 +63,9 @@ Error: cannot find symbol
 </table><p>The message “cannot find symbol” is confusing, but the last line provides a useful hint.
 The compiler is looking for <code>pow</code> in the same class where it is used, which is <code>Test</code>.
 If you don’t specify a class name, the compiler looks in the current class.</p>
-<h2 id="sec47" class="section">4.3  Adding new methods</h2>
+<h2 name="sec47" class="section">4.3  Adding new methods</h2>
 <p>
-<a id="adding_methods"/></p><p><a id="hevea_default207"/></p><p>You have probably guessed by now that you can define more than one method in a class.
+<a name="adding_methods"></a></p><p><a name="hevea_default207"></a></p><p>You have probably guessed by now that you can define more than one method in a class.
 Here’s an example:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{NewLine.java}----
 public class NewLine {
@@ -80,16 +80,16 @@ public class NewLine {
         System.out.println("Second line.");
     }
 }
---></p><p><a id="hevea_default208"/>
-<a id="hevea_default209"/></p><p>The name of the class is <code>NewLine</code>.
+--></p><p><a name="hevea_default208"></a>
+<a name="hevea_default209"></a></p><p>The name of the class is <code>NewLine</code>.
 By convention, class names begin with a capital letter.
 <code>NewLine</code> contains two methods, <code>newLine</code> and <code>main</code>.
-Remember that Java is case-sensitive, so <code>NewLine</code> and <code>newLine</code> are not the same.</p><p><a id="hevea_default210"/></p><p>Method names should begin with a lowercase letter and use “camel case”, which is a cute name for <code>jammingWordsTogetherLikeThis</code>.
-You can use any name you want for methods, except <code>main</code> or any of the Java keywords.</p><p><a id="hevea_default211"/>
-<a id="hevea_default212"/>
-<a id="hevea_default213"/></p><p><code>newLine</code> and <code>main</code> are <code><span style="color:blue">public</span></code>, which means they can be invoked from other classes.
+Remember that Java is case-sensitive, so <code>NewLine</code> and <code>newLine</code> are not the same.</p><p><a name="hevea_default210"></a></p><p>Method names should begin with a lowercase letter and use “camel case”, which is a cute name for <code>jammingWordsTogetherLikeThis</code>.
+You can use any name you want for methods, except <code>main</code> or any of the Java keywords.</p><p><a name="hevea_default211"></a>
+<a name="hevea_default212"></a>
+<a name="hevea_default213"></a></p><p><code>newLine</code> and <code>main</code> are <code><span style="color:blue">public</span></code>, which means they can be invoked from other classes.
 They are both <code><span style="color:blue">static</span></code>, but we can’t explain what that means yet.
-And they are both <code><span style="color:blue">void</span></code>, which means that they don’t yield a result (unlike the <code>Math</code> methods, for example).</p><p><a id="hevea_default214"/></p><p>The parentheses after the method name contain a list of variables, called <span style="font-weight:bold">parameters</span>, where the method stores its arguments.
+And they are both <code><span style="color:blue">void</span></code>, which means that they don’t yield a result (unlike the <code>Math</code> methods, for example).</p><p><a name="hevea_default214"></a></p><p>The parentheses after the method name contain a list of variables, called <span style="font-weight:bold">parameters</span>, where the method stores its arguments.
 <code>main</code> has a single parameter, called <code>args</code>, which has type <code>String[]</code>.
 That means that whoever invokes <code>main</code> must provide an array of strings (we’ll get to arrays in a later chapter).</p><p>Since <code>newLine</code> has no parameters, it requires no arguments, as shown when it is invoked in <code>main</code>.
 And because <code>newLine</code> is in the same class as <code>main</code>, we don’t have to specify the class name.</p><p>The output of this program is:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">First line.
@@ -120,9 +120,9 @@ There are many reasons, but this example demonstrates a few of them:</p><ul clas
 </li><li class="li-itemize">Introducing new methods can make a program smaller by eliminating repetitive code.
 For example, to display nine consecutive new lines, you could invoke <code>threeLine</code> three times.</li><li class="li-itemize">A common problem solving technique is to break tasks down into sub-problems.
 Methods allow you to focus on each sub-problem in isolation, and then compose them into a complete solution.</li></ul>
-<h2 id="sec48" class="section">4.4  Flow of execution</h2>
-<p><a id="hevea_default215"/>
-<a id="hevea_default216"/></p><p>Pulling together the code from the previous section, the complete program looks like this:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
+<h2 name="sec48" class="section">4.4  Flow of execution</h2>
+<p><a name="hevea_default215"></a>
+<a name="hevea_default216"></a></p><p>Pulling together the code from the previous section, the complete program looks like this:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{NewLine.java}----
 public class NewLine {
 
@@ -142,7 +142,7 @@ public class NewLine {
         System.out.println("Second line.");
     }
 }
---></p><p><a id="hevea_default217"/></p><p>When you look at a class definition that contains several methods, it is tempting to read it from top to bottom.
+--></p><p><a name="hevea_default217"></a></p><p>When you look at a class definition that contains several methods, it is tempting to read it from top to bottom.
 But that is likely to be confusing, because that is not the <span style="font-weight:bold">flow of execution</span> of the program.</p><p>Execution always begins at the first statement of <code>main</code>, regardless of where it is in the source file.
 Statements are executed one at a time, in order, until you reach a method invocation, which you can think of as a detour.
 Instead of going to the next statement, you jump to the first line of the invoked method, execute all the statements there, and then come back and pick up exactly where you left off.</p><p>That sounds simple enough, but remember that one method can invoke another one.
@@ -151,9 +151,9 @@ While we are executing <code>threeLine</code>, we go off to execute <code>newLin
 Then <code>newLine</code> invokes <code>println</code>, which causes yet another detour.</p><p>Fortunately, Java is good at keeping track of which methods are running.
 So when <code>println</code> completes, it picks up where it left off in <code>newLine</code>; when <code>newLine</code> completes, it goes back to <code>threeLine</code>, and when <code>threeLine</code> completes, it gets back to <code>main</code>.</p><p>In summary, when you read a program, don’t read from top to bottom.
 Instead, follow the flow of execution.</p>
-<h2 id="sec49" class="section">4.5  Parameters and arguments</h2>
-<p><a id="hevea_default218"/>
-<a id="hevea_default219"/></p><p>Some of the methods we have used require arguments, which are the values you provide when you invoke the method.
+<h2 name="sec49" class="section">4.5  Parameters and arguments</h2>
+<p><a name="hevea_default218"></a>
+<a name="hevea_default219"></a></p><p>Some of the methods we have used require arguments, which are the values you provide when you invoke the method.
 For example, to find the sine of a number, you have to provide the number, so <code>sin</code> takes a <code><span style="color:blue">double</span></code> as an argument.
 To display a message, you have to provide the message, so <code>println</code> takes a <code>String</code>.</p><p>When you use a method, you provide the arguments.
 When you write a method, you name the parameters.
@@ -173,7 +173,7 @@ public class PrintTwice {
 }
 --></p><p><code>printTwice</code> has a parameter named <code>s</code> with type <code>String</code>.
 When we invoke <code>printTwice</code>, we have to provide an argument with type <code>String</code>.</p><p>Before the method executes, the argument gets assigned to the parameter.
-In this example, the argument <span style="color:#B20000"><code>"Don't make me say this twice!"</code></span> gets assigned to the parameter <code>s</code>.</p><p><a id="hevea_default220"/></p><p>This process is called <span style="font-weight:bold">parameter passing</span> because the value gets passed from outside the method to the inside.
+In this example, the argument <span style="color:#B20000"><code>"Don't make me say this twice!"</code></span> gets assigned to the parameter <code>s</code>.</p><p><a name="hevea_default220"></a></p><p>This process is called <span style="font-weight:bold">parameter passing</span> because the value gets passed from outside the method to the inside.
 An argument can be any kind of expression, so if you have a <code>String</code> variable, you can use it as an argument:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">String argument = <span style="color:#B20000">"Never say never."</span>;
 printTwice(argument);</td></tr>
 </table><p>The value you provide as an argument must have the same type as the parameter.
@@ -191,12 +191,12 @@ But in the case of <code>printTwice</code>, Java can’t (or won’t) convert th
 Inside <code>main</code>, there is no such thing as <code>s</code>.
 If you try to use it there, you’ll get a compiler error.
 Similarly, inside <code>printTwice</code> there is no such thing as <code>argument</code>.
-That variable belongs to <code>main</code>.</p><p><a id="hevea_default221"/>
-<a id="hevea_default222"/></p><p>Because variables only exist inside the methods where they are defined, they are often called <span style="font-weight:bold">local variables</span>.</p>
-<h2 id="sec50" class="section">4.6  Multiple parameters</h2>
+That variable belongs to <code>main</code>.</p><p><a name="hevea_default221"></a>
+<a name="hevea_default222"></a></p><p>Because variables only exist inside the methods where they are defined, they are often called <span style="font-weight:bold">local variables</span>.</p>
+<h2 name="sec50" class="section">4.6  Multiple parameters</h2>
 <p>
-<a id="time"/></p><p><a id="hevea_default223"/>
-<a id="hevea_default224"/></p><p>Here is an example of a method that takes two parameters:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> printTime(<span style="color:blue">int</span> hour, <span style="color:blue">int</span> minute) {
+<a name="time"></a></p><p><a name="hevea_default223"></a>
+<a name="hevea_default224"></a></p><p>Here is an example of a method that takes two parameters:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> printTime(<span style="color:blue">int</span> hour, <span style="color:blue">int</span> minute) {
     System.out.print(hour);
     System.out.print(<span style="color:#B20000">":"</span>);
     System.out.println(minute);
@@ -213,9 +213,9 @@ printTime(<span style="color:blue">int</span> hour, <span style="color:blue">int
 </table><p>That’s a syntax error; the compiler sees <code><span style="color:blue">int</span> hour</code> and <code><span style="color:blue">int</span> minute</code> as variable declarations, not expressions.
 You wouldn’t declare the types of the arguments if they were simply integers:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">printTime(<span style="color:blue">int</span> 11, <span style="color:blue">int</span> 59);  <span style="color:#007C00">// syntax error</span></td></tr>
 </table>
-<h2 id="sec51" class="section">4.7  Stack diagrams</h2>
+<h2 name="sec51" class="section">4.7  Stack diagrams</h2>
 <p>
-<a id="stack"/></p><p>Pulling together the code fragments from the previous section, here is a complete class definition:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
+<a name="stack"></a></p><p>Pulling together the code fragments from the previous section, here is a complete class definition:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{PrintTime.java}----
 public class PrintTime {
 
@@ -240,31 +240,31 @@ printTime(hour + 1, 0);</td></tr>
 </table><p>Before the method is invoked, Java evaluates the arguments; in this example, the results are <code>12</code> and <code>0</code>.
 Then it assigns those values to the parameters.
 Inside <code>printTime</code>, the value of <code>hour</code> is <code>12</code>, not <code>11</code>, and the value of <code>minute</code> is <code>0</code>, not <code>59</code>.
-Furthermore, if <code>printTime</code> modifies one of its parameters, that change has no effect on the variables in <code>main</code>.</p><p><a id="hevea_default225"/>
-<a id="hevea_default226"/>
-<a id="hevea_default227"/></p><p>One way to keep track of everything is to draw a <span style="font-weight:bold">stack diagram</span>, which is a state diagram (see Section <a href="/thinkjava/chapter2.html#state">2.3</a>) that shows method invocations.
+Furthermore, if <code>printTime</code> modifies one of its parameters, that change has no effect on the variables in <code>main</code>.</p><p><a name="hevea_default225"></a>
+<a name="hevea_default226"></a>
+<a name="hevea_default227"></a></p><p>One way to keep track of everything is to draw a <span style="font-weight:bold">stack diagram</span>, which is a state diagram (see Section <a href="/thinkjava/chapter2.html#state">2.3</a>) that shows method invocations.
 For each method there is a box called a <span style="font-weight:bold">frame</span> that contains the method’s parameters and variables.
 The name of the method appears outside the frame; the variables and parameters appear inside.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
 <div class="center">
 <img src="thinkjava6008.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 4.1: Stack diagram for <code>PrintTime</code>.</td></tr>
 </table></div>
-<a id="fig.stack"/>
+<a name="fig.stack"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>As with state diagrams, stack diagrams show variables and methods at a particular point in time.
 Figure <a href="#fig.stack">4.1</a> is a stack diagram at the beginning of the <code>printTime</code> method.</p>
-<h2 id="sec52" class="section">4.8  Reading documentation</h2>
+<h2 name="sec52" class="section">4.8  Reading documentation</h2>
 <p>
-<a id="sec:apidocs"/></p><p><a id="hevea_default228"/></p><p>One of the nice things about Java is that it comes with an extensive library of classes and methods.
+<a name="sec:apidocs"></a></p><p><a name="hevea_default228"></a></p><p>One of the nice things about Java is that it comes with an extensive library of classes and methods.
 But before you use them, you might have to read the documentation.
 And sometimes that’s not easy.</p><p>As an example, let’s look at the documentation for <code>Scanner</code>, which we used in Section <a href="/thinkjava/chapter3.html#scanner">3.2</a>.
 You can find it by doing a web search for “Java Scanner”.
-Figure <a href="#fig.scanner">4.2</a> shows a screenshot of the page.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+Figure <a href="#fig.scanner">4.2</a> shows a screenshot of the page.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6009.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 4.2: Screenshot of the documentation for <code>Scanner</code>.</td></tr>
 </table></div>
-<a id="fig.scanner"/>
+<a name="fig.scanner"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>Documentation for other classes uses a similar format.
 The first line is the package that contains the class, such as <code>java.util</code>.
@@ -280,7 +280,7 @@ The list of methods that <code>Scanner</code> provides.</dd><dt class="dt-descri
 More information about how to create a <code>Scanner</code>.</dd><dt class="dt-description"><span style="font-weight:bold">Method detail:</span></dt><dd class="dd-description">
 More information about each method.</dd></dl><p>As an example, here is the summary information for <code>nextInt</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">public int nextInt()
 Scans the next token of the input as an int.</td></tr>
-</table><p><a id="hevea_default229"/></p><p>The first line is the method’s <span style="font-weight:bold">signature</span>, which specifies the name of the method, its parameters (none), and what type it returns (<code><span style="color:blue">int</span></code>).
+</table><p><a name="hevea_default229"></a></p><p>The first line is the method’s <span style="font-weight:bold">signature</span>, which specifies the name of the method, its parameters (none), and what type it returns (<code><span style="color:blue">int</span></code>).
 The next line is a short description of what it does.</p><p>The “Method detail” explains more:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">public int nextInt()
 Scans the next token of the input as an int.
 
@@ -302,15 +302,15 @@ Exceptions are said to be “thrown”, like a referee throwing a flag, or like 
 But it’s worth the effort.
 Knowing what’s available in the library helps you avoid reinventing the wheel.
 And a little bit of documentation can save you a lot of debugging.</p>
-<h2 id="sec53" class="section">4.9  Writing documentation</h2>
+<h2 name="sec53" class="section">4.9  Writing documentation</h2>
 <p>
-<a id="sec:javadoc"/></p><p>As you benefit from reading good documentation, you should “pay it forward” by writing good documentation.
+<a name="sec:javadoc"></a></p><p>As you benefit from reading good documentation, you should “pay it forward” by writing good documentation.
 A nice feature of the Java language is the ability to embed documentation in your source code.
-That way, you can write it as you go, and as things change, it is easier to keep the documentation consistent with the code.</p><p><a id="hevea_default230"/>
-<a id="hevea_default231"/></p><p>If you include documentation in your source code, you can extract it automatically, and generate well-formatted HTML, using a tool called <span style="font-weight:bold">Javadoc</span>.
+That way, you can write it as you go, and as things change, it is easier to keep the documentation consistent with the code.</p><p><a name="hevea_default230"></a>
+<a name="hevea_default231"></a></p><p>If you include documentation in your source code, you can extract it automatically, and generate well-formatted HTML, using a tool called <span style="font-weight:bold">Javadoc</span>.
 This tool is included in standard Java development environments, and it is widely used.
-In fact, the online documentation of the Java libraries is generated by Javadoc.</p><p><a id="hevea_default232"/>
-<a id="hevea_default233"/></p><p>Javadoc scans your source files looking for specially-formatted <span style="font-weight:bold">documentation comments</span>, also known as “Javadoc comments”.
+In fact, the online documentation of the Java libraries is generated by Javadoc.</p><p><a name="hevea_default232"></a>
+<a name="hevea_default233"></a></p><p>Javadoc scans your source files looking for specially-formatted <span style="font-weight:bold">documentation comments</span>, also known as “Javadoc comments”.
 They begin with <span style="color:#007C00"><code>/**</code></span> (two stars) and end with <code>*/</code> (one star).
 Anything in between is considered part of the documentation.</p><p>Here’s a class definition with two Javadoc comments, one for the class and one for the <code>main</code> method:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{Goodbye.java}----
@@ -334,26 +334,26 @@ They are intended for other programmers reading and maintaining the source code.
 They explain what each method does, but they omit details about how the method works.
 And they are intended for people who will use the methods without looking at the source code.</p><p>Appropriate comments and documentation are essential for making source code readable.
 And remember that the person most likely to read your code in the future, and appreciate good documentation, is you.</p>
-<h2 id="sec54" class="section">4.10  Vocabulary</h2>
-<dl class="description"><dt class="dt-description"><span style="font-weight:bold">argument:</span></dt><dd class="dd-description"><a id="hevea_default234"/>
+<h2 name="sec54" class="section">4.10  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">argument:</span></dt><dd class="dd-description"><a name="hevea_default234"></a>
 A value that you provide when you invoke a method.
-This value must have the same type as the corresponding parameter.</dd><dt class="dt-description"><span style="font-weight:bold">invoke:</span></dt><dd class="dd-description"><a id="hevea_default235"/>
+This value must have the same type as the corresponding parameter.</dd><dt class="dt-description"><span style="font-weight:bold">invoke:</span></dt><dd class="dd-description"><a name="hevea_default235"></a>
 To cause a method to execute.
-Also known as “calling” a method.</dd><dt class="dt-description"><span style="font-weight:bold">parameter:</span></dt><dd class="dd-description"><a id="hevea_default236"/>
+Also known as “calling” a method.</dd><dt class="dt-description"><span style="font-weight:bold">parameter:</span></dt><dd class="dd-description"><a name="hevea_default236"></a>
 A piece of information that a method requires before it can run.
-Parameters are variables: they contain values and have types.</dd><dt class="dt-description"><span style="font-weight:bold">flow of execution:</span></dt><dd class="dd-description"><a id="hevea_default237"/>
+Parameters are variables: they contain values and have types.</dd><dt class="dt-description"><span style="font-weight:bold">flow of execution:</span></dt><dd class="dd-description"><a name="hevea_default237"></a>
 The order in which Java executes methods and statements.
-It may not necessarily be from top to bottom, left to right.</dd><dt class="dt-description"><span style="font-weight:bold">parameter passing:</span></dt><dd class="dd-description"><a id="hevea_default238"/>
-The process of assigning an argument value to a parameter variable.</dd><dt class="dt-description"><span style="font-weight:bold">local variable:</span></dt><dd class="dd-description"><a id="hevea_default239"/>
+It may not necessarily be from top to bottom, left to right.</dd><dt class="dt-description"><span style="font-weight:bold">parameter passing:</span></dt><dd class="dd-description"><a name="hevea_default238"></a>
+The process of assigning an argument value to a parameter variable.</dd><dt class="dt-description"><span style="font-weight:bold">local variable:</span></dt><dd class="dd-description"><a name="hevea_default239"></a>
 A variable declared inside a method.
-Local variables cannot be accessed from outside their method.</dd><dt class="dt-description"><span style="font-weight:bold">stack diagram:</span></dt><dd class="dd-description"><a id="hevea_default240"/>
+Local variables cannot be accessed from outside their method.</dd><dt class="dt-description"><span style="font-weight:bold">stack diagram:</span></dt><dd class="dd-description"><a name="hevea_default240"></a>
 A graphical representation of the variables belonging to each method.
-The method calls are “stacked” from top to bottom, in the flow of execution.</dd><dt class="dt-description"><span style="font-weight:bold">frame:</span></dt><dd class="dd-description"><a id="hevea_default241"/>
-In a stack diagram, a representation of the variables and parameters for a method, along with their current values.</dd><dt class="dt-description"><span style="font-weight:bold">signature:</span></dt><dd class="dd-description"><a id="hevea_default242"/>
-The first line of a method that defines its name, return type, and parameters.</dd><dt class="dt-description"><span style="font-weight:bold">Javadoc:</span></dt><dd class="dd-description"><a id="hevea_default243"/>
-A tool that reads Java source code and generates documentation in HTML format.</dd><dt class="dt-description"><span style="font-weight:bold">documentation:</span></dt><dd class="dd-description"><a id="hevea_default244"/>
+The method calls are “stacked” from top to bottom, in the flow of execution.</dd><dt class="dt-description"><span style="font-weight:bold">frame:</span></dt><dd class="dd-description"><a name="hevea_default241"></a>
+In a stack diagram, a representation of the variables and parameters for a method, along with their current values.</dd><dt class="dt-description"><span style="font-weight:bold">signature:</span></dt><dd class="dd-description"><a name="hevea_default242"></a>
+The first line of a method that defines its name, return type, and parameters.</dd><dt class="dt-description"><span style="font-weight:bold">Javadoc:</span></dt><dd class="dd-description"><a name="hevea_default243"></a>
+A tool that reads Java source code and generates documentation in HTML format.</dd><dt class="dt-description"><span style="font-weight:bold">documentation:</span></dt><dd class="dd-description"><a name="hevea_default244"></a>
 Comments that describe the technical operation of a class or method.</dd></dl>
-<h2 id="sec55" class="section">4.11  Exercises</h2>
+<h2 name="sec55" class="section">4.11  Exercises</h2>
 <p>The code for this chapter is in the <span style="font-family:monospace">ch04</span> directory of <span style="font-family:monospace">ThinkJavaCode</span>.
 See page <a href="/thinkjava/preface.html#code">??</a> for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.</p><p>If you have not already read Appendix <a href="/thinkjava/appendix-a.html#cltesting">A.4</a>, now might be a good time.
@@ -389,38 +389,26 @@ The output should look something like this (except that the date might be differ
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/chapter4.html">Void methods</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/chapter4.html#sec45">Math methods</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec46">Composition revisited</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec47">Adding new methods</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec48">Flow of execution</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec49">Parameters and arguments</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec50">Multiple parameters</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec51">Stack diagrams</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec52">Reading documentation</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec53">Writing documentation</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec54">Vocabulary</a>
-      </li>
-      <li><a href="/thinkjava/chapter4.html#sec55">Exercises</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/chapter4.html#sec45">Math methods</a>
+</li><li><a href="/thinkjava/chapter4.html#sec46">Composition revisited</a>
+</li><li><a href="/thinkjava/chapter4.html#sec47">Adding new methods</a>
+</li><li><a href="/thinkjava/chapter4.html#sec48">Flow of execution</a>
+</li><li><a href="/thinkjava/chapter4.html#sec49">Parameters and arguments</a>
+</li><li><a href="/thinkjava/chapter4.html#sec50">Multiple parameters</a>
+</li><li><a href="/thinkjava/chapter4.html#sec51">Stack diagrams</a>
+</li><li><a href="/thinkjava/chapter4.html#sec52">Reading documentation</a>
+</li><li><a href="/thinkjava/chapter4.html#sec53">Writing documentation</a>
+</li><li><a href="/thinkjava/chapter4.html#sec54">Vocabulary</a>
+</li><li><a href="/thinkjava/chapter4.html#sec55">Exercises</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}Void methods | Think Java | Trinket{% endblock %}

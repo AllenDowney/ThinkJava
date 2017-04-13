@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,9 +7,9 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec164" class="chapter">Chapter 14  Objects of objects</h1>
+        <div class="columns small-12"><h1 name="sec164" class="chapter">Chapter 14  Objects of objects</h1>
 <p>
-<a id="eights"/></p><p><a id="hevea_default730"/></p><p>Now that we have classes that represent cards and decks, let’s use them to make a game!
+<a name="eights"></a></p><p><a name="hevea_default730"></a></p><p>Now that we have classes that represent cards and decks, let’s use them to make a game!
 <span style="font-style:italic">Crazy Eights</span> is a classic card game for two or more players.
 The main objective is to be the first player to get rid of all your cards.
 Here’s how to play:</p><ul class="itemize"><li class="li-itemize">Deal five or more cards to each player, and then deal one card face up to create the “discard pile”.
@@ -17,19 +17,19 @@ Place the remaining cards face down to create the “draw pile”.</li><li class
 The card must match the rank or suit of the previously played card, or be an eight, which is a “wild card”.</li><li class="li-itemize">When players don’t have a matching card or an eight, they must draw new cards until they get one.</li><li class="li-itemize">If the draw pile ever runs out, the discard pile is shuffled (except the top card) and becomes the new draw pile.</li><li class="li-itemize">As soon as a player has no cards, the game ends and all other players score penalty points for their remaining cards.
 Eights are worth 20, face cards are worth 10, and all others are worth their rank.</li></ul><p>You can read <a href="https://en.wikipedia.org/wiki/Crazy_Eights"><span style="font-family:monospace">https://en.wikipedia.org/wiki/Crazy_Eights</span></a> for more details, but we have enough to get started.</p><p>The code for this chapter is in the directory <span style="font-family:monospace">ch14</span> in the repository for this book.
 Instructions for downloading this code are on page <a href="/thinkjava/preface.html#code">??</a>.</p>
-<h2 id="sec165" class="section">14.1  Decks and hands</h2>
+<h2 name="sec165" class="section">14.1  Decks and hands</h2>
 <p>To implement this game, we need to represent a deck of cards, a discard pile, a draw pile, and a hand for each player.
 And we need to be able to deal, draw, and discard cards.</p><p>The <code>Deck</code> class from the previous chapter meets some of these requirements, but there are two problems:</p><ul class="itemize"><li class="li-itemize">Hands and piles have different sizes, and their sizes change as the game progresses.
 Our implementation of <code>Deck</code> uses a <code>Card</code> array, and the size of an array can’t change.</li><li class="li-itemize">It’s not clear that a <code>Deck</code> object is the right way to represent hands and piles.
-We might want new classes for other collections of cards.</li></ul><p><a id="hevea_default731"/>
-<a id="hevea_default732"/></p><p>We can solve the first problem by replacing the <code>Card</code> array with an <code>ArrayList</code>, which is in the <code>java.util</code> package.
+We might want new classes for other collections of cards.</li></ul><p><a name="hevea_default731"></a>
+<a name="hevea_default732"></a></p><p>We can solve the first problem by replacing the <code>Card</code> array with an <code>ArrayList</code>, which is in the <code>java.util</code> package.
 An <code>ArrayList</code> is a <span style="font-weight:bold">collection</span>, which is an object that contains other objects.</p><p>The Java library provides a variety of collections.
-For our purposes, <code>ArrayList</code> is a good choice because it provides methods to add and remove elements, and it grows and shrinks automatically.</p><p><a id="hevea_default733"/></p><p>To solve the second problem, we can use a language feature called <span style="font-weight:bold">inheritance</span>.
+For our purposes, <code>ArrayList</code> is a good choice because it provides methods to add and remove elements, and it grows and shrinks automatically.</p><p><a name="hevea_default733"></a></p><p>To solve the second problem, we can use a language feature called <span style="font-weight:bold">inheritance</span>.
 We’ll define a new class, <code>CardCollection</code>, to represent a collection of cards.
-Then we’ll define <code>Deck</code> and <code>Hand</code> as subclasses of <code>CardCollection</code>.</p><p><a id="hevea_default734"/>
-<a id="hevea_default735"/></p><p>A <span style="font-weight:bold">subclass</span> is a new class that “extends” an existing class; that is, it has the attributes and methods of the existing class, plus more.
+Then we’ll define <code>Deck</code> and <code>Hand</code> as subclasses of <code>CardCollection</code>.</p><p><a name="hevea_default734"></a>
+<a name="hevea_default735"></a></p><p>A <span style="font-weight:bold">subclass</span> is a new class that “extends” an existing class; that is, it has the attributes and methods of the existing class, plus more.
 We’ll see the details soon, but let’s start with <code>CardCollection</code>:</p>
-<h2 id="sec166" class="section">14.2  CardCollection</h2>
+<h2 name="sec166" class="section">14.2  CardCollection</h2>
 <p>Here’s the beginning of a <code>CardCollection</code> class that uses <code>ArrayList</code> instead of a primitive array:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public class</span> CardCollection {
 
     <span style="color:blue">private</span> String label;
@@ -40,13 +40,13 @@ We’ll see the details soon, but let’s start with <code>CardCollection</code>
         <span style="color:blue">this</span>.cards = <span style="color:blue">new</span> ArrayList&lt;Card&gt;();
     }
 }</td></tr>
-</table><p><a id="hevea_default736"/></p><p>When you declare an <code>ArrayList</code>, you specify the type it contains in angle brackets (<code>&lt;&gt;</code>).
+</table><p><a name="hevea_default736"></a></p><p>When you declare an <code>ArrayList</code>, you specify the type it contains in angle brackets (<code>&lt;&gt;</code>).
 This declaration says that <code>cards</code> is not just an <code>ArrayList</code>, it’s an <code>ArrayList</code> of <code>Card</code> objects.</p><p>The constructor takes a string as an argument and assigns it to an instance variable, <code>label</code>.
 It also initializes <code>cards</code> with an empty <code>ArrayList</code>.</p><p><code>ArrayList</code> provides a method, <code>add</code>, that adds an element to the collection.
 We will write a <code>CardCollection</code> method that does the same thing:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public void</span> addCard(Card card) {
     <span style="color:blue">this</span>.cards.add(card);
 }</td></tr>
-</table><p><a id="hevea_default737"/></p><p>Until now, we have used <code><span style="color:blue">this</span></code> explicitly to make it easy to identify attributes.
+</table><p><a name="hevea_default737"></a></p><p>Until now, we have used <code><span style="color:blue">this</span></code> explicitly to make it easy to identify attributes.
 Inside <code>addCard</code> and other instance methods, you can access instance variables without using the keyword <code><span style="color:blue">this</span></code>.
 So from here on, we will drop it:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public void</span> addCard(Card card) {
     cards.add(card);
@@ -55,7 +55,7 @@ So from here on, we will drop it:</p><table class="lstframe" style="padding:1ex;
 The following method takes an index, removes the card at that location, and shifts the following cards left to fill the gap:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public</span> Card popCard(<span style="color:blue">int</span> i) {
     <span style="color:blue">return</span> cards.remove(i);
 }</td></tr>
-</table><p><a id="hevea_default738"/></p><p>If we are dealing cards from a shuffled deck, we don’t care which card gets removed.
+</table><p><a name="hevea_default738"></a></p><p>If we are dealing cards from a shuffled deck, we don’t care which card gets removed.
 It is most efficient to choose the last one, so we don’t have to shift any following cards.
 Here is an overloaded version of <code>popCard</code> that removes and returns the last card:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public</span> Card popCard() {
     <span style="color:blue">int</span> i = size() - 1;
@@ -67,7 +67,7 @@ Here is an overloaded version of <code>popCard</code> that removes and returns t
 </table><p>For convenience, <code>CardCollection</code> also provides an <code>empty</code> method that returns <code><span style="color:blue">true</span></code> when <code>size</code> is zero:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public boolean</span> empty() {
     <span style="color:blue">return</span> cards.size() == 0;
 }</td></tr>
-</table><p><a id="hevea_default739"/></p><p>Methods like <code>addCard</code>, <code>popCard</code>, and <code>size</code>, which invoke another method without doing much additional work, are called <span style="font-weight:bold">wrapper methods</span>.
+</table><p><a name="hevea_default739"></a></p><p>Methods like <code>addCard</code>, <code>popCard</code>, and <code>size</code>, which invoke another method without doing much additional work, are called <span style="font-weight:bold">wrapper methods</span>.
 We will use these wrapper methods to implement less trivial methods, like <code>deal</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public void</span> deal(CardCollection that, <span style="color:blue">int</span> n) {
     <span style="color:blue">for</span> (<span style="color:blue">int</span> i = 0; i &lt; n; i++) {
         Card card = popCard();
@@ -84,8 +84,8 @@ Here is a wrapper for <code>get</code>:</p><table class="lstframe" style="paddin
     <span style="color:blue">int</span> i = size() - 1;
     <span style="color:blue">return</span> cards.get(i);
 }</td></tr>
-</table><p><a id="hevea_default740"/>
-<a id="hevea_default741"/></p><p>In order to control the ways card collections are modified, we don’t provide a wrapper for <code>set</code>.
+</table><p><a name="hevea_default740"></a>
+<a name="hevea_default741"></a></p><p>In order to control the ways card collections are modified, we don’t provide a wrapper for <code>set</code>.
 The only modifiers we provide are the two versions of <code>popCard</code> and the following version of <code>swapCards</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public void</span> swapCards(<span style="color:blue">int</span> i, <span style="color:blue">int</span> j) {
     Card temp = cards.get(i);
     cards.set(i, cards.get(j));
@@ -100,7 +100,7 @@ The only modifiers we provide are the two versions of <code>popCard</code> and t
 }</td></tr>
 </table><p><code>ArrayList</code> provides additional methods we aren’t using here.
 You can read about them in the documentation, which you can find by doing a web search for “Java ArrayList”.</p>
-<h2 id="sec167" class="section">14.3  Inheritance</h2>
+<h2 name="sec167" class="section">14.3  Inheritance</h2>
 <p>At this point we have a class that represents a collection of cards.
 Next we’ll use it to define <code>Deck</code> and <code>Hand</code>.
 Here is the complete definition of <code>Deck</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public class</span> Deck <span style="color:blue">extends</span> CardCollection {
@@ -115,17 +115,17 @@ Here is the complete definition of <code>Deck</code>:</p><table class="lstframe"
         }
     }
 }</td></tr>
-</table><p><a id="hevea_default742"/>
-<a id="hevea_default743"/></p><p>The first line uses the keyword <code><span style="color:blue">extends</span></code> to indicate that <code>Deck</code> extends the class <code>CardCollection</code>.
+</table><p><a name="hevea_default742"></a>
+<a name="hevea_default743"></a></p><p>The first line uses the keyword <code><span style="color:blue">extends</span></code> to indicate that <code>Deck</code> extends the class <code>CardCollection</code>.
 That means a <code>Deck</code> object has the same instance variables and methods as a <code>CardCollection</code>.
 Another way to say the same thing is that <code>Deck</code> “inherits from” <code>CardCollection</code>.
-We could also say that <code>CardCollection</code> is a <span style="font-weight:bold">superclass</span>, and <code>Deck</code> is one of its subclasses.</p><p><a id="hevea_default744"/></p><p>In Java, classes may only extend one superclass.
+We could also say that <code>CardCollection</code> is a <span style="font-weight:bold">superclass</span>, and <code>Deck</code> is one of its subclasses.</p><p><a name="hevea_default744"></a></p><p>In Java, classes may only extend one superclass.
 Classes that do not specify a superclass with <code><span style="color:blue">extends</span></code> automatically inherit from <code>java.lang.Object</code>.
 So in this example, <code>Deck</code> extends <code>CardCollection</code>, which in turn extends <code>Object</code>.
 The <code>Object</code> class provides the default <code>equals</code> and <code>toString</code> methods, among other things.</p><p>Constructors are not inherited, but all other <code><span style="color:blue">public</span></code> attributes and methods are.
 The only additional method in <code>Deck</code>, at least for now, is a constructor.
 So you can create a <code>Deck</code> object like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Deck deck = <span style="color:blue">new</span> Deck(<span style="color:#B20000">"Deck"</span>);</td></tr>
-</table><p><a id="hevea_default745"/></p><p>The first line of the constructor uses something new, <code><span style="color:blue">super</span></code>, which is a keyword that refers to the superclass of the current class.
+</table><p><a name="hevea_default745"></a></p><p>The first line of the constructor uses something new, <code><span style="color:blue">super</span></code>, which is a keyword that refers to the superclass of the current class.
 When <code><span style="color:blue">super</span></code> is used like a method, as in this example, it invokes the constructor of the superclass.</p><p>So in this case, <code><span style="color:blue">super</span></code> invokes the <code>CardCollection</code> constructor, which initializes the attributes <code>label</code> and <code>cards</code>.
 When it returns, the <code>Deck</code> constructor resumes and populates the (empty) <code>ArrayList</code> with <code>Card</code> objects.</p><p>That’s it for the <code>Deck</code> class.
 Next we need a way to represent a hand, which is the collection of cards held by a player, and a pile, which is a collection of cards on the table.
@@ -149,7 +149,7 @@ Here’s what the definition looks like:</p><table class="lstframe" style="paddi
 <code>Hand</code> also provides a constructor, which invokes the constructor of <code>CardCollection</code> (and nothing else).
 </p><p>In summary, a <code>Deck</code> is just like a <code>CardCollection</code>, but it provides a different constructor.
 And a <code>Hand</code> is just like a <code>CardCollection</code>, but it provides an additional method, <code>display</code>.</p>
-<h2 id="sec168" class="section">14.4  Dealing cards</h2>
+<h2 name="sec168" class="section">14.4  Dealing cards</h2>
 <p>At this point we can create a <code>Deck</code> and start dealing cards.
 Here’s a simple example that deals five cards to a hand, and deals the rest into a draw pile:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Deck deck = <span style="color:blue">new</span> Deck(<span style="color:#B20000">"Deck"</span>);
 deck.shuffle();
@@ -187,7 +187,7 @@ It’s because <code>Hand</code> is a subclass of <code>CardCollection</code>, s
 If a method expects a <code>CardCollection</code>, you can give it a <code>Hand</code>, a <code>Deck</code>, or a <code>CardCollection</code>.</p><p>But it doesn’t work the other way around: not every <code>CardCollection</code> is a <code>Hand</code>, so if a method expects a <code>Hand</code>, you have to give it a <code>Hand</code>, not a <code>CardCollection</code>.</p><p>If it seems strange that an object can belong to more than one type, remember that this happens in real life, too.
 Every cat is also a mammal, and every mammal is also an animal.
 But not every animal is a mammal, and not every mammal is a cat.</p>
-<h2 id="sec169" class="section">14.5  The Player class</h2>
+<h2 name="sec169" class="section">14.5  The Player class</h2>
 <p>The classes we have defined so far could be used for any card game; we have not yet implemented any of the rules specific to <span style="font-style:italic">Crazy Eights</span>.
 And that’s probably a good thing, since it makes it easy to reuse these classes if we want to make another game in the future.</p><p>But now it’s time to implement the rules.
 We’ll use two classes: <code>Player</code>, which encapsulates player strategy, and <code>Eights</code>, which creates and maintains the state of the game.
@@ -211,7 +211,7 @@ In this example, we have to use <code><span style="color:blue">this</span></code
 }</td></tr>
 </table><p>The first parameter is a reference to the <code>Eights</code> object that encapsulates the state of the game.
 We’ll need it if we have to draw a new card.
-The second parameter, <code>prev</code>, is the card on top of the discard pile.</p><p><a id="hevea_default746"/></p><p>Using top-down development, we’ll have <code>play</code> invoke two helper methods, <code>searchForMatch</code> and <code>drawForMatch</code>.
+The second parameter, <code>prev</code>, is the card on top of the discard pile.</p><p><a name="hevea_default746"></a></p><p>Using top-down development, we’ll have <code>play</code> invoke two helper methods, <code>searchForMatch</code> and <code>drawForMatch</code>.
 <code>searchForMatch</code> looks in the player’s hand for a card that matches the previously played card:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public</span> Card searchForMatch(Card prev) {
     <span style="color:blue">for</span> (<span style="color:blue">int</span> i = 0; i &lt; hand.size(); i++) {
         Card card = hand.getCard(i);
@@ -265,9 +265,9 @@ Otherwise it adds the card to the player’s hand and continues.</p><p>Both <cod
     <span style="color:blue">return</span> sum;
 }</td></tr>
 </table>
-<h2 id="sec170" class="section">14.6  The Eights class</h2>
-<p><a id="hevea_default747"/></p><p>In Section <a href="/thinkjava/chapter13.html#shuffle">13.2</a> we introduced top-down development, which is a way of developing programs by identifying high-level goals, like shuffling a deck, and breaking them into smaller problems, like finding the lowest element in an array or swapping two elements.</p><p><a id="hevea_default748"/>
-<a id="hevea_default749"/></p><p>In this section we present <span style="font-weight:bold">bottom-up development</span>, which goes the other way around: first we identify simple pieces we need, then we assemble them into more complex algorithms.</p><p>Looking at the rules of <span style="font-style:italic">Crazy Eights</span>, we can identify some methods we’ll need:</p><ul class="itemize"><li class="li-itemize">Create the deck, the discard and draw piles, and the player objects.</li><li class="li-itemize">Deal the cards.</li><li class="li-itemize">Check whether the game is over.</li><li class="li-itemize">If the draw pile is empty, shuffle the discard pile and move the cards into the draw pile.</li><li class="li-itemize">Draw a card.</li><li class="li-itemize">Keep track of whose turn it is and switch from one player to the next.</li><li class="li-itemize">Display the state of the game.</li><li class="li-itemize">Wait for the user before running the next turn.</li></ul><p>Now we can start implementing the pieces.
+<h2 name="sec170" class="section">14.6  The Eights class</h2>
+<p><a name="hevea_default747"></a></p><p>In Section <a href="/thinkjava/chapter13.html#shuffle">13.2</a> we introduced top-down development, which is a way of developing programs by identifying high-level goals, like shuffling a deck, and breaking them into smaller problems, like finding the lowest element in an array or swapping two elements.</p><p><a name="hevea_default748"></a>
+<a name="hevea_default749"></a></p><p>In this section we present <span style="font-weight:bold">bottom-up development</span>, which goes the other way around: first we identify simple pieces we need, then we assemble them into more complex algorithms.</p><p>Looking at the rules of <span style="font-style:italic">Crazy Eights</span>, we can identify some methods we’ll need:</p><ul class="itemize"><li class="li-itemize">Create the deck, the discard and draw piles, and the player objects.</li><li class="li-itemize">Deal the cards.</li><li class="li-itemize">Check whether the game is over.</li><li class="li-itemize">If the draw pile is empty, shuffle the discard pile and move the cards into the draw pile.</li><li class="li-itemize">Draw a card.</li><li class="li-itemize">Keep track of whose turn it is and switch from one player to the next.</li><li class="li-itemize">Display the state of the game.</li><li class="li-itemize">Wait for the user before running the next turn.</li></ul><p>Now we can start implementing the pieces.
 Here is the beginning of the class definition for <code>Eights</code>, which encapsulates the state of the game:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public class</span> Eights {
 
     <span style="color:blue">private</span> Player one;
@@ -359,44 +359,44 @@ The result is the card the player chose, which is added to the discard pile.</p>
 </table><p>Done!
 Notice the result of bottom-up development is similar to top-down: we have a high-level method that calls helper methods.
 The main difference is the order we used to arrive at this solution.</p>
-<h2 id="sec171" class="section">14.7  Class relationships</h2>
-<p>This chapter demonstrates two common relationships between classes:</p><dl class="description"><dt class="dt-description"><span style="font-weight:bold">composition:</span></dt><dd class="dd-description"><a id="hevea_default750"/>
+<h2 name="sec171" class="section">14.7  Class relationships</h2>
+<p>This chapter demonstrates two common relationships between classes:</p><dl class="description"><dt class="dt-description"><span style="font-weight:bold">composition:</span></dt><dd class="dd-description"><a name="hevea_default750"></a>
 Instances of one class contain references to instances of another class.
-For example, an instance of <code>Eights</code> contains references to two <code>Player</code> objects, two <code>Hand</code> objects, and a <code>Scanner</code>.</dd><dt class="dt-description"><span style="font-weight:bold">inheritance:</span></dt><dd class="dd-description"><a id="hevea_default751"/>
+For example, an instance of <code>Eights</code> contains references to two <code>Player</code> objects, two <code>Hand</code> objects, and a <code>Scanner</code>.</dd><dt class="dt-description"><span style="font-weight:bold">inheritance:</span></dt><dd class="dd-description"><a name="hevea_default751"></a>
 One class extends another class.
-For example, <code>Hand</code> extends <code>CardCollection</code>, so every instance of <code>Hand</code> is also a <code>CardCollection</code>.</dd></dl><p><a id="hevea_default752"/>
-<a id="hevea_default753"/>
-<a id="hevea_default754"/></p><p>Composition is also known as a <span style="font-weight:bold">HAS-A</span> relationship, as in “<code>Eights</code> HAS-A <code>Scanner</code>”.
+For example, <code>Hand</code> extends <code>CardCollection</code>, so every instance of <code>Hand</code> is also a <code>CardCollection</code>.</dd></dl><p><a name="hevea_default752"></a>
+<a name="hevea_default753"></a>
+<a name="hevea_default754"></a></p><p>Composition is also known as a <span style="font-weight:bold">HAS-A</span> relationship, as in “<code>Eights</code> HAS-A <code>Scanner</code>”.
 Inheritance is also known as an <span style="font-weight:bold">IS-A</span> relationship, as in “a <code>Hand</code> IS-A <code>CardCollection</code>”.
-This vocabulary provides a concise way to talk about an object-oriented design.</p><p><a id="hevea_default755"/></p><p>There is also a standard way to represent these relationships graphically in UML class diagrams.
+This vocabulary provides a concise way to talk about an object-oriented design.</p><p><a name="hevea_default755"></a></p><p>There is also a standard way to represent these relationships graphically in UML class diagrams.
 As we saw in Section <a href="/thinkjava/chapter10.html#UML">10.9</a>, the UML representation of a class is a box with three sections: the class name, the attributes, and the methods.
 The latter two sections are optional when showing relationships.</p><p>Relationships between classes are represented by arrows: composition arrows have a standard arrow head, and inheritance arrows have a hollow triangle head (usually pointing up).
-Figure <a href="#fig.uml1">14.1</a> shows the classes defined in this chapter and the relationships among them.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+Figure <a href="#fig.uml1">14.1</a> shows the classes defined in this chapter and the relationships among them.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6032.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 14.1: UML diagram for the classes in this chapter.</td></tr>
 </table></div>
-<a id="fig.uml1"/>
+<a name="fig.uml1"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>UML is an international standard, so almost any software engineer in the world could look at this diagram and understand our design.
 And class diagrams are only one of many graphical representations defined in the UML standard.</p><p>We hope this final chapter has been a useful summary of all the techniques presented in the book, including variables, methods, conditionals, loops, arrays, objects, and algorithms.
 Congratulations on making it to the end!</p>
-<h2 id="sec172" class="section">14.8  Vocabulary</h2>
-<dl class="description"><dt class="dt-description"><span style="font-weight:bold">collection:</span></dt><dd class="dd-description"><a id="hevea_default756"/>
-An object that contains other objects, or more specifically, one of the objects in the Java library, like <code>ArrayList</code>, that contains objects.</dd><dt class="dt-description"><span style="font-weight:bold">inheritance:</span></dt><dd class="dd-description"><a id="hevea_default757"/>
-The ability to define a new class that has the same instance variables and methods of an existing class.</dd><dt class="dt-description"><span style="font-weight:bold">subclass:</span></dt><dd class="dd-description"><a id="hevea_default758"/>
-A class that inherits from, or extends, an existing class.</dd><dt class="dt-description"><span style="font-weight:bold">superclass:</span></dt><dd class="dd-description"><a id="hevea_default759"/>
-An existing class that is extended by another class.</dd><dt class="dt-description"><span style="font-weight:bold">wrapper method:</span></dt><dd class="dd-description"><a id="hevea_default760"/>
-A method that calls another method without doing much additional work.</dd><dt class="dt-description"><span style="font-weight:bold">bottom-up development:</span></dt><dd class="dd-description"><a id="hevea_default761"/>
-A way of developing programs by identifying simple pieces, implementing them, and then assembling them into more complex algorithms.</dd><dt class="dt-description"><span style="font-weight:bold">HAS-A:</span></dt><dd class="dd-description"><a id="hevea_default762"/>
-A relationship between two classes where one class “has” an instance of another class as one of its attributes.</dd><dt class="dt-description"><span style="font-weight:bold">IS-A:</span></dt><dd class="dd-description"><a id="hevea_default763"/>
+<h2 name="sec172" class="section">14.8  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">collection:</span></dt><dd class="dd-description"><a name="hevea_default756"></a>
+An object that contains other objects, or more specifically, one of the objects in the Java library, like <code>ArrayList</code>, that contains objects.</dd><dt class="dt-description"><span style="font-weight:bold">inheritance:</span></dt><dd class="dd-description"><a name="hevea_default757"></a>
+The ability to define a new class that has the same instance variables and methods of an existing class.</dd><dt class="dt-description"><span style="font-weight:bold">subclass:</span></dt><dd class="dd-description"><a name="hevea_default758"></a>
+A class that inherits from, or extends, an existing class.</dd><dt class="dt-description"><span style="font-weight:bold">superclass:</span></dt><dd class="dd-description"><a name="hevea_default759"></a>
+An existing class that is extended by another class.</dd><dt class="dt-description"><span style="font-weight:bold">wrapper method:</span></dt><dd class="dd-description"><a name="hevea_default760"></a>
+A method that calls another method without doing much additional work.</dd><dt class="dt-description"><span style="font-weight:bold">bottom-up development:</span></dt><dd class="dd-description"><a name="hevea_default761"></a>
+A way of developing programs by identifying simple pieces, implementing them, and then assembling them into more complex algorithms.</dd><dt class="dt-description"><span style="font-weight:bold">HAS-A:</span></dt><dd class="dd-description"><a name="hevea_default762"></a>
+A relationship between two classes where one class “has” an instance of another class as one of its attributes.</dd><dt class="dt-description"><span style="font-weight:bold">IS-A:</span></dt><dd class="dd-description"><a name="hevea_default763"></a>
 A relationship between two classes where one class extends another class; the subclass “is” an instance of the superclass.</dd></dl>
-<h2 id="sec173" class="section">14.9  Exercises</h2>
+<h2 name="sec173" class="section">14.9  Exercises</h2>
 <p>The code for this chapter is in the <span style="font-family:monospace">ch14</span> directory of <span style="font-family:monospace">ThinkJavaCode</span>.
 See page <a href="/thinkjava/preface.html#code">??</a> for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.</p><div class="theorem"><span style="font-weight:bold">Exercise 1</span>  <em>
 Design a better strategy for the <code>Player.play</code> method.
-For example, if there are multiple cards you can play, and one of them is an eight, you might want to play the eight.</em><p><a id="hevea_default764"/></p><p><em>Think of other ways you can minimize penalty points, such as playing the highest ranking cards first.
+For example, if there are multiple cards you can play, and one of them is an eight, you might want to play the eight.</em><p><a name="hevea_default764"></a></p><p><em>Think of other ways you can minimize penalty points, such as playing the highest ranking cards first.
 Write a new class that extends <code>Player</code> and overrides <code>play</code> to implement your strategy.
 </em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 2</span>  <em>
 Write a loop that plays the game 100 times and keeps track of how many times each player wins.
@@ -415,34 +415,24 @@ And while you’re at it, you could add a method named <code>scoreCard</code> to
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/chapter14.html">Objects of objects</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/chapter14.html#sec165">Decks and hands</a>
-      </li>
-      <li><a href="/thinkjava/chapter14.html#sec166">CardCollection</a>
-      </li>
-      <li><a href="/thinkjava/chapter14.html#sec167">Inheritance</a>
-      </li>
-      <li><a href="/thinkjava/chapter14.html#sec168">Dealing cards</a>
-      </li>
-      <li><a href="/thinkjava/chapter14.html#sec169">The Player class</a>
-      </li>
-      <li><a href="/thinkjava/chapter14.html#sec170">The Eights class</a>
-      </li>
-      <li><a href="/thinkjava/chapter14.html#sec171">Class relationships</a>
-      </li>
-      <li><a href="/thinkjava/chapter14.html#sec172">Vocabulary</a>
-      </li>
-      <li><a href="/thinkjava/chapter14.html#sec173">Exercises</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/chapter14.html#sec165">Decks and hands</a>
+</li><li><a href="/thinkjava/chapter14.html#sec166">CardCollection</a>
+</li><li><a href="/thinkjava/chapter14.html#sec167">Inheritance</a>
+</li><li><a href="/thinkjava/chapter14.html#sec168">Dealing cards</a>
+</li><li><a href="/thinkjava/chapter14.html#sec169">The Player class</a>
+</li><li><a href="/thinkjava/chapter14.html#sec170">The Eights class</a>
+</li><li><a href="/thinkjava/chapter14.html#sec171">Class relationships</a>
+</li><li><a href="/thinkjava/chapter14.html#sec172">Vocabulary</a>
+</li><li><a href="/thinkjava/chapter14.html#sec173">Exercises</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}Objects of objects | Think Java | Trinket{% endblock %}

@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,15 +7,15 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec69" class="chapter">Chapter 6  Value methods</h1>
-<p><a id="hevea_default299"/>
-<a id="hevea_default300"/>
-<a id="hevea_default301"/>
-<a id="hevea_default302"/></p><p>Some of the methods we have used, like the <code>Math</code> methods, return values.
+        <div class="columns small-12"><h1 name="sec69" class="chapter">Chapter 6  Value methods</h1>
+<p><a name="hevea_default299"></a>
+<a name="hevea_default300"></a>
+<a name="hevea_default301"></a>
+<a name="hevea_default302"></a></p><p>Some of the methods we have used, like the <code>Math</code> methods, return values.
 But all the methods we have <em>written</em> so far have been <code><span style="color:blue">void</span></code>; that is, they don’t return values.
 In this chapter, we’ll write methods that return values, which we call <span style="font-weight:bold">value methods</span>.</p>
-<h2 id="sec70" class="section">6.1  Return values</h2>
-<p><a id="hevea_default303"/></p><p>When you invoke a void method, the invocation is usually on a line all by itself.
+<h2 name="sec70" class="section">6.1  Return values</h2>
+<p><a name="hevea_default303"></a></p><p>When you invoke a void method, the invocation is usually on a line all by itself.
 For example, here is the <code>countup</code> method from Section <a href="/thinkjava/chapter5.html#recursion">5.8</a>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> countup(<span style="color:blue">int</span> n) {
     <span style="color:blue">if</span> (n == 0) {
         System.out.println(<span style="color:#B20000">"Blastoff!"</span>);
@@ -29,21 +29,21 @@ System.out.println(<span style="color:#B20000">"Have a nice day."</span>);</td><
 </table><p>On the other hand, when you invoke a value method, you have to do something with the return value.
 We usually assign it to a variable or use it as part of an expression, like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> error = Math.abs(expected - actual);
 <span style="color:blue">double</span> height = radius * Math.sin(angle);</td></tr>
-</table><p><a id="hevea_default304"/>
-<a id="hevea_default305"/></p><p>Compared to void methods, value methods differ in two ways:</p><p><a id="hevea_default306"/>
-<a id="hevea_default307"/></p><ul class="itemize"><li class="li-itemize">They declare the type of the return value (the <span style="font-weight:bold">return type</span>);</li><li class="li-itemize">They use at least one <code><span style="color:blue">return</span></code> statement to provide a <span style="font-weight:bold">return value</span>.</li></ul><p>Here’s an example: <code>calculateArea</code> takes a <code><span style="color:blue">double</span></code> as a parameter and returns the area of a circle with that radius:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static double</span> calculateArea(<span style="color:blue">double</span> radius) {
+</table><p><a name="hevea_default304"></a>
+<a name="hevea_default305"></a></p><p>Compared to void methods, value methods differ in two ways:</p><p><a name="hevea_default306"></a>
+<a name="hevea_default307"></a></p><ul class="itemize"><li class="li-itemize">They declare the type of the return value (the <span style="font-weight:bold">return type</span>);</li><li class="li-itemize">They use at least one <code><span style="color:blue">return</span></code> statement to provide a <span style="font-weight:bold">return value</span>.</li></ul><p>Here’s an example: <code>calculateArea</code> takes a <code><span style="color:blue">double</span></code> as a parameter and returns the area of a circle with that radius:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static double</span> calculateArea(<span style="color:blue">double</span> radius) {
     <span style="color:blue">double</span> result = Math.PI * radius * radius;
     <span style="color:blue">return</span> result;
 }</td></tr>
 </table><p>As usual, this method is <code><span style="color:blue">public</span></code> and <code><span style="color:blue">static</span></code>.
-But in the place where we are used to seeing <code><span style="color:blue">void</span></code>, we see <code><span style="color:blue">double</span></code>, which means that the return value from this method is a <code><span style="color:blue">double</span></code>.</p><p><a id="hevea_default308"/>
-<a id="hevea_default309"/></p><p>The last line is a new form of the <code><span style="color:blue">return</span></code> statement that includes a return value.
+But in the place where we are used to seeing <code><span style="color:blue">void</span></code>, we see <code><span style="color:blue">double</span></code>, which means that the return value from this method is a <code><span style="color:blue">double</span></code>.</p><p><a name="hevea_default308"></a>
+<a name="hevea_default309"></a></p><p>The last line is a new form of the <code><span style="color:blue">return</span></code> statement that includes a return value.
 This statement means, “return immediately from this method and use the following expression as the return value.”
 The expression you provide can be arbitrarily complex, so we could have written this method more concisely:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static double</span> calculateArea(<span style="color:blue">double</span> radius) {
     <span style="color:blue">return</span> Math.PI * radius * radius;
 }</td></tr>
-</table><p><a id="hevea_default310"/>
-<a id="hevea_default311"/></p><p>On the other hand, <span style="font-weight:bold">temporary variables</span> like <code>result</code> often make debugging easier, especially when you are stepping through code using an interactive debugger (see Appendix <a href="/thinkjava/appendix-a.html#debugger">A.6</a>).</p><p>The type of the expression in the <code><span style="color:blue">return</span></code> statement must match the return type of the method.
+</table><p><a name="hevea_default310"></a>
+<a name="hevea_default311"></a></p><p>On the other hand, <span style="font-weight:bold">temporary variables</span> like <code>result</code> often make debugging easier, especially when you are stepping through code using an interactive debugger (see Appendix <a href="/thinkjava/appendix-a.html#debugger">A.6</a>).</p><p>The type of the expression in the <code><span style="color:blue">return</span></code> statement must match the return type of the method.
 When you declare that the return type is <code><span style="color:blue">double</span></code>, you are making a promise that this method will eventually produce a <code><span style="color:blue">double</span></code> value.
 If you try to <code><span style="color:blue">return</span></code> with no expression, or an expression with the wrong type, the compiler will generate an error.</p><p>Sometimes it is useful to have multiple return statements, for example, one in each branch of a conditional:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static double</span> absoluteValue(<span style="color:blue">double</span> x) {
     <span style="color:blue">if</span> (x &lt; 0) {
@@ -53,7 +53,7 @@ If you try to <code><span style="color:blue">return</span></code> with no expres
     }
 }</td></tr>
 </table><p>Since these <code><span style="color:blue">return</span></code> statements are in a conditional statement, only one will be executed.
-As soon as either of them executes, the method terminates without executing any more statements.</p><p><a id="hevea_default312"/></p><p>Code that appears after a <code><span style="color:blue">return</span></code> statement (in the same block), or any place else where it can never be executed, is called <span style="font-weight:bold">dead code</span>.
+As soon as either of them executes, the method terminates without executing any more statements.</p><p><a name="hevea_default312"></a></p><p>Code that appears after a <code><span style="color:blue">return</span></code> statement (in the same block), or any place else where it can never be executed, is called <span style="font-weight:bold">dead code</span>.
 The compiler will give you an “unreachable statement” error if part of your code is dead.
 For example, this method contains dead code:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static double</span> absoluteValue(<span style="color:blue">double</span> x) {
     <span style="color:blue">if</span> (x &lt; 0) {
@@ -76,10 +76,10 @@ For example, the following method is incomplete:</p><table class="lstframe" styl
 </table><p>When <code>x</code> is 0, neither condition is true, so the method ends without hitting a return statement.
 The error message in this case might be something like “missing return statement”, which is confusing since there are already two of them.
 But hopefully you will know what it means.</p>
-<h2 id="sec71" class="section">6.2  Writing methods</h2>
+<h2 name="sec71" class="section">6.2  Writing methods</h2>
 <p>
-<a id="distance"/></p><p><a id="hevea_default313"/>
-<a id="hevea_default314"/></p><p>Beginners often make the mistake of writing a lot of code before they try to compile and run it.
+<a name="distance"></a></p><p><a name="hevea_default313"></a>
+<a name="hevea_default314"></a></p><p>Beginners often make the mistake of writing a lot of code before they try to compile and run it.
 Then they spend way too much time debugging.
 A better approach is what we call <span style="font-weight:bold">incremental development</span>.
 The key aspects of incremental development are:</p><ul class="itemize"><li class="li-itemize">Start with a working program and make small, incremental changes.
@@ -90,7 +90,7 @@ By the usual definition:</p><table class="display dcenter"><tr style="vertical-a
 </table><p>The first step is to consider what a <code>distance</code> method should look like in Java.
 In other words, what are the inputs (parameters) and what is the output (return value)?
 In this case, the two points are the parameters, and it is natural to represent them using four <code><span style="color:blue">double</span></code> values.
-The return value is the distance, which should also have type <code><span style="color:blue">double</span></code>.</p><p><a id="hevea_default315"/></p><p>Already we can write an outline for the method, which is sometimes called a <span style="font-weight:bold">stub</span>.
+The return value is the distance, which should also have type <code><span style="color:blue">double</span></code>.</p><p><a name="hevea_default315"></a></p><p>Already we can write an outline for the method, which is sometimes called a <span style="font-weight:bold">stub</span>.
 The stub includes the method signature and a <code><span style="color:blue">return</span></code> statement:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static double</span> distance
         (<span style="color:blue">double</span> x1, <span style="color:blue">double</span> y1, <span style="color:blue">double</span> x2, <span style="color:blue">double</span> y2) {
     <span style="color:blue">return</span> 0.0;
@@ -111,7 +111,7 @@ We store those values in temporary variables named <code>dx</code> and <code>dy<
     System.out.println(<span style="color:#B20000">"dy is "</span> + dy);
     <span style="color:blue">return</span> 0.0;
 }</td></tr>
-</table><p><a id="hevea_default316"/></p><p>The print statements allows us to check the intermediate values before proceeding.
+</table><p><a name="hevea_default316"></a></p><p>The print statements allows us to check the intermediate values before proceeding.
 They should be 3.0 and 4.0.
 We will remove the print statements when the method is finished.
 Code like that is called <span style="font-weight:bold">scaffolding</span>, because it is helpful for building the program, but it is not part of the final product.</p><p>The next step is to square <code>dx</code> and <code>dy</code>.
@@ -134,8 +134,8 @@ Finally, we can use <code>Math.sqrt</code> to compute and return the result.</p>
 }</td></tr>
 </table><p>As you gain more experience programming, you might write and debug more than one line at a time.
 Nevertheless, incremental development can save you a lot of time.</p>
-<h2 id="sec72" class="section">6.3  Method composition</h2>
-<p><a id="hevea_default317"/></p><p>Once you define a new method, you can use it as part of an expression, or build new methods using existing methods.
+<h2 name="sec72" class="section">6.3  Method composition</h2>
+<p><a name="hevea_default317"></a></p><p>Once you define a new method, you can use it as part of an expression, or build new methods using existing methods.
 For example, suppose someone gave you two points, the center of the circle and a point on the perimeter, and asked for the area of the circle.
 Let’s say the center point is stored in the variables <code>xc</code> and <code>yc</code>, and the perimeter point is in <code>xp</code> and <code>yp</code>.</p><p>The first step is to find the radius of the circle, which is the distance between the two points.
 Fortunately, we have a method that does just that (<code>distance</code>).</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> radius = distance(xc, yc, xp, yp);</td></tr>
@@ -152,13 +152,13 @@ We have a method for that computation too (<code>calculateArea</code>).</p><tabl
         (<span style="color:blue">double</span> xc, <span style="color:blue">double</span> yc, <span style="color:blue">double</span> xp, <span style="color:blue">double</span> yp) {
     <span style="color:blue">return</span> calculateArea(distance(xc, yc, xp, yp));
 }</td></tr>
-</table><p><a id="hevea_default318"/></p><p>This example demonstrates a process called <span style="font-weight:bold">functional decomposition</span>; that is, breaking a complex computation into simple methods, testing the methods in isolation, and then composing the methods to perform the computation.
+</table><p><a name="hevea_default318"></a></p><p>This example demonstrates a process called <span style="font-weight:bold">functional decomposition</span>; that is, breaking a complex computation into simple methods, testing the methods in isolation, and then composing the methods to perform the computation.
 This process reduces debugging time and yields code that is more likely to be correct and easier to maintain.</p>
-<h2 id="sec73" class="section">6.4  Overloading</h2>
+<h2 name="sec73" class="section">6.4  Overloading</h2>
 <p>
-<a id="overloading"/></p><p>You might have noticed that <code>circleArea</code> and <code>calculateArea</code> perform similar functions.
+<a name="overloading"></a></p><p>You might have noticed that <code>circleArea</code> and <code>calculateArea</code> perform similar functions.
 They both find the area of a circle, but they take different parameters.
-For <code>calculateArea</code>, we have to provide the radius; for <code>circleArea</code> we provide two points.</p><p><a id="hevea_default319"/></p><p>If two methods do the same thing, it is natural to give them the same name.
+For <code>calculateArea</code>, we have to provide the radius; for <code>circleArea</code> we provide two points.</p><p><a name="hevea_default319"></a></p><p>If two methods do the same thing, it is natural to give them the same name.
 Having more than one method with the same name is called <span style="font-weight:bold">overloading</span>, and it is legal in Java as long as each version takes different parameters.
 So we could rename <code>circleArea</code> to <code>calculateArea</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static double</span> calculateArea
         (<span style="color:blue">double</span> xc, <span style="color:blue">double</span> yc, <span style="color:blue">double</span> xp, <span style="color:blue">double</span> yp) {
@@ -174,10 +174,10 @@ In this example, the second version actually invokes the first version.</p><p>Ma
 For example, there are versions of <code>print</code> and <code>println</code> that accept a single parameter of any data type.
 In the <code>Math</code> class, there is a version of <code>abs</code> that works on <code><span style="color:blue">double</span></code>s, and there is also a version for <code><span style="color:blue">int</span></code>s.</p><p>Although overloading is a useful feature, it should be used with caution.
 You might get yourself nicely confused if you are trying to debug one version of a method while accidentally invoking a different one.</p>
-<h2 id="sec74" class="section">6.5  Boolean methods</h2>
+<h2 name="sec74" class="section">6.5  Boolean methods</h2>
 <p>
-<a id="boolean"/></p><p><a id="hevea_default320"/>
-<a id="hevea_default321"/></p><p>Methods can return <code><span style="color:blue">boolean</span></code> values, just like any other type, which is often convenient for hiding tests inside methods.
+<a name="boolean"></a></p><p><a name="hevea_default320"></a>
+<a name="hevea_default321"></a></p><p>Methods can return <code><span style="color:blue">boolean</span></code> values, just like any other type, which is often convenient for hiding tests inside methods.
 For example:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static boolean</span> isSingleDigit(<span style="color:blue">int</span> x) {
     <span style="color:blue">if</span> (x &gt; -10 &amp;&amp; x &lt; 10) {
         <span style="color:blue">return true</span>;
@@ -201,12 +201,12 @@ The second line sets <code>bigFlag</code> to <code><span style="color:blue">true
 }</td></tr>
 </table><p>Examples like this one almost read like English:
 “If is single digit z, print ... else print ...”.</p>
-<h2 id="sec75" class="section">6.6  Javadoc tags</h2>
+<h2 name="sec75" class="section">6.6  Javadoc tags</h2>
 <p>In Section <a href="/thinkjava/chapter4.html#sec%3Ajavadoc">4.9</a>, we discussed how to write documentation comments using <span style="color:#007C00"><code>/**</code></span>.
-It’s generally a good idea to document each class and method, so that other programmers can understand what they do without having to read the code.</p><p><a id="hevea_default322"/>
-<a id="hevea_default323"/>
-<a id="hevea_default324"/>
-<a id="hevea_default325"/></p><p>To organize the documentation into sections, Javadoc supports optional <span style="font-weight:bold">tags</span> that begin with the at sign (<code>@</code>).
+It’s generally a good idea to document each class and method, so that other programmers can understand what they do without having to read the code.</p><p><a name="hevea_default322"></a>
+<a name="hevea_default323"></a>
+<a name="hevea_default324"></a>
+<a name="hevea_default325"></a></p><p>To organize the documentation into sections, Javadoc supports optional <span style="font-weight:bold">tags</span> that begin with the at sign (<code>@</code>).
 For example, we can use <code>@param</code> and <code>@return</code> to provide additional information about parameters and return values.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:#007C00">/**
  * Tests whether x is a single digit integer.
  *
@@ -214,29 +214,29 @@ For example, we can use <code>@param</code> and <code>@return</code> to provide 
  * @return true if x has one digit, false otherwise
  */</span>
 <span style="color:blue">public static boolean</span> isSingleDigit(<span style="color:blue">int</span> x) {</td></tr>
-</table><p><a id="hevea_default326"/>
-<a id="hevea_default327"/></p><p>Figure <a href="#fig.javadoc">6.1</a> shows part of the resulting HTML page generated by Javadoc.
+</table><p><a name="hevea_default326"></a>
+<a name="hevea_default327"></a></p><p>Figure <a href="#fig.javadoc">6.1</a> shows part of the resulting HTML page generated by Javadoc.
 Notice the relationship between the source code and the documentation.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
 <div class="center">
 <img src="thinkjava6011.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 6.1: HTML documentation for <code>isSingleDigit</code>.</td></tr>
 </table></div>
-<a id="fig.javadoc"/>
+<a name="fig.javadoc"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>Methods with multiple parameters should have separate <code>@param</code> tags that describe each one.
 Void methods should have no <code>@return</code> tag, since they do not return a value.</p>
-<h2 id="sec76" class="section">6.7  More recursion</h2>
+<h2 name="sec76" class="section">6.7  More recursion</h2>
 <p>
-<a id="factorial"/></p><p><a id="hevea_default328"/>
-<a id="hevea_default329"/></p><p><a id="hevea_default330"/>
-<a id="hevea_default331"/></p><p>Now that we have methods that return values, we have a <span style="font-weight:bold">Turing complete</span> programming language.
+<a name="factorial"></a></p><p><a name="hevea_default328"></a>
+<a name="hevea_default329"></a></p><p><a name="hevea_default330"></a>
+<a name="hevea_default331"></a></p><p>Now that we have methods that return values, we have a <span style="font-weight:bold">Turing complete</span> programming language.
 That means Java can compute anything computable, for any reasonable definition of “computable”.
 This idea was developed by Alonzo Church and Alan Turing, so it is known as the Church-Turing thesis.
-</p><p><a id="hevea_default332"/></p><p>To give you an idea of what you can do with the tools we have learned, let’s look at some methods for evaluating recursively-defined mathematical functions.
+</p><p><a name="hevea_default332"></a></p><p>To give you an idea of what you can do with the tools we have learned, let’s look at some methods for evaluating recursively-defined mathematical functions.
 A recursive definition is similar to a circular definition, in the sense that the definition refers to the thing being defined.</p><p>Of course, a truly circular definition is not very useful:</p><dl class="description"><dt class="dt-description">
-<span style="font-weight:bold">recursive:</span></dt><dd class="dd-description"><a id="hevea_default333"/> An adjective used to describe a method that is recursive.
+<span style="font-weight:bold">recursive:</span></dt><dd class="dd-description"><a name="hevea_default333"></a> An adjective used to describe a method that is recursive.
 </dd></dl><p>If you saw that definition in the dictionary, you might be annoyed.
-But if you search for recursion on Google, it displays “Did you mean: recursion” as an inside joke.</p><p><a id="hevea_default334"/></p><p>Many mathematical functions are defined recursively, because that is often the simplest way.
+But if you search for recursion on Google, it displays “Did you mean: recursion” as an inside joke.</p><p><a name="hevea_default334"></a></p><p>Many mathematical functions are defined recursively, because that is often the simplest way.
 For example, the <span style="font-weight:bold">factorial</span> of an integer <span style="font-style:italic">n</span>, which is written <span style="font-style:italic">n</span>!, is defined like this:
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:right;white-space:nowrap"> </td><td style="text-align:center;white-space:nowrap"> </td><td style="text-align:left;white-space:nowrap">0! = 1 </td></tr>
 <tr><td style="text-align:right;white-space:nowrap"> </td><td style="text-align:center;white-space:nowrap"> </td><td style="text-align:left;white-space:nowrap"><span style="font-style:italic">n</span>! = <span style="font-style:italic">n</span> ·(<span style="font-style:italic">n</span>−1)!
@@ -280,20 +280,20 @@ The return value (1) gets multiplied by <code>n</code>, which is 1, and the resu
 The return value (1) gets multiplied by <code>n</code>, which is 2, and the result is returned.
 </blockquote>
 The return value (2) gets multiplied by <code>n</code>, which is 3, and the result, 6, is returned to whatever invoked <code>factorial(3)</code>.
-</blockquote><p><a id="hevea_default335"/>
-<a id="hevea_default336"/></p><p>Figure <a href="#fig.stack3">6.2</a> shows what the stack diagram looks like for this sequence of method invocations.
+</blockquote><p><a name="hevea_default335"></a>
+<a name="hevea_default336"></a></p><p>Figure <a href="#fig.stack3">6.2</a> shows what the stack diagram looks like for this sequence of method invocations.
 The return values are shown being passed back up the stack.
 Notice that <code>recurse</code> and <code>result</code> do not exist in the last frame, because when <code>n == 0</code> the code that declares them does not execute.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
 <div class="center">
 <img src="thinkjava6012.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 6.2: Stack diagram for the <code>factorial</code> method.</td></tr>
 </table></div>
-<a id="fig.stack3"/>
+<a name="fig.stack3"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote>
-<h2 id="sec77" class="section">6.8  Leap of faith</h2>
+<h2 name="sec77" class="section">6.8  Leap of faith</h2>
 <p>
-<a id="leap of faith"/></p><p><a id="hevea_default337"/></p><p>Following the flow of execution is one way to read programs, but it can quickly become overwhelming.
+<a name="leap of faith"></a></p><p><a name="hevea_default337"></a></p><p>Following the flow of execution is one way to read programs, but it can quickly become overwhelming.
 An alternative is the <span style="font-weight:bold">leap of faith</span>:
 when you come to a method invocation, instead of following the flow of execution, you <em>assume</em> that the method works correctly and returns the appropriate value.</p><p>In fact, you are already practicing a leap of faith when you use methods in the Java library.
 When you invoke <code>Math.cos</code> or <code>System.out.println</code>, you don’t examine the implementations of those methods.
@@ -303,9 +303,9 @@ Once we convince ourselves that this method is correct – by testing and examin
 When you get to the recursive call, instead of following the flow of execution you should <em>assume</em> that the recursive invocation works.
 For example, “Assuming that I can find the factorial of <span style="font-style:italic">n</span>−1, can I compute the factorial of <span style="font-style:italic">n</span>?”
 Yes you can, by multiplying by <span style="font-style:italic">n</span>.</p><p>Of course, it is strange to assume that the method works correctly when you have not finished writing it, but that’s why it’s called a leap of faith!</p>
-<h2 id="sec78" class="section">6.9  One more example</h2>
+<h2 name="sec78" class="section">6.9  One more example</h2>
 <p>
-<a id="fibonacci"/></p><p><a id="hevea_default338"/></p><p>Another common recursively-defined mathematical function is the Fibonacci sequence, which has the following definition:
+<a name="fibonacci"></a></p><p><a name="hevea_default338"></a></p><p>Another common recursively-defined mathematical function is the Fibonacci sequence, which has the following definition:
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:right;white-space:nowrap"> </td><td style="text-align:center;white-space:nowrap"> </td><td style="text-align:left;white-space:nowrap"><span style="font-style:italic">fibonacci</span>(1) = 1 </td></tr>
 <tr><td style="text-align:right;white-space:nowrap"> </td><td style="text-align:center;white-space:nowrap"> </td><td style="text-align:left;white-space:nowrap"><span style="font-style:italic">fibonacci</span>(2) = 1 </td></tr>
 <tr><td style="text-align:right;white-space:nowrap"> </td><td style="text-align:center;white-space:nowrap"> </td><td style="text-align:left;white-space:nowrap"><span style="font-style:italic">fibonacci</span>(<span style="font-style:italic">n</span>) = <span style="font-style:italic">fibonacci</span>(<span style="font-style:italic">n</span>−1) + <span style="font-style:italic">fibonacci</span>(<span style="font-style:italic">n</span>−2)
@@ -319,38 +319,38 @@ Yes you can, by multiplying by <span style="font-style:italic">n</span>.</p><p>O
 }</td></tr>
 </table><p>If you try to follow the flow of execution here, even for small values of <code>n</code>, your head will explode.
 But if we take a leap of faith and assume that the two recursive invocations work correctly, it is clear that their sum is the result.</p>
-<h2 id="sec79" class="section">6.10  Vocabulary</h2>
-<dl class="description"><dt class="dt-description"><span style="font-weight:bold">void method:</span></dt><dd class="dd-description"><a id="hevea_default339"/>
-A method that does not return a value.</dd><dt class="dt-description"><span style="font-weight:bold">value method:</span></dt><dd class="dd-description"><a id="hevea_default340"/>
-A method that returns a value.</dd><dt class="dt-description"><span style="font-weight:bold">return type:</span></dt><dd class="dd-description"><a id="hevea_default341"/>
-The type of value a method returns.</dd><dt class="dt-description"><span style="font-weight:bold">return value:</span></dt><dd class="dd-description"><a id="hevea_default342"/>
-The value provided as the result of a method invocation.</dd><dt class="dt-description"><span style="font-weight:bold">temporary variable:</span></dt><dd class="dd-description"><a id="hevea_default343"/>
-A short-lived variable, often used for debugging.</dd><dt class="dt-description"><span style="font-weight:bold">dead code:</span></dt><dd class="dd-description"><a id="hevea_default344"/>
-Part of a program that can never be executed, often because it appears after a <code><span style="color:blue">return</span></code> statement.</dd><dt class="dt-description"><span style="font-weight:bold">incremental development:</span></dt><dd class="dd-description"><a id="hevea_default345"/>
-A process for creating programs by writing a few lines at a time, compiling, and testing.</dd><dt class="dt-description"><span style="font-weight:bold">stub:</span></dt><dd class="dd-description"><a id="hevea_default346"/>
-A placeholder for an incomplete method so that the class will compile.</dd><dt class="dt-description"><span style="font-weight:bold">scaffolding:</span></dt><dd class="dd-description"><a id="hevea_default347"/>
-Code that is used during program development but is not part of the final version.</dd><dt class="dt-description"><span style="font-weight:bold">functional decomposition:</span></dt><dd class="dd-description"><a id="hevea_default348"/>
-A process for breaking down a complex computation into simple methods, then composing the methods to perform the computation.</dd><dt class="dt-description"><span style="font-weight:bold">overload:</span></dt><dd class="dd-description"><a id="hevea_default349"/>
+<h2 name="sec79" class="section">6.10  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">void method:</span></dt><dd class="dd-description"><a name="hevea_default339"></a>
+A method that does not return a value.</dd><dt class="dt-description"><span style="font-weight:bold">value method:</span></dt><dd class="dd-description"><a name="hevea_default340"></a>
+A method that returns a value.</dd><dt class="dt-description"><span style="font-weight:bold">return type:</span></dt><dd class="dd-description"><a name="hevea_default341"></a>
+The type of value a method returns.</dd><dt class="dt-description"><span style="font-weight:bold">return value:</span></dt><dd class="dd-description"><a name="hevea_default342"></a>
+The value provided as the result of a method invocation.</dd><dt class="dt-description"><span style="font-weight:bold">temporary variable:</span></dt><dd class="dd-description"><a name="hevea_default343"></a>
+A short-lived variable, often used for debugging.</dd><dt class="dt-description"><span style="font-weight:bold">dead code:</span></dt><dd class="dd-description"><a name="hevea_default344"></a>
+Part of a program that can never be executed, often because it appears after a <code><span style="color:blue">return</span></code> statement.</dd><dt class="dt-description"><span style="font-weight:bold">incremental development:</span></dt><dd class="dd-description"><a name="hevea_default345"></a>
+A process for creating programs by writing a few lines at a time, compiling, and testing.</dd><dt class="dt-description"><span style="font-weight:bold">stub:</span></dt><dd class="dd-description"><a name="hevea_default346"></a>
+A placeholder for an incomplete method so that the class will compile.</dd><dt class="dt-description"><span style="font-weight:bold">scaffolding:</span></dt><dd class="dd-description"><a name="hevea_default347"></a>
+Code that is used during program development but is not part of the final version.</dd><dt class="dt-description"><span style="font-weight:bold">functional decomposition:</span></dt><dd class="dd-description"><a name="hevea_default348"></a>
+A process for breaking down a complex computation into simple methods, then composing the methods to perform the computation.</dd><dt class="dt-description"><span style="font-weight:bold">overload:</span></dt><dd class="dd-description"><a name="hevea_default349"></a>
 To define more than one method with the same name but different parameters.
-</dd><dt class="dt-description"><span style="font-weight:bold">tag:</span></dt><dd class="dd-description"><a id="hevea_default350"/>
-A label that begins with an at sign (<code>@</code>) and is used by Javadoc to organize documentation into sections.</dd><dt class="dt-description"><span style="font-weight:bold">Turing complete:</span></dt><dd class="dd-description"><a id="hevea_default351"/>
-A programming language that can implement any theoretically possible algorithm.</dd><dt class="dt-description"><span style="font-weight:bold">factorial:</span></dt><dd class="dd-description"><a id="hevea_default352"/>
-The product of all the integers up to and including a given integer.</dd><dt class="dt-description"><span style="font-weight:bold">leap of faith:</span></dt><dd class="dd-description"><a id="hevea_default353"/>
+</dd><dt class="dt-description"><span style="font-weight:bold">tag:</span></dt><dd class="dd-description"><a name="hevea_default350"></a>
+A label that begins with an at sign (<code>@</code>) and is used by Javadoc to organize documentation into sections.</dd><dt class="dt-description"><span style="font-weight:bold">Turing complete:</span></dt><dd class="dd-description"><a name="hevea_default351"></a>
+A programming language that can implement any theoretically possible algorithm.</dd><dt class="dt-description"><span style="font-weight:bold">factorial:</span></dt><dd class="dd-description"><a name="hevea_default352"></a>
+The product of all the integers up to and including a given integer.</dd><dt class="dt-description"><span style="font-weight:bold">leap of faith:</span></dt><dd class="dd-description"><a name="hevea_default353"></a>
 A way to read recursive programs by assuming that the recursive call works, rather than following the flow of execution.</dd></dl>
-<h2 id="sec80" class="section">6.11  Exercises</h2>
+<h2 name="sec80" class="section">6.11  Exercises</h2>
 <p>The code for this chapter is in the <span style="font-family:monospace">ch06</span> directory of <span style="font-family:monospace">ThinkJavaCode</span>.
 See page <a href="/thinkjava/preface.html#code">??</a> for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.</p><p>If you have not already read Appendix <a href="/thinkjava/appendix-a.html#JUnit">A.7</a>, now might be a good time.
 It describes JUnit, a tool for efficiently testing value methods.</p><div class="theorem"><span style="font-weight:bold">Exercise 1</span>  <p><em>If you have a question about whether something is legal, and what happens if it is not, a good way to find out is to ask the compiler.
 Answer the following questions by trying them out.</em></p><ol class="enumerate" type="1"><li class="li-enumerate"><em>What happens if you invoke a value method and don’t do anything with the result; that is, if you don’t assign it to a variable or use it as part of a larger expression?</em></li><li class="li-enumerate"><em>What happens if you use a void method as part of an expression?
 For example, try <code>System.out.println(<span style="color:#B20000">"boo!"</span>) + 7;</code></em></li></ol></div><div class="theorem"><span style="font-weight:bold">Exercise 2</span>  
-<a id="ex.isdiv"/><p><em>Write a method named <code>isDivisible</code> that takes two integers, <code>n</code> and <code>m</code>, and that returns <span style="color:blue"><code>true</code></span> if <code>n</code> is divisible by <code>m</code>, and <span style="color:blue"><code>false</code></span> otherwise.</em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 3</span>  <p><em>If you are given three sticks, you may or may not be able to arrange them in a triangle.
+<a name="ex.isdiv"></a><p><em>Write a method named <code>isDivisible</code> that takes two integers, <code>n</code> and <code>m</code>, and that returns <span style="color:blue"><code>true</code></span> if <code>n</code> is divisible by <code>m</code>, and <span style="color:blue"><code>false</code></span> otherwise.</em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 3</span>  <p><em>If you are given three sticks, you may or may not be able to arrange them in a triangle.
 For example, if one of the sticks is 12 inches long and the other two are one inch long, you will not be able to get the short sticks to meet in the middle.
 For any three lengths, there is a simple test to see if it is possible to form a triangle:</em></p><blockquote class="quotation"><em>
 If any of the three lengths is greater than the sum of the other two, you cannot form a triangle.
 </em></blockquote><p><em>Write a method named <code>isTriangle</code> that takes three integers as arguments and returns either <span style="color:blue"><code>true</code></span> or <span style="color:blue"><code>false</code></span>, depending on whether you can or cannot form a triangle from sticks with the given lengths.
 The point of this exercise is to use conditional statements to write a value method.</em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 4</span>  
-<a id="ex.multadd"/><p><em>Many computations can be expressed more concisely using the “multadd” operation, which takes three operands and computes <code>a * b + c</code>.
+<a name="ex.multadd"></a><p><em>Many computations can be expressed more concisely using the “multadd” operation, which takes three operands and computes <code>a * b + c</code>.
 Some processors even provide a hardware implementation of this operation for floating-point numbers.</em></p><ol class="enumerate" type="1"><li class="li-enumerate"><em>Create a new program called <span style="font-family:monospace">Multadd.java</span>.</em></li><li class="li-enumerate"><em>Write a method called <code>multadd</code> that takes three <code>doubles</code> as parameters and that returns <code>a * b + c</code>.</em></li><li class="li-enumerate"><em>Write a <code>main</code> method that tests <code>multadd</code> by invoking it with a few simple parameters, like <code>1.0, 2.0, 3.0</code>.</em></li><li class="li-enumerate"><em>Also in <code>main</code>, use <code>multadd</code> to compute the following values:
 </em><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:right;white-space:nowrap"> </td><td style="text-align:center;white-space:nowrap"><table class="display"><tr style="vertical-align:middle"><td class="dcell">sin</td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">π</td></tr>
 <tr><td class="hbar"/></tr>
@@ -441,44 +441,32 @@ The Ackermann function is defined for non-negative integers as follows:
 </table><p><em>Write a method called <code>ack</code> that takes two <span style="color:blue"><code>int</code></span>s as parameters and that computes and returns the value of the Ackermann function.</em></p><p><em>Test your implementation of Ackermann by invoking it from <code>main</code> and displaying the return value.
 Note the return value gets very big very quickly.
 You should try it only for small values of </em><span style="font-style:italic">m</span><em> and </em><span style="font-style:italic">n</span><em> (not bigger than 3).</em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 9</span>  
-<a id="ex.power"/><p><em>Write a recursive method called <code>power</code> that takes a double <code>x</code> and an integer <code>n</code> and returns </em><span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span></sup><em>.</em></p><p>Hint:<em> A recursive definition of this operation is </em><span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span></sup> = <span style="font-style:italic">x</span> · <span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span>−1</sup><em>.
+<a name="ex.power"></a><p><em>Write a recursive method called <code>power</code> that takes a double <code>x</code> and an integer <code>n</code> and returns </em><span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span></sup><em>.</em></p><p>Hint:<em> A recursive definition of this operation is </em><span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span></sup> = <span style="font-style:italic">x</span> · <span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span>−1</sup><em>.
 Also, remember that anything raised to the zeroth power is 1.</em></p><p><em>Optional challenge: you can make this method more efficient, when <code>n</code> is even, using </em><span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span></sup> = ( <span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span>/2</sup> )<sup>2</sup><em>.</em></p></div>
 </div>
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/chapter6.html">Value methods</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/chapter6.html#sec70">Return values</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec71">Writing methods</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec72">Method composition</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec73">Overloading</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec74">Boolean methods</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec75">Javadoc tags</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec76">More recursion</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec77">Leap of faith</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec78">One more example</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec79">Vocabulary</a>
-      </li>
-      <li><a href="/thinkjava/chapter6.html#sec80">Exercises</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/chapter6.html#sec70">Return values</a>
+</li><li><a href="/thinkjava/chapter6.html#sec71">Writing methods</a>
+</li><li><a href="/thinkjava/chapter6.html#sec72">Method composition</a>
+</li><li><a href="/thinkjava/chapter6.html#sec73">Overloading</a>
+</li><li><a href="/thinkjava/chapter6.html#sec74">Boolean methods</a>
+</li><li><a href="/thinkjava/chapter6.html#sec75">Javadoc tags</a>
+</li><li><a href="/thinkjava/chapter6.html#sec76">More recursion</a>
+</li><li><a href="/thinkjava/chapter6.html#sec77">Leap of faith</a>
+</li><li><a href="/thinkjava/chapter6.html#sec78">One more example</a>
+</li><li><a href="/thinkjava/chapter6.html#sec79">Vocabulary</a>
+</li><li><a href="/thinkjava/chapter6.html#sec80">Exercises</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}Value methods | Think Java | Trinket{% endblock %}

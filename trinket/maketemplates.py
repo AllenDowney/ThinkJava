@@ -14,16 +14,16 @@ web_dir = "/thinkjava/"    # Prefix for links
 
 # Pyquery to get TOC from index
 with open(index_file) as index:
-    
-        
+
+
     # Process chapter TOC from index.
     indextext = index.read()
     d = PyQuery(indextext)
-    
+
     files = sorted(glob.glob("trinkethtml/*.html"))
-    
+
     link_replacements = {}
-    
+
     # Build link swapping dict
     for i, file in enumerate(files[1:]): # skip book index
         special_chapters = {
@@ -51,22 +51,22 @@ with open(index_file) as index:
         toc = PyQuery('<ul class="right"></ul>').html(list_items)
         thisfile = file.replace('trinkethtml/','')
         newfile = link_replacements[thisfile]
-        toc_text = re.sub(thisfile, web_dir + newfile, toc.html()) 
-        print(toc_text)
-        
+        toc_text = re.sub(thisfile, web_dir + newfile, toc.html())
+        #print(toc_text)
+
         # Extract chapter text
         with open(file) as f:
             chapter_raw = f.read()
         chapter_query = PyQuery(chapter_raw)
         chapter_text = chapter_query(".bookchapter").html()
-        
+
         # Replace old links
         for old, new in link_replacements.items():
             chapter_text = re.sub(old, web_dir + new, chapter_text)
         #print(chapter_text)
-        
+
         # TODO: transform chapter text somehow
-        
+
         # Get title
         title = chapter_query("title").text()
         title += " | Think Java | Trinket"
@@ -74,7 +74,7 @@ with open(index_file) as index:
         print("Making ", newfile)
         with open(output_dir + newfile, 'w') as nf:
             template = """
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -82,7 +82,7 @@ with open(index_file) as index:
 
 $body$
 </div>
-    
+
 </div>
 {% endblock %}
 
@@ -95,8 +95,12 @@ $toc$
             template = re.sub('\$title\$', title, template)
             template = re.sub('\$toc\$', toc_text, template)
             template = re.sub('\$body\$', chapter_text, template)
+            # convert ids to names
+            template = re.sub(r'id\=\"', 'name="', template)
+            # form valid <a> elements
+            template = re.sub(r'<a (.*?[^<])/>', '<a \g<1>></a>', template, flags=re.M)
             print(template)
-          
+
             nf.write(template.encode('utf8'))
 sys.exit(0)
 
@@ -109,7 +113,7 @@ print("Processing TOC for " + filename + "...")
 with open(filename, 'r+') as f:
     text = f.read()
 
-with open(filename, 'w') as f:   
+with open(filename, 'w') as f:
     f.write('{% extends "books/pfe/base.html" %}\n\n')
     pattern = re.compile(r"{% block toc %}(.*){% endblock %}", re.DOTALL)
     matches = re.findall(pattern, text)

@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,44 +7,44 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec116" class="chapter">Chapter 10  Objects</h1>
+        <div class="columns small-12"><h1 name="sec116" class="chapter">Chapter 10  Objects</h1>
 <p>
-<a id="objects"/></p><p><a id="hevea_default504"/>
-<a id="hevea_default505"/></p><p>As we learned in the previous chapter, an object is a collection of data that provides a set of methods.
-For example, a <code>String</code> is a collection of characters that provides methods like <code>charAt</code> and <code>substring</code>.</p><p><a id="hevea_default506"/></p><p>Java is an “object-oriented” language, which means that it uses objects to represent data <em>and</em> provide methods related to them.
+<a name="objects"></a></p><p><a name="hevea_default504"></a>
+<a name="hevea_default505"></a></p><p>As we learned in the previous chapter, an object is a collection of data that provides a set of methods.
+For example, a <code>String</code> is a collection of characters that provides methods like <code>charAt</code> and <code>substring</code>.</p><p><a name="hevea_default506"></a></p><p>Java is an “object-oriented” language, which means that it uses objects to represent data <em>and</em> provide methods related to them.
 This way of organizing programs is a powerful design concept, and we will introduce it a little at a time throughout the remainder of the book.</p><p>In this chapter, we introduce two new types of objects: <code>Point</code> and <code>Rectangle</code>.
 We show how to write methods that take objects as parameters and produce objects as return values.
 We also take a look at the source code for the Java library.</p>
-<h2 id="sec117" class="section">10.1  Point objects</h2>
+<h2 name="sec117" class="section">10.1  Point objects</h2>
 <p>
-<a id="point"/></p><p><a id="hevea_default507"/>
-<a id="hevea_default508"/>
-<a id="hevea_default509"/>
-<a id="hevea_default510"/></p><p>The <code>java.awt</code> package provides a class named <code>Point</code> intended to represent the coordinates of a location in a Cartesian plane.
+<a name="point"></a></p><p><a name="hevea_default507"></a>
+<a name="hevea_default508"></a>
+<a name="hevea_default509"></a>
+<a name="hevea_default510"></a></p><p>The <code>java.awt</code> package provides a class named <code>Point</code> intended to represent the coordinates of a location in a Cartesian plane.
 In mathematical notation, points are often written in parentheses with a comma separating the coordinates.
 For example, (0,0) indicates the origin, and (<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>) indicates the point <span style="font-style:italic">x</span> units to the right and <span style="font-style:italic">y</span> units up from the origin.</p><p>In order to use the <code>Point</code> class, you have to import it:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">import</span> java.awt.Point;</td></tr>
-</table><p><a id="hevea_default511"/>
-<a id="hevea_default512"/></p><p>Then, to create a new point, you have to use the <code><span style="color:blue">new</span></code> operator:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Point blank;
+</table><p><a name="hevea_default511"></a>
+<a name="hevea_default512"></a></p><p>Then, to create a new point, you have to use the <code><span style="color:blue">new</span></code> operator:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Point blank;
 blank = <span style="color:blue">new</span> Point(3, 4);</td></tr>
-</table><p><a id="hevea_default513"/>
-<a id="hevea_default514"/></p><p>The first line declares that <code>blank</code> has type <code>Point</code>.
-The second line creates the new <code>Point</code> with the given arguments as coordinates.</p><p><a id="hevea_default515"/></p><p>The result of the <code><span style="color:blue">new</span></code> operator is a <em>reference</em> to the new object.
+</table><p><a name="hevea_default513"></a>
+<a name="hevea_default514"></a></p><p>The first line declares that <code>blank</code> has type <code>Point</code>.
+The second line creates the new <code>Point</code> with the given arguments as coordinates.</p><p><a name="hevea_default515"></a></p><p>The result of the <code><span style="color:blue">new</span></code> operator is a <em>reference</em> to the new object.
 So <code>blank</code> contains a reference to the new <code>Point</code> object.
-Figure <a href="#fig.reference">10.1</a> shows the result.</p><p><a id="hevea_default516"/>
-<a id="hevea_default517"/></p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+Figure <a href="#fig.reference">10.1</a> shows the result.</p><p><a name="hevea_default516"></a>
+<a name="hevea_default517"></a></p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
 <div class="center">
 <img src="thinkjava6017.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 10.1: State diagram showing a variable that refers to a <code>Point</code> object.</td></tr>
 </table></div>
-<a id="fig.reference"/>
+<a name="fig.reference"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>As usual, the name of the variable <code>blank</code> appears outside the box, and its value appears inside the box.
 In this case, the value is a reference, which is represented with an arrow.
 The arrow points to the new object, which contains two variables, <code>x</code> and <code>y</code>.</p>
-<h2 id="sec118" class="section">10.2  Attributes</h2>
+<h2 name="sec118" class="section">10.2  Attributes</h2>
 <p>
-<a id="attribute"/></p><p><a id="hevea_default518"/>
-<a id="hevea_default519"/></p><p>Variables that belong to an object are usually called <span style="font-weight:bold">attributes</span>, but you might also see them called “fields”.
+<a name="attribute"></a></p><p><a name="hevea_default518"></a>
+<a name="hevea_default519"></a></p><p>Variables that belong to an object are usually called <span style="font-weight:bold">attributes</span>, but you might also see them called “fields”.
 To access an attribute of an object, Java uses <span style="font-weight:bold">dot notation</span>.
 For example:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">int</span> x = blank.x;</td></tr>
 </table><p>The expression <code>blank.x</code> means “go to the object <code>blank</code> refers to, and get the value of the attribute <code>x</code>.”
@@ -54,9 +54,9 @@ The purpose of dot notation is to identify <em>which</em> variable you are refer
 For example:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(blank.x + <span style="color:#B20000">", "</span> + blank.y);
 <span style="color:blue">int</span> sum = blank.x * blank.x + blank.y * blank.y;</td></tr>
 </table><p>The first line displays <code>3, 4</code>; the second line calculates the value <code>25</code>.</p>
-<h2 id="sec119" class="section">10.3  Objects as parameters</h2>
-<p><a id="hevea_default520"/>
-<a id="hevea_default521"/></p><p>You can pass objects as parameters in the usual way.
+<h2 name="sec119" class="section">10.3  Objects as parameters</h2>
+<p><a name="hevea_default520"></a>
+<a name="hevea_default521"></a></p><p>You can pass objects as parameters in the usual way.
 For example:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> printPoint(Point p) {
     System.out.println(<span style="color:#B20000">"("</span> + p.x + <span style="color:#B20000">", "</span> + p.y + <span style="color:#B20000">")"</span>);
 }</td></tr>
@@ -70,22 +70,22 @@ In this case, it shows the name of the type (<code>java.awt.Point</code>) and th
     <span style="color:blue">return</span> Math.sqrt(dx * dx + dy * dy);
 }</td></tr>
 </table><p>Passing objects as parameters makes the source code more readable and less error-prone, because related values are bundled together.</p>
-<h2 id="sec120" class="section">10.4  Objects as return types</h2>
-<p><a id="hevea_default522"/>
-<a id="hevea_default523"/></p><p>The <code>java.awt</code> package also provides a class called <code>Rectangle</code>.
+<h2 name="sec120" class="section">10.4  Objects as return types</h2>
+<p><a name="hevea_default522"></a>
+<a name="hevea_default523"></a></p><p>The <code>java.awt</code> package also provides a class called <code>Rectangle</code>.
 To use it, you have to import it:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">import</span> java.awt.Rectangle;</td></tr>
 </table><p><code>Rectangle</code> objects are similar to points, but they have four attributes: <code>x</code>, <code>y</code>, <code>width</code>, and <code>height</code>.
 The following example creates a <code>Rectangle</code> object and makes the variable <code>box</code> refer to it:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Rectangle box = <span style="color:blue">new</span> Rectangle(0, 0, 100, 200);</td></tr>
-</table><p>Figure <a href="#fig.rectangle">10.2</a> shows the effect of this assignment.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+</table><p>Figure <a href="#fig.rectangle">10.2</a> shows the effect of this assignment.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6018.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 10.2: State diagram showing a <code>Rectangle</code> object.</td></tr>
 </table></div>
-<a id="fig.rectangle"/>
+<a name="fig.rectangle"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>If you run <code>System.out.println(box)</code>, you get:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">java.awt.Rectangle[x=0,y=0,width=100,height=200]</td></tr>
-</table><p>Again, <code>println</code> uses the <code>toString</code> method provided by <code>Rectangle</code>, which knows how to display <code>Rectangle</code> objects.</p><p><a id="hevea_default524"/>
-<a id="hevea_default525"/></p><p>You can write methods that return objects.
+</table><p>Again, <code>println</code> uses the <code>toString</code> method provided by <code>Rectangle</code>, which knows how to display <code>Rectangle</code> objects.</p><p><a name="hevea_default524"></a>
+<a name="hevea_default525"></a></p><p>You can write methods that return objects.
 For example, <code>findCenter</code> takes a <code>Rectangle</code> as an argument and returns a <code>Point</code> with the coordinates of the center of the rectangle:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static</span> Point findCenter(Rectangle box) {
     <span style="color:blue">int</span> x = box.x + box.width / 2;
     <span style="color:blue">int</span> y = box.y + box.height / 2;
@@ -93,21 +93,21 @@ For example, <code>findCenter</code> takes a <code>Rectangle</code> as an argume
 }</td></tr>
 </table><p>The return type of this method is <code>Point</code>.
 The last line creates a new <code>Point</code> object and returns a reference to it.</p>
-<h2 id="sec121" class="section">10.5  Mutable objects</h2>
-<p><a id="hevea_default526"/>
-<a id="hevea_default527"/></p><p>You can change the contents of an object by making an assignment to one of its attributes.
+<h2 name="sec121" class="section">10.5  Mutable objects</h2>
+<p><a name="hevea_default526"></a>
+<a name="hevea_default527"></a></p><p>You can change the contents of an object by making an assignment to one of its attributes.
 For example, to “move” a rectangle without changing its size, you can modify the <code>x</code> and <code>y</code> values:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Rectangle box = <span style="color:blue">new</span> Rectangle(0, 0, 100, 200);
 box.x = box.x + 50;
 box.y = box.y + 100;</td></tr>
-</table><p>The result is shown in Figure <a href="#fig.rectangle2">10.3</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+</table><p>The result is shown in Figure <a href="#fig.rectangle2">10.3</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6019.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 10.3: State diagram showing updated attributes.</td></tr>
 </table></div>
-<a id="fig.rectangle2"/>
+<a name="fig.rectangle2"></a>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default528"/>
-<a id="hevea_default529"/></p><p>We can encapsulate this code in a method and generalize it to move the rectangle by any amount:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> moveRect(Rectangle box, <span style="color:blue">int</span> dx, <span style="color:blue">int</span> dy) {
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default528"></a>
+<a name="hevea_default529"></a></p><p>We can encapsulate this code in a method and generalize it to move the rectangle by any amount:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> moveRect(Rectangle box, <span style="color:blue">int</span> dx, <span style="color:blue">int</span> dy) {
     box.x = box.x + dx;
     box.y = box.y + dy;
 }</td></tr>
@@ -119,11 +119,11 @@ System.out.println(box);</td></tr>
 But it can also make debugging more difficult, because it is not always clear which method invocations modify their arguments.</p><p>Java provides a number of methods that operate on <code>Point</code>s and <code>Rectangle</code>s.
 For example, <code>translate</code> has the same effect as <code>moveRect</code>, but instead of passing the rectangle as an argument, you use dot notation:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">box.translate(50, 100);</td></tr>
 </table><p>This line invokes the <code>translate</code> method for the object that <code>box</code> refers to.
-As a result, the <code>box</code> object is updated directly.</p><p><a id="hevea_default530"/></p><p>This example is a good illustration of <span style="font-weight:bold">object-oriented</span> programming.
+As a result, the <code>box</code> object is updated directly.</p><p><a name="hevea_default530"></a></p><p>This example is a good illustration of <span style="font-weight:bold">object-oriented</span> programming.
 Rather than write methods like <code>moveRect</code> that modify one or more parameters, we apply methods to objects themselves using dot notation.</p>
-<h2 id="sec122" class="section">10.6  Aliasing</h2>
+<h2 name="sec122" class="section">10.6  Aliasing</h2>
 <p>
-<a id="aliasing"/></p><p><a id="hevea_default531"/></p><p>Remember that when you assign an object to a variable, you are assigning a <em>reference</em> to an object.
+<a name="aliasing"></a></p><p><a name="hevea_default531"></a></p><p>Remember that when you assign an object to a variable, you are assigning a <em>reference</em> to an object.
 It is possible to have multiple variables that refer to the same object.
 The state diagram in Figure <a href="#fig.aliasing">10.4</a> shows the result.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Rectangle box1 = <span style="color:blue">new</span> Rectangle(0, 0, 100, 200);
 Rectangle box2 = box1;</td></tr>
@@ -132,82 +132,82 @@ Rectangle box2 = box1;</td></tr>
 <img src="thinkjava6020.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 10.4: State diagram showing two variables that refer to the same object.</td></tr>
 </table></div>
-<a id="fig.aliasing"/>
+<a name="fig.aliasing"></a>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default532"/></p><p>Notice how <code>box1</code> and <code>box2</code> are aliases for the same object, so any changes that affect one variable also affect the other.
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default532"></a></p><p>Notice how <code>box1</code> and <code>box2</code> are aliases for the same object, so any changes that affect one variable also affect the other.
 This example adds 50 to all four sides of the rectangle, so it moves the corner up and to the left by 50, and it increases the height and width by 100:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(box2.width);
 box1.grow(50, 50);
 System.out.println(box2.width);</td></tr>
 </table><p>The first line displays <span style="font-family:monospace">100</span>, which is the width of the <code>Rectangle</code> referred to by <code>box2</code>.
 The second line invokes the <code>grow</code> method on <code>box1</code>, which stretches the <code>Rectangle</code> horizontally and vertically.
-The effect is shown in Figure <a href="#fig.aliasing2">10.5</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+The effect is shown in Figure <a href="#fig.aliasing2">10.5</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6021.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 10.5: State diagram showing the effect of invoking <code>grow</code>.</td></tr>
 </table></div>
-<a id="fig.aliasing2"/>
+<a name="fig.aliasing2"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>When we make a change using <code>box1</code>, we see the change using <code>box2</code>.
 Thus, the value displayed by the third line is <span style="font-family:monospace">200</span>, the width of the expanded rectangle.
 </p>
-<h2 id="sec123" class="section">10.7  The null keyword</h2>
-<p><a id="hevea_default533"/></p><p>When you create an object variable, remember that you are storing a reference to an object.
+<h2 name="sec123" class="section">10.7  The null keyword</h2>
+<p><a name="hevea_default533"></a></p><p>When you create an object variable, remember that you are storing a reference to an object.
 In Java, the keyword <code><span style="color:blue">null</span></code> is a special value that means “no object”.
 You can declare and initialize object variables this way:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Point blank = <span style="color:blue">null</span>;</td></tr>
-</table><p>The value <code><span style="color:blue">null</span></code> is represented in state diagrams by a small box with no arrow, as in Figure <a href="#fig.reference2">10.6</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+</table><p>The value <code><span style="color:blue">null</span></code> is represented in state diagrams by a small box with no arrow, as in Figure <a href="#fig.reference2">10.6</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6022.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 10.6: State diagram showing a variable that contains a <code><span style="color:blue">null</span></code> reference.</td></tr>
 </table></div>
-<a id="fig.reference2"/>
+<a name="fig.reference2"></a>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default534"/>
-<a id="hevea_default535"/>
-<a id="hevea_default536"/></p><p>If you try to use a <code><span style="color:blue">null</span></code> value, either by accessing an attribute or invoking a method, Java throws a <code>NullPointerException</code>.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Point blank = <span style="color:blue">null</span>;
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default534"></a>
+<a name="hevea_default535"></a>
+<a name="hevea_default536"></a></p><p>If you try to use a <code><span style="color:blue">null</span></code> value, either by accessing an attribute or invoking a method, Java throws a <code>NullPointerException</code>.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Point blank = <span style="color:blue">null</span>;
 <span style="color:blue">int</span> x = blank.x;              <span style="color:#007C00">// NullPointerException</span>
 blank.translate(50, 50);      <span style="color:#007C00">// NullPointerException</span></td></tr>
 </table><p>On the other hand, it is legal to pass a null reference as an argument or receive one as a return value.
 For example, <code><span style="color:blue">null</span></code> is often used to represent a special condition or indicate an error.</p>
-<h2 id="sec124" class="section">10.8  Garbage collection</h2>
+<h2 name="sec124" class="section">10.8  Garbage collection</h2>
 <p>In Section <a href="#aliasing">10.6</a>, we saw what happens when more than one variable refers to the same object.
 What happens when <em>no</em> variables refer to an object?</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Point blank = <span style="color:blue">new</span> Point(3, 4);
 blank = <span style="color:blue">null</span>;</td></tr>
 </table><p>The first line creates a new <code>Point</code> object and makes <code>blank</code> refer to it.
 The second line changes <code>blank</code> so that instead of referring to the object, it refers to nothing.
-In the state diagram, we remove the arrow between them, as in Figure <a href="#fig.reference3">10.7</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+In the state diagram, we remove the arrow between them, as in Figure <a href="#fig.reference3">10.7</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6023.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 10.7: State diagram showing the effect of setting a variable to <code><span style="color:blue">null</span></code>.</td></tr>
 </table></div>
-<a id="fig.reference3"/>
+<a name="fig.reference3"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>If there are no references to an object, there is no way to access its attributes or invoke a method on it.
 From the programmer’s view, it ceases to exist.
-However it’s still present in the computer’s memory, taking up space.</p><p><a id="hevea_default537"/></p><p>As your program runs, the system automatically looks for stranded objects and reclaims them; then the space can be reused for new objects.
+However it’s still present in the computer’s memory, taking up space.</p><p><a name="hevea_default537"></a></p><p>As your program runs, the system automatically looks for stranded objects and reclaims them; then the space can be reused for new objects.
 This process is called <span style="font-weight:bold">garbage collection</span>.</p><p>You don’t have to do anything to make garbage collection happen, and in general don’t have to be aware of it.
 But in high-performance applications, you may notice a slight delay every now and then when Java reclaims space from discarded objects.
 </p>
-<h2 id="sec125" class="section">10.9  Class diagrams</h2>
+<h2 name="sec125" class="section">10.9  Class diagrams</h2>
 <p>
-<a id="UML"/></p><p>To summarize what we’ve learned so far, <code>Point</code> and <code>Rectangle</code> objects each have their own attributes and methods.
+<a name="UML"></a></p><p>To summarize what we’ve learned so far, <code>Point</code> and <code>Rectangle</code> objects each have their own attributes and methods.
 Attributes are an object’s <em>data</em>, and methods are an object’s <em>code</em>.
-An object’s class defines which attributes and methods it will have.</p><p><a id="hevea_default538"/></p><p>In practice, it’s more convenient to look at high-level pictures than to examine the source code.
+An object’s class defines which attributes and methods it will have.</p><p><a name="hevea_default538"></a></p><p>In practice, it’s more convenient to look at high-level pictures than to examine the source code.
 <span style="font-weight:bold">Unified Modeling Language</span> (UML) defines a standard way to summarize the design of a class.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
 <div class="center">
 <img src="thinkjava6024.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 10.8: UML class diagrams for <code>Point</code> and <code>Rectangle</code>.</td></tr>
 </table></div>
-<a id="fig.umlPoint"/>
+<a name="fig.umlPoint"></a>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default539"/>
-<a id="hevea_default540"/></p><p>As shown in Figure <a href="#fig.umlPoint">10.8</a>, a <span style="font-weight:bold">class diagram</span> is divided into two sections.
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default539"></a>
+<a name="hevea_default540"></a></p><p>As shown in Figure <a href="#fig.umlPoint">10.8</a>, a <span style="font-weight:bold">class diagram</span> is divided into two sections.
 The top half lists the attributes, and the bottom half lists the methods.
 UML uses a language-independent format, so rather than showing <code><span style="color:blue">int</span> x</code>, the diagram uses <span style="font-family:monospace">x: int</span>.</p><p>In contrast to state diagrams, which visualize objects (and variables) at run-time, a class diagram visualizes the source code at compile-time.</p><p>Both <code>Point</code> and <code>Rectangle</code> have additional methods; we are only showing the ones introduced in this chapter.
 See the documentation for these classes to learn more about what they can do.</p>
-<h2 id="sec126" class="section">10.10  Java library source</h2>
-<p><a id="hevea_default541"/></p><p>Throughout the book, you have used classes from the Java library including <code>System</code>, <code>String</code>, <code>Scanner</code>, <code>Math</code>, <code>Random</code>, and others.
+<h2 name="sec126" class="section">10.10  Java library source</h2>
+<p><a name="hevea_default541"></a></p><p>Throughout the book, you have used classes from the Java library including <code>System</code>, <code>String</code>, <code>Scanner</code>, <code>Math</code>, <code>Random</code>, and others.
 You may not have realized that these classes are written in Java.
-In fact, you can take a look at the source code to see how they work.</p><p><a id="hevea_default542"/></p><p>The Java library contains thousands of files, many of which are thousands of lines of code.
+In fact, you can take a look at the source code to see how they work.</p><p><a name="hevea_default542"></a></p><p>The Java library contains thousands of files, many of which are thousands of lines of code.
 That’s more than one person could read and understand fully, so please don’t be intimidated!</p><p>Because it’s so large, the library source code is stored in a file named <code>src.zip</code>.
 Take a few minutes to locate this file on your machine:</p><ul class="itemize"><li class="li-itemize">
 On Linux, it’s likely under: <code>/usr/lib/jvm/openjdk-8/</code>
@@ -220,24 +220,24 @@ On Linux, it’s likely under: <code>/usr/lib/jvm/openjdk-8/</code>
 For example, open the <span style="font-family:monospace">java</span> folder and then open the <span style="font-family:monospace">awt</span> folder.
 You should now see <span style="font-family:monospace">Point.java</span> and <span style="font-family:monospace">Rectangle.java</span>, along with the other classes in the <code>java.awt</code> package.</p><p>Open <span style="font-family:monospace">Point.java</span> in your editor and skim through the file.
 It uses language features we haven’t yet discussed, so you probably won’t understand everything.
-But you can get a sense of what professional Java software looks like by browsing through the library.</p><p><a id="hevea_default543"/>
-<a id="hevea_default544"/>
-<a id="hevea_default545"/></p><p>Notice how much of <span style="font-family:monospace">Point.java</span> is documentation.
+But you can get a sense of what professional Java software looks like by browsing through the library.</p><p><a name="hevea_default543"></a>
+<a name="hevea_default544"></a>
+<a name="hevea_default545"></a></p><p>Notice how much of <span style="font-family:monospace">Point.java</span> is documentation.
 Each method is thoroughly commented, including <code>@param</code>, <code>@return</code>, and other Javadoc tags.
 Javadoc reads these comments and generates documentation in HTML.
 You can see the results by reading the documentation for the <code>Point</code> class, which you can find by doing a web search for “Java Point”.</p><p>Now take a look at <code>Rectangle</code>’s <code>grow</code> and <code>translate</code> methods.
 There is more to them than you may have realized, but that doesn’t limit your ability to use these methods in a program.</p><p>To summarize the whole chapter, objects encapsulate data and provide methods to access and modify the data directly.
 Object-oriented programming makes it possible to hide messy details so that you can more easily use and understand code that other people wrote.</p>
-<h2 id="sec127" class="section">10.11  Vocabulary</h2>
-<dl class="description"><dt class="dt-description"><span style="font-weight:bold">attribute:</span></dt><dd class="dd-description"><a id="hevea_default546"/>
+<h2 name="sec127" class="section">10.11  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">attribute:</span></dt><dd class="dd-description"><a name="hevea_default546"></a>
 One of the named data items that make up an object.
-</dd><dt class="dt-description"><span style="font-weight:bold">dot notation:</span></dt><dd class="dd-description"><a id="hevea_default547"/>
-Use of the dot operator (<code>.</code>) to access an object’s attributes or methods.</dd><dt class="dt-description"><span style="font-weight:bold">object-oriented:</span></dt><dd class="dd-description"><a id="hevea_default548"/>
-A way of organizing code and data into objects, rather than independent methods.</dd><dt class="dt-description"><span style="font-weight:bold">garbage collection:</span></dt><dd class="dd-description"><a id="hevea_default549"/>
-The process of finding objects that have no references and reclaiming their storage space.</dd><dt class="dt-description"><span style="font-weight:bold">UML:</span></dt><dd class="dd-description"><a id="hevea_default550"/>
-Unified Modeling Language, a standard way to draw diagrams for software engineering.</dd><dt class="dt-description"><span style="font-weight:bold">class diagram:</span></dt><dd class="dd-description"><a id="hevea_default551"/>
+</dd><dt class="dt-description"><span style="font-weight:bold">dot notation:</span></dt><dd class="dd-description"><a name="hevea_default547"></a>
+Use of the dot operator (<code>.</code>) to access an object’s attributes or methods.</dd><dt class="dt-description"><span style="font-weight:bold">object-oriented:</span></dt><dd class="dd-description"><a name="hevea_default548"></a>
+A way of organizing code and data into objects, rather than independent methods.</dd><dt class="dt-description"><span style="font-weight:bold">garbage collection:</span></dt><dd class="dd-description"><a name="hevea_default549"></a>
+The process of finding objects that have no references and reclaiming their storage space.</dd><dt class="dt-description"><span style="font-weight:bold">UML:</span></dt><dd class="dd-description"><a name="hevea_default550"></a>
+Unified Modeling Language, a standard way to draw diagrams for software engineering.</dd><dt class="dt-description"><span style="font-weight:bold">class diagram:</span></dt><dd class="dd-description"><a name="hevea_default551"></a>
 An illustration of the attributes and methods for a class.</dd></dl>
-<h2 id="sec128" class="section">10.12  Exercises</h2>
+<h2 name="sec128" class="section">10.12  Exercises</h2>
 <p>The code for this chapter is in the <span style="font-family:monospace">ch10</span> directory of <span style="font-family:monospace">ThinkJavaCode</span>.
 See page <a href="/thinkjava/preface.html#code">??</a> for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.</p><div class="theorem"><span style="font-weight:bold">Exercise 1</span>  <em>
@@ -302,9 +302,9 @@ Why or why not?</em></li></ol><table class="lstframe" style="padding:1ex;backgro
     printPoint(p2);
 }</em></td></tr>
 </table></div><div class="theorem"><span style="font-weight:bold">Exercise 4</span>  
-<a id="ex.biginteger"/><p><a id="hevea_default552"/></p><p><em>You might be sick of the factorial method by now, but we’re going to do one more version.</em></p><ol class="enumerate" type="1"><li class="li-enumerate"><em>Create a new program called <span style="font-family:monospace">Big.java</span> and write (or reuse) an iterative version of <code>factorial</code>.</em></li><li class="li-enumerate"><em>Display a table of the integers from 0 to 30 along with their factorials.
+<a name="ex.biginteger"></a><p><a name="hevea_default552"></a></p><p><em>You might be sick of the factorial method by now, but we’re going to do one more version.</em></p><ol class="enumerate" type="1"><li class="li-enumerate"><em>Create a new program called <span style="font-family:monospace">Big.java</span> and write (or reuse) an iterative version of <code>factorial</code>.</em></li><li class="li-enumerate"><em>Display a table of the integers from 0 to 30 along with their factorials.
 At some point around 15, you will probably see that the answers are not right anymore.
-Why not?</em><p><a id="hevea_default553"/></p></li><li class="li-enumerate"><em><code>BigInteger</code> is a Java class that can represent arbitrarily big integers.
+Why not?</em><p><a name="hevea_default553"></a></p></li><li class="li-enumerate"><em><code>BigInteger</code> is a Java class that can represent arbitrarily big integers.
 There is no upper bound except the limitations of memory size and processing speed.
 Take a minute to read the documentation, which you can find by doing a web search for “Java BigInteger”.</em></li><li class="li-enumerate"><em>To use BigIntegers, you have to import <code>java.math.BigInteger</code> at the beginning of your program.</em></li><li class="li-enumerate"><em>There are several ways to create a BigInteger, but the simplest uses <code>valueOf</code>.
 The following code converts an integer to a BigInteger:</em><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><em><span style="color:blue">int</span> x = 17;
@@ -334,7 +334,7 @@ Here is a method that implements an efficient algorithm for integer exponentiati
         <span style="color:blue">return</span> t * t * x;
     }
 }</em></td></tr>
-</table><p><a id="hevea_default554"/></p><p><em>The problem with this method is that it only works if the result is small enough to be represented by an <span style="color:blue"><code>int</code></span>.
+</table><p><a name="hevea_default554"></a></p><p><em>The problem with this method is that it only works if the result is small enough to be represented by an <span style="color:blue"><code>int</code></span>.
 Rewrite it so that the result is a <code>BigInteger</code>.
 The parameters should still be integers, though.</em></p><p><em>You should use the <code>BigInteger</code> methods <code>add</code> and <code>multiply</code>.
 But don’t use <code>BigInteger.pow</code>; that would spoil the fun.
@@ -343,40 +343,27 @@ But don’t use <code>BigInteger.pow</code>; that would spoil the fun.
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/chapter10.html">Objects</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/chapter10.html#sec117">Point objects</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec118">Attributes</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec119">Objects as parameters</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec120">Objects as return types</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec121">Mutable objects</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec122">Aliasing</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec123">The null keyword</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec124">Garbage collection</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec125">Class diagrams</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec126">Java library source</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec127">Vocabulary</a>
-      </li>
-      <li><a href="/thinkjava/chapter10.html#sec128">Exercises</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/chapter10.html#sec117">Point objects</a>
+</li><li><a href="/thinkjava/chapter10.html#sec118">Attributes</a>
+</li><li><a href="/thinkjava/chapter10.html#sec119">Objects as parameters</a>
+</li><li><a href="/thinkjava/chapter10.html#sec120">Objects as return types</a>
+</li><li><a href="/thinkjava/chapter10.html#sec121">Mutable objects</a>
+</li><li><a href="/thinkjava/chapter10.html#sec122">Aliasing</a>
+</li><li><a href="/thinkjava/chapter10.html#sec123">The null keyword</a>
+</li><li><a href="/thinkjava/chapter10.html#sec124">Garbage collection</a>
+</li><li><a href="/thinkjava/chapter10.html#sec125">Class diagrams</a>
+</li><li><a href="/thinkjava/chapter10.html#sec126">Java library source</a>
+</li><li><a href="/thinkjava/chapter10.html#sec127">Vocabulary</a>
+</li><li><a href="/thinkjava/chapter10.html#sec128">Exercises</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}Objects | Think Java | Trinket{% endblock %}

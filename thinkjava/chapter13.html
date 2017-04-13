@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,14 +7,14 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec154" class="chapter">Chapter 13  Objects of arrays</h1>
+        <div class="columns small-12"><h1 name="sec154" class="chapter">Chapter 13  Objects of arrays</h1>
 <p>
-<a id="Deck"/></p><p><a id="hevea_default698"/></p><p>In the previous chapter, we defined a class to represent cards and used an array of <code>Card</code> objects to represent a deck.</p><p>In this chapter, we take another step toward object-oriented programming by defining a class to represent a deck of cards.
+<a name="Deck"></a></p><p><a name="hevea_default698"></a></p><p>In the previous chapter, we defined a class to represent cards and used an array of <code>Card</code> objects to represent a deck.</p><p>In this chapter, we take another step toward object-oriented programming by defining a class to represent a deck of cards.
 And we present algorithms for shuffling and sorting arrays.</p><p>The code for this chapter is in <span style="font-family:monospace">Card.java</span> and <span style="font-family:monospace">Deck.java</span>, which are in the directory <span style="font-family:monospace">ch13</span> in the repository for this book.
 Instructions for downloading this code are on page <a href="/thinkjava/preface.html#code">??</a>.</p>
-<h2 id="sec155" class="section">13.1  The Deck class</h2>
+<h2 name="sec155" class="section">13.1  The Deck class</h2>
 <p>
-<a id="deck"/></p><p>The main idea of this chapter is to create a <code>Deck</code> class that encapsulates an array of <code>Card</code>s.
+<a name="deck"></a></p><p>The main idea of this chapter is to create a <code>Deck</code> class that encapsulates an array of <code>Card</code>s.
 The initial class definition looks like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public class</span> Deck {
     <span style="color:blue">private</span> Card[] cards;
 
@@ -22,14 +22,14 @@ The initial class definition looks like this:</p><table class="lstframe" style="
         <span style="color:blue">this</span>.cards = <span style="color:blue">new</span> Card[n];
     }
 }</td></tr>
-</table><p><a id="hevea_default699"/>
-<a id="hevea_default700"/></p><p>The constructor initializes the instance variable with an array of <code>n</code> cards, but it doesn’t create any card objects.
-Figure <a href="#fig.deckobject">13.1</a> shows what a <code>Deck</code> looks like with no cards.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+</table><p><a name="hevea_default699"></a>
+<a name="hevea_default700"></a></p><p>The constructor initializes the instance variable with an array of <code>n</code> cards, but it doesn’t create any card objects.
+Figure <a href="#fig.deckobject">13.1</a> shows what a <code>Deck</code> looks like with no cards.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6030.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 13.1: State diagram of an unpopulated <code>Deck</code> object.</td></tr>
 </table></div>
-<a id="fig.deckobject"/>
+<a name="fig.deckobject"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>We’ll add a second constructor that makes a standard 52-card deck and populates it with <code>Card</code> objects:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public</span> Deck() {
     <span style="color:blue">this</span>.cards = <span style="color:blue">new</span> Card[52];
@@ -43,7 +43,7 @@ Figure <a href="#fig.deckobject">13.1</a> shows what a <code>Deck</code> looks 
 }</td></tr>
 </table><p>This method is similar to the example in Section <a href="/thinkjava/chapter12.html#cardarray">12.6</a>; we just turned it into a constructor.
 We can now create a standard <code>Deck</code> like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Deck deck = <span style="color:blue">new</span> Deck();</td></tr>
-</table><p><a id="hevea_default701"/></p><p>Now that we have a <code>Deck</code> class, we have a logical place to put methods that pertain to decks.
+</table><p><a name="hevea_default701"></a></p><p>Now that we have a <code>Deck</code> class, we have a logical place to put methods that pertain to decks.
 Looking at the methods we have written so far, one obvious candidate is <code>printDeck</code> from Section <a href="/thinkjava/chapter12.html#cardarray">12.6</a>.
 </p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public void</span> print() {
     <span style="color:blue">for</span> (<span style="color:blue">int</span> i = 0; i &lt; <span style="color:blue">this</span>.cards.length; i++) {
@@ -52,28 +52,28 @@ Looking at the methods we have written so far, one obvious candidate is <code>pr
 }</td></tr>
 </table><p>When you transform a static method into an instance method, it usually gets shorter.
 We can simply type <code>deck.print()</code> to invoke the instance method.</p>
-<h2 id="sec156" class="section">13.2  Shuffling decks</h2>
+<h2 name="sec156" class="section">13.2  Shuffling decks</h2>
 <p>
-<a id="shuffle"/></p><p><a id="hevea_default702"/></p><p>For most card games you need to be able to shuffle the deck; that is, put the cards in a random order.
+<a name="shuffle"></a></p><p><a name="hevea_default702"></a></p><p>For most card games you need to be able to shuffle the deck; that is, put the cards in a random order.
 In Section <a href="/thinkjava/chapter8.html#random">8.7</a> we saw how to generate random numbers, but it is not obvious how to use them to shuffle a deck.</p><p>One possibility is to model the way humans shuffle, which is usually dividing the deck in two halves and then choosing alternately from each one.
 Since humans usually don’t shuffle perfectly, after about seven iterations the order of the deck is pretty well randomized.</p><p>But a computer program would have the annoying property of doing a perfect shuffle every time, which is not very random.
 In fact, after eight perfect shuffles, you would find the deck back in the order you started in!
-(For more information, see <a href="https://en.wikipedia.org/wiki/Faro_shuffle"><span style="font-family:monospace">https://en.wikipedia.org/wiki/Faro_shuffle</span></a>.)</p><p><a id="hevea_default703"/></p><p>A better shuffling algorithm is to traverse the deck one card at a time, and at each iteration choose two cards and swap them.
+(For more information, see <a href="https://en.wikipedia.org/wiki/Faro_shuffle"><span style="font-family:monospace">https://en.wikipedia.org/wiki/Faro_shuffle</span></a>.)</p><p><a name="hevea_default703"></a></p><p>A better shuffling algorithm is to traverse the deck one card at a time, and at each iteration choose two cards and swap them.
 Here is an outline of how this algorithm works.
 To sketch the program, we will use a combination of Java statements and English.
 This technique is sometimes called <span style="font-weight:bold">pseudocode</span>.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">for</span> each index i {
     <span style="color:#007C00">// choose a random number between i and length - 1
     // swap the ith card and the randomly-chosen card</span>
 }</td></tr>
-</table><p><a id="hevea_default704"/>
-<a id="hevea_default705"/></p><p>The nice thing about pseudocode is that it often makes clear what methods you are going to need.
+</table><p><a name="hevea_default704"></a>
+<a name="hevea_default705"></a></p><p>The nice thing about pseudocode is that it often makes clear what methods you are going to need.
 In this case, we need a method that chooses a random integer between <code>low</code> and <code>high</code>, and a method that takes two indexes and swaps the cards at those positions.
-Methods like these are called <span style="font-weight:bold">helper methods</span>, because they help you implement more complex algorithms.</p><p><a id="hevea_default706"/>
-<a id="hevea_default707"/></p><p>And this process – writing pseudocode first and then writing methods to make it work – is called <span style="font-weight:bold">top-down development</span> (see <a href="https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design"><span style="font-family:monospace">https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design</span></a>).</p><p><a id="hevea_default708"/></p><p>One of the exercises at the end of the chapter asks you to write the helper methods <code>randomInt</code> and <code>swapCards</code> and use them to implement <code>shuffle</code>.</p>
-<h2 id="sec157" class="section">13.3  Selection sort</h2>
+Methods like these are called <span style="font-weight:bold">helper methods</span>, because they help you implement more complex algorithms.</p><p><a name="hevea_default706"></a>
+<a name="hevea_default707"></a></p><p>And this process – writing pseudocode first and then writing methods to make it work – is called <span style="font-weight:bold">top-down development</span> (see <a href="https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design"><span style="font-family:monospace">https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design</span></a>).</p><p><a name="hevea_default708"></a></p><p>One of the exercises at the end of the chapter asks you to write the helper methods <code>randomInt</code> and <code>swapCards</code> and use them to implement <code>shuffle</code>.</p>
+<h2 name="sec157" class="section">13.3  Selection sort</h2>
 <p>
-<a id="sorting"/></p><p><a id="hevea_default709"/>
-<a id="hevea_default710"/></p><p>Now that we have messed up the deck, we need a way to put it back in order.
+<a name="sorting"></a></p><p><a name="hevea_default709"></a>
+<a name="hevea_default710"></a></p><p>Now that we have messed up the deck, we need a way to put it back in order.
 There is an algorithm for sorting that is ironically similar to the algorithm for shuffling.
 It’s called <span style="font-weight:bold">selection sort</span>, because it works by traversing the array repeatedly and selecting the lowest (or highest) remaining card each time.</p><p>During the first iteration, we find the lowest card and swap it with the card in the 0th position.
 During the <span style="font-style:italic">i</span>th iteration, we find the lowest card to the right of <span style="font-style:italic">i</span> and swap it with the <span style="font-style:italic">i</span>th card.
@@ -85,13 +85,13 @@ Here is pseudocode for selection sort:</p><table class="lstframe" style="padding
 }</td></tr>
 </table><p>Again, the pseudocode helps with the design of the helper methods.
 In this algorithm we can use <code>swapCards</code> again, so we only need a method to find the lowest card; we’ll call it <code>indexLowest</code>.</p><p>One of the exercises at the end of the chapter asks you to write the helper method <code>indexLowest</code> and use it to implement <code>selectionSort</code>.</p>
-<h2 id="sec158" class="section">13.4  Merge sort</h2>
+<h2 name="sec158" class="section">13.4  Merge sort</h2>
 <p>
-<a id="mergesort"/></p><p><a id="hevea_default711"/></p><p>Selection sort is a simple algorithm, but it is not very efficient.
+<a name="mergesort"></a></p><p><a name="hevea_default711"></a></p><p>Selection sort is a simple algorithm, but it is not very efficient.
 To sort <span style="font-style:italic">n</span> items, it has to traverse the array <span style="font-style:italic">n</span>−1 times.
 Each traversal takes an amount of time proportional to <span style="font-style:italic">n</span>.
-The total time, therefore, is proportional to <span style="font-style:italic">n</span><sup>2</sup>.</p><p><a id="hevea_default712"/>
-<a id="hevea_default713"/></p><p>In the next two sections, we’ll develop a more efficient algorithm called <span style="font-weight:bold">merge sort</span>.
+The total time, therefore, is proportional to <span style="font-style:italic">n</span><sup>2</sup>.</p><p><a name="hevea_default712"></a>
+<a name="hevea_default713"></a></p><p>In the next two sections, we’ll develop a more efficient algorithm called <span style="font-weight:bold">merge sort</span>.
 To sort <span style="font-style:italic">n</span> items, merge sort takes time proportional to <span style="font-style:italic">n</span> log<sub>2</sub> <span style="font-style:italic">n</span>.
 That may not seem impressive, but as <span style="font-style:italic">n</span> gets big, the difference between <span style="font-style:italic">n</span><sup>2</sup> and <span style="font-style:italic">n</span> log<sub>2</sub> <span style="font-style:italic">n</span> can be enormous.</p><p>For example, log<sub>2</sub> of one million is around 20.
 So if you had to sort a million numbers, selection sort would require one trillion steps; merge sort would require only 20 million.</p><p>The idea behind merge sort is this: if you have two subdecks, each of which has already been sorted, it is easy and fast to merge them into a single, sorted deck.
@@ -100,8 +100,8 @@ Place both decks face up in front of you.</li><li class="li-enumerate">Compare t
 Flip it over and add it to the merged deck.</li><li class="li-enumerate">Repeat step 2 until one of the decks is empty.
 Then take the remaining cards and add them to the merged deck.</li></ol><p>The result should be a single sorted deck.
 In the next few sections, we’ll explain how to implement this algorithm in Java.</p>
-<h2 id="sec159" class="section">13.5  Subdecks</h2>
-<p><a id="hevea_default714"/></p><p>The first step of merge sort is to split the deck into two subdecks, each with about half the cards.
+<h2 name="sec159" class="section">13.5  Subdecks</h2>
+<p><a name="hevea_default714"></a></p><p>The first step of merge sort is to split the deck into two subdecks, each with about half the cards.
 So we might want a method, <code>subdeck</code>, that takes a deck and a range of indexes.
 It returns a new deck that contains the specified subset of the cards:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public</span> Deck subdeck(<span style="color:blue">int</span> low, <span style="color:blue">int</span> high) {
     Deck sub = <span style="color:blue">new</span> Deck(high - low + 1);
@@ -111,21 +111,21 @@ It returns a new deck that contains the specified subset of the cards:</p><table
     <span style="color:blue">return</span> sub;
 }</td></tr>
 </table><p>The first line creates an unpopulated subdeck.
-Inside the <code><span style="color:blue">for</span></code> loop, the subdeck gets populated with copies of references from the deck.</p><p><a id="hevea_default715"/></p><p>The length of the subdeck is <code>high - low + 1</code>, because both the low card and the high card are included.
+Inside the <code><span style="color:blue">for</span></code> loop, the subdeck gets populated with copies of references from the deck.</p><p><a name="hevea_default715"></a></p><p>The length of the subdeck is <code>high - low + 1</code>, because both the low card and the high card are included.
 This sort of computation can be confusing, and forgetting the <code>+ 1</code> often leads to “off-by-one” errors.
-Drawing a picture is usually the best way to avoid them.</p><p><a id="hevea_default716"/>
-<a id="hevea_default717"/></p><p>Figure <a href="#fig.subdeck">13.2</a> is a state diagram of a subdeck with <code>low = 0</code> and <code>high = 4</code>.
+Drawing a picture is usually the best way to avoid them.</p><p><a name="hevea_default716"></a>
+<a name="hevea_default717"></a></p><p>Figure <a href="#fig.subdeck">13.2</a> is a state diagram of a subdeck with <code>low = 0</code> and <code>high = 4</code>.
 The result is a hand with five cards that are <em>shared</em> with the original deck; that is, they are aliased.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
 <div class="center">
 <img src="thinkjava6031.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 13.2: State diagram showing the effect of <code>subdeck</code>.</td></tr>
 </table></div>
-<a id="fig.subdeck"/>
+<a name="fig.subdeck"></a>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default718"/>
-<a id="hevea_default719"/></p><p>Aliasing might not be a good idea, because changes to shared cards would be reflected in multiple decks.
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default718"></a>
+<a name="hevea_default719"></a></p><p>Aliasing might not be a good idea, because changes to shared cards would be reflected in multiple decks.
 But since <code>Card</code> objects are immutable, this kind of aliasing is not a problem at all.</p>
-<h2 id="sec160" class="section">13.6  Merging decks</h2>
+<h2 name="sec160" class="section">13.6  Merging decks</h2>
 <p>The next helper method we need is <code>merge</code>, which takes two sorted subdecks and returns a new deck containing all cards from both decks, in order.
 Here’s what the algorithm looks like in pseudocode, assuming the subdecks are named <code>d1</code> and <code>d2</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static</span> Deck merge(Deck d1, Deck d2) {
     <span style="color:#007C00">// create a new deck big enough for all the cards
@@ -147,7 +147,7 @@ Here’s what the algorithm looks like in pseudocode, assuming the subdecks are 
     <span style="color:#007C00">// return the new deck</span>
 }</td></tr>
 </table><p>One of the exercises at the end of the chapter asks you to implement <code>merge</code>.</p>
-<h2 id="sec161" class="section">13.7  Adding recursion</h2>
+<h2 name="sec161" class="section">13.7  Adding recursion</h2>
 <p>Once your <code>merge</code> method is working correctly, you can try out a simple version of merge sort:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public</span> Deck almostMergeSort() {
     <span style="color:#007C00">// divide the deck into two subdecks
     // sort the subdecks using selectionSort
@@ -158,7 +158,7 @@ Once you get it working, the real fun begins!
 The magical thing about merge sort is that it is inherently recursive.</p><p>At the point where you sort the subdecks, why should you invoke the slower algorithm, <code>selectionSort</code>?
 Why not invoke the spiffy new <code>mergeSort</code> you are in the process of writing?
 Not only is that a good idea, it is <em>necessary</em> to achieve the log<sub>2</sub> performance advantage.
-<a id="hevea_default720"/></p><p>To make <code>mergeSort</code> work recursively, you have to add a base case; otherwise it repeats forever.
+<a name="hevea_default720"></a></p><p>To make <code>mergeSort</code> work recursively, you have to add a base case; otherwise it repeats forever.
 A simple base case is a subdeck with 0 or 1 cards.
 If <code>mergeSort</code> receives such a small subdeck, it can return it unmodified since it would already be sorted.</p><p>The recursive version of <code>mergeSort</code> should look something like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public</span> Deck mergeSort() {
     <span style="color:#007C00">// if the deck is 0 or 1 cards, return it
@@ -166,21 +166,21 @@ If <code>mergeSort</code> receives such a small subdeck, it can return it unmodi
     // sort the subdecks using mergeSort
     // merge the two halves and return the result</span>
 }</td></tr>
-</table><p><a id="hevea_default721"/></p><p>As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the “leap of faith” (see Section <a href="/thinkjava/chapter6.html#leap%20of%20faith">6.8</a>).
+</table><p><a name="hevea_default721"></a></p><p>As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the “leap of faith” (see Section <a href="/thinkjava/chapter6.html#leap%20of%20faith">6.8</a>).
 This example should encourage you to make the leap of faith.</p><p>When you used <code>selectionSort</code> to sort the subdecks, you didn’t feel compelled to follow the flow of execution.
 You just assumed it works because you had already debugged it.
 And all you did to make <code>mergeSort</code> recursive was replace one sorting algorithm with another.
 There is no reason to read the program any differently.</p><p>Well, almost.
 You might have to give some thought to getting the base case right and making sure that you reach it eventually.
 But other than that, writing the recursive version should be no problem.</p>
-<h2 id="sec162" class="section">13.8  Vocabulary</h2>
-<dl class="description"><dt class="dt-description"><span style="font-weight:bold">pseudocode:</span></dt><dd class="dd-description"><a id="hevea_default722"/>
-A way of designing programs by writing rough drafts in a combination of English and Java.</dd><dt class="dt-description"><span style="font-weight:bold">helper method:</span></dt><dd class="dd-description"><a id="hevea_default723"/>
-Often a small method that does not do anything enormously useful by itself, but which helps another, more complex method.</dd><dt class="dt-description"><span style="font-weight:bold">top-down development:</span></dt><dd class="dd-description"><a id="hevea_default724"/>
-Breaking down a problem into sub-problems, and solving each sub-problem one at a time.</dd><dt class="dt-description"><span style="font-weight:bold">selection sort:</span></dt><dd class="dd-description"><a id="hevea_default725"/>
-A simple sorting algorithm that searches for the smallest or largest element <span style="font-style:italic">n</span> times.</dd><dt class="dt-description"><span style="font-weight:bold">merge sort:</span></dt><dd class="dd-description"><a id="hevea_default726"/>
+<h2 name="sec162" class="section">13.8  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">pseudocode:</span></dt><dd class="dd-description"><a name="hevea_default722"></a>
+A way of designing programs by writing rough drafts in a combination of English and Java.</dd><dt class="dt-description"><span style="font-weight:bold">helper method:</span></dt><dd class="dd-description"><a name="hevea_default723"></a>
+Often a small method that does not do anything enormously useful by itself, but which helps another, more complex method.</dd><dt class="dt-description"><span style="font-weight:bold">top-down development:</span></dt><dd class="dd-description"><a name="hevea_default724"></a>
+Breaking down a problem into sub-problems, and solving each sub-problem one at a time.</dd><dt class="dt-description"><span style="font-weight:bold">selection sort:</span></dt><dd class="dd-description"><a name="hevea_default725"></a>
+A simple sorting algorithm that searches for the smallest or largest element <span style="font-style:italic">n</span> times.</dd><dt class="dt-description"><span style="font-weight:bold">merge sort:</span></dt><dd class="dd-description"><a name="hevea_default726"></a>
 A recursive sorting algorithm that divides an array into two parts, sorts each part (using merge sort), and merges the results.</dd></dl>
-<h2 id="sec163" class="section">13.9  Exercises</h2>
+<h2 name="sec163" class="section">13.9  Exercises</h2>
 <p>The code for this chapter is in the <span style="font-family:monospace">ch13</span> directory of <span style="font-family:monospace">ThinkJavaCode</span>.
 See page <a href="/thinkjava/preface.html#code">??</a> for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.</p><div class="theorem"><span style="font-weight:bold">Exercise 1</span>  <em>
@@ -196,7 +196,7 @@ Use the <span style="font-family:monospace">Deck.java</span> file from the previ
 The best way to test it is to build and shuffle a deck.
 Then use <code>subdeck</code> to form two small subdecks, and use selection sort to sort them.
 Then you can pass the two halves to <code>merge</code> to see if it works.
-</em><a id="hevea_default727"/></li><li class="li-enumerate"><em>Write the simple version of <code>mergeSort</code>, the one that divides the deck in half, uses <code>selectionSort</code> to sort the two halves, and uses <code>merge</code> to create a new, sorted deck.</em></li><li class="li-enumerate"><em>Write a recursive version of <code>mergeSort</code>.
+</em><a name="hevea_default727"></a></li><li class="li-enumerate"><em>Write the simple version of <code>mergeSort</code>, the one that divides the deck in half, uses <code>selectionSort</code> to sort the two halves, and uses <code>merge</code> to create a new, sorted deck.</em></li><li class="li-enumerate"><em>Write a recursive version of <code>mergeSort</code>.
 Remember that <code>selectionSort</code> is a modifier and <code>mergeSort</code> is a pure method, which means that they get invoked differently:</em><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><em>deck.selectionSort();      <span style="color:#007C00">// modifies an existing deck</span>
 deck = deck.mergeSort();   <span style="color:#007C00">// replaces old deck with new</span></em></td></tr>
 </table></li></ol></div><div class="theorem"><span style="font-weight:bold">Exercise 4</span>  <em>
@@ -206,42 +206,32 @@ Write a method named <code>insertionSort</code> that implements this algorithm.
 </em></div><div class="theorem"><span style="font-weight:bold">Exercise 5</span>  <em>
 Write a <code>toString</code> method for the <code>Deck</code> class.
 It should return a single string that represents the cards in the deck.
-When it’s printed, this string should display the same results as the <code>print</code> method in Section </em><a href="#deck"><em>13.1</em></a><em>.</em><p><a id="hevea_default728"/>
-<a id="hevea_default729"/></p><p>Hint:<em> You can use the <code>+</code> operator to concatenate strings, but it is not very efficient.
+When it’s printed, this string should display the same results as the <code>print</code> method in Section </em><a href="#deck"><em>13.1</em></a><em>.</em><p><a name="hevea_default728"></a>
+<a name="hevea_default729"></a></p><p>Hint:<em> You can use the <code>+</code> operator to concatenate strings, but it is not very efficient.
 Consider using <code>java.util.StringBuilder</code>; you can find the documentation by doing a web search for “Java StringBuilder”.
 </em></p></div>
 </div>
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/chapter13.html">Objects of arrays</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/chapter13.html#sec155">The Deck class</a>
-      </li>
-      <li><a href="/thinkjava/chapter13.html#sec156">Shuffling decks</a>
-      </li>
-      <li><a href="/thinkjava/chapter13.html#sec157">Selection sort</a>
-      </li>
-      <li><a href="/thinkjava/chapter13.html#sec158">Merge sort</a>
-      </li>
-      <li><a href="/thinkjava/chapter13.html#sec159">Subdecks</a>
-      </li>
-      <li><a href="/thinkjava/chapter13.html#sec160">Merging decks</a>
-      </li>
-      <li><a href="/thinkjava/chapter13.html#sec161">Adding recursion</a>
-      </li>
-      <li><a href="/thinkjava/chapter13.html#sec162">Vocabulary</a>
-      </li>
-      <li><a href="/thinkjava/chapter13.html#sec163">Exercises</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/chapter13.html#sec155">The Deck class</a>
+</li><li><a href="/thinkjava/chapter13.html#sec156">Shuffling decks</a>
+</li><li><a href="/thinkjava/chapter13.html#sec157">Selection sort</a>
+</li><li><a href="/thinkjava/chapter13.html#sec158">Merge sort</a>
+</li><li><a href="/thinkjava/chapter13.html#sec159">Subdecks</a>
+</li><li><a href="/thinkjava/chapter13.html#sec160">Merging decks</a>
+</li><li><a href="/thinkjava/chapter13.html#sec161">Adding recursion</a>
+</li><li><a href="/thinkjava/chapter13.html#sec162">Vocabulary</a>
+</li><li><a href="/thinkjava/chapter13.html#sec163">Exercises</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}Objects of arrays | Think Java | Trinket{% endblock %}

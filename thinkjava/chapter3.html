@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,42 +7,42 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec31" class="chapter">Chapter 3  Input and output</h1>
+        <div class="columns small-12"><h1 name="sec31" class="chapter">Chapter 3  Input and output</h1>
 <p>The programs we’ve looked at so far simply display messages, which doesn’t involve a lot of real computation.
 This chapter will show you how to read input from the keyboard, use that input to calculate a result, and then format that result for output.
 </p>
-<h2 id="sec32" class="section">3.1  The System class</h2>
+<h2 name="sec32" class="section">3.1  The System class</h2>
 <p>
-<a id="sec:system"/></p><p><a id="hevea_default151"/></p><p>We have been using <code>System.out.println</code> for a while, but you might not have thought about what it means.
+<a name="sec:system"></a></p><p><a name="hevea_default151"></a></p><p>We have been using <code>System.out.println</code> for a while, but you might not have thought about what it means.
 <code>System</code> is a class that provides methods related to the “system” or environment where programs run.
-It also provides <code>System.out</code>, which is a special value that provides methods for displaying output, including <code>println</code>.</p><p><a id="hevea_default152"/></p><p>In fact, we can use <code>System.out.println</code> to display the value of <code>System.out</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(System.out);</td></tr>
+It also provides <code>System.out</code>, which is a special value that provides methods for displaying output, including <code>println</code>.</p><p><a name="hevea_default152"></a></p><p>In fact, we can use <code>System.out.println</code> to display the value of <code>System.out</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(System.out);</td></tr>
 </table><p>The result is:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">java.io.PrintStream@685d72cd</td></tr>
-</table><p><a id="hevea_default153"/></p><p>This output indicates that <code>System.out</code> is a <code>PrintStream</code>, which is defined in a package called <code>java.io</code>.
-A <span style="font-weight:bold">package</span> is a collection of related classes; <code>java.io</code> contains classes for “I/O” which stands for input and output.</p><p><a id="hevea_default154"/>
-<a id="hevea_default155"/></p><p>The numbers and letters after the <span style="font-family:monospace">@</span> sign are the <span style="font-weight:bold">address</span> of <code>System.out</code>, represented as a hexadecimal (base 16) number.
+</table><p><a name="hevea_default153"></a></p><p>This output indicates that <code>System.out</code> is a <code>PrintStream</code>, which is defined in a package called <code>java.io</code>.
+A <span style="font-weight:bold">package</span> is a collection of related classes; <code>java.io</code> contains classes for “I/O” which stands for input and output.</p><p><a name="hevea_default154"></a>
+<a name="hevea_default155"></a></p><p>The numbers and letters after the <span style="font-family:monospace">@</span> sign are the <span style="font-weight:bold">address</span> of <code>System.out</code>, represented as a hexadecimal (base 16) number.
 The address of a value is its location in the computer’s memory, which might be different on different computers.
 In this example the address is <code>685d72cd</code>, but if you run the same code you might get something different.
-</p><p><a id="hevea_default156"/></p><p>As shown in Figure <a href="#fig.system">3.1</a>, <code>System</code> is defined in a file called <span style="font-family:monospace">System.java</span>, and <code>PrintStream</code> is defined in <span style="font-family:monospace">PrintStream.java</span>.
+</p><p><a name="hevea_default156"></a></p><p>As shown in Figure <a href="#fig.system">3.1</a>, <code>System</code> is defined in a file called <span style="font-family:monospace">System.java</span>, and <code>PrintStream</code> is defined in <span style="font-family:monospace">PrintStream.java</span>.
 These files are part of the Java <span style="font-weight:bold">library</span>, which is an extensive collection of classes you can use in your programs.
 </p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
 <div class="center">
 <img src="thinkjava6004.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 3.1: <code>System.out.println</code> refers to the <code>out</code> variable of the <code>System</code> class, which is a <code>PrintStream</code> that provides a method called <code>println</code>.</td></tr>
 </table></div>
-<a id="fig.system"/>
+<a name="fig.system"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote>
-<h2 id="sec33" class="section">3.2  The Scanner class</h2>
+<h2 name="sec33" class="section">3.2  The Scanner class</h2>
 <p>
-<a id="scanner"/></p><p><a id="hevea_default157"/>
-<a id="hevea_default158"/></p><p><a id="hevea_default159"/></p><p>The <code>System</code> class also provides the special value <code>System.in</code>, which is an <code>InputStream</code> that provides methods for reading input from the keyboard.
-These methods are not easy to use; fortunately, Java provides other classes that make it easier to handle common input tasks.</p><p><a id="hevea_default160"/>
-<a id="hevea_default161"/>
-<a id="hevea_default162"/></p><p>For example, <code>Scanner</code> is a class that provides methods for inputting words, numbers, and other data.
+<a name="scanner"></a></p><p><a name="hevea_default157"></a>
+<a name="hevea_default158"></a></p><p><a name="hevea_default159"></a></p><p>The <code>System</code> class also provides the special value <code>System.in</code>, which is an <code>InputStream</code> that provides methods for reading input from the keyboard.
+These methods are not easy to use; fortunately, Java provides other classes that make it easier to handle common input tasks.</p><p><a name="hevea_default160"></a>
+<a name="hevea_default161"></a>
+<a name="hevea_default162"></a></p><p>For example, <code>Scanner</code> is a class that provides methods for inputting words, numbers, and other data.
 <code>Scanner</code> is provided by <code>java.util</code>, which is a package that contains classes so useful they are called “utility classes”.
 Before you can use <code>Scanner</code>, you have to import it like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">import</span> java.util.Scanner;</td></tr>
-</table><p><a id="hevea_default163"/>
-<a id="hevea_default164"/></p><p>This <span style="font-weight:bold">import statement</span> tells the compiler that when you say <code>Scanner</code>, you mean the one defined in <code>java.util</code>.
+</table><p><a name="hevea_default163"></a>
+<a name="hevea_default164"></a></p><p>This <span style="font-weight:bold">import statement</span> tells the compiler that when you say <code>Scanner</code>, you mean the one defined in <code>java.util</code>.
 It’s necessary because there might be another class named <code>Scanner</code> in another package.
 Using an import statement makes your code unambiguous.</p><p>Import statements can’t be inside a class definition.
 By convention, they are usually at the beginning of the file.</p><p>Next you have to create a <code>Scanner</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Scanner in = <span style="color:blue">new</span> Scanner(System.in);</td></tr>
@@ -72,22 +72,22 @@ That means the compiler doesn’t know what you mean by <code>Scanner</code>.</p
 <code>System</code> belongs to the <code>java.lang</code> package, which is imported automatically.
 According to the documentation, <code>java.lang</code> “provides classes that are fundamental to the design of the Java programming language.”
 The <code>String</code> class is also part of the <code>java.lang</code> package.</p>
-<h2 id="sec34" class="section">3.3  Program structure</h2>
+<h2 name="sec34" class="section">3.3  Program structure</h2>
 <p>
-<a id="sec:library"/></p><p>At this point, we have seen all of the elements that make up Java programs.
-Figure <a href="#fig.package">3.2</a> shows these organizational units.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+<a name="sec:library"></a></p><p>At this point, we have seen all of the elements that make up Java programs.
+Figure <a href="#fig.package">3.2</a> shows these organizational units.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6005.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 3.2: Elements of the Java language, from largest to smallest.</td></tr>
 </table></div>
-<a id="fig.package"/>
+<a name="fig.package"></a>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default165"/></p><p>To review, a package is a collection of classes, which define methods.
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default165"></a></p><p>To review, a package is a collection of classes, which define methods.
 Methods contain statements, some of which contain expressions.
 Expressions are made up of <span style="font-weight:bold">tokens</span>, which are the basic elements of a program, including numbers, variable names, operators, keywords, and punctuation like parentheses, braces and semicolons.</p><p>The standard edition of Java comes with <em>several thousand</em> classes you can <code><span style="color:blue">import</span></code>, which can be both exciting and intimidating.
 You can browse this library at <a href="http://docs.oracle.com/javase/8/docs/api/"><span style="font-family:monospace">http://docs.oracle.com/javase/8/docs/api/</span></a>.
 Most of the Java library itself is written in Java.</p><p>Note there is a major difference between the Java <em>language</em>, which defines the syntax and meaning of the elements in Figure <a href="#fig.package">3.2</a>, and the Java <em>library</em>, which provides the built-in classes.</p>
-<h2 id="sec35" class="section">3.4  Inches to centimeters</h2>
+<h2 name="sec35" class="section">3.4  Inches to centimeters</h2>
 <p>Now let’s see an example that’s a little more useful.
 Although most of the world has adopted the metric system for weights and measures, some countries are stuck with English units.
 For example, when talking with friends in Europe about the weather, people in the United States might have to convert from Celsius to Fahrenheit and back.
@@ -96,7 +96,7 @@ We’ll use a <code>Scanner</code> to input a measurement in inches, convert to 
 The following lines declare the variables and create the <code>Scanner</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">int</span> inch;
 <span style="color:blue">double</span> cm;
 Scanner in = <span style="color:blue">new</span> Scanner(System.in);</td></tr>
-</table><p><a id="hevea_default166"/></p><p>The next step is to prompt the user for the input.
+</table><p><a name="hevea_default166"></a></p><p>The next step is to prompt the user for the input.
 We’ll use <code>print</code> instead of <code>println</code> so they can enter the input on the same line as the prompt.
 And we’ll use the <code>Scanner</code> method <code>nextInt</code>, which reads input from the keyboard and converts it to an integer:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.print(<span style="color:#B20000">"How many inches? "</span>);
 inch = in.nextInt();</td></tr>
@@ -107,32 +107,32 @@ System.out.println(cm + <span style="color:#B20000">" cm"</span>);</td></tr>
 If another programmer reads this code, they might wonder where 2.54 comes from.
 For the benefit of others (and yourself in the future), it would be better to assign this value to a variable with a meaningful name.
 We’ll demonstrate in the next section.</p>
-<h2 id="sec36" class="section">3.5  Literals and constants</h2>
-<p><a id="hevea_default167"/></p><p>A value that appears in a program, like 2.54 (or <span style="color:#B20000"><code>" in ="</code></span>), is called a <span style="font-weight:bold">literal</span>.
+<h2 name="sec36" class="section">3.5  Literals and constants</h2>
+<p><a name="hevea_default167"></a></p><p>A value that appears in a program, like 2.54 (or <span style="color:#B20000"><code>" in ="</code></span>), is called a <span style="font-weight:bold">literal</span>.
 In general, there’s nothing wrong with literals.
 But when numbers like 2.54 appear in an expression with no explanation, they make code hard to read.
-And if the same value appears many times, and might have to change in the future, it makes code hard to maintain.</p><p><a id="hevea_default168"/></p><p>Values like that are sometimes called <span style="font-weight:bold">magic numbers</span> (with the implication that being “magic” is not a good thing).
+And if the same value appears many times, and might have to change in the future, it makes code hard to maintain.</p><p><a name="hevea_default168"></a></p><p>Values like that are sometimes called <span style="font-weight:bold">magic numbers</span> (with the implication that being “magic” is not a good thing).
 A good practice is to assign magic numbers to variables with meaningful names, like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> cmPerInch = 2.54;
 cm = inch * cmPerInch;</td></tr>
 </table><p>This version is easier to read and less error-prone, but it still has a problem.
 Variables can vary, but the number of centimeters in an inch does not.
 Once we assign a value to <code>cmPerInch</code>, it should never change.
 Java provides a language feature that enforces that rule, the keyword <code><span style="color:blue">final</span></code>.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">final double</span> CM_PER_INCH = 2.54;</td></tr>
-</table><p><a id="hevea_default169"/>
-<a id="hevea_default170"/></p><p>Declaring that a variable is <code><span style="color:blue">final</span></code> means that it cannot be reassigned once it has been initialized.
+</table><p><a name="hevea_default169"></a>
+<a name="hevea_default170"></a></p><p>Declaring that a variable is <code><span style="color:blue">final</span></code> means that it cannot be reassigned once it has been initialized.
 If you try, the compiler reports an error.
 Variables declared as <code><span style="color:blue">final</span></code> are called <span style="font-weight:bold">constants</span>.
 By convention, names for constants are all uppercase, with the underscore character (<code>_</code>) between words.</p>
-<h2 id="sec37" class="section">3.6  Formatting output</h2>
+<h2 name="sec37" class="section">3.6  Formatting output</h2>
 <p>
-<a id="printf"/></p><p>When you output a <code><span style="color:blue">double</span></code> using <code>print</code> or <code>println</code>, it displays up to 16 decimal places:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.print(4.0 / 3.0);</td></tr>
+<a name="printf"></a></p><p>When you output a <code><span style="color:blue">double</span></code> using <code>print</code> or <code>println</code>, it displays up to 16 decimal places:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.print(4.0 / 3.0);</td></tr>
 </table><p>The result is:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">1.3333333333333333</td></tr>
-</table><p><a id="hevea_default171"/></p><p>That might be more than you want.
+</table><p><a name="hevea_default171"></a></p><p>That might be more than you want.
 <code>System.out</code> provides another method, called <code>printf</code>, that gives you more control of the format.
 The “f” in <code>printf</code> stands for “formatted”.
 Here’s an example:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.printf(<span style="color:#B20000">"Four thirds = %.3f"</span>, 4.0 / 3.0);</td></tr>
-</table><p><a id="hevea_default172"/>
-<a id="hevea_default173"/></p><p>The first value in the parentheses is a <span style="font-weight:bold">format string</span> that specifies how the output should be displayed.
+</table><p><a name="hevea_default172"></a>
+<a name="hevea_default173"></a></p><p>The first value in the parentheses is a <span style="font-weight:bold">format string</span> that specifies how the output should be displayed.
 This format string contains ordinary text followed by a <span style="font-weight:bold">format specifier</span>, which is a special sequence that starts with a percent sign.
 The format specifier <code>\%.3f</code> indicates that the following value should be displayed as floating-point, rounded to three decimal places.
 The result is:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Four thirds = 1.333</td></tr>
@@ -156,16 +156,16 @@ The easiest way to find documentation for Java classes is to do a web search for
 </table>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Table 3.1: Example format specifiers</td></tr>
 </table></div>
-<a id="tab:format"/>
+<a name="tab:format"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote>
-<h2 id="sec38" class="section">3.7  Centimeters to inches</h2>
+<h2 name="sec38" class="section">3.7  Centimeters to inches</h2>
 <p>
-<a id="sec:rounding"/></p><p>Now suppose we have a measurement in centimeters, and we want to round it off to the nearest inch.
+<a name="sec:rounding"></a></p><p>Now suppose we have a measurement in centimeters, and we want to round it off to the nearest inch.
 It is tempting to write:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">inch = cm / CM_PER_INCH;  <span style="color:#007C00">// syntax error</span></td></tr>
 </table><p>But the result is an error – you get something like, “Bad types in assignment: from double to int.”
-The problem is that the value on the right is floating-point, and the variable on the left is an integer.</p><p><a id="hevea_default174"/>
-<a id="hevea_default175"/></p><p>The simplest way to convert a floating-point value to an integer is to use a <span style="font-weight:bold">type cast</span>, so called because it molds or “casts” a value from one type to another.
+The problem is that the value on the right is floating-point, and the variable on the left is an integer.</p><p><a name="hevea_default174"></a>
+<a name="hevea_default175"></a></p><p>The simplest way to convert a floating-point value to an integer is to use a <span style="font-weight:bold">type cast</span>, so called because it molds or “casts” a value from one type to another.
 The syntax for type casting is to put the name of the type in parentheses and use it as an operator.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">double</span> pi = 3.14159;
 <span style="color:blue">int</span> x = (<span style="color:blue">int</span>) pi;</td></tr>
 </table><p>The <code>(<span style="color:blue">int</span>)</code> operator has the effect of converting what follows into an integer.
@@ -180,22 +180,22 @@ System.out.printf(<span style="color:#B20000">"%f cm = %d in
 "</span>, cent, inch);</td></tr>
 </table><p>The parentheses after the cast operator require the division to happen before the type cast.
 And the result is rounded toward zero; we will see in the next chapter how to round floating-point numbers to the closest integer.</p>
-<h2 id="sec39" class="section">3.8  Modulus operator</h2>
+<h2 name="sec39" class="section">3.8  Modulus operator</h2>
 <p>Let’s take the example one step further: suppose you have a measurement in inches and you want to convert to feet and inches.
-The goal is divide by 12 (the number of inches in a foot) and keep the remainder.</p><p><a id="hevea_default176"/>
-<a id="hevea_default177"/>
-<a id="hevea_default178"/></p><p>We have already seen the division operator (<code>/</code>), which computes the quotient of two numbers.
+The goal is divide by 12 (the number of inches in a foot) and keep the remainder.</p><p><a name="hevea_default176"></a>
+<a name="hevea_default177"></a>
+<a name="hevea_default178"></a></p><p>We have already seen the division operator (<code>/</code>), which computes the quotient of two numbers.
 If the numbers are integers, it performs integer division.
 Java also provides the <span style="font-weight:bold">modulus</span> operator (<code>\%</code>), which divides two numbers and computes the remainder.</p><p>Using division and modulus, we can convert to feet and inches like this:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">quotient = 76 / 12;   <span style="color:#007C00">// division</span>
 remainder = 76 % 12;  <span style="color:#007C00">// modulus</span></td></tr>
 </table><p>The first line yields 6.
 The second line, which is pronounced “76 mod 12”, yields 4.
-So 76 inches is 6 feet, 4 inches.</p><p>The modulus operator looks like a percent sign, but you might find it helpful to think of it as a division sign (÷) rotated to the left.</p><p><a id="hevea_default179"/>
-<a id="hevea_default180"/></p><p>The modulus operator turns out to be surprisingly useful.
+So 76 inches is 6 feet, 4 inches.</p><p>The modulus operator looks like a percent sign, but you might find it helpful to think of it as a division sign (÷) rotated to the left.</p><p><a name="hevea_default179"></a>
+<a name="hevea_default180"></a></p><p>The modulus operator turns out to be surprisingly useful.
 For example, you can check whether one number is divisible by another: if <code>x \% y</code> is zero, then <code>x</code> is divisible by <code>y</code>.
 You can use modulus to “extract” digits from a number: <code>x \% 10</code> yields the rightmost digit of <code>x</code>, and <code>x \% 100</code> yields the last two digits.
 Also, many encryption algorithms use the modulus operator extensively.</p>
-<h2 id="sec40" class="section">3.9  Putting it all together</h2>
+<h2 name="sec40" class="section">3.9  Putting it all together</h2>
 <p>At this point, you have seen enough Java to write useful programs that solve everyday problems.
 You can (1) import Java library classes, (2) create a <code>Scanner</code>, (3) get input from the keyboard, (4) format output with <code>printf</code>, and (5) divide and mod integers.
 Now we will put everything together in a complete program:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
@@ -232,7 +232,7 @@ This practice makes it easier to find their types later on, and it helps the rea
 It also includes a documentation comment (<span style="color:#007C00"><code>/**</code></span>), which we’ll learn more about in the next chapter.</p><p>Many algorithms, including the <code>Convert</code> program, perform division and modulus together.
 In both steps, you divide by the same number (<code>IN_PER_FOOT</code>).</p><p>When statements get long (generally wider than 80 characters), a common style convention is to break them across multiple lines.
 The reader should never have to scroll horizontally.</p>
-<h2 id="sec41" class="section">3.10  The Scanner bug</h2>
+<h2 name="sec41" class="section">3.10  The Scanner bug</h2>
 <p>Now that you’ve had some experience with <code>Scanner</code>, there is an unexpected behavior we want to warn you about.
 The following code fragment asks users for their name and age:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.print(<span style="color:#B20000">"What is your name? "</span>);
 name = in.nextLine();
@@ -251,21 +251,21 @@ System.out.printf(<span style="color:#B20000">"Hello %s, age %d
 </table><p>Try running this example code.
 It doesn’t let you input your name, and it immediately displays the output:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">What is your name? Hello , age 45</td></tr>
 </table><p>To understand what is happening, you have to understand that the <code>Scanner</code> doesn’t see input as multiple lines, like we do.
-Instead, it gets a “stream of characters” as shown in Figure <a href="#fig.hopper1">3.3</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+Instead, it gets a “stream of characters” as shown in Figure <a href="#fig.hopper1">3.3</a>.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6006.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 3.3: A stream of characters as seen by a <code>Scanner</code>.</td></tr>
 </table></div>
-<a id="fig.hopper1"/>
+<a name="fig.hopper1"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>The arrow indicates the next character to be read by <code>Scanner</code>.
 When you call <code>nextInt</code>, it reads characters until it gets to a non-digit.
-Figure <a href="#fig.hopper2">3.4</a> shows the state of the stream after <code>nextInt</code> is invoked.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+Figure <a href="#fig.hopper2">3.4</a> shows the state of the stream after <code>nextInt</code> is invoked.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6007.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 3.4: A stream of characters after <code>nextInt</code> is invoked.</td></tr>
 </table></div>
-<a id="fig.hopper2"/>
+<a name="fig.hopper2"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>At this point, <code>nextInt</code> returns <code>45</code>.
 The program then displays the prompt <span style="color:#B20000"><code>"What is your name? "</code></span> and calls <code>nextLine</code>, which reads characters until it gets to a newline.
@@ -278,27 +278,27 @@ System.out.printf(<span style="color:#B20000">"Hello %s, age %d
 "</span>, name, age);</td></tr>
 </table><p>This technique is common when reading <code><span style="color:blue">int</span></code> or <code><span style="color:blue">double</span></code> values that appear on their own line.
 First you read the number, and then you read the rest of the line, which is just a newline character.</p>
-<h2 id="sec42" class="section">3.11  Vocabulary</h2>
-<dl class="description"><dt class="dt-description"><span style="font-weight:bold">package:</span></dt><dd class="dd-description"><a id="hevea_default181"/>
+<h2 name="sec42" class="section">3.11  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">package:</span></dt><dd class="dd-description"><a name="hevea_default181"></a>
 A group of classes that are related to each other.
-</dd><dt class="dt-description"><span style="font-weight:bold">address:</span></dt><dd class="dd-description"><a id="hevea_default182"/>
-The location of a value in computer memory, often represented as a hexadecimal integer.</dd><dt class="dt-description"><span style="font-weight:bold">library:</span></dt><dd class="dd-description"><a id="hevea_default183"/>
+</dd><dt class="dt-description"><span style="font-weight:bold">address:</span></dt><dd class="dd-description"><a name="hevea_default182"></a>
+The location of a value in computer memory, often represented as a hexadecimal integer.</dd><dt class="dt-description"><span style="font-weight:bold">library:</span></dt><dd class="dd-description"><a name="hevea_default183"></a>
 A collection of packages and classes that are available for use in other programs.
-</dd><dt class="dt-description"><span style="font-weight:bold">import statement:</span></dt><dd class="dd-description"><a id="hevea_default184"/>
-A statement that allows programs to use classes defined in other packages.</dd><dt class="dt-description"><span style="font-weight:bold">token:</span></dt><dd class="dd-description"><a id="hevea_default185"/>
-A basic element of a program, such as a word, space, symbol, or number.</dd><dt class="dt-description"><span style="font-weight:bold">literal:</span></dt><dd class="dd-description"><a id="hevea_default186"/>
+</dd><dt class="dt-description"><span style="font-weight:bold">import statement:</span></dt><dd class="dd-description"><a name="hevea_default184"></a>
+A statement that allows programs to use classes defined in other packages.</dd><dt class="dt-description"><span style="font-weight:bold">token:</span></dt><dd class="dd-description"><a name="hevea_default185"></a>
+A basic element of a program, such as a word, space, symbol, or number.</dd><dt class="dt-description"><span style="font-weight:bold">literal:</span></dt><dd class="dd-description"><a name="hevea_default186"></a>
 A value that appears in source code.
-For example, <span style="color:#B20000"><code>"Hello"</code></span> is a string literal and <code>74</code> is an integer literal.</dd><dt class="dt-description"><span style="font-weight:bold">magic number:</span></dt><dd class="dd-description"><a id="hevea_default187"/>
+For example, <span style="color:#B20000"><code>"Hello"</code></span> is a string literal and <code>74</code> is an integer literal.</dd><dt class="dt-description"><span style="font-weight:bold">magic number:</span></dt><dd class="dd-description"><a name="hevea_default187"></a>
 A number that appears without explanation as part of an expression.
-It should generally be replaced with a constant.</dd><dt class="dt-description"><span style="font-weight:bold">constant:</span></dt><dd class="dd-description"><a id="hevea_default188"/>
-A variable, declared <code><span style="color:blue">final</span></code>, whose value cannot be changed.</dd><dt class="dt-description"><span style="font-weight:bold">format string:</span></dt><dd class="dd-description"><a id="hevea_default189"/>
-A string passed to <code>printf</code> to specify the format of the output.</dd><dt class="dt-description"><span style="font-weight:bold">format specifier:</span></dt><dd class="dd-description"><a id="hevea_default190"/>
-A special code that begins with a percent sign and specifies the data type and format of the corresponding value.</dd><dt class="dt-description"><span style="font-weight:bold">type cast:</span></dt><dd class="dd-description"><a id="hevea_default191"/>
+It should generally be replaced with a constant.</dd><dt class="dt-description"><span style="font-weight:bold">constant:</span></dt><dd class="dd-description"><a name="hevea_default188"></a>
+A variable, declared <code><span style="color:blue">final</span></code>, whose value cannot be changed.</dd><dt class="dt-description"><span style="font-weight:bold">format string:</span></dt><dd class="dd-description"><a name="hevea_default189"></a>
+A string passed to <code>printf</code> to specify the format of the output.</dd><dt class="dt-description"><span style="font-weight:bold">format specifier:</span></dt><dd class="dd-description"><a name="hevea_default190"></a>
+A special code that begins with a percent sign and specifies the data type and format of the corresponding value.</dd><dt class="dt-description"><span style="font-weight:bold">type cast:</span></dt><dd class="dd-description"><a name="hevea_default191"></a>
 An operation that explicitly converts one data type into another.
-In Java it appears as a type name in parentheses, like <code>(<span style="color:blue">int</span>)</code>.</dd><dt class="dt-description"><span style="font-weight:bold">modulus:</span></dt><dd class="dd-description"><a id="hevea_default192"/>
+In Java it appears as a type name in parentheses, like <code>(<span style="color:blue">int</span>)</code>.</dd><dt class="dt-description"><span style="font-weight:bold">modulus:</span></dt><dd class="dd-description"><a name="hevea_default192"></a>
 An operator that yields the remainder when one integer is divided by another.
 In Java, it is denoted with a percent sign; for example, <code>5 \% 2</code> is <code>1</code>.</dd></dl>
-<h2 id="sec43" class="section">3.12  Exercises</h2>
+<h2 name="sec43" class="section">3.12  Exercises</h2>
 <p>The code for this chapter is in the <span style="font-family:monospace">ch03</span> directory of <span style="font-family:monospace">ThinkJavaCode</span>.
 See page <a href="/thinkjava/preface.html#code">??</a> for instructions on how to download the repository.
 Before you start the exercises, we recommend that you compile and run the examples.</p><p>If you have not already read Appendix <a href="/thinkjava/appendix-a.html#commandline">A.3</a>, now might be a good time.
@@ -321,7 +321,7 @@ Write a program that converts a total number of seconds to hours, minutes, and s
 It should (1) prompt the user for input, (2) read an integer from the keyboard, (3) calculate the result, and (4) use <code>printf</code> to display the output.
 For example, <span style="font-family:monospace">"5000 seconds = 1 hours, 23 minutes, and 20 seconds"</span>.</em><p>Hint:<em> Use the modulus operator.
 </em></p></div><div class="theorem"><span style="font-weight:bold">Exercise 4</span>  
-<a id="guess"/><em>
+<a name="guess"></a><em>
 The goal of this exercise is to program a “Guess My Number” game.
 When it’s finished, it will work like this:</em><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><em>I'm thinking of a number between 1 and 100
 (including both). Can you guess what it is?
@@ -343,8 +343,8 @@ public class GuessStarter {
         System.out.println(number);
     }
 }
---></em></p><p><a id="hevea_default193"/>
-<a id="hevea_default194"/></p><p><em>Like the <code>Scanner</code> class we saw in this chapter, <code>Random</code> has to be imported before we can use it.
+--></em></p><p><a name="hevea_default193"></a>
+<a name="hevea_default194"></a></p><p><em>Like the <code>Scanner</code> class we saw in this chapter, <code>Random</code> has to be imported before we can use it.
 And as we saw with <code>Scanner</code>, we have to use the <span style="color:blue"><code>new</code></span> operator to create a <code>Random</code> (number generator).</em></p><p><em>Then we can use the method <code>nextInt</code> to generate a random number.
 In this example, the result of <code>nextInt(100)</code> will be between 0 and 99, including both.
 Adding 1 yields a number between 1 and 100, including both.</em></p><ol class="enumerate" type="1"><li class="li-enumerate"><em>The definition of <code>GuessStarter</code> is in a file called <span style="font-family:monospace">GuessStarter.java</span>, in the directory called <span style="font-family:monospace">ch03</span>, in the repository for this book.
@@ -355,40 +355,27 @@ Again, compile and test.</em></li><li class="li-enumerate"><em>Compute and displ
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/chapter3.html">Input and output</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/chapter3.html#sec32">The System class</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec33">The Scanner class</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec34">Program structure</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec35">Inches to centimeters</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec36">Literals and constants</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec37">Formatting output</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec38">Centimeters to inches</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec39">Modulus operator</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec40">Putting it all together</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec41">The Scanner bug</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec42">Vocabulary</a>
-      </li>
-      <li><a href="/thinkjava/chapter3.html#sec43">Exercises</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/chapter3.html#sec32">The System class</a>
+</li><li><a href="/thinkjava/chapter3.html#sec33">The Scanner class</a>
+</li><li><a href="/thinkjava/chapter3.html#sec34">Program structure</a>
+</li><li><a href="/thinkjava/chapter3.html#sec35">Inches to centimeters</a>
+</li><li><a href="/thinkjava/chapter3.html#sec36">Literals and constants</a>
+</li><li><a href="/thinkjava/chapter3.html#sec37">Formatting output</a>
+</li><li><a href="/thinkjava/chapter3.html#sec38">Centimeters to inches</a>
+</li><li><a href="/thinkjava/chapter3.html#sec39">Modulus operator</a>
+</li><li><a href="/thinkjava/chapter3.html#sec40">Putting it all together</a>
+</li><li><a href="/thinkjava/chapter3.html#sec41">The Scanner bug</a>
+</li><li><a href="/thinkjava/chapter3.html#sec42">Vocabulary</a>
+</li><li><a href="/thinkjava/chapter3.html#sec43">Exercises</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}Input and output | Think Java | Trinket{% endblock %}

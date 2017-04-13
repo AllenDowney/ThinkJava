@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,53 +7,53 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec174" class="chapter">Appendix A  Development tools</h1>
+        <div class="columns small-12"><h1 name="sec174" class="chapter">Appendix A  Development tools</h1>
 <p>
-<a id="development"/></p><p>The steps for compiling, running, and debugging Java code depend on your development environment and operating system.
+<a name="development"></a></p><p>The steps for compiling, running, and debugging Java code depend on your development environment and operating system.
 We avoided putting these details in the main text, because they can be distracting.
-Instead, we provide this appendix with a brief introduction to DrJava – an <span style="font-weight:bold">integrated development environment</span> (IDE) that is well suited for beginners – and other development tools, including Checkstyle for code quality and JUnit for testing.</p><p><a id="hevea_default765"/></p>
-<h2 id="sec175" class="section">A.1  Installing DrJava</h2>
+Instead, we provide this appendix with a brief introduction to DrJava – an <span style="font-weight:bold">integrated development environment</span> (IDE) that is well suited for beginners – and other development tools, including Checkstyle for code quality and JUnit for testing.</p><p><a name="hevea_default765"></a></p>
+<h2 name="sec175" class="section">A.1  Installing DrJava</h2>
 <p>
-<a id="drjava"/></p><p>The easiest way to start programming in Java is to use a website that compiles and runs Java code in the browser.
-Examples include <a href="https://www.jdoodle.com/"><span style="font-family:monospace">jdoodle.com</span></a>, <a href="https://www.compilejava.net/"><span style="font-family:monospace">compilejava.net</span></a>, <a href="http://tutorialspoint.com/"><span style="font-family:monospace">tutorialspoint.com</span></a>, and others.</p><p>If you are unable to install software on your computer (which is often the case in public schools and Internet cafés), you can use these online development environments for almost everything in this book.</p><p>But if you want to compile and run Java programs on your own computer, you will need:</p><ul class="itemize"><li class="li-itemize">The <span style="font-weight:bold">Java Development Kit</span> (JDK), which includes the compiler, the <span style="font-weight:bold">Java Virtual Machine</span> (JVM) that interprets the compiled byte code, and other tools such as Javadoc.<p><a id="hevea_default766"/>
-<a id="hevea_default767"/>
-<a id="hevea_default768"/>
-<a id="hevea_default769"/></p><p><a id="hevea_default770"/>
-<a id="hevea_default771"/></p></li><li class="li-itemize">A simple <span style="font-weight:bold">text editor</span> such as Notepad++ or Sublime Text, and/or an IDE such as DrJava, Eclipse, jGrasp, or NetBeans.</li></ul><p>The JDK we recommend is Java SE (Standard Edition), which Oracle makes available for free.
+<a name="drjava"></a></p><p>The easiest way to start programming in Java is to use a website that compiles and runs Java code in the browser.
+Examples include <a href="https://www.jdoodle.com/"><span style="font-family:monospace">jdoodle.com</span></a>, <a href="https://www.compilejava.net/"><span style="font-family:monospace">compilejava.net</span></a>, <a href="http://tutorialspoint.com/"><span style="font-family:monospace">tutorialspoint.com</span></a>, and others.</p><p>If you are unable to install software on your computer (which is often the case in public schools and Internet cafés), you can use these online development environments for almost everything in this book.</p><p>But if you want to compile and run Java programs on your own computer, you will need:</p><ul class="itemize"><li class="li-itemize">The <span style="font-weight:bold">Java Development Kit</span> (JDK), which includes the compiler, the <span style="font-weight:bold">Java Virtual Machine</span> (JVM) that interprets the compiled byte code, and other tools such as Javadoc.<p><a name="hevea_default766"></a>
+<a name="hevea_default767"></a>
+<a name="hevea_default768"></a>
+<a name="hevea_default769"></a></p><p><a name="hevea_default770"></a>
+<a name="hevea_default771"></a></p></li><li class="li-itemize">A simple <span style="font-weight:bold">text editor</span> such as Notepad++ or Sublime Text, and/or an IDE such as DrJava, Eclipse, jGrasp, or NetBeans.</li></ul><p>The JDK we recommend is Java SE (Standard Edition), which Oracle makes available for free.
 The IDE we recommend is DrJava, which is an open-source development environment written in Java (see Figure <a href="#fig.drjava1">A.1</a>).</p><p>To install the JDK, search the web for “download JDK” which should take you to Oracle’s website.
 Scroll down to “Java Platform, Standard Edition” and click the download button under JDK.
 Then accept the license agreement and select the installer for your operating system.
-Don’t forget to run the installer after you download it!</p><p><a id="hevea_default772"/></p><p>To install DrJava, visit <a href="http://drjava.org"><span style="font-family:monospace">http://drjava.org</span></a> and download the <span style="font-weight:bold">JAR</span> file.
+Don’t forget to run the installer after you download it!</p><p><a name="hevea_default772"></a></p><p>To install DrJava, visit <a href="http://drjava.org"><span style="font-family:monospace">http://drjava.org</span></a> and download the <span style="font-weight:bold">JAR</span> file.
 We recommend that you save it to your Desktop or another convenient location.
 Simply double-click the JAR file to run DrJava.
-Refer to the DrJava documentation (<a href="http://drjava.org/docs/quickstart/"><span style="font-family:monospace">http://drjava.org/docs/quickstart/</span></a>) for more details.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+Refer to the DrJava documentation (<a href="http://drjava.org/docs/quickstart/"><span style="font-family:monospace">http://drjava.org/docs/quickstart/</span></a>) for more details.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6033.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure A.1: Screenshot of DrJava editing the hello world program.</td></tr>
 </table></div>
-<a id="fig.drjava1"/>
+<a name="fig.drjava1"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>When running DrJava for the first time, we recommend you change three settings from the <span style="font-family:sans-serif">Edit </span>&gt;<span style="font-family:sans-serif"> Preferences</span> menu under <span style="font-family:sans-serif">Miscellaneous</span>: set the <span style="font-family:sans-serif">Indent Level</span> to 4, check the <span style="font-family:sans-serif">Automatically Close Block Comments</span> box, and uncheck the <span style="font-family:sans-serif">Keep Emacs-style Backup Files</span> box.</p>
-<h2 id="sec176" class="section">A.2  DrJava interactions</h2>
+<h2 name="sec176" class="section">A.2  DrJava interactions</h2>
 <p>
-<a id="interactions"/></p><p>One of the most useful features of DrJava is the “Interactions Pane” at the bottom of the window.
+<a name="interactions"></a></p><p>One of the most useful features of DrJava is the “Interactions Pane” at the bottom of the window.
 It provides the ability to try out code quickly, without having to write a class definition and save/compile/run the program.
-Figure <a href="#fig.drjava2">A.2</a> shows an example.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+Figure <a href="#fig.drjava2">A.2</a> shows an example.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6034.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure A.2: Screenshot of the Interactions Pane in DrJava.</td></tr>
 </table></div>
-<a id="fig.drjava2"/>
+<a name="fig.drjava2"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>There is one subtle detail to note when using the Interactions feature.
 If you don’t end an expression (or statement) with a semicolon, DrJava automatically displays its value.
 Notice in Figure <a href="#fig.drjava2">A.2</a> how the variable declarations end with semicolons, but the logic expressions in the following lines do not.
 This feature saves you from having to type <code>System.out.println</code> every time.</p><p>What’s nice about this feature is that you don’t have to create a new class, declare a <code>main</code> method, write arbitrary expressions inside <code>System.out.println</code> statements, save the source file, and get all of your code to compile in advance.
 Also, you can press the up/down arrows on the keyboard to repeat previous commands and experiment with incremental differences.</p>
-<h2 id="sec177" class="section">A.3  Command-line interface</h2>
+<h2 name="sec177" class="section">A.3  Command-line interface</h2>
 <p>
-<a id="commandline"/></p><p><a id="hevea_default773"/>
-<a id="hevea_default774"/></p><p>One of the most powerful and useful skills you can learn is how to use the <span style="font-weight:bold">command-line interface</span>, also called the “terminal”.
+<a name="commandline"></a></p><p><a name="hevea_default773"></a>
+<a name="hevea_default774"></a></p><p>One of the most powerful and useful skills you can learn is how to use the <span style="font-weight:bold">command-line interface</span>, also called the “terminal”.
 The command line is a direct interface to the operating system.
 It allows you to run programs, manage files and directories, and monitor system resources.
 Many advanced tools, both for software development and general purpose computing, are available only at the command line.</p><p>There are many good tutorials online for learning the command line for your operating system; just search the web for “command line tutorial”.
@@ -65,14 +65,14 @@ We run the program using the <span style="font-family:monospace">java</span> com
 <img src="thinkjava6035.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure A.3: Compiling and running <span style="font-family:monospace">Hello.java</span> from the command line.</td></tr>
 </table></div>
-<a id="fig.terminal"/>
+<a name="fig.terminal"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>Note that the <span style="font-family:monospace">javac</span> command requires a <em>filename</em> (or multiple source files separated by spaces), whereas the <span style="font-family:monospace">java</span> command requires a single <em>class name</em>.
 If you use DrJava, it runs these commands for you behind the scenes and displays the output in the Interactions Pane.</p><p>Taking time to learn this efficient and elegant way of interacting with your operating system will make you more productive.
 People who don’t use the command line don’t know what they’re missing.</p>
-<h2 id="sec178" class="section">A.4  Command-line testing</h2>
+<h2 name="sec178" class="section">A.4  Command-line testing</h2>
 <p>
-<a id="cltesting"/></p><p>As described in Section <a href="/thinkjava/chapter1.html#sec%3Aexamples">1.8</a>, it’s more effective to program and debug your code little by little than to attempt writing everything all at once.
+<a name="cltesting"></a></p><p>As described in Section <a href="/thinkjava/chapter1.html#sec%3Aexamples">1.8</a>, it’s more effective to program and debug your code little by little than to attempt writing everything all at once.
 And after you’ve completed programming an algorithm, it’s important to test that it works correctly on a variety of inputs.</p><p>Throughout the book, we illustrate techniques for testing your programs.
 Most if not all testing is based on a simple idea: does the program do what we expect it to do?
 For simple programs, it’s not difficult to run them several times and see what happens.
@@ -84,9 +84,9 @@ Enter the following line and save the file:<table class="lstframe" style="paddin
 Enter the following line and save the file:<table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">193.04 cm = 6 ft, 4 in</td></tr>
 </table></li><li class="li-enumerate">Open a terminal, and change to the directory with these files.
 Run the following command to test the program:<table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">java Convert &lt; test.in &gt; test.out</td></tr>
-</table></li></ol><p><a id="hevea_default775"/>
-<a id="hevea_default776"/>
-<a id="hevea_default777"/></p><p>On the command line, <span style="font-family:monospace">&lt;</span> and <span style="font-family:monospace">&gt;</span> are <span style="font-weight:bold">redirection operators</span>.
+</table></li></ol><p><a name="hevea_default775"></a>
+<a name="hevea_default776"></a>
+<a name="hevea_default777"></a></p><p>On the command line, <span style="font-family:monospace">&lt;</span> and <span style="font-family:monospace">&gt;</span> are <span style="font-weight:bold">redirection operators</span>.
 The first one redirects the contents of <span style="font-family:monospace">test.in</span> to <code>System.in</code>, as if it were entered from the keyboard.
 The second one redirects the contents of <code>System.out</code> to a new file <span style="font-family:monospace">test.out</span>, much like a screen capture.
 In other words, the <span style="font-family:monospace">test.out</span> file contains the output of your program.</p><p>By the way, it’s perfectly okay to compile your programs in DrJava (or some other environment) and run them from the command line.
@@ -95,7 +95,7 @@ Knowing both techniques allows you to use the right tool for the job.</p><blockq
 <img src="thinkjava6036.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure A.4: Using <span style="font-family:monospace">meld</span> to compare expected output with the actual output.</td></tr>
 </table></div>
-<a id="fig.meld"/>
+<a name="fig.meld"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>At this point, we just need to compare the contents <span style="font-family:monospace">test.out</span> with <span style="font-family:monospace">test.exp</span>.
 If the files are the same, then the program outputted what we expected it to output.
@@ -108,13 +108,13 @@ Usually the program is at fault, and <span style="font-family:monospace">diff</s
 But there’s also a chance that we have a correct program and the expected output is wrong.</p><p>Interpreting the results from <span style="font-family:monospace">diff</span> can be confusing, but fortunately there are many graphical tools that show the differences between two files.
 For example, on Windows you can install <span style="font-family:monospace">WinMerge</span>, on Mac you can use <span style="font-family:monospace">opendiff</span> (which comes with Xcode), and on Linux there’s <span style="font-family:monospace">meld</span>, shown in Figure <a href="#fig.meld">A.4</a>.</p><p>Regardless of what tool you use, the goal is the same.
 Debug your program until the actual output is <em>identical</em> to the expected output.</p>
-<h2 id="sec179" class="section">A.5  Running Checkstyle</h2>
+<h2 name="sec179" class="section">A.5  Running Checkstyle</h2>
 <p>
-<a id="checkstyle"/></p><p><a id="hevea_default778"/></p><p>Checkstyle is a command-line tool that can be used to determine if your source code follows a set of style rules.
+<a name="checkstyle"></a></p><p><a name="hevea_default778"></a></p><p>Checkstyle is a command-line tool that can be used to determine if your source code follows a set of style rules.
 It also checks for common programming mistakes, such as class and method design problems.</p><p>You can download the latest version as a JAR file from <a href="http://checkstyle.sourceforge.net/"><span style="font-family:monospace">http://checkstyle.sourceforge.net/</span></a>.
 To run Checkstyle, move (or copy) the JAR file to the same directory as your program.
 Open a terminal in that location, and run the following command:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">java -jar checkstyle-*-all.jar -c /google_checks.xml *.java</td></tr>
-</table><p><a id="hevea_default779"/></p><p>The <span style="font-family:monospace">*</span> characters are <span style="font-weight:bold">wildcards</span> that match whatever version of Checkstyle you have and whatever Java source files are present.
+</table><p><a name="hevea_default779"></a></p><p>The <span style="font-family:monospace">*</span> characters are <span style="font-weight:bold">wildcards</span> that match whatever version of Checkstyle you have and whatever Java source files are present.
 The output indicates the file and line number of each problem.
 This example refers to a method beginning on line 93, column 5 of <span style="font-family:monospace">Hello.java</span>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Hello.java:93:5: Missing a Javadoc comment</td></tr>
 </table><p>The file <code>/google_checks.xml</code> is inside the JAR file and represents most of Google’s style rules.
@@ -124,17 +124,17 @@ But there are limits to what automatic style checkers can do.
 In particular, they can’t evaluate the <em>quality</em> of your comments, the <em>meaning</em> of your variable names, or the <em>structure</em> of your algorithms.</p><p>Good comments make it easier for experienced developers to identify errors in your code.
 Good variable names communicate the intent of your program and how the data is organized.
 And good programs are designed to be efficient and demonstrably correct.</p>
-<h2 id="sec180" class="section">A.6  Tracing with a debugger</h2>
+<h2 name="sec180" class="section">A.6  Tracing with a debugger</h2>
 <p>
-<a id="debugger"/></p><p><a id="hevea_default780"/></p><p>A great way to visualize the flow of execution, including how parameters and arguments work, is to use a <span style="font-weight:bold">debugger</span>.
-Most debuggers make it possible to:</p><p><a id="hevea_default781"/></p><ol class="enumerate" type="1"><li class="li-enumerate">
+<a name="debugger"></a></p><p><a name="hevea_default780"></a></p><p>A great way to visualize the flow of execution, including how parameters and arguments work, is to use a <span style="font-weight:bold">debugger</span>.
+Most debuggers make it possible to:</p><p><a name="hevea_default781"></a></p><ol class="enumerate" type="1"><li class="li-enumerate">
 Set a <span style="font-weight:bold">breakpoint</span>, a line where you want the program to pause.
 </li><li class="li-enumerate">Step through the code one line at a time and watch what it does.
 </li><li class="li-enumerate">Check the values of variables and see when and how they change.
 </li></ol><p>For example, open any program in DrJava and move the cursor to the first line of <code>main</code>.
 Press <span style="font-family:sans-serif">Ctrl+B</span> to toggle a breakpoint on the current line; it should now be highlighted in red.
 Press <span style="font-family:sans-serif">Ctrl+Shift+D</span> to turn on Debug Mode; a new pane should appear at the bottom of the window.
-These commands are also available from the <span style="font-family:sans-serif">Debugger</span> menu, in case you forget the shortcut keys.</p><p><a id="hevea_default782"/></p><p>When you run the program, execution pauses at the first breakpoint.
+These commands are also available from the <span style="font-family:sans-serif">Debugger</span> menu, in case you forget the shortcut keys.</p><p><a name="hevea_default782"></a></p><p>When you run the program, execution pauses at the first breakpoint.
 The debug pane displays the <span style="font-weight:bold">call stack</span>, with the current method on top of the stack, as shown in Figure <a href="#fig.debugger">A.5</a>.
 You might be surprised to see how many methods were called before the <code>main</code> method!</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
 <div class="center">
@@ -143,7 +143,7 @@ You might be surprised to see how many methods were called before the <code>main
 Execution is currently paused on the first line of <code>printTwice</code>.
 There is a breakpoint on the first line of <code>main</code>.</td></tr>
 </table></div>
-<a id="fig.debugger"/>
+<a name="fig.debugger"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>To the right are several buttons that allow you to step through the code at your own pace.
 You can also press <span style="font-family:sans-serif">Automatic Trace</span> to watch DrJava run your code one line at a time.</p><p>Using a debugger is like having the computer proofread your code out loud.
@@ -151,9 +151,9 @@ When the program is paused, you can examine (or even change) the value of any va
 You might expect the code do one thing, but then the debugger shows it doing something else.
 At that moment, you gain insight about what may be wrong with the code.</p><p>You can edit your code while debugging it, but we don’t recommend it.
 If you add or delete multiple lines of code while the program is paused, the results can be confusing.</p><p>See <a href="http://drjava.org/docs/user/ch09.html"><span style="font-family:monospace">http://drjava.org/docs/user/ch09.html</span></a> for more information about using the debugger feature of DrJava.</p>
-<h2 id="sec181" class="section">A.7  Testing with JUnit</h2>
+<h2 name="sec181" class="section">A.7  Testing with JUnit</h2>
 <p>
-<a id="JUnit"/></p><p><a id="hevea_default783"/></p><p>When beginners start writing methods, they usually test them by invoking them from <code>main</code> and checking the results by hand.
+<a name="JUnit"></a></p><p><a name="hevea_default783"></a></p><p>When beginners start writing methods, they usually test them by invoking them from <code>main</code> and checking the results by hand.
 Writing code like this can get repetitive, but there are tools to make it easier.
 For cases where we know the right answer, we can do better by writing <span style="font-weight:bold">unit tests</span>.</p><p>For example, to test <code>fibonacci</code> from Section <a href="/thinkjava/chapter6.html#fibonacci">6.9</a>, we could write:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> main(String[] args) {
     <span style="color:blue">if</span> (fibonacci(1) != 1) {
@@ -187,54 +187,45 @@ In DrJava, you can select <span style="font-family:sans-serif">New JUnit Test Ca
 It takes two arguments and checks whether they are equal.
 If so, it does nothing; otherwise it displays a detailed error message.
 Normally the first argument is the “expected value”, which we consider correct, and the second argument is the “actual value” we want to check.
-If they are not equal, the test fails.</p><p><a id="hevea_default784"/></p><p>Using <code>assertEquals</code> is more concise than writing your own <code><span style="color:blue">if</span></code> statements and <code>System.err</code> messages.
+If they are not equal, the test fails.</p><p><a name="hevea_default784"></a></p><p>Using <code>assertEquals</code> is more concise than writing your own <code><span style="color:blue">if</span></code> statements and <code>System.err</code> messages.
 JUnit provides additional assert methods, such as <code>assertNull</code>, <code>assertSame</code>, and <code>assertTrue</code>, that can be used to design a variety of tests.</p><p>To run JUnit directly from DrJava, click the <span style="font-family:sans-serif">Test</span> button on the toolbar.
 If all your test methods pass, you will see a green bar in the lower-right corner.
 Otherwise, DrJava will take you directly to the first assertion that failed.</p>
-<h2 id="sec182" class="section">A.8  Vocabulary</h2>
-<dl class="description"><dt class="dt-description"><span style="font-weight:bold">IDE:</span></dt><dd class="dd-description"><a id="hevea_default785"/>
-An “integrated development environment” that includes tools for editing, compiling, and debugging programs.</dd><dt class="dt-description"><span style="font-weight:bold">JDK:</span></dt><dd class="dd-description"><a id="hevea_default786"/>
-The “Java Development Kit” that contains the compiler, Javadoc, and other tools.</dd><dt class="dt-description"><span style="font-weight:bold">JVM:</span></dt><dd class="dd-description"><a id="hevea_default787"/>
-The “Java Virtual Machine” that interprets the compiled byte code.</dd><dt class="dt-description"><span style="font-weight:bold">text editor:</span></dt><dd class="dd-description"><a id="hevea_default788"/>
-A program that edits plain text files, the format used by most programming languages.</dd><dt class="dt-description"><span style="font-weight:bold">JAR:</span></dt><dd class="dd-description"><a id="hevea_default789"/>
-A “Java Archive”, which is essentially a ZIP file containing classes and other resources.</dd><dt class="dt-description"><span style="font-weight:bold">command-line interface:</span></dt><dd class="dd-description"><a id="hevea_default790"/>
-A means of interacting with the computer by issuing commands in the form of successive lines of text.</dd><dt class="dt-description"><span style="font-weight:bold">redirection operator:</span></dt><dd class="dd-description"><a id="hevea_default791"/>
-A command-line feature that substitutes <code>System.in</code> and/or <code>System.out</code> with a plain text file.</dd><dt class="dt-description"><span style="font-weight:bold">wildcard:</span></dt><dd class="dd-description"><a id="hevea_default792"/>
-A command-line feature that allows you to specify a pattern of filenames using the <span style="font-family:monospace">*</span> character.</dd><dt class="dt-description"><span style="font-weight:bold">debugger:</span></dt><dd class="dd-description"><a id="hevea_default793"/>
-A tool that allows you to run one statement at a time and see the contents of variables.</dd><dt class="dt-description"><span style="font-weight:bold">breakpoint:</span></dt><dd class="dd-description"><a id="hevea_default794"/>
-A line of code where the debugger will pause a running program.</dd><dt class="dt-description"><span style="font-weight:bold">call stack:</span></dt><dd class="dd-description"><a id="hevea_default795"/>
-The history of method calls and where to resume execution after each method returns.</dd><dt class="dt-description"><span style="font-weight:bold">unit test:</span></dt><dd class="dd-description"><a id="hevea_default796"/>
+<h2 name="sec182" class="section">A.8  Vocabulary</h2>
+<dl class="description"><dt class="dt-description"><span style="font-weight:bold">IDE:</span></dt><dd class="dd-description"><a name="hevea_default785"></a>
+An “integrated development environment” that includes tools for editing, compiling, and debugging programs.</dd><dt class="dt-description"><span style="font-weight:bold">JDK:</span></dt><dd class="dd-description"><a name="hevea_default786"></a>
+The “Java Development Kit” that contains the compiler, Javadoc, and other tools.</dd><dt class="dt-description"><span style="font-weight:bold">JVM:</span></dt><dd class="dd-description"><a name="hevea_default787"></a>
+The “Java Virtual Machine” that interprets the compiled byte code.</dd><dt class="dt-description"><span style="font-weight:bold">text editor:</span></dt><dd class="dd-description"><a name="hevea_default788"></a>
+A program that edits plain text files, the format used by most programming languages.</dd><dt class="dt-description"><span style="font-weight:bold">JAR:</span></dt><dd class="dd-description"><a name="hevea_default789"></a>
+A “Java Archive”, which is essentially a ZIP file containing classes and other resources.</dd><dt class="dt-description"><span style="font-weight:bold">command-line interface:</span></dt><dd class="dd-description"><a name="hevea_default790"></a>
+A means of interacting with the computer by issuing commands in the form of successive lines of text.</dd><dt class="dt-description"><span style="font-weight:bold">redirection operator:</span></dt><dd class="dd-description"><a name="hevea_default791"></a>
+A command-line feature that substitutes <code>System.in</code> and/or <code>System.out</code> with a plain text file.</dd><dt class="dt-description"><span style="font-weight:bold">wildcard:</span></dt><dd class="dd-description"><a name="hevea_default792"></a>
+A command-line feature that allows you to specify a pattern of filenames using the <span style="font-family:monospace">*</span> character.</dd><dt class="dt-description"><span style="font-weight:bold">debugger:</span></dt><dd class="dd-description"><a name="hevea_default793"></a>
+A tool that allows you to run one statement at a time and see the contents of variables.</dd><dt class="dt-description"><span style="font-weight:bold">breakpoint:</span></dt><dd class="dd-description"><a name="hevea_default794"></a>
+A line of code where the debugger will pause a running program.</dd><dt class="dt-description"><span style="font-weight:bold">call stack:</span></dt><dd class="dd-description"><a name="hevea_default795"></a>
+The history of method calls and where to resume execution after each method returns.</dd><dt class="dt-description"><span style="font-weight:bold">unit test:</span></dt><dd class="dd-description"><a name="hevea_default796"></a>
 Code that exercises a single method of a program, testing for correctness and/or efficiency.</dd></dl>
 </div>
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/appendix-a.html">Development tools</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/appendix-a.html#sec175">Installing DrJava</a>
-      </li>
-      <li><a href="/thinkjava/appendix-a.html#sec176">DrJava interactions</a>
-      </li>
-      <li><a href="/thinkjava/appendix-a.html#sec177">Command-line interface</a>
-      </li>
-      <li><a href="/thinkjava/appendix-a.html#sec178">Command-line testing</a>
-      </li>
-      <li><a href="/thinkjava/appendix-a.html#sec179">Running Checkstyle</a>
-      </li>
-      <li><a href="/thinkjava/appendix-a.html#sec180">Tracing with a debugger</a>
-      </li>
-      <li><a href="/thinkjava/appendix-a.html#sec181">Testing with JUnit</a>
-      </li>
-      <li><a href="/thinkjava/appendix-a.html#sec182">Vocabulary</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/appendix-a.html#sec175">Installing DrJava</a>
+</li><li><a href="/thinkjava/appendix-a.html#sec176">DrJava interactions</a>
+</li><li><a href="/thinkjava/appendix-a.html#sec177">Command-line interface</a>
+</li><li><a href="/thinkjava/appendix-a.html#sec178">Command-line testing</a>
+</li><li><a href="/thinkjava/appendix-a.html#sec179">Running Checkstyle</a>
+</li><li><a href="/thinkjava/appendix-a.html#sec180">Tracing with a debugger</a>
+</li><li><a href="/thinkjava/appendix-a.html#sec181">Testing with JUnit</a>
+</li><li><a href="/thinkjava/appendix-a.html#sec182">Vocabulary</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}Development tools | Think Java | Trinket{% endblock %}

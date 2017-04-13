@@ -1,5 +1,5 @@
 
-            
+
 {% extends 'books/thinkjava/base.html' %}
 {% block chaptercontent %}
 <div class="row">
@@ -7,21 +7,21 @@
 
 
       <div class="row">
-        <div class="columns small-12"><h1 id="sec7" class="chapter">Chapter 1  The way of the program</h1>
+        <div class="columns small-12"><h1 name="sec7" class="chapter">Chapter 1  The way of the program</h1>
 <p>
-<a id="theway"/></p><p>The goal of this book is to teach you to think like a computer scientist.
+<a name="theway"></a></p><p>The goal of this book is to teach you to think like a computer scientist.
 This way of thinking combines some of the best features of mathematics, engineering, and natural science.
 Like mathematicians, computer scientists use formal languages to denote ideas, specifically computations.
 Like engineers, they design things, assembling components into systems and evaluating trade-offs among alternatives.
-And like scientists, they observe the behavior of complex systems, form hypotheses, and test predictions.</p><p><a id="hevea_default2"/></p><p>The single most important skill for a computer scientist is <span style="font-weight:bold">problem solving</span>.
+And like scientists, they observe the behavior of complex systems, form hypotheses, and test predictions.</p><p><a name="hevea_default2"></a></p><p>The single most important skill for a computer scientist is <span style="font-weight:bold">problem solving</span>.
 It involves the ability to formulate problems, think creatively about solutions, and express solutions clearly and accurately.
 As it turns out, the process of learning to program is an excellent opportunity to develop problem solving skills.
 That’s why this chapter is called, “The way of the program”.</p><p>On one level you will be learning to program, a useful skill by itself.
 But on another level you will use programming as a means to an end.
 As we go along, that end will become clearer.
 </p>
-<h2 id="sec8" class="section">1.1  What is programming?</h2>
-<p><a id="hevea_default3"/></p><p>A <span style="font-weight:bold">program</span> is a sequence of instructions that specifies how to perform a computation.
+<h2 name="sec8" class="section">1.1  What is programming?</h2>
+<p><a name="hevea_default3"></a></p><p>A <span style="font-weight:bold">program</span> is a sequence of instructions that specifies how to perform a computation.
 The computation might be something mathematical, like solving a system of equations or finding the roots of a polynomial.
 It can also be a symbolic computation, like searching and replacing text in a document or (strangely enough) compiling a program.
 The details look different in different languages, but a few basic instructions appear in just about every language.</p><dl class="description"><dt class="dt-description">
@@ -30,55 +30,55 @@ The details look different in different languages, but a few basic instructions 
 </dd><dt class="dt-description"><span style="font-weight:bold">math:</span></dt><dd class="dd-description"> Perform basic mathematical operations like addition and division.
 </dd><dt class="dt-description"><span style="font-weight:bold">decisions:</span></dt><dd class="dd-description"> Check for certain conditions and execute the appropriate code.
 </dd><dt class="dt-description"><span style="font-weight:bold">repetition:</span></dt><dd class="dd-description"> Perform some action repeatedly, usually with some variation.
-</dd></dl><p><a id="hevea_default4"/></p><p>Believe it or not, that’s pretty much all there is to it.
+</dd></dl><p><a name="hevea_default4"></a></p><p>Believe it or not, that’s pretty much all there is to it.
 Every program you’ve ever used, no matter how complicated, is made up of small instructions that look much like these.
 So you can think of <span style="font-weight:bold">programming</span> as the process of breaking down a large, complex task into smaller and smaller subtasks.
 The process continues until the subtasks are simple enough to be performed with the basic instructions provided by the computer.</p>
-<h2 id="sec9" class="section">1.2  What is computer science?</h2>
+<h2 name="sec9" class="section">1.2  What is computer science?</h2>
 <p>One of the most interesting aspects of writing programs is deciding how to solve a particular problem, especially when there are multiple solutions.
 For example, there are numerous ways to sort a list of numbers, and each way has its advantages.
 In order to determine which way is best for a given situation, we need techniques for describing and analyzing solutions formally.
-</p><p><a id="hevea_default5"/>
-<a id="hevea_default6"/></p><p><span style="font-weight:bold">Computer science</span> is the science of algorithms, including their discovery and analysis.
+</p><p><a name="hevea_default5"></a>
+<a name="hevea_default6"></a></p><p><span style="font-weight:bold">Computer science</span> is the science of algorithms, including their discovery and analysis.
 An <span style="font-weight:bold">algorithm</span> is a sequence of steps that specifies how to solve a problem.
 Some algorithms are faster than others, and some use less space in computer memory.
 As you learn to develop algorithms for problems you haven’t solved before, you also learn to think like a computer scientist.
-</p><p><a id="hevea_default7"/>
-<a id="hevea_default8"/></p><p>Designing algorithms and writing code is difficult and error-prone.
+</p><p><a name="hevea_default7"></a>
+<a name="hevea_default8"></a></p><p>Designing algorithms and writing code is difficult and error-prone.
 For historical reasons, programming errors are called <span style="font-weight:bold">bugs</span>, and the process of tracking them down and correcting them is called <span style="font-weight:bold">debugging</span>.
 As you learn to debug your programs, you will develop new problem solving skills.
 You will need to think creatively when unexpected errors happen.</p><p>Although it can be frustrating, debugging is an intellectually rich, challenging, and interesting part of computer programming.
 In some ways, debugging is like detective work.
 You are confronted with clues, and you have to infer the processes and events that led to the results you see.
 Thinking about how to correct programs and improve their performance sometimes even leads to the discovery of new algorithms.</p>
-<h2 id="sec10" class="section">1.3  Programming languages</h2>
-<p><a id="hevea_default9"/>
-<a id="hevea_default10"/></p><p>The programming language you will learn is Java, which is a <span style="font-weight:bold">high-level language</span>.
-Other high-level languages you may have heard of include Python, C and C++, Ruby, and JavaScript.</p><p><a id="hevea_default11"/>
-<a id="hevea_default12"/></p><p>Before they can run, programs in high-level languages have to be translated into a <span style="font-weight:bold">low-level language</span>, also called “machine language”.
+<h2 name="sec10" class="section">1.3  Programming languages</h2>
+<p><a name="hevea_default9"></a>
+<a name="hevea_default10"></a></p><p>The programming language you will learn is Java, which is a <span style="font-weight:bold">high-level language</span>.
+Other high-level languages you may have heard of include Python, C and C++, Ruby, and JavaScript.</p><p><a name="hevea_default11"></a>
+<a name="hevea_default12"></a></p><p>Before they can run, programs in high-level languages have to be translated into a <span style="font-weight:bold">low-level language</span>, also called “machine language”.
 This translation takes some time, which is a small disadvantage of high-level languages.
 But high-level languages have two advantages:</p><ul class="itemize"><li class="li-itemize">It is <em>much</em> easier to program in a high-level language.
-Programs take less time to write, they are shorter and easier to read, and they are more likely to be correct.<p><a id="hevea_default13"/></p></li><li class="li-itemize">High-level languages are <span style="font-weight:bold">portable</span>, meaning they can run on different kinds of computers with few or no modifications.
-Low-level programs can only run on one kind of computer, and have to be rewritten to run on another.</li></ul><p><a id="hevea_default14"/></p><p>Two kinds of programs translate high-level languages into low-level languages: interpreters and compilers.
+Programs take less time to write, they are shorter and easier to read, and they are more likely to be correct.<p><a name="hevea_default13"></a></p></li><li class="li-itemize">High-level languages are <span style="font-weight:bold">portable</span>, meaning they can run on different kinds of computers with few or no modifications.
+Low-level programs can only run on one kind of computer, and have to be rewritten to run on another.</li></ul><p><a name="hevea_default14"></a></p><p>Two kinds of programs translate high-level languages into low-level languages: interpreters and compilers.
 An <span style="font-weight:bold">interpreter</span> reads a high-level program and executes it, meaning that it does what the program says.
 It processes the program a little at a time, alternately reading lines and performing computations.
-Figure <a href="#fig.interpreter">1.1</a> shows the structure of an interpreter.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"/></div>
+Figure <a href="#fig.interpreter">1.1</a> shows the structure of an interpreter.</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></a></div>
 <div class="center">
 <img src="thinkjava6001.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 1.1: How interpreted languages are executed.</td></tr>
 </table></div>
-<a id="fig.interpreter"/>
+<a name="fig.interpreter"></a>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default15"/>
-<a id="hevea_default16"/>
-<a id="hevea_default17"/>
-<a id="hevea_default18"/></p><p>In contrast, a <span style="font-weight:bold">compiler</span> reads the entire program and translates it completely before the program starts running.
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default15"></a>
+<a name="hevea_default16"></a>
+<a name="hevea_default17"></a>
+<a name="hevea_default18"></a></p><p>In contrast, a <span style="font-weight:bold">compiler</span> reads the entire program and translates it completely before the program starts running.
 In this context, the high-level program is called the <span style="font-weight:bold">source code</span>, and the translated program is called the <span style="font-weight:bold">object code</span> or the <span style="font-weight:bold">executable</span>.
 Once a program is compiled, you can execute it repeatedly without further translation.
 As a result, compiled programs often run faster than interpreted programs.
-</p><p><a id="hevea_default19"/>
-<a id="hevea_default20"/>
-<a id="hevea_default21"/></p><p>Java is <em>both</em> compiled and interpreted.
+</p><p><a name="hevea_default19"></a>
+<a name="hevea_default20"></a>
+<a name="hevea_default21"></a></p><p>Java is <em>both</em> compiled and interpreted.
 Instead of translating programs directly into machine language, the Java compiler generates <span style="font-weight:bold">byte code</span>.
 Similar to machine language, byte code is easy and fast to interpret.
 But it is also portable, so it is possible to compile a Java program on one machine, transfer the byte code to another machine, and run the byte code on the other machine.
@@ -88,15 +88,15 @@ The interpreter that runs byte code is called a “Java Virtual Machine” (JVM)
 <img src="thinkjava6002.png"/>
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Figure 1.2: The process of compiling and running a Java program.</td></tr>
 </table></div>
-<a id="fig.compiler"/>
+<a name="fig.compiler"></a>
 </div>
 <div class="center"><hr style="width:80%;height:2"/></div></blockquote><p>Figure <a href="#fig.compiler">1.2</a> shows the steps of this process.
 Although it might seem complicated, these steps are automated for you in most program development environments.
 Usually you only have to press a button or type a single command to compile and run your program.
 On the other hand, it is important to know what steps are happening in the background, so if something goes wrong you can figure out what it is.</p>
-<h2 id="sec11" class="section">1.4  The hello world program</h2>
+<h2 name="sec11" class="section">1.4  The hello world program</h2>
 <p>
-<a id="hello"/></p><p><a id="hevea_default22"/></p><p>Traditionally, the first program you write when learning a new programming language is called the hello world program.
+<a name="hello"></a></p><p><a name="hevea_default22"></a></p><p>Traditionally, the first program you write when learning a new programming language is called the hello world program.
 All it does is display the words “Hello, World!” on the screen.
 In Java, it looks like this:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{Hello.java}----
@@ -108,29 +108,29 @@ public class Hello {
     }
 }
 --></p><p>When this program runs it displays:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Hello, World!</td></tr>
-</table><p>Notice that the output does not include the quotation marks.</p><p><a id="hevea_default23"/>
-<a id="hevea_default24"/>
-<a id="hevea_default25"/>
-<a id="hevea_default26"/></p><p>Java programs are made up of <em>class</em> and <em>method</em> definitions, and methods are made up of <em>statements</em>.
+</table><p>Notice that the output does not include the quotation marks.</p><p><a name="hevea_default23"></a>
+<a name="hevea_default24"></a>
+<a name="hevea_default25"></a>
+<a name="hevea_default26"></a></p><p>Java programs are made up of <em>class</em> and <em>method</em> definitions, and methods are made up of <em>statements</em>.
 A <span style="font-weight:bold">statement</span> is a line of code that performs a basic operation.
 In the hello world program, this line is a <span style="font-weight:bold">print statement</span> that displays a message on the screen:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(<span style="color:#B20000">"Hello, World!"</span>);</td></tr>
-</table><p><a id="hevea_default27"/>
-<a id="hevea_default28"/></p><p><code>System.out.println</code> displays results on the screen; the name <code>println</code> stands for “print line”.
+</table><p><a name="hevea_default27"></a>
+<a name="hevea_default28"></a></p><p><code>System.out.println</code> displays results on the screen; the name <code>println</code> stands for “print line”.
 Confusingly, <em>print</em> can mean both “display on the screen” and “send to the printer”.
 In this book, we’ll try to say “display” when we mean output to the screen.
-Like most statements, the print statement ends with a semicolon (<code>;</code>).</p><p><a id="hevea_default29"/></p><p>Java is “case-sensitive”, which means that uppercase and lowercase are not the same.
-In this example, <code>System</code> has to begin with an uppercase letter; <code>system</code> and <code>SYSTEM</code> won’t work.</p><p><a id="hevea_default30"/></p><p>A <span style="font-weight:bold">method</span> is a named sequence of statements.
+Like most statements, the print statement ends with a semicolon (<code>;</code>).</p><p><a name="hevea_default29"></a></p><p>Java is “case-sensitive”, which means that uppercase and lowercase are not the same.
+In this example, <code>System</code> has to begin with an uppercase letter; <code>system</code> and <code>SYSTEM</code> won’t work.</p><p><a name="hevea_default30"></a></p><p>A <span style="font-weight:bold">method</span> is a named sequence of statements.
 This program defines one method named <code>main</code>:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting"><span style="color:blue">public static void</span> main(String[] args)</td></tr>
-</table><p><a id="hevea_default31"/></p><p>The name and format of <code>main</code> is special: when the program runs, it starts at the first statement in <code>main</code> and ends when it finishes the last statement.
-Later, we will see programs that define more than one method.</p><p><a id="hevea_default32"/></p><p>A <span style="font-weight:bold">class</span> is a collection of methods.
+</table><p><a name="hevea_default31"></a></p><p>The name and format of <code>main</code> is special: when the program runs, it starts at the first statement in <code>main</code> and ends when it finishes the last statement.
+Later, we will see programs that define more than one method.</p><p><a name="hevea_default32"></a></p><p>A <span style="font-weight:bold">class</span> is a collection of methods.
 This program defines a class named <code>Hello</code>.
 You can give a class any name you like, but it is conventional to start with a capital letter.
 The name of the class has to match the name of the file it is in, so this class has to be in a file named <span style="font-family:monospace">Hello.java</span>.</p><p>Java uses squiggly braces ({ and }) to group things together.
-In <span style="font-family:monospace">Hello.java</span>, the outermost braces contain the class definition, and the inner braces contain the method definition.</p><p><a id="hevea_default33"/>
-<a id="hevea_default34"/></p><p>The line that begins with two slashes (<span style="color:#007C00"><code>//</code></span>) is a <span style="font-weight:bold">comment</span>, which is a bit of English text that explains the code.
+In <span style="font-family:monospace">Hello.java</span>, the outermost braces contain the class definition, and the inner braces contain the method definition.</p><p><a name="hevea_default33"></a>
+<a name="hevea_default34"></a></p><p>The line that begins with two slashes (<span style="color:#007C00"><code>//</code></span>) is a <span style="font-weight:bold">comment</span>, which is a bit of English text that explains the code.
 When the compiler sees <span style="color:#007C00"><code>//</code></span>, it ignores everything from there until the end of the line.
 Comments have no effect on the execution of the program, but they make it easier for other programmers (and your future self) to understand what you meant to do.</p>
-<h2 id="sec12" class="section">1.5  Displaying strings</h2>
+<h2 name="sec12" class="section">1.5  Displaying strings</h2>
 <p>You can put as many statements as you like in <code>main</code>.
 For example, to display more than one line of output:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{Hello.java}----
@@ -142,13 +142,13 @@ public class Hello {
         System.out.println("How are you?");   // another line
     }
 }
---></p><p>As this example shows, you can put comments at the end of a line as well as on lines all by themselves.</p><p><a id="hevea_default35"/>
-<a id="hevea_default36"/>
-<a id="hevea_default37"/>
-<a id="hevea_default38"/></p><p>Phrases that appear in quotation marks are called <span style="font-weight:bold">strings</span>, because they contain a sequence of “characters” strung together.
-Characters can be letters, numbers, punctuation marks, symbols, spaces, tabs, etc.</p><p><a id="hevea_default39"/>
-<a id="hevea_default40"/>
-<a id="hevea_default41"/></p><p><code>System.out.println</code> appends a special character, called a <span style="font-weight:bold">newline</span>, that moves to the beginning of the next line.
+--></p><p>As this example shows, you can put comments at the end of a line as well as on lines all by themselves.</p><p><a name="hevea_default35"></a>
+<a name="hevea_default36"></a>
+<a name="hevea_default37"></a>
+<a name="hevea_default38"></a></p><p>Phrases that appear in quotation marks are called <span style="font-weight:bold">strings</span>, because they contain a sequence of “characters” strung together.
+Characters can be letters, numbers, punctuation marks, symbols, spaces, tabs, etc.</p><p><a name="hevea_default39"></a>
+<a name="hevea_default40"></a>
+<a name="hevea_default41"></a></p><p><code>System.out.println</code> appends a special character, called a <span style="font-weight:bold">newline</span>, that moves to the beginning of the next line.
 If you don’t want a newline at the end, you can use <code>print</code> instead of <code>println</code>:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{Goodbye.java}----
 public class Goodbye {
@@ -158,9 +158,9 @@ public class Goodbye {
         System.out.println("cruel world");
     }
 }
---></p><p><a id="goodbye"/></p><p>In this example, the first statement does not add a newline, so the output appears on a single line as <span style="font-family:monospace">Goodbye, cruel world</span>.
+--></p><p><a name="goodbye"></a></p><p>In this example, the first statement does not add a newline, so the output appears on a single line as <span style="font-family:monospace">Goodbye, cruel world</span>.
 Notice that there is a space at the end of the first string, which appears in the output.</p>
-<h2 id="sec13" class="section">1.6  Escape sequences</h2>
+<h2 name="sec13" class="section">1.6  Escape sequences</h2>
 <p>It is possible to display multiple lines of output in just one line of code.
 You just have to tell Java where to put the line breaks.</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{Hello.java}----
@@ -174,7 +174,7 @@ How are you doing?
 }
 --></p><p>The output is two lines, each ending with a newline character:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">Hello!
 How are you doing?</td></tr>
-</table><p><a id="hevea_default42"/></p><p>The <code>
+</table><p><a name="hevea_default42"></a></p><p>The <code>
 </code> is an <span style="font-weight:bold">escape sequence</span>, which is a sequence of characters that represents a special character.
 The backslash allows you to “escape” the string’s literal interpretation.
 Notice there is no space between <code>
@@ -190,13 +190,13 @@ If you add a space there, there will be a space at the beginning of the second l
 <div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;">Table 1.1: Common escape sequences</td></tr>
 </table></div>
 </div>
-<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a id="hevea_default43"/></p><p>Another common use of escape sequences is to have quotation marks inside of strings.
+<div class="center"><hr style="width:80%;height:2"/></div></blockquote><p><a name="hevea_default43"></a></p><p>Another common use of escape sequences is to have quotation marks inside of strings.
 Since double quotes indicate the beginning and end of strings, you need to escape them with a backslash.</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">System.out.println(<span style="color:#B20000">"She said \"Hello!\" to me."</span>);</td></tr>
 </table><p>The result is:</p><table class="lstframe" style="padding:1ex;background-color:#FAFAFA;"><tr><td class="lstlisting">She said "Hello!" to me.</td></tr>
 </table>
-<h2 id="sec14" class="section">1.7  Formatting code</h2>
+<h2 name="sec14" class="section">1.7  Formatting code</h2>
 <p>
-<a id="formatting"/></p><p>In Java programs, some spaces are required.
+<a name="formatting"></a></p><p>In Java programs, some spaces are required.
 For example, you need at least one space between words, so this program is not legal:</p><p><script type="text/javascript">(function(d,l,s,i,c){function n(e){e=e.nextSibling;return (!e||e.nodeType!=3)?e:n(e);};function r(f){/in/.test(d.readyState) ? setTimeout(function(){r(f);},9):f()};l=d.getElementsByTagName('script');s=l[l.length-1];r(function(){i=n(s),c=n(i);i.setAttribute('data-src','https://trinket.io/tools/1.0/jekyll/embed/java#code='+encodeURIComponent(c.nodeValue.replace(/^\s+|\s+$/g,'')));});})(document)</script><iframe width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" class="lazyload" allowfullscreen=""/><!--
 ----{Goodbye.java}----
 publicclassGoodbye{
@@ -223,70 +223,70 @@ public class Goodbye { public static void main(String[] args)
 ("cruel world");}}
 --></p><p>It still works, but the program is getting harder and harder to read.
 Newlines and spaces are important for organizing your program visually, making it easier to understand the program and find errors when they occur.</p><p>Many editors will automatically format source code with consistent indenting and line breaks.
-For example, in DrJava (see Appendix <a href="/thinkjava/appendix-a.html#development">A</a>) you can indent the code by selecting all text (<span style="font-family:sans-serif">Ctrl+A</span>) and pressing the <span style="font-family:sans-serif">Tab</span> key.</p><p><a id="hevea_default44"/></p><p>Organizations that do a lot of software development usually have strict guidelines on how to format source code.
+For example, in DrJava (see Appendix <a href="/thinkjava/appendix-a.html#development">A</a>) you can indent the code by selecting all text (<span style="font-family:sans-serif">Ctrl+A</span>) and pressing the <span style="font-family:sans-serif">Tab</span> key.</p><p><a name="hevea_default44"></a></p><p>Organizations that do a lot of software development usually have strict guidelines on how to format source code.
 For example, Google publishes its Java coding standards for use in open-source projects: <a href="http://google.github.io/styleguide/javaguide.html"><span style="font-family:monospace">http://google.github.io/styleguide/javaguide.html</span></a>.
 </p><p>You might not understand these guidelines now, because they refer to language features we haven’t yet seen.
 But you might want to refer back to them periodically as you read this book.</p>
-<h2 id="sec15" class="section">1.8  Debugging code</h2>
+<h2 name="sec15" class="section">1.8  Debugging code</h2>
 <p>
-<a id="sec:examples"/></p><p>It is a good idea to read this book in front of a computer so you can try out the examples as you go.
+<a name="sec:examples"></a></p><p>It is a good idea to read this book in front of a computer so you can try out the examples as you go.
 You can run many of the examples directly in DrJava’s Interactions Pane (see Appendix <a href="/thinkjava/appendix-a.html#development">A</a>).
 But if you put the code in a source file, it will be easier to try out variations.
-</p><p><a id="hevea_default45"/></p><p>Whenever you are experimenting with a new feature, you should also try to make mistakes.
+</p><p><a name="hevea_default45"></a></p><p>Whenever you are experimenting with a new feature, you should also try to make mistakes.
 For example, in the hello world program, what happens if you leave out one of the quotation marks?
 What if you leave out both?
 What if you spell <code>println</code> wrong?
 These kinds of experiments help you remember what you read.
 They also help with debugging, because you learn what the error messages mean.
-It is better to make mistakes now and on purpose than later on and accidentally.</p><p><a id="hevea_default46"/>
-<a id="hevea_default47"/></p><p>Debugging is like an experimental science: once you have an idea about what is going wrong, you modify your program and try again.
+It is better to make mistakes now and on purpose than later on and accidentally.</p><p><a name="hevea_default46"></a>
+<a name="hevea_default47"></a></p><p>Debugging is like an experimental science: once you have an idea about what is going wrong, you modify your program and try again.
 If your hypothesis was correct, then you can predict the result of the modification, and you take a step closer to a working program.
 If your hypothesis was wrong, you have to come up with a new one.
 </p><p>Programming and debugging should go hand in hand.
 Don’t just write a bunch of code and then perform trial and error debugging until it all works.
 Instead, start with a program that does <em>something</em> and make small modifications, debugging them as you go, until the program does what you want.
-That way you will always have a working program, and it will be easier to isolate errors.</p><p><a id="hevea_default48"/>
-<a id="hevea_default49"/>
-<a id="hevea_default50"/></p><p>A great example of this principle is the Linux operating system, which contains millions of lines of code.
+That way you will always have a working program, and it will be easier to isolate errors.</p><p><a name="hevea_default48"></a>
+<a name="hevea_default49"></a>
+<a name="hevea_default50"></a></p><p>A great example of this principle is the Linux operating system, which contains millions of lines of code.
 It started out as a simple program Linus Torvalds used to explore the Intel 80386 chip.
 According to Larry Greenfield in <span style="font-style:italic">The Linux Users’ Guide</span>, “One of Linus’s earlier projects was a program that would switch between printing AAAA and BBBB.
 This later evolved to Linux.”</p><p>Finally, programming sometimes brings out strong emotions.
 If you are struggling with a difficult bug, you might feel angry, despondent, or embarrassed.
 Remember that you are not alone, and most if not all programmers have had similar experiences.
 Don’t hesitate to reach out to a friend and ask questions!</p>
-<h2 id="sec16" class="section">1.9  Vocabulary</h2>
+<h2 name="sec16" class="section">1.9  Vocabulary</h2>
 <p>Throughout the book, we try to define each term the first time we use it.
 At the end of each chapter, we include the new terms and their definitions in order of appearance.
-If you spend some time learning this vocabulary, you will have an easier time reading the following chapters.</p><dl class="description"><dt class="dt-description"><span style="font-weight:bold">problem solving:</span></dt><dd class="dd-description"><a id="hevea_default51"/>
-The process of formulating a problem, finding a solution, and expressing the solution.</dd><dt class="dt-description"><span style="font-weight:bold">program:</span></dt><dd class="dd-description"><a id="hevea_default52"/>
-A sequence of instructions that specifies how to perform tasks on a computer.</dd><dt class="dt-description"><span style="font-weight:bold">programming:</span></dt><dd class="dd-description"><a id="hevea_default53"/>
-The application of problem solving to creating executable computer programs.</dd><dt class="dt-description"><span style="font-weight:bold">computer science:</span></dt><dd class="dd-description"><a id="hevea_default54"/>
-The scientific and practical approach to computation and its applications.</dd><dt class="dt-description"><span style="font-weight:bold">algorithm:</span></dt><dd class="dd-description"><a id="hevea_default55"/>
-A procedure or formula for solving a problem, with or without a computer.</dd><dt class="dt-description"><span style="font-weight:bold">bug:</span></dt><dd class="dd-description"><a id="hevea_default56"/>
-An error in a program.</dd><dt class="dt-description"><span style="font-weight:bold">debugging:</span></dt><dd class="dd-description"><a id="hevea_default57"/>
-The process of finding and removing errors.</dd><dt class="dt-description"><span style="font-weight:bold">high-level language:</span></dt><dd class="dd-description"><a id="hevea_default58"/>
-A programming language that is designed to be easy for humans to read and write.</dd><dt class="dt-description"><span style="font-weight:bold">low-level language:</span></dt><dd class="dd-description"><a id="hevea_default59"/>
+If you spend some time learning this vocabulary, you will have an easier time reading the following chapters.</p><dl class="description"><dt class="dt-description"><span style="font-weight:bold">problem solving:</span></dt><dd class="dd-description"><a name="hevea_default51"></a>
+The process of formulating a problem, finding a solution, and expressing the solution.</dd><dt class="dt-description"><span style="font-weight:bold">program:</span></dt><dd class="dd-description"><a name="hevea_default52"></a>
+A sequence of instructions that specifies how to perform tasks on a computer.</dd><dt class="dt-description"><span style="font-weight:bold">programming:</span></dt><dd class="dd-description"><a name="hevea_default53"></a>
+The application of problem solving to creating executable computer programs.</dd><dt class="dt-description"><span style="font-weight:bold">computer science:</span></dt><dd class="dd-description"><a name="hevea_default54"></a>
+The scientific and practical approach to computation and its applications.</dd><dt class="dt-description"><span style="font-weight:bold">algorithm:</span></dt><dd class="dd-description"><a name="hevea_default55"></a>
+A procedure or formula for solving a problem, with or without a computer.</dd><dt class="dt-description"><span style="font-weight:bold">bug:</span></dt><dd class="dd-description"><a name="hevea_default56"></a>
+An error in a program.</dd><dt class="dt-description"><span style="font-weight:bold">debugging:</span></dt><dd class="dd-description"><a name="hevea_default57"></a>
+The process of finding and removing errors.</dd><dt class="dt-description"><span style="font-weight:bold">high-level language:</span></dt><dd class="dd-description"><a name="hevea_default58"></a>
+A programming language that is designed to be easy for humans to read and write.</dd><dt class="dt-description"><span style="font-weight:bold">low-level language:</span></dt><dd class="dd-description"><a name="hevea_default59"></a>
 A programming language that is designed to be easy for a computer to run.
-Also called “machine language” or “assembly language”.</dd><dt class="dt-description"><span style="font-weight:bold">portable:</span></dt><dd class="dd-description"><a id="hevea_default60"/>
-The ability of a program to run on more than one kind of computer.</dd><dt class="dt-description"><span style="font-weight:bold">interpret:</span></dt><dd class="dd-description"><a id="hevea_default61"/>
-To run a program in a high-level language by translating it one line at a time and immediately executing the corresponding instructions.</dd><dt class="dt-description"><span style="font-weight:bold">compile:</span></dt><dd class="dd-description"><a id="hevea_default62"/>
-To translate a program in a high-level language into a low-level language, all at once, in preparation for later execution.</dd><dt class="dt-description"><span style="font-weight:bold">source code:</span></dt><dd class="dd-description"><a id="hevea_default63"/>
-A program in a high-level language, before being compiled.</dd><dt class="dt-description"><span style="font-weight:bold">object code:</span></dt><dd class="dd-description"><a id="hevea_default64"/>
-The output of the compiler, after translating the program.</dd><dt class="dt-description"><span style="font-weight:bold">executable:</span></dt><dd class="dd-description"><a id="hevea_default65"/>
-Another name for object code that is ready to run on specific hardware.</dd><dt class="dt-description"><span style="font-weight:bold">byte code:</span></dt><dd class="dd-description"><a id="hevea_default66"/>
+Also called “machine language” or “assembly language”.</dd><dt class="dt-description"><span style="font-weight:bold">portable:</span></dt><dd class="dd-description"><a name="hevea_default60"></a>
+The ability of a program to run on more than one kind of computer.</dd><dt class="dt-description"><span style="font-weight:bold">interpret:</span></dt><dd class="dd-description"><a name="hevea_default61"></a>
+To run a program in a high-level language by translating it one line at a time and immediately executing the corresponding instructions.</dd><dt class="dt-description"><span style="font-weight:bold">compile:</span></dt><dd class="dd-description"><a name="hevea_default62"></a>
+To translate a program in a high-level language into a low-level language, all at once, in preparation for later execution.</dd><dt class="dt-description"><span style="font-weight:bold">source code:</span></dt><dd class="dd-description"><a name="hevea_default63"></a>
+A program in a high-level language, before being compiled.</dd><dt class="dt-description"><span style="font-weight:bold">object code:</span></dt><dd class="dd-description"><a name="hevea_default64"></a>
+The output of the compiler, after translating the program.</dd><dt class="dt-description"><span style="font-weight:bold">executable:</span></dt><dd class="dd-description"><a name="hevea_default65"></a>
+Another name for object code that is ready to run on specific hardware.</dd><dt class="dt-description"><span style="font-weight:bold">byte code:</span></dt><dd class="dd-description"><a name="hevea_default66"></a>
 A special kind of object code used for Java programs.
-Byte code is similar to a low-level language, but it is portable like a high-level language.</dd><dt class="dt-description"><span style="font-weight:bold">statement:</span></dt><dd class="dd-description"><a id="hevea_default67"/>
-Part of a program that specifies one step of an algorithm.</dd><dt class="dt-description"><span style="font-weight:bold">print statement:</span></dt><dd class="dd-description"><a id="hevea_default68"/>
-A statement that causes output to be displayed on the screen.</dd><dt class="dt-description"><span style="font-weight:bold">method:</span></dt><dd class="dd-description"><a id="hevea_default69"/>
-A named sequence of statements.</dd><dt class="dt-description"><span style="font-weight:bold">class:</span></dt><dd class="dd-description"><a id="hevea_default70"/>
+Byte code is similar to a low-level language, but it is portable like a high-level language.</dd><dt class="dt-description"><span style="font-weight:bold">statement:</span></dt><dd class="dd-description"><a name="hevea_default67"></a>
+Part of a program that specifies one step of an algorithm.</dd><dt class="dt-description"><span style="font-weight:bold">print statement:</span></dt><dd class="dd-description"><a name="hevea_default68"></a>
+A statement that causes output to be displayed on the screen.</dd><dt class="dt-description"><span style="font-weight:bold">method:</span></dt><dd class="dd-description"><a name="hevea_default69"></a>
+A named sequence of statements.</dd><dt class="dt-description"><span style="font-weight:bold">class:</span></dt><dd class="dd-description"><a name="hevea_default70"></a>
 For now, a collection of related methods.
-(We will see later that there is more to it.)</dd><dt class="dt-description"><span style="font-weight:bold">comment:</span></dt><dd class="dd-description"><a id="hevea_default71"/>
-A part of a program that contains information about the program but has no effect when the program runs.</dd><dt class="dt-description"><span style="font-weight:bold">string:</span></dt><dd class="dd-description"><a id="hevea_default72"/>
-A sequence of characters; the primary data type for text.</dd><dt class="dt-description"><span style="font-weight:bold">newline:</span></dt><dd class="dd-description"><a id="hevea_default73"/>
+(We will see later that there is more to it.)</dd><dt class="dt-description"><span style="font-weight:bold">comment:</span></dt><dd class="dd-description"><a name="hevea_default71"></a>
+A part of a program that contains information about the program but has no effect when the program runs.</dd><dt class="dt-description"><span style="font-weight:bold">string:</span></dt><dd class="dd-description"><a name="hevea_default72"></a>
+A sequence of characters; the primary data type for text.</dd><dt class="dt-description"><span style="font-weight:bold">newline:</span></dt><dd class="dd-description"><a name="hevea_default73"></a>
 A special character signifying the end of a line of text.
-Also known as line ending, end of line (EOL), or line break.</dd><dt class="dt-description"><span style="font-weight:bold">escape sequence:</span></dt><dd class="dd-description"><a id="hevea_default74"/>
+Also known as line ending, end of line (EOL), or line break.</dd><dt class="dt-description"><span style="font-weight:bold">escape sequence:</span></dt><dd class="dd-description"><a name="hevea_default74"></a>
 A sequence of code that represents a special character when used inside a string.</dd></dl>
-<h2 id="sec17" class="section">1.10  Exercises</h2>
+<h2 name="sec17" class="section">1.10  Exercises</h2>
 <p>At the end of each chapter, we include exercises you can do with the things you’ve learned.
 We encourage you to at least attempt every problem.
 You can’t learn to program only by reading about it; you have to practice.</p><p>Before you can compile and run Java programs, you might have to download and install a few tools.
@@ -329,36 +329,25 @@ Add an extra one.
 </div>
 
 </div>
-    
+
 </div>
 {% endblock %}
 
 {% block toc %}
 <li class="has-dropdown"><a href="/thinkjava/chapter1.html">The way of the program</a>
-    <ul class="dropdown">
-      <li><a href="/thinkjava/chapter1.html#sec8">What is programming?</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec9">What is computer science?</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec10">Programming languages</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec11">The hello world program</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec12">Displaying strings</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec13">Escape sequences</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec14">Formatting code</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec15">Debugging code</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec16">Vocabulary</a>
-      </li>
-      <li><a href="/thinkjava/chapter1.html#sec17">Exercises</a>
-      </li>
-    </ul>
-  </li>
-  
+<ul class="dropdown">
+<li><a href="/thinkjava/chapter1.html#sec8">What is programming?</a>
+</li><li><a href="/thinkjava/chapter1.html#sec9">What is computer science?</a>
+</li><li><a href="/thinkjava/chapter1.html#sec10">Programming languages</a>
+</li><li><a href="/thinkjava/chapter1.html#sec11">The hello world program</a>
+</li><li><a href="/thinkjava/chapter1.html#sec12">Displaying strings</a>
+</li><li><a href="/thinkjava/chapter1.html#sec13">Escape sequences</a>
+</li><li><a href="/thinkjava/chapter1.html#sec14">Formatting code</a>
+</li><li><a href="/thinkjava/chapter1.html#sec15">Debugging code</a>
+</li><li><a href="/thinkjava/chapter1.html#sec16">Vocabulary</a>
+</li><li><a href="/thinkjava/chapter1.html#sec17">Exercises</a>
+</li></ul>
+</li>
 {% endblock %}
 
 {% block title%}The way of the program | Think Java | Trinket{% endblock %}
