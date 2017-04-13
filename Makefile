@@ -71,6 +71,10 @@ trinket: thinkjava.tex header.html footer.html
 	rm *motif.gif $(F)6.*
 	# perl postprocessing (woot) seems easier than escaping through Latex and Hevea
 	perl -i -pe 's/\[\[\[\[\s?(\S*?)\s?\]\]\]\]/----{\1}----/g' trinkethtml/*.html
+	python trinket/maketemplates.py
+	mkdir thinkjava/img
+	rm thinkjava/img/*
+	cp trinkethtml/*.png thinkjava/img
 	
 # a bug (in ocaml?) causes "make trinket" to fail; use "make -i trinket" instead
 testtrinket: trinket/testtrinket.tex trinket/template.html trinket/trinket.css trinket/trinket.tex
