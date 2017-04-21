@@ -64,7 +64,10 @@ with open(index_file) as index:
         # Replace old links
         for old, new in link_replacements.items():
             chapter_text = re.sub(old, web_dir + new, chapter_text)
-        #print(chapter_text)
+        # placeholder for tabs and newlines since RE will clobber them
+        # print(re.findall(r'^.*?\\[tn].*?$', chapter_text, flags=re.M))
+        chapter_text = re.sub(r'\\([tn])', 'shouldbe\g<1>', chapter_text, flags=re.M)
+
 
         # TODO: transform chapter text somehow
 
@@ -108,5 +111,11 @@ $toc$
             template = re.sub(r'<img src="(.*?)"\w*?/?>', '<img src="https://trinket-app-assets.trinket.io/thinkjava/\g<1>"/>', template)
             #print(template)
 
+            # replace tabs and newlines
+            # print(re.findall(r"^.*?shouldbe[tn].*?$", template, flags=re.M))
+            template = re.sub(r'shouldbe([tn])', '\\\\\g<1>', template, flags=re.M)
+
+
+            # Write template
             nf.write(template.encode('utf8'))
 sys.exit(0)
