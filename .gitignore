@@ -9,6 +9,9 @@ thinkjava.out
 thinkjava.pdf
 thinkjava.synctex.gz
 thinkjava.toc
+thinkjava.htoc
+thinkjava.hind
+thinkjava.image.tex
 
 # Java examples
 *.class
@@ -17,3 +20,4 @@ checkstyle*.jar
 # HTML output
 trinkethtml/*
 html/*
+
