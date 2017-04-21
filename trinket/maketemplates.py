@@ -64,7 +64,7 @@ with open(index_file) as index:
         # Replace old links
         for old, new in link_replacements.items():
             chapter_text = re.sub(old, web_dir + new, chapter_text)
-        # placeholder for tabs and newlines since RE will clobber them
+        # placeholder for tabs and newlines since re.sub will clobber them otherwise
         # print(re.findall(r'^.*?\\[tn].*?$', chapter_text, flags=re.M))
         chapter_text = re.sub(r'\\([tn])', 'shouldbe\g<1>', chapter_text, flags=re.M)
 

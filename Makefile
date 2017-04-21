@@ -71,6 +71,8 @@ trinket: thinkjava.tex header.html footer.html
 	rm *motif.gif $(F)6.*
 	# perl postprocessing (woot) seems easier than escaping through Latex and Hevea
 	perl -i -pe 's/\[\[\[\[\s?(\S*?)\s?\]\]\]\]/----{\1}----/g' trinkethtml/*.html
+	perl -i -pe 's/\<a .*? ALT\=\"(Previous|Up|Next)\"\>\<\/a\>//g' trinkethtml/*.html
+	perl -0777 -i -pe 's/\<hr\>//' trinkethtml/*.html
 
 	# Produce nunjucks templates for our app
 	mkdir trinkethtml/nunjucks
@@ -78,6 +80,5 @@ trinket: thinkjava.tex header.html footer.html
 
 	# Gather images for ease of uploading to CDN
 	mkdir trinkethtml/img
-	rm trinkethtml/img/*
 	cp trinkethtml/*.png trinkethtml/img
 
