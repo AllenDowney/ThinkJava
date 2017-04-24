@@ -9,8 +9,10 @@ thinkjava.out
 thinkjava.pdf
 thinkjava.synctex.gz
 thinkjava.toc
-thinkjava.htoc
+
+% HeVeA output
 thinkjava.hind
+thinkjava.htoc
 thinkjava.image.tex
 
 # Java examples
@@ -18,6 +20,5 @@ thinkjava.image.tex
 checkstyle*.jar
 
 # HTML output
-trinkethtml/*
 html/*
-
+trinkethtml/*
