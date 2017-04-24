@@ -59,15 +59,16 @@ distrib:
 # a bug (in ocaml?) causes "make trinket" to fail; use "make -i trinket" instead
 trinket: thinkjava.tex header.html footer.html
 	cp $(F).tex $(F)6.tex
-	rm -rf trinkethtml
 	mkdir trinkethtml
+	rm -rf trinkethtml/*
 	hevea -O -exec xxdate.exe -e latexonly trinket/trinket.tex $(F)6
 	hevea -O -exec xxdate.exe -e latexonly trinket/trinket.tex $(F)6
 	imagen -png -pdf $(F)6
 	imagen -png -pdf $(F)6
 	hacha $(F)6.html
 	cp up.png next.png back.png trinkethtml
-	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png trinket/*.css trinket/*.js trinkethtml
+	mv index.html $(F)6.css $(F)6?*.html $(F)6*.png trinkethtml
+	cp trinket/*.css trinket/*.js trinkethtml
 	rm *motif.gif $(F)6.*
 	# perl postprocessing (woot) seems easier than escaping through Latex and Hevea
 	perl -i -pe 's/\[\[\[\[\s?(\S*?)\s?\]\]\]\]/----{\1}----/g' trinkethtml/*.html
