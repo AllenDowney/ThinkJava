@@ -561,7 +561,8 @@ In Java, it looks like this:
 % more precise, but also to reduce the number of times ``print'' appears,
 % which is a lot!
 
-\begin{trinket}{Hello.java}
+% height = 130 + 15 * num_lines
+\begin{trinket}[235]{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -651,7 +652,7 @@ Comments have no effect on the execution of the program, but they make it easier
 You can put as many statements as you like in \java{main}.
 For example, to display more than one line of output:
 
-\begin{trinket}{Hello.java}
+\begin{trinket}[250]{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -679,7 +680,7 @@ Characters can be letters, numbers, punctuation marks, symbols, spaces, tabs, et
 \java{System.out.println} appends a special character, called a {\bf newline}, that moves to the beginning of the next line.
 If you don't want a newline at the end, you can use \java{print} instead of \java{println}:
 
-\begin{trinket}{Goodbye.java}
+\begin{trinket}[235]{Goodbye.java}
 public class Goodbye {
 
     public static void main(String[] args) {
@@ -700,7 +701,7 @@ Notice that there is a space at the end of the first string, which appears in th
 It is possible to display multiple lines of output in just one line of code.
 You just have to tell Java where to put the line breaks.
 
-\begin{trinket}{Hello.java}
+\begin{trinket}[220]{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -775,7 +776,7 @@ publicclassGoodbye{
 But most other spaces are optional.
 For example, this program is legal:
 
-\begin{trinket}{Goodbye.java}
+\begin{trinket}[220]{Goodbye.java}
 public class Goodbye {
 public static void main(String[] args) {
 System.out.print("Goodbye, ");
@@ -787,7 +788,7 @@ System.out.println("cruel world");
 The newlines are optional, too.
 So we could just write:
 
-\begin{trinket}{Goodbye.java}
+\begin{trinket}[175]{Goodbye.java}
 public class Goodbye { public static void main(String[] args)
 { System.out.print("Goodbye, "); System.out.println
 ("cruel world");}}
@@ -1661,7 +1662,7 @@ In the latter case, the program cannot be compiled, and the compiler displays an
 Error messages from the compiler usually indicate where in the program the error occurred, and sometimes they can tell you exactly what the error is.
 As an example, let's get back to the hello world program from Section~\ref{hello}.
 
-\begin{trinket}{Hello.java}
+\begin{trinket}[235]{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -1753,7 +1754,7 @@ If your program has a logic error, it will compile and run without generating er
 Instead, it will do exactly what you told it to do.
 For example, here is a version of the hello world program with a logic error:
 
-\begin{trinket}{Hello.java}
+\begin{trinket}[235]{Hello.java}
 public class Hello {
 
     public static void main(String[] args) {
@@ -2833,7 +2834,7 @@ If you don't specify a class name, the compiler looks in the current class.
 You have probably guessed by now that you can define more than one method in a class.
 Here's an example:
 
-\begin{trinket}{NewLine.java}
+\begin{trinket}[310]{NewLine.java}
 public class NewLine {
 
     public static void newLine() {
@@ -3008,7 +3009,7 @@ When you write a method, you name the parameters.
 The parameter list indicates what arguments are required.
 The following class shows an example:
 
-\begin{trinket}{PrintTwice.java}
+\begin{trinket}[295]{PrintTwice.java}
 public class PrintTwice {
 
     public static void printTwice(String s) {
@@ -3128,7 +3129,7 @@ printTime(int 11, int 59);  // syntax error
 
 Pulling together the code fragments from the previous section, here is a complete class definition:
 
-\begin{trinket}{PrintTime.java}
+\begin{trinket}[340]{PrintTime.java}
 public class PrintTime {
 
     public static void printTime(int hour, int minute) {

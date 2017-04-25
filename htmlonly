@@ -62,7 +62,7 @@
 {}
 
 % interactive code listing
-\lstnewenvironment{trinket}[1]
+\lstnewenvironment{trinket}[2][400]
 {}
 {}
 
