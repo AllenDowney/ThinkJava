@@ -1923,7 +1923,7 @@ European format:
 Thursday 16 July 2015
 \end{stdout}
 
-%{\em Hint:} You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
+%{\it Hint:} You should be able to copy, paste, and modify the code from Step 4 when completing Step 5.
 \end{enumerate}
 
 \end{exercise}
@@ -1954,7 +1954,7 @@ Then write code to compute the elapsed time since you started working on this ex
 
 \end{enumerate}
 
-{\em Hint:} You might want to use additional variables to hold values during the computation.
+{\it Hint:} You might want to use additional variables to hold values during the computation.
 Variables that are used in a computation but never displayed are sometimes called ``intermediate'' or ``temporary'' variables.
 
 \end{exercise}
@@ -2625,7 +2625,7 @@ Write a program that converts a total number of seconds to hours, minutes, and s
 It should (1) prompt the user for input, (2) read an integer from the keyboard, (3) calculate the result, and (4) use \java{printf} to display the output.
 For example, {\tt "5000 seconds = 1 hours, 23 minutes, and 20 seconds"}.
 
-{\em Hint:} Use the modulus operator.
+{\it Hint:} Use the modulus operator.
 \end{exercise}
 
 
@@ -3420,7 +3420,7 @@ The point of this exercise is to practice reading code and to make sure that you
 \item What is the output of the following program?
 Be precise about where there are spaces and where there are newlines.
 
-{\em Hint:} Start by describing in words what \java{ping} and \java{baffle} do when they are invoked.
+{\it Hint:} Start by describing in words what \java{ping} and \java{baffle} do when they are invoked.
 
 \item Draw a stack diagram that shows the state of the program the first time \java{ping} is invoked.
 
@@ -4155,7 +4155,7 @@ For the following program:
 
 \begin{enumerate}
 
-\item Draw a stack diagram that shows the state of the program the {\em second} time \java{zoop} is invoked.
+\item Draw a stack diagram that shows the state of the program the {\it second} time \java{zoop} is invoked.
 
 \item What is the complete output?
 
@@ -4207,7 +4207,7 @@ Write a method named \java{checkFermat} that takes four integers as parameters -
 If $n$ is greater than 2 and $a^n + b^n = c^n$, the program should display ``Holy smokes, Fermat was wrong!''
 Otherwise the program should display ``No, that doesn't work.''
 
-{\em Hint:} You may want to use \java{Math.pow}.
+{\it Hint:} You may want to use \java{Math.pow}.
 
 \end{exercise}
 
@@ -4297,7 +4297,7 @@ You should already have a program that chooses a random number, prompts the user
 Adding a small amount of code at a time, and testing as you go, modify the program so it tells the user whether the guess is too high or too low, and then prompts the user for another guess.
 
 The program should continue until the user gets it right.
-{\em Hint:} Use two methods, and make one of them recursive.
+{\it Hint:} Use two methods, and make one of them recursive.
 
 \end{exercise}
 
@@ -5069,7 +5069,7 @@ Some processors even provide a hardware implementation of this operation for flo
 x e^{-x} + \sqrt{1 - e^{-x}}
 \end{eqnarray*}
 %
-{\em Hint:} The method for raising $e$ to a power is \java{Math.exp}.
+{\it Hint:} The method for raising $e$ to a power is \java{Math.exp}.
 
 \end{enumerate}
 
@@ -5160,7 +5160,7 @@ public static int prod(int m, int n) {
 \item Explain in a few words what \java{prod} does (without getting into the details of how it works).
 
 \item Rewrite \java{prod} without the temporary variables \java{recurse} and \java{result}.
-{\em Hint:} You only need one line for the \java{else} branch.
+{\it Hint:} You only need one line for the \java{else} branch.
 
 \end{enumerate}
 
@@ -5200,7 +5200,7 @@ You should try it only for small values of $m$ and $n$ (not bigger than 3).
 
 Write a recursive method called \java{power} that takes a double \java{x} and an integer \java{n} and returns $x^n$.
 
-{\em Hint:} A recursive definition of this operation is $x^n = x \cdot x^{n-1}$.
+{\it Hint:} A recursive definition of this operation is $x^n = x \cdot x^{n-1}$.
 Also, remember that anything raised to the zeroth power is 1.
 
 Optional challenge: you can make this method more efficient, when \java{n} is even, using $x^n = \left( x^{n/2} \right)^2$.
@@ -6757,12 +6757,12 @@ Write a method called \java{sieve} that takes an integer parameter, \java{n}, an
 
 \begin{exercise}
 Write a method named \java{areFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all factors of \java{n} (which is to say that \java{n} is divisible by all of them).
-%{\em Hint:} See Exercise~\ref{ex.isdiv}.
+%{\it Hint:} See Exercise~\ref{ex.isdiv}.
 \end{exercise}
 
 
 \begin{exercise}
-Write a method named \java{arePrimeFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all prime {\em and} their product is \java{n}.
+Write a method named \java{arePrimeFactors} that takes an integer \java{n} and an array of integers, and that returns \java{true} if the numbers in the array are all prime {\it and} their product is \java{n}.
 \end{exercise}
 
 
@@ -6803,7 +6803,7 @@ Write a method called \java{max} that takes an array and uses \java{maxInRange} 
 %You can read about it at \url{https://en.wikipedia.org/wiki/Binary_search_algorithm}.
 %
 %Write a method called \java{binarySearch} that implements this algorithm.
-%{\em Hint:} You might find it easier to write this method recursively.
+%{\it Hint:} You might find it easier to write this method recursively.
 %
 %\end{exercise}
 
@@ -9083,7 +9083,7 @@ If you review the documentation of \java{java.lang.String}, you should see that 
 
 The implementation of \java{increment} in this chapter is not very efficient.
 Can you rewrite it so it doesn't use any loops?
-{\em Hint:} Remember the modulus operator.
+{\it Hint:} Remember the modulus operator.
 
 \end{exercise}
 
@@ -9169,7 +9169,7 @@ As always, test the new method.
 \item Write an instance method named \java{reduce} that reduces a rational number to its lowest terms by finding the greatest common divisor (GCD) of the numerator and denominator and dividing through.
 This method should be a pure method; it should not modify the instance variables of the object on which it is invoked.
 
-{\em Hint:} Finding the GCD only takes a few lines of code.
+{\it Hint:} Finding the GCD only takes a few lines of code.
 Search the web for ``Euclidean algorithm''.
 
 \item Write an instance method called \java{add} that takes a \java{Rational} number as an argument, adds it to \java{this}, and returns a new \java{Rational} object.
@@ -10424,7 +10424,7 @@ When it's printed, this string should display the same results as the \java{prin
 \index{StringBuilder}
 \index{efficiency}
 
-{\em Hint:} You can use the \java{+} operator to concatenate strings, but it is not very efficient.
+{\it Hint:} You can use the \java{+} operator to concatenate strings, but it is not very efficient.
 Consider using \java{java.lang.StringBuilder}; you can find the documentation by doing a web search for ``Java StringBuilder''.
 \end{exercise}
 
@@ -11234,7 +11234,7 @@ Write a new class that extends \java{Player} and overrides \java{play} to implem
 Write a loop that plays the game 100 times and keeps track of how many times each player wins.
 If you implemented multiple strategies in the previous exercise, you can play them against each other to evaluate which one works best.
 
-{\em Hint:} Design a \java{Genius} class that extends \java{Player} and overrides the \java{play} method, and then replace one of the players with a \java{Genius} object.
+{\it Hint:} Design a \java{Genius} class that extends \java{Player} and overrides the \java{play} method, and then replace one of the players with a \java{Genius} object.
 \end{exercise}
 
 
@@ -11922,7 +11922,7 @@ Draw the flag of Japan: a red circle on a white background that is wider than it
 Modify {\tt Mickey.java} to draw ears on the ears, and ears on those ears, and more ears all the way down until the smallest ears are only 3 pixels wide.
 
 The result should look like ``Mickey Moose'', shown in Figure~\ref{fig.moose}.
-{\em Hint:} You should only have to add or modify a few lines of code.
+{\it Hint:} You should only have to add or modify a few lines of code.
 
 \begin{figure}[!ht]
 \begin{center}
