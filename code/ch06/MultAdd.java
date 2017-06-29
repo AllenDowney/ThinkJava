@@ -36,7 +36,7 @@ public class MultAdd {
         double a, b, c, calculateSin , calculateCos , divideBy2;
         calculateSin = Math.sin(Math.PI / 4);
         calculateCos = Math.cos(Math.PI / 4);
-        divideBy2 = 1 / 2;
+        divideBy2 = 1 / 2.0;
 
         message("When invoked with multAdd\n" +
                 "calculateCos = a, divideBy2 = b, calculateSin = c:\n"
