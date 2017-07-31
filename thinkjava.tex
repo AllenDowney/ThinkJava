@@ -6,7 +6,7 @@
 \newcommand{\thetitle}{Think Java}
 \newcommand{\thesubtitle}{How to Think Like a Computer Scientist}
 \newcommand{\theauthors}{Allen B. Downey and Chris Mayfield}
-\newcommand{\theversion}{6.1.4}
+\newcommand{\theversion}{6.1.5}
 
 %%%% Both LATEX and PLASTEX
 
@@ -383,7 +383,7 @@ She has also worked on a Ruby version of the book.
 We are especially grateful to our technical reviewers: Blythe Samuels, David Wisneski, and Stephen Rose.
 They found errors, made many great suggestions, and helped make the book much better.
 
-Additional contributors who found one or more typos: Stijn Debrouwere, Guy Driesen, Andai Velican, Chris Kuszmaul, Daniel Kurikesu, Josh Donath, Rens Findhammer, Elisa Abedrapo, Yousef BaAfif, Bruce Hill, Matt Underwood, Isaac Sultan, Dan Rice, Robert Beard, Daniel Pierce, Michael Giftthaler, Min Zeng, and Markus Geuss.
+Additional contributors who found one or more typos: Stijn Debrouwere, Guy Driesen, Andai Velican, Chris Kuszmaul, Daniel Kurikesu, Josh Donath, Rens Findhammer, Elisa Abedrapo, Yousef BaAfif, Bruce Hill, Matt Underwood, Isaac Sultan, Dan Rice, Robert Beard, Daniel Pierce, Michael Giftthaler, Chris Fox, Min Zeng, and Markus Geuss.
 
 If you have additional comments or ideas about the text, please send them to: \href{mailto:feedback@greenteapress.com}{\tt feedback@greenteapress.com}.
 
@@ -6878,8 +6878,8 @@ System.out.println();
 Java uses {\bf Unicode} to represent characters, so strings can store text in other alphabets like Cyrillic and Greek, and non-alphabetic languages like Chinese.
 You can read more about it at \url{http://unicode.org/}.
 
-In Unicode, each character is represented by a ``code unit'', which you can think of as an integer.
-The code units for uppercase Greek letters run from 913 to 937, so we can display the Greek alphabet like this:
+In Unicode, each character is represented by a ``code point'', which you can think of as an integer.
+The code points for uppercase Greek letters run from 913 to 937, so we can display the Greek alphabet like this:
 
 \begin{code}
 System.out.print("Greek alphabet: ");
@@ -8601,7 +8601,7 @@ public int getMinute() {
     return this.minute;
 }
 
-public int getSecond() {
+public double getSecond() {
     return this.second;
 }
 \end{code}
@@ -8625,7 +8625,7 @@ public void setMinute(int minute) {
     this.minute = minute;
 }
 
-public void setSecond(int second) {
+public void setSecond(double second) {
     this.second = second;
 }
 \end{code}

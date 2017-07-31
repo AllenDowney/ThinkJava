@@ -1,5 +1,5 @@
-"""Search for \em in exercise (theorem) environments; these will be typeset as
-normal font in HTML versions."""
+"""Search for \em in exercise (theorem) environments; these should be typeset
+with a normal font in HTML versions."""
 
 def main():
     num = 0
